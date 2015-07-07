@@ -2,10 +2,44 @@
 ###################
 *.com
 *.class
-*.dll
-*.exe
-*.o
-*.so
+
+# Compiled Object files 
+*.slo 
+*.lo 
+*.o 
+
+# Compiled Dynamic libraries 
+*.so 
+*.so.1* 
+*.dylib 
+*.exp 
+*.dll 
+*.disabled 
+
+# Compiled Static libraries 
+*.lai 
+*.la 
+*.a 
+*.lib 
+
+# Compiled application binaries / bundles 
+*.exe 
+*.app 
+ 
+# Makefiles #
+#############
+Makefile 
+Makefile.Debug 
+Makefile.Release 
+Makefile.DeviceDebug 
+Makefile.DeviceRelease 
+Makefile.SimulatorDebug 
+Makefile.SimulatorRelease 
+*.pro.user 
+*.pro.user.*
+.qmake.cache 
+.qmake.stash 
+*.xcodeproj 
  
 # Packages #
 ############
@@ -28,6 +62,7 @@
  
 # OS generated files #
 ######################
+# Mac: 
 .DS_Store
 .DS_Store?
 ._*
@@ -35,3 +70,15 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+# MSVC: 
+_CL_* 
+*.tmp 
+*.pdb 
+*.ilk 
+
+# Output folders: 
+build-*
+debug 
+lib
+release 
+ui
