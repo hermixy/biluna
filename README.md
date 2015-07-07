@@ -37,4 +37,5 @@ biluna
 <li>SRM - supplier relation management</li>
 </ul>
 <p>The vision for the future is to have a set of building block (framework) which will be usefull for the creation of desktop-, mobile- (Apps) and web (SAAS) applications. The last two have not been investigated yet but the intention is to use QML for the mobile apps and QtWebApps for the SAAS applications.</p>
+<p>The first QML project will be W2W which will be a separate repository</p>
 <p>Your comments, suggestion and support are always appreciated. Enjoy coding!</p>
