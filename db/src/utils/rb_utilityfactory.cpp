@@ -12,11 +12,7 @@
 
 #include "rb_debug.h"
 
-//(From: http://etutorials.org/Programming/secure+programming/Chapter+12.+Anti-Tampering/12.11+Hiding+Strings/)
-#define A(c)            (c) - 0x17
-#define UNHIDE_STR(str) do { char *p = str;  while (*p) *p++ += 0x17; } while (0)
-#define HIDE_STR(str)   do { char *p = str;  while (*p) *p++ -= 0x17; } while (0)
-
+// HIDDEN
 
 /**
  * Constructor
@@ -26,16 +22,10 @@ RB_UtilityFactory::RB_UtilityFactory() {
 
     mIsEncryption = false;
 
-    char charStr[] = { // ;lksdohe039hsl*
-      A(';'), A('l'), A('k'), A('s'), A('d'), A('o'), A('h'), A('e'),
-      A('0'), A('3'), A('9'), A('h'), A('s'), A('l'), A('*'), 0
-    };
-
-    UNHIDE_STR(charStr);
-    if(mAes.init(RB_String(charStr))) {
-        mIsEncryption = true;
-    }
-    HIDE_STR(charStr);
+	// HIDDEN
+	
+    mAes.init(RB_String("Replace this string with your own salt string"));
+    mIsEncryption = true;
 }
 
 /**
