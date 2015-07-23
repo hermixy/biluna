@@ -1,0 +1,41 @@
+/*! \page home Biluna
+\section sec_index Home
+
+Biluna is multi functional application framework for business and private use.
+
+The design of the framework facilitates the creation of plugins to handle
+any business process. Examples of such plugins are Accounting (ACC),
+Computer Aided Design (CAD), Customer Relation Management (CRM) and
+Plant Engineering (PENG). These plugins are not better than- or replacement
+for specialist applications but intend to make your life easier by having
+to <i>enter data only once.</i>
+
+For <i>private users</i>, the Biluna framework provides an easy to use-, consistent-
+and low cost software tool to perform a variety of tasks. Such tasks include,
+keeping track of addresses, creating technical drawings and executing basic
+financial transactions.
+
+For <i>business users</i>, the same Biluna framework will grow with your business.
+In the Accounting plugin, you will probabley start with a small number
+financial transactions and as your business grows you can further implement
+your products and services, create pricing, enter sales orders, outstanding
+invoices, create reports and so on. With Biluna you will not have to switch
+to other software just because you are in the fortunate position that your
+business is growing.
+
+\image html "images/bil_mainscreen_peng.png"
+
+Software development is never finished and also Biluna will contain bugs.
+Please report bugs and suggestions to the Biluna Task Tracker or email
+request@biluna.com.
+
+\image html "images/logo2.png" <!-- leave in otherwise header without logo -->
+
+Based on Qt software. \n
+Copyright Biluna. All rights reserved
+
+The program is provided AS IS with NO WARRANTY OF ANY KIND,
+INCLUDING THE WARRANTY OF DESIGN,
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+*/

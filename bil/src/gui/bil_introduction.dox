@@ -1,0 +1,53 @@
+/*! \page bil_introduction Introduction - Biluna
+\section sec_bil_introduction Introduction
+
+Biluna is mutli-functional application framework for business- and private use.
+The framework consists of various software libraries developed with
+the Qt C++ libraries. The purpose for the framework is to be able
+to develop a fully integrated set of software applications in a common
+framework and database organization. Examples of these software applications
+are Accounting software, Customer Relation Management (CRM) software,
+engineering software, Computer Aided Design (CAD) software and warehouse
+management software.
+
+\subsection subsec_bil_introduction_whybiluna Why Biluna?
+
+There are already many suppliers of software packages as mentioned above
+such as Accounting software but many of these applications are difficult
+to integrate. Data has to be copied from one application to the other due
+to the lack of integration. There are however enterprise resource planning (ERP)
+applications that provide some- or all of these functions but are quite
+expensive and therefore not available for small business or for private use.
+
+The <b>purpose</b> of using Biluna software is:
+<b>to enter data only once and use many.</b>
+
+\subsection subsec_bil_introduction_perspectives Perspectives
+
+The sofware applications such as accounting are organized in so-called
+<i>perspectives.</i>
+A perspective is a stand-alone organization of software functionality.
+For example Accounting is a perspective. Within this perspective the user
+can execute various financial transactions, budgeting, forecasting and reporting.
+A perspective has some relation with activities within a company department.
+
+\subsection subsec_bil_introduction_userinterface User Interface
+
+The user inferface (GUI) in Biluna follow a consistent approach.
+At the top there is a menu and a toolbar. Left and right usually the
+navigation, selection and property dock windows are located. At the bottom
+the command window, detail messages from the application and special entry
+dockwindows are shown.
+
+The middle work area is for the MDI (multiple document interface) windows.
+These windows are the main working area for the user. A MDI window can be:
+a customer data entry window, a CAD drawing or even a 3D view of equipment.
+
+\subsection subsec_bil_introduction_enjoy Enjoy
+
+The Biluna software is created for private users, starting business
+and business that wants to grow without software limitations. We are confident
+that you will enjoy working with our software which will help you to do
+what ever you do faster and with pleasure.
+
+*/

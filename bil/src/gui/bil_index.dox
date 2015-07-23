@@ -1,0 +1,85 @@
+/*! \mainpage Documentation - Biluna
+\section sec_bil_index Index
+
+The Biluna Application Framework has general functionality such as
+editing and saving text, connecting to a database and Internet browsing.
+
+The perspectives extend the functionality with administration for example
+Accounting (ACC), Customer Relation Management (CRM) and with technical
+functions such as Computer Aided Design (CAD), Plant Engineering (PENG).
+
+Further introduction to Biluna can be found:
+\li \subpage bil_introduction
+\li \subpage bil_installationandfirststeps
+
+Core functionality such as text editing, Internet browsing and
+database connection, is explained in the following sections:
+\li \subpage db_index
+
+\subsection subsec_bil_index_menu "Menu"
+
+The so-called menu is at the top of the Biluna mainwindow. It always
+contains <i>File, Edit, Format, Perspective, Window, System, Help</i>.
+menu items will be activated or deactivated depending the current window.
+
+\image html bil_menutoolbar.png "Menu and toolbar"
+
+\subsection subsec_bil_index_menu_toolbars "Toolbars"
+
+The toolbar is just below the menu and contains buttons for quick
+access to frequently used functions. The third button with a &lt; and &gt;
+character for example will open a HTML edit window.
+
+\subsection subsec_bil_index_menu_windows "Windows, dockwindows, subwindows (MDI), dialogs"
+
+The Biluna application has one main window and one help window. The help window
+is shown if an help item is selected from the Help menu or F1 is pressed
+on the keyboard.
+
+The area below the menu and the top toolbars is the actual work area. It can
+contain dock windows and subwindows. Also the toolbars can be replaced to
+the below indicated positions.
+
+\image html bil_dockarea.png "MDI subwindow, toolbar and dockwindow areas"
+
+The dockwindows can be part of the mainwindow but can also be dragged outside
+the mainwindow to provide more area for the MDI subwindows.
+
+\image html bil_dockarea_biluna.png "Biluna subwindow, toolbar and dockwindow areas"
+
+Above is an example of a Biluna mainwindow with toolbars, dockwindows and
+MDI subwindows.
+
+The <i>Window</i> menu item has information and functions about the toolbars
+and the subwindows. If many subwindows are open, the user can select
+<i>Window &gt; Cascade</i> to cascade the windows for a quick overview of the
+open subwindows. The current subwindows are listed at the bottom
+of the <i>Window</i> menu and can be selected directly from the menu.
+
+\subsection subsec_bil_index_menu_settings "Settings"
+
+Biluna stores various user settings such as the window position and size.
+The settings are stored in a normal readible file format. The settings
+can be cleared by selecting <i>System &gt; Clear Settings</i>.
+
+\subsection subsec_bil_index_perspectives "Perspectives"
+
+The Biluna functionality is organized in so-called perspectives. The
+background of the perspectives is explained in the introduction to
+the Biluna Application Framework. The details of the core perspectives
+can be found in the following sections:
+\li \subpage acc_index
+\li \subpage crm_index
+\li \subpage peng_index
+\li \subpage sail_index
+\li \subpage scan_index
+\li \subpage srm_index
+
+Refer to the relevant perspective in the left column of this help window
+to view information about all the other available perspectives.
+
+\subsection subsec_bil_index_pages All Pages
+The list of related pages can be found:
+\li <a href="pages.html">Related pages</a>
+
+*/

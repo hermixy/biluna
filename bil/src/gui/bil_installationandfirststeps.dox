@@ -1,0 +1,102 @@
+/*! \page bil_installationandfirststeps Installation and First Steps - Biluna
+\section sec_bil_installationandfirststeps Installation and First Steps
+
+The installation has been successful if you can read this page.
+You have run the setup file of Biluna which as a default installs
+all the application files in the normal Program File directory.
+However the installation can also be done in any other directory.
+
+We advise our users to create a Biluna directory in the default home
+or Documents directory. This directory is used for all Biluna databases
+and generated documents. In case you want to make a backup of your data
+you only need to backup this folder. In the Biluna directory create a
+database directory and a temp directory.
+
+It is good practise to create directories as per the perspectives.
+This will help to find files and data in the database. In that case
+the directory structure should look like:
+<ul>
+<li>Biluna</li>
+<ul><li>acc</li><li>database</li><li>peng</li><li>temp&nbsp;</li><li>...</li></ul>
+</ul>
+
+\subsection subsec_db_installationandfirststeps_quickstart Quick Start
+Select from the main menu <i>System &gt; Connect</i>
+
+The following dialog will be shown:
+\image html db_connectiondialog.png "Database connection dialog"
+
+Click the radiobutton Local Sqlite (.db) to open or create the database.
+
+Click the button  \htmlonly (...) \endhtmlonly  in Local database
+path/name, in the opening file dialog go to the folder where you want
+to create the new database and a name for the database, for example
+C:\\Documents and Settings\\(your user
+name)\\My Documents\\Biluna\\database\\peng_test.db3
+
+Click OK to create the database and the following dialog will open:
+\image html db_projectdialog.png "Root project selection dialog"
+
+In the above dialog your company details can be
+entered. Change the company 'MyCompany' in your company name and the
+'MyLocation' to your company location. The number can be change to a number
+relevant to your company.
+
+Click OK to save changes
+
+\image html peng_perspectivemenu.png "Example: open perspective PENG"
+
+In menu oper <i>Perspective &gt; PENG</i> to load (a part of the) Plant Engineering
+perspective, this is an example the PENG perspective might not be in your
+application package.
+
+A new menu item will have been created including three buttons on the toolbar.
+
+If not opened at perspective load, click in menu
+<i>PlantEng &gt; Select Project</i>, the following dialog will open:
+\image html peng_projectdialog.png "PENG Project Selection Dialog"
+
+Click green button (with +) in case you want to add a new project,
+enter data for:
+\li number, enter relevant project number with your customer
+\li revision, possible revision number for this project
+\li description, description of the project
+\li company, the company name of your customer
+\li location, the location of your customers project
+
+Click OK to save the changes and close the dialog.
+
+Now the perspective is ready and select from the perspective menu
+the required item to start your work.
+
+\subsection subsec_db_installationandfirststeps_menusections Menu Sections
+
+The perspective menus are organized in sections:
+\li Edit and View
+\li Reporting
+\li Settings
+\li Maintenance
+
+\subsection subsec_db_installationandfirststeps_editview Edit View
+The Edit and View menu section are the menu items that are used for your daily work
+and they will occupy the top part of the menu item list. The menu items will
+open edit windows such as a customer list window or an equipment list window.
+
+\subsection subsec_db_installationandfirststeps_reporting Reporting
+The Reporting menu section is for the creation of reports. For example: the reports
+in the Accounting perspective include outstanding invoices and the trial balance.
+This are static (non-editable data) reports, providing a special view on the
+data in the database. These items are used frequently
+
+\subsection subsec_db_installationandfirststeps_settings Settings
+The Settings menu section are items that opens dialog where settings can be
+edited and viewed. The settings are required for the perspective to work
+properly and to set the user preferences. This items are used in the beginning
+when setting up the perspective and later only for updating
+
+\subsection subsec_db_installationandfirststeps_maintenance Maintenance
+The Maintenance menu section are items that are special for the maintenance
+of the data in the database. It can include to create a backup or to clean
+the database of orphaned or deleted records.
+
+*/

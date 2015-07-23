@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>html/bil_dashboard.html</file>
+    </qresource>
+</RCC>
