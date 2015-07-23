@@ -1,0 +1,48 @@
+HOW TO BUILD HELP:
+
+doc.qhcp has all the correct settings bil/doc/
+
+1. With Doxywizard open doxygen_help.cfg, run. This will result in a index.qhp in bil/doc/html 
+
+2. Run qcollectiongenerator.bat (make sure that path is valid e.g. Qt 4.8.1?)
+
+or 
+
+3. run build_doxygen_help.bat (make sure that path is valid e.g. Qt 4.8.1?)
+
+
+
+HOW TO BUILD PLUGINS SUCH AS SQL DRIVERS:
+
+(OLD:
+Open in QtCreator %QTDIR%\src\plugins\sqldrivers\mysql\mysql.pro)
+
+C:\Qt\Qt5.1.1\5.1.1\Src\qtbase\src\plugins\sqldrivers\mysql\mysql.pro
+add at the top of the .pro file:
+
+(OLD:
+INCLUDEPATH += \
+    C:/MySQL/5.1/include
+LIBS += \
+    C:/MySQL/5.1/lib/opt/libmysql.lib)
+
+Current:
+INCLUDEPATH += \
+    C:/mysql-5.5.25-win32/include
+LIBS += \
+    C:/mysql-5.5.25-win32/lib/libmysql.lib
+
+Build a debug and a release version and are copied both to:
+C:\Qt\Qt5.1.1\5.1.1\mingw48_32\plugins\sqldrivers
+
+As a reference from Qt help:
+
+cd %QTDIR%\src\plugins\sqldrivers\mysql
+qmake "INCLUDEPATH+=C:\MySQL\include" "LIBS+=C:\MYSQL\MySQL Server <version>\lib\opt\libmysql.lib" mysql.pro
+nmake
+
+
+HOW TO MAKE SCRIPT FOR BUILDING BILUNA
+
+Example:
+FOR %%d IN (db acc crm bil) DO ECHO %%d && cd ..\%%d\src && mingw32-make clean && qmake && C:\QtSDK\QtCreator\bin\jom && mingw32-make install && cd ..\..\scripts

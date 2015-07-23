@@ -1,0 +1,47 @@
+SUBVERSION terminal commands when in workspace:
+svn update
+svn commit
+
+
+From: http://qt-project.org/doc/qt-5.0/qtdoc/deployment-mac.html
+sudo chmod +x myscript.sh (and enter password to make executable)
+./myscript.sh (to run)
+otool -L Biluna (to see the dependencies)
+
+The steps to create the Biluna installable bundle:
+When in the bil/release directory where Biluna(.executable) is located 
+
+⁃ Create a Biluna.app folder (this will show the folder as single file however, open with show file contents, and create the folder Contents)
+⁃ mkdir Biluna.app
+⁃ mkdir Biluna.app/Contents
+⁃ mkdir Biluna.app/Contents/Frameworks
+⁃ cp -R /Users/gudula/Qt5.1.1/5.1.1/clang_64/lib/QtCore.framework Biluna.app/Contents/Frameworks
+
+Make nice installable .dmg 
+http://stackoverflow.com/questions/8680132/creating-nice-dmg-installer-for-mac-os-x
+http://codevarium.gameka.com.br/how-to-create-your-own-beautiful-dmg-files/
+google: dmg app installation, or mac make installable dmg
+http://chromasoft.blogspot.com.es/2010/02/building-dmg-installer-for-mac-simple.html
+
+Open keyboard preferences to change focus to all controls not only text input fields by:
+Keyboard shortcuts Full keyboard access -> all controls or CTRL+F7
+
+How to create icon set for Apple. These are the required names and dimensions:
+icon_512x512@2x (1024 x 1024)
+icon_512x512 (512 x 512)
+icon_256x256@2x (512 x 512)
+icon_256x256 (256 x 256)
+icon_128x128@2x (256 x 256)
+icon_128x128 (128 x 128)
+icon_32x32@2x (64 x 64)
+icon_32x32 (32 x 32)
+icon_16x16@2x (32 x 32)
+icon_16x16 (16 x 16)
+To create an .icns file, use iconutil in Terminal. Terminal is located in /Applications/Utilities/Terminal. Enter the command iconutil -c icns <iconset filename>, where <iconset filename> is the path to the .iconset folder. You must use iconutil, not Icon Composer, to create high-resolution .icns files.
+
+Main menubar can be hidden by setting in Info.plist:
+Application is agent (UIElement) : YES
+With normal mainwindow this is set to NO!
+In XML file this NO is equal to:
+<key>LSUIElement</key>
+<string>NO</string>

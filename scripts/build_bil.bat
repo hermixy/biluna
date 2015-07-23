@@ -1,0 +1,1 @@
+FOR %%d IN (db acc crm mrp pcalc peng sail scan srm bil) DO ECHO %%d && cd ..\%%d\src && C:\Qt\5.4\mingw491_32\bin\qmake.exe && C:\Qt\Tools\mingw491_32\bin\mingw32-make.exe clean && C:\Qt\5.4\mingw491_32\bin\qmake.exe && C:\Qt\Tools\QtCreator\bin\jom.exe && C:\Qt\Tools\mingw491_32\bin\mingw32-make.exe install && cd ..\..\scripts
