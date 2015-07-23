@@ -1,0 +1,81 @@
+/*! \page thrd_chartwidget Basic Chart Window - Database/System DB
+\section sec_thrd_chartwidget Basic Chart Window
+
+
+Biluna has extensive reporting facilities. The reports can be supported
+by charts. The purpose of a chart is usually the graphical representation
+of data. The graphical representation are often used to ease understand
+of small and large quantities of data.
+
+This basic chart window helps the user to develop a basic chart
+which can be automatically generated in a report. This graphical
+development window is for example available in the perspective SCAN.
+
+From the main menu select:
+\li <i>System &gt; Tools &gt; Basic Chart Types</i>
+or from the SCAN perspective menu select:
+\li Review chart types
+
+The below window will be shown.
+
+\image html thrd_chartwidget.png "Chart window"
+
+There are five (5) basic chart types. At the left top the dropdown box
+gives the selection for:
+\li Bar
+\li Line
+\li Pie 2D
+\li Pie 3D
+\li Stacked Bar
+
+The legend types are:
+\li Axes Horizontal, will give the values and legend at the X and Y axes
+\li Axes Angled, some as above but the X axes legend is angled,
+for example usefull when legend are long
+\li Horizontal, the legend will be shown as a horizontal list
+\li Vertical, the legend will be shown as a vertical list
+\li Round, the legend will be shown around the 2D and 3D pie chart
+
+The charts can be shown with or without a shadow to give some extra
+depth to the chart.
+
+The dimensions of the chart are:
+\li Image dimension width, overall image width
+\li Image dimension height, overall image height
+\li Graph coordinates X and Y, left top position of chart on the image
+\li Graph coordinates Width and Height, the width and height of the chart
+\li Legend coordinates X and Y, left top poisiton of the legend on the image
+
+For the dimensions refer to image below
+
+\image html thrd_chartwidget_stackedbarchartdim.png "Dimensions of chart"
+
+The legend and axes values can be edited by:
+\li Font, click the button with (...) to select the font
+\li Start Angle Pie, the value should be between 0 and 360 degrees
+\li Before Label, the label to be shown before the value such as currency
+\li After Label, the label to be shown after the value such as percent
+\li Length Y axis, the maximum value to be shown on the Y axis
+
+Stacks can be added to make a stacked bar chart as shown above. The number
+of items should be a multiple of the number of stacks. The name of
+the stack will be shown at the X axis
+
+Chart items can be added or deleted from the list. The name is shown
+as the X axis legend in case of a normal bar chart or pie or line chart.
+The color can be in HTML format such as \htmlonly #ff9900 \endhtmlonly
+or know names such as red or blue.
+
+Below are more examples of the possible chart types.
+
+\image html thrd_chartwidget_barchart.png "Bar chart"
+
+\image html thrd_chartwidget_pie2dchart.png "Pie 2D chart"
+
+\image html thrd_chartwidget_pie3dchart.png "Pie 3D chart"
+
+\image html thrd_chartwidget_stackedbarchart.png "Stacked bar chart"
+
+
+
+*/

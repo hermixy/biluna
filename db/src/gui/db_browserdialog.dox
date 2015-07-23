@@ -1,0 +1,68 @@
+/*! \page db_browserdialog Database Browser Dialog - Database/System DB
+\section sec_db_browserdialog Database Browser Dialog
+
+The database browser dialog is used to view the data in the database,
+make selections via SQL statements, in exceptional cases to make changes to
+the database and to export data from the database.
+
+Select from the main menu <i>System &gt; Administrator &gt;
+Browse Export Database</i>
+
+The following dialog will be shown:
+
+\image html db_browserdialog.png "Database browser dialog"
+
+At the left top of the window:
+\li Click (+) plus button to make a new connection to another database
+\li Click (-) minus button to delete a connection
+
+These extra connections are only made when transfer of data is required
+from one database to another or to have a peek into another database.
+
+From the table 'Database/Tables':
+\li Click the small triangle to view or hide the tables under
+the database connection
+\li Click the table once to select the table
+\li Double click the table to view the rows in the table in the table view
+in the bottom section
+\li Right click the database or tables to see a contect menu. This menu
+allows to refresh this view in case the connection has changed
+or tables have been edited, and to show the schema of the table
+
+The right top part:
+\li The text window with title 'SQL Query' is for entering an SQL statement
+\li The dropdown box is used to select the relevant perspective model
+\li Click 'Show SQL' to view the full SQL statement for the perspective
+tables
+\li Click 'Create Tables' to create the tables for the selected
+perspective in the database
+\li Click 'Check Tables' to check whether the database tables are
+in line and up-to-date with the application perspective object model
+\li Click 'Update Table' shows the update SQL statement for the selected
+table in the Database/Tables tree view. Manually update the select from the
+existing table where required.
+\li Click 'Clear' to clear the text in SQL Query text field
+\li Click 'Submit' to submit the SQL query to the database. In case of a
+selection the result will be shown in the table at the bottom of the dialog.
+\li Query Status, shows any comment related to submitted query
+\li Right click the first column to add or delete a row from the database,
+note: this action cannot be undone!
+
+The tab 'Data Transfer' is as follows:
+
+\image html db_browserdialog_tabdatatransfer.png "Data browser dialog - Data Transfer"
+
+The left treeviews can be clicked as on the previous treeview.
+\li the top part is for the selecting the source of the data
+\li the middle part is for the destination in case of database to database
+transfer
+\li Indicate the specific selection at the left bottom
+\li and the destination format at the right bottom
+\li Click 'Transfer Data' to start the data transfer
+
+At the bottom of the dialog
+\li Click 'Help' to see this help page
+\li Click 'Close' to close the dialog
+
+*/
+

@@ -1,0 +1,35 @@
+/*! \page db_projecteditdialog Project (root) Edit Dialog - DB
+\section sec_db_projecteditdialog Project (root) Edit Dialog
+
+The root project in DB can be a holding company or entity. Usualy there will
+be only one root project, for example the company you work for. The purpose for
+the possibility of different root projects is that various companies can share
+the same central database without interference, for example a database on
+the Internet.
+
+The relevant company is selected in the menu <i>System &gt; Select Project</i>
+when you start working with Biluna.
+
+Detail editing of the company is done in the in this Project Edit Dialog.
+This dialog is show after selecting <i>System &gt; Settings &gt; Project Edit.</i>
+The below dialog will be shown:
+\image html db_projecteditdialog.png "Root project edit dialog"
+
+Use the green button with (+) to add a new company.
+The red button with (-) will delete the company, NOTE: this action can not
+be undone.
+
+In the table view, select the relevant project,
+the fields are edited below the tableview.
+
+The edit fields are:
+\li Project Number, to identify this root project
+\li Revision, in case new revisions of the entire database are made
+\li Description, description of this root project
+\li Company name is optional
+\li Location name is optional
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

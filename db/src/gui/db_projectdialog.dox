@@ -1,0 +1,38 @@
+/*! \page db_projectdialog Project Dialog - Database/System DB
+\section sec_db_projectdialog Project Dialog
+
+The purpose of this dialog is to select the root project. If a (new)
+connection is made to the database with System > Connect, this dialog
+will automatically appear.
+
+Oterhwise select from the main menu System > Select Project
+
+The following dialog will be shown:
+
+\image html db_projectdialog.png "Database project dialog"
+
+At the top of the dialog:
+\li Click the (+) plus button to add a new root project
+\li Click the (-) minus button to delete the root project, please note
+that deletion cannot be undone!
+\li Text can be entered in the line edit to find the text in any of the
+columns
+\li Click the binoculars to start the search
+\li Click the filter button, will open a selection window
+for the column to be filtered
+\li Click the unfilter button, to undo any filtering
+
+The data in the table can be edited by double clicking or pressing F2 button.
+Update the data as required
+\li number, enter relevant project number
+\li revision, possible revision number for this project
+\li description, description of the project
+\li company, if applicable the company name or just a name for this project
+\li location, if applicable the location of this project
+
+The root project is used to identify the projects within the perspectives
+and to organize the users of the system in case of a client-server setup.
+
+For details on the root project refer to the core authentication section.
+
+*/

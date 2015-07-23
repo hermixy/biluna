@@ -1,0 +1,60 @@
+/*! \page db_connectiondialog Database Connection Dialog - Database/System DB
+\section sec_db_connectiondialog Database Connection Dialog
+
+A connection to a database is made with this dialog.
+Select from the main menu <i>System &gt; Connect</i>
+
+The following dialog will be shown:
+
+\image html db_connectiondialog.png "Database connection dialog"
+
+Click the radiobutton Local Sqlite (.db) to open or create a local database.
+
+Click the button \htmlonly (...) \endhtmlonly in Local database path/name,
+in the opening file dialog
+go to the folder where you want to create the new database and a name
+for the database, for example C:\\Documents and
+Settings\\(your user name)\\My Documents\\Biluna\\database\\peng_test.db3
+
+If the database does not exists yet, you can create the file at the location
+and the name you have selected by right clicking in the file dialog and
+selecting <i>New &gt; text document</i>. Change the name to for example
+peng_test.db3. The extension .db3 is required for the correct file selection.
+
+You can also create the .db3 file before hand, refer to
+\subpage db_createsqlitefile
+
+Enter a login username, a local login password is not required. With a local
+database the username is only to track the changes in the database
+per username otherwise 'unknown' will be used.
+
+Click the radiobutton Local MS Access to open an existing MS Access database
+or MS Excel document. Both or using the ODBC driver to access the data.
+
+The login username and password is depending the settings for the MS Access
+database
+
+Click the radiobutton Server Database to connect to a server database such
+as MySQL and MS Sql.
+
+Database has already been created on the server.
+\li select the corresponding driver
+\li the database name
+\li the username that has been set to connect to the database (this
+username has a different purpose than the Login user name)
+\li the password to connect to the database
+\li the hostname or servername or IP address of the server
+\li select a port, leave default if you have not received
+any specific other data
+\li click the 'Text connection' button to see whether the connection
+can be made and you connection data is correct
+
+Click OK to make the connection to the database and to store your last
+connection data.
+Click Cancel not to make connection to the database, the connection data
+will not be stored.
+
+Select <i>System &gt; Disconnect</i> from the menu to disconnect from
+the database. This will close all the database windows.
+
+*/

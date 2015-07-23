@@ -1,0 +1,29 @@
+/*! \page db_plaintextwidget Plain Text Window - Database/System DB
+\section sec_db_plaintextwidget Plain Text Window
+
+The Plain Text editing window is used for example to quickly store
+some text while you are working
+or to generate a list of filenames from a selected directory
+or to generate standard texts to be used in letters or emails.
+Multiple windows can be opened at the same time.
+
+The window functionality supports some basic text formatting and saving to disk.
+
+Open a text window with <i>File &gt; New &gt; Plaing Text Document</i>,
+the below window is shown:
+
+\image html db_plaintextwidget.png "Plain text edit window"
+
+The window shows Untitled9*, meaning that the text has not yet a filename
+and the asterisk indicates that there are unsaved changes in the text.
+
+Basic functionality is available such as Cut, Copy and Paste.
+
+Shortcuts are:
+\li Save [CTRL] + S
+\li Save As [CTRL] + [SHIFT] + S
+\li Cut [CTRL] + X
+\li Copy [CTRL] + C
+\li Paste [CTRL] + V
+
+*/

@@ -1,0 +1,49 @@
+/*! \page db_mappingdialog Import Mapping Dialog - Database/System DB
+\section sec_db_mappingdialog Import Mapping Dialog
+
+The database import mapping dialog is used to import data in to database
+from Comma Separate Value (.csv) files. For example: most spreadsheets can
+be exported to a .csv file.
+
+From the menu select <i>System &gt; Administrator &gt; Map/Import database</i>
+
+The following dialog will be shown:
+\image html db_mappingdialog1.png "Data Mapping dialog 1"
+
+The dialog has two screens, the first screen is shown above. To import
+data from a .csv file (numbers correspond with numbers on image):
+1. Click to open button to select the .csv file with data to be imported
+2. In case of a saved mapping file click File to select the mapping XML file
+3. In the top list window select the table where the data will be imported
+4. Click button with arrow the select the above import table, the table
+name can also be entered by handed.
+5. Click again on the the above list at 3) to select the parent table,
+select the row with the corresponding ID
+6. Click arrow button to select the ID from 5). The ID can also be
+entered manually. This ID will now be used to fill all the 'parent' fields
+7. Check 'Create new Uuid for ID field' if you want new ID's for all
+rows/records to be entered in the database. Leave unchecked if you want
+to use the ID's in the .csv file.
+
+The 'Next' button should be activated when all data is entered correctly.
+Click 'Next' and below screen will be shown.
+\image html db_mappingdialog2.png "Data Mapping dialog 2"
+
+The first three (3) rows from the .csv file will be shown as columns in
+above screen, refer 'File Row 1', 'File Row 2' and 'File Row 3'.
+
+If no mapping file has been used in previous screen 2) than the mapping
+has to be done manually:
+1. Double click the Table Columns field to associate or map the database
+field with the .csv field
+2. In this example the first row in the .csv file was the header row, check
+'File has header row' to prevent importing the header row in to the database
+3. Export mapping to a XML file to save the mapping for later use or save
+to database
+4. Click 'Import' to import the data in to the database
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the import operation.
+
+
+*/

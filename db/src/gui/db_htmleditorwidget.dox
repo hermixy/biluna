@@ -1,0 +1,48 @@
+/*! \page db_htmleditorwidget HTML Editor Window - Database/System DB
+\section sec_db_htmleditorwidget HTML Editor Window
+
+The Biluna core application has basic HTML editing and viewing functionality.
+HTML is the abbreviation of Hyper Text Markup Language. This means that the
+text is marked up with so-called tags which tells the HTML browser application 
+to show the text in a certain way. The Hyper part of HTML implies that there can
+be so-called hyper links to other pages in the text as most of us know from the
+Internet pages of websites.
+
+The HTML Document/Editor Window in Biluna shows in the first tab the HTML as will be shown
+by a regular browser and with the second tab the source of the HTML in plain text
+as is the original source code of the HTML file.
+
+Open a text window with <i>File &gt; New &gt; HTML Document</i>, the below window is shown:
+
+\image html db_htmleditorwidget.png "HTML document edit window"
+
+The window will show at the top the file name and an asterisk in case
+of unsaved changes in the text.
+
+The formatting of the text can be done by using the menu <i>Format </i>
+or by using the toolbar. The toolbar can be activated by <i>Window &gt;
+Toolbars &gt; Format</i>. This will show button as are part of the
+<i>Format</i> menu.
+
+Other shortcuts are
+\li Bold [CTRL] + B
+\li Italics [CTRL] + I
+\li Underline [CTRL] + U
+\li Save [CTRL] + S
+\li Save As [CTRL] + [SHIFT] + S
+\li Cut [CTRL] + X
+\li Copy [CTRL] + C
+\li Paste [CTRL] + V
+
+For using different characters such as &ntilde; refer to
+\li \subpage db_text_specialcharacters and
+\li \subpage db_text_symbolgreekcharacters
+
+The HTML source code can be edited by clicking the Source tab at the
+leftbottom of the window:
+
+\image html db_htmleditorwidget_source.png "HTML edit window source, code"
+The source code can be edited, the results are visible when returning
+to the view with the View tab.
+
+*/

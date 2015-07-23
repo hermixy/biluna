@@ -1,0 +1,25 @@
+/*! \page db_systemdevelopment System Development - Database/System DB
+\section sec_db_systemdevelopment System Development
+
+The menu <i>System &gt; Development</i> contains menu items for software
+development.
+\image html db_systemdevelopment.png "System Development menu"
+
+\li Regular expression - for building regular expressions
+\li View Model menu - this will create an XML text of the selected
+Biluna model and will be shown in a plain text window. The text can be
+used to review the model hierarchy and names of the fields.
+\li Export Model Structure - does the same as above but will now be
+stored as file. The file can be used to import in other applications
+\li Import Model Data - this function can import an XML file with model
+Biluna data. This function only works with XML files that have been
+exported from Biluna or fully comply with the Biluna XML file requirements.
+\li Plugins - this function checks for all the plugins available for
+the Biluna software on the current computer. This can take some time.
+\li Signal Spy - this function is only available in debug mode for
+software development and is used to test signals to a widget or control.
+in the user interface.
+\li Develop - this function is only available in debug mode for software
+development and is used to test current assigned action.
+
+*/

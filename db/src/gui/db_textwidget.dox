@@ -1,0 +1,38 @@
+/*! \page db_textwidget Rich Text Window - Database/System DB
+\section sec_db_textwidget Rich Text Window
+
+The Biluna core application has basic text editing window. This window
+is used for example to create some text while you are working
+or to generate standard texts to be used in letters or emails.
+Multiple windows can be opened at the same time.
+
+The window functionality supports some basic text formatting and saving to disk.
+
+Open a text window with <i>File > New > Text Document or [CTRL] + N,</i>
+the below window is shown:
+
+\image html db_textwidget.png "Text edit window"
+
+The window shows Untitled2*, meaning that the text has not yet a filename
+and the asterisk indicates that there are unsaved changes in the text.
+
+The formatting of the text can be done by using the menu <i>Format </i>
+or by using the toolbar. The toolbar can be activated by <i>Window &gt;
+Toolbars &gt; Format</i>. This will show button as are part of the
+<i>Format</i> menu.
+
+Other shortcuts are&nbsp;
+\li Bold [CTRL] + B
+\li Italics [CTRL] + I
+\li Underline [CTRL] + U
+\li Save [CTRL] + S
+\li Save As [CTRL] + [SHIFT] + S
+\li Cut [CTRL] + X
+\li Copy [CTRL] + C
+\li Paste [CTRL] + V
+
+For using different characters such as &ntilde; refer to
+\ref db_text_specialcharacters and
+\ref db_text_symbolgreekcharacters
+
+*/

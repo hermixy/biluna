@@ -1,0 +1,15 @@
+/*! \page db_tools Tools - Database/System DB
+\section sec_db_tools Tools
+
+The main menu <i>Tools</i> gives access to various handy
+tools to create reports, list or to a calculator.
+\image html db_tools.png "Tools menu"
+
+\li Calculator - shows a dock window with a calculator
+\li Simple report - to create a custom report from the database
+\li Text File List - to create a list from file names in a directory
+with pre text and post text. This makes retyping of file names unnecessary.
+\li Simple chart types - to test the setting for different chart types. These
+chart types are for example used in the SCAN perspective.
+
+*/

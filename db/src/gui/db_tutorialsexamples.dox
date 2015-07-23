@@ -1,0 +1,90 @@
+/*! \page db_tutorialsexamples Tutorials and Examples - General DB
+\section sec_db_tutorialsexamples Tutorials and Examples
+
+The tutorials and examples section is a starting point for
+all sorts activities and tasks in Biluna.
+
+The Biluna perspectives contain the functionality for a specific
+scope of work. For example the ACC perspective is the perspective
+for accounting. More about the perspectives is explained in the
+section \ref bil_introduction
+
+Most of the perspectives work with a connection to a database. This
+connection has to be made by the user of the software in the menu
+<i>System &gt; Connect</i>. Some basic functions such as a text document
+do not need a connection to the database. For example a new HTML document
+can be made just by selecting in the menu <i>File &gt; New &gt; HTML
+Document</i>
+
+\subsection subsec_db_tutorialsdatabase Database
+
+Biluna starts without connection to a database. Most perspectives
+require a connection to a database such as ACC (Accounting) and CRM
+(Customer Relation Management).
+
+There are two possibilities for connecting to database:
+\li a local SQLite database
+\li a server database, such as MySQL
+
+The local SQLite database will be stored on your local computer harddisk and
+is intended to be used by only one person. The data of the SQLite database
+is like a normal file on your harddisk which you can copy to other locations
+such as an USB stick. Therefore it is also relatively easy to make a backup
+of the database (file).
+
+<b>Note: the SQLite database is unencrypted and can be opened by any SQLite
+database program!</b>
+
+The server database MySQL data is stored on a server. The server is a
+separate computer on a (company, private) network which sole purpose is
+to store data and provide functionality to the users connected to the
+network.
+
+<b>Note: the data in the MySQL is unencrypted</b>, except for the passwords and
+can be opened by any MySQL administration program. Restricted access is done
+by setting the username, password and user properties of the database.
+
+Making connection to the database is explained in \ref db_connectiondialog.
+
+The editing, importing and exporting data from the database is explained in
+\li \ref db_browserdialog
+\li \ref db_mappingdialog
+
+\subsection subsec_db_tutorialstext Text Documents
+
+The creation of a new text document is quick and easy. When you are working
+you sometimes need to store some text by copy and paste, for example an
+address from a website. Biluna starts quickly because it does not load
+any overhead such as libraries and scripts. With <i>File &gt; New</i> the
+user can select to create a new
+\li rich text document
+\li plain text or
+\li HTML document
+
+The rich text or HTML will be selected when formatting of the text is
+important. The plain text will be selected when the original text as data
+is used.
+
+For more information about the text documents refer to
+\li \ref db_textwidget
+\li \ref db_plaintextwidget
+\li \ref db_htmleditorwidget
+
+\subsection subsec_db_tutorialsweb Web browser
+
+Biluna has a basic web browser to browse the Internet. Besides browsing the
+Internet the browser is used the execute custom scripts from perspectives
+to collect/store data and to use functionality of the Biluna and other
+websites.
+
+For example: the Accounting perspective contains address data of customers.
+Next to the physical (not postal) address a button is available to view the
+address location. When the button is clicked, the web browser will be opened
+and the location of the customer will be shown on the page of Google maps.
+
+More information about the web browser is found at \ref db_internetbrowserwidget.
+
+For perspective tutorials refer to the respective perspective help
+documentation.
+
+*/

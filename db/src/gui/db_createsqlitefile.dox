@@ -1,0 +1,40 @@
+/*! \page db_createsqlitefile Create SQLite database file - DB
+\section sec_db_createsqlitefile Create SQLite database file
+
+The SQLite database file can be prepared in the MS Windows file browser.
+
+In the standard file browser go to the folder where you want to create
+the database file.
+
+Use the File menu New or right click with the mouse in the folder and
+select <i>New &gt; Text document</i> like is shown below
+
+\image html db_newmenu.png "New file from menu"
+
+The following (empty) text file will be shown:
+
+\image html db_newtextfile.png "New text file created"
+
+If the file is selected, left click again on the file and rename the file:
+
+\image html db_newsqlite.png "Rename the text file"
+
+You can also use the F2 button on the top of your keyboard to rename the file.
+When changing an extension of a file (in this case change of .txt to .d3),
+you will get the following message:
+
+\image html db_newrenamemessage.png "Rename (extension change) message"
+
+Click yes to accept the changes.
+
+Now you have the ready to use (empty) SQLite database file.
+
+\image html db_newsqlitefile.png "Empty SQLite database file"
+
+This file can be selected from the database connection dialog
+(\ref db_connectiondialog) to create
+a new database and the corresponding tables for the various perspectives.
+The tables are created automatically when connecting to this database file
+and opening the relevant perspectives.
+
+*/

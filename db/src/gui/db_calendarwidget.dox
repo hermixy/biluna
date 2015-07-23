@@ -1,0 +1,75 @@
+/*! \page db_calendarwidget Calendar Window - Database/System DB
+\section sec_db_calendarwidget Calendar Window
+
+The calendar window is open at the start of the application. When connected
+to a database it will show the activities stored in the database.
+
+Select from the main menu <i>System &gt; Calendar</i> in case
+the window has been closed
+
+When visible the following window will be shown:
+
+\image html db_calendarwidget.png "Calendar window"
+
+At the left top of the window you will see only the 'Calendar' tab
+if not connected to a database. The 'Activities' tab will be shown when
+connected to a database.
+
+The left top button 'Connect' will open the database connect dialog to
+connect to a database. This is the same as using the main menu
+<i>System &amp; Connect</i>.
+
+The combo box or dropdown box is used to change the calendar by month,
+week or by range.
+
+The control buttons further at the right are for changing the selected
+period back and forth (arrow keys) and to change the month, week or range.
+
+The horizontal header shows the day. Clicking the day in the header
+has only effect when a day has been selected as shown in below figure.
+
+Clicking the vertical header will enlarge the days in the week or
+close the days in the week.
+
+Clicking the day will open the day and show the details as shown below
+
+\image html db_calendarwidget_dayview.png "Calendar window - day view"
+
+Drag with the mouse a time period in the day and the Activities tab will
+be activated, in this window the details of the activity can be updated.
+The dragging of a time period only works when connected to a database.
+
+The activities can also be added manually in the activities tab.
+
+\image html db_calendarwidget_activitytab.png "Calendar window - activity tab"
+
+At the left top of the window:
+\li Click (+) plus button to make a new activity
+\li Click (-) minus button to delete the selected activity
+\li Click the database button to save the changes to the database
+\li With the dropdown or combobox at the right, the activities can
+be filter based on the status of the activities
+
+The table shows the activities in the database. The list is sorted on
+end date by default. The sorting is changed when clicking the column header.
+
+The details of an activity can be edited with the fields below the table:
+\li Type is the type of activity Call, Case, Email, Log, Meeting, Note,
+Opportunity, Reminder, Solution and Task
+\li Code is a code for the activity. This code can be used for identification
+or for example sorting in a report
+\li Subject is the subject of the activity
+\li Reminder can be checked if a reminder has to be shown
+in the reminder dialog
+\li The days indicate the number of days for the reminder before
+the activity starts
+\li Priority gives an indication of the importance of the activity
+\li Start is the start date and time
+\li End is the end date and time
+\li Location is the identification of the location where activity takes place
+\li Value the money value (cost or benefit0 associated with the activity
+\li Status is a generic flag to identify the status of the activity, used
+for sorting and progress reporting
+\li Description gives more details about the activity.
+
+*/

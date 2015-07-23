@@ -1,0 +1,28 @@
+/*! \page db_internetbrowserwidget Internet Browser Window - Database/System DB
+\section sec_db_internetbrowserwidget Internet Browser Window
+
+The Internet Browser window is a simple browser for Internet pages. It is
+used to quickly look for information on the Internet but also,
+in case of an active license, to interface with functionality
+of the Biluna website.
+
+Open a HTML view window with <i>File > New > Internet Browser</i>,
+the below window is shown:
+
+\image html db_internetbrowserwidget.png "Internet Browser window"
+
+The window has basic browser functionality such as:
+\li back (go back in browsing history)
+\li forward
+\li (Re)load page in address field
+\li and a menu button
+
+The browser is based on WebKit an open source project. The menu button
+provides a dropdown list of menu items and contains many of the functionality
+of WebKit. This functionality includes the WebKit Inspector for web
+developers.
+
+For more information go to the website of WebKit:
+<a href="http://www.webkit.org">webkit.org</a>
+
+*/

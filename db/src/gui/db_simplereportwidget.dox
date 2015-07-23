@@ -1,0 +1,44 @@
+/*! \page db_simplereportwidget Simple Report Window - DB
+\section sec_db_simplereportwidget Simple Report Window
+
+The Simple Report window allows the user to create simple table like reports.
+The reports can be usefull if the user requires a listing of data from the
+database that is not available in the standard reports.
+
+Select from the menu <i>Tools &gt; Simple Report</i>
+and the below window will be shown:
+\image html db_simplereportwidget.png "Simple report window"
+
+Use the green button with (+) to add a category or below an item.
+
+The red button with (-) will delete a category or an item,
+NOTE: this action can not be undone.
+
+The database with diskette icon button will save the current report.
+
+Set text in the Filter field and press the filter button to filter the
+list of reports based on the title.
+
+Clear the filter by clicking the button with the empty filter.
+
+The following fiels are available:
+\li Title - title of the report, will be in the header of the report
+\li Subtitle - subtitle of the report, will be in the header of the report
+\li Column widths - set the column widths in percentage separated by a semicolon,
+the total values should add up to 100%
+\li Alternating Row Color - if set, will show white and grey row colors
+for easy readibility
+\li First Data Full Row - if set, will use the full row for the first data
+\li SQL - Enter the required SQL with the selected columns to be shown in the
+report. Use {$valuefrom} and {$valueto} to vary the range of selection. These
+two statements will be replaced by the 'From' and 'To' value above the report
+
+\image html db_simplereportwidget_tabreport.png "Tab report"
+
+A selection can be made to show all or a range at
+the top of the window.
+
+Click the refresh button to refresh the report. Do not forget to save all
+your changes to the database first.
+
+*/

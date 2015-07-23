@@ -1,0 +1,54 @@
+/*! \page db_index Index - Database/System DB
+\section sec_db_index Database/System Index
+
+Lear about the application and the database connection:
+\li \subpage db_tutorialsexamples
+
+The (local) database is open for direct viewing and editing of data.
+Click <i>System</i> in the main menu and make a connection to
+a database and open the database browser window:
+\li \subpage db_connectiondialog
+\li \subpage db_projectdialog
+\li \subpage db_projecteditdialog
+
+The administrator of the database has the following
+in the <i>System > Administrator</i> menu:
+\li \subpage db_browserdialog
+\li \subpage db_mappingdialog
+\li \subpage db_versiondialog
+
+Editing and viewing of text and HTML files can be done with,
+and are available from the menu <i>File &gt; New</i>:
+\li \subpage db_textwidget
+\li \subpage db_plaintextwidget
+\li \subpage db_htmleditorwidget
+\li \subpage db_internetbrowserwidget
+
+The Internet Browser is for quick browsing the Internet but more to use
+additional functionality from the Biluna website.
+
+General tools are supporting the user with otherwise time consuming tasks,
+such as creating a list of file names. More about the tools is in
+\li \subpage db_tools
+\li \subpage db_calendarwidget
+
+User tools are available from the menu item <i>Tools</i>:
+\li \subpage db_calendarwidget
+\li Calculator - for making simple calculations
+\li \subpage db_simplereportwidget - A simple report builder and generator for the
+creation of reports from the database
+\li Text File List - creates a text file of select file names. Sometimes a
+list of file names is required rather than a screendump of a file browser.
+The text of the list of files can be used for example for reporting purposes.
+\li Basic Chart Types - this opens a dialog to test the settings for a
+chart that can be used in reports. Charts are Pie 2D/3D, Line, Bar and
+Stacked Bar, refer \subpage thrd_chartwidget.
+
+
+System tools are for (software) development purposes. In the main
+menu click <i>System &gt; Development</i>.
+\li \subpage db_systemdevelopment
+
+
+
+*/
