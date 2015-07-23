@@ -11,6 +11,7 @@
 #ifndef RB_CSVWRITER_H
 #define RB_CSVWRITER_H
 
+#include <QIODevice>
 #include "rb_objectatomic.h"
 #include "rb_objectcontainer.h"
 #include "rb_string.h"
