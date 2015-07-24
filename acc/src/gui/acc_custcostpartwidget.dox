@@ -1,0 +1,44 @@
+/*! \page acc_custcostpartwidget Customer Cost Center Part Window - ACC
+\section sec_acc_custcostpartwidget Customer Cost Center Part Window
+
+The customer cost center part window is used to edit the part of the
+cost center or profit center value allocated to the selected customer.
+
+The customer is selected in the tab of the ACC navigation dock window.
+The cost center (part) can be added to the selected customer in this window.
+The cost center can be allocated to the customer for a limited period
+set by the start date and the end date. The part of the cost center
+value can be set by setting the weight in percent. The allocation can be
+done based on the budget, forecast or actual value of the cost center.
+
+The allocation can be done based on a cost center or on a cost center group.
+
+From the menu select <i>ACC &gt; Settings &amp; Customer Part</i>
+and the below window will be shown:
+\image html acc_custcostcenterpartwidget.png "Customer cost center part window"
+
+Use the green button with (+) to add a part item
+
+The red button with (-) will delete the part item,
+NOTE: this action can not be undone
+
+The button with the harddrive and diskette is the button to save any changes
+to table and edit fields, or use the key combination CTRL+S.
+
+In the text field (with 'Filter') text can be entered to filter the table
+on the first column.
+
+The group fields are:
+\li Short Name - a short name to identify the part item, usually in capitals
+\li Description - a short description to explain the part item
+\li Value type - select Budget, Forecast or Actual of the cost/profit center
+\li Weight - the part or weight in percent to be allocated to customer
+\li Start Date - start date of allocation
+\li End Date - end date of allocation
+\li Cost Group - select a (cost center) group with the three dotted button,
+the red button to delete
+\li Cost Center - select a cost center with the three dotted button,
+the red button to delete
+
+*/
+

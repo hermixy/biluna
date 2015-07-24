@@ -1,0 +1,30 @@
+/*! \page acc_factorcompanydialog Factor Companies edit dialog - Accounting ACC
+\section sec_acc_factorcompanydialog Factor Companies edit dialog
+
+This dialog is used to edit the factor companies.
+
+Factoring is a form of financing in which a business sells its
+receivables to a third party or "factor company" at a discounted price. 
+Under this arrangement, the factor agrees to provide financing and other
+services to the selling business in return for interest and fees on the
+money that they advanced against receivables invoices.
+
+From the menu select <i>Accounting &gt; Settings &gt; Factor Companies</i>
+and the below dialog will be shown:</p>
+\image html acc_factorcompanydialog.png "Factor companies edit dialog"
+
+Use the green button with (+) to add a factor company.The red button
+with (-) will delete the selected factor company, NOTE: this action
+can not be undone
+
+The details of the factor company can be edited:</
+\li Factor company name - the name of the factor company
+\li Address Line 1-6 - &nbsp;the physical address of the location
+\li Contact name - the name of the contact person for communication
+\li Telephone, Facsimile and Email - relevant contact information
+\li Tax Province - &nbsp;the tax province where this location is
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

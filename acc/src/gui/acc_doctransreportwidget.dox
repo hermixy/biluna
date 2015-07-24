@@ -1,0 +1,30 @@
+/*! \page acc_doctransreportwidget Document Transaction Report Window - Accounting ACC
+\section sec_acc_doctransreportwidget Document Transaction Report Window
+
+
+The Document transaction window shows the GL transactions per document.
+This report helps to trace back the GL transactions per document. From
+the menu select
+\li Accounting &gt; Reports &gt; Document Transaction Report
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows before
+running the document transaction report, otherwise the report will be generated
+with different data from the database.
+\image html acc_doctransreportwidget.png "Document Transaction Report Settings"
+
+Select the relevant period to be shown for the document transaction report.
+The default months are set based on the previous and current month. Click
+the refresh button to generate the summary. For an example refer to below image.
+\image html acc_doctransreportwidget_refresh.png "Document Transaction Report - refresh"
+
+The GL accounts are sorted based by account number.
+
+Click File &gt; Print or Print Preview to print the summary report.
+
+Click File &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+*/

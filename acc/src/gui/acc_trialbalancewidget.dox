@@ -1,0 +1,30 @@
+/*! \page acc_trialbalancewidget Trial Balance Report Window - Accounting ACC
+\section sec_acc_trialbalancewidget Trial Balance Report Window
+
+The trial balance shows the current GL transaction in a balance sheet format.
+From the menu select
+\li Accounting &gt; Reports &gt; Trial Balance
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows before
+running the trial balance report, otherwise the report will be generated with
+different data from the database.
+
+\image html acc_trialbalancewidget.png "Trial Balance Report"
+
+Select the relevant period for the trial balance. The months are set to the
+company defaults for the start and ending of the fiscal year. Click the refresh
+button to generate the summary. For an example refer to below image.
+\image html acc_trialbalancewidget_refresh.png "Trial Balance Report - refresh"
+
+The GL accounts are sorted based to the account groupings as set in the
+Settings &gt; Account Groups.
+
+Click File &gt; Print or Print Preview to print the summary report.
+
+Click File &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+*/

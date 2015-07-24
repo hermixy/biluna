@@ -1,0 +1,43 @@
+/*! \page acc_accountcontroldialog Account Control Edit Dialog - Accounting ACC
+\section sec_acc_accountcontroldialog Account Control Edit Dialog
+
+The Account Control dialog is used to edit the list of account controls.
+The accounting is organized in General Ledger (GL) accounts. The account
+controls set parameters to the GL account such that the sales tax is
+consistently booking to the correct sales tax GL account.
+
+The settings need to be done carefully otherwise the application will not
+be able to handle the automatic booking of sales tax or the calculation
+of sales tax. For the full explanation of the account control in ACC
+refer to (TODO).
+
+From the menu select <i>Accounting &gt; Settings &gt; Account Control</i>
+and the below dialog will be shown:
+
+\image html acc_accountcontroldialog.png "Account control edit dialog"
+
+Use the green button with (+) to add an account control.
+
+In the table view, double click or use press F2 to edit the:
+\li control number, this number needs to be unique in this list. Use numbers
+lower than 1000 for sales tax related controls, the numbers 1000 upto 2000 for
+the Creditors and Debtors account controls, 2000 upto 9000 for the bank
+accounts and above for the memorial account control
+\li description of the account control
+\li sales tax relation number is the control number of the associated tax account
+
+The red button with (-) will delete the account control,
+NOTE: this action can not be undone
+
+A account control name or part of thereof can be entered in the textbox
+and by clicking the button with the binocular a search will be done in the list
+of account control.
+
+The next two buttons are for setting a filter or removing the filter on the
+list of account control.
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+
+*/

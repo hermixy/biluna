@@ -1,0 +1,28 @@
+/*! \page acc_unitofmeasuredialog Unit of Measurement Edit Dialog - Accounting ACC
+\section sec_acc_unitofmeasuredialog Unit of Measurement Edit Dialog
+
+The Unit of Measurement dialog allows the user to edit the list the units that
+can be used. The units are used, for example, on sales invoices to indicate
+the price per unit.
+
+From the menu select <i>Accounting &gt; Settings &gt; Unit of Measurement</i>
+and the below dialog will be shown:
+\image html acc_unitofmeasuredialog.png "Unit of measurement edit dialog"
+
+Use the green button with (+) to add a unit.
+
+In the table view, double click or use press F2 to edit the unit name.
+
+The red button with (-) will delete the unit,
+NOTE: this action can not be undone
+
+A unit name or part of thereof can be entered in the textbox and by clicking
+the button with the binocular a search will be done in the list of units.
+
+The next two buttons are for setting a filter or removing the filter on the
+list of units.
+
+The Help button opens this help page, the OK button confirms the changes and
+the Cancel button cancels the changes to the units.
+
+*/

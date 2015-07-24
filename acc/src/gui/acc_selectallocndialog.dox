@@ -1,0 +1,32 @@
+/*! \page acc_selectallocndialog Select Allocation Dialog - Accounting ACC
+\section sec_acc_selectallocndialog Select Allocation Dialog
+
+Allocation is the accounting process where corresponding transactions are
+being matched.
+
+For example: the bank account shows the amounts being received or paid. Many
+of the amounts are due to a sales invoice payment being received or a purchase
+invoice being paid. The sales and purchase invoices have been booked on the
+Debtor and Creditor accounts. With the receipt or payment of the amounts, the
+bank amounts can now be allocated (matched) to the corresponding invoice. ACC
+makes the corresponding transactions which are added to the General Ledger.
+
+The allocation dialog is shown when selecting the button on the GL
+transaction/accounting window. This button only shown for the Bank, Cash and
+Memorial mode of the window.
+\image html acc_selectallocndialog.png "Allocation Report Settings"
+
+The dialog opens with the list of Supplier- (purchase invoices) or Customer
+documents (sales invoices). ACC makes automatically the selection for Supplier
+or Customer depending on the sign, plus or minus, of the amount.
+
+In exceptional case a credit invoice needs to be processed. In that case select
+the correct document type at the top dropdown box with the label Document type.
+
+Select the relevant document by clicking the corresponding row en click OK to
+confirm the selection
+
+Use the button Help to see this documentation and Cancel to cancel the
+allocation action.
+
+*/

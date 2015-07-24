@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ACC_NavigationWidget</class>
+ <widget class="QWidget" name="ACC_NavigationWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>223</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Navigation</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
+    <number>1</number>
+   </property>
+   <property name="horizontalSpacing">
+    <number>3</number>
+   </property>
+   <property name="verticalSpacing">
+    <number>1</number>
+   </property>
+   <item row="1" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>16</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="tabsClosable">
+      <bool>false</bool>
+     </property>
+     <property name="movable">
+      <bool>false</bool>
+     </property>
+     <widget class="QWidget" name="tabCustomer">
+      <property name="toolTip">
+       <string>Customer</string>
+      </property>
+      <attribute name="icon">
+       <iconset resource="../../../db/src/gui/db.qrc">
+        <normaloff>:/images/icons/group_edit.png</normaloff>:/images/icons/group_edit.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string/>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Customer Branch</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tabSupplier">
+      <property name="toolTip">
+       <string>Supplier</string>
+      </property>
+      <attribute name="icon">
+       <iconset resource="../../../db/src/gui/db.qrc">
+        <normaloff>:/images/icons/group_gear.png</normaloff>:/images/icons/group_gear.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string/>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Supplier</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tabAsset">
+      <property name="toolTip">
+       <string>Assets</string>
+      </property>
+      <attribute name="icon">
+       <iconset resource="../../../db/src/gui/db.qrc">
+        <normaloff>:/images/icons/house.png</normaloff>:/images/icons/house.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string/>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Assets</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tabStockItem">
+      <property name="toolTip">
+       <string>Stock Items</string>
+      </property>
+      <attribute name="icon">
+       <iconset resource="../../../db/src/gui/db.qrc">
+        <normaloff>:/images/icons/bricks.png</normaloff>:/images/icons/bricks.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string/>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Stock Items</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLineEdit" name="leProject">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../../db/src/gui/db.qrc"/>
+ </resources>
+ <connections/>
+</ui>

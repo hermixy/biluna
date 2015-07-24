@@ -1,0 +1,34 @@
+/*! \page acc_accountgroupdialog Account Groups Edit Dialog - Accounting ACC
+\section sec_acc_accountgroupdialog Account Groups Edit Dialog
+
+The Account Groups dialog is used to edit the list of account groups.
+The accounting is organized in General Ledger (GL) accounts. The account group
+provides the organization for the reporting based on the GL accounts.
+The account group will also set the balance or, profit and loss (PL) with
+the account group.
+
+The settings need to be done carefully otherwise the application will
+not be able to handle the report generation properly.
+
+From the menu select <i>Accounting &gt; Settings &gt; Account Groups</i>
+and the below dialog will be shown:
+
+\image html acc_accountgroupdialog.png "Account group edit dialog"
+
+Use the green button with (+) to add an account control.
+
+The green button with (++) to add a child account group
+
+
+The red button with (-) will delete the account control, NOTE: this action
+can not be undone
+
+The details of the account group can be edited:
+\li Account Group Name
+\li Balance or Profit and Loss type
+\li Sequence in the trial balance
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

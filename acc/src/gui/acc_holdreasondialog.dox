@@ -1,0 +1,28 @@
+/*! \page acc_holdreasondialog Hold Reasons or Credit Status Edit Dialog - Accounting ACC
+\section sec_acc_holdreasondialog Hold Reasons or Credit Status Edit Dialog
+
+This dialog is used to edit the hold reasons or credit status. This customer
+'flag' is used to indicate whether a customer has a good or bad payment
+history. If a customer for example always pays the bills late, the customer
+needs to watched and reminders have to be send promtly. A customer that does
+not pay or you have a serious dispute with you can set to NO INVOICING.
+
+From the menu select <i>Accounting &gt; Settings &gt; Credit Status</i>
+and the below dialog will be shown:
+\image html acc_holdreasondialog.png "Hold reasons dialog"
+
+The following fields can be edited:
+\li Reason Code - a short indicator of hold reason
+\li Description - description of the hold reason
+\li Disallow Invoices - set to NO INVOICING in case no invoice can be
+send to the customer
+
+Use the green button with (+) to add hold reason.
+
+The red button with (-) will delete a hold reason,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

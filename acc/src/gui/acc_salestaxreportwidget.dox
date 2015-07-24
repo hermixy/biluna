@@ -1,0 +1,42 @@
+/*! \page acc_salestaxreportwidget Sales Tax Report Window - Accounting ACC
+\section sec_acc_salestaxreportwidget Sales Tax Report Window
+
+The sales tax report window reports the sales tax for the selected period.
+The current tax scheme, show below, is for the Dutch tax authorities only. Other
+tax systems can be added upon request.
+
+From the menu select <i>Accounting &gt; Reports &gt; Sales Tax Report</i>
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows before
+running the tax report, otherwise the report will be generated with different
+data from the database.
+
+Select the relevant period to be shown for the tax report. The default months
+are set based on the previous and current month. Click the refresh button to
+generate the report. For an example refer to below image.
+\image html acc_salestaxreportwidget.png "Sales Tax Report"
+
+The report is based on authority value added tax reporting scheme.
+The columns are:
+\li Item - the item from the authority report
+\li Description - the description of this tax section
+\li Function - the function number in Biluna ACC that handles this tax
+\li Amount excl. Tax - the amount excluding the tax
+\li Tax amount - the tax amount for this section
+
+\image html acc_salestaxreportwidget_warning.png "Sales Tax Report Warning"
+
+Above image shows a warning in yellow. This means that the calculated tax,
+amount excl. times the tax percentage does not correspond with the total
+booked tax in this tax GL account. Probably a incorrect entry has been done
+or a tax amount is not booked in the General Ledger.
+
+Click File &gt; Print or Print Preview to print the allocation report.
+
+Click File &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+*/

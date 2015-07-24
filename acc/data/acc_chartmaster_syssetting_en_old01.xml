@@ -1,0 +1,1961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********************************************-->
+<!-- Generated with ACC -->
+<!-- For more information visit www.biluna.com  -->
+<!--********************************************-->
+<ACC version="0.9.13">
+    <ACC_Project id="{542859cc-51b3-46b9-abc2-068d2d355212}" parent="0" status="0" created="2014-02-24T12:22:13" changed="2014-02-24T12:22:14" muser="user_syssetting">
+        <coyname pvalue="&lt;Your Company&gt;">MyCompany</coyname>
+        <gstno></gstno>
+        <companynumber>0</companynumber>
+        <regoffice1></regoffice1>
+        <regoffice2></regoffice2>
+        <regoffice3></regoffice3>
+        <regoffice4></regoffice4>
+        <regoffice5></regoffice5>
+        <regoffice6></regoffice6>
+        <telephone></telephone>
+        <fax></fax>
+        <email></email>
+        <currencydefault_id>0</currencydefault_id>
+        <pytdiscountact_idx dvalue="">0</pytdiscountact_idx>
+        <payrollact_idx dvalue="">0</payrollact_idx>
+        <grnact_idx dvalue="">0</grnact_idx>
+        <exchangediffact_idx dvalue="">0</exchangediffact_idx>
+        <purchasesexchangediffact_idx dvalue="">0</purchasesexchangediffact_idx>
+        <retainedearnings_idx dvalue="">0</retainedearnings_idx>
+        <freightact_idx dvalue="">0</freightact_idx>
+        <bankname></bankname>
+        <bankiban></bankiban>
+        <bankbicswift></bankbicswift>
+        <taxprovince_id>0</taxprovince_id>
+        <taxgroup_id>0</taxgroup_id>
+        <logo>&lt;Your Company&gt;</logo>
+        <ACC_ChartMasterList>
+            <ACC_ChartMaster id="{8d80f657-4ebf-46ba-990c-9e3d8f9ada88}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2012-06-25T17:14:33" muser="user_syssetting">
+                <accountcode pvalue="0">0010</accountcode>
+                <accountname pvalue="">Goodwill</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{bef9c1fd-92e6-4180-b62c-17a168fb42d1}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:39:38" muser="user_syssetting">
+                <accountcode pvalue="0">0020</accountcode>
+                <accountname pvalue="">Patents</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f33589e8-53e8-42f4-a7fd-35049f4c0cb0}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:39:48" muser="user_syssetting">
+                <accountcode pvalue="0">0030</accountcode>
+                <accountname pvalue="">Licenses</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{eefd9c02-1d72-4549-8b94-49cb1642d3f8}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:39:55" muser="user_syssetting">
+                <accountcode pvalue="0">0035</accountcode>
+                <accountname pvalue="">Permits</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2b6eada4-b372-44de-a648-7174b67b7553}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:40:08" muser="user_syssetting">
+                <accountcode pvalue="0">0040</accountcode>
+                <accountname pvalue="">Development cost</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{06c99b1d-372a-44dd-b008-071dc505505e}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:40:18" muser="user_syssetting">
+                <accountcode pvalue="0">0045</accountcode>
+                <accountname pvalue="">Start-up cost</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d2767a68-4c01-48ed-83e8-226bd11ededb}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:40:34" muser="user_syssetting">
+                <accountcode pvalue="0">0050</accountcode>
+                <accountname pvalue="">Goodwill depreciation</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ed7c9a0c-92b0-43c2-bcf2-c0b3d3fc1c5f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:40:45" muser="user_syssetting">
+                <accountcode pvalue="0">0060</accountcode>
+                <accountname pvalue="">Patent depreciation</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{464baebb-884c-490a-b265-3837f97f9475}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:41:00" muser="user_syssetting">
+                <accountcode pvalue="0">0070</accountcode>
+                <accountname pvalue="">Licenses depreciation</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9a9ea2af-d2b1-4376-9652-d95a2d26840f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:41:14" muser="user_syssetting">
+                <accountcode pvalue="0">0075</accountcode>
+                <accountname pvalue="">Permit depreciation</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e818627c-074e-47ab-a708-d7b30fdff3db}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:41:26" muser="user_syssetting">
+                <accountcode pvalue="0">0080</accountcode>
+                <accountname pvalue="">Development cost depreciation</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b447e906-c383-4865-a186-b71d05d22f26}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:41:40" muser="user_syssetting">
+                <accountcode pvalue="0">0085</accountcode>
+                <accountname pvalue="">Start-up cost depreciation</accountname>
+                <accountgroup_id pvalue="0">{cce37fe8-4045-4202-a0ca-36ea4ecb68be}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1ac39ded-d83a-4470-8ece-288a859579ea}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:42:28" muser="user_syssetting">
+                <accountcode pvalue="0">0100</accountcode>
+                <accountname pvalue="">Land</accountname>
+                <accountgroup_id pvalue="0">{1476be22-f2df-49ab-9480-a7fa59a9e822}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{cf58f1e2-6d05-46fe-9725-4257d6669cf1}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:42:34" muser="user_syssetting">
+                <accountcode pvalue="0">0104</accountcode>
+                <accountname pvalue="">Buildings</accountname>
+                <accountgroup_id pvalue="0">{1476be22-f2df-49ab-9480-a7fa59a9e822}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{77bba251-4174-4a16-a6a6-dfc3909af1a0}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:42:54" muser="user_syssetting">
+                <accountcode pvalue="0">0132</accountcode>
+                <accountname pvalue="">Parking space</accountname>
+                <accountgroup_id pvalue="0">{1476be22-f2df-49ab-9480-a7fa59a9e822}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b2fb0ddc-416c-493a-9706-4dbf6602a0ea}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:43:05" muser="user_syssetting">
+                <accountcode pvalue="0">0154</accountcode>
+                <accountname pvalue="">Building depreciation</accountname>
+                <accountgroup_id pvalue="0">{1476be22-f2df-49ab-9480-a7fa59a9e822}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0f8b322a-7d24-48d8-8e9a-0f2834ffa6ac}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:43:19" muser="user_syssetting">
+                <accountcode pvalue="0">0182</accountcode>
+                <accountname pvalue="">Parking space depreciation</accountname>
+                <accountgroup_id pvalue="0">{1476be22-f2df-49ab-9480-a7fa59a9e822}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{39beb2e4-ee0f-496f-8edc-a732660f9d69}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2012-06-25T17:16:18" muser="user_syssetting">
+                <accountcode pvalue="0">0210</accountcode>
+                <accountname pvalue="">Machines</accountname>
+                <accountgroup_id pvalue="0">{f940e9c3-5bc5-45a7-9bbf-d4153e254e65}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{21a08d1a-e688-4b89-bd0c-c27f1d4400a7}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:37:04" muser="user_syssetting">
+                <accountcode pvalue="0">0220</accountcode>
+                <accountname pvalue="">Machines depriciation</accountname>
+                <accountgroup_id pvalue="0">{f940e9c3-5bc5-45a7-9bbf-d4153e254e65}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b0335af1-45ac-4ce2-b05e-7319f2c3d087}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:43:36" muser="user_syssetting">
+                <accountcode pvalue="0">0250</accountcode>
+                <accountname pvalue="">Inventory</accountname>
+                <accountgroup_id pvalue="0">{846a5c4a-f96f-45ad-bb96-18bf027a687a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f4a4e627-4a1e-4940-b290-5d3601a4aea5}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:44:01" muser="user_syssetting">
+                <accountcode pvalue="0">0275</accountcode>
+                <accountname pvalue="">Inventory depreciation</accountname>
+                <accountgroup_id pvalue="0">{846a5c4a-f96f-45ad-bb96-18bf027a687a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{87a60976-1c8b-4c51-a05e-cb24c3e60089}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:45:48" muser="user_syssetting">
+                <accountcode pvalue="0">0310</accountcode>
+                <accountname pvalue="">Automobiles</accountname>
+                <accountgroup_id pvalue="0">{dcd42b9a-812a-4982-abce-7425aa8840d5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0f5f8e9b-9e26-41d5-a9f1-cd16dfbf88a7}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:46:22" muser="user_syssetting">
+                <accountcode pvalue="0">0360</accountcode>
+                <accountname pvalue="">Automobiles depreciation</accountname>
+                <accountgroup_id pvalue="0">{dcd42b9a-812a-4982-abce-7425aa8840d5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{90fbd42b-cbc7-4393-97d4-1d5a3406d296}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:47:02" muser="user_syssetting">
+                <accountcode pvalue="0">0500</accountcode>
+                <accountname pvalue="">Majority shareholding</accountname>
+                <accountgroup_id pvalue="0">{831b22a6-5e02-4fab-bc02-b089720c31e3}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{df51ca5e-da4a-4dde-97e4-8d2141b9d312}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:48:19" muser="user_syssetting">
+                <accountcode pvalue="0">0560</accountcode>
+                <accountname pvalue="">Mortgage payable</accountname>
+                <accountgroup_id pvalue="0">{2b265764-fc69-40c1-b160-b2b3b3e67062}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{cd004d2a-e8d7-4b31-8430-8397f9352fec}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:48:28" muser="user_syssetting">
+                <accountcode pvalue="0">0565</accountcode>
+                <accountname pvalue="">Loan payable</accountname>
+                <accountgroup_id pvalue="0">{2b265764-fc69-40c1-b160-b2b3b3e67062}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2356d8de-0929-49f9-b5f4-f99e835ca638}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:48:39" muser="user_syssetting">
+                <accountcode pvalue="0">0600</accountcode>
+                <accountname pvalue="">Shares</accountname>
+                <accountgroup_id pvalue="0">{7fd8b4b4-3aaa-49eb-b5c3-eb941df84c5a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d98a4a8b-4f06-42f8-8441-13c8d92a7fba}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:48:48" muser="user_syssetting">
+                <accountcode pvalue="0">0610</accountcode>
+                <accountname pvalue="">Capital</accountname>
+                <accountgroup_id pvalue="0">{7fd8b4b4-3aaa-49eb-b5c3-eb941df84c5a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{6613df56-9836-401b-9bb7-4dc97f3ed489}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:50:04" muser="user_syssetting">
+                <accountcode pvalue="0">0620</accountcode>
+                <accountname pvalue="">Private borrowings/deposits</accountname>
+                <accountgroup_id pvalue="0">{7fd8b4b4-3aaa-49eb-b5c3-eb941df84c5a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{67182c05-88f2-42f3-a5bd-30a8640bc0c4}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:50:55" muser="user_syssetting">
+                <accountcode pvalue="0">0700</accountcode>
+                <accountname pvalue="">Pension obligations</accountname>
+                <accountgroup_id pvalue="0">{01e150a7-da7b-4607-8d47-3db5cdbd4a79}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{3e6873e4-22d4-410c-afab-07ab64789af0}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:53:02" muser="user_syssetting">
+                <accountcode pvalue="0">0720</accountcode>
+                <accountname pvalue="">Shares provision</accountname>
+                <accountgroup_id pvalue="0">{01e150a7-da7b-4607-8d47-3db5cdbd4a79}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a20c3ec3-d8ad-4dfd-9198-c88b16f6b308}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:53:24" muser="user_syssetting">
+                <accountcode pvalue="0">0810</accountcode>
+                <accountname pvalue="">Mortgage receivable</accountname>
+                <accountgroup_id pvalue="0">{500d1146-ae93-4ac7-b7fc-1cc878afd154}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{87a16f9f-b5b7-4050-9c82-37ea619ee50d}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-11-04T11:53:35" muser="user_syssetting">
+                <accountcode pvalue="0">0820</accountcode>
+                <accountname pvalue="">Loan receivable</accountname>
+                <accountgroup_id pvalue="0">{500d1146-ae93-4ac7-b7fc-1cc878afd154}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{88f4c849-c73b-407d-9ddd-9e93905f6b82}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-24T17:14:09" muser="rutger">
+                <accountcode pvalue="0">0850</accountcode>
+                <accountname pvalue="">Curr. account Director</accountname>
+                <accountgroup_id pvalue="0">{500d1146-ae93-4ac7-b7fc-1cc878afd154}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9c10b955-7c0f-4603-9465-7e49ee67b549}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:39:00" muser="user_syssetting">
+                <accountcode pvalue="0">0860</accountcode>
+                <accountname pvalue="">Mortgage repayment</accountname>
+                <accountgroup_id pvalue="0">{500d1146-ae93-4ac7-b7fc-1cc878afd154}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{df48ca26-774a-4672-a8cf-f12bec639a26}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:39:15" muser="user_syssetting">
+                <accountcode pvalue="0">0870</accountcode>
+                <accountname pvalue="">Loan repayment</accountname>
+                <accountgroup_id pvalue="0">{500d1146-ae93-4ac7-b7fc-1cc878afd154}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ca23ecc0-ee9d-40a9-a165-3a1142d9111b}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:08:17" muser="user_syssetting">
+                <accountcode pvalue="0">1000</accountcode>
+                <accountname pvalue="">Cash</accountname>
+                <accountgroup_id pvalue="0">{2db61459-79e5-4c11-ba95-091ceb61176b}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">2000</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{733be3d7-d40e-4032-9dc5-05a731a79a64}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-24T17:15:34" muser="rutger">
+                <accountcode pvalue="0">1100</accountcode>
+                <accountname pvalue="">Bank (current) 123456789</accountname>
+                <accountgroup_id pvalue="0">{2db61459-79e5-4c11-ba95-091ceb61176b}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">2100</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5f05e114-c9a9-477c-8936-da2db219df77}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:08:49" muser="user_syssetting">
+                <accountcode pvalue="0">1300</accountcode>
+                <accountname pvalue="">Debtors (sales)</accountname>
+                <accountgroup_id pvalue="0">{020644fe-8ee3-4038-a35a-c78235896727}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">1001</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ee1122cd-8779-4f55-8fe8-273ef33d57e1}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:13:24" muser="user_syssetting">
+                <accountcode pvalue="0">1310</accountcode>
+                <accountname pvalue="">Doubtful debtors</accountname>
+                <accountgroup_id pvalue="0">{020644fe-8ee3-4038-a35a-c78235896727}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{09bb1196-45b7-4c64-bc90-215842d85e36}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:13:42" muser="user_syssetting">
+                <accountcode pvalue="0">1350</accountcode>
+                <accountname pvalue="">Provision doubtful debtors</accountname>
+                <accountgroup_id pvalue="0">{020644fe-8ee3-4038-a35a-c78235896727}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{09b5aabd-6c46-47d1-ba5d-d08e64adb4b9}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:09:08" muser="user_syssetting">
+                <accountcode pvalue="0">1600</accountcode>
+                <accountname pvalue="">Creditors (purchases)</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">1002</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{bf2c20d3-6801-4214-a5ef-8dbaeb87f02b}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:14:17" muser="user_syssetting">
+                <accountcode pvalue="0">1602</accountcode>
+                <accountname pvalue="">VAT payable low</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">21</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e8e714b1-1902-4fb6-92e0-98f8f5075773}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:14:31" muser="user_syssetting">
+                <accountcode pvalue="0">1604</accountcode>
+                <accountname pvalue="">VAT payable high</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">22</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b29c49cf-35b4-4adb-8830-931d6890cf1f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:14:44" muser="user_syssetting">
+                <accountcode pvalue="0">1606</accountcode>
+                <accountname pvalue="">VAT payable other</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">23</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{abc4619d-8798-449e-aecf-3c91371b7746}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:14:59" muser="user_syssetting">
+                <accountcode pvalue="0">1612</accountcode>
+                <accountname pvalue="">VAT receivable low</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">41</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2eef8c19-6ccb-4986-8894-e14ccd3f6cc4}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:15:04" muser="user_syssetting">
+                <accountcode pvalue="0">1614</accountcode>
+                <accountname pvalue="">VAT receivable high</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">42</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a13f25f1-d78f-4793-9745-af0d32ee02a0}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:15:12" muser="user_syssetting">
+                <accountcode pvalue="0">1616</accountcode>
+                <accountname pvalue="">VAT receivable other</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">43</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a92e5f02-4962-476a-99d5-f45688bbdc03}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:15:24" muser="user_syssetting">
+                <accountcode pvalue="0">1620</accountcode>
+                <accountname pvalue="">VAT paid</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{542c278d-8f62-488f-8c88-b59ddffb6a56}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:40:57" muser="user_syssetting">
+                <accountcode pvalue="0">1630</accountcode>
+                <accountname pvalue="">Payable VAT transferred (sales)</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">24</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{51bf2d3c-4459-4166-92f8-f0e1f810a122}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:41:22" muser="user_syssetting">
+                <accountcode pvalue="0">1632</accountcode>
+                <accountname pvalue="">Payable VAT transferred EU (sales)</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">24</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a154655a-1ce1-4ce7-9c55-25dc2a21cc40}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:41:50" muser="user_syssetting">
+                <accountcode pvalue="0">1634</accountcode>
+                <accountname pvalue="">Receivable VAT transferred (sales)</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">25</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2c4d0a3d-ec2a-42c6-8621-d5e486ee8e48}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:42:30" muser="user_syssetting">
+                <accountcode pvalue="0">1640</accountcode>
+                <accountname pvalue="">Payable VAT transferred (purchases)</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">44</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{898dd147-06d4-4afb-bec6-c30981a32793}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:42:55" muser="user_syssetting">
+                <accountcode pvalue="0">1642</accountcode>
+                <accountname pvalue="">Payable VAT transferred EU (purchases)</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">44</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{63628a91-d10d-4709-9c45-d4e50b31ad2b}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:43:24" muser="user_syssetting">
+                <accountcode pvalue="0">1644</accountcode>
+                <accountname pvalue="">Receivable VAT transferred (purchases)</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">45</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{03a37849-504a-4754-8e72-4ba6ef7f1a19}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:43:52" muser="user_syssetting">
+                <accountcode pvalue="0">1660</accountcode>
+                <accountname pvalue="">Payroll taxes</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d9f749b9-3656-432f-8179-90b765e2153f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:44:13" muser="user_syssetting">
+                <accountcode pvalue="0">1665</accountcode>
+                <accountname pvalue="">Paid payroll taxes</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{364baef3-1907-41c6-bd50-ad8c577a6f5b}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:45:30" muser="user_syssetting">
+                <accountcode pvalue="0">1670</accountcode>
+                <accountname pvalue="">Company tax</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c3bb7b50-0af0-4e69-8fd3-7d53980eda6f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:38:46" muser="user_syssetting">
+                <accountcode pvalue="0">2100</accountcode>
+                <accountname pvalue="">Balance intermediate account</accountname>
+                <accountgroup_id pvalue="0">{096b0fb4-abfc-4a87-b783-2ca189ecc944}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5d3fd0e5-356a-41d7-a489-8270fbe51cfa}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:38:10" muser="user_syssetting">
+                <accountcode pvalue="0">2900</accountcode>
+                <accountname pvalue="">Internal transfers</accountname>
+                <accountgroup_id pvalue="0">{096b0fb4-abfc-4a87-b783-2ca189ecc944}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0c10b029-73e0-45c7-ab6e-12b81afea81f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:50:42" muser="user_syssetting">
+                <accountcode pvalue="0">3000</accountcode>
+                <accountname pvalue="">Raw materials</accountname>
+                <accountgroup_id pvalue="0">{f95af61e-721e-48ed-8330-c0122793d4ad}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c935294a-4769-4ec8-b6c8-afbef5b0ec6e}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:50:52" muser="user_syssetting">
+                <accountcode pvalue="0">3100</accountcode>
+                <accountname pvalue="">Parts</accountname>
+                <accountgroup_id pvalue="0">{f95af61e-721e-48ed-8330-c0122793d4ad}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2c83d395-14cd-4a8b-99e1-f59dbdf85766}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:51:17" muser="user_syssetting">
+                <accountcode pvalue="0">3200</accountcode>
+                <accountname pvalue="">Utilities</accountname>
+                <accountgroup_id pvalue="0">{f95af61e-721e-48ed-8330-c0122793d4ad}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{32794dd4-8cc2-465c-96e7-ba69a5d07936}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:51:39" muser="user_syssetting">
+                <accountcode pvalue="0">3300</accountcode>
+                <accountname pvalue="">Price difference raw materials</accountname>
+                <accountgroup_id pvalue="0">{f95af61e-721e-48ed-8330-c0122793d4ad}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d0104587-b1ef-4ad6-b5c9-401cdab9beb9}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:52:16" muser="user_syssetting">
+                <accountcode pvalue="0">4000</accountcode>
+                <accountname pvalue="">Wages and salaries</accountname>
+                <accountgroup_id pvalue="0">{3ed7c444-4e0f-40b8-a391-5894ee368d29}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{967163cd-089d-434a-8178-779baa82e3e9}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:52:42" muser="user_syssetting">
+                <accountcode pvalue="0">4030</accountcode>
+                <accountname pvalue="">Social charges</accountname>
+                <accountgroup_id pvalue="0">{3ed7c444-4e0f-40b8-a391-5894ee368d29}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5629da2b-d6f7-4fc3-ad7e-ec7a810b2a85}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:53:05" muser="user_syssetting">
+                <accountcode pvalue="0">4035</accountcode>
+                <accountname pvalue="">Pension contributions</accountname>
+                <accountgroup_id pvalue="0">{3ed7c444-4e0f-40b8-a391-5894ee368d29}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c2e89872-12c5-4603-b5c8-35e7b4a46591}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:53:28" muser="user_syssetting">
+                <accountcode pvalue="0">4050</accountcode>
+                <accountname pvalue="">Canteen cost</accountname>
+                <accountgroup_id pvalue="0">{3ed7c444-4e0f-40b8-a391-5894ee368d29}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a96d1144-acd2-43ef-94e2-acde7c96e168}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:53:36" muser="user_syssetting">
+                <accountcode pvalue="0">4055</accountcode>
+                <accountname pvalue="">Travel cost</accountname>
+                <accountgroup_id pvalue="0">{3ed7c444-4e0f-40b8-a391-5894ee368d29}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ae3f3dff-3cb8-4b94-95ac-e9402e55ea25}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:53:43" muser="user_syssetting">
+                <accountcode pvalue="0">4062</accountcode>
+                <accountname pvalue="">Training cost</accountname>
+                <accountgroup_id pvalue="0">{3ed7c444-4e0f-40b8-a391-5894ee368d29}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ff174140-33ca-4002-b176-08efcfbc7460}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:54:12" muser="user_syssetting">
+                <accountcode pvalue="0">4080</accountcode>
+                <accountname pvalue="">Office rent</accountname>
+                <accountgroup_id pvalue="0">{3ed7c444-4e0f-40b8-a391-5894ee368d29}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0ffda7b2-8f37-4542-ad16-7b3081f662c7}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2012-06-25T17:23:40" muser="user_syssetting">
+                <accountcode pvalue="0">4100</accountcode>
+                <accountname pvalue="">Huur pand</accountname>
+                <accountgroup_id pvalue="0">{6f47eea7-4d2b-438f-b8e7-f978abdbe52a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4f41aa6d-dc08-4f07-a681-c064b233f23f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:54:27" muser="user_syssetting">
+                <accountcode pvalue="0">4125</accountcode>
+                <accountname pvalue="">Cleaning cost</accountname>
+                <accountgroup_id pvalue="0">{6f47eea7-4d2b-438f-b8e7-f978abdbe52a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d6c3eaa3-702c-4ae8-b3f4-01834071ed0c}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:54:30" muser="user_syssetting">
+                <accountcode pvalue="0">4200</accountcode>
+                <accountname pvalue="">Rent machines</accountname>
+                <accountgroup_id pvalue="0">{08d3155c-28bb-47cd-9902-97175674f401}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{fba40eef-7f2b-4236-9df1-c3d716ab140f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:55:26" muser="user_syssetting">
+                <accountcode pvalue="0">4210</accountcode>
+                <accountname pvalue="">Maintenance machines</accountname>
+                <accountgroup_id pvalue="0">{08d3155c-28bb-47cd-9902-97175674f401}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{116618ae-632d-4dd4-9815-e3e42dfc83d4}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:55:37" muser="user_syssetting">
+                <accountcode pvalue="0">4300</accountcode>
+                <accountname pvalue="">Contributions</accountname>
+                <accountgroup_id pvalue="0">{e720357a-9258-4582-8778-3d46f9979884}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{db6f0feb-1a40-4652-88d1-38ba41628094}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:40:26" muser="user_syssetting">
+                <accountcode pvalue="0">4302</accountcode>
+                <accountname pvalue="">Subscriptions</accountname>
+                <accountgroup_id pvalue="0">{e720357a-9258-4582-8778-3d46f9979884}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{169b61eb-c1ff-41de-8b9e-0301c7c482e0}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:40:45" muser="user_syssetting">
+                <accountcode pvalue="0">4305</accountcode>
+                <accountname pvalue="">Office supplies</accountname>
+                <accountgroup_id pvalue="0">{e720357a-9258-4582-8778-3d46f9979884}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f49b36f2-4969-4b2f-b7a6-ddb900b60938}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:56:13" muser="user_syssetting">
+                <accountcode pvalue="0">4307</accountcode>
+                <accountname pvalue="">Printing cost</accountname>
+                <accountgroup_id pvalue="0">{e720357a-9258-4582-8778-3d46f9979884}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5f36a455-6fac-49ae-8b7e-eb64fc33af04}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:56:31" muser="user_syssetting">
+                <accountcode pvalue="0">4315</accountcode>
+                <accountname pvalue="">Telephone/fax cost</accountname>
+                <accountgroup_id pvalue="0">{e720357a-9258-4582-8778-3d46f9979884}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{8d3a47c9-a019-4fd4-95dc-c811e5a4bd74}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T15:30:50" muser="user_syssetting">
+                <accountcode pvalue="0">4320</accountcode>
+                <accountname pvalue="">Postage cost</accountname>
+                <accountgroup_id pvalue="0">{e720357a-9258-4582-8778-3d46f9979884}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{59c85381-09e5-4c44-8217-a3196f06500b}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:56:43" muser="user_syssetting">
+                <accountcode pvalue="0">4400</accountcode>
+                <accountname pvalue="">Fuel</accountname>
+                <accountgroup_id pvalue="0">{f5ef873b-f0f0-4f3b-9c47-d233d0a06484}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{17febb11-504a-45ff-957c-7ad7556143c5}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:56:55" muser="user_syssetting">
+                <accountcode pvalue="0">4410</accountcode>
+                <accountname pvalue="">Maintenance vehicles</accountname>
+                <accountgroup_id pvalue="0">{f5ef873b-f0f0-4f3b-9c47-d233d0a06484}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{183d115e-627a-438b-b833-1cfcbd90d11f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:57:16" muser="user_syssetting">
+                <accountcode pvalue="0">4500</accountcode>
+                <accountname pvalue="">Transportation cost</accountname>
+                <accountgroup_id pvalue="0">{b2a0dc96-11dd-49b4-a476-eb2fe790395a}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5f4f79a3-5a60-4d29-b19c-c745ca21fe2e}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:57:25" muser="user_syssetting">
+                <accountcode pvalue="0">4530</accountcode>
+                <accountname pvalue="">Advertising</accountname>
+                <accountgroup_id pvalue="0">{b2a0dc96-11dd-49b4-a476-eb2fe790395a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{61439633-5e62-4218-a4d7-871a416f2838}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:58:14" muser="user_syssetting">
+                <accountcode pvalue="0">4540</accountcode>
+                <accountname pvalue="">Exhibition cost</accountname>
+                <accountgroup_id pvalue="0">{b2a0dc96-11dd-49b4-a476-eb2fe790395a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f33d84a2-27cd-443b-b2ad-725f5068db61}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:58:27" muser="user_syssetting">
+                <accountcode pvalue="0">4600</accountcode>
+                <accountname pvalue="">Accountant cost</accountname>
+                <accountgroup_id pvalue="0">{6c0f0bfe-b6b9-4d3f-b534-9eb6de5e24a2}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{61dacc96-258c-4160-99e1-7ac1567098d1}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T20:58:32" muser="user_syssetting">
+                <accountcode pvalue="0">4620</accountcode>
+                <accountname pvalue="">Insurances</accountname>
+                <accountgroup_id pvalue="0">{6c0f0bfe-b6b9-4d3f-b534-9eb6de5e24a2}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9a7ab616-6eb4-48ba-a275-13e0aa1d5678}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:41:20" muser="user_syssetting">
+                <accountcode pvalue="0">4750</accountcode>
+                <accountname pvalue="">Interest savings account</accountname>
+                <accountgroup_id pvalue="0">{94d8d9c2-01f4-4e1c-b460-93ea6fcab201}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7bf73585-7b64-4cd8-8efd-1e5c8d9b3252}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:41:36" muser="user_syssetting">
+                <accountcode pvalue="0">4755</accountcode>
+                <accountname pvalue="">Interest and cost current account</accountname>
+                <accountgroup_id pvalue="0">{94d8d9c2-01f4-4e1c-b460-93ea6fcab201}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0c897bfb-337b-4766-bbf7-8b0422d63b0e}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:01:30" muser="user_syssetting">
+                <accountcode pvalue="0">4855</accountcode>
+                <accountname pvalue="">Depriciation machines</accountname>
+                <accountgroup_id pvalue="0">{7179e923-129a-4c52-b7db-b7534395e154}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4fa61642-af48-41fd-a8aa-a0fe3179142d}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:01:51" muser="user_syssetting">
+                <accountcode pvalue="0">4865</accountcode>
+                <accountname pvalue="">Depriciation office equipment</accountname>
+                <accountgroup_id pvalue="0">{7179e923-129a-4c52-b7db-b7534395e154}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5fb535a7-51d0-437b-8a1c-cd19a1f30c69}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:02:25" muser="user_syssetting">
+                <accountcode pvalue="0">4900</accountcode>
+                <accountname pvalue="">Cash differences</accountname>
+                <accountgroup_id pvalue="0">{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{32539391-3e98-4eae-a39b-0fd507315769}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:02:22" muser="user_syssetting">
+                <accountcode pvalue="0">4910</accountcode>
+                <accountname pvalue="">Stock differences</accountname>
+                <accountgroup_id pvalue="0">{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a8923a79-13bf-4757-b34d-3c2bad700428}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:42:00" muser="user_syssetting">
+                <accountcode pvalue="0">4950</accountcode>
+                <accountname pvalue="">Other cost and income</accountname>
+                <accountgroup_id pvalue="0">{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">1</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1bdb6130-0cf4-4dce-bb13-f33017dc3c0c}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T16:57:34" muser="user_syssetting">
+                <accountcode pvalue="0">4972</accountcode>
+                <accountname pvalue="">Sales currency exchange difference</accountname>
+                <accountgroup_id pvalue="0">{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{73857055-cb2b-4143-b372-e78bcd0a753c}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T16:57:53" muser="user_syssetting">
+                <accountcode pvalue="0">4974</accountcode>
+                <accountname pvalue="">Purchases currency exchange difference</accountname>
+                <accountgroup_id pvalue="0">{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d9151426-8d26-4a56-aa86-48c561ddc308}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:02:54" muser="user_syssetting">
+                <accountcode pvalue="0">4990</accountcode>
+                <accountname pvalue="">Transfer account section 4</accountname>
+                <accountgroup_id pvalue="0">{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5c7095bf-cc58-4959-83c5-656551654a10}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:03:20" muser="user_syssetting">
+                <accountcode pvalue="0">5100</accountcode>
+                <accountname pvalue="">Purchase cost</accountname>
+                <accountgroup_id pvalue="0">{0bf059d5-4639-4e7f-b355-2ccb1394cdc5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{65a94d81-1df8-43da-93ba-30130096f1d0}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:03:31" muser="user_syssetting">
+                <accountcode pvalue="0">5200</accountcode>
+                <accountname pvalue="">Production cost</accountname>
+                <accountgroup_id pvalue="0">{0bf059d5-4639-4e7f-b355-2ccb1394cdc5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{534bc8f5-a444-486e-aba0-3948609b4de8}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:03:39" muser="user_syssetting">
+                <accountcode pvalue="0">5300</accountcode>
+                <accountname pvalue="">Sales cost</accountname>
+                <accountgroup_id pvalue="0">{0bf059d5-4639-4e7f-b355-2ccb1394cdc5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f2680f56-95db-4b31-8884-e85df5c3780a}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:04:40" muser="user_syssetting">
+                <accountcode pvalue="0">5500</accountcode>
+                <accountname pvalue="">Purchased cost budget</accountname>
+                <accountgroup_id pvalue="0">{0bf059d5-4639-4e7f-b355-2ccb1394cdc5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b5952a63-6b0f-48d7-83d5-37fc752af33a}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:04:53" muser="user_syssetting">
+                <accountcode pvalue="0">5600</accountcode>
+                <accountname pvalue="">Production cost budget</accountname>
+                <accountgroup_id pvalue="0">{0bf059d5-4639-4e7f-b355-2ccb1394cdc5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{cf04cce7-e608-4c3e-bb65-8d8afca4b668}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:05:04" muser="user_syssetting">
+                <accountcode pvalue="0">5700</accountcode>
+                <accountname pvalue="">Sales cost budget</accountname>
+                <accountgroup_id pvalue="0">{0bf059d5-4639-4e7f-b355-2ccb1394cdc5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{feabe0c9-17b1-404f-b4c0-7281be01ddca}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:05:24" muser="user_syssetting">
+                <accountcode pvalue="0">5990</accountcode>
+                <accountname pvalue="">Transfer account section 5</accountname>
+                <accountgroup_id pvalue="0">{0bf059d5-4639-4e7f-b355-2ccb1394cdc5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7482a25a-b206-4a78-8b56-e33c8e8f9592}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:05:45" muser="user_syssetting">
+                <accountcode pvalue="0">6000</accountcode>
+                <accountname pvalue="">Utility consumption</accountname>
+                <accountgroup_id pvalue="0">{b6eb489d-1c7e-4d4f-aa6d-d6461cc9eb36}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9fee53b0-3e1a-471b-a79a-c379958283b5}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:05:52" muser="user_syssetting">
+                <accountcode pvalue="0">6020</accountcode>
+                <accountname pvalue="">Machine cost</accountname>
+                <accountgroup_id pvalue="0">{b6eb489d-1c7e-4d4f-aa6d-d6461cc9eb36}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{cfe6b058-865b-47ca-a406-fa9048ab6894}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:06:11" muser="user_syssetting">
+                <accountcode pvalue="0">6100</accountcode>
+                <accountname pvalue="">Standard utility consumption</accountname>
+                <accountgroup_id pvalue="0">{b6eb489d-1c7e-4d4f-aa6d-d6461cc9eb36}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{bc46f32d-637a-482a-baba-a807b361b057}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:06:27" muser="user_syssetting">
+                <accountcode pvalue="0">6120</accountcode>
+                <accountname pvalue="">Standard comsumption machine cost</accountname>
+                <accountgroup_id pvalue="0">{b6eb489d-1c7e-4d4f-aa6d-d6461cc9eb36}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e8c66831-c8c9-4dcb-b1b8-90ff8a011d1b}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:06:40" muser="user_syssetting">
+                <accountcode pvalue="0">6990</accountcode>
+                <accountname pvalue="">Transfer account section 6</accountname>
+                <accountgroup_id pvalue="0">{b6eb489d-1c7e-4d4f-aa6d-d6461cc9eb36}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{964b2fb7-d5bb-4c29-9709-3d998b1b59e6}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:07:09" muser="user_syssetting">
+                <accountcode pvalue="0">7000</accountcode>
+                <accountname pvalue="">Finished product</accountname>
+                <accountgroup_id pvalue="0">{eff9ec4d-363d-4a46-b38f-3455ec81e310}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{3103bf56-e1be-414b-a736-073d8897d12e}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:08:44" muser="user_syssetting">
+                <accountcode pvalue="0">7100</accountcode>
+                <accountname pvalue="">Goods receivable</accountname>
+                <accountgroup_id pvalue="0">{eff9ec4d-363d-4a46-b38f-3455ec81e310}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5b757216-4fe2-4276-bd07-3ef3d614a1e5}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:08:56" muser="user_syssetting">
+                <accountcode pvalue="0">7300</accountcode>
+                <accountname pvalue="">Work in progress</accountname>
+                <accountgroup_id pvalue="0">{eff9ec4d-363d-4a46-b38f-3455ec81e310}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{3d06a94c-c484-4c58-9a32-89f857513178}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:09:44" muser="user_syssetting">
+                <accountcode pvalue="0">7400</accountcode>
+                <accountname pvalue="">Products to be delivered (finished product)</accountname>
+                <accountgroup_id pvalue="0">{eff9ec4d-363d-4a46-b38f-3455ec81e310}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2a3a6923-629c-4949-bd19-77835fb6d431}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:46:45" muser="user_syssetting">
+                <accountcode pvalue="0">8000</accountcode>
+                <accountname pvalue="">Sales</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">13</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{17b2641c-f7ab-4291-85f2-250309378207}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:46:58" muser="user_syssetting">
+                <accountcode pvalue="0">8002</accountcode>
+                <accountname pvalue="">Sales inside EU</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">80</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{965f8a8b-b901-4799-9880-0346ea53ce08}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:47:07" muser="user_syssetting">
+                <accountcode pvalue="0">8004</accountcode>
+                <accountname pvalue="">Sales low</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">11</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{fb51cbfd-8613-4476-8fbd-9a61f54fc605}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:47:17" muser="user_syssetting">
+                <accountcode pvalue="0">8006</accountcode>
+                <accountname pvalue="">Sales high</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">12</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d3aa3ece-a2e8-41f1-80d1-8c20d29eaf0a}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:47:28" muser="user_syssetting">
+                <accountcode pvalue="0">8008</accountcode>
+                <accountname pvalue="">Sales outside EU</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">81</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{11a4602b-af83-499e-8728-a311256e588e}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:09:54" muser="user_syssetting">
+                <accountcode pvalue="0">8040</accountcode>
+                <accountname pvalue="">Services</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">13</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{01fcc419-c5e2-4e6f-abb5-7d0c6b352d51}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:10:03" muser="user_syssetting">
+                <accountcode pvalue="0">8042</accountcode>
+                <accountname pvalue="">Services inside EU</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">80</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d28977d3-a99c-4c63-b5db-8f289b323d2f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:10:12" muser="user_syssetting">
+                <accountcode pvalue="0">8044</accountcode>
+                <accountname pvalue="">Services low</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">11</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c97c640b-5296-4218-bdd5-4b1ea4ff973f}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:10:19" muser="user_syssetting">
+                <accountcode pvalue="0">8046</accountcode>
+                <accountname pvalue="">Services high</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">12</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ab7b80ce-8aed-4369-91fd-3a3fd5d4e5b6}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:10:29" muser="user_syssetting">
+                <accountcode pvalue="0">8048</accountcode>
+                <accountname pvalue="">Services outside EU</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">81</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{fa2f1392-df7b-49ec-9098-c45fb447124a}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:49:02" muser="user_syssetting">
+                <accountcode pvalue="0">8444</accountcode>
+                <accountname pvalue="">Purchases services 3rd party high</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ca761b34-a837-43eb-a261-0c7c46b74dba}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:10:56" muser="user_syssetting">
+                <accountcode pvalue="0">9000</accountcode>
+                <accountname pvalue="">Yield participations</accountname>
+                <accountgroup_id pvalue="0">{b4099ea3-f54a-4766-b3e1-ce90764bd952}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{668a0398-c648-4822-92d8-abc0b015c0d0}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:11:21" muser="user_syssetting">
+                <accountcode pvalue="0">9100</accountcode>
+                <accountname pvalue="">Loss participations</accountname>
+                <accountgroup_id pvalue="0">{b4099ea3-f54a-4766-b3e1-ce90764bd952}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f48dc260-dde5-44f5-97ea-48a4d313c465}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:11:29" muser="user_syssetting">
+                <accountcode pvalue="0">9300</accountcode>
+                <accountname pvalue="">Efficiency differences</accountname>
+                <accountgroup_id pvalue="0">{b4099ea3-f54a-4766-b3e1-ce90764bd952}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{6a6d91b0-3d19-438b-bf6d-03272ee0c863}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:50:15" muser="user_syssetting">
+                <accountcode pvalue="0">9990</accountcode>
+                <accountname pvalue="">Memorial</accountname>
+                <accountgroup_id pvalue="0">{b4099ea3-f54a-4766-b3e1-ce90764bd952}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">3000</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d7ed20e7-6bc5-4244-8496-b46840fbb26a}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2013-12-16T14:47:56" muser="user_syssetting">
+                <accountcode pvalue="0">8012</accountcode>
+                <accountname pvalue="">Sales transfered</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">14</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{62f30a32-5177-45fd-8559-85dba741871a}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-06-25T16:46:19" changed="2014-02-23T21:07:41" muser="user_syssetting">
+                <accountcode pvalue="0">7010</accountcode>
+                <accountname pvalue="">Purchase no VAT/VAT transferred</accountname>
+                <accountgroup_id pvalue="0">{f95af61e-721e-48ed-8330-c0122793d4ad}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">34</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{171fd48f-e90b-4e52-be84-1f0763634bad}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2011-08-11T09:24:50" changed="2014-02-23T20:54:18" muser="user_syssetting">
+                <accountcode pvalue="0">4110</accountcode>
+                <accountname pvalue="">Office services</accountname>
+                <accountgroup_id pvalue="0">{6f47eea7-4d2b-438f-b8e7-f978abdbe52a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{fd69d79d-8b85-4692-926c-fc84a2322554}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2011-08-11T10:39:29" changed="2013-12-16T14:41:06" muser="user_syssetting">
+                <accountcode pvalue="0">4520</accountcode>
+                <accountname pvalue="">Representation cost</accountname>
+                <accountgroup_id pvalue="0">{b2a0dc96-11dd-49b4-a476-eb2fe790395a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ef9047f2-4e0e-40a2-8b66-c38dcacd7ad6}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2011-10-04T11:22:24" changed="2013-12-16T14:49:10" muser="user_syssetting">
+                <accountcode pvalue="0">8446</accountcode>
+                <accountname pvalue="">Purchases services 3rd party low</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">31</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{6655522a-b7a8-40f9-9748-f8026e9a8832}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2011-10-04T11:30:21" changed="2013-12-16T14:48:49" muser="user_syssetting">
+                <accountcode pvalue="0">8440</accountcode>
+                <accountname pvalue="">Purchases services 3rd party</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{06c07441-c35e-409b-846f-689a21ed408e}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-01-05T17:25:07" changed="2014-02-23T20:47:33" muser="user_syssetting">
+                <accountcode pvalue="0">1675</accountcode>
+                <accountname pvalue="">Returned company tax</accountname>
+                <accountgroup_id pvalue="0">{3dbb9454-4382-4cbd-a71e-9342b336f760}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4a015969-5f27-4b2e-bced-3f7ed421b6f9}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-01-20T17:02:49" changed="2014-01-19T15:35:19" muser="user_syssetting">
+                <accountcode pvalue="0">1380</accountcode>
+                <accountname pvalue="">Oustanding sales amounts</accountname>
+                <accountgroup_id pvalue="0">{cb5a4c09-a88f-4f1c-b1f2-1e8624041f74}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1a3c35f7-ed63-459e-a989-35dda56e6531}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-01-20T17:10:09" changed="2014-01-19T15:34:48" muser="user_syssetting">
+                <accountcode pvalue="0">1680</accountcode>
+                <accountname pvalue="">Outstanding purchase amounts</accountname>
+                <accountgroup_id pvalue="0">{7c141244-81b2-490f-8b43-79c27d1bc3e4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{cc4af1c4-38f5-4c7a-926f-103b0334e700}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2012-11-18T11:11:10" changed="2013-01-28T13:37:18" muser="user_syssetting">
+                <accountcode pvalue="0">4640</accountcode>
+                <accountname pvalue="">Personnel Recruitment Cost</accountname>
+                <accountgroup_id pvalue="0">{6c0f0bfe-b6b9-4d3f-b534-9eb6de5e24a2}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{fd95fa98-2b8d-46ee-8b68-00e70f567a70}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2013-01-28T11:07:15" changed="2013-12-16T14:50:02" muser="user_syssetting">
+                <accountcode pvalue="0">8644</accountcode>
+                <accountname pvalue="">Purchases services inside EU</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">62</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f08a7dc2-4a02-423f-9630-c4b54a9a9ce8}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2013-01-28T11:09:20" changed="2013-12-16T14:50:09" muser="user_syssetting">
+                <accountcode pvalue="0">8544</accountcode>
+                <accountname pvalue="">Purchases services outside EU</accountname>
+                <accountgroup_id pvalue="0">{75a8a853-a2bd-4100-ae0b-9283fd02beb4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">72</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{3b771e6f-2f1a-4eb9-b3d8-8802d1c9d443}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2013-04-14T11:47:27" changed="2014-02-23T20:50:02" muser="user_syssetting">
+                <accountcode pvalue="0">1690</accountcode>
+                <accountname pvalue="">Early receipt of sales invoices</accountname>
+                <accountgroup_id pvalue="0">{cb5a4c09-a88f-4f1c-b1f2-1e8624041f74}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{edbb3106-456e-432e-9c24-b91d7addc593}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2013-10-31T16:59:09" changed="2013-10-31T16:59:35" muser="user_syssetting">
+                <accountcode pvalue="0">4650</accountcode>
+                <accountname pvalue="">Other cost in EU</accountname>
+                <accountgroup_id pvalue="0">{6c0f0bfe-b6b9-4d3f-b534-9eb6de5e24a2}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{412f8147-8cfc-46a7-91b6-31a43e56782c}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2013-10-31T17:20:27" changed="2013-10-31T17:21:06" muser="user_syssetting">
+                <accountcode pvalue="0">4980</accountcode>
+                <accountname pvalue="">Payments received for FEUZ</accountname>
+                <accountgroup_id pvalue="0">{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{63806117-7371-42cb-a6fa-251c8345f6b5}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2013-12-16T14:44:34" changed="2013-12-16T14:45:08" muser="user_syssetting">
+                <accountcode pvalue="0">4985</accountcode>
+                <accountname pvalue="">Payments done for Feuz</accountname>
+                <accountgroup_id pvalue="0">{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b00e4f4b-d053-48ec-9818-32254d6205ae}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2014-01-13T18:18:59" changed="2014-01-13T18:24:51" muser="user_syssetting">
+                <accountcode pvalue="0">4810</accountcode>
+                <accountname pvalue="">Bad debts</accountname>
+                <accountgroup_id>0</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">82</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{dd3f2b6c-a03c-43fe-998f-70b5f9358d6b}" parent="{542859cc-51b3-46b9-abc2-068d2d355212}" status="0" created="2014-02-24T17:20:01" changed="2014-02-24T17:21:25" muser="rutger">
+                <accountcode pvalue="0">1200</accountcode>
+                <accountname pvalue="">Bank (savings) 987654321</accountname>
+                <accountgroup_id pvalue="0">{2db61459-79e5-4c11-ba95-091ceb61176b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">2100</accountcontrol>
+            </ACC_ChartMaster>
+        </ACC_ChartMasterList>
+        <ACC_SysSettingList>
+            <ACC_SysSetting id="0" parent="none" status="0" created="2014-02-24T12:22:13" changed="2014-02-24T12:22:13" muser="system">
+                <syssettingname>Placeholder only</syssettingname>
+                <ACC_AccountControlList>
+                    <ACC_AccountControl id="{a6d69a59-4f30-4048-84f2-b6198aa9e45d}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T09:50:09" muser="user_syssetting">
+                        <controlnumber pvalue="0">10</controlnumber>
+                        <description pvalue="">Sales No Tax</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{0548736c-6b5e-42d3-b69c-2a8922f6c045}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:52:23" muser="user_syssetting">
+                        <controlnumber pvalue="0">11</controlnumber>
+                        <description pvalue="">Sales Low Tax (VAT to 21)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{5d416245-d0b1-4f0c-b9ad-e60b55248e71}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:52:30" muser="user_syssetting">
+                        <controlnumber pvalue="0">12</controlnumber>
+                        <description pvalue="">Sales High Tax (VAT to 22)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{53661c86-3b79-43e8-b697-badbee1ceb7a}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:52:42" muser="user_syssetting">
+                        <controlnumber pvalue="0">13</controlnumber>
+                        <description pvalue="">Sales Other Tax (VAT to 23)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{476d5756-e43b-4a24-9d77-f876cb5cee18}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:53:30" muser="user_syssetting">
+                        <controlnumber pvalue="0">21</controlnumber>
+                        <description pvalue="">Tax Payable Low (VAT from 11)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{0af6faa1-327d-4ea2-b882-d2938627b70f}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:53:38" muser="user_syssetting">
+                        <controlnumber pvalue="0">22</controlnumber>
+                        <description pvalue="">Tax Payable High (VAT from 12)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{0f01f828-4745-41e9-81a6-7b559f76f504}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:53:51" muser="user_syssetting">
+                        <controlnumber pvalue="0">23</controlnumber>
+                        <description pvalue="">Tax Payable Other (VAT from 9 and 13)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{9211e031-2f80-4980-a8b2-0cddeb13d9ee}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:54:08" muser="user_syssetting">
+                        <controlnumber pvalue="0">24</controlnumber>
+                        <description pvalue="">Tax Payable Reversed (VAT from 14)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{df06d4d6-f054-421f-a732-2458829c6e02}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T09:52:52" muser="user_syssetting">
+                        <controlnumber pvalue="0">25</controlnumber>
+                        <description pvalue="">Tax Sales Receivable Reversed</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{e0ec5200-5285-4154-b2eb-1c9ce4ab77c1}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T09:53:09" muser="user_syssetting">
+                        <controlnumber pvalue="0">26</controlnumber>
+                        <description pvalue="">Tax Payable Globalisation Low</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{968413c6-ceff-4b53-a7c6-8af7469af617}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T09:53:25" muser="user_syssetting">
+                        <controlnumber pvalue="0">27</controlnumber>
+                        <description pvalue="">Tax Payable Globalisation High</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{e6391cab-be25-4b40-accf-9547c3ea48cf}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T09:53:38" muser="user_syssetting">
+                        <controlnumber pvalue="0">28</controlnumber>
+                        <description pvalue="">Tax Payable Globalisation Other</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{c5700c72-c0d1-46ef-ae6b-5dc0ccc2bdf5}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:54:52" muser="user_syssetting">
+                        <controlnumber pvalue="0">30</controlnumber>
+                        <description pvalue="">Purchase All Tax (VAT to 43)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{f0f176b8-017b-4aa2-aeea-b64ec21e1ca9}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:55:03" muser="user_syssetting">
+                        <controlnumber pvalue="0">31</controlnumber>
+                        <description pvalue="">Purchase Low Tax (VAT to 41)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{51da026b-1cd3-40df-b2fa-879fc53f4967}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:55:11" muser="user_syssetting">
+                        <controlnumber pvalue="0">32</controlnumber>
+                        <description pvalue="">Purchase High Tax (VAT to 42)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{a764b64a-b667-4ebc-86d4-4396c5a3227a}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:55:19" muser="user_syssetting">
+                        <controlnumber pvalue="0">33</controlnumber>
+                        <description pvalue="">Purchase Other Tax (VAT to 43)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{3367e971-265a-41c6-99e7-f50eb6fd4fed}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:55:44" muser="user_syssetting">
+                        <controlnumber pvalue="0">41</controlnumber>
+                        <description pvalue="">Tax Receivable Low (VAT from 31)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{85698015-4ca9-455f-8aed-040cc1e0f125}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:55:52" muser="user_syssetting">
+                        <controlnumber pvalue="0">42</controlnumber>
+                        <description pvalue="">Tax Receivable High (VAT from 32)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{2f9fae75-e43c-4473-93dd-14176fdbefd7}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:56:04" muser="user_syssetting">
+                        <controlnumber pvalue="0">43</controlnumber>
+                        <description pvalue="">Tax Receivable Other (VAT from 30 and 33)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{43df449d-bc7f-4112-8792-bc54048c3e27}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:56:14" muser="user_syssetting">
+                        <controlnumber pvalue="0">44</controlnumber>
+                        <description pvalue="">Tax Purchase Payable Reversed (VAT from 34)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{f2a2eb5b-3f59-45c5-9acc-31e2d4707bda}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T09:57:03" muser="user_syssetting">
+                        <controlnumber pvalue="0">45</controlnumber>
+                        <description pvalue="">Tax Purchase Receivable Reversed</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{85f74e94-ec12-4053-ac52-18c61a2abcfe}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:56:34" muser="user_syssetting">
+                        <controlnumber pvalue="0">61</controlnumber>
+                        <description pvalue="">Purchase Inside EU Low (VAT to 66)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{eb2186cb-3e9f-4160-ba52-66efb48857b4}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:56:44" muser="user_syssetting">
+                        <controlnumber pvalue="0">62</controlnumber>
+                        <description pvalue="">Purchase Inside EU High (VAT to 66)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{6aac3126-1c5f-4562-b7ba-a5081839fdd7}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:56:50" muser="user_syssetting">
+                        <controlnumber pvalue="0">63</controlnumber>
+                        <description pvalue="">Purchase Inside EU Other (VAT to 66)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{935c861a-c5b2-4b66-b024-486b825c5365}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:57:34" muser="user_syssetting">
+                        <controlnumber pvalue="0">71</controlnumber>
+                        <description pvalue="">Purchase Outside EU Low (VAT to 76)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{54617464-cb49-4e61-b101-6081b1c0f9e2}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:57:40" muser="user_syssetting">
+                        <controlnumber pvalue="0">72</controlnumber>
+                        <description pvalue="">Purchase Outside EU High (VAT to 76)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{876f4c0d-be70-48a6-9faf-e5c30e94c047}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:57:48" muser="user_syssetting">
+                        <controlnumber pvalue="0">73</controlnumber>
+                        <description pvalue="">Purchase Outside EU Other (VAT to 76)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{caa06b3a-fd7d-4f51-8666-43195674fc98}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:00:15" muser="user_syssetting">
+                        <controlnumber pvalue="0">80</controlnumber>
+                        <description pvalue="">Sales Inside EU</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{b9186133-a58b-4291-9ca9-b40f51030a81}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:00:30" muser="user_syssetting">
+                        <controlnumber pvalue="0">81</controlnumber>
+                        <description pvalue="">Sales Outside EU</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{9b218bef-5d94-4143-a93d-fdc1f864d59f}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:02:34" muser="user_syssetting">
+                        <controlnumber pvalue="0">82</controlnumber>
+                        <description pvalue="">Bad Debt</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{fa3185cf-8e9e-4f63-a084-691744e79469}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:02:44" muser="user_syssetting">
+                        <controlnumber pvalue="0">83</controlnumber>
+                        <description pvalue="">Correction</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{9de25b58-c56b-4835-a260-2cf325839699}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:02:58" muser="user_syssetting">
+                        <controlnumber pvalue="0">84</controlnumber>
+                        <description pvalue="">Installation Inside EU</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{5daa92f8-4512-4367-8235-30f5edaae02a}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:03:12" muser="user_syssetting">
+                        <controlnumber pvalue="0">85</controlnumber>
+                        <description pvalue="">Sales BPM</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{b75a78c4-35bd-492b-9358-89499bdb9951}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:03:26" muser="user_syssetting">
+                        <controlnumber pvalue="0">86</controlnumber>
+                        <description pvalue="">Purchase BPM</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{eca529d4-f737-4598-8fc6-513ffa67f2dc}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:03:37" muser="user_syssetting">
+                        <controlnumber pvalue="0">87</controlnumber>
+                        <description pvalue="">Stock BPM</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{ba38f64d-6f1c-4f89-b398-bb3e86e0601f}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:03:52" muser="user_syssetting">
+                        <controlnumber pvalue="0">88</controlnumber>
+                        <description pvalue="">Service Inside EU</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{9643501f-49b3-4f10-a339-c0ea23fc8eee}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:04:06" muser="user_syssetting">
+                        <controlnumber pvalue="0">91</controlnumber>
+                        <description pvalue="">Sales Globalisation Low</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{e7a7c08f-a7d3-4b8f-9985-6092d605a166}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:04:21" muser="user_syssetting">
+                        <controlnumber pvalue="0">92</controlnumber>
+                        <description pvalue="">Sales Globalisation High</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{63b05fe9-939d-490e-b764-02d4eeb0a404}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:04:42" muser="user_syssetting">
+                        <controlnumber pvalue="0">93</controlnumber>
+                        <description pvalue="">Sales Globalisation Other</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{d0323dab-dfac-4cd4-921c-e3f9ea06bc8f}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:05:00" muser="user_syssetting">
+                        <controlnumber pvalue="0">94</controlnumber>
+                        <description pvalue="">Purchase Globalisation Low</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{4d68f4e9-59d6-4322-849e-e975a87d8e47}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:05:13" muser="user_syssetting">
+                        <controlnumber pvalue="0">95</controlnumber>
+                        <description pvalue="">Purchase Globalisation High</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{1e42493d-cb05-425e-8c8f-467283daae03}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:05:31" muser="user_syssetting">
+                        <controlnumber pvalue="0">96</controlnumber>
+                        <description pvalue="">Purchase Globalisation Other</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{ead99df8-d2fc-4409-a8d1-a30c21da5267}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:06:04" muser="user_syssetting">
+                        <controlnumber pvalue="0">100</controlnumber>
+                        <description pvalue="">Credit Limit Sales</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{536ee2be-38a9-4ec6-a6c1-86c4ecc4bbfa}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:06:17" muser="user_syssetting">
+                        <controlnumber pvalue="0">101</controlnumber>
+                        <description pvalue="">Credit Limit Purchase</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{3db34a8f-ce3e-4a36-a16f-0540ba9744ce}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:06:33" muser="user_syssetting">
+                        <controlnumber pvalue="0">102</controlnumber>
+                        <description pvalue="">Payment Discount</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{4c835f84-4884-457a-aca1-907b11635707}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:06:47" muser="user_syssetting">
+                        <controlnumber pvalue="0">110</controlnumber>
+                        <description pvalue="">Suspense Account</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{dcbe4b95-af79-4f85-816e-02ac8e772f44}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:07:36" muser="user_syssetting">
+                        <controlnumber pvalue="0">1001</controlnumber>
+                        <description pvalue="">Debtor Account</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{02b26b66-0caa-4714-81f0-79e8a6fe96a5}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:07:50" muser="user_syssetting">
+                        <controlnumber pvalue="0">1002</controlnumber>
+                        <description pvalue="">Creditor Account</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{371f51d1-a935-4496-aba0-0d28784b7f2f}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:08:12" muser="user_syssetting">
+                        <controlnumber pvalue="0">2000</controlnumber>
+                        <description pvalue="">Cash Register Account</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{f495e79d-75c6-481f-af22-fa728e82ad4b}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:08:45" muser="user_syssetting">
+                        <controlnumber pvalue="0">2100</controlnumber>
+                        <description pvalue="">Bank Account</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{22bdfafb-06f6-41d0-8cf8-b07cd2f2f2d8}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:07:00" muser="user_syssetting">
+                        <controlnumber pvalue="0">111</controlnumber>
+                        <description pvalue="">Unknown Payment</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{fb5d3fe1-fe68-49d6-803d-53e9089947cc}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:07:11" muser="user_syssetting">
+                        <controlnumber pvalue="0">120</controlnumber>
+                        <description pvalue="">Cash Payment</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{f585608a-d737-4ae4-9248-6e58b3cf756d}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:07:25" muser="user_syssetting">
+                        <controlnumber pvalue="0">121</controlnumber>
+                        <description pvalue="">Electronic Payment</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{f816da03-a631-4bcb-802f-3dae292f5305}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T09:51:34" muser="user_syssetting">
+                        <controlnumber pvalue="0">16</controlnumber>
+                        <description pvalue="">Private Use No Tax</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{b95d2d0d-0fa4-4350-bca0-f34ad3307ca8}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:52:11" muser="user_syssetting">
+                        <controlnumber pvalue="0">9</controlnumber>
+                        <description pvalue="">Sales All Tax (VAT to 23)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{e83042a4-fd7a-4a7d-ad23-6d4bd6f14ecd}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:52:57" muser="user_syssetting">
+                        <controlnumber pvalue="0">14</controlnumber>
+                        <description pvalue="">Sales Reversed Tax (VAT to 24)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{c5802587-e6f7-4ecd-8bb6-cb6736402c6d}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:53:12" muser="user_syssetting">
+                        <controlnumber pvalue="0">19</controlnumber>
+                        <description pvalue="">Private Use Tax (VAT to 29)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{3fc21b9c-c7f9-4c83-a83c-356901d96c5b}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T09:53:54" muser="user_syssetting">
+                        <controlnumber pvalue="0">29</controlnumber>
+                        <description pvalue="">Tax Payable Private Use</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{ff1a62ba-cbbb-49f0-a750-2ca17cf36091}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:55:26" muser="user_syssetting">
+                        <controlnumber pvalue="0">34</controlnumber>
+                        <description pvalue="">Purchase Reversed Tax (VAT to 44)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{493bed1d-323d-4ba5-8e5c-24ad2fe59619}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:58:17" muser="user_syssetting">
+                        <controlnumber pvalue="0">66</controlnumber>
+                        <description pvalue="">Tax Purchase Receivable Inside EU (VAT from 61,62,63)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{edba0234-2edf-4a9e-9e9f-b4b2d210347a}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T11:58:11" muser="user_syssetting">
+                        <controlnumber pvalue="0">76</controlnumber>
+                        <description pvalue="">Tax Purchase Receivable Outside EU (VAT from 71,72,73)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{69488f26-9d79-478d-b9a0-17344b65721e}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T10:09:50" muser="user_syssetting">
+                        <controlnumber pvalue="0">3000</controlnumber>
+                        <description pvalue="">Memorandum Account</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{2e4924d8-7a2d-4c82-b9c3-7a1f7bb01899}" parent="syssetting" status="0" created="2013-02-27T17:23:34" changed="2014-02-24T09:49:11" muser="user_syssetting">
+                        <controlnumber pvalue="0">1</controlnumber>
+                        <description pvalue="">Default</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{0f298c45-8ddd-446b-8856-f541eaa9f136}" parent="syssetting" status="0" created="2014-02-24T09:45:49" changed="2014-02-24T09:46:03" muser="user_syssetting">
+                        <controlnumber pvalue="0">2</controlnumber>
+                        <description pvalue="">Year Opening</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{e4774a76-ad27-4537-ad52-8672e8ed28fa}" parent="syssetting" status="0" created="2014-02-24T10:23:40" changed="2014-02-24T10:23:58" muser="user_syssetting">
+                        <controlnumber pvalue="0">65536</controlnumber>
+                        <description pvalue="">User Defined</description>
+                    </ACC_AccountControl>
+                </ACC_AccountControlList>
+                <ACC_AccountGroupList>
+                    <ACC_AccountGroup id="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:11:09" muser="user_syssetting">
+                        <groupname pvalue="">Fixed Assets</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb>0</sequenceintb>
+                        <ACC_AccountGroupList>
+                            <ACC_AccountGroup id="{1476be22-f2df-49ab-9480-a7fa59a9e822}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:12:05" muser="user_syssetting">
+                                <groupname pvalue="">Real Estate</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">100</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{f940e9c3-5bc5-45a7-9bbf-d4153e254e65}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="unknown">
+                                <groupname pvalue="">Machines</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">200</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{846a5c4a-f96f-45ad-bb96-18bf027a687a}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:12:15" muser="user_syssetting">
+                                <groupname pvalue="">Inventory</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">250</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{dcd42b9a-812a-4982-abce-7425aa8840d5}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:14:11" muser="user_syssetting">
+                                <groupname pvalue="">Vehicles, Transportation</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">300</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{831b22a6-5e02-4fab-bc02-b089720c31e3}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:14:24" muser="user_syssetting">
+                                <groupname pvalue="">Financial Fixed Assets</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">500</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{2b265764-fc69-40c1-b160-b2b3b3e67062}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:15:13" muser="user_syssetting">
+                                <groupname pvalue="">Long Term Claim</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">550</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{7fd8b4b4-3aaa-49eb-b5c3-eb941df84c5a}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:46:13" muser="user_syssetting">
+                                <groupname pvalue="">Equity Capital</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">600</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{01e150a7-da7b-4607-8d47-3db5cdbd4a79}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:15:34" muser="user_syssetting">
+                                <groupname pvalue="">Provision</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">700</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{500d1146-ae93-4ac7-b7fc-1cc878afd154}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:47:02" muser="user_syssetting">
+                                <groupname pvalue="">Long Term Debts</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">800</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{cce37fe8-4045-4202-a0ca-36ea4ecb68be}" parent="{897bfea7-0811-4419-8b35-a8c9c64a17e7}" status="0" created="2011-11-28T18:31:54" changed="2013-12-16T13:11:44" muser="user_syssetting">
+                                <groupname pvalue="">Intangible Assets</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">10</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                        </ACC_AccountGroupList>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{89d4619b-5b80-4fe0-8d18-330da2116f0c}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:16:48" muser="user_syssetting">
+                        <groupname pvalue="">Current Assets and Liabilities</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">1000</sequenceintb>
+                        <ACC_AccountGroupList>
+                            <ACC_AccountGroup id="{020644fe-8ee3-4038-a35a-c78235896727}" parent="{89d4619b-5b80-4fe0-8d18-330da2116f0c}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T20:20:35" muser="user_syssetting">
+                                <groupname pvalue="">Receivables</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1300</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{3dbb9454-4382-4cbd-a71e-9342b336f760}" parent="{89d4619b-5b80-4fe0-8d18-330da2116f0c}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T20:20:58" muser="user_syssetting">
+                                <groupname pvalue="">Payables Short Term</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1600</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{2db61459-79e5-4c11-ba95-091ceb61176b}" parent="{89d4619b-5b80-4fe0-8d18-330da2116f0c}" status="0" created="2011-11-28T18:36:06" changed="2013-12-16T12:47:39" muser="user_syssetting">
+                                <groupname pvalue="">Liquid Assets</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1010</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{7c141244-81b2-490f-8b43-79c27d1bc3e4}" parent="{89d4619b-5b80-4fe0-8d18-330da2116f0c}" status="0" created="2012-01-20T17:08:16" changed="2014-01-19T15:44:05" muser="user_syssetting">
+                                <groupname pvalue="">Outstanding payment</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1680</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{cb5a4c09-a88f-4f1c-b1f2-1e8624041f74}" parent="{89d4619b-5b80-4fe0-8d18-330da2116f0c}" status="0" created="2012-01-20T17:20:28" changed="2014-01-19T15:44:01" muser="user_syssetting">
+                                <groupname pvalue="">Outstanding receivables</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1380</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                        </ACC_AccountGroupList>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{096b0fb4-abfc-4a87-b783-2ca189ecc944}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:52:07" muser="user_syssetting">
+                        <groupname pvalue="">Internal Transfers</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">2000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{f95af61e-721e-48ed-8330-c0122793d4ad}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:06:35" muser="user_syssetting">
+                        <groupname pvalue="">Stock Accounts</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">3000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{63043382-445e-4bb6-9e58-cbb8382b15f9}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:03:21" muser="user_syssetting">
+                        <groupname pvalue="">Cost</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">4000</sequenceintb>
+                        <ACC_AccountGroupList>
+                            <ACC_AccountGroup id="{6f47eea7-4d2b-438f-b8e7-f978abdbe52a}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:05:14" muser="user_syssetting">
+                                <groupname pvalue="">Housing Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4100</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{08d3155c-28bb-47cd-9902-97175674f401}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:05:30" muser="user_syssetting">
+                                <groupname pvalue="">Operating Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4200</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{e720357a-9258-4582-8778-3d46f9979884}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:52:32" muser="user_syssetting">
+                                <groupname pvalue="">Office Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4300</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{f5ef873b-f0f0-4f3b-9c47-d233d0a06484}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:05:40" muser="user_syssetting">
+                                <groupname pvalue="">Transportation Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4400</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{b2a0dc96-11dd-49b4-a476-eb2fe790395a}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:52:42" muser="user_syssetting">
+                                <groupname pvalue="">Sales Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4500</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{6c0f0bfe-b6b9-4d3f-b534-9eb6de5e24a2}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:52:50" muser="user_syssetting">
+                                <groupname pvalue="">General Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4600</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{94d8d9c2-01f4-4e1c-b460-93ea6fcab201}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:53:09" muser="user_syssetting">
+                                <groupname pvalue="">Financing Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4700</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{7179e923-129a-4c52-b7db-b7534395e154}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2014-01-13T18:23:27" muser="user_syssetting">
+                                <groupname pvalue="">Depreciation Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4850</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{73e6a6aa-19c4-4bd5-be62-6d9a7e408df8}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:54:13" muser="user_syssetting">
+                                <groupname pvalue="">Differences</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4900</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{3ed7c444-4e0f-40b8-a391-5894ee368d29}" parent="{63043382-445e-4bb6-9e58-cbb8382b15f9}" status="0" created="2011-11-28T18:40:21" changed="2013-12-16T13:03:30" muser="user_syssetting">
+                                <groupname pvalue="">Personnel Cost</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4010</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                        </ACC_AccountGroupList>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{0bf059d5-4639-4e7f-b355-2ccb1394cdc5}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:03:14" muser="user_syssetting">
+                        <groupname pvalue="">Indirect Cost</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">5000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{b6eb489d-1c7e-4d4f-aa6d-d6461cc9eb36}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:01:46" muser="user_syssetting">
+                        <groupname pvalue="">Fabrication</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">6000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{eff9ec4d-363d-4a46-b38f-3455ec81e310}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T13:02:56" muser="user_syssetting">
+                        <groupname pvalue="">Stock and Work in Progress</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">7000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{75a8a853-a2bd-4100-ae0b-9283fd02beb4}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:54:19" muser="user_syssetting">
+                        <groupname pvalue="">Sales</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">8000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{b4099ea3-f54a-4766-b3e1-ce90764bd952}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-12-16T12:54:46" muser="user_syssetting">
+                        <groupname pvalue="">Special Income or Cost</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">9000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                </ACC_AccountGroupList>
+                <ACC_AreaList>
+                    <ACC_Area id="{9426ebbf-3b21-47c4-b955-fd5d34c64231}" parent="syssetting" status="0" created="2011-06-11T14:31:19" changed="2012-01-25T22:35:54" muser="user_syssetting">
+                        <areacode pvalue="">Def. Area</areacode>
+                        <areadescription pvalue="">Default or all sales areas</areadescription>
+                    </ACC_Area>
+                </ACC_AreaList>
+                <ACC_AssetTypeList>
+                    <ACC_AssetType id="{27a82b62-0628-4ac9-91f7-ab2060f4b2e9}" parent="syssetting" status="0" created="2012-08-27T17:52:09" changed="2012-08-27T17:58:53" muser="user_syssetting">
+                        <mname pvalue="">Office Small</mname>
+                        <description pvalue="">Building or part where 10 or less than 10 people work</description>
+                    </ACC_AssetType>
+                    <ACC_AssetType id="{4a024bba-8cda-4cbb-90c6-a56d011ce1e4}" parent="syssetting" status="0" created="2012-08-27T17:53:17" changed="2012-08-27T17:58:45" muser="user_syssetting">
+                        <mname pvalue="">Office Medium</mname>
+                        <description pvalue="">Building or part where 100 or less than 100 people work</description>
+                    </ACC_AssetType>
+                    <ACC_AssetType id="{e64bde67-8e69-4fa1-bff5-15e99579ad3e}" parent="syssetting" status="0" created="2012-08-27T17:54:01" changed="2012-08-27T17:54:31" muser="user_syssetting">
+                        <mname pvalue="">Office Large</mname>
+                        <description pvalue="">Building where more than 100 people work</description>
+                    </ACC_AssetType>
+                    <ACC_AssetType id="{fda4499f-b503-4806-b928-b5571b07434e}" parent="syssetting" status="0" created="2012-08-27T17:55:01" changed="2012-08-27T17:55:15" muser="user_syssetting">
+                        <mname pvalue="">Warehouse</mname>
+                        <description pvalue="">Storage building</description>
+                    </ACC_AssetType>
+                    <ACC_AssetType id="{e5c5e326-b385-40a3-a30c-b8ce3ef1e258}" parent="syssetting" status="0" created="2012-08-27T17:55:15" changed="2012-08-27T17:58:31" muser="user_syssetting">
+                        <mname pvalue="">Car</mname>
+                        <description pvalue="">Vehicle for transportation from and to work</description>
+                    </ACC_AssetType>
+                    <ACC_AssetType id="{7e7eaad0-7bb1-4198-b01a-5f473a2b956f}" parent="syssetting" status="0" created="2012-08-27T18:20:45" changed="2012-08-27T18:21:18" muser="user_syssetting">
+                        <mname pvalue="">Appartment</mname>
+                        <description pvalue="">Part of building where people live</description>
+                    </ACC_AssetType>
+                    <ACC_AssetType id="{fd7bad2a-42d7-4d52-ba8e-76195189f9b5}" parent="syssetting" status="0" created="2012-08-27T18:21:18" changed="2012-08-27T18:21:32" muser="user_syssetting">
+                        <mname pvalue="">House</mname>
+                        <description pvalue="">Buidling where people live</description>
+                    </ACC_AssetType>
+                </ACC_AssetTypeList>
+                <ACC_CostGroupList>
+                    <ACC_CostGroup id="{d36ae695-b9e7-49e0-90a2-96333294514f}" parent="syssetting" status="0" created="2012-08-17T16:24:27" changed="2013-01-24T09:24:57" muser="user_syssetting">
+                        <groupname pvalue="">Online Course INCOME</groupname>
+                        <costprofit pvalue="0">1</costprofit>
+                        <sequenceno pvalue="0">1000</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{45cca245-5c66-4e4b-8153-809ba9c6f76d}" parent="syssetting" status="0" created="2012-08-17T16:24:54" changed="2013-01-24T09:25:04" muser="user_syssetting">
+                        <groupname pvalue="">Onsite Course INCOME</groupname>
+                        <costprofit pvalue="0">1</costprofit>
+                        <sequenceno pvalue="0">2000</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{f45518f9-31fc-473f-a38f-7138787179c9}" parent="syssetting" status="0" created="2012-08-17T16:25:15" changed="2013-01-24T09:25:24" muser="user_syssetting">
+                        <groupname pvalue="">Instructors COST</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">4000</sequenceno>
+                        <ACC_CostGroupList>
+                            <ACC_CostGroup id="{f67f61a2-9546-4367-bf3d-9cbac6000226}" parent="{f45518f9-31fc-473f-a38f-7138787179c9}" status="0" created="2012-08-27T20:56:20" changed="2013-01-24T09:25:31" muser="user_syssetting">
+                                <groupname pvalue="">Course development COST</groupname>
+                                <costprofit>0</costprofit>
+                                <sequenceno pvalue="0">4100</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                            <ACC_CostGroup id="{8aad5905-0479-43c4-8e30-88d0c56f4b3b}" parent="{f45518f9-31fc-473f-a38f-7138787179c9}" status="0" created="2012-08-27T20:56:54" changed="2013-01-24T09:25:38" muser="user_syssetting">
+                                <groupname pvalue="">Module teaching COST</groupname>
+                                <costprofit>0</costprofit>
+                                <sequenceno pvalue="0">4200</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                            <ACC_CostGroup id="{2dfaad05-c95c-4dba-ac8f-bb142751487f}" parent="{f45518f9-31fc-473f-a38f-7138787179c9}" status="0" created="2012-11-18T09:53:24" changed="2013-01-24T09:25:45" muser="user_syssetting">
+                                <groupname pvalue="">Recruitment COST</groupname>
+                                <costprofit>0</costprofit>
+                                <sequenceno pvalue="0">4300</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                        </ACC_CostGroupList>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{40027366-1423-4615-8fd7-af9b715dab97}" parent="syssetting" status="0" created="2012-08-17T16:26:03" changed="2013-01-24T09:25:11" muser="user_syssetting">
+                        <groupname pvalue="">Other INCOME</groupname>
+                        <costprofit pvalue="0">1</costprofit>
+                        <sequenceno pvalue="0">3000</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{b6a705ee-1bdd-4097-9567-0707947ebad7}" parent="syssetting" status="0" created="2012-08-17T16:26:31" changed="2013-01-24T09:25:50" muser="user_syssetting">
+                        <groupname pvalue="">Promotion COST</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">5000</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{329a266f-e87c-4201-8e7d-e642fe13dfcc}" parent="syssetting" status="0" created="2012-08-17T16:27:11" changed="2013-01-24T09:25:57" muser="user_syssetting">
+                        <groupname pvalue="">Membership COST</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">6000</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{a2659961-bf3d-4521-b5ad-9be09294ef0f}" parent="syssetting" status="0" created="2012-10-04T15:47:51" changed="2013-01-24T09:26:14" muser="user_syssetting">
+                        <groupname pvalue="">Assistant COST</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">7000</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{5f6d9220-0792-453a-860b-0d622b980f8d}" parent="syssetting" status="0" created="2012-11-16T17:51:56" changed="2013-01-24T09:26:24" muser="user_syssetting">
+                        <groupname pvalue="">Other COST</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">8000</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                </ACC_CostGroupList>
+                <ACC_CurrencyList>
+                    <ACC_Currency id="{c29f6697-2b2e-45c8-aa4f-c00b059524c8}" parent="syssetting" status="0" created="2011-05-26T16:46:41" changed="2011-06-06T12:17:40" muser="user_syssetting">
+                        <currency pvalue="">Euro</currency>
+                        <currcode pvalue="">EUR</currcode>
+                        <country pvalue="">Euro zone</country>
+                        <hundredsname pvalue="Cents">Cent</hundredsname>
+                        <rate pvalue="0">1</rate>
+                    </ACC_Currency>
+                    <ACC_Currency id="{eb624a83-2b3d-4f86-898b-ae40fac69217}" parent="syssetting" status="0" created="2011-05-26T16:47:08" changed="2013-10-22T21:07:09" muser="user_syssetting">
+                        <currency pvalue="">US Dollar</currency>
+                        <currcode pvalue="">USD</currcode>
+                        <country pvalue="">United States of America</country>
+                        <hundredsname pvalue="Cents">Cent</hundredsname>
+                        <rate pvalue="0">1.35</rate>
+                    </ACC_Currency>
+                    <ACC_Currency id="{145eb467-04ef-4da6-a9a6-dfaa750edf21}" parent="syssetting" status="0" created="2013-02-14T20:53:16" changed="2013-10-22T21:08:35" muser="user_syssetting">
+                        <currency pvalue="">British Pound</currency>
+                        <currcode pvalue="">GBP</currcode>
+                        <country pvalue="">United Kindom</country>
+                        <hundredsname pvalue="Cents">Pence</hundredsname>
+                        <rate pvalue="0">0.85</rate>
+                    </ACC_Currency>
+                </ACC_CurrencyList>
+                <ACC_DebtorTypeList>
+                    <ACC_DebtorType id="{0721ba04-942f-4eb4-be7d-33ac63454405}" parent="syssetting" status="0" created="2011-06-13T16:03:17" changed="2011-06-13T16:03:25" muser="user_syssetting">
+                        <typename pvalue="">Good History</typename>
+                    </ACC_DebtorType>
+                    <ACC_DebtorType id="{58d3776e-7fe8-4c93-815a-15e6c4279e36}" parent="syssetting" status="0" created="2011-06-13T16:03:34" changed="2011-06-13T16:03:43" muser="user_syssetting">
+                        <typename pvalue="">Default</typename>
+                    </ACC_DebtorType>
+                    <ACC_DebtorType id="{1845313f-7b88-4aed-b369-8ca7123dea77}" parent="syssetting" status="0" created="2011-06-13T16:03:43" changed="2011-06-13T16:03:53" muser="user_syssetting">
+                        <typename pvalue="">Priority</typename>
+                    </ACC_DebtorType>
+                </ACC_DebtorTypeList>
+                <ACC_FactorCompanyList>
+                    <ACC_FactorCompany id="{f29cec2b-01e6-4386-82e1-701655f30cbc}" parent="syssetting" status="0" created="2011-06-09T15:08:47" changed="2014-02-24T12:36:51" muser="user_syssetting">
+                        <coyname pvalue="">No Factoring</coyname>
+                        <address1></address1>
+                        <address2></address2>
+                        <address3></address3>
+                        <address4></address4>
+                        <address5></address5>
+                        <address6></address6>
+                        <contact></contact>
+                        <telephone></telephone>
+                        <fax></fax>
+                        <email></email>
+                    </ACC_FactorCompany>
+                </ACC_FactorCompanyList>
+                <ACC_HoldReasonList>
+                    <ACC_HoldReason id="{9d1e0376-a326-4c8b-a082-4d98b2970362}" parent="syssetting" status="0" created="2011-06-13T15:57:57" changed="2012-01-25T22:48:58" muser="user_syssetting">
+                        <reasoncode pvalue="0">GOOD</reasoncode>
+                        <reasondescription pvalue="">Good history of payments</reasondescription>
+                        <dissallowinvoices>0</dissallowinvoices>
+                    </ACC_HoldReason>
+                    <ACC_HoldReason id="{127f558f-4387-425a-8c44-7afef7410225}" parent="syssetting" status="0" created="2011-06-13T16:00:47" changed="2012-01-25T22:48:33" muser="user_syssetting">
+                        <reasoncode pvalue="0">WATCH</reasoncode>
+                        <reasondescription pvalue="">One or more open invoices</reasondescription>
+                        <dissallowinvoices>0</dissallowinvoices>
+                    </ACC_HoldReason>
+                    <ACC_HoldReason id="{18279432-1b04-4df1-b56c-1be8e462599a}" parent="syssetting" status="0" created="2011-06-13T16:01:08" changed="2012-01-25T22:48:50" muser="user_syssetting">
+                        <reasoncode pvalue="0">BADHISTORY</reasoncode>
+                        <reasondescription pvalue="">Unacceptable payment history</reasondescription>
+                        <dissallowinvoices pvalue="0">1</dissallowinvoices>
+                    </ACC_HoldReason>
+                </ACC_HoldReasonList>
+                <ACC_LocationList>
+                    <ACC_Location id="{a5cd618a-7d51-4fb9-b1b1-e69dd21cfd39}" parent="syssetting" status="0" created="2012-04-30T09:44:04" changed="2014-02-24T13:04:40" muser="user_syssetting">
+                        <locationname pvalue="">MyCompany</locationname>
+                        <deladd1 pvalue="">Warehouse Street 1</deladd1>
+                        <deladd2 pvalue="">1234AB City</deladd2>
+                        <deladd3 pvalue="">The Netherlands</deladd3>
+                        <deladd4></deladd4>
+                        <deladd5></deladd5>
+                        <deladd6></deladd6>
+                        <tel pvalue="">+31 123456789</tel>
+                        <fax pvalue="">+31 123456789</fax>
+                        <email pvalue="">info@mycompany.com</email>
+                        <contact pvalue="">John Smith</contact>
+                        <taxprovince_id>0</taxprovince_id>
+                        <managed>0</managed>
+                    </ACC_Location>
+                </ACC_LocationList>
+                <ACC_PaymentTermList>
+                    <ACC_PaymentTerm id="{f46c830d-ff28-466f-a667-f46a1353b741}" parent="syssetting" status="0" created="2011-06-13T14:54:34" changed="2011-06-13T15:56:26" muser="user_syssetting">
+                        <termsindicator pvalue="">DUE30</termsindicator>
+                        <terms pvalue="">Payment due within 30 days</terms>
+                        <daysbeforedue pvalue="0">30</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{2eae5793-5671-4c74-8179-f753014e6e2f}" parent="syssetting" status="0" created="2011-06-13T15:56:36" changed="2011-06-13T15:57:01" muser="user_syssetting">
+                        <termsindicator pvalue="">DUE14</termsindicator>
+                        <terms pvalue="">Payment due within 14 days</terms>
+                        <daysbeforedue pvalue="0">14</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{ec581138-1ea4-435b-8291-6f3bc93a41dd}" parent="syssetting" status="0" created="2011-06-14T16:54:51" changed="2011-06-14T16:55:11" muser="user_syssetting">
+                        <termsindicator pvalue="">CASH</termsindicator>
+                        <terms pvalue="">Cash only</terms>
+                        <daysbeforedue>0</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{788e4c53-4ec1-4c50-a561-1e02b6fe1a50}" parent="syssetting" status="0" created="2011-06-14T16:55:15" changed="2011-06-14T16:56:58" muser="user_syssetting">
+                        <termsindicator pvalue="">DUE20FOLL</termsindicator>
+                        <terms pvalue="">Due 20th following month</terms>
+                        <daysbeforedue pvalue="0">20</daysbeforedue>
+                        <dayinfollowingmonth pvalue="0">1</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{d3a5924d-2ecc-404f-aa96-bf4d19d843c8}" parent="syssetting" status="0" created="2012-06-25T23:12:31" changed="2012-06-25T23:13:36" muser="user_syssetting">
+                        <termsindicator pvalue="">REFERLINE</termsindicator>
+                        <terms pvalue="">Refer to line item</terms>
+                        <daysbeforedue>0</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{2a6a9521-f6c8-4da7-9627-4212c7aee38c}" parent="syssetting" status="0" created="2013-10-04T20:16:03" changed="2013-10-04T20:16:28" muser="user_syssetting">
+                        <termsindicator pvalue="">BEFORE14</termsindicator>
+                        <terms pvalue="">14 days before course start</terms>
+                        <daysbeforedue>0</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                </ACC_PaymentTermList>
+                <ACC_SalesManList>
+                    <ACC_SalesMan id="{e01b9892-46a3-404a-9bb8-e5c2138a2988}" parent="syssetting" status="0" created="2011-06-13T16:04:20" changed="2012-01-26T13:36:36" muser="user_syssetting">
+                        <salesmanname pvalue="">Salesman Name</salesmanname>
+                        <smantel pvalue="">+31 76 565 1365</smantel>
+                        <smanfax pvalue="">+31</smanfax>
+                        <commissionrate1>0</commissionrate1>
+                        <breakpoint>0</breakpoint>
+                        <commissionrate2>0</commissionrate2>
+                    </ACC_SalesMan>
+                </ACC_SalesManList>
+                <ACC_SalesTypeList>
+                    <ACC_SalesType id="{a726bb4e-07cd-4b6b-a118-d4cad0a93d7e}" parent="syssetting" status="0" created="2011-06-11T13:44:29" changed="2011-06-16T13:18:23" muser="user_syssetting">
+                        <typeabbrev pvalue="">Default EU</typeabbrev>
+                        <description pvalue="">Default or base price list in Euro's</description>
+                    </ACC_SalesType>
+                    <ACC_SalesType id="{ee0d799d-26aa-44a1-8f97-350fdd47fdbf}" parent="syssetting" status="0" created="2011-06-11T13:45:09" changed="2011-06-11T13:53:00" muser="user_syssetting">
+                        <typeabbrev pvalue="">Indented</typeabbrev>
+                        <description pvalue="">Ordered in advance</description>
+                    </ACC_SalesType>
+                    <ACC_SalesType id="{ed1a3865-d24a-45dc-b551-fc028756c1ea}" parent="syssetting" status="0" created="2011-06-11T13:45:59" changed="2012-01-25T22:34:56" muser="user_syssetting">
+                        <typeabbrev pvalue="">CustomMade</typeabbrev>
+                        <description pvalue="">Goods made up especially for the custome</description>
+                    </ACC_SalesType>
+                </ACC_SalesTypeList>
+                <ACC_ShipperList>
+                    <ACC_Shipper id="{502e5e5b-2695-4dd9-9df0-a0e9ffe88ee5}" parent="syssetting" status="0" created="2011-06-09T13:25:13" changed="2014-02-24T12:35:58" muser="user_syssetting">
+                        <shippername pvalue="Default">TNT</shippername>
+                        <mincharge>0</mincharge>
+                    </ACC_Shipper>
+                    <ACC_Shipper id="{1b8b0956-b14a-447f-8d6b-b7e03c761d72}" parent="syssetting" status="0" created="2011-06-09T13:25:35" changed="2014-02-24T12:35:52" muser="user_syssetting">
+                        <shippername pvalue="Default">DHL</shippername>
+                        <mincharge>0</mincharge>
+                    </ACC_Shipper>
+                    <ACC_Shipper id="{7430c44e-bd6f-40fe-bcaf-590d46a40dc6}" parent="syssetting" status="0" created="2011-09-21T12:49:33" changed="2011-11-09T20:08:25" muser="user_syssetting">
+                        <shippername pvalue="Default">Email</shippername>
+                        <mincharge>0</mincharge>
+                    </ACC_Shipper>
+                    <ACC_Shipper id="{d4e9bf3c-1b88-4d9b-98a9-7803c343b202}" parent="syssetting" status="0" created="2011-11-09T20:08:41" changed="2011-11-09T20:08:53" muser="user_syssetting">
+                        <shippername pvalue="Default">None</shippername>
+                        <mincharge>0</mincharge>
+                    </ACC_Shipper>
+                </ACC_ShipperList>
+                <ACC_TaxAuthorityList>
+                    <ACC_TaxAuthority id="{21547f2b-a982-4413-a447-694c5fd80dcc}" parent="syssetting" status="0" created="2011-08-03T18:48:03" changed="2014-02-24T12:30:34" muser="user_syssetting">
+                        <description pvalue="">NL The Netherlands</description>
+                        <bank pvalue="">Bank Name</bank>
+                        <bankacctype pvalue="">Check Account</bankacctype>
+                        <bankacc pvalue="">123456</bankacc>
+                        <bankswift pvalue="">-</bankswift>
+                        <ACC_TaxAuthRateList/>
+                    </ACC_TaxAuthority>
+                    <ACC_TaxAuthority id="{4172f2ab-941f-4baf-a5cb-d705a7b29eeb}" parent="syssetting" status="0" created="2012-01-25T19:31:14" changed="2014-02-24T12:27:32" muser="user_syssetting">
+                        <description pvalue="">NL EU Intracommunautair</description>
+                        <bank pvalue="">Bank Name</bank>
+                        <bankacctype pvalue="">Check Account</bankacctype>
+                        <bankacc pvalue="">123456</bankacc>
+                        <bankswift pvalue="">-</bankswift>
+                        <ACC_TaxAuthRateList/>
+                    </ACC_TaxAuthority>
+                    <ACC_TaxAuthority id="{bf2a6800-9107-4d4a-bea0-39efd102bd91}" parent="syssetting" status="0" created="2011-12-09T09:55:04" changed="2014-02-24T12:30:03" muser="user_syssetting">
+                        <description pvalue="">NL Outside EU</description>
+                        <bank pvalue="">Bank Name</bank>
+                        <bankacctype pvalue="">Check Account</bankacctype>
+                        <bankacc pvalue="">123456</bankacc>
+                        <bankswift pvalue="">-</bankswift>
+                        <ACC_TaxAuthRateList/>
+                    </ACC_TaxAuthority>
+                    <ACC_TaxAuthority id="{07541b71-1ab5-48e8-a06c-c1184bf7d8ec}" parent="syssetting" status="0" created="2013-04-14T11:04:58" changed="2014-02-24T12:29:45" muser="user_syssetting">
+                        <description pvalue="">NL Exempt</description>
+                        <bank pvalue="">Bank Name</bank>
+                        <bankacctype pvalue="">Check Account</bankacctype>
+                        <bankacc pvalue="">123456</bankacc>
+                        <bankswift pvalue="">-</bankswift>
+                        <ACC_TaxAuthRateList/>
+                    </ACC_TaxAuthority>
+                </ACC_TaxAuthorityList>
+                <ACC_TaxCategoryList>
+                    <ACC_TaxCategory id="{db8b89f7-69e0-4957-bbb6-8b1ac0af3a10}" parent="syssetting" status="0" created="2011-05-26T20:16:36" changed="2011-05-26T20:16:42" muser="user_syssetting">
+                        <taxcatname pvalue="">Exempt</taxcatname>
+                    </ACC_TaxCategory>
+                    <ACC_TaxCategory id="{ef4b7acf-95cc-41cb-98f3-cc8ea6d4a137}" parent="syssetting" status="0" created="2011-05-26T21:52:51" changed="2011-05-26T21:53:06" muser="user_syssetting">
+                        <taxcatname pvalue="">High VAT level</taxcatname>
+                    </ACC_TaxCategory>
+                    <ACC_TaxCategory id="{0db0911a-5741-49de-a080-c1b90363dd36}" parent="syssetting" status="0" created="2011-05-26T21:53:09" changed="2011-06-07T19:10:03" muser="user_syssetting">
+                        <taxcatname pvalue="">Medium VAT Level</taxcatname>
+                    </ACC_TaxCategory>
+                </ACC_TaxCategoryList>
+                <ACC_TaxGroupList>
+                    <ACC_TaxGroup id="{31bb0e98-b289-4fd1-96ea-49abb5522b99}" parent="syssetting" status="0" created="2013-04-14T11:07:07" changed="2014-02-24T12:32:41" muser="user_syssetting">
+                        <taxgroupdescr pvalue="">NL Tax Group</taxgroupdescr>
+                        <ACC_TaxGroupAuthList/>
+                    </ACC_TaxGroup>
+                    <ACC_TaxGroup id="{fbfbeb44-c552-4f4b-abf0-68671641d213}" parent="syssetting" status="0" created="2014-02-24T12:33:18" changed="2014-02-24T12:33:42" muser="user_syssetting">
+                        <taxgroupdescr pvalue="">EU Tax Group (Intracomm.)</taxgroupdescr>
+                        <ACC_TaxGroupAuthList/>
+                    </ACC_TaxGroup>
+                    <ACC_TaxGroup id="{36e0bd4c-4d87-402a-b2ef-87f1d3e01d6f}" parent="syssetting" status="0" created="2014-02-24T12:33:50" changed="2014-02-24T12:34:49" muser="user_syssetting">
+                        <taxgroupdescr pvalue="">Outside EU Tax Group (world)</taxgroupdescr>
+                        <ACC_TaxGroupAuthList/>
+                    </ACC_TaxGroup>
+                </ACC_TaxGroupList>
+                <ACC_TaxProvinceList>
+                    <ACC_TaxProvince id="{b77c5001-52a4-4666-9bd5-dc16956c1623}" parent="syssetting" status="0" created="2011-05-26T21:58:32" changed="2011-05-26T22:00:48" muser="user_syssetting">
+                        <taxprovincename pvalue="">The Netherlands - all provinces</taxprovincename>
+                    </ACC_TaxProvince>
+                    <ACC_TaxProvince id="{bde2a9ab-a93a-40a0-b396-3e8054e77918}" parent="syssetting" status="0" created="2011-05-26T21:59:12" changed="2011-05-26T21:59:28" muser="user_syssetting">
+                        <taxprovincename pvalue="">European Union (EU)</taxprovincename>
+                    </ACC_TaxProvince>
+                    <ACC_TaxProvince id="{33a8fc84-19e1-4858-bdea-2425dd55e336}" parent="syssetting" status="0" created="2011-05-26T22:00:06" changed="2011-05-26T22:00:36" muser="user_syssetting">
+                        <taxprovincename pvalue="">Outside European Union - world</taxprovincename>
+                    </ACC_TaxProvince>
+                </ACC_TaxProvinceList>
+                <ACC_UnitOfMeasureList>
+                    <ACC_UnitOfMeasure id="{88ca9644-b8a9-41de-a673-af0bbf174927}" parent="syssetting" status="0" created="2011-05-26T16:43:14" changed="2011-05-26T16:43:24" muser="user_syssetting">
+                        <unitname pvalue="">Each</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{9bb90117-c7d4-4751-a331-655c7de39f5f}" parent="syssetting" status="0" created="2011-05-26T16:43:24" changed="2011-05-26T16:43:33" muser="user_syssetting">
+                        <unitname pvalue="">Piece</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{61a3f782-24bb-48a2-a4de-ca5d0374dc11}" parent="syssetting" status="0" created="2011-05-26T16:43:33" changed="2011-05-26T16:45:28" muser="user_syssetting">
+                        <unitname pvalue="">Meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{3bed0e4a-cb4a-444e-a09a-72203f5491b1}" parent="syssetting" status="0" created="2011-05-26T16:44:01" changed="2011-05-26T16:45:34" muser="user_syssetting">
+                        <unitname pvalue="">Cubic meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{db8a9649-b5c4-4a19-9a73-271b96cc179c}" parent="syssetting" status="0" created="2011-05-26T16:44:13" changed="2011-05-26T16:44:30" muser="user_syssetting">
+                        <unitname pvalue="">None</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{f61fdeeb-7934-480d-89ee-53f2ecb5def9}" parent="syssetting" status="0" created="2011-06-11T09:55:46" changed="2011-06-11T09:55:53" muser="user_syssetting">
+                        <unitname pvalue="">Manhour</unitname>
+                    </ACC_UnitOfMeasure>
+                </ACC_UnitOfMeasureList>
+            </ACC_SysSetting>
+        </ACC_SysSettingList>
+    </ACC_Project>
+</ACC>
+ed="2011-05-26T22:00:36" muser="user_syssetting">
+                        <taxprovincename pvalue="">Outside European Union - world</taxprovincename>
+                    </ACC_TaxProvince>
+                </ACC_TaxProvinceList>
+                <ACC_UnitOfMeasureList>
+                    <ACC_UnitOfMeasure id="{88ca9644-b8a9-41de-a673-af0bbf174927}" parent="syssetting" status="0" created="2011-05-26T16:43:14" changed="2011-05-26T16:43:24" muser="user_syssetting">
+                        <unitname pvalue="">Each</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{9bb90117-c7d4-4751-a331-655c7de39f5f}" parent="syssetting" status="0" created="2011-05-26T16:43:24" changed="2011-05-26T16:43:33" muser="user_syssetting">
+                        <unitname pvalue="">Piece</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{61a3f782-24bb-48a2-a4de-ca5d0374dc11}" parent="syssetting" status="0" created="2011-05-26T16:43:33" changed="2011-05-26T16:45:28" muser="user_syssetting">
+                        <unitname pvalue="">Meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{3bed0e4a-cb4a-444e-a09a-72203f5491b1}" parent="syssetting" status="0" created="2011-05-26T16:44:01" changed="2011-05-26T16:45:34" muser="user_syssetting">
+                        <unitname pvalue="">Cubic meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{db8a9649-b5c4-4a19-9a73-271b96cc179c}" parent="syssetting" status="0" created="2011-05-26T16:44:13" changed="2011-05-26T16:44:30" muser="user_syssetting">
+                        <unitname pvalue="">None</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{f61fdeeb-7934-480d-89ee-53f2ecb5def9}" parent="syssetting" status="0" created="2011-06-11T09:55:46" changed="2011-06-11T09:55:53" muser="user_syssetting">
+                        <unitname pvalue="">Manhour</unitname>
+                    </ACC_UnitOfMeasure>
+                </ACC_UnitOfMeasureList>
+            </ACC_SysSetting>
+        </ACC_SysSettingList>
+    </ACC_Project>
+</ACC>
+         <taxprovincename pvalue="">Outside European Union - world</taxprovincename>
+                    </ACC_TaxProvince>
+                </ACC_TaxProvinceList>
+                <ACC_UnitOfMeasureList>
+                    <ACC_UnitOfMeasure id="{88ca9644-b8a9-41de-a673-af0bbf174927}" parent="syssetting" status="0" created="2011-05-26T16:43:14" changed="2011-05-26T16:43:24" muser="user_syssetting">
+                        <unitname pvalue="">Each</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{9bb90117-c7d4-4751-a331-655c7de39f5f}" parent="syssetting" status="0" created="2011-05-26T16:43:24" changed="2011-05-26T16:43:33" muser="user_syssetting">
+                        <unitname pvalue="">Piece</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{61a3f782-24bb-48a2-a4de-ca5d0374dc11}" parent="syssetting" status="0" created="2011-05-26T16:43:33" changed="2011-05-26T16:45:28" muser="user_syssetting">
+                        <unitname pvalue="">Meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{3bed0e4a-cb4a-444e-a09a-72203f5491b1}" parent="syssetting" status="0" created="2011-05-26T16:44:01" changed="2011-05-26T16:45:34" muser="user_syssetting">
+                        <unitname pvalue="">Cubic meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{db8a9649-b5c4-4a19-9a73-271b96cc179c}" parent="syssetting" status="0" created="2011-05-26T16:44:13" changed="2011-05-26T16:44:30" muser="user_syssetting">
+                        <unitname pvalue="">None</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{f61fdeeb-7934-480d-89ee-53f2ecb5def9}" parent="syssetting" status="0" created="2011-06-11T09:55:46" changed="2011-06-11T09:55:53" muser="user_syssetting">
+                        <unitname pvalue="">Manhour</unitname>
+                    </ACC_UnitOfMeasure>
+                </ACC_UnitOfMeasureList>
+            </ACC_SysSetting>
+        </ACC_SysSettingList>
+    </ACC_Project>
+</ACC>

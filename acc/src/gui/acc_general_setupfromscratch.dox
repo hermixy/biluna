@@ -1,0 +1,82 @@
+/*! \page acc_general_setupfromscratch Setup ACC from Scratch - Accounting ACC
+\section sec_acc_general_setupfromscratch Setup ACC from Scratch
+
+Use this procedure when you want to start with an empty database.
+
+From the menu: Accounting &gt; <b>Select Project (Company)</b>, add a row
+and enter your company name. The details of your company will be set later.
+
+\subsection subsec_acc_general_setupfromscratch_general Settings > General
+\li Set the <b>units of measurements</b> you will be using, such as Each, Piece,
+meter, cubic meter, etc. These units will be printed for example on a sales- or
+purchase order. For details refer to the units of measurement dialog.
+\li Set the <b>currency</b> for your transactions. For details refer to the
+currency dialog.
+\li Set <b>account controls</b>. These controls are required for the system to
+make the required additional bookings in the General Ledger (GL) and for the
+preparation of for example the VAT or sales tax report. Check the values
+thoroughly otherwise the booking system will not work correctly. For details
+refer to the account control dialog.
+\li Set the <b>account groups</b> for the trail balance. These groups provide
+the organization of the GL accounts for further reporting.
+\li Set the <b>chart of (GL) accounts</b>. For more details refer to the chart
+of accounts dialog.
+\li Set the <b>tax categories</b> (names only) as &nbsp;are applicable in the
+various tax provinces, states or countries. Sometimes it will be sufficient to
+enter the tax level names of the country where your company is located. For more
+details refer to the tax category dialog.
+\li Set the <b>tax provinces</b>&nbsp;(names only) for all the warehouses from
+where the goods can be supplied. For more details refer to the tax provinces
+dialog.
+\li Set the <b>tax authorities</b> and <b>tax authority rates</b>. The tax
+authorities are the authorities to which the tax will be paid, set the rates
+for all the tax provinces and all the tax categories of your products or
+services. For more details refer to the tax authority rates dialog.
+\li Set the <b>tax groups</b> for your customer and the <b>tax group authority</b>.
+The tax group authority allows you to assign more than one tax authority to a group
+and to handle tax on taxes. For more details refer to the tax group authorities dialog.
+\li Set the <b>stock categories</b>. This are the category of products
+or services your company sells. For details refer to the stock categories
+window.
+\li Set the <b>stock or office location</b> of the warehouses or the location from
+where the services are executed. For details refer to the location edit dialog.
+\li Set the <b>shipper</b> that are used for shipping the goods to the
+customer. For details refer to the shipper edit dialog.
+\li If applicable, set the <b>factor companies</b>, For details refer to the
+factor companies edit dialog.
+\li Set the <b>asset type</b>. The asset type is only a name for a
+type to be able to report per type such as Office or Warehouse or Truck.
+
+
+\subsection subsec_acc_general_setupfromscratch_sales Settings > Sales
+\li Set the <b>sales type</b> and price lists. The price list can be different
+for different type of customer. For details refer to the sales type dialog.
+\li Set the <b>sales and purchase area</b>, the area are used to group
+sales according regions. For details refer to the area dialog.
+\li Set the <b>sales GL posting</b>, these are the GL accounts where the
+sales are being booked in the accounting system.
+For details refer to the sales GL postings dialog.
+\li Set the <b>COGS posting</b>, these are the GL accounts where the Cost
+Of Goods Sold (COGS) are being booked.
+For details refer to the COGS postings dialog.
+\li Set the <b>sales tax posting</b>, these settings define the GL account
+of the sales tax bookings. For details refer to the sales tax posting dialog.
+\li Set the <b>sales people</b> to group the sales according the sales persons.
+For details refer to the sales people dialog.
+\li Set the <b>price</b>, these are set per stock item. The navigation
+dock window with the stock items will be opened. The price has to be set
+per each price list. For details refer to the price window.
+\li Set the <b>payment terms</b> which will be shown on the invoice.
+For details refer to the payment terms dialog.
+\li Set the <b>credit status</b> which is used to keep track of invoice
+payments by customer. For details refer to the credit status dialog.
+\li Set the <b>debtor type</b> to label a customer. For details refer to the
+debtor type dialog.
+
+\subsection subsec_acc_general_setupfromscratch_sales Settings > Cost Centers
+\li Set the <b>cost center group</b> to group the cost centers for reporting
+purposes. For details refer to the cost center group dialog.
+\li Set the <b>cost centers and budget</b> to set the cost centers and their
+budget. For details refer to the cost center and budget dialog.
+
+*/

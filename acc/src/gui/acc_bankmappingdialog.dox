@@ -1,0 +1,69 @@
+/*! \page acc_bankmappingdialog Bank CSV Mapping dialog - Accounting ACC
+\section sec_acc_bankmappingdialog Bank CSV Mapping dialog
+
+The Biluna ACC perspective can import bank statements.
+The bank statement formats that can be imported are:
+\li MT940 (limited, tested only with major Dutch banks)
+\li CSV, comma separated value files
+
+The CSV files are different for each bank. The user can set the name of
+fields and their destination.
+
+Click <i>Accounting > Settings > Import > Bank CSV Import Mapping</i> to
+open the below dialog:
+\image html acc_bankmappingdialog.png "Bank CSV Mapping dialog"
+
+The dialog has two tabs at the top: Mapping and Check. The mapping settings
+are as follows:
+\li Bank Account, this description should be exactly the same as in the
+CSV file used to identify your bank account. The software will use this
+field to check whether the number is part of the file or to decide that
+this file is not for this import setting
+\li Date Format, with this setting the date format can be set. Use yy for two
+digit years and yyyy for four digit years, use MM for two digit month indication
+and dd for two digit day indication. For example, if there are dashes
+between the years, months and days, the format could look like yyyy-MM-dd
+\li Credit ID Name, some bank use a positive amount for both the debit and
+the credit values. Use this field if there is a separate field indicating that
+the positive field is a credit field. In the image below the word 'Af' means
+a credit amount. This field is not required, if negative values
+indicate the credit amount.
+\li Column Separator, this is the separator used by the bank to differentiate
+between the columns. There are three possibilities, comma [,], semicolon [;] and
+tab separated columns
+\li First Row Is Title, some banks print in the first row the column names
+for your convenience. Set to Yes of the file contains in the first row
+the column names
+\li Strip Quotes, sometimes the fields start and end with a single
+or double quote. Set this field if this is the case in your bank CSV file,
+the software will strip the quotes to get the correct field value
+\li Decimal Separator, in for example Germany and The Netherlands the decimal
+values are indicated with a comma instead of a decimal point. Set to Comma
+if the decimal values contain a comma instead of a point.
+
+The fields in the lower part are for mapping the column number to a field
+\li Bank Account, this is the field that contains your bank account number.
+In the above example the bank account is the third column in the CSV file
+\li Transaction Date, the date of the transaction or bank statement
+\li Counter Bank Account, the bank account from which the amount
+is received or to which the amount is paid. This field is optional and can
+be used if available.
+\li Bank Account Holder Name, the name of the bank account holder. This field
+is optional and can be used if available.
+\li Debit/Credit Name, the column the contains the Credit ID as indicated
+above. This field is required if credit amounts are also positive
+\li Amount, the amount or money value
+\li Description, description of the transaction
+\li Transaction Code. The transaction code or type can indicate for example
+whether this was a normal bank wire transfer, a cash withdrawl
+or a credit card payment. This field is optional and can be used if available.
+\li Statement Number. This is the bank statement sequence number. Not all
+banks provide a bank statement number. This field is optional and can
+be used if available.
+\image html acc_bankmappingdialog_check.png "Check bank CSV Mapping"
+
+The settings can be tested in tab Check. If the settings are correct a
+sample CSV file can be opened to see whether all data is parsed to the
+correct field. The above image shows an example.
+
+*/

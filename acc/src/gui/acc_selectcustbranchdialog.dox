@@ -1,0 +1,17 @@
+/*! \page acc_selectcustbranchdialog Select Customer Branch Dialog - Accounting ACC
+\section sec_acc_selectcustbranchdialog Select Customer Branch Dialog
+
+This dialog is used to select the applicable customer branch for example when a
+new payable document (sales invoice) is entered in the GL transaction window.
+
+From the dialog select the applicable branch by clicking in the table:
+\image html acc_selectcustbranchdialog.png "Select customer branch dialog"
+
+The Help button opens this help page, the Select button confirms the selection
+and the Cancel button cancels the selection operation.
+
+Note: the triangle or arrow next to a customer number indicates that there are
+child branches to this customer. Click the arrow to open the hidden child
+branches.
+
+*/

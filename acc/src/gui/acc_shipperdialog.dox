@@ -1,0 +1,22 @@
+/*! \page acc_shipperdialog Shipper Edit Dialog - Accounting ACC
+\section sec_acc_shipperdialog Shipper Edit Dialog
+
+This dialog is used to edit the shipper or freight forwarders of goods.
+
+From the menu select <i>Accounting &gt; Settings &gt; Shipper</i>
+and the below dialog will be shown:
+\image html acc_shipperdialog.png "Shipper edit dialog"
+
+Use the green button with (+) to add a location.
+
+The red button with (-) will delete location,
+NOTE: this action can not be undone
+
+The details of the location can be edited:
+\li Shipper Name - a convenient name of the shipper
+\li Minimum Charge - some shipper charge a minimum amount.
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

@@ -1,0 +1,105 @@
+/*! \page acc_custbranchwidget Customer Branch window - Accounting ACC
+\section sec_acc_custbranchwidget Customer Branch window
+
+This window is used to edit the customer branches. The customer are
+organized in a hierachical structure. This means that a customer can
+be a child of another company. Also when company B is purchased by company
+A, than company B can be a child company of company A. All data of company
+B is transfered by changing this parent child relationship.
+
+From the menu select <i>Accounting &gt; Customer &gt; Branch</i>
+and the below window will be shown:
+\image html acc_custbranchwidget.png "Customer branch window"
+
+At the left the ACC Navigation (dock) window will be shown. The tab with
+the customer branch will be shown. The branch is selected by clicking the
+relevant company in the list.
+
+Use the green button with (+) to add a category or below an item.
+
+The red button with (-) will delete a category or an item,
+NOTE: this action can not be undone
+
+The MDI (multiple document interface) window in the middle looks as follows:
+\image html acc_custbranchwidget_tab_customer.png "Customer branch details window"
+
+The following fields can be edited:
+\li Customer code - an identification for the category,
+use for example the first six letters of the company name in capitals
+\li Customer name - &nbsp;official name of the customer, is used on invoices,
+letter heads
+\li Post Address 1-6 - Post or invoice address lines
+\li Branch Contact - an extra field for the name of a company contact person,
+note that there is a separate possibility to handle all the contacts of a company
+\li Email - the email of the branch contact person
+\li Phone number - telephone number
+\li Fax number - fax number
+\li Street Address 1-6 - physical address of the company or delivery address
+
+The button Copy Parent copies all address lines of the parent company
+to this company, the button Copy Postal copies all postal address
+lines from this company to the street address lines. The first button is
+convenient when this company is at the same address as the parent company,
+the second button is convenient when the postal address is completed and is a
+street address also.
+
+The tab with the accounting information shows the following:
+\image html acc_custbranchwidget_tab_accounting.png "Customer accounting details window"
+
+The following fields can be edited:
+\li Sales Type/Price List - the price list type which is to be used
+for this customer
+\li Customer Type - &nbsp;indication whether this is a normal,
+good or priority customer
+\li Customer Since - &nbsp;date when the first order by this customer
+was placed
+\li Discount Percent - &nbsp;the percentage discount this customer receives
+\li Discount Code - a code for the discount
+\li Payment Discount Percent - discount if payment is done in a
+hort (defined) period
+\li Credit Limit - the maximum acceptable total amount of open invoices
+\li Tax Reference - &nbsp;the tax reference number given by the tax
+authorities to the company
+\li Payment Terms - &nbsp;the indicator of the due date for the payment
+\li Credit Status - &nbsp;indicator whether the company has a good payment
+history, should be watched or no invoices should be send anymore
+\li Customer Currency - &nbsp;the currency of the sales orders with this customer
+\li Customer PO Line on SO - &nbsp;whether the purchase order line on should
+be mentioned on the sales order
+\li Invoice Addressing - &nbsp;indicator where the invoice should be send to.
+Address to branch means that the invoice will be send to the postal address
+of this branch, if Address to HO (home office) is selected the address of
+the parent or parent-parent, etc. will be used utill the parent shows Address
+to branch. The third alternative is to send the invoice to the order contact.
+This is usefull if a different location or a private person should receive
+the invoice. At the sales order a contact can be selected and this contact will
+receive the invoice.
+
+The tab with the sales information shows the following:
+\image html acc_custbranchwidget_tab_sales.png "Customer sales details window"
+
+The following fields can be edited:
+\li Special Instructions - a text field for special (sales) instructions
+\li Default Days to Deliver - &nbsp;the (default) number of days for delivery
+\li Forward After (day in month) - &nbsp;the day in the month
+\li Draw Stock From - the warehouse or office where the goods will
+be supplied from
+\li Default freight /shipper method - can be an outside company or by
+company transportation
+\li Default Packlist - indicator whether the details and logo of the company
+should be shown on the packlist
+\li Sales Person - &nbsp;the salesman handling this customer
+\li Sales Area - &nbsp;the sales area
+\li Tax Group - the tax group of this company
+\li Transactions on this branch - disable if no transaction are to be
+done with this branch
+\li Internal Branch Code (EDI) - Electronic Data Interchange for electronic
+transaction information between trading partners
+
+New customer can be added in the navigation dock window of the ACC (this
+accounting) perspective. In this case you will not see the customer in the
+CRM perspective when selecting the filter by 'Account'. You will have to
+select show 'All' first and go to the relevant customer and select the
+button 'Change account' to assign the customer to a CRM account. Now the
+customer will be shown with the filter set to 'Account'
+*/

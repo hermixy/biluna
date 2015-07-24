@@ -1,0 +1,21 @@
+/*! \page acc_selectchartmasterdialog Select GL Account from Chartmaster Dialog - Accounting ACC
+\section sec_acc_selectchartmasterdialog Select GL Account from Chartmaster Dialog
+
+This dialog is used to select the applicable GL account from the chart of
+accounts (chartmaster).
+
+The transactions are entered in to the accounting in the GL transaction window.
+The Bank and Cash payments and receipts are usually corresponding with sales or
+purchase invoices. These invoices are called 'Documents', as are the Bank notes.
+The Bank/Cash receipts and payments are allocated to the corresponding invoice
+documents. This will create the correct entries in the Payables- and Receivables
+accounts.
+
+From the GL window select the dotted button next to the 'Allocation' field
+and the below dialog will be shown:
+\image html acc_selectchartmasterdialog.png "Select GL account from chartmaster dialog"
+
+The Help button opens this help page, the Select button confirms the selection
+and the Cancel button cancels the selection operation.
+
+*/

@@ -1,0 +1,41 @@
+/*! \page acc_chartmasterdialog General Ledger Chart Master Edit Dialog - Accounting ACC
+\section sec_acc_chartmasterdialog General Ledger Chart Master Edit Dialog
+
+The accounting is organized in General Ledger (GL) accounts or chart
+of accounts. Chart of accounts is a list of ledger account names and
+associated numbers arranged in the order in which they normally appear
+in the financial statements. It is a&nbsp;listing of the accounts available
+in the accounting system in which to record entries.
+
+The Chart of Accounts can for example be arranged in the following order:
+balance sheet accounts (assets, liabilities, stockholders' equity) and
+income statement accounts (revenues, expenses, gains, losses).
+
+The chart of accounts can be expanded and tailored to reflect the operations
+of the company.
+
+From the menu select <i>Accounting &gt; Settings &gt; Chart of Accounts</i>
+and the below dialog will be shown:
+\image html acc_chartmasterdialog.png "Chart of accounts edit dialog"
+
+Use the green button with (+) to add an account.
+
+The red button with (-) will delete the selected account,
+NOTE: this action can not be undone
+
+The details of the account can be edited:
+\li Account Code - account sequence number
+\li Account Name - name of the account. In case of a bankaccount, add
+the account number without spaces or dots to the name. This number will
+be used to identify the relevant General Ledger when importing bank statements
+such as the MT940 format.
+\li Account Control - control identification for ACC to record entries to,
+for example Creditors
+\li Account Group - the group to which this account belongs to
+\li Group Type - depending the group, this will show either Balance or
+Profit and Loss (PL)
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

@@ -1,0 +1,49 @@
+/*! \page acc_stockitemwidget Stock Item Window - Accounting ACC
+\section sec_acc_stockitemwidget Stock Item Window
+
+The stock is organized in stock categories,
+\ref acc_stockcategorywidget "refer to the stock category window".
+This stock item window is used to edit the stock items.
+The stock contains all the products and services your company is selling
+(and buying). A service does not require a warehouse but the identification
+and handling is done more or less the same we as physical warehouse items.
+
+From the menu select Accounting > Stock Items and the below dialog will be shown:
+\image html acc_stockitemwidget.png "Stock item window"
+
+The stock item window is the view and edit window and is navigated from the ACC Navigation dock window as shown in the above image. By selecting a category in the above table an item can be selected and the stock item window is loaded with the relevant detail data.
+
+The stock item window has three tabs: Stock Item, Material Mgt and Accounting. The respective fields are as follows:
+\li Item Code - an identification for the stock item, use for example the first six letters of the item name in capitals
+\li Description (short) -  a short description like a title for the item
+\li Description (long) -  the long description of the item
+\li Unit of Measurement -  the unit of measurement for this item
+\li Packaged Volume - the packaged volume to be taken into account for example for shipping
+\li Packaged Weight - the packaged weight to be taken into account for example for shipping
+\li PDF file - a PDF file with more information about the item, for example in case of purchased product
+
+The material management tab gives the following details:
+\image html acc_stockitemwidget_matmgt.png "Tab material management"
+
+\li Current or obsolete -  indicator whether the stock item is still valid. For example if an item is not being sold or used anymore, select Obsolete
+\li Assembly, Kit, ... - Select (sub)Assembly in case the product is assembled from other stock items, kit is a set of other stock items that should be exploded into its components when ordered. A kit set is not a physical item itself it is just a short cut to entering a number of parts onto an order. Unlike an assembly, the kit set part does not appear on invoices or orders, but "explodes" into its component parts for modification. It follows that kit sets do not have any cost or physical stock quantities associated with them., select manufactured if the stock item is manufactured from raw material in-house, select phantom if this is not an actual sold product but only a placeholder for a bill of materials, selected Purchase if the product is purchased and no additional labor is required such as for a reseller of software, select Service/Labor is this item only involves manhours
+\li Serialized (auto) - select yes if the product has unique item numbers such as the cars in a car rental company, the number will be automatically incremented
+\li Serial number (fixed) - set fixed serial number for this item, is used when Serialized is set to No
+\li Perishable - select yes if the product or good is aging in a short time after which it can not be used anymore, for example food
+\li Decimal Places for Displaying Quantities - the number of decimals you want to use to display the quantities for this product, good or service
+\li Bar Code - the numerical number of the barcode
+
+The accounting tab give the following details:
+\image html acc_stockitemwidget_accounting.png "Tab accounting"
+
+\li Tax Category - the tax category for this item
+\li Discount Category - identifier for the discount category. Is used in the discount matrix of discount categories and sales types. When an order is for an item with a discount category code and a customer of a sales type that has a discount matrix entry and the order is for a quantity more than the matrix quantity break figure, the system automatically enters the discount into the order lines for all items in that discount category. This allows quantity break discounts across a range of similar products.
+\li Economic Order Quantity - this is the quantity that new orders are made or purchased in by default. This is a critical part of the MRP calculations. 
+\li Material/Service Purchase Cost - the raw material purchasing cost or purchased services for this item. This price is used when creating a purchase order. Standard costing is used in situations where costs do vary and a middle ground standard is adopted - variances away from the standard are reported as price variances. Standard costing is particularly relevant to importers and manufacturers where exchange rate, freight and manufacturing costs and volumes vary making each item have different costs. The alternative is weighted average costing
+\li Standard Labour Cost - standard internal labour cost for this item
+\li Standard Overhead Cost - standard internal overhead cost for this item
+\li Cost Center - cost center for this item, used in management accounting reports
+
+In the purchase order the sum of material. labour and overhead cost are
+the basis for the item price. Note: for the sales order the price list is used.
+*/

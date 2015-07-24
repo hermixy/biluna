@@ -1,0 +1,46 @@
+/*! \page acc_assetwidget Asset window - Accounting ACC
+\section sec_acc_assetwidget Asset window
+
+This window is used to edit the asset details. Assets to a company are
+tangible and intangible items owned by a company or person. Land, office,
+inventory and cars are example of tangible assets. Intangible assets can
+be nonphysical items such as patents, goodwill and trademarks.
+
+The balance sheet of a company will record the current financial value
+of the asset.
+
+From the menu select <i>Accounting &gt; Asset &gt; Details</i>
+and the below window will be shown:
+\image html acc_assetwidget.png "Asset detail window"
+
+At the left the ACC Navigation (dock) window will be shown. The tab with
+the assets will be shown. The asset is selected by clicking the
+relevant item in the list.
+
+Use the green button with (+) to add a category or below an item.
+
+The red button with (-) will delete a category or an item,
+NOTE: this action can not be undone
+
+The MDI (multiple document interface) window looks as follows:
+\image html acc_assetwidget_tabasset.png "Asset details window"
+
+The following fields can be edited:
+\li Code - an identification for the asset in capitals
+\li Name - name or short description of the asset
+\li Data 1-6 - Data line such as address lines of a building or
+license plate of a car
+\li Latitude - Latitude of a building
+\li Longitude - Longitude of a building
+\li Salesman - the salesman who sold you the asset
+\li Since - the data when this asset is in your possession
+\li Contact - name of contact person or maintenance person
+\li Email - email of contact
+\li Phone number - telephone number
+\li Fax number - fax number
+
+\image html acc_assetwidget_tabnote.png "Asset Note tab"
+
+The tab with note gives the possibility to add a comment to the asset.
+
+*/

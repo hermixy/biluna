@@ -1,0 +1,36 @@
+/*! \page acc_salestaxpostingdialog Sales Tax Posting Dialog - Accounting ACC
+\section sec_acc_salestaxpostingdialog Sales Tax Posting Dialog
+
+The sales tax posting dialog is used to set the applicable sales tax categories
+per tax authority or country. The tax categories are set in the
+\ref acc_taxcategorydialog "tax categories dialog" and the percentages are
+set in the \ref acc_taxauthratedialog "tax authority rates dialog".
+
+From the menu select <i>Accounting &gt; Settings &gt; Sales Tax Posting</i> and
+the below dialog will be shown:
+\image html acc_salestaxpostingdialog.png "Sales tax posting dialog"
+
+In this dialog the following fields are set:
+\li Tax Authority
+\li Tax Category
+\li Sales Tax Posting
+
+The (for your company or companies) relevant tax authority names and rates
+have been set in the \ref acc_taxauthratedialog "tax authority rates dialog".
+The above image shows that this company is only obliged to pay sales tax in
+The Netherlands. The Netherlands has three possible levels of taxes. It is
+necessary in Biluna ACC to assign different GL accounts for all three levels.
+
+The booked high and medium level tax are checked when creating the tax report.
+In case of erroneous bookings the report will show a warning as can be seen
+in the \ref acc_trialbalancewidget "trial balance window".
+
+Use the green button with (+) to add an item.
+
+The red button with (-) will delete a an item,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

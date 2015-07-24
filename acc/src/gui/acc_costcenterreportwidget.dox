@@ -1,0 +1,38 @@
+/*! \page acc_costcenterreportwidget Cost Center Report Window - Accounting ACC
+\section sec_acc_costcenterreportwidget Cost Center Report Window
+
+The cost center report shows the current cost/profit center budget, forecast
+and actuals for the select period.
+
+From the menu select <i>Accounting &gt; Reports &gt; Cost Center Summary</i>
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows before
+running the cost center report, otherwise the report will be generated with
+different data from the database.
+
+\image html acc_costcenterreportwidget.png "Cost Center Report"
+
+There are three type of reports based on the period length:
+\li Period from - this will show the budget, forecast and actual totals
+as per the selected months and year
+\li 3 months - this will show the report for three months around the
+selected month and year. For example 2012 and January was selected, the first
+period would be December 2011, the second would be January 2012 and the third
+would be February 2012
+\li 3 years - this will show the report for three years around the selected
+month and year.
+
+Select the relevant period for the report and click the refresh
+button to generate the summary.
+
+Click File &gt; Print or Print Preview to print the summary report.
+
+Click File &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+Click File &gt; PDF Export to save the summary report to PDF format
+
+*/

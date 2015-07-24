@@ -1,0 +1,207 @@
+/*! \page acc_faq_sql Frequently Asked Questions - SQL - Accounting ACC
+\section sec_acc_faq_sql Frequently Asked Questions - SQL
+
+\subsection sec SQL queries
+
+\b Q. <i>How do I only use the ID from an _idx field in a SQL statement?</i>
+
+\b A. Use the SUBSTR function of SQL for example:<br>
+\code
+SELECT SUM(`amount`) AS `balance` FROM `acc_gltrans` <br>
+WHERE `transdate`&gt;='2011-01-01T00:00:00'<br>
+AND `transdate`&lt;'2011-07-12T00:00:00' and SUBSTR(`chartmaster_idx`, 1, 38)=
+'{00000000-0000-0000-0000-000000ID1100}';
+\endcode
+
+\b Q. <i>How do I only use the value (without ID) from an _idx field in a SQL statement?</i>
+
+\b A. Use SUBSTR(`chartmaster_idx`, 39)
+
+\b Q. <i>How do I merge two columns in one column with SQLite?</i>
+
+\b A. Concatenate does not work in SQLite, use the || operator
+
+Example:
+\code
+UPDATE acc_transdoc set debtor_id=(debtor_id || debtor_displ)
+\endcode
+
+\b Q. <i>How to find orphaned records in the database?</i>
+
+Use the ID's to match relational records, for example:
+\code
+SELECT * FROM acc_gltrans WHERE transdoc_id NOT IN (SELECT id from acc_transdoc)<br>
+SELECT * FROM acc_gltrans WHERE substr(chartmaster_idx,1,38) NOT IN
+(SELECT id from acc_chartmaster)
+\endcode
+or in general with RIGHT JOIN statement:
+\code
+SELECT c.* FROM Parent p RIGHT OUTER JOIN Child c
+ON p.CommanCol = c.sharedCol WHERE p.sharedCol IS NULL
+\endcode
+for example find acc_gltrans without acc_transdoc:
+\code
+SELECT acc_gltrans.* FROM acc_transdoc RIGHT OUTER JOIN acc_gltrans
+ON acc_gltrans.transdoc_id=acc_transdoc.id WHERE acc_transdoc.id IS NULL;
+\endcode
+
+\b Q. <i>How do I list all the tables of SQLite with an SQL statement</i>
+
+\b A. Use the special SQLite system table sqlite_master
+
+The table looks like:
+\code
+CREATE TABLE sqlite_master (
+  type TEXT,
+  name TEXT,
+  tbl_name TEXT,
+  rootpage INTEGER,
+  sql TEXT
+);
+\endcode
+with the following statement all tables based on where clause are selected:
+\code
+SELECT name FROM sqlite_master WHERE type='table' AND name<>'acc_chartmaster' ORDER BY name;
+\endcode
+Refer also to the FAQ of www.sqlite.org
+
+\b Q. <i>How do I find orphaned rows</i>
+
+\b A. An orphan record exists when there is a Contact2 record
+but NOT a Contact1 record.
+\code
+SELECT * FROM Contact2 WHERE AccountNo NOT IN (SELECT AccountNo from Contact1)
+\endcode
+or
+\code
+SELECT * FROM acc_gltrans WHERE transdoc_id NOT IN (SELECT id FROM acc_transdoc);
+\endcode
+In case you are investigating why the Trial Balance debit and credit sums are
+not equal and you can not find any orphaned rows, also check for empty or
+incorrect entries in acc_glsum.chartmaster_id
+
+\b Q. <i>How do I find acc_gltrans that do not have a acc-transdoc record:</i>
+
+\b A. Refer also to above question
+\code
+SELECT * FROM acc_gltrans WHERE acc_gltrans.transdoc_id
+NOT IN (SELECT acc_transdoc.id FROM acc_transdoc);
+\endcode
+
+\b Q. <i>Could you give example SQL for checking open debit/credit items:</i>
+
+\b A. Below you find some example SQL for evaluating open debit or credit items
+
+Get total of an acc_gltrans GL account
+\code
+SELECT SUM(amount) FROM acc_gltrans
+WHERE SUBSTR(chartmaster_idx,1, 38)='{00000000-0000-0000-0000-000000ID1300}'
+AND periodno>=201101
+AND periodno<=201112
+AND amount>0.0;
+\endcode
+
+Find acc_gltrans that do not have a acc_transdoc reference:
+\code
+SELECT * FROM acc_gltrans WHERE acc_gltrans.transdoc_id NOT IN (SELECT acc_transdoc.id FROM acc_transdoc);
+\endcode
+or
+\code
+SELECT `acc_gltrans`.* FROM `acc_transdoc` RIGHT OUTER JOIN `acc_gltrans`
+ON `acc_gltrans`.`transdoc_id`=`acc_transdoc`.`id` WHERE `acc_transdoc`.`id` IS NULL;
+\endcode
+
+Find acc_transallocn that do not have acc_transdoc reference:
+\code
+SELECT * FROM acc_transallocn WHERE acc_transallocn.docfrom_id NOT IN (SELECT acc_transdoc.id FROM acc_transdoc);
+SELECT * FROM acc_transallocn WHERE acc_transallocn.itemallocfrom_id NOT IN (SELECT acc_banktrans.id FROM acc_banktrans);
+SELECT * FROM acc_transallocn WHERE acc_transallocn.docallocto_id NOT IN (SELECT acc_transdoc.id FROM acc_transdoc);
+\endcode
+
+Interface acc_transdoc, acc_debtortrans via acc_transallocn to acc_banktrans:
+\code
+SELECT acc_transdoc.doctype, acc_transdoc.docname, acc_transdoc.transno, acc_transdoc.transdate,
+acc_debtortrans.description, (acc_debtortrans.amount+acc_debtortrans.taxhighamt+acc_debtortrans.taxlowamt+acc_debtortrans.taxotheramt) as totalamount,
+acc_transallocn.datealloc, acc_banktrans.transdate,
+acc_banktrans.description, acc_banktrans.transno, acc_banktrans.amount
+FROM  acc_transdoc
+INNER JOIN acc_debtortrans ON acc_debtortrans.transdoc_id=acc_transdoc.id
+LEFT JOIN acc_transallocn ON acc_transallocn.docallocto_id=acc_transdoc.id
+LEFT JOIN acc_banktrans ON acc_banktrans.id=acc_transallocn.itemallocfrom_id
+WHERE (acc_banktrans.transdate>'2012' OR acc_transdoc.settled=0)
+AND acc_transdoc.transdate<'2012'
+AND acc_transdoc.id<>'0'
+\endcode
+
+Select all acc_transdoc where no allocation
+\code
+SELECT * from acc_transdoc where acc_transdoc.id NOT IN (
+SELECT acc_transdoc.id
+FROM  acc_transdoc
+INNER JOIN acc_debtortrans ON acc_debtortrans.transdoc_id=acc_transdoc.id
+INNER JOIN acc_transallocn ON acc_transallocn.docallocto_id=acc_transdoc.id
+INNER JOIN acc_banktrans ON acc_banktrans.id=acc_transallocn.itemallocfrom_id) and (acc_transdoc.doctype=10 OR acc_transdoc.doctype=30)
+\endcode
+
+Check acc_debtortrans amount with ...
+\code
+SELECT sum(acc_debtortrans.amount+acc_debtortrans.taxhighamt+acc_debtortrans.taxlowamt+acc_debtortrans.taxotheramt) as totalamount
+FROM acc_debtortrans
+INNER JOIN acc_transdoc ON acc_transdoc.id=acc_debtortrans.transdoc_id
+WHERE acc_transdoc.transdate>'2011' AND acc_transdoc.transdate<'2012'
+\endcode
+
+... acc_gltrans amount
+\code
+SELECT sum(acc_gltrans.amount) as totalamount
+FROM acc_gltrans
+WHERE acc_gltrans.transdate>'2011' AND acc_gltrans.transdate<'2012'
+AND SUBSTR(acc_gltrans.chartmaster_idx, 1, 38)='{00000000-0000-0000-0000-000000ID1300}'
+AND acc_gltrans.amount>0
+\endcode
+
+Check acc_banktrans amount and ...
+\code
+SELECT sum(acc_banktrans.amount) as totalamount
+FROM acc_banktrans
+WHERE acc_banktrans.transdate>'2011' AND acc_banktrans.transdate<'2012'
+AND SUBSTR(acc_banktrans.chartmaster_idx, 1, 38)='{00000000-0000-0000-0000-000000ID1300}'
+\endcode
+
+... acc_memotrans amount with ...
+\code
+SELECT sum(acc_memotrans.amount) as totalamount
+FROM acc_memotrans
+INNER JOIN acc_transdoc ON acc_transdoc.id=acc_memotrans.transdoc_id
+WHERE acc_transdoc.transdate>'2011' AND acc_transdoc.transdate<'2012'
+AND SUBSTR(acc_memotrans.chartmaster_idx, 1, 38)='{00000000-0000-0000-0000-000000ID1300}'
+\endcode
+
+... acc_gltrans amount
+\code
+SELECT sum(acc_gltrans.amount) as totalamount
+FROM acc_gltrans
+WHERE acc_gltrans.transdate>'2011' AND acc_gltrans.transdate<'2012'
+AND SUBSTR(acc_gltrans.chartmaster_idx, 1, 38)='{00000000-0000-0000-0000-000000ID1300}'
+AND acc_gltrans.amount<0
+\endcode
+
+Interface acc_transdoc, acc_creditortrans via acc_transallocn to acc_banktrans:
+\code
+SELECT acc_transdoc.doctype, acc_transdoc.docname, acc_transdoc.transno, acc_transdoc.transdate,
+acc_creditortrans.description, (acc_creditortrans.amount+acc_creditortrans.taxhighamt+acc_creditortrans.taxlowamt+acc_creditortrans.taxotheramt) as totalamount,
+acc_transallocn.datealloc, acc_banktrans.transdate,
+acc_banktrans.description, acc_banktrans.transno, acc_banktrans.amount
+FROM  acc_transdoc
+INNER JOIN acc_creditortrans ON acc_creditortrans.transdoc_id=acc_transdoc.id
+LEFT JOIN acc_transallocn ON acc_transallocn.docallocto_id=acc_transdoc.id
+LEFT JOIN acc_banktrans ON acc_banktrans.id=acc_transallocn.itemallocfrom_id
+WHERE (acc_banktrans.transdate>'2012' OR acc_transdoc.settled=0)
+AND acc_transdoc.transdate<'2012'
+AND acc_transdoc.id<>'0'
+\endcode
+
+\b Q. <i>Question or remark</i>
+
+\b A. Answer
+*/

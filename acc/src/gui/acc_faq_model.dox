@@ -1,0 +1,28 @@
+/*! \page acc_faq_model Frequently Asked Questions - Model - Accounting ACC
+\section sec_acc_faq_model Frequently Asked Questions - Model
+
+\subsection sec Model structure references
+
+\b Q. <i>Which are the fields where the ACC_ChartMaster ID is used?</i>
+
+\b A. ACC_BankTrans: chartmaster_idx<br>
+ACC_CogsGlPosting:&nbsp;glcode_idx<br>
+ACC_CreditorTrans: chartmaster_idx, taxhighchartmaster_idx,
+taxlowchartmaster_idx, taxotherchartmaster_idx<br>
+ACC_DebtorTrans: chartmaster_idx, taxhighchartmaster_idx, taxlowchartmaster_idx,
+taxotherchartmaster_idx<br>
+ACC_GlTrans: chartmaster_idx<br>
+ACC_Project: debtorsact_idx, creditorsact_idx, payrollact_idx, grnact_idx,
+retainedearnings_idx, freightact_idx, exchangediffact_idx,
+purchasesexchangediffact_idx, pytdiscountact_idx<br>
+ACC_SalesGlPosting: discountglact_idx, salesglact_idx<br>
+ACC_StockCategory: stockact_idx, adjglact_idx, purchpricevaract_idx,
+materialuseagevarac_idx,wipact_idx<br>
+ACC_TaxAuthority: salestaxglacct_idx, purchtaxglacct_idx<br>
+ACC_TaxAuthRate: taxacct_idx
+
+\b Q. <i>Question or remark</i>
+
+\b A. Answer
+
+*/

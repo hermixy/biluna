@@ -1,0 +1,55 @@
+/*! \page acc_stockcategorywidget Stock Category Window - Accounting ACC
+\section sec_acc_stockcategorywidget Stock Category Window
+
+Stock are items that you can sell but also items that you can buy. Stock
+can be physical products and goods but also virtual items such manhours
+and services. The stock items are organized in categories.
+
+This window is used to edit the stock categories. It works closely together
+with the stock item window.
+\image html acc_stockcategoryitemwidgets.png "Stock category and item navigation"
+
+In above image is indicated that the navigation window marked with 1) with
+the list of categories works together with the stock category edit window
+marked with 2). The navigation window with the stock item listing marked with
+3) works together with the edit window for the stock items marked with 4).
+
+The stock item listing
+contains all the products and services your company is selling. A service does
+not require a warehouse but the identification and handling is done more or
+less the same as physical warehouse items.
+
+The stock items are organized in categories. The category contains all
+the items that have the same taxation (sales tax) and warehouse handling.
+
+From the menu select <i>Accounting &gt; Stock category</i>&nbsp;and the below
+dialog will be shown:
+\image html acc_stockcategorywidget.png "Stock category window"
+
+At the left the ACC Navigation (dock) window will be shown. At the middle the
+stock category will be shown. A category is selected by clicking
+the category in the left navigation dock window marked with 1). The details of
+the selected category will be shown in the window marked with 2) details.
+The same applies for the stock items. Click in the navigation window the item,
+see 3) and the details will appear in the window, see 4) Details.
+
+Use the green button with (+) to add a category or below an item.
+
+Use the green button with (++) to a subcategory.
+
+The red button with (-) will delete a category or an item,
+NOTE: this action can not be undone
+
+The details of the category can be edited in the middle window:
+\li Category code - an identification for the category, use for example
+the first six letters of the category name in capitals
+\li Description - the description of the category
+\li Stock GL Code - General Ledger (GL) account code for changes in stock
+\li WIP Code - Work in progress code
+\li Stock Adjustment GLCode - GL account for stock update after inventory check
+\li Price Variance GL Code - GL account where changes or difference from the
+base selling price are recorded
+\li Usage Variance GL Code - GL account where the usage differences (for
+example of the raw material) are recorded
+
+*/

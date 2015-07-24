@@ -1,0 +1,74 @@
+/*! \page acc_projecteditdialog Company (project) Edit Dialog - Accounting ACC
+\section sec_acc_projecteditdialog Company (project) Edit Dialog
+
+The root object in ACC is a company. Usualy there will be only one company,
+i.e. &nbsp;the company you work for.&nbsp;
+
+This company is selected in the menu <i>Accounting &gt; Select Project</i>.
+
+Detail editing of the company is done in the Project Edit Dialog. This dialog
+is show after selectin&nbsp;<i>Accounting &gt; Settings &gt; Company Edit.</i>
+The below dialog will be shown:
+\image html acc_projecteditdialog.png "Company edit dialog"
+
+Use the green button with (+) to add a new company.
+The red button with (-) will delete the company, NOTE: this action can not
+be undone
+
+In the table view, select the company name (above the name Red-Bag is used),
+the fields are edited below the tableview.
+
+The edit fields are:
+\li Company name
+\li 6 address lines, ACC does not make any difference between
+items such as: postal code street or state
+\li Telephone number, use + for international line followed by country code,
+local code and telephone number. This format ensures that the number can
+be dialed from any country in the world.
+\li Facsimile, a fax number with the same format as the telephone number
+\li Official company number, in some countries companies get a number which
+can be an alphanumeric number or a Chamber of Commerce number
+\li Tax Authority Reference, this is the tax (VAT) number given by the
+authorities to your company
+\li Email, the general email address. Usualy something like info@yourcompany.com
+
+The Help button opens this help page, the OK button confirms the selected
+company and the Cancel button cancels the selection.
+
+The following edit fields are shown when the tab Accounting is clicked:
+\image html acc_projecteditdialog_tab_accounting.png "Company edit dialog, tab Accounting"
+
+The edit fields are as follows:
+\li Home Currency, is the currency as used in the financial reporting of
+this company
+\li Debtors Control, General Ledger (GL) account for invoices to customer.
+In the double booking system an invoice is booked against the product or
+service which was rendered by the company to a customer and the counter
+booking is done against the debtors control GL account.
+\li The same counter GL account applies to Creditors Control, Payroll Net Pay
+Clearing, Goods Received Clearing, Retained Earnings Clearing, Freight
+Re-chared, Sales Exchange Variance, Purchase Exchange Variance,
+Payment Discount.
+\li The buttons next to the edit field will open a selection dialog from
+which the relevant GL account can be selected
+\li The Accounts Receivable Transactions can be disabled from for example the
+Sales Order postings. If disabled the Sales Orders will have to be entered
+by hand or posted by an authorized user.
+\li The Accounts Payable Transaction can be disabled from the Purchase Order
+postings.
+\li The Stock Transactions can be done at standard cost or at average cost. (TODO: check)
+
+The following edit fields are shown when the tab Tax is clicked:
+\image html acc_projecteditdialog_tab_tax.png "Company edit dialog, tab Accounting"
+
+The edit fields are as follows:
+\li The Default Tax Province is the tax country or state or province in which
+company has to pay tax and where the default dispatch warehouse is located.
+\li The Default Tax Group is the group which applies to the default tax province
+of the default dispatch warehouse location.
+
+The tax province and tax group are used for determining the tax  percentage,
+for example the high tax, low tax etc. are the tax percentages used when issuing
+sales invoices or purchase invoices.
+
+*/

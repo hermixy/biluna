@@ -1,0 +1,37 @@
+/*! \page acc_editview Edit and View - Accounting ACC
+\section sec_acc_editview Edit and View
+
+Select a project from the perspective, if not done already by
+loading the accounting perspective:
+\li \subpage acc_projectdialog
+
+The business is done with customer and supplier. The orders and invoices
+are related to these parties and are set first before any accounting. In
+case of accounting only and no creation of (sales) invoices, this step can
+be ommitted.
+
+\li \subpage acc_custbranchwidget
+\li \subpage acc_contacteditwidget
+
+\li \subpage acc_supplierdetailwidget
+
+\li \subpage acc_assetwidget
+\li \subpage acc_assetvaluationwidget
+
+\li \subpage acc_stockcategorywidget
+\li \subpage acc_stockitemwidget
+
+\li \subpage acc_salesorderwidget
+\li \subpage acc_purchaseorderwidget
+
+\li \subpage acc_gltransactionwidget
+\li \subpage acc_gltransactionwidget_adddoc
+
+\li \subpage acc_bankimportcheckdialog
+
+\li \subpage acc_selectchartmasterdialog
+\li \subpage acc_selectcustbranchdialog
+\li \subpage acc_selectallocndialog
+
+\li \subpage acc_taxconfirmationdialog
+*/

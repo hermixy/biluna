@@ -1,0 +1,30 @@
+/*! \page acc_costgroupdialog Cost Group Edit Dialog - Accounting ACC
+\section sec_acc_costgroupdialog Cost Group Edit Dialog
+
+The cost (and profit) centers are an organization of cost and income
+for company management reporting.
+
+The cost centers are grouped in cost center groups. This dialog is used
+to edit the groups.
+
+From the menu select <i>Accounting &gt; Settings &gt; Cost Center
+&gt; Group</i> and the below dialog will be shown:
+
+\image html acc_costgroupdialog.png "Cost center group edit dialog"
+
+Use the green button with (+) to add an account control.
+
+The green button with (++) to add a child account group
+
+The red button with (-) will delete the account control, NOTE: this action
+can not be undone
+
+The details of the account group can be edited:
+\li Cost Center Group Name
+\li Group type - cost or profit center
+\li Sequence in the cost center report
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

@@ -1,0 +1,41 @@
+/*! \page acc_contacteditwidget Contact Edit Window - Accounting ACC
+\section sec_acc_contacteditwidget Contact Edit Window
+
+This window is used to edit the contact persons of customer or potential
+customer.
+
+From the menu select <i>Accounting &gt; Customer &gt; Contact</i>&nbsp;and
+the below window will be shown:
+
+\image html acc_contacteditwidget.png "Contact edit window"
+
+At the left the ACC Navigation (dock) window will be shown. The tab with the
+customer branch will be shown. The customer branch is selected by clicking the
+relevant company in the list. This contact will show the contacts of the
+selected customer branch
+
+Use the green button with (+) to add a contact
+
+The red button with (-) will delete a contact,
+NOTE: this action can not be undone
+
+The following fields can be edited:
+\li First Name, Last Name, Titel, Description - the description is a
+free field for notes
+\li Communication - use a plus (+) in front of the number, country number,
+local region number, telephone number
+\li Do not call - check this flag if contact person should not be called by phone
+\li Opted Out - check this flag if the contact person has indicated not
+wanting to receive advertising or general information emails
+\li Invalid - check this flag if the contact is invalid, for example has left
+the company
+\li Primary Address 1-6 - primary address lines
+\li Other Address 1-6 - other or alternative address lines
+
+The button Copy Parent copies all address lines of the parent company
+to this contact, the button Copy Primary copies all primary address lines
+from this contact to the street address lines. The first button is convenient
+when the contact is at the same address as the parent company, the second
+button is convenient when the primary address is completed and is the
+alternative (private) address also.
+*/

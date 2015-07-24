@@ -1,0 +1,35 @@
+/*! \page acc_systypedialog System Type Dialog - Accounting ACC
+\section sec_acc_systypedialog System Type Dialog
+
+This dialog is used to edit the system types. The system types contain the
+values of the last used sequence number.
+
+Maintenance to these numbers can be necessary when for example a new purchase
+order was made and this order is deleted. In that case the last sequence
+number used will still show the new (but deleted) number
+and all subsequent new purchase orders will have the wrong (one up)
+sequence number.
+
+Another examle is that you want the sequence numbering to start at different
+number than default is used in the ACC perspective. You set here the required
+number to start with the correct sequence number.
+
+From the menu select <i>Accounting &gt; Maintenance &gt; System Type Numbers</i>
+and the below dialog will be shown:
+\image html acc_systypedialog.png "System type number dialog"
+
+A system type number can be searched at the top of the dialog
+or a filter can be set for the system type number
+
+The following fields can be edited:
+\li systypename - the chartmaster, General Ledger account or order name (these
+can be edited here but has no effect for example in the chartmaster,
+there are separate edit dialog for these fields)
+\li systypeno - last used sequence number for the related field
+
+Double click a systypeno or press F2 to edit the sequence number.
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

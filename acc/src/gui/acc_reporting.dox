@@ -1,0 +1,22 @@
+/*! \page acc_reporting Reporting - Accounting ACC
+\section sec_acc_reporting Reporting
+
+The reports are created documents from the database data. The purpose is
+to generate documentation for reviewing, printing or sending by email. The
+reports are special to accounting such as the trail balance or the
+outstanding sales invoices.
+
+The available reports are:
+\li \subpage acc_trialbalancewidget
+\li \subpage acc_gltransreportwidget
+\li \subpage acc_doctransreportwidget
+\li \subpage acc_allocnreportwidget
+\li \subpage acc_costcenterreportwidget
+\li \subpage acc_costcenterbalancereportwidget
+
+\li \subpage acc_invoiceagedreportwidget
+\li \subpage acc_orderreportwidget
+\li \subpage acc_settingreportwidget
+\li \subpage acc_salestaxreportwidget
+
+*/

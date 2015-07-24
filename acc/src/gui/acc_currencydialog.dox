@@ -1,0 +1,35 @@
+/*! \page acc_currencydialog Currency Edit Dialog - Accounting ACC
+\section sec_acc_currencydialog Currency Edit Dialog
+
+The Currency dialog allows the user to edit the list of currency.
+The currency units are used, for example, to calculate the exchange
+rates or to show the currency on a sales invoice.
+
+From the menu select <i>Accounting &gt; Settings &gt; Currency</i> and
+the below dialog will be shown:
+
+\image html acc_currencydialog.png "Currency edit dialog"
+
+Use the green button with (+) to add a currency.
+
+In the table view, double click or use press F2 to edit the:&nbsp;
+\li currency name,
+\li currency abbreviation (= ISO4217 Code)
+\li country where the currency is used
+\li hundreds name, if applicable
+\li and the exchange to be used against the company default currency
+(in above example the default currency is Euro).
+
+The red button with (-) will delete the currency,
+NOTE: this action can not be undone
+
+A currency name or part of thereof can be entered in the textbox
+and by clicking the button with the binocular a search will be done in the
+list of currency.
+
+The next two buttons are for setting a filter or removing the filter
+on the list of currency.
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

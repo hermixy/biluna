@@ -1,0 +1,54 @@
+/*! \page acc_general General - Accounting ACC
+\section sec_acc_general General
+
+The accounting perspective is used for the editing and viewing of
+financial information. The accounting perspective can be used for
+mid sized companies but also for private bookkeeping.
+
+The basic accounting is done by entering General Ledger (GL) transactions.
+A transaction is related to a transaction document, such as sales invoice,
+and the transaction document has transaction items, the sales invoice
+line items.
+
+The basic accounting in the \ref acc_gltransactionwidget has four (4) types
+of transaction documents and related to actual documents:
+\li debtor transaction, the sales invoice
+\li creditor transaction, the purchase invoice
+\li bank transaction, the bank statement
+\li journal or memorial transaction, all other transactions such as
+depreciation of assets
+
+The transactions can be assigned to cost centers to be able to create
+management financial reports.
+
+The minimum required is settings are explained in
+\subpage acc_general_gettingstarted
+
+General accounting principles are elucidated in ...
+\todo Further expand accounting and tutorial.
+
+\subsection subsec_acc_generalorders Sales and Purchase Orders
+
+The accounting perpspective includes the creation of sales quotations,
+sales orders, purchase order request and purchase orders. The sales and
+purchase orders can be posted directly in to the General Ledger.
+
+All orders are based on stock items. These items can be physical products
+but also virtual items such as manhours and services.
+
+The taxes are automatically set when the correct settings have been
+entered for the tax authorities.
+
+The all the settings for the accouting perspective including
+the orders and tax calculation are explained in
+\subpage acc_general_setupfromscratch
+
+\subsection subsec_acc_generalfaq Accounting - Frequently Asked Questions
+
+Frequently Asked Questions can be found here:
+\li \subpage acc_faq Q&amp;A about accounting in general
+\li \subpage acc_faq_model Q&amp;A about the accounting model
+\li \subpage acc_faq_sql Q&amp;A about database SQL in accounting perspective
+
+
+*/

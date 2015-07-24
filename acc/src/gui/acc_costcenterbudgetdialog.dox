@@ -1,0 +1,38 @@
+/*! \page acc_costcenterbudgetdialog Cost Center and Budget Edit Dialog - Accounting ACC
+\section sec_acc_costcenterbudgetdialog Cost Center and Budget Edit Dialog
+
+The cost (and profit) centers are an organization of cost and income
+for company management reporting.
+
+The cost center group have to be set first. The group defines whether
+a cost center is a cost- or a profit center.
+
+This dialog is used to edit the at the top the cost center data
+and at the bottom the cost center budget for a particular period.
+
+From the menu select <i>Accounting &gt; Settings &gt; Cost center
+&gt; Center and Budget</i> and the below dialog will be shown:
+\image html acc_costcenterbudgetdialog.png "Cost center and budget edit dialog"
+
+Use the green button with (+) to add an cost center or below a budget.
+
+The red button with (-) will delete items,
+NOTE: this action can not be undone
+
+The details of the cost center can be edited:
+\li Code - a short code to identify the cost center, usually capitals
+\li Cost Center Name - a name for the cost center
+\li Group - select with the dotted button the cost center group
+\li Description - a short description explaining to scope of this center
+
+The budgets can be set with:
+\li Period - this is the year and month as one number yyyyMM,
+for example August 2012 will be 201208
+\li Note - a note or comment to be shown with this budget as extra information
+\li Budget - the budget for this center's period
+\li Forecast - the best estimate of the final value of this cost center
+\li Actual - is value that will be calculated, refreshed based on the
+current data in the database, just for reference. The actual number
+will also be shown on the cost center reports.
+
+*/

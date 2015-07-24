@@ -1,0 +1,27 @@
+/*! \page acc_taxprovincedialog Tax Provinces Edit Dialog - Accounting ACC
+\section sec_acc_taxprovincedialog Tax Provinces Edit Dialog
+
+The tax provinces are headings for the different tax provinces/countries
+(depending the warehouse- and customer location) from where the goods are
+dispatched to the customer.
+
+From the menu select <i>Accounting &gt; Settings &gt; Tax Provinces</i>
+and the below dialog will be shown:
+\image html acc_taxprovincedialog.png "Tax provinces edit dialog"
+
+Use the green button with (+) to add a tax province.
+
+The red button with (-) will delete the selected province,
+NOTE: this action can not be undone.
+
+A tax province name or part of thereof can be entered in the textbox and by
+clicking the button with the binocular a search will be done in the list of
+tax provinces.
+
+The next two buttons are for setting a filter or removing the filter on the
+list of tax provinces.
+
+The Help button opens this help page, the OK button confirms the changes and
+the Cancel button cancels the changes.
+
+*/

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>invoice_table</title>
+		<!-- font sizes for print always in pt -->
+		<style type="text/css">
+		@media print, screen {
+			body {
+				background-color: #ffffff;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10pt;
+                margin-left: 0px;
+                margin-top: 0px;
+			}
+            span.smallText {
+                font-size: 7pt;
+            }
+            table {
+                border-collapse: collapse;
+                border-color: #000000;
+                width: 100%;
+            }
+			table.page {
+                margin-left: 0px;
+                margin-top: 0px;
+                width:756px;
+			}
+			td {
+				vertical-align: top;
+			}
+		}
+		//-->	
+		</style>
+	</head>
+    <body>
+      <table class="page"><tr><td>
+        <table width="100%">
+		  <tr>
+            <td width="175" style="vertical-align:top;"><span style="color: #FF0000;font-family: Impact;font-size: 20pt;">Red</span>
+              <span style="color: #000000;font-family: Impact;font-size: 20pt;">-Bag</span></td>
+            <td width="*" style="vertical-align:top;text-align:center;"><span style="font-size: 14pt;">TAX INVOICE/FACTUUR</span></td>
+            <td width="140" style="vertical-align:top;"><span class="smallText">Red-Bag BV<br />
+	 		  Rotterdamseweg 183c<br />
+	 		  2629HD Delft<br />
+	 		  The Netherlands<br />
+	 		  <br />
+			 Phone: +31 15 268 2504<br />
+			 Fax: +31 15 268 2530<br />
+			 Email: info@red-bag.com<br />
+			 VAT/BTW: NL8111.53.198B01</span></td>
+		  </tr>
+      </table>
+      
+      <!-- Invoice and Delivery Address -->
+	  <table width="100%">
+		<tr>
+  		  <td width="50%" colspan="2">Sold To:</td>
+          <td width="50%" colspan="2">Delivered To:</td>
+		</tr>
+        <tr>
+          <td colspan="4">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td width="45%">
+            {$ACC_Customer.mname}<br />
+            {$ACC_Customer.address1}<br />
+            {$ACC_Customer.address2}<br />
+            {$ACC_Customer.address3}<br />
+            {$ACC_Customer.address4}<br />
+            {$ACC_Customer.address5}<br />
+            {$ACC_Customer.address6}
+          </td>
+          <td>&nbsp;</td>
+          <td width="45%">
+            {$ACC_SalesOrder.deliverto}<br />
+            {$ACC_SalesOrder.deladd1}<br />
+            {$ACC_SalesOrder.deladd2}<br />
+            {$ACC_SalesOrder.deladd3}<br />
+            {$ACC_SalesOrder.deladd4}<br />
+            {$ACC_SalesOrder.deladd5}<br />
+            {$ACC_SalesOrder.deladd6}
+          </td>
+        </tr>
+      </table>
+
+      <br /><br />
+
+      <!-- Invoice Number Heading -->
+        &nbsp;&nbsp;All amounts are stated in: {$ACC_Customer.currency}
+      <table border="1" width="100%"><tr><td>
+         <table width="100%">
+            <tr>
+              <td width="2%">&nbsp;</td>
+              <td width="18%"><strong>Invoice Number:</strong></td>
+              <td width="25%"><strong>{$ACC_TransDoc.transno}</strong></td>
+              <td width="20%">Customer Order:</td>
+              <td width="35%">{$ACC_SalesOrder.customerref}</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>Invoice Date:</td>
+              <td>{$ACC_TransDoc.transdate}</td>
+              <td>Customer Tax Ref.:</td>
+              <td>{$ACC_Customer.taxref}</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>Dispatch Detail:</td>
+              <td>{$ACC_SalesOrder.shipvia_id}</td>
+              <td>Customer Contact:</td>
+              <td>{$ACC_CustBranch.contactname}</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>Page:</td>
+              <td>{$ACC_Invoice.page}</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>Payment Terms:</td>
+              <td colspan="3">{$ACC_PaymentTerm.terms}</td>
+            </tr>
+          </table></td></tr></table>
+
+          <br />
+
+          <!-- Invoice Detail Heading -->
+          <table width="100%" border="1">
+            <tr>
+              <td width="20%" style="text-align: center;">Item</td>
+              <td width="35%" style="text-align: center;">Description</td>
+              <td width="10%" style="text-align: center;">Unit Price</td>
+              <td width="5%" style="text-align: center;">Qty</td>
+              <td width="7%" style="text-align: center;">UoM</td>
+              <td width="8%" style="text-align: center;">Discount</td>
+              <td width="15%" style="text-align: center;">Extended Price</td>
+            </tr>
+          </table>
+
+          <br />
+
+          <!-- Invoice Detail Item -->
+          {$ACC_SalesOrders.lineitems}          
+
+          <!-- Invoice Detail Footer -->
+          <table width="100%" border="1">
+            <tr>
+              <td width="65%" rowspan="2" class="blackBorder">
+                <table>
+                      <tr>
+                        <td width="60%"><span>Comments</span></td>
+                        <td width="40%">
+                          <span class="smallText">Please state invoice number<br />
+                            Rabo Bank 1455.28.669<br />
+                            IBAN: NL27 RABO 0145.5286.69<br />
+                            BIC/SWIFT: RABO NL 2U<br /></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <span class="smallText">Ownership will not pass to the buyer 
+                            until the goods have been paid for in full.</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td width="35%" class="blackBorder">
+                    <table width="100%">
+                      <tr>
+                        <td width="57%">Sub Total</td>
+                        <td width="43%" style="text-align: right;">{$ACC_SalesOrder.totalnetprice}</td>
+                      </tr>
+                      <tr>
+                        <td>Freight</td>
+                        <td style="text-align: right;">{$ACC_SalesOrder.freightcost}</td>
+                      </tr>
+                      <tr>
+                        <td>Tax (VAT/BTW)</td>
+                        <td style="text-align: right;">{$ACC_SalesOrder.tax}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="blackBorder">
+                    <table width="100%">
+                      <tr>
+                        <td width="57%"><strong>TOTAL INVOICE</strong></td>
+                        <td width="43%" style="text-align: right;"><strong>{$ACC_SalesOrder.totalgrossprice}</strong></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+        </td></tr></table>
+	</body>
+</html>

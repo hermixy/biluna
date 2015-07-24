@@ -1,0 +1,63 @@
+/*! \page acc_taxauthratedialog Tax Authority Rates Edit Dialog - Accounting ACC
+\section sec_acc_taxauthratedialog Tax Authority Rates Edit Dialog
+
+This dialog is used to edit the tax authorities and the tax rates per tax
+authority. The tax authorities represent the authorities which are applicable
+for the financial offices of your company. Usually you will have only one tax
+authority in case your company has only one financial head office.
+
+The tax rates should be completed as per tax authority and for each province
+where your warehouses and customer are located. The tax will be calculated
+based on the customer location and the warehouse location from where the goods
+are shipped.
+
+The settings need to be done carefully otherwise the application will not be
+able to handle the tax calculation properly.
+
+From the menu select <i>Accounting &gt; Settings &gt; Tax Autorities Rates</i>
+and the below dialog will be shown:
+\image html acc_taxauthratedialog.png "Tax authority rates edit dialog"
+
+Use the green button with (+) to add an tax authority or tax rate.
+
+The red button with (-) will delete authority or the rate,
+NOTE: this action can not be undone
+
+The details of the tax authority can be edited:
+\li Tax Type Description - &nbsp;for example a country name
+\li Input Tax GL Account - &nbsp;the GL account where payable sales tax should
+be booked to
+\li Output Tax GL Account - &nbsp;the GL account where the receivable purchase
+tax should be booked from
+\li Bank Name - &nbsp;The name of the bank where the sales tax has to be paid
+\li Bank Account Type - cheque account, (or giro in The Netherlands)
+\li Bank Account - Bank account number
+\li Bank Swift - Bank account Swift (Society for Worldwide Interbank Financial
+Telecommunication) number
+\li Deliveries from Tax Province - Location from where the goods a shipped
+\li Tax Category - The tax category for a good, enter a record for all tax
+categories of your goods/products
+\li Tax Rate - The applicable tax rate for the good
+\li Sales Tax GL Account - &nbsp;The GL account where the tax should be booked
+
+The Help button opens this help page, the OK button confirms the changes and
+the Cancel button cancels the changes.
+
+SWIFT bank transfers are available worldwide; SWIFT codes are similar to BIC.
+Free cross border IBAN bank transfers within EU countries. BIC + IBAN details
+are printed on EU/EEA bank statements.
+
+BIC + IBAN is often the cheapest way to transfer money internationally and is
+now free of charge* in much of Europe under EU/EEA directive 2560/2001.
+BIC + IBAN international bank transfers are faster, more efficient, and
+low-cost as they are sent directly through the SWIFT interbank network
+without using intermediary banks (who deduct charges or fees for their service).
+IBAN will be progressively introduced in most OECD countries to allow Straight
+Through Processing of cross border payments.
+
+BIC + IBAN is not available in the United States of America, nor is it likely
+to be, with the decentralized structure of the US banking system and lack of
+nationwide banks. Electronic account-to-account transfers are often called
+wire or ACH transfers in the USA.
+
+*/

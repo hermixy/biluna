@@ -1,0 +1,117 @@
+/*! \page acc_general_gettingstarted Getting Started - Accounting ACC
+\section sec_acc_general_gettingstarted Getting Started
+
+The purpose of this getting started guide is to give a quick overview
+of the minimal settings required to start with accounting.
+
+You have started the software and Biluna Dashboard is shown.
+
+\subsection subsec_acc_general_gettingstarted_database Connect to database
+\li From the main menu select <i>System &gt; Connect</i>
+\li In the dialog select <i>Local SQLite (.db3) - open or create</i>
+\li Click the button with \htmlonly (...) \endhtmlonly
+\li Browse to a location where to create the database
+\li Enter for example <tt>biluna.db3</tt>
+\li Enter your name at Login User Name to identify changes made by you
+\li Click OK to close the open file dialog
+\li Click OK in the Connect Dialog to create the database
+
+The settings in the Connect Dialog are stored for next time quick
+opening of the database.
+
+\li A new dialog is opened to select the database root project,
+select the DB0001 project and click OK to close the dialog.
+\li An information dialog shows the message that the database
+is ready, click OK to close the dialog
+
+\subsection subsec_acc_general_gettingstarted_perspective Accounting Perspective
+\li From the main menu select <i>Perspective &gt; ACC</i> to load the
+accounting perspective
+\li Select <tt>MyCompany</tt> and click OK, you can later edit your
+company details such as name and address
+\li An information dialog shows the message that the perspective
+is ready, click OK to close the dialog
+
+\subsection subsec_acc_general_gettingstarted_basicsettings Basic Settings
+The basic settings can be imported from a standard data file.
+\li Select <i>Accounting &gt; Maintenance &gt; Import Settings</i>,
+a file dialog will be opened.
+\li Select the file <tt>acc_chartmaster_sysseting_nl.xml</tt> in
+the data directory where the Biluna software is installed. Under MS Windows
+the default directory would be \htmlonly C:\Program Files\Biluna\data. \endhtmlonly
+The above file
+name refers to settings used in The Netherlands (NL). Select other settings
+applicable for your country.
+\li Click Open to import the settings
+\li An information dialog shows the message that the model data is saved
+to the database, click OK to close the dialog
+
+\subsection subsec_acc_general_gettingstarted_taxsettings Tax Settings
+The final basic settings to be done are the tax settings. The tax settings
+have to be completed by hand since these are different per country and
+sometimes change.
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Tax Categories</i>,
+check or update whether your tax level name is available. For example:
+the High, Low and Exempt tax levels are used in The Netherlands.
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Tax Provinces</i>,
+check or update whether the tax provinces (area or countries)
+where your customer or supplier or you are liable to pay tax
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Tax Authorities/Rates</i>,
+check and update the applicable tax authorities for your supplies. Per
+authority add the rates per your applicable tax category. In The Netherlands
+this would be High, Low and the Exempt category (tax level) and per tax
+province from where you will dispatch products. If you have only one location
+or warehouse and thus only one tax province from where you supply your products
+or services than you only need one (1) tax province to complete.
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Tax Group/Taxes</i>,
+check and update the tax groups. A tax group is a group containing a series
+of tax authorities (usually one or sometimes two) who will tax your supply
+depending the dispatch location (office or warehouse) and the delivery
+location. Add the applicable tax authority(ies) per tax group.
+
+The tax section is simple if you deliver products or service only in
+your own country (or tax province/authority). It can be quite complicated
+to setup and understand if you have more warehouses or offices from where
+your deliver your goods or services and to customer all over the world.
+Refer to the website to have look at more examples of these settings. The
+intention of these settings to be able to calculate automatically the
+sales tax when entering orders.
+
+The tax groups and tax group authority taxes are not required if you do not
+intend to use the sales order and purchase order functions within accounting.
+
+\subsection subsec_acc_general_gettingstarted_stocksettings Stock Settings
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Stock Category</i>,
+Add the stock categories and set as a minimum the category code
+(in capitals), the description, the stock type and the tax category.
+Note: the tax category will set the sales tax of the stock items and where
+the sales are booked in the accounting system, refer \ref acc_cogsglpostingdialog.
+The GL Code items are only required for warehouse management.
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Stock Office/Location</i>,
+set the offices or warehouses from where you will deliver your services or
+will dispatch your products
+
+\subsection subsec_acc_general_gettingstarted_companysettings Company Settings
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Shipper</i>, set or
+add the shipper names as applicable for your deliveries
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Factor Companies</i>,
+set or add the factor companies if applicable
+\li Select <i>Accounting &gt; Settings &gt; General &gt; Company Edit</i>,
+complete your company name address, accounting and tax settings. The General
+Ledger Accounts are only required in case of payrolling and warehouse
+management. The default dispatch tax province is the province (or country) from
+where your services or goods normally will be dispatched. The default tax
+group is the group which applies to the default tax province
+of the default dispatch warehouse location.
+
+The tax province and tax group are used for determining the tax  percentage,
+for example the high tax, low tax etc. are the tax percentages used when issuing
+sales invoices or purchase invoices.
+
+The company settings are handled last because the other settings need to be
+entered first to have the required selection of the tax province and
+tax group available.
+
+For the remaining settings of the accounting system for sales/purchase orders
+and cost centers refer \ref acc_general_setupfromscratch.
+*/

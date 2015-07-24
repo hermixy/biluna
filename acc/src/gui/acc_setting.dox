@@ -1,0 +1,46 @@
+/*! \page acc_setting Settings - Accounting ACC
+\section sec_acc_setting Settings
+
+The settings are required to automatically executed certain operations.
+For example the calculation of the sales tax is based on the location
+of the customer and warehouse from where the delivery takes place.
+
+The system general settings are set in the below dialogs:
+\li \subpage acc_unitofmeasuredialog
+\li \subpage acc_currencydialog
+\li \subpage acc_accountcontroldialog
+\li \subpage acc_accountgroupdialog
+\li \subpage acc_chartmasterdialog
+\li \subpage acc_taxcategorydialog
+\li \subpage acc_taxprovincedialog
+\li \subpage acc_taxauthratedialog
+\li \subpage acc_taxgroupauthdialog
+\li \subpage acc_stockcategorywidget
+\li \subpage acc_locationdialog
+\li \subpage acc_shipperdialog
+\li \subpage acc_factorcompanydialog
+\li \subpage acc_projecteditdialog
+\li \subpage acc_assettypedialog
+
+The system sales settings are set in the below dialogs:
+\li \subpage acc_salestypedialog
+\li \subpage acc_areadialog
+\li \subpage acc_salesglpostingdialog
+\li \subpage acc_purchaseglpostingdialog
+\li \subpage acc_cogsglpostingdialog
+\li \subpage acc_salestaxpostingdialog
+\li \subpage acc_pricewidget
+\li \subpage acc_paymenttermdialog
+\li \subpage acc_holdreasondialog
+\li \subpage acc_debtortypedialog
+\li \subpage acc_salesmandialog
+
+The system cost center data is set in the below dialogs:
+\li \subpage acc_costgroupdialog
+\li \subpage acc_costcenterbudgetdialog
+\li \subpage acc_custcostpartwidget
+\li \subpage acc_supplcostpartwidget
+
+The system import settings are set in the below dialog:
+\li \subpage acc_bankmappingdialog
+*/

@@ -1,0 +1,35 @@
+/*! \page acc_settingreportwidget Settings Window - Accounting ACC
+\section sec_acc_settingreportwidget Settings Window
+
+The accounting perspective ACC uses many settings. The settings are used for
+example for the calculation of the sales tax or to create the trial balance.
+
+It sometimes necessary to reference the settings such as the chart of accounts
+when executing accounting. Rather than opening the settings dialog every time,
+the settings report window provides a quick reference to the settings during
+the accounting work.
+
+From the menu select <i>Accounting &gt; Reports &gt; Settings Report</i>
+and the below window will be shown:
+\image html acc_settingreportwidget.png "Settings report window"
+
+At the left top the type of setting can be selected:
+\li Units of Measurement \li Currency
+\li Account Control \li Account Groups
+\li Chart of Accounts \li Tax Categories
+\li Tax Provinces \li Tax Authorities/Rates
+\li Tax Location Taxes \li Stock/Office Location
+\li Shipper \li Factor Companies
+\li Sales Types/Price Lists \li Sales/Purchase Area
+\li Sales GL Postings \li COGS GL Postings
+\li Sales Tax Postings \li Price
+\li Payment Terms \li Credit Status
+\li Debtor Type \li Sales People
+\li Asset Types \li System Account Control
+\li Cost Center Groups \li Cost Centers
+
+Click the refresh button to create or refresh the report. Do not forget to save
+all you data to the database or the report will be generated from old data
+from the database.
+
+*/

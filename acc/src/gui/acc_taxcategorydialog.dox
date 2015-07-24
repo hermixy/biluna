@@ -1,0 +1,27 @@
+/*! \page acc_taxcategorydialog Tax Categories Edit Dialog - Accounting ACC
+\section sec_acc_taxcategorydialog Tax Categories Edit Dialog
+
+The tax categories are headings for the different tax levels. Goods or services
+are liable for sales tax and the tax category (name) assists to identify the tax
+level to be used.
+
+From the menu select <i>Accounting &gt; Settings &gt; Tax Categories</i>
+and the below dialog will be shown:
+\image html acc_taxcategorydialog.png "Tax categories edit dialog"
+
+Use the green button with (+) to add a tax category.
+
+The red button with (-) will delete the selected category,
+NOTE: this action can not be undone
+
+A tax category name or part of thereof can be entered in the textbox and by
+clicking the button with the binocular a search will be done in the list of
+tax category.
+
+The next two buttons are for setting a filter or removing the filter on
+the list of tax category.
+
+The Help button opens this help page, the OK button confirms the changes and
+the Cancel button cancels the changes.
+
+*/

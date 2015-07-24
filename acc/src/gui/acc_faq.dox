@@ -1,0 +1,27 @@
+/*! \page acc_faq Frequently Asked Questions - Accounting ACC
+\section sec_acc_faq Frequently Asked Questions
+
+\subsection sec General Ledger Booking
+
+\b Q. <i>When checking the bank balance, the amount seems to be incorrect.</i>
+
+\b A. The balance of the bank account is calculated based on the entries in the GL.
+The start date is at year opening and the end date is the date of the selected
+bank transaction. In case the date of the bank transaction is incorrect or the
+starting balance is not correct the checked bank balance will not show the
+correct amount. If the both dates and starting amount are correct, there is
+possibly an error is in one of the bank entries. Start at the year opening and
+work you way to the selected date to find the incorrect entries.
+
+\b Q. <i>When making a debtor- or creditor entry in the GL Transaction window,
+the VAT is not booked</i>
+
+\b A. Check whether you are booking against a GL account which is flagged as VAT
+account. If this is not the case than the booking will be done without the
+VAT amount. This is to prevent entry mistakes.
+
+\b Q. <i>Question or remark</i>
+
+\b A. Answer
+
+*/

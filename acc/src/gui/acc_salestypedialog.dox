@@ -1,0 +1,38 @@
+/*! \page acc_salestypedialog Sales type or Price List Type Edit Dialog - Accounting ACC
+\section sec_acc_salestypedialog Sales type or Price List Type Edit Dialog
+
+This dialog is used to edit the sales- or price list types.&nbsp;Sales types
+are the broad categories which sales fall under, they
+should not be confused with stock categories. They are arbitrary 
+headings for the different pricing arrangements applicable to each type 
+of customer. For example the fashion house might have sales types for:
+\li Indented sales - ordered in advance.
+\li Stock sales - sold from stock.
+\li Made to Measure - sales made up especially for a customer.
+
+Inventory categories by contrast refer to the type of garment sold.
+Each customer is defined as belonging to a specific sales type. A sales 
+type could also be used for groupings of customer. Price lists are held
+ against sales types so all customer defined as belonging to the sales 
+type will be on the same pricing.
+
+Pricing can be set up for each stock item by sales type (and
+currency), e.g. stock sales would attract a premium for the cost of the 
+increased working capital required or perhaps a discount reflecting the 
+scale of purchasing allowed on volume lines. Sales types for retail, 
+wholesale, trade, special may also be appropriate in other types of 
+business.
+
+From the menu select <i>Accounting &gt; Settings &gt; Sales Type</i>
+and the below dialog will be shown:
+\image html acc_salestypedialog.png "Sales type dialog"
+
+Use the green button with (+) to add a category or below an item.
+
+The red button with (-) will delete a category or an item,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

@@ -1,0 +1,43 @@
+/*! \page acc_invoiceagedreportwidget Invoice Aged Report Window - Accounting ACC
+\section sec_acc_invoiceagedreportwidget Invoice Aged Report Window
+
+The invoice aged report windows reports the invoices that are due or overdue
+for the customer or supplier.
+\li Accounting &gt; Reports &gt; Sales Invoiced Aged Report
+\li Accounting &gt; Reports &gt; Purchase Invoiced Aged Report
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows
+before running the reports, otherwise the report will be generated with
+different data from the database.
+
+Select the relevant period to be shown for the invoice aged report.
+The default months are set based on the previous and current month.
+Click the refresh button to generate the report. For an example refer
+to below image.
+\image html acc_invoiceagedreportwidget_sales.png "Sales Invoice Aged Report"
+
+The report is sorted by customer (or supplier). The columns are:
+\li Doc. Nr. - the document number e.g.: sales invoice number
+\li Description - the description of the document
+\li Date - date of issue as shown on the invoice
+\li Due Date - due date for payment of the invoice
+\li Currency - &nbsp;invoice currency
+\li Total - invoice total amount
+\li Cleared - amount already payed
+\li Due &gt; 30 days - amount of the invoice that has past the due
+date more than 30 days
+\li Due &gt; 60 days - amount of the invoice that has past the due date
+more than 60 days
+
+Below is the example of the purchase invoice aged report.
+\image html acc_invoiceagedreportwidget_purchases.png "Purchase Invoice Aged Report"
+
+Click File &gt; Print or Print Preview to print the allocation report.
+
+Click FIle &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+*/

@@ -1,0 +1,43 @@
+/*! \page acc_pricewidget Price window - Accounting ACC
+\section sec_acc_pricewidget Price window
+
+This window is used to edit and view the price of the stock items. The stock
+is organized in categories, the categories contain the stock items. A stock
+item can also be a service although services do not required a warehouse.
+
+The stock item price is selected by clicking a category 1), by clicking an
+item in 2). In case of editing click the price in the price list 3). The item
+price are shown in the window for the different price lists. The below example
+has only one price list (Default).
+
+From the menu select <i>Accounting &gt; Settings &gt; Price</i>&nbsp;the
+below window (3) will be shown:
+\image html acc_pricewidget.png "Price window"
+
+The price per item are settings for ACC and normally this would be shown
+in a dialog. However when creating for example a sales order the user would
+like to see also the price. The price window is an exemption to other
+settings in ACC.
+
+At the left the ACC Navigation (dock) window will be shown. At the middle
+the price window. A category is selected by clicking the category in the
+left navigation dock window marked with 1). Click in the navigation window
+the item, see 2) and the price(s) will appear in the middle window, see 3)
+Details.
+
+Use the green button with (+) to add a price. NOTE: Make sure that there is
+only one price per item per price list.
+
+The red button with (-) will delete a price list price, NOTE: this action
+can not be undone
+
+The details of the price can be edited in the middle window:
+\li Sales Type/Price List - the applicable sales type or price list for
+this price
+\li Currency - &nbsp;the currency of the price
+\li Sales Price - the sales price as listed on the price list for this item
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

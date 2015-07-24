@@ -1,0 +1,28 @@
+/*! \page acc_assettypedialog Asset Type Edit Dialog - Accounting ACC
+\section sec_acc_assettypedialog Asset Type Edit Dialog
+
+This dialog is used to edit the asset types. Assets in accounting are for
+example buildings and cars.
+
+The type data enables differentiation of the assets according their type.
+
+From the menu select <i>Accounting &gt; Settings &gt; General
+&gt; Asset Types</i> and the below dialog will be shown:
+\image html acc_assettypedialog.png "Asset type edit dialog"
+
+Use the green button with (+) to add an asset type.
+
+The red button with (-) will delete the asset type,
+NOTE: this action can not be undone.
+
+The button with the binoculars is to search for a specific asset.
+
+The buttons with a funnel set a filter respectively clears the filter
+
+In the table click a cell to select and double click or press F2 to
+edit the content.
+
+The Help button opens this help file, the OK button saves the changes,
+the cancel button reverts the changes.
+
+*/

@@ -1,0 +1,51 @@
+/*! \page acc_gltransactionwidget_adddoc General Ledger (GL) Transaction window, add document - Accounting ACC
+\section sec_acc_gltransactionwidget_adddoc General Ledger (GL) Transaction window, add document
+
+The accounting in Biluna is a document controlled system. For each financial
+transaction a (paper) document is the origine. This document can be a sales
+invoice, a cash withdrawl, a bank statement or a depreciation booking. It is
+good practise to keep even the originating document of the depreciation booking
+for future reference and validation.
+
+From the menu select <i>Accounting &gt; GL Transaction</i>
+and the below window will be shown:
+\image html acc_gltransactionwidget_adddoc.png "GL Transaction window"
+
+After clicking the left top add (green +) document button a new row will be
+visible in the document table (marked with 1). At the same time the add
+document button, the ledger account selection at the top and the document
+table are disabled. The purpose of disabling the widgets/controls is to
+prevent mistakes.
+
+In area (2) the data can be entered. For convenience the (transaction)
+date will be set to the current date and the due date also. The next
+document number is collected from the database, but these numbers can be
+changed by hand. Enter the description for this transaction. The description
+is not mandatory but is for ease of reference in the various reports. Usually
+this is a summary of the items of the transaction document. The relevant
+customer can be selected with the button (...) next to the Customer or
+Supplier field. Leave the Total Receivable/Payable and Total Tax for later,
+or enter them by hand.
+
+Click the add document item (green +) button to add a new row the item table.
+Enter the description and the Item Amount at (4). The save button at the top
+will be disabled at the top when an amount is entered, the button will be
+enabled as soon as the item and total amount match and are a valid transaction.
+Click the button next to the Account field to select the relevant account for
+booking this item.&nbsp;
+
+At (5) the Value Added Tax is entered. The High and Low Tax account and
+percentage are automatically set depending the accounting settings. The
+percentages are according the company settings and the accounts are indirectly
+from the selected Tax Province. In case the account is not correct or the
+precentage is not correct use Other Tax to select the account and the correct
+percentage for calculating the tax amount. Press the calculation buttons to c
+alculate the relevant tax level or enter the tax by hand.
+
+Click the sum buttons at (6) to calculate the totals for the tax and the
+receivables/payables. The item total should now match the totals at (6) and
+the save button is enabled to save the transaction. Click the tab Journal at
+the top to review implications of the item transactions to the GL. CTRL+S can
+also be used to save the data.
+
+*/

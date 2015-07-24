@@ -1,0 +1,36 @@
+/*! \page acc_locationdialog Location Edit Dialog - Accounting ACC
+\section sec_acc_locationdialog Location Edit Dialog
+
+This dialog is used to edit the warehouse (with inventory) or services
+execution location.
+
+The location is used for storage of inventory goods or it is the office from
+which the services are executed. In case of goods the location will also have
+to possibility to attach inventory control and goods usage. The location
+address will be used to determine the sales or puchase tax when the goods
+are delivered to the customer.
+
+From the menu select <i>Accounting &gt; Settings &gt; Stock Location</i>
+and the below dialog will be shown:
+\image html acc_locationdialog.png "Stock or execution office location edit dialog"
+
+Use the green button with (+) to add a location.
+
+The red button with (-) will delete location,
+NOTE: this action can not be undone
+
+The details of the location can be edited:
+\li Location name - a convenient name of a company or city where the
+location is situated
+\li Deliver Address 1-6 - &nbsp;the physical address of the location
+\li Contact for deliveries - the name of the contact person for the deliveries
+\li Telephone, Facsimile and Email - relevant contact information
+\li Tax Province - &nbsp;the tax province where this location is
+\li Enable Warehouse Mgt - if yes, the application will give warnings when
+the inventory of the warehouse is lower than a preset value, to initiate
+re-ordering or fabrication of inventory products
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

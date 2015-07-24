@@ -1,0 +1,30 @@
+/*! \page acc_taxconfirmationdialog Tax Confirmation Dialog - Accounting ACC
+\section sec_acc_taxconfirmationdialog Tax Confirmation Dialog
+
+This dialog enables the user to edit the tax just before the invoice is created
+from the sales order and posted in the General Ledger.
+
+The editing should not be necessary, when all the tax settings are correct.
+But it is possible to make a mistake with the tax when entering
+a new customer and creating a new sales order to be invoiced.
+
+From the menu select <i>Accounting &gt; Sales Orders</i>
+and the \ref acc_salesorderwidget will be shown.
+The tab Invoice will show two buttons:
+\li Preview Invoice
+\li Confirm Dispatch and Process Invoice
+
+If one of these buttons is clicked the dialog will be shown
+\image html acc_taxconfirmationdialog.png "Tax confirmation dialog"
+
+In this dialog the High, Low and Other tax amount can be updated
+to the required values. This can be the case when for example the
+tax settings were still incorrect and you want to update the booking with
+correct tax amounts.
+
+Use the refresh button to see the updated totals.
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

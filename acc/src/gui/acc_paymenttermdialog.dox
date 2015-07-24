@@ -1,0 +1,28 @@
+/*! \page acc_paymenttermdialog Payment Terms Edit Dialog - Accounting ACC
+\section sec_acc_paymenttermdialog Payment Terms Edit Dialog
+
+This dialog is used to edit the payment terms. The payment terms indicate
+to the customer when an invoice needs to be paid. The payment terms can set
+as a number of days from the invoice or as in the last line of below figure
+the date in the next month.
+
+From the menu select <i>Accounting &gt; Settings &gt; Payment Terms</i>
+and the below dialog will be shown:
+\image html acc_paymenttermdialog.png "Payment terms dialog"
+
+The following fields can be edited:
+\li Terms Indicator - a short indicator of the payment term
+\li Terms - &nbsp;description of the payment term
+\li Days before due - the days from the invoice of the date in the next month
+\li Day in following month - indicator of 'Number of days' or 'Day in
+following month'
+
+Use the green button with (+) to a payment term.
+
+The red button with (-) will delete a payment term,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

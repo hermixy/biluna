@@ -1,0 +1,82 @@
+/*! \page acc_bankimportcheckdialog Bank import checking dialog - Accounting ACC
+\section sec_acc_bankimportcheckdialog Bank import checking dialog
+
+The bank import check dialog is to import bank statement data downloaded
+from your bank account. The bank transaction can be checked before
+they are posted in the database and added to your GL accounts.
+
+There are two types of data files which can be imported from your bank:
+\li MT940
+\li CSV
+
+The MT940 format has been tested only for a limited number of banks. Refer
+to the websites which banks have been tested.
+
+The CSV (Comma Separated Value) format is flexible and needs to be defined
+by the user. For more information about the user settings, refer to:
+\li \subpage acc_bankmappingdialog
+
+When the settings have been correctly done, the data file can be opened
+with the button at the top. If something is not correct the message
+will show:
+\image html acc_bankimportcheckdialog_warning.png "Bank import warning dialog"
+
+The cause could be with
+\li the initial bank statement is missing, the software requires that for
+the relevant bank account a first booking is available with a sequence number
+\li the bank statement numbers are not in sequence, the numbers should be
+ascending without gaps
+\li the numbers do not start with last statement number, the numbers should
+start with the next number in sequence related to the last booking made
+\li the dates are not chronological, the date should be ascending and
+chronological
+
+If any of these items are not correct the resulting bookings would
+have gaps or would not be valid.
+
+If the first parsing of the import data was successful the listing will
+be shown as is in below example.
+\image html acc_bankimportcheckdialog.png "Bank import check dialog"
+
+The above example listing is shown when the file is opened. The dates and
+the bank statement number columns are editable. This allows manual update
+when for example the CSV download from the bank does not contain the
+required numbers.
+
+The software will update the number automaticaly to
+the next number in the ACC accounting for the current bank account
+and will give all transactions the same number. This is only done if
+the CSV file did not start with this next number.
+The user can update the numbers manually. The numbers further down are
+automatically updated when the user changes one of the numbers in the list.
+\image html acc_bankimportcheckdialog_numbercheck.png "Number check"
+
+The above dialog is shown to remind the user to update the statements numbers. Click
+yes if you have you do not want to make any changes or no if you would like
+to update the numbers first.
+
+Click next to preview the result of the import:
+\image html acc_bankimportcheckdialog_next.png "Import check"
+
+The dialog now shows the preview for the import. The top part lists the
+individual bank statements as imported or as updated by the user and
+the lower part shows the individual transactions (line items) per bank
+statements. The system will select the default GL account for the booking
+if no other rules such as debtor, creditor allocation can be done
+or GL account booking rule has been set.
+The most right button next to Account will allow the user to add
+a new booking rule:
+\li select the part of the description which will trigger the booking rule
+\li set the GL account for this line item
+\li click the button add booking rule and the booking rule dialog will open
+with the new rule selected
+
+The Journal tab shows the detail bookings to the various GL accounts.
+
+Click Import to import the current bank transactions into the GL accounting
+or cancel if you would to cancel this action.
+
+In case you have the \ref acc_gltransactionwidget "GL transaction window" open,
+refresh the window to see the imported bank statements.
+
+*/

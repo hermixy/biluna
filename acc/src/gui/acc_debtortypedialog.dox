@@ -1,0 +1,24 @@
+/*! \page acc_debtortypedialog Debtor Type Edit Dialog - Accounting ACC
+\section sec_acc_debtortypedialog Debtor Type Edit Dialog
+
+This dialog is used to edit debtor type. This customer 'flag' is used to
+indicate whether a customer is a default (average) customer or has priority
+of other customer. In case of for example delivery a priority customer will
+receive the goods first before a default customer.
+
+From the menu select <i>Accounting &gt; Settings &gt; Debtor Type</i>
+and the below dialog will be shown:
+\image html acc_debtortypedialog.png "Debtor type dialog"
+
+The following fields can be edited:
+\li Type Name - the indicator debtor type
+
+Use the green button with (+) to add a debtor type
+
+The red button with (-) will delete a debtor type,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

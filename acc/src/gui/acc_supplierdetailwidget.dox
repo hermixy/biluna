@@ -1,0 +1,64 @@
+/*! \page acc_supplierdetailwidget Supplier Detail Edit Window - Accounting ACC
+\section sec_acc_supplierdetailwidget Supplier Detail Edit Window
+
+This window is used to edit the supplier detail.
+
+From the menu select <i>Accounting &gt; Supplier</i>&nbsp;and the below dock
+window and window will be shown:
+\image html acc_supplierdetailwidget.png "Supplier detail edit window"
+
+At the left the ACC Navigation (dock) window will be shown. The tab with the
+supplier will be shown. The supplier is selected by clicking the relevant
+supplier in the list.
+
+Use the green button with (+) to add a supplier
+
+The red button with (-) will delete a supplier,
+NOTE: this action can not be undone
+
+The supplier address and invoice details can be edited as shown in below figure.
+\image html acc_supplierdetailwidget_tab_address.png "Supplier address and invoice detail window"
+
+The following fields can be edited:
+\li Vendor or Supplier Code - a convenient identification of the supplier,
+for example use the first six letters of the supplier name in capitals
+\li Vendor name - official supplier name
+\li Address Line 1-6 - address information
+\li Button - Show location in Google Maps
+\li Supplier Contact - the contact person of the supplier
+\li Email - email address of the contact, you can enter more email
+address by separating them by semicolon (;)
+\li Phone number
+\li Fax number
+
+The following fields are available in the tab Accounting
+\li Supplier since - the date when this vendor became a supplier to your company
+\li Bank Particulars - supplier bank name, short address and/or information
+\li Bank Reference - SWIFT or BIC identification, in USA this is the ABA code
+or Fedwire of Bank code
+\li Bank Account - (IBAN) bank account number or in USA just account number
+\li Payment Terms - &nbsp;the payment terms of this supplier
+\li Factoring Company - factoring company name
+\li Tax Reference - &nbsp;the supplier tax reference number given by the
+tax authorities
+\li Supplier Currency - the currency of the supplier
+\li Remittance Advice - remittance advice
+\li Tax Group - &nbsp;the tax group of the supplier
+
+The purchasing data can be edited as shown in the below figure after selecting
+the purchase data tab.
+\image html acc_supplierdetailwidget_tab_purchdata.png "Supplier purchase data detail window"
+
+The following fields can be edited:
+\li Stock Code - the corresponing stock code in your warehouse
+\li Item Code - the vendor item code
+\li Item Description - the description of the item
+\li Price - &nbsp;price of item in vendors currency
+\li Unit of Meausrement - the unit of measurement of the vendor
+\li Conversion Factor &nbsp;- &nbsp;the conversion factor to convert from
+the vendor unit to the stock unit
+\li Lead Time - number of days of delivery, used for scheduling ordering date
+\li Preferred Supplier - yes if this is the or one of the preferred supplier
+\li Effective From - the date when the first order was placed with this vendor
+
+*/

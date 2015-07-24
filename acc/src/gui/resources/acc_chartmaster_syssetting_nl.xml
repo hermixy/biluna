@@ -1,0 +1,1851 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********************************************-->
+<!-- Generated with ACC -->
+<!-- For more information visit www.biluna.com  -->
+<!--********************************************-->
+<ACC version="0.9.13">
+    <ACC_Project id="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" parent="0" status="0" created="2014-02-24T14:26:53" changed="2014-02-24T14:26:53" muser="user_syssetting">
+        <coyname pvalue="&lt;Your Company&gt;">MyCompany</coyname>
+        <gstno></gstno>
+        <companynumber>0</companynumber>
+        <regoffice1></regoffice1>
+        <regoffice2></regoffice2>
+        <regoffice3></regoffice3>
+        <regoffice4></regoffice4>
+        <regoffice5></regoffice5>
+        <regoffice6></regoffice6>
+        <telephone></telephone>
+        <fax></fax>
+        <email></email>
+        <currencydefault_id>0</currencydefault_id>
+        <pytdiscountact_idx dvalue="">0</pytdiscountact_idx>
+        <payrollact_idx dvalue="">0</payrollact_idx>
+        <grnact_idx dvalue="">0</grnact_idx>
+        <exchangediffact_idx dvalue="">0</exchangediffact_idx>
+        <purchasesexchangediffact_idx dvalue="">0</purchasesexchangediffact_idx>
+        <retainedearnings_idx dvalue="">0</retainedearnings_idx>
+        <freightact_idx dvalue="">0</freightact_idx>
+        <bankname></bankname>
+        <bankiban></bankiban>
+        <bankbicswift></bankbicswift>
+        <taxprovince_id>0</taxprovince_id>
+        <taxgroup_id>0</taxgroup_id>
+        <logo>&lt;Your Company&gt;</logo>
+        <ACC_ChartMasterList>
+            <ACC_ChartMaster id="{08427c5a-8d05-4286-9b5c-dcab2bd28f96}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0010</accountcode>
+                <accountname pvalue="">Goodwill</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ae84c0a0-d1ae-4956-a8ef-a0b880f8e30d}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0020</accountcode>
+                <accountname pvalue="">Octrooien</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{55bd5749-a7f0-4a2d-ad77-86ecd4b78788}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0030</accountcode>
+                <accountname pvalue="">Licenties</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7bece8f8-d353-4a1a-8896-0bcd0d8e90d6}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0035</accountcode>
+                <accountname pvalue="">Vergunningen</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{266cd360-d20e-4314-93c5-634a0e33dd96}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0040</accountcode>
+                <accountname pvalue="">Ontwikkelkosten</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e097c35b-65b0-4fe0-9d88-24006e8180e9}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0045</accountcode>
+                <accountname pvalue="">Aanloopkosten</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0cd027c6-1ffb-4c3e-a48f-4a1272f06853}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0050</accountcode>
+                <accountname pvalue="">Goodwill afschrijving</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e41a0508-2a1d-4f36-995a-b3757d989e29}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0060</accountcode>
+                <accountname pvalue="">Octrooien afschrijving</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{8fa35adf-f64a-476d-a2f6-9f28ba1ea560}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0070</accountcode>
+                <accountname pvalue="">Licenties afschrijving</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4d6eeeab-3c42-4e9f-a7ec-e7d616af3cc5}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0075</accountcode>
+                <accountname pvalue="">Vergunningen afschrijving</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{40e5f18f-95c2-436e-90f4-5466786a219e}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0080</accountcode>
+                <accountname pvalue="">Ontwikkelkosten afschrijving</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7418aa14-533d-43bb-a5c3-a085999bb776}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0085</accountcode>
+                <accountname pvalue="">Aanloopkosten afschrijving</accountname>
+                <accountgroup_id pvalue="0">{ff4e96b8-40a4-459e-80ed-398db1ef861b}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c5280f19-bbcd-4669-85c0-c30891467f15}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0100</accountcode>
+                <accountname pvalue="">Terreinen</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{bb0bf3cf-3ce4-4547-b0d0-12450f1465ea}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0104</accountcode>
+                <accountname pvalue="">Bedrijfsgebouwen</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{41fa4981-d2c3-441d-95e0-26990fe92794}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0132</accountcode>
+                <accountname pvalue="">Parkeerplaats</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{220f938d-30df-4d23-8eb2-d5dedf4223eb}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0154</accountcode>
+                <accountname pvalue="">Bedrijfsgebouwen afschrijving</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{37e1de93-6c2b-43cc-a7ad-4cc6299f3cfa}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0182</accountcode>
+                <accountname pvalue="">Parkeerplaats afschrijving</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4f3eacf8-7a65-412f-ae68-256d234aeb38}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T13:01:28" muser="user_syssetting">
+                <accountcode pvalue="0">0210</accountcode>
+                <accountname pvalue="">Machines</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0df24157-a36b-450a-a61d-16372bd263e5}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T13:01:34" muser="user_syssetting">
+                <accountcode pvalue="0">0220</accountcode>
+                <accountname pvalue="">Machines afschrijving</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{45bbb55d-0012-43e9-9a36-5145091d6e14}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T13:01:42" muser="user_syssetting">
+                <accountcode pvalue="0">0250</accountcode>
+                <accountname pvalue="">Bedrijfsinventaris</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4055d1d4-621b-4f86-8fea-fea23ca30c09}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T13:01:49" muser="user_syssetting">
+                <accountcode pvalue="0">0275</accountcode>
+                <accountname pvalue="">Bedrijfsinventaris afschrijving</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{55b43f50-8d75-40dd-ba33-869bed337de9}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T13:02:32" muser="user_syssetting">
+                <accountcode pvalue="0">0310</accountcode>
+                <accountname pvalue="">Personenautos</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ca3de625-8a02-4ae2-ba41-43bfc375d52f}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T13:02:39" muser="user_syssetting">
+                <accountcode pvalue="0">0360</accountcode>
+                <accountname pvalue="">Personenautos afschrijving</accountname>
+                <accountgroup_id pvalue="0">{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d9ce3043-1150-4085-a578-313d4d1eb5f0}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">0500</accountcode>
+                <accountname pvalue="">Meerderheidsdeelnemingen</accountname>
+                <accountgroup_id pvalue="0">{c32f27ec-5488-40c4-81dd-255a8084dc36}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{dd5386a8-3bbb-4a8d-be9a-dfe2c962d5d5}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T13:05:37" muser="user_syssetting">
+                <accountcode pvalue="0">0560</accountcode>
+                <accountname pvalue="">Hypotheken u/g</accountname>
+                <accountgroup_id pvalue="0">{c32f27ec-5488-40c4-81dd-255a8084dc36}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2354a922-f76c-4c70-ab50-32903e317c02}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T13:05:47" muser="user_syssetting">
+                <accountcode pvalue="0">0565</accountcode>
+                <accountname pvalue="">Leningen u/g</accountname>
+                <accountgroup_id pvalue="0">{c32f27ec-5488-40c4-81dd-255a8084dc36}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9cb9adc9-8fcc-4aeb-80b4-2b8c63672757}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:47:29" muser="user_syssetting">
+                <accountcode pvalue="0">0600</accountcode>
+                <accountname pvalue="">Aandelen kapitaal</accountname>
+                <accountgroup_id pvalue="0">{524e1400-428a-44f7-9616-a2927b51cbc6}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{fcea72f7-2244-45ae-a8cc-09d160e61266}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:47:41" muser="user_syssetting">
+                <accountcode pvalue="0">0610</accountcode>
+                <accountname pvalue="">Kapitaal</accountname>
+                <accountgroup_id pvalue="0">{524e1400-428a-44f7-9616-a2927b51cbc6}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b3f80fed-bc17-4326-91d7-8715be2eac85}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:47:50" muser="user_syssetting">
+                <accountcode pvalue="0">0620</accountcode>
+                <accountname pvalue="">Prive opnames/stortingen</accountname>
+                <accountgroup_id pvalue="0">{524e1400-428a-44f7-9616-a2927b51cbc6}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7bdc4d54-b2d0-4954-a944-d68b5c0a5a79}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:48:05" muser="user_syssetting">
+                <accountcode pvalue="0">0700</accountcode>
+                <accountname pvalue="">Pensioenverplichtingen</accountname>
+                <accountgroup_id pvalue="0">{a01a3b0c-7ec3-4ad3-bcfe-d15aa445867f}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{66281beb-c0d2-45df-af57-a6a330fc6fd6}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:48:11" muser="user_syssetting">
+                <accountcode pvalue="0">0720</accountcode>
+                <accountname pvalue="">Voorziening deelnemingen</accountname>
+                <accountgroup_id pvalue="0">{a01a3b0c-7ec3-4ad3-bcfe-d15aa445867f}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2d3ff14c-7eb9-4eaa-a473-3b80528ac35e}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:48:22" muser="user_syssetting">
+                <accountcode pvalue="0">0810</accountcode>
+                <accountname pvalue="">Hypotheken o/g</accountname>
+                <accountgroup_id pvalue="0">{d5120719-0aca-4861-bc2f-9cb7c067a6f7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c68b1960-9490-4ebb-bbab-bc67be9336d0}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:48:31" muser="user_syssetting">
+                <accountcode pvalue="0">0820</accountcode>
+                <accountname pvalue="">Leningen o/g</accountname>
+                <accountgroup_id pvalue="0">{d5120719-0aca-4861-bc2f-9cb7c067a6f7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1f59e26b-0cea-4f0a-9a41-0e95b651b844}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2014-02-24T17:43:31" muser="rutger">
+                <accountcode pvalue="0">0850</accountcode>
+                <accountname pvalue="">Rek. courant directeur</accountname>
+                <accountgroup_id pvalue="0">{d5120719-0aca-4861-bc2f-9cb7c067a6f7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e35e16cf-d2bc-49e1-9640-dd75183939b3}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:49:04" muser="user_syssetting">
+                <accountcode pvalue="0">0860</accountcode>
+                <accountname pvalue="">Hypotheken o/g aflossing</accountname>
+                <accountgroup_id pvalue="0">{d5120719-0aca-4861-bc2f-9cb7c067a6f7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{dcea12b7-00ea-4894-8170-2fa3eacc63fd}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T12:49:09" muser="user_syssetting">
+                <accountcode pvalue="0">0870</accountcode>
+                <accountname pvalue="">Leningen o/g aflossing</accountname>
+                <accountgroup_id pvalue="0">{d5120719-0aca-4861-bc2f-9cb7c067a6f7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4e5d1e07-db49-48de-ae6f-21137ec55b90}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:40:54" muser="user_syssetting">
+                <accountcode pvalue="0">1000</accountcode>
+                <accountname pvalue="">Kas</accountname>
+                <accountgroup_id pvalue="0">{c60e8af4-0fdd-4665-973c-7b188f7e821e}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">2000</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c936b47b-e80b-4826-bab8-fd17750f4822}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:41:35" muser="user_syssetting">
+                <accountcode pvalue="0">1100</accountcode>
+                <accountname pvalue="">Bank (rc) 0123456789</accountname>
+                <accountgroup_id pvalue="0">{c60e8af4-0fdd-4665-973c-7b188f7e821e}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">2100</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{734125f4-7860-4f06-a4db-be3aab3db9ae}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">1300</accountcode>
+                <accountname pvalue="">Debiteuren (verkopen)</accountname>
+                <accountgroup_id pvalue="0">{843f605d-184c-4166-ae2b-73c1a54adc87}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">1001</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9370dfbd-a82b-4dd9-91ba-b720cf1d3c2f}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">1310</accountcode>
+                <accountname pvalue="">Dubieuze debiteuren</accountname>
+                <accountgroup_id pvalue="0">{843f605d-184c-4166-ae2b-73c1a54adc87}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d8d3bcd8-2c3b-4a50-9f65-9200535241bb}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">1350</accountcode>
+                <accountname pvalue="">Voorzieninge dubieuze debiteuren</accountname>
+                <accountgroup_id pvalue="0">{843f605d-184c-4166-ae2b-73c1a54adc87}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ce5dccf4-febd-4496-8f5b-c8bfe4f77700}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:19:43" muser="user_syssetting">
+                <accountcode pvalue="0">1600</accountcode>
+                <accountname pvalue="">Crediteuren (inkopen)</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">1002</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a1ec6ba4-5487-4159-aedf-b9e781a13a92}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:19:52" muser="user_syssetting">
+                <accountcode pvalue="0">1602</accountcode>
+                <accountname pvalue="">BTW af te dragen laag</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">21</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{20bf99ef-9d14-454b-b617-5b1b4ccd75c4}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:00" muser="user_syssetting">
+                <accountcode pvalue="0">1604</accountcode>
+                <accountname pvalue="">BTW af te dragen hoog</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">22</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{88209301-9867-4e3f-a569-4246407c9716}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:07" muser="user_syssetting">
+                <accountcode pvalue="0">1606</accountcode>
+                <accountname pvalue="">BTW af te dragen overig</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">23</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{36b6de85-48e9-4930-8ecc-faea4fb43e75}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:13" muser="user_syssetting">
+                <accountcode pvalue="0">1612</accountcode>
+                <accountname pvalue="">BTW te vorderen laag</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">41</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{3799afcb-c41e-4801-a700-bf8a1a049161}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:19" muser="user_syssetting">
+                <accountcode pvalue="0">1614</accountcode>
+                <accountname pvalue="">BTW te vorderen hoog</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">42</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{cad267bf-90b3-4ead-9b03-81c36c6d3894}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:25" muser="user_syssetting">
+                <accountcode pvalue="0">1616</accountcode>
+                <accountname pvalue="">BTW te vorderen overig</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">43</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c8fd487c-372b-49cb-bb1f-9030ef052f78}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:32" muser="user_syssetting">
+                <accountcode pvalue="0">1620</accountcode>
+                <accountname pvalue="">Afdracht BTW</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e7b5948b-5443-4268-bee5-f519a036655d}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:38" muser="user_syssetting">
+                <accountcode pvalue="0">1630</accountcode>
+                <accountname pvalue="">Af te dragen BTW verlegd (verkopen)</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">24</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1905ca0a-4168-445e-ab1c-73ee955a7939}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:43" muser="user_syssetting">
+                <accountcode pvalue="0">1632</accountcode>
+                <accountname pvalue="">Af te dragen BTW verlegd EU (verkopen)</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">24</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a96221a2-0b87-4adf-8fe0-c5372d065008}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:50" muser="user_syssetting">
+                <accountcode pvalue="0">1634</accountcode>
+                <accountname pvalue="">Te vorderen BTW verlegd (verkopen)</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">25</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0321ffa7-6c31-4cc5-ba79-adb31adf44cb}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:20:55" muser="user_syssetting">
+                <accountcode pvalue="0">1640</accountcode>
+                <accountname pvalue="">Af te dragen BTW verlegd (inkopen)</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">44</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{45288097-7d1b-4d92-9b91-ddb9a04ce689}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:21:01" muser="user_syssetting">
+                <accountcode pvalue="0">1642</accountcode>
+                <accountname pvalue="">Af te dragen BTW verlegd EU (inkopen)</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">44</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b59f12a5-7e95-4280-863a-7350f312b992}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:21:07" muser="user_syssetting">
+                <accountcode pvalue="0">1644</accountcode>
+                <accountname pvalue="">Te vorderen BTW verlegd (inkopen)</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">45</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{8d95d50c-e43f-43e5-a758-b1745a19cb74}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:21:11" muser="user_syssetting">
+                <accountcode pvalue="0">1660</accountcode>
+                <accountname pvalue="">Loonheffingen</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b693b9a4-623d-49d5-8078-d65bdc284efc}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:21:17" muser="user_syssetting">
+                <accountcode pvalue="0">1665</accountcode>
+                <accountname pvalue="">Afdracht loonheffingen</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{00433a17-b9e1-407c-a908-ab8d2b97644f}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:21:24" muser="user_syssetting">
+                <accountcode pvalue="0">1670</accountcode>
+                <accountname pvalue="">Vennootschapsbelasting</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{71d48b4e-207a-42b1-b3ea-83991967b098}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">2100</accountcode>
+                <accountname pvalue="">Tussenrekening balans</accountname>
+                <accountgroup_id pvalue="0">{a91d2e9a-3dd2-4c62-80a2-13ec8de9bd6e}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{cb5b9669-3c92-4679-af10-6fe22147871a}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">2900</accountcode>
+                <accountname pvalue="">Kruisposten</accountname>
+                <accountgroup_id pvalue="0">{a91d2e9a-3dd2-4c62-80a2-13ec8de9bd6e}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ac9bc3f4-f2e2-4d0d-ad7a-4e4f27c941b6}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:50:40" muser="user_syssetting">
+                <accountcode pvalue="0">3000</accountcode>
+                <accountname pvalue="">Grondstoffen</accountname>
+                <accountgroup_id pvalue="0">{6f856164-c3dc-42af-83ec-829223d9b808}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7737f641-77aa-4ac1-966b-4f64e7f760d7}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:50:47" muser="user_syssetting">
+                <accountcode pvalue="0">3100</accountcode>
+                <accountname pvalue="">Onderdelen</accountname>
+                <accountgroup_id pvalue="0">{6f856164-c3dc-42af-83ec-829223d9b808}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{60e073cd-7240-4429-9fa4-7fc23a80e26d}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:50:53" muser="user_syssetting">
+                <accountcode pvalue="0">3200</accountcode>
+                <accountname pvalue="">Hulpstoffen</accountname>
+                <accountgroup_id pvalue="0">{6f856164-c3dc-42af-83ec-829223d9b808}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{42c00ce5-3955-497a-9602-df5cce414ea1}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:51:00" muser="user_syssetting">
+                <accountcode pvalue="0">3300</accountcode>
+                <accountname pvalue="">Prijsverschillen grondstoffen</accountname>
+                <accountgroup_id pvalue="0">{6f856164-c3dc-42af-83ec-829223d9b808}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{8e3452c9-5130-4d60-9635-eb5552176cec}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4000</accountcode>
+                <accountname pvalue="">Lonen en salarissen</accountname>
+                <accountgroup_id pvalue="0">{21c57791-cb97-41db-aed2-7b04f4c64175}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{533e87ca-9393-432a-b1ed-39e8e22cd93d}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4030</accountcode>
+                <accountname pvalue="">Sociale lasten</accountname>
+                <accountgroup_id pvalue="0">{21c57791-cb97-41db-aed2-7b04f4c64175}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1ec44e16-f67f-4ed3-bc7b-48157cbf9113}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4035</accountcode>
+                <accountname pvalue="">Pensioenpremies</accountname>
+                <accountgroup_id pvalue="0">{21c57791-cb97-41db-aed2-7b04f4c64175}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4c539f1b-2fc1-49f7-9801-ab171bb3f4d1}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4050</accountcode>
+                <accountname pvalue="">Kantinekosten</accountname>
+                <accountgroup_id pvalue="0">{21c57791-cb97-41db-aed2-7b04f4c64175}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{33e95fb2-1fbc-4142-9dff-f8c9ccc02fd7}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:51:53" muser="user_syssetting">
+                <accountcode pvalue="0">4055</accountcode>
+                <accountname pvalue="">Reiskosten</accountname>
+                <accountgroup_id pvalue="0">{21c57791-cb97-41db-aed2-7b04f4c64175}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1d581199-09db-496e-afa0-6d9c500e207a}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4062</accountcode>
+                <accountname pvalue="">Opleidingskosten</accountname>
+                <accountgroup_id pvalue="0">{21c57791-cb97-41db-aed2-7b04f4c64175}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f0e4d0a8-7737-4aa4-8731-df6e813337e0}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4080</accountcode>
+                <accountname pvalue="">Geschenken personeel</accountname>
+                <accountgroup_id pvalue="0">{21c57791-cb97-41db-aed2-7b04f4c64175}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{6dcc16b7-6bed-4184-828a-7e67b74307a8}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4100</accountcode>
+                <accountname pvalue="">Huur pand</accountname>
+                <accountgroup_id pvalue="0">{543b3cd5-7be1-4241-99d5-7a227dfcdcbc}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{62b6121f-2ae1-4535-8d4e-2a7d732abf0b}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4125</accountcode>
+                <accountname pvalue="">Schoonmaakkosten</accountname>
+                <accountgroup_id pvalue="0">{543b3cd5-7be1-4241-99d5-7a227dfcdcbc}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9fe1a765-450a-45b5-a9a8-d1488f5856dd}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4200</accountcode>
+                <accountname pvalue="">Huur machines</accountname>
+                <accountgroup_id pvalue="0">{e682fb60-711d-4b2a-a447-de700341aac6}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5de23f2a-8904-47de-914e-ec9eb00a1cd3}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4210</accountcode>
+                <accountname pvalue="">Onderhoud machines</accountname>
+                <accountgroup_id pvalue="0">{e682fb60-711d-4b2a-a447-de700341aac6}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{006f130e-40c4-4f9e-a398-423e1aefa999}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4300</accountcode>
+                <accountname pvalue="">Contributies</accountname>
+                <accountgroup_id pvalue="0">{e7cf0625-84d2-490f-b185-609c085fc24a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9eab582e-3d0c-4b1d-af25-1da1544eb79c}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4302</accountcode>
+                <accountname pvalue="">Abonnementen</accountname>
+                <accountgroup_id pvalue="0">{e7cf0625-84d2-490f-b185-609c085fc24a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{6c525b26-0084-4e38-8e78-4907a64e8c50}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4305</accountcode>
+                <accountname pvalue="">Kantoor benodigdheden</accountname>
+                <accountgroup_id pvalue="0">{e7cf0625-84d2-490f-b185-609c085fc24a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{f83697da-cc55-4a3b-a5f6-5031500f96e8}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4307</accountcode>
+                <accountname pvalue="">Drukwerk</accountname>
+                <accountgroup_id pvalue="0">{e7cf0625-84d2-490f-b185-609c085fc24a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{259a64dd-173f-413f-94f9-d58b792336be}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4315</accountcode>
+                <accountname pvalue="">Telefoon/fax</accountname>
+                <accountgroup_id pvalue="0">{e7cf0625-84d2-490f-b185-609c085fc24a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{02eb158e-5671-40ab-9ae7-a7f6c6e1835a}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:53:38" muser="user_syssetting">
+                <accountcode pvalue="0">4320</accountcode>
+                <accountname pvalue="">Porto</accountname>
+                <accountgroup_id pvalue="0">{e7cf0625-84d2-490f-b185-609c085fc24a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{70c7adf9-5199-4ffa-9bb6-65087f4f3eb8}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4400</accountcode>
+                <accountname pvalue="">Brandstof</accountname>
+                <accountgroup_id pvalue="0">{a4d270f8-7c3f-4da1-a101-7f753a222fca}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{02a80e85-91f5-4ee7-aed4-c56194604bfb}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4410</accountcode>
+                <accountname pvalue="">Onderhoud personenautos</accountname>
+                <accountgroup_id pvalue="0">{a4d270f8-7c3f-4da1-a101-7f753a222fca}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{6c633f31-597d-4c28-b85a-7791de45f90f}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4500</accountcode>
+                <accountname pvalue="">Verzendkosten uitgaande vrachten</accountname>
+                <accountgroup_id pvalue="0">{3a30adef-1622-4dfb-b26d-267ff4a93d35}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{21d3d6b2-f531-4f6e-a493-b92323835928}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4530</accountcode>
+                <accountname pvalue="">Reclame</accountname>
+                <accountgroup_id pvalue="0">{3a30adef-1622-4dfb-b26d-267ff4a93d35}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{06341a90-49dd-4bb3-a1ae-8ededbd8c6a0}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4540</accountcode>
+                <accountname pvalue="">Beurskosten</accountname>
+                <accountgroup_id pvalue="0">{3a30adef-1622-4dfb-b26d-267ff4a93d35}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a98a1fc2-3c25-4308-8240-b4b641c440e1}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4600</accountcode>
+                <accountname pvalue="">Accountantskosten</accountname>
+                <accountgroup_id pvalue="0">{2fb3e572-47c7-478a-afa3-76109965766a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4cbf0256-0bfd-4f69-b8ef-57ad35b45825}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4620</accountcode>
+                <accountname pvalue="">Assuranties</accountname>
+                <accountgroup_id pvalue="0">{2fb3e572-47c7-478a-afa3-76109965766a}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{481d39f9-4fef-44d1-a6bd-70889535eae1}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4750</accountcode>
+                <accountname pvalue="">Rente deposito rekeningen</accountname>
+                <accountgroup_id pvalue="0">{ce6a5834-1a97-4c3f-8d25-424bd12c6092}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1a175c9e-f92c-438f-836b-403f7a8725b3}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4755</accountcode>
+                <accountname pvalue="">Rente en bankkosten rek. courant</accountname>
+                <accountgroup_id pvalue="0">{ce6a5834-1a97-4c3f-8d25-424bd12c6092}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7b8e1ae5-2496-4a83-8539-f04b2b32509d}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4855</accountcode>
+                <accountname pvalue="">Afschrijving machines</accountname>
+                <accountgroup_id pvalue="0">{fa37c8c0-8dd0-484d-976d-b323b20dc9b8}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5f141991-5bd1-415a-953c-ab74a281f6b6}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4865</accountcode>
+                <accountname pvalue="">Afschrijving kantoormachines</accountname>
+                <accountgroup_id pvalue="0">{fa37c8c0-8dd0-484d-976d-b323b20dc9b8}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{11218567-9237-4f8c-b3a5-746b5d39d2d5}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4900</accountcode>
+                <accountname pvalue="">Kasverschillen</accountname>
+                <accountgroup_id pvalue="0">{a189aa08-6999-437e-b28b-13fe68dcbe69}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a0ba9978-e95b-4d99-94aa-3a5764441dc2}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4910</accountcode>
+                <accountname pvalue="">Voorraadverschillen</accountname>
+                <accountgroup_id pvalue="0">{a189aa08-6999-437e-b28b-13fe68dcbe69}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2a262a11-506e-4ce9-a11e-f599e14254be}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4950</accountcode>
+                <accountname pvalue="">Overige baten en lasten</accountname>
+                <accountgroup_id pvalue="0">{a189aa08-6999-437e-b28b-13fe68dcbe69}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">1</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{34fa569e-a9c1-4c96-8a73-0da6fb760ddf}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4972</accountcode>
+                <accountname pvalue="">Koersverschillen verkopen</accountname>
+                <accountgroup_id pvalue="0">{a189aa08-6999-437e-b28b-13fe68dcbe69}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e6d15145-56d2-45e4-9472-c4facf6afff2}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4974</accountcode>
+                <accountname pvalue="">Koersverschillen inkopen</accountname>
+                <accountgroup_id pvalue="0">{a189aa08-6999-437e-b28b-13fe68dcbe69}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{96e04202-c406-490b-81b1-6e80c1d46b1f}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">4990</accountcode>
+                <accountname pvalue="">Overboekingsrekening rubriek 4</accountname>
+                <accountgroup_id pvalue="0">{a189aa08-6999-437e-b28b-13fe68dcbe69}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a7d25a91-2e30-4620-a6ec-762836d694f6}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">5100</accountcode>
+                <accountname pvalue="">Inkoopkosten</accountname>
+                <accountgroup_id pvalue="0">{4682912c-d0a3-46a3-a8d8-676a751d6cf5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{3a988965-20a7-4943-b49e-76c60e8e8392}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">5200</accountcode>
+                <accountname pvalue="">Produktiekosten</accountname>
+                <accountgroup_id pvalue="0">{4682912c-d0a3-46a3-a8d8-676a751d6cf5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ccfeeb84-dcca-4ab3-b0f6-58edb8a49130}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-05-02T13:06:14" muser="user_syssetting">
+                <accountcode pvalue="0">5300</accountcode>
+                <accountname pvalue="">Verkoopkosten</accountname>
+                <accountgroup_id pvalue="0">{4682912c-d0a3-46a3-a8d8-676a751d6cf5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e90dedee-f154-46c6-b2d9-2a6215d97e58}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">5500</accountcode>
+                <accountname pvalue="">Dekking inkoopkosten</accountname>
+                <accountgroup_id pvalue="0">{4682912c-d0a3-46a3-a8d8-676a751d6cf5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d6891f8f-a8c5-4b6a-bff9-86082075e257}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">5600</accountcode>
+                <accountname pvalue="">Dekking produktiekosten</accountname>
+                <accountgroup_id pvalue="0">{4682912c-d0a3-46a3-a8d8-676a751d6cf5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{44d5a7fd-85eb-4002-8261-ebb70a50ac43}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">5700</accountcode>
+                <accountname pvalue="">Dekking verkoopkosten</accountname>
+                <accountgroup_id pvalue="0">{4682912c-d0a3-46a3-a8d8-676a751d6cf5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{0fc6cfe8-a383-43b5-a401-d71d7e889715}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">5990</accountcode>
+                <accountname pvalue="">Overboekingsrekening rubriek 5</accountname>
+                <accountgroup_id pvalue="0">{4682912c-d0a3-46a3-a8d8-676a751d6cf5}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{87b050de-b434-47a9-94af-cf2343d0c8bf}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">6000</accountcode>
+                <accountname pvalue="">Verbruik grondstof</accountname>
+                <accountgroup_id pvalue="0">{2698f7c6-6252-435a-9640-7a0a2a6e83dc}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7241e5ff-b521-4d30-b33f-bdd7ff320b99}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">6020</accountcode>
+                <accountname pvalue="">Machinekosten</accountname>
+                <accountgroup_id pvalue="0">{2698f7c6-6252-435a-9640-7a0a2a6e83dc}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5ba9abea-9159-4348-9a51-3472c442f721}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">6100</accountcode>
+                <accountname pvalue="">Standaard verbruik grondstof</accountname>
+                <accountgroup_id pvalue="0">{2698f7c6-6252-435a-9640-7a0a2a6e83dc}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{a6049f54-719c-4eea-a200-2cfc5afc7916}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">6120</accountcode>
+                <accountname pvalue="">Standaard verbruik machinekosten</accountname>
+                <accountgroup_id pvalue="0">{2698f7c6-6252-435a-9640-7a0a2a6e83dc}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{fa394fbd-0e4b-42b8-9997-581fa15295fc}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">6990</accountcode>
+                <accountname pvalue="">Overboekingsrekening rubriek 6</accountname>
+                <accountgroup_id pvalue="0">{2698f7c6-6252-435a-9640-7a0a2a6e83dc}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ee8acbb5-8a0a-4225-bb70-41af15b4d7a2}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">7000</accountcode>
+                <accountname pvalue="">Gereed produkt</accountname>
+                <accountgroup_id pvalue="0">{352f9cb1-da97-45d8-9445-196a38cbeca7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{1956cfd0-8143-4041-9c4e-e547131686c4}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:54:14" muser="user_syssetting">
+                <accountcode pvalue="0">7010</accountcode>
+                <accountname pvalue="">Inkopen onbelast/verlegd</accountname>
+                <accountgroup_id pvalue="0">{352f9cb1-da97-45d8-9445-196a38cbeca7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">34</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{afb6ecac-fe1a-4590-957a-713964a84fcc}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">7100</accountcode>
+                <accountname pvalue="">Nog te ontvangen goederen</accountname>
+                <accountgroup_id pvalue="0">{352f9cb1-da97-45d8-9445-196a38cbeca7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{fa20e867-73ad-4766-8efc-b4586a35e2d6}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">7300</accountcode>
+                <accountname pvalue="">Goederen in bewerking</accountname>
+                <accountgroup_id pvalue="0">{352f9cb1-da97-45d8-9445-196a38cbeca7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7d02379b-4587-43cc-8261-7452b6ff4d3f}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">7400</accountcode>
+                <accountname pvalue="">Af te leveren goederen (verkocht produkt)</accountname>
+                <accountgroup_id pvalue="0">{352f9cb1-da97-45d8-9445-196a38cbeca7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e2b4258a-0fbb-44d0-b9e4-dc8a5e7e349c}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8000</accountcode>
+                <accountname pvalue="">Verkopen</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">13</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{61f8545d-d7d4-4648-8e3b-f7dd00be815c}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8002</accountcode>
+                <accountname pvalue="">Verkopen binnen EU</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">80</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{d5f70deb-9c7f-4483-af0a-d0c9c53f3dbc}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8004</accountcode>
+                <accountname pvalue="">Verkopen laag</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">11</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{2561c8ad-14c3-418b-85bd-75cc65637c01}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8006</accountcode>
+                <accountname pvalue="">Verkopen hoog</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">12</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b3b08864-c906-4edd-b8cd-e7afee59745b}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8008</accountcode>
+                <accountname pvalue="">Verkopen buiten EU</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">81</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{91a909d1-335e-4f43-8cdc-02a448ebeea4}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8012</accountcode>
+                <accountname pvalue="">Verkopen verlegd</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">14</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c405fce8-ab68-44be-9d1e-4a17244e5123}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8040</accountcode>
+                <accountname pvalue="">Diensten</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">13</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{bbd695a8-c915-4674-a365-66cde713bcca}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8042</accountcode>
+                <accountname pvalue="">Diensten binnen EU</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">80</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{240dfbd9-8d7a-4f5a-9d88-64c3c595a522}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8044</accountcode>
+                <accountname pvalue="">Diensten laag</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">11</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7ee8861e-5b39-4a60-8714-a0ba1cc4db4a}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8046</accountcode>
+                <accountname pvalue="">Diensten hoog</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">12</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{aef36e37-ecb9-48d3-b9f6-18bed51acb9e}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">8048</accountcode>
+                <accountname pvalue="">Diensten buiten EU</accountname>
+                <accountgroup_id pvalue="0">{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">81</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{e63b47bb-c10c-49cd-83e4-e1f125cb6eca}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-08-22T14:59:26" muser="user_syssetting">
+                <accountcode pvalue="0">7544</accountcode>
+                <accountname pvalue="">Inkoop diensten derden hoog</accountname>
+                <accountgroup_id pvalue="0">{352f9cb1-da97-45d8-9445-196a38cbeca7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{648cd60f-b2c1-4010-8246-bd5e7db79071}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">9000</accountcode>
+                <accountname pvalue="">Opbrengst deelnemingen</accountname>
+                <accountgroup_id pvalue="0">{41b4c060-cc8d-4475-b2b4-dd25da1b735e}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{c1a33e59-5a6e-46af-9f24-94e2eac5d1ae}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">9100</accountcode>
+                <accountname pvalue="">Verlies deelnemingen</accountname>
+                <accountgroup_id pvalue="0">{41b4c060-cc8d-4475-b2b4-dd25da1b735e}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{98c8deb6-e8b0-47e7-ba7d-3fecf3cacd43}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">9300</accountcode>
+                <accountname pvalue="">Efficiency verschillen</accountname>
+                <accountgroup_id pvalue="0">{41b4c060-cc8d-4475-b2b4-dd25da1b735e}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{9083d532-20a6-4b69-a326-b6a1a055fa30}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                <accountcode pvalue="0">9990</accountcode>
+                <accountname pvalue="">Memoriaal</accountname>
+                <accountgroup_id pvalue="0">{41b4c060-cc8d-4475-b2b4-dd25da1b735e}</accountgroup_id>
+                <accountrequired pvalue="0">1</accountrequired>
+                <accountcontrol pvalue="0">3000</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{214489d5-b8c8-4b0a-8590-ef44b4f63b7e}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2011-08-11T10:39:29" changed="2011-08-11T10:43:36" muser="user_syssetting">
+                <accountcode pvalue="0">4520</accountcode>
+                <accountname pvalue="">Representatiekosten</accountname>
+                <accountgroup_id pvalue="0">{3a30adef-1622-4dfb-b26d-267ff4a93d35}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{4c2b4443-c0a6-401c-b85c-2d8bafebbc3a}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2012-01-05T17:25:07" changed="2013-08-22T14:21:30" muser="user_syssetting">
+                <accountcode pvalue="0">1675</accountcode>
+                <accountname pvalue="">Terugontvangen Vennootschapsbelasting</accountname>
+                <accountgroup_id pvalue="0">{3c5283c9-7dd3-4e01-a8e0-648dc896d465}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{ce9ba99e-4444-4019-8773-1cd956a1525a}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2012-08-07T11:36:53" changed="2013-08-22T12:47:56" muser="user_syssetting">
+                <accountcode pvalue="0">0650</accountcode>
+                <accountname pvalue="">Winst saldo</accountname>
+                <accountgroup_id pvalue="0">{524e1400-428a-44f7-9616-a2927b51cbc6}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{bb6a056c-ee26-4f4a-b5f3-7c33bf2a9cd5}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2011-08-11T09:24:50" changed="2011-11-28T16:17:21" muser="user_syssetting">
+                <accountcode pvalue="0">4110</accountcode>
+                <accountname pvalue="">Huisvesting services</accountname>
+                <accountgroup_id pvalue="0">{543b3cd5-7be1-4241-99d5-7a227dfcdcbc}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">32</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{11ee7115-d8df-44d8-bcb0-678574f718aa}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2011-10-04T11:30:21" changed="2013-08-22T14:59:23" muser="user_syssetting">
+                <accountcode pvalue="0">7540</accountcode>
+                <accountname pvalue="">Inkoop diensten derden</accountname>
+                <accountgroup_id pvalue="0">{352f9cb1-da97-45d8-9445-196a38cbeca7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">30</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{5323058b-f9ae-4fcb-8be2-fb14f4464d5a}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2011-10-04T11:22:24" changed="2013-08-22T14:59:37" muser="user_syssetting">
+                <accountcode pvalue="0">7546</accountcode>
+                <accountname pvalue="">Inkoop diensten derden laag</accountname>
+                <accountgroup_id pvalue="0">{352f9cb1-da97-45d8-9445-196a38cbeca7}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">31</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{b7b5ca43-8211-46a5-8247-a1d69e80bdeb}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2012-01-20T17:10:09" changed="2013-08-22T14:21:38" muser="user_syssetting">
+                <accountcode pvalue="0">1680</accountcode>
+                <accountname pvalue="">Nog te betalen facturen</accountname>
+                <accountgroup_id pvalue="0">{3f242787-9ad9-4871-8f35-37cbe5b261cf}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{830ac55e-93f5-49a3-a93e-bc6ac7c72ce4}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2012-01-04T16:43:39" changed="2013-08-22T14:41:10" muser="user_syssetting">
+                <accountcode pvalue="0">1110</accountcode>
+                <accountname pvalue="">Bank (deposito rek.)</accountname>
+                <accountgroup_id pvalue="0">{c60e8af4-0fdd-4665-973c-7b188f7e821e}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">2100</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{001bbb6a-1514-47d6-9036-51f98067aa8e}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2012-01-20T17:02:49" changed="2012-01-20T17:23:13" muser="user_syssetting">
+                <accountcode pvalue="0">1380</accountcode>
+                <accountname pvalue="">Nog te ontvangen facturen</accountname>
+                <accountgroup_id pvalue="0">{bee62b3f-0fa3-4263-808a-736432af95e4}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol>0</accountcontrol>
+            </ACC_ChartMaster>
+            <ACC_ChartMaster id="{7fc666a1-17f1-4077-997e-0fb733b2b6cb}" parent="{3b5239ee-f6d0-46bd-9e38-7422499b4e50}" status="0" created="2013-04-28T14:30:02" changed="2013-08-22T14:42:06" muser="user_syssetting">
+                <accountcode pvalue="0">1102</accountcode>
+                <accountname pvalue="">Bank (rc) 9876543210</accountname>
+                <accountgroup_id pvalue="0">{c60e8af4-0fdd-4665-973c-7b188f7e821e}</accountgroup_id>
+                <accountrequired>0</accountrequired>
+                <accountcontrol pvalue="0">2100</accountcontrol>
+            </ACC_ChartMaster>
+        </ACC_ChartMasterList>
+        <ACC_SysSettingList>
+            <ACC_SysSetting id="0" parent="none" status="0" created="2014-02-24T14:26:52" changed="2014-02-24T14:26:52" muser="system">
+                <syssettingname>Placeholder only</syssettingname>
+                <ACC_AccountControlList>
+                    <ACC_AccountControl id="{dcf8ec54-d87d-4ad1-aadc-4fc7c73615bf}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">9</controlnumber>
+                        <description pvalue="">verkopen/omzet alle btw tarieven</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{9651e383-23e2-4ba6-be71-356bdba1e745}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">10</controlnumber>
+                        <description pvalue="">verkopen/omzet onbelast (rubriek 1e)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{bc3905d5-0d95-4d2f-921b-4d4e4b70c997}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">11</controlnumber>
+                        <description pvalue="">verkopen/omzet laag (excl btw: rubriek 1b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{53e66545-3173-4710-8329-53b64fb9cb40}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">12</controlnumber>
+                        <description pvalue="">verkopen/omzet hoog (excl btw: rubriek 1a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{8f3a2cbe-2133-4ebc-b6ff-351748c3274d}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">13</controlnumber>
+                        <description pvalue="">verkopen/omzet overig (excl btw: rubriek 1c)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{308e4583-eb87-428b-9203-655d2e3eec1e}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">14</controlnumber>
+                        <description pvalue="">verkopen/omzet verlegd (excl btw: rubriek 1e)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{c02c5efb-5a8b-4c29-b83d-2bcbf3c2a0d2}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">16</controlnumber>
+                        <description pvalue="">prive gebruik (rubriek 1d)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{e38efeb1-d4de-4d24-9b4d-5dda424cb130}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">19</controlnumber>
+                        <description pvalue="">prive gebruik (excl btw: rubriek 1d)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{5b5b0221-5ff8-4946-89f8-f8b4560d7ee3}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">21</controlnumber>
+                        <description pvalue="">btw af te dragen laag (verkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{360c7d41-5468-4f10-bc35-614e1940e7cf}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">22</controlnumber>
+                        <description pvalue="">btw af te dragen hoog (verkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{d785a076-c452-46f0-980d-b5b90a2bec1b}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">23</controlnumber>
+                        <description pvalue="">btw af te dragen overig (verkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{c9622405-d341-4b54-a2c2-e0d038f89185}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">24</controlnumber>
+                        <description pvalue="">btw af te dragen verlegd (verkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{a431739c-3a19-4f7f-8da3-9f613e4be164}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">25</controlnumber>
+                        <description pvalue="">btw te vorderen verlegd (verkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{74080403-0fa6-46ec-ba84-a12c66f02caa}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">26</controlnumber>
+                        <description pvalue="">btw af te dragen globalisatie laag</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{182f0725-4004-46d1-b81d-3718b3a6a7ce}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">27</controlnumber>
+                        <description pvalue="">btw af te dragen globalisatie hoog</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{d59887f2-2b65-45bf-ae0e-381b6d23086d}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">28</controlnumber>
+                        <description pvalue="">btw af te dragen globalisatie overig</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{7956ce92-04e3-4d5e-8731-20f92e9950be}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">29</controlnumber>
+                        <description pvalue="">btw af te dragen prive gebruik</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{e6f264b6-931b-4086-95c4-f99964229d5e}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">30</controlnumber>
+                        <description pvalue="">inkopen/kosten alle btw tarieven (rubriek 5b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{45f32820-893e-47e3-8805-a1d144f207b8}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">31</controlnumber>
+                        <description pvalue="">inkopen/kosten laag (excl btw: rubriek 5b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{39860bc5-0e8b-4193-9e74-06332e3a2a58}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">32</controlnumber>
+                        <description pvalue="">inkopen/kosten hoog (excl btw: rubriek 5b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{bfb1ce50-3eb3-4493-9062-566a45986c1a}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">33</controlnumber>
+                        <description pvalue="">inkopen/kosten overig (excl btw: rubriek 5b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{a273e0b7-f4ba-4e70-8e92-c809204f188d}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">34</controlnumber>
+                        <description pvalue="">inkopen/kosten verlegd (excl btw: rubriek 2a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{7d6aab25-4fd7-43a8-84b9-997a8dd4c777}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">41</controlnumber>
+                        <description pvalue="">btw te vorderen laag (inkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{bf1b0a69-9254-4225-acc8-1521b1521c5f}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">42</controlnumber>
+                        <description pvalue="">btw te vorderen hoog (inkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{efe2e1f1-6182-424f-982f-42221b183a25}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">43</controlnumber>
+                        <description pvalue="">btw te vorderen overig (inkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{0b848182-ce10-48a6-a3f5-bdea2ca9a2dc}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">44</controlnumber>
+                        <description pvalue="">btw af te dragen verlegd (inkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{14bcda19-4d45-46e1-a59c-a7d6cf096691}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">45</controlnumber>
+                        <description pvalue="">btw te vorderen verlegd (inkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{f8260ed4-ce44-4683-ac39-e1c260c27ba7}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">61</controlnumber>
+                        <description pvalue="">inkopen import binnen EU laag (rubriek 4b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{30023929-6c4c-4378-a329-913cbd0bcc74}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">62</controlnumber>
+                        <description pvalue="">inkopen import binnen EU hoog (rubriek 4b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{c132bd19-351c-4724-b65b-a134a8d38a23}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">63</controlnumber>
+                        <description pvalue="">inkopen import binnen EU overig (rubriek 4b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{ccabd5bb-f8cf-4f15-b33d-5aa9d073bd69}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">66</controlnumber>
+                        <description pvalue="">btw te vorderen inkopen import binnen EU (rubriek 4b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{e73d77b7-a6f6-464c-8afb-d085ddf4cbe4}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">71</controlnumber>
+                        <description pvalue="">inkopen import buiten EU laag (rubriek 4a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{9ecf592d-6209-4df5-b2f7-6e1bb19dfdc0}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">72</controlnumber>
+                        <description pvalue="">inkopen import buiten EU hoog (rubriek 4a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{92466497-3bf1-4011-a4b3-000de40c3e89}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">73</controlnumber>
+                        <description pvalue="">inkopen import buiten EU overig (rubriek 4a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{953cc520-f155-45d3-a3a0-3d8daca1955a}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">76</controlnumber>
+                        <description pvalue="">btw te vorderen inkopen import buiten EU (rubriek 4a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{3fc4bc7f-d3c3-4ca7-aab1-31cac8844b26}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">80</controlnumber>
+                        <description pvalue="">verkopen export binnen EU (rubriek 3b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{474f398b-e3c2-4218-a9d6-fc5d01432ff9}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">81</controlnumber>
+                        <description pvalue="">verkopen export buiten EU (rubriek 3a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{430b22cf-de92-4b82-99af-90567e88d02f}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">82</controlnumber>
+                        <description pvalue="">oninbare vorderingen</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{f3d4a9e4-cb77-407e-8b5c-37fc976fcd5b}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">83</controlnumber>
+                        <description pvalue="">herrekening/correcties</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{435e9b08-084c-4772-83e0-4cbaf3b12a90}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">84</controlnumber>
+                        <description pvalue="">installatie/televerkoop binnen EU</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{a60bf621-8aca-4b7a-a852-97ba08b0e297}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">85</controlnumber>
+                        <description pvalue="">BPM verkoop</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{19850167-1cd4-4952-91ec-c9d151bcc5ac}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">86</controlnumber>
+                        <description pvalue="">BPM inkoop</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{61d0d495-423b-4806-aa24-2ae16b44a318}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">87</controlnumber>
+                        <description pvalue="">BPM voorraad</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{4daed14d-e2c0-4f80-b9fa-e0f5e69da6cd}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">88</controlnumber>
+                        <description pvalue="">dienstverlening binnen EU (rubriek 3b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{fcc737c1-a5f8-4e08-bd3e-3901cd705777}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">91</controlnumber>
+                        <description pvalue="">verkoop globalisatie laag (rubriek 1b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{0c2a949a-a76d-44d4-aa82-2308140ce731}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">92</controlnumber>
+                        <description pvalue="">verkoop globalisatie hoog (rubriek 1a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{579def67-9ee9-4842-adc3-5c214f5c8c65}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">93</controlnumber>
+                        <description pvalue="">verkoop globalisatie overig (rubriek 1c)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{466fc176-375d-40b0-88bd-8d51a1559a0b}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">94</controlnumber>
+                        <description pvalue="">inkoop globalisatie laag (rubriek 1b)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{17659a58-72e8-48a4-b32d-5cf7105d2e4a}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">95</controlnumber>
+                        <description pvalue="">inkoop globalisatie hoog (rubriek 1a)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{b01b7aa5-3137-4611-aedb-6be4e950d90e}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">96</controlnumber>
+                        <description pvalue="">inkoop globalisatie overig (rubriek 1c)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{39058088-f7c8-4ea3-9694-9012024748d4}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">100</controlnumber>
+                        <description pvalue="">kredietbeperking (verkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{c1a57051-30bf-400e-9f1d-eb787db3e324}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">101</controlnumber>
+                        <description pvalue="">kredietbeperking (inkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{2beca438-6756-485e-9bf1-cae6639a2a7e}" parent="syssetting" status="0" created="2013-03-06T09:30:55" changed="2013-03-06T09:30:55" muser="user_syssetting">
+                        <controlnumber pvalue="0">102</controlnumber>
+                        <description pvalue="">betalingskorting</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{8ced03db-1692-46a1-913b-ea54068ae66e}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">110</controlnumber>
+                        <description pvalue="">tussenrekening betalingen</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{b4d42699-5f10-4019-bd24-733d9e149964}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">111</controlnumber>
+                        <description pvalue="">onbekende betalingen</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{827cc2fe-b048-4560-8849-bde8fb4b093c}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">120</controlnumber>
+                        <description pvalue="">betaalwijze contant</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{48a65a88-2aa2-4d20-8ab5-8f20ce88fe86}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">121</controlnumber>
+                        <description pvalue="">betaalwijze electronisch</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{7a47f140-04bd-476f-8651-e6b30019362b}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">1001</controlnumber>
+                        <description pvalue="">Debiteuren (verkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{6f343cae-1e2a-4c9d-82b6-3fe2d28166cd}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">1002</controlnumber>
+                        <description pvalue="">Crediteuren (inkopen)</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{3003c7af-6699-4c5e-9f4f-b27d52edc431}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">2000</controlnumber>
+                        <description pvalue="">Kas</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{39db3ea6-653c-433d-908b-334d4500a680}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">2100</controlnumber>
+                        <description pvalue="">Bank</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{35676bf9-916a-48e6-994d-5f5a23793635}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">2200</controlnumber>
+                        <description pvalue="">Postbank</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{604d5adf-9353-4a9a-abab-7051d172f900}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2013-03-06T09:30:56" muser="user_syssetting">
+                        <controlnumber pvalue="0">3000</controlnumber>
+                        <description pvalue="">Memoriaal</description>
+                    </ACC_AccountControl>
+                    <ACC_AccountControl id="{539bf459-7f40-4068-a977-f33779b01249}" parent="syssetting" status="0" created="2013-08-22T11:39:27" changed="2013-08-22T12:20:39" muser="user_syssetting">
+                        <controlnumber pvalue="0">1</controlnumber>
+                        <description pvalue="">standaard systeem rekening</description>
+                    </ACC_AccountControl>
+                </ACC_AccountControlList>
+                <ACC_AccountGroupList>
+                    <ACC_AccountGroup id="{b7a3cda5-465d-46ea-ac0b-ecc1c5c205ff}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-08-22T12:36:46" muser="user_syssetting">
+                        <groupname pvalue="">Vaste Activa</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb>0</sequenceintb>
+                        <ACC_AccountGroupList>
+                            <ACC_AccountGroup id="{9eaaf83b-b12e-4c86-9cf0-fa308d6f070c}" parent="{b7a3cda5-465d-46ea-ac0b-ecc1c5c205ff}" status="0" created="2011-08-11T09:34:47" changed="2013-08-22T13:06:52" muser="user_syssetting">
+                                <groupname pvalue="">Materiele Vaste Activa</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">100</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{c32f27ec-5488-40c4-81dd-255a8084dc36}" parent="{b7a3cda5-465d-46ea-ac0b-ecc1c5c205ff}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Financiele Vaste Activa</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">500</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{ff4e96b8-40a4-459e-80ed-398db1ef861b}" parent="{b7a3cda5-465d-46ea-ac0b-ecc1c5c205ff}" status="0" created="2011-11-28T18:31:54" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Immateriele Activa</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">10</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                        </ACC_AccountGroupList>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{8750dd62-837c-4171-b0d9-3a3394095720}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-08-22T14:28:06" muser="user_syssetting">
+                        <groupname pvalue="">Vlottende Activa</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">2</sequenceintb>
+                        <ACC_AccountGroupList>
+                            <ACC_AccountGroup id="{843f605d-184c-4166-ae2b-73c1a54adc87}" parent="{8750dd62-837c-4171-b0d9-3a3394095720}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Vorderingen</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1300</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{bee62b3f-0fa3-4263-808a-736432af95e4}" parent="{8750dd62-837c-4171-b0d9-3a3394095720}" status="0" created="2012-01-20T17:20:28" changed="2012-01-20T17:21:10" muser="user_syssetting">
+                                <groupname pvalue="">Overlopende Activa</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1380</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{6f856164-c3dc-42af-83ec-829223d9b808}" parent="{8750dd62-837c-4171-b0d9-3a3394095720}" status="0" created="2013-08-22T14:44:56" changed="2013-08-22T14:45:25" muser="user_syssetting">
+                                <groupname pvalue="">Voorraden</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">3000</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                        </ACC_AccountGroupList>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{a91d2e9a-3dd2-4c62-80a2-13ec8de9bd6e}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                        <groupname pvalue="">Tussenrekeningen</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">2000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{27b6f327-6ecf-43db-ab15-d826c6ecb498}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-08-22T14:46:16" muser="user_syssetting">
+                        <groupname pvalue="">Voorraadrekeningen oud</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">3000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                        <groupname pvalue="">Kosten</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">4000</sequenceintb>
+                        <ACC_AccountGroupList>
+                            <ACC_AccountGroup id="{543b3cd5-7be1-4241-99d5-7a227dfcdcbc}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Huisvestingskosten</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4100</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{e682fb60-711d-4b2a-a447-de700341aac6}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Bedrijfskosten</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4200</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{e7cf0625-84d2-490f-b185-609c085fc24a}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Kantoorkosten</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4300</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{a4d270f8-7c3f-4da1-a101-7f753a222fca}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Vervoerskosten</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4400</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{3a30adef-1622-4dfb-b26d-267ff4a93d35}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Verkoopkosten</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4500</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{2fb3e572-47c7-478a-afa3-76109965766a}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Algemene Kosten</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4600</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{ce6a5834-1a97-4c3f-8d25-424bd12c6092}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Financieringskosten</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4700</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{fa37c8c0-8dd0-484d-976d-b323b20dc9b8}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Afschrijvingen</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4800</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{a189aa08-6999-437e-b28b-13fe68dcbe69}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                                <groupname pvalue="">Verschillen</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4900</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{21c57791-cb97-41db-aed2-7b04f4c64175}" parent="{95703760-2dc8-4a95-9de4-dbd3bda152ba}" status="0" created="2011-11-28T18:40:21" changed="2012-01-05T14:14:28" muser="user_syssetting">
+                                <groupname pvalue="">Personeelskosten</groupname>
+                                <pandl pvalue="0">1</pandl>
+                                <sequenceintb pvalue="0">4010</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                        </ACC_AccountGroupList>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{4682912c-d0a3-46a3-a8d8-676a751d6cf5}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                        <groupname pvalue="">Indirecte Kosten</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">5000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{2698f7c6-6252-435a-9640-7a0a2a6e83dc}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-01-03T10:51:36" muser="user_syssetting">
+                        <groupname pvalue="">Fabricage</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">6000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{352f9cb1-da97-45d8-9445-196a38cbeca7}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2013-08-22T14:47:48" muser="user_syssetting">
+                        <groupname pvalue="">Inkoop</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">7000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{4c56d1a0-606e-4f31-8cb8-c01a82e3cb32}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                        <groupname pvalue="">Verkoop</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">8000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{41b4c060-cc8d-4475-b2b4-dd25da1b735e}" parent="syssetting" status="0" created="2011-08-11T09:34:47" changed="2011-11-28T18:42:40" muser="user_syssetting">
+                        <groupname pvalue="">Bijzondere Baten en Lasten</groupname>
+                        <pandl pvalue="0">1</pandl>
+                        <sequenceintb pvalue="0">9000</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{524e1400-428a-44f7-9616-a2927b51cbc6}" parent="syssetting" status="0" created="2013-08-22T12:41:48" changed="2013-08-22T14:44:04" muser="user_syssetting">
+                        <groupname pvalue="">Vaste Passiva - Eigen Vermogen</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">600</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{a01a3b0c-7ec3-4ad3-bcfe-d15aa445867f}" parent="syssetting" status="0" created="2013-08-22T12:43:45" changed="2013-08-22T14:44:09" muser="user_syssetting">
+                        <groupname pvalue="">Vaste Passiva - Voorzieningen</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">700</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{d5120719-0aca-4861-bc2f-9cb7c067a6f7}" parent="syssetting" status="0" created="2013-08-22T12:44:42" changed="2013-08-22T14:44:16" muser="user_syssetting">
+                        <groupname pvalue="">Vaste Passiva - Vreemd Vermogen - Lang</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">900</sequenceintb>
+                        <ACC_AccountGroupList/>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{f888261a-69d0-4bbf-bdb8-70084f7bc589}" parent="syssetting" status="0" created="2013-08-22T13:45:05" changed="2013-08-22T13:48:15" muser="user_syssetting">
+                        <groupname pvalue="">Vlottende Passiva</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">1500</sequenceintb>
+                        <ACC_AccountGroupList>
+                            <ACC_AccountGroup id="{3c5283c9-7dd3-4e01-a8e0-648dc896d465}" parent="{f888261a-69d0-4bbf-bdb8-70084f7bc589}" status="0" created="2013-08-22T13:45:46" changed="2013-08-22T13:46:15" muser="user_syssetting">
+                                <groupname pvalue="">Kortlopende Schulden</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1610</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                            <ACC_AccountGroup id="{3f242787-9ad9-4871-8f35-37cbe5b261cf}" parent="{f888261a-69d0-4bbf-bdb8-70084f7bc589}" status="0" created="2013-08-22T14:13:22" changed="2013-08-22T14:13:58" muser="user_syssetting">
+                                <groupname pvalue="">Overlopende Passiva</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1680</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                        </ACC_AccountGroupList>
+                    </ACC_AccountGroup>
+                    <ACC_AccountGroup id="{ad18886a-d221-4827-a769-9f74bc250fc3}" parent="syssetting" status="0" created="2013-08-22T14:37:49" changed="2013-08-22T14:38:34" muser="user_syssetting">
+                        <groupname pvalue="">Vlottende Activa - Liquide Middelen</groupname>
+                        <pandl>0</pandl>
+                        <sequenceintb pvalue="0">4</sequenceintb>
+                        <ACC_AccountGroupList>
+                            <ACC_AccountGroup id="{c60e8af4-0fdd-4665-973c-7b188f7e821e}" parent="{ad18886a-d221-4827-a769-9f74bc250fc3}" status="0" created="2013-08-22T14:38:52" changed="2013-08-22T14:39:25" muser="user_syssetting">
+                                <groupname pvalue="">Liquide Middelen</groupname>
+                                <pandl>0</pandl>
+                                <sequenceintb pvalue="0">1010</sequenceintb>
+                                <ACC_AccountGroupList/>
+                            </ACC_AccountGroup>
+                        </ACC_AccountGroupList>
+                    </ACC_AccountGroup>
+                </ACC_AccountGroupList>
+                <ACC_AreaList>
+                    <ACC_Area id="{919a7a63-9b1e-4645-8eb7-e02e85b6476e}" parent="syssetting" status="0" created="2011-06-11T14:31:19" changed="2014-02-25T18:31:53" muser="user_syssetting">
+                        <areacode pvalue="">Alle gebieden</areacode>
+                        <areadescription pvalue="">Alle verkoop/inkoop gebieden</areadescription>
+                    </ACC_Area>
+                </ACC_AreaList>
+                <ACC_AssetTypeList/>
+                <ACC_CostGroupList>
+                    <ACC_CostGroup id="{8d1ba070-50dd-49f3-beff-1c68599e6f57}" parent="syssetting" status="0" created="2012-08-17T09:17:47" changed="2014-02-25T18:54:16" muser="user_syssetting">
+                        <groupname pvalue="">Software Licentie Verkoop</groupname>
+                        <costprofit pvalue="0">1</costprofit>
+                        <sequenceno pvalue="0">1000</sequenceno>
+                        <ACC_CostGroupList>
+                            <ACC_CostGroup id="{ab147c44-ab4f-4ec9-971e-a1394b9aaf02}" parent="{8d1ba070-50dd-49f3-beff-1c68599e6f57}" status="0" created="2012-10-02T09:04:25" changed="2014-02-25T18:53:46" muser="user_syssetting">
+                                <groupname pvalue="">BBB Licentie</groupname>
+                                <costprofit pvalue="0">1</costprofit>
+                                <sequenceno pvalue="0">1200</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                            <ACC_CostGroup id="{15fe37f9-3647-48c8-9379-ef52dbe7e833}" parent="{8d1ba070-50dd-49f3-beff-1c68599e6f57}" status="0" created="2012-10-02T09:04:58" changed="2014-02-25T18:54:04" muser="user_syssetting">
+                                <groupname pvalue="">AAA Licentie</groupname>
+                                <costprofit pvalue="0">1</costprofit>
+                                <sequenceno pvalue="0">1100</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                            <ACC_CostGroup id="{b373292e-e53c-471b-baa2-907858c8082f}" parent="{8d1ba070-50dd-49f3-beff-1c68599e6f57}" status="0" created="2012-10-26T09:34:08" changed="2014-02-25T18:53:57" muser="user_syssetting">
+                                <groupname pvalue="">CCC Licentie</groupname>
+                                <costprofit pvalue="0">1</costprofit>
+                                <sequenceno pvalue="0">1300</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                        </ACC_CostGroupList>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{951f3fef-98eb-4422-98c0-763a7b3fba76}" parent="syssetting" status="0" created="2012-08-17T09:18:34" changed="2014-02-25T18:54:39" muser="user_syssetting">
+                        <groupname pvalue="">Software Onderhoud Verkoop</groupname>
+                        <costprofit pvalue="0">1</costprofit>
+                        <sequenceno pvalue="0">2000</sequenceno>
+                        <ACC_CostGroupList>
+                            <ACC_CostGroup id="{4ec6ccff-d9f0-48e6-a357-2c658e3f2964}" parent="{951f3fef-98eb-4422-98c0-763a7b3fba76}" status="0" created="2012-10-02T09:05:45" changed="2014-02-25T18:54:56" muser="user_syssetting">
+                                <groupname pvalue="">BBB Onderhoud</groupname>
+                                <costprofit pvalue="0">1</costprofit>
+                                <sequenceno pvalue="0">2200</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                            <ACC_CostGroup id="{7ab05acc-09c6-4a55-b2db-f7256fb8db08}" parent="{951f3fef-98eb-4422-98c0-763a7b3fba76}" status="0" created="2012-10-02T09:06:10" changed="2014-02-25T18:54:47" muser="user_syssetting">
+                                <groupname pvalue="">AAA Onderhoud</groupname>
+                                <costprofit pvalue="0">1</costprofit>
+                                <sequenceno pvalue="0">2100</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                            <ACC_CostGroup id="{ea433db5-299b-4672-868b-46daabf27e09}" parent="{951f3fef-98eb-4422-98c0-763a7b3fba76}" status="0" created="2012-10-26T09:32:05" changed="2014-02-25T18:55:05" muser="user_syssetting">
+                                <groupname pvalue="">CCC Onderhoud</groupname>
+                                <costprofit pvalue="0">1</costprofit>
+                                <sequenceno pvalue="0">2300</sequenceno>
+                                <ACC_CostGroupList/>
+                            </ACC_CostGroup>
+                        </ACC_CostGroupList>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{64c79be8-68c0-4313-8817-5c2e19b1bd73}" parent="syssetting" status="0" created="2012-08-17T09:18:58" changed="2014-02-25T18:55:25" muser="user_syssetting">
+                        <groupname pvalue="">Ontwerp Diensten</groupname>
+                        <costprofit pvalue="0">1</costprofit>
+                        <sequenceno pvalue="0">3000</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{6bdaa0c9-c978-4a33-b7a9-38b099d19c21}" parent="syssetting" status="0" created="2012-08-17T09:19:49" changed="2014-02-25T18:55:54" muser="user_syssetting">
+                        <groupname pvalue="">Kantoor Kosten</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">4100</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{ddbaf29c-9598-4cec-a19d-3ad278c5724c}" parent="syssetting" status="0" created="2012-08-17T09:20:25" changed="2014-02-25T18:55:50" muser="user_syssetting">
+                        <groupname pvalue="">Promotie Kosten</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">4200</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{242ebf5e-cfb1-4702-a5de-dd8b6bd7c830}" parent="syssetting" status="0" created="2012-08-17T09:21:11" changed="2014-02-25T18:56:08" muser="user_syssetting">
+                        <groupname pvalue="">Alle ander kosten</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">4900</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                    <ACC_CostGroup id="{33b82fb5-a171-4d75-b074-5776ce2885df}" parent="syssetting" status="0" created="2012-08-17T09:54:19" changed="2014-02-25T18:56:00" muser="user_syssetting">
+                        <groupname pvalue="">Salarissen</groupname>
+                        <costprofit>0</costprofit>
+                        <sequenceno pvalue="0">4300</sequenceno>
+                        <ACC_CostGroupList/>
+                    </ACC_CostGroup>
+                </ACC_CostGroupList>
+                <ACC_CurrencyList>
+                    <ACC_Currency id="{0b68d19b-1bce-4c13-b243-ab1c7de18167}" parent="syssetting" status="0" created="2011-05-26T16:46:41" changed="2011-06-06T12:17:40" muser="user_syssetting">
+                        <currency pvalue="">Euro</currency>
+                        <currcode pvalue="">EUR</currcode>
+                        <country pvalue="">Euro zone</country>
+                        <hundredsname pvalue="Cents">Cent</hundredsname>
+                        <rate pvalue="0">1</rate>
+                    </ACC_Currency>
+                    <ACC_Currency id="{6c778fc4-7a5e-464b-88c9-9c9362a9abad}" parent="syssetting" status="0" created="2011-05-26T16:47:08" changed="2011-06-06T12:17:16" muser="user_syssetting">
+                        <currency pvalue="">US Dollar</currency>
+                        <currcode pvalue="">USD</currcode>
+                        <country pvalue="">United States of America</country>
+                        <hundredsname pvalue="Cents">Cent</hundredsname>
+                        <rate pvalue="0">0.75</rate>
+                    </ACC_Currency>
+                    <ACC_Currency id="{f0014ec0-310f-44a9-81b1-46738d320071}" parent="syssetting" status="0" created="2013-08-22T11:50:48" changed="2013-08-22T12:15:23" muser="user_syssetting">
+                        <currency pvalue="">Pound Sterling</currency>
+                        <currcode pvalue="">GBP</currcode>
+                        <country pvalue="">United Kindom</country>
+                        <hundredsname pvalue="Cents">Pence</hundredsname>
+                        <rate pvalue="0">1.2</rate>
+                    </ACC_Currency>
+                </ACC_CurrencyList>
+                <ACC_DebtorTypeList>
+                    <ACC_DebtorType id="{c0abee87-bce0-42c7-a17c-2baa826552d0}" parent="syssetting" status="0" created="2011-06-13T16:03:17" changed="2014-02-25T18:49:34" muser="user_syssetting">
+                        <typename pvalue="">Goede klant</typename>
+                    </ACC_DebtorType>
+                    <ACC_DebtorType id="{ac9dba0a-bf4e-4afe-853b-bfda4e4d8006}" parent="syssetting" status="0" created="2011-06-13T16:03:34" changed="2014-02-25T18:49:25" muser="user_syssetting">
+                        <typename pvalue="">Standaard</typename>
+                    </ACC_DebtorType>
+                    <ACC_DebtorType id="{d76d3256-087f-481b-8652-cb50911a5d34}" parent="syssetting" status="0" created="2011-06-13T16:03:43" changed="2014-02-25T18:49:39" muser="user_syssetting">
+                        <typename pvalue="">Voorrang</typename>
+                    </ACC_DebtorType>
+                </ACC_DebtorTypeList>
+                <ACC_FactorCompanyList>
+                    <ACC_FactorCompany id="{d6525770-80a6-4fff-a689-763152e4e855}" parent="syssetting" status="0" created="2011-06-09T15:08:47" changed="2014-02-25T18:27:10" muser="user_syssetting">
+                        <coyname pvalue="">Geen factoring</coyname>
+                        <address1></address1>
+                        <address2></address2>
+                        <address3></address3>
+                        <address4></address4>
+                        <address5></address5>
+                        <address6></address6>
+                        <contact></contact>
+                        <telephone></telephone>
+                        <fax></fax>
+                        <email></email>
+                    </ACC_FactorCompany>
+                </ACC_FactorCompanyList>
+                <ACC_HoldReasonList>
+                    <ACC_HoldReason id="{cd98aa89-09a8-437e-8fd1-0f1b85d7ae11}" parent="syssetting" status="0" created="2011-06-13T16:01:08" changed="2014-02-25T18:47:30" muser="user_syssetting">
+                        <reasoncode pvalue="0">VERBODEN</reasoncode>
+                        <reasondescription pvalue="">Onacceptabel betaling gedrag</reasondescription>
+                        <dissallowinvoices pvalue="0">1</dissallowinvoices>
+                    </ACC_HoldReason>
+                    <ACC_HoldReason id="{90ccc4bb-fe93-4165-9509-5aa62bd9c34b}" parent="syssetting" status="0" created="2011-06-13T15:57:57" changed="2014-02-25T18:47:51" muser="user_syssetting">
+                        <reasoncode pvalue="0">GOED</reasoncode>
+                        <reasondescription pvalue="">Goede betaling historie</reasondescription>
+                        <dissallowinvoices>0</dissallowinvoices>
+                    </ACC_HoldReason>
+                    <ACC_HoldReason id="{e3bf3d9a-7e49-4509-b3e0-b189e7dc31e8}" parent="syssetting" status="0" created="2011-06-13T16:00:47" changed="2014-02-25T18:48:35" muser="user_syssetting">
+                        <reasoncode pvalue="0">WAAKZAAM</reasoncode>
+                        <reasondescription pvalue="">Een of meer open facturen</reasondescription>
+                        <dissallowinvoices>0</dissallowinvoices>
+                    </ACC_HoldReason>
+                </ACC_HoldReasonList>
+                <ACC_LocationList>
+                    <ACC_Location id="{8134c1fc-e2ef-441d-893a-e37a7b9eb97d}" parent="syssetting" status="0" created="2013-05-01T20:43:08" changed="2013-08-22T15:26:37" muser="user_syssetting">
+                        <locationname pvalue="">MyWarehouseLocation</locationname>
+                        <deladd1 pvalue="">Address</deladd1>
+                        <deladd2></deladd2>
+                        <deladd3></deladd3>
+                        <deladd4></deladd4>
+                        <deladd5></deladd5>
+                        <deladd6></deladd6>
+                        <tel></tel>
+                        <fax></fax>
+                        <email></email>
+                        <contact></contact>
+                        <taxprovince_id pvalue="0">{6c6a97c7-965b-46c4-9207-5a6dc62a7ece}</taxprovince_id>
+                        <managed>0</managed>
+                    </ACC_Location>
+                </ACC_LocationList>
+                <ACC_PaymentTermList>
+                    <ACC_PaymentTerm id="{9b712e87-96d5-410f-8922-bacc77fc6ded}" parent="syssetting" status="0" created="2011-06-13T14:54:34" changed="2014-02-25T18:46:00" muser="user_syssetting">
+                        <termsindicator pvalue="">30DAG</termsindicator>
+                        <terms pvalue="">Betaling binnen 30 dagen</terms>
+                        <daysbeforedue pvalue="0">30</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{0fe0a561-f9cd-4c23-8613-8be215174e65}" parent="syssetting" status="0" created="2011-06-14T16:55:15" changed="2014-02-25T18:45:35" muser="user_syssetting">
+                        <termsindicator pvalue="">20VOLGEND</termsindicator>
+                        <terms pvalue="">Betaling op 20ste dag volgende maand</terms>
+                        <daysbeforedue pvalue="0">20</daysbeforedue>
+                        <dayinfollowingmonth pvalue="0">1</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{70f031b6-23c8-4baa-a53f-c5ed9d79f898}" parent="syssetting" status="0" created="2011-06-14T16:54:51" changed="2014-02-25T18:44:11" muser="user_syssetting">
+                        <termsindicator pvalue="">CONTANT</termsindicator>
+                        <terms pvalue="">Alleen contant</terms>
+                        <daysbeforedue>0</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{5b8509d7-c28b-4ea8-82fe-166a78013582}" parent="syssetting" status="0" created="2012-10-26T09:27:00" changed="2014-02-25T18:43:53" muser="user_syssetting">
+                        <termsindicator pvalue="">ERVOOR</termsindicator>
+                        <terms pvalue="">Betaling voor levering</terms>
+                        <daysbeforedue>0</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                    <ACC_PaymentTerm id="{1465714d-bc59-4d31-b633-96d4a7b0307b}" parent="syssetting" status="0" created="2011-06-13T15:56:36" changed="2014-02-25T18:44:49" muser="user_syssetting">
+                        <termsindicator pvalue="">14DAG</termsindicator>
+                        <terms pvalue="">Betaling binnen 14 dagen</terms>
+                        <daysbeforedue pvalue="0">14</daysbeforedue>
+                        <dayinfollowingmonth>0</dayinfollowingmonth>
+                    </ACC_PaymentTerm>
+                </ACC_PaymentTermList>
+                <ACC_SalesManList>
+                    <ACC_SalesMan id="{e4e17608-06c2-4f38-b261-86f51dd9dfc4}" parent="syssetting" status="0" created="2011-06-13T16:04:20" changed="2014-02-25T18:50:32" muser="user_syssetting">
+                        <salesmanname pvalue="">Verkoper Naam</salesmanname>
+                        <smantel pvalue="">+31 123456789</smantel>
+                        <smanfax pvalue="">+31 987654321</smanfax>
+                        <commissionrate1 pvalue="0">1</commissionrate1>
+                        <breakpoint pvalue="0">100000</breakpoint>
+                        <commissionrate2 pvalue="0">1.5</commissionrate2>
+                    </ACC_SalesMan>
+                </ACC_SalesManList>
+                <ACC_SalesTypeList>
+                    <ACC_SalesType id="{1ad84400-36f1-4a5f-bc76-7a7899743840}" parent="syssetting" status="0" created="2011-06-11T13:44:29" changed="2014-02-25T18:28:41" muser="user_syssetting">
+                        <typeabbrev pvalue="">Standaard EUR</typeabbrev>
+                        <description pvalue="">Standaard of basis prijslijst in Euro's</description>
+                    </ACC_SalesType>
+                    <ACC_SalesType id="{afce1cb9-3236-4bb8-a523-36870ddff068}" parent="syssetting" status="0" created="2011-06-11T13:45:59" changed="2014-02-25T18:28:11" muser="user_syssetting">
+                        <typeabbrev pvalue="">In opdracht</typeabbrev>
+                        <description pvalue="">Producten gemaakt speciaal voor de klant</description>
+                    </ACC_SalesType>
+                    <ACC_SalesType id="{ec6396c5-33f7-458a-a2ac-ebadfd495e5b}" parent="syssetting" status="0" created="2011-06-11T13:45:09" changed="2014-02-25T18:30:36" muser="user_syssetting">
+                        <typeabbrev pvalue="">Vooruit besteld</typeabbrev>
+                        <description pvalue="">Lang van tevoren besteld</description>
+                    </ACC_SalesType>
+                </ACC_SalesTypeList>
+                <ACC_ShipperList>
+                    <ACC_Shipper id="{27bf77f1-a635-4217-b72a-d34ced15d993}" parent="syssetting" status="0" created="2011-06-09T13:25:13" changed="2014-02-24T13:51:23" muser="user_syssetting">
+                        <shippername pvalue="Default">TNT</shippername>
+                        <mincharge>0</mincharge>
+                    </ACC_Shipper>
+                    <ACC_Shipper id="{1e781ab8-c635-4017-ad30-31cba2328560}" parent="syssetting" status="0" created="2011-06-09T13:25:35" changed="2014-02-24T13:51:21" muser="user_syssetting">
+                        <shippername pvalue="Default">DHL</shippername>
+                        <mincharge>0</mincharge>
+                    </ACC_Shipper>
+                    <ACC_Shipper id="{ef1ea72c-2407-4b1e-9145-9d3f42b6595b}" parent="syssetting" status="0" created="2011-11-09T20:08:41" changed="2014-02-25T18:26:13" muser="user_syssetting">
+                        <shippername pvalue="Default">Geen</shippername>
+                        <mincharge>0</mincharge>
+                    </ACC_Shipper>
+                    <ACC_Shipper id="{473aa04f-4003-4b2c-9463-42369a2ca878}" parent="syssetting" status="0" created="2011-09-21T12:49:33" changed="2011-11-09T20:08:25" muser="user_syssetting">
+                        <shippername pvalue="Default">Email</shippername>
+                        <mincharge>0</mincharge>
+                    </ACC_Shipper>
+                </ACC_ShipperList>
+                <ACC_TaxAuthorityList>
+                    <ACC_TaxAuthority id="{8ab303c3-f615-4ed9-9343-aedd628921f9}" parent="syssetting" status="0" created="2011-12-09T09:55:04" changed="2014-02-25T18:17:28" muser="user_syssetting">
+                        <description pvalue="">Buiten EU</description>
+                        <bank pvalue="">Niet van toepassing (NVT)</bank>
+                        <bankacctype pvalue="">NVT</bankacctype>
+                        <bankacc pvalue="">NVT</bankacc>
+                        <bankswift pvalue="">NVT</bankswift>
+                        <ACC_TaxAuthRateList/>
+                    </ACC_TaxAuthority>
+                    <ACC_TaxAuthority id="{fa3b0ec1-a3d9-4765-9548-0af9f2e1145d}" parent="syssetting" status="0" created="2013-03-06T09:30:56" changed="2014-02-25T18:17:00" muser="user_syssetting">
+                        <description pvalue="">EU Intracommunautair</description>
+                        <bank pvalue="">Niet van toepassing (NVT)</bank>
+                        <bankacctype pvalue="">NVT</bankacctype>
+                        <bankacc pvalue="">NVT</bankacc>
+                        <bankswift pvalue="">NVT</bankswift>
+                        <ACC_TaxAuthRateList/>
+                    </ACC_TaxAuthority>
+                    <ACC_TaxAuthority id="{64a9bd29-bd44-429f-ad0d-5749c62993e7}" parent="syssetting" status="0" created="2011-08-03T18:48:03" changed="2014-02-25T18:18:10" muser="user_syssetting">
+                        <description pvalue="">Nederland</description>
+                        <bank pvalue="">Bank Naam</bank>
+                        <bankacctype pvalue="">Betaalrekening</bankacctype>
+                        <bankacc pvalue="">123456789</bankacc>
+                        <bankswift pvalue="">987654321</bankswift>
+                        <ACC_TaxAuthRateList/>
+                    </ACC_TaxAuthority>
+                </ACC_TaxAuthorityList>
+                <ACC_TaxCategoryList>
+                    <ACC_TaxCategory id="{b1231fb6-5728-4e78-90ed-2ca30965e6b4}" parent="syssetting" status="0" created="2011-05-26T21:52:51" changed="2014-02-25T17:23:21" muser="user_syssetting">
+                        <taxcatname pvalue="">Hoog BTW tarief</taxcatname>
+                    </ACC_TaxCategory>
+                    <ACC_TaxCategory id="{e17399a4-1aed-4667-a2c6-83a517acba0b}" parent="syssetting" status="0" created="2011-05-26T20:16:36" changed="2014-02-25T17:22:37" muser="user_syssetting">
+                        <taxcatname pvalue="">Geen BTW</taxcatname>
+                    </ACC_TaxCategory>
+                    <ACC_TaxCategory id="{5579d2c6-51e9-4447-bfdd-ee77103986ba}" parent="syssetting" status="0" created="2011-05-26T21:53:09" changed="2014-02-25T17:23:17" muser="user_syssetting">
+                        <taxcatname pvalue="">Laag BTW tarief</taxcatname>
+                    </ACC_TaxCategory>
+                </ACC_TaxCategoryList>
+                <ACC_TaxGroupList>
+                    <ACC_TaxGroup id="{0087c6b3-4b83-4fd4-bb14-52ee6cbe5ed7}" parent="syssetting" status="0" created="2011-12-09T09:53:03" changed="2014-02-25T18:24:15" muser="user_syssetting">
+                        <taxgroupdescr pvalue="">Buiten EU BTW Groep (wereld)</taxgroupdescr>
+                        <ACC_TaxGroupAuthList/>
+                    </ACC_TaxGroup>
+                    <ACC_TaxGroup id="{eba6c7c5-d138-44a6-88bd-16b9b00c8066}" parent="syssetting" status="0" created="2011-08-03T12:42:32" changed="2014-02-25T18:22:48" muser="user_syssetting">
+                        <taxgroupdescr pvalue="">EU BTW Groep (Intracomm.)</taxgroupdescr>
+                        <ACC_TaxGroupAuthList/>
+                    </ACC_TaxGroup>
+                    <ACC_TaxGroup id="{2dbada0e-a8d2-4f71-a1d3-18f05aedcc17}" parent="syssetting" status="0" created="2011-05-26T22:34:16" changed="2014-02-25T18:22:58" muser="user_syssetting">
+                        <taxgroupdescr pvalue="">NL BTW Groep</taxgroupdescr>
+                        <ACC_TaxGroupAuthList/>
+                    </ACC_TaxGroup>
+                </ACC_TaxGroupList>
+                <ACC_TaxProvinceList>
+                    <ACC_TaxProvince id="{b3e0c455-5a68-42aa-9da5-61f3574d3699}" parent="syssetting" status="0" created="2011-05-26T21:58:32" changed="2014-02-25T17:24:33" muser="rutger">
+                        <taxprovincename pvalue="">Nederland - alle provincies</taxprovincename>
+                    </ACC_TaxProvince>
+                    <ACC_TaxProvince id="{5ca14c57-08bf-45c3-8f73-3b2b2ecf1741}" parent="syssetting" status="0" created="2011-05-26T22:00:06" changed="2014-02-25T17:24:19" muser="rutger">
+                        <taxprovincename pvalue="">Buiten Europese Unie - wereld</taxprovincename>
+                    </ACC_TaxProvince>
+                    <ACC_TaxProvince id="{76c5e814-96ca-483f-9b1f-fd89ee2928d1}" parent="syssetting" status="0" created="2011-05-26T21:59:12" changed="2014-02-25T17:23:56" muser="rutger">
+                        <taxprovincename pvalue="">Europese Unie (EU)</taxprovincename>
+                    </ACC_TaxProvince>
+                </ACC_TaxProvinceList>
+                <ACC_UnitOfMeasureList>
+                    <ACC_UnitOfMeasure id="{8af97fa4-b9c7-40d5-8a12-ff43ee1878d8}" parent="syssetting" status="0" created="2011-05-26T16:44:13" changed="2014-02-25T17:20:05" muser="user_syssetting">
+                        <unitname pvalue="">Geen</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{2dd0e02c-7f6d-42a8-b3bb-947521897151}" parent="syssetting" status="0" created="2011-05-26T16:44:01" changed="2014-02-25T17:18:51" muser="user_syssetting">
+                        <unitname pvalue="">Kubieke meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{a764455b-47d6-489d-83f2-cc621ff4fd86}" parent="syssetting" status="0" created="2011-05-26T16:43:33" changed="2011-05-26T16:45:28" muser="user_syssetting">
+                        <unitname pvalue="">Meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{9681c821-e1fb-4a3d-a202-f2b09aa8efe6}" parent="syssetting" status="0" created="2011-06-11T09:55:46" changed="2014-02-25T17:19:28" muser="user_syssetting">
+                        <unitname pvalue="">Manuur</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{654d1a4a-de1e-491f-a0f1-8e73a615cff1}" parent="syssetting" status="0" created="2011-05-26T16:43:14" changed="2014-02-25T17:19:20" muser="user_syssetting">
+                        <unitname pvalue="">Stuk</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{cc94ef86-6274-4479-a416-afd8e319225c}" parent="syssetting" status="0" created="2011-05-26T16:43:24" changed="2013-08-22T11:46:33" muser="user_syssetting">
+                        <unitname pvalue="">Kg</unitname>
+                    </ACC_UnitOfMeasure>
+                </ACC_UnitOfMeasureList>
+            </ACC_SysSetting>
+        </ACC_SysSettingList>
+    </ACC_Project>
+</ACC>
+axProvinceList>
+                <ACC_UnitOfMeasureList>
+                    <ACC_UnitOfMeasure id="{7ad069f5-d2bc-4b7a-935a-692ec114eb6d}" parent="syssetting" status="0" created="2011-05-26T16:44:13" changed="2011-05-26T16:44:30" muser="user_syssetting">
+                        <unitname pvalue="">None</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{b6086b0d-e7fb-499b-b9d1-41875109afd6}" parent="syssetting" status="0" created="2011-05-26T16:44:01" changed="2011-05-26T16:45:34" muser="user_syssetting">
+                        <unitname pvalue="">Cubic meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{add9afcf-78e4-41f1-94eb-ead6bab5ccc6}" parent="syssetting" status="0" created="2011-05-26T16:43:33" changed="2011-05-26T16:45:28" muser="user_syssetting">
+                        <unitname pvalue="">Meter</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{ece55128-d1cb-4478-9a4f-514d8bc3e2ce}" parent="syssetting" status="0" created="2011-06-11T09:55:46" changed="2011-06-11T09:55:53" muser="user_syssetting">
+                        <unitname pvalue="">Manhour</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{3ecfa277-ded5-48c7-adee-9fad395ce32d}" parent="syssetting" status="0" created="2011-05-26T16:43:14" changed="2011-05-26T16:43:24" muser="user_syssetting">
+                        <unitname pvalue="">Each</unitname>
+                    </ACC_UnitOfMeasure>
+                    <ACC_UnitOfMeasure id="{d9367f06-58a4-4c8c-8dc6-c5482c4a146a}" parent="syssetting" status="0" created="2011-05-26T16:43:24" changed="2013-08-22T11:46:33" muser="user_syssetting">
+                        <unitname pvalue="">Kg</unitname>
+                    </ACC_UnitOfMeasure>
+                </ACC_UnitOfMeasureList>
+            </ACC_SysSetting>
+        </ACC_SysSettingList>
+    </ACC_Project>
+</ACC>

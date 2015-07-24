@@ -1,0 +1,124 @@
+/*! \page acc_gltransactionwidget General Ledger (GL) Transaction Window - Accounting ACC
+\section sec_acc_gltransactionwidget General Ledger (GL) Transaction Window
+
+The basic accounting in ACC is done in the GL Transaction window. This window
+gives the user access to the Bank, Cash, Debtor, Creditor and GL accounts.
+
+All the above accounts are document controlled. For example a bank will issue
+bank statements, giving the overview of deposits and withdrawls. This bank
+statement, in paper or electronically, is a document. The document has a
+listing of the detail transactions. The document and the detail transactions
+or items are edited in the GL Transaction window. Another example would be a
+sales invoice. This is a debtor document. This document has detail items or
+invoice line items.
+
+From the menu select <i>Accounting &gt; GL Transaction</i>&nbsp;
+the below window will be shown:
+\image html acc_gltransactionwidget.png "GL Transaction window"
+
+The window has two tabs at the top: Entry and Journal. The Entry tab shows
+at the top half of the window the document entry fields and at the bottom half
+the items per document entry fields The Journal tab will show the GL
+transactions as per the selected document and item entries for check of the
+GL modifications, refer to below image:
+\image html acc_gltransactionwidget_journal.png "Ledger account selection"
+
+At the left top select the relevant Ledger account to be edited, refer to below image:
+\image html acc_gltransactionwidget_selectgl.png "Ledger account selection"
+
+There are 4 types of GL documents,
+\li Bank or Cash
+\li Amounts Receivable (Debtors)
+\li Amounts Payable (Creditors)
+\li Journal (in Dutch Memoriaal)
+
+Of Cash and Bank more than one can exist within the accounting system.
+For example: your company can have more than one bank account.
+
+Use the green button with (+) to add a document
+
+The red button with (-) will delete the selected document and items.
+NOTE: this action can not be undone
+
+Next to the delete button is the Save button. This button will be shown
+when all the amounts for the document result in a valid GL transaction.
+Click this button to save the changes when you have finished the editing
+of the entries.
+
+The Revert button can be clicked to revert any changes made to the document
+and item entries.
+
+The Find field + button is used to find a specific
+document. The first find action can take some time when all the documents
+for the selected GL account are collected from the database.
+
+Click in the table with documents to select a document.
+
+The edit fields for the documents are:
+\li Date - the transaction (booking) date for this document
+\li Due Date - the due date if applicable for the invoice to be paid or
+to receive
+\li Document No. - the (booking) number of the document
+\li Reference No. - for a purchase invoice this will be the invoice number
+of the customer
+\li Description - a description of the document for ease of reference
+\li Customer or Supplier - with the (...) three dot button select the
+relevant customer for sales invoices and the supplier for the purchase
+invoices
+\li Total Receivable or Payable - the total amount receivable or payable
+on this document. This amount is including the Total Tax
+\li Total Tax - &nbsp;the total tax amount
+
+The button Reprint Invoice is only shown when the Debtor account
+is selected. The invoice can be reprinted when a debtor document
+is generated via a Sales Order and the invoice has been processed
+as a GL transaction.
+
+The bottom half of the window is dealing with the document items.
+
+Use the green button with (+) to add a document item
+
+The red button with (-) will delete the selected item.
+NOTE: this action can not be undone
+Click the table with items to select an item.
+
+The edit fields for the items are:
+\li Description - a description of the item, usually the item
+description as on the invoice or bank statement
+\li Item Amount - the item amount excluding tax
+\li Allocation - use the (...) three dotted button to allocate the
+cash/bank or the journal item to an invoice
+\li Account - select with the three dotted button the applicable GL account.
+This account will be set to Account Payable or Account Receivable if an
+allocation is selected and can not be changed, only after deletion of
+the allocation.
+\li Cost Center - click the button to select the cost center. This only
+required if you also want to maintain a cost/profit center administration
+\li The High Tax and Low Tax field will automatically set as per
+your companies preferences. The other tax and the applicable percentage
+an be selected by the user.
+\li The buttons with the calculator calculate and set the tax amount
+
+Most of the amounts are calculated, except the Item Amount. The efficient
+work method is to set the Item Amounts first, per item click the relevant
+tax button and tax will be calculated and set, click in the document the
+Total Tax sum button and last click the Total Receivable or Payable sum button.
+Use CTRL+S or the save button to save the document and item transactions.
+
+NOTE: if the High, Low or Other Tax fields are not set automatically, you can
+check whether your settings are done in:
+
+\li Sales tax postings, in menu Accounting &gt; ACC Settings
+&gt; Sales/Purchasing &gt; Sales Tax Posting
+\li Tax authority rates, in menu Accounting &gt; ACC Settings &gt; General
+&gt; Tax Authorities/Rates and
+\li Tax group authorities, in menu: Accounting &gt; ACC Settings &gt; General
+&gt; Tax Group/Authorities
+
+You can also check in the Command Message dock window which ID's are missing
+to complete the automatic settings correctly.
+
+The query used to get the relevant tax information uses the dispatch provice
+from where the goods or service are issued and customer (or supplier) tax group.
+
+*/

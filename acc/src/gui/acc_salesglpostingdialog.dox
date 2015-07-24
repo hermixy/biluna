@@ -1,0 +1,52 @@
+/*! \page acc_salesglpostingdialog Sales GL Postings Edit Dialog - Accounting ACC
+\section sec_acc_salesglpostingdialog Sales GL Postings Edit Dialog
+
+This dialog is used to edit the sales GL postings.
+
+In the company record the GL integration is set up:
+\li Create GL entries for accounts receivable transactions
+\li Create GL entries for accounts payable transactions
+\li Create GL entries for stock transactions (at standard cost)
+
+Notice that the stock GL integration is a separate flag. If GL
+integration of accounts receivable is set to yes, then GL journals are 
+created for invoices and credits to sales and debtors but not for cost 
+of sales and stock. For the later integration this requires that the GL 
+entries for stock transactions be set to yes also.
+
+For GL integration at the sales level the posting codes for sales for a
+specific sales type, sales area and stock category need to be defined 
+from Accounting &gt; Settings &gt; Sales GL (Interface) Postings. For Stock GL integration 
+then the cost of sales posting codes for a specific sales type, sales 
+area and stock category also need to be set up from Accounting &gt; Settings &gt;
+COGS GL &nbsp;(Interface) Postings (COGS = Cost Of Goods Sold). If appropriate GL codes
+are not specified the system will automatically create a new GL account 
+number 1 for the postings to be made to. If you have this account keep 
+appearing then this is a good sign that default posting codes are not 
+created.&nbsp;The sales area are used for sales analysis when a breakdown is
+required per area.
+
+From the menu select <i>Accounting &gt; Settings &gt; Sales GL Postings</i>
+and the below dialog will be shown:
+\image html acc_salesglpostingdialog.png "Sales GL postings dialog"
+
+The following data fields are available:
+\li Tax Authority - applicable tax authority
+\li Sales area - the applicable sales area where the product
+(from category) is sold
+\li Stock category - the category of the sold products
+\li Sales Type/Price List - the applicable price list for the products
+\li Post Discount to GL Account - the GL account where the discount on
+the selling price are being posted
+\li Post Sales to GL Account - the GL account where the sales price are
+being posted
+
+Use the green button with (+) to add an item.
+
+The red button with (-) will delete a an item,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

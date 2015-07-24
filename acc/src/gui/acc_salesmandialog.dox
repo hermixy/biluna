@@ -1,0 +1,27 @@
+/*! \page acc_salesmandialog Salesman Edit Dialog - Accounting ACC
+\section sec_acc_salesmandialog Salesman Edit Dialog
+
+This dialog is used to edit salesmen. Except the name and telephone number
+also the commision rates can be set in this dialog.
+
+From the menu select <i>Accounting &gt; Settings &gt; Salesman</i>
+and the below dialog will be shown:
+\image html acc_salesmandialog.png "Salesman dialog"
+
+The following fields can be edited:
+\li Salesman Name - name of the salesman
+\li Telephone - telephone number
+\li Fax - fax number
+\li Commission rate 1 - the base commission rate
+\li Breakpoint - sales volume above which rate 2 will be applicable
+\li Commission rate 2 - the second (usually higher) commission rate
+
+Use the green button with (+) to add a salesman
+
+The red button with (-) will delete a salesman,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

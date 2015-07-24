@@ -1,0 +1,30 @@
+/*! \page acc_gltransreportwidget GL Transaction Report Window - Accounting ACC
+\section sec_acc_gltransreportwidget GL Transaction Report Window
+
+The GL transaction window shows the individual GL transactions that are
+summarized the a balance sheet. This report helps to find the transactions
+that make up the amounts listed in the trial balance. From the menu select<
+
+\li Accounting &gt; Reports &gt; GL Transaction Report
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows before
+running the GL transaction report, otherwise the report will be generated
+with different data from the database.
+\image html acc_gltransreportwidget.png "GL Transaction Report Settings"
+
+Select the relevant period and the accounts to be shown for the GL transaction
+report. The months are based on the previous and current month. Click the
+refresh button to generate the summary. For an example refer to below image.
+\image html acc_gltransreportwidget_refresh.png "GL Transaction Report - refresh"
+
+The GL accounts are sorted based by account number.
+
+Click File &gt; Print or Print Preview to print the summary report.
+
+Click File &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+*/

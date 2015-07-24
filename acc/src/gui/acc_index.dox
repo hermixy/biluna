@@ -1,0 +1,41 @@
+/*! \page acc_index Index - Accounting ACC
+\section sec_acc_index Accounting Index
+
+Getting started information can be found in:
+\li \subpage acc_general_gettingstarted
+
+The accounting help documentation is diveded in the following sections:
+\li \subpage acc_general
+\li \subpage acc_editview
+\li \subpage acc_reporting
+\li \subpage acc_setting
+\li \subpage acc_maintenance
+
+The general section gives general information about the accounting
+perspective and answers to Frequently Asked Questions (FAQ).
+
+The edit/view section gives information about the edit and view windows
+at top part of the perspective menu. These menu items are most frequently
+used and therefore directly accessible. Most of these windows will be shown
+in the multi document interface (MDI) section of the main window
+
+The reporting section gives explanation about all the reporting possibilities
+and windows that create reports. In accounting various reports are used.
+The reports are shown in the MDI section of the main window. This enables the
+user to refresh the report without reopening the window from the menu and
+see immediately the changes made in the edit windows.
+
+The settings section of the help gives information about the settings
+that can be done or are required in the accounting perspective. These
+settings are only done in the beginning and later only done sporadically.
+
+The changes in the settings usually have an impact on the overall
+accounting system and are therefore done in dialogs on top of all
+other windows.
+
+The maintenance section describes the maintenance actions that can be done.
+The maintenance includes the recreation of related tables such as the
+trial balance. The trial balance table is derived from the GL transaction
+table for efficiency purpose of the trial balance report.
+
+*/

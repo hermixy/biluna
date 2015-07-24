@@ -1,0 +1,97 @@
+/*! \page acc_assetvaluationwidget Asset Valuation Window - Accounting ACC
+\section sec_acc_assetvaluationwidget Asset Valuation Window
+
+Assets are resources that usually represents a value or benefits can be
+obtained from the asset. The assets can have important economical influence
+depending the business who is owner or is responsible.
+For example if you are in the
+real estate business or a automobile dealer, the assets are your core
+business. When you are a software development company and own the office
+you are working in, the office will be a line item on you balance sheet.
+
+The asset valuation window provides the user a tool to calculate the value
+of the asset. The window is selected from the menu <i>Accounting &gt; Assets
+&gt; Asset Valuation</i>&nbsp;and the below window will be shown:
+\image html acc_assetvaluationwidget.png "Asset Valuation window"
+
+The asset is selected from the navigation menu at the left. The assets are
+defined by a Asset Code (for easy reference) and the Name.
+
+The Asset Valuation window repeats at the top the selected Asset Code. The
+button next to the Asset Code or CTRL+S saves the changes of this window
+to the database.
+
+The window has two tabs at the top: Attributes and Valuation. The Attributes
+tab is for the data entry and the Valuation tab shows the valuation report.
+
+The top half of the Attributes tab is for the revenues from the customer,
+such as rental income. The bottom half is for the cost to supplier,
+such as maintenance and other services.
+
+Use the green button with (+) to add an attribute.
+
+The red button with (-) will delete the selected attribute.
+NOTE: this action cannot be undone.
+
+The edit fields for revenues and cost (customer or supplier) are as follows:
+\li Sequence number, to identify the attribute and possibly link to other
+attributes
+\li Short name, a short name which will be used in the listings
+\li Description, to explain the background or purpose of this attribute
+\li Unit of measurement, such as m2, EURO, Date
+\li Weight, a weight factor for this attribute to quickly see the impact
+of changes without changing the value
+\li Value, the actual calculation value of this attribute
+\li Multiply with number, is the sequence number of the attribute with
+which this attribute will be multiplied to get the result value
+\li Interval, can be Once, Month or Year. In case of Monthly or Year the
+attribute will have repeated results during start date and the end date
+\li (Start) Date, is the start date for Month or Year interval or the date
+in case of interval is Once
+\li End Date, is the end date for Month or Year interval, does nothing
+in case of interval is Once
+\li Customer, the customer can be selected for the resulting attribute for
+identification in the valuation report
+
+The calculation is as follows:
+\li if an attribute has a sequence number that is not referenced by
+any other attribute in the Multiply With field and has the interval Once
+than the result value will be add to the result list with the date
+of (Start) Date
+\li in case the above attribute referenced another attribute sequence number
+in the Multiply With field than the result value will be the multiplication
+of both values
+\li if an attribute has an interval Month or Year than the attribute will be
+repeated has much intervals as fit in between the start date and the end date
+and the result value will be increased with value each interval, for example
+the value 1.02 will result in an increase of 2% each interval
+\li an attribute that references an interval (Month or Year) attribute that
+attribute will be repeated equally by the set interval but only between
+the start and end date of this attribute
+
+The below picture shows a section of the customer attributes
+\image html acc_assetvaluationwidget_detail.png "Detail of Asset Valuation window"
+The sequence numbers increases with 10 because it will be easier to insert
+other attributes at a later stage.
+
+NOTE: the valuation calculation is done in ascending order of the sequence
+numbers. If the numbers are scattered, the result will be undefined.
+
+The below picture shows the relation of the Sequence Number and the Multiply
+With number.
+\image html acc_assetvaluationwidget_detail1.png "Calculation of Valuation Result"
+The above date will result in:
+\li 6015 * 170 * 1 for the first interval
+\li 6015 * 170 * 1.02 for the second interval
+\li 6015 * 170 * 1.02 * 1.02 for the third interval
+\li 6015 * 170 * 1.02^n for the n-th interval
+
+The start and end dates are not shown in above example but the above sequence
+continues from the start date untill the end date
+
+Below is a part of a valuation report.
+\image html acc_assetvaluationwidget_report.png "Valuation Report"
+
+Refer to the website for more valuation examples.
+
+*/

@@ -1,0 +1,42 @@
+/*! \page acc_orderreportwidget Order Report Window - Accounting ACC
+\section sec_acc_orderreportwidget Order Report Window
+
+The order report windows list only the open orders or all orders for
+the selected period.
+\li Accounting &gt; Reports &gt; Sales Order Report
+\li Accounting &gt; Reports &gt; Purchase Order Report
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows
+before running the reports, otherwise the report will be generated with
+different data from the database.
+
+Select the relevant period to be shown for the invoice aged report.
+Select whether you want only the open orders or all orders of the period.
+Click the refresh button to generate the report. For an example refer
+to below image.
+\image html acc_orderreportwidget.png "Sales Order Report"
+
+The report is sorted by order number. The columns are:
+\li Item - stock item code
+\li Description - the description of the order
+\li Unit - unit of measurement for the quantities
+\li Price - item price
+\li Qty Order - quantity ordered
+\li Qty Inv. - quantity invoiced
+\li Qty Disp. - quantity dispatched
+\li Item Due - due date of delivery
+\li Difference - Difference in order amount and invoiced amount
+
+The purchase order report follows a similar approach.
+
+Click File &gt; Print or Print Preview to print the allocation report.
+
+Click FIle &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+Click File &gt; PDF Export to save the summary report to PDF format
+
+*/

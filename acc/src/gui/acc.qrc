@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/invoice_table.html</file>
+        <file>resources/salesinvoice_table_te.html</file>
+        <file>resources/salesquotation_table_te.html</file>
+        <file>resources/purchaseorder_table_te.html</file>
+        <file>resources/acc_chartmaster_syssetting_en.xml</file>
+        <file>resources/acc_chartmaster_syssetting_nl.xml</file>
+    </qresource>
+</RCC>

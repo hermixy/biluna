@@ -1,0 +1,53 @@
+/*! \page acc_costcenterbalancereportwidget Cost Center Balance Report Window - Accounting ACC
+\section sec_acc_costcenterbalancereportwidget Cost Center Balance Report Window
+
+The cost center balance report gives and overview of the customer
+and supplier part of the budget-, forecast- or actual costcenter amounts.
+
+From the menu select <i>Accounting &gt; Reports &gt; Cost Center Balance</i>
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows before
+running the cost center report, otherwise the report will be generated with
+different data from the database.
+
+Set the applicable year and months at the top of the report window
+to generate the relevant report. If the year is set to 2013, the
+from month is set to August and the to month is set to July, the period
+will be from August 1, 2013 to July 31, 2014.
+
+The customer and supplier part settings are done in the
+\li \subpage acc_custcostpartwidget
+\li \subpage acc_supplcostpartwidget
+
+The report shows the following data:
+\li Name - customer or supplier name
+\li Seq.No. - sequence number of the cost/profit center group
+\li Group Name - name of cost/profit center group
+\li Cost/Profit - 0 is a cost center, 1 is profit center
+\li Center Code - cost/profit center code
+\li Center Name - cost/profit center name
+\li Budget - part of the budget in set period attributable to relevant
+customer or supplier
+\li Forecast - part of the forecast in set period attributable to relevant
+customer or supplier
+\li Actual - part of the actual amount in set period attributable to relevant
+customer or supplier
+\li Start - start date of applicable period for customer or supplier
+\li End - end date of applicable period for customer or supplier
+
+\image html acc_costcenterbalancereportwidget.png "Cost Center Balance Report"
+
+Select the relevant period for the report and click the refresh
+button to generate the summary.
+
+Click File &gt; Print or Print Preview to print the summary report.
+
+Click File &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+Click File &gt; PDF Export to save the summary report to PDF format
+
+*/
