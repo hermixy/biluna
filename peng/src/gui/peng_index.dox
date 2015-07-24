@@ -1,0 +1,36 @@
+/*! \page peng_index Index - Plant Engineering and Design PENG
+\section sec_peng_index PENG Index
+
+The Plant Engineering and Design perspective provides tools to handle
+data, execute design and engineering as applicable in the process industry.
+
+The following documents are part of the database and design tools:
+
+\li Piping and Instrument Diagram (later)
+\li Equipment List (later)
+\li Line Designation Table (later)
+\li Instrument List (later)
+\li Electrical Equipment List (later)
+\li Key One Line Diagram (later)
+\li Plant Layout (later)
+\li Area Classification (later)
+
+<b>Specifications</b>
+
+\li Insulation (later)
+\li Painting (later)
+
+<b>Authority Classification</b>
+
+\li \subpage peng_ped_guide
+
+<b>Engineering Tools</b>
+
+\li \subpage peng_conestrikeoutwidget
+\li \subpage peng_weldoletweldvolumewidget
+
+<b>Settings</b>
+
+\li \subpage peng_projecteditdialog
+
+*/

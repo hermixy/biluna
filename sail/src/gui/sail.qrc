@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/icons/sail_report.png</file>
+        <file>images/icons/sail_world.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,36 @@
+/*! \page peng_conestrikeoutwidget Cone strikeout window - PENG
+\section sec_peng_conestrikeoutwidget Cone strikeout window
+
+The cone strikeout window is used to design the plate strikeout for a cone
+with a large diameter, a small diameter and a height.
+
+\image html peng_conestrikeoutwidget.png "Cone strike out"
+
+At the top left the buttons are used for:
+
+\li + button for adding a cone to the database
+\li - button to delete the cone from the database
+
+Activate a cone in the cone table at the left by clicking the relevant row.
+
+Enter the detail data and dimensions of the cone in the textfields
+in the middle.
+
+\li A convenient number of the cone. This number will be shown on the
+design document
+\li The description of the cone.
+\li The revision of the design, to keep track of changes in the design
+dimensions
+\li D0, the large diameter of the cone
+\li D1, the small diameter of the cone
+\li H0, the height of the cone
+
+Press the Design button to refresh the design document at the right.
+
+In the main menu:
+
+\li File &gt; PDF Export to export the design document as a PDF document
+\li File &gt; Print or [CTRL]+P to print the design document
+\li File &gt; Print preview to preview the print
+
+*/

@@ -1,0 +1,29 @@
+/*! \page srm_leadsourcetypedialog Lead Source Type Dialog - SRM
+\section sec_srm_leadsourcetypedialog Lead Source Type Dialog
+
+The dialog is for editing the lead source types. A lead is contact
+which might result in business and the source indicates where
+the lead came from.
+
+From the menu select <i>SRM &gt; Settings &gt; Lead Source Type</i>
+and the below dialog will be shown:
+\image html srm_leadsourcetypedialog.png "Lead source type dialog"
+
+Use the green button with (+) to add a type
+
+In the table view, enter the name for the type. Double click to edit
+the field or press F2 on the keyboard.
+
+The red button with (-) will delete the account,
+NOTE: this action can not be undone
+
+The button with binoculars is to search for a particular setting.
+
+The next two buttons with funnels are for setting a filter or removing the filter on the
+a selected column. Setting the filter will open a dialog with the selection
+for a column, match case and the filter criteria.
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

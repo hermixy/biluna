@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/icons/equipment.png</file>
+        <file>images/icons/equipment_edit.png</file>
+        <file>images/icons/equipment_graph.png</file>
+        <file>images/icons/equipmenttype.png</file>
+        <file>images/icons/equipmenttype_edit.png</file>
+        <file>images/icons/instrument.png</file>
+        <file>images/icons/lightning.png</file>
+        <file>images/icons/pipeline.png</file>
+        <file>images/icons/pnid.png</file>
+        <file>images/rb_a4cover-0.svg</file>
+        <file>images/weldolet_legend.png</file>
+        <file>images/weldvolume_legend.png</file>
+        <file>images/rb_a4follow-0.svg</file>
+        <file>images/weldolet_legend_bw.svg</file>
+        <file>images/cone_legend.svg</file>
+        <file>images/cone_legend_bw.svg</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,32 @@
+/*! \page srm_projecteditdialog Project Edit Dialog - SRM
+\section sec_srm_projecteditdialog Project Edit Dialog
+
+The relevant project in SRM can be a customer relation project
+or just a placeholder for potential customer.
+
+The current project is selected in the menu <i>Select Project</i>
+when you start working with the SRM perspective.
+
+Detail editing of the project is done in the in this Project Edit Dialog.
+This dialog is show after selecting <i>Settings &gt; Project Edit.</i>
+The below dialog will be shown:
+\image html srm_projecteditdialog.png "Project edit dialog"
+
+Use the green button with (+) to add a new project.
+The red button with (-) will delete the project, NOTE: this action can not
+be undone.
+
+In the table view, select the relevant project,
+the fields are edited below the tableview.
+
+The edit fields are:
+\li Project Code or Number, to identify this root project
+<!-- \li Revision, in case new revisions of the entire database are made -->
+\li Description, description of this root project
+<!-- \li Company name is optional -->
+<!-- \li Location name is optional -->
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

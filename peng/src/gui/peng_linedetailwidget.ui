@@ -1,0 +1,1987 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PENG_LineDetailWidget</class>
+ <widget class="QWidget" name="PENG_LineDetailWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>696</width>
+    <height>412</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_12">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <property name="spacing">
+    <number>3</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="RB_ToolButtonBar" name="tbbLineDetail" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>26</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBoxLineMain">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Line main data</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="leftMargin">
+       <number>6</number>
+      </property>
+      <property name="topMargin">
+       <number>6</number>
+      </property>
+      <property name="rightMargin">
+       <number>6</number>
+      </property>
+      <property name="bottomMargin">
+       <number>6</number>
+      </property>
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="textLabelLineNo">
+        <property name="text">
+         <string>Line No.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="leLineNo">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="textLabelRevLine">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Revision&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="leRevision">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="textLabelFluidCode">
+        <property name="text">
+         <string>Fluid Code</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5" colspan="2">
+       <widget class="RB_IdxLineEdit" name="ileFluidCode">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="textLabelSize">
+        <property name="text">
+         <string>Size</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="leDnSize">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QComboBox" name="cbProcessUtility">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="label_23">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Nozzles</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLabel" name="textLabelPipeClass">
+        <property name="text">
+         <string>Pipe Class</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5" colspan="2">
+       <widget class="RB_IdxLineEdit" name="ilePipeClass">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="textLabelFrom">
+        <property name="text">
+         <string>From</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="leFrom">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QComboBox" name="cbFromType">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLineEdit" name="leFromSub">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QLabel" name="textLabelPd">
+        <property name="toolTip">
+         <string>Design Pressure</string>
+        </property>
+        <property name="text">
+         <string>Pd</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5">
+       <widget class="QLineEdit" name="lePd">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="6">
+       <widget class="QLabel" name="textLabel1">
+        <property name="text">
+         <string>N/mm2</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="textLabelTo">
+        <property name="text">
+         <string>To</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="leTo">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QComboBox" name="cbToType">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLineEdit" name="leToSub">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="4">
+       <widget class="QLabel" name="textLabelTd">
+        <property name="toolTip">
+         <string>Design Temperature</string>
+        </property>
+        <property name="text">
+         <string>Td</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5">
+       <widget class="QLineEdit" name="leTd">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="6">
+       <widget class="QLabel" name="textLabel2">
+        <property name="text">
+         <string>Celsius</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1677725</width>
+       <height>1677725</height>
+      </size>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="engineeringDesign">
+      <attribute name="title">
+       <string>Engineering</string>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Engineering and Design Data</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_17">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBoxEngineeringDesign">
+         <property name="title">
+          <string>Engineering Design Detail Data</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="leDesIsoTo"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="textLabel3_3_2">
+            <property name="text">
+             <string>General Arrangement - From</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="textLabel6_3_2">
+            <property name="text">
+             <string>Isometric Number - To</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="textLabel10_2_2">
+            <property name="text">
+             <string>Insulation Type / Thickness</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLineEdit" name="leDesTracingNumberOf">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="leDesGaTo"/>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="textLabel9_5_2_2">
+            <property name="text">
+             <string>Tracing Type / Number Of</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="leDesGaFrom"/>
+          </item>
+          <item row="4" column="4" colspan="3">
+           <widget class="QLineEdit" name="leDesPaintingSystem"/>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="textLabel7_3_2">
+            <property name="text">
+             <string>Line Function</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="6">
+           <widget class="QLabel" name="textLabel12_2_2">
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3" colspan="2">
+           <widget class="QComboBox" name="cbDesTracingType">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3" colspan="4">
+           <widget class="QComboBox" name="cbDesExternalPressure"/>
+          </item>
+          <item row="4" column="3">
+           <widget class="QCheckBox" name="ckbDesPaintingAsPerSpec">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="leDesPnidFrom"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="textLabel2_3">
+            <property name="text">
+             <string>P&amp;ID Number - To</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="textLabel8_3_2">
+            <property name="text">
+             <string>External Pressure</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="textLabel4_3_2">
+            <property name="text">
+             <string>General Arrangement - To</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3" colspan="4">
+           <widget class="QComboBox" name="cbDesLineFunction"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="leDesPnidTo"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel1_3">
+            <property name="text">
+             <string>P&amp;ID Number - From</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="5">
+           <widget class="QLineEdit" name="leDesInsulationThickness">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3" colspan="2">
+           <widget class="QComboBox" name="cbDesInsulationType">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="leDesIsoFrom"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="textLabel5_3_2">
+            <property name="text">
+             <string>Isometric Number - From</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="6">
+           <widget class="QLabel" name="textLabel13_2_2">
+            <property name="text">
+             <string>mm</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="textLabel11_2_2">
+            <property name="text">
+             <string>Painting per Spec./System</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="5" column="2">
+           <widget class="QLabel" name="lblStressCalcRequired">
+            <property name="text">
+             <string>Stress Calc. Required</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QCheckBox" name="ckbStressCalcRequired">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="4" colspan="3">
+           <widget class="QLineEdit" name="leStressCalcNumber"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="process1">
+      <attribute name="title">
+       <string>Process 1</string>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Process Data page 1</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_16">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBoxProcessDetail_1">
+         <property name="title">
+          <string>Process detail data</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <item row="1" column="5">
+           <widget class="QLabel" name="textLabel8_2_2_2">
+            <property name="text">
+             <string>N/mm2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QLineEdit" name="leProcessMassFlowRate"/>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Mass Flow Rate</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>N/mm2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Operating Temperature Low</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="textLabel4_3_4_2_2">
+            <property name="text">
+             <string>Operating Pressure</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="leProcessOperTemp"/>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLineEdit" name="leProcessMassFlowRateMax"/>
+          </item>
+          <item row="5" column="5">
+           <widget class="QLabel" name="textLabel12_2_4_2_2">
+            <property name="text">
+             <string>m/s</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="textLabel10_2_4_2_2">
+            <property name="text">
+             <string>Celsius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLabel" name="textLabel8_3_4_2_2">
+            <property name="text">
+             <string>Mass Flow Rate Max.</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="textLabel8_2_5_4_2_2">
+            <property name="text">
+             <string>N/mm2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLabel" name="textLabel8_2_3_2">
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="leProcessOperPress"/>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="leProcessOperTempLow"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel3_3_4_2_2">
+            <property name="text">
+             <string>Fluid Description</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLineEdit" name="leProcessTestPress"/>
+          </item>
+          <item row="2" column="4">
+           <widget class="QLineEdit" name="leProcessTestMedium"/>
+          </item>
+          <item row="4" column="5">
+           <widget class="QLabel" name="textLabel11_2_4_2_2">
+            <property name="text">
+             <string>kg/s</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="textLabel5_3_4_2_2">
+            <property name="text">
+             <string>Operating Temperature</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_24_2_2">
+            <property name="text">
+             <string>Pressure Drop 100m</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="leProcessOperTempHigh"/>
+          </item>
+          <item row="3" column="5">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>kg/s</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Operating Temperature High</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QLabel" name="textLabel1_2_2">
+            <property name="text">
+             <string>Velocity</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Celsius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="leProcessPressDrop"/>
+          </item>
+          <item row="5" column="4">
+           <widget class="QLineEdit" name="leProcessVelocity"/>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Celsius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="5">
+           <widget class="QLineEdit" name="leProcessFluidDescr"/>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="textLabel7_3_4_2_2">
+            <property name="text">
+             <string>Test Medium</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="textLabel6_3_4_2_2">
+            <property name="text">
+             <string>Test Pressure</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="process2">
+      <attribute name="title">
+       <string>Process 2</string>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Process Data page 2</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_15">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBoxProcessDetail_2">
+         <property name="title">
+          <string>Process2 Detail Data</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="leProcessMolWeight"/>
+          </item>
+          <item row="3" column="4">
+           <widget class="QLineEdit" name="leProcessStandardVolumeFlowMax"/>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="textLabel14_2_4_2_2">
+            <property name="text">
+             <string>cP</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="textLabel3_2_2">
+            <property name="text">
+             <string>Viscosity Vapour</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Viscosity Liquid</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="textLabel2_2_2">
+            <property name="text">
+             <string>Density Vapour</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="textLabel16_2_4_2_2">
+            <property name="text">
+             <string>Celsius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>Mol Weight</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>m3/h</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Standard Volume Flow</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel4_2_2">
+            <property name="text">
+             <string>Phase (liquid, vapour, gas, ...)</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="cbProcessPhase"/>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLineEdit" name="leProcessViscosityVapour"/>
+          </item>
+          <item row="5" column="4">
+           <widget class="QLineEdit" name="leProcessActualFlowMax"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="textLabel5_2_2">
+            <property name="text">
+             <string>Boiling Point @ 1 Bar (abs)</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>cP</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Density Liquid</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLineEdit" name="leProcessViscosityLiquid"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="textLabel6_2_2">
+            <property name="text">
+             <string>Vapour Pressure @ Oper. Temp.</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="label_22">
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="leProcessVapourPress"/>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>Standard Volume Flow Max.</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="leProcessDensityLiquid"/>
+          </item>
+          <item row="5" column="2">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>kg/m3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="textLabel7_2_2">
+            <property name="text">
+             <string>Process Simulation Reference</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1" colspan="4">
+           <widget class="QLineEdit" name="leProcessSimulation"/>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="textLabel8_2_4_2">
+            <property name="text">
+             <string>N/mm2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="leProcessBoilingPoint"/>
+          </item>
+          <item row="2" column="4">
+           <widget class="QLineEdit" name="leProcessStandardVolumeFlow"/>
+          </item>
+          <item row="3" column="5">
+           <widget class="QLabel" name="label_18">
+            <property name="text">
+             <string>m3/h</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="leProcessDensityVapour"/>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="textLabel13_2_4_2_2">
+            <property name="text">
+             <string>kg/m3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLabel" name="label_15">
+            <property name="text">
+             <string>Actual Flow</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLineEdit" name="leProcessActualFlow"/>
+          </item>
+          <item row="4" column="5">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>m3/h</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="5">
+           <widget class="QLabel" name="label_20">
+            <property name="text">
+             <string>m3/h</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>Actual Flow Max</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="classification">
+      <attribute name="title">
+       <string>Classification</string>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Classification Data</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_14">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox5">
+         <property name="title">
+          <string>Line Classification Detail Data</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <item row="0" column="4">
+           <widget class="QLineEdit" name="leClassAuthorRegul"/>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="textLabel10_6">
+            <property name="text">
+             <string>Celsius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QComboBox" name="cbClassFluidDangerClassGroup"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="textLabel4_4">
+            <property name="text">
+             <string>Maximum Design Temperature</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QLineEdit" name="leClassRegulClassGroup"/>
+          </item>
+          <item row="2" column="4">
+           <widget class="QComboBox" name="cbClassGasStability"/>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="textLabel8_2_5_2">
+            <property name="text">
+             <string>N/mm2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="textLabel7_4">
+            <property name="text">
+             <string>Authority Regulation</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="leClassMaxDesPress"/>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="textLabel8_4">
+            <property name="text">
+             <string>Fluid Danger Class/Group</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="textLabel10_5">
+            <property name="text">
+             <string>Celsius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="leClassMinDesTemp"/>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLineEdit" name="leClassRegulSubClassGroup"/>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="leClassMaxDesTemp"/>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="textLabel9_2">
+            <property name="text">
+             <string>Regulation Category</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="textLabel3_4">
+            <property name="text">
+             <string>Maximum Design Pressure</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="textLabel11_3">
+            <property name="text">
+             <string>Gas Stability</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel1_4">
+            <property name="text">
+             <string>Nominal Operating Pressure</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="leClassNomOperTemp"/>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="textLabel10_4">
+            <property name="text">
+             <string>Celsius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="textLabel2_4">
+            <property name="text">
+             <string>Nominal Operating Temperature</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="leClassNomOperPress"/>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLabel" name="textLabel10_3">
+            <property name="text">
+             <string>Regulation Module(s)</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="textLabel5_4">
+            <property name="text">
+             <string>Minimum Design Temperature</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="textLabel8_2_6">
+            <property name="text">
+             <string>N/mm2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="custom">
+      <attribute name="title">
+       <string>Custom</string>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Custom Fields</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_10">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox9">
+         <property name="title">
+          <string>Custom Data Details</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel7_5_4_2_2">
+            <property name="text">
+             <string>Label</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <spacer name="spacer_1">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>151</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="textLabel18_2">
+            <property name="text">
+             <string>Value (numeric)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="textLabel19">
+            <property name="text">
+             <string>Unit</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="textLabel7_5_2">
+            <property name="text">
+             <string>Label</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <spacer name="spacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>141</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="6">
+           <widget class="QLabel" name="textLabel20">
+            <property name="text">
+             <string>Text (alphanumeric)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="textLabel8_5">
+            <property name="text">
+             <string>1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="leCustLabel1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLineEdit" name="leCustValue1"/>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLineEdit" name="leCustUnit1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLabel" name="textLabel13_4">
+            <property name="text">
+             <string>6</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QLineEdit" name="leCustLabel6">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLineEdit" name="leCustText6"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="textLabel9_3">
+            <property name="text">
+             <string>2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="leCustLabel2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLineEdit" name="leCustValue2"/>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLineEdit" name="leCustUnit2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QLabel" name="textLabel14_3">
+            <property name="text">
+             <string>7</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLineEdit" name="leCustLabel7">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="6">
+           <widget class="QLineEdit" name="leCustText7"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="textLabel10_7">
+            <property name="text">
+             <string>3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="leCustLabel3">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLineEdit" name="leCustValue3"/>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLineEdit" name="leCustUnit3">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QLabel" name="textLabel15_3">
+            <property name="text">
+             <string>8</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="5">
+           <widget class="QLineEdit" name="leCustLabel8">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="6">
+           <widget class="QLineEdit" name="leCustText8"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="textLabel11_4">
+            <property name="text">
+             <string>4</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="leCustLabel4">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLineEdit" name="leCustValue4"/>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLineEdit" name="leCustUnit4">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLabel" name="textLabel16_3">
+            <property name="text">
+             <string>9</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="5">
+           <widget class="QLineEdit" name="leCustLabel9">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="6">
+           <widget class="QLineEdit" name="leCustText9"/>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="textLabel12_4">
+            <property name="text">
+             <string>5</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="leCustLabel5">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QLineEdit" name="leCustValue5"/>
+          </item>
+          <item row="5" column="3">
+           <widget class="QLineEdit" name="leCustUnit5">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="4">
+           <widget class="QLabel" name="textLabel17">
+            <property name="text">
+             <string>10</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="5">
+           <widget class="QLineEdit" name="leCustLabel10">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="6">
+           <widget class="QLineEdit" name="leCustText10"/>
+          </item>
+          <item row="6" column="1">
+           <spacer name="verticalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <spacer name="verticalSpacer_5">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RB_IdxLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>rb_idxlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RB_ToolButtonBar</class>
+   <extends>QWidget</extends>
+   <header>rb_toolbuttonbar.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>leLineNo</tabstop>
+  <tabstop>leRevision</tabstop>
+  <tabstop>leDnSize</tabstop>
+  <tabstop>cbProcessUtility</tabstop>
+  <tabstop>leFrom</tabstop>
+  <tabstop>cbFromType</tabstop>
+  <tabstop>leFromSub</tabstop>
+  <tabstop>leTo</tabstop>
+  <tabstop>cbToType</tabstop>
+  <tabstop>leToSub</tabstop>
+  <tabstop>ileFluidCode</tabstop>
+  <tabstop>ilePipeClass</tabstop>
+  <tabstop>lePd</tabstop>
+  <tabstop>leTd</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>leDesPnidFrom</tabstop>
+  <tabstop>leDesPnidTo</tabstop>
+  <tabstop>leDesGaFrom</tabstop>
+  <tabstop>leDesGaTo</tabstop>
+  <tabstop>leDesIsoFrom</tabstop>
+  <tabstop>leDesIsoTo</tabstop>
+  <tabstop>cbDesLineFunction</tabstop>
+  <tabstop>cbDesExternalPressure</tabstop>
+  <tabstop>cbDesTracingType</tabstop>
+  <tabstop>leDesTracingNumberOf</tabstop>
+  <tabstop>cbDesInsulationType</tabstop>
+  <tabstop>leDesInsulationThickness</tabstop>
+  <tabstop>ckbDesPaintingAsPerSpec</tabstop>
+  <tabstop>leDesPaintingSystem</tabstop>
+  <tabstop>ckbStressCalcRequired</tabstop>
+  <tabstop>leStressCalcNumber</tabstop>
+  <tabstop>leProcessFluidDescr</tabstop>
+  <tabstop>leProcessOperPress</tabstop>
+  <tabstop>leProcessOperTemp</tabstop>
+  <tabstop>leProcessOperTempLow</tabstop>
+  <tabstop>leProcessOperTempHigh</tabstop>
+  <tabstop>leProcessPressDrop</tabstop>
+  <tabstop>leProcessTestPress</tabstop>
+  <tabstop>leProcessTestMedium</tabstop>
+  <tabstop>leProcessMassFlowRate</tabstop>
+  <tabstop>leProcessMassFlowRateMax</tabstop>
+  <tabstop>leProcessVelocity</tabstop>
+  <tabstop>cbProcessPhase</tabstop>
+  <tabstop>leProcessBoilingPoint</tabstop>
+  <tabstop>leProcessVapourPress</tabstop>
+  <tabstop>leProcessMolWeight</tabstop>
+  <tabstop>leProcessDensityVapour</tabstop>
+  <tabstop>leProcessDensityLiquid</tabstop>
+  <tabstop>leProcessSimulation</tabstop>
+  <tabstop>leProcessViscosityVapour</tabstop>
+  <tabstop>leProcessViscosityLiquid</tabstop>
+  <tabstop>leProcessStandardVolumeFlow</tabstop>
+  <tabstop>leProcessStandardVolumeFlowMax</tabstop>
+  <tabstop>leProcessActualFlow</tabstop>
+  <tabstop>leProcessActualFlowMax</tabstop>
+  <tabstop>leClassNomOperPress</tabstop>
+  <tabstop>leClassNomOperTemp</tabstop>
+  <tabstop>leClassMaxDesPress</tabstop>
+  <tabstop>leClassMaxDesTemp</tabstop>
+  <tabstop>leClassMinDesTemp</tabstop>
+  <tabstop>leClassAuthorRegul</tabstop>
+  <tabstop>cbClassFluidDangerClassGroup</tabstop>
+  <tabstop>cbClassGasStability</tabstop>
+  <tabstop>leClassRegulClassGroup</tabstop>
+  <tabstop>leClassRegulSubClassGroup</tabstop>
+  <tabstop>leCustValue1</tabstop>
+  <tabstop>leCustValue2</tabstop>
+  <tabstop>leCustValue3</tabstop>
+  <tabstop>leCustValue4</tabstop>
+  <tabstop>leCustValue5</tabstop>
+  <tabstop>leCustText6</tabstop>
+  <tabstop>leCustText7</tabstop>
+  <tabstop>leCustText8</tabstop>
+  <tabstop>leCustText9</tabstop>
+  <tabstop>leCustText10</tabstop>
+  <tabstop>leCustLabel1</tabstop>
+  <tabstop>leCustLabel2</tabstop>
+  <tabstop>leCustLabel3</tabstop>
+  <tabstop>leCustLabel4</tabstop>
+  <tabstop>leCustLabel5</tabstop>
+  <tabstop>leCustUnit1</tabstop>
+  <tabstop>leCustUnit2</tabstop>
+  <tabstop>leCustUnit3</tabstop>
+  <tabstop>leCustUnit4</tabstop>
+  <tabstop>leCustUnit5</tabstop>
+  <tabstop>leCustLabel6</tabstop>
+  <tabstop>leCustLabel7</tabstop>
+  <tabstop>leCustLabel8</tabstop>
+  <tabstop>leCustLabel9</tabstop>
+  <tabstop>leCustLabel10</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

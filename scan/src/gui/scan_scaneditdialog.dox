@@ -1,0 +1,182 @@
+/*! \page scan_scaneditdialog Edit dialog - SCAN
+\section sec_scan_scaneditdialog Edit dialog
+
+The SCAN perspective is a custom build scan and survey report builder.
+The user interface is explained for the scan based on the Jerry Rhodes
+mind scan method, refer to www.effectiveintelligence.com.
+The other scan and survey methods have the same type of user interface.
+
+The scan edit dialog is used to build the scan and survey questions
+and answers, and at the same time edit the result report.
+
+\image html scan_scaneditdialog.png "Scan edit dialog"
+
+Different scans and surveys can be created, for example in different languages.
+The above scan is made for the Dutch language. Each scan has questions
+and each question has various answers. The answers can be open questions,
+multiple choice or multiple choice valued. In case of the open questions the
+answers may include words that should be part of the answer. In case of
+multiple choice, only one answer will be the correct one. In case of
+multiple choice valued, each answer gets a value which has an
+influence on the result.
+
+At the topleft and left side of the dialog
+
+\li Add button (+) to add a new scan
+\li Delete button (-) to delete the scan, this action cannot be undone
+\li Save button to save the scan
+\li Revert button to undo last change
+\li Table view with list of scan, the table is editable to change the fields
+and click to select
+
+The middle part of the dialog has two tabs, content and report.
+The content tab is for editing the questions and answers. The buttons,
+tables and fields are:
+\li Add button (+) to add a new question
+\li Delete button (-) to delete the question, this action cannot be undone
+\li Table view with list of questions, click to select
+\li Number, a sequence number for the question
+\li Type, type of question: open, multiple choice or multiple choice valued
+\li Active, whether the question is valid and should be used in result
+\li Question, the question text
+
+The answers have:
+\li Add button (+) to add a new answer
+\li Delete button (-) to delete the answer, this action cannot be undone
+\li Table view with list of answers, click to select
+\li Number, a sequence number for the answer
+\li Answer, answer text
+
+The report is edited in Report tab.
+
+\image html scan_scaneditdialog_tabreport.png "Tab Report"
+
+The creation of a report is organized in textblocks. A textblock can have
+text only or text with fields that need to be replaced by a value and charts.
+The textblocks are organized in a treeview or parent-child structure for
+convenience. This makes grouping of text possible.
+
+The setup of the report is highly flexible. The above example shows in
+the treeview at number 1 'Cover Page'. This textblock or entry and the
+other main entries are for example only a placeholder for the chapters.
+The main entries contain the title and various paragraphs to be shown if
+an answer value is valid. The selected textblock 'Een samenvatting van je
+resultaten' is a textblock with values to be replaced. The text in curly
+braces {} indicates the value to be replaced.
+
+At the top are the buttons:
+
+\li Add button (+) to add a new textblock
+\li Add child button (+) to add a new child textblock
+\li Delete button (-) to delete the textblock, this action cannot be undone
+\li Promote textblock
+\li Demote textblock to new parent textblock
+\li Tree view with list of textblocks, click to select
+\li Number, a sequence number for the textblock
+\li Various buttons to format the text
+\li View and source tab, the source tab shows the raw HTML
+\li Content type, to select text only, text value and chart
+\li Validity 1 - 3 selects the parameter to validated
+\li Min and Max give the range for the parameter to be valid
+\li Paramaters can be coupled by None, And, and Or
+
+The reports can be supported by charts. The textblock type needs to be
+set to Chart. The format of calling the chart is as follows:
+
+{$SCAN_Chart;chartType;legendType;shadow;imageWidth;imageHeight,chartXPosition;
+chartYPosition;chartWidth;chartHeight;
+
+legendXPosition;legendYPosition;fontName;startAnglePie;beforeLabel;
+afterLabel;chartYAxisLength;
+
+numberOfStacks;(stackNames; or empty)
+
+numberOfItems;(itemName;itemColor;itemValue;)}
+
+A 3D piechart example is:
+
+{$SCAN_Chart;3;4;1;600;300;200;80;200;100;250;0;Arial;0;;%;100;0;3;
+Kritisch denken;blue;JrColorBlue;
+Analytisch denken;red;JrColorRed;
+Creatief denken;green;JrColorGreen}
+
+A barchart example is:
+
+\htmlonly {$SCAN_Chart;0;1;1;800;500;50;20;700;400;20;20;Arial;0;;%;100;0;
+21;
+Compare;#0000cc;JrPerc01;
+Distinguish;#0000cc;JrPerc02;
+Test;#0000cc;JrPerc03;
+Value;#6666ff;JrPerc04;
+Interpret;#6666ff;JrPerc05;
+Predict;#6666ff;JrPerc06;
+Commit;#6666ff;JrPerc07;
+Specify;#cc0000;JrPerc08;
+Categorise;#cc0000;JrPerc09;
+Lookin/out;#cc0000;JrPerc10;
+Observe;#ff6666;JrPerc11;
+Code;#ff6666;JrPerc12;
+Set Level;#ff6666;JrPerc13;
+Challenge;#00cc00;JrPerc14;
+Re-describe;#00cc00;JrPerc15;
+Excape;#00cc00;JrPerc16;
+Pursue;#00cc00;JrPerc17;
+Unform;#66ff66;JrPerc18;
+Pretend;#66ff66;JrPerc19;
+Symbolise;#66ff66;JrPerc20;
+Feel;#66ff66;JrPerc21
+} \endhtmlonly
+
+There are five (5) basic chart types. At the left top the dropdown box
+gives the selection for:
+
+\li 0 = Bar
+\li 1 = Line
+\li 2 = Pie 2D
+\li 3 = Pie 3D
+\li 4 = Stacked Bar
+
+The legend types are:
+
+\li 0 = Axes Horizontal, will give the values and legend at the X and Y axes
+\li 1= Axes Angled, some as above but the X axes legend is angled,
+for example usefull when legend are long
+\li 2 = Horizontal, the legend will be shown as a horizontal list
+\li 3 = Vertical, the legend will be shown as a vertical list
+\li 4= Round, the legend will be shown around the 2D and 3D pie chart
+
+The charts can be shown with (=1) or without a shadow (=0) to give
+some extra depth to the chart.
+
+The dimensions of the chart are:
+
+\li Image dimension width, overall image width
+\li Image dimension height, overall image height
+\li Graph coordinates X and Y, left top position of chart on the image
+\li Graph coordinates Width and Height, the width and height of the chart &nbsp;
+\li Legend coordinates X and Y, left top poisiton of the legend on the image
+
+For the dimensions refer to image below.
+
+\image html thrd_chartwidget_stackedbarchartdim.png "Dimensions of chart"
+
+The legend and axes values can be edited by:
+\li Font family name
+\li Start Angle Pie, the value should be between 0 and 360 degrees
+\li Before Label, the label to be shown before the value such as currency
+\li After Label, the label to be shown after the value such as percent
+\li Length Y axis, the maximum value to be shown on the Y axis
+
+
+Stacks can be added to make a stacked bar chart as shown above.
+The number of items should be a multiple of the number of stacks. The name
+of the stack will be shown at the X axis
+
+Chart items can be added or deleted from the list. The name is shown as
+the X axis legend in case of a normal bar chart or pie or line chart. The
+color can be in HTML format such as \htmlonly #ff9900 \endhtmlonly 
+or know names such as red or blue.
+
+The \ref thrd_chartwidget can be used to test your settings.
+
+*/

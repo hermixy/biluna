@@ -1,0 +1,45 @@
+/*! \page acc_projectdialog Company (Project) Selection Dialog - Accounting ACC
+\section sec_acc_projectdialog Company (Project) Selection Dialog
+
+The accounting in ACC is organized by company. Usualy there will be only
+one company, i.e. the company you work for.
+
+However in case you are an Accountant you will have many companies for which
+the accounting is done. Another example would be if you are working for
+a Holding which owns many other companies or a mother company which has
+various branches with individual financial accounting.
+
+Another example would be if you are a large Engineering Contractor. In this
+case you probably would like to have separate accounting for the different
+projects.
+
+ACC allows you to consolidate the different companies or projects.
+
+From the menu select <i>Accounting &gt; Select Project</i> and the below
+dialog will be shown:
+\image html acc_projectdialog.png "Company selection dialog"
+
+Use the green button with (+) to add your company.
+
+In the table view, enter your company name (above the name Red-Bag is used),
+the other fields are not necessary to enter because there is a
+\ref acc_projecteditdialog "Detail edit window"
+for the company data.
+
+The red button with (-) will delete the company,
+NOTE: this action can not be undone
+
+A company name or part of company name can be entered in the textedit
+and clicking the button with the binocular a search will be done in the list
+of companies.
+
+The next two buttons are for setting a filter or removing the filter on the
+list of companies.
+
+Click a company in the list to select- and set the root company for which
+the accounting will be done.
+
+The Help button opens this help page, the OK button confirms the selected
+company and the Cancel button cancels the selection.
+
+*/

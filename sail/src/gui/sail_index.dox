@@ -1,0 +1,10 @@
+/*! \page sail_index Index - Sailing perspective
+\section sec_sail_index SAIL Index
+
+\li \subpage sail_mapnavigationwidget
+\li \subpage sail_polardiagramwidget
+\li \subpage sail_projectdialog
+\li \subpage sail_projecteditdialog
+\li \subpage sail_trackdistancereportwidget
+
+*/

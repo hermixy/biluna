@@ -1,0 +1,86 @@
+/*! \page srm_contactwidget Contact Window - SRM
+\section sec_srm_contactwidget Contact Window
+
+The contact window is the edit and view window for contact person
+name, address and some purchasing information.
+
+From the menu select <i>SRM &gt; Contact</i> and the below
+window will be shown:
+\image html srm_contactwidget.png "Contact window"
+
+Use the green button with (+) to add a contact
+
+The red button with (-) will delete the contact,
+NOTE: this action can not be undone
+
+The button with the harddrive and diskette is the button to save any changes
+to contact table and edit fields.
+
+In the text field (with 'Filter') text can be entered to filter the table
+on lastname.
+
+The dropdown box, now showing 'Supplier' has the following items:
+\li Supplier
+\li Account
+\li All
+
+Only the contacts that are part of the selected supplier are shown
+if Supplier is selected. The selection of supplier is done in the
+\ref srm_supplierwidget. When the selection in the dropdown box is
+changed to the Supplier, a dialog will be shown to indicate
+that the supplier has to be selected from the appropriate
+supplier window.
+
+All the contacts of the selected Account are shown in case of Account is
+selected in the dropdown box.
+
+In case of All, all contacts in the database for all accounts
+are shown.
+
+The text field shows the selected account, supplier
+or is empty when All is selected as filter in the dropdown box.
+
+Click a row in the table to select the contact for viewing the details
+or to edit.
+
+The tab General has the fields:
+\li dropwdown box for Mr. Ms. Mrs. Prof. Dr.
+\li First Name
+\li Last Name
+\li Title - job title
+\li Department
+\li Description - information for the sales person about this contact
+\li Office Phone
+\li Mobile
+\li Fax
+\li Email 1 - primary email address
+\li Email 2 - secondary or private email address
+
+Additional possibilities are
+\li Do not call - indicator that contact should not be called
+\li Opted Out - contact should not receive emails
+\li Invalid - communication information is not valid anymore
+
+Sending emails can be done by pressing
+\li button next to Email 1 field
+\li button next to Email 2 field
+
+The tab Address has the following fields
+\li Primary Address 1 - 6
+\li Other Address 1 - 6, can be for example the private address
+\li Button Copy Parent will copy all the address lines from the parent
+company if applicable
+\li Button Copy Primary will copy the Primary Address fields to
+the Other Address fields
+
+The tab Purchasing has the following fields
+\li Change Supplier in case the contact person has started to work
+for another company or to set the company which was previously not known
+\li Lead Source to indicate the type of lead origine
+\li Birthday
+\li Spous Name
+\li Children Name(s)
+\li Hobbies
+\li Background for background information
+
+*/

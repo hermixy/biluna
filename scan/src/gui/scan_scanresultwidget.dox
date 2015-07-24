@@ -1,0 +1,56 @@
+/*! \page scan_scanresultwidget Scan Result Window - SCAN
+\section sec_scan_scanresultwidget Scan Result Window
+
+The SCAN perspective is a custom build scan and survey report builder.
+The user interface is explained for the scan based on the Jerry Rhodes mind
+scan method, refer to www.effectiveintelligence.com. The other scan and survey
+methods have the same type of user interface.
+
+The scan result window is used to enter the scan or survey results and to
+create the report.
+
+\image html scan_scanresultwidget.png "Scan edit dialog"
+
+The lefttop and left side of the window has:
+
+\li Add button (+) to add a new resultscan
+\li Delete button (-) to delete the result, this action cannot be undone
+\li Save button to save the result
+\li Revert button to undo last change
+\li Table view with the result
+
+The title and the scan type can be edited in the table view with the list of
+results. The result title or name can also be edited at the top middle field
+as can the scan type and person who did the scan or survey.
+
+The tab Answer Result is used to set all the result values. The following
+procedure applies:
+
+\li With button Add Questions (bucket icon) the questions and answers will be
+copied to this result
+\li In case of a wrong scan type setting the delete button can be used to
+remove the scan question and answer set
+
+At the botton of the window the values for the answers can be entered. In
+above case the values of 6, 3 and 1 can be used and indicate a preference,
+for example: 6 is highest, 3 is middle and 1 is lowest preference.
+
+The tab Score Result gives a report and overview of the result values entered.
+This report can be used to validate the entries made in the previous tab.
+
+\image html scan_scanresultwidget_tabscoreresult.png "Scan score result"
+
+The above shown report is typical for the Effictive Intelligence scan and
+is custom made per scan or survey. Use the refresh button at the left top of
+the tab to refresh or create the report.
+
+The final report is generated in the Report tab.
+
+\image html scan_scanresultwidget_tabreport.png "Scan report"
+
+Above figure shows an example part of a report with inline charts.
+Use the refresh button to create or refresh the report.
+
+The report can be printed, saved as HTML for further editing and as PDF file.
+
+*/

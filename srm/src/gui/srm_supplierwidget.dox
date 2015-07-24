@@ -1,0 +1,95 @@
+/*! \page srm_supplierwidget Supplier Window - Supplier Relation Management - SRM
+\section sec_srm_supplierwidget Supplier Window
+The supplier window is the edit and view window for supplier name, address
+and some sales information.
+
+From the menu select <i>SRM &gt; Supplier</i> and the below
+window will be shown:
+\image html srm_supplierwidget.png "Supplier window"
+
+Use the green button with (+) to add a (potential) supplier or company
+
+The red button with (-) will delete the supplier,
+NOTE: this action can not be undone
+
+The button with the harddrive and diskette is the button to save any changes
+to supplier table and edit fields.
+
+In the text field (with 'Filter') text can be entered to filter the table
+on suppliercode.
+
+The dropdown box, now showing 'Account' has the following items:
+\li Account
+\li All
+
+Only the supplier that are part of this account are shown if Account is
+selected. In case of All, all supplier in the database for all accounts
+are shown. The text field shows the selected account or is empty when All
+is selected as filter in the dropdown box.
+
+Click a row in the table to select the supplier for viewing the details
+or to edit.
+
+The tab Address below the table contains the supplier contact information:
+\li Supplier Code
+\li Supplier Name
+\li Post Address 1 - 6
+\li Phone Number
+\li Fax Number
+\li Street Address 1 - 6
+
+The post address lines are for sending mail to the supplier, the street
+address lines are the actual visit- or delivery address.
+
+The supplier parent is selected by clicking the button with three dots.
+The supplier parent selection is used when for example the invoice for
+deliveries to this supplier is to be send to the company head office or
+an administrative office. The invoice address will be used from the supplier
+parent post address, in case of an invoice.
+
+The red button with (-) will remove the parent supplier.
+
+The Copy Parent button will copy all address fields of the supplier. This is
+usefull if many of the fields are similar to the parent.
+
+The branch contact is the contact person or department which is the contact
+focal point. The financial or accounting department will be the branch contact
+in case the potential supplier is an actual supplier. This field will be used
+on the invoice in the 'For Attention Of:' field.
+
+The email can be the email of the contact person at supplier.
+
+The button Copy Postal is usefull if the post address fields have been
+entered and the post address and street address are the same.
+
+Click the tab sales to view the below image.
+
+\image html srm_supplierwidget_tabpurchasing.png "Supplier window, purchasing data"
+
+The tab with sales data has the following edit fields:
+
+\li Change Account - click the button to change or move this supplier
+to another account
+\li Relation with Company - set the (your) company from the Accounting (ACC)
+perspective that will handle business with this supplier
+\li Existing supplier - is Yes in case there has been already business
+with this supplier and is to be shown in the Accounting perspective
+\li Type - indicator of type of supplier such as Supplier, Investor and Partner
+\li Ownership - information about the type of ownership, Public, Private
+or other
+\li Classification code - such as SIC (Standard Industrial Classification)
+code in US and UK
+\li Industry - indicator of the type of industry, such as Chemicals, Food and
+Healthcare
+\li Number of Employees
+\li Annual Revenue
+\li Rating - sales rating or any rating to sort the supplier report
+
+New supplier can be added in the navigation dock window of the ACC (the
+accounting) perspective. In this case you will not see the supplier in the
+SRM perspective when selecting the filter by 'Account'. You will have to
+select show 'All' first and go to the relevant supplier and select the
+button 'Change account' to assign the supplier to a SRM account. Now the
+supplier will be shown with the filter set to 'Account'
+
+*/

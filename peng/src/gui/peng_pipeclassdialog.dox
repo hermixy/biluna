@@ -1,0 +1,30 @@
+/*! \page peng_pipeclassdialog Pipe class specification edit dialog - PENG
+\section sec_peng_pipeclassdialog Pipe class specification edit dialog
+
+This dialog is used to edit the pipe class specification. The pipe class
+specification is used to check whether the line table has existing pipe classes
+and whether line sizes exist. Also the design pressure/temperature can be
+checked for consistency.
+
+From the menu select <i>PlantEng &gt; PENG Settings &gt; Pipe class specification</i>
+and the below dialog will be shown:
+\image html peng_pipeclassdialog.png "Pipe class specification edit dialog"
+
+The top table is the list of all the pipe classes in this project specification.
+The two tables below are the line sizes and the pressure/temperature
+combinations applicable for the above selected pipe class
+
+For all tables editing is the same:
+
+Click a cell to select the row, double click the cell or use [F2] to edit
+the value.
+
+Use the green button with (+) to add a category or below an item.
+
+The red button with (-) will delete a category or an item,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the
+changes and the Cancel button cancels the changes.
+
+*/

@@ -1,0 +1,34 @@
+/*! \page crm_sysseqnodialog System Sequence Number Dialog - CRM
+\section sec_crm_sysseqnodialog System Sequence Number Dialog
+
+This dialog is used to edit the system sequence numbers. The system sequence
+number contain the values of the last used sequence number.
+
+Maintenance to these numbers can be necessary when for example a new document
+was made and this document is deleted. In that case the last sequence
+number used will still show the new (but deleted) number
+and all subsequent new documents will have the wrong (one up)
+sequence number.
+
+Another examle is that you want the sequence numbering to start at different
+number than default is used in the CRM perspective. You set here the required
+number to start with the correct sequence number.
+
+From the menu select <i>CRM &gt; Maintenance &gt; System Sequence Numbers</i>
+and the below dialog will be shown:
+\image html crm_sysseqnodialog.png "System sequence number dialog"
+
+A system type number can be searched at the top of the dialog
+or a filter can be set for the system type number
+
+The following fields can be edited:
+\li seqnumbername - the system will set default names (these
+can be edited for convenience)
+\li sequencenumber - last used sequence number for the related field
+
+Double click a sequencenumber or press F2 to edit the selected sequence number.
+
+The Help button opens this help page, the OK button confirms the changes
+and the Cancel button cancels the changes.
+
+*/

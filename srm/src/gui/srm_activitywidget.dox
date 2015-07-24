@@ -1,0 +1,63 @@
+/*! \page srm_activitywidget Activity Window - SRM
+\section sec_activitywidget Activity Window
+
+The activity window is an edit and view window of all types of activities.
+
+From the menu select <i>SRM &gt; Activity</i> and the below
+window will be shown:
+\image html srm_activitywidget.png "Activity window"
+
+Types of activities are:
+\li call
+\li case
+\li email
+\li log
+\li meeting
+\li note
+\li opportunity
+\li reminder
+\li solution
+\li task
+
+The activities can be tagged with various data like priority, status, date
+and money value.
+
+Use the green button with (+) to add an activity.
+
+The red button with (-) will delete the selected activity,
+NOTE: this action can not be undone
+
+The button save can be used but also the key combination CTRL+S.
+
+There two selections possible:
+\li select by 'Status', all or only active. The active states are Not Started,
+In Progress and Pending Input
+\li 'Selected by' Supplier, Contact, Account and All
+
+You can use the window with supplier to show only the activities for that
+supplier in case the 'Selected by' option is set to 'Supplier'. By clicking a
+different supplier in the supplier window, the activities for the new
+selected supplier are shown.
+
+The same applies for the 'Select by' option of 'Contacts'. Use the contacts
+window to select the contact and only the activities related to this contact
+are listed in the activities window.
+
+The following fields are available per activity:
+\li Type - type of activity
+\li Code - a code for sorting and easy referencing, usually capitals
+\li Subject - the subject of this activity
+\li Reminder - check this option and indicate when you would like to
+receive a reminder in the SRM perspective
+\li Priority - set a priority for this activity. The priority will
+show a color in the activity report
+\li Start - a possible start date
+\li End/Due - an end or due date if applicable
+\li Location - the location of the activity if relevant
+\li Value - a money value for this activity, this could be relevant
+if the type is a sales opportunity
+\li Status - status of the activity
+\li Description - a short description of the activity
+
+*/
+

@@ -1,0 +1,33 @@
+/*! \page crm_groupcontactwidget Group and Contact Window - CRM
+\section sec_crm_groupcontactwidget Group and Contact Window
+
+The group and contact window is for the creation of groups and to
+assign contacts of customer to the groups. The groups are used when
+a campaign is created and various groups are assigned to the campaign.
+
+From the menu select <i>CRM &gt; Group &amp; Contact</i> and the below
+window will be shown:
+\image html crm_groupcontactwidget.png "Group and contact window"
+
+Use the green button with (+) to add a group or contact
+
+The red button with (-) will delete the group or contact,
+NOTE: this action can not be undone
+
+The button with the harddrive and diskette is the button to save any changes
+to contact table and edit fields, or use the key combination CTRL+S.
+
+In the text field (with 'Filter') text can be entered to filter the table
+on first column.
+
+The group fields are:
+\li Name - a name to identify the group
+\li Description - a short description to explain the group
+
+The contact fields are:
+\li Contact - select a contact with the three dotted button,
+the red button to delete
+\li Note - a note with this contact for information
+
+*/
+

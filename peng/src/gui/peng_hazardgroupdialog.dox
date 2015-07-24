@@ -1,0 +1,19 @@
+/*! \page acc_areadialog Sales area edit dialog - Accounting ACC
+\section sec_acc_areadialog Sales area edit dialog
+
+This dialog is used to edit the sales area. The sales area are used
+for sales analysis when a breakdown is required per area.
+
+From the menu select <i>Accounting &gt; Settings &gt; Sales Area</i>
+and the below dialog will be shown:
+\image html acc_areadialog.png "Sales area dialog"
+
+Use the green button with (+) to add a category or below an item.
+
+The red button with (-) will delete a category or an item,
+NOTE: this action can not be undone
+
+The Help button opens this help page, the OK button confirms the
+changes and the Cancel button cancels the changes.
+
+*/

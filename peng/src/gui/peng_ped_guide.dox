@@ -1,0 +1,32 @@
+/*! \page peng_ped_guide PED Guide - PENG
+\section sec_peng_ped_guide PED Guide
+
+PED is a European Single Market Directive that covers pressure equipment
+and assemblies with a maximum allowable pressure PS >0.5 bar.
+PED was adopted on 29 May and came into force on 29 November 1999.
+
+Pressure equipment means vessels, piping, safety accessories and pressure
+accessories. Assemblies are defined as several pieces of pressure equipment
+assembled to form an integrated, functional whole.
+
+The principal intention of the legislation is to enable the free trading of
+products within the European Economic Area by removing the need for separate
+documentation and testing for each individual European market. Manufacturers
+may use a single CE mark on their products to show compliance with this
+(and any other relevant) Directive.
+
+The Directive does not deal with in-use requirements that may be necessary
+to ensure the continued safe use of pressure equipment.
+
+The Directive covers a wide range of equipment such as reaction vessels,
+pressurised storage containers, heat exchangers, shell and water tube boilers,
+industrial pipework, safety devices and pressure accessories. Such equipment
+is widely used in the chemical, petrochemical, biochemical, food processing,
+refrigeration and energy industries and for power generation.
+
+The Biluna application has the following tools:
+\li \subpage peng_ped
+\li \subpage peng_pedwidget
+\li \subpage peng_pedeqsummarywidget
+
+*/

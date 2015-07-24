@@ -1,0 +1,87 @@
+/*! \page srm_templatewidget Template Edit Window - Supplier Relation Management SRM
+\section sec_srm_templatewidget Template Edit Window
+
+The purpose of a template is to send personalized email and letters to contacts.
+Documents in SRM can be email, letter or a simple news letter.
+
+From the menu select <i>SRM &gt; Template</i> and the below
+window will be shown:
+\image html srm_templatewidget.png "Template window"
+
+In this window you can create the templates.
+
+Use the green button with (+) to add a template.
+
+The red button with (-) will delete a template,
+NOTE: this action can not be undone
+
+Use the save button to save the data to the database. The buttons with
+the funnels will filter the templates or clear the filter.
+
+The available data fields are:
+\li Type - type of template
+\li Document Reference - the reference number of the template. This
+reference can also be shown on the template
+\li Description - a short description of the template
+\li Last used - the date when the template was last used in a campaign
+\li Paper size - the size of the printed template
+\li Page margins - margins to the paper size border in millimeters
+
+The tab text is for editing the template
+\image html srm_templatewidget_tabtext.png "Tab text"
+
+The reference number of the template is shown at the top for information only.
+Click on the page header bar to edit the page header text. At the bottom the
+height of the header can be set in millimeters.
+
+The same applies for the text tab and the footer tab.
+
+The tab preview shows the template when printed
+\image html srm_templatewidget_tabpreview.png "Tab text"
+Use the mouse wheel to zoom in or out.
+
+The templates can contain fields
+which are completed by the SRM software, for example:
+the name and address of the contact or lead.
+
+The template window is an edit and view window. Use the edit and formatting
+functions from the main menu to format your text with bold, italics and
+font types.
+
+The fields that will be completed by the software have the format,
+do not forget the curly braces:
+\li <b>{$objectname.fieldname}</b> for example: {$ACC_Contact.lastname}
+
+The fields are only applicable in the template content section.
+Refer also to the database with the content of the field names. The current
+supported field names are:
+\li {$ACC_Contact.salutation}
+\li {$ACC_Contact.firstname}
+\li {$ACC_Contact.lastname}
+\li {$ACC_Contact.title}
+\li {$ACC_Contact.department}
+\li {$ACC_Contact.phonework}
+\li {$ACC_Contact.phonefax}
+\li {$ACC_Contact.email1}
+\li {$ACC_Contact.primaryaddress1}
+\li {$ACC_Contact.primaryaddress2}
+\li {$ACC_Contact.primaryaddress3}
+\li {$ACC_Contact.primaryaddress4}
+\li {$ACC_Contact.primaryaddress5}
+\li {$ACC_Contact.primaryaddress6}
+\li {$ACC_Supplier.suppname} company name related to the contact
+\li {$ACC_Supplier.suppliercode} supplier number (or code)
+\li {$SRM_Template.reference}
+\li {$date} current date
+
+For the page numbering in the footer the following fields are available:
+\li {$pagenumberoftotal} prints for example: '3 of 12'
+\li {$pagenumber} prints only the page number, e.g.: '3'
+
+The following extra fields are available in case the template is used
+for individual letters generated with SRM Document:
+\li {$SRM_Document.reference}
+\li {$SRM_Document.subject}
+
+*/
+

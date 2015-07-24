@@ -1,0 +1,30 @@
+/*! \page srm_index Index - Supplier Relation Management SRM
+\section sec_srm_index SRM Index
+
+The SRM perspective is the tool to interact with your supplier. It helps
+you to keep track of any activity related to the relationship with
+supplier.
+
+The SRM perspective has a set of windows that can be opened at the same
+time that shows you the selection of data you want. You can edit the
+data and view what is hapening but you can also create campaigns to
+send information to a selected group of supplier.
+
+Futher information can be found:
+\li \subpage srm_projectdialog
+\li \subpage srm_projecteditdialog
+\li \subpage srm_leadsourcetypedialog
+\li \subpage srm_supplierwidget
+\li \subpage srm_supplierreportwidget
+\li \subpage srm_contactwidget
+\li \subpage srm_contactreportwidget
+\li \subpage srm_contactbysuppreportwidget
+\li \subpage srm_activitywidget
+\li \subpage srm_activityreportwidget
+\li \subpage srm_groupcontactwidget
+\li \subpage srm_campaigntargetwidget
+\li \subpage srm_documentwidget
+\li \subpage srm_templatewidget
+\li \subpage srm_sysseqnodialog
+
+*/

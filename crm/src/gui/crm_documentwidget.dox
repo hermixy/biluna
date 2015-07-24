@@ -1,0 +1,80 @@
+/*! \page crm_documentwidget Document Edit Window - CRM
+\section sec_crm_documentwidget Document Edit Window
+
+This window is used to send individual documents and letters
+to contacts. The basic layout is created in the template window, refer:
+\ref crm_templatewidget.
+
+From the menu select <i>CRM &gt; Document</i> and the below
+window will be shown:
+\image html crm_documentwidget.png "Document window"
+
+Use the green button with (+) to add a new document
+
+The red button with (-) will delete the selected document,
+NOTE: this action can not be undone
+
+The button with the harddrive and diskette is the button to save any changes
+to the document, or use the key combination CTRL+S.
+
+In the text field (with 'Filter') text can be entered to filter the table
+on 'first'subject' column.
+
+The document fields are:
+\li Reference No. - a number to identify the document, the number will
+be upgraded everytime a new document is added. The number can be edited
+in the \ref sec_crm_sysseqnodialog. The reference number can be used in
+the template as {$CRM_Document.reference}.
+\li Subject - the subject of the letter, this text can be used in
+the template as {$CRM_Document.subject}.
+
+There are two modi of operation for the customer and contact field:
+\li the customer and contact window are open and a row is selected
+\li the customer and contact window are not open and/or no rows are selected
+
+If the windows are open and a row is selected
+\li Customer field will be set with selected customer in case of
+the addition of a new document
+\li Contact field will be set similar
+
+If the windows are not open or no rows are selected
+\li Customer will have to be selected manually by clicking the three dot
+button
+\li Contact will have to be selected manually by clicking the three dot button
+
+Refer to the \ref sec_crm_customerwidget window to add the relevant customers
+to this CRM project
+
+The next fields are
+\li Template to select the template to be used to generate the document
+\li Content is the content or text of the document and/or letter.
+
+Full list of fields that are replaced by database fields:
+\li {$ACC_Contact.salutation}
+\li {$ACC_Contact.firstname}
+\li {$ACC_Contact.lastname}
+\li {$ACC_Contact.title}
+\li {$ACC_Contact.department}
+\li {$ACC_Contact.phonework}
+\li {$ACC_Contact.phonefax}
+\li {$ACC_Contact.email1}
+\li {$ACC_Contact.primaryaddress1}
+\li {$ACC_Contact.primaryaddress2}
+\li {$ACC_Contact.primaryaddress3}
+\li {$ACC_Contact.primaryaddress4}
+\li {$ACC_Contact.primaryaddress5}
+\li {$ACC_Contact.primaryaddress6}
+\li {$ACC_Contact.altaddress1}
+\li {$ACC_Contact.altaddress2}
+\li {$ACC_Contact.altaddress3}
+\li {$ACC_Contact.altaddress4}
+\li {$ACC_Contact.altaddress5}
+\li {$ACC_Contact.altaddress6}
+\li {$ACC_Customer.mname}
+\li {$ACC_Customer.customerno}
+\li {$CRM_Document.reference}
+\li {$CRM_Document.subject}
+\li {$date}
+
+*/
+

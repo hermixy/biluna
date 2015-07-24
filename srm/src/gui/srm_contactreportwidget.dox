@@ -1,0 +1,17 @@
+/*! \page srm_contactreportwidget Contact Report Window - SRM
+\section sec_srm_contactreportwidget Contact Report Window
+
+The report window gives a report of the detail contact data
+for distribution to others and printing purposes.
+
+From the menu select <i>SRM &gt; Reports &gt; Contact Report</i>
+and the below window will be shown:
+\image html srm_contactreportwidget.png "Contact report window"
+
+A selection can be made to show all or a part of the alphabet at
+the top of the window.
+
+Click the refresh button to refresh the report. Do not forget to save all
+your changes to the database first.
+
+*/

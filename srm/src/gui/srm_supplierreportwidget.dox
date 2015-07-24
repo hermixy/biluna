@@ -1,0 +1,17 @@
+/*! \page srm_supplierreportwidget Supplier Report Window - SRM
+\section sec_srm_supplierreportwidget Supplier Report Window
+
+The report window gives a report of the detail supplier data
+for distribution to others and printing purposes.
+
+From the menu select <i>SRM &gt; Reports &gt; Supplier Report</i>
+and the below window will be shown:
+\image html srm_supplierreportwidget.png "Supplier report window"
+
+A selection can be made to show all or a part of the alphabet at
+the top of the window.
+
+Click the refresh button to refresh the report. Do not forget to save all
+your changes to the database first.
+
+*/

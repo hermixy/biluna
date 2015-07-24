@@ -1,0 +1,30 @@
+/*! \page crm_index Index - Customer Relation Management CRM
+\section sec_crm_index CRM Index
+
+The CRM perspective is the tool to interact with your customer. It helps
+you to keep track of any activity related to the relationship with
+customer.
+
+The CRM perspective has a set of windows that can be opened at the same
+time that shows you the selection of data you want. You can edit the
+data and view what is hapening but you can also create campaigns to
+send information to a selected group of customer.
+
+Futher information can be found:
+\li \subpage crm_projectdialog
+\li \subpage crm_projecteditdialog
+\li \subpage crm_leadsourcetypedialog
+\li \subpage crm_customerwidget
+\li \subpage crm_customerreportwidget
+\li \subpage crm_contactwidget
+\li \subpage crm_contactreportwidget
+\li \subpage crm_contactbycustreportwidget
+\li \subpage crm_activitywidget
+\li \subpage crm_activityreportwidget
+\li \subpage crm_groupcontactwidget
+\li \subpage crm_campaigntargetwidget
+\li \subpage crm_templatewidget
+\li \subpage crm_documentwidget
+\li \subpage crm_sysseqnodialog
+
+*/

@@ -1,0 +1,139 @@
+/*! \page peng_ped Pressure Equipment Directive PED - PENG
+\section sec_peng_ped Pressure Equipment Directive PED
+
+The PED Directive arises from the European Community's Programme for the
+elimination of technical barriers to trade and is formulated under the
+"New Approach to Technical Harmonisation and Standards".
+
+The purpose of the PED is to harmonise national laws of Member States regarding the
+ design, manufacture, testing and conformity assessment of pressure 
+equipment and assemblies of pressure equipment. It therefore aims to 
+ensure the free placing on the market and putting into service of the 
+equipment within the European Union and the European Economic Area.
+
+The PED section of the Plant Engineering (PENG) module calculates the
+applicable PED category for equipment and pipe lines.
+
+<b>Quick Start</b>
+
+Select from the main menu System &gt; Connect
+
+The following dialog will be shown:
+
+\image html db_connectiondialog.png "Connection dialog"
+
+Click the radiobutton Local Sqlite (.db) open
+or create to select
+
+Click the button \htmlonly (...) \endhtmlonly in Local database
+path/name, in the opening file dialog go to the folder where you want
+to create the new database, right click to create a new text file and name
+this file for the database, for example: \n
+\htmlonly C:\Documents and Settings\(your user
+name)\My Documents\Biluna\database\peng.db3 \endhtmlonly
+
+The alternative way to create a SQLite database is to create an empty
+text document in the file browser. Refer to \ref db_createsqlitefile
+
+Click OK to create the database and the following
+dialog will open:
+
+\image html db_projectdialog.png "Root Project Dialog"
+
+In the above dialog your company details can be
+entered. Change the company 'MyCompany' in your company name and the
+'MyLocation' to your company location. The number can be change to a number
+relevant to your company.
+
+Click OK to save changes
+
+\image html peng_perspectivemenu.png "PENG perspective menu"
+
+In menu open Perspective &gt; PENG to load (a part of the)
+Plant Engineering perspective.
+
+A new menu item will have been created including three buttons on the toolbar.
+
+Click in menu PlantEng &gt; Select Project, the following dialog will open:
+
+\image html peng_projectdialog.png "PENG Project Dialog"
+
+Click green button (with +) in case you want to add a new project, enter data for:
+
+\li number, enter relevant project number with your customer
+\li revision, possible revision number for this project
+\li description, description of the project
+\li company, the company name of your customer
+\li location, the location of your customers project
+
+Click OK to save the changes and close the dialog.
+
+In the menu click PlantEng &gt; Edit equipment type.
+
+\image html peng_typeeditdialog.png "Equipment type dialog"
+
+In the dialog enter the required equipment type names. The type names
+are only used in the PED application the other columns such as the eqtype,
+eqsubtype are not used. The type names allow the user to select
+the equipment type for the PED report.
+
+Click OK to save the changes.
+
+<b>Equipment Classification</b>
+
+Click in menu PlantEng &gt; PED Classification
+
+The PED window with the equipment list dockwindow at the left will be shown,
+drag the windows to the required size. The dock window at the left has various
+tabs at the top. For the PED module only the equipment list and line table
+are activated. Choose the equipment list tab as shown below.&nbsp;
+
+\image html peng_pedwidget_before.png "Equipment list empty"
+
+In the dock window at the left (PENG Navigation) click green (+) button
+to add equipment.
+
+In the main window in the middle:
+
+\li select equipment type with button
+\li enter tag number, description, etc.
+\li fluid 1, 2, 3 and 4 are optional description fiels which will show on the
+summary report only
+
+Clik the button Calculate to show the calculation as below:
+
+\image html peng_pedwidget_after.png "Equipment list"
+
+Click in the menu File &gt; Save or [CTRL]+S to save the input.
+
+NOTE: the table, category, modules and exception are not stored to the
+database and are calculated on the fly when reports are generated, to make
+sure the calculated values are relevant to the input values.
+
+Click File &gt; Print or Print Preview to print the detail report
+
+<b>Line Designation Table</b>
+
+The above can also be done for the line designation table. Select the
+tab line table at the top of the left dockwindow to select pipe lines and
+edit the line data.
+
+<b>Summary Report</b>
+
+Click PlantEng &gt; Reports &gt; PED Equipment Summary or the relevant
+button in the toolbar.
+
+\image html peng_pedeqsummarywidget.png "PED summary report"
+
+Select Selected Items or All Items if you want the report of all the
+equipment in the project and click the refresh button to generate the summary.
+
+Click File &gt; Print or Print Preview to print the summary report.
+
+Click FIle &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+*/

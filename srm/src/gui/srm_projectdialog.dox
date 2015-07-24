@@ -1,0 +1,36 @@
+/*! \page srm_projectdialog Account (Project) Selection Dialog - SRM
+\section sec_srm_projectdialog Account (Project) Selection Dialog
+
+The supplier relation management in SRM is organized by account.
+Usualy there will be one account per sales person, but that is depending
+the sales organization and preferences.
+
+From the menu select <i>SRM &gt; Select Project</i> and the below
+dialog will be shown:
+\image html srm_projectdialog.png "Account selection dialog"
+
+Use the green button with (+) to add an account
+
+In the table view, enter the account code (above the name INIPED_SRM is used) and
+the account description for future reference.
+
+The red button with (-) will delete the account,
+NOTE: this action can not be undone
+
+An account code or part of the account code can be entered in the text field
+and clicking the button with the binocular a search will be done in the list
+of companies.
+
+The next two buttons are for setting a filter or removing the filter on the
+a selected column. Setting the filter will open a dialog with the selection
+for a column, match case and the filter criteria.
+
+Click an account in the list to select- and set the root account for which
+the accounting will be done.
+
+The Help button opens this help page, the OK button confirms the selected
+account and the Cancel button cancels the selection.
+
+*/
+
+

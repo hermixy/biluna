@@ -1,0 +1,25 @@
+/*! \page peng_pedeqsummarywidget PED summary window - PENG
+\section sec_peng_pedeqsummarywidget PED summary window
+
+The PED calculation can be listed in a summary report. From the menu select
+
+\li PlantEng &gt; Reports &gt; PED Summary
+
+NOTE: do not forget to SAVE all your changes from the PED detail window
+before running the summary report, otherwise the summary report will be
+generated with different data from the database.
+
+\image html peng_pedeqsummarywidget.png "PED summary window"
+
+Select Selected Items or All Items if you want the report of all the
+equipment in the project and click the refresh button to generate the summary.
+
+Click File &gt; Print or Print Preview to print the summary report.
+
+Click FIle &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+*/

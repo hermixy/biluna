@@ -1,0 +1,17 @@
+/*! \page crm_contactbycustreportwidget Contact by Customer Report Window - CRM
+\section sec_crm_contactbycustreportwidget Contact by Customer Report Window
+
+The report window gives a report of the basic contact data
+organized by customer name for distribution to others and printing purposes.
+
+From the menu select <i>CRM &gt; Reports &gt; Contact by Customer Report</i>
+and the below window will be shown:
+\image html crm_contactbycustreportwidget.png "Contact by customer report window"
+
+A selection can be made to show all or a part of the alphabet at
+the top of the window.
+
+Click the refresh button to refresh the report. Do not forget to save all
+your changes to the database first.
+
+*/

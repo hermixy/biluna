@@ -1,0 +1,38 @@
+/*! \page crm_activityreportwidget Activity Report Window- CRM
+\section sec_crm_activityreportwidget Activity Report Window
+
+The activity report window gives a report of the current activities
+for distribution to others and printing purposes.
+
+From the menu select <i>CRM &gt; Reports &gt; Activity Report</i> and the below
+window will be shown:
+\image html crm_activityreportwidget.png "Activity report window"
+
+A selection can be made to show all or just the selected activity type at
+the top of the window. The options are:
+\li All
+\li Call
+\li Case
+\li Email
+\li Log
+\li Meeting
+\li Note
+\li Opportunity
+\li Reminder
+\li Solution
+\li Task
+
+The 'End Date From' can be set to filter out any old and not relevant
+activities. The activities will be shown with an end date after
+the End Date From date.
+
+Completed activities are not shown as default. Check the checkbox
+'Show Completed' to also show the completed activities
+
+The activities are shown for the current account. Uncheck the checkbox
+'Filter by Account' to show the other activities of all accounts
+
+Click the refresh button to refresh the report. Do not forget to save all
+your changes to the database first.
+
+*/

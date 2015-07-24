@@ -1,0 +1,43 @@
+/*! \page peng_weldoletweldvolumewidget Weldolet weld volume window - PENG
+\section sec_peng_weldoletweldvolumewidget Weldolet weld volume window
+
+The weldolet weld volume window is used to calculate the volume of the weld
+when welding a weldolet to a pipe or cylinder.
+
+\image html peng_weldoletweldvolumewidget.png "Weldolet weld volume window"
+
+At the top left the buttons are used for:
+
+\li + button for adding a weldolet to the database
+\li - button to delete the weldolet from the database
+
+Activate a weldolet in the weldolet table at the left by clicking
+the relevant row.
+
+Enter the detail data and dimensions of the weldolet in the textfields
+in the middle and at the right top. At the middle:
+
+\li A convenient number of the weldolet. This number will be shown on
+the design document\li The description of the weldolet.
+\li The revision of the design, to keep track of changes in the design
+dimensions
+
+At the right top:
+
+\li D0 is the outside diameter of the pipe or cylinder in millimeters
+\li D2, D21 and D3 are diameters of the weldolet, refer to the legend
+image at the middle bottom
+\li Alpha1,2 and 3 are angles in degrees. H3 is depending the Alpha2 value
+and is calculated when the required values are entered.
+\li The no of steps can be selected to demonstrate the amount accuracy of the
+calculated volume.
+
+Press the CalcVol button to refresh the design document at the right bottom.
+
+In the main menu:
+
+\li File &gt; PDF Export to export the design document as a PDF document
+\li File &gt; Print or [CTRL]+P to print the design document
+\li File &gt; Print preview to preview the print
+
+*/

@@ -1,0 +1,95 @@
+/*! \page crm_customerwidget Customer Window - Customer Relation Management CRM
+\section sec_crm_customerwidget Customer Window
+The customer window is the edit and view window for customer name, address
+and some sales information.
+
+From the menu select <i>CRM &gt; Customer</i> and the below
+window will be shown:
+\image html crm_customerwidget.png "Customer window"
+
+Use the green button with (+) to add a (potential) customer or company
+
+The red button with (-) will delete the customer,
+NOTE: this action can not be undone
+
+The button with the harddrive and diskette is the button to save any changes
+to customer table and edit fields.
+
+In the text field (with 'Filter') text can be entered to filter the table
+on customerno.
+
+The dropdown box, now showing 'Account' has the following items:
+\li Account
+\li All
+
+Only the customer that are part of this account are shown if Account is
+selected. In case of All, all customer in the database for all accounts
+are shown. The text field shows the selected account or is empty when All
+is selected as filter in the dropdown box.
+
+Click a row in the table to select the customer for viewing the details
+or to edit.
+
+The tab Address below the table contains the customer contact information:
+\li Customer Code
+\li Customer Name
+\li Post Address 1 - 6
+\li Phone Number
+\li Fax Number
+\li Street Address 1 - 6
+
+The post address lines are for sending mail to the customer, the street
+address lines are the actual visit- or delivery address.
+
+The customer parent is selected by clicking the button with three dots.
+The customer parent selection is used when for example the invoice for
+deliveries to this customer is to be send to the company head office or
+an administrative office. The invoice address will be used from the customer
+parent post address, in case of an invoice.
+
+The red button with (-) will remove the parent customer.
+
+The Copy Parent button will copy all address fields of the customer. This is
+usefull if many of the fields are similar to the parent.
+
+The branch contact is the contact person or department which is the contact
+focal point. The financial or accounting department will be the branch contact
+in case the potential customer is an actual customer. This field will be used
+on the invoice in the 'For Attention Of:' field.
+
+The email can be the email of the contact person at customer.
+
+The button Copy Postal is usefull if the post address fields have been
+entered and the post address and street address are the same.
+
+Click the tab sales to view the below image.
+
+\image html crm_customerwidget_tabsales.png "Customer window, sales data"
+
+The tab with sales data has the following edit fields:
+
+\li Change Account - click the button to change or move this customer
+to another account
+\li Relation with Company - set the (your) company from the Accounting (ACC)
+perspective that will handle business with this customer
+\li Existing customer - is Yes in case there has been already business
+with this customer and is to be shown in the Accounting perspective
+\li Type - indicator of type of customer such as Customer, Investor and Partner
+\li Ownership - information about the type of ownership, Public, Private
+or other
+\li Classification code - such as SIC (Standard Industrial Classification)
+code in US and UK
+\li Industry - indicator of the type of industry, such as Chemicals, Food and
+Healthcare
+\li Number of Employees
+\li Annual Revenue
+\li Rating - sales rating or any rating to sort the customer report
+
+New customer can be added in the navigation dock window of the ACC (the
+accounting) perspective. In this case you will not see the customer in the
+CRM perspective when selecting the filter by 'Account'. You will have to
+select show 'All' first and go to the relevant customer and select the
+button 'Change account' to assign the customer to a CRM account. Now the
+customer will be shown with the filter set to 'Account'
+
+*/

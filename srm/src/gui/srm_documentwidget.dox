@@ -1,0 +1,53 @@
+/*! \page srm_documentwidget Document Edit Window - SRM
+\section sec_srm_documentwidget Document Edit Window
+
+This window is used to send individual documents and letters
+to contacts. The basic layout is created in the template window, refer:
+\ref srm_templatewidget.
+
+From the menu select <i>SRM &gt; Document</i> and the below
+window will be shown:
+\image html srm_documentwidget.png "Document window"
+
+Use the green button with (+) to add a new document
+
+The red button with (-) will delete the selected document,
+NOTE: this action can not be undone
+
+The button with the harddrive and diskette is the button to save any changes
+to the document, or use the key combination CTRL+S.
+
+In the text field (with 'Filter') text can be entered to filter the table
+on 'first'subject' column.
+
+The document fields are:
+\li Reference No. - a number to identify the document, the number will
+be upgraded everytime a new document is added. The number can be edited
+in the \ref sec_srm_sysseqnodialog. The reference number can be used in
+the template as {$SRM_Document.reference}.
+\li Subject - the subject of the letter, this text can be used in
+the template as {$SRM_Document.subject}.
+
+There are two modi of operation for the supplier and contact field:
+\li the supplier and contact window are open and a row is selected
+\li the supplier and contact window are not open and/or no rows are selected
+
+If the windows are open and a row is selected
+\li Supplier field will be set with selected supplier in case of
+the addition of a new document
+\li Contact field will be set similar
+
+If the windows are not open or no rows are selected
+\li Supplier will have to be selected manually by clicking the three dot
+button
+\li Contact will have to be selected manually by clicking the three dot button
+
+Refer to the \ref sec_srm_supplierwidget window to add the relevant suppliers
+to this SRM project
+
+The next fields are
+\li Template to select the template to be used to generate the document
+\li Content is the content or text of the document and/or letter.
+
+*/
+

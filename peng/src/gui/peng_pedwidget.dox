@@ -1,0 +1,120 @@
+/*! \page peng_pedwidget PED classification window - PENG
+\section sec_peng_pedwidget PED classification window
+
+The PED classification window is used for equipment and pipe lines to calculate
+the classification according the Pressure Equipment Directive or PED.
+
+\image html peng_pedwidget_general.png "PED classification window"
+
+When an equipment is selected in the navigation dockwindow at the left, the
+equipment is activated and the PED relevant data can be edited.
+The top three items:
+
+\li Equipment Type
+\li Tag Number
+\li Description
+
+are items which are used at more locations in the Plant Engineering perspective.
+For example: the tagnumber is used on the equipment list and on the P&amp;ID.
+
+\image html peng_pedwidget_properties_ped.png "Properties"
+
+The first part of the properties group contains the items with data that
+are required to calculate the PED classification:
+
+\li PED Type, type of equipment as defined by the PED, for pipe lines use
+the pipe line navigation tab in the navigation dock window
+\li Assessment by, the volume for equipment and nominal line size for piping
+\li Fluid State, the fluid state liquid or gaseous.
+Liquids having a vapour pressure at the maximum
+allowable temperature of more than 0,5 bar above
+normal atmospheric pressure (1013 mbar), will be
+treated as a Gas, otherwise as a Liquid.
+\li Fluid Group, a danger class for the fluid Group 1 or Group 2.
+Group 1 comprises fluids, covered by the Council Directive 67/548/EEC(*),
+defined as: explosive, extremely flammable, highly flammable,
+flammable (where the maximum allowable temperature is above flashpoint),
+very toxic, toxic, oxidizing. Group 2 comprises all other fluids not referred to
+group 1, including steam.
+\li Maximum Allowable Pressure, in N/mm2. The application will transfer the
+unit for the PED calculation to barg
+\li Maximum Allowable Temperature, in degree Celsius
+\li Maximum Volume, in litres. This is not used in case of piping.
+\li Nominal Size, or DN size in millimeters. This is not used for equipment,
+only for piping
+\li Additional Information, indication whether the equipment is a bottle,
+extinguisher, cooker or not
+\li Unstable gas, indicates whether the fluid is an unstable gas
+
+The PED types can be summarized as follows:
+\li -Pressure Vessel- means a housing designed and
+built to contain fluids under pressure including its
+direct attachments up to the coupling point
+connecting it to other equipment. A vessel may be
+composed of more than one chamber.
+\li -Piping- means piping components intended for the
+transport of fluids, when connected together for
+integration into a pressure system. Piping includes
+in particular a pipe or system of pipes, tubing,
+fittings, expansion joints, hoses, or other pressure-
+bearing  components as appropriate. Heat
+exchangers  consisting of pipes for the purpose of
+cooling or  heating air shall be considered as
+piping.
+\li -(Fired) heated pressure equipment- or otherwise
+heated with the risk of overheating intended for
+generation of steam or superheated water at
+temperatures higher than 110°C having a volume
+temperatures higher than 110 degree C having a volume
+greater than 2L, and all pressure cookers.
+
+Further explanation of the design data is:
+\li -Design pressure PS or
+Maximum allowable pressure- Maximum pressure
+for which the equipment is designed, as specified by
+the manufacturer. It is defined at a location
+specified by the manufacturer. This must be the
+location of connection of protective and/or limiting
+devices or the top of equipment or if not appropriate
+any point specified.
+\li -Volume V-
+The internal volume of a chamber, including the
+volume of nozzles to the first connection or weld
+and excluding the volume of permanent internal
+parts.
+\li -Diameter DN or
+Nominal size (DN)- means a numerical designation
+of size which is common to all components in a
+piping system other than components indicated by
+outside diameters or by thread size. It is a
+convenient round number for reference purposes
+and is only loosely related to manufacturing
+dimensions.
+The nominal size is designated by DN followed by a
+number.
+
+\image html peng_pedwidget_properties_optional.png "Optional properties"
+
+The fluid 1 through 4 are optional fields to indicate the type of fluids
+in the equipment or piping. These items will be shown on the summary sheet of
+the PED calculations. These values are not used in the calculation.
+
+\image html peng_pedwidget_properties_results.png "Results"
+
+The calculation is done after the button Calculate is pressed. The results
+are shown in the chart at the right and the fields:
+
+\li Category
+\li Modules
+\li Exception
+
+
+\image html peng_pedwidget_piping.png "Piping"
+
+Some of the general items and property items change in case pipe lines are
+selected from the dockwindow at the left instead of equipment. The above image
+shows that the equipment type is fixed to Pipe Line as the Description.
+Also the PED Type is fixed to Piping and the Assessment By is fixed to Nominal
+Size. The remaining is the same as for equipment
+
+*/

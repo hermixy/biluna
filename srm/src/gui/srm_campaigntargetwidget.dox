@@ -1,0 +1,69 @@
+/*! \page srm_campaigntargetwidget Campaign Target Window - SRM
+\section sec_srm_campaigntargetwidget Campaign Target Window
+
+An advertising campaign is a series of messages, letters or brochures
+send to potential supplier in order to get their attention to your
+products or services.
+
+The Biluna campaign is designed to create personalized documents
+with supplier and contact name. The documents can be a PDF or
+a printed letter. These documents are generated in bulk by selecting
+the relevant groups per campaign. The action of the generated letters
+or PDF's are recorded as a log item in the activity database table.
+This allows the user to check whether a certain document has been send
+to the supplier contact.
+
+The campaign system is currently not designed to send mass emails.
+
+The sequence of work is:
+\li create the document your want to send, refer \ref srm_documentwidget
+\li create or ensure you have the contacts with the supplier you want
+to send the document. NOTE: you can only send documents to contacts, if you
+do not have a contact just use for example 'Manager of Engineering' under
+Last Name of the contact and use this in the document
+\li Create the groups with contacts, refer \ref srm_groupcontactwidget
+\li Create the campaign with groups in this campaign window
+
+From the menu select <i>SRM &gt; Campaign</i> and the below
+window will be shown:
+\image html srm_campaigntargetwidget.png "Campaign and target window"
+
+Use the green button with (+) to add a campaign or group
+
+The red button with (-) will delete the campaign or group,
+NOTE: this action can not be undone
+
+The button with the harddrive and diskette is the button to save any changes
+to contact table and edit fields, or use the key combination CTRL+S.
+
+In the text field (with 'Filter') text can be entered to filter the table
+on first column.
+
+The available fields for the campaign are:
+\li Type - type of campaign, email, mail, newsletter, newspaper, print (letter),
+radio, telesales and television. For the email you probably generated the
+PDF to be send with the email, mail and print will be a letter and possible
+attachment to be send by regular mail
+\li Code - a code to identify the campaign, usually in capitals
+\li Subject - the subject or title of the campaign
+\li Start - start date of the campaign
+\li End - end date of the campaign
+\li Objective - the objective, goal or target of the campaign
+\li Currency - currency of the budget and revenue value
+\li Budget - possible budget for this campaign, used in the report of the campaign
+\li Expected Revenue - possible revenue to be expected from this campaign
+\li Document - the text document to be used for this campaign
+\li Status - status of the campaign, planning, in queue, sending, active,
+inactive and completed
+\li Description - additional description, for example feedback about
+the success of the campaign
+
+The available field for the target group are:
+\li Target group - select the group with the three dotted button or delete
+with the delete button
+\li Note - an additional with this group
+
+
+*/
+
+

@@ -1,0 +1,18 @@
+/*! \page scan_index Index - Scan and Survey SCAN
+\section sec_scan_index SCAN Index
+
+The SCAN perspective is to create scans and surveys, and to create
+result reports.
+
+The perspective is custom build for our customers. Contact Biluna to
+learn about the possibilities.
+
+\image html scan_reportexample.png "Scan report example"
+
+Futher information can be found:
+\li \subpage scan_projecteditdialog
+\li \subpage scan_scaneditdialog
+\li \subpage scan_scanresultwidget
+\li \subpage thrd_chartwidget
+
+*/
