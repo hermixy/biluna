@@ -42,14 +42,14 @@ INCLUDEPATH += \
 CONFIG(debug, debug|release) {
     message("Debug libraries used for sail")
     LIBS	+= \
-#        -L../../qt/qt-enterprise-charts-src-1.3.0/bin/debug -lQtCommercialChartd \
+#        -LC:/Qt/5.5/msvc2013/bin/Qt5Chartsd \
 #        -L../../rpt/lib -lrptd \
 #        -L../../gv/lib -lgvd \
         -L../../bil/debug -ldbd
 } else {
     message("Release libraries used for sail")
     LIBS	+= \
-        -L../../qt/qt-enterprise-charts-src-1.3.0/bin/release -lQtCommercialChart \
+#        -LC:/Qt/5.5/msvc2013/bin/Qt5Charts \
 #        -L../../rpt/lib -lrpt \
 #        -L../../gv/lib -lgv \
         -L../../bil/release -ldb

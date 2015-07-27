@@ -10,6 +10,8 @@
 #include "peng_pedtable.h"
 
 #include <cmath>
+#include <QColor>
+#include <QFont>
 #include "rb_debug.h"
 
 
@@ -70,8 +72,8 @@ double PENG_PedTable::fromScale(double scaledValue) {
 }
 
 void PENG_PedTable::setTable(int table) {
-	QFont small = QFont("Helvetica", 9);
-	
+    QFont smallFont("Helvetica", 9);
+	    
 	if (table == 1) {
 		RB_String str = "PED 97/23/EC Table " + RB_String::number(table);
 		setTitle(str);
@@ -94,25 +96,25 @@ void PENG_PedTable::setTable(int table) {
 		lineVector.push_back(new RB_PlotLine(toScale(1), toScale(50), toScale(100), toScale(0.5), QColor(Qt::black)));
 		lineVector.push_back(new RB_PlotLine(toScale(1), toScale(25), toScale(50), toScale(0.5), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(0.125), toScale(1050), "PS=1000", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(0.125), toScale(210), "PS=200", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(0.125), toScale(1050), "PS=1000", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.125), toScale(210), "PS=200", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical lines
-		textVector.push_back(new RB_PlotText(toScale(0.95), toScale(50), "V=1", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(0.95), toScale(50), "V=1", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines
-		textVector.push_back(new RB_PlotText(toScale(4.75), toScale(210), "PS*V=1000", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(4.75), toScale(42), "PS*V=200", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(4.75), toScale(10.5), "PS*V=50", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(4.75), toScale(5.3), "PS*V=25", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(4.75), toScale(210), "PS*V=1000", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(4.75), toScale(42), "PS*V=200", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(4.75), toScale(10.5), "PS*V=50", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(4.75), toScale(5.3), "PS*V=25", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(52.5), toScale(0.525), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(142.5), toScale(0.525), "II", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(665), toScale(0.525), "III", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(2850), toScale(0.525), "IV", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(52.5), toScale(0.525), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(142.5), toScale(0.525), "II", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(665), toScale(0.525), "III", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(2850), toScale(0.525), "IV", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);
@@ -139,26 +141,26 @@ void PENG_PedTable::setTable(int table) {
 		lineVector.push_back(new RB_PlotLine(toScale(1), toScale(200), toScale(400), toScale(0.5), QColor(Qt::black)));
 		lineVector.push_back(new RB_PlotLine(toScale(1), toScale(50), toScale(100), toScale(0.5), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(0.125), toScale(3150), "PS=3000", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(0.125), toScale(1050), "PS=1000", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(4.2), "PS=4", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(0.125), toScale(3150), "PS=3000", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.125), toScale(1050), "PS=1000", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(4.2), "PS=4", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical line
-		textVector.push_back(new RB_PlotText(toScale(0.95), toScale(100), "V=1", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(0.95), toScale(100), "V=1", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines		
-		textVector.push_back(new RB_PlotText(toScale(5), toScale(600), "PS*V=3000", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(5), toScale(200), "PS*V=1000", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(5), toScale(40), "PS*V=200", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(5), toScale(10), "PS*V=50", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(5), toScale(600), "PS*V=3000", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(5), toScale(200), "PS*V=1000", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(5), toScale(40), "PS*V=200", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(5), toScale(10), "PS*V=50", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(150), toScale(0.525), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(700), toScale(0.525), "II", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(3000), toScale(0.525), "III", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(3000), toScale(4.2), "IV", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(150), toScale(0.525), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(700), toScale(0.525), "II", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(3000), toScale(0.525), "III", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(3000), toScale(4.2), "IV", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);
@@ -182,22 +184,22 @@ void PENG_PedTable::setTable(int table) {
 		// sloped lines
 		lineVector.push_back(new RB_PlotLine(toScale(1), toScale(200), toScale(400), toScale(0.5), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(525), "PS=500", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(10.5), "PS=10", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(525), "PS=500", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(10.5), "PS=10", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical line
-		textVector.push_back(new RB_PlotText(toScale(0.95), toScale(3000), "V=1", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(0.95), toScale(3000), "V=1", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines		
-		textVector.push_back(new RB_PlotText(toScale(5), toScale(40), "PS*V=200", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(5), toScale(40), "PS*V=200", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(700), toScale(0.525), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(700), toScale(10.5), "II", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(700), toScale(525), "III", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.125), toScale(525), "IV", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(700), toScale(0.525), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(700), toScale(10.5), "II", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(700), toScale(525), "III", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.125), toScale(525), "IV", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);
@@ -221,21 +223,21 @@ void PENG_PedTable::setTable(int table) {
 		// sloped lines
 		lineVector.push_back(new RB_PlotLine(toScale(10), toScale(1000), toScale(1000), toScale(10), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(525), "PS=500", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(10.5), "PS=10", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(525), "PS=500", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(10.5), "PS=10", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical line
-		textVector.push_back(new RB_PlotText(toScale(9.5), toScale(3000), "V=10", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(9.5), toScale(3000), "V=10", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines		
-		textVector.push_back(new RB_PlotText(toScale(200), toScale(50), "PS*V=10000", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(200), toScale(50), "PS*V=10000", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(1500), toScale(10.5), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(1500), toScale(525), "II", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.125), toScale(1050), "I", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(1500), toScale(10.5), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(1500), toScale(525), "II", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.125), toScale(1050), "I", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);
@@ -260,23 +262,23 @@ void PENG_PedTable::setTable(int table) {
 		lineVector.push_back(new RB_PlotLine(toScale(6.25), toScale(32), toScale(400), toScale(0.5), QColor(Qt::black)));
 		lineVector.push_back(new RB_PlotLine(toScale(2), toScale(25), toScale(100), toScale(0.5), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(5), toScale(33.6), "PS=32", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(5), toScale(33.6), "PS=32", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical line
-		textVector.push_back(new RB_PlotText(toScale(1.9), toScale(100), "V=2", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(1.9), toScale(100), "V=2", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines		
-		textVector.push_back(new RB_PlotText(toScale(250), toScale(12), "PS*V=3000", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(50), toScale(4), "PS*V=200", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(50), toScale(1), "PS*V=50", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(250), toScale(12), "PS*V=3000", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(50), toScale(4), "PS*V=200", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(50), toScale(1), "PS*V=50", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(10), toScale(0.525), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(150), toScale(0.525), "II", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(500), toScale(0.525), "III", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(3000), toScale(0.525), "IV", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(10), toScale(0.525), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(150), toScale(0.525), "II", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(500), toScale(0.525), "III", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(3000), toScale(0.525), "IV", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);
@@ -301,23 +303,23 @@ void PENG_PedTable::setTable(int table) {
 		lineVector.push_back(new RB_PlotLine(toScale(25), toScale(40), toScale(100), toScale(10), QColor(Qt::black)));
 		lineVector.push_back(new RB_PlotLine(toScale(100), toScale(35), toScale(350), toScale(10), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical line
-		textVector.push_back(new RB_PlotText(toScale(23.75), toScale(1), "DN=25", QColor(Qt::black), small, -90.0));
-		textVector.push_back(new RB_PlotText(toScale(95), toScale(1), "DN=100", QColor(Qt::black), small, -90.0));
-		textVector.push_back(new RB_PlotText(toScale(95), toScale(100), "DN=100", QColor(Qt::black), small, -90.0));
-		textVector.push_back(new RB_PlotText(toScale(332.5), toScale(1), "DN=350", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(23.75), toScale(1), "DN=25", QColor(Qt::black), smallFont, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(95), toScale(1), "DN=100", QColor(Qt::black), smallFont, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(95), toScale(100), "DN=100", QColor(Qt::black), smallFont, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(332.5), toScale(1), "DN=350", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines		
-		textVector.push_back(new RB_PlotText(toScale(140), toScale(25), "PS*DN=3500", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(80), toScale(12.5), "PS*DN=1000", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(140), toScale(25), "PS*DN=3500", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(80), toScale(12.5), "PS*DN=1000", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(50), toScale(0.525), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(150), toScale(0.525), "II", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(500), toScale(0.525), "III", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(50), toScale(0.525), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(150), toScale(0.525), "II", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(500), toScale(0.525), "III", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);
@@ -342,23 +344,23 @@ void PENG_PedTable::setTable(int table) {
 		lineVector.push_back(new RB_PlotLine(toScale(100), toScale(35), toScale(7000), toScale(0.5), QColor(Qt::black)));
 		lineVector.push_back(new RB_PlotLine(toScale(32), toScale(31.25), toScale(2000), toScale(0.5), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(13000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(13000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical line
-		textVector.push_back(new RB_PlotText(toScale(23.75), toScale(100), "DN=32", QColor(Qt::black), small, -90.0));
-		textVector.push_back(new RB_PlotText(toScale(95), toScale(100), "DN=100", QColor(Qt::black), small, -90.0));
-		textVector.push_back(new RB_PlotText(toScale(237.5), toScale(100), "DN=250", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(23.75), toScale(100), "DN=32", QColor(Qt::black), smallFont, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(95), toScale(100), "DN=100", QColor(Qt::black), smallFont, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(237.5), toScale(100), "DN=250", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines		
-		textVector.push_back(new RB_PlotText(toScale(400), toScale(12.5), "PS*DN=5000", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(700), toScale(5), "PS*DN=3500", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(500), toScale(2), "PS*DN=1000", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(400), toScale(12.5), "PS*DN=5000", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(700), toScale(5), "PS*DN=3500", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(500), toScale(2), "PS*DN=1000", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(50), toScale(50), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(130), toScale(50), "II", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(500), toScale(50), "III", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(50), toScale(50), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(130), toScale(50), "II", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(500), toScale(50), "III", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);
@@ -381,21 +383,21 @@ void PENG_PedTable::setTable(int table) {
 		// sloped lines
 		lineVector.push_back(new RB_PlotLine(toScale(25), toScale(80), toScale(4000), toScale(0.5), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(525), "PS=500", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(10.5), "PS=10", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(525), "PS=500", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(10.5), "PS=10", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical line
-		textVector.push_back(new RB_PlotText(toScale(23.75), toScale(1000), "DN=25", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(23.75), toScale(1000), "DN=25", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines		
-		textVector.push_back(new RB_PlotText(toScale(50), toScale(40), "PS*DN=2000", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(50), toScale(40), "PS*DN=2000", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(5000), toScale(0.5), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(4000), toScale(10), "II", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(4000), toScale(500), "III", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(5000), toScale(0.5), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(4000), toScale(10), "II", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(4000), toScale(500), "III", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);
@@ -418,20 +420,20 @@ void PENG_PedTable::setTable(int table) {
 		// sloped lines
 		lineVector.push_back(new RB_PlotLine(toScale(200), toScale(25), toScale(500), toScale(10), QColor(Qt::black)));
 		// text horizontal lines
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(525), "PS=500", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(10.5), "PS=10", QColor(Qt::black), small));
-		textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(525), "PS=500", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(10.5), "PS=10", QColor(Qt::black), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(10000), toScale(0.525), "PS=0.5", QColor(Qt::black), smallFont));
 		// text vertical line
-		textVector.push_back(new RB_PlotText(toScale(190), toScale(1000), "DN=200", QColor(Qt::black), small, -90.0));
+        textVector.push_back(new RB_PlotText(toScale(190), toScale(1000), "DN=200", QColor(Qt::black), smallFont, -90.0));
 		// text sloped lines		
-		textVector.push_back(new RB_PlotText(toScale(250), toScale(20), "PS*DN=5000", QColor(Qt::black), small));
+        textVector.push_back(new RB_PlotText(toScale(250), toScale(20), "PS*DN=5000", QColor(Qt::black), smallFont));
 		// category area indication
-		textVector.push_back(new RB_PlotText(toScale(2000), toScale(10), "I", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(2000), toScale(500), "II", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(2000), toScale(10), "I", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(2000), toScale(500), "II", QColor(Qt::red), smallFont));
 		// remaining non-category areas
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), small));
-		textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), small));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(1.2), "Article 3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.7), "par.3", QColor(Qt::red), smallFont));
+        textVector.push_back(new RB_PlotText(toScale(0.119), toScale(0.15), "PED not applicable", QColor(Qt::red), smallFont));
 
 		setLines(lineVector);
 		setTexts(textVector);

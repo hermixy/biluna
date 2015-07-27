@@ -10,7 +10,7 @@
 
 #include "peng_vector.h"
 
-//#include <cmath>
+#include <algorithm>
 
 // for min, max
 using namespace std;
@@ -152,7 +152,7 @@ double PENG_Vector::distanceTo(const PENG_Vector& v) const {
 bool PENG_Vector::isInWindow(const PENG_Vector& firstCorner,
         const PENG_Vector& secondCorner) {
 
-	double minX = min(firstCorner.x, secondCorner.x);
+    double minX = min(firstCorner.x, secondCorner.x);
 	double maxX = max(firstCorner.x, secondCorner.x);
 	double minY = min(firstCorner.y, secondCorner.y);
 	double maxY = max(firstCorner.y, secondCorner.y);

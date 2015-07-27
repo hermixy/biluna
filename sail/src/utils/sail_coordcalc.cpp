@@ -12,6 +12,7 @@
 
 #include <cmath>
 #include <math.h>
+#include "rb.h"
 
 
 /* WARNING:  These values are very important, as used under the "default" case. */
