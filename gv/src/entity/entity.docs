@@ -1,0 +1,7 @@
+/*!
+
+\defgroup entity Entity Module
+
+This module contains implementations of all standard CAD entities.
+
+*/

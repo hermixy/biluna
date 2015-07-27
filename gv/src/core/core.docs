@@ -1,0 +1,12 @@
+/*!
+
+\defgroup core Core module
+
+This module contains some fundamental core classes and abstract
+base classes for extensions, e.g. RStorage as an abstract base
+class for all storage implementations. Storage implementations
+are in a separate module.
+
+\image html images/core_architecture.png
+
+*/

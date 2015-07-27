@@ -1,0 +1,7 @@
+/*!
+
+\defgroup gui_qt GUI Qt module
+
+GUI implementation based on Qt.
+
+*/

@@ -1,0 +1,7 @@
+/*!
+
+\defgroup operations Operations module
+
+This module contains implementations of the ROperation Interface.
+
+*/
