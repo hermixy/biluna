@@ -875,14 +875,14 @@ void DB_ActionFactory::getSystemMenu(QMenu* menu, QToolBar* /* tb */) {
     ga = DB_ActionSystemToolsImportModel::createGuiAction();
     subMenu->addAction(ga);
     ga->setEnabled(false);
-#ifdef BILUNA_DEBUG
+// #ifdef BILUNA_DEBUG
     ga->addEnabledType(RB2::ValidTrue);
     connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));
 
     ga = DB_ActionSystemToolsPlugins::createGuiAction();
     subMenu->addAction(ga);
-#endif
+// #endif
 
     ga = DB_ActionSystemToolsSignalSpy::createGuiAction();
     subMenu->addAction(ga);
