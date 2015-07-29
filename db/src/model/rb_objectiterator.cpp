@@ -50,7 +50,7 @@ void RB_ObjectIterator::last() {
     mIter = mContainer.end();
 	previous();
     mDone = false;
-    mIndex = mContainer.size() - 1;
+    mIndex = ((int)mContainer.size()) - 1;
 }
 
 /**

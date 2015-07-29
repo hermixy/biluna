@@ -53,4 +53,5 @@ IF YOU GET 'cl' is not recognized as an internal or external command, ...
 cl is not in the path of your computer, do run vcvars32.bat by
 
 - At the command prompt, change to the \bin subdirectory of your Visual C++ installation.
+  For example: C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin
 - Run vcvars32.bat by typing VCVARS32.

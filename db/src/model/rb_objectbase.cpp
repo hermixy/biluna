@@ -380,7 +380,7 @@ void RB_ObjectBase::deleteOriginal() {
  * @return total number of members in this object
  */
 int RB_ObjectBase::countMember() const {
-    return mMemberVector.size();
+    return (int)mMemberVector.size();
 //    return mMemberMap.size();
 }
 

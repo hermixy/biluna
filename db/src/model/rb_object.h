@@ -19,7 +19,7 @@
 
 
 /**
- * Template of light weight object, can be part of parent child relations.
+ * Template of light weight object
  */
 class DB_EXPORT RB_Object : public RB_Flags {
 
@@ -31,18 +31,17 @@ public:
 
     virtual void init();
 
-    virtual RB_Object* getParent() const;
-
-    virtual std::vector<RB_Object*> getChildList() const;
+//    virtual RB_Object* getParent() const;
+//    virtual std::vector<RB_Object*> getChildList() const;
 
     virtual RB_String getName() const;
     virtual void setName(const RB_String& name);
 
 protected:
-    //! Parent object
-    RB_Object* mParent;
-    //! vector container of children objects
-    std::vector<RB_Object*> mChildList;
+//    //! Parent object
+//    RB_Object* mParent;
+//    //! vector container of children objects
+//    std::vector<RB_Object*> mChildList;
     //! Sensible name of object for identification/debugging
     RB_String mName;
 };

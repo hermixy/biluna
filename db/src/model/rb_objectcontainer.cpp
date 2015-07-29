@@ -267,13 +267,13 @@ RB_ObjectBase* RB_ObjectContainer::getObject(const RB_String& id) {
     iter = mObjectList.begin();
     while (iter != mObjectList.end()) {
 
-    if ((*iter)->getId() == id) {
+        if ((*iter)->getId() == id) {
             return *iter;
         }
 
         ++iter;
     }
-    return NULL;
+//    return NULL;
 
 //    std::map<std::string, RB_ObjectBase*>::const_iterator iter;
 //    iter = mObjectMap.find(id.toStdString());
