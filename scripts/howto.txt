@@ -35,6 +35,8 @@ LIBS += \
 Build a debug and a release version and are copied both to:
 C:\Qt\Qt5.1.1\5.1.1\mingw48_32\plugins\sqldrivers
 
+NOTE!!! put INCLUDEPATH and LIBS before source files in .pro file
+
 As a reference from Qt help:
 
 cd %QTDIR%\src\plugins\sqldrivers\mysql
@@ -46,3 +48,9 @@ HOW TO MAKE SCRIPT FOR BUILDING BILUNA
 
 Example:
 FOR %%d IN (db acc crm bil) DO ECHO %%d && cd ..\%%d\src && mingw32-make clean && qmake && C:\QtSDK\QtCreator\bin\jom && mingw32-make install && cd ..\..\scripts
+
+IF YOU GET 'cl' is not recognized as an internal or external command, ... 
+cl is not in the path of your computer, do run vcvars32.bat by
+
+- At the command prompt, change to the \bin subdirectory of your Visual C++ installation.
+- Run vcvars32.bat by typing VCVARS32.

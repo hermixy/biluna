@@ -82,6 +82,7 @@ _CL_*
 build-*/
 debug/
 doc/
+html/
 lib/
 release/
 tmp/

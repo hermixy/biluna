@@ -1,0 +1,75 @@
+body {
+	/* background-color: #E3E3E2; */
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px; 
+	margin: 5px;
+	padding: 5px;
+}
+
+/* page overall div's */
+div.pagefooter {
+	background-color: #FFFFFF;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.pageheader {
+	background-color: #FFFFFF;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.header {
+	background-color: #FFFFFF;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.contents {
+	background-color: #FFFFFF;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Hide the doxygen navigation bar id="navrow1" */
+div#navrow1 {
+	display: none;
+}
+
+div#nav-path {
+	display: none;
+}
+
+/* Show header (page) title right */
+div.title {
+	color: #003366;
+	font-weight: bold;
+	text-align: right;
+}
+
+/* Center image */
+div.image img {
+	display: block;
+	margin-bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+
+/* Center caption of image */
+div.image div {
+	text-align: center;
+}
+
+/* Horizontal lines */
+hr {
+	height: 0; 
+	border-style: solid; 
+	border-width: 1px 0 0 0; 
+	border-color:#cccccc;
+}

@@ -11,20 +11,14 @@
 # qmake project file to include in project files of biluna
 # provides settings for release, debug, demo etc.
 
-# HACK for Qt 4.7.4
-# QMAKE_LFLAGS += -Wl,-enable-auto-import
-# win32-msvc {
-#  DEFINES += _CRT_SECURE_NO_DEPRECATE
-# }
-
 # UI_DIR overrides both UI_HEADERS_DIR and UI_SOURCES_DIR
 UI_DIR	    = ../src/gui/ui
 INCLUDEPATH += ../mkspecs
 
 # webkitwidgets includes widgets
 QT += core gui help network printsupport sql svg uitools webkitwidgets widgets xml
-#CONFIG += release
-CONFIG -= release
+CONFIG += release
+#CONFIG -= release
 
 if (release) {
 #    message("Release compile mode in defs.pro")

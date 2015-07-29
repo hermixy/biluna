@@ -1,0 +1,25 @@
+- http://doc.qt.nokia.com/qq/qq28-qthelp.html
+
+Source: .ghp, binary: .qch; Contains a table of contents, an index of items in the documentation, and a file manifest.
+Source: .qhcp, binary: .qhc; Contains information that is used to customize the appearance and available features of Qt Assistant.
+
+To create documentation to be shown in Qt Assistant, we would write a Qt Help Project file (an XML file with a .qhp suffix) and "compile" it to a binary Qt Compressed Help file (with a .qch suffix) by using the qhelpgenerator tool. Doxygen is able to generate .qhp files, but it can also generate .qch files automatically, allowing us to create files that we can use directly with Qt Assistant. 
+
+- http://doc.qt.nokia.com/latest/assistant-custom-help-viewer.html
+
+- For Biluna
+
+For the generation of the help collection file (SQLite3) use from the workspace/hlp folder:
+qcollectiongenerator(.exe) <collection-config-file> -o <collection-file> 
+For example:
+qcollectiongenerator(.exe) doc.qhcp -o doc.qhc
+
+The references in doc.qhp (help project) should refer to the html directory 
+where the help files are located. 
+
+If above line crashes, try to use the msvc2008 version of the qcollectiongenerator.
+
+A batch file in the script folder could look like:
+cd c:\users\rutger\documents\workspace\bil\doc
+c:\qtsdk\desktop\qt\4.7.3\msvc2008\bin\qcollectiongenerator doc.qhcp -o doc.qhc
+

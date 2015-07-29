@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QHelpCollectionProject version="1.0">
+  <assistant>
+    <title>Biluna Assistant</title>
+	<applicationIcon>images/biluna16.png</applicationIcon>
+	<cacheDirectory>Biluna/doc</cacheDirectory>
+	<homePage>qthelp://biluna_0_9_15/doc/html/home.html</homePage>
+	<startPage>qthelp://biluna_0_9_15/doc/html/index.html</startPage>
+	<enableAddressBar visible="false">true</enableAddressBar>
+	<enableDocumentationManager>true</enableDocumentationManager>
+	<enableFilterFunctionality>true</enableFilterFunctionality>
+	<aboutMenuText>
+       <text>About Biluna</text>
+    </aboutMenuText>
+    <aboutDialog>
+       <file>about.html</file>
+       <icon>images/logo2.png</icon>
+    </aboutDialog>
+  </assistant>
+  <docFiles>
+    <generate>
+      <file>
+        <input>html/index.qhp</input>
+        <output>doc/doc.qch</output>
+      </file>
+    </generate>
+    <register>
+      <file>doc/doc.qch</file>
+    </register>
+  </docFiles>
+</QHelpCollectionProject>

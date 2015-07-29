@@ -12,7 +12,7 @@
 
 #include "db_dialogfactory.h"
 #include "peng_conestrikeoutwidget.h"
-#include "peng_equipmentmasterwidget.h"
+//#include "peng_equipmentmasterwidget.h"
 #include "peng_fluiddialog.h"
 #include "peng_fluidstabilitydialog.h"
 #include "peng_hazardgroupdialog.h"

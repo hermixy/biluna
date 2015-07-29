@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Biluna"
-!define PRODUCT_VERSION "0.9.14"
+!define PRODUCT_VERSION "0.9.15"
 !define PRODUCT_PUBLISHER "Biluna"
 !define PRODUCT_WEB_SITE "http://www.biluna.com"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\Biluna.exe"
@@ -38,7 +38,7 @@
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "Setup_Biluna_0_9_14.exe"
+OutFile "Setup_Biluna_0_9_15.exe"
 InstallDir "$PROGRAMFILES\Biluna"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -81,6 +81,8 @@ Section "QtLibrarySection" SEC02
   File "C:\Qt\5.5\msvc2013\bin\Qt5CLucene.dll"
 ;  File "C:\Qt\5.5\msvc2013\bin\phonon4.dll"
 ;  File "C:\MinGW\bin\mingwm10.dll"
+  File "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT\msvcp120.dll"
+  File "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT\msvcr120.dll"
   File "C:\Qt\5.5\msvc2013\bin\icudt54.dll"
   File "C:\Qt\5.5\msvc2013\bin\icuin54.dll"
   File "C:\Qt\5.5\msvc2013\bin\icuuc54.dll"
@@ -214,17 +216,21 @@ Section Uninstall
   Delete "$INSTDIR\imageformats\qwbmp.dll"
   
   Delete "$INSTDIR\assistant.exe"
-  Delete "$INSTDIR\icudt53.dll"
-  Delete "$INSTDIR\icuin53.dll"
-  Delete "$INSTDIR\icuuc53.dll"
+  Delete "$INSTDIR\icudt54.dll"
+  Delete "$INSTDIR\icuin54.dll"
+  Delete "$INSTDIR\icuuc54.dll"
   Delete "$INSTDIR\libeay32.dll"
   Delete "$INSTDIR\libssl32.dll"
   Delete "$INSTDIR\ssleay32.dll"
   Delete "$INSTDIR\libmySQL.dll"
-  Delete "$INSTDIR\libgcc_s_dw2-1.dll"
-  Delete "$INSTDIR\libstdc++-6.dll"
-  Delete "$INSTDIR\libwinpthread-1.dll"
-  Delete "$INSTDIR\mingwm10.dll"
+;  Delete "$INSTDIR\libgcc_s_dw2-1.dll"
+;  Delete "$INSTDIR\libstdc++-6.dll"
+;  Delete "$INSTDIR\libwinpthread-1.dll"
+;  Delete "$INSTDIR\mingwm10.dll"
+
+  Delete "$INSTDIR\msvcp120.dll"
+  Delete "$INSTDIR\msvcr120.dll"
+  
 ;  Delete "$INSTDIR\phonon4.dll"
   Delete "$INSTDIR\Qt5CLucene.dll"
   Delete "$INSTDIR\Qt5Core.dll"
@@ -263,8 +269,7 @@ Section Uninstall
   RMDir "$INSTDIR\imageformats"
   RMDir "$INSTDIR\platforms"
   RMDir "$INSTDIR\printsupport"
-;  RMDir "$INSTDIR\doc\html\images"
-;  RMDir "$INSTDIR\doc\html"
+
   RMDir "$INSTDIR\doc"
   RMDir "$INSTDIR\data"
   RMDir "$SMPROGRAMS\Biluna"

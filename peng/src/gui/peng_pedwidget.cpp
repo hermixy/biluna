@@ -12,7 +12,7 @@
 #include <QtSvg>
 #include <QtWebKit>
 #include "db_dialogfactory.h"
-// #include "gv_drawing.h"
+#include "gv_drawing.h"
 #include "peng_determinepedclass.h"
 #include "peng_dialogfactory.h"
 #include "peng_modelfactory.h"

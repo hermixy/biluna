@@ -16,6 +16,6 @@
 #define RB_APPNAME "BILUNA"
 #define RB_COMPANYDOMAIN "biluna.com"
 #define RB_COMPANYKEY "Biluna"
-#define RB_VERSION "0.9.14" // change also in help doxygen_help.cfg file
+#define RB_VERSION "0.9.15" // change also in help doxygen_help.cfg file
 
 #endif // MAIN_H
