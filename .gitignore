@@ -79,6 +79,7 @@ _CL_*
 *.ilk
 
 # Output folders:
+build_*/
 build-*/
 debug/
 doc/
