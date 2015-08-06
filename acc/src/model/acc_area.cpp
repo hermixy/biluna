@@ -33,6 +33,6 @@ ACC_Area::~ACC_Area() {
  * - areadescription description for this area
  */
 void ACC_Area::createMembers() {
-    addMember(this, "areacode", "-", "", RB2::MemberChar40);
-    addMember(this, "areadescription", "-", "", RB2::MemberChar125);
+    addMember("areacode", "-", "", RB2::MemberChar40);
+    addMember("areadescription", "-", "", RB2::MemberChar125);
 }

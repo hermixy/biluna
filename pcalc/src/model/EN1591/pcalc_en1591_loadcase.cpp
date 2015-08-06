@@ -34,61 +34,61 @@ PCALC_EN1591_LoadCase::~PCALC_EN1591_LoadCase() {
  * \li -
  */
 void PCALC_EN1591_LoadCase::createMembers() {
-    addMember(this, "loadcaseno", "-", 0, RB2::MemberInteger);
+    addMember("loadcaseno", "-", 0, RB2::MemberInteger);
     // pressure temperature
-    addMember(this, "p", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "t0", "Celsius", 0.0, RB2::MemberDouble);
-    addMember(this, "tb", "Celsius", 0.0, RB2::MemberDouble);
-    addMember(this, "tg", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("p", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("t0", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("tb", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("tg", "Celsius", 0.0, RB2::MemberDouble);
     // flange 1
-    addMember(this, "tf1", "Celsius", 0.0, RB2::MemberDouble);
-    addMember(this, "tl1", "Celsius", 0.0, RB2::MemberDouble);
-    addMember(this, "tw1", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("tf1", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("tl1", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("tw1", "Celsius", 0.0, RB2::MemberDouble);
     // flange 2
-    addMember(this, "tf2", "Celsius", 0.0, RB2::MemberDouble);
-    addMember(this, "tl2", "Celsius", 0.0, RB2::MemberDouble);
-    addMember(this, "tw2", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("tf2", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("tl2", "Celsius", 0.0, RB2::MemberDouble);
+    addMember("tw2", "Celsius", 0.0, RB2::MemberDouble);
     // force
-    addMember(this, "fx", "N", 0.0, RB2::MemberDouble);
-    addMember(this, "fy", "N", 0.0, RB2::MemberDouble);
-    addMember(this, "fz", "N", 0.0, RB2::MemberDouble);
-    addMember(this, "mx", "N", 0.0, RB2::MemberDouble);
-    addMember(this, "my", "N", 0.0, RB2::MemberDouble);
-    addMember(this, "mz", "N", 0.0, RB2::MemberDouble);
+    addMember("fx", "N", 0.0, RB2::MemberDouble);
+    addMember("fy", "N", 0.0, RB2::MemberDouble);
+    addMember("fz", "N", 0.0, RB2::MemberDouble);
+    addMember("mx", "N", 0.0, RB2::MemberDouble);
+    addMember("my", "N", 0.0, RB2::MemberDouble);
+    addMember("mz", "N", 0.0, RB2::MemberDouble);
     // stress expansion elasticity
-    addMember(this, "fb", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "fn", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("fb", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("fn", "N/mm2", 0.0, RB2::MemberDouble);
 
     // flange 1
-    addMember(this, "ff1", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "fl1", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "fs1", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "fw1", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("ff1", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("fl1", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("fs1", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("fw1", "N/mm2", 0.0, RB2::MemberDouble);
     // flange 2
-    addMember(this, "ff2", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "fl2", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "fs2", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "fw2", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("ff2", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("fl2", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("fs2", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("fw2", "N/mm2", 0.0, RB2::MemberDouble);
 
-    addMember(this, "alphab", "1/Kelvin", 0.0, RB2::MemberDouble);
-    addMember(this, "alphag", "1/Kelvin", 0.0, RB2::MemberDouble);
+    addMember("alphab", "1/Kelvin", 0.0, RB2::MemberDouble);
+    addMember("alphag", "1/Kelvin", 0.0, RB2::MemberDouble);
     // flange 1
-    addMember(this, "alphaf1", "1/Kelvin", 0.0, RB2::MemberDouble);
-    addMember(this, "alphal1", "1/Kelvin", 0.0, RB2::MemberDouble);
-    addMember(this, "alphaw1", "1/Kelvin", 0.0, RB2::MemberDouble);
+    addMember("alphaf1", "1/Kelvin", 0.0, RB2::MemberDouble);
+    addMember("alphal1", "1/Kelvin", 0.0, RB2::MemberDouble);
+    addMember("alphaw1", "1/Kelvin", 0.0, RB2::MemberDouble);
     // flange 2
-    addMember(this, "alphaf2", "1/Kelvin", 0.0, RB2::MemberDouble);
-    addMember(this, "alphal2", "1/Kelvin", 0.0, RB2::MemberDouble);
-    addMember(this, "alphaw2", "1/Kelvin", 0.0, RB2::MemberDouble);
+    addMember("alphaf2", "1/Kelvin", 0.0, RB2::MemberDouble);
+    addMember("alphal2", "1/Kelvin", 0.0, RB2::MemberDouble);
+    addMember("alphaw2", "1/Kelvin", 0.0, RB2::MemberDouble);
 
-    addMember(this, "eb", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("eb", "N/mm2", 0.0, RB2::MemberDouble);
     // flange 1
-    addMember(this, "ef1", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "el1", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "ew1", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("ef1", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("el1", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("ew1", "N/mm2", 0.0, RB2::MemberDouble);
     // flange 2
-    addMember(this, "ef2", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "el2", "N/mm2", 0.0, RB2::MemberDouble);
-    addMember(this, "ew2", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("ef2", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("el2", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("ew2", "N/mm2", 0.0, RB2::MemberDouble);
 }
 

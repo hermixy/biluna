@@ -50,10 +50,10 @@ Web Site, Word of mouth, Email, Campaign, Other
 \li background
  */
 void CRM_ContactDetail::createMembers() {
-    addMember(this, "leadsource_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "birthday", "-", "0000-00-00", RB2::MemberChar20);
-    addMember(this, "spousname", "-", "", RB2::MemberChar125);
-    addMember(this, "childrennames", "-", "", RB2::MemberChar125);
-    addMember(this, "hobbies", "-", "", RB2::MemberChar125);
-    addMember(this, "background", "-", "", RB2::MemberChar255);
+    addMember("leadsource_id", "-", "0", RB2::MemberChar40);
+    addMember("birthday", "-", "0000-00-00", RB2::MemberChar20);
+    addMember("spousname", "-", "", RB2::MemberChar125);
+    addMember("childrennames", "-", "", RB2::MemberChar125);
+    addMember("hobbies", "-", "", RB2::MemberChar125);
+    addMember("background", "-", "", RB2::MemberChar255);
 }

@@ -73,12 +73,12 @@ bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
 
         RB_ObjectBase* obj = new RB_ObjectAtomic("", invoiceAccruedList, "ACC_InvoiceAccrued");
         invoiceAccruedList->addObject(obj);
-        obj->addMember(obj, "transdocdate", "-", transDocDate, RB2::MemberChar125);
-        obj->addMember(obj, "transno", "-", transNo, RB2::MemberChar125);
-        obj->addMember(obj, "description", "-", description, RB2::MemberChar125);
-        obj->addMember(obj, "totalamountrec", "-", totalAmountRec, RB2::MemberChar125);
-        obj->addMember(obj, "totalamountpay", "-", totalAmountPay, RB2::MemberChar125);
-        obj->addMember(obj, "allocatedamount", "-", allocatedAmount, RB2::MemberChar125);
+        obj->addMember("transdocdate", "-", transDocDate, RB2::MemberChar125);
+        obj->addMember("transno", "-", transNo, RB2::MemberChar125);
+        obj->addMember("description", "-", description, RB2::MemberChar125);
+        obj->addMember("totalamountrec", "-", totalAmountRec, RB2::MemberChar125);
+        obj->addMember("totalamountpay", "-", totalAmountPay, RB2::MemberChar125);
+        obj->addMember("allocatedamount", "-", allocatedAmount, RB2::MemberChar125);
     }
 
     return true;

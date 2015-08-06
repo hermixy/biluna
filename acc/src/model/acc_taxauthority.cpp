@@ -37,9 +37,9 @@ ACC_TaxAuthority::~ACC_TaxAuthority() {
  * - bankswift bank BIC or Swift number
  */
 void ACC_TaxAuthority::createMembers() {
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "bank", "-", "", RB2::MemberChar125);
-    addMember(this, "bankacctype", "-", "", RB2::MemberChar20);
-    addMember(this, "bankacc", "-", "", RB2::MemberChar125);
-    addMember(this, "bankswift", "-", "", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("bank", "-", "", RB2::MemberChar125);
+    addMember("bankacctype", "-", "", RB2::MemberChar20);
+    addMember("bankacc", "-", "", RB2::MemberChar125);
+    addMember("bankswift", "-", "", RB2::MemberChar40);
 }

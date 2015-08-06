@@ -29,22 +29,22 @@ PENG_Weldolet::~PENG_Weldolet() {
 
 
 void PENG_Weldolet::createMembers() {
-    addMember(this, "number", "-", "<number>", RB2::MemberChar20);   // document number
-    addMember(this, "description", "-", "<description>", RB2::MemberChar125);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);         // issue
+    addMember("number", "-", "<number>", RB2::MemberChar20);   // document number
+    addMember("description", "-", "<description>", RB2::MemberChar125);
+    addMember("revision", "-", 0, RB2::MemberInteger);         // issue
 
-    addMember(this, "D0", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "D2", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "D21", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "D3", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "gap", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "gap1", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "H3", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "alpha1", "degree", 0.0, RB2::MemberDouble);
-    addMember(this, "alpha2", "degree", 0.0, RB2::MemberDouble);
-    addMember(this, "alpha3", "degree", 0.0, RB2::MemberDouble);
+    addMember("D0", "mm", 0.0, RB2::MemberDouble);
+    addMember("D2", "mm", 0.0, RB2::MemberDouble);
+    addMember("D21", "mm", 0.0, RB2::MemberDouble);
+    addMember("D3", "mm", 0.0, RB2::MemberDouble);
+    addMember("gap", "mm", 0.0, RB2::MemberDouble);
+    addMember("gap1", "mm", 0.0, RB2::MemberDouble);
+    addMember("H3", "mm", 0.0, RB2::MemberDouble);
+    addMember("alpha1", "degree", 0.0, RB2::MemberDouble);
+    addMember("alpha2", "degree", 0.0, RB2::MemberDouble);
+    addMember("alpha3", "degree", 0.0, RB2::MemberDouble);
 
-    addMember(this, "steps", "-", 0, RB2::MemberInteger);         // iteration steps
-    addMember(this, "textOutput", "-", 1, RB2::MemberInteger);    // yes/no boolean
-    addMember(this, "zoomFactor", "-", 1.0, RB2::MemberDouble);
+    addMember("steps", "-", 0, RB2::MemberInteger);         // iteration steps
+    addMember("textOutput", "-", 1, RB2::MemberInteger);    // yes/no boolean
+    addMember("zoomFactor", "-", 1.0, RB2::MemberDouble);
 }

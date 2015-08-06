@@ -13,7 +13,8 @@
 
 RB_Object::RB_Object(const RB_String& name) {
     RB_DEBUG->addObjectCreated(this);
-    this->mName = name;
+    mName = name;
+    resetFlags();
 }
 
 RB_Object::RB_Object(RB_Object* obj) {
@@ -24,18 +25,6 @@ RB_Object::RB_Object(RB_Object* obj) {
 
 RB_Object::~RB_Object() {
     RB_DEBUG->addObjectDeleted(this);
-//    std::vector<RB_Object*>::iterator iter;
-//    iter = mChildList.begin();
-
-//    while (iter != mChildList.end()) {
-//        if (*iter != NULL) {
-//            delete *iter;
-//            *iter = NULL;
-//        }
-//        ++iter;
-//    }
-
-//    mChildList.clear();
 }
 
 RB_Object& RB_Object::operator= (const RB_Object& obj) {
@@ -45,14 +34,6 @@ RB_Object& RB_Object::operator= (const RB_Object& obj) {
 }
 
 void RB_Object::init() { }
-
-//RB_Object* RB_Object::getParent() const {
-//    return mParent;
-//}
-
-//std::vector<RB_Object*> RB_Object::getChildList() const {
-//    return mChildList;
-//}
 
 RB_String RB_Object::getName() const {
     return mName;

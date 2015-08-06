@@ -40,13 +40,13 @@ ACC_PurchData::~ACC_PurchData() {
  * - effectivefrom date from when the supplier is used
  */
 void ACC_PurchData::createMembers() {
-    addMember(this, "stockmaster_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "supplier_partno", "-", "", RB2::MemberChar125);
-    addMember(this, "supplierdescription", "-", "", RB2::MemberChar255);
-    addMember(this, "price", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "supplieruom", "-", "-", RB2::MemberChar40);
-    addMember(this, "conversionfactor", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "leadtime", "-", 0, RB2::MemberInteger);
-    addMember(this, "preferred", "-", 0, RB2::MemberInteger);
-    addMember(this, "effectivefrom", "-", "", RB2::MemberDateTime);
+    addMember("stockmaster_idx", "-", "0", RB2::MemberChar165);
+    addMember("supplier_partno", "-", "", RB2::MemberChar125);
+    addMember("supplierdescription", "-", "", RB2::MemberChar255);
+    addMember("price", "-", 0.0, RB2::MemberDouble);
+    addMember("supplieruom", "-", "-", RB2::MemberChar40);
+    addMember("conversionfactor", "-", 0.0, RB2::MemberDouble);
+    addMember("leadtime", "-", 0, RB2::MemberInteger);
+    addMember("preferred", "-", 0, RB2::MemberInteger);
+    addMember("effectivefrom", "-", "", RB2::MemberDateTime);
 }

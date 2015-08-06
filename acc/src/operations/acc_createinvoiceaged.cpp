@@ -376,17 +376,17 @@ WHERE acc_supplier.supplierid >= '0'
     while (query.next()) {
         RB_ObjectBase* obj = new RB_ObjectAtomic("", invoiceList, "ACC_Invoice");
         invoiceList->addObject(obj);
-        obj->addMember(obj, "suppname", "-", query.value(0), RB2::MemberChar125);
-        obj->addMember(obj, "transno", "-", query.value(1), RB2::MemberInteger);
-        obj->addMember(obj, "description", "-", query.value(2), RB2::MemberChar125);
-        obj->addMember(obj, "transdate", "-", query.value(3), RB2::MemberChar40);
-        obj->addMember(obj, "duedate", "-", query.value(4), RB2::MemberChar40);
-        obj->addMember(obj, "currency_id", "-", query.value(5), RB2::MemberChar10);
-        obj->addMember(obj, "amount", "-", query.value(6), RB2::MemberDouble);
-        obj->addMember(obj, "alloc", "-", query.value(7), RB2::MemberDouble);
-        obj->addMember(obj, "due", "-", query.value(8), RB2::MemberDouble);
-        obj->addMember(obj, "overdue1", "-", query.value(9), RB2::MemberDouble);
-        obj->addMember(obj, "overdue2", "-", query.value(10), RB2::MemberDouble);
+        obj->addMember("suppname", "-", query.value(0), RB2::MemberChar125);
+        obj->addMember("transno", "-", query.value(1), RB2::MemberInteger);
+        obj->addMember("description", "-", query.value(2), RB2::MemberChar125);
+        obj->addMember("transdate", "-", query.value(3), RB2::MemberChar40);
+        obj->addMember("duedate", "-", query.value(4), RB2::MemberChar40);
+        obj->addMember("currency_id", "-", query.value(5), RB2::MemberChar10);
+        obj->addMember("amount", "-", query.value(6), RB2::MemberDouble);
+        obj->addMember("alloc", "-", query.value(7), RB2::MemberDouble);
+        obj->addMember("due", "-", query.value(8), RB2::MemberDouble);
+        obj->addMember("overdue1", "-", query.value(9), RB2::MemberDouble);
+        obj->addMember("overdue2", "-", query.value(10), RB2::MemberDouble);
     }
 
     return true;

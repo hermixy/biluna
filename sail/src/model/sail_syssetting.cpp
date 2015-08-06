@@ -33,5 +33,5 @@ SAIL_SysSetting::~SAIL_SysSetting() {
   \li syssetingname system setting name (placeholder only)
  */
 void SAIL_SysSetting::createMembers() {
-    addMember(this, "syssettingname", "-", "Placeholder only", RB2::MemberChar40);
+    addMember("syssettingname", "-", "Placeholder only", RB2::MemberChar40);
 }

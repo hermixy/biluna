@@ -35,7 +35,7 @@ ACC_TaxGroupAuth::~ACC_TaxGroupAuth() {
  * - taxontax is 1 when tax on tax calculation
  */
 void ACC_TaxGroupAuth::createMembers() {
-    addMember(this, "taxauth_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "calculationorder", "-", 0, RB2::MemberInteger);
-    addMember(this, "taxontax", "-", 0, RB2::MemberInteger);
+    addMember("taxauth_id", "-", "0", RB2::MemberChar40);
+    addMember("calculationorder", "-", 0, RB2::MemberInteger);
+    addMember("taxontax", "-", 0, RB2::MemberInteger);
 }

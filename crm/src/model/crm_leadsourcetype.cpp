@@ -32,5 +32,5 @@ CRM_LeadSourceType::~CRM_LeadSourceType() {
  * \li mname name of the lead source type
  */
 void CRM_LeadSourceType::createMembers() {
-    addMember(this, "mname", "-", "", RB2::MemberChar40);
+    addMember("mname", "-", "", RB2::MemberChar40);
 }

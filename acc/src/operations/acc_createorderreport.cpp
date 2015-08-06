@@ -144,20 +144,20 @@ bool ACC_CreateOrderReport::execute(RB_ObjectBase* orderList) {
     while (query.next()) {
         RB_ObjectBase* obj = new RB_ObjectAtomic("", orderList, "ACC_Order");
         orderList->addObject(obj);
-        obj->addMember(obj, "orderno", "-", query.value(0), RB2::MemberChar125);
-        obj->addMember(obj, "delivertofrom", "-", query.value(1), RB2::MemberChar125);
-        obj->addMember(obj, "custsuppref", "-", query.value(2), RB2::MemberChar125);
-        obj->addMember(obj, "orddate", "-", query.value(3), RB2::MemberChar125);
-        obj->addMember(obj, "deliverydate", "-", query.value(4), RB2::MemberChar125);
-        obj->addMember(obj, "stk_idx", "-", query.value(5), RB2::MemberChar125);
-        obj->addMember(obj, "stkdescription", "-", query.value(6), RB2::MemberChar125);
-        obj->addMember(obj, "stkuom", "-", query.value(7), RB2::MemberChar125);
-        obj->addMember(obj, "unitprice", "-", query.value(8), RB2::MemberDouble);
-        obj->addMember(obj, "discountpercent", "-", query.value(9), RB2::MemberDouble);
-        obj->addMember(obj, "quantity", "-", query.value(10), RB2::MemberDouble);
-        obj->addMember(obj, "qtyinvoiced", "-", query.value(11), RB2::MemberDouble);
-        obj->addMember(obj, "qtydispatched", "-", query.value(12), RB2::MemberDouble);
-        obj->addMember(obj, "itemdue", "-", query.value(13), RB2::MemberChar125);
+        obj->addMember("orderno", "-", query.value(0), RB2::MemberChar125);
+        obj->addMember("delivertofrom", "-", query.value(1), RB2::MemberChar125);
+        obj->addMember("custsuppref", "-", query.value(2), RB2::MemberChar125);
+        obj->addMember("orddate", "-", query.value(3), RB2::MemberChar125);
+        obj->addMember("deliverydate", "-", query.value(4), RB2::MemberChar125);
+        obj->addMember("stk_idx", "-", query.value(5), RB2::MemberChar125);
+        obj->addMember("stkdescription", "-", query.value(6), RB2::MemberChar125);
+        obj->addMember("stkuom", "-", query.value(7), RB2::MemberChar125);
+        obj->addMember("unitprice", "-", query.value(8), RB2::MemberDouble);
+        obj->addMember("discountpercent", "-", query.value(9), RB2::MemberDouble);
+        obj->addMember("quantity", "-", query.value(10), RB2::MemberDouble);
+        obj->addMember("qtyinvoiced", "-", query.value(11), RB2::MemberDouble);
+        obj->addMember("qtydispatched", "-", query.value(12), RB2::MemberDouble);
+        obj->addMember("itemdue", "-", query.value(13), RB2::MemberChar125);
     }
 
     return true;

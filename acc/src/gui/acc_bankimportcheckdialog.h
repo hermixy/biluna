@@ -188,7 +188,7 @@ private:
     //! Bank statement sequence number
     int mBankStatSeqNo;
     //! Transaction document list based on import of bank statement list
-    RB_ObjectBase* mTransDocListRoot;
+    RB_ObjectContainer* mTransDocListRoot;
 };
 
 #endif // ACC_BANKIMPORTCHECKDIALOG_H

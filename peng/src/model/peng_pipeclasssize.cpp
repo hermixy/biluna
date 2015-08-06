@@ -31,5 +31,5 @@ PENG_PipeClassSize::~PENG_PipeClassSize() {
 
 
 void PENG_PipeClassSize::createMembers() {
-    addMember(this, "size", "NomInch", 0.0, RB2::MemberDouble);
+    addMember("size", "NomInch", 0.0, RB2::MemberDouble);
 }

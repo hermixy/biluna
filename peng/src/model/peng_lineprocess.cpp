@@ -64,30 +64,30 @@ PENG_LineProcess::~PENG_LineProcess() {
  * - processsimulation
  */
 void PENG_LineProcess::createMembers() {
-    addMember(this, "processfluiddescription", "-", "", RB2::MemberChar125);
-    addMember(this, "processoperatingpress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "processoperatingtempstd", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "processoperatingtemphigh", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "processoperatingtemplow", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "processtestmedium", "-", "", RB2::MemberChar125);
-    addMember(this, "processtestpress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "processpressdrop", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "processmassflowratestd", "kg/s", 0.0, RB2::MemberDouble);
-    addMember(this, "processmassflowratemax", "kg/s", 0.0, RB2::MemberDouble);
-    addMember(this, "processvelocity", "m/s", 0.0, RB2::MemberDouble);
-    addMember(this, "processphase_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "processboilingpoint", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "processvapourpress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "processmolweight", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "processdensityvapour", "kg/m3", 0.0, RB2::MemberDouble);
-    addMember(this, "processdensityliquid", "kg/m3", 0.0, RB2::MemberDouble);
-    addMember(this, "processviscosityvapour", "cP", 0.0, RB2::MemberDouble);
-    addMember(this, "processviscosityliquid", "cP", 0.0, RB2::MemberDouble);
-    addMember(this, "processstandardvolumeflowstd", "m3/h", 0.0, RB2::MemberDouble);
-    addMember(this, "processstandardvolumeflowmax", "m3/h", 0.0, RB2::MemberDouble);
-    addMember(this, "processactualflowstd", "m3/h", 0.0, RB2::MemberDouble);
-    addMember(this, "processactualflowmax", "m3/h", 0.0, RB2::MemberDouble);
-    addMember(this, "processsimulation", "-", "", RB2::MemberChar125);
+    addMember("processfluiddescription", "-", "", RB2::MemberChar125);
+    addMember("processoperatingpress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("processoperatingtempstd", "DegC", 0.0, RB2::MemberDouble);
+    addMember("processoperatingtemphigh", "DegC", 0.0, RB2::MemberDouble);
+    addMember("processoperatingtemplow", "DegC", 0.0, RB2::MemberDouble);
+    addMember("processtestmedium", "-", "", RB2::MemberChar125);
+    addMember("processtestpress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("processpressdrop", "MPa", 0.0, RB2::MemberDouble);
+    addMember("processmassflowratestd", "kg/s", 0.0, RB2::MemberDouble);
+    addMember("processmassflowratemax", "kg/s", 0.0, RB2::MemberDouble);
+    addMember("processvelocity", "m/s", 0.0, RB2::MemberDouble);
+    addMember("processphase_id", "-", 0, RB2::MemberInteger);
+    addMember("processboilingpoint", "DegC", 0.0, RB2::MemberDouble);
+    addMember("processvapourpress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("processmolweight", "-", 0.0, RB2::MemberDouble);
+    addMember("processdensityvapour", "kg/m3", 0.0, RB2::MemberDouble);
+    addMember("processdensityliquid", "kg/m3", 0.0, RB2::MemberDouble);
+    addMember("processviscosityvapour", "cP", 0.0, RB2::MemberDouble);
+    addMember("processviscosityliquid", "cP", 0.0, RB2::MemberDouble);
+    addMember("processstandardvolumeflowstd", "m3/h", 0.0, RB2::MemberDouble);
+    addMember("processstandardvolumeflowmax", "m3/h", 0.0, RB2::MemberDouble);
+    addMember("processactualflowstd", "m3/h", 0.0, RB2::MemberDouble);
+    addMember("processactualflowmax", "m3/h", 0.0, RB2::MemberDouble);
+    addMember("processsimulation", "-", "", RB2::MemberChar125);
 }
 
 /**

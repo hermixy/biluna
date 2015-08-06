@@ -36,10 +36,10 @@ ACC_Currency::~ACC_Currency() {
  * - rate exchange rate against company default currency
  */
 void ACC_Currency::createMembers() {
-    addMember(this, "currency", "-", "", RB2::MemberChar20);
+    addMember("currency", "-", "", RB2::MemberChar20);
     //! ISO4217 Code
-    addMember(this, "currcode", "-", "", RB2::MemberChar10);
-    addMember(this, "country", "-", "", RB2::MemberChar125);
-    addMember(this, "hundredsname", "-", "Cents", RB2::MemberChar125);
-    addMember(this, "rate", "-", 0.0, RB2::MemberDouble);
+    addMember("currcode", "-", "", RB2::MemberChar10);
+    addMember("country", "-", "", RB2::MemberChar125);
+    addMember("hundredsname", "-", "Cents", RB2::MemberChar125);
+    addMember("rate", "-", 0.0, RB2::MemberDouble);
 }

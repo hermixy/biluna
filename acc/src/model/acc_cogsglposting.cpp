@@ -35,7 +35,7 @@ ACC_CogsGlPosting::~ACC_CogsGlPosting() {
  * - glcode_idx GL account ID and description
  */
 void ACC_CogsGlPosting::createMembers() {
-    addMember(this, "area_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "stkcat_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "glcode_idx", "-", "0", RB2::MemberChar165);
+    addMember("area_id", "-", "0", RB2::MemberChar40);
+    addMember("stkcat_idx", "-", "0", RB2::MemberChar165);
+    addMember("glcode_idx", "-", "0", RB2::MemberChar165);
 }

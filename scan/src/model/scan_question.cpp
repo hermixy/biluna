@@ -44,8 +44,8 @@ SCAN_Question::~SCAN_Question() {
  * question text of the question
  */
 void SCAN_Question::createMembers() {
-    addMember(this, "number", "-", 0, RB2::MemberInteger);
-    addMember(this, "type", "-", 0, RB2::MemberInteger);
-    addMember(this, "isactive", "-", 1, RB2::MemberInteger);
-    addMember(this, "question", "-", "", RB2::MemberString);
+    addMember("number", "-", 0, RB2::MemberInteger);
+    addMember("type", "-", 0, RB2::MemberInteger);
+    addMember("isactive", "-", 1, RB2::MemberInteger);
+    addMember("question", "-", "", RB2::MemberString);
 }

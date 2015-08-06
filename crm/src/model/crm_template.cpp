@@ -47,23 +47,23 @@ CRM_Template::~CRM_Template() {
 
  */
 void CRM_Template::createMembers() {
-    addMember(this, "type_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "reference", "-", "", RB2::MemberChar40);
-    addMember(this, "standard", "-", 0, RB2::MemberInteger);
-    addMember(this, "description", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "lastused", "-", "1900-01-01", RB2::MemberChar20);
+    addMember("type_id", "-", 0, RB2::MemberInteger);
+    addMember("reference", "-", "", RB2::MemberChar40);
+    addMember("standard", "-", 0, RB2::MemberInteger);
+    addMember("description", "-", "<NEW>", RB2::MemberChar125);
+    addMember("lastused", "-", "1900-01-01", RB2::MemberChar20);
 
-    addMember(this, "pageheader", "-", "", RB2::MemberString);
-    addMember(this, "doccontent", "-", "", RB2::MemberString);
-    addMember(this, "pagefooter", "-", "", RB2::MemberString);
+    addMember("pageheader", "-", "", RB2::MemberString);
+    addMember("doccontent", "-", "", RB2::MemberString);
+    addMember("pagefooter", "-", "", RB2::MemberString);
 
-    addMember(this, "papersize", "-", 0, RB2::MemberInteger);
+    addMember("papersize", "-", 0, RB2::MemberInteger);
 
-    addMember(this, "marginleft", "mm", 15.0, RB2::MemberDouble);
-    addMember(this, "marginright", "mm", 10.0, RB2::MemberDouble);
-    addMember(this, "margintop", "mm", 10.0, RB2::MemberDouble);
-    addMember(this, "marginbottom", "mm", 10.0, RB2::MemberDouble);
+    addMember("marginleft", "mm", 15.0, RB2::MemberDouble);
+    addMember("marginright", "mm", 10.0, RB2::MemberDouble);
+    addMember("margintop", "mm", 10.0, RB2::MemberDouble);
+    addMember("marginbottom", "mm", 10.0, RB2::MemberDouble);
 
-    addMember(this, "pageheaderheight", "mm", 20.0, RB2::MemberDouble);
-    addMember(this, "pagefooterheight", "mm", 20.0, RB2::MemberDouble);
+    addMember("pageheaderheight", "mm", 20.0, RB2::MemberDouble);
+    addMember("pagefooterheight", "mm", 20.0, RB2::MemberDouble);
 }

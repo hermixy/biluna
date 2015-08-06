@@ -13,6 +13,7 @@ class DB_EXPORT DB_PluginTesterDialog : public RB_Dialog, private Ui::DB_PluginT
 
 public:
     DB_PluginTesterDialog(QWidget* parent = 0);
+    void init() { }
 
 protected:
     void findFiles(const QString &directory);

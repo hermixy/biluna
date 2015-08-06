@@ -11,6 +11,7 @@
 #include "acc_utilityfactory.h"
 
 #include "rb_debug.h"
+#include "rb_utility.h"
 
 
 ACC_UtilityFactory* ACC_UtilityFactory::mActiveFactory = 0;
@@ -28,7 +29,12 @@ ACC_UtilityFactory::ACC_UtilityFactory() : RB_UtilityFactory() {
  * Destructor
  */
 ACC_UtilityFactory::~ACC_UtilityFactory() {
-    closeAllFactories();
+    // Here and not in base class, otherwise mActiveFactory is already NULL
+    while (!mUtilityVector.empty()) {
+        RB_Utility* f = mUtilityVector.back();
+        delete f; // deletes utility and removes, therefor no pop_back()
+    }
+
     DB_UTILITYFACTORY->unregisterFactory(this);
     mActiveFactory = NULL;
     RB_DEBUG->print("ACC_UtilityFactory::~ACC_UtilityFactory() OK");
@@ -42,83 +48,4 @@ ACC_UtilityFactory* ACC_UtilityFactory::getInstance() {
         mActiveFactory = new ACC_UtilityFactory();
     }
     return mActiveFactory;
-}
-
-/**
- * Refresh the utilities, for example after changing the project/root
- */
-void ACC_UtilityFactory::refresh() {
-    std::vector<RB_UtilityFactory*>::iterator iter;
-    iter = mFactoryList.begin();
-    while (iter != mFactoryList.end()) {
-        RB_UtilityFactory* f = *iter;
-        f->refresh();
-        ++iter;
-    }
-}
-
-/**
- * @return factory list
- */
-std::vector<RB_UtilityFactory*> ACC_UtilityFactory::getFactoryList() {
-    return mFactoryList;
-}
-
-/**
- * Register factory
- * @param f Objectfactory
- */
-void ACC_UtilityFactory::registerFactory(RB_UtilityFactory* f) {
-    bool exists = false;
-
-    std::vector<RB_UtilityFactory*>::iterator iter;
-    iter = mFactoryList.begin();
-    while (iter != mFactoryList.end() && !exists) {
-        if(f == *iter) {
-            exists = true;
-            RB_DEBUG->print(RB_Debug::D_ERROR,
-                            "ACC_UtilityFactory::registerFactory() "
-                            "objectfactory already registered ERROR");
-        }
-        ++iter;
-    }
-
-    if (!exists) {
-        mFactoryList.push_back(f);
-    }
-}
-
-/**
- * Unregister factory
- * @param f Objectfactory
- */
-void ACC_UtilityFactory::unregisterFactory(RB_UtilityFactory* f) {
-    bool exists = false;
-
-    std::vector<RB_UtilityFactory*>::iterator iter;
-    iter = mFactoryList.begin();
-    while (iter != mFactoryList.end() && !exists) {
-        if(f == *iter) {
-            mFactoryList.erase(iter);
-            exists = true;
-        }
-        ++iter;
-    }
-
-    if (!exists) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_UtilityFactory::unregisterFactory() "
-                        "objectfactory was not registered ERROR");
-    }
-}
-
-/**
- * Close and delete all factories except this (DB) factory
- */
-void ACC_UtilityFactory::closeAllFactories() {
-    while (!mFactoryList.empty()) {
-        RB_UtilityFactory* f
-                = dynamic_cast<RB_UtilityFactory*>(mFactoryList.back());
-        delete f; // unregisters factory and removes, therefor no pop_back()
-    }
 }

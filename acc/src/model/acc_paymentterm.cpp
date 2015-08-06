@@ -37,8 +37,8 @@ ACC_PaymentTerm::~ACC_PaymentTerm() {
  */
 void ACC_PaymentTerm::createMembers() {
     // conform webErp
-    addMember(this, "termsindicator", "-", "", RB2::MemberChar40);
-    addMember(this, "terms", "-", "", RB2::MemberChar255);
-    addMember(this, "daysbeforedue", "-", 0, RB2::MemberInteger);
-    addMember(this, "dayinfollowingmonth", "-", 0, RB2::MemberInteger);
+    addMember("termsindicator", "-", "", RB2::MemberChar40);
+    addMember("terms", "-", "", RB2::MemberChar255);
+    addMember("daysbeforedue", "-", 0, RB2::MemberInteger);
+    addMember("dayinfollowingmonth", "-", 0, RB2::MemberInteger);
 }

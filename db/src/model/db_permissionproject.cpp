@@ -41,11 +41,11 @@ DB_PermissionProject::~DB_PermissionProject() {
  * -end, end date after which this project is not visible or editable by anybody
  */
 void DB_PermissionProject::createMembers() {
-    addMember(this, "number", "-", "<NEW>", RB2::MemberChar40);
-    addMember(this, "description", "-", "YourPermissionGroup", RB2::MemberChar125);
-    addMember(this, "customer", "-", "YourCustomer", RB2::MemberChar125);
-    addMember(this, "persproject_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "mstatus_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "start", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "end", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("number", "-", "<NEW>", RB2::MemberChar40);
+    addMember("description", "-", "YourPermissionGroup", RB2::MemberChar125);
+    addMember("customer", "-", "YourCustomer", RB2::MemberChar125);
+    addMember("persproject_idx", "-", "0", RB2::MemberChar165);
+    addMember("mstatus_id", "-", 0, RB2::MemberInteger);
+    addMember("start", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("end", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
 }

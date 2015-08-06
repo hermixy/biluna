@@ -39,12 +39,12 @@ DB_SystemUser::~DB_SystemUser() {
  * -end
  */
 void DB_SystemUser::createMembers() {
-    addMember(this, "firstname", "-", "<NEW>", RB2::MemberChar40);
-    addMember(this, "lastname", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "email", "-", "", RB2::MemberChar125);
-    addMember(this, "telephone", "-", "", RB2::MemberChar40);
-    addMember(this, "username", "-", "", RB2::MemberChar40);
-    addMember(this, "password", "-", "", RB2::MemberChar255);
-    addMember(this, "start", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "end", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("firstname", "-", "<NEW>", RB2::MemberChar40);
+    addMember("lastname", "-", "<NEW>", RB2::MemberChar125);
+    addMember("email", "-", "", RB2::MemberChar125);
+    addMember("telephone", "-", "", RB2::MemberChar40);
+    addMember("username", "-", "", RB2::MemberChar40);
+    addMember("password", "-", "", RB2::MemberChar255);
+    addMember("start", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("end", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
 }

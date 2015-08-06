@@ -36,7 +36,7 @@ PENG_TypeSection::~PENG_TypeSection () {
  * \li description is an explanation of the member
  */
 void PENG_TypeSection::createMembers() {
-    addMember(this, "type", "-", "New section type", RB2::MemberChar125);	// 0
-    addMember(this, "sectiontype", "-", "", RB2::MemberChar40);	// 1
-    addMember(this, "description", "-", "", RB2::MemberChar125);		// 2
+    addMember("type", "-", "New section type", RB2::MemberChar125);	// 0
+    addMember("sectiontype", "-", "", RB2::MemberChar40);	// 1
+    addMember("description", "-", "", RB2::MemberChar125);		// 2
 }

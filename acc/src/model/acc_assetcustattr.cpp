@@ -42,16 +42,16 @@ ACC_AssetCustAttr::~ACC_AssetCustAttr() {
  * - resultvalue is the result value in case of multiplywith otherwise equal to value
  */
 void ACC_AssetCustAttr::createMembers() {
-    addMember(this, "seqno", "-", 0, RB2::MemberInteger);
-    addMember(this, "shortname", "-", "<NEW>", RB2::MemberChar40);
-    addMember(this, "description", "-", "<New>", RB2::MemberChar255);
-    addMember(this, "unit", "-", "", RB2::MemberChar40);
-    addMember(this, "weight", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "value", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "multiplywith", "-", "", RB2::MemberChar40);
-    addMember(this, "startdate", "-", "", RB2::MemberChar20);
-    addMember(this, "enddate", "-", "", RB2::MemberChar20);
-    addMember(this, "interval", "-", 0, RB2::MemberInteger);
-    addMember(this, "resultvalue", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "customer_idx", "-", "0", RB2::MemberChar165);
+    addMember("seqno", "-", 0, RB2::MemberInteger);
+    addMember("shortname", "-", "<NEW>", RB2::MemberChar40);
+    addMember("description", "-", "<New>", RB2::MemberChar255);
+    addMember("unit", "-", "", RB2::MemberChar40);
+    addMember("weight", "-", 0.0, RB2::MemberDouble);
+    addMember("value", "-", 0.0, RB2::MemberDouble);
+    addMember("multiplywith", "-", "", RB2::MemberChar40);
+    addMember("startdate", "-", "", RB2::MemberChar20);
+    addMember("enddate", "-", "", RB2::MemberChar20);
+    addMember("interval", "-", 0, RB2::MemberInteger);
+    addMember("resultvalue", "-", 0.0, RB2::MemberDouble);
+    addMember("customer_idx", "-", "0", RB2::MemberChar165);
 }

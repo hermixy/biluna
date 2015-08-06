@@ -34,6 +34,6 @@ ACC_AssetType::~ACC_AssetType() {
  * - description description of the type
  */
 void ACC_AssetType::createMembers() {
-    addMember(this, "mname", "-", "", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
+    addMember("mname", "-", "", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar255);
 }

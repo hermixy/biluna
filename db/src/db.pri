@@ -281,6 +281,7 @@ HEADERS = \
     ../src/utils/rb_system.h \
     ../src/utils/rb_tcpsocket.h \
     ../src/utils/rb_urlbasedrenderer.h \
+    ../src/utils/rb_utility.h \
     ../src/utils/rb_utilityfactory.h \
     ../src/utils/rb_uuid.h \
     ../src/utils/rb_variant.h \
@@ -511,6 +512,7 @@ SOURCES = \
     ../src/utils/rb_string.cpp \
     ../src/utils/rb_system.cpp \
     ../src/utils/rb_tcpsocket.cpp \
+    ../src/utils/rb_utility.cpp \
     ../src/utils/rb_utilityfactory.cpp \
     ../src/visitors/db_xmlreader.cpp \
     ../src/visitors/rb_csvwriter.cpp \

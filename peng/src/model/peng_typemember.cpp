@@ -34,8 +34,8 @@ PENG_TypeMember::~PENG_TypeMember () {
  * 6 is a double (RB2::MemberDouble). Check RB2::MemberType for possible changes
  */
 void PENG_TypeMember::createMembers() {
-    addMember(this, "mname", "-", "memberName", RB2::MemberChar40);	// 0
-    addMember(this, "unit", "-", "-", RB2::MemberChar40);				// 1
-    addMember(this, "valuetype", "-", 0, RB2::MemberInteger);			// 2
-    // addMember(this, "pValue", "-", "");							// 3
+    addMember("mname", "-", "memberName", RB2::MemberChar40);	// 0
+    addMember("unit", "-", "-", RB2::MemberChar40);				// 1
+    addMember("valuetype", "-", 0, RB2::MemberInteger);			// 2
+    // addMember("pValue", "-", "");							// 3
 }

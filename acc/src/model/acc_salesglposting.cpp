@@ -38,10 +38,10 @@ ACC_SalesGlPosting::~ACC_SalesGlPosting() {
  * - salesglact_idx sales GL account for this stock category
  */
 void ACC_SalesGlPosting::createMembers() {
-    addMember(this, "taxauth_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "area_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "salestype_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "stkcat_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "discountglact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "salesglact_idx", "-", "0", RB2::MemberChar165);
+    addMember("taxauth_id", "-", "0", RB2::MemberChar40);
+    addMember("area_id", "-", "0", RB2::MemberChar40);
+    addMember("salestype_id", "-", "0", RB2::MemberChar40);
+    addMember("stkcat_idx", "-", "0", RB2::MemberChar165);
+    addMember("discountglact_idx", "-", "0", RB2::MemberChar165);
+    addMember("salesglact_idx", "-", "0", RB2::MemberChar165);
 }

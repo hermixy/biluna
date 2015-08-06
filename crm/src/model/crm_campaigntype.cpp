@@ -32,5 +32,5 @@ CRM_CampaignType::~CRM_CampaignType() {
  * - mname name of campaign type
  */
 void CRM_CampaignType::createMembers() {
-    addMember(this, "mname", "-", "<new>", RB2::MemberChar125);
+    addMember("mname", "-", "<new>", RB2::MemberChar125);
 }

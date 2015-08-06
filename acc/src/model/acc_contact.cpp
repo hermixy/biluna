@@ -56,41 +56,41 @@ ACC_Contact::~ACC_Contact() {
  * - rm_id ID of the CRM perspective account (CRM_Project.id) or SRM (SRM_Project.id)
  */
 void ACC_Contact::createMembers() {
-    addMember(this, "salutation", "-", "", RB2::MemberChar20);
-    addMember(this, "firstname", "-", "", RB2::MemberChar125);
-    addMember(this, "lastname", "-", "", RB2::MemberChar125);
-    addMember(this, "leadsource", "-", "", RB2::MemberChar125);
-    addMember(this, "title", "-", "", RB2::MemberChar125);
-    addMember(this, "department", "-", "", RB2::MemberChar125);
-    addMember(this, "reportsto_id", "-", "", RB2::MemberChar40);
-    addMember(this, "birthdate", "-", 0, RB2::MemberDateTime);
-    addMember(this, "donotcall", "-", 0, RB2::MemberInteger);
-    addMember(this, "phonehome", "-", "", RB2::MemberChar20);
-    addMember(this, "phonemobile", "-", "", RB2::MemberChar20);
-    addMember(this, "phonework", "-", "", RB2::MemberChar20);
-    addMember(this, "phoneother", "-", "", RB2::MemberChar20);
-    addMember(this, "phonefax", "-", "", RB2::MemberChar20);
-    addMember(this, "email1", "-", "", RB2::MemberChar125);
-    addMember(this, "email2", "-", "", RB2::MemberChar125);
-    addMember(this, "voip", "-", "", RB2::MemberChar125);
-    addMember(this, "emailoptout", "-", 0, RB2::MemberInteger);
-    addMember(this, "invalidemail", "-", 0, RB2::MemberInteger);
-    addMember(this, "assistant", "-", "", RB2::MemberChar125);
-    addMember(this, "assistantphone", "-", "", RB2::MemberChar20);
-    addMember(this, "primaryaddress1", "-", "", RB2::MemberChar125);
-    addMember(this, "primaryaddress2", "-", "", RB2::MemberChar125);
-    addMember(this, "primaryaddress3", "-", "", RB2::MemberChar125);
-    addMember(this, "primaryaddress4", "-", "", RB2::MemberChar125);
-    addMember(this, "primaryaddress5", "-", "", RB2::MemberChar125);
-    addMember(this, "primaryaddress6", "-", "", RB2::MemberChar40);
-    addMember(this, "altaddress1", "-", "", RB2::MemberChar125);
-    addMember(this, "altaddress2", "-", "", RB2::MemberChar125);
-    addMember(this, "altaddress3", "-", "", RB2::MemberChar125);
-    addMember(this, "altaddress4", "-", "", RB2::MemberChar125);
-    addMember(this, "altaddress5", "-", "", RB2::MemberChar125);
-    addMember(this, "altaddress6", "-", "", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar2500);
+    addMember("salutation", "-", "", RB2::MemberChar20);
+    addMember("firstname", "-", "", RB2::MemberChar125);
+    addMember("lastname", "-", "", RB2::MemberChar125);
+    addMember("leadsource", "-", "", RB2::MemberChar125);
+    addMember("title", "-", "", RB2::MemberChar125);
+    addMember("department", "-", "", RB2::MemberChar125);
+    addMember("reportsto_id", "-", "", RB2::MemberChar40);
+    addMember("birthdate", "-", 0, RB2::MemberDateTime);
+    addMember("donotcall", "-", 0, RB2::MemberInteger);
+    addMember("phonehome", "-", "", RB2::MemberChar20);
+    addMember("phonemobile", "-", "", RB2::MemberChar20);
+    addMember("phonework", "-", "", RB2::MemberChar20);
+    addMember("phoneother", "-", "", RB2::MemberChar20);
+    addMember("phonefax", "-", "", RB2::MemberChar20);
+    addMember("email1", "-", "", RB2::MemberChar125);
+    addMember("email2", "-", "", RB2::MemberChar125);
+    addMember("voip", "-", "", RB2::MemberChar125);
+    addMember("emailoptout", "-", 0, RB2::MemberInteger);
+    addMember("invalidemail", "-", 0, RB2::MemberInteger);
+    addMember("assistant", "-", "", RB2::MemberChar125);
+    addMember("assistantphone", "-", "", RB2::MemberChar20);
+    addMember("primaryaddress1", "-", "", RB2::MemberChar125);
+    addMember("primaryaddress2", "-", "", RB2::MemberChar125);
+    addMember("primaryaddress3", "-", "", RB2::MemberChar125);
+    addMember("primaryaddress4", "-", "", RB2::MemberChar125);
+    addMember("primaryaddress5", "-", "", RB2::MemberChar125);
+    addMember("primaryaddress6", "-", "", RB2::MemberChar40);
+    addMember("altaddress1", "-", "", RB2::MemberChar125);
+    addMember("altaddress2", "-", "", RB2::MemberChar125);
+    addMember("altaddress3", "-", "", RB2::MemberChar125);
+    addMember("altaddress4", "-", "", RB2::MemberChar125);
+    addMember("altaddress5", "-", "", RB2::MemberChar125);
+    addMember("altaddress6", "-", "", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar2500);
 
     // customer/supplier relation management
-    addMember(this, "rm_id", "-", "0", RB2::MemberChar40);
+    addMember("rm_id", "-", "0", RB2::MemberChar40);
 }

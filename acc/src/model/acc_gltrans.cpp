@@ -53,20 +53,20 @@ ACC_GlTrans::~ACC_GlTrans() {
  * - costcenter_idx cost center ID and description
  */
 void ACC_GlTrans::createMembers() {
-    addMember(this, "type", "-", 0, RB2::MemberInteger);
-    addMember(this, "transdocno", "-", 0, RB2::MemberInteger);
-    addMember(this, "chequeno", "-", 0, RB2::MemberInteger);
-    addMember(this, "transdate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "periodno", "-", 0, RB2::MemberInteger);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "chartmaster_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "accountcontrol", "-", 0, RB2::MemberInteger);
-    addMember(this, "amount", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "posted", "-", 0, RB2::MemberInteger);
-    addMember(this, "jobref_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "tag_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "transdoc_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "itemtrans_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "transallocn_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "costcenter_idx", "-", "0", RB2::MemberChar165);
+    addMember("type", "-", 0, RB2::MemberInteger);
+    addMember("transdocno", "-", 0, RB2::MemberInteger);
+    addMember("chequeno", "-", 0, RB2::MemberInteger);
+    addMember("transdate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("periodno", "-", 0, RB2::MemberInteger);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("chartmaster_idx", "-", "0", RB2::MemberChar165);
+    addMember("accountcontrol", "-", 0, RB2::MemberInteger);
+    addMember("amount", "-", 0.0, RB2::MemberDouble);
+    addMember("posted", "-", 0, RB2::MemberInteger);
+    addMember("jobref_id", "-", "0", RB2::MemberChar40);
+    addMember("tag_id", "-", "0", RB2::MemberChar40);
+    addMember("transdoc_id", "-", "0", RB2::MemberChar40);
+    addMember("itemtrans_id", "-", "0", RB2::MemberChar40);
+    addMember("transallocn_idx", "-", "0", RB2::MemberChar165);
+    addMember("costcenter_idx", "-", "0", RB2::MemberChar165);
 }

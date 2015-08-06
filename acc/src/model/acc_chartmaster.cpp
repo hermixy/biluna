@@ -43,9 +43,9 @@ ACC_ChartMaster::~ACC_ChartMaster() {
  *    control = 2000-2999 bank accounts control (Bank accounts) (cannot be deleted)
  */
 void ACC_ChartMaster::createMembers() {
-    addMember(this, "accountcode", "-", "0", RB2::MemberChar10);
-    addMember(this, "accountname", "-", "", RB2::MemberChar125);
-    addMember(this, "accountgroup_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "accountrequired", "-", 0, RB2::MemberInteger);
-    addMember(this, "accountcontrol", "-", 0, RB2::MemberInteger);
+    addMember("accountcode", "-", "0", RB2::MemberChar10);
+    addMember("accountname", "-", "", RB2::MemberChar125);
+    addMember("accountgroup_id", "-", "0", RB2::MemberChar40);
+    addMember("accountrequired", "-", 0, RB2::MemberInteger);
+    addMember("accountcontrol", "-", 0, RB2::MemberInteger);
 }

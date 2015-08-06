@@ -213,7 +213,7 @@ void ACC_SysSetXmlReader::readMember() {
         return;
     }
 
-    RB_ObjectMember* mem = obj->addMember(obj, mReader.name().toString(),
+    RB_ObjectMember* mem = obj->addMember(mReader.name().toString(),
                                           "-", RB_Variant());
 
     QXmlStreamAttributes attrs = mReader.attributes();

@@ -922,11 +922,11 @@ void PCALC_EN1591Widget::createInputOutputObject() {
 
     // Add setting object to input list
     RB_ObjectAtomic* obj = new RB_ObjectAtomic("", inList, "PCALC_Setting");
-    obj->addMember(obj, "lastvalue", "-", cbLastValuesOnly->isChecked() ? 1 : 0,
+    obj->addMember("lastvalue", "-", cbLastValuesOnly->isChecked() ? 1 : 0,
                    RB2::MemberInteger);
-    obj->addMember(obj, "formulafrom", "-", sbFormulaFrom->value(),
+    obj->addMember("formulafrom", "-", sbFormulaFrom->value(),
                    RB2::MemberInteger);
-    obj->addMember(obj, "formulato", "-", sbFormulaTo->value(),
+    obj->addMember("formulato", "-", sbFormulaTo->value(),
                    RB2::MemberInteger);
     inList->addObject(obj);
 }
@@ -938,7 +938,7 @@ void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,
     QModelIndex idx = model->index(
                 model->getCurrentIndex().row(),
                 model->fieldIndex(variableName));
-    obj->addMember(obj, variableName, unit, model->data(idx));
+    obj->addMember(variableName, unit, model->data(idx));
 }
 
 void PCALC_EN1591Widget::addLoadCaseVariable(RB_ObjectBase* loadCase,
@@ -949,6 +949,6 @@ void PCALC_EN1591Widget::addLoadCaseVariable(RB_ObjectBase* loadCase,
     QModelIndex idx = model->index(
                 currentRow,
                 model->fieldIndex(variableName));
-    loadCase->addMember(loadCase, variableName, unit, model->data(idx));
+    loadCase->addMember(variableName, unit, model->data(idx));
 }
 

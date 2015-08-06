@@ -28,9 +28,9 @@ DB_Project::~DB_Project() {
 
 
 void DB_Project::createMembers() {
-    addMember(this, "number", "-", "DB0001", RB2::MemberChar125);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "description", "-", "Default", RB2::MemberChar255);
-    addMember(this, "company", "-", "MyCompany", RB2::MemberChar125);
-    addMember(this, "location", "-", "MyLocation", RB2::MemberChar125);
+    addMember("number", "-", "DB0001", RB2::MemberChar125);
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("description", "-", "Default", RB2::MemberChar255);
+    addMember("company", "-", "MyCompany", RB2::MemberChar125);
+    addMember("location", "-", "MyLocation", RB2::MemberChar125);
 }

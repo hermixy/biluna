@@ -56,11 +56,11 @@ Utilities, Other
 
  */
 void SRM_SupplierDetail::createMembers() {
-    addMember(this, "suppliertype_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "ownership", "-", "", RB2::MemberChar125);
-    addMember(this, "classifcode", "-", "", RB2::MemberChar125);
-    addMember(this, "industrytype_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "employeecount", "-", 0, RB2::MemberInteger);
-    addMember(this, "annualrevenue", "-", "", RB2::MemberChar125);
-    addMember(this, "rating", "-", "", RB2::MemberChar125);
+    addMember("suppliertype_id", "-", 0, RB2::MemberInteger);
+    addMember("ownership", "-", "", RB2::MemberChar125);
+    addMember("classifcode", "-", "", RB2::MemberChar125);
+    addMember("industrytype_id", "-", 0, RB2::MemberInteger);
+    addMember("employeecount", "-", 0, RB2::MemberInteger);
+    addMember("annualrevenue", "-", "", RB2::MemberChar125);
+    addMember("rating", "-", "", RB2::MemberChar125);
 }

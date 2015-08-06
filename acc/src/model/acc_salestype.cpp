@@ -33,6 +33,6 @@ ACC_SalesType::~ACC_SalesType() {
  * - description sales type description
  */
 void ACC_SalesType::createMembers() {
-    addMember(this, "typeabbrev", "-", "", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
+    addMember("typeabbrev", "-", "", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar255);
 }

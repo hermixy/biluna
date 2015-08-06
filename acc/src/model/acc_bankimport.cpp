@@ -47,20 +47,20 @@ ACC_BankImport::~ACC_BankImport() {
  * - transcode, transaction code                            (Transactie Code/Mutatie Soort)
  */
 void ACC_BankImport::createMembers() {
-    addMember(this, "importmessage", "-", "", RB2::MemberChar125);
-    addMember(this, "statbankname", "-", "", RB2::MemberChar125);
-    addMember(this, "statactnumber", "-", "", RB2::MemberChar40);
-    addMember(this, "statstartamount", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "statendamount", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "stattimestamp", "-", "", RB2::MemberChar20);
-    addMember(this, "statnumber", "-", "0", RB2::MemberChar40);
-    addMember(this, "transaccount", "-", "", RB2::MemberChar40);
-    addMember(this, "transactnumber", "-", "", RB2::MemberChar40);
-    addMember(this, "transamount", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "transdebitcredit", "-", "", RB2::MemberChar10);
-    addMember(this, "transdescription", "-", "", RB2::MemberChar125);
-    addMember(this, "transseconddescription", "-", "", RB2::MemberChar125);
-    addMember(this, "transentrytimestamp", "-", "", RB2::MemberChar20);
-    addMember(this, "transvaluetimestamp", "-", "", RB2::MemberChar20);
-    addMember(this, "transcode", "-", "", RB2::MemberChar125);
+    addMember("importmessage", "-", "", RB2::MemberChar125);
+    addMember("statbankname", "-", "", RB2::MemberChar125);
+    addMember("statactnumber", "-", "", RB2::MemberChar40);
+    addMember("statstartamount", "-", 0.0, RB2::MemberDouble);
+    addMember("statendamount", "-", 0.0, RB2::MemberDouble);
+    addMember("stattimestamp", "-", "", RB2::MemberChar20);
+    addMember("statnumber", "-", "0", RB2::MemberChar40);
+    addMember("transaccount", "-", "", RB2::MemberChar40);
+    addMember("transactnumber", "-", "", RB2::MemberChar40);
+    addMember("transamount", "-", 0.0, RB2::MemberDouble);
+    addMember("transdebitcredit", "-", "", RB2::MemberChar10);
+    addMember("transdescription", "-", "", RB2::MemberChar125);
+    addMember("transseconddescription", "-", "", RB2::MemberChar125);
+    addMember("transentrytimestamp", "-", "", RB2::MemberChar20);
+    addMember("transvaluetimestamp", "-", "", RB2::MemberChar20);
+    addMember("transcode", "-", "", RB2::MemberChar125);
 }

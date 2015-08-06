@@ -53,37 +53,37 @@ ACC_Project::~ACC_Project() {
  * - logo company logo image
  */
 void ACC_Project::createMembers() {
-    addMember(this, "coyname", "-", "<Your Company>", RB2::MemberChar125);
+    addMember("coyname", "-", "<Your Company>", RB2::MemberChar125);
     //! Company goods sales tax reference number, VAT number
-    addMember(this, "gstno", "-", "", RB2::MemberChar20);
-    addMember(this, "companynumber", "-", "0", RB2::MemberChar20);
-    addMember(this, "regoffice1", "-", "", RB2::MemberChar125);
-    addMember(this, "regoffice2", "-", "", RB2::MemberChar125);
-    addMember(this, "regoffice3", "-", "", RB2::MemberChar125);
-    addMember(this, "regoffice4", "-", "", RB2::MemberChar125);
-    addMember(this, "regoffice5", "-", "", RB2::MemberChar125);
-    addMember(this, "regoffice6", "-", "", RB2::MemberChar125);
-    addMember(this, "telephone", "-", "", RB2::MemberChar40);
-    addMember(this, "fax", "-", "", RB2::MemberChar20);
-    addMember(this, "email", "-", "", RB2::MemberChar125);
-    addMember(this, "currencydefault_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "pytdiscountact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "payrollact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "grnact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "exchangediffact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "purchasesexchangediffact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "retainedearnings_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "freightact_idx", "-", "0", RB2::MemberChar165);
+    addMember("gstno", "-", "", RB2::MemberChar20);
+    addMember("companynumber", "-", "0", RB2::MemberChar20);
+    addMember("regoffice1", "-", "", RB2::MemberChar125);
+    addMember("regoffice2", "-", "", RB2::MemberChar125);
+    addMember("regoffice3", "-", "", RB2::MemberChar125);
+    addMember("regoffice4", "-", "", RB2::MemberChar125);
+    addMember("regoffice5", "-", "", RB2::MemberChar125);
+    addMember("regoffice6", "-", "", RB2::MemberChar125);
+    addMember("telephone", "-", "", RB2::MemberChar40);
+    addMember("fax", "-", "", RB2::MemberChar20);
+    addMember("email", "-", "", RB2::MemberChar125);
+    addMember("currencydefault_id", "-", "0", RB2::MemberChar40);
+    addMember("pytdiscountact_idx", "-", "0", RB2::MemberChar165);
+    addMember("payrollact_idx", "-", "0", RB2::MemberChar165);
+    addMember("grnact_idx", "-", "0", RB2::MemberChar165);
+    addMember("exchangediffact_idx", "-", "0", RB2::MemberChar165);
+    addMember("purchasesexchangediffact_idx", "-", "0", RB2::MemberChar165);
+    addMember("retainedearnings_idx", "-", "0", RB2::MemberChar165);
+    addMember("freightact_idx", "-", "0", RB2::MemberChar165);
     // ACC addition
-    addMember(this, "bankname", "-", "", RB2::MemberChar125);
-    addMember(this, "bankiban", "-", "", RB2::MemberChar125);
-    addMember(this, "bankbicswift", "-", "", RB2::MemberChar125);
+    addMember("bankname", "-", "", RB2::MemberChar125);
+    addMember("bankiban", "-", "", RB2::MemberChar125);
+    addMember("bankbicswift", "-", "", RB2::MemberChar125);
 
-    addMember(this, "taxprovince_id", "-", "0", RB2::MemberChar40); // default dispatch tax province
-    addMember(this, "taxgroup_id", "-", "0", RB2::MemberChar40); // default delivery tax location
+    addMember("taxprovince_id", "-", "0", RB2::MemberChar40); // default dispatch tax province
+    addMember("taxgroup_id", "-", "0", RB2::MemberChar40); // default delivery tax location
     // Logo's, barcodes
-    addMember(this, "logo", "-", "<Your Company>", RB2::MemberChar255);
-    addMember(this, "fiscalmonthstart", "-", 1, RB2::MemberInteger);
-    addMember(this, "fiscaldaystart", "-", 1, RB2::MemberInteger);
+    addMember("logo", "-", "<Your Company>", RB2::MemberChar255);
+    addMember("fiscalmonthstart", "-", 1, RB2::MemberInteger);
+    addMember("fiscaldaystart", "-", 1, RB2::MemberInteger);
 }
 

@@ -83,14 +83,14 @@ bool MRP_SoftwareLicenseOperation::execute(RB_ObjectContainer* licenseList) {
 
         RB_ObjectBase* obj = new RB_ObjectAtomic("", licenseList, "MRP_LicenseData");
         licenseList->addObject(obj);
-        obj->addMember(obj, "contactname", "-", contactName, RB2::MemberChar125);
-        obj->addMember(obj, "licensecode", "-", licenseCode, RB2::MemberChar125);
-        obj->addMember(obj, "licensestart", "-", licenseStart, RB2::MemberChar125);
-        obj->addMember(obj, "licenseend", "-", licenseEnd, RB2::MemberChar125);
-        obj->addMember(obj, "modifieddate", "-", modified, RB2::MemberChar125);
-        obj->addMember(obj, "customer", "-", customer, RB2::MemberChar125);
-        obj->addMember(obj, "ordernumber", "-", orderNumber, RB2::MemberChar125);
-        obj->addMember(obj, "comment", "-", comment, RB2::MemberChar255);
+        obj->addMember("contactname", "-", contactName, RB2::MemberChar125);
+        obj->addMember("licensecode", "-", licenseCode, RB2::MemberChar125);
+        obj->addMember("licensestart", "-", licenseStart, RB2::MemberChar125);
+        obj->addMember("licenseend", "-", licenseEnd, RB2::MemberChar125);
+        obj->addMember("modifieddate", "-", modified, RB2::MemberChar125);
+        obj->addMember("customer", "-", customer, RB2::MemberChar125);
+        obj->addMember("ordernumber", "-", orderNumber, RB2::MemberChar125);
+        obj->addMember("comment", "-", comment, RB2::MemberChar255);
     }
 
     return true;

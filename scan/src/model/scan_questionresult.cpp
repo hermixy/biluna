@@ -44,7 +44,7 @@ SCAN_QuestionResult::~SCAN_QuestionResult() {
  * question text of the question
  */
 void SCAN_QuestionResult::createMembers() {
-    addMember(this, "number", "-", 0, RB2::MemberInteger);
-    addMember(this, "type", "-", 0, RB2::MemberInteger);
-    addMember(this, "question", "", "", RB2::MemberString);
+    addMember("number", "-", 0, RB2::MemberInteger);
+    addMember("type", "-", 0, RB2::MemberInteger);
+    addMember("question", "", "", RB2::MemberString);
 }

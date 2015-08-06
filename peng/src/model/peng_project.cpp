@@ -30,9 +30,9 @@ PENG_Project::~PENG_Project() {
 
 
 void PENG_Project::createMembers() {
-    addMember(this, "number", "-", "PENG0001", RB2::MemberChar125);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "description", "-", "Default", RB2::MemberChar125);
-    addMember(this, "company", "-", "YourCompany", RB2::MemberChar125);
-    addMember(this, "location", "-", "YourLocation", RB2::MemberChar125);
+    addMember("number", "-", "PENG0001", RB2::MemberChar125);
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("description", "-", "Default", RB2::MemberChar125);
+    addMember("company", "-", "YourCompany", RB2::MemberChar125);
+    addMember("location", "-", "YourLocation", RB2::MemberChar125);
 }

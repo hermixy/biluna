@@ -186,13 +186,13 @@ void ACC_CreateAllocList::addObjectsToList(QSqlQuery& q,
     while (q.next()) {
         RB_ObjectBase* obj = new RB_ObjectAtomic("", allocList, "ACC_Allocation");
         allocList->addObject(obj);
-        obj->addMember(obj, "docname", "-", q.value(0), RB2::MemberChar125);
-        obj->addMember(obj, "doctotransno", "-", q.value(1), RB2::MemberChar40);
-        obj->addMember(obj, "transdate", "-", q.value(2), RB2::MemberChar40);
-        obj->addMember(obj, "totalamountrecpay", "-", q.value(3), RB2::MemberDouble);
-        obj->addMember(obj, "datealloc", "-", q.value(4), RB2::MemberChar40);
-        obj->addMember(obj, "amount", "-", q.value(5), RB2::MemberDouble);
-        obj->addMember(obj, "transno", "-", q.value(6), RB2::MemberChar40);
-        obj->addMember(obj, "itemamount", "-", q.value(7), RB2::MemberDouble);
+        obj->addMember("docname", "-", q.value(0), RB2::MemberChar125);
+        obj->addMember("doctotransno", "-", q.value(1), RB2::MemberChar40);
+        obj->addMember("transdate", "-", q.value(2), RB2::MemberChar40);
+        obj->addMember("totalamountrecpay", "-", q.value(3), RB2::MemberDouble);
+        obj->addMember("datealloc", "-", q.value(4), RB2::MemberChar40);
+        obj->addMember("amount", "-", q.value(5), RB2::MemberDouble);
+        obj->addMember("transno", "-", q.value(6), RB2::MemberChar40);
+        obj->addMember("itemamount", "-", q.value(7), RB2::MemberDouble);
     }
 }

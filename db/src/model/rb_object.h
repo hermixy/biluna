@@ -19,7 +19,7 @@
 
 
 /**
- * Template of light weight object
+ * Template of light weight object that reports to RB_Debug
  */
 class DB_EXPORT RB_Object : public RB_Flags {
 
@@ -31,18 +31,11 @@ public:
 
     virtual void init();
 
-//    virtual RB_Object* getParent() const;
-//    virtual std::vector<RB_Object*> getChildList() const;
-
     virtual RB_String getName() const;
     virtual void setName(const RB_String& name);
 
 protected:
-//    //! Parent object
-//    RB_Object* mParent;
-//    //! vector container of children objects
-//    std::vector<RB_Object*> mChildList;
-    //! Sensible name of object for identification/debugging
+    //! Name of object for identification or debugging usually class name
     RB_String mName;
 };
 

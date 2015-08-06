@@ -56,27 +56,27 @@ ACC_TransDoc::~ACC_TransDoc() {
  * - salesorder_id is the id of the sales order
  */
 void ACC_TransDoc::createMembers() {
-    addMember(this, "doctype", "-", 0, RB2::MemberInteger);
-    addMember(this, "docname", "-", "", RB2::MemberChar125);
-    addMember(this, "salestype_id", "-", "0", RB2::MemberChar40);  // rel_id
-    addMember(this, "transdate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "transno", "-", 0, RB2::MemberInteger);
-    addMember(this, "debtor_idx", "-", "0", RB2::MemberChar165);        // rel_id,
-    addMember(this, "creditor_idx", "-", "0", RB2::MemberChar165);      // rel_id,
-    addMember(this, "refno", "-", "", RB2::MemberChar40);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "totalamountrec", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "totalamountpay", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "totaltax", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "duedate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "rate", "-", 1.0, RB2::MemberDouble);
-    addMember(this, "diffonexch", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "alloc", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "settled", "-", 0, RB2::MemberInteger);
-    addMember(this, "hold", "-", 0, RB2::MemberInteger);
-    addMember(this, "edisent", "-", 0, RB2::MemberInteger);
-    addMember(this, "consignment", "-", "", RB2::MemberChar20);
+    addMember("doctype", "-", 0, RB2::MemberInteger);
+    addMember("docname", "-", "", RB2::MemberChar125);
+    addMember("salestype_id", "-", "0", RB2::MemberChar40);  // rel_id
+    addMember("transdate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("transno", "-", 0, RB2::MemberInteger);
+    addMember("debtor_idx", "-", "0", RB2::MemberChar165);        // rel_id,
+    addMember("creditor_idx", "-", "0", RB2::MemberChar165);      // rel_id,
+    addMember("refno", "-", "", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("totalamountrec", "-", 0.0, RB2::MemberDouble);
+    addMember("totalamountpay", "-", 0.0, RB2::MemberDouble);
+    addMember("totaltax", "-", 0.0, RB2::MemberDouble);
+    addMember("duedate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("rate", "-", 1.0, RB2::MemberDouble);
+    addMember("diffonexch", "-", 0.0, RB2::MemberDouble);
+    addMember("alloc", "-", 0.0, RB2::MemberDouble);
+    addMember("settled", "-", 0, RB2::MemberInteger);
+    addMember("hold", "-", 0, RB2::MemberInteger);
+    addMember("edisent", "-", 0, RB2::MemberInteger);
+    addMember("consignment", "-", "", RB2::MemberChar20);
     // Link with sales/purchase order
-    addMember(this, "order_id", "-", "0", RB2::MemberChar40);    // rel_id,
-    addMember(this, "invoicecomment", "-", "", RB2::MemberChar255);
+    addMember("order_id", "-", "0", RB2::MemberChar40);    // rel_id,
+    addMember("invoicecomment", "-", "", RB2::MemberChar255);
 }

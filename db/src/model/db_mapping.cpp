@@ -32,6 +32,6 @@ DB_Mapping::~DB_Mapping() {
  * @param tofield field to which data should be mapped
  */
 void DB_Mapping::createMembers() {
-    addMember(this, "columnnumber", "-", 0, RB2::MemberInteger);
-    addMember(this, "tofield", "-", "", RB2::MemberChar125);
+    addMember("columnnumber", "-", 0, RB2::MemberInteger);
+    addMember("tofield", "-", "", RB2::MemberChar125);
 }

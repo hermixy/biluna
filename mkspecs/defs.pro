@@ -17,8 +17,8 @@ INCLUDEPATH += ../mkspecs
 
 # webkitwidgets includes widgets
 QT += core gui help network printsupport sql svg uitools webkitwidgets widgets xml
-CONFIG += release
-#CONFIG -= release
+#CONFIG += release
+CONFIG -= release
 
 if (release) {
 #    message("Release compile mode in defs.pro")
@@ -28,9 +28,9 @@ if (release) {
     # CONFIG += release
     CONFIG += qt warn_on rtti
     # CONFIG -= thread
-    # OBJECTS_DIR = obj
-    # MOC_DIR     = moc
-    # RCC_DIR     = res
+    OBJECTS_DIR = ../build_release/obj
+    MOC_DIR     = ../build_release/moc
+    RCC_DIR     = ../build_release/res
 
     if (demo) {
         DEFINES += BILUNA_DEMO
@@ -45,9 +45,9 @@ else {
     CONFIG += debug
     CONFIG += qt warn_on rtti
     # CONFIG -= thread
-    # OBJECTS_DIR = obj
-    # MOC_DIR     = moc
-    # RCC_DIR     = res
+    OBJECTS_DIR = ../build_debug/obj
+    MOC_DIR     = ../build_debug/moc
+    RCC_DIR     = ../build_debug/res
 
     DEFINES += BILUNA_DEBUG
 

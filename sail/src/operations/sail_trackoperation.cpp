@@ -84,16 +84,16 @@ bool SAIL_TrackOperation::execute(RB_ObjectContainer* trackList) {
 
         RB_ObjectBase* obj = new RB_ObjectAtomic("", trackList, "SAIL_TrackDistance");
         trackList->addObject(obj);
-        obj->addMember(obj, "mname", "-", query.value(0), RB2::MemberChar125);
-        obj->addMember(obj, "from_name", "-", query.value(1), RB2::MemberChar125);
-        obj->addMember(obj, "to_name", "-", query.value(2), RB2::MemberChar125);
-        obj->addMember(obj, "weightfactor", "-", weight, RB2::MemberDouble);
-        obj->addMember(obj, "distance", "nmile", distance, RB2::MemberDouble);
-        obj->addMember(obj, "speed", "knots", speed, RB2::MemberDouble);
-        obj->addMember(obj, "efficiency", "-", efficiency, RB2::MemberDouble);
-        obj->addMember(obj, "bearingstart", "degree", bearingStart, RB2::MemberDouble);
-        obj->addMember(obj, "bearingend", "degree", bearingEnd, RB2::MemberDouble);
-        obj->addMember(obj, "comment", "-", query.value(8), RB2::MemberDouble);
+        obj->addMember("mname", "-", query.value(0), RB2::MemberChar125);
+        obj->addMember("from_name", "-", query.value(1), RB2::MemberChar125);
+        obj->addMember("to_name", "-", query.value(2), RB2::MemberChar125);
+        obj->addMember("weightfactor", "-", weight, RB2::MemberDouble);
+        obj->addMember("distance", "nmile", distance, RB2::MemberDouble);
+        obj->addMember("speed", "knots", speed, RB2::MemberDouble);
+        obj->addMember("efficiency", "-", efficiency, RB2::MemberDouble);
+        obj->addMember("bearingstart", "degree", bearingStart, RB2::MemberDouble);
+        obj->addMember("bearingend", "degree", bearingEnd, RB2::MemberDouble);
+        obj->addMember("comment", "-", query.value(8), RB2::MemberDouble);
     }
 
     return true;

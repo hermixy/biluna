@@ -66,106 +66,106 @@ PENG_Line::~PENG_Line() {
 
  */
 void PENG_Line::createMembers() {
-    addMember(this, "number", "-", 0, RB2::MemberInteger);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "sizedn", "DN", 0, RB2::MemberInteger);
-    addMember(this, "processutility_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "fromdesignation", "-", "", RB2::MemberChar125);
-    addMember(this, "fromtype_id", "-", "0", RB2::MemberChar40); // user type
-    addMember(this, "fromsub", "-", "", RB2::MemberChar125); // nozzle number
-    addMember(this, "todesignation", "-", "", RB2::MemberChar125);
-    addMember(this, "totype_id", "-", "0", RB2::MemberChar40); // user type
-    addMember(this, "tosub", "-", "", RB2::MemberChar125); // nozzle number
-    addMember(this, "fluid_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "pipeclass_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "designtemp", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "designpress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("number", "-", 0, RB2::MemberInteger);
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("sizedn", "DN", 0, RB2::MemberInteger);
+    addMember("processutility_id", "-", 0, RB2::MemberInteger);
+    addMember("fromdesignation", "-", "", RB2::MemberChar125);
+    addMember("fromtype_id", "-", "0", RB2::MemberChar40); // user type
+    addMember("fromsub", "-", "", RB2::MemberChar125); // nozzle number
+    addMember("todesignation", "-", "", RB2::MemberChar125);
+    addMember("totype_id", "-", "0", RB2::MemberChar40); // user type
+    addMember("tosub", "-", "", RB2::MemberChar125); // nozzle number
+    addMember("fluid_idx", "-", "0", RB2::MemberChar165);
+    addMember("pipeclass_idx", "-", "0", RB2::MemberChar165);
+    addMember("designtemp", "DegC", 0.0, RB2::MemberDouble);
+    addMember("designpress", "MPa", 0.0, RB2::MemberDouble);
 }
 
 void PENG_Line::createProcessMembers() {
-    addMember(this, "processFluidDescription", "-", "", RB2::MemberChar125);
-    addMember(this, "processOperatingPress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "processOperatingTempStd", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "processOperatingTempHigh", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "processOperatingTempLow", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "processTestMedium", "-", "", RB2::MemberChar125);
-    addMember(this, "processTestPress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "processPressDrop", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "processMassFlowRateStd", "kg/s", 0.0, RB2::MemberDouble);
-    addMember(this, "processMassFlowRateMax", "kg/s", 0.0, RB2::MemberDouble);
-    addMember(this, "processVelocity", "m/s", 0.0, RB2::MemberDouble);
-    addMember(this, "processPhase", "-", "", RB2::MemberChar40);
-    addMember(this, "processBoilingPoint", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "processVapourPress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "processMolWeight", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "processDensityVapour", "kg/m3", 0.0, RB2::MemberDouble);
-    addMember(this, "processDensityLiquid", "kg/m3", 0.0, RB2::MemberDouble);
-    addMember(this, "processViscosityVapour", "cP", 0.0, RB2::MemberDouble);
-    addMember(this, "processViscosityLiquid", "cP", 0.0, RB2::MemberDouble);
-    addMember(this, "processStandardVolumeFlowStd", "m3/h", 0.0, RB2::MemberDouble);
-    addMember(this, "processStandardVolumeFlowMax", "m3/h", 0.0, RB2::MemberDouble);
-    addMember(this, "processActualFlowStd", "m3/h", 0.0, RB2::MemberDouble);
-    addMember(this, "processActualFlowMax", "m3/h", 0.0, RB2::MemberDouble);
-    addMember(this, "processSimulation", "-", "", RB2::MemberChar125);
+    addMember("processFluidDescription", "-", "", RB2::MemberChar125);
+    addMember("processOperatingPress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("processOperatingTempStd", "DegC", 0.0, RB2::MemberDouble);
+    addMember("processOperatingTempHigh", "DegC", 0.0, RB2::MemberDouble);
+    addMember("processOperatingTempLow", "DegC", 0.0, RB2::MemberDouble);
+    addMember("processTestMedium", "-", "", RB2::MemberChar125);
+    addMember("processTestPress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("processPressDrop", "MPa", 0.0, RB2::MemberDouble);
+    addMember("processMassFlowRateStd", "kg/s", 0.0, RB2::MemberDouble);
+    addMember("processMassFlowRateMax", "kg/s", 0.0, RB2::MemberDouble);
+    addMember("processVelocity", "m/s", 0.0, RB2::MemberDouble);
+    addMember("processPhase", "-", "", RB2::MemberChar40);
+    addMember("processBoilingPoint", "DegC", 0.0, RB2::MemberDouble);
+    addMember("processVapourPress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("processMolWeight", "-", 0.0, RB2::MemberDouble);
+    addMember("processDensityVapour", "kg/m3", 0.0, RB2::MemberDouble);
+    addMember("processDensityLiquid", "kg/m3", 0.0, RB2::MemberDouble);
+    addMember("processViscosityVapour", "cP", 0.0, RB2::MemberDouble);
+    addMember("processViscosityLiquid", "cP", 0.0, RB2::MemberDouble);
+    addMember("processStandardVolumeFlowStd", "m3/h", 0.0, RB2::MemberDouble);
+    addMember("processStandardVolumeFlowMax", "m3/h", 0.0, RB2::MemberDouble);
+    addMember("processActualFlowStd", "m3/h", 0.0, RB2::MemberDouble);
+    addMember("processActualFlowMax", "m3/h", 0.0, RB2::MemberDouble);
+    addMember("processSimulation", "-", "", RB2::MemberChar125);
 }
  
 void PENG_Line::createEnginDesMembers() {
-    addMember(this, "enginDesPnidFrom", "-", "", RB2::MemberChar125);
-    addMember(this, "enginDesPnidTo", "-", "", RB2::MemberChar125);
-    addMember(this, "enginDesGaFrom", "-", "", RB2::MemberChar125);
-    addMember(this, "enginDesGaTo", "-", "", RB2::MemberChar125);
-    addMember(this, "enginDesIsoFrom", "-", "", RB2::MemberChar125);
-    addMember(this, "enginDesIsoTo", "-", "", RB2::MemberChar125);
-    addMember(this, "enginDesLineFunction", "-", "", RB2::MemberChar40);
-    addMember(this, "enginDesExternalPress", "-", "", RB2::MemberChar40);
-    addMember(this, "enginDesTracingType", "-", "", RB2::MemberChar40);
-    addMember(this, "enginDesNoTracer", "-", 0, RB2::MemberInteger);
-    addMember(this, "enginDesInsulationType", "-", "", RB2::MemberChar40);
-    addMember(this, "enginDesInsulationThickness", "mm", 0, RB2::MemberInteger);
-    addMember(this, "enginDesUsePaintSpec", "-", "false", RB2::MemberChar40);
-    addMember(this, "enginDesPaintSystem", "-", "", RB2::MemberChar125);
+    addMember("enginDesPnidFrom", "-", "", RB2::MemberChar125);
+    addMember("enginDesPnidTo", "-", "", RB2::MemberChar125);
+    addMember("enginDesGaFrom", "-", "", RB2::MemberChar125);
+    addMember("enginDesGaTo", "-", "", RB2::MemberChar125);
+    addMember("enginDesIsoFrom", "-", "", RB2::MemberChar125);
+    addMember("enginDesIsoTo", "-", "", RB2::MemberChar125);
+    addMember("enginDesLineFunction", "-", "", RB2::MemberChar40);
+    addMember("enginDesExternalPress", "-", "", RB2::MemberChar40);
+    addMember("enginDesTracingType", "-", "", RB2::MemberChar40);
+    addMember("enginDesNoTracer", "-", 0, RB2::MemberInteger);
+    addMember("enginDesInsulationType", "-", "", RB2::MemberChar40);
+    addMember("enginDesInsulationThickness", "mm", 0, RB2::MemberInteger);
+    addMember("enginDesUsePaintSpec", "-", "false", RB2::MemberChar40);
+    addMember("enginDesPaintSystem", "-", "", RB2::MemberChar125);
 }
 
 void PENG_Line::createClassifMembers() {
-    addMember(this, "classifNomOperPress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "classifNomOperTemp", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "classifMaxDesPress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "classifMaxDesTemp", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "classifMinDesTemp", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "classifAuthorityRegulation", "-", "", RB2::MemberChar125);
-    addMember(this, "classifFluidDangerGroup", "-", "", RB2::MemberChar40);
-    addMember(this, "classifGasStability", "-", "", RB2::MemberChar40);
-    addMember(this, "classifRegulationGroup", "-", "", RB2::MemberChar125);
-    addMember(this, "classifRegulationSubGroup", "-", "", RB2::MemberChar125);
+    addMember("classifNomOperPress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("classifNomOperTemp", "DegC", 0.0, RB2::MemberDouble);
+    addMember("classifMaxDesPress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("classifMaxDesTemp", "DegC", 0.0, RB2::MemberDouble);
+    addMember("classifMinDesTemp", "DegC", 0.0, RB2::MemberDouble);
+    addMember("classifAuthorityRegulation", "-", "", RB2::MemberChar125);
+    addMember("classifFluidDangerGroup", "-", "", RB2::MemberChar40);
+    addMember("classifGasStability", "-", "", RB2::MemberChar40);
+    addMember("classifRegulationGroup", "-", "", RB2::MemberChar125);
+    addMember("classifRegulationSubGroup", "-", "", RB2::MemberChar125);
 }
 
 void PENG_Line::createOperMaintMembers() {
-    addMember(this, "operMaintInstallDate", "-", "1901-01-01", RB2::MemberDateTime);
-    addMember(this, "operMaintOutOfService", "-", "false", RB2::MemberChar40);
-    addMember(this, "operMaintPeriodicInspection", "-", "false", RB2::MemberChar40);
-    addMember(this, "operMaintInspectionLoopNr", "-", "", RB2::MemberChar40);
-    addMember(this, "operMaintInspectionFrequency", "day", 0, RB2::MemberDateTime);
+    addMember("operMaintInstallDate", "-", "1901-01-01", RB2::MemberDateTime);
+    addMember("operMaintOutOfService", "-", "false", RB2::MemberChar40);
+    addMember("operMaintPeriodicInspection", "-", "false", RB2::MemberChar40);
+    addMember("operMaintInspectionLoopNr", "-", "", RB2::MemberChar40);
+    addMember("operMaintInspectionFrequency", "day", 0, RB2::MemberDateTime);
 }
 
 void PENG_Line::createRemarkMembers() {
-    addMember(this, "remarkProcess", "-", "", RB2::MemberChar255);
-    addMember(this, "remarkEnginDes", "-", "", RB2::MemberChar255);
-    addMember(this, "remarkClassification", "-", "", RB2::MemberChar255);
-    addMember(this, "remarkOperMaint", "-", "", RB2::MemberChar255);
-    addMember(this, "remarkCustom", "-", "", RB2::MemberChar255);
+    addMember("remarkProcess", "-", "", RB2::MemberChar255);
+    addMember("remarkEnginDes", "-", "", RB2::MemberChar255);
+    addMember("remarkClassification", "-", "", RB2::MemberChar255);
+    addMember("remarkOperMaint", "-", "", RB2::MemberChar255);
+    addMember("remarkCustom", "-", "", RB2::MemberChar255);
 }
  
 void PENG_Line::createCustomMembers() {
-    addMember(this, "customField1Value", "(customUnit1)", 0.0, RB2::MemberDouble);
-    addMember(this, "customField2Value", "(customUnit2)", 0.0, RB2::MemberDouble);
-    addMember(this, "customField3Value", "(customUnit3)", 0.0, RB2::MemberDouble);
-    addMember(this, "customField4Value", "(customUnit4)", 0.0, RB2::MemberDouble);
-    addMember(this, "customField5Value", "(customUnit5)", 0.0, RB2::MemberDouble);
-    addMember(this, "customField6Text", "-", "", RB2::MemberChar125);
-    addMember(this, "customField7Text", "-", "", RB2::MemberChar125);
-    addMember(this, "customField8Text", "-", "", RB2::MemberChar125);
-    addMember(this, "customField9Text", "-", "", RB2::MemberChar125);
-    addMember(this, "customField10Text", "-", "", RB2::MemberChar125);
+    addMember("customField1Value", "(customUnit1)", 0.0, RB2::MemberDouble);
+    addMember("customField2Value", "(customUnit2)", 0.0, RB2::MemberDouble);
+    addMember("customField3Value", "(customUnit3)", 0.0, RB2::MemberDouble);
+    addMember("customField4Value", "(customUnit4)", 0.0, RB2::MemberDouble);
+    addMember("customField5Value", "(customUnit5)", 0.0, RB2::MemberDouble);
+    addMember("customField6Text", "-", "", RB2::MemberChar125);
+    addMember("customField7Text", "-", "", RB2::MemberChar125);
+    addMember("customField8Text", "-", "", RB2::MemberChar125);
+    addMember("customField9Text", "-", "", RB2::MemberChar125);
+    addMember("customField10Text", "-", "", RB2::MemberChar125);
 }
 
 

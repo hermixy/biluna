@@ -29,12 +29,12 @@ PENG_Cone::~PENG_Cone() {
 
 
 void PENG_Cone::createMembers() {
-    addMember(this, "number", "-", "<NEW>", RB2::MemberChar20);
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "D0", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "D1", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "t0", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "t1", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "H0", "mm", 0.0, RB2::MemberDouble);
+    addMember("number", "-", "<NEW>", RB2::MemberChar20);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("D0", "mm", 0.0, RB2::MemberDouble);
+    addMember("D1", "mm", 0.0, RB2::MemberDouble);
+    addMember("t0", "mm", 0.0, RB2::MemberDouble);
+    addMember("t1", "mm", 0.0, RB2::MemberDouble);
+    addMember("H0", "mm", 0.0, RB2::MemberDouble);
 }

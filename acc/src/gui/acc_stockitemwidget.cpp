@@ -109,15 +109,15 @@ void ACC_StockItemWidget::init() {
     mMapper->addMapping(leStandardOverheadCost, mModel->fieldIndex("overheadcost"));
 
     // not (yet) used here from ACC_StockMaster
-//    addMember(this, "lastcurcostdate", "-", "", RB2::MemberDateTime);
-//    addMember(this, "actualcost", "-", 0.0, RB2::MemberDouble);
-//    addMember(this, "lastcost", "-", 0.0, RB2::MemberDouble);
-//    addMember(this, "lowestlevel", "-", 0, RB2::MemberInteger);
+//    addMember("lastcurcostdate", "-", "", RB2::MemberDateTime);
+//    addMember("actualcost", "-", 0.0, RB2::MemberDouble);
+//    addMember("lastcost", "-", 0.0, RB2::MemberDouble);
+//    addMember("lowestlevel", "-", 0, RB2::MemberInteger);
 //
-//    addMember(this, "nextserialno", "-", 0, RB2::MemberInteger);
-//    addMember(this, "pansize", "-", 0.0, RB2::MemberDouble);
-//    addMember(this, "shrinkfactor", "-", 0.0, RB2::MemberDouble);
-//    addMember(this, "netweight", "-", 0.0, RB2::MemberDouble);
+//    addMember("nextserialno", "-", 0, RB2::MemberInteger);
+//    addMember("pansize", "-", 0.0, RB2::MemberDouble);
+//    addMember("shrinkfactor", "-", 0.0, RB2::MemberDouble);
+//    addMember("netweight", "-", 0.0, RB2::MemberDouble);
 
     // Cost Center
     mMapper->addMapping(ileCostCenter, mModel->fieldIndex("costcenter_idx"));

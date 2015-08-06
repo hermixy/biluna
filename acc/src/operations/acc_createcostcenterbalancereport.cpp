@@ -488,33 +488,33 @@ void ACC_CreateCostCenterBalanceReport
 
         if (!query.value(0).toString().isEmpty()) {
             // cost center or first of cost center group (centercode and centername are empty)
-            obj->addMember(obj, "suppname_mname", "-", suppname_mname, RB2::MemberChar125);
-            obj->addMember(obj, "sequenceno", "-", query.value(1), RB2::MemberInteger);
-            obj->addMember(obj, "groupname", "-", query.value(2), RB2::MemberChar125);
-            obj->addMember(obj, "costprofit", "-", query.value(3), RB2::MemberInteger);
-            obj->addMember(obj, "centercode", "-", query.value(4), RB2::MemberChar125);
-            obj->addMember(obj, "centername", "-", query.value(5), RB2::MemberChar125);
+            obj->addMember("suppname_mname", "-", suppname_mname, RB2::MemberChar125);
+            obj->addMember("sequenceno", "-", query.value(1), RB2::MemberInteger);
+            obj->addMember("groupname", "-", query.value(2), RB2::MemberChar125);
+            obj->addMember("costprofit", "-", query.value(3), RB2::MemberInteger);
+            obj->addMember("centercode", "-", query.value(4), RB2::MemberChar125);
+            obj->addMember("centername", "-", query.value(5), RB2::MemberChar125);
 
             switch (budgetForecastActual) {
             case 0 :
-                obj->addMember(obj, "budget", "-", query.value(6).toDouble() / costsumcount * weight, RB2::MemberDouble);
-                obj->addMember(obj, "forecast", "-", 0.0, RB2::MemberDouble);
-                obj->addMember(obj, "actual", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("budget", "-", query.value(6).toDouble() / costsumcount * weight, RB2::MemberDouble);
+                obj->addMember("forecast", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("actual", "-", 0.0, RB2::MemberDouble);
                 break;
             case 1 :
-                obj->addMember(obj, "budget", "-", 0.0, RB2::MemberDouble);
-                obj->addMember(obj, "forecast", "-", query.value(7).toDouble() / costsumcount * weight, RB2::MemberDouble);
-                obj->addMember(obj, "actual", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("budget", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("forecast", "-", query.value(7).toDouble() / costsumcount * weight, RB2::MemberDouble);
+                obj->addMember("actual", "-", 0.0, RB2::MemberDouble);
                 break;
             case 2 :
-                obj->addMember(obj, "budget", "-", 0.0, RB2::MemberDouble);
-                obj->addMember(obj, "forecast", "-", 0.0, RB2::MemberDouble);
-                obj->addMember(obj, "actual", "-", query.value(8).toDouble() * weight, RB2::MemberDouble);
+                obj->addMember("budget", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("forecast", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("actual", "-", query.value(8).toDouble() * weight, RB2::MemberDouble);
                 break;
             default :
-                obj->addMember(obj, "budget", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
-                obj->addMember(obj, "forecast", "-", query.value(7).toDouble() / costsumcount, RB2::MemberDouble);
-                obj->addMember(obj, "actual", "-", query.value(8), RB2::MemberDouble);
+                obj->addMember("budget", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
+                obj->addMember("forecast", "-", query.value(7).toDouble() / costsumcount, RB2::MemberDouble);
+                obj->addMember("actual", "-", query.value(8), RB2::MemberDouble);
                 break;
             }
         } else {
@@ -534,7 +534,7 @@ void ACC_CreateCostCenterBalanceReport
             }
         }
 
-        obj->addMember(obj, "startdate", "-", query.value(11), RB2::MemberDateTime);
-        obj->addMember(obj, "enddate", "-", query.value(12), RB2::MemberDateTime);
+        obj->addMember("startdate", "-", query.value(11), RB2::MemberDateTime);
+        obj->addMember("enddate", "-", query.value(12), RB2::MemberDateTime);
     }
 }

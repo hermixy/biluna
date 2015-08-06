@@ -660,11 +660,11 @@ bool ACC_PoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
         while (query.next()) {
             RB_ObjectBase* tax = new RB_ObjectAtomic("", taxList, "");
             taxList->addObject(tax);
-            tax->addMember(tax, "taxauth_id", "-", query.value(2), RB2::MemberChar40);
-            tax->addMember(tax, "taxrate", "-", query.value(4), RB2::MemberDouble);
-            tax->addMember(tax, "taxontax", "-", query.value(3), RB2::MemberInteger);
-            tax->addMember(tax, "taxcalculationorder", "-", query.value(0), RB2::MemberInteger);
-            tax->addMember(tax, "taxacct_idx", "-", query.value(5), RB2::MemberChar40);
+            tax->addMember("taxauth_id", "-", query.value(2), RB2::MemberChar40);
+            tax->addMember("taxrate", "-", query.value(4), RB2::MemberDouble);
+            tax->addMember("taxontax", "-", query.value(3), RB2::MemberInteger);
+            tax->addMember("taxcalculationorder", "-", query.value(0), RB2::MemberInteger);
+            tax->addMember("taxacct_idx", "-", query.value(5), RB2::MemberChar40);
 
             // Set display value
             obj = ACC_QACHARTMASTER->getAcctObj(query.value(5).toString());

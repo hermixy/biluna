@@ -138,6 +138,10 @@ void RB_Widget::setDialogFactory(RB_DialogFactory* df) {
     mDialogFactory = df;
 }
 
+RB_DialogFactory *RB_Widget::getDialogFactory() {
+    return mDialogFactory;
+}
+
 /**
  * Initialize widget internal state. Does nothing, override this function
  * Use to set widgets and model with possible child model(s)

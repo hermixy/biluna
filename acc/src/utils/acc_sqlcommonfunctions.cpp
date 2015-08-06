@@ -1045,10 +1045,7 @@ bool ACC_SqlCommonFunctions::isGlTransOrphanExisting() {
                                           + " " + query.value("amount").toString());
     }
 
-    if (query.first() > 0) {
-        return true;
-    }
-    return false;
+    return query.first();
 }
 
 /**
@@ -1093,10 +1090,7 @@ bool ACC_SqlCommonFunctions::isAllocNotConsistent() {
                                           + " " + query.value(3).toString());
     }
 
-    if (query.first() > 0) {
-        return true;
-    }
-    return false;
+    return query.first();
 }
 
 /**

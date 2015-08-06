@@ -33,5 +33,5 @@ ACC_TaxGroup::~ACC_TaxGroup() {
  * - taxgroupdescr tax location name/description
  */
 void ACC_TaxGroup::createMembers() {
-    addMember(this, "taxgroupdescr", "-", "", RB2::MemberChar125);
+    addMember("taxgroupdescr", "-", "", RB2::MemberChar125);
 }

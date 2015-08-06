@@ -659,22 +659,22 @@ void CRM_CampaignTargetWidget::setTargetList(RB_ObjectContainer* targetList,
     while (q.next()) {
         RB_ObjectBase* obj = new RB_ObjectAtomic("", targetList, "CRM_TargetExtended");
         targetList->addObject(obj);
-        obj->addMember(obj, "salutation", "-", q.value(0), RB2::MemberChar125);
-        obj->addMember(obj, "firstname", "-", q.value(1), RB2::MemberChar125);
-        obj->addMember(obj, "lastname", "-", q.value(2), RB2::MemberChar125);
-        obj->addMember(obj, "title", "-", q.value(3), RB2::MemberChar125);
-        obj->addMember(obj, "department", "-", q.value(4), RB2::MemberChar125);
-        obj->addMember(obj, "phonework", "-", q.value(5), RB2::MemberChar125);
-        obj->addMember(obj, "phonefax", "-", q.value(6), RB2::MemberChar125);
-        obj->addMember(obj, "email1", "-", q.value(7), RB2::MemberChar125);
-        obj->addMember(obj, "primaryaddress1", "-", q.value(8), RB2::MemberChar125);
-        obj->addMember(obj, "primaryaddress2", "-", q.value(9), RB2::MemberChar125);
-        obj->addMember(obj, "primaryaddress3", "-", q.value(10), RB2::MemberChar125);
-        obj->addMember(obj, "primaryaddress4", "-", q.value(11), RB2::MemberChar125);
-        obj->addMember(obj, "primaryaddress5", "-", q.value(12), RB2::MemberChar125);
-        obj->addMember(obj, "primaryaddress6", "-", q.value(13), RB2::MemberChar125);
-        obj->addMember(obj, "customerno", "-", q.value(14), RB2::MemberChar125);
-        obj->addMember(obj, "mname", "-", q.value(15), RB2::MemberChar125);
+        obj->addMember("salutation", "-", q.value(0), RB2::MemberChar125);
+        obj->addMember("firstname", "-", q.value(1), RB2::MemberChar125);
+        obj->addMember("lastname", "-", q.value(2), RB2::MemberChar125);
+        obj->addMember("title", "-", q.value(3), RB2::MemberChar125);
+        obj->addMember("department", "-", q.value(4), RB2::MemberChar125);
+        obj->addMember("phonework", "-", q.value(5), RB2::MemberChar125);
+        obj->addMember("phonefax", "-", q.value(6), RB2::MemberChar125);
+        obj->addMember("email1", "-", q.value(7), RB2::MemberChar125);
+        obj->addMember("primaryaddress1", "-", q.value(8), RB2::MemberChar125);
+        obj->addMember("primaryaddress2", "-", q.value(9), RB2::MemberChar125);
+        obj->addMember("primaryaddress3", "-", q.value(10), RB2::MemberChar125);
+        obj->addMember("primaryaddress4", "-", q.value(11), RB2::MemberChar125);
+        obj->addMember("primaryaddress5", "-", q.value(12), RB2::MemberChar125);
+        obj->addMember("primaryaddress6", "-", q.value(13), RB2::MemberChar125);
+        obj->addMember("customerno", "-", q.value(14), RB2::MemberChar125);
+        obj->addMember("mname", "-", q.value(15), RB2::MemberChar125);
         obj->setId(q.value(16).toString());
         obj->setValue("parent", q.value(17).toString());
     }

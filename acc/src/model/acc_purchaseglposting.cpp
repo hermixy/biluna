@@ -35,7 +35,7 @@ ACC_PurchaseGlPosting::~ACC_PurchaseGlPosting() {
  * - purchaseglact_idx purchase GL account for this authority and stock category
  */
 void ACC_PurchaseGlPosting::createMembers() {
-    addMember(this, "taxgroup_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "stkcat_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "purchaseglact_idx", "-", "0", RB2::MemberChar165);
+    addMember("taxgroup_id", "-", "0", RB2::MemberChar40);
+    addMember("stkcat_idx", "-", "0", RB2::MemberChar165);
+    addMember("purchaseglact_idx", "-", "0", RB2::MemberChar165);
 }

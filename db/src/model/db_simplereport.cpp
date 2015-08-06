@@ -38,10 +38,10 @@ DB_SimpleReport::~DB_SimpleReport() {
  * - sqlstring SQL statement to retrieve the report data from the database
  */
 void DB_SimpleReport::createMembers() {
-    addMember(this, "title", "-", "", RB2::MemberChar125);
-    addMember(this, "subtitle", "-", "", RB2::MemberChar125);
-    addMember(this, "columnwidths", "-", "", RB2::MemberChar125);
-    addMember(this, "alternatingrow", "-", 0, RB2::MemberInteger);
-    addMember(this, "firstdatafull", "-", 0, RB2::MemberInteger);
-    addMember(this, "sqlstring", "-", "", RB2::MemberString);
+    addMember("title", "-", "", RB2::MemberChar125);
+    addMember("subtitle", "-", "", RB2::MemberChar125);
+    addMember("columnwidths", "-", "", RB2::MemberChar125);
+    addMember("alternatingrow", "-", 0, RB2::MemberInteger);
+    addMember("firstdatafull", "-", 0, RB2::MemberInteger);
+    addMember("sqlstring", "-", "", RB2::MemberString);
 }

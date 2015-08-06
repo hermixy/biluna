@@ -217,7 +217,7 @@ bool DB_CsvParser::parse(const RB_String& rawData) {
         mCsvObjectList->addObject(csvObj);
 
         for (int col = 0; col < colCount; ++col) {
-            csvObj->addMember(csvObj, "val" + RB_String::number(col),
+            csvObj->addMember("val" + RB_String::number(col),
                               "-", lineFields.at(col));
         }
 

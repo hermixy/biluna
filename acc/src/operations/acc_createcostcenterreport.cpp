@@ -103,15 +103,15 @@ bool ACC_CreateCostCenterReport::execute(RB_ObjectBase* costCenterSumList) {
 
         RB_ObjectBase* obj = new RB_ObjectAtomic("", costCenterSumList, "ACC_CostCenterSummary");
         costCenterSumList->addObject(obj);
-        obj->addMember(obj, "groupsequenceno", "-", query.value(0), RB2::MemberDouble);
-        obj->addMember(obj, "groupname", "-", query.value(1), RB2::MemberDouble);
-        obj->addMember(obj, "groupcostprofit", "-", query.value(2), RB2::MemberDouble);
-        obj->addMember(obj, "centercode", "-", query.value(3), RB2::MemberDouble);
-        obj->addMember(obj, "centername", "-", query.value(4), RB2::MemberDouble);
+        obj->addMember("groupsequenceno", "-", query.value(0), RB2::MemberDouble);
+        obj->addMember("groupname", "-", query.value(1), RB2::MemberDouble);
+        obj->addMember("groupcostprofit", "-", query.value(2), RB2::MemberDouble);
+        obj->addMember("centercode", "-", query.value(3), RB2::MemberDouble);
+        obj->addMember("centername", "-", query.value(4), RB2::MemberDouble);
         // Correct the budget and forecast for the amount/count of acc_costsum in SQL datasets
-        obj->addMember(obj, "budget", "-", query.value(5).toDouble() / costsumcount, RB2::MemberDouble);
-        obj->addMember(obj, "forecast", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
-        obj->addMember(obj, "actual", "-", query.value(7), RB2::MemberDouble);
+        obj->addMember("budget", "-", query.value(5).toDouble() / costsumcount, RB2::MemberDouble);
+        obj->addMember("forecast", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
+        obj->addMember("actual", "-", query.value(7), RB2::MemberDouble);
     }
 
     return true;

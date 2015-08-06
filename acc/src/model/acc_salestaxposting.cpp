@@ -35,7 +35,7 @@ ACC_SalesTaxPosting::~ACC_SalesTaxPosting() {
  * - salestaxaccount_idx sales tax account ID and description
  */
 void ACC_SalesTaxPosting::createMembers() {
-    addMember(this, "taxauth_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "taxcat_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "salestaxacct_idx", "-", "0", RB2::MemberChar165);
+    addMember("taxauth_id", "-", "0", RB2::MemberChar40);
+    addMember("taxcat_id", "-", "0", RB2::MemberChar40);
+    addMember("salestaxacct_idx", "-", "0", RB2::MemberChar165);
 }

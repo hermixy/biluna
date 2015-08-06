@@ -29,9 +29,9 @@ PENG_Fluid::~PENG_Fluid() {
 
 
 void PENG_Fluid::createMembers() {
-    addMember(this, "code", "-", "<NEW>", RB2::MemberChar40);
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "processutility_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "hazardgroup_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "stability_id", "-", "0", RB2::MemberChar40);
+    addMember("code", "-", "<NEW>", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("processutility_id", "-", 0, RB2::MemberInteger);
+    addMember("hazardgroup_id", "-", "0", RB2::MemberChar40);
+    addMember("stability_id", "-", "0", RB2::MemberChar40);
 }

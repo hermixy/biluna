@@ -33,16 +33,16 @@ PCALC_EN1591_Shell::~PCALC_EN1591_Shell() {
  */
 void PCALC_EN1591_Shell::createMembers() {
     // flange/shell 1
-    addMember(this, "typeshell1_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "ds1", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "es1", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "phis1", "degree", 0.0, RB2::MemberDouble);
-    addMember(this, "materialshell1_idx", "-", "0", RB2::MemberChar165);
+    addMember("typeshell1_id", "-", 0, RB2::MemberInteger);
+    addMember("ds1", "mm", 0.0, RB2::MemberDouble);
+    addMember("es1", "mm", 0.0, RB2::MemberDouble);
+    addMember("phis1", "degree", 0.0, RB2::MemberDouble);
+    addMember("materialshell1_idx", "-", "0", RB2::MemberChar165);
     // flange/shell 2
-    addMember(this, "shell2equal", "-", 0, RB2::MemberInteger);
-    addMember(this, "typeshell2_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "ds2", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "es2", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "phis2", "degree", 0.0, RB2::MemberDouble);
-    addMember(this, "materialshell2_idx", "-", "0", RB2::MemberChar165);
+    addMember("shell2equal", "-", 0, RB2::MemberInteger);
+    addMember("typeshell2_id", "-", 0, RB2::MemberInteger);
+    addMember("ds2", "mm", 0.0, RB2::MemberDouble);
+    addMember("es2", "mm", 0.0, RB2::MemberDouble);
+    addMember("phis2", "degree", 0.0, RB2::MemberDouble);
+    addMember("materialshell2_idx", "-", "0", RB2::MemberChar165);
 }

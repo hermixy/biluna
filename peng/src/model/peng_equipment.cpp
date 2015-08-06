@@ -76,36 +76,36 @@ PENG_Equipment::~PENG_Equipment() {
     svg
  */
 void PENG_Equipment::createMembers() {
-    addMember(this, "number", "-", "", RB2::MemberChar40); // V-1201
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "type_idx", "-", "0", RB2::MemberChar165); // Horizontal Drum
-    addMember(this, "eqtype_id", "-", "0", RB2::MemberChar40); // Equipment list sub Static Equipment page
-    addMember(this, "eqsubtype_id", "-", 0, RB2::MemberInteger); // Static or rotating
+    addMember("number", "-", "", RB2::MemberChar40); // V-1201
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("type_idx", "-", "0", RB2::MemberChar165); // Horizontal Drum
+    addMember("eqtype_id", "-", "0", RB2::MemberChar40); // Equipment list sub Static Equipment page
+    addMember("eqsubtype_id", "-", 0, RB2::MemberInteger); // Static or rotating
     
-    addMember(this, "eqname", "-", "", RB2::MemberChar40); // Holdup drum
-    addMember(this, "field1", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "field2", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "field3", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "designtemp", "degC", 0.0, RB2::MemberDouble);
-    addMember(this, "designpress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "material", "-", "", RB2::MemberChar125);
-    addMember(this, "fluid_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "length", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "width", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "height", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "weight", "kg", 0.0, RB2::MemberDouble);
-    addMember(this, "volume", "litres", 0.0, RB2::MemberDouble);
-    addMember(this, "pnid_idx", "-", "0", RB2::MemberChar165);
+    addMember("eqname", "-", "", RB2::MemberChar40); // Holdup drum
+    addMember("field1", "-", 0.0, RB2::MemberDouble);
+    addMember("field2", "-", 0.0, RB2::MemberDouble);
+    addMember("field3", "-", 0.0, RB2::MemberDouble);
+    addMember("designtemp", "degC", 0.0, RB2::MemberDouble);
+    addMember("designpress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("material", "-", "", RB2::MemberChar125);
+    addMember("fluid_idx", "-", "0", RB2::MemberChar165);
+    addMember("length", "mm", 0.0, RB2::MemberDouble);
+    addMember("width", "mm", 0.0, RB2::MemberDouble);
+    addMember("height", "mm", 0.0, RB2::MemberDouble);
+    addMember("weight", "kg", 0.0, RB2::MemberDouble);
+    addMember("volume", "litres", 0.0, RB2::MemberDouble);
+    addMember("pnid_idx", "-", "0", RB2::MemberChar165);
     
-    addMember(this, "requisition_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "supplier_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "manufacturer", "-", "", RB2::MemberChar125);
-    addMember(this, "model", "-", "", RB2::MemberChar125);
-    addMember(this, "serial", "-", "", RB2::MemberChar125);
-    addMember(this, "mcase", "-", "", RB2::MemberChar125);
-    addMember(this, "governingcase", "-", "", RB2::MemberChar125);
+    addMember("requisition_idx", "-", "0", RB2::MemberChar165);
+    addMember("supplier_idx", "-", "0", RB2::MemberChar165);
+    addMember("manufacturer", "-", "", RB2::MemberChar125);
+    addMember("model", "-", "", RB2::MemberChar125);
+    addMember("serial", "-", "", RB2::MemberChar125);
+    addMember("mcase", "-", "", RB2::MemberChar125);
+    addMember("governingcase", "-", "", RB2::MemberChar125);
     
-    addMember(this, "svg", "-", "", RB2::MemberString);
+    addMember("svg", "-", "", RB2::MemberString);
 }
 
 /**

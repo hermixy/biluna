@@ -33,6 +33,6 @@ CRM_CampaignTarget::~CRM_CampaignTarget() {
  * - note reference note with this group
  */
 void CRM_CampaignTarget::createMembers() {
-    addMember(this, "group_idx", "-", "0", RB2::MemberChar125);
-    addMember(this, "note", "-", "<NEW>", RB2::MemberChar255);
+    addMember("group_idx", "-", "0", RB2::MemberChar125);
+    addMember("note", "-", "<NEW>", RB2::MemberChar255);
 }

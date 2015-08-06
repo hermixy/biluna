@@ -48,18 +48,18 @@ ACC_StockMove::~ACC_StockMove() {
  * what, from/to where, how much, when, who
  */
 void ACC_StockMove::createMembers() {
-    addMember(this, "order_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "serialno", "-", "", RB2::MemberChar40);
-    addMember(this, "type_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "location_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "building_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "row_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "box_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "qty", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "movedate", "-", "1971-01-01 00:00:00", RB2::MemberDateTime);
-    addMember(this, "employee_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "status_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "comment", "-", "", RB2::MemberChar125);
+    addMember("order_idx", "-", "0", RB2::MemberChar165);
+    addMember("serialno", "-", "", RB2::MemberChar40);
+    addMember("type_idx", "-", "0", RB2::MemberChar165);
+    addMember("location_idx", "-", "0", RB2::MemberChar165);
+    addMember("building_idx", "-", "0", RB2::MemberChar165);
+    addMember("row_idx", "-", "0", RB2::MemberChar165);
+    addMember("box_idx", "-", "0", RB2::MemberChar165);
+    addMember("qty", "-", 0.0, RB2::MemberDouble);
+    addMember("movedate", "-", "1971-01-01 00:00:00", RB2::MemberDateTime);
+    addMember("employee_idx", "-", "0", RB2::MemberChar165);
+    addMember("status_id", "-", 0, RB2::MemberInteger);
+    addMember("comment", "-", "", RB2::MemberChar125);
 }
 
 
@@ -86,27 +86,27 @@ void ACC_StockMove::createMembers() {
  * - soline_id salesorder line ID, to reference stockmove to salesorder line
  * /
 void ACC_StockMove::createMembers() {
-    addMember(this, "serialno", "-", 0, RB2::MemberChar40);
-    addMember(this, "type", "-", 0, RB2::MemberInteger);          // 3
-    addMember(this, "transno", "-", "", RB2::MemberChar40);       // rel_id
-    addMember(this, "location_id", "-", "", RB2::MemberChar40);       // rel_id
-    addMember(this, "transdate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
-    addMember(this, "debtor_id", "-", "", RB2::MemberChar40);      // rel_id
-    addMember(this, "branch_id", "-", "", RB2::MemberChar40);    // rel_id
-    addMember(this, "price", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "prd", "-", 0, RB2::MemberInteger);           // period
-    addMember(this, "salesorder_id", "-", "", RB2::MemberChar40);     // rel_id salesorderId
-    addMember(this, "qty", "-", 0.0, RB2::MemberDouble);          // quantity (dispatched)
-    addMember(this, "discountpercent", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "standardcost", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "show_on_inv_crds", "-", 1, RB2::MemberInteger);
-    addMember(this, "newqoh", "-", 0.0, RB2::MemberDouble);       // new quantity on hand
-    addMember(this, "hidemovt", "-", 0, RB2::MemberInteger);
-    addMember(this, "narrative", "-", "", RB2::MemberChar255);
+    addMember("serialno", "-", 0, RB2::MemberChar40);
+    addMember("type", "-", 0, RB2::MemberInteger);          // 3
+    addMember("transno", "-", "", RB2::MemberChar40);       // rel_id
+    addMember("location_id", "-", "", RB2::MemberChar40);       // rel_id
+    addMember("transdate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+    addMember("debtor_id", "-", "", RB2::MemberChar40);      // rel_id
+    addMember("branch_id", "-", "", RB2::MemberChar40);    // rel_id
+    addMember("price", "-", 0.0, RB2::MemberDouble);
+    addMember("prd", "-", 0, RB2::MemberInteger);           // period
+    addMember("salesorder_id", "-", "", RB2::MemberChar40);     // rel_id salesorderId
+    addMember("qty", "-", 0.0, RB2::MemberDouble);          // quantity (dispatched)
+    addMember("discountpercent", "-", 0.0, RB2::MemberDouble);
+    addMember("standardcost", "-", 0.0, RB2::MemberDouble);
+    addMember("show_on_inv_crds", "-", 1, RB2::MemberInteger);
+    addMember("newqoh", "-", 0.0, RB2::MemberDouble);       // new quantity on hand
+    addMember("hidemovt", "-", 0, RB2::MemberInteger);
+    addMember("narrative", "-", "", RB2::MemberChar255);
     // Added:
     // Tax category id for easy retrieval for example during setting of tax rates
-    addMember(this, "taxcat_id", "-", "0", RB2::MemberChar40);     // rel_id
+    addMember("taxcat_id", "-", "0", RB2::MemberChar40);     // rel_id
     // Salesorder line ID, to reference stockmove to salesorder line
-    addMember(this, "soline_id", "-", "0", RB2::MemberChar40);     // rel_id salesorderlineId
+    addMember("soline_id", "-", "0", RB2::MemberChar40);     // rel_id salesorderlineId
 }
 */

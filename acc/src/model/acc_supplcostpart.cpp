@@ -39,12 +39,12 @@ ACC_SupplCostPart::~ACC_SupplCostPart() {
  * - costcenter_idx is the ID of the cost center
  */
 void ACC_SupplCostPart::createMembers() {
-    addMember(this, "shortname", "-", "<NEW>", RB2::MemberChar40);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "type_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "weight", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "startdate", "-", "", RB2::MemberChar20);
-    addMember(this, "enddate", "-", "", RB2::MemberChar20);
-    addMember(this, "costgroup_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "costcenter_idx", "-", "0", RB2::MemberChar165);
+    addMember("shortname", "-", "<NEW>", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("type_id", "-", 0, RB2::MemberInteger);
+    addMember("weight", "-", 0.0, RB2::MemberDouble);
+    addMember("startdate", "-", "", RB2::MemberChar20);
+    addMember("enddate", "-", "", RB2::MemberChar20);
+    addMember("costgroup_idx", "-", "0", RB2::MemberChar165);
+    addMember("costcenter_idx", "-", "0", RB2::MemberChar165);
 }

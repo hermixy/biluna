@@ -34,17 +34,17 @@ PCALC_EN1591_Gasket::~PCALC_EN1591_Gasket() {
  * \li -
  */
 void PCALC_EN1591_Gasket::createMembers() {
-    addMember(this, "materialcode_ix", "-", "0", RB2::MemberChar165);
-    addMember(this, "formtype_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "manufacturetype", "-", 0, RB2::MemberChar125);
-    addMember(this, "insertfilltype_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "dg0", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "dg1", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "dg2", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "dg1en13555", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "dg2en13555", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "egt", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "k", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "phig", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "r2", "mm", 0.0, RB2::MemberDouble);
+    addMember("materialcode_ix", "-", "0", RB2::MemberChar165);
+    addMember("formtype_id", "-", 0, RB2::MemberInteger);
+    addMember("manufacturetype", "-", 0, RB2::MemberChar125);
+    addMember("insertfilltype_id", "-", 0, RB2::MemberInteger);
+    addMember("dg0", "mm", 0.0, RB2::MemberDouble);
+    addMember("dg1", "mm", 0.0, RB2::MemberDouble);
+    addMember("dg2", "mm", 0.0, RB2::MemberDouble);
+    addMember("dg1en13555", "mm", 0.0, RB2::MemberDouble);
+    addMember("dg2en13555", "mm", 0.0, RB2::MemberDouble);
+    addMember("egt", "mm", 0.0, RB2::MemberDouble);
+    addMember("k", "-", 0.0, RB2::MemberDouble);
+    addMember("phig", "-", 0.0, RB2::MemberDouble);
+    addMember("r2", "mm", 0.0, RB2::MemberDouble);
 }

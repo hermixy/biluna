@@ -11,6 +11,7 @@
 #include "rb_utilityfactory.h"
 
 #include "rb_debug.h"
+#include "rb_utility.h"
 
 //(From: http://etutorials.org/Programming/secure+programming/Chapter+12.+Anti-Tampering/12.11+Hiding+Strings/)
 #define A(c)            (c) - 0x17
@@ -41,7 +42,6 @@ RB_UtilityFactory::RB_UtilityFactory() {
  * Destructor
  */
 RB_UtilityFactory::~RB_UtilityFactory() {
-    // nothing
     RB_DEBUG->print("RB_UtilityFactory::~RB_UtilityFactory() OK");
 }
 
@@ -64,3 +64,26 @@ QString RB_UtilityFactory::decrypt(const QVariant& var) {
 
     return var.toString();
 }
+
+void RB_UtilityFactory::addUtility(RB_Utility* util) {
+    mUtilityVector.push_back(util);
+}
+
+void RB_UtilityFactory::removeUtility(RB_Utility* util) {
+    std::vector<RB_Utility*>::iterator iter
+            = std::remove(mUtilityVector.begin(), mUtilityVector.end(), util);
+    mUtilityVector.erase(iter);
+}
+
+void RB_UtilityFactory::refresh() {
+    std::vector<RB_Utility*>::iterator iter;
+    iter = mUtilityVector.begin();
+
+    while (iter != mUtilityVector.end()) {
+        RB_Utility* util = *iter;
+        util->refresh();
+        ++iter;
+    }
+}
+
+

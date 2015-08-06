@@ -38,11 +38,11 @@ ACC_MemoTrans::~ACC_MemoTrans() {
  * - transallocn_idx transaction allocation ID and description
  */
 void ACC_MemoTrans::createMembers() {
-    addMember(this, "transdoc_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "chartmaster_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "accountcontrol", "-", 0, RB2::MemberInteger);
-    addMember(this, "amount", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "transno", "-", 0, RB2::MemberInteger);
-    addMember(this, "transallocn_idx", "-", "0", RB2::MemberChar165);
+    addMember("transdoc_id", "-", "0", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("chartmaster_idx", "-", "0", RB2::MemberChar165);
+    addMember("accountcontrol", "-", 0, RB2::MemberInteger);
+    addMember("amount", "-", 0.0, RB2::MemberDouble);
+    addMember("transno", "-", 0, RB2::MemberInteger);
+    addMember("transallocn_idx", "-", "0", RB2::MemberChar165);
 }

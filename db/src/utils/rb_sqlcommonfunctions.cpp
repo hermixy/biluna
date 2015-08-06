@@ -345,10 +345,10 @@ bool RB_SqlCommonFunctions::createSystemSeqNumber(const QString& perspectiveCode
     obj->setValue("created", dt);
     obj->setValue("changed", dt);
     obj->setValue("muser", username);
-    obj->addMember(obj, "modeltype", "-", modelType, RB2::MemberInteger);
-    obj->addMember(obj, "seqnumbername", "-", seqNumberName, RB2::MemberChar125);
-    obj->addMember(obj, "sequencenumber", "-", seqNumber, RB2::MemberInteger);
-    obj->addMember(obj, "modelsubtype_id", "-", modelSubTypeId, RB2::MemberChar40);
+    obj->addMember("modeltype", "-", modelType, RB2::MemberInteger);
+    obj->addMember("seqnumbername", "-", seqNumberName, RB2::MemberChar125);
+    obj->addMember("sequencenumber", "-", seqNumber, RB2::MemberInteger);
+    obj->addMember("modelsubtype_id", "-", modelSubTypeId, RB2::MemberChar40);
     obj->setFlag(RB2::FlagIsDirty);
 
     if (!obj->dbUpdate(DB_MODELFACTORY->getDatabase())) {

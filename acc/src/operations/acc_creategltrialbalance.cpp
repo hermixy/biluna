@@ -149,49 +149,49 @@ bool ACC_CreateGlTrialBalance::execute(RB_ObjectBase* trialBalanceList) {
         } else {
             RB_ObjectBase* obj = new RB_ObjectAtomic("", trialBalanceList, "ACC_TrialBalanceAccount");
             trialBalanceList->addObject(obj);
-            obj->addMember(obj, "groupname", "-", query.value(0), RB2::MemberDouble);
-            obj->addMember(obj, "pandl", "-", query.value(1), RB2::MemberDouble);
-            obj->addMember(obj, "accountcode", "-", query.value(2), RB2::MemberDouble);
-            obj->addMember(obj, "accountname", "-", query.value(3), RB2::MemberDouble);
-            obj->addMember(obj, "sumdebit", "-", query.value(4), RB2::MemberDouble);
-            obj->addMember(obj, "sumcredit", "-", query.value(5), RB2::MemberDouble);
+            obj->addMember("groupname", "-", query.value(0), RB2::MemberDouble);
+            obj->addMember("pandl", "-", query.value(1), RB2::MemberDouble);
+            obj->addMember("accountcode", "-", query.value(2), RB2::MemberDouble);
+            obj->addMember("accountname", "-", query.value(3), RB2::MemberDouble);
+            obj->addMember("sumdebit", "-", query.value(4), RB2::MemberDouble);
+            obj->addMember("sumcredit", "-", query.value(5), RB2::MemberDouble);
 
             double balance = query.value(4).toDouble() - query.value(5).toDouble();
 
             if (balance >= 0.0) {
-                obj->addMember(obj, "trialdebit", "-", balance, RB2::MemberDouble);
-                obj->addMember(obj, "trialcredit", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("trialdebit", "-", balance, RB2::MemberDouble);
+                obj->addMember("trialcredit", "-", 0.0, RB2::MemberDouble);
             } else {
-                obj->addMember(obj, "trialdebit", "-", 0.0, RB2::MemberDouble);
-                obj->addMember(obj, "trialcredit", "-", -balance, RB2::MemberDouble);
+                obj->addMember("trialdebit", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("trialcredit", "-", -balance, RB2::MemberDouble);
             }
 
             // Profit and loss
             if (query.value(1).toInt() > 0) {
                 if (balance >= 0.0) {
-                    obj->addMember(obj, "pandldebit", "-", balance, RB2::MemberDouble);
-                    obj->addMember(obj, "pandlcredit", "-", 0.0, RB2::MemberDouble);
+                    obj->addMember("pandldebit", "-", balance, RB2::MemberDouble);
+                    obj->addMember("pandlcredit", "-", 0.0, RB2::MemberDouble);
                 } else {
-                    obj->addMember(obj, "pandldebit", "-", 0.0, RB2::MemberDouble);
-                    obj->addMember(obj, "pandlcredit", "-", -balance, RB2::MemberDouble);
+                    obj->addMember("pandldebit", "-", 0.0, RB2::MemberDouble);
+                    obj->addMember("pandlcredit", "-", -balance, RB2::MemberDouble);
                 }
             } else {
-                obj->addMember(obj, "pandldebit", "-", 0.0, RB2::MemberDouble);
-                obj->addMember(obj, "pandlcredit", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("pandldebit", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("pandlcredit", "-", 0.0, RB2::MemberDouble);
             }
 
             // Final balance
             if (query.value(1).toInt() < 1) {
                 if (balance >= 0.0) {
-                    obj->addMember(obj, "baldebit", "-", balance, RB2::MemberDouble);
-                    obj->addMember(obj, "balcredit", "-", 0.0, RB2::MemberDouble);
+                    obj->addMember("baldebit", "-", balance, RB2::MemberDouble);
+                    obj->addMember("balcredit", "-", 0.0, RB2::MemberDouble);
                 } else {
-                    obj->addMember(obj, "baldebit", "-", 0.0, RB2::MemberDouble);
-                    obj->addMember(obj, "balcredit", "-", -balance, RB2::MemberDouble);
+                    obj->addMember("baldebit", "-", 0.0, RB2::MemberDouble);
+                    obj->addMember("balcredit", "-", -balance, RB2::MemberDouble);
                 }
             } else {
-                obj->addMember(obj, "baldebit", "-", 0.0, RB2::MemberDouble);
-                obj->addMember(obj, "balcredit", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("baldebit", "-", 0.0, RB2::MemberDouble);
+                obj->addMember("balcredit", "-", 0.0, RB2::MemberDouble);
             }
         }
     }

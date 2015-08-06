@@ -34,6 +34,6 @@ ACC_CustomerNote::~ACC_CustomerNote() {
  */
 void ACC_CustomerNote::createMembers() {
     // conform webErp
-    addMember(this, "subject", "-", "", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar2500);
+    addMember("subject", "-", "", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar2500);
 }

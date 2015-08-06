@@ -30,8 +30,8 @@ PENG_Setting::~PENG_Setting() {
 
 
 void PENG_Setting::createMembers() {
-    addMember(this, "category_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "setting_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "value", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
+    addMember("category_id", "-", 0, RB2::MemberInteger);
+    addMember("setting_id", "-", 0, RB2::MemberInteger);
+    addMember("value", "-", "<NEW>", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar255);
 }

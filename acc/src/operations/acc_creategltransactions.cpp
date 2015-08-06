@@ -73,22 +73,22 @@ bool ACC_CreateGlTransactions::execute(RB_ObjectBase* glTransList) {
     while (query.next()) {
         RB_ObjectBase* obj = new RB_ObjectAtomic("", glTransList, "ACC_GlTransactions");
         glTransList->addObject(obj);
-        obj->addMember(obj, "accountcode", "-", query.value(0), RB2::MemberChar40);
-        obj->addMember(obj, "accountname", "-", query.value(1), RB2::MemberChar255);
-        obj->addMember(obj, "docparent", "-", query.value(2), RB2::MemberChar40);
-        obj->addMember(obj, "transdate", "-", query.value(3), RB2::MemberChar40);
-        obj->addMember(obj, "transdocno", "-", query.value(4), RB2::MemberInteger);
-        obj->addMember(obj, "description", "-", query.value(5), RB2::MemberChar255);
-        obj->addMember(obj, "refno", "-", query.value(6), RB2::MemberChar40);
+        obj->addMember("accountcode", "-", query.value(0), RB2::MemberChar40);
+        obj->addMember("accountname", "-", query.value(1), RB2::MemberChar255);
+        obj->addMember("docparent", "-", query.value(2), RB2::MemberChar40);
+        obj->addMember("transdate", "-", query.value(3), RB2::MemberChar40);
+        obj->addMember("transdocno", "-", query.value(4), RB2::MemberInteger);
+        obj->addMember("description", "-", query.value(5), RB2::MemberChar255);
+        obj->addMember("refno", "-", query.value(6), RB2::MemberChar40);
 
         double amount = query.value(7).toDouble();
 
         if (amount >= 0.0) {
-            obj->addMember(obj, "debit", "-", amount, RB2::MemberDouble);
-            obj->addMember(obj, "credit", "-", 0.0, RB2::MemberDouble);
+            obj->addMember("debit", "-", amount, RB2::MemberDouble);
+            obj->addMember("credit", "-", 0.0, RB2::MemberDouble);
         } else {
-            obj->addMember(obj, "debit", "-", 0.0, RB2::MemberDouble);
-            obj->addMember(obj, "credit", "-", -amount, RB2::MemberDouble);
+            obj->addMember("debit", "-", 0.0, RB2::MemberDouble);
+            obj->addMember("credit", "-", -amount, RB2::MemberDouble);
         }
     }
 

@@ -54,22 +54,22 @@ PENG_LineEnginDes::~PENG_LineEnginDes() {
  * - engindespaintsystem TODO: change to _id(x) of paintspec system
  */
 void PENG_LineEnginDes::createMembers() {
-    addMember(this, "engindespnidfrom", "-", "", RB2::MemberChar125);
-    addMember(this, "engindespnidto", "-", "", RB2::MemberChar125);
-    addMember(this, "engindesgafrom", "-", "", RB2::MemberChar125);
-    addMember(this, "engindesgato", "-", "", RB2::MemberChar125);
-    addMember(this, "engindesisofrom", "-", "", RB2::MemberChar125);
-    addMember(this, "engindesisoto", "-", "", RB2::MemberChar125);
-    addMember(this, "engindeslinefunction_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "engindesexternalpress_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "engindestracingtype_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "engindesnotracer", "-", 0, RB2::MemberInteger);
-    addMember(this, "engindesinsulationtype_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "engindesinsulationthickness", "mm", 0.0, RB2::MemberDouble);
-    addMember(this, "engindesusepaintspec_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "engindespaintsystem", "-", "", RB2::MemberChar125);
-    addMember(this, "enginstresscalcrequired_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "enginstresscalcnumber", "-", "", RB2::MemberChar125);
+    addMember("engindespnidfrom", "-", "", RB2::MemberChar125);
+    addMember("engindespnidto", "-", "", RB2::MemberChar125);
+    addMember("engindesgafrom", "-", "", RB2::MemberChar125);
+    addMember("engindesgato", "-", "", RB2::MemberChar125);
+    addMember("engindesisofrom", "-", "", RB2::MemberChar125);
+    addMember("engindesisoto", "-", "", RB2::MemberChar125);
+    addMember("engindeslinefunction_id", "-", 0, RB2::MemberInteger);
+    addMember("engindesexternalpress_id", "-", 0, RB2::MemberInteger);
+    addMember("engindestracingtype_id", "-", 0, RB2::MemberInteger);
+    addMember("engindesnotracer", "-", 0, RB2::MemberInteger);
+    addMember("engindesinsulationtype_id", "-", 0, RB2::MemberInteger);
+    addMember("engindesinsulationthickness", "mm", 0.0, RB2::MemberDouble);
+    addMember("engindesusepaintspec_id", "-", 0, RB2::MemberInteger);
+    addMember("engindespaintsystem", "-", "", RB2::MemberChar125);
+    addMember("enginstresscalcrequired_id", "-", 0, RB2::MemberInteger);
+    addMember("enginstresscalcnumber", "-", "", RB2::MemberChar125);
 }
 
 /**

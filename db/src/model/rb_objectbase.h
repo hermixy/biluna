@@ -10,13 +10,12 @@
 #ifndef RB_OBJECTBASE_H
 #define RB_OBJECTBASE_H
 
-#include <map>
 #include <string>
 #include <vector>
 #include <QSqlDatabase>
 
 #include "rb.h"
-#include "rb_flags.h"
+#include "rb_object.h"
 #include "rb_objectfactory.h"
 #include "rb_objectmember.h"
 #include "rb_string.h"
@@ -35,17 +34,17 @@ class RB_ObjectMember;
  * Template of base object in model, has one or more members in a std::vector.
  * Can be root or has a parent container object.
  */
-class DB_EXPORT RB_ObjectBase : public RB_Flags {
+class DB_EXPORT RB_ObjectBase : public RB_Object {
 
 public:
     RB_ObjectBase(const RB_String& id = "", RB_ObjectBase* p = NULL,
-                const RB_String& n = "", RB_ObjectFactory* f = NULL,
-                bool woMembers = false);
+                  const RB_String& n = "", RB_ObjectFactory* f = NULL,
+                  bool woMembers = false);
     RB_ObjectBase(RB_ObjectBase* obj);
     virtual ~RB_ObjectBase();
     virtual RB_ObjectBase& operator= (const RB_ObjectBase& obj);
 
-    virtual void init() { }
+//    virtual void init() { }
 
     virtual RB_String getId() const;
     virtual void setId(const RB_String& id);
@@ -82,8 +81,8 @@ public:
     // abstract container definitions
     virtual int countObject() const { return 0; }
     virtual RB_ObjectBase* getObject(const RB_String& id = "") = 0;
-    virtual RB_ObjectBase* getObject(const RB_String& /*name*/,
-                                     const RB_Variant& /*value*/) { return NULL; }
+    virtual RB_ObjectBase* getObject(const RB_String& memberName,
+                                     const RB_Variant& value);
     virtual RB_ObjectBase* newObject(const RB_String& id = "") = 0;
     virtual RB_ObjectContainer* getContainer(const RB_String& name = "") = 0;
     virtual RB_ObjectContainer* newContainer(const RB_String& name) = 0;
@@ -94,18 +93,18 @@ public:
     virtual RB_ObjectBase* getChildObject(const RB_String& objName) = 0;
     virtual RB_ObjectBase* getDescendantObject(const RB_String& id) = 0;
 
-    // member functions
+    virtual bool eraseChildren() = 0;
+
     virtual int countMember() const;
     virtual RB_ObjectMember* getMember(int number) const;
     virtual RB_ObjectMember* getMember(const RB_String& name) const;
     virtual int getMemberNo(const RB_String& name) const;
-    virtual RB_ObjectMember* addMember(RB_ObjectBase* parent, const RB_String& name,
+    virtual RB_ObjectMember* addMember(const RB_String& name,
                            const RB_String& unit, const RB_Variant& value,
                            RB2::MemberType type = RB2::MemberNone,
                            const RB_Variant& prevValue = RB_Variant(),
                            const RB_Variant& dispValue = RB_Variant());
 
-    // same as getMember(int number)->getValue()
     virtual RB_Variant getValue(int number) const;
     virtual RB_Variant getValue(const RB_String& name) const;
     virtual void setValue(int number, const RB_Variant& var);
@@ -119,10 +118,6 @@ public:
     virtual void setDValue(int number, const RB_Variant& var);
     virtual void setDValue(const RB_String& name, const RB_Variant& var);
 
-    virtual bool eraseChildren() = 0;
-
-    // database interface CRUD, create, read, update and delete,
-    // create is handled normal by the constructor
     virtual bool dbRead(QSqlDatabase db,
                         RB2::ResolveLevel level = RB2::ResolveNone,
                         bool calledFromList = false, bool useParentId = false);
@@ -138,14 +133,12 @@ public:
                               const RB_String& fieldName = "parent");
     /**
      * Accept visitor of the visitor design pattern,
-     * such as XML writer, abstract function.
+     * such as XML writer, DB read/write, is an abstract function.
      * @param visitor
      */
     virtual void acceptVisitor(RB_Visitor& visitor) = 0;
 
-    // debug only
     virtual RB_String toString();
-
 
 protected:
     //! Create object members, to be overloaded. Function does nothing.
@@ -159,7 +152,7 @@ protected:
     //! pointer to parent object
     RB_ObjectBase* mParent;
     //! name of the object (instead of typeid() for example LDT_Line)
-    RB_String mName;
+//    RB_String mName;
     //! model object factory
     RB_ObjectFactory* mFactory;
     //! pointer to original object in case this object is the clone
@@ -170,11 +163,6 @@ private:
     bool mClonedObject;
     //! vector container of members
     std::vector<RB_ObjectMember*> mMemberVector;
-    // map container of members, only for quick find by name
-    // is slower in index look-up for TreeView and adds considerable
-    // extra time during construction of the object if used in combination
-    // with vector. 2011-07-03
-//    std::map<std::string, RB_ObjectMember*> mMemberMap;
 };
 
 #endif // RB_OBJECTBASE_H

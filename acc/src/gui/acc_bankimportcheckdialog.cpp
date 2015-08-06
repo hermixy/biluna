@@ -63,7 +63,8 @@ ACC_BankImportCheckDialog::ACC_BankImportCheckDialog(QWidget *parent)
     mItemMapper = NULL;
     mAllocDocModel = NULL; // selection document only
 
-    mGlTransList = new RB_ObjectContainer("", NULL, "ACC_GlTransList", ACC_OBJECTFACTORY);
+    mGlTransList = new RB_ObjectContainer("", NULL, "ACC_GlTransList",
+                                          ACC_OBJECTFACTORY);
 
     mInitInProgress = false;
     mSaveInProgress = false;
@@ -94,7 +95,7 @@ ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() {
     delete mItemModel; // OK if not used anywhere else
 
     delete mBankImportList;
-    delete mTransDocListRoot;
+    // delete mTransDocListRoot; deleted with mDocModel
     delete mGlTransList;
     // delete mTransDocList; deleted by ACC_BankImportCheckDialog
     RB_DEBUG->print("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() OK");

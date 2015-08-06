@@ -38,9 +38,9 @@ SAIL_Coordinate::~SAIL_Coordinate() {
   in west/east direction
 */
 void SAIL_Coordinate::createMembers() {
-    addMember(this, "mname", "-", "<New>", RB2::MemberChar125);
-    addMember(this, "comment", "-", "", RB2::MemberChar255);
-    addMember(this, "symbol_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "latitude", "degree", 0.0, RB2::MemberDouble);
-    addMember(this, "longitude", "degree", 0.0, RB2::MemberDouble);
+    addMember("mname", "-", "<New>", RB2::MemberChar125);
+    addMember("comment", "-", "", RB2::MemberChar255);
+    addMember("symbol_idx", "-", "0", RB2::MemberChar165);
+    addMember("latitude", "degree", 0.0, RB2::MemberDouble);
+    addMember("longitude", "degree", 0.0, RB2::MemberDouble);
 }

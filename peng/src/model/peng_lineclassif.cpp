@@ -50,16 +50,16 @@ PENG_LineClassif::~PENG_LineClassif() {
  * - classifregulationsubgroup
  */
 void PENG_LineClassif::createMembers() {
-    addMember(this, "classifnomoperpress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "classifnomopertemp", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "classifmaxdespress", "MPa", 0.0, RB2::MemberDouble);
-    addMember(this, "classifmaxdestemp", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "classifmindestemp", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "classifauthorityregulation", "-", "", RB2::MemberChar125);
-    addMember(this, "classiffluiddangergroup_id", "0", "", RB2::MemberChar40);
-    addMember(this, "classifgasstability_id", "0", "", RB2::MemberChar40);
-    addMember(this, "classifregulationgroup", "-", "", RB2::MemberChar125);
-    addMember(this, "classifregulationsubgroup", "-", "", RB2::MemberChar125);
+    addMember("classifnomoperpress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("classifnomopertemp", "DegC", 0.0, RB2::MemberDouble);
+    addMember("classifmaxdespress", "MPa", 0.0, RB2::MemberDouble);
+    addMember("classifmaxdestemp", "DegC", 0.0, RB2::MemberDouble);
+    addMember("classifmindestemp", "DegC", 0.0, RB2::MemberDouble);
+    addMember("classifauthorityregulation", "-", "", RB2::MemberChar125);
+    addMember("classiffluiddangergroup_id", "0", "", RB2::MemberChar40);
+    addMember("classifgasstability_id", "0", "", RB2::MemberChar40);
+    addMember("classifregulationgroup", "-", "", RB2::MemberChar125);
+    addMember("classifregulationsubgroup", "-", "", RB2::MemberChar125);
 }
 
 /**

@@ -36,7 +36,7 @@ DB_SystemGroup::~DB_SystemGroup() {
  *  [CRUD] Create Read Update Delete, [CRUDX] Create Read Update Delete Execute
  */
 void DB_SystemGroup::createMembers() {
-    addMember(this, "code", "-", "<NEW>", RB2::MemberChar40);
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "permission_id", "-", 0, RB2::MemberInteger);
+    addMember("code", "-", "<NEW>", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("permission_id", "-", 0, RB2::MemberInteger);
 }

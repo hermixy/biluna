@@ -37,8 +37,8 @@ CRM_SysSeqNo::~CRM_SysSeqNo() {
  * to differentiate groups within the same table
  */
 void CRM_SysSeqNo::createMembers() {
-    addMember(this, "modeltype", "-", 0, RB2::MemberInteger);
-    addMember(this, "seqnumbername", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "sequencenumber", "-", 0, RB2::MemberInteger);
-    addMember(this, "modelsubtype_id", "-", "0", RB2::MemberChar40);
+    addMember("modeltype", "-", 0, RB2::MemberInteger);
+    addMember("seqnumbername", "-", "<NEW>", RB2::MemberChar125);
+    addMember("sequencenumber", "-", 0, RB2::MemberInteger);
+    addMember("modelsubtype_id", "-", "0", RB2::MemberChar40);
 }

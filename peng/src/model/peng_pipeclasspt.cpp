@@ -32,6 +32,6 @@ PENG_PipeClassPT::~PENG_PipeClassPT() {
 
 
 void PENG_PipeClassPT::createMembers() {
-    addMember(this, "designtemperature", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "designpressure", "MPa", 0.0, RB2::MemberDouble);
+    addMember("designtemperature", "DegC", 0.0, RB2::MemberDouble);
+    addMember("designpressure", "MPa", 0.0, RB2::MemberDouble);
 }

@@ -32,5 +32,5 @@ DB_PermissionGroup::~DB_PermissionGroup() {
  * -group_idx, id and name or number of the group
  */
 void DB_PermissionGroup::createMembers() {
-    addMember(this, "group_idx", "-", "0", RB2::MemberChar165);
+    addMember("group_idx", "-", "0", RB2::MemberChar165);
 }

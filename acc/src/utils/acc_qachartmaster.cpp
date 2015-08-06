@@ -23,10 +23,10 @@ ACC_QaChartMaster* ACC_QaChartMaster::mActiveUtility = 0;
 /**
  * Constructor
  */
-ACC_QaChartMaster::ACC_QaChartMaster() : RB_UtilityFactory() {
+ACC_QaChartMaster::ACC_QaChartMaster() : RB_Utility() {
     RB_DEBUG->print("ACC_QaChartMaster::ACC_QaChartMaster()");
     initMemberValues();
-    ACC_UTILITYFACTORY->registerFactory(this);
+    ACC_UTILITYFACTORY->addUtility(this);
 }
 
 void ACC_QaChartMaster::initMemberValues() {
@@ -82,7 +82,7 @@ void ACC_QaChartMaster::initMemberValues() {
  * Destructor
  */
 ACC_QaChartMaster::~ACC_QaChartMaster() {
-    ACC_UTILITYFACTORY->unregisterFactory(this);
+    ACC_UTILITYFACTORY->removeUtility(this);
     mActiveUtility = NULL;
     RB_DEBUG->print("ACC_QaChartMaster::~ACC_QaChartMaster() OK");
 }

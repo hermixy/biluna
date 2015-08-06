@@ -33,5 +33,5 @@ ACC_SysSetting::~ACC_SysSetting() {
  * - syssettingname system setting name
  */
 void ACC_SysSetting::createMembers() {
-    addMember(this, "syssettingname", "-", "Placeholder only", RB2::MemberChar40);      // 3
+    addMember("syssettingname", "-", "Placeholder only", RB2::MemberChar40);      // 3
 }

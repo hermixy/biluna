@@ -29,5 +29,5 @@ DB_PermissionPerspectiveProject::~DB_PermissionPerspectiveProject() {
 
 
 void DB_PermissionPerspectiveProject::createMembers() {
-    addMember(this, "description", "-", "", RB2::MemberChar255);
+    addMember("description", "-", "", RB2::MemberChar255);
 }

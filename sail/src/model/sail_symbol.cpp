@@ -33,7 +33,7 @@ SAIL_Symbol::~SAIL_Symbol() {
   \li svg, the SVG data of the symbol image
  */
 void SAIL_Symbol::createMembers() {
-    addMember(this, "mname", "-", "<New>", RB2::MemberChar125);
-    addMember(this, "svg", "-", "", RB2::MemberString);
-    addMember(this, "icon", "-", "", RB2::MemberByteArray);
+    addMember("mname", "-", "<New>", RB2::MemberChar125);
+    addMember("svg", "-", "", RB2::MemberString);
+    addMember("icon", "-", "", RB2::MemberByteArray);
 }

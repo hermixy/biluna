@@ -39,10 +39,10 @@ ACC_AssetAttribute::~ACC_AssetAttribute() {
  */
 
 void ACC_AssetAttribute::createMembers() {
-    addMember(this, "shortname", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "description", "-", "<New>", RB2::MemberChar255);
-    addMember(this, "type", "-", 0, RB2::MemberInteger);
-    addMember(this, "unit", "-", "", RB2::MemberChar40);
-    addMember(this, "weight", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "value", "-", 0.0, RB2::MemberDouble);
+    addMember("shortname", "-", "<NEW>", RB2::MemberChar125);
+    addMember("description", "-", "<New>", RB2::MemberChar255);
+    addMember("type", "-", 0, RB2::MemberInteger);
+    addMember("unit", "-", "", RB2::MemberChar40);
+    addMember("weight", "-", 0.0, RB2::MemberDouble);
+    addMember("value", "-", 0.0, RB2::MemberDouble);
 }

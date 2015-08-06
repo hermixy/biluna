@@ -325,13 +325,11 @@ bool RB_DbVisitor::dbReadList() {
                     childObj->setValue(fieldName.toLower(), rec.value(i));
                 } else {
                     if (!fieldName.endsWith("_idx")) {
-                        childObj->addMember(childObj, fieldName,
-                                            "-", rec.value(i));
+                        childObj->addMember(fieldName, "-", rec.value(i));
                     } else {
                         value = rec.value(i).toString();
                         // remove the Uuid part including the curly braces
-                        RB_ObjectMember* mem = childObj->addMember(
-                                    childObj, fieldName,
+                        RB_ObjectMember* mem = childObj->addMember(fieldName,
                                     "-", value.remove(38, value.length()));
                         value = rec.value(i).toString();
                         // remove the part after the Uuid

@@ -35,7 +35,7 @@ PENG_TypeSubsection::~PENG_TypeSubsection () {
  * \li description is an explanation of the member
  */
 void PENG_TypeSubsection::createMembers() {
-    addMember(this, "type", "-", "New subsection type", RB2::MemberChar125);	// 0
-    addMember(this, "subsectiontype", "-", "", RB2::MemberChar40);		// 1
-    addMember(this, "description", "-", "", RB2::MemberChar125);			// 2
+    addMember("type", "-", "New subsection type", RB2::MemberChar125);	// 0
+    addMember("subsectiontype", "-", "", RB2::MemberChar40);		// 1
+    addMember("description", "-", "", RB2::MemberChar125);			// 2
 }

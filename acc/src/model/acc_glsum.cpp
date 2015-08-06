@@ -36,9 +36,9 @@ ACC_GlSum::~ACC_GlSum() {
  * - credit credit amount
  */
 void ACC_GlSum::createMembers() {
-    addMember(this, "period", "-", 0, RB2::MemberInteger);
-    addMember(this, "accountcode", "-", 0, RB2::MemberInteger);
-    addMember(this, "accountname", "-", 0, RB2::MemberChar255);
-    addMember(this, "debit", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "credit", "-", 0.0, RB2::MemberDouble);
+    addMember("period", "-", 0, RB2::MemberInteger);
+    addMember("accountcode", "-", 0, RB2::MemberInteger);
+    addMember("accountname", "-", 0, RB2::MemberChar255);
+    addMember("debit", "-", 0.0, RB2::MemberDouble);
+    addMember("credit", "-", 0.0, RB2::MemberDouble);
 }

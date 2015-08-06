@@ -33,6 +33,6 @@ SAIL_Project::~SAIL_Project() {
  * \li description description of this SAIL project
  */
 void SAIL_Project::createMembers() {
-    addMember(this, "code", "-", "<NEW>", RB2::MemberChar20);
-    addMember(this, "description", "-", "", RB2::MemberChar125);
+    addMember("code", "-", "<NEW>", RB2::MemberChar20);
+    addMember("description", "-", "", RB2::MemberChar125);
 }

@@ -33,6 +33,6 @@ CRM_GroupContact::~CRM_GroupContact() {
  * \li note comment note for ease of reference
  */
 void CRM_GroupContact::createMembers() {
-    addMember(this, "contact_idx", "-", "0", RB2::MemberChar125);
-    addMember(this, "note", "-", "<NEW>", RB2::MemberChar125);
+    addMember("contact_idx", "-", "0", RB2::MemberChar125);
+    addMember("note", "-", "<NEW>", RB2::MemberChar125);
 }

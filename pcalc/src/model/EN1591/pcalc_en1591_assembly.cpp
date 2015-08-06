@@ -39,9 +39,9 @@ PCALC_EN1591_Assembly::~PCALC_EN1591_Assembly() {
  * \li nr (mNR) number of reassemblies
  */
 void PCALC_EN1591_Assembly::createMembers() {
-    addMember(this, "number", "-", "<NEW>", RB2::MemberChar40);
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "date", "-", "", RB2::MemberDateTime);
-    addMember(this, "nameengineer", "-", "", RB2::MemberChar125);
+    addMember("number", "-", "<NEW>", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("date", "-", "", RB2::MemberDateTime);
+    addMember("nameengineer", "-", "", RB2::MemberChar125);
  }

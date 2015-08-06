@@ -62,21 +62,21 @@ void RB_Report::addDetail(const QString& formulaNumber,
     RB_ObjectAtomic* obj = new RB_ObjectAtomic("", mOutContainer,
                                                "PCALC_Output", NULL,
                                                withoutMembers);
-    obj->addMember(obj, "formulanumber", "-", formulaNumber,
+    obj->addMember("formulanumber", "-", formulaNumber,
                    RB2::MemberChar125);
-    obj->addMember(obj, "variablename", "-", variableName,
+    obj->addMember("variablename", "-", variableName,
                    RB2::MemberChar125);
-    obj->addMember(obj, "formula", "-", formula,
+    obj->addMember("formula", "-", formula,
                    RB2::MemberChar2500);
-    obj->addMember(obj, "result", unit, result,
+    obj->addMember("result", unit, result,
                    RB2::MemberDouble);
-    obj->addMember(obj, "unit", "-", unit,
+    obj->addMember("unit", "-", unit,
                    RB2::MemberChar125);
-    obj->addMember(obj, "formulavalues", "-", formulaValues,
+    obj->addMember("formulavalues", "-", formulaValues,
                    RB2::MemberChar2500);
-    obj->addMember(obj, "loadcaseno", "-", loadCaseNo,
+    obj->addMember("loadcaseno", "-", loadCaseNo,
                    RB2::MemberInteger);
-    obj->addMember(obj, "note", "-", note,
+    obj->addMember("note", "-", note,
                    RB2::MemberChar165);
     mOutContainer->addObject(obj);
     mLastOutput = obj;

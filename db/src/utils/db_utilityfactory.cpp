@@ -104,8 +104,7 @@ void DB_UtilityFactory::unregisterFactory(RB_UtilityFactory* f) {
  */
 void DB_UtilityFactory::closeAllFactories() {
     while (!mFactoryList.empty()) {
-        RB_UtilityFactory* f
-                = dynamic_cast<RB_UtilityFactory*>(mFactoryList.back());
+        RB_UtilityFactory* f = mFactoryList.back();
         delete f; // unregisters factory and removes, therefor no pop_back()
     }
 }

@@ -42,14 +42,14 @@ DB_SystemUserPermission::~DB_SystemUserPermission() {
  * \li persprojectend
  */
 void DB_SystemUserPermission::createMembers() {
-    addMember(this, "userstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "userend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "groupstatus_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "grouppermission_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "groupstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "groupend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "persproject_idx", "-", "", RB2::MemberChar165);
-    addMember(this, "persprojectstatus_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "persprojectstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "persprojectend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("userstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("userend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("groupstatus_id", "-", 0, RB2::MemberInteger);
+    addMember("grouppermission_id", "-", 0, RB2::MemberInteger);
+    addMember("groupstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("groupend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("persproject_idx", "-", "", RB2::MemberChar165);
+    addMember("persprojectstatus_id", "-", 0, RB2::MemberInteger);
+    addMember("persprojectstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("persprojectend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
 }

@@ -166,20 +166,20 @@ void ACC_CreateCostCenter3Report::setPeriod1(RB_ObjectBase *costCenterSumList,
 
         RB_ObjectBase* obj = new RB_ObjectAtomic("", costCenterSumList, "ACC_CostCenterSummary");
         costCenterSumList->addObject(obj);
-        obj->addMember(obj, "groupsequenceno", "-", query.value(0), RB2::MemberDouble);
-        obj->addMember(obj, "groupname", "-", query.value(1), RB2::MemberDouble);
-        obj->addMember(obj, "groupcostprofit", "-", query.value(2), RB2::MemberDouble);
-        obj->addMember(obj, "centercode", "-", query.value(3), RB2::MemberDouble);
-        obj->addMember(obj, "centername", "-", query.value(4), RB2::MemberDouble);
-        obj->addMember(obj, "budget", "-", query.value(5).toDouble() / costsumcount, RB2::MemberDouble);
-        obj->addMember(obj, "forecast", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
-        obj->addMember(obj, "actual", "-", query.value(7), RB2::MemberDouble);
-        obj->addMember(obj, "budget2", "-", 0.0);
-        obj->addMember(obj, "forecast2", "-", 0.0);
-        obj->addMember(obj, "actual2", "-", 0.0);
-        obj->addMember(obj, "budget3", "-", 0.0);
-        obj->addMember(obj, "forecast3", "-", 0.0);
-        obj->addMember(obj, "actual3", "-", 0.0);
+        obj->addMember("groupsequenceno", "-", query.value(0), RB2::MemberDouble);
+        obj->addMember("groupname", "-", query.value(1), RB2::MemberDouble);
+        obj->addMember("groupcostprofit", "-", query.value(2), RB2::MemberDouble);
+        obj->addMember("centercode", "-", query.value(3), RB2::MemberDouble);
+        obj->addMember("centername", "-", query.value(4), RB2::MemberDouble);
+        obj->addMember("budget", "-", query.value(5).toDouble() / costsumcount, RB2::MemberDouble);
+        obj->addMember("forecast", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
+        obj->addMember("actual", "-", query.value(7), RB2::MemberDouble);
+        obj->addMember("budget2", "-", 0.0);
+        obj->addMember("forecast2", "-", 0.0);
+        obj->addMember("actual2", "-", 0.0);
+        obj->addMember("budget3", "-", 0.0);
+        obj->addMember("forecast3", "-", 0.0);
+        obj->addMember("actual3", "-", 0.0);
     }
 }
 
@@ -204,20 +204,20 @@ void ACC_CreateCostCenter3Report::setPeriod2(RB_ObjectBase *costCenterSumList,
         if (!obj) {
             obj = new RB_ObjectAtomic("", costCenterSumList, "ACC_CostCenterSummary");
             costCenterSumList->addObject(obj);
-            obj->addMember(obj, "groupsequenceno", "-", query.value(0), RB2::MemberDouble);
-            obj->addMember(obj, "groupname", "-", query.value(1), RB2::MemberDouble);
-            obj->addMember(obj, "groupcostprofit", "-", query.value(2), RB2::MemberDouble);
-            obj->addMember(obj, "centercode", "-", query.value(3), RB2::MemberDouble);
-            obj->addMember(obj, "centername", "-", query.value(4), RB2::MemberDouble);
-            obj->addMember(obj, "budget", "-", 0.0);
-            obj->addMember(obj, "forecast", "-", 0.0);
-            obj->addMember(obj, "actual", "-", 0.0);
-            obj->addMember(obj, "budget2", "-", query.value(5).toDouble() / costsumcount, RB2::MemberDouble);
-            obj->addMember(obj, "forecast2", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
-            obj->addMember(obj, "actual2", "-", query.value(7), RB2::MemberDouble);
-            obj->addMember(obj, "budget3", "-", 0.0);
-            obj->addMember(obj, "forecast3", "-", 0.0);
-            obj->addMember(obj, "actual3", "-", 0.0);
+            obj->addMember("groupsequenceno", "-", query.value(0), RB2::MemberDouble);
+            obj->addMember("groupname", "-", query.value(1), RB2::MemberDouble);
+            obj->addMember("groupcostprofit", "-", query.value(2), RB2::MemberDouble);
+            obj->addMember("centercode", "-", query.value(3), RB2::MemberDouble);
+            obj->addMember("centername", "-", query.value(4), RB2::MemberDouble);
+            obj->addMember("budget", "-", 0.0);
+            obj->addMember("forecast", "-", 0.0);
+            obj->addMember("actual", "-", 0.0);
+            obj->addMember("budget2", "-", query.value(5).toDouble() / costsumcount, RB2::MemberDouble);
+            obj->addMember("forecast2", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
+            obj->addMember("actual2", "-", query.value(7), RB2::MemberDouble);
+            obj->addMember("budget3", "-", 0.0);
+            obj->addMember("forecast3", "-", 0.0);
+            obj->addMember("actual3", "-", 0.0);
         } else {
             obj->setValue("budget2", query.value(5).toDouble() / costsumcount);
             obj->setValue("forecast2", query.value(6).toDouble() / costsumcount);
@@ -247,20 +247,20 @@ void ACC_CreateCostCenter3Report::setPeriod3(RB_ObjectBase *costCenterSumList,
         if (!obj) {
             obj = new RB_ObjectAtomic("", costCenterSumList, "ACC_CostCenterSummary");
             costCenterSumList->addObject(obj);
-            obj->addMember(obj, "groupsequenceno", "-", query.value(0), RB2::MemberDouble);
-            obj->addMember(obj, "groupname", "-", query.value(1), RB2::MemberDouble);
-            obj->addMember(obj, "groupcostprofit", "-", query.value(2), RB2::MemberDouble);
-            obj->addMember(obj, "centercode", "-", query.value(3), RB2::MemberDouble);
-            obj->addMember(obj, "centername", "-", query.value(4), RB2::MemberDouble);
-            obj->addMember(obj, "budget", "-", 0.0);
-            obj->addMember(obj, "forecast", "-", 0.0);
-            obj->addMember(obj, "actual", "-", 0.0);
-            obj->addMember(obj, "budget2", "-", 0.0);
-            obj->addMember(obj, "forecast2", "-", 0.0);
-            obj->addMember(obj, "actual2", "-", 0.0);
-            obj->addMember(obj, "budget3", "-", query.value(5).toDouble() / costsumcount, RB2::MemberDouble);
-            obj->addMember(obj, "forecast3", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
-            obj->addMember(obj, "actual3", "-", query.value(7), RB2::MemberDouble);
+            obj->addMember("groupsequenceno", "-", query.value(0), RB2::MemberDouble);
+            obj->addMember("groupname", "-", query.value(1), RB2::MemberDouble);
+            obj->addMember("groupcostprofit", "-", query.value(2), RB2::MemberDouble);
+            obj->addMember("centercode", "-", query.value(3), RB2::MemberDouble);
+            obj->addMember("centername", "-", query.value(4), RB2::MemberDouble);
+            obj->addMember("budget", "-", 0.0);
+            obj->addMember("forecast", "-", 0.0);
+            obj->addMember("actual", "-", 0.0);
+            obj->addMember("budget2", "-", 0.0);
+            obj->addMember("forecast2", "-", 0.0);
+            obj->addMember("actual2", "-", 0.0);
+            obj->addMember("budget3", "-", query.value(5).toDouble() / costsumcount, RB2::MemberDouble);
+            obj->addMember("forecast3", "-", query.value(6).toDouble() / costsumcount, RB2::MemberDouble);
+            obj->addMember("actual3", "-", query.value(7), RB2::MemberDouble);
         } else {
             obj->setValue("budget3", query.value(5).toDouble() / costsumcount);
             obj->setValue("forecast3", query.value(6).toDouble() / costsumcount);

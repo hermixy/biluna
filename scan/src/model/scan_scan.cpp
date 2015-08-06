@@ -43,5 +43,5 @@ SCAN_Scan::~SCAN_Scan() {
  * title is the title of the scan
  */
 void SCAN_Scan::createMembers() {
-    addMember(this, "title", "-", "None", RB2::MemberChar125);
+    addMember("title", "-", "None", RB2::MemberChar125);
 }

@@ -34,6 +34,6 @@ SCAN_Answer::~SCAN_Answer () {
  * answer answer text
  */
 void SCAN_Answer::createMembers() {
-    addMember(this, "number", "-", 1, RB2::MemberInteger);
-    addMember(this, "answer", "-", "", RB2::MemberString);
+    addMember("number", "-", 1, RB2::MemberInteger);
+    addMember("answer", "-", "", RB2::MemberString);
 }

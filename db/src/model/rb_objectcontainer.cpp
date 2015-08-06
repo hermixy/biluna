@@ -288,15 +288,15 @@ RB_ObjectBase* RB_ObjectContainer::getObject(const RB_String& id) {
 
 /**
  * Get the first relevant object with the member equal to value
- * @param memName member name
+ * @param memberName member name
  * @param value member value
  * @return RB_ObjectBase*
  */
-RB_ObjectBase* RB_ObjectContainer::getObject(const RB_String& name,
+RB_ObjectBase* RB_ObjectContainer::getObject(const RB_String& memberName,
                                              const RB_Variant& value) {
-    if (name == "") {
+    if (memberName == "") {
         return NULL;
-    } else if (name == "id") {
+    } else if (memberName == "id") {
         return getObject(value.toString());
     }
 
@@ -305,13 +305,13 @@ RB_ObjectBase* RB_ObjectContainer::getObject(const RB_String& name,
     while (iter != mObjectList.end()) {
         RB_ObjectBase* obj = *iter;
         // !obj->isList() because of tree search only
-        if (!obj->isList() && obj->getValue(name) == value) {
+        if (!obj->isList() && obj->getValue(memberName) == value) {
             return *iter;
         }
         // tree search
         if (obj->getName().remove("List", Qt::CaseInsensitive)
                 == this->getName().remove("List", Qt::CaseInsensitive)) {
-            RB_ObjectBase* foundObj = obj->getObject(name, value);
+            RB_ObjectBase* foundObj = obj->getObject(memberName, value);
 
             if (foundObj) {
                 return foundObj;

@@ -68,7 +68,7 @@ DB_WeekItem::DB_WeekItem(DB_CalendarView* calendarView, const QDate& start,
 
 void DB_WeekItem::paint(QPainter *painter,
                         const QStyleOptionGraphicsItem *option,
-                        QWidget */*widget*/) {
+                        QWidget* /*widget*/) {
     int width = (int)mBoundingRect.width() - 1;
     int height = (int)mBoundingRect.height();
     painter->setClipRect(mBoundingRect);
@@ -207,7 +207,7 @@ void DB_WeekItem::mousePressEvent(QGraphicsSceneMouseEvent* /*event*/) {
     // nothing
 }
 
-void DB_WeekItem::mouseMoveEvent(QGraphicsSceneMouseEvent */*event*/) {
+void DB_WeekItem::mouseMoveEvent(QGraphicsSceneMouseEvent* /*event*/) {
     // nothing
 }
 

@@ -35,7 +35,7 @@ ACC_AccountGroup::~ACC_AccountGroup() {
  * - sequenceintb sequence number in trial balance
  */
 void ACC_AccountGroup::createMembers() {
-    addMember(this, "groupname", "-", "", RB2::MemberChar40);
-    addMember(this, "pandl", "-", 0, RB2::MemberInteger);
-    addMember(this, "sequenceintb", "-", 0, RB2::MemberInteger);
+    addMember("groupname", "-", "", RB2::MemberChar40);
+    addMember("pandl", "-", 0, RB2::MemberInteger);
+    addMember("sequenceintb", "-", 0, RB2::MemberInteger);
 }

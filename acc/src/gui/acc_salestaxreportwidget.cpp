@@ -52,8 +52,8 @@ void ACC_SalesTaxReportWidget::init() {
     // DB_ACTIONFACTORY->enableFormatMenu(getWidgetType());
 
     mSumObj = ACC_OBJECTFACTORY->newSingleObject("ACC_GlTrans"); // refer ACC_CalcSalesTax
-    mSumObj->addMember(mSumObj, "accountcontrol", "-", 0, RB2::MemberInteger);
-    mSumObj->addMember(mSumObj, "taxamount", "-", 0, RB2::MemberInteger);
+    mSumObj->addMember("accountcontrol", "-", 0, RB2::MemberInteger);
+    mSumObj->addMember("taxamount", "-", 0, RB2::MemberInteger);
     mSumObj->setValue("amount", 0.0);
     mSumObj->setValue("taxamount", 0.0);
 

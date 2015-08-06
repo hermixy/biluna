@@ -29,9 +29,9 @@ PENG_PipeClass::~PENG_PipeClass() {
 }
 
 void PENG_PipeClass::createMembers() {
-    addMember(this, "classnumber", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "service", "-", "", RB2::MemberChar125);
-    addMember(this, "rating", "-", "", RB2::MemberChar125);
-    addMember(this, "materialgroup", "-", "", RB2::MemberChar125);
+    addMember("classnumber", "-", "<NEW>", RB2::MemberChar125);
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("service", "-", "", RB2::MemberChar125);
+    addMember("rating", "-", "", RB2::MemberChar125);
+    addMember("materialgroup", "-", "", RB2::MemberChar125);
 }

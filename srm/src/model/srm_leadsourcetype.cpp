@@ -32,5 +32,5 @@ SRM_LeadSourceType::~SRM_LeadSourceType() {
  * \li mname name of the lead source type
  */
 void SRM_LeadSourceType::createMembers() {
-    addMember(this, "mname", "-", "", RB2::MemberChar40);
+    addMember("mname", "-", "", RB2::MemberChar40);
 }

@@ -35,7 +35,7 @@ ACC_CostGroup::~ACC_CostGroup() {
  * \li sequenceno sequence number in report
  */
 void ACC_CostGroup::createMembers() {
-    addMember(this, "groupname", "-", "", RB2::MemberChar40);
-    addMember(this, "costprofit", "-", 0, RB2::MemberInteger);
-    addMember(this, "sequenceno", "-", 0, RB2::MemberInteger);
+    addMember("groupname", "-", "", RB2::MemberChar40);
+    addMember("costprofit", "-", 0, RB2::MemberInteger);
+    addMember("sequenceno", "-", 0, RB2::MemberInteger);
 }

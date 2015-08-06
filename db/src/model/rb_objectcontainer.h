@@ -47,7 +47,7 @@ public:
     virtual int countObject() const;
     virtual RB_ObjectBase* getObject(int row);
     virtual RB_ObjectBase* getObject(const RB_String& id = "");
-    virtual RB_ObjectBase* getObject(const RB_String& name,
+    virtual RB_ObjectBase* getObject(const RB_String& memberName,
                                      const RB_Variant& value);
     virtual RB_ObjectBase* newObject(const RB_String& id = "");
     virtual bool newObject(int row, int count = 1);

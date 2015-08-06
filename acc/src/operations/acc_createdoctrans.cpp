@@ -83,24 +83,24 @@ bool ACC_CreateDocTrans::execute(RB_ObjectBase* docList) {
     while (query.next()) {
         RB_ObjectBase* obj = new RB_ObjectAtomic("", docList, "ACC_GlTransactions");
         docList->addObject(obj);
-        obj->addMember(obj, "transdocid", "-", query.value(0), RB2::MemberChar40);
-        obj->addMember(obj, "transdocname", "-", query.value(1), RB2::MemberChar125);
-        obj->addMember(obj, "accountcode", "-", query.value(2), RB2::MemberChar40);
-        obj->addMember(obj, "accountname", "-", query.value(3), RB2::MemberChar255);
-        obj->addMember(obj, "transno", "-", query.value(4), RB2::MemberChar40);
-        obj->addMember(obj, "chartmasterid", "-", query.value(5), RB2::MemberChar40);
-        obj->addMember(obj, "transdate", "-", query.value(6), RB2::MemberChar40);
-        obj->addMember(obj, "description", "-", query.value(7), RB2::MemberChar255);
-        obj->addMember(obj, "refno", "-", query.value(8), RB2::MemberChar40);
+        obj->addMember("transdocid", "-", query.value(0), RB2::MemberChar40);
+        obj->addMember("transdocname", "-", query.value(1), RB2::MemberChar125);
+        obj->addMember("accountcode", "-", query.value(2), RB2::MemberChar40);
+        obj->addMember("accountname", "-", query.value(3), RB2::MemberChar255);
+        obj->addMember("transno", "-", query.value(4), RB2::MemberChar40);
+        obj->addMember("chartmasterid", "-", query.value(5), RB2::MemberChar40);
+        obj->addMember("transdate", "-", query.value(6), RB2::MemberChar40);
+        obj->addMember("description", "-", query.value(7), RB2::MemberChar255);
+        obj->addMember("refno", "-", query.value(8), RB2::MemberChar40);
 
         double amount = query.value(9).toDouble();
 
         if (amount >= 0.0) {
-            obj->addMember(obj, "debit", "-", amount, RB2::MemberDouble);
-            obj->addMember(obj, "credit", "-", 0.0, RB2::MemberDouble);
+            obj->addMember("debit", "-", amount, RB2::MemberDouble);
+            obj->addMember("credit", "-", 0.0, RB2::MemberDouble);
         } else {
-            obj->addMember(obj, "debit", "-", 0.0, RB2::MemberDouble);
-            obj->addMember(obj, "credit", "-", -amount, RB2::MemberDouble);
+            obj->addMember("debit", "-", 0.0, RB2::MemberDouble);
+            obj->addMember("credit", "-", -amount, RB2::MemberDouble);
         }
     }
 

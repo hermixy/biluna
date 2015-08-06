@@ -32,5 +32,5 @@ ACC_UnitOfMeasure::~ACC_UnitOfMeasure() {
  * - unitname name of the unit of measurement
  */
 void ACC_UnitOfMeasure::createMembers() {
-    addMember(this, "unitname", "-", "", RB2::MemberChar125);      // 3
+    addMember("unitname", "-", "", RB2::MemberChar125);      // 3
 }

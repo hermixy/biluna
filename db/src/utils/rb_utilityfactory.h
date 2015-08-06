@@ -15,6 +15,8 @@
 #include "db_global.h"
 #include "rb_aesencryption.h"
 
+class RB_Utility;
+
 
 /**
  * Abstract utility factory class, for the creation and deletion
@@ -26,14 +28,21 @@ public:
     RB_UtilityFactory();
     virtual ~RB_UtilityFactory();
 	
-    virtual void refresh() { }
-
     QString encrypt(const QString& str);
     QString decrypt(const QVariant& var);
+
+    virtual void addUtility(RB_Utility* util);
+    virtual void removeUtility(RB_Utility* util);
+
+    virtual void refresh();
+
+protected:
+    std::vector<RB_Utility*> mUtilityVector;
 
 private:
     bool mIsEncryption;
     RB_AesEncryption mAes;
+
 };
 
 #endif // RB_UTILITYFACTORY_H

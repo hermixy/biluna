@@ -405,8 +405,7 @@ void DB_TransferDataAction::createTableModel(QSqlDatabase db,
 		
         for (int col = 0; col < model->columnCount(); ++col) {
             strData = model->data(model->index(row,col,QModelIndex())).toString();
-            obj->addMember(obj, colNameList.at(col),
-                           colDefList.at(col), strData);
+            obj->addMember(colNameList.at(col), colDefList.at(col), strData);
         }
     }
 	

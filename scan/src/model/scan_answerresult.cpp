@@ -40,7 +40,7 @@ SCAN_AnswerResult::~SCAN_AnswerResult () {
  *   no meaning.
  */
 void SCAN_AnswerResult::createMembers() {
-    addMember(this, "number", "-", 1, RB2::MemberInteger);
-    addMember(this, "answer", "-", "", RB2::MemberString);
-    addMember(this, "mvalue", "-", "", RB2::MemberInteger);
+    addMember("number", "-", 1, RB2::MemberInteger);
+    addMember("answer", "-", "", RB2::MemberString);
+    addMember("mvalue", "-", "", RB2::MemberInteger);
 }

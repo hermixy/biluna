@@ -65,7 +65,7 @@ void DB_ActivityItem::layoutChanged() {
  * Show the form setting a meeting
  * @param event
  */
-void DB_ActivityItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent */*event*/) {
+void DB_ActivityItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* /*event*/) {
     mDayItem->mCalendarView->editActivity(mActivity);
 }
 

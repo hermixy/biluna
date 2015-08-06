@@ -38,10 +38,10 @@ CRM_Document::~CRM_Document() {
 
  */
 void CRM_Document::createMembers() {
-    addMember(this, "refno", "-", 0, RB2::MemberInteger);
-    addMember(this, "subject", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "customer_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "contact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "template_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "content", "-", "", RB2::MemberString);
+    addMember("refno", "-", 0, RB2::MemberInteger);
+    addMember("subject", "-", "<NEW>", RB2::MemberChar125);
+    addMember("customer_idx", "-", "0", RB2::MemberChar165);
+    addMember("contact_idx", "-", "0", RB2::MemberChar165);
+    addMember("template_idx", "-", "0", RB2::MemberChar165);
+    addMember("content", "-", "", RB2::MemberString);
 }

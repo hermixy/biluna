@@ -36,9 +36,9 @@ SAIL_Track::~SAIL_Track() {
   \li weightfactor, a track usually gets a fixed distance
 */
 void SAIL_Track::createMembers() {
-    addMember(this, "mname", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "comment", "-", "", RB2::MemberChar255);
-    addMember(this, "from_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "to_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "weightfactor", "-", 0.0, RB2::MemberDouble);
+    addMember("mname", "-", "<NEW>", RB2::MemberChar125);
+    addMember("comment", "-", "", RB2::MemberChar255);
+    addMember("from_idx", "-", "0", RB2::MemberChar165);
+    addMember("to_idx", "-", "0", RB2::MemberChar165);
+    addMember("weightfactor", "-", 0.0, RB2::MemberDouble);
 }

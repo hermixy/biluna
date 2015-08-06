@@ -45,18 +45,18 @@ CRM_Activity::~CRM_Activity() {
  * - acc_customer_id cusomer ID (in ACC)
  */
 void CRM_Activity::createMembers() {
-    addMember(this, "activitytype_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "activitycode", "-", "", RB2::MemberChar40);
-    addMember(this, "subject", "-", "", RB2::MemberChar125);
-    addMember(this, "mstart", "-", "", RB2::MemberDateTime);
-    addMember(this, "mend", "-", "", RB2::MemberDateTime);
-    addMember(this, "isreminder", "-", 0, RB2::MemberInteger);
-    addMember(this, "remindertime", "day", 0, RB2::MemberInteger);
-    addMember(this, "priority_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "description", "-", "", RB2::MemberChar2500);
-    addMember(this, "status_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "location", "-", "", RB2::MemberChar125);
-    addMember(this, "mvalue", "currency", 0.0, RB2::MemberDouble);
-    addMember(this, "acc_contact_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "acc_customer_id", "-", "0", RB2::MemberChar40);
+    addMember("activitytype_id", "-", 0, RB2::MemberInteger);
+    addMember("activitycode", "-", "", RB2::MemberChar40);
+    addMember("subject", "-", "", RB2::MemberChar125);
+    addMember("mstart", "-", "", RB2::MemberDateTime);
+    addMember("mend", "-", "", RB2::MemberDateTime);
+    addMember("isreminder", "-", 0, RB2::MemberInteger);
+    addMember("remindertime", "day", 0, RB2::MemberInteger);
+    addMember("priority_id", "-", 0, RB2::MemberInteger);
+    addMember("description", "-", "", RB2::MemberChar2500);
+    addMember("status_id", "-", 0, RB2::MemberInteger);
+    addMember("location", "-", "", RB2::MemberChar125);
+    addMember("mvalue", "currency", 0.0, RB2::MemberDouble);
+    addMember("acc_contact_id", "-", "0", RB2::MemberChar40);
+    addMember("acc_customer_id", "-", "0", RB2::MemberChar40);
 }

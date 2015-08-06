@@ -36,7 +36,7 @@ SAIL_RouteCoordinate::~SAIL_RouteCoordinate() {
   \li coordinate_idx, coordinate ID and name
 */
 void SAIL_RouteCoordinate::createMembers() {
-    addMember(this, "seqno", "-", 0, RB2::MemberInteger);
-    addMember(this, "coordinate_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "comment", "-", "", RB2::MemberChar255);
+    addMember("seqno", "-", 0, RB2::MemberInteger);
+    addMember("coordinate_idx", "-", "0", RB2::MemberChar165);
+    addMember("comment", "-", "", RB2::MemberChar255);
 }

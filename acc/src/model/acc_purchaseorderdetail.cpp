@@ -50,23 +50,23 @@ ACC_PurchaseOrderDetail::~ACC_PurchaseOrderDetail() {
  * - costcenter_idx cost center ID and description
  */
 void ACC_PurchaseOrderDetail::createMembers() {
-    addMember(this, "stk_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "serialno", "-", "", RB2::MemberChar40);
-    addMember(this, "stkdescription", "-", "", RB2::MemberChar125);
-    addMember(this, "stkuom", "-", "", RB2::MemberChar20);
-    addMember(this, "unitprice", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "quantity", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "estimate", "-", 0, RB2::MemberInteger);
-    addMember(this, "qtyinvoiced", "-", 0.0, RB2::MemberDouble);
+    addMember("stk_idx", "-", "0", RB2::MemberChar165);
+    addMember("serialno", "-", "", RB2::MemberChar40);
+    addMember("stkdescription", "-", "", RB2::MemberChar125);
+    addMember("stkuom", "-", "", RB2::MemberChar20);
+    addMember("unitprice", "-", 0.0, RB2::MemberDouble);
+    addMember("quantity", "-", 0.0, RB2::MemberDouble);
+    addMember("estimate", "-", 0, RB2::MemberInteger);
+    addMember("qtyinvoiced", "-", 0.0, RB2::MemberDouble);
     // Quantity received when creating the invoice, reset to 0.0 after invoice is processed
-    addMember(this, "qtyreceived", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "discountpercent", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "actualreceiptdate", "-", "2000-01-01 00:00:00", RB2::MemberDateTime);
-    addMember(this, "completed", "-", 0, RB2::MemberInteger);
-    addMember(this, "narrative", "-", "", RB2::MemberChar255);
-    addMember(this, "poline", "-", "", RB2::MemberChar125);
-    addMember(this, "itemdue", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+    addMember("qtyreceived", "-", 0.0, RB2::MemberDouble);
+    addMember("discountpercent", "-", 0.0, RB2::MemberDouble);
+    addMember("actualreceiptdate", "-", "2000-01-01 00:00:00", RB2::MemberDateTime);
+    addMember("completed", "-", 0, RB2::MemberInteger);
+    addMember("narrative", "-", "", RB2::MemberChar255);
+    addMember("poline", "-", "", RB2::MemberChar125);
+    addMember("itemdue", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
     // Tax category id for easy retrieval for example during creation of stockmoves
-    addMember(this, "taxcat_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "costcenter_idx", "-", "0", RB2::MemberChar165);
+    addMember("taxcat_id", "-", "0", RB2::MemberChar40);
+    addMember("costcenter_idx", "-", "0", RB2::MemberChar165);
 }

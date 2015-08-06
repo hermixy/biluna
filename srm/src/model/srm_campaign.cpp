@@ -43,16 +43,16 @@ SRM_Campaign::~SRM_Campaign() {
  * - document_idx document ID and description for mailing campaign
  */
 void SRM_Campaign::createMembers() {
-    addMember(this, "campaigntype_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "campaigncode", "-", "<NEW>", RB2::MemberChar20);
-    addMember(this, "subject", "-", "", RB2::MemberChar125);
-    addMember(this, "mstart", "-", "", RB2::MemberDateTime);
-    addMember(this, "mend", "-", "", RB2::MemberDateTime);
-    addMember(this, "currency_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "budget", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "expectedrevenue", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "campaignstatus_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "objective", "-", "", RB2::MemberChar255);
-    addMember(this, "description", "-", "", RB2::MemberChar2500);
-    addMember(this, "document_idx", "-", "0", RB2::MemberChar125);
+    addMember("campaigntype_id", "-", 0, RB2::MemberInteger);
+    addMember("campaigncode", "-", "<NEW>", RB2::MemberChar20);
+    addMember("subject", "-", "", RB2::MemberChar125);
+    addMember("mstart", "-", "", RB2::MemberDateTime);
+    addMember("mend", "-", "", RB2::MemberDateTime);
+    addMember("currency_id", "-", "0", RB2::MemberChar40);
+    addMember("budget", "-", 0.0, RB2::MemberDouble);
+    addMember("expectedrevenue", "-", 0.0, RB2::MemberDouble);
+    addMember("campaignstatus_id", "-", 0, RB2::MemberInteger);
+    addMember("objective", "-", "", RB2::MemberChar255);
+    addMember("description", "-", "", RB2::MemberChar2500);
+    addMember("document_idx", "-", "0", RB2::MemberChar125);
 }

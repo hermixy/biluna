@@ -85,3 +85,4 @@ exists( thrd.pri ) {
 
 #target.path = ../../bil
 #INSTALLS += target
+

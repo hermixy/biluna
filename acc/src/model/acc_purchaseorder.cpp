@@ -49,42 +49,42 @@ ACC_PurchaseOrder::~ACC_PurchaseOrder() {
  * - suppinvoicedate supplier invoice date
  */
 void ACC_PurchaseOrder::createMembers() {
-    addMember(this, "orderno", "-", 0, RB2::MemberInteger);
-    addMember(this, "requisitionno", "-", "", RB2::MemberChar125);
-    addMember(this, "receiptat_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "orderdate", "-", "2000-01-01 00:00:00", RB2::MemberDateTime);
-    addMember(this, "contact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "contactphone", "-", "", RB2::MemberChar20);
-    addMember(this, "contactemail", "-", "", RB2::MemberChar125);
-    addMember(this, "supplierref", "-", "", RB2::MemberChar125);
-    addMember(this, "receiptdate", "-", "2000-01-01 00:00:00", RB2::MemberDateTime);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "shipvia_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "orderstatus", "-", 0, RB2::MemberInteger);
-    addMember(this, "quotation", "-", 0, RB2::MemberInteger); // 0=no, 1=yes
+    addMember("orderno", "-", 0, RB2::MemberInteger);
+    addMember("requisitionno", "-", "", RB2::MemberChar125);
+    addMember("receiptat_id", "-", "0", RB2::MemberChar40);
+    addMember("orderdate", "-", "2000-01-01 00:00:00", RB2::MemberDateTime);
+    addMember("contact_idx", "-", "0", RB2::MemberChar165);
+    addMember("contactphone", "-", "", RB2::MemberChar20);
+    addMember("contactemail", "-", "", RB2::MemberChar125);
+    addMember("supplierref", "-", "", RB2::MemberChar125);
+    addMember("receiptdate", "-", "2000-01-01 00:00:00", RB2::MemberDateTime);
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("shipvia_id", "-", "0", RB2::MemberChar40);
+    addMember("orderstatus", "-", 0, RB2::MemberInteger);
+    addMember("quotation", "-", 0, RB2::MemberInteger); // 0=no, 1=yes
 
-    addMember(this, "deladd1", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd2", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd3", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd4", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd5", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd6", "-", "", RB2::MemberChar125);
+    addMember("deladd1", "-", "", RB2::MemberChar125);
+    addMember("deladd2", "-", "", RB2::MemberChar125);
+    addMember("deladd3", "-", "", RB2::MemberChar125);
+    addMember("deladd4", "-", "", RB2::MemberChar125);
+    addMember("deladd5", "-", "", RB2::MemberChar125);
+    addMember("deladd6", "-", "", RB2::MemberChar125);
 
-    addMember(this, "ordertitle", "-", "", RB2::MemberChar125);
-    addMember(this, "comments", "-", "", RB2::MemberChar2500);
+    addMember("ordertitle", "-", "", RB2::MemberChar125);
+    addMember("comments", "-", "", RB2::MemberChar2500);
 
-    addMember(this, "suppinvoiceno", "-", "", RB2::MemberChar125);
-    addMember(this, "suppinvoicedate", "-", "", RB2::MemberDateTime);
+    addMember("suppinvoiceno", "-", "", RB2::MemberChar125);
+    addMember("suppinvoicedate", "-", "", RB2::MemberDateTime);
 
 
 
-//    addMember(this, "buyername", "-", "", RB2::MemberChar125);
-//    addMember(this, "ordertype", "-", "", RB2::MemberChar10);
-//    addMember(this, "freightcost", "-", 0.0, RB2::MemberDouble);
-//    addMember(this, "fromstkloc_id", "-", "0", RB2::MemberChar40);
-//    addMember(this, "quotedate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
-//    addMember(this, "confirmeddate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
-//    addMember(this, "printedpackingslip", "-", 0, RB2::MemberInteger);
-//    addMember(this, "datepackingslipprinted", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+//    addMember("buyername", "-", "", RB2::MemberChar125);
+//    addMember("ordertype", "-", "", RB2::MemberChar10);
+//    addMember("freightcost", "-", 0.0, RB2::MemberDouble);
+//    addMember("fromstkloc_id", "-", "0", RB2::MemberChar40);
+//    addMember("quotedate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+//    addMember("confirmeddate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+//    addMember("printedpackingslip", "-", 0, RB2::MemberInteger);
+//    addMember("datepackingslipprinted", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
 }
 

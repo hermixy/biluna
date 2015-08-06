@@ -32,5 +32,5 @@ DB_SystemUserGroup::~DB_SystemUserGroup() {
  * -group_idx ID of the group
  */
 void DB_SystemUserGroup::createMembers() {
-    addMember(this, "group_idx", "-", "0", RB2::MemberChar165);
+    addMember("group_idx", "-", "0", RB2::MemberChar165);
 }

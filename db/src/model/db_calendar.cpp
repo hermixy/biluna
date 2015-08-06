@@ -158,8 +158,8 @@ bool DB_Calendar::removeActivity(DB_Activity *appointment) {
  * - color color of the activity items
  */
 void DB_Calendar::createMembers() {
-    addMember(this, "mname", "-", "<New>", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "color", "-", "", RB2::MemberChar40);
+    addMember("mname", "-", "<New>", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("color", "-", "", RB2::MemberChar40);
 }
 

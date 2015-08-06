@@ -580,11 +580,11 @@ int RB_ModelFactory::getPerspectivePermission(const RB_String& perspectiveCode) 
 }
 
 int RB_ModelFactory::getCrudxPermission(const RB_String& modelName,
-                                       const RB_String& projectId) {
+                                        const RB_String& projectId) {
     RB_StringList modelList = modelName.split("_", QString::SkipEmptyParts);
 
     if (modelList.size() < 2) {
-        RB_DEBUG->error("RB_ModelFactory::userHasPermission() method name ERROR");
+        RB_DEBUG->error("RB_ModelFactory::getCrudxPermission() method name ERROR");
         return (int)RB2::PermissionNone;
     }
 

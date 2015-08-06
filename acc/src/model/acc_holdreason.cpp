@@ -34,7 +34,7 @@ ACC_HoldReason::~ACC_HoldReason() {
  * - dissallowinvoices disallow invoices with this hold reason
  */
 void ACC_HoldReason::createMembers() {
-    addMember(this, "reasoncode", "-", "0", RB2::MemberChar40);
-    addMember(this, "reasondescription", "-", "", RB2::MemberChar255);
-    addMember(this, "dissallowinvoices", "-", 0, RB2::MemberInteger);
+    addMember("reasoncode", "-", "0", RB2::MemberChar40);
+    addMember("reasondescription", "-", "", RB2::MemberChar255);
+    addMember("dissallowinvoices", "-", 0, RB2::MemberInteger);
 }

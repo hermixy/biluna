@@ -34,7 +34,7 @@ ACC_TaxAuthRate::~ACC_TaxAuthRate() {
  * - taxrate tax rate as percentage
  */
 void ACC_TaxAuthRate::createMembers() {
-    addMember(this, "dispatchtaxprovince_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "taxcat_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "taxrate", "percent", 0.0, RB2::MemberDouble);
+    addMember("dispatchtaxprovince_id", "-", "0", RB2::MemberChar40);
+    addMember("taxcat_id", "-", "0", RB2::MemberChar40);
+    addMember("taxrate", "percent", 0.0, RB2::MemberDouble);
 }

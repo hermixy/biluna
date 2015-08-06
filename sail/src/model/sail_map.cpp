@@ -34,7 +34,7 @@ SAIL_Map::~SAIL_Map() {
   \li svg SVG data of the map
  */
 void SAIL_Map::createMembers() {
-    addMember(this, "mname", "-", "", RB2::MemberChar125);
-    addMember(this, "version", "-", "", RB2::MemberChar125);
-    addMember(this, "svg", "-", "", RB2::MemberString);
+    addMember("mname", "-", "", RB2::MemberChar125);
+    addMember("version", "-", "", RB2::MemberChar125);
+    addMember("svg", "-", "", RB2::MemberString);
 }

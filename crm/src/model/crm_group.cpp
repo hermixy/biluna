@@ -33,6 +33,6 @@ CRM_Group::~CRM_Group() {
  * \li description of the group
  */
 void CRM_Group::createMembers() {
-    addMember(this, "mname", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
+    addMember("mname", "-", "<NEW>", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar255);
 }

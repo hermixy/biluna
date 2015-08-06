@@ -30,12 +30,6 @@ public:
     virtual ~ACC_UtilityFactory();
     static ACC_UtilityFactory* getInstance();
 
-    void refresh();
-    virtual std::vector<RB_UtilityFactory*> getFactoryList();
-    virtual void registerFactory(RB_UtilityFactory* factory);
-    virtual void unregisterFactory(RB_UtilityFactory* factory);
-    virtual void closeAllFactories();
-
 private:
     ACC_UtilityFactory();
 

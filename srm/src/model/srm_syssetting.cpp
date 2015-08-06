@@ -33,5 +33,5 @@ SRM_SysSetting::~SRM_SysSetting() {
   \li syssetingname system setting name (placeholder only)
  */
 void SRM_SysSetting::createMembers() {
-    addMember(this, "syssettingname", "-", "Placeholder only", RB2::MemberChar40);
+    addMember("syssettingname", "-", "Placeholder only", RB2::MemberChar40);
 }

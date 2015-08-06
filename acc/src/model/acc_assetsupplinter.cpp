@@ -34,5 +34,5 @@ ACC_AssetSupplInter::~ACC_AssetSupplInter() {
  * - suppl_id ID of supplier interface
  */
 void ACC_AssetSupplInter::createMembers() {
-    addMember(this, "suppl_id", "-", "0", RB2::MemberChar40);
+    addMember("suppl_id", "-", "0", RB2::MemberChar40);
 }

@@ -33,17 +33,17 @@ PENG_InsulationHCO::~PENG_InsulationHCO() {
  * - thicknessplus050 insulation thickness at 50 degree Celsius (operating temperature)
  */
 void PENG_InsulationHCO::createMembers() {
-    addMember(this, "linesize", "NomInch", 0.0, RB2::MemberDouble);
-    addMember(this, "thicknessplus050", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus100", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus150", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus200", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus250", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus300", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus350", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus400", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus450", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus500", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus550", "mm", 0, RB2::MemberInteger);
-    addMember(this, "thicknessplus600", "mm", 0, RB2::MemberInteger);
+    addMember("linesize", "NomInch", 0.0, RB2::MemberDouble);
+    addMember("thicknessplus050", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus100", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus150", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus200", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus250", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus300", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus350", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus400", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus450", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus500", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus550", "mm", 0, RB2::MemberInteger);
+    addMember("thicknessplus600", "mm", 0, RB2::MemberInteger);
 }

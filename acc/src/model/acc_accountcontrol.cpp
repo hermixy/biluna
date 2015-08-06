@@ -36,6 +36,6 @@ ACC_AccountControl::~ACC_AccountControl() {
  * controlnumber >= 1000 journal accounts and should allway be balanced
  */
 void ACC_AccountControl::createMembers() {
-    addMember(this, "controlnumber", "-", 0, RB2::MemberInteger);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
+    addMember("controlnumber", "-", 0, RB2::MemberInteger);
+    addMember("description", "-", "", RB2::MemberChar255);
 }

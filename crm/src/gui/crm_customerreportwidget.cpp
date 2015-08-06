@@ -199,7 +199,7 @@ void CRM_CustomerReportWidget::on_pbRefresh_clicked() {
 //        RB_ObjectAtomic* obj = new RB_ObjectAtomic("", dataList);
 //        dataList->addObject(obj);
 //        for (int j = 0; j < 6; ++j) {
-//            obj->addMember(obj, "Column " + RB_String::number(j), "nounit", j + i, RB2::MemberInteger);
+//            obj->addMember("Column " + RB_String::number(j), "nounit", j + i, RB2::MemberInteger);
 //        }
 //    }
 //    RB_String html;

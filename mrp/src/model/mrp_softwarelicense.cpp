@@ -38,11 +38,11 @@ MRP_SoftwareLicense::~MRP_SoftwareLicense() {
  * \li comment, comment or remark with this code
  */
 void MRP_SoftwareLicense::createMembers() {
-    addMember(this, "licensecode", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "startdate", "-", "2000-01-01", RB2::MemberChar20);
-    addMember(this, "enddate", "-", "2000-01-01", RB2::MemberChar20);
-    addMember(this, "customer_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "salesorder_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "contact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "comment", "-", "", RB2::MemberChar125);
+    addMember("licensecode", "-", "<NEW>", RB2::MemberChar125);
+    addMember("startdate", "-", "2000-01-01", RB2::MemberChar20);
+    addMember("enddate", "-", "2000-01-01", RB2::MemberChar20);
+    addMember("customer_idx", "-", "0", RB2::MemberChar165);
+    addMember("salesorder_idx", "-", "0", RB2::MemberChar165);
+    addMember("contact_idx", "-", "0", RB2::MemberChar165);
+    addMember("comment", "-", "", RB2::MemberChar125);
 }

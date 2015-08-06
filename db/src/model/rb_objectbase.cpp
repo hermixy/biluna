@@ -27,33 +27,31 @@
  */
 RB_ObjectBase::RB_ObjectBase(const RB_String& id, RB_ObjectBase* p,
                             const RB_String& n, RB_ObjectFactory* f,
-                            bool woMembers) {
-    RB_DEBUG->addObjectBaseCreated(this);
-
+                            bool woMembers) : RB_Object(n) {
     mId = id != "" ? id : RB_Uuid::createUuid().toString();
     mParent = p;
-    mName = n;
+//    mName = n;
 
     if (!woMembers) {
         // id, parent(id) and name are part of the member list
-        addMember(this, "id", "-", mId, RB2::MemberChar40);
+        addMember("id", "-", mId, RB2::MemberChar40);
         if (p && p->getParent()) {
-            addMember(this, "parent", "-", p->getParent()->getId(), RB2::MemberChar40);
+            addMember("parent", "-", p->getParent()->getId(), RB2::MemberChar40);
         } else {
-            addMember(this, "parent", "-", "", RB2::MemberChar40);
+            addMember("parent", "-", "", RB2::MemberChar40);
         }
-        addMember(this, "name", "-", n, RB2::MemberChar40);
-        addMember(this, "status", "-", 0 /* RB2::StatusDefault */, RB2::MemberInteger);
-        addMember(this, "created", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
-        addMember(this, "changed", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
-        addMember(this, "muser", "-", "system", RB2::MemberChar20);
+        addMember("name", "-", n, RB2::MemberChar40);
+        addMember("status", "-", 0 /* RB2::StatusDefault */, RB2::MemberInteger);
+        addMember("created", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
+        addMember("changed", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
+        addMember("muser", "-", "system", RB2::MemberChar20);
     }
 
     mFactory = f;
     mOriginal = NULL;
     mClonedObject = false;
 
-    resetFlags();
+//    resetFlags();
 }
 
 /**
@@ -62,31 +60,30 @@ RB_ObjectBase::RB_ObjectBase(const RB_String& id, RB_ObjectBase* p,
  * TODO: after extensive testing remove debug functions
  * @param obj object to be copied
  */
-RB_ObjectBase::RB_ObjectBase(RB_ObjectBase* obj) {
-    RB_DEBUG->addObjectBaseCreated(this);
+RB_ObjectBase::RB_ObjectBase(RB_ObjectBase* obj) : RB_Object(obj) {
     if (!obj) return;
 
     // Note: do not use *this = *obj, but instead use:
     mParent = obj->getParent();
 
     // id, parent(id) and name are part of the member list
-    addMember(this, "id", "-", obj->getId(), RB2::MemberChar40);
+    addMember("id", "-", obj->getId(), RB2::MemberChar40);
     if (obj->getParent() && obj->getParent()->getParent()) {
-        addMember(this, "parent", "-", obj->getParent()->getParent()->getId(), RB2::MemberChar40);
+        addMember("parent", "-", obj->getParent()->getParent()->getId(), RB2::MemberChar40);
     } else {
-        addMember(this, "parent", "-", "", RB2::MemberChar40);
+        addMember("parent", "-", "", RB2::MemberChar40);
     }
-    addMember(this, "name", "-", obj->getName(), RB2::MemberChar40);
-    addMember(this, "status", "-", RB2::StatusDefault, RB2::MemberInteger);
-    addMember(this, "created", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
-    addMember(this, "changed", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
-    addMember(this, "muser", "-", "noname", RB2::MemberChar20);
+    addMember("name", "-", obj->getName(), RB2::MemberChar40);
+    addMember("status", "-", RB2::StatusDefault, RB2::MemberInteger);
+    addMember("created", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
+    addMember("changed", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
+    addMember("muser", "-", "noname", RB2::MemberChar20);
 
     mFactory = obj->getFactory();
     mOriginal = obj->getOriginal();
     mClonedObject = true;
 
-    setFlags(obj->getFlags());
+//    setFlags(obj->getFlags());
 }
 
 /**
@@ -94,7 +91,6 @@ RB_ObjectBase::RB_ObjectBase(RB_ObjectBase* obj) {
  * TODO: after extensive testing remove debug functions
  */
 RB_ObjectBase::~RB_ObjectBase() {
-    RB_DEBUG->addObjectBaseDeleted(this);
     removeMembers();
 }
 
@@ -121,12 +117,11 @@ RB_ObjectBase& RB_ObjectBase::operator= (const RB_ObjectBase& obj) {
                 // at creation only has a few members for equipmentList
                 // but not all as per data sheet
                 RB_ObjectMember* mem = obj.getMember(i);
-                addMember(this,
-                            mem->getName(),
-                            mem->getUnit(),
-                            mem->getValue(),
-                            mem->getType(),
-                            mem->getPreviousValue());
+                addMember(mem->getName(),
+                          mem->getUnit(),
+                          mem->getValue(),
+                          mem->getType(),
+                          mem->getPreviousValue());
             }
         }
     }
@@ -326,7 +321,7 @@ void RB_ObjectBase::createCopy(RB_ObjectBase* copy, RB2::ResolveLevel /*level*/)
 
     for (int i = RB2::HIDDENCOLUMNS; i < memCount; ++i) {
         mem = mMemberVector.at(i);
-        copy->addMember(copy, mem->getName(), mem->getUnit(),
+        copy->addMember(mem->getName(), mem->getUnit(),
                         mem->getValue(), mem->getType(),
                         mem->getPreviousValue(), mem->getDisplayValue());
     }
@@ -377,11 +372,19 @@ void RB_ObjectBase::deleteOriginal() {
 }
 
 /**
+ * @brief Abstract function get (first0 object with member name and value
+ * @return RB_ObjectBase
+ */
+RB_ObjectBase *RB_ObjectBase::getObject(const QString& /*memberName*/,
+                                        const QVariant& /*value*/) {
+    return NULL;
+}
+
+/**
  * @return total number of members in this object
  */
 int RB_ObjectBase::countMember() const {
     return (int)mMemberVector.size();
-//    return mMemberMap.size();
 }
 
 /**
@@ -399,17 +402,6 @@ RB_ObjectMember* RB_ObjectBase::getMember(int number) const {
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
     } else {
         member = mMemberVector.at(number);
-
-//        std::map<std::string, RB_ObjectMember*>::const_iterator iter;
-//        int count = 0;
-
-//        for (iter = mMemberMap.begin(); iter != mMemberMap.end(); ++iter) {
-//            if (count == number) {
-//                return iter->second;
-//            }
-//            ++count;
-//        }
-
     }
 
     return member;
@@ -435,25 +427,8 @@ RB_ObjectMember* RB_ObjectBase::getMember(const RB_String& name) const {
             i = memCount;
         }
     }
-    // Debug only
-    //    if (!member) {
-    //        RB_DEBUG->debug("RB_ObjectBase::getMember(RB_Stringname=" + name + ") ERROR");
-    //        for (int i = 0; i < noMem; i++) {
-    //            tmpMember = getMember(i);
-    //            RB_DEBUG->debug("  with membername=" + tmpMember->getName());
-    //        }
-    //    }
-    // end Debug
+
     return member;
-
-//    std::map<std::string, RB_ObjectMember*>::const_iterator iter;
-//    iter = mMemberMap.find(name.toStdString());
-
-//    if (iter != mMemberMap.end()) {
-//        return iter->second;
-//    }
-
-//    return NULL;
 }
 
 /**
@@ -484,6 +459,7 @@ int RB_ObjectBase::getMemberNo(const RB_String& name) const {
 /**
  * Creation, addition and initialization of members. No action if member
  * member name already exists.
+ * NOTE: does not check whether member already exists
  * @param id unique identification of member, used to interface with database
  * @param parent parent (base) object of member
  * @param name name of member
@@ -492,24 +468,16 @@ int RB_ObjectBase::getMemberNo(const RB_String& name) const {
  * @param prevValue previous value
  * @return member
  */
-RB_ObjectMember* RB_ObjectBase::addMember(RB_ObjectBase* parent,
-                        const RB_String& name, const RB_String& unit,
-                        const RB_Variant& value, RB2::MemberType type,
-                        const RB_Variant& prevValue, const RB_Variant& dispValue) {
-    // For debug only, slows down the creation of objects
-    /*
-    if (getMember(name)) {
-        RB_DEBUG->print("RB_ObjectBase::addMember() member '%s' "
-                            "already exists ERROR", name.toStdString().c_str());
-        return false;
-    }
-    */
+RB_ObjectMember* RB_ObjectBase::addMember(
+        const RB_String& name, const RB_String& unit,
+        const RB_Variant& value, RB2::MemberType type,
+        const RB_Variant& prevValue, const RB_Variant& dispValue) {
 
-    RB_ObjectMember* newMember = new RB_ObjectMember(parent, name, unit,
-                                                     value, type, prevValue,
-                                                     dispValue);
+    RB_ObjectMember* newMember = new RB_ObjectMember(this,
+                                                     name, unit,
+                                                     value, type,
+                                                     prevValue, dispValue);
     mMemberVector.push_back(newMember);
-//    mMemberMap[name.toStdString()] = newMember;
     return newMember;
 }
 
@@ -519,6 +487,7 @@ RB_ObjectMember* RB_ObjectBase::addMember(RB_ObjectBase* parent,
 void RB_ObjectBase::removeMembers() {
     std::vector<RB_ObjectMember*>::iterator iter;
     iter = mMemberVector.begin();
+
     while (iter != mMemberVector.end()) {
         if (*iter != NULL) {
             delete *iter;
@@ -527,19 +496,8 @@ void RB_ObjectBase::removeMembers() {
         ++iter;
     }
 
-    // empty memberVector, this is not overdone because otherwise
-    // vector contains invalid pointers
+    // Clear, otherwise invalid pointers
     mMemberVector.clear();
-
-//    std::map<std::string, RB_ObjectMember*>::const_iterator iter;
-//    iter = mMemberMap.begin();
-//    while (iter != mMemberMap.end()) {
-//        if (iter->second != NULL) {
-//            delete iter->second;
-//        }
-//        ++iter;
-//    }
-//    mMemberMap.clear();
 }
 
 /**
@@ -549,11 +507,13 @@ void RB_ObjectBase::removeMembers() {
  */
 RB_Variant RB_ObjectBase::getValue(int number) const {
     RB_ObjectMember* member = getMember(number);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::getValue(int=" + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return RB_Variant();
     }
+
     return member->getValue();
 }
 
@@ -569,6 +529,7 @@ RB_Variant RB_ObjectBase::getValue(int number) const {
  */
 RB_Variant RB_ObjectBase::getValue(const RB_String& name) const {
     RB_ObjectMember* member = getMember(name);
+
     if (!member && (name == "id")) {
         return mId;
     } else if (mName.endsWith("List") && mParent && name == "parent") {
@@ -580,6 +541,7 @@ RB_Variant RB_ObjectBase::getValue(const RB_String& name) const {
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return RB_Variant();
     }
+
     return member->getValue();
 }
 
@@ -590,11 +552,13 @@ RB_Variant RB_ObjectBase::getValue(const RB_String& name) const {
  */
 void RB_ObjectBase::setValue(int number, const RB_Variant& var) {
     RB_ObjectMember* member = getMember(number);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::setValue(int=" + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return;
     }
+
     if (var != member->getValue()) {
         member->setValue(var);
     }
@@ -610,12 +574,12 @@ void RB_ObjectBase::setValue(int number, const RB_Variant& var) {
 void RB_ObjectBase::setValue(const RB_String& name, const RB_Variant& var) {
     if (name == "id") {
         mId = var.toString();
-    // } else if (name == "parent") {
-        // nothing
     } else if (name == "name") {
         mName = var.toString();
     }
+
     RB_ObjectMember* member = getMember(name);
+
     if (!member) {
         if (name != "parent") { // 'parent' in case without member creation
             RB_String str = "RB_ObjectBase::setValue(RB_String=" + name + ", "
@@ -624,6 +588,7 @@ void RB_ObjectBase::setValue(const RB_String& name, const RB_Variant& var) {
         }
         return;
     }
+
     if (var != member->getValue()) {
         member->setValue(var);
     }
@@ -636,11 +601,13 @@ void RB_ObjectBase::setValue(const RB_String& name, const RB_Variant& var) {
  */
 RB_Variant RB_ObjectBase::getPValue(int number) const {
     RB_ObjectMember* member = getMember(number);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::getPValue(int=" + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return RB_Variant();
     }
+
     return member->getPreviousValue();
 }
 
@@ -651,11 +618,13 @@ RB_Variant RB_ObjectBase::getPValue(int number) const {
  */
 RB_Variant RB_ObjectBase::getPValue(const RB_String& name) const {
     RB_ObjectMember* member = getMember(name);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::getPValue(RB_String=" + name + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return RB_Variant();
     }
+
     return member->getPreviousValue();
 }
 
@@ -666,11 +635,13 @@ RB_Variant RB_ObjectBase::getPValue(const RB_String& name) const {
  */
 void RB_ObjectBase::setPValue(int number, const RB_Variant& var) {
     RB_ObjectMember* member = getMember(number);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::setPValue(int=" + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return;
     }
+
     member->setPreviousValue(var);
 }
 
@@ -681,11 +652,13 @@ void RB_ObjectBase::setPValue(int number, const RB_Variant& var) {
  */
 void RB_ObjectBase::setPValue(const RB_String& name, const RB_Variant& var) {
     RB_ObjectMember* member = getMember(name);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::setPValue(RB_String=" + name + ", var) ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return;
     }
+
     member->setPreviousValue(var);
 }
 
@@ -696,11 +669,13 @@ void RB_ObjectBase::setPValue(const RB_String& name, const RB_Variant& var) {
  */
 RB_Variant RB_ObjectBase::getDValue(int number) const {
     RB_ObjectMember* member = getMember(number);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::getDValue(int=" + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return RB_Variant();
     }
+
     return member->getDisplayValue();
 }
 
@@ -711,11 +686,13 @@ RB_Variant RB_ObjectBase::getDValue(int number) const {
  */
 RB_Variant RB_ObjectBase::getDValue(const RB_String& name) const {
     RB_ObjectMember* member = getMember(name);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::getDValue(RB_String=" + name + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return RB_Variant();
     }
+
     return member->getDisplayValue();
 }
 
@@ -726,11 +703,13 @@ RB_Variant RB_ObjectBase::getDValue(const RB_String& name) const {
  */
 void RB_ObjectBase::setDValue(int number, const RB_Variant& var) {
     RB_ObjectMember* member = getMember(number);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::setDValue(int=" + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return;
     }
+
     member->setDisplayValue(var);
 }
 
@@ -741,11 +720,13 @@ void RB_ObjectBase::setDValue(int number, const RB_Variant& var) {
  */
 void RB_ObjectBase::setDValue(const RB_String& name, const RB_Variant& var) {
     RB_ObjectMember* member = getMember(name);
+
     if (!member) {
         RB_String str = "RB_ObjectBase::setDValue(RB_String=" + name + ", var) ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return;
     }
+
     member->setDisplayValue(var);
 }
 
@@ -900,13 +881,6 @@ RB_String RB_ObjectBase::toString() {
     for (unsigned int i = 2; i < mMemberVector.size(); ++i) {
         str += "    " + mMemberVector.at(i)->toString() + "\n";
     }
-
-//    std::map<std::string, RB_ObjectMember*>::const_iterator iter;
-//    iter = mMemberMap.begin();
-//    while (iter != mMemberMap.end()) {
-//        str += "    " + iter->second->toString() + "\n";
-//        ++iter;
-//    }
 
     return str;
 }

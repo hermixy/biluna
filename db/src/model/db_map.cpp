@@ -37,11 +37,11 @@ DB_Map::~DB_Map() {
  * @param fileheading true/false: does CSV has a header row?
  */
 void DB_Map::createMembers() {
-    addMember(this, "number", "-", "", RB2::MemberChar125);
-    addMember(this, "mdatabase", "-", "", RB2::MemberChar125);
-    addMember(this, "mtable", "-", "", RB2::MemberChar125);
-    addMember(this, "createid", "-", 0, RB2::MemberInteger);
-    addMember(this, "parent_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "importfile", "-", "", RB2::MemberChar125);
-    addMember(this, "fileheading", "-", 0, RB2::MemberInteger);
+    addMember("number", "-", "", RB2::MemberChar125);
+    addMember("mdatabase", "-", "", RB2::MemberChar125);
+    addMember("mtable", "-", "", RB2::MemberChar125);
+    addMember("createid", "-", 0, RB2::MemberInteger);
+    addMember("parent_id", "-", "0", RB2::MemberChar40);
+    addMember("importfile", "-", "", RB2::MemberChar125);
+    addMember("fileheading", "-", 0, RB2::MemberInteger);
 }

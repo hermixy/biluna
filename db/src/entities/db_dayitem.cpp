@@ -176,11 +176,11 @@ void DB_DayItem::layoutChanged() {
 }
 
 
-void DB_DayItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
+void DB_DayItem::mousePressEvent(QGraphicsSceneMouseEvent* /*event*/) {
     // nothing
 }
 
-void DB_DayItem::mouseMoveEvent(QGraphicsSceneMouseEvent */*event*/) {
+void DB_DayItem::mouseMoveEvent(QGraphicsSceneMouseEvent* /*event*/) {
     // nothing
 }
 

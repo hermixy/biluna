@@ -57,43 +57,43 @@ ACC_Supplier::~ACC_Supplier() {
  * - srm_paprent SRM Account (SRM_Project.id)
  */
 void ACC_Supplier::createMembers() {
-    addMember(this, "suppliercode", "-", "", RB2::MemberChar40);        // 3
-    addMember(this, "suppname", "-", "", RB2::MemberChar125);
-    addMember(this, "address1", "-", "", RB2::MemberChar125);
-    addMember(this, "address2", "-", "", RB2::MemberChar125);
-    addMember(this, "address3", "-", "", RB2::MemberChar125);
-    addMember(this, "address4", "-", "", RB2::MemberChar125);
-    addMember(this, "address5", "-", "", RB2::MemberChar125);
-    addMember(this, "address6", "-", "", RB2::MemberChar40);
-    addMember(this, "lat", "-", 0.000000, RB2::MemberDouble);
-    addMember(this, "lng", "-", 0.000000, RB2::MemberDouble);
-    addMember(this, "currency_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "suppliersince", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "paymentterm_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "lastpaid", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "lastpaiddate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
-    addMember(this, "bankname", "-", "", RB2::MemberChar125); // Bank name
-    addMember(this, "bankaddress", "-", "", RB2::MemberChar255);
-    addMember(this, "bankcode", "-", "", RB2::MemberChar40); // swift/ABA/routing
-    addMember(this, "bankaccountnumber", "-", "", RB2::MemberChar40); // IBAN/BIC
-    addMember(this, "remittance", "-", 0, RB2::MemberInteger);
-    addMember(this, "taxgroup_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "factorcompany_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "taxref", "-", "", RB2::MemberChar20);
-    addMember(this, "phn", "-", "", RB2::MemberChar125);
-    addMember(this, "port", "-", "", RB2::MemberChar255);
+    addMember("suppliercode", "-", "", RB2::MemberChar40);        // 3
+    addMember("suppname", "-", "", RB2::MemberChar125);
+    addMember("address1", "-", "", RB2::MemberChar125);
+    addMember("address2", "-", "", RB2::MemberChar125);
+    addMember("address3", "-", "", RB2::MemberChar125);
+    addMember("address4", "-", "", RB2::MemberChar125);
+    addMember("address5", "-", "", RB2::MemberChar125);
+    addMember("address6", "-", "", RB2::MemberChar40);
+    addMember("lat", "-", 0.000000, RB2::MemberDouble);
+    addMember("lng", "-", 0.000000, RB2::MemberDouble);
+    addMember("currency_id", "-", "0", RB2::MemberChar40);
+    addMember("suppliersince", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("paymentterm_id", "-", "0", RB2::MemberChar40);
+    addMember("lastpaid", "-", 0.0, RB2::MemberDouble);
+    addMember("lastpaiddate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("bankname", "-", "", RB2::MemberChar125); // Bank name
+    addMember("bankaddress", "-", "", RB2::MemberChar255);
+    addMember("bankcode", "-", "", RB2::MemberChar40); // swift/ABA/routing
+    addMember("bankaccountnumber", "-", "", RB2::MemberChar40); // IBAN/BIC
+    addMember("remittance", "-", 0, RB2::MemberInteger);
+    addMember("taxgroup_id", "-", "0", RB2::MemberChar40);
+    addMember("factorcompany_id", "-", "0", RB2::MemberChar40);
+    addMember("taxref", "-", "", RB2::MemberChar20);
+    addMember("phn", "-", "", RB2::MemberChar125);
+    addMember("port", "-", "", RB2::MemberChar255);
 
-    addMember(this, "phoneno", "-", "", RB2::MemberChar20);
-    addMember(this, "faxno", "-", "", RB2::MemberChar20);
-    addMember(this, "contactname", "-", "", RB2::MemberChar125);
-    addMember(this, "email", "-", "", RB2::MemberChar125);
+    addMember("phoneno", "-", "", RB2::MemberChar20);
+    addMember("faxno", "-", "", RB2::MemberChar20);
+    addMember("contactname", "-", "", RB2::MemberChar125);
+    addMember("email", "-", "", RB2::MemberChar125);
 
     // accounting
-    addMember(this, "lastusedacct_id", "-", "0", RB2::MemberChar40);  // rel_id
-    addMember(this, "lastusedcostcenter_id", "-", "0", RB2::MemberChar40);  // rel_id
-    addMember(this, "area_id", "-", "0", RB2::MemberChar40);  // rel_id
+    addMember("lastusedacct_id", "-", "0", RB2::MemberChar40);  // rel_id
+    addMember("lastusedcostcenter_id", "-", "0", RB2::MemberChar40);  // rel_id
+    addMember("area_id", "-", "0", RB2::MemberChar40);  // rel_id
 
     // supplier relation management 0=potential supplier, 1=existing supplier
-    addMember(this, "srmtype_id", "-", 0, RB2::MemberInteger);  // int_id
-    addMember(this, "srm_parent", "-", "0", RB2::MemberChar40); // is SRM Account (SRM_Project.id)
+    addMember("srmtype_id", "-", 0, RB2::MemberInteger);  // int_id
+    addMember("srm_parent", "-", "0", RB2::MemberChar40); // is SRM Account (SRM_Project.id)
 }

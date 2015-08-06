@@ -44,18 +44,18 @@ SCAN_Block::~SCAN_Block () {
  * etc.
  */
 void SCAN_Block::createMembers() {
-    addMember(this, "number", "-", 1, RB2::MemberInteger);
-    addMember(this, "blocktext", "-", "Block text ...", RB2::MemberString);
-    addMember(this, "contenttype", "-", 0, RB2::MemberInteger);
-    addMember(this, "var1type", "-", 0, RB2::MemberInteger);
-    addMember(this, "var1min", "-", 0, RB2::MemberInteger);
-    addMember(this, "var1max", "-", 0, RB2::MemberInteger);
-    addMember(this, "andor1", "-", 0, RB2::MemberInteger);
-    addMember(this, "var2type", "-", 0, RB2::MemberInteger);
-    addMember(this, "var2min", "-", 0, RB2::MemberInteger);
-    addMember(this, "var2max", "-", 0, RB2::MemberInteger);
-    addMember(this, "andor2", "-", 0, RB2::MemberInteger);
-    addMember(this, "var3type", "-", 0, RB2::MemberInteger);
-    addMember(this, "var3min", "-", 0, RB2::MemberInteger);
-    addMember(this, "var3max", "-", 0, RB2::MemberInteger);
+    addMember("number", "-", 1, RB2::MemberInteger);
+    addMember("blocktext", "-", "Block text ...", RB2::MemberString);
+    addMember("contenttype", "-", 0, RB2::MemberInteger);
+    addMember("var1type", "-", 0, RB2::MemberInteger);
+    addMember("var1min", "-", 0, RB2::MemberInteger);
+    addMember("var1max", "-", 0, RB2::MemberInteger);
+    addMember("andor1", "-", 0, RB2::MemberInteger);
+    addMember("var2type", "-", 0, RB2::MemberInteger);
+    addMember("var2min", "-", 0, RB2::MemberInteger);
+    addMember("var2max", "-", 0, RB2::MemberInteger);
+    addMember("andor2", "-", 0, RB2::MemberInteger);
+    addMember("var3type", "-", 0, RB2::MemberInteger);
+    addMember("var3min", "-", 0, RB2::MemberInteger);
+    addMember("var3max", "-", 0, RB2::MemberInteger);
 }

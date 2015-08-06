@@ -32,5 +32,5 @@ SRM_CampaignType::~SRM_CampaignType() {
  * - mname name of campaign type
  */
 void SRM_CampaignType::createMembers() {
-    addMember(this, "mname", "-", "<new>", RB2::MemberChar125);
+    addMember("mname", "-", "<new>", RB2::MemberChar125);
 }

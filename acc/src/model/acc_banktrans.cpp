@@ -48,19 +48,19 @@ ACC_BankTrans::~ACC_BankTrans() {
  * - transallocn_idx allocation to document ID and description
  */
 void ACC_BankTrans::createMembers() {
-    addMember(this, "transdoc_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "chartmaster_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "accountcontrol", "-", 0, RB2::MemberInteger);
-    addMember(this, "amount", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "type", "-", 0, RB2::MemberInteger);
-    addMember(this, "transno", "-", 0, RB2::MemberInteger);
-    addMember(this, "bankaccountnumber", "-", "", RB2::MemberChar40);
-    addMember(this, "amountcleared", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "exrate", "-", 1.0, RB2::MemberDouble);
-    addMember(this, "functionalexrate", "-", 1.0, RB2::MemberDouble);
-    addMember(this, "transdate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
-    addMember(this, "banktranstype", "-", "", RB2::MemberChar40);
-    addMember(this, "currency_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "transallocn_idx", "-", "0", RB2::MemberChar165);
+    addMember("transdoc_id", "-", "0", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("chartmaster_idx", "-", "0", RB2::MemberChar165);
+    addMember("accountcontrol", "-", 0, RB2::MemberInteger);
+    addMember("amount", "-", 0.0, RB2::MemberDouble);
+    addMember("type", "-", 0, RB2::MemberInteger);
+    addMember("transno", "-", 0, RB2::MemberInteger);
+    addMember("bankaccountnumber", "-", "", RB2::MemberChar40);
+    addMember("amountcleared", "-", 0.0, RB2::MemberDouble);
+    addMember("exrate", "-", 1.0, RB2::MemberDouble);
+    addMember("functionalexrate", "-", 1.0, RB2::MemberDouble);
+    addMember("transdate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
+    addMember("banktranstype", "-", "", RB2::MemberChar40);
+    addMember("currency_id", "-", "0", RB2::MemberChar40);
+    addMember("transallocn_idx", "-", "0", RB2::MemberChar165);
 }

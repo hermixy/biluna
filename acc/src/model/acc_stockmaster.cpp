@@ -60,33 +60,33 @@ ACC_StockMaster::~ACC_StockMaster() {
  * - costcenter_idx cost center ID and description
  */
 void ACC_StockMaster::createMembers() {
-    addMember(this, "stockcode", "-", "<NEW>", RB2::MemberChar20);      // 3 or stockcode
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "longdescription", "-", "", RB2::MemberChar2500);
-    addMember(this, "unitofmeasurement", "-", "", RB2::MemberChar40);
-    addMember(this, "mbflag", "-", "", RB2::MemberChar10);
-    addMember(this, "lastcurcostdate", "-", "", RB2::MemberDateTime);
-    addMember(this, "actualcost", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "lastcost", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "materialcost", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "labourcost", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "overheadcost", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "lowestlevel", "-", 0, RB2::MemberInteger);
-    addMember(this, "discontinued", "-", 0, RB2::MemberInteger);
-    addMember(this, "controlled", "-", 0, RB2::MemberInteger);
-    addMember(this, "eoq", "-", 0.0, RB2::MemberDouble); // economic order quantity
-    addMember(this, "volume", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "kgs", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "barcode", "-", "", RB2::MemberChar125);
-    addMember(this, "discountcategory", "-", "", RB2::MemberChar10);
-//    addMember(this, "taxcat_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "serialised", "-", 0, RB2::MemberInteger);
-    addMember(this, "stockimage", "-", "", RB2::MemberByteArray);
-    addMember(this, "perishable", "-", 0, RB2::MemberInteger);
-    addMember(this, "decimalplaces", "-", 0, RB2::MemberInteger);
-    addMember(this, "serialno", "-", "", RB2::MemberChar40);
-    addMember(this, "pansize", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "shrinkfactor", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "netweight", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "costcenter_idx", "-", "0", RB2::MemberChar165);
+    addMember("stockcode", "-", "<NEW>", RB2::MemberChar20);      // 3 or stockcode
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("longdescription", "-", "", RB2::MemberChar2500);
+    addMember("unitofmeasurement", "-", "", RB2::MemberChar40);
+    addMember("mbflag", "-", "", RB2::MemberChar10);
+    addMember("lastcurcostdate", "-", "", RB2::MemberDateTime);
+    addMember("actualcost", "-", 0.0, RB2::MemberDouble);
+    addMember("lastcost", "-", 0.0, RB2::MemberDouble);
+    addMember("materialcost", "-", 0.0, RB2::MemberDouble);
+    addMember("labourcost", "-", 0.0, RB2::MemberDouble);
+    addMember("overheadcost", "-", 0.0, RB2::MemberDouble);
+    addMember("lowestlevel", "-", 0, RB2::MemberInteger);
+    addMember("discontinued", "-", 0, RB2::MemberInteger);
+    addMember("controlled", "-", 0, RB2::MemberInteger);
+    addMember("eoq", "-", 0.0, RB2::MemberDouble); // economic order quantity
+    addMember("volume", "-", 0.0, RB2::MemberDouble);
+    addMember("kgs", "-", 0.0, RB2::MemberDouble);
+    addMember("barcode", "-", "", RB2::MemberChar125);
+    addMember("discountcategory", "-", "", RB2::MemberChar10);
+//    addMember("taxcat_id", "-", "0", RB2::MemberChar40);
+    addMember("serialised", "-", 0, RB2::MemberInteger);
+    addMember("stockimage", "-", "", RB2::MemberByteArray);
+    addMember("perishable", "-", 0, RB2::MemberInteger);
+    addMember("decimalplaces", "-", 0, RB2::MemberInteger);
+    addMember("serialno", "-", "", RB2::MemberChar40);
+    addMember("pansize", "-", 0.0, RB2::MemberDouble);
+    addMember("shrinkfactor", "-", 0.0, RB2::MemberDouble);
+    addMember("netweight", "-", 0.0, RB2::MemberDouble);
+    addMember("costcenter_idx", "-", "0", RB2::MemberChar165);
 }

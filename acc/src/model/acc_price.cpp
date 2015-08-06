@@ -34,7 +34,7 @@ ACC_Price::~ACC_Price() {
  * - price price value
  */
 void ACC_Price::createMembers() {
-    addMember(this, "salestype_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "currency_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "price", "-", 0.0, RB2::MemberDouble);
+    addMember("salestype_id", "-", "0", RB2::MemberChar40);
+    addMember("currency_id", "-", "0", RB2::MemberChar40);
+    addMember("price", "-", 0.0, RB2::MemberDouble);
 }

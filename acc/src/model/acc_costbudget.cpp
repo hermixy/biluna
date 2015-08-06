@@ -36,8 +36,8 @@ ACC_CostBudget::~ACC_CostBudget() {
  * \li forecast forecasted amount for this period
  */
 void ACC_CostBudget::createMembers() {
-    addMember(this, "period", "-", 0, RB2::MemberInteger);
-    addMember(this, "note", "-", "", RB2::MemberChar255);
-    addMember(this, "budget", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "forecast", "-", 0.0, RB2::MemberDouble);
+    addMember("period", "-", 0, RB2::MemberInteger);
+    addMember("note", "-", "", RB2::MemberChar255);
+    addMember("budget", "-", 0.0, RB2::MemberDouble);
+    addMember("forecast", "-", 0.0, RB2::MemberDouble);
 }

@@ -37,15 +37,15 @@ ACC_FactorCompany::~ACC_FactorCompany() {
  * - email email address
  */
 void ACC_FactorCompany::createMembers() {
-    addMember(this, "coyname", "-", "", RB2::MemberChar125);
-    addMember(this, "address1", "-", "", RB2::MemberChar125);
-    addMember(this, "address2", "-", "", RB2::MemberChar125);
-    addMember(this, "address3", "-", "", RB2::MemberChar125);
-    addMember(this, "address4", "-", "", RB2::MemberChar125);
-    addMember(this, "address5", "-", "", RB2::MemberChar125);
-    addMember(this, "address6", "-", "", RB2::MemberChar40);
-    addMember(this, "contact", "-", "", RB2::MemberChar125);
-    addMember(this, "telephone", "-", "", RB2::MemberChar20);
-    addMember(this, "fax", "-", "", RB2::MemberChar20);
-    addMember(this, "email", "-", "", RB2::MemberChar125);
+    addMember("coyname", "-", "", RB2::MemberChar125);
+    addMember("address1", "-", "", RB2::MemberChar125);
+    addMember("address2", "-", "", RB2::MemberChar125);
+    addMember("address3", "-", "", RB2::MemberChar125);
+    addMember("address4", "-", "", RB2::MemberChar125);
+    addMember("address5", "-", "", RB2::MemberChar125);
+    addMember("address6", "-", "", RB2::MemberChar40);
+    addMember("contact", "-", "", RB2::MemberChar125);
+    addMember("telephone", "-", "", RB2::MemberChar20);
+    addMember("fax", "-", "", RB2::MemberChar20);
+    addMember("email", "-", "", RB2::MemberChar125);
 }

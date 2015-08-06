@@ -34,5 +34,5 @@ ACC_DebtorType::~ACC_DebtorType() {
  * - typename type name
  */
 void ACC_DebtorType::createMembers() {
-    addMember(this, "typename", "-", "", RB2::MemberChar125);      // 3
+    addMember("typename", "-", "", RB2::MemberChar125);      // 3
 }

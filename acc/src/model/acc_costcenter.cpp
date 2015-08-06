@@ -36,8 +36,8 @@ ACC_CostCenter::~ACC_CostCenter() {
  * \li centergroup_id center group ID
  */
 void ACC_CostCenter::createMembers() {
-    addMember(this, "centercode", "-", "", RB2::MemberChar40);
-    addMember(this, "centername", "-", "", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "centergroup_idx", "-", "0", RB2::MemberChar165);
+    addMember("centercode", "-", "", RB2::MemberChar40);
+    addMember("centername", "-", "", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("centergroup_idx", "-", "0", RB2::MemberChar165);
 }

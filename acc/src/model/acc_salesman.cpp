@@ -37,10 +37,10 @@ ACC_SalesMan::~ACC_SalesMan() {
  * - commissionrate2 commission rate 2
  */
 void ACC_SalesMan::createMembers() {
-    addMember(this, "salesmanname", "-", "", RB2::MemberChar125);
-    addMember(this, "smantel", "-", "", RB2::MemberChar20);
-    addMember(this, "smanfax", "-", "", RB2::MemberChar20);
-    addMember(this, "commissionrate1", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "breakpoint", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "commissionrate2", "-", 0.0, RB2::MemberDouble);
+    addMember("salesmanname", "-", "", RB2::MemberChar125);
+    addMember("smantel", "-", "", RB2::MemberChar20);
+    addMember("smanfax", "-", "", RB2::MemberChar20);
+    addMember("commissionrate1", "-", 0.0, RB2::MemberDouble);
+    addMember("breakpoint", "-", 0.0, RB2::MemberDouble);
+    addMember("commissionrate2", "-", 0.0, RB2::MemberDouble);
 }

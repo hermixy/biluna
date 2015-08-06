@@ -34,5 +34,5 @@ ACC_AssetCustInter::~ACC_AssetCustInter() {
  * - cust_id ID of customer interface
  */
 void ACC_AssetCustInter::createMembers() {
-    addMember(this, "cust_id", "-", "0", RB2::MemberChar40);      // 3
+    addMember("cust_id", "-", "0", RB2::MemberChar40);      // 3
 }

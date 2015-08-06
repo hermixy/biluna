@@ -31,16 +31,16 @@ PENG_Paint::~PENG_Paint() {
 
 
 void PENG_Paint::createMembers() {
-    addMember(this, "number", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "revision", "-", 0, RB2::MemberInteger);
-    addMember(this, "applicable_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "temperaturelimithigh", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "temperaturelimitlow", "DegC", 0.0, RB2::MemberDouble);
-    addMember(this, "comment", "-", "", RB2::MemberChar255);
-    addMember(this, "surfacepreparation", "-", "", RB2::MemberChar255);
-    addMember(this, "primercoat", "-", "", RB2::MemberChar255);
-    addMember(this, "finishcoat1", "-", "", RB2::MemberChar255);
-    addMember(this, "finishcoat2", "-", "", RB2::MemberChar255);
-    addMember(this, "finishcoat3", "-", "", RB2::MemberChar255);
+    addMember("number", "-", "<NEW>", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("revision", "-", 0, RB2::MemberInteger);
+    addMember("applicable_id", "-", 0, RB2::MemberInteger);
+    addMember("temperaturelimithigh", "DegC", 0.0, RB2::MemberDouble);
+    addMember("temperaturelimitlow", "DegC", 0.0, RB2::MemberDouble);
+    addMember("comment", "-", "", RB2::MemberChar255);
+    addMember("surfacepreparation", "-", "", RB2::MemberChar255);
+    addMember("primercoat", "-", "", RB2::MemberChar255);
+    addMember("finishcoat1", "-", "", RB2::MemberChar255);
+    addMember("finishcoat2", "-", "", RB2::MemberChar255);
+    addMember("finishcoat3", "-", "", RB2::MemberChar255);
 }

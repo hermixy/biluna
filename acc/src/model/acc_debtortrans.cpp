@@ -53,27 +53,27 @@ ACC_DebtorTrans::~ACC_DebtorTrans() {
  * - costcenter_idx cost center ID and description
  */
 void ACC_DebtorTrans::createMembers() {
-    addMember(this, "transdoc_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "chartmaster_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "accountcontrol", "-", 0, RB2::MemberInteger);
-    addMember(this, "amount", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "taxhighchartmaster_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "taxhighamt", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "taxlowchartmaster_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "taxlowamt", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "taxotherchartmaster_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "taxotheramt", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "taxauth_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "hold", "-", 0, RB2::MemberInteger);
+    addMember("transdoc_id", "-", "0", RB2::MemberChar40);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("chartmaster_idx", "-", "0", RB2::MemberChar165);
+    addMember("accountcontrol", "-", 0, RB2::MemberInteger);
+    addMember("amount", "-", 0.0, RB2::MemberDouble);
+    addMember("taxhighchartmaster_idx", "-", "0", RB2::MemberChar165);
+    addMember("taxhighamt", "-", 0.0, RB2::MemberDouble);
+    addMember("taxlowchartmaster_idx", "-", "0", RB2::MemberChar165);
+    addMember("taxlowamt", "-", 0.0, RB2::MemberDouble);
+    addMember("taxotherchartmaster_idx", "-", "0", RB2::MemberChar165);
+    addMember("taxotheramt", "-", 0.0, RB2::MemberDouble);
+    addMember("taxauth_id", "-", "0", RB2::MemberChar40);
+    addMember("hold", "-", 0, RB2::MemberInteger);
     // Link to order detail, ACC_SalesOrderDetail
-    addMember(this, "orderdetail_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "stk_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "narrative", "-", "", RB2::MemberChar255);
-    addMember(this, "unitprice", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "qtydispatched", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "stkuom", "-", "", RB2::MemberChar20);
-    addMember(this, "discountpercent", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "costcenter_idx", "-", "0", RB2::MemberChar165);
+    addMember("orderdetail_id", "-", "0", RB2::MemberChar40);
+    addMember("stk_idx", "-", "0", RB2::MemberChar165);
+    addMember("narrative", "-", "", RB2::MemberChar255);
+    addMember("unitprice", "-", 0.0, RB2::MemberDouble);
+    addMember("qtydispatched", "-", 0.0, RB2::MemberDouble);
+    addMember("stkuom", "-", "", RB2::MemberChar20);
+    addMember("discountpercent", "-", 0.0, RB2::MemberDouble);
+    addMember("costcenter_idx", "-", "0", RB2::MemberChar165);
 
 }

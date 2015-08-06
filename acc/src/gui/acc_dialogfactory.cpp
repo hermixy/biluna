@@ -399,7 +399,8 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
  * @param type type of dialog
  * @return Dialog
  */
-RB_Dialog* ACC_DialogFactory::getDialog(int type) {
+RB_Dialog* ACC_DialogFactory::
+getDialog(int type) {
     RB_DEBUG->print("ACC_DialogFactory::getDialog()");
 
     RB_Dialog* dlg = NULL;

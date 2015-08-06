@@ -36,9 +36,9 @@ ACC_CostSum::~ACC_CostSum() {
  * - credit actual credit amount
  */
 void ACC_CostSum::createMembers() {
-    addMember(this, "period", "-", 0, RB2::MemberInteger);
-    addMember(this, "centercode", "-", "", RB2::MemberChar40);
-    addMember(this, "centername", "-", "", RB2::MemberChar255);
-    addMember(this, "debit", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "credit", "-", 0.0, RB2::MemberDouble);
+    addMember("period", "-", 0, RB2::MemberInteger);
+    addMember("centercode", "-", "", RB2::MemberChar40);
+    addMember("centername", "-", "", RB2::MemberChar255);
+    addMember("debit", "-", 0.0, RB2::MemberDouble);
+    addMember("credit", "-", 0.0, RB2::MemberDouble);
 }

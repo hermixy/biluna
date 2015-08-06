@@ -22,7 +22,7 @@ RB_SqlRelationalDelegate::RB_SqlRelationalDelegate(RB_MmProxy* sfpm, QObject* pa
 }
 
 QWidget* RB_SqlRelationalDelegate::createEditor(QWidget* parent,
-                                               const QStyleOptionViewItem& option,
+                                               const QStyleOptionViewItem& /*option*/,
                                                const QModelIndex& index) const {
     // TODO: _idx editor
 

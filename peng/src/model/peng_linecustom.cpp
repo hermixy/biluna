@@ -50,16 +50,16 @@ PENG_LineCustom::~PENG_LineCustom() {
  * - customfield10text
  */
 void PENG_LineCustom::createMembers() {
-    addMember(this, "customfield1value", "(customunit1)", 0.0, RB2::MemberDouble);
-    addMember(this, "customfield2value", "(customunit2)", 0.0, RB2::MemberDouble);
-    addMember(this, "customfield3value", "(customunit3)", 0.0, RB2::MemberDouble);
-    addMember(this, "customfield4value", "(customunit4)", 0.0, RB2::MemberDouble);
-    addMember(this, "customfield5value", "(customunit5)", 0.0, RB2::MemberDouble);
-    addMember(this, "customfield6text", "-", "", RB2::MemberChar125);
-    addMember(this, "customfield7text", "-", "", RB2::MemberChar125);
-    addMember(this, "customfield8text", "-", "", RB2::MemberChar125);
-    addMember(this, "customfield9text", "-", "", RB2::MemberChar125);
-    addMember(this, "customfield10text", "-", "", RB2::MemberChar125);
+    addMember("customfield1value", "(customunit1)", 0.0, RB2::MemberDouble);
+    addMember("customfield2value", "(customunit2)", 0.0, RB2::MemberDouble);
+    addMember("customfield3value", "(customunit3)", 0.0, RB2::MemberDouble);
+    addMember("customfield4value", "(customunit4)", 0.0, RB2::MemberDouble);
+    addMember("customfield5value", "(customunit5)", 0.0, RB2::MemberDouble);
+    addMember("customfield6text", "-", "", RB2::MemberChar125);
+    addMember("customfield7text", "-", "", RB2::MemberChar125);
+    addMember("customfield8text", "-", "", RB2::MemberChar125);
+    addMember("customfield9text", "-", "", RB2::MemberChar125);
+    addMember("customfield10text", "-", "", RB2::MemberChar125);
 }
 
 

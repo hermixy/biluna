@@ -37,9 +37,9 @@ ACC_TransAllocn::~ACC_TransAllocn() {
  * - docallocto_id supplier or customer document ID to which the amount is allocated
  */
 void ACC_TransAllocn::createMembers() {
-    addMember(this, "amount", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "datealloc", "-", "2000-01-01 00:00:00", RB2::MemberDateTime);
-    addMember(this, "docfrom_id", "-", "", RB2::MemberChar40);
-    addMember(this, "itemallocfrom_id", "-", "", RB2::MemberChar40);
-    addMember(this, "docallocto_id", "-", "", RB2::MemberChar40);
+    addMember("amount", "-", 0.0, RB2::MemberDouble);
+    addMember("datealloc", "-", "2000-01-01 00:00:00", RB2::MemberDateTime);
+    addMember("docfrom_id", "-", "", RB2::MemberChar40);
+    addMember("itemallocfrom_id", "-", "", RB2::MemberChar40);
+    addMember("docallocto_id", "-", "", RB2::MemberChar40);
 }

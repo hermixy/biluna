@@ -18,7 +18,7 @@
 #include "rb_objectcontainer.h"
 #include "rb_objectfactory.h"
 #include "rb_string.h"
-#include "rb_utilityfactory.h"
+#include "rb_utility.h"
 
 
 #define ACC_QACHARTMASTER ACC_QaChartMaster::getInstance()
@@ -32,7 +32,7 @@
  * general accounting/booking of invoices
  * Utililities are handled independently with utility factory
  */
-class ACC_QaChartMaster : public RB_UtilityFactory {
+class ACC_QaChartMaster : public RB_Utility {
 
 public:
     virtual ~ACC_QaChartMaster();

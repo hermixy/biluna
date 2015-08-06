@@ -50,26 +50,26 @@ ACC_Asset::~ACC_Asset() {
  * - note text
  */
 void ACC_Asset::createMembers() {
-    addMember(this, "assetcode", "-", "<NEW>", RB2::MemberChar40);
-    addMember(this, "mname", "-", "", RB2::MemberChar125);
-    addMember(this, "type_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "data1", "-", "", RB2::MemberChar125); // for example street address
-    addMember(this, "data2", "-", "", RB2::MemberChar125);
-    addMember(this, "data3", "-", "", RB2::MemberChar125);
-    addMember(this, "data4", "-", "", RB2::MemberChar125);
-    addMember(this, "data5", "-", "", RB2::MemberChar125);
-    addMember(this, "data6", "-", "", RB2::MemberChar40);
+    addMember("assetcode", "-", "<NEW>", RB2::MemberChar40);
+    addMember("mname", "-", "", RB2::MemberChar125);
+    addMember("type_id", "-", "0", RB2::MemberChar40);
+    addMember("data1", "-", "", RB2::MemberChar125); // for example street address
+    addMember("data2", "-", "", RB2::MemberChar125);
+    addMember("data3", "-", "", RB2::MemberChar125);
+    addMember("data4", "-", "", RB2::MemberChar125);
+    addMember("data5", "-", "", RB2::MemberChar125);
+    addMember("data6", "-", "", RB2::MemberChar40);
 
-    addMember(this, "lat", "-", 0.0, RB2::MemberDouble); // latitude (GeoCoordinate)
-    addMember(this, "lng", "-", 0.0, RB2::MemberDouble); // longitude (GeoCoordinate)
+    addMember("lat", "-", 0.0, RB2::MemberDouble); // latitude (GeoCoordinate)
+    addMember("lng", "-", 0.0, RB2::MemberDouble); // longitude (GeoCoordinate)
 
-    addMember(this, "salesman_id", "-", "", RB2::MemberChar40);
-    addMember(this, "assetsince", "-", "", RB2::MemberDateTime);
+    addMember("salesman_id", "-", "", RB2::MemberChar40);
+    addMember("assetsince", "-", "", RB2::MemberDateTime);
 
-    addMember(this, "contactname", "-", "", RB2::MemberChar125);
-    addMember(this, "email", "-", "", RB2::MemberChar125);
-    addMember(this, "phoneno", "-", "", RB2::MemberChar20);
-    addMember(this, "faxno", "-", "", RB2::MemberChar20);
+    addMember("contactname", "-", "", RB2::MemberChar125);
+    addMember("email", "-", "", RB2::MemberChar125);
+    addMember("phoneno", "-", "", RB2::MemberChar20);
+    addMember("faxno", "-", "", RB2::MemberChar20);
 
-    addMember(this, "note", "-", "", RB2::MemberChar2500);
+    addMember("note", "-", "", RB2::MemberChar2500);
 }

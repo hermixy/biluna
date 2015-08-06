@@ -39,13 +39,13 @@ ACC_StockCategory::~ACC_StockCategory() {
  * - wipact_idx, work in progress gl account
  */
 void ACC_StockCategory::createMembers() {
-    addMember(this, "categorycode", "-", "<NEW>", RB2::MemberChar20);    // 3
-    addMember(this, "categorydescription", "-", "", RB2::MemberChar125);
-    addMember(this, "stocktype", "-", 0, RB2::MemberInteger);    // int_id
-    addMember(this, "taxcat_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "stockact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "adjglact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "purchpricevaract_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "materialuseagevarac_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "wipact_idx", "-", "0", RB2::MemberChar165);
+    addMember("categorycode", "-", "<NEW>", RB2::MemberChar20);    // 3
+    addMember("categorydescription", "-", "", RB2::MemberChar125);
+    addMember("stocktype", "-", 0, RB2::MemberInteger);    // int_id
+    addMember("taxcat_id", "-", "0", RB2::MemberChar40);
+    addMember("stockact_idx", "-", "0", RB2::MemberChar165);
+    addMember("adjglact_idx", "-", "0", RB2::MemberChar165);
+    addMember("purchpricevaract_idx", "-", "0", RB2::MemberChar165);
+    addMember("materialuseagevarac_idx", "-", "0", RB2::MemberChar165);
+    addMember("wipact_idx", "-", "0", RB2::MemberChar165);
 }

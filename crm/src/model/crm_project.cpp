@@ -34,7 +34,7 @@ CRM_Project::~CRM_Project() {
  * \li user_idx user ID and description
  */
 void CRM_Project::createMembers() {
-    addMember(this, "code", "-", "<NEW>", RB2::MemberChar20);
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "user_idx", "-", "0", RB2::MemberChar125);
+    addMember("code", "-", "<NEW>", RB2::MemberChar20);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("user_idx", "-", "0", RB2::MemberChar125);
 }

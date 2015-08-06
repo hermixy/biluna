@@ -55,36 +55,36 @@ ACC_SalesOrder::~ACC_SalesOrder() {
  * - consignment reference to consignment note, applicable if goods are delivered by consignment
  */
 void ACC_SalesOrder::createMembers() {
-    addMember(this, "orderno", "-", 0, RB2::MemberInteger);
-    addMember(this, "customerref", "-", "", RB2::MemberChar125);
-    addMember(this, "buyername", "-", "", RB2::MemberChar125);
-    addMember(this, "ordertitle", "-", "", RB2::MemberChar125);
-    addMember(this, "comments", "-", "", RB2::MemberString);
-    addMember(this, "orddate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
-    addMember(this, "ordertype", "-", "", RB2::MemberChar40);
-    addMember(this, "shipvia_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "deladd1", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd2", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd3", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd4", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd5", "-", "", RB2::MemberChar125);
-    addMember(this, "deladd6", "-", "", RB2::MemberChar40);
-    addMember(this, "contact_idx", "-", "0", RB2::MemberChar165);
-    addMember(this, "contactphone", "-", "", RB2::MemberChar20);
-    addMember(this, "contactemail", "-", "", RB2::MemberChar125);
-    addMember(this, "deliverto", "-", "", RB2::MemberChar125); // alternative company name
-    addMember(this, "deliverblind", "-", 0, RB2::MemberInteger); // no company details
-    addMember(this, "freightcost", "-", 0.0, RB2::MemberDouble);
-    addMember(this, "fromstkloc_id", "-", "0", RB2::MemberChar40);
-    addMember(this, "deliverydate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
-    addMember(this, "quotedate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
-    addMember(this, "confirmeddate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
-    addMember(this, "printedpackingslip", "-", 0, RB2::MemberInteger);
-    addMember(this, "datepackingslipprinted", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
-    addMember(this, "quotation", "-", 0, RB2::MemberInteger);
+    addMember("orderno", "-", 0, RB2::MemberInteger);
+    addMember("customerref", "-", "", RB2::MemberChar125);
+    addMember("buyername", "-", "", RB2::MemberChar125);
+    addMember("ordertitle", "-", "", RB2::MemberChar125);
+    addMember("comments", "-", "", RB2::MemberString);
+    addMember("orddate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
+    addMember("ordertype", "-", "", RB2::MemberChar40);
+    addMember("shipvia_id", "-", "0", RB2::MemberChar40);
+    addMember("deladd1", "-", "", RB2::MemberChar125);
+    addMember("deladd2", "-", "", RB2::MemberChar125);
+    addMember("deladd3", "-", "", RB2::MemberChar125);
+    addMember("deladd4", "-", "", RB2::MemberChar125);
+    addMember("deladd5", "-", "", RB2::MemberChar125);
+    addMember("deladd6", "-", "", RB2::MemberChar40);
+    addMember("contact_idx", "-", "0", RB2::MemberChar165);
+    addMember("contactphone", "-", "", RB2::MemberChar20);
+    addMember("contactemail", "-", "", RB2::MemberChar125);
+    addMember("deliverto", "-", "", RB2::MemberChar125); // alternative company name
+    addMember("deliverblind", "-", 0, RB2::MemberInteger); // no company details
+    addMember("freightcost", "-", 0.0, RB2::MemberDouble);
+    addMember("fromstkloc_id", "-", "0", RB2::MemberChar40);
+    addMember("deliverydate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
+    addMember("quotedate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
+    addMember("confirmeddate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
+    addMember("printedpackingslip", "-", 0, RB2::MemberInteger);
+    addMember("datepackingslipprinted", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+    addMember("quotation", "-", 0, RB2::MemberInteger);
     // added
     // Extra comment to be shown on the invoice
-    addMember(this, "invoicecomment", "-", "", RB2::MemberChar255);
+    addMember("invoicecomment", "-", "", RB2::MemberChar255);
     // Reference to consignment note, applicable if goods are delivered by consignment
-    addMember(this, "consignment", "-", "", RB2::MemberChar20);
+    addMember("consignment", "-", "", RB2::MemberChar20);
 }

@@ -40,7 +40,7 @@ ACC_SysAcctControl::~ACC_SysAcctControl() {
  * themselves of course do not have a taxcontrolno.
  */
 void ACC_SysAcctControl::createMembers() {
-    addMember(this, "controlnumber", "-", 0, RB2::MemberInteger);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
-    addMember(this, "taxcontrolno", "-", 0, RB2::MemberInteger);
+    addMember("controlnumber", "-", 0, RB2::MemberInteger);
+    addMember("description", "-", "", RB2::MemberChar255);
+    addMember("taxcontrolno", "-", 0, RB2::MemberInteger);
 }

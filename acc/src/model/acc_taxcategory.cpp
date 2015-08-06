@@ -32,5 +32,5 @@ ACC_TaxCategory::~ACC_TaxCategory() {
  * - taxcatname tax category name
  */
 void ACC_TaxCategory::createMembers() {
-    addMember(this, "taxcatname", "-", "", RB2::MemberChar125);      // 3
+    addMember("taxcatname", "-", "", RB2::MemberChar125);      // 3
 }

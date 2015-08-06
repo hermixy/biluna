@@ -32,5 +32,5 @@ ACC_TaxProvince::~ACC_TaxProvince() {
  * - taxprovincename name of tax province
  */
 void ACC_TaxProvince::createMembers() {
-    addMember(this, "taxprovincename", "-", "", RB2::MemberChar125);   // 3
+    addMember("taxprovincename", "-", "", RB2::MemberChar125);   // 3
 }

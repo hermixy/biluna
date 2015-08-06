@@ -38,7 +38,7 @@ PENG_HazardGroup::~PENG_HazardGroup() {
  * description - hazard group description
  */
 void PENG_HazardGroup::createMembers() {
-    addMember(this, "code", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "description", "-", "", RB2::MemberChar255);
+    addMember("code", "-", "<NEW>", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar255);
 }
 

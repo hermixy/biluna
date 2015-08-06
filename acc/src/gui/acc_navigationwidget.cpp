@@ -62,6 +62,7 @@ void ACC_NavigationWidget::slotShowTab(int tabType) {
 
         if (!mCustMasterWidget) {
             mCustMasterWidget = new ACC_CustMasterWidget(this);
+            mCustMasterWidget->setDialogFactory(getDialogFactory());
             mCustMasterWidget->init();
 
             QWidget* wdgt = tabWidget->currentWidget();
@@ -80,6 +81,7 @@ void ACC_NavigationWidget::slotShowTab(int tabType) {
 
         if (!mSupplierMasterWidget) {
             mSupplierMasterWidget = new ACC_SupplierMasterWidget(this);
+            mSupplierMasterWidget->setDialogFactory(getDialogFactory());
             mSupplierMasterWidget->init();
 
             QWidget* wdgt = tabWidget->currentWidget();
@@ -98,6 +100,7 @@ void ACC_NavigationWidget::slotShowTab(int tabType) {
 
         if (!mAssetMasterWidget) {
             mAssetMasterWidget = new ACC_AssetMasterWidget(this);
+            mAssetMasterWidget->setDialogFactory(getDialogFactory());
             mAssetMasterWidget->init();
 
             QWidget* wdgt = tabWidget->currentWidget();
@@ -116,6 +119,7 @@ void ACC_NavigationWidget::slotShowTab(int tabType) {
 
         if (!mStockCategoryWidget) {
             mStockCategoryWidget = new ACC_StockMasterWidget(this);
+            mStockCategoryWidget->setDialogFactory(getDialogFactory());
             mStockCategoryWidget->init();
 
             QWidget* wdgt = tabWidget->currentWidget();

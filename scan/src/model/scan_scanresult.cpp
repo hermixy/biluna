@@ -45,8 +45,8 @@ SCAN_ScanResult::~SCAN_ScanResult() {
  * contact_id ID of ACC_Contacts
  */
 void SCAN_ScanResult::createMembers() {
-    addMember(this, "title", "-", "title", RB2::MemberChar125);
-    addMember(this, "scan_id", "-", "", RB2::MemberChar40);
-    addMember(this, "contact_id", "-", "", RB2::MemberChar40);
+    addMember("title", "-", "title", RB2::MemberChar125);
+    addMember("scan_id", "-", "", RB2::MemberChar40);
+    addMember("contact_id", "-", "", RB2::MemberChar40);
 
 }

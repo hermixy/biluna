@@ -31,7 +31,7 @@ DB_WeekDayHeaderItem::DB_WeekDayHeaderItem(DB_CalendarView* calendarView,
 
 void DB_WeekDayHeaderItem::paint(QPainter *painter,
                                  const QStyleOptionGraphicsItem *option,
-                                 QWidget */*widget*/) {
+                                 QWidget* /*widget*/) {
     int width = (int)mBoundingRect.width();
     int height = (int)mBoundingRect.height();
     painter->setClipRect(mBoundingRect);

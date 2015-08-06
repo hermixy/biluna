@@ -36,8 +36,8 @@ ACC_SysType::~ACC_SysType() {
  * - systypelist_id ID of the system type list for example the ACC_ChartMaster ID
  */
 void ACC_SysType::createMembers() {
-    addMember(this, "systypecode", "-", 0, RB2::MemberInteger);
-    addMember(this, "systypename", "-", "", RB2::MemberChar125);
-    addMember(this, "systypeno", "-", 0, RB2::MemberInteger);
-    addMember(this, "systypelist_id", "-", "0", RB2::MemberChar40);
+    addMember("systypecode", "-", 0, RB2::MemberInteger);
+    addMember("systypename", "-", "", RB2::MemberChar125);
+    addMember("systypeno", "-", 0, RB2::MemberInteger);
+    addMember("systypelist_id", "-", "0", RB2::MemberChar40);
 }

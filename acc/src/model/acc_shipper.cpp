@@ -33,6 +33,6 @@ ACC_Shipper::~ACC_Shipper() {
  * - mincharge minimum or lowest charge for shipments
  */
 void ACC_Shipper::createMembers() {
-    addMember(this, "shippername", "-", "Default", RB2::MemberChar125);
-    addMember(this, "mincharge", "-", 0.0, RB2::MemberDouble);
+    addMember("shippername", "-", "Default", RB2::MemberChar125);
+    addMember("mincharge", "-", 0.0, RB2::MemberDouble);
 }

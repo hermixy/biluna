@@ -49,21 +49,21 @@ ACC_BankMapping::~ACC_BankMapping() {
  * - colnostatnumber, bank statement sequence number
  */
 void ACC_BankMapping::createMembers() {
-    addMember(this, "bankaccount", "-", "<NEW>", RB2::MemberChar125);
-    addMember(this, "dateformat", "-", "yyyy-MM-dd", RB2::MemberChar20);
-    addMember(this, "creditname", "-", "", RB2::MemberChar20);
-    addMember(this, "separator_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "firstrowtitle_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "stripquotes_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "decimal_id", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnobankaccount", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnotransactiondate", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnocounterbankaccount", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnocounteraccountholder", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnodebitcredit", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnoamount", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnodescription", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnoseconddescription", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnotransactioncode", "-", 0, RB2::MemberInteger);
-    addMember(this, "colnostatnumber", "-", 0, RB2::MemberInteger);
+    addMember("bankaccount", "-", "<NEW>", RB2::MemberChar125);
+    addMember("dateformat", "-", "yyyy-MM-dd", RB2::MemberChar20);
+    addMember("creditname", "-", "", RB2::MemberChar20);
+    addMember("separator_id", "-", 0, RB2::MemberInteger);
+    addMember("firstrowtitle_id", "-", 0, RB2::MemberInteger);
+    addMember("stripquotes_id", "-", 0, RB2::MemberInteger);
+    addMember("decimal_id", "-", 0, RB2::MemberInteger);
+    addMember("colnobankaccount", "-", 0, RB2::MemberInteger);
+    addMember("colnotransactiondate", "-", 0, RB2::MemberInteger);
+    addMember("colnocounterbankaccount", "-", 0, RB2::MemberInteger);
+    addMember("colnocounteraccountholder", "-", 0, RB2::MemberInteger);
+    addMember("colnodebitcredit", "-", 0, RB2::MemberInteger);
+    addMember("colnoamount", "-", 0, RB2::MemberInteger);
+    addMember("colnodescription", "-", 0, RB2::MemberInteger);
+    addMember("colnoseconddescription", "-", 0, RB2::MemberInteger);
+    addMember("colnotransactioncode", "-", 0, RB2::MemberInteger);
+    addMember("colnostatnumber", "-", 0, RB2::MemberInteger);
 }

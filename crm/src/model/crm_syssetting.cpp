@@ -33,5 +33,5 @@ CRM_SysSetting::~CRM_SysSetting() {
   \li syssetingname system setting name (placeholder only)
  */
 void CRM_SysSetting::createMembers() {
-    addMember(this, "syssettingname", "-", "Placeholder only", RB2::MemberChar40);
+    addMember("syssettingname", "-", "Placeholder only", RB2::MemberChar40);
 }

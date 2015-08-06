@@ -49,6 +49,7 @@ public:
     virtual int getParentWidgetType() const;
     virtual void setParentWidgetType(int type);
     virtual void setDialogFactory(RB_DialogFactory* df);
+    virtual RB_DialogFactory* getDialogFactory();
 
     virtual QWidget* getMainWidget() { return NULL; }
 

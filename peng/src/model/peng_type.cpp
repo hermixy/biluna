@@ -38,14 +38,14 @@ PENG_Type::~PENG_Type () {
  * \li eqsubtype is a system type for quick filtering on static or rotating types
  */
 void PENG_Type::createMembers() {
-    addMember(this, "typename", "-", "new type", RB2::MemberChar125);
-    addMember(this, "eqtype", "-", 0, RB2::MemberInteger);
-    addMember(this, "eqsubtype", "-", 0, RB2::MemberInteger);
-    addMember(this, "description", "-", "", RB2::MemberChar125);
-    addMember(this, "field1", "-", "N.A.", RB2::MemberChar40);
-    addMember(this, "unit1", "-", "N.A.", RB2::MemberChar40);
-    addMember(this, "field2", "-", "N.A.", RB2::MemberChar40);
-    addMember(this, "unit2", "-", "N.A.", RB2::MemberChar40);
-    addMember(this, "field3", "-", "N.A.", RB2::MemberChar40);
-    addMember(this, "unit3", "-", "N.A.", RB2::MemberChar40);
+    addMember("typename", "-", "new type", RB2::MemberChar125);
+    addMember("eqtype", "-", 0, RB2::MemberInteger);
+    addMember("eqsubtype", "-", 0, RB2::MemberInteger);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("field1", "-", "N.A.", RB2::MemberChar40);
+    addMember("unit1", "-", "N.A.", RB2::MemberChar40);
+    addMember("field2", "-", "N.A.", RB2::MemberChar40);
+    addMember("unit2", "-", "N.A.", RB2::MemberChar40);
+    addMember("field3", "-", "N.A.", RB2::MemberChar40);
+    addMember("unit3", "-", "N.A.", RB2::MemberChar40);
 }

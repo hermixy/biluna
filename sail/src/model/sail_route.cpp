@@ -33,6 +33,6 @@ SAIL_Route::~SAIL_Route() {
   \li comment, history of purpose of the route
 */
 void SAIL_Route::createMembers() {
-    addMember(this, "mname", "-", 0, RB2::MemberChar125);
-    addMember(this, "comment", "-", "", RB2::MemberChar255);
+    addMember("mname", "-", 0, RB2::MemberChar125);
+    addMember("comment", "-", "", RB2::MemberChar255);
 }

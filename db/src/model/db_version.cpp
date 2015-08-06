@@ -29,10 +29,10 @@ DB_Version::~DB_Version() {
 
 
 void DB_Version::createMembers() {
-    addMember(this, "perspectivecode", "-", "", RB2::MemberChar10);
-    addMember(this, "major", "-", 0, RB2::MemberInteger);
-    addMember(this, "medior", "-", 0, RB2::MemberInteger);
-    addMember(this, "minor", "-", 0, RB2::MemberInteger);
-    addMember(this, "build", "-", 0, RB2::MemberInteger);
-    addMember(this, "comment", "-", "", RB2::MemberChar125);
+    addMember("perspectivecode", "-", "", RB2::MemberChar10);
+    addMember("major", "-", 0, RB2::MemberInteger);
+    addMember("medior", "-", 0, RB2::MemberInteger);
+    addMember("minor", "-", 0, RB2::MemberInteger);
+    addMember("build", "-", 0, RB2::MemberInteger);
+    addMember("comment", "-", "", RB2::MemberChar125);
 }
