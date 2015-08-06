@@ -3,11 +3,11 @@
 
 #include "flange_integral.h"
 #include "rb_namespace.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Flange_IntegralTest : public UnitTest {
+class Flange_IntegralTest : public RB_UnitTest {
 
 public:
     Flange_IntegralTest(RB_ObjectContainer* inputOutput);

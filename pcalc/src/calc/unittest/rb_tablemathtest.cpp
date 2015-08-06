@@ -2,7 +2,8 @@
 NAMESPACE_REDBAG_CALC
 
 
-RB_TableMathTest::RB_TableMathTest(RB_ObjectContainer *inputOutput) {
+RB_TableMathTest::RB_TableMathTest(RB_ObjectContainer *inputOutput)
+        : RB_UnitTest() {
     target = NULL;
     mInputOutput = inputOutput;
 }

@@ -3,11 +3,11 @@
 
 #include "assembly.h"
 #include "rb_namespace.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class AssemblyTest : public UnitTest {
+class AssemblyTest : public RB_UnitTest {
 
 public:
     AssemblyTest(RB_ObjectContainer* inputOutput);

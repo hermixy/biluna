@@ -12,7 +12,7 @@
 
 #include "acc.h"
 #include "acc_sysacctcontrol.h"
-#include "db_utilityfactory.h"
+#include "acc_utilityfactory.h"
 
 
 ACC_QaSysAcctControl* ACC_QaSysAcctControl::mActiveUtility = 0;
@@ -21,17 +21,17 @@ ACC_QaSysAcctControl* ACC_QaSysAcctControl::mActiveUtility = 0;
 /**
  * Constructor
  */
-ACC_QaSysAcctControl::ACC_QaSysAcctControl() : RB_UtilityFactory() {
+ACC_QaSysAcctControl::ACC_QaSysAcctControl() : RB_Utility() {
     RB_DEBUG->print("ACC_QaSysAcctControl::ACC_QaSysAcctControl()");
     mRoot = NULL;
-    DB_UTILITYFACTORY->registerFactory(this);
+    ACC_UTILITYFACTORY->addUtility(this);
 }
 
 /**
  * Destructor
  */
 ACC_QaSysAcctControl::~ACC_QaSysAcctControl() {
-    DB_UTILITYFACTORY->unregisterFactory(this);
+    ACC_UTILITYFACTORY->removeUtility(this);
     if (mRoot) {
         delete mRoot;
         mRoot = NULL;

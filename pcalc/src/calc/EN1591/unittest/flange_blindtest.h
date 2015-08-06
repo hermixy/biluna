@@ -3,11 +3,11 @@
 
 #include "flange_blind.h"
 #include "rb_namespace.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Flange_BlindTest : public UnitTest {
+class Flange_BlindTest : public RB_UnitTest {
 
 public:
     Flange_BlindTest(RB_ObjectContainer* inputOutput);

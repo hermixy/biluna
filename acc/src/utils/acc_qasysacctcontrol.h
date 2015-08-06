@@ -15,7 +15,7 @@
 #include "rb_objectcontainer.h"
 #include "rb_objectfactory.h"
 #include "rb_string.h"
-#include "rb_utilityfactory.h"
+#include "rb_utility.h"
 
 
 #define ACC_QASYSACCTCONTROL ACC_QaSysAcctControl::getInstance()
@@ -29,7 +29,7 @@
  * general accounting/booking of sales/purchase orders
  * Utililities are handled independently with utility factory
  */
-class ACC_QaSysAcctControl : public RB_UtilityFactory {
+class ACC_QaSysAcctControl : public RB_Utility {
 
 public:
     virtual ~ACC_QaSysAcctControl();

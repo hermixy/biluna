@@ -2,7 +2,7 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-BoltTest::BoltTest(RB_ObjectContainer* inputOutput) {
+BoltTest::BoltTest(RB_ObjectContainer* inputOutput) : RB_UnitTest() {
     target = NULL;
     mInputOutput = inputOutput;
 }

@@ -3,11 +3,11 @@
 
 #include "bolt.h"
 #include "rb_namespace.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class BoltTest : public UnitTest{
+class BoltTest : public RB_UnitTest{
 
 public:
     BoltTest(RB_ObjectContainer* inputOutput);

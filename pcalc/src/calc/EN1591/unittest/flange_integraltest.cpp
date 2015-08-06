@@ -1,7 +1,8 @@
 ﻿#include "flange_integraltest.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-Flange_IntegralTest::Flange_IntegralTest(RB_ObjectContainer *inputOutput) {
+Flange_IntegralTest::Flange_IntegralTest(RB_ObjectContainer *inputOutput)
+            : RB_UnitTest() {
     target = NULL;
     mInputOutput = inputOutput;
 }

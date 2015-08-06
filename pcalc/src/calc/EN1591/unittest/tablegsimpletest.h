@@ -2,12 +2,12 @@
 #define TABLEGSIMPLETEST_H
 
 #include "rb_namespace.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 #include "tablegsimple.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class TableGSimpleTest : public UnitTest {
+class TableGSimpleTest : public RB_UnitTest {
 
 public:
     TableGSimpleTest(RB_ObjectContainer* inputOutput);

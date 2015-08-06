@@ -2,7 +2,7 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-WasherTest::WasherTest(RB_ObjectContainer *inputOutput) {
+WasherTest::WasherTest(RB_ObjectContainer *inputOutput) : RB_UnitTest() {
     target = NULL;
     mInputOutput = inputOutput;
 }

@@ -3,11 +3,11 @@
 
 #include "force.h"
 #include "rb_namespace.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class ForceTest : public UnitTest {
+class ForceTest : public RB_UnitTest {
 
 public:
     ForceTest(RB_ObjectContainer* inputOutput);

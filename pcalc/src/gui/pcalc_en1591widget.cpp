@@ -18,7 +18,7 @@
 #include "pcalc_inputoutput.h"
 #include "pcalc_modelfactory.h"
 #include "pcalc_objectfactory.h"
-#include "unittestfactory.h"
+#include "en1591_unittestfactory.h"
 // #include "peng_graphicsview.h"
 
 
@@ -545,7 +545,7 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
 
     // Create output report
     QString outputStr;
-    outputStr.append("-- Start calculation:"
+    outputStr.append("-- Start calculation: "
                      + QDateTime::currentDateTime().toString(Qt::ISODate));
     // input
     RB_ObjectContainer* inList = mInputOutput->getContainer("PCALC_InputList");
@@ -591,7 +591,7 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
         RB_ObjectBase* obj = iter->currentObject();
         outputStr.append(
                     "\n" + obj->getValue("formulanumber").toString()
-                    + "\t " + obj->getValue("variablename").toString()
+                    + "\t" + obj->getValue("variablename").toString()
                     + " = " + obj->getValue("formula").toString()
                     + " = " + obj->getValue("result").toString()
                     /*+ " " + obj->getValue("unit").toString()
@@ -616,7 +616,7 @@ void PCALC_EN1591Widget::on_pbUnitTest_clicked() {
     getTextEdit()->clear();
     createInputOutputObject();
 
-    RedBag::Calc::EN1591::UnitTestFactory testFactory(mInputOutput);
+    RedBag::Calc::EN1591::EN1591_UnitTestFactory testFactory(mInputOutput);
     testFactory.exec();
 
     RB_ObjectContainer* outList = mInputOutput->getContainer("PCALC_OutputList");

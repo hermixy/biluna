@@ -2,12 +2,12 @@
 #define WASHERTEST_H
 
 #include "rb_namespace.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 #include "washer.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class WasherTest : public UnitTest {
+class WasherTest : public RB_UnitTest {
 
 public:
     WasherTest(RB_ObjectContainer* inputOutput);

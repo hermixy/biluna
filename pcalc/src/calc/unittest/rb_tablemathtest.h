@@ -3,11 +3,11 @@
 
 #include "rb_namespace.h"
 #include "rb_tablemath.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 
 NAMESPACE_REDBAG_CALC
 
-class RB_TableMathTest : public UnitTest {
+class RB_TableMathTest : public RB_UnitTest {
 
 public:
     RB_TableMathTest(RB_ObjectContainer* inputOutput);

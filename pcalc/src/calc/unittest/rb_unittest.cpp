@@ -1,17 +1,17 @@
 #include <iostream>
-#include "unittest.h"
+#include "rb_unittest.h"
 NAMESPACE_REDBAG_CALC
 
 
-UnitTest::UnitTest() {
+RB_UnitTest::RB_UnitTest() {
 
 }
 
-UnitTest::~UnitTest() {
+RB_UnitTest::~RB_UnitTest() {
 
 }
 
-void UnitTest::areEqual(RB_ObjectBase* output, const QString& functionName,
+void RB_UnitTest::areEqual(RB_ObjectBase* output, const QString& functionName,
                         double expected, double test, double accuracy) {
     if (output) {
         if (expected - accuracy <= test && test <= expected + accuracy) {

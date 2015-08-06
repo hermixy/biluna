@@ -2,7 +2,8 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-TableGSimpleTest::TableGSimpleTest(RB_ObjectContainer *inputOutput) {
+TableGSimpleTest::TableGSimpleTest(RB_ObjectContainer *inputOutput)
+            : RB_UnitTest() {
     target = NULL;
     mInputOutput = inputOutput;
 }

@@ -3,7 +3,7 @@
 #include "flange_integral.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-FlangeTest::FlangeTest(RB_ObjectContainer *inputOutput) {
+FlangeTest::FlangeTest(RB_ObjectContainer *inputOutput) : RB_UnitTest() {
     target = NULL;
     mInputOutput = inputOutput;
 }

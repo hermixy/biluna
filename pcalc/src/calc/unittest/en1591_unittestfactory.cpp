@@ -1,6 +1,5 @@
-#include "unittestfactory.h"
+#include "en1591_unittestfactory.h"
 
-#include <QDateTime>
 #include "assemblytest.h"
 #include "bolttest.h"
 #include "flange_blindtest.h"
@@ -11,7 +10,6 @@
 #include "gaskettest.h"
 #include "rb_tablemathtest.h"
 #include "tablegsimpletest.h"
-#include "unittest.h"
 #include "WasherTest.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
@@ -20,17 +18,18 @@ NAMESPACE_REDBAG_CALC_EN1591
     ut->exec(); \
     delete ut;
 
-UnitTestFactory::UnitTestFactory(RB_ObjectContainer* inputOutput) {
+EN1591_UnitTestFactory::EN1591_UnitTestFactory(RB_ObjectContainer* inputOutput)
+            : RB_UnitTestFactory(inputOutput) {
     mInputOutput = inputOutput;
 }
 
-UnitTestFactory::~UnitTestFactory() {
+EN1591_UnitTestFactory::~EN1591_UnitTestFactory() {
     // nothing yet
 }
 
-void UnitTestFactory::exec() {
+void EN1591_UnitTestFactory::exec() {
 
-    UnitTest* ut;
+    RB_UnitTest* ut;
     UNITTESTCLASS(AssemblyTest);
     UNITTESTCLASS(BoltTest);
     UNITTESTCLASS(Flange_BlindTest);

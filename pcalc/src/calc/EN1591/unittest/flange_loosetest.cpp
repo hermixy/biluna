@@ -2,7 +2,8 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-Flange_LooseTest::Flange_LooseTest(RB_ObjectContainer *inputOutput) {
+Flange_LooseTest::Flange_LooseTest(RB_ObjectContainer *inputOutput)
+            : RB_UnitTest() {
     target = NULL;
     mInputOutput = inputOutput;
 }

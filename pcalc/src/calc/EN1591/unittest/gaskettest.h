@@ -3,11 +3,11 @@
 
 #include "gasket.h"
 #include "rb_namespace.h"
-#include "unittest.h"
+#include "rb_unittest.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class GasketTest : public UnitTest {
+class GasketTest : public RB_UnitTest {
 
 public:
     GasketTest(RB_ObjectContainer* inputOutput);

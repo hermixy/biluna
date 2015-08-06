@@ -11,7 +11,7 @@
 #include "washer.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-AssemblyTest::AssemblyTest(RB_ObjectContainer *inputOutput) : UnitTest() {
+AssemblyTest::AssemblyTest(RB_ObjectContainer *inputOutput) : RB_UnitTest() {
     target = NULL;
     mInputOutput = inputOutput;
 }

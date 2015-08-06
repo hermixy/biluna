@@ -1,5 +1,5 @@
-#ifndef UNITTEST_H
-#define UNITTEST_H
+#ifndef RB_UNITTEST_H
+#define RB_UNITTEST_H
 
 #include <QString>
 #include <QTextEdit>
@@ -8,11 +8,11 @@
 
 NAMESPACE_REDBAG_CALC
 
-class UnitTest {
+class RB_UnitTest {
 
 public:
-    UnitTest();
-    virtual ~UnitTest();
+    RB_UnitTest();
+    virtual ~RB_UnitTest();
 
     virtual void exec() = 0;
 
@@ -24,4 +24,4 @@ protected:
 
 END_NAMESPACE_REDBAG_CALC
 
-#endif // UNITTEST_H
+#endif // RB_UNITTEST_H

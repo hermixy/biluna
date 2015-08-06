@@ -55,8 +55,9 @@ HEADERS += \
     ../src/calc/rb_report.h \
     ../src/calc/rb_tablemath.h \
     ../src/calc/unittest/rb_tablemathtest.h \
-    ../src/calc/unittest/unittest.h \
-    ../src/calc/unittest/unittestfactory.h \
+    ../src/calc/unittest/rb_unittest.h \
+    ../src/calc/unittest/rb_unittestfactory.h \
+    ../src/calc/unittest/en1591_unittestfactory.h \
     ../src/gui/pcalc_dialogfactory.h \
     ../src/gui/pcalc_en1591widget.h \
     ../src/gui/pcalc_projectdialog.h \
@@ -118,8 +119,9 @@ SOURCES += \
     ../src/calc/rb_report.cpp \
     ../src/calc/rb_tablemath.cpp \
     ../src/calc/unittest/rb_tablemathtest.cpp \
-    ../src/calc/unittest/unittest.cpp \
-    ../src/calc/unittest/unittestfactory.cpp \
+    ../src/calc/unittest/rb_unittest.cpp \
+    ../src/calc/unittest/rb_unittestfactory.cpp \
+    ../src/calc/unittest/en1591_unittestfactory.cpp \
     ../src/gui/pcalc_dialogfactory.cpp \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditdialog.cpp \
