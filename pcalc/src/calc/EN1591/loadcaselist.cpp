@@ -18,8 +18,10 @@ LoadCaseList::~LoadCaseList() {
 }
 
 LoadCase *LoadCaseList::createLoadCase() {
+    int loadCaseNo = (int)this->size();
     LoadCase* loadCase = new LoadCase(mInputOutput); // first loadcase number: 0
     loadCase->mForce = new Force(mInputOutput);
+    loadCase->mForce->mLoadCaseNo = loadCaseNo; // otherwise force does not know
     this->push_back(loadCase);
     return loadCase;
 }

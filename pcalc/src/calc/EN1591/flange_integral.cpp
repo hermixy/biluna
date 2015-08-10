@@ -257,7 +257,9 @@ void Flange_Integral::Calc_kR() {
 void Flange_Integral::Calc_ZF() {
     ZF = 3 * dF * cF / (M_PI * bF * pow(eF, 3));
     addDetail("Formula 34", "ZF", "3 * dF * cF "
-              "/ (Math.PI * bF * eF ^ 3)", ZF, "1/mm^2");
+              "/ (PI * bF * eF ^ 3)", ZF, "1/mm^2",
+              "3 * " + qn(dF) + " * " + qn(cF) + " / (pi * " + qn(bF)
+              + " * " + qn(eF) + " ^ 3)");
 }
 
 /**

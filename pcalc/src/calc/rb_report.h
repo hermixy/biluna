@@ -29,6 +29,10 @@ protected:
     RB_String fv(const char* format ...);
 
 private:
+    RB_ObjectBase* getObject(RB_ObjectContainer* outContainer,
+                             const QString& variableName,
+                             int loadCaseNo);
+
     RB_ObjectContainer* mInContainer;
     RB_ObjectContainer* mOutContainer;
     RB_ObjectBase* mLastOutput;

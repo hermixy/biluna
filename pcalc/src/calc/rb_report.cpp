@@ -41,9 +41,17 @@ void RB_Report::addDetail(const QString& formulaNumber,
 
     // Report filter settings
     if (settingObj->getValue("lastvalue").toInt() == 1) {
-        RB_ObjectBase* existObj = mOutContainer->getObject("formulanumber",
-                                                           formulaNumber);
+        RB_ObjectBase* existObj = getObject(mOutContainer, variableName,
+                                            loadCaseNo);
         if (existObj) {
+            existObj->setValue("formulanumber", formulaNumber);
+            existObj->setValue("variablename", variableName);
+            existObj->setValue("formula", formula);
+            existObj->setValue("result", result);
+            existObj->setValue("unit", unit);
+            existObj->setValue("formulavalues", formulaValues);
+            existObj->setValue("loadcaseno", loadCaseNo);
+            existObj->setValue("note", note);
             return;
         }
     }
@@ -100,6 +108,23 @@ RB_String RB_Report::fv(const char* format ...) {
     va_end (args);
 
     return strBuffer;
+}
+
+RB_ObjectBase* RB_Report::getObject(RB_ObjectContainer* outContainer,
+                                    const QString& variableName,
+                                    int loadCaseNo) {
+    RB_ObjectIterator* iter = outContainer->createIterator();
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* obj = iter->currentObject();
+
+        if (obj->getValue("variablename").toString() == variableName
+                && obj->getValue("loadcaseno").toInt() == loadCaseNo) {
+            return obj;
+        }
+    }
+
+    return NULL;
 }
 
 END_NAMESPACE_REDBAG_CALC

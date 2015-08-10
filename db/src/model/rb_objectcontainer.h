@@ -113,10 +113,6 @@ protected:
      */
     std::list<RB_ObjectBase*> mObjectList;
     /**
-     * Map container of containers, only for quick find by name
-     */
-//    std::map<std::string, RB_ObjectBase*> mObjectMap;
-    /**
      * Column number or member number to sort. This number is the sequence
      * number of the objectmember that are part of objects in the containerList.
      * Needs to be set globaly otherwise the getColumnSort() will return the

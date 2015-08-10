@@ -31,6 +31,7 @@ HEADERS += \
     ../src/calc/EN1591/loadcase.h \
     ../src/calc/EN1591/loadcaselist.h \
     ../src/calc/EN1591/shell.h \
+    ../src/calc/EN1591/table02_15property.h \
     ../src/calc/EN1591/table16property.h \
     ../src/calc/EN1591/table17_30property.h \
     ../src/calc/EN1591/tableeproperty.h \
@@ -96,6 +97,7 @@ SOURCES += \
     ../src/calc/EN1591/loadcase.cpp \
     ../src/calc/EN1591/loadcaselist.cpp \
     ../src/calc/EN1591/shell.cpp \
+    ../src/calc/EN1591/table02_15property.cpp \
     ../src/calc/EN1591/table16property.cpp \
     ../src/calc/EN1591/table17_30property.cpp \
     ../src/calc/EN1591/tableeproperty.cpp \

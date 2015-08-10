@@ -159,8 +159,8 @@ void AssemblyTest::Calc_F_GInitialTest() {
     target->mLoadCaseList->at(0)->fB = 103.2;
     target->mLoadCaseList->at(0)->F_R = 12.1;
     target->Calc_F_GInitial(0);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GInitialTest()", 239.02,
-             target->mLoadCaseList->at(0)->F_G);
+    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GInitialTest()",
+             239.02, target->mLoadCaseList->at(0)->F_G);
     deleteTarget();
 }
 
@@ -181,8 +181,9 @@ void AssemblyTest::Calc_F_RTest() {
     target->mLoadCaseList->at(i)->mForce->M_AI = 832.7;
     target->mFlange1->d3e = 1643.2;
     target->Calc_F_R(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_RTest()", 14.127020447906524,
-             target->mLoadCaseList->at(i)->F_R);
+    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_RTest()",
+             14.127020447906524,
+             target->mLoadCaseList->at(i)->F_Rpositive);
     deleteTarget();
 }
 
@@ -196,7 +197,8 @@ void AssemblyTest::Calc_lBTest() {
     target->mFlange1->mWasher->eW = 1.2;
     target->mFlange2->mWasher->eW = 1.3;
     target->Calc_lB();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_lBTest()", 134.8, target->mBolt->lB);
+    areEqual(target->getLastOutput(), "AssemblyTest::Calc_lBTest()", 134.8,
+             target->mBolt->lB);
     deleteTarget();
 }
 

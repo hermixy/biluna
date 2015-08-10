@@ -205,8 +205,10 @@ void Gasket::Calc_AGe(int /* i */) {
 void Gasket::Calc_E_G(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->E_G
             = gasketCompressedElasticity(mLoadCaseList->at(loadCaseNo));
+
+    // TODO move addDetail() to relevant table
     addDetail("Formula 58",
-              "E_G", "gasketCompressedElasticity(loadCase))",
+              "E_G", "gasketCompressedElasticity(loadCase)",
               mLoadCaseList->at(loadCaseNo)->E_G, "N/mm^2");
 }
 
@@ -217,6 +219,8 @@ void Gasket::Calc_E_G(int loadCaseNo) {
 void Gasket::Calc_eG(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->eG
             =  gasketCompressedThickness(mLoadCaseList->at(loadCaseNo));
+
+    // TODO move addDetail() to relevant table
     addDetail("With Formula 63",
               "eG", "gasketCompressedThickness(loadCase)",
               mLoadCaseList->at(loadCaseNo)->eG, "mm");
@@ -229,9 +233,10 @@ void Gasket::Calc_eG(int loadCaseNo) {
 void Gasket::Calc_Q_smax(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->Q_smax
             = gasketMaximumLoad(mLoadCaseList->at(loadCaseNo));
-    addDetail("With Formula 65, 69, 70, 74, 75",
-              "Q_smax", "gasketMaximumLoad(loadCase))",
-              mLoadCaseList->at(loadCaseNo)->Q_smax, "N/mm^2");
+    // addDetail moved to table 16
+//    addDetail("With Formula 65, 69, 70, 74, 75",
+//              "Q_smax", "gasketMaximumLoad(loadCase)",
+//              mLoadCaseList->at(loadCaseNo)->Q_smax, "N/mm^2");
 }
 
 /**
@@ -256,7 +261,9 @@ void Gasket::Calc_AQ(int loadCaseNo) {
             = pow(mLoadCaseList->at(loadCaseNo)->dGe, 2) * M_PI / 4;
     addDetail("Formula 90",
               "AQ", "dGe ^ 2 * PI / 4",
-              mLoadCaseList->at(loadCaseNo)->AQ, "mm^2");
+              mLoadCaseList->at(loadCaseNo)->AQ, "mm^2",
+              qn(mLoadCaseList->at(loadCaseNo)->dGe) + " ^ 2 * pi / 4",
+              loadCaseNo);
 }
 
 /**

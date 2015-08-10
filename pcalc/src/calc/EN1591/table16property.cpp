@@ -28,20 +28,23 @@ double Table16Property::getTable16_Q_smax(const RB_String& materialCode,
     double value = 0.0;
     if (!getUpperLower(materialCode, temperature)) {
         value = 0.0;
-        addDetail("Table 16", "Qsmax", "", value, "N/mm2", "", -1, "Out of range");
+        addDetail("Table 16 F.65, 69, 70, 74, 75", "Q_smax",
+                  "Table value", value, "N/mm2", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mQ_smax;
-        addDetail("Table 16", "Qsmax", "", value, "N/mm2");
+        addDetail("Table 16 F.65, 69, 70, 74, 75", "Q_smax",
+                  "Table value", value, "N/mm2");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mQ_smax - mLower->mQ_smax) * perunage + mLower->mQ_smax;
-    addDetail("Table 16", "Qsmax", "", value, "N/mm2");
+    addDetail("Table 16 F.65, 69, 70, 74, 75", "Q_smax",
+              "Table value", value, "N/mm2");
     return value;
 }
 

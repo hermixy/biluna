@@ -6,7 +6,7 @@ LoadCase_IN::LoadCase_IN(RB_ObjectContainer *inputOutput)
             : RB_Report(inputOutput) {
     setName("PCALC EN1591 LoadCase");
 
-    mForce = NULL;
+    mForce = NULL; // created from outside
     alphaB = 0;
     alphaG = 0;
     alphaF1 = 0;

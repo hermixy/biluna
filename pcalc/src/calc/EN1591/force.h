@@ -18,6 +18,8 @@ public:
     double M_X;
     double M_Y;
     double M_Z;
+
+    int mLoadCaseNo; // only Force does not get relevant LoadCase for calcs
 };
 
 

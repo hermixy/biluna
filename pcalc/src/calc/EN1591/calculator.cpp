@@ -1201,7 +1201,6 @@ void Calculator::F90_to_104(Assembly* assembly, int loadCaseNo) {
 
 void Calculator::F105_to_105(Assembly* assembly,
                              int loadCaseNo) 	{
-    // TODO: delta_eGc is an uncertain part of the code, can be zero if no information is available 2014-10-25
     assembly->Calc_delta_eGc(loadCaseNo);
     assembly->Calc_F_Gdelta(loadCaseNo);
 }

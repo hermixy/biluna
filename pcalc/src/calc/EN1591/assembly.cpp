@@ -192,7 +192,9 @@ void Assembly::Calc_F_Q(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->F_Q = mLoadCaseList->at(loadCaseNo)->P
             * mLoadCaseList->at(loadCaseNo)->AQ;
     addDetail("Formula 91", "F_Q", "P * AQ",
-              mLoadCaseList->at(loadCaseNo)->F_Q, "N");
+              mLoadCaseList->at(loadCaseNo)->F_Q, "N",
+              qn(mLoadCaseList->at(loadCaseNo)->P) + " * "
+              + qn(mLoadCaseList->at(loadCaseNo)->AQ), loadCaseNo);
 }
 
 /**
@@ -216,12 +218,18 @@ void Assembly::Calc_F_R(int loadCaseNo) {
         loadCase->F_R = loadCase->F_Rnegative;
         addDetail("Formula 96",
                   "F_Rnegative", "F_Z - M_AI * 4 / d3e",
-                  loadCase->F_Rnegative, "N");
+                  loadCase->F_Rnegative, "N",
+                  qn(loadCase->mForce->F_Z) + " - "
+                  + qn(loadCase->mForce->M_AI) + " * 4 / " + qn(mFlange1->d3e),
+                  loadCaseNo);
     } else {
         loadCase->F_R = loadCase->F_Rpositive;
         addDetail("Formula 96",
                   "F_Rpositive", "F_Z + M_AI * 4 / d3e",
-                  loadCase->F_Rpositive, "N");
+                  loadCase->F_Rpositive, "N",
+                  qn(loadCase->mForce->F_Z) + " + "
+                  + qn(loadCase->mForce->M_AI) + " * 4 / " + qn(mFlange1->d3e),
+                  loadCaseNo);
     }
 }
 
@@ -249,7 +257,17 @@ void Assembly::Calc_dUI(int loadCaseNo) {
               "* (TL1 - T0) - Flange1.Washer.eW * alphaW1 * (TW1 - T0) "
               "- Flange2.eFt * alphaF2 * (TF2 - T0) - Flange2.eL * alphaL2 "
               "* (TL2 - T0) - Flange2.Washer.eW * alphaW2 * (TW2 - T0)",
-              loadCase->dUI, "N");
+              loadCase->dUI, "N",
+              qn(mBolt->lB) + " * " + qn(loadCase->alphaB) + " * (" + qn(loadCase->TB) + " - " + qn(tmp_T0)
+              + ") - " + qn(tmp_eG) + " * " + qn(loadCase->alphaG) + " * (" + qn(loadCase->TG) + " - " + qn(tmp_T0)
+              + ") - " + qn(mFlange1->eFt) + " * " + qn(loadCase->alphaF1) + " * (" + qn(loadCase->TF1) + " - " + qn(tmp_T0)
+              + ") - " + qn(mFlange1->eL) + " * " + qn(loadCase->alphaL1) + " * (" + qn(loadCase->TL1) + " - " + qn(tmp_T0)
+              + ") - " + qn(mFlange1->mWasher->eW) + " * " + qn(loadCase->alphaW1) + " * (" + qn(loadCase->TW1) + " - " + qn(tmp_T0)
+              + ") - " + qn(mFlange2->eFt) + " * " + qn(loadCase->alphaF2) + " * (" + qn(loadCase->TF2) + " - " + qn(tmp_T0)
+              + ") - " + qn(mFlange2->eL) + " * " + qn(loadCase->alphaL2) + " * (" + qn(loadCase->TL2) + " - " + qn(tmp_T0)
+              + ") - " + qn(mFlange2->mWasher->eW) + " * " + qn(loadCase->alphaW2) + " * (" + qn(loadCase->TW2) + " - " + qn(tmp_T0)
+              + ")",
+              loadCaseNo);
 }
 
 /**
@@ -264,7 +282,13 @@ void Assembly::Calc_lB() {
     addDetail("Formula 98",
               "lB", "eGt + Flange1.eFt + Flange2.eFt + Flange1.eRF + Flange2.eRF "
               "+ Flange1->eL + Flange2->eL + Flange1.Washer.eW + Flange2.Washer.eW",
-              mBolt->lB, "mm");
+              mBolt->lB, "mm",
+              qn(mGasket->eGt)
+              + " + " + qn(mFlange1->eFt) + " + " + qn(mFlange2->eFt)
+              + " + " + qn(mFlange1->eRF) + " + " + qn(mFlange2->eRF)
+              + " + " + qn(mFlange1->eL) + " + " + qn(mFlange2->eL)
+              + " + " + qn(mFlange1->mWasher->eW) + " + "
+              + qn(mFlange2->mWasher->eW));
 }
 
 /**
@@ -305,7 +329,8 @@ void Assembly::Calc_YB(int loadCaseNo) {
               + qn(mFlange2->ZL) + " * " + qn(loadCase->hL2) + "^2 / " + qn(loadCase->EL2) + " + "
               + qn(mBolt->XB) + " / " + qn(loadCase->EB) + " + "
               + qn(mFlange1->mWasher->XW) + " / " + qn(loadCase->EW1) + " + "
-              + qn(mFlange2->mWasher->XW) + " / " + qn(loadCase->EW2));
+              + qn(mFlange2->mWasher->XW) + " / " + qn(loadCase->EW2),
+              loadCaseNo);
 }
 
 /**
@@ -323,7 +348,8 @@ void Assembly::Calc_YG(int loadCaseNo) {
               loadCase->Y_G, "mm/N",
               qn(mFlange1->ZF) + " * (" + qn(loadCase->hG1) + "^2) / " + qn(loadCase->EF1) + " + "
               + qn(mFlange2->ZF) + " * (" + qn(loadCase->hG2) + "^2) / " + qn(loadCase->EF2) + " + "
-              + qn(loadCase->Y_B) + " + " + qn(mGasket->XG) + " / " + qn(loadCase->E_G));
+              + qn(loadCase->Y_B) + " + " + qn(mGasket->XG) + " / " + qn(loadCase->E_G),
+              loadCaseNo);
 }
 
 /**
@@ -347,7 +373,7 @@ void Assembly::Calc_YQ(int loadCaseNo) {
               + qn(loadCase->hH1) + " - " + qn(mFlange1->hP) + " + " + qn(mFlange1->hQ) + ") / " + qn(loadCase->EF1) + " + "
               + qn(mFlange2->ZF) + " * " + qn(loadCase->hG2) + " * ("
               + qn(loadCase->hH2) + " - " + qn(mFlange2->hP) + " + " + qn(mFlange2->hQ) + ") / " + qn(loadCase->EF2) + " + "
-              + qn(loadCase->Y_B));
+              + qn(loadCase->Y_B), loadCaseNo);
 }
 
 /**
@@ -368,7 +394,7 @@ void Assembly::Calc_YR(int loadCaseNo) {
               + qn(loadCase->hH1) + " + " + qn(mFlange1->hR) + ") / " + qn(loadCase->EF1) + " + "
               + qn(mFlange2->ZF) + " * " + qn(loadCase->hG2) + " * ("
               + qn(loadCase->hH2) + " + " + qn(mFlange2->hR) + ") / " + qn(loadCase->EF2) + " + "
-              + qn(loadCase->Y_B));
+              + qn(loadCase->Y_B), loadCaseNo);
 }
 
 /**
@@ -430,7 +456,7 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
 }
 
 /**
- * @brief Before Formula 105 F.2 and F.3: Creep of gasket
+ * @brief Before Formula 105 annex F: Creep of gasket
  * under seating pressure and temperature
  * \todo: check whether this approach is correct, formulae are
  * from the code and no additional interpretation is added
@@ -445,7 +471,7 @@ void Assembly::Calc_delta_eGc(int loadCaseNo) {
         // TODO annex F and gasketdata.org
         loadCase->delta_eGc = mGasket->K * loadCase->Y_G
                 * loadCase->delta_eGc_EN13555;
-        addDetail("Before Formula 105 F.3",
+        addDetail("Before Formula 105 annex F",
                   "delta_eGc", "K * Y_G * delta_eGc_EN13555",
                   loadCase->delta_eGc, "mm");
     } else if (mGasket->dG2_EN13555 > 0
@@ -455,7 +481,7 @@ void Assembly::Calc_delta_eGc(int loadCaseNo) {
         loadCase->delta_eGc = loadCase->Y_G * (M_PI / 4)
                 * (pow(mGasket->dG2_EN13555, 2) - pow(mGasket->dG1_EN13555, 2))
                 * loadCase->Q_A * (1 - loadCase->P_QR);
-        addDetail("Before Formula 105 F.2 F.3", "delta_eGc", "Y_G * (PI / 4) "
+        addDetail("Before Formula 105 annex F", "delta_eGc", "Y_G * (PI / 4) "
                   "* (dG2_EN13555 ^ 2 - dG1_EN13555 ^ 2) * Q_A * (1 - P_QR)",
                   loadCase->delta_eGc, "mm");
     } else {
