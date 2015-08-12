@@ -2,9 +2,8 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-GasketTest::GasketTest(RB_ObjectContainer *inputOutput) : RB_UnitTest() {
+GasketTest::GasketTest() : RB_UnitTest() {
     target = NULL;
-    mInputOutput = inputOutput;
 }
 
 GasketTest::~GasketTest() {
@@ -28,8 +27,8 @@ void GasketTest::exec() {
 
 void GasketTest::setupTarget() {
     if (!target) {
-        target = new Gasket(mInputOutput);
-        target->mLoadCaseList = new LoadCaseList(mInputOutput);
+        target = new Gasket();
+        target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
     }
     target->dG1 = 70.8;
@@ -41,19 +40,19 @@ void GasketTest::Calc_AGtTest() {
     target->dGt = 6.7;
     target->bGt = 3.03;
     target->Calc_AGt();
-    areEqual(target->getLastOutput(), "GasketTest::Calc_AGtTest()", 63.77747246052639, target->AGt);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_AGtTest()", 63.77747246052639, target->AGt);
 }
 
 void GasketTest::Calc_bGtTest() {
     setupTarget();
     target->Calc_bGt();
-    areEqual(target->getLastOutput(), "GasketTest::Calc_bGtTest()", 14.75, target->bGt);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_bGtTest()", 14.75, target->bGt);
 }
 
 void GasketTest::Calc_dGtTest() {
     setupTarget();
     target->Calc_dGt();
-    areEqual(target->getLastOutput(), "GasketTest::Calc_dGtTest()", 85.55, target->dGt);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_dGtTest()", 85.55, target->dGt);
 }
 
 void GasketTest::Calc_AGeTest() {
@@ -62,7 +61,7 @@ void GasketTest::Calc_AGeTest() {
     target->mLoadCaseList->at(i)->dGe = 36.2;
     target->mLoadCaseList->at(i)->bGe = 5.78;
     target->Calc_AGe(i);
-    areEqual(target->getLastOutput(), "GasketTest::Calc_AGeTest()", 657.334280466514,
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_AGeTest()", 657.334280466514,
                      target->mLoadCaseList->at(i)->AGe);
 }
 
@@ -71,7 +70,7 @@ void GasketTest::Calc_AQTest() {
     int i = 0;
     target->mLoadCaseList->at(i)->dGe = 78.56;
     target->Calc_AQ(i);
-    areEqual(target->getLastOutput(), "GasketTest::Calc_AQTest()", 4847.2211105285178,
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_AQTest()", 4847.2211105285178,
              target->mLoadCaseList->at(i)->AQ);
 }
 
@@ -81,12 +80,12 @@ void GasketTest::Calc_bGeTest() {
     target->bGi = 2.1;
     target->bGt = -9.1;
     target->Calc_bGe(i);
-    areEqual(target->getLastOutput(), "GasketTest::Calc_bGeTest()", -9.1,
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_bGeTest()", -9.1,
                      target->mLoadCaseList->at(i)->bGe);
     target->bGi = -2.2;
     target->bGt = 9.1;
     target->Calc_bGe(i);
-    areEqual(target->getLastOutput(), "GasketTest::Calc_bGeTest()", -2.2,
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_bGeTest()", -2.2,
                      target->mLoadCaseList->at(i)->bGe);
 }
 
@@ -98,7 +97,7 @@ void GasketTest::Calc_XGTest() {
     target->AGt = 8.3;
     target->mLoadCaseList->at(i)->bGe = 7.7;
     target->Calc_XG(i);
-    areEqual(target->getLastOutput(), "GasketTest::Calc_XGTest()", 0.970281124497992, target->XG);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_XGTest()", 0.970281124497992, target->XG);
 }
 
 

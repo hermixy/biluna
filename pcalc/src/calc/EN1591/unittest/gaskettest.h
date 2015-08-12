@@ -10,7 +10,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class GasketTest : public RB_UnitTest {
 
 public:
-    GasketTest(RB_ObjectContainer* inputOutput);
+    GasketTest();
     virtual ~GasketTest();
 
     void exec();

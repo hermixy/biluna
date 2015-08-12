@@ -10,7 +10,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class TableGSimpleTest : public RB_UnitTest {
 
 public:
-    TableGSimpleTest(RB_ObjectContainer* inputOutput);
+    TableGSimpleTest();
     virtual ~TableGSimpleTest();
 
     void exec();

@@ -10,7 +10,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class AssemblyTest : public RB_UnitTest {
 
 public:
-    AssemblyTest(RB_ObjectContainer* inputOutput);
+    AssemblyTest();
     virtual ~AssemblyTest();
 
     void exec();

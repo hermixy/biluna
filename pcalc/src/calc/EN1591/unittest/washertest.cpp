@@ -2,9 +2,8 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-WasherTest::WasherTest(RB_ObjectContainer *inputOutput) : RB_UnitTest() {
+WasherTest::WasherTest() : RB_UnitTest() {
     target = NULL;
-    mInputOutput = inputOutput;
 }
 
 WasherTest::~WasherTest() {
@@ -20,7 +19,7 @@ void WasherTest::exec() {
 
 void WasherTest::setupTarget() {
     if (!target) {
-        target = new Washer(mInputOutput);
+        target = new Washer();
     }
     target->washerNumber = 1;
 }
@@ -31,7 +30,7 @@ void WasherTest::Calc_bWTest() {
     target->dW2 = 18.3;
     target->dW1 = 7.7;
     target->Calc_bW();
-    areEqual(target->getLastOutput(), "WasherTest::Calc_bWTest()", 5.3, target->bW);
+    areEqual(PR->getLastOutput(), "WasherTest::Calc_bWTest()", 5.3, target->bW);
 }
 
 void WasherTest::Calc_dWTest() {
@@ -40,7 +39,7 @@ void WasherTest::Calc_dWTest() {
     target->dW2 = 18.3;
     target->dW1 = 7.7;
     target->Calc_dW();
-    areEqual(target->getLastOutput(), "WasherTest::Calc_dWTest()", 13.0, target->dW);
+    areEqual(PR->getLastOutput(), "WasherTest::Calc_dWTest()", 13.0, target->dW);
 }
 
 void WasherTest::Calc_bKBTest() {
@@ -50,7 +49,7 @@ void WasherTest::Calc_bKBTest() {
     target->dK2 = 7.6;
     target->dW1 = 2.7;
     target->Calc_bKB();
-    areEqual(target->getLastOutput(), "WasherTest::Calc_bKBTest()", 2.45, target->bKB);
+    areEqual(PR->getLastOutput(), "WasherTest::Calc_bKBTest()", 2.45, target->bKB);
 }
 
 END_NAMESPACE_REDBAG_CALC_EN1591

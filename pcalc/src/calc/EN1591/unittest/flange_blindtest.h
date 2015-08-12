@@ -10,7 +10,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class Flange_BlindTest : public RB_UnitTest {
 
 public:
-    Flange_BlindTest(RB_ObjectContainer* inputOutput);
+    Flange_BlindTest();
     virtual ~Flange_BlindTest();
 
     void exec();

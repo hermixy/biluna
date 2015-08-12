@@ -3,11 +3,11 @@
 
 #include "assembly.h"
 #include "rb_objectcontainer.h"
-#include "rb_report.h"
+
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Calculator : public RB_Report {
+class Calculator : public RB_Object {
 
 public:
     enum FlangeType {
@@ -16,8 +16,7 @@ public:
         Loose
     };
 
-    Calculator(FlangeType flange1Type, FlangeType flange2Type,
-               RB_ObjectContainer* inputOutput);
+    Calculator(FlangeType flange1Type, FlangeType flange2Type);
     virtual ~Calculator();
 
     void SetInputData_Ohmtech(Assembly* assembly);
@@ -30,12 +29,12 @@ public:
     void SetLoadCases_Plantware(Assembly* assembly);
 
     void exec();
-    void Loop_F55_to_108(Assembly* assembly, int loadCaseNo);
+    void Loop_F55_to_108(Assembly* assembly);
     void F3_to_24(Assembly* assembly);
     void F25_to_40(Assembly* assembly);
     void F41_to_53(Assembly* assembly);
     void F54_to_54(Assembly* assembly);
-    void F55_to_62_table1(Assembly* assembly, int loadCaseNo);
+    void F55_to_62_table1(Assembly* assembly);
     void F63_to_63(Assembly* assembly, int loadCaseNo);
     void F77_to_89(Assembly* assembly, int loadCaseNo);
     void F90_to_104(Assembly* assembly, int loadCaseNo);
@@ -50,10 +49,8 @@ public:
     Assembly* mAssembly;
 
 private:
-    void createAssembly(FlangeType flange1Type, FlangeType flange2Type,
-                        RB_ObjectContainer *inputOutput);
-    void CreateAssemblyHelper(Assembly* assembly,
-                              RB_ObjectContainer* inputOutput);
+    void createAssembly(FlangeType flange1Type, FlangeType flange2Type);
+    void CreateAssemblyHelper(Assembly* assembly);
 
     int mWriteCalcFromNumber;
     int mIterNo;

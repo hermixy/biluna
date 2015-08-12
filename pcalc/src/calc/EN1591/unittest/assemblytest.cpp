@@ -11,9 +11,8 @@
 #include "washer.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-AssemblyTest::AssemblyTest(RB_ObjectContainer *inputOutput) : RB_UnitTest() {
+AssemblyTest::AssemblyTest() : RB_UnitTest() {
     target = NULL;
-    mInputOutput = inputOutput;
 }
 
 AssemblyTest::~AssemblyTest() {
@@ -64,10 +63,10 @@ void AssemblyTest::exec() {
 
 void AssemblyTest::SetupIntegralTarget() {
     if (target) return;
-    target = new Assembly(mInputOutput);
+    target = new Assembly();
 
-    Flange* flange1 = new Flange_Integral(1, mInputOutput);
-    Flange* flange2 = new Flange_Integral(2, mInputOutput);
+    Flange* flange1 = new Flange_Integral(1);
+    Flange* flange2 = new Flange_Integral(2);
     target->mFlange1 = flange1;
     target->mFlange2 = flange2;
 
@@ -76,11 +75,11 @@ void AssemblyTest::SetupIntegralTarget() {
 
 void AssemblyTest::SetupLooseTarget() {
     if (target) return;
-    target = new Assembly(mInputOutput);
+    target = new Assembly();
 
     // Create components
-    Flange* flange1 = new Flange_Loose(1, mInputOutput);
-    Flange* flange2 = new Flange_Loose(2, mInputOutput);
+    Flange* flange1 = new Flange_Loose(1);
+    Flange* flange2 = new Flange_Loose(2);
     target->mFlange1 = flange1;
     target->mFlange2 = flange2;
 
@@ -89,23 +88,23 @@ void AssemblyTest::SetupLooseTarget() {
 
 void AssemblyTest::SetupBlindTarget() {
     if (target) return;
-    target = new Assembly(mInputOutput);
+    target = new Assembly();
 
     // Create components
-    target->mFlange1 = new Flange_Blind(1, mInputOutput); // includes shell, washer
-    target->mFlange2 = new Flange_Blind(2, mInputOutput);
+    target->mFlange1 = new Flange_Blind(1); // includes shell, washer
+    target->mFlange2 = new Flange_Blind(2);
     SetupRemainingTarget();
 }
 
 void AssemblyTest::SetupRemainingTarget() {
-    target->mLoadCaseList = new LoadCaseList(mInputOutput);
+    target->mLoadCaseList = new LoadCaseList();
     target->mLoadCaseList->createLoadCase(); // includes Force creation
     target->mLoadCaseList->createLoadCase();
 
-    target->mGasket = new Gasket(mInputOutput);
+    target->mGasket = new Gasket();
     target->mGasket->frmType = Gasket::Flat;
 
-    target->mBolt = new Bolt(mInputOutput);  // includes BoltHole creation
+    target->mBolt = new Bolt();  // includes BoltHole creation
     target->mBolt->bType = Bolt::Stud;
     target->mBolt->mBoltHole->isBlindHole = false;
 
@@ -131,24 +130,24 @@ void AssemblyTest::Calc_dGeTest() {
     target->mGasket->dG2 = 7.3;
     target->mLoadCaseList->at(i)->bGe = 2.6;
     target->Calc_dGe(i, target->mGasket);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 4.7,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 4.7,
              target->mLoadCaseList->at(i)->dGe);
 
     target->mGasket->frmType = Gasket::CurvedSimpleContact;
     target->mGasket->dG0 = 9.78;
     target->Calc_dGe(i, target->mGasket);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 9.78,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 9.78,
              target->mLoadCaseList->at(i)->dGe);
 
     target->mGasket->frmType = Gasket::CurvedDoubleContact;
     target->mGasket->dGt = 25.8;
     target->Calc_dGe(i, target->mGasket);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 25.8,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 25.8,
              target->mLoadCaseList->at(i)->dGe);
 
     target->mGasket->frmType = Gasket::OctagonalDoubleContact;
     target->Calc_dGe(i, target->mGasket);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 25.8,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 25.8,
              target->mLoadCaseList->at(i)->dGe);
     deleteTarget();
 }
@@ -159,7 +158,7 @@ void AssemblyTest::Calc_F_GInitialTest() {
     target->mLoadCaseList->at(0)->fB = 103.2;
     target->mLoadCaseList->at(0)->F_R = 12.1;
     target->Calc_F_GInitial(0);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GInitialTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GInitialTest()",
              239.02, target->mLoadCaseList->at(0)->F_G);
     deleteTarget();
 }
@@ -169,7 +168,7 @@ void AssemblyTest::Calc_F_QTest() {
     target->mLoadCaseList->at(0)->AQ = 5.6;
     target->mLoadCaseList->at(0)->P = 9.2;
     target->Calc_F_Q(0);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_QTest()", 51.52,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_QTest()", 51.52,
              target->mLoadCaseList->at(0)->F_Q);
     deleteTarget();
 }
@@ -181,7 +180,7 @@ void AssemblyTest::Calc_F_RTest() {
     target->mLoadCaseList->at(i)->mForce->M_AI = 832.7;
     target->mFlange1->d3e = 1643.2;
     target->Calc_F_R(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_RTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_RTest()",
              14.127020447906524,
              target->mLoadCaseList->at(i)->F_Rpositive);
     deleteTarget();
@@ -197,7 +196,7 @@ void AssemblyTest::Calc_lBTest() {
     target->mFlange1->mWasher->eW = 1.2;
     target->mFlange2->mWasher->eW = 1.3;
     target->Calc_lB();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_lBTest()", 134.8,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_lBTest()", 134.8,
              target->mBolt->lB);
     deleteTarget();
 }
@@ -221,7 +220,7 @@ void AssemblyTest::Calc_YBTest() {
     target->mLoadCaseList->at(i)->EB = 7.5;
 
     target->Calc_YB(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_YBTest()", 5.8447859193305112,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YBTest()", 5.8447859193305112,
              target->mLoadCaseList->at(i)->Y_B);
     deleteTarget();
 }
@@ -239,7 +238,7 @@ void AssemblyTest::Calc_YGTest() {
     target->mGasket->XG = 4.1;
     target->mLoadCaseList->at(i)->E_G = 5.1;
     target->Calc_YG(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_YGTest()", 4.30676027830487,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YGTest()", 4.30676027830487,
              target->mLoadCaseList->at(i)->Y_G);
     deleteTarget();
 }
@@ -261,7 +260,7 @@ void AssemblyTest::Calc_YQTest() {
     target->mLoadCaseList->at(i)->EF2 = 6.2;
     target->mLoadCaseList->at(i)->Y_B = 0.923;
     target->Calc_YQ(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_YQTest()", 4.2640100475938656,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YQTest()", 4.2640100475938656,
              target->mLoadCaseList->at(i)->Y_Q);
     deleteTarget();
 }
@@ -281,7 +280,7 @@ void AssemblyTest::Calc_YRTest() {
     target->mLoadCaseList->at(i)->EF2 = 5.3;
     target->mLoadCaseList->at(i)->Y_B = 0.525;
     target->Calc_YR(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_YRTest()", 8.0737236403995567,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YRTest()", 8.0737236403995567,
              target->mLoadCaseList->at(i)->Y_R);
     deleteTarget();
 }
@@ -294,7 +293,7 @@ void AssemblyTest::Calc_bGiTest() {
     target->mGasket->frmType = Gasket::Flat;
     target->mGasket->bGt = 2.3;
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 2.3, target->mGasket->bGi);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 2.3, target->mGasket->bGi);
 
     //target.LoadCaseList(0).Qsmax = 100.3
     //target.LoadCaseList(0).E0 = 7.1
@@ -307,18 +306,18 @@ void AssemblyTest::Calc_bGiTest() {
     target->mLoadCaseList->at(0)->Q_smax = 4561.23;
     target->mLoadCaseList->at(0)->E_G = 6000.4;
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 14.5407000127705715317,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 14.5407000127705715317,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::CurvedDoubleContact;
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 20.5636551644587786355,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 20.5636551644587786355,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::OctagonalDoubleContact;
     target->mGasket->bGiOct = 3.2;
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 3.2, target->mGasket->bGi);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 3.2, target->mGasket->bGi);
 
     isFirstApproximation = false;
 
@@ -339,28 +338,28 @@ void AssemblyTest::Calc_bGiTest() {
     target->mFlange2->ZF = 7.3;
     target->mLoadCaseList->at(i)->EF2 = 9.7;
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 0.45134629619661641586,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 0.45134629619661641586,
              target->mGasket->bGi);
 
     target->mGasket->insType = Gasket::SpiralGraphFillOuterInner; // Non metalic
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 0.638143,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 0.638143,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::CurvedSimpleContact;
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 29.18099436801514326863,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 29.18099436801514326863,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::CurvedDoubleContact;
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 41.26815556620527463859,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 41.26815556620527463859,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::OctagonalDoubleContact;
     target->mGasket->bGiOct = 7.2;
     target->Calc_bGi(i, isFirstApproximation);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 7.2, target->mGasket->bGi);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 7.2, target->mGasket->bGi);
     deleteTarget();
 }
 
@@ -397,7 +396,7 @@ void AssemblyTest::Calc_dUTTest() {
     target->mFlange1->mWasher->eW = 3.6;
     target->mFlange2->mWasher->eW = 3.5;
     target->Calc_dUI(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_dUTTest()", -134.904,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dUTTest()", -134.904,
              target->mLoadCaseList->at(i)->dUI);
     deleteTarget();
 }
@@ -408,7 +407,7 @@ void AssemblyTest::Calc_F_GminTest() {
     target->mLoadCaseList->at(i)->AGe = 7.6;
     target->mLoadCaseList->at(i)->Q_A = 3.7;
     target->Calc_F_Gmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GminTest()", 28.12,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GminTest()", 28.12,
              target->mLoadCaseList->at(i)->F_Gmin);
     i = 1;
     target->mGasket->frmType = Gasket::Flat;
@@ -425,13 +424,13 @@ void AssemblyTest::Calc_F_GminTest() {
     target->mLoadCaseList->at(i)->F_R = 0.0;
     // tmpVal2 = 43.567164179104481
     target->Calc_F_Gmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GminTest()", 43.567164179104481,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GminTest()", 43.567164179104481,
              target->mLoadCaseList->at(i)->F_Gmin);
     target->mLoadCaseList->at(i)->F_Q = -17.3;
     target->mLoadCaseList->at(i)->F_R = -89.23;
     // tmpVal3 = 106.53
     target->Calc_F_Gmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GminTest()", 106.53,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GminTest()", 106.53,
              target->mLoadCaseList->at(i)->F_Gmin);
     deleteTarget();
 }
@@ -452,11 +451,11 @@ void AssemblyTest::Calc_F_G0deltaTest() {
     target->mLoadCaseList->at(i)->dUI = 2.8;
     target->mLoadCaseList->at(i)->delta_eGc = 3.8;
     target->Calc_F_Gdelta(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_G0deltaTest()", 20.664285714285715,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0deltaTest()", 20.664285714285715,
              target->mLoadCaseList->at(0)->F_Gdelta);
     target->mLoadCaseList->at(i)->F_Gmin = -52.3;
     target->Calc_F_Gdelta(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_G0deltaTest()", 0.0,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0deltaTest()", 0.0,
              target->mLoadCaseList->at(0)->F_Gdelta);
     deleteTarget();
 }
@@ -466,7 +465,7 @@ void AssemblyTest::Calc_F_G0reqTest() {
     target->mLoadCaseList->at(0)->F_Gmin = 3.4;
     target->mLoadCaseList->at(0)->F_Gdelta = 8.9;
     target->Calc_F_G0req();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_G0reqTest()", 8.9,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0reqTest()", 8.9,
              target->mLoadCaseList->at(0)->F_Greq);
     deleteTarget();
 }
@@ -476,12 +475,12 @@ void AssemblyTest::Is_F_G0act_larger_F_G0reqTest() {
     target->mLoadCaseList->at(0)->F_G = 1.2;
     target->mLoadCaseList->at(0)->F_Greq = 2.3;
     bool actual = target->Is_F_G0_larger_F_G0req();
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_F_G0act_larger_F_G0reqTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_F_G0act_larger_F_G0reqTest()",
              false, actual);
     target->mLoadCaseList->at(0)->F_G = 1.5;
     target->mLoadCaseList->at(0)->F_Greq = -0.7;
     actual = target->Is_F_G0_larger_F_G0req();
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_F_G0act_larger_F_G0reqTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_F_G0act_larger_F_G0reqTest()",
              true, actual);
     deleteTarget();
 }
@@ -491,17 +490,17 @@ void AssemblyTest::Is_F_G0act_acceptable_to_F_G0reqTest() {
     target->mLoadCaseList->at(0)->F_G = 1.2;
     target->mLoadCaseList->at(0)->F_Greq = 2.3;
     bool actual = target->Is_F_G0act_within_0_1_percent_of_F_G0req();
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_F_G0act_acceptable_to_F_G0reqTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_F_G0act_acceptable_to_F_G0reqTest()",
              false, actual);
     target->mLoadCaseList->at(0)->F_G = 1.5;
     target->mLoadCaseList->at(0)->F_Greq = -0.7;
     actual = target->Is_F_G0act_within_0_1_percent_of_F_G0req();
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_F_G0act_acceptable_to_F_G0reqTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_F_G0act_acceptable_to_F_G0reqTest()",
              false, actual);
     target->mLoadCaseList->at(0)->F_G = 1.500001;
     target->mLoadCaseList->at(0)->F_Greq = 1.5;
     actual = target->Is_F_G0act_within_0_1_percent_of_F_G0req();
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_F_G0act_acceptable_to_F_G0reqTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_F_G0act_acceptable_to_F_G0reqTest()",
              true, actual);
     deleteTarget();
 }
@@ -511,7 +510,7 @@ void AssemblyTest::Calc_F_B0reqTest() {
     target->mLoadCaseList->at(0)->F_Greq = 5.6;
     target->mLoadCaseList->at(0)->F_R = 4.05;
     target->Calc_F_B0req();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0reqTest()", 9.65,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0reqTest()", 9.65,
              target->mLoadCaseList->at(0)->F_Breq);
     deleteTarget();
 }
@@ -523,28 +522,28 @@ void AssemblyTest::Calc_F_B0nomTest() {
     target->mBolt->etanminus = 7.1;
     target->mBolt->etanplus = -5.4;
     target->Calc_F_B0nom();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 12.3, loadCase->F_Bnom);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", -75.03, loadCase->F_Bmin);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", -54.12, loadCase->F_Bmax);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 12.3, loadCase->F_Bnom);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", -75.03, loadCase->F_Bmin);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", -54.12, loadCase->F_Bmax);
     target->mBolt->tType = Bolt::TorqueWrench;
     loadCase->F_Bspec = 0;
     loadCase->F_Breq = 6.2;
     target->Calc_F_B0nom();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", -1.0163934426229508,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", -1.0163934426229508,
              loadCase->F_Bnom);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 6.2,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 6.2,
              loadCase->F_Bmin);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 4.472131147540984,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 4.472131147540984,
              loadCase->F_Bmax);
     loadCase->F_Bav = 0.73;
     target->mBolt->tType = Bolt::ManualStandardRing;
     target->mFlange1->nB = 32;
     target->Calc_F_B0nom();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 7.6665425993101133,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 7.6665425993101133,
              loadCase->F_Bnom);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 6.2,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", 6.2,
              loadCase->F_Bmin);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", -33.7327874369645,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0nomTest()", -33.7327874369645,
              loadCase->F_Bmax);
     deleteTarget();
 }
@@ -561,17 +560,17 @@ void AssemblyTest::Is_F_B0nom_ValidTest() {
     target->mBolt->tType = Bolt::TorqueWrench;
     bool actual = false;
     actual = target->Is_F_B0nom_Valid();
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_F_B0nom_ValidTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_F_B0nom_ValidTest()",
              false, actual);
     target->mBolt->etanminus = 0.00000001;
     actual = target->Is_F_B0nom_Valid();
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_F_B0nom_ValidTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_F_B0nom_ValidTest()",
              true, actual);
     target->mBolt->tType = Bolt::ManualStandardRing;
     loadCase->F_Bspec = 0.0;
     target->mFlange1->nB = 3;
     actual = target->Is_F_B0nom_Valid();
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_F_B0nom_ValidTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_F_B0nom_ValidTest()",
              false, actual);
     deleteTarget();
 }
@@ -581,7 +580,7 @@ void AssemblyTest::Calc_F_G0maxTest() {
     target->mLoadCaseList->at(0)->F_Bmax = 4.8;
     target->mLoadCaseList->at(0)->F_R = 9.7;
     target->Calc_F_G0max();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_G0maxTest()", -4.9,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0maxTest()", -4.9,
              target->mLoadCaseList->at(0)->F_Gmax);
     deleteTarget();
 }
@@ -593,7 +592,7 @@ void AssemblyTest::Calc_F_G0dTest() {
     target->mNR = 3;
     target->mLoadCaseList->at(0)->F_R = 2.3;
     target->Calc_F_G0d();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()", 5.6,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()", 5.6,
              target->mLoadCaseList->at(0)->F_Gd);
     target->mLoadCaseList->at(0)->F_Bmax = 700;
     target->mNR = 300;
@@ -601,7 +600,7 @@ void AssemblyTest::Calc_F_G0dTest() {
     target->mLoadCaseList->at(0)->F_Bmin = 0.7;
     target->mLoadCaseList->at(0)->F_R = -2.3;
     target->Calc_F_G0d();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()", 453.4111111111111,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()", 453.4111111111111,
              target->mLoadCaseList->at(0)->F_Gd);
     deleteTarget();
 }
@@ -621,7 +620,7 @@ void AssemblyTest::Calc_F_GTest() {
     target->mLoadCaseList->at(i)->Y_G = 5.2;
     target->mLoadCaseList->at(i)->delta_eGc = 0.0;
     target->Calc_F_G(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GTest()", -0.21153846153846154,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GTest()", -0.21153846153846154,
              target->mLoadCaseList->at(i)->F_G);
     deleteTarget();
 }
@@ -633,7 +632,7 @@ void AssemblyTest::Calc_F_BTest() {
     target->mLoadCaseList->at(i)->F_Q = 3.9;
     target->mLoadCaseList->at(i)->F_R = 9.4;
     target->Calc_F_B(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_BTest()", 16.8,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BTest()", 16.8,
              target->mLoadCaseList->at(i)->F_B);
     deleteTarget();
 }
@@ -644,26 +643,26 @@ void AssemblyTest::Calc_cATest() {
     target->mBolt->ruptureElongationA = 0.2;
     int i = 0;
     target->Calc_cA(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_cATest()", 1,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 1,
              target->mLoadCaseList->at(i)->cA);
     target->mBolt->ruptureElongationA = 0.02;
     target->Calc_cA(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_cATest()", 4 / 3.0,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 4 / 3.0,
              target->mLoadCaseList->at(i)->cA);
     target->mBolt->tType = Bolt::TorqueWrench;
     target->mBolt->ruptureElongationA = 0.2;
     i = 1;
     target->Calc_cA(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
              target->mLoadCaseList->at(i)->cA);
     target->mBolt->ruptureElongationA = 0.02;
     target->Calc_cA(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
              target->mLoadCaseList->at(i)->cA);
     target->mBolt->tType = Bolt::ManualOperatorFeel;
     i = 0;
     target->Calc_cA(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
              target->mLoadCaseList->at(i)->cA);
     deleteTarget();
 }
@@ -679,7 +678,7 @@ void AssemblyTest::Calc_cBTest() {
     target->mLoadCaseList->at(i)->fF1 = 207000;
     target->mLoadCaseList->at(i)->fF2 = 207000; // takes minimum of both flanges
     target->Calc_cB(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_cBTest()", 0.024571629751921942,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cBTest()", 0.024571629751921942,
              target->mLoadCaseList->at(i)->cB);
     deleteTarget();
 }
@@ -696,7 +695,7 @@ void AssemblyTest::Calc_PhiBTest() {
     target->mLoadCaseList->at(i)->cB = 1.0;
     target->mBolt->mut = 7.8;
     target->Calc_PhiB(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()", 0.6186202131555113,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()", 0.6186202131555113,
              target->mLoadCaseList->at(i)->PhiB);
     deleteTarget();
 }
@@ -709,7 +708,7 @@ void AssemblyTest::Calc_PhiGTest() {
     target->mGasket->AGt = 2.2;
     loadCase->Q_smax = 3.3;
     target->Calc_PhiG(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_Calc_PhiGTest()", 0.15151515151515152,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiGTest()", 0.15151515151515152,
              target->mLoadCaseList->at(i)->PhiG);
     deleteTarget();
 }
@@ -719,11 +718,11 @@ void AssemblyTest::Is_PhiB_ValidTest() {
     target->mLoadCaseList->at(0)->PhiB = 1.1;
     bool actual = false;
     actual = target->Is_PhiB_Valid(0);
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_PhiB_ValidTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_PhiB_ValidTest()",
              false, actual);
     target->mLoadCaseList->at(0)->PhiB = 0.8;
     actual = target->Is_PhiB_Valid(0);
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_PhiB_ValidTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_PhiB_ValidTest()",
              true, actual);
     deleteTarget();
 }
@@ -733,7 +732,7 @@ void AssemblyTest::Calc_fETest() {
     target->mLoadCaseList->at(0)->fF1 = 3.2;
     target->mLoadCaseList->at(0)->fS1 = 15.3;
     target->Calc_fE(target->mFlange1, 0);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_fETest()", 3.2,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_fETest()", 3.2,
              target->mLoadCaseList->at(0)->fE1);
     deleteTarget();
 }
@@ -745,11 +744,11 @@ void AssemblyTest::Is_PhiG_ValidTest() {
     bool actual = false;
     target->mLoadCaseList->at(i)->PhiG = 0.9;
     actual = target->Is_PhiG_Valid(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_PhiG_ValidTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_PhiG_ValidTest()", expected, actual);
     expected = false;
     target->mLoadCaseList->at(i)->PhiG = 1.2;
     actual = target->Is_PhiG_Valid(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Is_PhiG_ValidTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Is_PhiG_ValidTest()", expected, actual);
     deleteTarget();
 }
 
@@ -763,7 +762,7 @@ void AssemblyTest::Calc_MtBTest() {
     target->mFlange1->nB = 17;
     target->mBolt->etanplus = 0.3;
     target->Calc_MtB();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_MtBTest()", 0.41725222609301915,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_MtBTest()", 0.41725222609301915,
              target->mLoadCaseList->at(0)->MtB);
     deleteTarget();
 }
@@ -775,9 +774,9 @@ void AssemblyTest::Calc_F_BImaxminTest() {
     target->mBolt->etanminus = 1.2;
     target->mBolt->etanplus = 1.3;
     target->Calc_F_BImaxmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", -0.22,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", -0.22,
              target->mLoadCaseList->at(i)->F_BImin);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 2.53,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 2.53,
              target->mLoadCaseList->at(i)->F_BImax);
     i = 1;
     target->mLoadCaseList->at(i)->F_GImin = 2.1;
@@ -785,9 +784,9 @@ void AssemblyTest::Calc_F_BImaxminTest() {
     target->mLoadCaseList->at(i)->F_R = 2.3;
     target->mLoadCaseList->at(i)->F_GImax = 3.1;
     target->Calc_F_BImaxmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 6.6,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 6.6,
              target->mLoadCaseList->at(i)->F_BImin);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 7.6,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 7.6,
              target->mLoadCaseList->at(i)->F_BImax);
     deleteTarget();
 }
@@ -799,9 +798,9 @@ void AssemblyTest::Calc_F_GImaxminTest() {
     target->mLoadCaseList->at(i)->F_BImax = 1.2;
     target->mLoadCaseList->at(i)->F_R = 1.3;
     target->Calc_F_GImaxmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.2,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.2,
              target->mLoadCaseList->at(i)->F_GImin);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.1,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.1,
              target->mLoadCaseList->at(i)->F_GImax);
     i = 1;
     target->mLoadCaseList->at(0)->F_GImin = 2.1;
@@ -817,9 +816,9 @@ void AssemblyTest::Calc_F_GImaxminTest() {
     target->mLoadCaseList->at(i)->Y_G = 2.9;
     target->mLoadCaseList->at(i)->delta_eGc = 0.0;
     target->Calc_F_GImaxmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.11379310344827587,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.11379310344827587,
              target->mLoadCaseList->at(i)->F_GImin);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.0068965517241379309,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.0068965517241379309,
              target->mLoadCaseList->at(i)->F_GImax);
     deleteTarget();
 }
@@ -847,13 +846,13 @@ void AssemblyTest::Calc_ThetaFmaxminTest() {
     loadCase->hG1 = 3.4;
     loadCase->hG2 = 4.4;
     target->Calc_ThetaFmaxmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 16.46875,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 16.46875,
              loadCase->ThetaF1min);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 19.7625,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 19.7625,
              loadCase->ThetaF1max);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 23.81904761904762,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 23.81904761904762,
              loadCase->ThetaF2min);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 28.114285714285714,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 28.114285714285714,
              loadCase->ThetaF2max);
     deleteTarget();
 }
@@ -871,13 +870,13 @@ void AssemblyTest::Calc_ThetaLmaxminTest() {
     loadCase->F_BImax = 2.3;
     loadCase->hL2 = 2.4;
     target->Calc_ThetaLmaxmin(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 1.6683333333333332,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 1.6683333333333332,
              loadCase->ThetaL1min);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 2.9516666666666667,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 2.9516666666666667,
              loadCase->ThetaL1max);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 2.978181818181818,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 2.978181818181818,
              loadCase->ThetaL2min);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 5.2690909090909095,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 5.2690909090909095,
              loadCase->ThetaL2max);
     deleteTarget();
 }
@@ -891,7 +890,7 @@ void AssemblyTest::Calc_Q_GTest() {
     i = 1;
     LoadCase* loadCase1 = target->mLoadCaseList->at(i);
     target->Calc_Q_G(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_Q_GTest()", 0.5, loadCase1->Q_G);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_GTest()", 0.5, loadCase1->Q_G);
     deleteTarget();
 }
 
@@ -899,15 +898,6 @@ void AssemblyTest::Calc_delta_eGcTest() {
     SetupIntegralTarget();
     int i = 1;
     LoadCase* loadCase = target->mLoadCaseList->at(i);
-    //If (target.Gasket.K > 0 And .delta_eGc_EN13555 > 0) Then
-    target->mGasket->K = 2.3;
-    loadCase->Y_G = 3.4;
-    loadCase->delta_eGc_EN13555 = 6.7;
-    target->Calc_delta_eGc(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()", 52.394,
-             loadCase->delta_eGc);
-    //ElseIf (target.Gasket.dG2_EN13555 > 0
-    //  And target.Gasket.dG1_EN13555 > 0 And .P_QR > 0) Then
     target->mGasket->K = 0.0;
     loadCase->delta_eGc_EN13555 = 0.0;
     loadCase->Y_G = 1.3;
@@ -916,14 +906,13 @@ void AssemblyTest::Calc_delta_eGcTest() {
     loadCase->Q_A = 15.3;
     loadCase->P_QR = 0.0456;
     target->Calc_delta_eGc(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()", -1148.7558557602242,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()", -1148.7558557602242,
              loadCase->delta_eGc);
-    //Else
     target->mGasket->dG2_EN13555 = 0.0;
     target->mGasket->dG1_EN13555 = 0.0;
     loadCase->P_QR = 0.0;
     target->Calc_delta_eGc(i);
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()", 0.0,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()", 0.0,
              loadCase->delta_eGc);
     deleteTarget();
 }
@@ -937,10 +926,10 @@ void AssemblyTest::Calc_F_B0avTest() {
     loadCase->fB = 123.45;
     target->mFlange1->nB = 3;
     target->Calc_F_B0av();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0avTest()", 395.04, loadCase->F_Bav);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0avTest()", 395.04, loadCase->F_Bav);
     target->mBolt->AB = 320000;
     target->Calc_F_B0av();
-    areEqual(target->getLastOutput(), "AssemblyTest::Calc_F_B0avTest()", 600000, loadCase->F_Bav);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_B0avTest()", 600000, loadCase->F_Bav);
     deleteTarget();
 }
 

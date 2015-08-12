@@ -5,9 +5,8 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-LoadCaseList::LoadCaseList(RB_ObjectContainer* inputOutput)
+LoadCaseList::LoadCaseList()
         : std::vector<LoadCase*>() {
-    mInputOutput = inputOutput;
 }
 
 LoadCaseList::~LoadCaseList() {
@@ -19,8 +18,8 @@ LoadCaseList::~LoadCaseList() {
 
 LoadCase *LoadCaseList::createLoadCase() {
     int loadCaseNo = (int)this->size();
-    LoadCase* loadCase = new LoadCase(mInputOutput); // first loadcase number: 0
-    loadCase->mForce = new Force(mInputOutput);
+    LoadCase* loadCase = new LoadCase(); // first loadcase number: 0
+    loadCase->mForce = new Force();
     loadCase->mForce->mLoadCaseNo = loadCaseNo; // otherwise force does not know
     this->push_back(loadCase);
     return loadCase;

@@ -10,21 +10,16 @@
 #include "gaskettest.h"
 #include "rb_tablemathtest.h"
 #include "tablegsimpletest.h"
-#include "WasherTest.h"
+#include "washertest.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-#define UNITTESTCLASS(className) \
-    ut = new className(mInputOutput); \
-    ut->exec(); \
-    delete ut;
 
-EN1591_UnitTestFactory::EN1591_UnitTestFactory(RB_ObjectContainer* inputOutput)
-            : RB_UnitTestFactory(inputOutput) {
-    mInputOutput = inputOutput;
+EN1591_UnitTestFactory::EN1591_UnitTestFactory() : RB_UnitTestFactory() {
+    // nothing
 }
 
 EN1591_UnitTestFactory::~EN1591_UnitTestFactory() {
-    // nothing yet
+    // nothing
 }
 
 void EN1591_UnitTestFactory::exec() {

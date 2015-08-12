@@ -100,11 +100,8 @@ RB_MainWindow::~RB_MainWindow() {
     }
 
     // test possible memory leakage
-    RB_DEBUG->printObjectBaseCreated();
-    RB_DEBUG->printObjectBaseDeleted();
     RB_DEBUG->printMemberCreated();
     RB_DEBUG->printMemberDeleted();
-    RB_DEBUG->printObjectBaseList();
     RB_DEBUG->printObjectCreated();
     RB_DEBUG->printObjectDeleted();
     RB_DEBUG->printObjectList();

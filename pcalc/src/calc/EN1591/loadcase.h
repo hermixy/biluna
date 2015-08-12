@@ -3,14 +3,12 @@
 
 #include "force.h"
 #include "rb_namespace.h"
-#include "rb_report.h" // only for debugging possible memory leak
-
 NAMESPACE_REDBAG_CALC_EN1591
 
-class LoadCase_IN : public RB_Report {
+class LoadCase_IN : public RB_Object {
 
 public:
-    LoadCase_IN(RB_ObjectContainer* inputOutput);
+    LoadCase_IN();
     virtual ~LoadCase_IN();
 
     Force* mForce;
@@ -60,7 +58,7 @@ public:
 class LoadCase_OUT : public LoadCase_IN {
 
 public:
-    LoadCase_OUT(RB_ObjectContainer* inputOutput);
+    LoadCase_OUT();
 
     double EGm;
     double E_G;
@@ -199,7 +197,7 @@ public:
 class LoadCase : public LoadCase_OUT {
 
 public:
-    LoadCase(RB_ObjectContainer* inputOutput) : LoadCase_OUT(inputOutput) {
+    LoadCase() : LoadCase_OUT() {
         // nothing
     }
 

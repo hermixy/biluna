@@ -34,10 +34,10 @@ public:
  * The EN13445 appendix G tables 9 class for gaskets
  * without EN13555 measured data
  */
-class TableGSimple : public RB_Report {
+class TableGSimple : public RB_Object {
 
 public:
-    TableGSimple(RB_ObjectContainer* inputOutput);
+    TableGSimple();
     virtual ~TableGSimple();
 
     double getTableG_Q0min(Gasket::InsFilLayMatType insType,

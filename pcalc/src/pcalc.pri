@@ -21,7 +21,6 @@ HEADERS += \
     ../src/calc/EN1591/bolt.h \
     ../src/calc/EN1591/bolthole.h \
     ../src/calc/EN1591/calculator.h \
-#    ../src/calc/EN1591/Document.h \
     ../src/calc/EN1591/flange.h \
     ../src/calc/EN1591/flange_blind.h \
     ../src/calc/EN1591/flange_integral.h \
@@ -31,12 +30,6 @@ HEADERS += \
     ../src/calc/EN1591/loadcase.h \
     ../src/calc/EN1591/loadcaselist.h \
     ../src/calc/EN1591/shell.h \
-    ../src/calc/EN1591/table02_15property.h \
-    ../src/calc/EN1591/table16property.h \
-    ../src/calc/EN1591/table17_30property.h \
-    ../src/calc/EN1591/tableeproperty.h \
-    ../src/calc/EN1591/tablegproperty.h \
-    ../src/calc/EN1591/tablegsimple.h \
     ../src/calc/EN1591/washer.h \
     ../src/calc/EN1591/unittest/assemblytest.h \
     ../src/calc/EN1591/unittest/bolttest.h \
@@ -53,8 +46,6 @@ HEADERS += \
     ../src/calc/rb_materialservice.h \
     ../src/calc/rb_namespace.h \
     ../src/calc/rb_qualityservice.h \
-    ../src/calc/rb_report.h \
-    ../src/calc/rb_tablemath.h \
     ../src/calc/unittest/rb_tablemathtest.h \
     ../src/calc/unittest/rb_unittest.h \
     ../src/calc/unittest/rb_unittestfactory.h \
@@ -72,7 +63,16 @@ HEADERS += \
     ../src/model/pcalc.h \
     ../src/model/pcalc_modelfactory.h \
     ../src/model/pcalc_objectfactory.h \
-    ../src/utils/pcalc_sqlcommonfunctions.h
+    ../src/utils/EN1591/table02_15property.h \
+    ../src/utils/EN1591/table16property.h \
+    ../src/utils/EN1591/table17_30property.h \
+    ../src/utils/EN1591/tableeproperty.h \
+    ../src/utils/EN1591/tablegproperty.h \
+    ../src/utils/EN1591/tablegsimple.h \
+    ../src/utils/pcalc_report.h \
+    ../src/utils/pcalc_sqlcommonfunctions.h \
+    ../src/utils/pcalc_utilityfactory.h \
+    ../src/utils/rb_tablemath.h
 
 SOURCES += \
     ../../peng/src/model/peng_project.cpp \
@@ -87,7 +87,6 @@ SOURCES += \
     ../src/calc/EN1591/bolt.cpp \
     ../src/calc/EN1591/bolthole.cpp \
     ../src/calc/EN1591/calculator.cpp \
-#    ../src/calc/EN1591/Document.cpp \
     ../src/calc/EN1591/flange.cpp \
     ../src/calc/EN1591/flange_blind.cpp \
     ../src/calc/EN1591/flange_integral.cpp \
@@ -97,12 +96,6 @@ SOURCES += \
     ../src/calc/EN1591/loadcase.cpp \
     ../src/calc/EN1591/loadcaselist.cpp \
     ../src/calc/EN1591/shell.cpp \
-    ../src/calc/EN1591/table02_15property.cpp \
-    ../src/calc/EN1591/table16property.cpp \
-    ../src/calc/EN1591/table17_30property.cpp \
-    ../src/calc/EN1591/tableeproperty.cpp \
-    ../src/calc/EN1591/tablegproperty.cpp \
-    ../src/calc/EN1591/tablegsimple.cpp \
     ../src/calc/EN1591/washer.cpp \
     ../src/calc/EN1591/unittest/assemblytest.cpp \
     ../src/calc/EN1591/unittest/bolttest.cpp \
@@ -118,8 +111,6 @@ SOURCES += \
     ../src/calc/rb_allowanceservice.cpp \
     ../src/calc/rb_materialservice.cpp \
     ../src/calc/rb_qualityservice.cpp \
-    ../src/calc/rb_report.cpp \
-    ../src/calc/rb_tablemath.cpp \
     ../src/calc/unittest/rb_tablemathtest.cpp \
     ../src/calc/unittest/rb_unittest.cpp \
     ../src/calc/unittest/rb_unittestfactory.cpp \
@@ -135,7 +126,16 @@ SOURCES += \
     ../src/model/EN1591/pcalc_en1591_shell.cpp \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
-    ../src/utils/pcalc_sqlcommonfunctions.cpp
+    ../src/utils/EN1591/table02_15property.cpp \
+    ../src/utils/EN1591/table16property.cpp \
+    ../src/utils/EN1591/table17_30property.cpp \
+    ../src/utils/EN1591/tableeproperty.cpp \
+    ../src/utils/EN1591/tablegproperty.cpp \
+    ../src/utils/EN1591/tablegsimple.cpp \
+    ../src/utils/pcalc_report.cpp \
+    ../src/utils/pcalc_sqlcommonfunctions.cpp \
+    ../src/utils/pcalc_utilityfactory.cpp \
+    ../src/utils/rb_tablemath.cpp
 
 RESOURCES += \
 

@@ -12,7 +12,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class EN1591_UnitTestFactory : public RB_UnitTestFactory {
 
 public:
-    EN1591_UnitTestFactory(RB_ObjectContainer* inputOutput);
+    EN1591_UnitTestFactory();
     virtual ~EN1591_UnitTestFactory();
 
     virtual void exec();

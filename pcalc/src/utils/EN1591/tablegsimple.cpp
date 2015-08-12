@@ -1,4 +1,5 @@
 ﻿#include "tablegsimple.h"
+#include "pcalc_report.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
 /**
@@ -34,8 +35,7 @@ TableGSimpleProperty::TableGSimpleProperty(Gasket::InsFilLayMatType insFillMat,
 /**
  * Constructor
  */
-TableGSimple::TableGSimple(RB_ObjectContainer* inputOutput)
-                : RB_Report(inputOutput) {
+TableGSimple::TableGSimple() : RB_Object() {
     mUpper = NULL;
     mLower = NULL;
     createList();
@@ -53,20 +53,20 @@ double TableGSimple::getTableG_Q0min(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        addDetail("Table G", "Q0min", "", value, "N/mmm2", "", -1, "Out of range");
+        PR->addDetail("Table G", "Q0min", "", value, "N/mmm2", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value =  mUpper->mQ0min;
-        addDetail("Table G", "Q0min", "", value, "N/mmm2");
+        PR->addDetail("Table G", "Q0min", "", value, "N/mmm2");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mQ0min - mLower->mQ0min) * perunage + mLower->mQ0min;
-    addDetail("Table G", "Q0min", "", value, "N/mmm2");
+    PR->addDetail("Table G", "Q0min", "", value, "N/mmm2");
     return value;
 }
 
@@ -75,20 +75,20 @@ double TableGSimple::getTableG_Qmax(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        addDetail("Table G", "Qmax", "", value, "N/mmm2", "", -1, "Out of range");
+        PR->addDetail("Table G", "Qmax", "", value, "N/mmm2", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mQmax;
-        addDetail("Table G", "Qmax", "", value, "N/mmm2");
+        PR->addDetail("Table G", "Qmax", "", value, "N/mmm2");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mQmax - mLower->mQmax) * perunage + mLower->mQmax;
-    addDetail("Table G", "Qmax", "", value, "N/mmm2");
+    PR->addDetail("Table G", "Qmax", "", value, "N/mmm2");
     return value;
 }
 
@@ -97,20 +97,20 @@ double TableGSimple::getTableG_E0(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        addDetail("Table G", "E0", "", value, "N/mmm2", "", -1, "Out of range");
+        PR->addDetail("Table G", "E0", "", value, "N/mmm2", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mE0;
-        addDetail("Table G", "E0", "", value, "N/mmm2");
+        PR->addDetail("Table G", "E0", "", value, "N/mmm2");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mE0 - mLower->mE0) * perunage + mLower->mE0;
-    addDetail("Table G", "E0", "", value, "N/mmm2");
+    PR->addDetail("Table G", "E0", "", value, "N/mmm2");
     return value;
 }
 
@@ -119,20 +119,20 @@ double TableGSimple::getTableG_K1(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        addDetail("Table G", "K1", "", value, "-", "", -1, "Out of range");
+        PR->addDetail("Table G", "K1", "", value, "-", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mK1;
-        addDetail("Table G", "K1", "", value, "-");
+        PR->addDetail("Table G", "K1", "", value, "-");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mK1 - mLower->mK1) * perunage + mLower->mK1;
-    addDetail("Table G", "K1", "", value, "-");
+    PR->addDetail("Table G", "K1", "", value, "-");
     return value;
 }
 
@@ -141,20 +141,20 @@ double TableGSimple::getTableG_mI(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        addDetail("Table G", "mI", "", value, "-", "", -1, "Out of range");
+        PR->addDetail("Table G", "mI", "", value, "-", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mmI;
-        addDetail("Table G", "mI", "", value, "-");
+        PR->addDetail("Table G", "mI", "", value, "-");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mmI - mLower->mmI) * perunage + mLower->mmI;
-    addDetail("Table G", "mI", "", value, "-");
+    PR->addDetail("Table G", "mI", "", value, "-");
     return value;
 }
 
@@ -163,20 +163,20 @@ double TableGSimple::getTableG_gC(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        addDetail("Table G", "gC", "", value, "-", "", -1, "Out of range");
+        PR->addDetail("Table G", "gC", "", value, "-", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mgC;
-        addDetail("Table G", "gC", "", value, "-");
+        PR->addDetail("Table G", "gC", "", value, "-");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mgC - mLower->mgC) * perunage + mLower->mgC;
-    addDetail("Table G", "gC", "", value, "-");
+    PR->addDetail("Table G", "gC", "", value, "-");
     return value;
 }
 

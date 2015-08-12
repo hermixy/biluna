@@ -1,9 +1,9 @@
 ﻿#include "bolthole.h"
+#include "pcalc_report.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-BoltHole_IN::BoltHole_IN(RB_ObjectContainer* inputOutput)
-            : RB_Report(inputOutput) {
+BoltHole_IN::BoltHole_IN() : RB_Object() {
     setName("PCALC EN1591 BoltHole");
 
     d5 = 0;
@@ -16,13 +16,11 @@ BoltHole_IN::~BoltHole_IN() {
     // nothing
 }
 
-BoltHole_OUT::BoltHole_OUT(RB_ObjectContainer* inputOutput)
-            : BoltHole_IN(inputOutput) {
+BoltHole_OUT::BoltHole_OUT() : BoltHole_IN() {
 
 }
 
-BoltHole::BoltHole(RB_ObjectContainer* inputOutput)
-            : BoltHole_OUT(inputOutput){
+BoltHole::BoltHole() : BoltHole_OUT(){
 
 }
 

@@ -33,7 +33,7 @@ public:
 class Table16Property : public RB_TableMath {
 
 public:
-    Table16Property(RB_ObjectContainer* inputOutput);
+    Table16Property();
     virtual ~Table16Property();
 
     double getTable16_Q_smax(const RB_String& materialCode, double temperature);

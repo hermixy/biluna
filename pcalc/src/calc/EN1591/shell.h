@@ -2,14 +2,14 @@
 #define SHELL_H
 
 #include "rb_namespace.h"
-#include "rb_report.h"
+#include "pcalc_report.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Shell_IN : public RB_Report {
+class Shell_IN : public RB_Object {
 
 public:
-    Shell_IN(RB_ObjectContainer* inputOutput);
+    Shell_IN();
     virtual ~Shell_IN();
 
     enum ShellType {
@@ -29,8 +29,7 @@ public:
 class Shell_OUT : public Shell_IN {
 
 public:
-    Shell_OUT(RB_ObjectContainer* inputOutput)
-        : Shell_IN(inputOutput) {
+    Shell_OUT() : Shell_IN() {
         // nothing
     }
 
@@ -40,8 +39,7 @@ public:
 class Shell : public Shell_OUT {
 
 public:
-    Shell(RB_ObjectContainer* inputOutput)
-        : Shell_OUT(inputOutput) {
+    Shell() : Shell_OUT() {
         // nothing
     }
 

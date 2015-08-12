@@ -14,7 +14,7 @@ class Flange_Loose : public Flange {
     // nothing
 
 public:
-    Flange_Loose(int flangeNo, RB_ObjectContainer* inputOutput);
+    Flange_Loose(int flangeNo);
     virtual ~Flange_Loose();
 
     virtual bool Is_flange_Valid();

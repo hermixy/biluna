@@ -4,17 +4,17 @@
 #include "loadcase.h"
 #include "loadcaselist.h"
 #include "rb_namespace.h"
-#include "rb_report.h"
+#include "rb_object.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
 class Table16Property;
 class TableGSimple;
 
-class Gasket_IN : public RB_Report {
+class Gasket_IN : public RB_Object {
 
 public:
-    Gasket_IN(RB_ObjectContainer* inputOutput);
+    Gasket_IN();
     virtual ~Gasket_IN();
 
     bool isMetalic();
@@ -99,7 +99,7 @@ public:
 class Gasket_OUT : public Gasket_IN {
 
 public:
-    Gasket_OUT(RB_ObjectContainer* inputOutput);
+    Gasket_OUT();
 
     double bGi;
     double bGiOct;
@@ -114,22 +114,24 @@ public:
 class Gasket : public Gasket_OUT {
 
 public:
-    Gasket(RB_ObjectContainer* inputOutput);
+    Gasket();
     virtual ~Gasket();
 
     void Calc_bGt();
     void Calc_dGt();
     void Calc_AGt();
-    void Calc_bGe(int i);
-    void Calc_AGe(int i);
+    void Calc_bGe(int loadCaseNo);
+    void Calc_AGe(int loadCaseNo);
     void Calc_E_G(int loadCaseNo);
     void Calc_eG(int loadCaseNo);
     void Calc_Q_smax(int loadCaseNo);
-    void Calc_XG(int i);
+    void Calc_XG(int loadCaseNo);
     void Calc_AQ(int loadCaseNo);
+    void Calc_P_QR(int loadCaseNo);
     double gasketCompressedElasticity(LoadCase* loadCase);
     double gasketCompressedThickness(LoadCase* loadCase);
     double gasketMaximumLoad(LoadCase* loadCase);
+    double gasketCreepFactor(LoadCase* loadCase);
 
     LoadCaseList* mLoadCaseList;
 

@@ -11,10 +11,7 @@
 #include "rb_tablemath.h"
 NAMESPACE_REDBAG_CALC
 
-
-
-RB_TableMath::RB_TableMath(RB_ObjectContainer* inputOutput)
-            : RB_Report(inputOutput) {
+RB_TableMath::RB_TableMath() {
     // nothing
 }
 
@@ -38,7 +35,7 @@ RB_TableMath::~RB_TableMath() {
  * @param p21val
  * @param p22X (p22Y not used, same as p21Y) bottom right
  * @param p22val
- * @return
+ * @return result
  */
 double RB_TableMath::getBilinearValue(
         double valX, double valY,
@@ -54,8 +51,7 @@ double RB_TableMath::getBilinearValue(
             + (valX - p21X) / (p22X - p21X) * p22val;
     double value = (p21Y - valY) / (p21Y - p11Y) * val1
             + (valY - p11Y) / (p21Y - p11Y) * val2;
-    addDetail("RB_TableMath", "getBilinearValue()", "", value, "-");
     return value;
-
 }
+
 END_NAMESPACE_REDBAG_CALC

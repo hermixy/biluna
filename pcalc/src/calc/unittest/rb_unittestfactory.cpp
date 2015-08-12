@@ -2,14 +2,9 @@
 
 NAMESPACE_REDBAG_CALC
 
-// Example:
-//#define UNITTESTCLASS(className) \
-//    ut = new className(mInputOutput); \
-//    ut->exec(); \
-//    delete ut;
 
-RB_UnitTestFactory::RB_UnitTestFactory(RB_ObjectContainer* inputOutput) {
-    mInputOutput = inputOutput;
+RB_UnitTestFactory::RB_UnitTestFactory() {
+    // nothing
 }
 
 RB_UnitTestFactory::~RB_UnitTestFactory() {

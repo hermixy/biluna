@@ -36,6 +36,7 @@ PCALC_EN1591_Flange::~PCALC_EN1591_Flange() {
 void PCALC_EN1591_Flange::createMembers() {
     addMember("nr", "-", 0, RB2::MemberInteger);
     addMember("nb", "-", 0, RB2::MemberInteger);
+    addMember("leakagerate", "-", "", RB2::MemberChar40);
 
     // flange 1
     addMember("typeflange1_id", "-", 0, RB2::MemberInteger);

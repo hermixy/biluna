@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1069</width>
-    <height>760</height>
+    <height>791</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -125,10 +125,33 @@
             <property name="spacing">
              <number>3</number>
             </property>
-            <item row="3" column="0">
-             <widget class="QLabel" name="lblDate">
+            <item row="5" column="1">
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="1" colspan="2">
+             <widget class="QDateEdit" name="deDate">
+              <property name="displayFormat">
+               <string>yyyy-MM-dd</string>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lblDescription">
               <property name="text">
-               <string>Date</string>
+               <string>Description</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -158,62 +181,10 @@
               </property>
              </spacer>
             </item>
-            <item row="1" column="1" colspan="3">
-             <widget class="QLineEdit" name="leDescription"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lblDescription">
-              <property name="text">
-               <string>Description</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1" colspan="2">
-             <widget class="QLineEdit" name="leNumber"/>
-            </item>
-            <item row="3" column="1" colspan="2">
-             <widget class="QDateEdit" name="deDate">
-              <property name="displayFormat">
-               <string>yyyy-MM-dd</string>
-              </property>
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>158</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item row="4" column="0">
              <widget class="QLabel" name="lblNameEngineer">
               <property name="text">
                <string>Name Engineer</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1" colspan="3">
-             <widget class="QLineEdit" name="leNameEngineer"/>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="lblNumber">
-              <property name="text">
-               <string>Number</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -233,18 +204,18 @@
               </property>
              </spacer>
             </item>
-            <item row="5" column="1">
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+            <item row="4" column="1" colspan="3">
+             <widget class="QLineEdit" name="leNameEngineer"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="lblNumber">
+              <property name="text">
+               <string>Number</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
-             </spacer>
+             </widget>
             </item>
             <item row="2" column="1">
              <widget class="QSpinBox" name="sbRevision">
@@ -255,6 +226,35 @@
                <number>999</number>
               </property>
              </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QLineEdit" name="leNumber"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="lblDate">
+              <property name="text">
+               <string>Date</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" colspan="3">
+             <widget class="QLineEdit" name="leDescription"/>
+            </item>
+            <item row="0" column="3">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>158</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -1055,7 +1055,7 @@
               </property>
               <property name="maximumSize">
                <size>
-                <width>50</width>
+                <width>100</width>
                 <height>16777215</height>
                </size>
               </property>
@@ -1076,6 +1076,19 @@
                <number>999</number>
               </property>
              </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lblLeakageRate">
+              <property name="text">
+               <string>Leakage rate L</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="cbLeakageRate"/>
             </item>
            </layout>
           </widget>

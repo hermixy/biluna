@@ -36,7 +36,7 @@ public:
 class Table17_30Property : public RB_TableMath {
 
 public:
-    Table17_30Property(RB_ObjectContainer* inputOutput);
+    Table17_30Property();
     virtual ~Table17_30Property();
 
     double getTableE_G(const RB_String& materialCode, double temperature,

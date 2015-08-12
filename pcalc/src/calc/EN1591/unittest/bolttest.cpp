@@ -2,9 +2,8 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-BoltTest::BoltTest(RB_ObjectContainer* inputOutput) : RB_UnitTest() {
+BoltTest::BoltTest() : RB_UnitTest() {
     target = NULL;
-    mInputOutput = inputOutput;
 }
 
 BoltTest::~BoltTest() {
@@ -20,7 +19,7 @@ void BoltTest::exec() {
 
 void BoltTest::setupTarget() {
     if (!target) {
-        target = new Bolt(mInputOutput);
+        target = new Bolt();
     }
 
     target->bType = Bolt::Stud;
@@ -43,31 +42,31 @@ void BoltTest::Calc_eta1plusTest() {
     target->mut = 0.21;
     target->tType = Bolt::ManualOperatorFeel;
     target->Calc_eta1plus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.405, target->eta1plus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.405, target->eta1plus);
 
     target->tType = Bolt::Impact;
     target->Calc_eta1plus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.305, target->eta1plus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.305, target->eta1plus);
 
     target->tType = Bolt::TorqueWrench;
     target->Calc_eta1plus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.205, target->eta1plus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.205, target->eta1plus);
 
     target->tType = Bolt::TensionerMeasureHydraulicPressure;
     target->Calc_eta1plus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.4, target->eta1plus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.4, target->eta1plus);
 
     target->tType = Bolt::TensionerMeasureBoltElongation;
     target->Calc_eta1plus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.15, target->eta1plus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.15, target->eta1plus);
 
     target->tType = Bolt::WrenchMeasureNutTurn;
     target->Calc_eta1plus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.1, target->eta1plus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.1, target->eta1plus);
 
     target->tType = Bolt::WrenchMeasureTorquePlusNutTurn;
     target->Calc_eta1plus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.07, target->eta1plus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1plusTest()", 0.07, target->eta1plus);
 }
 
 void BoltTest::Calc_eta1minusTest() {
@@ -75,31 +74,31 @@ void BoltTest::Calc_eta1minusTest() {
     target->mut = 0.22;
     target->tType = Bolt::ManualOperatorFeel;
     target->Calc_eta1minus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.41, target->eta1minus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.41, target->eta1minus);
 
     target->tType = Bolt::Impact;
     target->Calc_eta1minus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.31, target->eta1minus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.31, target->eta1minus);
 
     target->tType = Bolt::TorqueWrench;
     target->Calc_eta1minus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.21, target->eta1minus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.21, target->eta1minus);
 
     target->tType = Bolt::TensionerMeasureHydraulicPressure;
     target->Calc_eta1minus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.2, target->eta1minus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.2, target->eta1minus);
 
     target->tType = Bolt::TensionerMeasureBoltElongation;
     target->Calc_eta1minus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.15, target->eta1minus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.15, target->eta1minus);
 
     target->tType = Bolt::WrenchMeasureNutTurn;
     target->Calc_eta1minus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.1, target->eta1minus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.1, target->eta1minus);
 
     target->tType = Bolt::WrenchMeasureTorquePlusNutTurn;
     target->Calc_eta1minus();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.07, target->eta1minus);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_eta1minusTest()", 0.07, target->eta1minus);
 }
 
 void BoltTest::Calc_IBTest() {
@@ -107,10 +106,10 @@ void BoltTest::Calc_IBTest() {
     target->dBe = 4.2;
     target->dBS = 1.3;
     target->Calc_IB();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_IBTest()", 0.57517325499473126, target->IB);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_IBTest()", 0.57517325499473126, target->IB);
     target->dBS = 77.5;
     target->Calc_IB();
-    areEqual(target->getLastOutput(), "BoltTest::Calc_IBTest()", 19.396193043263384, target->IB);
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_IBTest()", 19.396193043263384, target->IB);
 }
 
 END_NAMESPACE_REDBAG_CALC_EN1591

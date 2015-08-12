@@ -12,12 +12,10 @@ class LoadCase;
 class LoadCaseList : public std::vector<LoadCase*> {
 
 public:
-    LoadCaseList(RB_ObjectContainer* inputOutput);
+    LoadCaseList();
     virtual ~LoadCaseList();
     LoadCase* createLoadCase();
 
-private:
-    RB_ObjectContainer* mInputOutput;
 
 };
 

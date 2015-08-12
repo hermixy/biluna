@@ -11,8 +11,7 @@ E_GProperty::E_GProperty(const QString &materialCode,
     mE_G = E_G;
 }
 
-Table17_30Property::Table17_30Property(RB_ObjectContainer *inputOutput)
-        : RB_TableMath(inputOutput) {
+Table17_30Property::Table17_30Property() : RB_TableMath() {
     createList();
 }
 

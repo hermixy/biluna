@@ -12,17 +12,17 @@
 #define RB_TABLEMATH_H
 
 #include "rb_namespace.h"
-#include "rb_report.h"
 
 NAMESPACE_REDBAG_CALC
 
 /**
- * @brief Base class for table math such as interpolation.
+ * Base class for table math such as interpolation. To be inherited
+ * by calculation or utility.
  */
-class RB_TableMath : public RB_Report {
+class RB_TableMath {
 
 public:
-    RB_TableMath(RB_ObjectContainer* inputOutput);
+    RB_TableMath();
     virtual ~RB_TableMath();
 
     double getBilinearValue(double valX, double valY,

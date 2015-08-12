@@ -55,8 +55,8 @@ protected:
     void changeEvent(QEvent *e);
 
 private:
-    void setInputObject();
-    void createInputOutputObject();
+    void setInput();
+    void setSettings();
     void addObjectMemberVariable(RB_ObjectBase* obj,
                                  const QString& variableName,
                                  const QString& unit, RB_MmProxy* model);
@@ -82,7 +82,6 @@ private:
     //! Last selected assembly ID
     RB_String mCurrentId;
 
-    RB_ObjectContainer* mInputOutput;
 };
 
 #endif // PCALC_EN1591WIDGET_H

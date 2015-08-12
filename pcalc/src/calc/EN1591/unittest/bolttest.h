@@ -10,7 +10,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class BoltTest : public RB_UnitTest{
 
 public:
-    BoltTest(RB_ObjectContainer* inputOutput);
+    BoltTest();
     virtual ~BoltTest();
 
     void exec();

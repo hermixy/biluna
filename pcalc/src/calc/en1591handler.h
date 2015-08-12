@@ -20,8 +20,7 @@ class RB_QualityService;
 class EN1591Handler {
 
 public:
-    EN1591Handler(RB_ObjectContainer* inputOutput,
-                  RB_AllowanceService* allowService = NULL,
+    EN1591Handler(RB_AllowanceService* allowService = NULL,
                   RB_MaterialService* matService = NULL,
                   RB_QualityService* qualService = NULL);
     virtual ~EN1591Handler();
@@ -38,13 +37,11 @@ protected:
     Calculator* getCalculator() const;
 
 private:
-    void setFlangeType(RB_ObjectContainer* inputOutput,
-                       int& flange1Type, int& flange2Type);
+    void setFlangeType(int& flange1Type, int& flange2Type);
     Calculator* mCalc;
     RB_AllowanceService* mAllowService;
     RB_MaterialService* mMatService;
     RB_QualityService* mQualService;
-    RB_ObjectContainer* mInOut;
 };
 
 END_NAMESPACE_REDBAG_CALC_EN1591

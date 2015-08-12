@@ -2,14 +2,14 @@
 #define BOLTHOLE_H
 
 #include "rb_namespace.h"
-#include "rb_report.h"
+#include "rb_object.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class BoltHole_IN : public RB_Report {
+class BoltHole_IN : public RB_Object {
 
 public:
-    BoltHole_IN(RB_ObjectContainer* inputOutput);
+    BoltHole_IN();
     virtual ~BoltHole_IN();
 
     double d5;
@@ -23,14 +23,14 @@ public:
 class BoltHole_OUT : public BoltHole_IN {
 
 public:
-    BoltHole_OUT(RB_ObjectContainer* inputOutput);
+    BoltHole_OUT();
 };
 
 
 class BoltHole : public BoltHole_OUT {
 
 public:
-    BoltHole(RB_ObjectContainer* inputOutput);
+    BoltHole();
 };
 
 END_NAMESPACE_REDBAG_CALC_EN1591

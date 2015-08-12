@@ -3,9 +3,8 @@
 #include "flange_integral.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-FlangeTest::FlangeTest(RB_ObjectContainer *inputOutput) : RB_UnitTest() {
+FlangeTest::FlangeTest() : RB_UnitTest() {
     target = NULL;
-    mInputOutput = inputOutput;
 }
 
 FlangeTest::~FlangeTest() {
@@ -52,9 +51,9 @@ void FlangeTest::exec() {
 void FlangeTest::setupTarget() {
     if (!target) {
         // Flange itself is abstract class
-        target = new Flange_Integral(1, mInputOutput); // includes shell and washer
-        target->mBolt = new Bolt(mInputOutput);
-        target->mLoadCaseList = new LoadCaseList(mInputOutput);
+        target = new Flange_Integral(1); // includes shell and washer
+        target->mBolt = new Bolt();
+        target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
     }
 
@@ -73,23 +72,23 @@ void FlangeTest::setupTarget() {
 void FlangeTest::Calc_d3eTest() {
     setupTarget();
     target->Calc_d3e();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_d3eTest()", 407.243359375, target->d3e);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_d3eTest()", 407.243359375, target->d3e);
 }
 
 void FlangeTest::Calc_d5eTest() {
     setupTarget();
     target->pB = 87.3;
     target->Calc_d5e();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_d5eTest()", 30.918259, target->d5e);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_d5eTest()", 30.918259, target->d5e);
     target->mBolt->mBoltHole->isBlindHole = true;
     target->Calc_d5e();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_d5eTest()", 20763.727150987565, target->d5e);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_d5eTest()", 20763.727150987565, target->d5e);
 }
 
 void FlangeTest::Calc_pBTest() {
     setupTarget();
     target->Calc_pB();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_pBTest()", 80.591669, target->pB);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_pBTest()", 80.591669, target->pB);
 }
 
 void FlangeTest::Calc_hPTest() {
@@ -99,13 +98,13 @@ void FlangeTest::Calc_hPTest() {
     target->dF = 103.2;
     target->mLoadCaseList->at(0)->dGe = 150.14;
     target->Calc_hP(0);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_hPTest()", 44.730940732332016, target->hP);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_hPTest()", 44.730940732332016, target->hP);
 }
 
 void FlangeTest::Calc_eQTest() {
     setupTarget();
     target->Calc_eQ();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_eQTest()", 14.8, target->eQ);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_eQTest()", 14.8, target->eQ);
 }
 
 void FlangeTest::Calc_ABTest() {
@@ -114,7 +113,7 @@ void FlangeTest::Calc_ABTest() {
     target->mBolt->dBe = 18.7;
     target->mBolt->dBS = 21.3;
     target->Calc_AB();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_ABTest()", 4668.9800238937132,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_ABTest()", 4668.9800238937132,
              target->mBolt->AB);
 }
 
@@ -127,7 +126,7 @@ void FlangeTest::Calc_XBTest() {
     target->mBolt->lB = 9.1;
     target->mBolt->lS = 19.1;
     target->Calc_XB();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_XBTest()", 0.012315046218782398,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_XBTest()", 0.012315046218782398,
              target->mBolt->XB);
 }
 
@@ -136,7 +135,7 @@ void FlangeTest::Calc_etanminusTest() {
     target->mBolt->eta1minus = 0.13;
     target->nB = 19;
     target->Calc_etanminus();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_etanminusTest()", 0.05486803405237977,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_etanminusTest()", 0.05486803405237977,
              target->mBolt->etanminus);
 }
 
@@ -145,7 +144,7 @@ void FlangeTest::Calc_etanplusTest() {
     target->mBolt->eta1minus = 0.27;
     target->nB = 21;
     target->Calc_etanminus();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_etanplusTest()", 0.11168912277278846,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_etanplusTest()", 0.11168912277278846,
              target->mBolt->etanminus);
 }
 
@@ -158,7 +157,7 @@ void FlangeTest::Calc_deltaQTest() {
     target->eD = 4.4;
     target->mShell->phiS = 0.2;
     target->Calc_deltaQ(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_deltaQTest()", 0.085028237078432725,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_deltaQTest()", 0.085028237078432725,
              target->mLoadCaseList->at(loadCaseNo)->deltaQ1);
 }
 
@@ -171,7 +170,7 @@ void FlangeTest::Calc_deltaRTest() {
     target->eD = 15.1;
     target->mShell->phiS = 0.45;
     target->Calc_deltaR(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_deltaRTest()", 0.0015335923629893277,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_deltaRTest()", 0.0015335923629893277,
              target->mLoadCaseList->at(loadCaseNo)->deltaR1);
 }
 
@@ -182,11 +181,11 @@ void FlangeTest::Calc_cMTest() {
     target->mLoadCaseList->at(loadCaseNo)->deltaQ1 = 1.1;
     target->mLoadCaseList->at(loadCaseNo)->deltaR1 = 2.2;
     target->Calc_cM(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_cMTest()", 5.437423609377193,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_cMTest()", 5.437423609377193,
              target->mLoadCaseList->at(loadCaseNo)->cM1);
     target->mShell->sType = target->mShell->Spherical;
     target->Calc_cM(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_cMTest()", 9.2779917323706158,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_cMTest()", 9.2779917323706158,
              target->mLoadCaseList->at(loadCaseNo)->cM1);
 }
 
@@ -197,7 +196,7 @@ void FlangeTest::Is_cM_validTest() {
     bool actual = false;
     target->mLoadCaseList->at(loadCaseNo)->cM1 = -1.1;
     actual = target->Is_cM_valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_cM_validTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_cM_validTest()", expected, actual);
 }
 
 void FlangeTest::Calc_cSTest() {
@@ -207,20 +206,20 @@ void FlangeTest::Calc_cSTest() {
     target->mLoadCaseList->at(loadCaseNo)->deltaR1 = 2.2;
     target->mShell->sType = target->mShell->Spherical;
     target->Calc_cS(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_cSTest()", -4.671875,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_cSTest()", -4.671875,
              target->mLoadCaseList->at(loadCaseNo)->cS_plus1);
     target->mLoadCaseList->at(loadCaseNo)->deltaQ1 = 0.1;
     target->mLoadCaseList->at(loadCaseNo)->deltaR1 = 0.2;
     target->Calc_cS(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_cSTest()", 0.98275396382587354,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_cSTest()", 0.98275396382587354,
              target->mLoadCaseList->at(loadCaseNo)->cS_plus1);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_cSTest()", 0.550784973957277,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_cSTest()", 0.550784973957277,
              target->mLoadCaseList->at(loadCaseNo)->cS_minus1);
     target->mShell->sType = target->mShell->Conical;
     target->Calc_cS(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_cSTest()", 0.78640442297651147,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_cSTest()", 0.78640442297651147,
              target->mLoadCaseList->at(loadCaseNo)->cS_plus1);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_cSTest()", 0.74713451480663906,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_cSTest()", 0.74713451480663906,
              target->mLoadCaseList->at(loadCaseNo)->cS_minus1);
 }
 
@@ -232,20 +231,20 @@ void FlangeTest::Is_cS_validTest() {
     target->mLoadCaseList->at(loadCaseNo)->cS_minus1 = 0.1;
     target->mLoadCaseList->at(loadCaseNo)->cS_plus1 = -0.1;
     actual = target->Is_cS_valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_cS_validTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_cS_validTest()", expected, actual);
     target->mLoadCaseList->at(loadCaseNo)->cS_minus1 = -0.2;
     target->mLoadCaseList->at(loadCaseNo)->cS_plus1 = 0.2;
     actual = target->Is_cS_valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_cS_validTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_cS_validTest()", expected, actual);
     target->mLoadCaseList->at(loadCaseNo)->cS_minus1 = -0.3;
     target->mLoadCaseList->at(loadCaseNo)->cS_plus1 = -0.3;
     actual = target->Is_cS_valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_cS_validTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_cS_validTest()", expected, actual);
     expected = true;
     target->mLoadCaseList->at(loadCaseNo)->cS_minus1 = 0.4;
     target->mLoadCaseList->at(loadCaseNo)->cS_plus1 = 0.5;
     actual = target->Is_cS_valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_cS_validTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_cS_validTest()", expected, actual);
 }
 
 void FlangeTest::Calc_jMTest() {
@@ -261,11 +260,11 @@ void FlangeTest::Calc_jMTest() {
     loadCase->hH1 = 2.3;
 
     target->Calc_jM(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_jMTest()", 1,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_jMTest()", 1,
              target->mLoadCaseList->at(loadCaseNo)->jM1);
     target->mLoadCaseList->at(loadCaseNo)->F_G = -10.1;
     target->Calc_jM(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_jMTest()", -1,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_jMTest()", -1,
              target->mLoadCaseList->at(loadCaseNo)->jM1);
 }
 
@@ -276,11 +275,11 @@ void FlangeTest::Calc_PsiOptTest() {
     target->eP = 2.2;
     target->eF = 3.9;
     target->Calc_PsiOpt(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiOptTest()", 0.12820512820512819,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiOptTest()", 0.12820512820512819,
              target->mLoadCaseList->at(loadCaseNo)->PsiOpt1);
     target->mLoadCaseList->at(loadCaseNo)->jM1 = -1;
     target->Calc_PsiOpt(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiOptTest()", -0.12820512820512819,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiOptTest()", -0.12820512820512819,
              target->mLoadCaseList->at(loadCaseNo)->PsiOpt1);
 }
 
@@ -288,11 +287,11 @@ void FlangeTest::Calc_Psi0Test() {
     setupTarget();
     int loadCaseNo = 0;
     target->Calc_Psi0(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_Psi0Test()", 0,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_Psi0Test()", 0,
              target->mLoadCaseList->at(loadCaseNo)->jS);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_Psi0Test()", 0,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_Psi0Test()", 0,
              target->mLoadCaseList->at(loadCaseNo)->kM1);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_Psi0Test()", 0,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_Psi0Test()", 0,
              target->mLoadCaseList->at(loadCaseNo)->kS);
 }
 
@@ -321,9 +320,9 @@ void FlangeTest::Calc_PsiMaxTest() {
     // *tan(0.45)-0.1*2*8.8/2.2+1*1*((3.3*0.3*0.4*(1+1*1))
     // /(2.2*(cos(0.45))^3))^0.5)
     //   0.00029545994904527013
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiMaxTest()", 0.00029545994904527014,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiMaxTest()", 0.00029545994904527014,
              target->mLoadCaseList->at(loadCaseNo)->Psi_jkk1);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiMaxTest()", 0.00029545994904527014,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiMaxTest()", 0.00029545994904527014,
              target->mLoadCaseList->at(loadCaseNo)->PsiMax1);
 }
 
@@ -335,20 +334,20 @@ void FlangeTest::Is_PsiMaxMin_ValidTest() {
     target->mLoadCaseList->at(loadCaseNo)->PsiMax1 = -1.1;
     target->mLoadCaseList->at(loadCaseNo)->PsiMin1 = 0.9;
     actual = target->Is_PsiMaxMin_Valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_PsiMaxMin_ValidTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_PsiMaxMin_ValidTest()", expected, actual);
     target->mLoadCaseList->at(loadCaseNo)->PsiMax1 = -0.9;
     target->mLoadCaseList->at(loadCaseNo)->PsiMin1 = 1.1;
     actual = target->Is_PsiMaxMin_Valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_PsiMaxMin_ValidTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_PsiMaxMin_ValidTest()", expected, actual);
     target->mLoadCaseList->at(loadCaseNo)->PsiMax1 = -2.1;
     target->mLoadCaseList->at(loadCaseNo)->PsiMin1 = 2.1;
     actual = target->Is_PsiMaxMin_Valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_PsiMaxMin_ValidTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_PsiMaxMin_ValidTest()", expected, actual);
     expected = true;
     target->mLoadCaseList->at(loadCaseNo)->PsiMax1 = -0.8;
     target->mLoadCaseList->at(loadCaseNo)->PsiMin1 = 0.8;
     actual = target->Is_PsiMaxMin_Valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_PsiMaxMin_ValidTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_PsiMaxMin_ValidTest()", expected, actual);
 }
 
 void FlangeTest::Calc_PsiZTest() {
@@ -362,29 +361,29 @@ void FlangeTest::Calc_PsiZTest() {
     target->mLoadCaseList->at(loadCaseNo)->PsiMin1 = 0.5;
     target->mLoadCaseList->at(loadCaseNo)->Psi01 = 0.7;
     target->Calc_PsiZ(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 0.9,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 0.9,
              target->mLoadCaseList->at(loadCaseNo)->PsiZ1);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 1.0,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 1.0,
              target->mLoadCaseList->at(loadCaseNo)->kM1);
     target->mLoadCaseList->at(loadCaseNo)->PsiOpt1 = 0.8;
     target->Calc_PsiZ(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 0.8,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 0.8,
              target->mLoadCaseList->at(loadCaseNo)->PsiZ1);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 1.0,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 1.0,
              target->mLoadCaseList->at(loadCaseNo)->kM1);
     target->mLoadCaseList->at(loadCaseNo)->jM1 = -1;
     target->mLoadCaseList->at(loadCaseNo)->PsiOpt1 = 0.3;
     target->Calc_PsiZ(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 0.5,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 0.5,
              target->mLoadCaseList->at(loadCaseNo)->PsiZ1);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiZTest()", -1.0,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiZTest()", -1.0,
              target->mLoadCaseList->at(loadCaseNo)->kM1);
     target->mLoadCaseList->at(loadCaseNo)->jM1 = -1;
     target->mLoadCaseList->at(loadCaseNo)->PsiOpt1 = 0.6;
     target->Calc_PsiZ(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 0.6,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiZTest()", 0.6,
              target->mLoadCaseList->at(loadCaseNo)->PsiZ1);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PsiZTest()", -1.0,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PsiZTest()", -1.0,
              target->mLoadCaseList->at(loadCaseNo)->kM1);
 
     // Optimatization of kM required, TODO
@@ -417,7 +416,7 @@ void FlangeTest::Calc_WFTest() {
     target->eD = 6.6;
 
     target->Calc_WF(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_WFTest()", 368.15244856183011,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_WFTest()", 368.15244856183011,
              target->mLoadCaseList->at(loadCaseNo)->WF1);
 }
 
@@ -436,7 +435,7 @@ void FlangeTest::Calc_PhiFTest() {
     loadCase->WF1 = 7.7;
 
     target->Calc_PhiF(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_PhiFTest()", 3.2142857142857144,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PhiFTest()", 3.2142857142857144,
              target->mLoadCaseList->at(loadCaseNo)->PhiF1);
 }
 
@@ -447,11 +446,11 @@ void FlangeTest::Is_PhiF_validTest() {
     bool actual = false;
     target->mLoadCaseList->at(loadCaseNo)->PhiF1 = 2.1;
     actual = target->Is_PhiF_valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_PhiF_validTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_PhiF_validTest()", expected, actual);
     expected = true;
     target->mLoadCaseList->at(loadCaseNo)->PhiF1 = 0.1;
     actual = target->Is_PhiF_valid(loadCaseNo);
-    areEqual(target->getLastOutput(), "FlangeTest::Is_PhiF_validTest()", expected, actual);
+    areEqual(PR->getLastOutput(), "FlangeTest::Is_PhiF_validTest()", expected, actual);
 }
 
 void FlangeTest::Calc_dK1Test() {
@@ -462,10 +461,10 @@ void FlangeTest::Calc_dK1Test() {
     target->mBolt->mBoltHole->d5 = 2.1;
     target->mWasher->dW1 = 2.3;
     target->Calc_dK1();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_dK1Test()", 2.3, target->mWasher->dK1);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_dK1Test()", 2.3, target->mWasher->dK1);
     target->mWasher->dW1 = 10.9;
     target->Calc_dK1();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_dK1Test()", 10.9, target->mWasher->dK1);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_dK1Test()", 10.9, target->mWasher->dK1);
 }
 
 void FlangeTest::Calc_dK2Test() {
@@ -475,10 +474,10 @@ void FlangeTest::Calc_dK2Test() {
     target->mBolt->dB4 = 2.1;
     target->mWasher->dW2 = 2.3;
     target->Calc_dK2();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_dK2Test()", 2.1, target->mWasher->dK2);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_dK2Test()", 2.1, target->mWasher->dK2);
     target->mWasher->dW2 = 0.9;
     target->Calc_dK2();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_dK2Test()", 0.9, target->mWasher->dK2);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_dK2Test()", 0.9, target->mWasher->dK2);
 }
 
 void FlangeTest::Calc_XWTest() {
@@ -491,7 +490,7 @@ void FlangeTest::Calc_XWTest() {
     target->mWasher->bW = 171.8;
     target->mWasher->bKB = 3.123;
     target->Calc_XW();
-    areEqual(target->getLastOutput(), "FlangeTest::Calc_XWTest()", 0.000021504377065960737,
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_XWTest()", 0.000021504377065960737,
              target->mWasher->XW);
 }
 

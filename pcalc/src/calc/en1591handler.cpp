@@ -1,6 +1,7 @@
 ﻿#include "en1591handler.h"
 
 #include "calculator.h"
+#include "pcalc_report.h"
 #include "rb_allowanceservice.h"
 #include "rb_materialservice.h"
 #include "rb_qualityservice.h"
@@ -8,12 +9,10 @@
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-EN1591Handler::EN1591Handler(RB_ObjectContainer* inputOutput,
-                             RB_AllowanceService* allowService,
+EN1591Handler::EN1591Handler(RB_AllowanceService* allowService,
                              RB_MaterialService* matService,
                              RB_QualityService* qualService) {
     mCalc = NULL;
-    mInOut = inputOutput;
     mAllowService = allowService;
     mMatService = matService;
     mQualService = qualService;
@@ -27,9 +26,10 @@ EN1591Handler::~EN1591Handler() {
 void EN1591Handler::exec() {
     int flange1Type; // items << "Blind" << "Integral" << "Loose";
     int flange2Type;
-    setFlangeType(mInOut, flange1Type, flange2Type);
+    setFlangeType(flange1Type, flange2Type);
 
-    RB_ObjectContainer* inList = mInOut->getContainer("PCALC_InputList");
+    RB_ObjectContainer* inList
+            = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
 
     if (in->getValue("flange2equal").toInt() != 0) {
@@ -38,8 +38,7 @@ void EN1591Handler::exec() {
     }
 
     mCalc = new Calculator((Calculator::FlangeType)flange1Type,
-                           (Calculator::FlangeType)flange2Type,
-                           mInOut);
+                           (Calculator::FlangeType)flange2Type);
 
     setDimensions();
     setAllowances();
@@ -51,10 +50,13 @@ void EN1591Handler::exec() {
 }
 
 void EN1591Handler::setDimensions() {
-    RB_ObjectContainer* inList = mInOut->getContainer("PCALC_InputList");
+    RB_ObjectContainer* inList
+            = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
 
     mCalc->mAssembly->mNR = in->getValue("nr").toInt();
+    mCalc->mAssembly->mLeakageRate
+            = pow(10, -(in->getValue("leakagerate").toInt()));
 
     Flange* fl1 = mCalc->mAssembly->mFlange1;
     fl1->nB = in->getValue("nb").toInt();
@@ -231,7 +233,8 @@ void EN1591Handler::setQualityFactors() {
 }
 
 void EN1591Handler::setLoadCases() {
-    RB_ObjectContainer* loadList = mInOut->getContainer("PCALC_LoadCaseList");
+    RB_ObjectContainer* loadList
+            = PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
     loadList->sort(0, RB2::SortOrderAscending, RB2::MemberInteger);
     RB_ObjectIterator* iter = loadList->createIterator();
 
@@ -279,7 +282,8 @@ void EN1591Handler::setLoadCases() {
         lc->EW1 = lcIn->getValue("ew1").toDouble();
 
         // flange 2
-        RB_ObjectContainer* inList = mInOut->getContainer("PCALC_InputList");
+        RB_ObjectContainer* inList
+                = PR->getInOutContainer()->getContainer("PCALC_InputList");
         RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
 
         if (in->getValue("flange2equal").toInt() != 0) {
@@ -323,9 +327,9 @@ Calculator* EN1591Handler::getCalculator() const {
     return mCalc;
 }
 
-void EN1591Handler::setFlangeType(
-        RB_ObjectContainer* inputOutput, int& flangeType1, int& flangeType2) {
-    RB_ObjectContainer* inList = inputOutput->getContainer("PCALC_InputList");
+void EN1591Handler::setFlangeType(int& flangeType1, int& flangeType2) {
+    RB_ObjectContainer* inList
+            = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectBase* objIn = inList->getObject("name", "PCALC_Input");
     flangeType1 = objIn->getValue("typeflange1_id").toInt();
     flangeType2 = objIn->getValue("typeflange2_id").toInt();

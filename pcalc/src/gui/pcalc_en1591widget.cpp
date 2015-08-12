@@ -14,11 +14,12 @@
 #include <QTransform>
 
 #include "en1591handler.h"
+#include "en1591_unittestfactory.h"
 #include "pcalc_dialogfactory.h"
 #include "pcalc_inputoutput.h"
 #include "pcalc_modelfactory.h"
 #include "pcalc_objectfactory.h"
-#include "en1591_unittestfactory.h"
+#include "pcalc_report.h"
 // #include "peng_graphicsview.h"
 
 
@@ -28,16 +29,13 @@
 PCALC_EN1591Widget::PCALC_EN1591Widget(QWidget *parent)
                                 : RB_Widget(parent) {
     setupUi(this);
-
-    mInputOutput = NULL;
 }
 
 /**
  * Destructor
  */
 PCALC_EN1591Widget::~PCALC_EN1591Widget() {
-    delete mInputOutput;
-    mInputOutput = NULL;
+    // nothing
 }
 
 RB_String PCALC_EN1591Widget::getSaveAsFileName() {
@@ -70,6 +68,21 @@ void PCALC_EN1591Widget::init() {
                 PCALC_ModelFactory::ModelEN1591LoadCase);
     mShellModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelEN1591Shell);
+
+    // Required because not formatTableView() for these models
+    connect(mBoltNutWasherModel,
+            SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mBoltNutWasherModel, SIGNAL(modelBeforeSubmitted()),
+            this, SLOT(slotDataIsSaved()));
+    connect(mFlangeModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mGasketModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mLoadCaseModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mShellModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
 
     //
     // 2. Set relations and mapper for line edits etc.
@@ -104,6 +117,13 @@ void PCALC_EN1591Widget::init() {
                               mFlangeModel->fieldIndex("nr"));
     mFlangeMapper->addMapping(sbnB, mFlangeModel->fieldIndex("nb"));
     RB_StringList items;
+    items << "10e0" << "10e-1" << "10e-2" << "10e-3" << "10e-4" << "10e-5"
+              << "10e-6" << "10e-7" << "10e-8";
+    cbLeakageRate->setModel(new QStringListModel(items, this));
+    mFlangeMapper->addMapping(cbLeakageRate,
+                              mFlangeModel->fieldIndex("leakagerate"),
+                              "currentIndex");
+    items.clear();
     items << "Blind" << "Integral" << "Loose";
     cbTypeFlange_1->setModel(new QStringListModel(items, this));
 //    mFlangeModel->setTextList(mFlangeModel->fieldIndex("typeflange1_id"),
@@ -542,15 +562,16 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
     QString tdc = "</td>";
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
+    PR->clear();
     getTextEdit()->clear();
-    setInputObject();
+    setInput();
 
     QString dateTimeStr = QDateTime::currentDateTime().toString(Qt::ISODate);
 
     // continue here with first calculation
     // second the material, allow=>1, qual service=>1
 
-    RedBag::Calc::EN1591::EN1591Handler handler(mInputOutput, NULL, NULL, NULL);
+    RedBag::Calc::EN1591::EN1591Handler handler(NULL, NULL, NULL);
     handler.exec();
 
     // Create output report
@@ -558,53 +579,60 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
     QString outputStr;
     outputStr.append(po + "-- Start calculation: " + dateTimeStr + pc);
     outputStr.append(tbo);
-    outputStr.append(tro + "<td width='15%'>&nbsp;</td>"
-                           "<td width='10%'><strong>INPUT</strong></td>"
-                           "<td width='10%'>&nbsp;</td>"
-                           "<td width='65%'>&nbsp;</td>"
+    outputStr.append(tro + "<td width='10%'>&nbsp;</td>"
+                           "<td width='7%'><strong>CALCULATION</strong></td>"
+                           "<td width='8%'>&nbsp;</td>"
+                           "<td width='75%'>&nbsp;</td>"
                      + trc);
-    // input
-    RB_ObjectContainer* inList = mInputOutput->getContainer("PCALC_InputList");
-    RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
-    int memberCount = in->countMember();
+    if (!cbLastValuesOnly->isChecked()) {
+        outputStr.append(tro + tdo + tdc
+                         + tdo + "<strong>INPUT</strong>" + tdc
+                         + tdo + tdc+ tdo + tdc + trc);
+        // input
+        RB_ObjectContainer* inList
+                = PR->getInOutContainer()->getContainer("PCALC_InputList");
+        RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
+        int memberCount = in->countMember();
 
-    for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
-        RB_ObjectMember* mem = in->getMember(i);
-        outputStr.append(tro + tdo + "Input:" + tdc
-                    + tdo + mem->getName() + " = " + tdc
-                    + tdo + mem->getValue().toString() + tdc + tdo + tdc + trc);
-
-    }
-
-    outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
-    outputStr.append(tro + tdo + tdc + tdo + "<strong>LOADCASES</strong>"
-                     + tdc + tdo + tdc + tdo + tdc + trc);
-
-    RB_ObjectContainer* loadCaseList =
-            mInputOutput->getContainer("PCALC_LoadCaseList");
-    loadCaseList->sort(0, RB2::SortOrderAscending, RB2::MemberInteger);
-    RB_ObjectIterator* iterLoad = loadCaseList->createIterator();
-
-    for (iterLoad->first(); !iterLoad->isDone(); iterLoad->next()) {
-        in = iterLoad->currentObject();
-        memberCount = in->countMember();
-
-        for (int i = 0; i < memberCount; ++i) {
+        for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
             RB_ObjectMember* mem = in->getMember(i);
             outputStr.append(tro + tdo + "Input:" + tdc
                         + tdo + mem->getName() + " = " + tdc
-                        + tdo + mem->getValue().toString()) + tdc + trc;
-        }
-    }
+                        + tdo + mem->getValue().toString() + tdc + tdo + tdc + trc);
 
-    delete iterLoad;
+        }
+
+        outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
+        outputStr.append(tro + tdo + tdc + tdo + "<strong>LOADCASES</strong>"
+                         + tdc + tdo + tdc + tdo + tdc + trc);
+
+        RB_ObjectContainer* loadCaseList =
+                PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
+        loadCaseList->sort(0, RB2::SortOrderAscending, RB2::MemberInteger);
+        RB_ObjectIterator* iterLoad = loadCaseList->createIterator();
+
+        for (iterLoad->first(); !iterLoad->isDone(); iterLoad->next()) {
+            in = iterLoad->currentObject();
+            memberCount = in->countMember();
+
+            for (int i = 0; i < memberCount; ++i) {
+                RB_ObjectMember* mem = in->getMember(i);
+                outputStr.append(tro + tdo + "Input:" + tdc
+                            + tdo + mem->getName() + " = " + tdc
+                            + tdo + mem->getValue().toString()) + tdc + trc;
+            }
+        }
+
+        delete iterLoad;
+    }
 
     outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
     outputStr.append(tro + tdo + tdc + tdo + "<strong>OUTPUT</strong>"
                      + tdc + tdo + tdc + tdo + tdc + trc);
 
     // output
-    RB_ObjectContainer* outList = mInputOutput->getContainer("PCALC_OutputList");
+    RB_ObjectContainer* outList
+            = PR->getInOutContainer()->getContainer("PCALC_OutputList");
     RB_ObjectIterator* iter = outList->createIterator();
 
     for (iter->first(); !iter->isDone(); iter->next()) {
@@ -636,13 +664,15 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
 
 void PCALC_EN1591Widget::on_pbUnitTest_clicked() {
     QApplication::setOverrideCursor(Qt::WaitCursor);
+    PR->clear();
     getTextEdit()->clear();
-    createInputOutputObject();
+    setSettings();
 
-    RedBag::Calc::EN1591::EN1591_UnitTestFactory testFactory(mInputOutput);
+    RedBag::Calc::EN1591::EN1591_UnitTestFactory testFactory;
     testFactory.exec();
 
-    RB_ObjectContainer* outList = mInputOutput->getContainer("PCALC_OutputList");
+    RB_ObjectContainer* outList =
+            PR->getInOutContainer()->getContainer("PCALC_OutputList");
     RB_ObjectIterator* iter = outList->createIterator();
     RB_String str;
 
@@ -736,10 +766,11 @@ void PCALC_EN1591Widget::slotHandleParentRowChanged() {
     mShellModel->slotChangeCurrentRow(idx, QModelIndex());
 }
 
-void PCALC_EN1591Widget::setInputObject() {
-    createInputOutputObject();
+void PCALC_EN1591Widget::setInput() {
+    setSettings();
 
-    RB_ObjectContainer* inList = mInputOutput->getContainer("PCALC_InputList");
+    RB_ObjectContainer* inList
+            = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectAtomic* objIn = new RB_ObjectAtomic("", inList, "PCALC_Input");
     inList->addObject(objIn);
 
@@ -752,6 +783,7 @@ void PCALC_EN1591Widget::setInputObject() {
     // flanges
     addObjectMemberVariable(objIn, "nr", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "nb", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "leakagerate", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "typeflange1_id", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d01", "-", mFlangeModel);
@@ -866,7 +898,7 @@ void PCALC_EN1591Widget::setInputObject() {
 
     // loadcase
     RB_ObjectContainer* loadCaseList;
-    loadCaseList = mInputOutput->getContainer("PCALC_LoadCaseList");
+    loadCaseList = PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
     int rowCount = mLoadCaseModel->rowCount();
 
     for (int row = 0; row < rowCount; ++row) {
@@ -934,14 +966,9 @@ void PCALC_EN1591Widget::setInputObject() {
     }
 }
 
-void PCALC_EN1591Widget::createInputOutputObject() {
-    if (mInputOutput) {
-        delete mInputOutput;
-    }
-
-    mInputOutput = new PCALC_InputOutput();
-    RB_ObjectContainer* inList;
-    inList = mInputOutput->getContainer("PCALC_InputList");
+void PCALC_EN1591Widget::setSettings() {
+    RB_ObjectContainer* inList
+            = PR->getInOutContainer()->getContainer("PCALC_InputList");
 
     // Add setting object to input list
     RB_ObjectAtomic* obj = new RB_ObjectAtomic("", inList, "PCALC_Setting");

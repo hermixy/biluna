@@ -15,7 +15,7 @@ class Flange_Blind : public Flange {
     // nothing
 
 public:
-    Flange_Blind(int flangeNo, RB_ObjectContainer* inputOutput);
+    Flange_Blind(int flangeNo);
     virtual ~Flange_Blind();
 
     virtual bool Is_flange_Valid();

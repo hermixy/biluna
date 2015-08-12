@@ -89,20 +89,16 @@ public:
     void debug(const RB_String& text); // same as print
 
     void append(RB_String& str, const char* format ...);
-    void addObjectBaseCreated(RB_ObjectBase* obj);
-    void addObjectBaseDeleted(RB_ObjectBase* obj);
     void addMemberCreated();
     void addMemberDeleted();
     void addObjectCreated(RB_Object* obj);
     void addObjectDeleted(RB_Object* obj);
 
-    void printObjectBaseCreated();
-    void printObjectBaseDeleted();
     void printMemberCreated();
     void printMemberDeleted();
-    void printObjectBaseList();
-    void printObject(RB_ObjectBase* obj,
-                     RB2::ResolveLevel level = RB2::ResolveNone);
+    void printObject(RB_Object* obj);
+    void printObjectBase(RB_ObjectBase* obj,
+                         RB2::ResolveLevel level = RB2::ResolveNone);
     void printMessages();
     void printObjectCreated();
     void printObjectDeleted();
@@ -117,8 +113,6 @@ private:
 //    FILE* stream;
     
     // to test memory leak
-    int objectBaseCreatedCount;
-    int objectBaseDeletedCount;
     int memberCreatedCount;
     int memberDeletedCount;
     int objectCreatedCount;
@@ -134,7 +128,6 @@ private:
     int msgDebuggingCount;
 
     std::list<RB_Object*> mObjectList;
-    std::list<RB_ObjectBase*> mObjectBaseList;
 };
 
 #endif

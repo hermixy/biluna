@@ -10,7 +10,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class WasherTest : public RB_UnitTest {
 
 public:
-    WasherTest(RB_ObjectContainer* inputOutput);
+    WasherTest();
     virtual ~WasherTest();
 
     void exec();

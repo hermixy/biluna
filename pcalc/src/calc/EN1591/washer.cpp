@@ -1,7 +1,8 @@
 ﻿#include "washer.h"
+#include "pcalc_report.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-Washer_IN::Washer_IN(RB_ObjectContainer* inputOutput) : RB_Report(inputOutput) {
+Washer_IN::Washer_IN() : RB_Object() {
     eW = 0;
     dW1 = 0;
     dW2 = 0;
@@ -11,8 +12,7 @@ Washer_IN::~Washer_IN() {
     // nothing
 }
 
-Washer_OUT::Washer_OUT(RB_ObjectContainer* inputOutput)
-            : Washer_IN(inputOutput) {
+Washer_OUT::Washer_OUT() : Washer_IN() {
     bW = 0.0;
     dW = 0.0;
     XW = 0.0;
@@ -31,7 +31,7 @@ bool Washer::isPresent() {
 void Washer::Calc_bW() {
     if (isPresent())     {
         bW = 0.5 * (dW2 - dW1);
-        addDetail("Formula 44", "bW", "0.5 * (dW2 - dW1)", bW, "mm");
+        PR->addDetail("Formula 44", "bW", "0.5 * (dW2 - dW1)", bW, "mm");
     }
 }
 
@@ -41,7 +41,7 @@ void Washer::Calc_bW() {
 void Washer::Calc_dW() {
     if (isPresent())     {
         dW = 0.5 * (dW2 + dW1);
-        addDetail("Formula 45", "dW", "0.5 * (dW2 + dW1)", dW, "mm");
+        PR->addDetail("Formula 45", "dW", "0.5 * (dW2 + dW1)", dW, "mm");
     }
 }
 
@@ -51,7 +51,7 @@ void Washer::Calc_dW() {
 void Washer::Calc_bKB() {
     if (isPresent())     {
         bKB = (dK2 - dW1) / 2;
-        addDetail("Formula 48", "bKB", "(dK2 - dW1) / 2", bKB, "mm");
+        PR->addDetail("Formula 48", "bKB", "(dK2 - dW1) / 2", bKB, "mm");
     }
 }
 

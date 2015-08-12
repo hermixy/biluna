@@ -2,10 +2,8 @@
 NAMESPACE_REDBAG_CALC
 
 
-RB_TableMathTest::RB_TableMathTest(RB_ObjectContainer *inputOutput)
-        : RB_UnitTest() {
+RB_TableMathTest::RB_TableMathTest() : RB_UnitTest() {
     target = NULL;
-    mInputOutput = inputOutput;
 }
 
 RB_TableMathTest::~RB_TableMathTest() {
@@ -19,7 +17,7 @@ void RB_TableMathTest::exec() {
 
 void RB_TableMathTest::setupTarget() {
     if (!target) {
-        target = new RB_TableMath(mInputOutput);
+        target = new RB_TableMath();
     }
 }
 
@@ -33,7 +31,7 @@ void RB_TableMathTest::getBilinearValueTest() {
                                           15.0, 20.0, 210,
                                           14.0, 21.0, 162.0,
                                           15.0, 21.0, 95.0);
-    areEqual(target->getLastOutput(),
+    areEqual(PR->getLastOutput(),
              "RB_TableMathTest::Calc_getBilinearValueTest()", 146.1, res);
 }
 

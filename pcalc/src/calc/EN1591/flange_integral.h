@@ -14,7 +14,7 @@ class Flange_Integral : public Flange {
     // nothing
 
 public:
-    Flange_Integral(int flangeNo, RB_ObjectContainer* inputOutput);
+    Flange_Integral(int flangeNo);
     virtual ~Flange_Integral();
 
     virtual bool Is_flange_Valid();

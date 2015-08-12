@@ -1,11 +1,11 @@
 ﻿#include "gasket.h"
+#include "pcalc_report.h"
 #include "table16property.h"
 #include "tablegsimple.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-Gasket_IN::Gasket_IN(RB_ObjectContainer* inputOutput)
-            : RB_Report(inputOutput){
+Gasket_IN::Gasket_IN() : RB_Object(){
     setName("PCALC EN1591 Gasket");
 
     dG0 = 0;
@@ -114,8 +114,7 @@ bool Gasket_IN::isMetalic() {
     }
 }
 
-Gasket_OUT::Gasket_OUT(RB_ObjectContainer *inputOutput)
-            : Gasket_IN(inputOutput) {
+Gasket_OUT::Gasket_OUT() : Gasket_IN() {
     bGi = 0.0;
     bGiOct = 0.0;
     bGp = 0.0;
@@ -125,9 +124,9 @@ Gasket_OUT::Gasket_OUT(RB_ObjectContainer *inputOutput)
     XG = 0.0;
 }
 
-Gasket::Gasket(RB_ObjectContainer *inputOutput) : Gasket_OUT(inputOutput) {
-    mTable16Property = new Table16Property(inputOutput);
-    mTableGSimple = new TableGSimple(inputOutput);
+Gasket::Gasket() : Gasket_OUT() {
+    mTable16Property = new Table16Property();
+    mTableGSimple = new TableGSimple();
 }
 
 Gasket::~Gasket() {
@@ -142,7 +141,7 @@ Gasket::~Gasket() {
  */
 void Gasket::Calc_bGt() {
     bGt = 0.5 * (dG2 - dG1);
-    addDetail("Formula 51", "bGt", "0.5 * (dG2 - dG1)", bGt, "mm");
+    PR->addDetail("Formula 51", "bGt", "0.5 * (dG2 - dG1)", bGt, "mm");
 }
 
 /**
@@ -151,7 +150,7 @@ void Gasket::Calc_bGt() {
  */
 void Gasket::Calc_dGt() {
     dGt = 0.5 * (dG2 + dG1);
-    addDetail("Formula 52", "dGt", "0.5 * (dG2 + dG1)", dGt, "mm");
+    PR->addDetail("Formula 52", "dGt", "0.5 * (dG2 + dG1)", dGt, "mm");
 
     if (dG0 <= 0.0)     {
         dG0 = dGt;
@@ -163,7 +162,8 @@ void Gasket::Calc_dGt() {
  */
 void Gasket::Calc_AGt() {
     AGt = M_PI * bGt * dGt;
-    addDetail("Formula 53", "AGt", "Math.PI * bGt * dGt", AGt, "mm^2");
+    PR->addDetail("Formula 53", "AGt", "Math.PI * bGt * dGt", AGt, "mm^2",
+                  "pi * " + QN(bGt) + " + " + QN(dGt));
 }
 
 /**
@@ -171,7 +171,7 @@ void Gasket::Calc_AGt() {
  * set for all loadcases because it is not recalculated refer 6.4.3
  * @param i load case number not used
  */
-void Gasket::Calc_bGe(int /* i */) {
+void Gasket::Calc_bGe(int /* loadCaseNo */) {
     double tmpbGe = std::min(bGi, bGt);
 
     // because bGe is not recalculated
@@ -179,14 +179,14 @@ void Gasket::Calc_bGe(int /* i */) {
                 it != mLoadCaseList->end(); it++) {
         (*it)->bGe = tmpbGe;
     }
-    addDetail("Formula 55", "bGe", "Min(bGi, bGt)", tmpbGe, "mm");
+    PR->addDetail("Formula 55", "bGe", "Min(bGi, bGt)", tmpbGe, "mm");
 }
 
 /**
  * @brief Formula 56: Effective gasket area, loadcase number is only 0
  * @param i load case number
  */
-void Gasket::Calc_AGe(int /* i */) {
+void Gasket::Calc_AGe(int /* loadCaseNo */) {
     // bGe dGe is not recalculated
     double tmpAGe = M_PI * mLoadCaseList->at(0)->bGe * mLoadCaseList->at(0)->dGe;
 
@@ -195,7 +195,7 @@ void Gasket::Calc_AGe(int /* i */) {
                 it != mLoadCaseList->end(); it++) {
         (*it)->AGe = tmpAGe;
     }
-    addDetail("Formula 56", "AGe", "PI * bGe * dGe", tmpAGe, "mm^2");
+    PR->addDetail("Formula 56", "AGe", "PI * bGe * dGe", tmpAGe, "mm^2");
 }
 
 /**
@@ -207,7 +207,7 @@ void Gasket::Calc_E_G(int loadCaseNo) {
             = gasketCompressedElasticity(mLoadCaseList->at(loadCaseNo));
 
     // TODO move addDetail() to relevant table
-    addDetail("Formula 58",
+    PR->addDetail("Formula 58",
               "E_G", "gasketCompressedElasticity(loadCase)",
               mLoadCaseList->at(loadCaseNo)->E_G, "N/mm^2");
 }
@@ -221,7 +221,7 @@ void Gasket::Calc_eG(int loadCaseNo) {
             =  gasketCompressedThickness(mLoadCaseList->at(loadCaseNo));
 
     // TODO move addDetail() to relevant table
-    addDetail("With Formula 63",
+    PR->addDetail("With Formula 63",
               "eG", "gasketCompressedThickness(loadCase)",
               mLoadCaseList->at(loadCaseNo)->eG, "mm");
 }
@@ -234,7 +234,7 @@ void Gasket::Calc_Q_smax(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->Q_smax
             = gasketMaximumLoad(mLoadCaseList->at(loadCaseNo));
     // addDetail moved to table 16
-//    addDetail("With Formula 65, 69, 70, 74, 75",
+//    PR->addDetail("With Formula 65, 69, 70, 74, 75",
 //              "Q_smax", "gasketMaximumLoad(loadCase)",
 //              mLoadCaseList->at(loadCaseNo)->Q_smax, "N/mm^2");
 }
@@ -243,11 +243,11 @@ void Gasket::Calc_Q_smax(int loadCaseNo) {
  * @brief Formula 63: Axial flexibility modulus of gasket
  * @param i load case number
  */
-void Gasket::Calc_XG(int /* i */) {
+void Gasket::Calc_XG(int /* loadCaseNo */) {
     XG = (mLoadCaseList->at(0)->eG / AGt)
             * ((bGt + mLoadCaseList->at(0)->eG / 2)
                / (mLoadCaseList->at(0)->bGe + mLoadCaseList->at(0)->eG / 2));
-    addDetail("Formula 63",
+    PR->addDetail("Formula 63",
               "XG", "(eG / AGt) * ((bGt + eG / 2) / (bGe + eG / 2))",
               XG, "N/mm^2");
 }
@@ -259,11 +259,16 @@ void Gasket::Calc_XG(int /* i */) {
 void Gasket::Calc_AQ(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->AQ
             = pow(mLoadCaseList->at(loadCaseNo)->dGe, 2) * M_PI / 4;
-    addDetail("Formula 90",
+    PR->addDetail("Formula 90",
               "AQ", "dGe ^ 2 * PI / 4",
               mLoadCaseList->at(loadCaseNo)->AQ, "mm^2",
-              qn(mLoadCaseList->at(loadCaseNo)->dGe) + " ^ 2 * pi / 4",
-              loadCaseNo);
+              QN(mLoadCaseList->at(loadCaseNo)->dGe) + " ^ 2 * pi / 4",
+                  loadCaseNo);
+}
+
+void Gasket::Calc_P_QR(int loadCaseNo) {
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    loadCase->P_QR = gasketCreepFactor(loadCase);
 }
 
 /**
@@ -322,6 +327,22 @@ double Gasket::gasketMaximumLoad(LoadCase* loadCase) {
     }
 
     return loadCase->Q_smax;
+}
+
+/**
+ * @brief Gasket creep factor P_QR
+ * @param loadCase
+ * @return
+ */
+double Gasket::gasketCreepFactor(LoadCase* loadCase) {
+    if (mTable16Property->isGasketMaterialCodeExisting(matCode)) {
+        loadCase->P_QR = mTable16Property->getTable16_P_QR(matCode,
+                                                           loadCase->TG);
+    } else {
+        loadCase->P_QR = 0.0;
+    }
+
+    return loadCase->P_QR;
 }
 
 

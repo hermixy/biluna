@@ -10,7 +10,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class ForceTest : public RB_UnitTest {
 
 public:
-    ForceTest(RB_ObjectContainer* inputOutput);
+    ForceTest();
     virtual ~ForceTest();
 
     void exec();

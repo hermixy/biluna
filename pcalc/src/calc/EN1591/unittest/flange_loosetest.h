@@ -10,7 +10,7 @@ NAMESPACE_REDBAG_CALC_EN1591
 class Flange_LooseTest : public RB_UnitTest {
 
 public:
-    Flange_LooseTest(RB_ObjectContainer* inputOutput);
+    Flange_LooseTest();
     virtual ~Flange_LooseTest();
 
     void exec();

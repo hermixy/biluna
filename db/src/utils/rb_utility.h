@@ -11,7 +11,7 @@ public:
     RB_Utility();
     virtual ~RB_Utility();
 
-    virtual void refresh() { }
+    virtual void refresh() = 0;
 
 protected:
     RB_UtilityFactory* mUtilityFactory;

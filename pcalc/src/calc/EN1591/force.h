@@ -2,14 +2,14 @@
 #define FORCE_H
 
 #include "rb_namespace.h"
-#include "rb_report.h"
+#include "rb_object.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Force_IN : public RB_Report {
+class Force_IN : public RB_Object {
 
 public:
-    Force_IN(RB_ObjectContainer* inputOutput);
+    Force_IN();
     virtual ~Force_IN();
 
     double F_X;
@@ -26,7 +26,7 @@ public:
 class Force_OUT : public Force_IN {
 
 public:
-    Force_OUT(RB_ObjectContainer* inputOutput);
+    Force_OUT();
 
     double F_LI;
     double M_AI;
@@ -36,7 +36,7 @@ public:
 class Force : public Force_OUT {
 
 public:
-    Force(RB_ObjectContainer* inputOutput);
+    Force();
 
     void Calc_F_LI();
     void Calc_M_AI();

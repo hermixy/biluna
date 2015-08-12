@@ -2,8 +2,7 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-LoadCase_IN::LoadCase_IN(RB_ObjectContainer *inputOutput)
-            : RB_Report(inputOutput) {
+LoadCase_IN::LoadCase_IN() : RB_Object() {
     setName("PCALC EN1591 LoadCase");
 
     mForce = NULL; // created from outside
@@ -56,8 +55,7 @@ LoadCase_IN::~LoadCase_IN() {
     mForce = NULL;
 }
 
-LoadCase_OUT::LoadCase_OUT(RB_ObjectContainer* inputOutput)
-        : LoadCase_IN(inputOutput) {
+LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     EGm = 0.0;
     E_G = 0.0;
     AGe = 0.0;

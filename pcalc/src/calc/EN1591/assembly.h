@@ -11,6 +11,7 @@
 #include "loadcase.h"
 #include "loadcaselist.h"
 #include "rb_namespace.h"
+#include "rb_object.h"
 #include "shell.h"
 #include "tableeproperty.h"
 #include "tablegproperty.h"
@@ -18,10 +19,10 @@
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Assembly_IN : public RB_Report {
+class Assembly_IN : public RB_Object {
 
 public:
-    Assembly_IN(RB_ObjectContainer* inputOutput);
+    Assembly_IN();
     virtual ~Assembly_IN();
 
     Bolt* mBolt;
@@ -30,13 +31,14 @@ public:
     Flange* mFlange2;
     LoadCaseList* mLoadCaseList;
     double mNR;
+    double mLeakageRate;
 };
 
 
 class Assembly_OUT : public Assembly_IN {
 
 public :
-    Assembly_OUT(RB_ObjectContainer* inputOutput);
+    Assembly_OUT();
     virtual ~Assembly_OUT() { }
 
     double mPhiMax;
@@ -46,7 +48,7 @@ public :
 class Assembly : public Assembly_OUT {
 
 public:
-    Assembly(RB_ObjectContainer* inputOutput);
+    Assembly();
 
     void Calc_F_GInitial(int loadCaseNo);
     void Calc_dGe(int loadCaseNo, Gasket *gasket);
@@ -60,6 +62,7 @@ public:
     void Calc_YG(int loadCaseNo);
     void Calc_YQ(int loadCaseNo);
     void Calc_YR(int loadCaseNo);
+    void Calc_Q_A_Qsmin(int loadCaseNo);
     void Calc_F_Gmin(int loadCaseNo);
     void Calc_delta_eGc(int loadCaseNo);
     void Calc_F_Gdelta(int loadCaseNo);

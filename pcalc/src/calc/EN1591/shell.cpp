@@ -1,7 +1,7 @@
 ﻿#include "shell.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-Shell_IN::Shell_IN(RB_ObjectContainer *inputOutput) : RB_Report(inputOutput) {
+Shell_IN::Shell_IN() : RB_Object() {
     setName("PCALC EN1591 Shell");
 
     shellNumber = 0;

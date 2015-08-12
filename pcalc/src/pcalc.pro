@@ -44,7 +44,8 @@ INCLUDEPATH += \
     ../src/model \
     ../src/model/EN1591 \
     ../src/operations \
-    ../src/utils
+    ../src/utils \
+    ../src/utils/EN1591
 
 # Carefull with the sequence of the libraries, most basic one last
 CONFIG(debug, debug|release) {

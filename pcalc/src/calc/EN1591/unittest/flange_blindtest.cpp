@@ -2,10 +2,8 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-Flange_BlindTest::Flange_BlindTest(RB_ObjectContainer *inputOutput)
-            : RB_UnitTest() {
+Flange_BlindTest::Flange_BlindTest() : RB_UnitTest() {
     target = NULL;
-    mInputOutput = inputOutput;
 }
 
 Flange_BlindTest::~Flange_BlindTest() {
@@ -47,9 +45,9 @@ void Flange_BlindTest::exec() {
 void Flange_BlindTest::setupTarget() {
     if (!target) {
         //IN similar to integral flange
-        target = new Flange_Blind(1, mInputOutput);
-        target->mGasket = new Gasket(mInputOutput);
-        target->mLoadCaseList = new LoadCaseList(mInputOutput);
+        target = new Flange_Blind(1);
+        target->mGasket = new Gasket();
+        target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
     }
 
@@ -67,58 +65,58 @@ void Flange_BlindTest::Calc_ZFTest() {
     target->e0 = 6.9;
     target->rho = 1.2;
     target->Calc_ZF();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_ZFTest()", 0.038276423029374368,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_ZFTest()", 0.038276423029374368,
              target->ZF);
 }
 
 void Flange_BlindTest::Calc_ZLTest() {
     setupTarget();
     target->Calc_ZL();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_ZLTest()", 0.0, target->ZL);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_ZLTest()", 0.0, target->ZL);
 }
 
 void Flange_BlindTest::Calc_bFTest() {
     setupTarget();
     target->d5e = 15.3;
     target->Calc_bF();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_bFTest()", 16.25, target->bF);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_bFTest()", 16.25, target->bF);
 }
 
 void Flange_BlindTest::Calc_dETest() {
     setupTarget();
     target->d0 = 17.3;
     target->Calc_dE();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_dETest()", 17.3, target->dE);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_dETest()", 17.3, target->dE);
 }
 
 void Flange_BlindTest::Calc_dFTest() {
     setupTarget();
     target->Calc_dF();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_dFTest()", 351.65, target->dF);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_dFTest()", 351.65, target->dF);
 }
 
 void Flange_BlindTest::Calc_dLTest() {
     setupTarget();
     target->Calc_dL();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_dLTest()", 0.0, target->dL);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_dLTest()", 0.0, target->dL);
 }
 
 void Flange_BlindTest::Calc_eETest() {
     setupTarget();
     target->Calc_eE();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_eETest()", 0.0, target->eE);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_eETest()", 0.0, target->eE);
 }
 
 void Flange_BlindTest::Calc_AFTest() {
     setupTarget();
     target->Calc_AF();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_AFTest()", 684.635, target->AF);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_AFTest()", 684.635, target->AF);
 }
 
 void Flange_BlindTest::Calc_eLTest() {
     setupTarget();
     target->Calc_AL();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_eLTest()", 0.0, target->AL);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_eLTest()", 0.0, target->AL);
 }
 
 void Flange_BlindTest::Calc_hGTest() {
@@ -127,7 +125,7 @@ void Flange_BlindTest::Calc_hGTest() {
     target->d3e = 418.23;
     target->mLoadCaseList->at(loadCaseNo)->dGe = 348.6;
     target->Calc_hG(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_hGTest()", 34.815,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hGTest()", 34.815,
              target->mLoadCaseList->at(loadCaseNo)->hG1);
 }
 
@@ -137,7 +135,7 @@ void Flange_BlindTest::Calc_hHTest() {
     target->d3e = 418.23;
     target->dE = 397.2;
     target->Calc_hH(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_hHTest()", 10.515,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hHTest()", 10.515,
              target->mLoadCaseList->at(loadCaseNo)->hH1);
 }
 
@@ -145,7 +143,7 @@ void Flange_BlindTest::Calc_hLTest() {
     setupTarget();
     int loadCaseNo = 0;
     target->Calc_hL(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_hLTest()", 0.0,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hLTest()", 0.0,
              target->mLoadCaseList->at(loadCaseNo)->hL1);
 }
 
@@ -157,7 +155,7 @@ void Flange_BlindTest::Calc_hPTest() {
     int loadCaseNo = 0;
     target->mLoadCaseList->at(loadCaseNo)->dGe = 150.14;
     target->Calc_hP(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_hPTest()", 41.829879640183911,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hPTest()", 41.829879640183911,
              target->hP, 0.000001);
 }
 
@@ -168,7 +166,7 @@ void Flange_BlindTest::Calc_hQTest() {
     int loadCaseNo = 0;
     target->mLoadCaseList->at(loadCaseNo)->dGe = 7.3;
     target->Calc_hQ(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_hQTest()", -16.35146231289276, target->hQ);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hQTest()", -16.35146231289276, target->hQ);
 }
 
 void Flange_BlindTest::Calc_hRTest() {
@@ -176,7 +174,7 @@ void Flange_BlindTest::Calc_hRTest() {
     target->dE = 12.1;
     target->rho = 1.65;
     target->Calc_hR();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_hRTest()", -3.1976201101327963,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hRTest()", -3.1976201101327963,
              target->hR);
 }
 
@@ -185,7 +183,7 @@ void Flange_BlindTest::Calc_rhoTest() {
     target->d9 = 12.1;
     target->dE = 7.3;
     target->Calc_rho();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_rhoTest()", 1.6575342465753424,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_rhoTest()", 1.6575342465753424,
              target->rho);
 }
 
@@ -194,7 +192,7 @@ void Flange_BlindTest::Is_d0_ValidTest() {
     target->d0 = 23.5;
     target->mGasket->dG1 = 24.5;
     bool ret = target->Is_d0_Valid();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_Is_d0_ValidTest()", 1,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_Is_d0_ValidTest()", 1,
              static_cast<int>(ret));
 }
 
@@ -211,7 +209,7 @@ void Flange_BlindTest::Calc_WFTest() {
     target->e0 = 2.0;
 
     target->Calc_WF(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_WFTest()", -86.55276256199096,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_WFTest()", -86.55276256199096,
              target->mLoadCaseList->at(loadCaseNo)->WF1);
 }
 
@@ -232,7 +230,7 @@ void Flange_BlindTest::Calc_PhiFTest() {
 
 
     target->Calc_PhiF(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_PhiFTest", 81.192248062015508,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_PhiFTest", 81.192248062015508,
              target->mLoadCaseList->at(loadCaseNo)->PhiF1);
 }
 
@@ -242,15 +240,15 @@ void Flange_BlindTest::Is_flange_ValidTest() {
     target->bF = 1.2;
     target->eF = 2.3;
     actual = target->Is_flange_Valid();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_Is_flange_ValidTest()", 1,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_Is_flange_ValidTest()", 1,
              static_cast<int>(actual));
     target->bF = 0.12;
     actual = target->Is_flange_Valid();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_Is_flange_ValidTest()", 0,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_Is_flange_ValidTest()", 0,
              static_cast<int>(actual));
     target->bF = 120.0;
     actual = target->Is_flange_Valid();
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_Is_flange_ValidTest()", 0,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_Is_flange_ValidTest()", 0,
              static_cast<int>(actual));
 }
 
@@ -265,7 +263,7 @@ void Flange_BlindTest::Calc_WXTest() {
     target->eF = 9.5;
     target->eX = 8.3;
     target->Calc_WX(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_WXTest()", -3119.8358678266227,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_WXTest()", -3119.8358678266227,
              target->mLoadCaseList->at(loadCaseNo)->WX1);
 }
 
@@ -279,7 +277,7 @@ void Flange_BlindTest::Calc_PhiXTest() {
     loadCase->WX1 = 3.2;
 
     target->Calc_PhiX(loadCaseNo);
-    areEqual(target->getLastOutput(), "Flange_BlindTest::Calc_Calc_PhiXTest()", 2.615625,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_Calc_PhiXTest()", 2.615625,
              target->mLoadCaseList->at(loadCaseNo)->PhiX1);
 }
 

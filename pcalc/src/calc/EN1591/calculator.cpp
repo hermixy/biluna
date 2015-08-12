@@ -2,18 +2,17 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-Calculator::Calculator(FlangeType flange1Type, FlangeType flange2Type,
-                       RB_ObjectContainer* inputOutput)
-            : RB_Report(inputOutput) {
+Calculator::Calculator(FlangeType flange1Type, FlangeType flange2Type)
+            : RB_Object() {
     setName("PCALC EN1591 Calculator");
 
-    mAssembly = new Assembly(inputOutput);
+    mAssembly = new Assembly();
     mWriteCalcFromNumber = 0;
     mIterNo = 0;
     mIsFirstApproximation = false;
     mLoadCaseCount = 0;
 
-    createAssembly(flange1Type, flange2Type, inputOutput);
+    createAssembly(flange1Type, flange2Type);
 }
 
 Calculator::~Calculator() {
@@ -22,21 +21,20 @@ Calculator::~Calculator() {
 }
 
 void Calculator::createAssembly(FlangeType flange1Type,
-                                FlangeType flange2Type,
-                                RB_ObjectContainer* inputOutput) {
+                                FlangeType flange2Type) {
     Flange* flange1;
     Flange* flange2;
 
     // Flange creation also creates washer and shell
     switch (flange1Type) {
     case Blind:
-        flange1 = new Flange_Blind(1, inputOutput);
+        flange1 = new Flange_Blind(1);
         break;
     case Integral:
-        flange1 = new Flange_Integral(1, inputOutput);
+        flange1 = new Flange_Integral(1);
         break;
     case Loose:
-        flange1 = new Flange_Loose(1, inputOutput);
+        flange1 = new Flange_Loose(1);
         break;
     default:
         break;
@@ -44,13 +42,13 @@ void Calculator::createAssembly(FlangeType flange1Type,
 
     switch (flange2Type) {
     case Blind:
-        flange2 = new Flange_Blind(2, inputOutput);
+        flange2 = new Flange_Blind(2);
         break;
     case Integral:
-        flange2 = new Flange_Integral(2, inputOutput);
+        flange2 = new Flange_Integral(2);
         break;
     case Loose:
-        flange2 = new Flange_Loose(2, inputOutput);
+        flange2 = new Flange_Loose(2);
         break;
     default:
         break;
@@ -58,19 +56,18 @@ void Calculator::createAssembly(FlangeType flange1Type,
 
     mAssembly->mFlange1 = flange1;
     mAssembly->mFlange2 = flange2;
-    CreateAssemblyHelper(mAssembly, inputOutput);
+    CreateAssemblyHelper(mAssembly);
 }
 
-void Calculator::CreateAssemblyHelper(Assembly* assembly,
-                                      RB_ObjectContainer* inputOutput) {
+void Calculator::CreateAssemblyHelper(Assembly* assembly) {
     // LoadCaseList
-    assembly->mLoadCaseList = new LoadCaseList(inputOutput);
+    assembly->mLoadCaseList = new LoadCaseList();
     //    assembly->mLoadCaseList->createLoadCase(); // includes Force creation
 
-    assembly->mGasket = new Gasket(inputOutput);
+    assembly->mGasket = new Gasket();
     assembly->mGasket->frmType = Gasket::Flat;
 
-    assembly->mBolt = new Bolt(inputOutput);  // includes BoltHole creation
+    assembly->mBolt = new Bolt();  // includes BoltHole creation
     assembly->mBolt->bType = Bolt::Stud;
     assembly->mBolt->mBoltHole->isBlindHole = false;
 
@@ -923,8 +920,6 @@ void Calculator::exec() {
 
     mWriteCalcFromNumber = 4; // -1 is all
     mIterNo = 0;
-
-    int loadCaseNo = 0;
     mLoadCaseCount = assembly->mLoadCaseList->size();
 
     F3_to_24(assembly);
@@ -937,19 +932,9 @@ void Calculator::exec() {
     bool isFG0approximateFG0req = false;
     int counter = 0;
 
-
-
-    //***************
-//    return;
-
-
-
-
-
-    // Outside loop
     while (! (isFG0largerFG0req && isFG0approximateFG0req) && counter < 10) {
-
-        Loop_F55_to_108(assembly, loadCaseNo);
+        // Outside loop
+        Loop_F55_to_108(assembly);
 
         // Formulae 109 and 110
         isFG0largerFG0req = assembly->Is_F_G0_larger_F_G0req();
@@ -967,45 +952,38 @@ void Calculator::exec() {
                         = assembly->mLoadCaseList->at(0)->F_Greq * 1.1;
             }
 
-            mAssembly->addDetail("New INITIAL", "Force F_GInitial", "initial",
-                               assembly->mLoadCaseList->at(loadCaseNo)->F_G, "N");
+            PR->addDetail("New INITIAL", "Force F_GInitial", "initial",
+                          assembly->mLoadCaseList->at(0)->F_G, "N");
         }
 
         mIsFirstApproximation = true;
         counter += 1;
     }
 
-
-
-    //*************************
-//    return;
-
-
-
     F111_to_118(assembly);
     F119_to_119(assembly);
 
-    for (loadCaseNo = 1; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
+    for (int loadCaseNo = 1; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
         F120_to_122(assembly, loadCaseNo);
     }
 
-    loadCaseNo = 0;
-
-    for (loadCaseNo = 0; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
+    for (int loadCaseNo = 0; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
         F123_to_151(assembly, loadCaseNo);
         FC1_to_C10(assembly, loadCaseNo);
     }
 }
 
-void Calculator::Loop_F55_to_108(Assembly* assembly, int loadCaseNo) {
+void Calculator::Loop_F55_to_108(Assembly* assembly) {
     for (this->mIterNo = 0; this->mIterNo <= 5; this->mIterNo++) {
-        F55_to_62_table1(assembly, loadCaseNo);
+        F55_to_62_table1(assembly);
         mIsFirstApproximation = false;
     }
 
+    int loadCaseNo = 0;
+    F63_to_63(assembly, loadCaseNo);
+    F77_to_89(assembly, loadCaseNo);
+
     for (loadCaseNo = 0; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
-        F63_to_63(assembly, loadCaseNo);
-        F77_to_89(assembly, loadCaseNo);
         F90_to_104(assembly, loadCaseNo);
     }
 
@@ -1121,7 +1099,9 @@ void Calculator::F54_to_54(Assembly* assembly) 	{
     assembly->Calc_F_GInitial(loadCaseNo);
 }
 
-void Calculator::F55_to_62_table1(Assembly* assembly, int loadCaseNo) {
+void Calculator::F55_to_62_table1(Assembly* assembly) {
+    int loadCaseNo = 0;
+
     if (!mIsFirstApproximation) {
         assembly->mGasket->Calc_eG(loadCaseNo);
     }
@@ -1161,8 +1141,7 @@ void Calculator::F55_to_62_table1(Assembly* assembly, int loadCaseNo) {
     assembly->mFlange2->Calc_hG(loadCaseNo);
 }
 
-void Calculator::F63_to_63(Assembly* assembly,
-                           int loadCaseNo) {
+void Calculator::F63_to_63(Assembly* assembly, int loadCaseNo) {
     assembly->mGasket->Calc_eG(loadCaseNo);
     assembly->mGasket->Calc_XG(loadCaseNo);
 }
@@ -1196,11 +1175,13 @@ void Calculator::F90_to_104(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_YG(loadCaseNo);
     assembly->Calc_YQ(loadCaseNo);
     assembly->Calc_YR(loadCaseNo);
+    assembly->Calc_Q_A_Qsmin(loadCaseNo);
     assembly->Calc_F_Gmin(loadCaseNo);
 }
 
 void Calculator::F105_to_105(Assembly* assembly,
-                             int loadCaseNo) 	{
+                             int loadCaseNo) {
+    assembly->mGasket->Calc_P_QR(loadCaseNo);
     assembly->Calc_delta_eGc(loadCaseNo);
     assembly->Calc_F_Gdelta(loadCaseNo);
 }
@@ -1236,6 +1217,8 @@ void Calculator::F123_to_151(Assembly* assembly,
     assembly->Calc_cB(loadCaseNo);
     assembly->Calc_PhiB(loadCaseNo);
     bool res = assembly->Is_PhiB_Valid(loadCaseNo);
+
+    assembly->mGasket->Calc_Q_smax(loadCaseNo);
     assembly->Calc_PhiG(loadCaseNo);
     res = assembly->Is_PhiG_Valid(loadCaseNo);
 

@@ -2,7 +2,7 @@
 #define RB_UNITTEST_H
 
 #include <QString>
-#include <QTextEdit>
+#include "pcalc_report.h"
 #include "rb_namespace.h"
 #include "rb_objectbase.h"
 
@@ -19,7 +19,6 @@ public:
 protected:
     void areEqual(RB_ObjectBase* output, const QString& functionName,
                   double expected, double test, double accuracy = 0.000001);
-    RB_ObjectContainer* mInputOutput;
 };
 
 END_NAMESPACE_REDBAG_CALC

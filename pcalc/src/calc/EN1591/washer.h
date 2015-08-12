@@ -2,14 +2,13 @@
 #define WASHER_H
 
 #include "rb_namespace.h"
-#include "rb_report.h"
-
+#include "rb_object.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Washer_IN : public RB_Report {
+class Washer_IN : public RB_Object {
 
 public:
-    Washer_IN(RB_ObjectContainer* inputOutput);
+    Washer_IN();
     virtual ~Washer_IN();
 
     double eW;
@@ -21,7 +20,7 @@ public:
 class Washer_OUT : public Washer_IN {
 
 public:
-    Washer_OUT(RB_ObjectContainer* inputOutput);
+    Washer_OUT();
 
     double bW;
     double dW;
@@ -35,7 +34,7 @@ public:
 class Washer : public Washer_OUT {
 
 public:
-    Washer(RB_ObjectContainer* inputOutput) : Washer_OUT(inputOutput) {
+    Washer() : Washer_OUT() {
         // nothing
     }
 

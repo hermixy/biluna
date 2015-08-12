@@ -6,16 +6,19 @@
 
 NAMESPACE_REDBAG_CALC
 
+#define UNITTESTCLASS(className) \
+    ut = new className(); \
+    ut->exec(); \
+    delete ut;
+
 class RB_UnitTestFactory {
 
 public:
-    RB_UnitTestFactory(RB_ObjectContainer* inputOutput);
+    RB_UnitTestFactory();
     virtual ~RB_UnitTestFactory();
 
     virtual void exec() = 0;
 
-protected:
-    RB_ObjectContainer* mInputOutput;
 };
 
 END_NAMESPACE_REDBAG_CALC

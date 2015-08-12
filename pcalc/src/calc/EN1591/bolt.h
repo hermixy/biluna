@@ -3,14 +3,14 @@
 
 #include "bolthole.h"
 #include "rb_namespace.h"
-#include "rb_report.h"
+#include "rb_object.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Bolt_IN : public RB_Report {
+class Bolt_IN : public RB_Object {
 
 public:
-    Bolt_IN(RB_ObjectContainer* inputOutput);
+    Bolt_IN();
     virtual ~Bolt_IN();
 
     void setBoltHole(BoltHole* boltHole) { mBoltHole = boltHole; }
@@ -52,7 +52,7 @@ public:
 class Bolt_OUT : public Bolt_IN {
 
 public:
-    Bolt_OUT(RB_ObjectContainer* inputOutput);
+    Bolt_OUT();
 
     double AB;
     double IB;
@@ -68,7 +68,7 @@ public:
 class Bolt : public Bolt_OUT {
 
 public:
-    Bolt(RB_ObjectContainer* inputOutput);
+    Bolt();
 
     void Calc_eta1plus();
     void Calc_eta1minus();

@@ -1,24 +1,52 @@
-﻿#include "rb_report.h"
+﻿#include "pcalc_report.h"
+#include "pcalc_inputoutput.h"
+#include "pcalc_utilityfactory.h"
 #include "rb_objectatomic.h"
 NAMESPACE_REDBAG_CALC
 
-RB_Report::RB_Report(RB_ObjectContainer* inputOutput) {
-    if (!inputOutput) {
-        RB_DEBUG->warning("RB_Report::RB_Report() inputOutput WARNING");
-        mOutContainer = NULL;
-        return;
-    }
+PCALC_Report* PCALC_Report::mActiveUtility = 0;
 
-    mInContainer = inputOutput->getContainer("PCALC_InputList");
-    mOutContainer = inputOutput->getContainer("PCALC_OutputList");
+PCALC_Report::PCALC_Report() : RB_Utility() {
+    RB_DEBUG->print("PCALC_Report::PCALC_Report()");
+    mInOutContainer = NULL;
+    mInContainer = NULL;
+    mOutContainer = NULL;
+    mLastOutput = NULL;
+    createInputOutputObject();
+    PCALC_UTILITYFACTORY->addUtility(this);
+}
+
+void PCALC_Report::createInputOutputObject() {
+    if (mInOutContainer) {
+        delete mInOutContainer;
+    }
+    mInOutContainer = new PCALC_InputOutput();
+    mInContainer = mInOutContainer->getContainer("PCALC_InputList");
+    mOutContainer = mInOutContainer->getContainer("PCALC_OutputList");
     mLastOutput = NULL;
 }
 
-RB_Report::~RB_Report() {
-    // nothing yet
+PCALC_Report::~PCALC_Report() {
+    PCALC_UTILITYFACTORY->removeUtility(this);
+    delete mInOutContainer;
+    mInOutContainer  = NULL;
+    mInContainer = NULL;
+    mOutContainer = NULL;
+    mLastOutput = NULL;
+    mActiveUtility = NULL;
+    RB_DEBUG->print("PCALC_Report::~PCALC_Report()");
 }
 
-void RB_Report::addDetail(const QString& formulaNumber,
+PCALC_Report* PCALC_Report::getInstance() {
+    if (!mActiveUtility) {
+        mActiveUtility = new PCALC_Report();
+        mActiveUtility->refresh();
+    }
+
+    return mActiveUtility;
+}
+
+void PCALC_Report::addDetail(const QString& formulaNumber,
                        const QString& variableName,
                        const QString& formula,
                        double result,
@@ -28,14 +56,14 @@ void RB_Report::addDetail(const QString& formulaNumber,
                        const QString& note) {
 
     if (!mInContainer || !mOutContainer) {
-        RB_DEBUG->error("RB_Report::addDetail() input or output container ERROR");
+        RB_DEBUG->error("PCALC_Report::addDetail() input or output container ERROR");
         return;
     }
 
     RB_ObjectBase* settingObj = mInContainer->getObject("name", "PCALC_Setting");
 
     if (!settingObj) {
-        RB_DEBUG->error("RB_Report::addDetail() setting object ERROR");
+        RB_DEBUG->error("PCALC_Report::addDetail() setting object ERROR");
         return;
     }
 
@@ -60,8 +88,8 @@ void RB_Report::addDetail(const QString& formulaNumber,
     int to = settingObj->getValue("formulato").toInt();
     RB_String formulaStr = "Formula ";
 
-    if ((formulaNumber < formulaStr + qn(from) && from > 0)
-            || (formulaStr + qn(to) < formulaNumber && to < 999)) {
+    if ((formulaNumber < formulaStr + QN(from) && from > 0)
+            || (formulaStr + QN(to) < formulaNumber && to < 999)) {
         return;
     }
 
@@ -90,29 +118,21 @@ void RB_Report::addDetail(const QString& formulaNumber,
     mLastOutput = obj;
 }
 
-RB_ObjectBase *RB_Report::getLastOutput() {
+RB_ObjectContainer* PCALC_Report::getInOutContainer() {
+    return mInOutContainer;
+}
+
+RB_ObjectBase *PCALC_Report::getLastOutput() {
     return mLastOutput;
 }
 
-
-RB_String RB_Report::qn(double val) {
-    return RB_String::number(val);
+void PCALC_Report::clear() {
+    createInputOutputObject();
 }
 
-RB_String RB_Report::fv(const char* format ...) {
-    char buffer[256];
-    va_list args;
-    va_start (args, format);
-    vsprintf_s (buffer,format, args);
-    RB_String strBuffer(buffer);
-    va_end (args);
-
-    return strBuffer;
-}
-
-RB_ObjectBase* RB_Report::getObject(RB_ObjectContainer* outContainer,
-                                    const QString& variableName,
-                                    int loadCaseNo) {
+RB_ObjectBase* PCALC_Report::getObject(RB_ObjectContainer* outContainer,
+                                       const QString& variableName,
+                                       int loadCaseNo) {
     RB_ObjectIterator* iter = outContainer->createIterator();
 
     for (iter->first(); !iter->isDone(); iter->next()) {

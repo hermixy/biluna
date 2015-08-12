@@ -66,8 +66,6 @@ RB_Debug* RB_Debug::instance() {
         //uniqueInstance->stream = fopen(fName.latin1(), "wt");
 //        uniqueInstance->stream = stderr;
 
-        uniqueInstance->objectBaseCreatedCount = 0;
-        uniqueInstance->objectBaseDeletedCount = 0;
         uniqueInstance->memberCreatedCount = 0;
         uniqueInstance->memberDeletedCount = 0;
         uniqueInstance->objectCreatedCount = 0;
@@ -89,20 +87,6 @@ RB_Debug* RB_Debug::instance() {
  * Deletes the one and only RB_Debug instance.
  */
 void RB_Debug::deleteInstance() {
-    // first delete objects
-    std::list<RB_ObjectBase*>::iterator iterBase;
-    iterBase = uniqueInstance->mObjectBaseList.begin();
-    while (iterBase != uniqueInstance->mObjectBaseList.end()) {
-        if (*iterBase != NULL) {
-            delete *iterBase;
-            *iterBase = NULL;
-        }
-        ++iterBase;
-    }
-
-    // second clear/remove pointers
-    uniqueInstance->mObjectBaseList.clear();
-
     // first delete objects
     std::list<RB_Object*>::iterator iter;
     iter = uniqueInstance->mObjectList.begin();
@@ -170,13 +154,6 @@ void RB_Debug::print(const char* format ...) {
     }
 
 }
-
-
-//void RB_Debug::print(const std::string& text) {
-//    fprintf(stream, text.c_str());
-//    fprintf(stream, "\n");
-//    fflush(stream);
-//}
 
 /**
  * Print RB_String to output device with fprintf and fflush. Example use could be:
@@ -285,26 +262,6 @@ void RB_Debug::append(RB_String& str, const char* format ...) {
 }
 
 /**
- * Add one (1) to the count of created objects and add the object to the 
- * object list
- */
-void RB_Debug::addObjectBaseCreated(RB_ObjectBase* obj) {
-    ++objectBaseCreatedCount;
-    mObjectBaseList.push_back(obj);
-}
-
-
-/**
- * Add one (1) to the count of deleted objects and remove the object from the 
- * object list
- */
-void RB_Debug::addObjectBaseDeleted(RB_ObjectBase* obj) {
-    ++objectBaseDeletedCount;
-    mObjectBaseList.remove(obj);
-}
-
-
-/**
  * Add one (1) to the count of created members
  */
 void RB_Debug::addMemberCreated() { 
@@ -333,17 +290,17 @@ void RB_Debug::addObjectDeleted(RB_Object *obj) {
 /**
  * Print the number of created objects
  */
-void RB_Debug::printObjectBaseCreated() {
-    print("Created base objects: %i", this->objectBaseCreatedCount);
-}
+//void RB_Debug::printObjectBaseCreated() {
+//    print("Created base objects: %i", this->objectBaseCreatedCount);
+//}
 
 
 /**
  * Print the number of deleted objects
  */
-void RB_Debug::printObjectBaseDeleted() {
-    print("Deleted base objects: %i", this->objectBaseDeletedCount);
-}
+//void RB_Debug::printObjectBaseDeleted() {
+//    print("Deleted base objects: %i", this->objectBaseDeletedCount);
+//}
 
 
 /**
@@ -358,32 +315,35 @@ void RB_Debug::printMemberCreated() {
  * Print the number of deleted members
  */
 void RB_Debug::printMemberDeleted() { 
-   	print("Deleted members: %i", this->memberDeletedCount); 
+    print("Deleted members: %i", this->memberDeletedCount);
 }
 
 
-/**
- * Print current objects in the object list
- */
-void RB_Debug::printObjectBaseList() {
-	print("Objects in list:");
-	
-	std::list<RB_ObjectBase*>::iterator iter;
-    iter = mObjectBaseList.begin();
-    while (iter != mObjectBaseList.end()) {
-		if (*iter != NULL) {
-			print("  %p %s", (*iter), (*iter)->getName().toStdString().c_str());
-		}
-		++iter;
-	}
+void RB_Debug::printObject(RB_Object* obj) {
+    RB_ObjectBase* objB = dynamic_cast<RB_ObjectBase*>(obj);
+
+    if (objB) {
+        printObjectBase(objB);
+        return;
+    }
+
+    RB_String str = "";
+    str = "  RB_Debug::printObject() START";
+
+    if (!obj) {
+        str += "\n    object pointer is NULL";
+    } else {
+        append(str, "\n    object pointer = %p", obj);
+        str += "\n    object name = " + obj->getName();
+    }
 }
 
 /**
  * To print id, parent, name and members of an RB_ObjectBase object
  */
-void RB_Debug::printObject(RB_ObjectBase* obj, RB2::ResolveLevel level) {
+void RB_Debug::printObjectBase(RB_ObjectBase* obj, RB2::ResolveLevel level) {
     RB_String str = "";
-    str = "  RB_Debug::printObject() START";
+    str = "  RB_Debug::printObjectBase() START";
 	
 	if (!obj) {
         str += "\n    object pointer is NULL";
@@ -470,12 +430,12 @@ void RB_Debug::printObject(RB_ObjectBase* obj, RB2::ResolveLevel level) {
 		RB_ObjectIterator* iter = objC->createIterator();
 		
 		for (iter->first(); !iter->isDone(); iter->next()) {
-			printObject(iter->currentObject(), childLevel);	
+            printObjectBase(iter->currentObject(), childLevel);
 		}
 		delete iter;
 	}
 	
-	print("  RB_Debug::printObject() END");
+    print("  RB_Debug::printObjectBase() END");
 }
 
 void RB_Debug::printMessages() {
@@ -497,7 +457,7 @@ void RB_Debug::printObjectDeleted() {
 }
 
 void RB_Debug::printObjectList() {
-    print("Calculations in list:");
+    print("Objects in list:");
 
     std::list<RB_Object*>::iterator iter;
     iter = mObjectList.begin();

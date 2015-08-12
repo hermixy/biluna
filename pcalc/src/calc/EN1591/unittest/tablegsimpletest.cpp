@@ -2,10 +2,8 @@
 NAMESPACE_REDBAG_CALC_EN1591
 
 
-TableGSimpleTest::TableGSimpleTest(RB_ObjectContainer *inputOutput)
-            : RB_UnitTest() {
+TableGSimpleTest::TableGSimpleTest() : RB_UnitTest() {
     target = NULL;
-    mInputOutput = inputOutput;
 }
 
 TableGSimpleTest::~TableGSimpleTest() {
@@ -19,18 +17,18 @@ void TableGSimpleTest::exec() {
 
 void TableGSimpleTest::setupTarget() {
     if (!target) {
-        target = new TableGSimple(mInputOutput);
+        target = new TableGSimple();
     }
 }
 
 void TableGSimpleTest::getTableG_QmaxTest() {
     setupTarget();
     double result = target->getTableG_Qmax(Gasket::PtfeSoftSteel, 150.0);
-    areEqual(target->getLastOutput(), "TableGSimpleTest::getQmaxTest()", 310, result);
+    areEqual(PR->getLastOutput(), "TableGSimpleTest::getQmaxTest()", 310, result);
     result = target->getTableG_Qmax(Gasket::PtfeSoftSteel, -10.0);
-    areEqual(target->getLastOutput(), "TableGSimpleTest::getQmaxTest()", 0, result);
+    areEqual(PR->getLastOutput(), "TableGSimpleTest::getQmaxTest()", 0, result);
     result = target->getTableG_Qmax(Gasket::PtfeSoftSteel, 310.0);
-    areEqual(target->getLastOutput(), "TableGSimpleTest::getQmaxTest()", 0, result);
+    areEqual(PR->getLastOutput(), "TableGSimpleTest::getQmaxTest()", 0, result);
 }
 
 END_NAMESPACE_REDBAG_CALC_EN1591

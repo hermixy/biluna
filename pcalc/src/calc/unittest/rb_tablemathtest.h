@@ -10,14 +10,13 @@ NAMESPACE_REDBAG_CALC
 class RB_TableMathTest : public RB_UnitTest {
 
 public:
-    RB_TableMathTest(RB_ObjectContainer* inputOutput);
+    RB_TableMathTest();
     virtual ~RB_TableMathTest();
 
     void exec();
 
 private:
     void setupTarget();
-
     void getBilinearValueTest();
 
     RB_TableMath* target;

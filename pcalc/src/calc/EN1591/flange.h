@@ -4,16 +4,15 @@
 #include "bolt.h"
 #include "gasket.h"
 #include "rb_namespace.h"
-#include "rb_report.h"
 #include "shell.h"
 #include "washer.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
-class Flange_IN : public RB_Report {
+class Flange_IN : public RB_Object {
 
 public:
-    Flange_IN(int flangeNo, RB_ObjectContainer* inputOutput);
+    Flange_IN(int flangeNo);
     virtual ~Flange_IN();
 
     int getFlangeNumber() { return mFlangeNumber; }
@@ -81,7 +80,7 @@ private:
 class Flange_OUT : public Flange_IN {
 
 public:
-    Flange_OUT(int flangeNo, RB_ObjectContainer* inputOutput);
+    Flange_OUT(int flangeNo);
     virtual ~Flange_OUT() { }
 
     double pB;
@@ -122,8 +121,7 @@ public:
 class Flange : public Flange_OUT {
 
 public:
-    Flange(int flangeNo, RB_ObjectContainer* inputOutput)
-            : Flange_OUT(flangeNo, inputOutput) { }
+    Flange(int flangeNo) : Flange_OUT(flangeNo) { }
     virtual ~Flange() { }
 
     /**

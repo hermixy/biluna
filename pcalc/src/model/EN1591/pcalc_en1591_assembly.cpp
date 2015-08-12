@@ -36,7 +36,6 @@ PCALC_EN1591_Assembly::~PCALC_EN1591_Assembly() {
  * \li revision revision of the data
  * \li date date of calculation
  * \li nameengineer name of engineer
- * \li nr (mNR) number of reassemblies
  */
 void PCALC_EN1591_Assembly::createMembers() {
     addMember("number", "-", "<NEW>", RB2::MemberChar40);

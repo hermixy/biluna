@@ -6,6 +6,7 @@
 #include "gasket.h"
 #include "rb_namespace.h"
 #include "rb_tablemath.h"
+#include "rb_utility.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
@@ -30,18 +31,26 @@ public:
 };
 
 
+#define TABLE02_15PROPERTY Table02_15Property::getInstance()
+
 /**
  * @brief Table EN1591-2 Table 2 to 15 used for QminL and QsminL property.
  * These values are is used if no detail gasket data from,
  * for example, www.gasketdata.org is available.
  * Refer also www.europeansealing.com
  */
-class Table02_15Property : public RB_TableMath {
+class Table02_15Property : public RB_TableMath, RB_Utility {
 
 public:
-    Table02_15Property(RB_ObjectContainer* inputOutput);
     virtual ~Table02_15Property();
+    static Table02_15Property* getInstance();
 
+    void refresh() {}
+
+
+    double getTableQA(double leakageRate,
+                         const RB_String& materialCode,
+                         double testPressure = 40.0);
     double getTableQminL(double leakageRate,
                          const RB_String& materialCode,
                          double testPressure = 40.0);
@@ -52,6 +61,8 @@ public:
 
 
 private:
+    Table02_15Property();
+
     void createList();
     void cl(double leakageRate, const RB_String& materialCode,
             double testPressure, double QA, double QminL, double QsminL);
@@ -59,6 +70,8 @@ private:
     bool isGasketMaterialCodeExisting(const RB_String& materialCode);
     void updateLeft(QminLQsminLProperty* obj);
     void updateRight(QminLQsminLProperty* obj);
+
+    static Table02_15Property* mActiveUtility;
 
     std::vector<QminLQsminLProperty*> mList;
     double mTargetQA;
