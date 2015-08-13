@@ -102,16 +102,18 @@ void Flange_Blind::Calc_rho() {
 
 /**
  * @brief Formula 80: Lever arm correction hQ
- * @param loadCaseNo
  */
-void Flange_Blind::Calc_hQ(int loadCaseNo) {
-    double tmpdGe = mLoadCaseList->at(loadCaseNo)->dGe;
+void Flange_Blind::Calc_hQ() {
     hQ = (dE * (1 - pow(rho, 2)) / 8) * ((0.7 + 3.3 * pow(rho, 2))
                                          / (0.7 + 1.3 * pow(rho, 2)))
-            * pow(dE / tmpdGe, 2);
-    PR->addDetail("Formula 80",
-              "hQ", "(dE * (1 - rho ^ 2) / 8) * ((0.7 + 3.3 * rho ^ 2) "
-              "/ (0.7 + 1.3 * rho ^ 2)) * (dE / dGe) ^ 2", hQ, "mm");
+            * pow(dE / mGasket->dGe, 2);
+    PR->addDetail("Formula 80", "hQ",
+                  "(dE * (1 - rho ^ 2) / 8) * ((0.7 + 3.3 * rho ^ 2) "
+                  "/ (0.7 + 1.3 * rho ^ 2)) * (dE / dGe) ^ 2", hQ, "mm",
+                  "(" + QN(dE) + " * (1 - " + QN(rho)
+                  + " ^ 2) / 8) * ((0.7 + 3.3 * " + QN(rho)
+                  + " ^ 2) / (0.7 + 1.3 * " + QN(rho) + " ^ 2)) * ("
+                  + QN(dE) + " / " + QN(mGasket->dGe) + ") ^ 2");
 }
 
 /**
@@ -141,67 +143,49 @@ void Flange_Blind::Calc_ZF() {
  */
 void Flange_Blind::Calc_ZL() {
     ZL = 0;
-    PR->addDetail("Formula 39", "ZL", "0", ZL, "1/mm^2");
+    PR->addDetail("Formula 39", "ZL", "0", ZL, "1/mm^2", "0.0");
 }
 
 /**
  * @brief Formula 78 and 77: Lever arm correction pressure (P), default = 0.0
  * @param loadCaseNo
  */
-void Flange_Blind::Calc_hP(int loadCaseNo) {
+void Flange_Blind::Calc_hP() {
     eP = 0.0;
-    PR->addDetail("Formula 78", "eP", "0", eP, "1/mm^2");
-    Flange::Calc_hP(loadCaseNo);
+    PR->addDetail("Formula 78", "eP", "0", eP, "1/mm^2", "0.0");
+    Flange::Calc_hP();
 }
 
 /**
  * @brief Formula 59 and 81: Gasket lever arm for all load cases
  * @param loadCaseNo
  */
-void Flange_Blind::Calc_hG(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (getFlangeNumber() == 1) {
-        loadCase->hG1 = (d3e - loadCase->dGe) / 2;
-        PR->addDetail("Formula 59, 81",
-                  "hG1", "(d3e - dGe) / 2", loadCase->hG1, "mm");
-    } else {
-        loadCase->hG2 = (d3e - loadCase->dGe) / 2;
-        PR->addDetail("Formula 59, 81",
-                  "hG2", "(d3e - dGe) / 2", loadCase->hG2, "mm");
-    }
+void Flange_Blind::Calc_hG() {
+    hG = (d3e - mGasket->dGe) / 2;
+    PR->addDetail("Formula 59, 81", "hG" + QN(getFlangeNumber()),
+                  "(d3e - dGe) / 2", hG, "mm",
+                  "(" + QN(d3e) + " - " + QN(mGasket->dGe) + ") / 2");
 }
 
 /**
  * @brief Formula 82: Hub lever arm for all load case
  * @param loadCaseNo
  */
-void Flange_Blind::Calc_hH(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (getFlangeNumber() == 1) {
-        loadCase->hH1 = (d3e - dE) / 2;
-        PR->addDetail("Formula 82", "hH1", "(d3e - dE) / 2", loadCase->hH1, "mm");
-    } else {
-        loadCase->hH2 = (d3e - dE) / 2;
-        PR->addDetail("Formula 82", "hH2", "(d3e - dE) / 2", loadCase->hH2, "mm");
-    }
+void Flange_Blind::Calc_hH() {
+    hH = (d3e - dE) / 2;
+    PR->addDetail("Formula 82", "hH" + QN(getFlangeNumber()),
+                  "(d3e - dE) / 2", hH, "mm",
+                  "(" + QN(d3e) + " - " + QN(dE) + ") / 2");
 }
 
 /**
- * @brief Formula 83: Loose flange lever arm for all load cases sets hL1 = 0.0
+ * @brief Formula 83: Loose flange lever arm for all load cases sets hL = 0.0
  * @param loadCaseNo
  */
-void Flange_Blind::Calc_hL(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (getFlangeNumber() == 1) {
-        loadCase->hL1 = 0.0;
-        PR->addDetail("Formula 83", "hL1", "0.0", loadCase->hL1, "mm");
-    } else {
-        loadCase->hL2 = 0.0;
-        PR->addDetail("Formula 83", "hL2", "0.0", loadCase->hL2, "mm");
-    }
+void Flange_Blind::Calc_hL() {
+    hL = 0.0;
+    PR->addDetail("Formula 83", "hL" + QN(getFlangeNumber()), "0.0",
+                  hL, "mm", "0.0");
 }
 
 /**
@@ -251,28 +235,25 @@ void Flange_Blind::Calc_WF(int loadCaseNo) {
  */
 void Flange_Blind::Calc_PhiF(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    double tmp_hG = loadCase->hG1;
     double tmp_WF = loadCase->WF1;
 
-    if (getFlangeNumber() == 2)
-    {
-        tmp_hG = loadCase->hG2;
+    if (getFlangeNumber() == 2) {
         tmp_WF = loadCase->WF2;
     }
 
-    double tmpVal1 = loadCase->F_B * tmp_hG + loadCase->F_Q *(1 - pow(rho, 3))
-            * loadCase->dGe / 6;
-    double tmpVal2 = loadCase->F_R *(1 - rho) * loadCase->dGe / 2;
+    double tmpVal1 = loadCase->F_B * hG + loadCase->F_Q *(1 - pow(rho, 3))
+            * mGasket->dGe / 6;
+    double tmpVal2 = loadCase->F_R *(1 - rho) * mGasket->dGe / 2;
     double tmp_PhiF = std::max(fabs(tmpVal1 + tmpVal2),
                         std::max(fabs(tmpVal1), fabs(tmpVal2))) / tmp_WF;
     if (getFlangeNumber() == 1) {
         loadCase->PhiF1 = tmp_PhiF;
-        // PR->addDetail("Formula 146", "WF1", "...", WF1, "-");
-        PR->addDetail("Formula 145", "PhiF1", "...", loadCase->PhiF1, "-");
+        PR->addDetail("Formula 145", "PhiF1", "...", loadCase->PhiF1, "-",
+                      "TODO", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiF2 = tmp_PhiF;
-        // PR->addDetail("Formula 146", ".WF2 = ...", loadCase->WF2, "-");
-        PR->addDetail("Formula 145", "PhiF2", "...", loadCase->PhiF2, "-");
+        PR->addDetail("Formula 145", "PhiF2", "...", loadCase->PhiF2, "-",
+                      "TODO", loadCaseNo);
     }
 }
 

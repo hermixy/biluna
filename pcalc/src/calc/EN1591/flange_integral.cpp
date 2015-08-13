@@ -202,14 +202,19 @@ void Flange_Integral::Calc_hT() {
 
 /**
  * @brief Formula 79: Lever arm correction hQ
- * @param loadCaseNo
  */
-void Flange_Integral::Calc_hQ(int loadCaseNo) {
-    double tmpdGe = mLoadCaseList->at(loadCaseNo)->dGe;
-    hQ = (hS * kQ + hT * (2 * dF * eP / (dE * dE) - 0.5 * tan(mShell->phiS)))
-            * pow(dE / tmpdGe, 2);
-    PR->addDetail("Formula 79", "hQ", "(hS * kQ + hT * (2 * dF * eP / (dE * dE) "
-              "- 0.5 * Math.Tan(Shell.phiS))) * (dE / tmpdGe) ^ 2", hQ, "mm");
+void Flange_Integral::Calc_hQ() {
+    hQ = (hS * kQ + hT * (2 * dF * eP / (dE * dE)
+                          - 0.5 * tan(mShell->phiS)))
+            * (pow((dE / mGasket->dGe), 2));
+    PR->addDetail("Formula 79", "hQ",
+                  "(hS * kQ + hT * (2 * dF * eP / (dE * dE) "
+                  "- 0.5 * tan(phiS))) * ((dE / dGe) ^ 2)",
+                  hQ, "mm",
+                  "(" + QN(hS) + " * " + QN(kQ) + " + " + QN(hT) + " * (2 * "
+                  + QN(dF) + " * " + QN(eP) + " / (" + QN(dE) + " * "
+                  + QN(dE) + ") - 0.5 * tan(" + QN(mShell->phiS) + "))) * (("
+                  + QN(dE) + " / " + QN(mGasket->dGe) + ") ^ 2)");
 }
 
 /**
@@ -270,54 +275,31 @@ void Flange_Integral::Calc_ZL() {
 
 /**
  * @brief Formula 59 and 81: Gasket lever arm for all load cases
- * @param loadCaseNo
  */
-void Flange_Integral::Calc_hG(int loadCaseNo) {
-    LoadCase *loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (getFlangeNumber() == 1) {
-        loadCase->hG1 = (d3e - loadCase->dGe) / 2;
-        PR->addDetail("Formula 59, 81", "hG1", "(d3e - dGe) / 2",
-                  loadCase->hG1, "mm");
-    } else {
-        loadCase->hG2 = (d3e - loadCase->dGe) / 2;
-        PR->addDetail("Formula 59, 81", "hG2", "(d3e - dGe) / 2",
-                  loadCase->hG2, "mm");
-    }
+void Flange_Integral::Calc_hG() {
+    hG = (d3e - mGasket->dGe) / 2;
+    PR->addDetail("Formula 59, 81", "hG" + QN(getFlangeNumber()),
+                  "(d3e - dGe) / 2", hG, "mm",
+                  "(" + QN(d3e) + " - " + QN(mGasket->dGe) + ") / 2");
 }
 
 /**
  * @brief Formula 82: Hub lever arm for all load case
- * @param loadCaseNo
  */
-void Flange_Integral::Calc_hH(int loadCaseNo) {
-    LoadCase *loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (getFlangeNumber() == 1) {
-        loadCase->hH1 = (d3e - dE) / 2;
-        PR->addDetail("Formula 82", "hH1", "(d3e - dE) / 2",
-                  loadCase->hH1, "mm");
-    } else {
-        loadCase->hH2 = (d3e - dE) / 2;
-        PR->addDetail("Formula 82", "hH2", "(d3e - dE) / 2",
-                  loadCase->hH2, "mm");
-    }
+void Flange_Integral::Calc_hH() {
+    hH = (d3e - dE) / 2;
+    PR->addDetail("Formula 82", "hH" + QN(getFlangeNumber()),
+                  "(d3e - dE) / 2", hH, "mm",
+                  "(" + QN(d3e) + " - " + QN(dE) + ") / 2");
 }
 
 /**
- * @brief Formula 83: Loose flange lever arm for all load cases
- * @param loadCaseNo
+ * @brief Formula 83: Loose flange lever arm for all load cases, 0 for integral
  */
-void Flange_Integral::Calc_hL(int loadCaseNo) {
-    LoadCase *loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (getFlangeNumber() == 1) {
-        loadCase->hL1 = 0.0;
-        PR->addDetail("Formula 83", "hL1", "0.0", loadCase->hL1, "mm");
-    } else {
-        loadCase->hL2 = 0.0;
-        PR->addDetail("Formula 83", "hL2", "0.0", loadCase->hL2, "mm");
-    }
+void Flange_Integral::Calc_hL() {
+    hL = 0.0;
+    PR->addDetail("Formula 83", "hL" + QN(getFlangeNumber()), "0.0",
+                  hL, "mm", "0.0");
 }
 
 END_NAMESPACE_REDBAG_CALC_EN1591

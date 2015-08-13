@@ -122,6 +122,11 @@ Gasket_OUT::Gasket_OUT() : Gasket_IN() {
     dGt = 0.0;
     AGt = 0.0;
     XG = 0.0;
+
+    AGe = 0.0;
+    AQ = 0.0;
+    bGe = 0.0;
+    dGe = 0.0;
 }
 
 Gasket::Gasket() : Gasket_OUT() {
@@ -172,30 +177,18 @@ void Gasket::Calc_AGt() {
  * @param i load case number not used
  */
 void Gasket::Calc_bGe(int /* loadCaseNo */) {
-    double tmpbGe = std::min(bGi, bGt);
-
-    // because bGe is not recalculated
-    for (std::vector<LoadCase*>::iterator it = mLoadCaseList->begin();
-                it != mLoadCaseList->end(); it++) {
-        (*it)->bGe = tmpbGe;
-    }
-    PR->addDetail("Formula 55", "bGe", "Min(bGi, bGt)", tmpbGe, "mm");
+    bGe = std::min(bGi, bGt);
+    PR->addDetail("Formula 55", "bGe", "Min(bGi, bGt)", bGe, "mm",
+                  "min(" + QN(bGi) + "; " + QN(bGt) + ")");
 }
 
 /**
  * @brief Formula 56: Effective gasket area, loadcase number is only 0
- * @param i load case number
  */
-void Gasket::Calc_AGe(int /* loadCaseNo */) {
-    // bGe dGe is not recalculated
-    double tmpAGe = M_PI * mLoadCaseList->at(0)->bGe * mLoadCaseList->at(0)->dGe;
-
-    // because AGe is not recalculated for the different loadcases
-    for (std::vector<LoadCase*>::iterator it = mLoadCaseList->begin();
-                it != mLoadCaseList->end(); it++) {
-        (*it)->AGe = tmpAGe;
-    }
-    PR->addDetail("Formula 56", "AGe", "PI * bGe * dGe", tmpAGe, "mm^2");
+void Gasket::Calc_AGe() {
+    AGe = M_PI * bGe * dGe;
+    PR->addDetail("Formula 56", "AGe", "PI * bGe * dGe", AGe, "mm^2",
+                  "pi * " + QN(bGe) + " * " + QN(dGe));
 }
 
 /**
@@ -232,7 +225,7 @@ void Gasket::Calc_eG(int loadCaseNo) {
  */
 void Gasket::Calc_Q_smax(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->Q_smax
-            = gasketMaximumLoad(mLoadCaseList->at(loadCaseNo));
+            = gasketMaximumLoad(loadCaseNo, mLoadCaseList->at(loadCaseNo));
     // addDetail moved to table 16
 //    PR->addDetail("With Formula 65, 69, 70, 74, 75",
 //              "Q_smax", "gasketMaximumLoad(loadCase)",
@@ -246,29 +239,28 @@ void Gasket::Calc_Q_smax(int loadCaseNo) {
 void Gasket::Calc_XG(int /* loadCaseNo */) {
     XG = (mLoadCaseList->at(0)->eG / AGt)
             * ((bGt + mLoadCaseList->at(0)->eG / 2)
-               / (mLoadCaseList->at(0)->bGe + mLoadCaseList->at(0)->eG / 2));
+               / (bGe + mLoadCaseList->at(0)->eG / 2));
     PR->addDetail("Formula 63",
               "XG", "(eG / AGt) * ((bGt + eG / 2) / (bGe + eG / 2))",
-              XG, "N/mm^2");
+              XG, "N/mm^2", "("+ QN(mLoadCaseList->at(0)->eG) + " / " + QN(AGt)
+                  + ") * ((" + QN(bGt) + " + " + QN(mLoadCaseList->at(0)->eG)
+                  + " / 2) / (" + QN(bGe) + " + " + QN(mLoadCaseList->at(0)->eG)
+                  + " / 2))");
 }
 
 /**
  * @brief Formula 90: Effective area for the axial fluid-pressure force
  * @param loadCaseNo
  */
-void Gasket::Calc_AQ(int loadCaseNo) {
-    mLoadCaseList->at(loadCaseNo)->AQ
-            = pow(mLoadCaseList->at(loadCaseNo)->dGe, 2) * M_PI / 4;
-    PR->addDetail("Formula 90",
-              "AQ", "dGe ^ 2 * PI / 4",
-              mLoadCaseList->at(loadCaseNo)->AQ, "mm^2",
-              QN(mLoadCaseList->at(loadCaseNo)->dGe) + " ^ 2 * pi / 4",
-                  loadCaseNo);
+void Gasket::Calc_AQ() {
+    AQ = pow(dGe, 2) * M_PI / 4;
+    PR->addDetail("Formula 90", "AQ", "dGe ^ 2 * PI / 4", AQ, "mm^2",
+                  QN(dGe) + " ^ 2 * pi / 4");
 }
 
 void Gasket::Calc_P_QR(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->P_QR = gasketCreepFactor(loadCase);
+    loadCase->P_QR = gasketCreepFactor(loadCaseNo, loadCase);
 }
 
 /**
@@ -316,14 +308,23 @@ double Gasket::gasketCompressedThickness(LoadCase* loadCase) {
  * @param loadCase
  * @return gasket maximum load at temperature
  */
-double Gasket::gasketMaximumLoad(LoadCase* loadCase) {
+double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
     // TODO: fill database with gasketdata.org now only Table 16
 
     if (mTable16Property->isGasketMaterialCodeExisting(matCode)) {
         loadCase->Q_smax = mTable16Property->getTable16_Q_smax(matCode,
                                                                loadCase->TG);
+        if (loadCase->Q_smax > 0) {
+            PR->addDetail("Table 16", "Q_smax", "Table value", loadCase->Q_smax,
+                          "-", "Table value", loadCaseNo);
+        } else {
+            PR->addDetail("Table 16", "Q_smax", "Table value", loadCase->Q_smax,
+                          "-", "Table value", loadCaseNo, "Out of range");
+        }
     } else if (loadCase->Q_smax < 0.001) {
         loadCase->Q_smax = mTableGSimple->getTableG_Qmax(insType, loadCase->TG);
+        PR->addDetail("Table 16", "Q_smax", "Table value", loadCase->Q_smax,
+                      "-", "Table value", loadCaseNo, "Material not found");
     }
 
     return loadCase->Q_smax;
@@ -331,15 +332,25 @@ double Gasket::gasketMaximumLoad(LoadCase* loadCase) {
 
 /**
  * @brief Gasket creep factor P_QR
+ * @param loadCaseNo loadcase number
  * @param loadCase
  * @return
  */
-double Gasket::gasketCreepFactor(LoadCase* loadCase) {
+double Gasket::gasketCreepFactor(int loadCaseNo, LoadCase* loadCase) {
     if (mTable16Property->isGasketMaterialCodeExisting(matCode)) {
         loadCase->P_QR = mTable16Property->getTable16_P_QR(matCode,
                                                            loadCase->TG);
+        if (loadCase->P_QR > 0) {
+            PR->addDetail("Table 16", "PQR", "Table value", loadCase->P_QR, "-",
+                          "Table value", loadCaseNo);
+        } else {
+            PR->addDetail("Table 16", "PQR", "Table value", loadCase->P_QR, "-",
+                          "Table value", loadCaseNo, "Out of range");
+        }
     } else {
         loadCase->P_QR = 0.0;
+        PR->addDetail("Table 16", "PQR", "Table value", loadCase->P_QR, "-",
+                      "Table value", loadCaseNo, "Material not found");
     }
 
     return loadCase->P_QR;

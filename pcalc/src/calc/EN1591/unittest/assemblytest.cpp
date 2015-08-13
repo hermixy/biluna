@@ -125,30 +125,29 @@ void AssemblyTest::deleteTarget() {
 
 void AssemblyTest::Calc_dGeTest() {
     SetupIntegralTarget();
-    int i = 0;
     target->mGasket->frmType = Gasket::Flat;
     target->mGasket->dG2 = 7.3;
-    target->mLoadCaseList->at(i)->bGe = 2.6;
-    target->Calc_dGe(i, target->mGasket);
+    target->mGasket->bGe = 2.6;
+    target->Calc_dGe();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 4.7,
-             target->mLoadCaseList->at(i)->dGe);
+             target->mGasket->dGe);
 
     target->mGasket->frmType = Gasket::CurvedSimpleContact;
     target->mGasket->dG0 = 9.78;
-    target->Calc_dGe(i, target->mGasket);
+    target->Calc_dGe();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 9.78,
-             target->mLoadCaseList->at(i)->dGe);
+             target->mGasket->dGe);
 
     target->mGasket->frmType = Gasket::CurvedDoubleContact;
     target->mGasket->dGt = 25.8;
-    target->Calc_dGe(i, target->mGasket);
+    target->Calc_dGe();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 25.8,
-             target->mLoadCaseList->at(i)->dGe);
+             target->mGasket->dGe);
 
     target->mGasket->frmType = Gasket::OctagonalDoubleContact;
-    target->Calc_dGe(i, target->mGasket);
+    target->Calc_dGe();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 25.8,
-             target->mLoadCaseList->at(i)->dGe);
+             target->mGasket->dGe);
     deleteTarget();
 }
 
@@ -157,7 +156,7 @@ void AssemblyTest::Calc_F_GInitialTest() {
     target->mFlange1->mBolt->AB = 7.3;
     target->mLoadCaseList->at(0)->fB = 103.2;
     target->mLoadCaseList->at(0)->F_R = 12.1;
-    target->Calc_F_GInitial(0);
+    target->Calc_F_GInitial();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GInitialTest()",
              239.02, target->mLoadCaseList->at(0)->F_G);
     deleteTarget();
@@ -165,7 +164,7 @@ void AssemblyTest::Calc_F_GInitialTest() {
 
 void AssemblyTest::Calc_F_QTest() {
     SetupIntegralTarget();
-    target->mLoadCaseList->at(0)->AQ = 5.6;
+    target->mGasket->AQ = 5.6;
     target->mLoadCaseList->at(0)->P = 9.2;
     target->Calc_F_Q(0);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_QTest()", 51.52,
@@ -205,13 +204,13 @@ void AssemblyTest::Calc_YBTest() {
     SetupLooseTarget();
     int i = 0;
     target->mFlange1->ZL = 1.1;
-    target->mLoadCaseList->at(i)->hL1 = 2.1;
+    target->mFlange1->hL = 2.1;
     target->mLoadCaseList->at(i)->EL1 = 3.1;
     target->mFlange1->mWasher->XW = 4.1;
     target->mLoadCaseList->at(i)->EW1 = 5.1;
 
     target->mFlange2->ZL = 1.2;
-    target->mLoadCaseList->at(i)->hL2 = 2.2;
+    target->mFlange2->hL = 2.2;
     target->mLoadCaseList->at(i)->EL2 = 3.2;
     target->mFlange2->mWasher->XW = 4.2;
     target->mLoadCaseList->at(i)->EW2 = 5.2;
@@ -229,10 +228,10 @@ void AssemblyTest::Calc_YGTest() {
     SetupIntegralTarget();
     int i = 0;
     target->mFlange1->ZF = 1.1;
-    target->mLoadCaseList->at(i)->hG1 = 2.1;
+    target->mFlange1->hG = 2.1;
     target->mLoadCaseList->at(i)->EF1 = 3.1;
     target->mFlange2->ZF = 1.2;
-    target->mLoadCaseList->at(i)->hG2 = 2.2;
+    target->mFlange2->hG = 2.2;
     target->mLoadCaseList->at(i)->EF2 = 3.2;
     target->mLoadCaseList->at(i)->Y_B = 0.123;
     target->mGasket->XG = 4.1;
@@ -247,14 +246,14 @@ void AssemblyTest::Calc_YQTest() {
     SetupIntegralTarget();
     int i = 0;
     target->mFlange1->ZF = 1.1;
-    target->mLoadCaseList->at(i)->hG1 = 2.1;
-    target->mLoadCaseList->at(i)->hH1 = 3.1;
+    target->mFlange1->hG = 2.1;
+    target->mFlange1->hH = 3.1;
     target->mFlange1->hP = 4.1;
     target->mFlange1->hQ = 5.1;
     target->mLoadCaseList->at(i)->EF1 = 6.1;
     target->mFlange2->ZF = 1.2;
-    target->mLoadCaseList->at(i)->hG2 = 2.2;
-    target->mLoadCaseList->at(i)->hH2 = 3.2;
+    target->mFlange2->hG = 2.2;
+    target->mFlange2->hH = 3.2;
     target->mFlange2->hP = 4.2;
     target->mFlange2->hQ = 5.2;
     target->mLoadCaseList->at(i)->EF2 = 6.2;
@@ -269,13 +268,13 @@ void AssemblyTest::Calc_YRTest() {
     SetupIntegralTarget();
     int i = 0;
     target->mFlange1->ZF = 1.1;
-    target->mLoadCaseList->at(i)->hG1 = 2.1;
-    target->mLoadCaseList->at(i)->hH1 = 3.1;
+    target->mFlange1->hG = 2.1;
+    target->mFlange1->hH = 3.1;
     target->mFlange1->hR = 4.1;
     target->mLoadCaseList->at(i)->EF1 = 5.1;
     target->mFlange2->ZF = 1.3;
-    target->mLoadCaseList->at(i)->hG2 = 2.3;
-    target->mLoadCaseList->at(i)->hH2 = 3.3;
+    target->mFlange2->hG = 2.3;
+    target->mFlange2->hH = 3.3;
     target->mFlange2->hR = 4.3;
     target->mLoadCaseList->at(i)->EF2 = 5.3;
     target->mLoadCaseList->at(i)->Y_B = 0.525;
@@ -327,14 +326,14 @@ void AssemblyTest::Calc_bGiTest() {
     target->mGasket->frmType = Gasket::Flat;
     target->mGasket->insType = Gasket::SteelSoft; // Metalic
     target->mLoadCaseList->at(i)->F_G = 7.3;
-    target->mLoadCaseList->at(i)->dGe = 2.3;
+    target->mGasket->dGe = 2.3;
     target->mLoadCaseList->at(i)->Q_smax = 71.3;
     target->mLoadCaseList->at(i)->eG = 9.1;
     target->mLoadCaseList->at(i)->E_G = 1.1;
-    target->mLoadCaseList->at(i)->hG1 = 3.3;
+    target->mFlange1->hG = 3.3;
     target->mFlange1->ZF = 6.3;
     target->mLoadCaseList->at(i)->EF1 = 8.7;
-    target->mLoadCaseList->at(i)->hG2 = 4.3;
+    target->mFlange2->hG = 4.3;
     target->mFlange2->ZF = 7.3;
     target->mLoadCaseList->at(i)->EF2 = 9.7;
     target->Calc_bGi(i, isFirstApproximation);
@@ -404,14 +403,14 @@ void AssemblyTest::Calc_dUTTest() {
 void AssemblyTest::Calc_F_GminTest() {
     SetupIntegralTarget();
     int i = 0;
-    target->mLoadCaseList->at(i)->AGe = 7.6;
+    target->mGasket->AGe = 7.6;
     target->mLoadCaseList->at(i)->Q_A = 3.7;
     target->Calc_F_Gmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GminTest()", 28.12,
              target->mLoadCaseList->at(i)->F_Gmin);
     i = 1;
     target->mGasket->frmType = Gasket::Flat;
-    target->mLoadCaseList->at(i)->AGe = 12.9;
+    target->mGasket->AGe = 12.9;
     target->mLoadCaseList->at(i)->Q_sminL = 0.458;
     // tmpVal1 = 5.9082
     target->mLoadCaseList->at(i)->mForce->M_AI = 7.8;
@@ -640,26 +639,31 @@ void AssemblyTest::Calc_F_BTest() {
 void AssemblyTest::Calc_cATest() {
     SetupIntegralTarget();
     target->mBolt->tType = Bolt::TorqueWrench;
-    target->mBolt->ruptureElongationA = 0.2;
+    target->mBolt->ruptureElongationA = 20.0; // percent
     int i = 0;
     target->Calc_cA(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 1,
              target->mLoadCaseList->at(i)->cA);
-    target->mBolt->ruptureElongationA = 0.02;
+    target->mBolt->ruptureElongationA = 2.0;
     target->Calc_cA(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 4 / 3.0,
              target->mLoadCaseList->at(i)->cA);
-    target->mBolt->tType = Bolt::TorqueWrench;
-    target->mBolt->ruptureElongationA = 0.2;
+    target->mBolt->tType = Bolt::ManualOperatorFeel;
+    target->mBolt->ruptureElongationA = 20.0;
     i = 1;
     target->Calc_cA(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 1.0,
              target->mLoadCaseList->at(i)->cA);
-    target->mBolt->ruptureElongationA = 0.02;
+    target->mBolt->ruptureElongationA = 2.0;
+    target->Calc_cA(i);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 4 / 3.0,
+             target->mLoadCaseList->at(i)->cA);
+    target->mBolt->tType = Bolt::TensionerMeasureBoltElongation;
+    i = 0;
     target->Calc_cA(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
              target->mLoadCaseList->at(i)->cA);
-    target->mBolt->tType = Bolt::ManualOperatorFeel;
+    target->mBolt->tType = Bolt::TensionerMeasureHydraulicPressure;
     i = 0;
     target->Calc_cA(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_cATest()", 0.0,
@@ -828,8 +832,8 @@ void AssemblyTest::Calc_ThetaFmaxminTest() {
     int i = 0;
     LoadCase* loadCase = target->mLoadCaseList->at(i);
     loadCase->F_Q = 1.1;
-    loadCase->hH1 = 1.2;
-    loadCase->hH2 = 2.2;
+    target->mFlange1->hH = 1.2;
+    target->mFlange2->hH = 2.2;
     target->mFlange1->hP = 1.3;
     target->mFlange2->hP = 2.3;
     target->mFlange1->hQ = 1.4;
@@ -843,8 +847,8 @@ void AssemblyTest::Calc_ThetaFmaxminTest() {
     loadCase->EF2 = 4.2;
     loadCase->F_GImin = 3.3;
     loadCase->F_GImax = 4.3;
-    loadCase->hG1 = 3.4;
-    loadCase->hG2 = 4.4;
+    target->mFlange1->hG = 3.4;
+    target->mFlange2->hG = 4.4;
     target->Calc_ThetaFmaxmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaFmaxminTest()", 16.46875,
              loadCase->ThetaF1min);
@@ -864,11 +868,11 @@ void AssemblyTest::Calc_ThetaLmaxminTest() {
     target->mFlange1->ZL = 1.1;
     loadCase->EL1 = 1.2;
     loadCase->F_BImin = 1.3;
-    loadCase->hL1 = 1.4;
+    target->mFlange1->hL = 1.4;
     target->mFlange2->ZL = 2.1;
     loadCase->EL2 = 2.2;
     loadCase->F_BImax = 2.3;
-    loadCase->hL2 = 2.4;
+    target->mFlange2->hL = 2.4;
     target->Calc_ThetaLmaxmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 1.6683333333333332,
              loadCase->ThetaL1min);
@@ -886,28 +890,28 @@ void AssemblyTest::Calc_Q_GTest() {
     int i = 0;
     LoadCase* loadCase0 = target->mLoadCaseList->at(i);
     loadCase0->F_G = 1.1;
-    loadCase0->AGe = 2.2;
-    i = 1;
-    LoadCase* loadCase1 = target->mLoadCaseList->at(i);
-    target->Calc_Q_G(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_GTest()", 0.5, loadCase1->Q_G);
+    target->mGasket->AGe = 2.2;
+    target->Calc_Q_G();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_GTest()", 0.5,
+             loadCase0->Q_G);
     deleteTarget();
 }
 
 void AssemblyTest::Calc_delta_eGcTest() {
     SetupIntegralTarget();
+    LoadCase* loadCase0 = target->mLoadCaseList->at(0);
     int i = 1;
     LoadCase* loadCase = target->mLoadCaseList->at(i);
-    target->mGasket->K = 0.0;
     loadCase->delta_eGc_EN13555 = 0.0;
     loadCase->Y_G = 1.3;
+    target->mGasket->K = 500000.0;
     target->mGasket->dG2_EN13555 = 2.4;
     target->mGasket->dG1_EN13555 = 9.1;
-    loadCase->Q_A = 15.3;
+    loadCase0->Q_A = 15.3;
     loadCase->P_QR = 0.0456;
     target->Calc_delta_eGc(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()", -1148.7558557602242,
-             loadCase->delta_eGc);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()",
+             -1148.7558557602242, loadCase->delta_eGc);
     target->mGasket->dG2_EN13555 = 0.0;
     target->mGasket->dG1_EN13555 = 0.0;
     loadCase->P_QR = 0.0;

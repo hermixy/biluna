@@ -55,6 +55,7 @@ void FlangeTest::setupTarget() {
         target->mBolt = new Bolt();
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
+        target->mGasket = new Gasket();
     }
 
     target->eP = 0.8;
@@ -79,16 +80,19 @@ void FlangeTest::Calc_d5eTest() {
     setupTarget();
     target->pB = 87.3;
     target->Calc_d5e();
-    areEqual(PR->getLastOutput(), "FlangeTest::Calc_d5eTest()", 30.918259, target->d5e);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_d5eTest()",
+             30.918259, target->d5e);
     target->mBolt->mBoltHole->isBlindHole = true;
     target->Calc_d5e();
-    areEqual(PR->getLastOutput(), "FlangeTest::Calc_d5eTest()", 20763.727150987565, target->d5e);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_d5eTest()",
+             20763.727150987565, target->d5e);
 }
 
 void FlangeTest::Calc_pBTest() {
     setupTarget();
     target->Calc_pB();
-    areEqual(PR->getLastOutput(), "FlangeTest::Calc_pBTest()", 80.591669, target->pB);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_pBTest()",
+             80.591669, target->pB);
 }
 
 void FlangeTest::Calc_hPTest() {
@@ -96,15 +100,17 @@ void FlangeTest::Calc_hPTest() {
     target->eP = 17.8;
     target->dE = 16.5;
     target->dF = 103.2;
-    target->mLoadCaseList->at(0)->dGe = 150.14;
-    target->Calc_hP(0);
-    areEqual(PR->getLastOutput(), "FlangeTest::Calc_hPTest()", 44.730940732332016, target->hP);
+    target->mGasket->dGe = 150.14;
+    target->Calc_hP();
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_hPTest()",
+             44.730940732332016, target->hP);
 }
 
 void FlangeTest::Calc_eQTest() {
     setupTarget();
     target->Calc_eQ();
-    areEqual(PR->getLastOutput(), "FlangeTest::Calc_eQTest()", 14.8, target->eQ);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_eQTest()",
+             14.8, target->eQ);
 }
 
 void FlangeTest::Calc_ABTest() {
@@ -113,8 +119,8 @@ void FlangeTest::Calc_ABTest() {
     target->mBolt->dBe = 18.7;
     target->mBolt->dBS = 21.3;
     target->Calc_AB();
-    areEqual(PR->getLastOutput(), "FlangeTest::Calc_ABTest()", 4668.9800238937132,
-             target->mBolt->AB);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_ABTest()",
+             4668.9800238937132, target->mBolt->AB);
 }
 
 void FlangeTest::Calc_XBTest() {
@@ -126,8 +132,8 @@ void FlangeTest::Calc_XBTest() {
     target->mBolt->lB = 9.1;
     target->mBolt->lS = 19.1;
     target->Calc_XB();
-    areEqual(PR->getLastOutput(), "FlangeTest::Calc_XBTest()", 0.012315046218782398,
-             target->mBolt->XB);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_XBTest()",
+             0.012315046218782398, target->mBolt->XB);
 }
 
 void FlangeTest::Calc_etanminusTest() {
@@ -252,12 +258,11 @@ void FlangeTest::Calc_jMTest() {
     int loadCaseNo = 0;
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
     loadCase->F_G = 10.1;
-    loadCase->hG1 = 2.4;
+    target->hG = 2.4;
     loadCase->F_Q = 5.1;
-    loadCase->hH1 = 4.9;
+    target->hH = 2.3;
     target->hP = 8.1;
     loadCase->F_R = 9.3;
-    loadCase->hH1 = 2.3;
 
     target->Calc_jM(loadCaseNo);
     areEqual(PR->getLastOutput(), "FlangeTest::Calc_jMTest()", 1,
@@ -426,12 +431,11 @@ void FlangeTest::Calc_PhiFTest() {
 
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
     loadCase->F_G = 1.1;
-    loadCase->hG1 = 2.2;
+    target->hG = 2.2;
     loadCase->F_Q = 3.3;
-    loadCase->hH1 = 4.4;
+    target->hH = 4.4;
     target->hP = 5.5;
     loadCase->F_R = 5.9;
-    //.hH1 = 6.6
     loadCase->WF1 = 7.7;
 
     target->Calc_PhiF(loadCaseNo);

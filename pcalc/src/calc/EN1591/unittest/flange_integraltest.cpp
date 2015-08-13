@@ -52,6 +52,7 @@ void Flange_IntegralTest::setupTarget() {
         target->mGasket = new Gasket();
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
+        target->mGasket = new Gasket();
     }
 
     target->AF = 3300.7; //cross section area
@@ -161,39 +162,35 @@ void Flange_IntegralTest::Calc_hQTest() {
     target->eP = 7.32;
     target->dE = 654.3;
     target->mShell->phiS = 0.31;
-    int loadCaseNo = 0;
-    target->mLoadCaseList->at(loadCaseNo)->dGe = 642.1;
-    target->Calc_hQ(loadCaseNo);
+    target->mGasket->dGe = 642.1;
+    target->Calc_hQ();
     areEqual(PR->getLastOutput(), "Flange_IntegralTest::Calc_hQTest()",
              2.4619527610220837, target->hQ);
 }
 
 void Flange_IntegralTest::Calc_hLTest() {
     setupTarget();
-    int loadCaseNo = 0;
-    target->Calc_hL(loadCaseNo);
+    target->Calc_hL();
     areEqual(PR->getLastOutput(), "Flange_IntegralTest::Calc_hLTest()",
-             0.0, target->mLoadCaseList->at(loadCaseNo)->hL1);
+             0.0, target->hL);
 }
 
 void Flange_IntegralTest::Calc_hHTest() {
     setupTarget();
-    int loadCaseNo = 0;
     target->d3e = 418.23;
     target->dE = 397.2;
-    target->Calc_hH(loadCaseNo);
+    target->Calc_hH();
     areEqual(PR->getLastOutput(), "Flange_IntegralTest::Calc_hHTest()",
-             10.515, target->mLoadCaseList->at(loadCaseNo)->hH1);
+             10.515, target->hH);
 }
 
 void Flange_IntegralTest::Calc_hGTest() {
     setupTarget();
-    int loadCaseNo = 0;
     target->d3e = 418.23;
-    target->mLoadCaseList->at(loadCaseNo)->dGe = 348.6;
-    target->Calc_hG(loadCaseNo);
+    target->mGasket->dGe = 348.6;
+    target->Calc_hG();
     areEqual(PR->getLastOutput(), "Flange_IntegralTest::Calc_hGTest()",
-             34.815, target->mLoadCaseList->at(loadCaseNo)->hG1);
+             34.815, target->hG);
 }
 
 void Flange_IntegralTest::Calc_gammaTest() {

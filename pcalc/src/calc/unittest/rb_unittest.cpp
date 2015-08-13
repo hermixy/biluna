@@ -18,9 +18,10 @@ void RB_UnitTest::areEqual(RB_ObjectBase* output, const QString& functionName,
             output->setValue("note", functionName + " - test OK");
         } else {
             output->setValue("note", functionName
-                              + " - test FAILED\n  => EXPECTED: "
-                              + QString::number(expected) + "\n  => TEST: "
-                              + QString::number(test));
+                             + " - test FAILED\n  => EXPECTED: "
+                             + QString::number(expected)
+                             + "\n  => TEST: " + QString::number(test) + " = "
+                             + output->getValue("formulavalues").toString());
         }
     } else {
         if (expected - accuracy <= test && test <= expected + accuracy) {

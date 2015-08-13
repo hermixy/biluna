@@ -102,6 +102,12 @@ Flange_OUT::Flange_OUT(int flangeNo) : Flange_IN(flangeNo) {
     theta = 0.0;
     lambda = 0.0;
     cF = 0.0;
+
+    d7 = 0.0;
+    hG = 0.0;
+    hH = 0.0;
+    hL = 0.0;
+
     hS = 0.0;
     hT = 0.0;
     kQ = 0.0;
@@ -224,16 +230,18 @@ void Flange::Calc_XW() {
 }
 
 /**
- * @brief Formula 77: Lever arm correction pressure (P) uses dGe from loadcase 0
- * @param loadCaseNo
+ * @brief Formula 77: Lever arm correction pressure (P) uses dGe
  */
-void Flange::Calc_hP(int loadCaseNo) {
-    double tmpdGe = mLoadCaseList->at(loadCaseNo)->dGe;
+void Flange::Calc_hP() {
+    double tmpdGe = mGasket->dGe;
     hP = (pow((tmpdGe - dE), 2) * (2 * tmpdGe + dE)
           / 6 + 2 * pow(eP, 2) * dF) / pow(tmpdGe, 2);
-    PR->addDetail("Formula 77",
-              "hP", "(((dGe - dE) ^ 2) * (2 * dGe + dE) "
-              "/ 6 + 2 * (eP ^ 2) * dF) / (dGe ^ 2)", hP, "mm");
+    PR->addDetail("Formula 77", "hP",
+                  "(((dGe - dE) ^ 2) * (2 * dGe + dE) "
+                  "/ 6 + 2 * (eP ^ 2) * dF) / (dGe ^ 2)", hP, "mm",
+                  "(((" + QN(tmpdGe) + " - " + QN(dE) + ") ^ 2) * (2 * "
+                  + QN(tmpdGe)+ " + " + QN(dE) + ") / 6 + 2 * (" + QN(eP)
+                  + " ^ 2) * " + QN(dF) + ") / (" + QN(tmpdGe) + " ^ 2)");
 }
 
 /**
@@ -568,29 +576,30 @@ bool Flange::Is_cS_valid(int loadCaseNo) {
  * @param loadCaseNo
  */
 void Flange::Calc_jM(int loadCaseNo) {
-    double tmp_hG = 0;
-    double tmp_hH = 0;
     double tmpVal = 0;
 
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    tmp_hG = loadCase->hG1;
-    tmp_hH = loadCase->hH1;
 
-    if (getFlangeNumber() == 2) {
-        tmp_hG = loadCase->hG2;
-        tmp_hH = loadCase->hH2;
-    }
-
-    tmpVal = loadCase->F_G * tmp_hG + loadCase->F_Q
-            * (tmp_hH - hP) + loadCase->F_R * tmp_hH;
+    tmpVal = loadCase->F_G * hG + loadCase->F_Q * (hH - hP) + loadCase->F_R * hH;
     tmpVal /= fabs(tmpVal);
+
+    QString str = QN(loadCase->F_G) + " * " + QN(hG) + " + "
+            + QN(loadCase->F_Q) + " * (" + QN(hH) + " - "
+            + QN(hP) + ") + " + QN(loadCase->F_R) + " * " + QN(hH)
+            + " / abs(" + QN(loadCase->F_G) + " * " + QN(hG) + " + "
+            + QN(loadCase->F_Q) + " * (" + QN(hH) + " - "
+            + QN(hP) + ") + " + QN(loadCase->F_R) + " * " + QN(hH) + ")";
 
     if (getFlangeNumber() == 1) {
         loadCase->jM1 = static_cast<int>(tmpVal);
-        PR->addDetail("Formula 136", "jM1", "...", loadCase->jM1, "-");
+        PR->addDetail("Formula 136", "jM1", "F_G * hG1 + F_Q * (hH1 - hP1) + F_R * hH1"
+                      "/ abs (F_G * hG1 + F_Q * (hH1 - hP1) + F_R * hH1)",
+                      loadCase->jM1, "-", str, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->jM2 = static_cast<int>(tmpVal);
-        PR->addDetail("Formula 136", "jM2", "...", loadCase->jM2, "-");
+        PR->addDetail("Formula 136", "jM2", "F_G * hG2 + F_Q * (hH2 - hP2) + F_R * hH2"
+                      "/ abs (F_G * hG2 + F_Q * (hH2 - hP2) + F_R * hH2)",
+                      loadCase->jM2, "-", str, loadCaseNo);
     }
 
 }
@@ -998,27 +1007,29 @@ void Flange::Calc_WF(int loadCaseNo) {
  */
 void Flange::Calc_PhiF(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    double tmp_hG = loadCase->hG1;
-    double tmp_hH = loadCase->hH1;
     double tmp_WF = loadCase->WF1;
 
     if (getFlangeNumber() == 2) {
-        tmp_hG = loadCase->hG2;
-        tmp_hH = loadCase->hH2;
         tmp_WF = loadCase->WF2;
     }
 
-    double tmp_PhiF = (fabs(loadCase->F_G * tmp_hG + loadCase->F_Q
-                           * (tmp_hH - hP) + loadCase->F_R * tmp_hH)) / tmp_WF;
+    double tmp_PhiF = (fabs(loadCase->F_G * hG + loadCase->F_Q
+                           * (hH - hP) + loadCase->F_R * hH)) / tmp_WF;
+    QString str = "(abs(" + QN(loadCase->F_G) + " * " + QN(hG) + " + "
+            + QN(loadCase->F_Q) + " * (" + QN(hH) + " - " + QN(hP)
+            + ") + " + QN(loadCase->F_R) + " * " + QN(hH) + ")) / "
+            + QN(tmp_WF);
 
     if (getFlangeNumber() == 1) {
         loadCase->PhiF1 = tmp_PhiF;
-        PR->addDetail("Formula 129", "PhiF1", "(abs(F_G * hG + F_Q "
-                  "* (hH - hP) + F_R * hH)) / WF", loadCase->PhiF1, "-");
+        PR->addDetail("Formula 129", "PhiF1", "(abs(F_G * hG1 + F_Q "
+                      "* (hH1 - hP1) + F_R * hH1)) / WF1", loadCase->PhiF1, "-",
+                      str, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiF2 = tmp_PhiF;
-        PR->addDetail("Formula 129", "PhiF2", "(abs(F_G * hG + F_Q "
-                  "* (hH - hP) + F_R * hH)) / WF", loadCase->PhiF2, "-");
+        PR->addDetail("Formula 129", "PhiF2", "(abs(F_G * hG2 + F_Q "
+                      "* (hH2 - hP2) + F_R * hH2)) / WF2", loadCase->PhiF2, "-",
+                      str, loadCaseNo);
     }
 }
 

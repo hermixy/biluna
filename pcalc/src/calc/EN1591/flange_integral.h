@@ -34,15 +34,15 @@ public:
     virtual void Calc_cF();
     virtual void Calc_hS();
     virtual void Calc_hT();
-    virtual void Calc_hQ(int loadCaseNo);
+    virtual void Calc_hQ();
     virtual void Calc_hR();
     virtual void Calc_kQ();
     virtual void Calc_kR();
     virtual void Calc_ZF();
     virtual void Calc_ZL();
-    virtual void Calc_hG(int loadCaseNo);
-    virtual void Calc_hH(int loadCaseNo);
-    virtual void Calc_hL(int loadCaseNo);
+    virtual void Calc_hG();
+    virtual void Calc_hH();
+    virtual void Calc_hL();
 };
 
 END_NAMESPACE_REDBAG_CALC_EN1591

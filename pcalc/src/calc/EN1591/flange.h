@@ -102,6 +102,12 @@ public:
     double theta;
     double lambda;
     double cF;
+
+    double d7;
+    double hG;
+    double hH;
+    double hL;
+
     double hS;
     double hT;
     double kQ;
@@ -138,7 +144,7 @@ public:
     void Calc_dK1();
     void Calc_dK2();
     void Calc_XW();
-    virtual void Calc_hP(int loadCaseNo);
+    virtual void Calc_hP();
     void Calc_etanplus();
     void Calc_etanminus();
 
@@ -165,7 +171,7 @@ public:
     virtual void Calc_hS();
     virtual void Calc_hT();
 
-    virtual void Calc_hQ(int loadCaseNo) = 0;
+    virtual void Calc_hQ() = 0;
     virtual void Calc_hR() = 0;
 
     virtual void Calc_kQ();
@@ -176,9 +182,9 @@ public:
 
     virtual void Calc_rho();
 
-    virtual void Calc_hG(int loadCaseNo) = 0;
-    virtual void Calc_hH(int loadCaseNo) = 0;
-    virtual void Calc_hL(int loadCaseNo) = 0;
+    virtual void Calc_hG() = 0;
+    virtual void Calc_hH() = 0;
+    virtual void Calc_hL() = 0;
 
     virtual void Calc_d7min();
     virtual void Calc_d7max();

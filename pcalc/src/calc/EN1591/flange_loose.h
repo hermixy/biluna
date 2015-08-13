@@ -34,7 +34,7 @@ public:
     virtual void Calc_cF();
     virtual void Calc_hS();
     virtual void Calc_hT();
-    virtual void Calc_hQ(int loadCaseNo);
+    virtual void Calc_hQ();
     virtual void Calc_hR();
     virtual void Calc_kQ();
     virtual void Calc_kR();
@@ -42,12 +42,12 @@ public:
     virtual void Calc_ZL();
     virtual void Calc_d7min();
     virtual void Calc_d7max();
-    virtual void Calc_d70(int loadCaseNo);
-    virtual void Calc_d7minMax(int loadCaseNo);
+    virtual void Calc_d70();
+    virtual void Calc_d7minMax();
     virtual void Calc_chi(int loadCaseNo);
-    virtual void Calc_hG(int loadCaseNo);
-    virtual void Calc_hH(int loadCaseNo);
-    virtual void Calc_hL(int loadCaseNo);
+    virtual void Calc_hG();
+    virtual void Calc_hH();
+    virtual void Calc_hL();
     virtual void Calc_WL(int loadCaseNo);
     virtual void Calc_PhiL(int loadCaseNo);
     virtual bool Is_PhiL_valid(int loadCaseNo);

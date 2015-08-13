@@ -1,4 +1,5 @@
 ﻿#include "flange_loose.h"
+#include <algorithm>
 NAMESPACE_REDBAG_CALC_EN1591
 
 
@@ -208,15 +209,19 @@ void Flange_Loose::Calc_hT() {
 
 /**
  * @brief Formula 79: Lever arm correction hQ
- * @param loadCaseNo
  */
-void Flange_Loose::Calc_hQ(int loadCaseNo) {
-    double tmpdGe = mLoadCaseList->at(loadCaseNo)->dGe;
+void Flange_Loose::Calc_hQ() {
     hQ = (hS * kQ + hT * (2 * dF * eP / (dE * dE)
-                          - 0.5 * tan(mShell->phiS))) * (pow((dE / tmpdGe), 2));
-    PR->addDetail("Formula 79", "hQ", "(hS * kQ + hT * (2 * dF * eP / (dE * dE) "
-              "- 0.5 * tan(phiS))) * (pow((dE / tmpdGe), 2));",
-              hQ, "mm");
+                          - 0.5 * tan(mShell->phiS)))
+            * (pow((dE / mGasket->dGe), 2));
+    PR->addDetail("Formula 79", "hQ",
+                  "(hS * kQ + hT * (2 * dF * eP / (dE * dE) "
+                  "- 0.5 * tan(phiS))) * ((dE / dGe) ^ 2)",
+                  hQ, "mm",
+                  "(" + QN(hS) + " * " + QN(kQ) + " + " + QN(hT) + " * (2 * "
+                  + QN(dF) + " * " + QN(eP) + " / (" + QN(dE) + " * "
+                  + QN(dE) + ") - 0.5 * tan(" + QN(mShell->phiS) + "))) * (("
+                  + QN(dE) + " / " + QN(mGasket->dGe) + ") ^ 2)");
 }
 
 /**
@@ -296,9 +301,8 @@ void Flange_Loose::Calc_d7max() {
  * as d7 for all loadcases
  * @param loadCaseNo
  */
-void Flange_Loose::Calc_d70(int loadCaseNo) {
-    double tmpdGe = mLoadCaseList->at(loadCaseNo)->dGe;
-    d70 = (tmpdGe + chi * d3e) / (1 + chi);
+void Flange_Loose::Calc_d70() {
+    d70 = (mGasket->dGe + chi * d3e) / (1 + chi);
 
     if (d70 < d7min)     {
         d70 = d7min;
@@ -306,29 +310,25 @@ void Flange_Loose::Calc_d70(int loadCaseNo) {
         d70 = d7max;
     }
 
-    for (std::vector<LoadCase*>::iterator it = mLoadCaseList->begin();
-                it != mLoadCaseList->end(); it++) {
-        (*it)->d7 = d70;
-    }
+    d7 = d70;
 
-    PR->addDetail("Formula 61", "d70", "(dGe + chi * d3e) "
-              "/ (1 + chi) [d7min;d7max]", d70, "mm");
+    PR->addDetail("Formula 61", "d70",
+                  "(dGe + chi * d3e) / (1 + chi) [d7min;d7max]",
+                  d70, "mm",
+                  "(" + QN(mGasket->dGe) + " + " + QN(chi) + " * "
+                  + QN(d3e) + ") / (1 + " + QN(chi) + ")");
 }
 
 /**
  * @brief Formula 84: Limit d7 to minimum and maximum
  * @param loadCaseNo
  */
-void Flange_Loose::Calc_d7minMax(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (loadCase->d7 < d7min) {
-        loadCase->d7 = d7min;
-    } else if (loadCase->d7 > d7max) {
-        loadCase->d7 = d7max;
-    }
-    PR->addDetail("Formula 84", "result", "d7min =< d7 >= d7max",
-              loadCase->d7, "mm");
+void Flange_Loose::Calc_d7minMax() {
+    d7 = std::min(std::max(d7min, d7), d7max);
+    PR->addDetail("Formula 84", "result", "min(max(d7min, d7), d7max)",
+                  d7, "mm",
+                  "min(max(" + QN(d7min) + "; " + QN(d7) + "); "
+                  + QN(d7max) + ")");
 }
 
 /**
@@ -354,53 +354,31 @@ void Flange_Loose::Calc_chi(int loadCaseNo) {
  * @brief Formula 60 and 87: Lever arm gasket at load case
  * @param loadCaseNo
  */
-void Flange_Loose::Calc_hG(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    if (getFlangeNumber() == 1) {
-        loadCase->hG1 = (loadCase->d7 - mLoadCaseList->at(0)->dGe) / 2;
-        PR->addDetail("Formula 60, 87",
-                  "hG1", "(d7 - dGe) / 2",
-                  loadCase->hG1, "-");
-    } else {
-        loadCase->hG2 = (loadCase->d7 - mLoadCaseList->at(0)->dGe) / 2;
-        PR->addDetail("Formula 60, 87", "hG2", "(d7 - dGe) / 2", loadCase->hG2, "-");
-    }
+void Flange_Loose::Calc_hG() {
+    hG = (d7 - mGasket->dGe) / 2;
+    PR->addDetail("Formula 60, 87", "hG" + QN(getFlangeNumber()),
+                  "(d7 - dGe) / 2", hG, "-",
+                  "(" + QN(d7) + " - " + QN(mGasket->dGe) + ") / 2");
 }
 
 /**
  * @brief Formula 88: Hub lever arm for all load case
  * @param loadCaseNo
  */
-void Flange_Loose::Calc_hH(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (getFlangeNumber() == 1) {
-        loadCase->hH1 = (loadCase->d7 - dE) / 2;
-        PR->addDetail("Formula 88", "hH1", "(d7 - dE) / 2",
-                  loadCase->hH1, "mm");
-    } else {
-        loadCase->hH2 = (loadCase->d7 - dE) / 2;
-        PR->addDetail("Formula 88", "hH2", "(d7 - dE) / 2",
-                  loadCase->hH2, "mm");
-    }
+void Flange_Loose::Calc_hH() {
+    hH = (d7 - dE) / 2;
+    PR->addDetail("Formula 88", "hH" + QN(getFlangeNumber()),
+                  "(d7 - dE) / 2", hH, "mm",
+                  "(" + QN(d7) + " - " + QN(dE) + ") / 2");
 }
 
 /**
- * @brief Formula 89: Lever arm loose ring at load case 0
- * @param loadCaseNo
+ * @brief Formula 89: Lever arm loose ring
  */
-void Flange_Loose::Calc_hL(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-
-    if (getFlangeNumber() == 1) {
-        loadCase->hL1 = (d3e - loadCase->d7) / 2;
-        PR->addDetail("Formula 89", "hL1", "(d3e - d7) / 2",
-                  loadCase->hL1, "mm");
-    } else {
-        loadCase->hL2 = (d3e - loadCase->d7) / 2;
-        PR->addDetail("Formula 89", "hL2", "(d3e - d7) / 2",
-                  loadCase->hL2, "mm");
-    }
+void Flange_Loose::Calc_hL() {
+    hL = (d3e - d7) / 2;
+    PR->addDetail("Formula 89", "hL" + QN(getFlangeNumber()), "(d3e - d7) / 2",
+                  hL, "mm", "(" + QN(d3e) + " - " + QN(d7) + ") / 2");
 }
 
 /**
@@ -434,24 +412,26 @@ void Flange_Loose::Calc_WL(int loadCaseNo) {
  */
 void Flange_Loose::Calc_PhiL(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    double tmp_hL = loadCase->hL1;
     double tmp_WL = loadCase->WL1;
 
     if (getFlangeNumber() == 2) {
-        tmp_hL = loadCase->hL2;
         tmp_WL = loadCase->WL2;
     }
 
-    double tmp_PhiL = loadCase->F_B *tmp_hL / tmp_WL;
+    double tmp_PhiL = loadCase->F_B * hL / tmp_WL;
 
     if (getFlangeNumber() == 1) {
         loadCase->PhiL1 = tmp_PhiL;
         PR->addDetail("Formula 149", "PhiL1", "F_B * hL1 / WL1",
-                  loadCase->PhiL1, "-");
+                      loadCase->PhiL1, "-",
+                      QN(loadCase->F_B) + " * " + QN(hL) + " / " + QN(tmp_WL),
+                      loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiL2 = tmp_PhiL;
         PR->addDetail("Formula 149", "PhiL2", "F_B * hL2 / WL2",
-                  loadCase->PhiL2, "-");
+                      loadCase->PhiL2, "-",
+                      QN(loadCase->F_B) + " * " + QN(hL) + " / " + QN(tmp_WL),
+                      loadCaseNo);
     }
 }
 
@@ -494,7 +474,7 @@ void Flange_Loose::Calc_WQ(int loadCaseNo) {
     double tmpVal1 = std::min(tmp_fS * pow(mShell->eS, 2), tmp_fF * pow(eF, 2));
     double tmpVal2 = std::min(tmp_fF * pow(eF, 2),
                               loadCase->Q_smax *
-                                  pow(mGasket->dG2 - loadCase->d7, 2) / 4.0);
+                                  pow(mGasket->dG2 - d7, 2) / 4.0);
     double tmp_WQ = M_PI / 4 * mShell->dS *(tmpVal1 + tmpVal2);
 
     if (getFlangeNumber() == 1)     {
@@ -513,17 +493,14 @@ void Flange_Loose::Calc_WQ(int loadCaseNo) {
 void Flange_Loose::Calc_PhiF(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
 
-    if (mGasket->dG2 - loadCase->d7 > 0) {
-
-        double tmp_hH = loadCase->hH1;
+    if (mGasket->dG2 - d7 > 0) {
         double tmp_WQ = loadCase->WQ1;
 
         if (getFlangeNumber() == 2) {
-            tmp_hH = loadCase->hH2;
             tmp_WQ = loadCase->WQ2;
         }
 
-        double tmp_PhiF = fabs(loadCase->F_Q + loadCase->F_R) *tmp_hH / tmp_WQ;
+        double tmp_PhiF = fabs(loadCase->F_Q + loadCase->F_R) * hH / tmp_WQ;
 
         if (getFlangeNumber() == 1) {
             loadCase->PhiF1 = tmp_PhiF;

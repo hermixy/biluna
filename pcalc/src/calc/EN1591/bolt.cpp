@@ -26,6 +26,18 @@ Bolt_IN::~Bolt_IN() {
     mBoltHole = NULL;
 }
 
+Bolt_OUT::Bolt_OUT() : Bolt_IN(){
+    AB = 0.0;
+    IB = 0.0;
+    lB = 0.0;
+    XB = 0.0;
+    eta1plus = 0.0;
+    etanplus = 0.0;
+    eta1minus = 0.0;
+    etanminus = 0.0;
+
+}
+
 /**
  * @brief Table B.1: High scatter value of one bolt tensioning
  */
@@ -118,18 +130,5 @@ void Bolt::Calc_IB() {
     PR->addDetail("With Formula 123", "IB",
                   "(Math.PI / 12) * (Math.Min(dBe, dBS)) ^ 3", IB, "-");
 }
-
-Bolt_OUT::Bolt_OUT() : Bolt_IN(){
-    AB = 0.0;
-    IB = 0.0;
-    lB = 0.0;
-    XB = 0.0;
-    eta1plus = 0.0;
-    etanplus = 0.0;
-    eta1minus = 0.0;
-    etanminus = 0.0;
-
-}
-
 
 END_NAMESPACE_REDBAG_CALC_EN1591

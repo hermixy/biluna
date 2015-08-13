@@ -94,6 +94,8 @@ double Table02_15Property::getTableQsminL(double leakageRate,
                                           const QString& materialCode,
                                           double QA,
                                           double testPressure) {
+    mLeft = NULL;
+    mRight = NULL;
     mTargetQA = QA;
 
     for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
@@ -108,10 +110,23 @@ double Table02_15Property::getTableQsminL(double leakageRate,
         }
     }
 
-    // TODO Amtec presentation of QsminL:
-    double value = mRight->mQA - mLeft->mQA;
+    double value = -1.0;
 
+    if (mLeft && mRight) {
+        double denominator = mRight->mQA - mLeft->mQA;
 
+        if (denominator != 0) {
+            value = mLeft->mQsminL + (QA - mLeft->mQA)
+                    * (mRight->mQsminL - mLeft->mQsminL)
+                    / (mRight->mQA - mLeft->mQA);
+        } else {
+            value = mRight->mQsminL;
+        }
+    } else if (mRight) {
+        value = mRight->mQsminL;
+    } else if (mLeft) {
+        value = mLeft->mQsminL;
+    }
 
     return value;
 }
@@ -233,16 +248,16 @@ void Table02_15Property::cl(double leakageRate,
 }
 
 void Table02_15Property::updateLeft(QminLQsminLProperty* obj) {
-    if (obj->mQA < mTargetQA) {
-        if (mLeft && obj->mQA > mLeft->mQA) {
+    if (obj->mQA <= mTargetQA) {
+        if (!mLeft || obj->mQA > mLeft->mQA) {
             mLeft = obj;
         }
     }
 }
 
 void Table02_15Property::updateRight(QminLQsminLProperty* obj) {
-    if (obj->mQA > mTargetQA) {
-        if (mRight && obj->mQA < mRight->mQA) {
+    if (obj->mQA >= mTargetQA) {
+        if (!mRight || obj->mQA < mRight->mQA) {
             mRight = obj;
         }
     }

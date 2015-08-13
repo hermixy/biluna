@@ -68,6 +68,7 @@ void Flange_LooseTest::setupTarget() {
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
         target->mLoadCaseList->createLoadCase();
+        target->mGasket = new Gasket();
     }
 
     target->d0 = 320.1; //inside diameter
@@ -117,29 +118,28 @@ void Flange_LooseTest::Calc_cFTest() {
     target->theta = 2.34;
     target->lambda = 3.45;
     target->Calc_cF();
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_cFTest()", 0.013072460636480212,
-             target->cF);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_cFTest()",
+             0.013072460636480212, target->cF);
 }
 
 void Flange_LooseTest::Calc_d7Test() {
     setupTarget();
-    int loadCaseNo = 0;
-    LoadCase *loadCase = target->mLoadCaseList->at(loadCaseNo);
     target->d7min = 203.8;
     target->d7max = 217.3;
-    loadCase->dGe = 212.7;
+    target->mGasket->dGe = 212.7;
     target->chi = 0.1;
     target->d3e = 225.7;
-    target->Calc_d70(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_d7Test()", 213.88181818181818,
-             loadCase->d7);
+    target->Calc_d70();
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_d7Test()",
+             213.88181818181818, target->d7);
 }
 
 void Flange_LooseTest::Calc_d7maxTest() {
     setupTarget();
     target->d8 = 412.7;
     target->Calc_d7max();
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_d7maxTest()", 412.7, target->d7max);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_d7maxTest()",
+             412.7, target->d7max);
 }
 
 void Flange_LooseTest::Calc_d7minTest() {
@@ -220,74 +220,32 @@ void Flange_LooseTest::Calc_gammaTest() {
 
 void Flange_LooseTest::Calc_hGTest() {
     setupTarget();
-    int loadCaseNo = 0;
     target->setFlangeNumber(1);
-    target->mLoadCaseList->at(loadCaseNo)->d7 = 234.9;
-    target->mLoadCaseList->at(loadCaseNo)->dGe = 222.1;
-    target->Calc_hG(loadCaseNo);
+    target->d7 = 234.9;
+    target->mGasket->dGe = 222.1;
+    target->Calc_hG();
     areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hGTest()", 6.4,
-             target->mLoadCaseList->at(loadCaseNo)->hG1);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hGTest()", 0.0,
-             target->mLoadCaseList->at(loadCaseNo)->hG2);
-    target->setFlangeNumber(2);
-    target->Calc_hG(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hGTest()", 6.4,
-             target->mLoadCaseList->at(loadCaseNo)->hG2);
-    //loadCaseNo = 1
-    //target.flangeNumber = 1
-    //target.LoadCaseList(0).hG1 = 243.9
-    //target.LoadCaseList(loadCaseNo).x = 0.5
-    //target.hV = 7.1
-    //target.Calc_hG()
-    //Assert.AreEqual(247.45, target.LoadCaseList(loadCaseNo).hG1, ACCURACY)
+             target->hG);
 }
 
 void Flange_LooseTest::Calc_hHTest() {
     setupTarget();
-    int loadCaseNo = 0;
     target->setFlangeNumber(1);
-    target->mLoadCaseList->at(loadCaseNo)->d7 = 34.1;
+    target->d7 = 34.1;
     target->dE = 27.1;
-    target->Calc_hH(loadCaseNo);
+    target->Calc_hH();
     areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hHTest()", 3.5,
-             target->mLoadCaseList->at(loadCaseNo)->hH1);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hHTest()", 0.0,
-             target->mLoadCaseList->at(loadCaseNo)->hH2);
-    target->setFlangeNumber(2);
-    target->Calc_hH(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hHTest()", 3.5,
-             target->mLoadCaseList->at(loadCaseNo)->hH2);
-    //loadCaseNo = 1
-    //target.flangeNumber = 1
-    //target.LoadCaseList(0).hH1 = 243.9
-    //target.LoadCaseList(loadCaseNo).x = 0.5
-    //target.hV = 7.1
-    //target.Calc_hH(loadCaseNo)
-    //Assert.AreEqual(247.45, target.LoadCaseList(loadCaseNo).hH1, ACCURACY)
+             target->hH);
 }
 
 void Flange_LooseTest::Calc_hLTest() {
     setupTarget();
-    int loadCaseNo = 0;
     target->setFlangeNumber(1);
-    target->mLoadCaseList->at(loadCaseNo)->d7 = 131.4;
+    target->d7 = 131.4;
     target->d3e = 27.3;
-    target->Calc_hL(loadCaseNo);
+    target->Calc_hL();
     areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hLTest()", -52.05,
-             target->mLoadCaseList->at(loadCaseNo)->hL1);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hLTest()", 0.0,
-             target->mLoadCaseList->at(loadCaseNo)->hL2);
-    target->setFlangeNumber(2);
-    target->Calc_hL(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hLTest()", -52.05,
-             target->mLoadCaseList->at(loadCaseNo)->hL2);
-    //loadCaseNo = 1
-    //target.flangeNumber = 1
-    //target.LoadCaseList(0).hL1 = 243.9
-    //target.LoadCaseList(loadCaseNo).x = 0.5
-    //target.hV = 7.1
-    //target.Calc_hL(loadCaseNo)
-    //Assert.AreEqual(240.35, target.LoadCaseList(loadCaseNo).hL1, ACCURACY)
+             target->hL);
 }
 
 void Flange_LooseTest::Calc_hQTest() {
@@ -299,10 +257,10 @@ void Flange_LooseTest::Calc_hQTest() {
     target->eP = 7.32;
     target->dE = 654.3;
     target->mShell->phiS = 0.31;
-    int loadCaseNo = 0;
-    target->mLoadCaseList->at(loadCaseNo)->dGe = 642.1;
-    target->Calc_hQ(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hQTest()", 2.4619527610220837, target->hQ);
+    target->mGasket->dGe = 642.1;
+    target->Calc_hQ();
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hQTest()",
+             2.4619527610220837, target->hQ);
 }
 
 void Flange_LooseTest::Calc_hRTest() {
@@ -312,7 +270,8 @@ void Flange_LooseTest::Calc_hRTest() {
     target->hT = 7.3;
     target->mShell->phiS = 0.31;
     target->Calc_hR();
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hRTest()", 1.7090046064655768, target->hR);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hRTest()",
+             1.7090046064655768, target->hR);
 }
 
 void Flange_LooseTest::Calc_hSTest() {
@@ -324,8 +283,8 @@ void Flange_LooseTest::Calc_hSTest() {
     target->lambda = 3.45;
 
     target->Calc_hS();
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hSTest()", -14.834159238788418,
-             target->hS);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_hSTest()",
+             -14.834159238788418, target->hS);
 }
 
 void Flange_LooseTest::Calc_hTTest() {
@@ -425,7 +384,7 @@ void Flange_LooseTest::Calc_PhiLTest() {
     int loadCaseNo = 0;
     target->setFlangeNumber(1);
     target->mLoadCaseList->at(loadCaseNo)->F_B = 4.5;
-    target->mLoadCaseList->at(loadCaseNo)->hL1 = 6.3;
+    target->hL = 6.3;
     target->mLoadCaseList->at(loadCaseNo)->WL1 = 5.1;
     target->Calc_PhiL(loadCaseNo);
     areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_PhiLTest()", 5.5588235294117645,
@@ -459,7 +418,7 @@ void Flange_LooseTest::Calc_WQTest() {
     target->eF = 1.3;
     loadCase->Q_smax = 0.015;
     target->mGasket->dG2 = 1.6;
-    loadCase->d7 = 1.7;
+    target->d7 = 1.7;
     target->mShell->dS = 1.8;
     target->Calc_WQ(loadCaseNo);
     areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_WQTest()", 0.0305327463011575,
@@ -467,7 +426,7 @@ void Flange_LooseTest::Calc_WQTest() {
     loadCase->fS1 = 1.1;
     loadCase->fF1 = 0.012;
     loadCase->Q_smax = 1.5;
-    loadCase->d7 = 7.7;
+    target->d7 = 7.7;
     target->Calc_WQ(loadCaseNo);
     areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_WQTest()", 0.057340349113320907,
              loadCase->WQ1);
@@ -492,8 +451,8 @@ void Flange_LooseTest::Calc_WFTest() {
     target->eD = 6.6;
 
     target->Calc_WF(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_WFTest()", 368.15244856183011,
-             target->mLoadCaseList->at(loadCaseNo)->WF1);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_WFTest()",
+             368.15244856183011, target->mLoadCaseList->at(loadCaseNo)->WF1);
 }
 
 void Flange_LooseTest::Calc_PhiFTest() {
@@ -504,13 +463,14 @@ void Flange_LooseTest::Calc_PhiFTest() {
     LoadCase* loadCase =
             target->mLoadCaseList->at(loadCaseNo);
     target->mGasket->dG2 = 2.9;
-    loadCase->d7 = 2.7;
+    target->d7 = 2.7;
     loadCase->F_Q = -102.3;
     loadCase->F_R = 2.4;
-    loadCase->hH1 = 6.2;
+    target->hH = 6.2;
     loadCase->WQ1 = 3.2;
     target->Calc_PhiF(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_PhiFTest()", 193.55625, loadCase->PhiF1);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_PhiFTest()",
+             193.55625, loadCase->PhiF1);
 }
 
 void Flange_LooseTest::Is_flange_ValidTest() {

@@ -49,6 +49,7 @@ void Flange_BlindTest::setupTarget() {
         target->mGasket = new Gasket();
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
+        target->mGasket = new Gasket();
     }
 
     target->d0 = 320.1; //inside diameter
@@ -121,30 +122,27 @@ void Flange_BlindTest::Calc_eLTest() {
 
 void Flange_BlindTest::Calc_hGTest() {
     setupTarget();
-    int loadCaseNo = 0;
     target->d3e = 418.23;
-    target->mLoadCaseList->at(loadCaseNo)->dGe = 348.6;
-    target->Calc_hG(loadCaseNo);
+    target->mGasket->dGe = 348.6;
+    target->Calc_hG();
     areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hGTest()", 34.815,
-             target->mLoadCaseList->at(loadCaseNo)->hG1);
+             target->hG);
 }
 
 void Flange_BlindTest::Calc_hHTest() {
     setupTarget();
-    int loadCaseNo = 0;
     target->d3e = 418.23;
     target->dE = 397.2;
-    target->Calc_hH(loadCaseNo);
+    target->Calc_hH();
     areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hHTest()", 10.515,
-             target->mLoadCaseList->at(loadCaseNo)->hH1);
+             target->hH);
 }
 
 void Flange_BlindTest::Calc_hLTest() {
     setupTarget();
-    int loadCaseNo = 0;
-    target->Calc_hL(loadCaseNo);
+    target->Calc_hL();
     areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hLTest()", 0.0,
-             target->mLoadCaseList->at(loadCaseNo)->hL1);
+             target->hL);
 }
 
 void Flange_BlindTest::Calc_hPTest() {
@@ -152,21 +150,20 @@ void Flange_BlindTest::Calc_hPTest() {
     target->eP = 17.8; // just to test whether eP is set to zero
     target->dE = 16.5;
     target->dF = 103.2;
-    int loadCaseNo = 0;
-    target->mLoadCaseList->at(loadCaseNo)->dGe = 150.14;
-    target->Calc_hP(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hPTest()", 41.829879640183911,
-             target->hP, 0.000001);
+    target->mGasket->dGe = 150.14;
+    target->Calc_hP();
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hPTest()",
+             41.829879640183911, target->hP, 0.000001);
 }
 
 void Flange_BlindTest::Calc_hQTest() {
     setupTarget();
     target->dE = 12.1;
     target->rho = 1.65;
-    int loadCaseNo = 0;
-    target->mLoadCaseList->at(loadCaseNo)->dGe = 7.3;
-    target->Calc_hQ(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hQTest()", -16.35146231289276, target->hQ);
+    target->mGasket->dGe = 7.3;
+    target->Calc_hQ();
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_hQTest()",
+             -16.35146231289276, target->hQ);
 }
 
 void Flange_BlindTest::Calc_hRTest() {
@@ -219,10 +216,10 @@ void Flange_BlindTest::Calc_PhiFTest() {
 
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
     loadCase->F_B = 1.1;
-    loadCase->hG1 = 2.3;
+    target->hG = 2.3;
     loadCase->F_Q = 3.4;
     target->rho = 4.5;
-    loadCase->dGe = 5.6;
+    target->mGasket->dGe = 5.6;
     loadCase->F_R = 6.7;
     loadCase->WF1 = 4.3;
     //Dim tmp_PhiF = Math.Max(Math.Abs(tmpVal1 + tmpVal2), _

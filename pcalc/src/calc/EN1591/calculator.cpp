@@ -952,7 +952,7 @@ void Calculator::exec() {
                         = assembly->mLoadCaseList->at(0)->F_Greq * 1.1;
             }
 
-            PR->addDetail("New INITIAL", "Force F_GInitial", "initial",
+            PR->addDetail("After F.108", "F_G", "F_Greq + F_R",
                           assembly->mLoadCaseList->at(0)->F_G, "N");
         }
 
@@ -1096,7 +1096,7 @@ void Calculator::F54_to_54(Assembly* assembly) 	{
     LoadCase* loadCase = assembly->mLoadCaseList->at(loadCaseNo);
     loadCase->mForce->Calc_M_AI();
     assembly->Calc_F_R(loadCaseNo);
-    assembly->Calc_F_GInitial(loadCaseNo);
+    assembly->Calc_F_GInitial();
 }
 
 void Calculator::F55_to_62_table1(Assembly* assembly) {
@@ -1111,11 +1111,10 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
             && (assembly->mGasket->frmType == Gasket::CurvedSimpleContact
             || assembly->mGasket->frmType == Gasket::CurvedDoubleContact)) {
         // E_G is unknown at this stage, refer Assembly::Calc_bGi()
-        LoadCase* loadCase0 = assembly->mLoadCaseList->at(0);
-        loadCase0->dGe = assembly->mGasket->dGt;
-        loadCase0->bGe = assembly->mGasket->bGt;
-        assembly->mGasket->Calc_AGe(0);
-        assembly->Calc_Q_G(0);
+        assembly->mGasket->dGe = assembly->mGasket->dGt;
+        assembly->mGasket->bGe = assembly->mGasket->bGt;
+        assembly->mGasket->Calc_AGe();
+        assembly->Calc_Q_G();
         assembly->mGasket->Calc_E_G(0);
     }
     // HACK: End
@@ -1124,9 +1123,9 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
 
     assembly->Calc_bGi(loadCaseNo, mIsFirstApproximation);
     assembly->mGasket->Calc_bGe(loadCaseNo);
-    assembly->Calc_dGe(loadCaseNo, assembly->mGasket);
-    assembly->mGasket->Calc_AGe(loadCaseNo);
-    assembly->Calc_Q_G(loadCaseNo);
+    assembly->Calc_dGe();
+    assembly->mGasket->Calc_AGe();
+    assembly->Calc_Q_G();
     assembly->mGasket->Calc_E_G(loadCaseNo);
 
     assembly->mFlange1->Calc_d7min(); // loose flange only
@@ -1137,8 +1136,8 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
     assembly->mFlange2->Calc_chi(loadCaseNo); // loose flange only
     assembly->mFlange1->Calc_d70(loadCaseNo); // loose flange only
     assembly->mFlange2->Calc_d70(loadCaseNo); // loose flange only
-    assembly->mFlange1->Calc_hG(loadCaseNo);
-    assembly->mFlange2->Calc_hG(loadCaseNo);
+    assembly->mFlange1->Calc_hG();
+    assembly->mFlange2->Calc_hG();
 }
 
 void Calculator::F63_to_63(Assembly* assembly, int loadCaseNo) {
@@ -1147,29 +1146,29 @@ void Calculator::F63_to_63(Assembly* assembly, int loadCaseNo) {
 }
 
 void Calculator::F77_to_89(Assembly* assembly, int loadCaseNo) {
-    assembly->mFlange1->Calc_hP(loadCaseNo);
-    assembly->mFlange2->Calc_hP(loadCaseNo);
-    assembly->mFlange1->Calc_hQ(loadCaseNo);
-    assembly->mFlange2->Calc_hQ(loadCaseNo);
+    assembly->mFlange1->Calc_hP();
+    assembly->mFlange2->Calc_hP();
+    assembly->mFlange1->Calc_hQ();
+    assembly->mFlange2->Calc_hQ();
     assembly->mFlange1->Calc_d7minMax(loadCaseNo);
     assembly->mFlange2->Calc_d7minMax(loadCaseNo);
-    assembly->mFlange1->Calc_hG(loadCaseNo);
-    assembly->mFlange2->Calc_hG(loadCaseNo);
-    assembly->mFlange1->Calc_hH(loadCaseNo);
-    assembly->mFlange2->Calc_hH(loadCaseNo);
-    assembly->mFlange1->Calc_hL(loadCaseNo);
-    assembly->mFlange2->Calc_hL(loadCaseNo);
+    assembly->mFlange1->Calc_hG();
+    assembly->mFlange2->Calc_hG();
+    assembly->mFlange1->Calc_hH();
+    assembly->mFlange2->Calc_hH();
+    assembly->mFlange1->Calc_hL();
+    assembly->mFlange2->Calc_hL();
 }
 
 void Calculator::F90_to_104(Assembly* assembly, int loadCaseNo) {
-    assembly->mGasket->Calc_AQ(loadCaseNo);
+    assembly->mGasket->Calc_AQ();
     assembly->Calc_F_Q(loadCaseNo);
     assembly->mLoadCaseList->at(loadCaseNo)->mForce->Calc_F_LI();
     assembly->mLoadCaseList->at(loadCaseNo)->mForce->Calc_M_AI();
     assembly->Calc_F_R(loadCaseNo);
 //    assembly->Calc_lB(); already before Formula 42
     assembly->Calc_dUI(loadCaseNo);
-    assembly->Calc_Q_G(loadCaseNo); // for determining EG Formula 100
+    assembly->Calc_Q_G(); // for determining EG Formula 100
     assembly->mGasket->Calc_E_G(loadCaseNo);
     assembly->Calc_YB(loadCaseNo);
     assembly->Calc_YG(loadCaseNo);

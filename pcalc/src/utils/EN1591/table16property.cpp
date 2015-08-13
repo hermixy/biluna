@@ -28,23 +28,17 @@ double Table16Property::getTable16_Q_smax(const RB_String& materialCode,
     double value = 0.0;
     if (!getUpperLower(materialCode, temperature)) {
         value = 0.0;
-        PR->addDetail("Table 16 F.65, 69, 70, 74, 75", "Q_smax",
-                  "Table value", value, "N/mm2", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mQ_smax;
-        PR->addDetail("Table 16 F.65, 69, 70, 74, 75", "Q_smax",
-                  "Table value", value, "N/mm2");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mQ_smax - mLower->mQ_smax) * perunage + mLower->mQ_smax;
-    PR->addDetail("Table 16 F.65, 69, 70, 74, 75", "Q_smax",
-              "Table value", value, "N/mm2");
     return value;
 }
 
@@ -53,20 +47,17 @@ double Table16Property::getTable16_P_QR(const RB_String& materialCode,
     double value = 0.0;
     if (!getUpperLower(materialCode, temperature)) {
         value = 0.0;
-        PR->addDetail("Table 16", "PQR", "", value, "-", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mP_QR;
-        PR->addDetail("Table 16", "PQR", "", value, "-");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mP_QR - mLower->mP_QR) * perunage + mLower->mP_QR;
-    PR->addDetail("Table 16", "PQR", "", value, "-");
     return value;
 }
 

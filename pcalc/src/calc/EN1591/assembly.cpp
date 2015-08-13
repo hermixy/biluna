@@ -38,18 +38,22 @@ Assembly::Assembly() : Assembly_OUT() {
  * Different from EN13445 Appendix GA
  * @param loadCaseNo
  */
-void Assembly::Calc_F_GInitial(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+void Assembly::Calc_F_GInitial() {
+    LoadCase* loadCase = mLoadCaseList->at(0);
 
     if (loadCase->F_Bspec > 0)     {
         loadCase->F_G = loadCase->F_Bspec
                 * (1 - mBolt->etanminus) - loadCase->F_R;
         PR->addDetail("Formula 54", "F_G", "F_Bspec * (1 - etanminus) - F_R",
-                      loadCase->F_G, "N");
+                      loadCase->F_G, "N",
+                      QN(loadCase->F_Bspec) + " * (1 - " + QN(mBolt->etanminus)
+                      + ") - " + QN(loadCase->F_R), 0);
     } else {
-        loadCase->F_G = (mBolt->AB * loadCase->fB / 3 - loadCase->F_R);
+        loadCase->F_G = mBolt->AB * loadCase->fB / 3 - loadCase->F_R;
         PR->addDetail("Formula 54", "F_G", "AB * fB / 3 - F_R",
-                      loadCase->F_G, "N");
+                      loadCase->F_G, "N",
+                      QN(mBolt->AB) + " * " + QN(loadCase->fB)
+                      + " / 3 - " + QN(loadCase->F_R), 0);
     }
 }
 
@@ -58,28 +62,23 @@ void Assembly::Calc_F_GInitial(int loadCaseNo) {
  * @param loadCaseNo
  * @param gasket
  */
-void Assembly::Calc_dGe(int loadCaseNo, Gasket *gasket)
-{
-    double tmpdGe = 0.0;
-
-    if (gasket->frmType == Gasket::Flat) {
-        tmpdGe = gasket->dG2 - mLoadCaseList->at(loadCaseNo)->bGe;
-        PR->addDetail("Formula 68", "dGe", "dG2 - bGe", tmpdGe, "mm");
-    } else if (gasket->frmType == Gasket::CurvedSimpleContact) {
-        tmpdGe = gasket->dG0;
-        PR->addDetail("Formula 71", "dGe", "dG0", tmpdGe, "mm");
-    } else if (gasket->frmType == Gasket::CurvedDoubleContact) {
-        tmpdGe = gasket->dGt;
-        PR->addDetail("Formula 76", "dGe", "dGt", tmpdGe, "mm");
-    } else if (gasket->frmType == Gasket::OctagonalDoubleContact) {
-        tmpdGe = gasket->dGt;
-        PR->addDetail("Formula 73", "dGe", "dGt", tmpdGe, "mm");
-    }
-
-    // because dGe is not recalculated
-    for (std::vector<LoadCase*>::iterator it = mLoadCaseList->begin();
-                it != mLoadCaseList->end(); it++) {
-        (*it)->dGe = tmpdGe;
+void Assembly::Calc_dGe() {
+    if (mGasket->frmType == Gasket::Flat) {
+        mGasket->dGe = mGasket->dG2 - mGasket->bGe;
+        PR->addDetail("Formula 68", "dGe", "dG2 - bGe", mGasket->dGe, "mm",
+                      QN(mGasket->dG2) + " - " + QN(mGasket->bGe));
+    } else if (mGasket->frmType == Gasket::CurvedSimpleContact) {
+        mGasket->dGe = mGasket->dG0;
+        PR->addDetail("Formula 71", "dGe", "dG0", mGasket->dGe, "mm",
+                      QN(mGasket->dG0));
+    } else if (mGasket->frmType == Gasket::CurvedDoubleContact) {
+        mGasket->dGe = mGasket->dGt;
+        PR->addDetail("Formula 76", "dGe", "dGt", mGasket->dGe, "mm",
+                      QN(mGasket->dGt));
+    } else if (mGasket->frmType == Gasket::OctagonalDoubleContact) {
+        mGasket->dGe = mGasket->dGt;
+        PR->addDetail("Formula 73", "dGe", "dGt", mGasket->dGe, "mm",
+                      QN(mGasket->dGt));
     }
 }
 
@@ -115,7 +114,7 @@ void Assembly::Calc_bGi(int loadCaseNo, bool isFirstApproximation) {
             PR->addDetail("Formula 72", "bGi", "bGiOct", mGasket->bGi, "mm");
         }
     } else {
-        double bGp = loadCase0->F_G / (M_PI *loadCaseI->dGe
+        double bGp = loadCase0->F_G / (M_PI * mGasket->dGe
                                        * loadCaseI->Q_smax);
         if (mGasket->frmType == Gasket::Flat) {
             if (!mGasket->isMetalic()) {
@@ -126,9 +125,9 @@ void Assembly::Calc_bGi(int loadCaseNo, bool isFirstApproximation) {
 
             mGasket->bGi =
                     pow((loadCaseI->eG
-                          / (M_PI * loadCaseI->dGe * loadCaseI->EGm))
-                         / (loadCase0->hG1 * mFlange1->ZF / loadCase0->EF1
-                             + loadCase0->hG2 * mFlange2->ZF / loadCase0->EF2)
+                          / (M_PI * mGasket->dGe * loadCaseI->EGm))
+                         / (mFlange1->hG * mFlange1->ZF / loadCase0->EF1
+                             + mFlange2->hG * mFlange2->ZF / loadCase0->EF2)
                             + pow(bGp, 2), 0.5);
             PR->addDetail("Formula 65", "bGi",
                           "((eG / (PI * dGe * EGm)) / (hG1 * Flange1.ZF "
@@ -136,13 +135,13 @@ void Assembly::Calc_bGi(int loadCaseNo, bool isFirstApproximation) {
                           "* Q_smax)) ^ 2) ^ 0.5", mGasket->bGi, "mm",
 
                           "((" + QN(loadCaseI->eG)
-                          + " / (PI * " + QN(loadCaseI->dGe)
+                          + " / (PI * " + QN(mGasket->dGe)
                           + " * " + QN(loadCaseI->EGm) + ")) / ("
-                          + QN(loadCase0->hG1) + " * " + QN(mFlange1->ZF)
+                          + QN(mFlange1->hG) + " * " + QN(mFlange1->ZF)
                           + " / " + QN(loadCase0->EF1) + " + "
-                          + QN(loadCase0->hG2) + " * " + QN(mFlange2->ZF)
+                          + QN(mFlange2->hG) + " * " + QN(mFlange2->ZF)
                           + " / " + QN(loadCase0->EF2) + ") + ("
-                          + QN(loadCase0->F_G) + " / (PI *" + QN(loadCaseI->dGe)
+                          + QN(loadCase0->F_G) + " / (PI *" + QN(mGasket->dGe)
                           + " * " + QN(loadCaseI->Q_smax) + ")) ^ 2) ^ 0.5");
 
         } else if (mGasket->frmType == Gasket::CurvedSimpleContact) {
@@ -150,7 +149,7 @@ void Assembly::Calc_bGi(int loadCaseNo, bool isFirstApproximation) {
 
             mGasket->bGi =
                     pow((6 * mGasket->r2 * cos(mGasket->phiG) * loadCase0->F_G)
-                         / (M_PI * loadCaseI->dGe * loadCase0->E_G)
+                         / (M_PI * mGasket->dGe * loadCase0->E_G)
                         + pow(bGp, 2), 0.5);
             PR->addDetail("Formula 70",
                       "bGi", "((6 * r2 * Cos(phiG) * F_G) "
@@ -161,7 +160,7 @@ void Assembly::Calc_bGi(int loadCaseNo, bool isFirstApproximation) {
 
             mGasket->bGi =
                     pow((12 * mGasket->r2 * cos(mGasket->phiG) * loadCase0->F_G)
-                         / (M_PI * loadCaseI->dGe * loadCaseI->E_G)
+                         / (M_PI * mGasket->dGe * loadCaseI->E_G)
                          + pow(bGp, 2), 0.5);
             PR->addDetail("Formula 75", "bGi",
                           "((12 * r2 * Cos(phiG) * F_G) / (PI * dGe * E_G) "
@@ -176,14 +175,12 @@ void Assembly::Calc_bGi(int loadCaseNo, bool isFirstApproximation) {
 
 /**
  * @brief Formula 57: Initial gasket stress at assembly
- * @param loadCaseNo
  */
-void Assembly::Calc_Q_G(int loadCaseNo) {
-    // AGe is not recalculated by loadcase
-    mLoadCaseList->at(loadCaseNo)->Q_G =
-            mLoadCaseList->at(0)->F_G / mLoadCaseList->at(0)->AGe;
+void Assembly::Calc_Q_G() {
+    mLoadCaseList->at(0)->Q_G = mLoadCaseList->at(0)->F_G / mGasket->AGe;
     PR->addDetail("Formula 57", "Q_G", "F_G / AGe",
-              mLoadCaseList->at(loadCaseNo)->Q_G, "N/mm^2");
+                  mLoadCaseList->at(0)->Q_G, "N/mm^2",
+                  QN(mLoadCaseList->at(0)->F_G) + " / " + QN(mGasket->AGe));
 }
 
 /**
@@ -192,11 +189,11 @@ void Assembly::Calc_Q_G(int loadCaseNo) {
  */
 void Assembly::Calc_F_Q(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->F_Q = mLoadCaseList->at(loadCaseNo)->P
-            * mLoadCaseList->at(loadCaseNo)->AQ;
+            * mGasket->AQ;
     PR->addDetail("Formula 91", "F_Q", "P * AQ",
               mLoadCaseList->at(loadCaseNo)->F_Q, "N",
               QN(mLoadCaseList->at(loadCaseNo)->P) + " * "
-              + QN(mLoadCaseList->at(loadCaseNo)->AQ), loadCaseNo);
+              + QN(mGasket->AQ), loadCaseNo);
 }
 
 /**
@@ -304,12 +301,12 @@ void Assembly::Calc_YB(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
 
     if (dynamic_cast<Flange_Loose*>(mFlange1) != NULL) {
-        tmpFlange1Val = mFlange1->ZL * (pow(loadCase->hL1, 2))
+        tmpFlange1Val = mFlange1->ZL * (pow(mFlange1->hL, 2))
                 / loadCase->EL1;
     }
 
     if (dynamic_cast<Flange_Loose*>(mFlange2) != NULL) {
-        tmpFlange2Val = mFlange2->ZL * (pow(loadCase->hL2, 2))
+        tmpFlange2Val = mFlange2->ZL * (pow(mFlange2->hL, 2))
                 / loadCase->EL2;
     }
 
@@ -327,8 +324,8 @@ void Assembly::Calc_YB(int loadCaseNo) {
               "/ EL1 + ZL2 * (hL2 ^ 2) / EL2 "
               "+ XB / EB + XW1 / EW1 + XW2 / EW2",
               loadCase->Y_B, "mm/N",
-              QN(mFlange1->ZL) + " * " + QN(loadCase->hL1) + "^2 / " + QN(loadCase->EL1) + " + "
-              + QN(mFlange2->ZL) + " * " + QN(loadCase->hL2) + "^2 / " + QN(loadCase->EL2) + " + "
+              QN(mFlange1->ZL) + " * " + QN(mFlange1->hL) + "^2 / " + QN(loadCase->EL1) + " + "
+              + QN(mFlange2->ZL) + " * " + QN(mFlange2->hL) + "^2 / " + QN(loadCase->EL2) + " + "
               + QN(mBolt->XB) + " / " + QN(loadCase->EB) + " + "
               + QN(mFlange1->mWasher->XW) + " / " + QN(loadCase->EW1) + " + "
               + QN(mFlange2->mWasher->XW) + " / " + QN(loadCase->EW2),
@@ -342,14 +339,14 @@ void Assembly::Calc_YB(int loadCaseNo) {
  */
 void Assembly::Calc_YG(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->Y_G = mFlange1->ZF * (pow(loadCase->hG1, 2)) / loadCase->EF1
-            + mFlange2->ZF * (pow(loadCase->hG2, 2)) / loadCase->EF2
+    loadCase->Y_G = mFlange1->ZF * (pow(mFlange1->hG, 2)) / loadCase->EF1
+            + mFlange2->ZF * (pow(mFlange2->hG, 2)) / loadCase->EF2
             + loadCase->Y_B + mGasket->XG / loadCase->E_G;
     PR->addDetail("Formula 100", "Y_G", "Flange1.ZF * (hG1 ^ 2) / EF1 "
               "+ Flange2.ZF * (hG2 ^ 2) / EF2 + Y_B + XG / E_G",
               loadCase->Y_G, "mm/N",
-              QN(mFlange1->ZF) + " * (" + QN(loadCase->hG1) + "^2) / " + QN(loadCase->EF1) + " + "
-              + QN(mFlange2->ZF) + " * (" + QN(loadCase->hG2) + "^2) / " + QN(loadCase->EF2) + " + "
+              QN(mFlange1->ZF) + " * (" + QN(mFlange1->hG) + "^2) / " + QN(loadCase->EF1) + " + "
+              + QN(mFlange2->ZF) + " * (" + QN(mFlange2->hG) + "^2) / " + QN(loadCase->EF2) + " + "
               + QN(loadCase->Y_B) + " + " + QN(mGasket->XG) + " / " + QN(loadCase->E_G),
               loadCaseNo);
 }
@@ -361,20 +358,20 @@ void Assembly::Calc_YG(int loadCaseNo) {
  */
 void Assembly::Calc_YQ(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->Y_Q = mFlange1->ZF * loadCase->hG1
-            * (loadCase->hH1 - mFlange1->hP + mFlange1->hQ) / loadCase->EF1
-            + mFlange2->ZF * loadCase->hG2
-            * (loadCase->hH2 - mFlange2->hP + mFlange2->hQ) / loadCase->EF2
+    loadCase->Y_Q = mFlange1->ZF * mFlange1->hG
+            * (mFlange1->hH - mFlange1->hP + mFlange1->hQ) / loadCase->EF1
+            + mFlange2->ZF * mFlange2->hG
+            * (mFlange2->hH - mFlange2->hP + mFlange2->hQ) / loadCase->EF2
             + loadCase->Y_B;
     PR->addDetail("Formula 101", "Y_Q", "Flange1.ZF * hG1 "
               "* (hH1 - Flange1.hP + Flange1.hQ) / EF1 "
               "+ Flange2.ZF * hG2 "
               "* (hH2 - Flange2.hP + Flange2.hQ) / EF2 + Y_B",
               loadCase->Y_Q, "mm/N",
-              QN(mFlange1->ZF) + " * " + QN(loadCase->hG1) + " * ("
-              + QN(loadCase->hH1) + " - " + QN(mFlange1->hP) + " + " + QN(mFlange1->hQ) + ") / " + QN(loadCase->EF1) + " + "
-              + QN(mFlange2->ZF) + " * " + QN(loadCase->hG2) + " * ("
-              + QN(loadCase->hH2) + " - " + QN(mFlange2->hP) + " + " + QN(mFlange2->hQ) + ") / " + QN(loadCase->EF2) + " + "
+              QN(mFlange1->ZF) + " * " + QN(mFlange1->hG) + " * ("
+              + QN(mFlange1->hH) + " - " + QN(mFlange1->hP) + " + " + QN(mFlange1->hQ) + ") / " + QN(loadCase->EF1) + " + "
+              + QN(mFlange2->ZF) + " * " + QN(mFlange2->hG) + " * ("
+              + QN(mFlange2->hH) + " - " + QN(mFlange2->hP) + " + " + QN(mFlange2->hQ) + ") / " + QN(loadCase->EF2) + " + "
               + QN(loadCase->Y_B), loadCaseNo);
 }
 
@@ -385,17 +382,17 @@ void Assembly::Calc_YQ(int loadCaseNo) {
  */
 void Assembly::Calc_YR(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->Y_R = mFlange1->ZF * loadCase->hG1
-            * (loadCase->hH1 + mFlange1->hR) / loadCase->EF1
-            + mFlange2->ZF * loadCase->hG2
-            * (loadCase->hH2 + mFlange2->hR) / loadCase->EF2 + loadCase->Y_B;
+    loadCase->Y_R = mFlange1->ZF * mFlange1->hG
+            * (mFlange1->hH + mFlange1->hR) / loadCase->EF1
+            + mFlange2->ZF * mFlange2->hG
+            * (mFlange2->hH + mFlange2->hR) / loadCase->EF2 + loadCase->Y_B;
     PR->addDetail("Formula 102", "Y_R", "Flange1.ZF * hG1 * (hH1 + Flange1.hR) / EF1"
               " + Flange2.ZF * hG2 * (hH2 + Flange2.hR) / EF2 + Y_B",
               loadCase->Y_R, "mm/N",
-              QN(mFlange1->ZF) + " * " + QN(loadCase->hG1) + " * ("
-              + QN(loadCase->hH1) + " + " + QN(mFlange1->hR) + ") / " + QN(loadCase->EF1) + " + "
-              + QN(mFlange2->ZF) + " * " + QN(loadCase->hG2) + " * ("
-              + QN(loadCase->hH2) + " + " + QN(mFlange2->hR) + ") / " + QN(loadCase->EF2) + " + "
+              QN(mFlange1->ZF) + " * " + QN(mFlange1->hG) + " * ("
+              + QN(mFlange1->hH) + " + " + QN(mFlange1->hR) + ") / " + QN(loadCase->EF1) + " + "
+              + QN(mFlange2->ZF) + " * " + QN(mFlange2->hG) + " * ("
+              + QN(mFlange2->hH) + " + " + QN(mFlange2->hR) + ") / " + QN(loadCase->EF2) + " + "
                   + QN(loadCase->Y_B), loadCaseNo);
 }
 
@@ -408,12 +405,17 @@ void Assembly::Calc_Q_A_Qsmin(int loadCaseNo) {
     if (loadCaseNo == 0) {
         loadCase0->Q_A = TABLE02_15PROPERTY->getTableQA(mLeakageRate,
                                                         mGasket->matCode);
+        PR->addDetail("Table 2-15", "Q_A", "Table value", loadCase0->Q_A, "-",
+                      "Table value", loadCaseNo);
     } else {
         LoadCase* loadCaseI = mLoadCaseList->at(loadCaseNo);
         loadCaseI->Q_sminL
                 = TABLE02_15PROPERTY->getTableQsminL(mLeakageRate,
                                                      mGasket->matCode,
                                                      loadCase0->Q_A);
+        PR->addDetail("Table 2-15", "Q_sminL", "Table value",
+                      loadCaseI->Q_sminL, "-",
+                      "Table value", loadCaseNo);
     }
 }
 
@@ -428,18 +430,18 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
 
     if (loadCaseNo == 0) {
         if (loadCase->Q_A > 0) {
-            loadCase->F_Gmin = loadCase->AGe * loadCase->Q_A;
+            loadCase->F_Gmin = mGasket->AGe * loadCase->Q_A;
             PR->addDetail("Formula 103", "F_Gmin", "AGe * Q_A",
                           loadCase->F_Gmin, "N",
-                          QN(loadCase->AGe) + " * " + QN(loadCase->Q_A),
+                          QN(mGasket->AGe) + " * " + QN(loadCase->Q_A),
                           loadCaseNo);
         } else {
             TableGProperty* table = new TableGProperty(); // TODO: static class or part of assembly
             double Q0min = table->getTableG_Q0min(mGasket->insType);
-            loadCase->F_Gmin = loadCase->AGe * Q0min;
+            loadCase->F_Gmin = mGasket->AGe * Q0min;
             PR->addDetail("Formula 103", "F_Gmin", "AGe * Q0min",
                           loadCase->F_Gmin, "N",
-                          QN(loadCase->AGe) + " * " + QN(Q0min), loadCaseNo);
+                          QN(mGasket->AGe) + " * " + QN(Q0min), loadCaseNo);
             delete table;
         }
     } else {
@@ -447,11 +449,11 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
         double m = 0;
 
         if (loadCase->Q_sminL > 0) {
-            tmpVal1 = loadCase->AGe * loadCase->Q_sminL;
+            tmpVal1 = mGasket->AGe * loadCase->Q_sminL;
         } else {
             TableGProperty *table = new TableGProperty(); // TODO: static class or part of assembly
             m = table->getTableG_m(mGasket->insType);
-            tmpVal1 = loadCase->AGe * m * loadCase->P;
+            tmpVal1 = mGasket->AGe * m * loadCase->P;
             delete table;
         }
 
@@ -478,8 +480,8 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
                   "F_Gmin", "Max(Max(AGe * Q_sminL | AGe * m * P, "
                   "F_LI / muG + 2 * M_Z / (muG * dGt) - 2 * M_AI / dGt), "
                   "F_Q + F_R)",
-                  loadCase->F_Gmin, "N", "max(max(" + QN(loadCase->AGe) + " * "
-                      + QN(loadCase->Q_sminL) + " | " + QN(loadCase->AGe) + " * "
+                  loadCase->F_Gmin, "N", "max(max(" + QN(mGasket->AGe) + " * "
+                      + QN(loadCase->Q_sminL) + " | " + QN(mGasket->AGe) + " * "
                       + QN(m) + " * " + QN(loadCase->P) + " ...", // TODO
                   loadCaseNo);
     }
@@ -488,13 +490,11 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
 /**
  * @brief Before Formula 105 annex F: Creep of gasket
  * under seating pressure and temperature
- * \todo: check whether this approach is correct, formulae are
- * from the code and no additional interpretation is added
- * however it is not sure which data is available from the gasket
  * @param loadCaseNo
  */
 void Assembly::Calc_delta_eGc(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    LoadCase* loadCase0 = mLoadCaseList->at(0);
 
     if (mGasket->dG2_EN13555 > 0
                && mGasket->dG1_EN13555 > 0
@@ -502,15 +502,15 @@ void Assembly::Calc_delta_eGc(int loadCaseNo) {
         // F.2, text and F.3
         loadCase->delta_eGc = loadCase->Y_G * (M_PI / 4)
                 * (pow(mGasket->dG2_EN13555, 2) - pow(mGasket->dG1_EN13555, 2))
-                * loadCase->Q_A * (1 - loadCase->P_QR);
-        PR->addDetail("Before Formula 105 annex F",
+                * loadCase0->Q_A * (1 - loadCase->P_QR);
+        PR->addDetail("Before F. 105 annex F",
                       "delta_eGc", "Y_G * (PI / 4) "
                       "* (dG2_EN13555 ^ 2 - dG1_EN13555 ^ 2) * Q_A * (1 - P_QR)",
                       loadCase->delta_eGc, "mm",
                       QN(loadCase->Y_G) + " * (pi / 4) * ("
                       + QN(mGasket->dG2_EN13555) + " ^ 2 - "
                       + QN(mGasket->dG1_EN13555) + " ^ 2) * "
-                      + QN(loadCase->Q_A) + " * (1 - "
+                      + QN(loadCase0->Q_A) + " * (1 - "
                       + QN(loadCase->P_QR) + ")", loadCaseNo);
     } else {
         // no further gasket information available
@@ -540,8 +540,6 @@ void Assembly::Calc_F_Gdelta(int loadCaseNo) {
                       - mLoadCaseList->at(0)->F_R * mLoadCaseList->at(0)->Y_R)
                    + loadCase->dUI + loadCase->delta_eGc)
             / mLoadCaseList->at(0)->Y_G;
-    mLoadCaseList->at(0)->F_Gdelta =
-            std::max(mLoadCaseList->at(0)->F_Gdelta, tmpF_Gdelta);
 
     // Tuckmantel suggestion:
     //tmpF_Gdelta = (.F_Gmin * .Y_G + .F_Q * .Y_Q _
@@ -553,6 +551,8 @@ void Assembly::Calc_F_Gdelta(int loadCaseNo) {
               "tmpF_Gdelta", "(F_Gmin * Y_G + F_Q * Y_Q "
               "+ (F_R * Y_R - F_R * Y_R) + dUI + delta_eGc) / Y_G",
               tmpF_Gdelta, "N");
+    mLoadCaseList->at(0)->F_Gdelta =
+            std::max(mLoadCaseList->at(0)->F_Gdelta, tmpF_Gdelta);
     PR->addDetail("Formula 105",
               "F_Gdelta", "Max(F_Gdelta, tmpF_Gdelta)",
               mLoadCaseList->at(0)->F_Gdelta, "N");
@@ -809,10 +809,15 @@ void Assembly::Calc_PhiB(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
     loadCase->PhiB = 1 / (loadCase->fB * loadCase->cB)
             * pow((pow(loadCase->F_B / mBolt->AB, 2) + torsionVal), 0.5);
-    PR->addDetail("Formula 123",
-              "PhiB", "1 / (fB * cB) * ((F_B / AB) ^ 2 "
-              "+ 3 * cA * MtB / IB) ^ 2) ^ 0.5",
-              loadCase->PhiB, "-");
+    PR->addDetail("Formula 123", "PhiB",
+                  "1 / (fB * cB) * ((F_B / AB) ^ 2 "
+                  "+ 3 * (cA * MtB / IB) ^ 2) ^ 0.5",
+                  loadCase->PhiB, "-",
+                  "1 / (" + QN(loadCase->fB) + " * " + QN(loadCase->cB)
+                  + ") * ((" + QN(loadCase->F_B) + " / " + QN(mBolt->AB)
+                  + ") ^ 2 + 3 * (" + QN(mLoadCaseList->at(loadCaseNo)->cA)
+                  + " * " + QN(mLoadCaseList->at(0)->MtB) + " / "
+                  + QN(mBolt->IB) + ") ^ 2) ^ 0.5", loadCaseNo);
 }
 
 /**
@@ -833,20 +838,27 @@ bool Assembly::Is_PhiB_Valid(int loadCaseNo) {
  * @param loadCaseNo
  */
 void Assembly::Calc_cA(int loadCaseNo) {
-    if (mBolt->tType == Bolt::TorqueWrench && loadCaseNo == 0) {
-        if (mBolt->ruptureElongationA >= 0.1)         {
+    if (mBolt->tType == Bolt::TensionerMeasureHydraulicPressure
+            || mBolt->tType == Bolt::TensionerMeasureBoltElongation) {
+        mLoadCaseList->at(loadCaseNo)->cA = 0.0;
+        PR->addDetail("Formula 126", "cA", "0.0",
+                      mLoadCaseList->at(loadCaseNo)->cA, "-",
+                      "No torque on bolt",
+                      loadCaseNo);
+    } else {
+        if (mBolt->ruptureElongationA >= 10) { // percent
             mLoadCaseList->at(loadCaseNo)->cA = 1.0;
             PR->addDetail("Formula 124", "cA", "1.0",
-                      mLoadCaseList->at(loadCaseNo)->cA, "-");
+                          mLoadCaseList->at(loadCaseNo)->cA, "-",
+                          QN(mBolt->ruptureElongationA) + " >= 10%",
+                          loadCaseNo);
         } else {
             mLoadCaseList->at(loadCaseNo)->cA = 4 / 3.0;
             PR->addDetail("Formula 125", "cA", "4 / 3",
-                      mLoadCaseList->at(loadCaseNo)->cA, "-");
+                      mLoadCaseList->at(loadCaseNo)->cA, "-",
+                          QN(mBolt->ruptureElongationA) + " < 10%",
+                          loadCaseNo);
         }
-    } else {
-        mLoadCaseList->at(loadCaseNo)->cA = 0.0;
-        PR->addDetail("Formula 126", "cA", "0.0",
-                  mLoadCaseList->at(loadCaseNo)->cA, "-");
     }
 }
 
@@ -1012,19 +1024,19 @@ void Assembly::Calc_ThetaFmaxmin(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
 
     double tmpFlange1 =
-            loadCase->F_Q *(loadCase->hH1 - mFlange1->hP + mFlange1->hQ)
-            + loadCase->F_R *(loadCase->hH1 + mFlange1->hR);
+            loadCase->F_Q *(mFlange1->hH - mFlange1->hP + mFlange1->hQ)
+            + loadCase->F_R *(mFlange1->hH + mFlange1->hR);
     double tmpFlange2 =
-            loadCase->F_Q *(loadCase->hH2 - mFlange2->hP + mFlange2->hQ)
-            + loadCase->F_R *(loadCase->hH2 + mFlange2->hR);
+            loadCase->F_Q *(mFlange2->hH - mFlange2->hP + mFlange2->hQ)
+            + loadCase->F_R *(mFlange2->hH + mFlange2->hR);
     loadCase->ThetaF1min = mFlange1->ZF / loadCase->EF1
-            * (loadCase->F_GImin * loadCase->hG1 + tmpFlange1);
+            * (loadCase->F_GImin * mFlange1->hG + tmpFlange1);
     loadCase->ThetaF1max = mFlange1->ZF / loadCase->EF1
-            * (loadCase->F_GImax * loadCase->hG1 + tmpFlange1);
+            * (loadCase->F_GImax * mFlange1->hG + tmpFlange1);
     loadCase->ThetaF2min = mFlange2->ZF / loadCase->EF2
-            * (loadCase->F_GImin * loadCase->hG2 + tmpFlange2);
+            * (loadCase->F_GImin * mFlange2->hG + tmpFlange2);
     loadCase->ThetaF2max = mFlange2->ZF / loadCase->EF2
-            * (loadCase->F_GImax * loadCase->hG2 + tmpFlange2);
+            * (loadCase->F_GImax * mFlange2->hG + tmpFlange2);
     PR->addDetail("Formula C.1", "ThetaF1min", "Flange1.ZF / EF1 * (F_GImin * hG1 "
               "+ F_Q * (hH1 - Flange1.hP + Flange1.hQ) "
               "+ F_R * (hH1 + Flange1.hR))",
@@ -1053,9 +1065,9 @@ void Assembly::Calc_ThetaLmaxmin(int loadCaseNo) {
 
     if (dynamic_cast<Flange_Loose*>(mFlange1) != NULL)     {
         loadCase->ThetaL1min = mFlange1->ZL / loadCase->EL1
-                * (loadCase->F_BImin * loadCase->hL1);
+                * (loadCase->F_BImin * mFlange1->hL);
         loadCase->ThetaL1max = mFlange1->ZL / loadCase->EL1
-                * (loadCase->F_BImax * loadCase->hL1);
+                * (loadCase->F_BImax * mFlange1->hL);
         PR->addDetail("Formula C.2",
                   "ThetaL1min", "Flange1.ZL / EL1 * (F_BImin * hL1)",
                   radToDeg * loadCase->ThetaL1min, "degree");
@@ -1073,9 +1085,9 @@ void Assembly::Calc_ThetaLmaxmin(int loadCaseNo) {
 
     if (dynamic_cast<Flange_Loose*>(mFlange2) != NULL)     {
         loadCase->ThetaL2min = mFlange2->ZL / loadCase->EL2
-                * (loadCase->F_BImin * loadCase->hL2);
+                * (loadCase->F_BImin * mFlange2->hL);
         loadCase->ThetaL2max = mFlange2->ZL / loadCase->EL2
-                * (loadCase->F_BImax * loadCase->hL2);
+                * (loadCase->F_BImax * mFlange2->hL);
         PR->addDetail("Formula C.2",
                   "ThetaL2min", "Flange2.ZL / EL2 * (F_BImin * hL2)",
                   radToDeg * loadCase->ThetaL2min, "degree");

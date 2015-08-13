@@ -50,10 +50,10 @@ class Assembly : public Assembly_OUT {
 public:
     Assembly();
 
-    void Calc_F_GInitial(int loadCaseNo);
-    void Calc_dGe(int loadCaseNo, Gasket *gasket);
+    void Calc_F_GInitial();
+    void Calc_dGe();
     void Calc_bGi(int loadCaseNo, bool isFirstApproximation = false);
-    void Calc_Q_G(int loadCaseNo);
+    void Calc_Q_G();
     void Calc_F_Q(int loadCaseNo);
     void Calc_F_R(int loadCaseNo);
     void Calc_dUI(int loadCaseNo);
