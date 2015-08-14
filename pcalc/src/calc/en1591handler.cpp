@@ -57,6 +57,8 @@ void EN1591Handler::setDimensions() {
     mCalc->mAssembly->mNR = in->getValue("nr").toInt();
     mCalc->mAssembly->mLeakageRate
             = pow(10, -(in->getValue("leakagerate").toInt()));
+    // TODO: now calculation value from loadCase 0, change to assembly value only
+    mCalc->mAssembly->mF_Bspec = in->getValue("f_bspecified").toInt();
 
     Flange* fl1 = mCalc->mAssembly->mFlange1;
     fl1->nB = in->getValue("nb").toInt();
@@ -242,6 +244,7 @@ void EN1591Handler::setLoadCases() {
         RB_ObjectBase* lcIn = iter->currentObject();
         LoadCase* lc = mCalc->mAssembly->mLoadCaseList->createLoadCase();
         // loadcaseno not used
+        lc->F_Bspec = mCalc->mAssembly->mF_Bspec; //TODO: change in calculations
 
         // pressure temperature
         lc->P = lcIn->getValue("p").toDouble();

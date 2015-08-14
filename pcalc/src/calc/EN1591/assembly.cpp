@@ -13,6 +13,7 @@ Assembly_IN::Assembly_IN() : RB_Object() {
     mFlange2 = NULL;
     mLoadCaseList = NULL;
     mNR = 0.0;
+    mF_Bspec = 0.0;
 }
 
 Assembly_IN::~Assembly_IN() {

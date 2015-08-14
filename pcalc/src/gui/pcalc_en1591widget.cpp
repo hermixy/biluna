@@ -123,6 +123,7 @@ void PCALC_EN1591Widget::init() {
     mFlangeMapper->addMapping(cbLeakageRate,
                               mFlangeModel->fieldIndex("leakagerate"),
                               "currentIndex");
+    mFlangeMapper->addMapping(leF_Bspec, mFlangeModel->fieldIndex("f_bspecified"));
     items.clear();
     items << "Blind" << "Integral" << "Loose";
     cbTypeFlange_1->setModel(new QStringListModel(items, this));
@@ -784,6 +785,7 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "nr", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "nb", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "leakagerate", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "f_bspecified", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "typeflange1_id", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d01", "-", mFlangeModel);
