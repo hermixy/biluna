@@ -16,8 +16,7 @@ AssemblyTest::AssemblyTest() : RB_UnitTest() {
 }
 
 AssemblyTest::~AssemblyTest() {
-    delete target;
-    target = NULL;
+    // nothing refer to deleteTarget
 }
 
 void AssemblyTest::exec() {
@@ -93,6 +92,7 @@ void AssemblyTest::SetupBlindTarget() {
     // Create components
     target->mFlange1 = new Flange_Blind(1); // includes shell, washer
     target->mFlange2 = new Flange_Blind(2);
+
     SetupRemainingTarget();
 }
 
@@ -119,6 +119,23 @@ void AssemblyTest::SetupRemainingTarget() {
 }
 
 void AssemblyTest::deleteTarget() {
+    delete target->mBolt;  // deletes BoltHole
+    target->mBolt = NULL;
+    target->mFlange1->mBolt = NULL;
+    target->mFlange2->mBolt = NULL;
+    delete target->mLoadCaseList;
+    target->mLoadCaseList = NULL;
+    target->mGasket->mLoadCaseList = NULL;
+    target->mFlange1->mLoadCaseList = NULL;
+    target->mFlange2->mLoadCaseList = NULL;
+    delete target->mGasket;
+    target->mGasket = NULL;
+    target->mFlange1->mGasket = NULL;
+    target->mFlange2->mGasket = NULL;
+    delete target->mFlange1;
+    target->mFlange1 = NULL;
+    delete target->mFlange2;
+    target->mFlange2 = NULL;
     delete target;
     target = NULL;
 }

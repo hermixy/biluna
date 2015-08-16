@@ -8,10 +8,7 @@ Flange_Loose::Flange_Loose(int flangeNo) : Flange(flangeNo) {
 }
 
 Flange_Loose::~Flange_Loose() {
-    delete mShell;
-    mShell = NULL;
-    delete mWasher;
-    mWasher = NULL;
+    // shell, washer deleted in Flange
 }
 
 /**

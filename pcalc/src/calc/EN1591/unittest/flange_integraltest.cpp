@@ -52,7 +52,6 @@ void Flange_IntegralTest::setupTarget() {
         target->mGasket = new Gasket();
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
-        target->mGasket = new Gasket();
     }
 
     target->AF = 3300.7; //cross section area

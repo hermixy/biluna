@@ -49,7 +49,6 @@ void Flange_BlindTest::setupTarget() {
         target->mGasket = new Gasket();
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
-        target->mGasket = new Gasket();
     }
 
     target->d0 = 320.1; //inside diameter

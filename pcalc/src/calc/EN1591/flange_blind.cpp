@@ -7,9 +7,7 @@ Flange_Blind::Flange_Blind(int flangeNo) : Flange(flangeNo) {
 }
 
 Flange_Blind::~Flange_Blind() {
-    // no shell
-    delete mWasher;
-    mWasher = NULL;
+    // shell, washer deleted in Flange
 }
 
 /**

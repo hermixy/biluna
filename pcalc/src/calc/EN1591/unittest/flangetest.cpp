@@ -11,6 +11,8 @@ FlangeTest::~FlangeTest() {
     // these are normally deleted by Assembly
     delete target->mBolt;
     target->mBolt = NULL;
+    delete target->mGasket;
+    target->mGasket = NULL;
     delete target->mLoadCaseList;
     target->mLoadCaseList = NULL;
     // target itself

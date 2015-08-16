@@ -7,10 +7,7 @@ Flange_Integral::Flange_Integral(int flangeNo) : Flange(flangeNo) {
 }
 
 Flange_Integral::~Flange_Integral() {
-    delete mShell;
-    mShell = NULL;
-    delete mWasher;
-    mWasher = NULL;
+    // shell, washer deleted in Flange
 }
 
 /**

@@ -17,11 +17,7 @@ Assembly_IN::Assembly_IN() : RB_Object() {
 }
 
 Assembly_IN::~Assembly_IN() {
-    delete mBolt;
-    delete mGasket;
-    delete mFlange1;
-    delete mFlange2;
-    delete mLoadCaseList;
+    // nothing
 }
 
 Assembly_OUT::Assembly_OUT() : Assembly_IN() {

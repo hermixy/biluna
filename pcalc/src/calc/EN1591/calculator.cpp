@@ -16,8 +16,7 @@ Calculator::Calculator(FlangeType flange1Type, FlangeType flange2Type)
 }
 
 Calculator::~Calculator() {
-    delete mAssembly;
-    mAssembly = NULL;
+    deleteAssembly();
 }
 
 void Calculator::createAssembly(FlangeType flange1Type,
@@ -56,10 +55,10 @@ void Calculator::createAssembly(FlangeType flange1Type,
 
     mAssembly->mFlange1 = flange1;
     mAssembly->mFlange2 = flange2;
-    CreateAssemblyHelper(mAssembly);
+    createAssemblyHelper(mAssembly);
 }
 
-void Calculator::CreateAssemblyHelper(Assembly* assembly) {
+void Calculator::createAssemblyHelper(Assembly* assembly) {
     // LoadCaseList
     assembly->mLoadCaseList = new LoadCaseList();
     //    assembly->mLoadCaseList->createLoadCase(); // includes Force creation
@@ -79,6 +78,28 @@ void Calculator::CreateAssemblyHelper(Assembly* assembly) {
     assembly->mGasket->mLoadCaseList = assembly->mLoadCaseList;
     assembly->mFlange1->mLoadCaseList = assembly->mLoadCaseList;
     assembly->mFlange2->mLoadCaseList = assembly->mLoadCaseList;
+}
+
+void Calculator::deleteAssembly() {
+    delete mAssembly->mBolt;
+    mAssembly->mBolt = NULL;
+    mAssembly->mFlange1->mBolt = NULL;
+    mAssembly->mFlange2->mBolt = NULL;
+    delete mAssembly->mLoadCaseList;
+    mAssembly->mLoadCaseList = NULL;
+    mAssembly->mGasket->mLoadCaseList = NULL;
+    mAssembly->mFlange1->mLoadCaseList = NULL;
+    mAssembly->mFlange2->mLoadCaseList = NULL;
+    delete mAssembly->mGasket;
+    mAssembly->mGasket = NULL;
+    mAssembly->mFlange1->mGasket = NULL;
+    mAssembly->mFlange2->mGasket = NULL;
+    delete mAssembly->mFlange1;
+    mAssembly->mFlange1 = NULL;
+    delete mAssembly->mFlange2;
+    mAssembly->mFlange2 = NULL;
+    delete mAssembly;
+    mAssembly = NULL;
 }
 
 void Calculator::SetInputData_Ohmtech(Assembly* assembly)

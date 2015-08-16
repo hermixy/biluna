@@ -13,8 +13,6 @@ public:
     Bolt_IN();
     virtual ~Bolt_IN();
 
-    void setBoltHole(BoltHole* boltHole) { mBoltHole = boltHole; }
-
     enum BoltType {
         HexagonHeaded,
         Stud,

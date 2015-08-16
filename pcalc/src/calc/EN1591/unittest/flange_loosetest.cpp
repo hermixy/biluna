@@ -68,7 +68,6 @@ void Flange_LooseTest::setupTarget() {
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
         target->mLoadCaseList->createLoadCase();
-        target->mGasket = new Gasket();
     }
 
     target->d0 = 320.1; //inside diameter

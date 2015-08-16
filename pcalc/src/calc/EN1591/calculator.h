@@ -50,7 +50,8 @@ public:
 
 private:
     void createAssembly(FlangeType flange1Type, FlangeType flange2Type);
-    void CreateAssemblyHelper(Assembly* assembly);
+    void createAssemblyHelper(Assembly* assembly);
+    void deleteAssembly();
 
     int mWriteCalcFromNumber;
     int mIterNo;
