@@ -19,15 +19,6 @@ public:
     Calculator(FlangeType flange1Type, FlangeType flange2Type);
     virtual ~Calculator();
 
-    void SetInputData_Ohmtech(Assembly* assembly);
-    void SetLoadCases_Ohmtech(Assembly* assembly);
-    void SetInputData_CR13642_B4(Assembly* assembly);
-    void SetLoadCases_CR13642_B4(Assembly* assembly);
-    void SetInputData_Ambrosio(Assembly* assembly);
-    void SetLoadCases_Ambrosio(Assembly* assembly);
-    void SetInputData_Plantware(Assembly* assembly);
-    void SetLoadCases_Plantware(Assembly* assembly);
-
     void exec();
     void Loop_F55_to_108(Assembly* assembly);
     void F3_to_24(Assembly* assembly);
@@ -53,7 +44,6 @@ private:
     void createAssemblyHelper(Assembly* assembly);
     void deleteAssembly();
 
-    int mWriteCalcFromNumber;
     int mIterNo;
     bool mIsFirstApproximation;
     int mLoadCaseCount;

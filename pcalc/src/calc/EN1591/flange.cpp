@@ -992,12 +992,26 @@ void Flange::Calc_WF(int loadCaseNo) {
     double val3 = tmp_fE * dE * pow(eD, 2) * tmp_cM * tmp_jM * tmp_kM;
     double tmp_WF = M_PI / 4 * (val1 * val2 + val3);
 
+    QString flNr = QN(getFlangeNumber());
+    QString forStr = "pi / 4 * (fF" + flNr + " * 2 * bF" + flNr
+            + " *  (eF" + flNr + " ^ 2) * (1 + 2 * PsiOpt" + flNr
+            + " * PsiZ" + flNr + " - (PsiZ" + flNr + " ^ 2)) + fE" + flNr
+            + " * dE" + flNr + " * (eD" + flNr + " ^ 2) * cM" + flNr
+            + " * jM" + flNr + " * kM" + flNr + ")";
+    QString valStr = "pi / 4 * (" + QN(tmp_fF) + " * 2 * " + QN(bF)
+            + " *  (" + QN(eF) + " ^ 2) * (1 + 2 * " + QN(tmp_PsiOpt)
+            + " * " + QN(tmp_PsiZ) + " - (" + QN(tmp_PsiZ) + " ^ 2)) + "
+            + QN(tmp_fE) + " * " + QN(dE) + " * (" + QN(eD) + " ^ 2) * "
+            + QN(tmp_cM) + " * " + QN(tmp_jM) + " * " + QN(tmp_kM) + ")";
+
     if (getFlangeNumber() == 1) {
         loadCase->WF1 = tmp_WF;
-        PR->addDetail("Table 2 (Formula 130)", "WF1", "...", loadCase->WF1, "Nmm");
+        PR->addDetail("Table 2 (F. 130)", "WF1", forStr,
+                      loadCase->WF1, "Nmm", valStr, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->WF2 = tmp_WF;
-        PR->addDetail("Table 2 (Formula 130)", "WF2", "...", loadCase->WF2, "Nmm");
+        PR->addDetail("Table 2 (F. 130)", "WF2", forStr,
+                      loadCase->WF2, "Nmm", valStr, loadCaseNo);
     }
 }
 

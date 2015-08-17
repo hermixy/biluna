@@ -38,7 +38,8 @@ Assembly::Assembly() : Assembly_OUT() {
 void Assembly::Calc_F_GInitial() {
     LoadCase* loadCase = mLoadCaseList->at(0);
 
-    if (loadCase->F_Bspec > 0)     {
+    if (loadCase->F_Bspec > 0) {
+        loadCase->F_B = loadCase->F_Bspec;
         loadCase->F_G = loadCase->F_Bspec
                 * (1 - mBolt->etanminus) - loadCase->F_R;
         PR->addDetail("Formula 54", "F_G", "F_Bspec * (1 - etanminus) - F_R",
@@ -500,7 +501,7 @@ void Assembly::Calc_delta_eGc(int loadCaseNo) {
         loadCase->delta_eGc = loadCase->Y_G * (M_PI / 4)
                 * (pow(mGasket->dG2_EN13555, 2) - pow(mGasket->dG1_EN13555, 2))
                 * loadCase0->Q_A * (1 - loadCase->P_QR);
-        PR->addDetail("Before F. 105 annex F",
+        PR->addDetail("Before F. 105 an. F",
                       "delta_eGc", "Y_G * (PI / 4) "
                       "* (dG2_EN13555 ^ 2 - dG1_EN13555 ^ 2) * Q_A * (1 - P_QR)",
                       loadCase->delta_eGc, "mm",
@@ -545,14 +546,23 @@ void Assembly::Calc_F_Gdelta(int loadCaseNo) {
     //           / (mLoadCaseList->at(0)->Y_G * .Pqr)
 
     PR->addDetail("Formula 105",
-              "tmpF_Gdelta", "(F_Gmin * Y_G + F_Q * Y_Q "
-              "+ (F_R * Y_R - F_R * Y_R) + dUI + delta_eGc) / Y_G",
-              tmpF_Gdelta, "N");
+                  "tmpF_Gdelta", "(F_Gmin * Y_G + F_Q * Y_Q "
+                  "+ (F_R * Y_R - F_R * Y_R) + dUI + delta_eGc) / Y_G",
+                  tmpF_Gdelta, "N",
+                  "(" + QN(loadCase->F_Gmin) + " * " + QN(loadCase->Y_G)
+                  + " + " + QN(loadCase->F_Q) + " * " + QN(loadCase->Y_Q)
+                  +  " + (" + QN(loadCase->F_R) + " * " + QN(loadCase->Y_R)
+                  + " - " + QN(mLoadCaseList->at(0)->F_R) + " * "
+                  + QN(mLoadCaseList->at(0)->Y_R)
+                  + ") + " + QN(loadCase->dUI) + " + " + QN(loadCase->delta_eGc)
+                  + ") / " + QN(mLoadCaseList->at(0)->Y_G), loadCaseNo);
     mLoadCaseList->at(0)->F_Gdelta =
             std::max(mLoadCaseList->at(0)->F_Gdelta, tmpF_Gdelta);
     PR->addDetail("Formula 105",
-              "F_Gdelta", "Max(F_Gdelta, tmpF_Gdelta)",
-              mLoadCaseList->at(0)->F_Gdelta, "N");
+                  "F_Gdelta", "Max(F_Gdelta, tmpF_Gdelta)",
+                  mLoadCaseList->at(0)->F_Gdelta, "N",
+                  "max(" + QN(mLoadCaseList->at(0)->F_Gdelta) + "; "
+                  + QN(tmpF_Gdelta) + ")", loadCaseNo);
 }
 
 /**
@@ -561,8 +571,10 @@ void Assembly::Calc_F_Gdelta(int loadCaseNo) {
 void Assembly::Calc_F_G0req() {
     LoadCase* loadCase = mLoadCaseList->at(0);
     loadCase->F_Greq = std::max(loadCase->F_Gmin, loadCase->F_Gdelta);
-    PR->addDetail("Formula 107", "F_Greq", "Math.Max(F_Gmin, F_Gdelta))",
-              loadCase->F_Greq, "N");
+    PR->addDetail("Formula 107", "F_Greq", "max(F_Gmin, F_Gdelta))",
+                  loadCase->F_Greq, "N",
+                  "max(" + QN(loadCase->F_Gmin) + "; "
+                  + QN(loadCase->F_Gdelta) + ")", 0);
 }
 
 /**
@@ -571,7 +583,9 @@ void Assembly::Calc_F_G0req() {
 void Assembly::Calc_F_B0req() {
     LoadCase* loadCase = mLoadCaseList->at(0);
     loadCase->F_Breq = loadCase->F_Greq + loadCase->F_R;
-    PR->addDetail("Formula 108", "F_Breq", "F_Greq + F_R", loadCase->F_Breq, "N");
+    PR->addDetail("Formula 108", "F_Breq", "F_Greq + F_R",
+                  loadCase->F_Breq, "N",
+                  QN(loadCase->F_Greq) + " + " + QN(loadCase->F_R), 0);
 }
 
 /**
@@ -583,7 +597,8 @@ bool Assembly::Is_F_G0_larger_F_G0req() {
     LoadCase* loadCase = mLoadCaseList->at(0);
     result = loadCase->F_G > loadCase->F_Greq;
     PR->addDetail("Formula 109", "result", "F_G > F_Greq",
-              static_cast<int>(result), "-");
+                  static_cast<int>(result), "-",
+                  QN(loadCase->F_G) + " > " + QN(loadCase->F_Greq), 0);
     return result;
 }
 
@@ -597,8 +612,11 @@ bool Assembly::Is_F_G0act_within_0_1_percent_of_F_G0req() {
     result = loadCase->F_Greq < loadCase->F_G
             && loadCase->F_G < loadCase->F_Greq * 1.001; // 0.1%
     PR->addDetail("Formula 110",
-              "result", "F_Greq < F_G And F_G < F_Greq * 1.001",
-              static_cast<int>(result), "-");
+                  "result", "F_Greq &lt; F_G And F_G &lt; F_Greq * 1.001",
+                  static_cast<int>(result), "-",
+                  QN(loadCase->F_Greq) + " &lt; " + QN(loadCase->F_G)
+                  + " &amp;&amp; " + QN(loadCase->F_G)
+                  + " &lt; " + QN(loadCase->F_Greq) + " * 1.001", 0);
     return result;
 }
 
@@ -606,7 +624,8 @@ bool Assembly::Is_F_G0act_within_0_1_percent_of_F_G0req() {
  * @brief Formula B.3: ManualOperatorFeel uncontrolled tightning
  */
 void Assembly::Calc_F_B0av() {
-    if (! (mBolt->tType == Bolt::ManualStandardRing)) {
+    if ( !(mBolt->tType == Bolt::ManualStandardRing)
+         || mF_Bspec > 0.0) {
         return;
     }
 
@@ -614,8 +633,10 @@ void Assembly::Calc_F_B0av() {
     loadCase->F_Bav = std::min(mBolt->AB * loadCase->fB,
                                (double)mFlange1->nB * 200000);
     PR->addDetail("Formula B.3",
-              "F_Bav", "Min(AB * fB, Flange1.nB * 200000)",
-              loadCase->F_Bav, "N");
+                  "F_Bav", "Min(AB * fB, Flange1.nB * 200000)",
+                  loadCase->F_Bav, "N",
+                  "min(" + QN(mBolt->AB) + " * " + QN(loadCase->fB) + "; "
+                  + QN(mFlange1->nB) + " * 200000)", 0);
 }
 
 /**
@@ -629,36 +650,57 @@ void Assembly::Calc_F_B0nom() {
         // User specified nominal bolt load
         loadCase->F_Bnom = loadCase->F_Bspec;
         PR->addDetail("With Formula 111", "F_Bnom", "F_Bspec",
-                  loadCase->F_Bnom, "N");
+                      loadCase->F_Bnom, "N", QN(loadCase->F_Bspec), 0);
         loadCase->F_Bmin = loadCase->F_Bnom * (1 - mBolt->etanminus);
         PR->addDetail("With Formula 111", "F_Bmin", "F_Bnom * (1 - etanminus)",
-                  loadCase->F_Bmin, "N");
+                      loadCase->F_Bmin, "N",
+                      QN(loadCase->F_Bnom) + " * (1 - "
+                      + QN(mBolt->etanminus) + ")", 0);
         loadCase->F_Bmax = loadCase->F_Bnom * (1 + mBolt->etanplus);
         PR->addDetail("With Formula 111", "F_Bmax", "F_Bnom * (1 + etanplus)",
-                  loadCase->F_Bmax, "N");
+                      loadCase->F_Bmax, "N",
+                      QN(loadCase->F_Bnom) + " * (1 + "
+                      + QN(mBolt->etanplus) + ")", 0);
     } else if (! (mBolt->tType == Bolt::ManualStandardRing)) {
         // Use required bolt as starting point
-        loadCase->F_Bnom = loadCase->F_Breq / (1 - mBolt->etanminus);
-        PR->addDetail("Formula 115", "F_Bnom", "F_Breq", loadCase->F_Bnom, "N");
         loadCase->F_Bmin = loadCase->F_Breq;
-        PR->addDetail("Formula 114", "F_Bmin", "F_Bnom * (1 - etanminus)",
-                  loadCase->F_Bmin, "N");
+        PR->addDetail("Formula 114", "F_Bmin", "F_Breq",
+                      loadCase->F_Bmin, "N", QN(loadCase->F_Breq), 0);
+        loadCase->F_Bnom = loadCase->F_Breq / (1 - mBolt->etanminus);
+        PR->addDetail("Formula 115", "F_Bnom", "F_Breq / (1 - etanminus)",
+                      loadCase->F_Bnom, "N",
+                      QN(loadCase->F_Breq) + " / (1 - "
+                      + QN(mBolt->etanminus) + ")", 0);
         loadCase->F_Bmax = loadCase->F_Bnom * (1 + mBolt->etanplus);
         PR->addDetail("Formula 117", "F_Bmax", "F_Bnom * (1 + etanplus)",
-                  loadCase->F_Bmax, "N");
+                      loadCase->F_Bmax, "N",
+                      QN(loadCase->F_Bnom) + " * (1 + "
+                      + QN(mBolt->etanplus) + ")", 0);
     } else {
-        // Use uncontrolled standard ring as per formula B.3
-        double tmp_etanminus = 0.5 *(1 + 3 / (pow(mFlange1->nB, 0.5))) / 4;
-        loadCase->F_Bav = loadCase->F_Breq / (1 - tmp_etanminus);
+        // Use uncontrolled standard ring, F_Bav already calculated
+        // Formula B.2, 116, 0.5 is fixed e1+ and e1-
+        double etanplusminus = 0.5 *(1 + 3 / (pow(mFlange1->nB, 0.5))) / 4;
+        PR->addDetail("Formula B.2",
+                      "etanminus", "0.5 *(1 + 3 / (nB ^ 0.5)) / 4",
+                      etanplusminus, "-",
+                      "0.5 *(1 + 3 / (" + QN(mFlange1->nB) + " ^ 0.5)) / 4", 0);
+        loadCase->F_Bav = loadCase->F_Breq / (1 - etanplusminus);
         loadCase->F_Bnom = loadCase->F_Bav;
-        PR->addDetail("Formula B.3", "F_Bnom=F_Bav", "F_Breq / (1 - tmp_etanminus)",
-                  loadCase->F_Bnom, "N");
-        loadCase->F_Bmin = loadCase->F_Bnom * (1 - tmp_etanminus);
-        PR->addDetail("Formula 112", "F_Bmin", "F_Bnom * (1 - tmp_etanminus)",
-                  loadCase->F_Bmin, "N");
+        PR->addDetail("Formula 116",
+                      "F_Bnom", "F_Bav = F_Breq / (1 - etanminus)",
+                      loadCase->F_Bnom, "N",
+                      QN(loadCase->F_Breq) + " / (1 - "
+                      + QN(etanplusminus) + ")", 0);
+        loadCase->F_Bmin = loadCase->F_Bnom * (1 - etanplusminus);
+        PR->addDetail("Formula 112", "F_Bmin", "F_Bnom * (1 - etanminus)",
+                      loadCase->F_Bmin, "N",
+                      QN(loadCase->F_Bnom) + " * (1 - "
+                      + QN(etanplusminus) + ")", 0);
         loadCase->F_Bmax = loadCase->F_Bnom * (1 + mBolt->etanplus);
-        PR->addDetail("Formula 113", "F_Bmax", "F_Bnom * (1 + tmp_etanplus)",
-                  loadCase->F_Bmax, "N");
+        PR->addDetail("Formula 113", "F_Bmax", "F_Bnom * (1 + etanplus)",
+                      loadCase->F_Bmax, "N",
+                      QN(loadCase->F_Bnom) + " * (1 + "
+                      + QN(mBolt->etanplus) + ")", 0);
     }
 }
 
@@ -686,11 +728,11 @@ bool Assembly::Is_F_B0nom_Valid() {
                   "AND F_Bnom >= F_Breq / (1 - etanminus)",
                   static_cast<int>(result), "-");
     } else {
-        double tmp_etanminus = 0.5 *(1 + 3 / (pow(mFlange1->nB, 0.5))) / 4;
+        double etanplusminus = 0.5 *(1 + 3 / (pow(mFlange1->nB, 0.5))) / 4;
         result = result && loadCase->F_Bnom >= loadCase->F_Breq
-                / (1 - tmp_etanminus); // 116
+                / (1 - etanplusminus); // 116
         PR->addDetail("Formula 116", "result",
-                  "F_Bnom >= F_Breq / (1 - tmp_etanminus) "
+                  "F_Bnom >= F_Breq / (1 - etanplusminus) "
                   "And .F_Bnom >= F_Breq / (1 - 0.5 * (1 + 3 "
                   "/ (Flange1.nB ^ 0.5)) / 4)",
                   static_cast<int>(result), "-");
@@ -710,7 +752,9 @@ bool Assembly::Is_F_B0nom_Valid() {
 void Assembly::Calc_F_G0max() {
     LoadCase* loadCase = mLoadCaseList->at(0);
     loadCase->F_Gmax = loadCase->F_Bmax - loadCase->F_R;
-    PR->addDetail("Formula 118", "F_Gmax", "F_Bmax - F_R", loadCase->F_Gmax, "N");
+    PR->addDetail("Formula 118", "F_Gmax", "F_Bmax - F_R",
+                  loadCase->F_Gmax, "N",
+                  QN(loadCase->F_Bmax) + " - " + QN(loadCase->F_R), 0);
 }
 
 /**
@@ -720,16 +764,25 @@ void Assembly::Calc_F_G0max() {
 void Assembly::Calc_F_G0d() {
     LoadCase* loadCase = mLoadCaseList->at(0);
     double tmpF_G = loadCase->F_Gdelta;
+    QString varStr = "F_Gdelta";
+    QString forStr = "Formula 119";
 
     if (loadCase->F_Bspec > 0.0) {
         tmpF_G = loadCase->F_Bmin - loadCase->F_R;
+        varStr = "F_Bmin - F_R";
+        forStr = "Formula 119";
     }
 
     loadCase->F_Gd = std::max(tmpF_G, (2 / 3.0) * (1 - 10 / mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
-    PR->addDetail("Formula 119 or 2",
-              "F_Gd", "Max(F_Gdelta, (2 / 3) * (1 - 10 / NR) * F_Bmax - F_R)",
-              loadCase->F_Gd, "N");
+    PR->addDetail(forStr, "F_Gd",
+                  "max(" + varStr + ", (2 / 3) "
+                  "* (1 - 10 / NR) * F_Bmax - F_R)",
+                  loadCase->F_Gd, "N",
+                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / " + QN(mNR)
+                  + ") * " + QN(loadCase->F_Bmax) + " - "
+                  + QN(loadCase->F_R) + ")",
+                  0);
 }
 
 /**
@@ -752,8 +805,9 @@ void Assembly::Calc_F_G(int loadCaseNo) {
                   + " - (" + QN(loadCaseI->F_Q) + " * " + QN(loadCaseI->Y_Q)
                   + " + (" + QN(loadCaseI->F_R) + " * " + QN(loadCaseI->Y_R)
                   + " - " + QN(loadCase0->F_R) + " * " + QN(loadCase0->Y_R)
-                  + ") + " + QN(loadCaseI->dUI) + ") - " + QN(loadCaseI->delta_eGc)
-                  + ") / " + QN(loadCaseI->Y_G) + ")", loadCaseNo);
+                  + ") + " + QN(loadCaseI->dUI) + ") - "
+                  + QN(loadCaseI->delta_eGc)
+                  + ") / " + QN(loadCaseI->Y_G), loadCaseNo);
 }
 
 /**
@@ -867,10 +921,10 @@ void Assembly::Calc_cB(int loadCaseNo) {
     double tmp_cB1 = Calc_cB_helper(mFlange1, loadCaseNo);
     double tmp_cB2 = Calc_cB_helper(mFlange2, loadCaseNo);
     mLoadCaseList->at(loadCaseNo)->cB = std::min(tmp_cB1, tmp_cB2);
-    PR->addDetail("Formula 127",
-              "cB", "Min{1.0; eN * fN / (0.8 * dB0 * fB); "
-              "l5t * fF / (0.8 * dB0 * fB)}",
-              mLoadCaseList->at(loadCaseNo)->cB, "-");
+    PR->addDetail("With F. 127",
+                  "cB", "min(cB1, cB2)",
+                  mLoadCaseList->at(loadCaseNo)->cB, "-",
+                  "min(" + QN(tmp_cB1) + "; " + QN(tmp_cB2) + ")", loadCaseNo);
 }
 
 /**
@@ -887,14 +941,35 @@ double Assembly::Calc_cB_helper(Flange* flange, int loadCaseNo) {
         tmp_fF = loadCase->fF2;
     }
 
-    double denom = 0.8 * mBolt->dB0 *loadCase->fB;
+    double denom = 0.8 * mBolt->dB0 * loadCase->fB;
+    double val = 0.0;
 
     if (dynamic_cast<Flange_Blind*>(flange) != NULL) {
-        return std::min(1.0, std::min(mBolt->eN * loadCase->fN / denom,
+        val = std::min(1.0, std::min(mBolt->eN * loadCase->fN / denom,
                                       mBolt->l5t * tmp_fF / denom));
+        PR->addDetail("With F. 127",
+                      "cB" + QN(flange->getFlangeNumber()),
+                      "min(1.0; eN * fN / (0.8 * dB0 * fB); "
+                      "l5t * fF" + QN(flange->getFlangeNumber())
+                      + " / (0.8 * dB0 * fB))",
+                      val, "-",
+                      "min(1.0; min(" + QN(mBolt->eN) + " * " + QN(loadCase->fN)
+                      + " / (0.8 * " + QN(mBolt->dB0) + " * " + QN(loadCase->fB)
+                      + "); " + QN(mBolt->l5t) + " * " + QN(tmp_fF)
+                      + " / (0.8 * " + QN(mBolt->dB0) + " * " + QN(loadCase->fB)
+                      + ")))", 0.0);
     } else {
-        return std::min(1.0, mBolt->eN * loadCase->fN / denom);
+        val = std::min(1.0, mBolt->eN * loadCase->fN / denom);
+        PR->addDetail("With F. 127",
+                      "cB" + QN(flange->getFlangeNumber()),
+                      "min(1.0; eN * fN / (0.8 * dB0 * fB))",
+                      val, "-",
+                      "min(1.0; " + QN(mBolt->eN) + " * " + QN(loadCase->fN)
+                      + " / (0.8 * " + QN(mBolt->dB0) + " * " + QN(loadCase->fB)
+                      + ")) " , 0.0);
     }
+
+    return val;
 }
 
 /**

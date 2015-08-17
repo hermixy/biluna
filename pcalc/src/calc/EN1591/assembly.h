@@ -32,7 +32,7 @@ public:
     LoadCaseList* mLoadCaseList;
     double mNR;
     double mLeakageRate;
-    double mF_Bspec;
+    double mF_Bspec; // transferred to loadcase(0)
 };
 
 
