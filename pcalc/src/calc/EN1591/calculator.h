@@ -28,7 +28,8 @@ public:
     void F55_to_62_table1(Assembly* assembly);
     void F63_to_63(Assembly* assembly, int loadCaseNo);
     void F77_to_89(Assembly* assembly, int loadCaseNo);
-    void F90_to_104(Assembly* assembly, int loadCaseNo);
+    void F90_to_102(Assembly* assembly, int loadCaseNo);
+    void F103_to_104(Assembly* assembly, int loadCaseNo);
     void F105_to_105(Assembly* assembly, int loadCaseNo);
     void F106_to_108(Assembly* assembly);
     void F111_to_118(Assembly* assembly);

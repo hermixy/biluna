@@ -520,8 +520,6 @@ void Assembly::Calc_delta_eGc(int loadCaseNo) {
 
 /**
  * @brief Formula 105: Required gasket force based on load conditions
- * \todo: delta_eGc is zero and not calculated yet should be based on Pqr?
- * \todo: consider Tuckmantel Formula refer below
  * @param loadCaseNo
  */
 void Assembly::Calc_F_Gdelta(int loadCaseNo) {

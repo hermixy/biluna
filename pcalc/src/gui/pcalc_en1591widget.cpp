@@ -29,13 +29,34 @@
 PCALC_EN1591Widget::PCALC_EN1591Widget(QWidget *parent)
                                 : RB_Widget(parent) {
     setupUi(this);
+
+    mAssemblyModel = NULL;
+    mBoltNutWasherModel = NULL;
+    mFlangeModel = NULL;
+    mGasketModel = NULL;
+    mLoadCaseModel = NULL;
+    mShellModel = NULL;
 }
 
 /**
  * Destructor
  */
 PCALC_EN1591Widget::~PCALC_EN1591Widget() {
-    // nothing
+    // store selected report type
+//    RB_SETTINGS->beginGroup(objectName());
+//    RB_SETTINGS->setValue("glno", cbLedgerAccount->currentIndex());
+//    RB_SETTINGS->endGroup();
+
+    // non-shared models are always deleted by the widgets,
+    // can be MDI window or dialog, but also a dockWindow with table or tree
+    delete mAssemblyModel;
+    delete mBoltNutWasherModel;
+    delete mFlangeModel;
+    delete mGasketModel;
+    delete mLoadCaseModel;
+    delete mShellModel;
+
+    RB_DEBUG->print("PCALC_EN1591Widget::~PCALC_EN1591Widget() OK");
 }
 
 RB_String PCALC_EN1591Widget::getSaveAsFileName() {
