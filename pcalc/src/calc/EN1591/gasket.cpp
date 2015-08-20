@@ -130,13 +130,10 @@ Gasket_OUT::Gasket_OUT() : Gasket_IN() {
 }
 
 Gasket::Gasket() : Gasket_OUT() {
-    mTable16Property = new Table16Property();
     mTableGSimple = new TableGSimple();
 }
 
 Gasket::~Gasket() {
-    delete mTable16Property;
-    mTable16Property = NULL;
     delete mTableGSimple;
     mTableGSimple = NULL;
 }
@@ -309,8 +306,8 @@ double Gasket::gasketCompressedThickness(LoadCase* loadCase) {
  * @return gasket maximum load at temperature
  */
 double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
-    if (mTable16Property->isGasketMaterialCodeExisting(matCode)) {
-        loadCase->Q_smax = mTable16Property->getTable16_Q_smax(matCode,
+    if (TABLE16PROPERTY->isGasketMaterialCodeExisting(matCode)) {
+        loadCase->Q_smax = TABLE16PROPERTY->getTable16_Q_smax(matCode,
                                                                loadCase->TG);
         if (loadCase->Q_smax > 0) {
             PR->addDetail("Table 16", "Q_smax", "Table value", loadCase->Q_smax,
@@ -335,8 +332,8 @@ double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
  * @return
  */
 double Gasket::gasketCreepFactor(int loadCaseNo, LoadCase* loadCase) {
-    if (mTable16Property->isGasketMaterialCodeExisting(matCode)) {
-        loadCase->P_QR = mTable16Property->getTable16_P_QR(matCode,
+    if (TABLE16PROPERTY->isGasketMaterialCodeExisting(matCode)) {
+        loadCase->P_QR = TABLE16PROPERTY->getTable16_P_QR(matCode,
                                                            loadCase->TG);
         if (loadCase->P_QR > 0) {
             PR->addDetail("Table 16", "PQR", "Table value", loadCase->P_QR, "-",

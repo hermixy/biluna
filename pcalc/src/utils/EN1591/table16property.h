@@ -6,6 +6,7 @@
 #include "gasket.h"
 #include "rb_namespace.h"
 #include "rb_tablemath.h"
+#include "rb_utility.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
@@ -25,22 +26,26 @@ public:
     RB_String mMaterialCode;
 };
 
+#define TABLE16PROPERTY Table16Property::getInstance()
 
 /**
  * @brief Table EN1591-2 Table 16 used for Q_smax property  and P_QR property.
  * Refer also www.gasketdata.org and www.europeansealing.com
  */
-class Table16Property : public RB_TableMath {
+class Table16Property : public RB_TableMath, RB_Utility {
 
 public:
-    Table16Property();
     virtual ~Table16Property();
+    static Table16Property* getInstance();
+
+    void refresh() {}
 
     double getTable16_Q_smax(const RB_String& materialCode, double temperature);
     double getTable16_P_QR(const RB_String& materialCode, double temperature);
     bool isGasketMaterialCodeExisting(const RB_String& materialCode);
 
 private:
+    Table16Property();
     bool getUpperLower(const RB_String& materialCode,
                        double temperature);
     void updateUpperObject(Q_smax_Pqr_Property* obj,
@@ -52,6 +57,8 @@ private:
             double Q_smax,
             double P_QR,
             const RB_String& materialCode);
+
+    static Table16Property* mActiveUtility;
     Q_smax_Pqr_Property* mUpper;
     Q_smax_Pqr_Property* mLower;
 

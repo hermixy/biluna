@@ -142,7 +142,6 @@ public:
     LoadCaseList* mLoadCaseList;
 
 private:
-    Table16Property* mTable16Property;
     TableGSimple* mTableGSimple;
 
 };

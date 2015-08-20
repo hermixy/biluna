@@ -1,5 +1,6 @@
 ﻿#include "table16property.h"
 #include "pcalc_report.h"
+#include "pcalc_utilityfactory.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
 Q_smax_Pqr_Property::Q_smax_Pqr_Property(double temperature,
@@ -12,8 +13,14 @@ Q_smax_Pqr_Property::Q_smax_Pqr_Property(double temperature,
     mMaterialCode = materialCode;
 }
 
+Table16Property* Table16Property::mActiveUtility = 0;
+
 Table16Property::Table16Property() : RB_TableMath() {
+    RB_DEBUG->print("Table16Property::Table16Property()");
+    mUpper = NULL;
+    mLower = NULL;
     createList();
+    PCALC_UTILITYFACTORY->addUtility(this);
 }
 
 Table16Property::~Table16Property() {
@@ -21,6 +28,19 @@ Table16Property::~Table16Property() {
                 it != mList.end(); it++) {
         delete (*it);
     }
+
+    PCALC_UTILITYFACTORY->removeUtility(this);
+    mActiveUtility = NULL;
+    RB_DEBUG->print("Table16Property::~Table16Property()");
+}
+
+Table16Property *Table16Property::getInstance() {
+    if (!mActiveUtility) {
+        mActiveUtility = new Table16Property();
+        mActiveUtility->refresh();
+    }
+
+    return mActiveUtility;
 }
 
 double Table16Property::getTable16_Q_smax(const RB_String& materialCode,
