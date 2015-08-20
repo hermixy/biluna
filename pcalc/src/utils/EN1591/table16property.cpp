@@ -79,8 +79,15 @@ bool Table16Property::isGasketMaterialCodeExisting(
 
 bool Table16Property::getUpperLower(const RB_String& materialCode,
                                     double temperature) {
-    mUpper = getUpperObject(materialCode, temperature);
-    mLower = getLowerObject(materialCode, temperature);
+    mUpper = NULL;
+    mLower = NULL;
+
+    for (std::vector<Q_smax_Pqr_Property*>::iterator it = mList.begin();
+                it != mList.end(); it++) {
+        Q_smax_Pqr_Property* obj = (*it);
+        updateUpperObject(obj, materialCode, temperature);
+        updateLowerObject(obj, materialCode, temperature);
+    }
 
     if (mUpper && mLower) {
         return true;
@@ -89,45 +96,26 @@ bool Table16Property::getUpperLower(const RB_String& materialCode,
     return false;
 }
 
-Q_smax_Pqr_Property* Table16Property::getUpperObject(
+void Table16Property::updateUpperObject(Q_smax_Pqr_Property* obj,
         const RB_String& materialCode, double temperature) {
 
-    Q_smax_Pqr_Property* obj = NULL;
-
-    for (std::vector<Q_smax_Pqr_Property*>::iterator it = mList.begin();
-                it != mList.end(); it++) {
-        Q_smax_Pqr_Property* tmpObj = (*it);
-
-        if (tmpObj->mMaterialCode == materialCode
-                && tmpObj->mTemperature >= temperature) {
-
-            if (!obj || (obj && obj->mTemperature >= tmpObj->mTemperature)) {
-                obj = tmpObj;
-            }
+    if (obj->mMaterialCode == materialCode
+            && obj->mTemperature >= temperature) {
+        if (!mUpper || mUpper->mTemperature >= obj->mTemperature) {
+            mUpper = obj;
         }
     }
-
-    return obj;
 }
 
-Q_smax_Pqr_Property* Table16Property::getLowerObject(
+void Table16Property::updateLowerObject(Q_smax_Pqr_Property* obj,
         const RB_String& materialCode, double temperature) {
-    Q_smax_Pqr_Property* obj = NULL;
 
-    for (std::vector<Q_smax_Pqr_Property*>::iterator it = mList.begin();
-                it != mList.end(); it++) {
-        Q_smax_Pqr_Property* tmpObj = (*it);
-
-        if (tmpObj->mMaterialCode == materialCode
-                && tmpObj->mTemperature <= temperature) {
-
-            if (!obj || (obj && obj->mTemperature <= tmpObj->mTemperature)) {
-                obj = tmpObj;
-            }
+    if (obj->mMaterialCode == materialCode
+            && obj->mTemperature <= temperature) {
+        if (!mLower || mLower->mTemperature <= obj->mTemperature) {
+            mLower = obj;
         }
     }
-
-    return obj;
 }
 
 void Table16Property::createList() {

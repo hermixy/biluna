@@ -143,13 +143,15 @@ RB_Debug::RB_DebugLevel RB_Debug::getLevel() {
  */
 void RB_Debug::print(const char* format ...) {
     if(debugLevel==D_DEBUGGING) {
-        char buffer[256];
-        va_list args;
-        va_start (args, format);
-        vsprintf_s (buffer,format, args);
-        RB_String strBuffer(buffer);
-        va_end (args);
+//        char buffer[256];
+//        va_list args;
+//        va_start (args, format);
+//        vsprintf (buffer,format, args);
+//        RB_String strBuffer(buffer);
+//        va_end (args);
 
+        RB_String strBuffer;
+        append(strBuffer, format);
         qDebug() << strBuffer << "\n" ;
     }
 
@@ -189,13 +191,15 @@ void RB_Debug::print(RB_DebugLevel level, const char* format ...) {
     }
 
     if(debugLevel>=level) {
-        char buffer[256];
-        va_list args;
-        va_start (args, format);
-        vsprintf_s (buffer,format, args);
-        RB_String strBuffer(buffer);
-        va_end (args);
+//        char buffer[256];
+//        va_list args;
+//        va_start (args, format);
+//        vsprintf (buffer,format, args);
+//        RB_String strBuffer(buffer);
+//        va_end (args);
 
+        RB_String strBuffer;
+        append(strBuffer, format);
         qDebug() << strBuffer << "\n" ;
     }
 }
@@ -255,7 +259,11 @@ void RB_Debug::append(RB_String& str, const char* format ...) {
     char buffer[256];
     va_list args;
     va_start (args, format);
+#ifdef Q_OS_MAC
+    vsprintf (buffer,format, args);
+#else
     vsprintf_s (buffer,format, args);
+#endif
     RB_String strBuffer(buffer);
     str.append(strBuffer);
     va_end (args);

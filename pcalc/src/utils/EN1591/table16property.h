@@ -43,10 +43,10 @@ public:
 private:
     bool getUpperLower(const RB_String& materialCode,
                        double temperature);
-    Q_smax_Pqr_Property* getUpperObject(const RB_String& materialCode,
-                                        double temperature);
-    Q_smax_Pqr_Property* getLowerObject(const RB_String& materialCode,
-                                        double temperature);
+    void updateUpperObject(Q_smax_Pqr_Property* obj,
+                           const RB_String& materialCode, double temperature);
+    void updateLowerObject(Q_smax_Pqr_Property* obj,
+                           const RB_String& materialCode, double temperature);
     void createList();
     void cl(double temperature,
             double Q_smax,

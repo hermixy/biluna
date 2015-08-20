@@ -304,13 +304,11 @@ double Gasket::gasketCompressedThickness(LoadCase* loadCase) {
 }
 
 /**
- * @brief Temporary solution for the calculation of Q_smax
+ * @brief Maximum gasket load Q_smax (Table 16)
  * @param loadCase
  * @return gasket maximum load at temperature
  */
 double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
-    // TODO: fill database with gasketdata.org now only Table 16
-
     if (mTable16Property->isGasketMaterialCodeExisting(matCode)) {
         loadCase->Q_smax = mTable16Property->getTable16_Q_smax(matCode,
                                                                loadCase->TG);
@@ -331,7 +329,7 @@ double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
 }
 
 /**
- * @brief Gasket creep factor P_QR
+ * @brief Gasket creep factor P_QR (Table 16)
  * @param loadCaseNo loadcase number
  * @param loadCase
  * @return

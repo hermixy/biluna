@@ -1,6 +1,6 @@
-devpath=/Users/gudula/Documents/workspace/bil/release
+devpath=/Users/gudula/Documents/biluna/bil/release
 appdir=$devpath/Biluna.app
-qtdir=/Users/gudula/Qt5.3.1/5.3/clang_64
+qtdir=/Users/gudula/Qt/5.5/clang_64
 
 echo "Creating folders for Biluna"
 mkdir $appdir
@@ -24,6 +24,7 @@ cp -v -R $devpath/libdb.1.0.dylib $appdir/Contents/MacOs/libdb.1.0.dylib
 cp -v -R $devpath/libdb.1.0.0.dylib $appdir/Contents/MacOs/libdb.1.0.0.dylib
 cp -v -R $devpath/plugins/libacc_actionplugin.dylib $appdir/Contents/MacOs/plugins/libacc_actionplugin.dylib
 cp -v -R $devpath/plugins/libcrm_actionplugin.dylib $appdir/Contents/MacOs/plugins/libcrm_actionplugin.dylib
+cp -v -R $devpath/plugins/libpcalc_actionplugin.dylib $appdir/Contents/MacOs/plugins/libpcalc_actionplugin.dylib
 cp -v -R $devpath/plugins/libpeng_actionplugin.dylib $appdir/Contents/MacOs/plugins/libpeng_actionplugin.dylib
 cp -v -R $devpath/plugins/libsrm_actionplugin.dylib $appdir/Contents/MacOs/plugins/libsrm_actionplugin.dylib
 
@@ -31,6 +32,7 @@ echo "Change library paths for Biluna and actionplugins"
 install_name_tool -change libdb.1.dylib @executable_path/libdb.1.dylib  $appdir/Contents/MacOs/Biluna
 install_name_tool -change libdb.1.dylib @executable_path/libdb.1.dylib  $appdir/Contents/MacOs/plugins/libacc_actionplugin.dylib
 install_name_tool -change libdb.1.dylib @executable_path/libdb.1.dylib  $appdir/Contents/MacOs/plugins/libcrm_actionplugin.dylib
+install_name_tool -change libdb.1.dylib @executable_path/libdb.1.dylib  $appdir/Contents/MacOs/plugins/libpcalc_actionplugin.dylib
 install_name_tool -change libdb.1.dylib @executable_path/libdb.1.dylib  $appdir/Contents/MacOs/plugins/libpeng_actionplugin.dylib
 install_name_tool -change libdb.1.dylib @executable_path/libdb.1.dylib  $appdir/Contents/MacOs/plugins/libsrm_actionplugin.dylib
 

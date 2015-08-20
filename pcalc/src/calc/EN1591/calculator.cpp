@@ -170,7 +170,11 @@ void Calculator::Loop_F55_to_108(Assembly* assembly) {
     F77_to_89(assembly, loadCaseNo);
 
     for (loadCaseNo = 0; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
-        F90_to_104(assembly, loadCaseNo);
+        F90_to_102(assembly, loadCaseNo);
+    }
+
+    for (loadCaseNo = 0; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
+        F103_to_104(assembly, loadCaseNo);
     }
 
     for (loadCaseNo = 1; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
@@ -346,7 +350,7 @@ void Calculator::F77_to_89(Assembly* assembly, int loadCaseNo) {
     assembly->mFlange2->Calc_hL();
 }
 
-void Calculator::F90_to_104(Assembly* assembly, int loadCaseNo) {
+void Calculator::F90_to_102(Assembly* assembly, int loadCaseNo) {
     assembly->mGasket->Calc_AQ();
     assembly->Calc_F_Q(loadCaseNo);
     assembly->mLoadCaseList->at(loadCaseNo)->mForce->Calc_F_LI();
@@ -360,6 +364,9 @@ void Calculator::F90_to_104(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_YG(loadCaseNo);
     assembly->Calc_YQ(loadCaseNo);
     assembly->Calc_YR(loadCaseNo);
+}
+
+void Calculator::F103_to_104(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_Q_A_Qsmin(loadCaseNo);
     assembly->Calc_F_Gmin(loadCaseNo);
 }

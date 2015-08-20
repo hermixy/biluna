@@ -25,10 +25,11 @@ Table17_30Property::~Table17_30Property() {
 double Table17_30Property::getTableE_G(const RB_String& materialCode,
                                        double temperature,
                                        double gasketStress) {
-    bool existing = false;
+    mTargetTemperature = temperature;
+    mTargetGasketStress = gasketStress;
 
     for (std::vector<E_GProperty*>::iterator it = mList.begin();
-                it != mList.end() && !existing; it++) {
+                it != mList.end(); it++) {
         E_GProperty* tmpObj = (*it);
 
         if (tmpObj->mMaterialCode == materialCode) {
@@ -39,9 +40,76 @@ double Table17_30Property::getTableE_G(const RB_String& materialCode,
         }
     }
 
-    double value = 0.0;
+    double value = getBilinearValue(
+                mTargetTemperature, mTargetGasketStress,
+                mTopLeft->mTemperature, mTopLeft->mGasketStress, mTopLeft->mE_G,
+                mTopRight->mTemperature, mTopRight->mGasketStress, mTopRight->mE_G,
+                mBottomLeft->mTemperature, mBottomLeft->mGasketStress, mBottomLeft->mE_G,
+                mBottomRight->mTemperature, mBottomRight->mGasketStress, mBottomRight->mE_G);
 
-    return -1.0;
+    return value;
+}
+
+bool Table17_30Property::isGasketMaterialCodeExisting(
+        const RB_String& materialCode) {
+    bool existing = false;
+
+    for (std::vector<E_GProperty*>::iterator it = mList.begin();
+                it != mList.end() && !existing; it++) {
+        E_GProperty* tmpObj = (*it);
+
+        if (tmpObj->mMaterialCode == materialCode) {
+            existing = true;
+        }
+    }
+
+    return existing;
+}
+
+void Table17_30Property::updateTopLeft(E_GProperty* obj) {
+    if (obj->mTemperature <= mTargetTemperature
+            && obj->mGasketStress <= mTargetGasketStress) {
+        if (!mTopLeft || (obj->mTemperature >= mTopLeft->mTemperature
+                && obj->mGasketStress >= mTopLeft->mGasketStress)) {
+            mTopLeft = obj;
+        }
+    }
+}
+
+void Table17_30Property::updateTopRight(E_GProperty* obj) {
+    if (obj->mTemperature >= mTargetTemperature
+            && obj->mGasketStress <= mTargetGasketStress) {
+        if (!mTopLeft || (obj->mTemperature <= mTopLeft->mTemperature
+                && obj->mGasketStress >= mTopLeft->mGasketStress)) {
+            mTopRight = obj;
+        }
+    }
+}
+
+void Table17_30Property::updateBottomLeft(E_GProperty* obj) {
+    if (obj->mTemperature <= mTargetTemperature
+            && obj->mGasketStress >= mTargetGasketStress) {
+        if (!mTopLeft || (obj->mTemperature >= mTopLeft->mTemperature
+                && obj->mGasketStress <= mTopLeft->mGasketStress)) {
+            mBottomLeft = obj;
+        }
+    }
+}
+
+void Table17_30Property::updateBottomRight(E_GProperty* obj) {
+    if (obj->mTemperature <= mTargetTemperature
+            && obj->mGasketStress <= mTargetGasketStress) {
+        if (!mTopLeft || (obj->mTemperature >= mTopLeft->mTemperature
+                && obj->mGasketStress >= mTopLeft->mGasketStress)) {
+            mBottomRight = obj;
+        }
+    }
+}
+
+void Table17_30Property::cl(const RB_String& materialCode, double temperature,
+                            double gasketStress, double E_G) {
+    mList.push_back(new E_GProperty(materialCode, temperature,
+                                    gasketStress, E_G));
 }
 
 void Table17_30Property::createList() {
@@ -185,50 +253,5 @@ void Table17_30Property::createList() {
     // TODO: complete
 }
 
-bool Table17_30Property::isGasketMaterialCodeExisting(
-        const RB_String& materialCode) {
-    bool existing = false;
-
-    for (std::vector<E_GProperty*>::iterator it = mList.begin();
-                it != mList.end() && !existing; it++) {
-        E_GProperty* tmpObj = (*it);
-
-        if (tmpObj->mMaterialCode == materialCode) {
-            existing = true;
-        }
-    }
-
-    return existing;
-}
-
-void Table17_30Property::cl(const RB_String& materialCode, double temperature,
-                            double gasketStress, double E_G) {
-    mList.push_back(new E_GProperty(materialCode, temperature,
-                                    gasketStress, E_G));
-}
-
-void Table17_30Property::updateTopLeft(E_GProperty *obj)
-{
-    if (obj->mTemperature < mTargetTemperature) {
-        if (mTopLeft && obj->mTemperature < mTopLeft->mTemperature) {
-
-        }
-    }
-}
-
-void Table17_30Property::updateTopRight(E_GProperty *obj)
-{
-
-}
-
-void Table17_30Property::updateBottomLeft(E_GProperty *obj)
-{
-
-}
-
-void Table17_30Property::updateBottomRight(E_GProperty *obj)
-{
-
-}
 
 END_NAMESPACE_REDBAG_CALC_EN1591
