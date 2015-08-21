@@ -134,15 +134,12 @@ public:
     void Calc_XG(int loadCaseNo);
     void Calc_AQ();
     void Calc_P_QR(int loadCaseNo);
-    double gasketCompressedElasticity(LoadCase* loadCase);
+    double gasketCompressedElasticity(int loadCaseNo, LoadCase* loadCase);
     double gasketCompressedThickness(LoadCase* loadCase);
     double gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase);
     double gasketCreepFactor(int loadCaseNo, LoadCase* loadCase);
 
     LoadCaseList* mLoadCaseList;
-
-private:
-    TableGSimple* mTableGSimple;
 
 };
 

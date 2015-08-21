@@ -58,6 +58,7 @@ public:
                           const RB_String& materialCode,
                           double QA,
                           double testPressure = 40.0);
+    bool isGasketMaterialCodeExisting(const RB_String& materialCode);
 
 
 private:
@@ -67,7 +68,6 @@ private:
     void cl(double leakageRate, const RB_String& materialCode,
             double testPressure, double QA, double QminL, double QsminL);
 
-    bool isGasketMaterialCodeExisting(const RB_String& materialCode);
     void updateLeft(QminLQsminLProperty* obj);
     void updateRight(QminLQsminLProperty* obj);
 

@@ -123,6 +123,24 @@ RB_ObjectContainer* PCALC_Report::getInOutContainer() {
 }
 
 RB_ObjectBase *PCALC_Report::getLastOutput() {
+    if (!mLastOutput) {
+        // Add new output object for unit test of functions without output
+        bool withoutMembers = true;
+        RB_ObjectAtomic* obj = new RB_ObjectAtomic("", mOutContainer,
+                                                   "PCALC_Output", NULL,
+                                                   withoutMembers);
+        obj->addMember("formulanumber", "-", "", RB2::MemberChar125);
+        obj->addMember("variablename", "-", "", RB2::MemberChar125);
+        obj->addMember("formula", "-", "", RB2::MemberChar2500);
+        obj->addMember("result", "-", 0.0, RB2::MemberDouble);
+        obj->addMember("unit", "-", "", RB2::MemberChar125);
+        obj->addMember("formulavalues", "-", "", RB2::MemberChar2500);
+        obj->addMember("loadcaseno", "-", -1, RB2::MemberInteger);
+        obj->addMember("note", "-", "", RB2::MemberChar165);
+        mOutContainer->addObject(obj);
+        mLastOutput = obj;
+    }
+
     return mLastOutput;
 }
 

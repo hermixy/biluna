@@ -1,6 +1,7 @@
 ﻿#include "gasket.h"
 #include "pcalc_report.h"
 #include "table16property.h"
+#include "table17_30property.h"
 #include "tablegsimple.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
@@ -130,12 +131,11 @@ Gasket_OUT::Gasket_OUT() : Gasket_IN() {
 }
 
 Gasket::Gasket() : Gasket_OUT() {
-    mTableGSimple = new TableGSimple();
+    // nothing
 }
 
 Gasket::~Gasket() {
-    delete mTableGSimple;
-    mTableGSimple = NULL;
+    // nothing
 }
 
 /**
@@ -194,12 +194,8 @@ void Gasket::Calc_AGe() {
  */
 void Gasket::Calc_E_G(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->E_G
-            = gasketCompressedElasticity(mLoadCaseList->at(loadCaseNo));
-
-    // TODO move addDetail() to relevant table
-    PR->addDetail("Formula 58",
-              "E_G", "gasketCompressedElasticity(loadCase)",
-              mLoadCaseList->at(loadCaseNo)->E_G, "N/mm^2");
+            = gasketCompressedElasticity(loadCaseNo,
+                                         mLoadCaseList->at(loadCaseNo));
 }
 
 /**
@@ -223,10 +219,6 @@ void Gasket::Calc_eG(int loadCaseNo) {
 void Gasket::Calc_Q_smax(int loadCaseNo) {
     mLoadCaseList->at(loadCaseNo)->Q_smax
             = gasketMaximumLoad(loadCaseNo, mLoadCaseList->at(loadCaseNo));
-    // addDetail moved to table 16
-//    PR->addDetail("With Formula 65, 69, 70, 74, 75",
-//              "Q_smax", "gasketMaximumLoad(loadCase)",
-//              mLoadCaseList->at(loadCaseNo)->Q_smax, "N/mm^2");
 }
 
 /**
@@ -266,19 +258,40 @@ void Gasket::Calc_P_QR(int loadCaseNo) {
  * @param loadCase
  * @return gasket compressed elasticity
  */
-double Gasket::gasketCompressedElasticity(LoadCase* loadCase) {
-    if (loadCase->TG > 120) return 5404;
-    return 3833.0;
-
+double Gasket::gasketCompressedElasticity(int loadCaseNo, LoadCase* loadCase) {
     // TODO: refer www.gasketdata.org and EN1591-2 Table 17 - 30
-//    return 50 * loadCase->Q_G;
 
-    // Simple or EN1591 2001 version
-    // E_G = E0 + K1 * Q
-    double E0 = mTableGSimple->getTableG_E0(insType, loadCase->TG);
-    double K1 = mTableGSimple->getTableG_K1(insType, loadCase->TG);
-    double Q = loadCase->Q_G;
-    return E0 + K1 * Q;
+    LoadCase* loadCase0 = mLoadCaseList->at(0);
+
+    if (TABLE17_30PROPERTY->isGasketMaterialCodeExisting(matCode)) {
+        loadCase->E_G = TABLE17_30PROPERTY->getTableE_G(
+                    matCode, loadCase->TG, loadCase0->Q_G);
+        if (loadCase->E_G > 0) {
+            PR->addDetail("F. 58 Table 17-30", "E_G", "Table 17-30 value",
+                          loadCase->E_G, "N/mm2", "Table value", loadCaseNo);
+        } else {
+            PR->addDetail("F. 58 Table 17-30", "E_G",
+                          "Table 17-30 value out of range",
+                          loadCase->E_G, "N/mm2", "Table value", loadCaseNo,
+                          "Out of range");
+        }
+    } else {
+        // Simple or EN1591 2001 version
+        // E_G = E0 + K1 * Q
+        double E0 = TABLEGSIMPLE->getTableG_E0(insType, loadCase->TG);
+        double K1 = TABLEGSIMPLE->getTableG_K1(insType, loadCase->TG);
+        double Q = loadCase->Q_G;
+        loadCase->E_G = E0 + K1 * Q;
+
+        PR->addDetail("F. 58 Table G", "E_G", "Table G value",
+                      loadCase->E_G, "N/mmm2", "Table value", loadCaseNo);
+    }
+
+    return loadCase->E_G;
+
+    // Test only, Amtec
+//    if (loadCase->TG > 120) return 5404;
+//    return 3833.0;
 }
 
 /**
@@ -310,16 +323,18 @@ double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
         loadCase->Q_smax = TABLE16PROPERTY->getTable16_Q_smax(matCode,
                                                                loadCase->TG);
         if (loadCase->Q_smax > 0) {
-            PR->addDetail("Table 16", "Q_smax", "Table value", loadCase->Q_smax,
-                          "-", "Table value", loadCaseNo);
+            PR->addDetail("Before F.65 etc.", "Q_smax", "Table 16 value",
+                          loadCase->Q_smax, "-", "Table value", loadCaseNo);
         } else {
-            PR->addDetail("Table 16", "Q_smax", "Table value", loadCase->Q_smax,
+            PR->addDetail("Before F.65 etc.", "Q_smax",
+                          "Table 16 value out of range", loadCase->Q_smax,
                           "-", "Table value", loadCaseNo, "Out of range");
         }
     } else if (loadCase->Q_smax < 0.001) {
-        loadCase->Q_smax = mTableGSimple->getTableG_Qmax(insType, loadCase->TG);
-        PR->addDetail("Table 16", "Q_smax", "Table value", loadCase->Q_smax,
-                      "-", "Table value", loadCaseNo, "Material not found");
+        loadCase->Q_smax = TABLEGSIMPLE->getTableG_Qmax(insType, loadCase->TG);
+        PR->addDetail("Before F.65 etc.", "Q_smax", "Table G value",
+                      loadCase->Q_smax, "-", "Table value", loadCaseNo,
+                      "Material not found");
     }
 
     return loadCase->Q_smax;

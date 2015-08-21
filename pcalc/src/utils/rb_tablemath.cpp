@@ -45,12 +45,30 @@ double RB_TableMath::getBilinearValue(
         double p22X, double /*p22Y*/, double p22val) {
     // data points to be in a square, orthogonal
     // first calculate value on both x-axis and then y-axis
-    double val1 = (p12X - valX) / (p12X - p11X) * p11val
-            + (valX - p11X) / (p12X - p11X) * p12val;
-    double val2 = (p22X - valX) / (p22X - p21X) * p21val
-            + (valX - p21X) / (p22X - p21X) * p22val;
-    double value = (p21Y - valY) / (p21Y - p11Y) * val1
-            + (valY - p11Y) / (p21Y - p11Y) * val2;
+    double val1 = 0.0;
+    double val2 = 0.0;
+
+    if (p12X == p11X && p22X == p21X) {
+        // now p11val and p12val normally should be the same,
+        // same for p21val p22val
+        val1 = (p11val + p12val) / 2;
+        val2 = (p21val + p22val) / 2;
+    } else {
+        val1 = (p12X - valX) / (p12X - p11X) * p11val
+                + (valX - p11X) / (p12X - p11X) * p12val;
+        val2 = (p22X - valX) / (p22X - p21X) * p21val
+                + (valX - p21X) / (p22X - p21X) * p22val;
+    }
+
+    double value = 0.0;
+
+    if (p11Y == p21Y) {
+        // now val1 and val2 normally should be the same
+        value = (val1 + val2) / 2;
+    } else {
+        value = (p21Y - valY) / (p21Y - p11Y) * val1
+                + (valY - p11Y) / (p21Y - p11Y) * val2;
+    }
     return value;
 }
 

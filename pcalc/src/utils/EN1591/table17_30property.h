@@ -6,6 +6,7 @@
 #include "gasket.h"
 #include "rb_namespace.h"
 #include "rb_tablemath.h"
+#include "rb_utility.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
@@ -27,34 +28,39 @@ public:
 
 };
 
+#define TABLE17_30PROPERTY Table17_30Property::getInstance()
 
 /**
  * @brief Table EN1591-2 Table 17 to 30 used for E_G property. The E_G value
  * is used if no detail gasket data from for example www.gasketdata.org
  * is available. Refer also www.europeansealing.com
  */
-class Table17_30Property : public RB_TableMath {
+class Table17_30Property : public RB_TableMath, RB_Utility {
 
 public:
-    Table17_30Property();
     virtual ~Table17_30Property();
+    static Table17_30Property* getInstance();
+
+    void refresh() {}
 
     double getTableE_G(const RB_String& materialCode, double temperature,
                        double gasketStress);
+    bool isGasketMaterialCodeExisting(const RB_String& materialCode);
 
 private:
+    Table17_30Property();
     void createList();
     void cl(const RB_String& materialCode,
             double temperature,
             double gasketStress,
             double E_G);
 
-    bool isGasketMaterialCodeExisting(const RB_String& materialCode);
     void updateTopLeft(E_GProperty* obj);
     void updateTopRight(E_GProperty* obj);
     void updateBottomLeft(E_GProperty* obj);
     void updateBottomRight(E_GProperty* obj);
 
+    static Table17_30Property* mActiveUtility;
     std::vector<E_GProperty*> mList;
     double mTargetTemperature;
     double mTargetGasketStress;

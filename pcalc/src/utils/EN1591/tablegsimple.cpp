@@ -1,5 +1,5 @@
 ﻿#include "tablegsimple.h"
-#include "pcalc_report.h"
+#include "pcalc_utilityfactory.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
 /**
@@ -32,13 +32,17 @@ TableGSimpleProperty::TableGSimpleProperty(Gasket::InsFilLayMatType insFillMat,
     mgC = gC;
 }
 
+TableGSimple* TableGSimple::mActiveUtility = 0;
+
 /**
  * Constructor
  */
-TableGSimple::TableGSimple() : RB_Object() {
+TableGSimple::TableGSimple() : RB_TableMath(), RB_Utility() {
+    RB_DEBUG->print("TableGSimple::TableGSimple()");
     mUpper = NULL;
     mLower = NULL;
     createList();
+    PCALC_UTILITYFACTORY->addUtility(this);
 }
 
 TableGSimple::~TableGSimple() {
@@ -46,6 +50,19 @@ TableGSimple::~TableGSimple() {
                 it != mList.end(); it++) {
         delete (*it);
     }
+
+    PCALC_UTILITYFACTORY->removeUtility(this);
+    mActiveUtility = NULL;
+    RB_DEBUG->print("TableGSimple::~TableGSimple()");
+}
+
+TableGSimple* TableGSimple::getInstance() {
+    if (!mActiveUtility) {
+        mActiveUtility = new TableGSimple();
+        mActiveUtility->refresh();
+    }
+
+    return mActiveUtility;
 }
 
 double TableGSimple::getTableG_Q0min(Gasket::InsFilLayMatType insType,
@@ -53,20 +70,17 @@ double TableGSimple::getTableG_Q0min(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        PR->addDetail("Table G", "Q0min", "", value, "N/mmm2", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value =  mUpper->mQ0min;
-        PR->addDetail("Table G", "Q0min", "", value, "N/mmm2");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mQ0min - mLower->mQ0min) * perunage + mLower->mQ0min;
-    PR->addDetail("Table G", "Q0min", "", value, "N/mmm2");
     return value;
 }
 
@@ -75,20 +89,17 @@ double TableGSimple::getTableG_Qmax(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        PR->addDetail("Table G", "Qmax", "", value, "N/mmm2", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mQmax;
-        PR->addDetail("Table G", "Qmax", "", value, "N/mmm2");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mQmax - mLower->mQmax) * perunage + mLower->mQmax;
-    PR->addDetail("Table G", "Qmax", "", value, "N/mmm2");
     return value;
 }
 
@@ -97,20 +108,17 @@ double TableGSimple::getTableG_E0(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        PR->addDetail("Table G", "E0", "", value, "N/mmm2", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mE0;
-        PR->addDetail("Table G", "E0", "", value, "N/mmm2");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mE0 - mLower->mE0) * perunage + mLower->mE0;
-    PR->addDetail("Table G", "E0", "", value, "N/mmm2");
     return value;
 }
 
@@ -119,20 +127,17 @@ double TableGSimple::getTableG_K1(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        PR->addDetail("Table G", "K1", "", value, "-", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mK1;
-        PR->addDetail("Table G", "K1", "", value, "-");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mK1 - mLower->mK1) * perunage + mLower->mK1;
-    PR->addDetail("Table G", "K1", "", value, "-");
     return value;
 }
 
@@ -141,20 +146,17 @@ double TableGSimple::getTableG_mI(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        PR->addDetail("Table G", "mI", "", value, "-", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mmI;
-        PR->addDetail("Table G", "mI", "", value, "-");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mmI - mLower->mmI) * perunage + mLower->mmI;
-    PR->addDetail("Table G", "mI", "", value, "-");
     return value;
 }
 
@@ -163,27 +165,32 @@ double TableGSimple::getTableG_gC(Gasket::InsFilLayMatType insType,
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
         value = 0.0;
-        PR->addDetail("Table G", "gC", "", value, "-", "", -1, "Out of range");
         return value;
     }
 
     if (mUpper->mTemperature == mLower->mTemperature) {
         value = mUpper->mgC;
-        PR->addDetail("Table G", "gC", "", value, "-");
         return value;
     }
 
     double perunage = (temperature - mLower->mTemperature)
             / (mUpper->mTemperature - mLower->mTemperature);
     value = (mUpper->mgC - mLower->mgC) * perunage + mLower->mgC;
-    PR->addDetail("Table G", "gC", "", value, "-");
     return value;
 }
 
 bool TableGSimple::getUpperLower(Gasket::InsFilLayMatType insType,
                                  double temperature) {
-    mUpper = getUpperObject(insType, temperature);
-    mLower = getLowerObject(insType, temperature);
+    mUpper = NULL;
+    mLower = NULL;
+
+    for (std::vector<TableGSimpleProperty*>::iterator it = mList.begin();
+                it != mList.end(); it++) {
+        TableGSimpleProperty* obj = (*it);
+        updateUpperObject(obj, insType, temperature);
+        updateLowerObject(obj, insType, temperature);
+
+    }
 
     if (mUpper && mLower) {
         return true;
@@ -192,48 +199,28 @@ bool TableGSimple::getUpperLower(Gasket::InsFilLayMatType insType,
     return false;
 }
 
-TableGSimpleProperty* TableGSimple::getUpperObject(
-        Gasket::InsFilLayMatType insType,
-        double temperature) {
+void TableGSimple::updateUpperObject(TableGSimpleProperty* obj,
+                                     Gasket::InsFilLayMatType insType,
+                                     double temperature) {
+    if (obj->mInsertFillMaterial == insType
+            && obj->mTemperature >= temperature) {
 
-    TableGSimpleProperty* obj = NULL;
-
-    for (std::vector<TableGSimpleProperty*>::iterator it = mList.begin();
-                it != mList.end(); it++) {
-        TableGSimpleProperty* tmpObj = (*it);
-
-        if (tmpObj->mInsertFillMaterial == insType
-                && tmpObj->mTemperature >= temperature) {
-
-            if (!obj || (obj && obj->mTemperature >= tmpObj->mTemperature)) {
-                obj = tmpObj;
-            }
+        if (!mUpper || (mUpper->mTemperature >= obj->mTemperature)) {
+            mUpper = obj;
         }
     }
-
-    return obj;
 }
 
-TableGSimpleProperty *TableGSimple::getLowerObject(
-        Gasket::InsFilLayMatType insType,
-        double temperature) {
+void TableGSimple::updateLowerObject(TableGSimpleProperty* obj,
+                                     Gasket::InsFilLayMatType insType,
+                                     double temperature) {
+    if (obj->mInsertFillMaterial == insType
+            && obj->mTemperature <= temperature) {
 
-    TableGSimpleProperty* obj = NULL;
-
-    for (std::vector<TableGSimpleProperty*>::iterator it = mList.begin();
-                it != mList.end(); it++) {
-        TableGSimpleProperty* tmpObj = (*it);
-
-        if (tmpObj->mInsertFillMaterial == insType
-                && tmpObj->mTemperature <= temperature) {
-
-            if (!obj || (obj && obj->mTemperature <= tmpObj->mTemperature)) {
-                obj = tmpObj;
-            }
+        if (!mLower || (mLower->mTemperature <= obj->mTemperature)) {
+            mLower = obj;
         }
     }
-
-    return obj;
 }
 
 void TableGSimple::createList() {

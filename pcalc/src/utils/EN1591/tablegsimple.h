@@ -4,7 +4,8 @@
 #include <vector>
 #include "gasket.h"
 #include "rb_namespace.h"
-#include "rb_objectcontainer.h"
+#include "rb_tablemath.h"
+#include "rb_utility.h"
 
 NAMESPACE_REDBAG_CALC_EN1591
 
@@ -30,15 +31,19 @@ public:
     double mgC;
 };
 
+#define TABLEGSIMPLE TableGSimple::getInstance()
+
 /**
  * The EN13445 appendix G tables 9 class for gaskets
  * without EN13555 measured data
  */
-class TableGSimple : public RB_Object {
+class TableGSimple : public RB_TableMath, RB_Utility {
 
 public:
-    TableGSimple();
     virtual ~TableGSimple();
+    static TableGSimple* getInstance();
+
+    void refresh() {}
 
     double getTableG_Q0min(Gasket::InsFilLayMatType insType,
                            double temperature);
@@ -54,12 +59,15 @@ public:
                         double temperature);
 
 private:
+    TableGSimple();
     bool getUpperLower(Gasket::InsFilLayMatType insType,
                        double temperature);
-    TableGSimpleProperty* getUpperObject(Gasket::InsFilLayMatType insType,
-                                         double temperature);
-    TableGSimpleProperty* getLowerObject(Gasket::InsFilLayMatType insType,
-                                         double temperature);
+    void updateUpperObject(TableGSimpleProperty *obj,
+                           Gasket::InsFilLayMatType insType,
+                           double temperature);
+    void updateLowerObject(TableGSimpleProperty *obj,
+                           Gasket::InsFilLayMatType insType,
+                           double temperature);
     void createList();
     void cl(Gasket::InsFilLayMatType insFillMat,
             double temperature,
@@ -69,6 +77,8 @@ private:
             double K1,
             double mI,
             double gC);
+
+    static TableGSimple* mActiveUtility;
     TableGSimpleProperty* mUpper;
     TableGSimpleProperty* mLower;
 

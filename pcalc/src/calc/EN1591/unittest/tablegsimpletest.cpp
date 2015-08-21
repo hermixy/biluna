@@ -17,7 +17,7 @@ void TableGSimpleTest::exec() {
 
 void TableGSimpleTest::setupTarget() {
     if (!target) {
-        target = new TableGSimple();
+        target = TABLEGSIMPLE;
     }
 }
 

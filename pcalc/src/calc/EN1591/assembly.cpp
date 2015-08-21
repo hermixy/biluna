@@ -401,18 +401,27 @@ void Assembly::Calc_Q_A_Qsmin(int loadCaseNo) {
     LoadCase* loadCase0 = mLoadCaseList->at(0);
 
     if (loadCaseNo == 0) {
-//        loadCase0->Q_A = 95.0; // test only
-        loadCase0->Q_A = TABLE02_15PROPERTY->getTableQA(mLeakageRate,
-                                                        mGasket->matCode);
-        PR->addDetail("Table 2-15", "Q_A", "Table value", loadCase0->Q_A, "-",
-                      "Table value", loadCaseNo);
+//        loadCase0->Q_A = 95.0; // test only, result Amtech
+//        loadCase0->Q_A = loadCase0->Q_G; // test only
+
+        if (mF_Bspec > 0) {
+            loadCase0->Q_A = mF_Bspec / mGasket->AGe;
+            PR->addDetail("Before F. 103", "Q_A", "Table 2-15 value",
+                          loadCase0->Q_A, "-", "Table value", loadCaseNo);
+        } else {
+            // original
+            loadCase0->Q_A = TABLE02_15PROPERTY->getTableQA(mLeakageRate,
+                                                            mGasket->matCode);
+            PR->addDetail("Before F. 103", "Q_A", "Table 2-15 value",
+                          loadCase0->Q_A, "-", "Table value", loadCaseNo);
+        }
     } else {
         LoadCase* loadCaseI = mLoadCaseList->at(loadCaseNo);
         loadCaseI->Q_sminL
                 = TABLE02_15PROPERTY->getTableQsminL(mLeakageRate,
                                                      mGasket->matCode,
                                                      loadCase0->Q_A);
-        PR->addDetail("Table 2-15", "Q_sminL", "Table value",
+        PR->addDetail("Before F. 104", "Q_sminL", "Table 2-15 value",
                       loadCaseI->Q_sminL, "-",
                       "Table value", loadCaseNo);
     }
@@ -766,12 +775,13 @@ void Assembly::Calc_F_G0d() {
     QString varStr = "F_Gdelta";
     QString forStr = "Formula 119";
 
-    if (loadCase->F_Bspec > 0.0) {
-        tmpF_G = loadCase->F_Bmin - loadCase->F_R;
-        varStr = "F_Bmin - F_R";
-        forStr = "Formula 119";
-    }
+//    if (loadCase->F_Bspec > 0.0) {
+//        tmpF_G = loadCase->F_Bmin - loadCase->F_R;
+//        varStr = "F_Bmin - F_R";
+//        forStr = "Formula 119";
+//    }
 
+    // TODO: the second argument does almost nothing
     loadCase->F_Gd = std::max(tmpF_G, (2 / 3.0) * (1 - 10 / mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",

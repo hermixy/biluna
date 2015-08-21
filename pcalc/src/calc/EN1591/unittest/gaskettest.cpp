@@ -57,7 +57,6 @@ void GasketTest::Calc_dGtTest() {
 
 void GasketTest::Calc_AGeTest() {
     setupTarget();
-    int i = 0;
     target->dGe = 36.2;
     target->bGe = 5.78;
     target->Calc_AGe();

@@ -1,4 +1,5 @@
 ﻿#include "table17_30property.h"
+#include "pcalc_utilityfactory.h"
 NAMESPACE_REDBAG_CALC_EN1591
 
 E_GProperty::E_GProperty(const QString &materialCode,
@@ -11,8 +12,18 @@ E_GProperty::E_GProperty(const QString &materialCode,
     mE_G = E_G;
 }
 
-Table17_30Property::Table17_30Property() : RB_TableMath() {
+Table17_30Property* Table17_30Property::mActiveUtility = 0;
+
+Table17_30Property::Table17_30Property() : RB_TableMath(), RB_Utility() {
+    RB_DEBUG->print("Table02_15Property::Table02_15Property()");
+    mTargetTemperature = 0.0;
+    mTargetGasketStress = 0.0;
+    mTopLeft = NULL;
+    mTopRight = NULL;
+    mBottomLeft = NULL;
+    mBottomRight = NULL;
     createList();
+    PCALC_UTILITYFACTORY->addUtility(this);
 }
 
 Table17_30Property::~Table17_30Property() {
@@ -20,6 +31,18 @@ Table17_30Property::~Table17_30Property() {
                 it != mList.end(); it++) {
         delete (*it);
     }
+
+    PCALC_UTILITYFACTORY->removeUtility(this);
+    mActiveUtility = NULL;
+    RB_DEBUG->print("Table17_30Property::~Table17_30Property()");
+}
+
+Table17_30Property* Table17_30Property::getInstance() {
+    if (!mActiveUtility) {
+        mActiveUtility = new Table17_30Property();
+        mActiveUtility->refresh();
+    }
+    return mActiveUtility;
 }
 
 double Table17_30Property::getTableE_G(const RB_String& materialCode,
@@ -27,6 +50,10 @@ double Table17_30Property::getTableE_G(const RB_String& materialCode,
                                        double gasketStress) {
     mTargetTemperature = temperature;
     mTargetGasketStress = gasketStress;
+    mTopLeft = NULL;
+    mTopRight = NULL;
+    mBottomLeft = NULL;
+    mBottomRight = NULL;
 
     for (std::vector<E_GProperty*>::iterator it = mList.begin();
                 it != mList.end(); it++) {
@@ -40,12 +67,18 @@ double Table17_30Property::getTableE_G(const RB_String& materialCode,
         }
     }
 
-    double value = getBilinearValue(
-                mTargetTemperature, mTargetGasketStress,
-                mTopLeft->mTemperature, mTopLeft->mGasketStress, mTopLeft->mE_G,
-                mTopRight->mTemperature, mTopRight->mGasketStress, mTopRight->mE_G,
-                mBottomLeft->mTemperature, mBottomLeft->mGasketStress, mBottomLeft->mE_G,
-                mBottomRight->mTemperature, mBottomRight->mGasketStress, mBottomRight->mE_G);
+    double value = 0.0;
+
+    if (mTopLeft && mTopRight && mBottomLeft && mBottomRight) {
+        value = getBilinearValue(
+            mTargetTemperature, mTargetGasketStress,
+            mTopLeft->mTemperature, mTopLeft->mGasketStress, mTopLeft->mE_G,
+            mTopRight->mTemperature, mTopRight->mGasketStress, mTopRight->mE_G,
+            mBottomLeft->mTemperature, mBottomLeft->mGasketStress,
+                    mBottomLeft->mE_G,
+            mBottomRight->mTemperature, mBottomRight->mGasketStress,
+                    mBottomRight->mE_G);
+    }
 
     return value;
 }
@@ -79,8 +112,8 @@ void Table17_30Property::updateTopLeft(E_GProperty* obj) {
 void Table17_30Property::updateTopRight(E_GProperty* obj) {
     if (obj->mTemperature >= mTargetTemperature
             && obj->mGasketStress <= mTargetGasketStress) {
-        if (!mTopLeft || (obj->mTemperature <= mTopLeft->mTemperature
-                && obj->mGasketStress >= mTopLeft->mGasketStress)) {
+        if (!mTopRight || (obj->mTemperature <= mTopRight->mTemperature
+                && obj->mGasketStress >= mTopRight->mGasketStress)) {
             mTopRight = obj;
         }
     }
@@ -89,18 +122,18 @@ void Table17_30Property::updateTopRight(E_GProperty* obj) {
 void Table17_30Property::updateBottomLeft(E_GProperty* obj) {
     if (obj->mTemperature <= mTargetTemperature
             && obj->mGasketStress >= mTargetGasketStress) {
-        if (!mTopLeft || (obj->mTemperature >= mTopLeft->mTemperature
-                && obj->mGasketStress <= mTopLeft->mGasketStress)) {
+        if (!mBottomLeft || (obj->mTemperature >= mBottomLeft->mTemperature
+                && obj->mGasketStress <= mBottomLeft->mGasketStress)) {
             mBottomLeft = obj;
         }
     }
 }
 
 void Table17_30Property::updateBottomRight(E_GProperty* obj) {
-    if (obj->mTemperature <= mTargetTemperature
-            && obj->mGasketStress <= mTargetGasketStress) {
-        if (!mTopLeft || (obj->mTemperature >= mTopLeft->mTemperature
-                && obj->mGasketStress >= mTopLeft->mGasketStress)) {
+    if (obj->mTemperature >= mTargetTemperature
+            && obj->mGasketStress >= mTargetGasketStress) {
+        if (!mBottomRight || (obj->mTemperature <= mBottomRight->mTemperature
+                && obj->mGasketStress <= mBottomRight->mGasketStress)) {
             mBottomRight = obj;
         }
     }
