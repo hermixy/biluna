@@ -15,6 +15,7 @@ void BoltTest::exec() {
     Calc_eta1plusTest();
     Calc_eta1minusTest();
     Calc_IBTest();
+    Calc_kBTest();
 }
 
 void BoltTest::setupTarget() {
@@ -110,6 +111,18 @@ void BoltTest::Calc_IBTest() {
     target->dBS = 77.5;
     target->Calc_IB();
     areEqual(PR->getLastOutput(), "BoltTest::Calc_IBTest()", 19.396193043263384, target->IB);
+}
+
+void BoltTest::Calc_kBTest() {
+    setupTarget();
+    target->pt = 3.1;
+    target->mut = 2.5;
+    target->dB2 = -7.3;
+    target->mun = 823.5;
+    target->dn = 0.058;
+    target->Calc_kB();
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_kBTest()",
+             13.84415, target->kB);
 }
 
 END_NAMESPACE_REDBAG_CALC_EN1591

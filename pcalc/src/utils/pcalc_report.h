@@ -28,6 +28,15 @@ public:
                            int loadCaseNo = -1,
                            const QString& note = "");
     RB_ObjectContainer* getInOutContainer();
+
+    /**
+     * Used for unittest when calculation creates output object, can
+     * be used only once. The next time a new output object is created.
+     * This new object is required for functions that do not create a
+     * calculation output object
+     * @brief Used for unittest
+     * @return last calculation output object
+     */
     RB_ObjectBase* getLastOutput();
     virtual void clear();
 

@@ -358,14 +358,20 @@ void Flange::Calc_deltaQ(int loadCaseNo) {
         loadCase->deltaQ1 = loadCase->P * dE / (loadCase->fE1 * 2 * eD
                                                 * cos(mShell->phiS));
         PR->addDetail("Formula 132",
-                  "deltaQ1", "P * dE / (fE1 * 2 * eD * Cos(Shell.phiS))",
-                  loadCase->deltaQ1, "-");
+                      "deltaQ1", "P * dE / (fE1 * 2 * eD * Cos(Shell.phiS))",
+                      loadCase->deltaQ1, "-",
+                      QN(loadCase->P) + " * " + QN(dE) + " / ("
+                      + QN(loadCase->fE1) + " * 2 * " + QN(eD)
+                      + " * cos(" + QN(mShell->phiS) + "))", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->deltaQ2 = loadCase->P * dE / (loadCase->fE2 * 2 * eD
                                                 * cos(mShell->phiS));
         PR->addDetail("Formula 132",
-                  "deltaQ2", "P * dE / (fE2 * 2 * eD * Cos(Shell.phiS))",
-                  loadCase->deltaQ2, "-");
+                      "deltaQ2", "P * dE / (fE2 * 2 * eD * Cos(Shell.phiS))",
+                      loadCase->deltaQ2, "-",
+                      QN(loadCase->P) + " * " + QN(dE) + " / ("
+                      + QN(loadCase->fE2) + " * 2 * " + QN(eD)
+                      + " * cos(" + QN(mShell->phiS) + "))", loadCaseNo);
     }
 }
 
@@ -380,15 +386,20 @@ void Flange::Calc_deltaR(int loadCaseNo) {
         loadCase->deltaR1 = loadCase->F_R / (loadCase->fE1 * M_PI * dE
                                              * eD * cos(mShell->phiS));
         PR->addDetail("Formula 133",
-                  "deltaR1", "F_R / (fE1 * Math.PI * dE * eD "
-                  "* Cos(Shell.phiS))",
-                  loadCase->deltaR1, "-");
+                      "deltaR1", "F_R / (fE1 * PI * dE * eD * Cos(Shell.phiS))",
+                      loadCase->deltaR1, "-",
+                      QN(loadCase->F_R) + " / (" + QN(loadCase->fE1)
+                      + " * pi * " + QN(dE) + " * " + QN(eD)
+                      + " * cos(" + QN(mShell->phiS"))", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->deltaR2 = loadCase->F_R / (loadCase->fE2 * M_PI * dE
                                              * eD * cos(mShell->phiS));
         PR->addDetail("Formula 133",
-                  "deltaR2", "F_R / (fE2 * Math.PI * dE * eD * Cos(Shell.phiS))",
-                  loadCase->deltaR2, "-");
+                      "deltaR2", "F_R / (fE2 * PI * dE * eD * Cos(Shell.phiS))",
+                      loadCase->deltaR2, "-",
+                      QN(loadCase->F_R) + " / (" + QN(loadCase->fE2)
+                      + " * pi * " + QN(dE) + " * " + QN(eD)
+                      + " * cos(" + QN(mShell->phiS"))", loadCaseNo);
     }
 }
 
@@ -417,33 +428,37 @@ void Flange::Calc_cM(int loadCaseNo) {
 
     double cM_root = 1.333 *(1 - 0.75 * pow(0.5 * tmp_deltaQ + tmp_deltaR, 2))
             * (1 - (val1 * pow(tmp_deltaQ, 2) + val2 * pow(tmp_deltaR, 2)));
+    QString str = "(1.333 *(1 - 0.75 * (0.5 * " + QN(tmp_deltaQ) + " + "
+            + QN(tmp_deltaR) + ") ^ 2 * (1 - (" + QN(val1) + " * "
+            + QN(tmp_deltaQ) + " ^ 2 + " + QN(val2) + " * "
+            + QN(tmp_deltaR) + " ^ 2))) ^ 0.5";
     if (cM_root >= 0) {
         if (getFlangeNumber() == 1) {
             loadCase->cM1 = pow(cM_root, 0.5);
             PR->addDetail("Formula 134",
-                      "cM1", "1.333 * (1 - 0.75 * (0.5 * deltaQ "
-                      "+ deltaR) ^ 2) * (1 - (val * deltaQ ^ 2 "
-                      "+ val2 * tmp_deltaR ^ 2))",
-                      loadCase->cM1, "-");
+                          "cM1", "1.333 * (1 - 0.75 * (0.5 * deltaQ "
+                                 "+ deltaR) ^ 2) * (1 - (val * deltaQ ^ 2 "
+                                 "+ val2 * tmp_deltaR ^ 2))",
+                          loadCase->cM1, "-", str, loadCaseNo);
         } else if (getFlangeNumber() == 2) {
             loadCase->cM2 = pow(cM_root, 0.5);
             PR->addDetail("Formula 134",
-                      "cM2", "1.333 * (1 - 0.75 * (0.5 * deltaQ "
-                      "+ deltaR) ^ 2) * (1 - (val * deltaQ ^ 2 "
-                      "+ val2 * deltaR ^ 2))",
-                      loadCase->cM2, "-");
+                          "cM2", "1.333 * (1 - 0.75 * (0.5 * deltaQ "
+                                 "+ deltaR) ^ 2) * (1 - (val * deltaQ ^ 2 "
+                                 "+ val2 * deltaR ^ 2))",
+                          loadCase->cM2, "-", str, loadCaseNo);
         }
     } else {
         if (getFlangeNumber() == 1) {
-            loadCase->cM1 = cM_root; // be carefull, not a valid value!
+            loadCase->cM1 = cM_root;
             PR->addDetail("Formula 134",
-                      "cM1", "cM_root ' be carefull, not a valid value!",
-                      loadCase->cM1, "-");
+                          "cM1", "cM_root ' be carefull, not a valid value!",
+                          loadCase->cM1, "-", str, loadCaseNo);
         } else if (getFlangeNumber() == 2) {
-            loadCase->cM2 = cM_root; // be carefull, not a valid value!
+            loadCase->cM2 = cM_root;
             PR->addDetail("Formula 134",
-                      "cM2", "cM_root ' be carefull, not a valid value!",
-                      loadCase->cM2, "-");
+                          "cM2", "cM_root ' be carefull, not a valid value!",
+                          loadCase->cM2, "-", str, loadCaseNo);
         }
     }
 }

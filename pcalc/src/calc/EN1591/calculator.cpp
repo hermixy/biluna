@@ -403,7 +403,9 @@ void Calculator::F120_to_122(Assembly* assembly,
 void Calculator::F123_to_151(Assembly* assembly,
                              int loadCaseNo) {
     // bolt load
-    assembly->Calc_MtB();
+    // assembly->Calc_MtB(); not used anymore
+    assembly->mBolt->Calc_kB();
+    assembly->Calc_Mtnom();
     assembly->mBolt->Calc_IB();
     assembly->Calc_cA(loadCaseNo);
     assembly->Calc_cB(loadCaseNo);

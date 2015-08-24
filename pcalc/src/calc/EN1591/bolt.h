@@ -37,10 +37,13 @@ public:
     double dB4;
     double dBe;
     double dBS;
+    double dn; // B.7 calculation
     double eN;
     double l5t;
     double lS;
+    double mun;
     double mut;
+    double pt;
     double ruptureElongationA;
 
     BoltHole* mBoltHole;
@@ -54,6 +57,7 @@ public:
 
     double AB;
     double IB;
+    double kB; // B.7 calculation
     double lB;
     double XB;
     double eta1plus;
@@ -71,6 +75,7 @@ public:
     void Calc_eta1plus();
     void Calc_eta1minus();
     void Calc_IB();
+    void Calc_kB();
 };
 
 END_NAMESPACE_REDBAG_CALC_EN1591

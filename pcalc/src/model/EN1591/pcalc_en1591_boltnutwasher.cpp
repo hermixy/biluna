@@ -44,10 +44,13 @@ void PCALC_EN1591_BoltNutWasher::createMembers() {
     addMember("db4", "mm", 0.0, RB2::MemberDouble);
     addMember("dbe", "mm", 0.0, RB2::MemberDouble);
     addMember("dbs", "mm", 0.0, RB2::MemberDouble);
+    addMember("dn", "mm", 0.0, RB2::MemberDouble);
     addMember("en", "mm", 0.0, RB2::MemberDouble);
     addMember("l5t", "mm", 0.0, RB2::MemberDouble);
     addMember("ls", "mm", 0.0, RB2::MemberDouble);
+    addMember("mun", "-", 0.0, RB2::MemberDouble);
     addMember("mut", "-", 0.0, RB2::MemberDouble);
+    addMember("pt", "-", 0.0, RB2::MemberDouble);
     addMember("ruptureelongationa", "percent", 0.0, RB2::MemberDouble);
     addMember("materialbolt_idx", "-", "0", RB2::MemberChar165);
     // bolthole

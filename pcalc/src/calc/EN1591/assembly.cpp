@@ -832,12 +832,24 @@ void Assembly::Calc_F_B(int loadCaseNo) {
 }
 
 /**
+ * @brief Formula B.4
+ */
+void Assembly::Calc_Mtnom() {
+    LoadCase* loadCase = mLoadCaseList->at(0);
+    loadCase->Mtnom = mBolt->kB * mLoadCaseList->at(0)->F_Bnom / mFlange1->nB;
+    PR->addDetail("Formula B.4", "Mtnom", "kB * F_Bnom / nB",
+                  loadCase->Mtnom, "Nmm", QN(mBolt->kB) + " * "
+                  + QN(mLoadCaseList->at(0)->F_Bnom) + " / " + QN(mFlange1->nB));
+}
+
+/**
  * @brief Formula B.9: Torsional moment during assembly in bolts,
  * only for loadcase = 0 with table B EN1591-2001 for ISO bolts/thread for pt
+ * TODO: not used anymore
  */
 void Assembly::Calc_MtB() {
     LoadCase* loadCase = mLoadCaseList->at(0);
-    // from table B EN1591-2001 for ISO bolts/thread
+    // from table B EN1591-2001 for ISO bolts/thread and Table A
     double pt = (mBolt->dB0 - mBolt->dBe) / 0.9382;
     PR->addDetail("With Formula B.9", "pt", "(Bolt.dB0 - Bolt.dBe) / 0.9382",
               pt, "Nmm", "(" + QN(mBolt->dB0) + " - " + QN(mBolt->dBe)
@@ -860,24 +872,31 @@ void Assembly::Calc_MtB() {
  */
 void Assembly::Calc_PhiB(int loadCaseNo) {
     double torsionVal = 0.0;
+    QString str1 = "";
+    QString str2 = "";
 
     if (loadCaseNo == 0) {
-        torsionVal = 3 * pow(mLoadCaseList->at(loadCaseNo)->cA
-                             * mLoadCaseList->at(0)->MtB / mBolt->IB, 2);
+        torsionVal =
+                3 * pow(mLoadCaseList->at(loadCaseNo)->cA
+                        * mLoadCaseList->at(0)->Mtnom * (1 + mBolt->etanplus)
+                        / mBolt->IB, 2);
+        str1 = " + 3 * (cA * Mtnom * (1 + etanplus) / IB) ^ 2";
+        str2 = " + 3 * (" + QN(mLoadCaseList->at(loadCaseNo)->cA)
+                + " * " + QN(mLoadCaseList->at(0)->Mtnom)
+                + " * (1 + " + QN(mBolt->etanplus)
+                + ") / " + QN(mBolt->IB) + ") ^ 2";
     }
 
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
     loadCase->PhiB = 1 / (loadCase->fB * loadCase->cB)
             * pow((pow(loadCase->F_B / mBolt->AB, 2) + torsionVal), 0.5);
     PR->addDetail("Formula 123", "PhiB",
-                  "1 / (fB * cB) * ((F_B / AB) ^ 2 "
-                  "+ 3 * (cA * MtB / IB) ^ 2) ^ 0.5",
+                  "1 / (fB * cB) * ((F_B / AB) ^ 2"
+                  + str1 + ") ^ 0.5",
                   loadCase->PhiB, "-",
                   "1 / (" + QN(loadCase->fB) + " * " + QN(loadCase->cB)
                   + ") * ((" + QN(loadCase->F_B) + " / " + QN(mBolt->AB)
-                  + ") ^ 2 + 3 * (" + QN(mLoadCaseList->at(loadCaseNo)->cA)
-                  + " * " + QN(mLoadCaseList->at(0)->MtB) + " / "
-                  + QN(mBolt->IB) + ") ^ 2) ^ 0.5", loadCaseNo);
+                  + ") ^ 2" + str2 + ") ^ 0.5", loadCaseNo);
 }
 
 /**

@@ -141,7 +141,9 @@ RB_ObjectBase *PCALC_Report::getLastOutput() {
         mLastOutput = obj;
     }
 
-    return mLastOutput;
+    RB_ObjectBase* output = mLastOutput;
+    mLastOutput = NULL;
+    return output;
 }
 
 void PCALC_Report::clear() {

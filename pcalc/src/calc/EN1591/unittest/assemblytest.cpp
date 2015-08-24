@@ -50,7 +50,8 @@ void AssemblyTest::exec() {
     Is_PhiB_ValidTest();
     Calc_fETest();
     Is_PhiG_ValidTest();
-    Calc_MtBTest();
+    Calc_MtnomTest();
+//    Calc_MtBTest();
     Calc_F_BImaxminTest();
     Calc_F_GImaxminTest();
     Calc_ThetaFmaxminTest();
@@ -710,14 +711,23 @@ void AssemblyTest::Calc_PhiBTest() {
     target->mLoadCaseList->at(i)->F_B = 12.3;
     target->mBolt->AB = 2.7;
     target->mLoadCaseList->at(i)->fB = 12.3;
-    target->mLoadCaseList->at(i)->MtB = 8.36;
+    target->mLoadCaseList->at(i)->Mtnom = 8.36;
     target->mBolt->IB = 13.78;
     target->mLoadCaseList->at(i)->cA = 5.8;
     target->mLoadCaseList->at(i)->cB = 1.0;
     target->mBolt->mut = 7.8;
+    target->mBolt->etanplus = 0.7;
     target->Calc_PhiB(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()", 0.6186202131555113,
-             target->mLoadCaseList->at(i)->PhiB);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()",
+             0.92017261349202768449, target->mLoadCaseList->at(i)->PhiB);
+    i = 1;
+    target->mLoadCaseList->at(i)->F_B = 12.3;
+    target->mBolt->AB = 2.7;
+    target->mLoadCaseList->at(i)->fB = 12.3;
+    target->mLoadCaseList->at(i)->cB = 1.0;
+    target->Calc_PhiB(i);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()",
+             0.37037037037037037037, target->mLoadCaseList->at(i)->PhiB);
     deleteTarget();
 }
 
@@ -773,20 +783,32 @@ void AssemblyTest::Is_PhiG_ValidTest() {
     deleteTarget();
 }
 
-void AssemblyTest::Calc_MtBTest() {
+void AssemblyTest::Calc_MtnomTest() {
     SetupIntegralTarget();
-    target->mBolt->mut = 0.22;
-    target->mBolt->dB0 = 13.8;
-    target->mBolt->dB2 = 14.1;
-    target->mBolt->dBe = 14.3;
-    target->mLoadCaseList->at(0)->F_Bnom = 3.2;
+    LoadCase* loadCase = target->mLoadCaseList->at(0);
+    target->mBolt->kB = 24.3;
+    loadCase->F_Bnom = 17.9;
     target->mFlange1->nB = 17;
-    target->mBolt->etanplus = 0.3;
-    target->Calc_MtB();
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_MtBTest()", 0.41725222609301915,
-             target->mLoadCaseList->at(0)->MtB);
+    target->Calc_Mtnom();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Mtnom()",
+             25.58647058823529411765, loadCase->Mtnom);
     deleteTarget();
 }
+
+//void AssemblyTest::Calc_MtBTest() {
+//    SetupIntegralTarget();
+//    target->mBolt->mut = 0.22;
+//    target->mBolt->dB0 = 13.8;
+//    target->mBolt->dB2 = 14.1;
+//    target->mBolt->dBe = 14.3;
+//    target->mLoadCaseList->at(0)->F_Bnom = 3.2;
+//    target->mFlange1->nB = 17;
+//    target->mBolt->etanplus = 0.3;
+//    target->Calc_MtB();
+//    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_MtBTest()", 0.41725222609301915,
+//             target->mLoadCaseList->at(0)->MtB);
+//    deleteTarget();
+//}
 
 void AssemblyTest::Calc_F_BImaxminTest() {
     SetupIntegralTarget();

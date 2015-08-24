@@ -176,9 +176,11 @@ void EN1591Handler::setDimensions() {
     blt->dB4 = in->getValue("db4").toDouble();
     blt->dBe = in->getValue("dbe").toDouble();
     blt->dBS = in->getValue("dbs").toDouble();
+    blt->dn = in->getValue("dn").toDouble();
     blt->eN = in->getValue("en").toDouble();
     blt->l5t = in->getValue("l5t").toDouble();
     blt->lS = in->getValue("ls").toDouble();
+    blt->mun = in->getValue("mun").toDouble();
     blt->mut = in->getValue("mut").toDouble();
     blt->ruptureElongationA = in->getValue("ruptureelongationa").toDouble();
     // TODO materialbolt_idx

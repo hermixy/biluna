@@ -175,7 +175,8 @@ public:
     double PhiL2;
     double WQ1;
     double WQ2;
-    double MtB;
+    double MtB; // not used anymore
+    double Mtnom;
     double Q_G;
     double Q_A;
     double Q_0min;

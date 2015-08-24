@@ -1525,7 +1525,7 @@
             <property name="spacing">
              <number>3</number>
             </property>
-            <item row="11" column="0">
+            <item row="13" column="0">
              <widget class="QLabel" name="lblmut">
               <property name="text">
                <string>mut</string>
@@ -1535,17 +1535,17 @@
               </property>
              </widget>
             </item>
-            <item row="12" column="1">
+            <item row="15" column="1">
              <widget class="QLineEdit" name="leRuptureElongationA"/>
             </item>
-            <item row="12" column="0">
+            <item row="15" column="0">
              <widget class="QLabel" name="lblRuptElongA">
               <property name="text">
                <string>Rupture Elongation A</string>
               </property>
              </widget>
             </item>
-            <item row="11" column="1">
+            <item row="13" column="1">
              <widget class="QLineEdit" name="lemut"/>
             </item>
             <item row="3" column="1">
@@ -1564,7 +1564,7 @@
             <item row="2" column="1" colspan="2">
              <widget class="QComboBox" name="cbTensionerType"/>
             </item>
-            <item row="3" column="2" rowspan="10">
+            <item row="3" column="2" rowspan="13">
              <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1678,7 +1678,7 @@
             <item row="7" column="1">
              <widget class="QLineEdit" name="ledBS"/>
             </item>
-            <item row="8" column="0">
+            <item row="9" column="0">
              <widget class="QLabel" name="lbleN">
               <property name="text">
                <string>eN</string>
@@ -1688,10 +1688,10 @@
               </property>
              </widget>
             </item>
-            <item row="8" column="1">
+            <item row="9" column="1">
              <widget class="QLineEdit" name="leeN"/>
             </item>
-            <item row="9" column="0">
+            <item row="10" column="0">
              <widget class="QLabel" name="lbll5t">
               <property name="text">
                <string>l5t</string>
@@ -1701,10 +1701,10 @@
               </property>
              </widget>
             </item>
-            <item row="9" column="1">
+            <item row="10" column="1">
              <widget class="QLineEdit" name="lel5t"/>
             </item>
-            <item row="10" column="0">
+            <item row="11" column="0">
              <widget class="QLabel" name="lbllS">
               <property name="text">
                <string>lS</string>
@@ -1714,20 +1714,20 @@
               </property>
              </widget>
             </item>
-            <item row="10" column="1">
+            <item row="11" column="1">
              <widget class="QLineEdit" name="lelS"/>
             </item>
-            <item row="13" column="0">
+            <item row="16" column="0">
              <widget class="QLabel" name="lblMaterialBolt">
               <property name="text">
                <string>Material</string>
               </property>
              </widget>
             </item>
-            <item row="14" column="0" colspan="3">
+            <item row="17" column="0" colspan="3">
              <widget class="QLineEdit" name="ileMaterialBolt"/>
             </item>
-            <item row="15" column="0">
+            <item row="18" column="0">
              <spacer name="verticalSpacer_13">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -1739,6 +1739,45 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="12" column="0">
+             <widget class="QLabel" name="lblmun">
+              <property name="text">
+               <string>mun</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="1">
+             <widget class="QLineEdit" name="lemun"/>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="lbldn">
+              <property name="text">
+               <string>dn</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QLineEdit" name="ledn"/>
+            </item>
+            <item row="14" column="0">
+             <widget class="QLabel" name="lblpt">
+              <property name="text">
+               <string>pt</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="1">
+             <widget class="QLineEdit" name="lept"/>
             </item>
            </layout>
           </widget>

@@ -327,14 +327,20 @@ void PCALC_EN1591Widget::init() {
                                      mBoltNutWasherModel->fieldIndex("dbe"));
     mBoltNutWasherMapper->addMapping(ledBS,
                                      mBoltNutWasherModel->fieldIndex("dbs"));
+    mBoltNutWasherMapper->addMapping(ledn,
+                                     mBoltNutWasherModel->fieldIndex("dn"));
     mBoltNutWasherMapper->addMapping(leeN,
                                      mBoltNutWasherModel->fieldIndex("en"));
     mBoltNutWasherMapper->addMapping(lel5t,
                                      mBoltNutWasherModel->fieldIndex("l5t"));
     mBoltNutWasherMapper->addMapping(lelS,
                                      mBoltNutWasherModel->fieldIndex("ls"));
+    mBoltNutWasherMapper->addMapping(lemun,
+                                     mBoltNutWasherModel->fieldIndex("mun"));
     mBoltNutWasherMapper->addMapping(lemut,
                                      mBoltNutWasherModel->fieldIndex("mut"));
+    mBoltNutWasherMapper->addMapping(lept,
+                                     mBoltNutWasherModel->fieldIndex("pt"));
     mBoltNutWasherMapper->addMapping(leRuptureElongationA,
                                      mBoltNutWasherModel->fieldIndex(
                                          "ruptureelongationa"));
@@ -559,10 +565,6 @@ void PCALC_EN1591Widget::slotAssemblyAdded() {
                 mAssemblyModel->fieldIndex("date"));
     QDate date = QDateTime::currentDateTime().date();
     mAssemblyModel->setData(idx, date.toString(Qt::ISODate));
-    idx = mAssemblyModel->index(
-                mAssemblyModel->getCurrentIndex().row(),
-                mAssemblyModel->fieldIndex("nr"));
-    mAssemblyModel->setData(idx, 1);
 
     leNumber->setFocus();
     leNumber->selectAll();
@@ -889,10 +891,13 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "db4", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "dbe", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "dbs", "-", mBoltNutWasherModel);
+    addObjectMemberVariable(objIn, "dn", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "en", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "l5t", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "ls", "-", mBoltNutWasherModel);
+    addObjectMemberVariable(objIn, "mun", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "mut", "-", mBoltNutWasherModel);
+    addObjectMemberVariable(objIn, "pt", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "ruptureelongationa", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "materialbolt_idx", "-", mBoltNutWasherModel);
     // bolthole

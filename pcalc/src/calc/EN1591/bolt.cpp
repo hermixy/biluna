@@ -30,6 +30,7 @@ Bolt_OUT::Bolt_OUT() : Bolt_IN(){
     AB = 0.0;
     IB = 0.0;
     lB = 0.0;
+    kB = 0.0;
     XB = 0.0;
     eta1plus = 0.0;
     etanplus = 0.0;
@@ -129,6 +130,25 @@ void Bolt::Calc_IB() {
     IB = (M_PI / 12) * (pow((std::min(dBe, dBS)), 3));
     PR->addDetail("With Formula 123", "IB",
                   "(Math.PI / 12) * (Math.Min(dBe, dBS)) ^ 3", IB, "-");
+}
+
+/**
+ * @brief Annex B, B.7 calculation of friction factor kB
+ */
+void Bolt::Calc_kB() {
+    if (pt <= 0.0) {
+        // from table B EN1591-2001 for ISO bolts/thread and Table A
+        pt = (dB0 - dBe) / 0.9382;
+        PR->addDetail("Before F. B.7", "pt", "(dB0 - dBe) / 0.9382",
+                  pt, "Nmm", "(" + QN(dB0) + " - " + QN(dBe)
+                      + ") / 0.9382");
+    }
+
+    kB = 0.159 * pt + 0.577 * mut * dB2 + 0.5 * mun * dn;
+    PR->addDetail("Formula B.7", "kB",
+                  "0.159 * pt + 0.577 * mut * dB2 + 0.5 * mun * dn", kB, "-",
+                  "0.159 * " + QN(pt) + " + 0.577 * " + QN(mut) + " * "
+                  + QN(dB2) + " + 0.5 * " + QN(mun) + " * " + QN(dn));
 }
 
 END_NAMESPACE_REDBAG_CALC_EN1591

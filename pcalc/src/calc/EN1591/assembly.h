@@ -82,7 +82,8 @@ public:
     void Calc_F_G0d();
     void Calc_F_G(int loadCaseNo);
     void Calc_F_B(int loadCaseNo);
-    void Calc_MtB();
+    void Calc_Mtnom();
+    void Calc_MtB(); // not used any more
     void Calc_PhiB(int loadCaseNo);
 
     bool Is_PhiB_Valid(int loadCaseNo);

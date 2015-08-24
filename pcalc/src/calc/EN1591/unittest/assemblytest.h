@@ -52,7 +52,8 @@ private:
     void Is_PhiB_ValidTest();
     void Calc_fETest();
     void Is_PhiG_ValidTest();
-    void Calc_MtBTest();
+    void Calc_MtnomTest();
+//    void Calc_MtBTest();
     void Calc_F_BImaxminTest();
     void Calc_F_GImaxminTest();
     void Calc_ThetaFmaxminTest();
