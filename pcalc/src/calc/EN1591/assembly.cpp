@@ -403,8 +403,11 @@ void Assembly::Calc_Q_A_Qsmin(int loadCaseNo) {
     if (loadCaseNo == 0) {
 //        loadCase0->Q_A = 95.0; // test only, result Amtech
 //        loadCase0->Q_A = loadCase0->Q_G; // test only
-
-        if (mF_Bspec > 0) {
+        if (mQ_Aspec > 0) {
+            // nothing, leave as is
+            PR->addDetail("Before F. 103", "Q_A", "Q_A set by user",
+                          loadCase0->Q_A, "-", "User defined value", loadCaseNo);
+        } else if (mF_Bspec > 0) {
             loadCase0->Q_A = mF_Bspec / mGasket->AGe;
             PR->addDetail("Before F. 103", "Q_A", "Table 2-15 value",
                           loadCase0->Q_A, "-", "Table value", loadCaseNo);

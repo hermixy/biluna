@@ -390,7 +390,7 @@ void Flange::Calc_deltaR(int loadCaseNo) {
                       loadCase->deltaR1, "-",
                       QN(loadCase->F_R) + " / (" + QN(loadCase->fE1)
                       + " * pi * " + QN(dE) + " * " + QN(eD)
-                      + " * cos(" + QN(mShell->phiS"))", loadCaseNo);
+                      + " * cos(" + QN(mShell->phiS) + "))", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->deltaR2 = loadCase->F_R / (loadCase->fE2 * M_PI * dE
                                              * eD * cos(mShell->phiS));
@@ -399,7 +399,7 @@ void Flange::Calc_deltaR(int loadCaseNo) {
                       loadCase->deltaR2, "-",
                       QN(loadCase->F_R) + " / (" + QN(loadCase->fE2)
                       + " * pi * " + QN(dE) + " * " + QN(eD)
-                      + " * cos(" + QN(mShell->phiS"))", loadCaseNo);
+                      + " * cos(" + QN(mShell->phiS) + "))", loadCaseNo);
     }
 }
 

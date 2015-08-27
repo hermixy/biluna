@@ -144,6 +144,7 @@ void PCALC_EN1591Widget::init() {
     mFlangeMapper->addMapping(cbLeakageRate,
                               mFlangeModel->fieldIndex("leakagerate"),
                               "currentIndex");
+    mFlangeMapper->addMapping(leQ_Aspec, mFlangeModel->fieldIndex("q_aspecified"));
     mFlangeMapper->addMapping(leF_Bspec, mFlangeModel->fieldIndex("f_bspecified"));
     items.clear();
     items << "Blind" << "Integral" << "Loose";
@@ -809,6 +810,7 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "nb", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "leakagerate", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "f_bspecified", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "q_aspecified", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "typeflange1_id", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d01", "-", mFlangeModel);

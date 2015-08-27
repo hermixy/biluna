@@ -33,6 +33,7 @@ public:
     double mNR;
     double mLeakageRate;
     double mF_Bspec; // transferred to loadcase(0)
+    double mQ_Aspec; // transferred to loadcase(0)
 };
 
 

@@ -59,6 +59,7 @@ void EN1591Handler::setDimensions() {
             = pow(10, -(in->getValue("leakagerate").toInt()));
     // TODO: now calculation value from loadCase 0, change to assembly value only
     mCalc->mAssembly->mF_Bspec = in->getValue("f_bspecified").toInt();
+    mCalc->mAssembly->mQ_Aspec = in->getValue("q_aspecified").toInt();
 
     Flange* fl1 = mCalc->mAssembly->mFlange1;
     fl1->nB = in->getValue("nb").toInt();
@@ -241,12 +242,17 @@ void EN1591Handler::setLoadCases() {
             = PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
     loadList->sort(0, RB2::SortOrderAscending, RB2::MemberInteger);
     RB_ObjectIterator* iter = loadList->createIterator();
+    int loadCaseNoMemory = 0;
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* lcIn = iter->currentObject();
         LoadCase* lc = mCalc->mAssembly->mLoadCaseList->createLoadCase();
-        // loadcaseno not used
-        lc->F_Bspec = mCalc->mAssembly->mF_Bspec; //TODO: change in calculations
+
+        if (loadCaseNoMemory == 0) {
+            lc->F_Bspec = mCalc->mAssembly->mF_Bspec; // TODO: change in calculations
+            lc->Q_A = mCalc->mAssembly->mQ_Aspec; // TODO: change in calculations
+            ++loadCaseNoMemory;
+        }
 
         // pressure temperature
         lc->P = lcIn->getValue("p").toDouble();

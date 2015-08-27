@@ -302,17 +302,20 @@
             <property name="spacing">
              <number>3</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="lblNoReassemblies">
+            <item row="3" column="0">
+             <widget class="QLabel" name="lblLeakageRate">
               <property name="text">
-               <string>Number of reassemblies</string>
+               <string>Leakage rate L</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item row="3" column="1">
+             <widget class="QComboBox" name="cbLeakageRate"/>
+            </item>
+            <item row="1" column="1">
              <widget class="QSpinBox" name="sbNoReassemblies">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -340,20 +343,17 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="lblLeakageRate">
+            <item row="1" column="0">
+             <widget class="QLabel" name="lblNoReassemblies">
               <property name="text">
-               <string>Leakage rate L</string>
+               <string>Number of reassemblies</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
-             <widget class="QComboBox" name="cbLeakageRate"/>
-            </item>
-            <item row="1" column="0">
+            <item row="2" column="0">
              <widget class="QLabel" name="lblnB">
               <property name="text">
                <string>Number of bolts</string>
@@ -363,7 +363,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="2" column="1">
              <widget class="QSpinBox" name="sbnB">
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -373,10 +373,30 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
+            <item row="3" column="2" colspan="2">
+             <widget class="QCheckBox" name="chbFlange2Equal">
+              <property name="text">
+               <string>Flange 2 is equal to flange 1</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
              <widget class="QLabel" name="lblF_Bspec">
               <property name="text">
-               <string>F&lt;sub&gt;B&lt;/sub&gt; specified</string>
+               <string>FB specified</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QLineEdit" name="leF_Bspec"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="lblQ_Aspec">
+              <property name="text">
+               <string>QA specified</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -384,27 +404,7 @@
              </widget>
             </item>
             <item row="1" column="3">
-             <widget class="QLineEdit" name="leF_Bspec"/>
-            </item>
-            <item row="2" column="0" colspan="2">
-             <spacer name="horizontalSpacer_12">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>188</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="2" column="2" colspan="2">
-             <widget class="QCheckBox" name="chbFlange2Equal">
-              <property name="text">
-               <string>Flange 2 is equal to flange 1</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="leQ_Aspec"/>
             </item>
            </layout>
           </widget>
