@@ -77,19 +77,21 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     F_Bav = 0.0;
     F_Bcalc = 0.0;
     F_Bmax = 0.0;
+//    F_Bmax = 0.0;
     F_Bmin = 0.0;
+//    F_Bmin = 0.0;
     F_Bnom = 0.0;
     F_Breq = 0.0;
-    F_BImax = 0.0;
-    F_BImin = 0.0;
-    F_GImax = 0.0;
-    F_GImin = 0.0;
+
+    F_Gmax = 0.0;
+//    F_Gmax = 0.0;
+    F_Gmin = 0.0;
+//    F_Gmin = 0.0;
     F_G = 0.0;
     F_Gd = 0.0;
     F_Gdelta = 0.0;
-    F_Gmax = 0.0;
-    F_Gmin = 0.0;
     F_Greq = 0.0;
+
     DGm = 0.0;
     Y_B = 0.0;
     Y_G = 0.0;

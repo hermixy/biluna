@@ -118,8 +118,9 @@ void Calculator::exec() {
     bool isFG0approximateFG0req = false;
     int counter = 0;
 
-    while ( !(isFG0largerFG0req && isFG0approximateFG0req)
-           && counter < 10 && (counter < 1 || assembly->mF_Bspec <= 0.0)) {
+    while (!(isFG0largerFG0req && isFG0approximateFG0req)
+           && counter < 10
+           && (counter < 1 || assembly->mF_Bspec <= 0.0)) {
         // Outside loop
         Loop_F55_to_108(assembly);
 
@@ -127,19 +128,24 @@ void Calculator::exec() {
         isFG0largerFG0req = assembly->Is_F_G0_larger_F_G0req();
         isFG0approximateFG0req = assembly->Is_F_G0act_within_0_1_percent_of_F_G0req();
 
-        if (! (isFG0largerFG0req && isFG0approximateFG0req)) {
+        if (!(isFG0largerFG0req && isFG0approximateFG0req)
+                && (assembly->mF_Bspec <= 0.0)) {
+            LoadCase* loadCase0 = assembly->mLoadCaseList->at(0);
 
             // TODO: is this setting of higher load required for convergence?
-            if (isFG0largerFG0req)             {
-                assembly->mLoadCaseList->at(0)->F_G
-                        = assembly->mLoadCaseList->at(0)->F_Greq;
-            } else {
-                assembly->mLoadCaseList->at(0)->F_G
-                        = assembly->mLoadCaseList->at(0)->F_Greq * 1.1;
-            }
+//            if (isFG0largerFG0req)             {
+                loadCase0->F_G = loadCase0->F_Greq;
+                PR->addDetail("After F.108", "F_G",
+                              "F_Greq (new initial force)",
+                              loadCase0->F_G, "N");
+//            } else {
+//                loadCase0->F_G = loadCase0->F_Greq * 1.1;
+//                PR->addDetail("After F.108", "F_G",
+//                              "F_Greq * 1.1 (new initial force)",
+//                              assembly->mLoadCaseList->at(0)->F_G, "N");
+//            }
 
-            PR->addDetail("After F.108", "F_G", "F_Greq + F_R",
-                          assembly->mLoadCaseList->at(0)->F_G, "N");
+            loadCase0->F_B = loadCase0->F_G + loadCase0->F_R;
         }
 
         mIsFirstApproximation = true;

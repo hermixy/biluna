@@ -58,8 +58,8 @@ void EN1591Handler::setDimensions() {
     mCalc->mAssembly->mLeakageRate
             = pow(10, -(in->getValue("leakagerate").toInt()));
     // TODO: now calculation value from loadCase 0, change to assembly value only
-    mCalc->mAssembly->mF_Bspec = in->getValue("f_bspecified").toInt();
-    mCalc->mAssembly->mQ_Aspec = in->getValue("q_aspecified").toInt();
+    mCalc->mAssembly->mF_Bspec = in->getValue("f_bspecified").toDouble();
+    mCalc->mAssembly->mQ_Aspec = in->getValue("q_aspecified").toDouble();
 
     Flange* fl1 = mCalc->mAssembly->mFlange1;
     fl1->nB = in->getValue("nb").toInt();

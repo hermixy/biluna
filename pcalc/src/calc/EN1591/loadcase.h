@@ -93,10 +93,7 @@ public:
     double F_Bmin;
     double F_Bnom;
     double F_Breq;
-    double F_BImax;
-    double F_BImin;
-    double F_GImax;
-    double F_GImin;
+
     double F_G;
     double F_Gd;
     double F_Gdelta;

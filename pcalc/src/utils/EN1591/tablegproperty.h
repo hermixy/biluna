@@ -21,7 +21,7 @@ public:
 
 /**
  * The EN1591 table G.1 from Annex G with sealing parameters when
- * no leage rate is specified.
+ * no leakage rate is specified.
  * - Q0min [MPa]
  * - m
  */

@@ -895,11 +895,11 @@ void Flange::Calc_PsiZ(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         PR->addDetail("Table 2", "kM1", "...", loadCase->kM1, "-");
-        PR->addDetail("Table 2 (Formula 140)", "PsiZ1", "...",
+        PR->addDetail("Table 2 (F. 140)", "PsiZ1", "...",
                   loadCase->PsiZ1, "-");
     } else if (getFlangeNumber() == 2) {
         PR->addDetail("Table 2", "kM2", "...", loadCase->kM2, "-");
-        PR->addDetail("Table 2 (Formula 140)", "PsiZ2", "...", loadCase->PsiZ2, "-");
+        PR->addDetail("Table 2 (F. 140)", "PsiZ2", "...", loadCase->PsiZ2, "-");
     }
 }
 

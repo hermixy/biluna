@@ -128,8 +128,9 @@ void Bolt::Calc_eta1minus() {
 // Torsional resistance
 void Bolt::Calc_IB() {
     IB = (M_PI / 12) * (pow((std::min(dBe, dBS)), 3));
-    PR->addDetail("With Formula 123", "IB",
-                  "(Math.PI / 12) * (Math.Min(dBe, dBS)) ^ 3", IB, "-");
+    PR->addDetail("With F.", "IB",
+                  "(pi / 12) * (min(dBe, dBS)) ^ 3", IB, "mm3",
+                  "(pi / 12) * (min(" + QN(dBe) + ", " + QN(dBS) + ")) ^ 3");
 }
 
 /**
