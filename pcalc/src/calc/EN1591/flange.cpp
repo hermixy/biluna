@@ -726,15 +726,16 @@ void Flange::Calc_Psi_jkk(int loadCaseNo) {
             + QN(loadCase->jS) + " * " + QN(tmp_kM) + ") / (" + QN(dE)
             + " * cos(" + QN(mShell->phiS) + ") ^ 3)) ^ 0.5)";
 
+    double tmpPsi_jkk = val1 * (val2 + val3);
+
     if (getFlangeNumber() == 1) {
-        loadCase->Psi_jkk1 = val1 * (val2 + val3);
-        PR->addDetail("Formula 140", "Psi_jkk1", str, loadCase->Psi_jkk1, "-",
-                      strVal, loadCaseNo);
+        loadCase->Psi_jkk1 = tmpPsi_jkk;
     } else if (getFlangeNumber() == 2) {
-        loadCase->Psi_jkk2 = val1 * (val2 + val3);
-        PR->addDetail("Formula 140", "Psi_jkk2", str, loadCase->Psi_jkk2, "-",
-                      strVal, loadCaseNo);
+        loadCase->Psi_jkk2 = tmpPsi_jkk;
     }
+
+    PR->addDetail("Formula 140", "Psi_jkk" + QN(getFlangeNumber()), str,
+                  tmpPsi_jkk, "-", strVal, loadCaseNo);
 }
 
 /**
@@ -743,16 +744,23 @@ void Flange::Calc_Psi_jkk(int loadCaseNo) {
  */
 void Flange::Calc_PsiOpt(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    double tmpPsiOpt = 0.0;
+    double tmpjM = 0.0;
 
     if (getFlangeNumber() == 1) {
-        loadCase->PsiOpt1 = loadCase->jM1 * (2 * eP / eF - 1);
-        PR->addDetail("Formula 141", "PsiOpt1", "jM1 * (2 * eP / eF - 1)",
-                  loadCase->PsiOpt1, "-");
+        tmpjM = loadCase->jM1;
+        tmpPsiOpt = loadCase->jM1 * (2 * eP / eF - 1);
+        loadCase->PsiOpt1 = tmpPsiOpt;
     } else if (getFlangeNumber() == 2) {
-        loadCase->PsiOpt2 = loadCase->jM2 * (2 * eP / eF - 1);
-        PR->addDetail("Formula 141", "PsiOpt2", "jM2 * (2 * eP / eF - 1)",
-                  loadCase->PsiOpt2, "-");
+        tmpjM = loadCase->jM2;
+        tmpPsiOpt = loadCase->jM2 * (2 * eP / eF - 1);
+        loadCase->PsiOpt2 = tmpPsiOpt;
     }
+
+    PR->addDetail("Formula 141", "PsiOpt" + QN(getFlangeNumber()),
+                  "jM" + QN(getFlangeNumber()) + " * (2 * eP / eF - 1)",
+                  tmpPsiOpt, "-", QN(tmpjM) + " * (2 * "
+                  + QN(eP) + " / " + QN(eF) + " - 1)", loadCaseNo);
 }
 
 /**
@@ -773,11 +781,14 @@ void Flange::Calc_PsiMax(int loadCaseNo) {
     Calc_Psi_jkk(loadCaseNo);
     Calc_PsiMaxMin0(loadCaseNo);
 
-
     if (getFlangeNumber() == 1) {
-        PR->addDetail("Formula 143", "PsiMax", "...", loadCase->Psi_jkk1, "-");
+        PR->addDetail("Formula 143", "PsiMax", "Psi_jkk1(1,1,1)",
+                      loadCase->Psi_jkk1, "-",
+                      QN(loadCase->Psi_jkk1), loadCaseNo);
     } else if (getFlangeNumber() == 2) {
-        PR->addDetail("Formula 143", "PsiMax", "...", loadCase->Psi_jkk2, "-");
+        PR->addDetail("Formula 143", "PsiMax", "Psi_jkk2(1,1,1)",
+                      loadCase->Psi_jkk2, "-",
+                      QN(loadCase->Psi_jkk2) , loadCaseNo);
     }
 }
 
@@ -795,10 +806,14 @@ void Flange::Calc_Psi0(int loadCaseNo) {
     Calc_Psi_jkk(loadCaseNo);
     Calc_PsiMaxMin0(loadCaseNo);
 
-    if (getFlangeNumber() == 1)     {
-        PR->addDetail("Formula 142", "Psi0", "...", loadCase->Psi_jkk1, "-");
+    if (getFlangeNumber() == 1) {
+        PR->addDetail("Formula 142", "Psi0", "Psi_jkk1(0,0,0)",
+                      loadCase->Psi_jkk1, "-",
+                      QN(loadCase->Psi_jkk1), loadCaseNo);
     } else if (getFlangeNumber() == 2) {
-        PR->addDetail("Formula 142", "Psi0", "...", loadCase->Psi_jkk2, "-");
+        PR->addDetail("Formula 142", "Psi0", "Psi_jkk2(0,0,0)",
+                      loadCase->Psi_jkk2, "-",
+                      QN(loadCase->Psi_jkk2) , loadCaseNo);
     }
 }
 
@@ -821,9 +836,13 @@ void Flange::Calc_PsiMin(int loadCaseNo) {
     Calc_PsiMaxMin0(loadCaseNo);
 
     if (getFlangeNumber() == 1) {
-        PR->addDetail("Formula 144", "PsiMin", "...", loadCase->Psi_jkk1, "-");
+        PR->addDetail("Formula 144", "PsiMin", "Psi_jkk1(-1,-1,+1)",
+                      loadCase->Psi_jkk1, "-",
+                      QN(loadCase->Psi_jkk1), loadCaseNo);
     } else if (getFlangeNumber() == 2) {
-        PR->addDetail("Formula 144", "PsiMin", "...", loadCase->Psi_jkk2, "-");
+        PR->addDetail("Formula 144", "PsiMin", "Psi_jkk2(-1,-1,+1)",
+                      loadCase->Psi_jkk2, "-",
+                      QN(loadCase->Psi_jkk2) , loadCaseNo);
     }
 }
 
@@ -870,13 +889,19 @@ bool Flange::Is_PsiMaxMin_Valid(int loadCaseNo) {
     if (getFlangeNumber() == 1) {
         result = loadCase->PsiMax1 >= -1
                 && loadCase->PsiMin1 <= 1;
-        PR->addDetail("After Table 2", "result", "PsiMax1 >= -1 and PsiMin1 <= 1",
-                  static_cast<int>(result), "-");
+        PR->addDetail("After Table 2", "result", "PsiMax1 >= -1 "
+                                                 "and PsiMin1 <= 1",
+                      static_cast<int>(result), "-", QN(loadCase->PsiMax1)
+                      + " >= -1 AND " + QN(loadCase->PsiMin1)
+                      + " <= 1", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = loadCase->PsiMax2 >= -1
                 && loadCase->PsiMin2 <= 1;
-        PR->addDetail("After Table 2", "result", "PsiMax2 >= -1 and PsiMin2 <= 1",
-                  static_cast<int>(result), "-");
+        PR->addDetail("After Table 2", "result", "PsiMax2 >= -1 "
+                                                 "and PsiMin2 <= 1",
+                      static_cast<int>(result), "-", QN(loadCase->PsiMax2)
+                      + " >= -1 AND " + QN(loadCase->PsiMin2)
+                      + " <= 1", loadCaseNo);
     }
 
     return result;
@@ -962,12 +987,15 @@ void Flange::Calc_PsiZ(int loadCaseNo) {
     }
 
     if (getFlangeNumber() == 1) {
-        PR->addDetail("Table 2", "kM1", "...", loadCase->kM1, "-");
-        PR->addDetail("Table 2 (F. 140)", "PsiZ1", "...",
-                  loadCase->PsiZ1, "-");
+        PR->addDetail("Table 2", "kM1", "para 8.4 note d", loadCase->kM1,
+                      "Table 2", QN(loadCase->kM1), loadCaseNo);
+        PR->addDetail("Table 2 (F. 140)", "PsiZ1", "para 8.4 note d",
+                      loadCase->PsiZ1, "-", QN(loadCase->PsiZ1), loadCaseNo);
     } else if (getFlangeNumber() == 2) {
-        PR->addDetail("Table 2", "kM2", "...", loadCase->kM2, "-");
-        PR->addDetail("Table 2 (F. 140)", "PsiZ2", "...", loadCase->PsiZ2, "-");
+        PR->addDetail("Table 2", "kM1", "para 8.4 note d", loadCase->kM2,
+                      "Table 2", QN(loadCase->kM2), loadCaseNo);
+        PR->addDetail("Table 2 (F. 140)", "PsiZ2", "para 8.4 note d",
+                      loadCase->PsiZ2, "-", QN(loadCase->PsiZ2), loadCaseNo);
     }
 }
 
