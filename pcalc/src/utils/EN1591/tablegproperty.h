@@ -5,7 +5,7 @@
 #include "gasket.h"
 #include "rb_namespace.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Q0min_m_Property {
 
@@ -40,5 +40,5 @@ private:
     std::vector<Q0min_m_Property*> mList;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //TABLEGPROPERTY_H

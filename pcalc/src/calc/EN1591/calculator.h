@@ -5,7 +5,7 @@
 #include "rb_objectcontainer.h"
 
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Calculator : public RB_Object {
 
@@ -51,5 +51,5 @@ private:
 
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //CALCULATOR_H

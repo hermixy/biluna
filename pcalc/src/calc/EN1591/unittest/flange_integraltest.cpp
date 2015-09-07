@@ -1,5 +1,5 @@
 ﻿#include "flange_integraltest.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 Flange_IntegralTest::Flange_IntegralTest() : RB_UnitTest() {
     target = NULL;
@@ -349,4 +349,4 @@ void Flange_IntegralTest::Is_flange_ValidTest() {
     areEqual(PR->getLastOutput(),
              "Flange_IntegralTest::Is_flange_ValidTest()", false, actual);
 }
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

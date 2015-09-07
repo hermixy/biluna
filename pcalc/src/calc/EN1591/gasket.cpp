@@ -3,7 +3,7 @@
 #include "table16property.h"
 #include "table17_30property.h"
 #include "tablegsimple.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 Gasket_IN::Gasket_IN() : RB_Object(){
@@ -143,7 +143,8 @@ Gasket::~Gasket() {
  */
 void Gasket::Calc_bGt() {
     bGt = 0.5 * (dG2 - dG1);
-    PR->addDetail("Formula 51", "bGt", "0.5 * (dG2 - dG1)", bGt, "mm");
+    PR->addDetail("Formula 51", "bGt", "0.5 * (dG2 - dG1)", bGt, "mm",
+                  "0.5 * (" + QN(dG2) + " - " + QN(dG1) + ")", 0);
 }
 
 /**
@@ -152,7 +153,8 @@ void Gasket::Calc_bGt() {
  */
 void Gasket::Calc_dGt() {
     dGt = 0.5 * (dG2 + dG1);
-    PR->addDetail("Formula 52", "dGt", "0.5 * (dG2 + dG1)", dGt, "mm");
+    PR->addDetail("Formula 52", "dGt", "0.5 * (dG2 + dG1)", dGt, "mm",
+                  "0.5 * (" + QN(dG2) + " + " + QN(dG1) + ")", 0);
 
     if (dG0 <= 0.0)     {
         dG0 = dGt;
@@ -165,7 +167,7 @@ void Gasket::Calc_dGt() {
 void Gasket::Calc_AGt() {
     AGt = M_PI * bGt * dGt;
     PR->addDetail("Formula 53", "AGt", "Math.PI * bGt * dGt", AGt, "mm^2",
-                  "pi * " + QN(bGt) + " + " + QN(dGt));
+                  "pi * " + QN(bGt) + " + " + QN(dGt), 0);
 }
 
 /**
@@ -176,7 +178,7 @@ void Gasket::Calc_AGt() {
 void Gasket::Calc_bGe(int /* loadCaseNo */) {
     bGe = std::min(bGi, bGt);
     PR->addDetail("Formula 55", "bGe", "Min(bGi, bGt)", bGe, "mm",
-                  "min(" + QN(bGi) + "; " + QN(bGt) + ")");
+                  "min(" + QN(bGi) + "; " + QN(bGt) + ")", 0);
 }
 
 /**
@@ -185,7 +187,7 @@ void Gasket::Calc_bGe(int /* loadCaseNo */) {
 void Gasket::Calc_AGe() {
     AGe = M_PI * bGe * dGe;
     PR->addDetail("Formula 56", "AGe", "PI * bGe * dGe", AGe, "mm^2",
-                  "pi * " + QN(bGe) + " * " + QN(dGe));
+                  "pi * " + QN(bGe) + " * " + QN(dGe), 0);
 }
 
 /**
@@ -207,9 +209,10 @@ void Gasket::Calc_eG(int loadCaseNo) {
             =  gasketCompressedThickness(mLoadCaseList->at(loadCaseNo));
 
     // TODO move addDetail() to relevant table
-    PR->addDetail("With Formula 63",
-              "eG", "gasketCompressedThickness(loadCase)",
-              mLoadCaseList->at(loadCaseNo)->eG, "mm");
+    PR->addDetail("With F. 63",
+                  "eG", "gasketCompressedThickness(loadCase)",
+                  mLoadCaseList->at(loadCaseNo)->eG, "mm",
+                  "Table value", loadCaseNo);
 }
 
 /**
@@ -234,7 +237,7 @@ void Gasket::Calc_XG(int /* loadCaseNo */) {
               XG, "N/mm^2", "("+ QN(mLoadCaseList->at(0)->eG) + " / " + QN(AGt)
                   + ") * ((" + QN(bGt) + " + " + QN(mLoadCaseList->at(0)->eG)
                   + " / 2) / (" + QN(bGe) + " + " + QN(mLoadCaseList->at(0)->eG)
-                  + " / 2))");
+                  + " / 2))", 0);
 }
 
 /**
@@ -244,7 +247,7 @@ void Gasket::Calc_XG(int /* loadCaseNo */) {
 void Gasket::Calc_AQ() {
     AQ = pow(dGe, 2) * M_PI / 4;
     PR->addDetail("Formula 90", "AQ", "dGe ^ 2 * PI / 4", AQ, "mm^2",
-                  QN(dGe) + " ^ 2 * pi / 4");
+                  QN(dGe) + " ^ 2 * pi / 4", 0);
 }
 
 void Gasket::Calc_P_QR(int loadCaseNo) {
@@ -351,15 +354,18 @@ double Gasket::gasketCreepFactor(int loadCaseNo, LoadCase* loadCase) {
         loadCase->P_QR = TABLE16PROPERTY->getTable16_P_QR(matCode,
                                                            loadCase->TG);
         if (loadCase->P_QR > 0) {
-            PR->addDetail("Table 16", "PQR", "Table value", loadCase->P_QR, "-",
+            PR->addDetail("Table 16", "PQR", "Table value",
+                          loadCase->P_QR, "-",
                           "Table value", loadCaseNo);
         } else {
-            PR->addDetail("Table 16", "PQR", "Table value", loadCase->P_QR, "-",
+            PR->addDetail("Table 16", "PQR", "Table value",
+                          loadCase->P_QR, "-",
                           "Table value", loadCaseNo, "Out of range");
         }
     } else {
         loadCase->P_QR = 0.0;
-        PR->addDetail("Table 16", "PQR", "Table value", loadCase->P_QR, "-",
+        PR->addDetail("Table 16", "PQR", "Table value",
+                      loadCase->P_QR, "-",
                       "Table value", loadCaseNo, "Material not found");
     }
 
@@ -368,4 +374,4 @@ double Gasket::gasketCreepFactor(int loadCaseNo, LoadCase* loadCase) {
 
 
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

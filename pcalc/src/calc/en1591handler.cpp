@@ -7,7 +7,7 @@
 #include "rb_qualityservice.h"
 #include "rb_objectcontainer.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 EN1591Handler::EN1591Handler(RB_AllowanceService* allowService,
                              RB_MaterialService* matService,
@@ -346,4 +346,4 @@ void EN1591Handler::setFlangeType(int& flangeType1, int& flangeType2) {
     flangeType2 = objIn->getValue("typeflange2_id").toInt();
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

@@ -17,7 +17,7 @@
 #include "tablegproperty.h"
 #include "washer.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Assembly_IN : public RB_Object {
 
@@ -105,5 +105,5 @@ private:
     double Calc_cB_helper(Flange *flange, int loadCaseNo);
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //ASSEMBLY_H

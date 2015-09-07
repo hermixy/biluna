@@ -1,5 +1,5 @@
 ﻿#include "rb_tablemathtest.h"
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 
 RB_TableMathTest::RB_TableMathTest() : RB_UnitTest() {
@@ -35,4 +35,4 @@ void RB_TableMathTest::getBilinearValueTest() {
              "RB_TableMathTest::Calc_getBilinearValueTest()", 146.1, res);
 }
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC

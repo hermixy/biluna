@@ -1,6 +1,6 @@
 ﻿#include "bolthole.h"
 #include "pcalc_report.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 BoltHole_IN::BoltHole_IN() : RB_Object() {
@@ -25,4 +25,4 @@ BoltHole::BoltHole() : BoltHole_OUT(){
 }
 
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

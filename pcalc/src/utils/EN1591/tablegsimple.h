@@ -7,7 +7,7 @@
 #include "rb_tablemath.h"
 #include "rb_utility.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class TableGSimpleProperty {
 
@@ -85,5 +85,5 @@ private:
     std::vector<TableGSimpleProperty*> mList;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //TABLEGSIMPLE_H

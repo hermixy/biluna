@@ -1,7 +1,7 @@
 ﻿#include "table16property.h"
 #include "pcalc_report.h"
 #include "pcalc_utilityfactory.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 Q_smax_Pqr_Property::Q_smax_Pqr_Property(double temperature,
                                          double Q_smax,
@@ -237,4 +237,4 @@ void Table16Property::cl(double temperature,
                                             P_QR, materialCode));
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

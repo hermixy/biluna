@@ -1,7 +1,7 @@
 ﻿#include "flangetest.h"
 
 #include "flange_integral.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 FlangeTest::FlangeTest() : RB_UnitTest() {
     target = NULL;
@@ -500,4 +500,4 @@ void FlangeTest::Calc_XWTest() {
              target->mWasher->XW);
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

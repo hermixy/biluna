@@ -4,7 +4,7 @@
 #include "rb_namespace.h"
 #include "pcalc_report.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Shell_IN : public RB_Object {
 
@@ -45,5 +45,5 @@ public:
 
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //SHELL_H

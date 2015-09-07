@@ -9,7 +9,7 @@
  *****************************************************************/
 
 #include "rb_tablemath.h"
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 RB_TableMath::RB_TableMath() {
     // nothing
@@ -72,4 +72,4 @@ double RB_TableMath::getBilinearValue(
     return value;
 }
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC

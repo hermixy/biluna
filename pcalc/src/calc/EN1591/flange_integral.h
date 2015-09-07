@@ -4,7 +4,7 @@
 #include "flange.h"
 #include "rb_objectcontainer.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Flange_Integral : public Flange {
     //IN
@@ -45,5 +45,5 @@ public:
     virtual void Calc_hL();
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //FLANGE_INTEGRAL_H

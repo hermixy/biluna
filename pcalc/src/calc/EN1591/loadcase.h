@@ -3,7 +3,7 @@
 
 #include "force.h"
 #include "rb_namespace.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class LoadCase_IN : public RB_Object {
 
@@ -202,5 +202,5 @@ public:
     void setInputData(LoadCase* loadCaseIn);
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //LOADCASE_H

@@ -5,7 +5,7 @@
 class RB_ObjectContainer;
 
 #define NULL 0
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Calculator;
 class RB_AllowanceService;
@@ -44,5 +44,5 @@ private:
     RB_QualityService* mQualService;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif // EN1591HANDLER_H

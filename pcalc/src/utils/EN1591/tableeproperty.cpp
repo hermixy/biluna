@@ -1,5 +1,5 @@
 ﻿#include "tableeproperty.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 MuG_Property::MuG_Property(Gasket::InsFilLayMatType insFillMat,
                            double muG) {
@@ -74,4 +74,4 @@ void TableEProperty::CreateList() {
     mList.push_back(new MuG_Property(Gasket::LowAlloyOrStainlessSteelGraphFill, 0.1));
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

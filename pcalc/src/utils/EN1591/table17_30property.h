@@ -8,7 +8,7 @@
 #include "rb_tablemath.h"
 #include "rb_utility.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 /**
  * @brief EN1591-2 E_G property from table 17 to 30
@@ -70,5 +70,5 @@ private:
     E_GProperty* mBottomRight;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //TABLE17_30PROPERTY_H

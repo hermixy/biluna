@@ -2,7 +2,7 @@
 
 #include "force.h"
 #include "loadcase.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 LoadCaseList::LoadCaseList()
@@ -25,4 +25,4 @@ LoadCase *LoadCaseList::createLoadCase() {
     return loadCase;
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

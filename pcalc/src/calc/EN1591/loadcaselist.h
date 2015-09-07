@@ -5,7 +5,7 @@
 #include "rb_objectcontainer.h"
 #include <vector>
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class LoadCase;
 
@@ -19,5 +19,5 @@ public:
 
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //LOADCASELIST_H

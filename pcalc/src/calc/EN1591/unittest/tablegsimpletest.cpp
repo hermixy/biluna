@@ -1,5 +1,5 @@
 ﻿#include "tablegsimpletest.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 TableGSimpleTest::TableGSimpleTest() : RB_UnitTest() {
@@ -31,4 +31,4 @@ void TableGSimpleTest::getTableG_QmaxTest() {
     areEqual(PR->getLastOutput(), "TableGSimpleTest::getQmaxTest()", 0, result);
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

@@ -1,7 +1,7 @@
 ﻿#include "assembly.h"
 #include "pcalc_report.h"
 #include "table02_15property.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 Assembly_IN::Assembly_IN() : RB_Object() {
@@ -1328,4 +1328,4 @@ void Assembly::Calc_ThetaLmaxmin(int loadCaseNo) {
     }
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

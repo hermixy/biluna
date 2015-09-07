@@ -3,7 +3,7 @@
 #include "shell.h"
 #include "washer.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 double Flange_IN::ACCURACY = 0.000001; //1.0e-6 required for integral a.o.
@@ -1015,13 +1015,19 @@ void Flange::Calc_kM_for_WFmax(int loadCaseNo) {
     double yMidMax = 0.0;
     double yAfterMax = 0.0;
     int NumberOfLoops = 4; // accuracy of 0.2 ^ 4 = 0.0016
+    int maxInnerLoops = 100;
+    int counterInnerLoops = 0;
 
     double tmp_WF = 0.0;
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
 
+
     for (int loopNo = 1; loopNo <= NumberOfLoops; loopNo++) {
-        for (double xRunner = xMinInterval; xRunner <= xMaxInterval;
-                    xRunner += xIncrement) { // xIncrement should be positive
+        counterInnerLoops = 0;
+
+        for (double xRunner = xMinInterval;
+             xRunner <= xMaxInterval && counterInnerLoops++ < maxInnerLoops;
+             xRunner += xIncrement) { // xIncrement should be positive
             // Calculation
             if (getFlangeNumber() == 1) {
                 loadCase->kM1 = xRunner;
@@ -1174,14 +1180,16 @@ bool Flange::Is_PhiX_Valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = loadCase->PhiX1 <= 1.0;
-        PR->addDetail("After Formula 147", "result", "PhiX1 <= 1.0",
-                  static_cast<int>(result), "-");
+        PR->addDetail("After F. 147", "result", "PhiX1 <= 1.0",
+                      static_cast<int>(result), "-",
+                      QN(loadCase->PhiX1) + " <= 1.0", loadCaseNo);
     }
     else if (getFlangeNumber() == 2)
     {
         result = loadCase->PhiX2 <= 1.0;
-        PR->addDetail("After Formula 147", "result", "PhiX2 <= 1.0",
-                  static_cast<int>(result), "-");
+        PR->addDetail("After F. 147", "result", "PhiX2 <= 1.0",
+                      static_cast<int>(result), "-",
+                      QN(loadCase->PhiX2) + " <= 1.0", loadCaseNo);
     }
 
     return result;
@@ -1215,4 +1223,4 @@ void Flange::Calc_WQ(int /*loadCaseNo*/) {
     // does nothing, loose flange only
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

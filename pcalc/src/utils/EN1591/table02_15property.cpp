@@ -1,6 +1,6 @@
 ﻿#include "table02_15property.h"
 #include "pcalc_utilityfactory.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 QminLQsminLProperty::QminLQsminLProperty(double leakageRate,
                                          const QString& materialCode,
@@ -263,4 +263,4 @@ void Table02_15Property::updateRight(QminLQsminLProperty* obj) {
     }
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

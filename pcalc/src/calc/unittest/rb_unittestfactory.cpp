@@ -1,6 +1,6 @@
 #include "RB_unittestfactory.h"
 
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 
 RB_UnitTestFactory::RB_UnitTestFactory() {
@@ -28,4 +28,4 @@ RB_UnitTestFactory::~RB_UnitTestFactory() {
 //    ut = NULL;
 //}
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC

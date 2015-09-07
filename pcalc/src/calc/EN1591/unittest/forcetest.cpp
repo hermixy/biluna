@@ -1,5 +1,5 @@
 ﻿#include "forcetest.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 ForceTest::ForceTest() : RB_UnitTest() {
@@ -40,4 +40,4 @@ void ForceTest::Calc_M_BTest() {
              45.657967541273671, target->M_AI);
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

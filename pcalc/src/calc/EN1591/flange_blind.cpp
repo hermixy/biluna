@@ -1,5 +1,5 @@
 ﻿#include "flange_blind.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 Flange_Blind::Flange_Blind(int flangeNo) : Flange(flangeNo) {
@@ -60,7 +60,7 @@ void Flange_Blind::Calc_AF() {
  */
 void Flange_Blind::Calc_bL() {
     bL = 0;
-    PR->addDetail("Formula 8", "bL", "0", bL, "mm", 0, 0);
+    PR->addDetail("Formula 8", "bL", "0", bL, "mm", "0", 0);
 }
 
 /**
@@ -68,7 +68,7 @@ void Flange_Blind::Calc_bL() {
  */
 void Flange_Blind::Calc_dL() {
     dL = 0;
-    PR->addDetail("Formula 8", "dL", "0", dL, "mm", 0, 0);
+    PR->addDetail("Formula 8", "dL", "0", dL, "mm", "0", 0);
 }
 
 /**
@@ -76,7 +76,7 @@ void Flange_Blind::Calc_dL() {
  */
 void Flange_Blind::Calc_AL() {
     AL = 0;
-    PR->addDetail("Formula 8", "AL", "0", AL, "mm", 0, 0);
+    PR->addDetail("Formula 8", "AL", "0", AL, "mm", "0", 0);
 }
 
 /**
@@ -85,7 +85,7 @@ void Flange_Blind::Calc_AL() {
  */
 void Flange_Blind::Calc_eE() {
     eE = 0;
-    PR->addDetail("Formula 23", "eE", "0", eE, "mm", 0, 0);
+    PR->addDetail("Formula 23", "eE", "0", eE, "mm", "0", 0);
 }
 
 /**
@@ -94,7 +94,7 @@ void Flange_Blind::Calc_eE() {
  */
 void Flange_Blind::Calc_dE() {
     dE = d0;
-    PR->addDetail("Formula 24", "dE", "d0", dE, "mm",0 ,0);
+    PR->addDetail("Formula 24", "dE", "d0", dE, "mm", "0", 0);
 }
 
 /**
@@ -155,7 +155,7 @@ void Flange_Blind::Calc_ZF() {
  */
 void Flange_Blind::Calc_ZL() {
     ZL = 0;
-    PR->addDetail("Formula 39", "ZL", "0", ZL, "1/mm^2", "0.0", 0);
+    PR->addDetail("Formula 39", "ZL", "0", ZL, "1/mm^2", "0", 0);
 }
 
 /**
@@ -164,7 +164,7 @@ void Flange_Blind::Calc_ZL() {
  */
 void Flange_Blind::Calc_hP() {
     eP = 0.0;
-    PR->addDetail("Formula 78", "eP", "0", eP, "1/mm^2", "0.0", 0);
+    PR->addDetail("Formula 78", "eP", "0", eP, "1/mm^2", "0", 0);
     Flange::Calc_hP();
 }
 
@@ -197,7 +197,7 @@ void Flange_Blind::Calc_hH() {
 void Flange_Blind::Calc_hL() {
     hL = 0.0;
     PR->addDetail("Formula 83", "hL" + QN(getFlangeNumber()), "0.0",
-                  hL, "mm", "0.0", 0);
+                  hL, "mm", "0", 0);
 }
 
 /**
@@ -326,9 +326,9 @@ bool Flange_Blind::Is_PhiX_Valid(int loadCaseNo) {
     }
 
     result = mLoadCaseList->at(loadCaseNo)->PhiX2 <= 1.0;
-    PR->addDetail("With Formula 147", "result", "PhiX2 <= 1.0",
+    PR->addDetail("With Formula 147", "result", "PhiX2 &lt;= 1.0",
                   static_cast<int>(result), "-",
-                  QN(mLoadCaseList->at(loadCaseNo)->PhiX2) + " <= 1.0", 0);
+                  QN(mLoadCaseList->at(loadCaseNo)->PhiX2) + " &lt;= 1.0", 0);
     return result;
 }
 
@@ -415,11 +415,11 @@ void Flange_Blind::Calc_kM_for_WFmax(int /*loadCaseNo*/) {
 }
 
 void Flange_Blind::Calc_deltaQ(int /*loadCaseNo*/) {
-    // does nothing, integral, stub or collar only Formula GA.7-28
+    // does nothing, integral, stub or collar only
 }
 
 void Flange_Blind::Calc_deltaR(int /*loadCaseNo*/) {
-    // does nothing, integral, stub or collar only Formula GA.7-29
+    // does nothing, integral, stub or collar only
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

@@ -5,7 +5,7 @@
 #include "rb_tablemath.h"
 #include "rb_unittest.h"
 
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 class RB_TableMathTest : public RB_UnitTest {
 
@@ -23,6 +23,6 @@ private:
 
 };
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC
 
 #endif //RB_TABLEMATHTEST_H

@@ -1,6 +1,6 @@
 ﻿#include "washer.h"
 #include "pcalc_report.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 Washer_IN::Washer_IN() : RB_Object() {
     eW = 0;
@@ -31,7 +31,8 @@ bool Washer::isPresent() {
 void Washer::Calc_bW() {
     if (isPresent())     {
         bW = 0.5 * (dW2 - dW1);
-        PR->addDetail("Formula 44", "bW", "0.5 * (dW2 - dW1)", bW, "mm");
+        PR->addDetail("Formula 44", "bW", "0.5 * (dW2 - dW1)", bW, "mm",
+                      "0.5 * (" + QN(dW2) + " - " + QN(dW1) + ")", 0);
     }
 }
 
@@ -41,7 +42,8 @@ void Washer::Calc_bW() {
 void Washer::Calc_dW() {
     if (isPresent())     {
         dW = 0.5 * (dW2 + dW1);
-        PR->addDetail("Formula 45", "dW", "0.5 * (dW2 + dW1)", dW, "mm");
+        PR->addDetail("Formula 45", "dW", "0.5 * (dW2 + dW1)", dW, "mm",
+                      "0.5 * (" + QN(dW2) + " + " + QN(dW1) + ")", 0);
     }
 }
 
@@ -51,8 +53,9 @@ void Washer::Calc_dW() {
 void Washer::Calc_bKB() {
     if (isPresent())     {
         bKB = (dK2 - dW1) / 2;
-        PR->addDetail("Formula 48", "bKB", "(dK2 - dW1) / 2", bKB, "mm");
+        PR->addDetail("Formula 48", "bKB", "(dK2 - dW1) / 2", bKB, "mm",
+                      "(" + QN(dK2) + " - " + QN(dW1) + ") / 2", 0);
     }
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

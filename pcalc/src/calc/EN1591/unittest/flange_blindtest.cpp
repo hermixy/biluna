@@ -1,5 +1,5 @@
 ﻿#include "flange_blindtest.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 Flange_BlindTest::Flange_BlindTest() : RB_UnitTest() {
@@ -277,4 +277,4 @@ void Flange_BlindTest::Calc_PhiXTest() {
              target->mLoadCaseList->at(loadCaseNo)->PhiX1);
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

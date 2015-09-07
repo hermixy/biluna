@@ -6,10 +6,10 @@
 #include "rb_objectcontainer.h"
 #include "rb_utility.h"
 
-#define PR RedBag::Calc::PCALC_Report::getInstance()
+#define PR Biluna::Calc::PCALC_Report::getInstance()
 #define QN(value) RB_String::number(value)
 
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 class PCALC_Report : public RB_Utility {
 
@@ -54,7 +54,7 @@ private:
     RB_ObjectBase* mLastOutput;
 };
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC
 
 #endif //RB_REPORT_H
 

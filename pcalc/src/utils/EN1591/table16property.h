@@ -8,7 +8,7 @@
 #include "rb_tablemath.h"
 #include "rb_utility.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 /**
  * EN1591-2 table 16 properties Q_smax and P_QR
@@ -65,5 +65,5 @@ private:
     std::vector<Q_smax_Pqr_Property*> mList;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //TABLE16PROPERTY_H

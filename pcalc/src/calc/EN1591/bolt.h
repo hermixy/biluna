@@ -5,7 +5,7 @@
 #include "rb_namespace.h"
 #include "rb_object.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Bolt_IN : public RB_Object {
 
@@ -78,5 +78,5 @@ public:
     void Calc_kB();
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //BOLT_H

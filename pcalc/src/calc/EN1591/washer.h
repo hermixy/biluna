@@ -3,7 +3,7 @@
 
 #include "rb_namespace.h"
 #include "rb_object.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Washer_IN : public RB_Object {
 
@@ -46,5 +46,5 @@ public:
     int washerNumber;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //WASHER_H

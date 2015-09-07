@@ -1,6 +1,6 @@
 ﻿#include "force.h"
 #include "pcalc_report.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 Force_IN::Force_IN() : RB_Object() {
@@ -48,4 +48,4 @@ void Force::Calc_M_AI() {
               "(" + QN(M_X) + " ^ 2 + " + QN(M_Y) + " ^ 2) ^ 0.5", mLoadCaseNo);
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

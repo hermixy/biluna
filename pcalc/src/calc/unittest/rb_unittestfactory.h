@@ -4,7 +4,7 @@
 #include "rb_namespace.h"
 #include "rb_objectcontainer.h"
 
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 #define UNITTESTCLASS(className) \
     ut = new className(); \
@@ -21,6 +21,6 @@ public:
 
 };
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC
 
 #endif // RB_UNITTESTFACTORY_H

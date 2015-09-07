@@ -5,7 +5,7 @@
 #include "gasket.h"
 #include "rb_namespace.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 /**
  * @brief EN1591-1 MuG property from Annex E table E.1
@@ -36,5 +36,5 @@ private:
     std::vector<MuG_Property*> mList;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //TABLEEPROPERTY_H

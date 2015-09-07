@@ -1,6 +1,6 @@
 ﻿#include "tablegsimple.h"
 #include "pcalc_utilityfactory.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 /**
  * Constructor
@@ -486,4 +486,4 @@ void TableGSimple::cl(Gasket::InsFilLayMatType insFillMat,
                                              Q0min, Qmax, E0, K1, mI, gC));
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

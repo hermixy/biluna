@@ -1,6 +1,6 @@
 ﻿#include "table17_30property.h"
 #include "pcalc_utilityfactory.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 E_GProperty::E_GProperty(const QString &materialCode,
                          double temperature,
@@ -287,4 +287,4 @@ void Table17_30Property::createList() {
 }
 
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

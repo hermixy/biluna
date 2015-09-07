@@ -8,7 +8,7 @@
 #include "rb_tablemath.h"
 #include "rb_utility.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 /**
  * @brief EN1591-2 QminL and QsminL property from table 2 to 15
@@ -79,5 +79,5 @@ private:
     QminLQsminLProperty* mRight;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //TABLE02_15PROPERTY_H

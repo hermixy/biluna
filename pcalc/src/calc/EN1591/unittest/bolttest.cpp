@@ -1,5 +1,5 @@
 ﻿#include "bolttest.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 BoltTest::BoltTest() : RB_UnitTest() {
@@ -125,4 +125,4 @@ void BoltTest::Calc_kBTest() {
              13.84415, target->kB);
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

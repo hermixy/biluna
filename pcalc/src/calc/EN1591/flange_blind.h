@@ -4,7 +4,7 @@
 #include "flange.h"
 #include "rb_namespace.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Flange_Blind : public Flange {
     //IN
@@ -59,5 +59,5 @@ public:
     virtual void Calc_deltaR(int loadCaseNo);
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //FLANGE_BLIND_H

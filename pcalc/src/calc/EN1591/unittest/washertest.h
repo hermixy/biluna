@@ -5,7 +5,7 @@
 #include "rb_unittest.h"
 #include "washer.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class WasherTest : public RB_UnitTest {
 
@@ -26,5 +26,5 @@ private:
 
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //WASHERTEST_H

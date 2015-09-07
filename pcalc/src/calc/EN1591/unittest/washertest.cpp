@@ -1,5 +1,5 @@
 ﻿#include "washertest.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 WasherTest::WasherTest() : RB_UnitTest() {
@@ -52,4 +52,4 @@ void WasherTest::Calc_bKBTest() {
     areEqual(PR->getLastOutput(), "WasherTest::Calc_bKBTest()", 2.45, target->bKB);
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

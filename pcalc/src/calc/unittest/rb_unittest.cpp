@@ -1,6 +1,6 @@
 #include <iostream>
 #include "rb_unittest.h"
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 
 RB_UnitTest::RB_UnitTest() {
@@ -36,4 +36,4 @@ void RB_UnitTest::areEqual(RB_ObjectBase* output, const QString& functionName,
     }
 }
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC

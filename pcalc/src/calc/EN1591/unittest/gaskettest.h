@@ -5,7 +5,7 @@
 #include "rb_namespace.h"
 #include "rb_unittest.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class GasketTest : public RB_UnitTest {
 
@@ -29,5 +29,5 @@ private:
     Gasket *target;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //GASKETTEST_H

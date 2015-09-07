@@ -2,7 +2,7 @@
 #include "pcalc_inputoutput.h"
 #include "pcalc_utilityfactory.h"
 #include "rb_objectatomic.h"
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 PCALC_Report* PCALC_Report::mActiveUtility = 0;
 
@@ -167,4 +167,4 @@ RB_ObjectBase* PCALC_Report::getObject(RB_ObjectContainer* outContainer,
     return NULL;
 }
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC

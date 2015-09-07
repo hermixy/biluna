@@ -5,7 +5,7 @@
 #include "rb_namespace.h"
 #include "rb_unittest.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Flange_BlindTest : public RB_UnitTest {
 
@@ -44,5 +44,5 @@ private:
     Flange_Blind *target;
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //FLANGE_BLINDTEST_H

@@ -1,5 +1,5 @@
 ﻿#include "gaskettest.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 GasketTest::GasketTest() : RB_UnitTest() {
@@ -99,4 +99,4 @@ void GasketTest::Calc_XGTest() {
 }
 
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

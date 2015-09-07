@@ -1,5 +1,5 @@
 ﻿#include "tablegproperty.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 Q0min_m_Property::Q0min_m_Property(Gasket::InsFilLayMatType insFillMat,
                                    double Q0min, double m) {
@@ -94,4 +94,4 @@ void TableGProperty::CreateList() {
     mList.push_back(new Q0min_m_Property(Gasket::LowAlloyOrStainlessSteelGraphFill, 100, 2.2));
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

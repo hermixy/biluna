@@ -596,7 +596,7 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
     // continue here with first calculation
     // second the material, allow=>1, qual service=>1
 
-    RedBag::Calc::EN1591::EN1591Handler handler(NULL, NULL, NULL);
+    Biluna::Calc::EN1591::EN1591Handler handler(NULL, NULL, NULL);
     handler.exec();
 
     // Create output report
@@ -693,7 +693,7 @@ void PCALC_EN1591Widget::on_pbUnitTest_clicked() {
     getTextEdit()->clear();
     setSettings();
 
-    RedBag::Calc::EN1591::EN1591_UnitTestFactory testFactory;
+    Biluna::Calc::EN1591::EN1591_UnitTestFactory testFactory;
     testFactory.exec();
 
     RB_ObjectContainer* outList =

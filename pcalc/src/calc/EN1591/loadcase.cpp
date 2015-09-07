@@ -1,5 +1,5 @@
 ﻿#include "loadcase.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 LoadCase_IN::LoadCase_IN() : RB_Object() {
@@ -244,4 +244,4 @@ void LoadCase::setInputData(LoadCase *loadCaseIn) {
     TW2 = loadCaseIn->TW2;
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

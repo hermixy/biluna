@@ -1,5 +1,5 @@
 ﻿#include "calculator.h"
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 
 Calculator::Calculator(FlangeType flange1Type, FlangeType flange2Type)
@@ -131,20 +131,12 @@ void Calculator::exec() {
         if (!(isFG0largerFG0req && isFG0approximateFG0req)
                 && (assembly->mF_Bspec <= 0.0)) {
             LoadCase* loadCase0 = assembly->mLoadCaseList->at(0);
+            loadCase0->F_G = loadCase0->F_Greq;
+            PR->addDetail("After F.108", "F_G",
+                          "F_Greq (new initial force)",
+                          loadCase0->F_G, "N", QN(loadCase0->F_Greq), 0);
 
-            // TODO: is this setting of higher load required for convergence?
-//            if (isFG0largerFG0req)             {
-                loadCase0->F_G = loadCase0->F_Greq;
-                PR->addDetail("After F.108", "F_G",
-                              "F_Greq (new initial force)",
-                              loadCase0->F_G, "N");
-//            } else {
-//                loadCase0->F_G = loadCase0->F_Greq * 1.1;
-//                PR->addDetail("After F.108", "F_G",
-//                              "F_Greq * 1.1 (new initial force)",
-//                              assembly->mLoadCaseList->at(0)->F_G, "N");
-//            }
-
+            // Also reset initial bolt load
             loadCase0->F_B = loadCase0->F_G + loadCase0->F_R;
         }
 
@@ -377,8 +369,7 @@ void Calculator::F103_to_104(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_Gmin(loadCaseNo);
 }
 
-void Calculator::F105_to_105(Assembly* assembly,
-                             int loadCaseNo) {
+void Calculator::F105_to_105(Assembly* assembly, int loadCaseNo) {
     assembly->mGasket->Calc_P_QR(loadCaseNo);
     assembly->Calc_delta_eGc(loadCaseNo);
     assembly->Calc_F_Gdelta(loadCaseNo);
@@ -400,14 +391,12 @@ void Calculator::F119_to_119(Assembly* assembly) {
     assembly->Calc_F_G0d();
 }
 
-void Calculator::F120_to_122(Assembly* assembly,
-                             int loadCaseNo) {
+void Calculator::F120_to_122(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_G(loadCaseNo);
     assembly->Calc_F_B(loadCaseNo);
 }
 
-void Calculator::F123_to_151(Assembly* assembly,
-                             int loadCaseNo) {
+void Calculator::F123_to_151(Assembly* assembly, int loadCaseNo) {
     // bolt load
     // assembly->Calc_MtB(); not used anymore
     assembly->mBolt->Calc_kB();
@@ -483,8 +472,7 @@ void Calculator::F123_to_151(Assembly* assembly,
     res = assembly->mFlange2->Is_PhiL_valid(loadCaseNo);
 }
 
-void Calculator::FC1_to_C10(Assembly* assembly,
-                            int loadCaseNo) {
+void Calculator::FC1_to_C10(Assembly* assembly, int loadCaseNo) {
 
     // Note: in below output: Dim radToDeg As Double = 180 / Math.PI
 
@@ -501,4 +489,4 @@ void Calculator::FC1_to_C10(Assembly* assembly,
     assembly->Calc_ThetaLmaxmin(loadCaseNo);
 }
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591

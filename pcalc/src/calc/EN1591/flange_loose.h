@@ -4,7 +4,7 @@
 #include "flange.h"
 #include "rb_namespace.h"
 
-NAMESPACE_REDBAG_CALC_EN1591
+NAMESPACE_BILUNA_CALC_EN1591
 
 class Flange_Loose : public Flange {
     //IN
@@ -82,5 +82,5 @@ public:
 
 };
 
-END_NAMESPACE_REDBAG_CALC_EN1591
+END_NAMESPACE_BILUNA_CALC_EN1591
 #endif //FLANGE_LOOSE_H

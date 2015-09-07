@@ -13,7 +13,7 @@
 
 #include "rb_namespace.h"
 
-NAMESPACE_REDBAG_CALC
+NAMESPACE_BILUNA_CALC
 
 /**
  * Base class for table math such as interpolation. To be inherited
@@ -32,6 +32,6 @@ public:
                             double p22X, double p22Y, double p22val);
 };
 
-END_NAMESPACE_REDBAG_CALC
+END_NAMESPACE_BILUNA_CALC
 
 #endif //RB_TABLEMATH_H
