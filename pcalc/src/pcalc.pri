@@ -6,7 +6,8 @@
 # ----------------------------------------------------------
 
 FORMS += \
-    ../src/gui/pcalc_en1591widget.ui
+    ../src/gui/pcalc_en1591widget.ui \
+    ../src/gui/rb_databasetablewidget.ui
 
 HEADERS += \
     ../../peng/src/model/peng_project.h \
@@ -54,6 +55,7 @@ HEADERS += \
     ../src/gui/pcalc_en1591widget.h \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditdialog.h \
+    ../src/gui/rb_databasetablewidget.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
     ../src/model/EN1591/pcalc_en1591_flange.h \
@@ -73,6 +75,7 @@ HEADERS += \
     ../src/utils/pcalc_sqlcommonfunctions.h \
     ../src/utils/pcalc_utilityfactory.h \
     ../src/utils/rb_tablemath.h
+
 
 SOURCES += \
     ../../peng/src/model/peng_project.cpp \
@@ -118,6 +121,7 @@ SOURCES += \
     ../src/gui/pcalc_dialogfactory.cpp \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditdialog.cpp \
+    ../src/gui/rb_databasetablewidget.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \
     ../src/model/EN1591/pcalc_en1591_flange.cpp \

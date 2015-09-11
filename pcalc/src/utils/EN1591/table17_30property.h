@@ -25,7 +25,6 @@ public:
     double mTemperature;
     double mGasketStress;
     double mE_G;
-
 };
 
 #define TABLE17_30PROPERTY Table17_30Property::getInstance()
