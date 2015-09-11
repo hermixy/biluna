@@ -677,7 +677,7 @@ bool Assembly::Is_F_G0act_within_0_1_percent_of_F_G0req() {
 void Assembly::Calc_F_B0av() {
     LoadCase* loadCase = mLoadCaseList->at(0);
 
-    if ( !(mBolt->tType == Bolt::ManualStandardRing)) {
+    if (mBolt->tType != Bolt::ManualStandardRing) {
         loadCase->F_Bav = 0.0;
         return;
     }
@@ -698,22 +698,7 @@ void Assembly::Calc_F_B0av() {
 void Assembly::Calc_F_B0nom() {
     LoadCase* loadCase = mLoadCaseList->at(0);
 
-    /*if (loadCase->F_Bspec > 0.0) {
-        // User specified nominal bolt load
-        loadCase->F_Bnom = loadCase->F_Bspec;
-        PR->addDetail("With Formula 111", "F_Bnom", "F_Bspec",
-                      loadCase->F_Bnom, "N", QN(loadCase->F_Bspec), 0);
-        loadCase->F_Bmin = loadCase->F_Bnom * (1 - mBolt->etanminus);
-        PR->addDetail("With Formula 111", "F_Bmin", "F_Bnom * (1 - etanminus)",
-                      loadCase->F_Bmin, "N",
-                      QN(loadCase->F_Bnom) + " * (1 - "
-                      + QN(mBolt->etanminus) + ")", 0);
-        loadCase->F_Bmax = loadCase->F_Bnom * (1 + mBolt->etanplus);
-        PR->addDetail("With Formula 111", "F_Bmax", "F_Bnom * (1 + etanplus)",
-                      loadCase->F_Bmax, "N",
-                      QN(loadCase->F_Bnom) + " * (1 + "
-                      + QN(mBolt->etanplus) + ")", 0);
-    } else*/ if (! (mBolt->tType == Bolt::ManualStandardRing)) {
+    if (mBolt->tType != Bolt::ManualStandardRing) {
         // Use required bolt as starting point
         loadCase->F_Bmin = loadCase->F_Breq;
         PR->addDetail("Formula 114", "F_Bmin", "F_Breq",
@@ -737,19 +722,21 @@ void Assembly::Calc_F_B0nom() {
                       etanplusminus, "-",
                       "0.5 *(1 + 3 / (" + QN(mFlange1->nB) + " ^ 0.5)) / 4", 0);
 
-//        loadCase->F_Bav = loadCase->F_Breq / (1 - etanplusminus);
 
         loadCase->F_Bnom = loadCase->F_Bav; // already calculated
         PR->addDetail("Formula 116",
-                      "F_Bnom", "F_Bav = F_Breq / (1 - etanminus)",
+                      "F_Bnom", "F_Bav",
                       loadCase->F_Bnom, "N",
-                      QN(loadCase->F_Breq) + " / (1 - "
-                      + QN(etanplusminus) + ")", 0);
+                      QN(loadCase->F_Bav), 0);
+
+
         loadCase->F_Bmin = loadCase->F_Bnom * (1 - etanplusminus);
         PR->addDetail("Formula 112", "F_Bmin", "F_Bnom * (1 - etanminus)",
                       loadCase->F_Bmin, "N",
                       QN(loadCase->F_Bnom) + " * (1 - "
                       + QN(etanplusminus) + ")", 0);
+
+
         loadCase->F_Bmax = loadCase->F_Bnom * (1 + mBolt->etanplus);
         PR->addDetail("Formula 113", "F_Bmax", "F_Bnom * (1 + etanplus)",
                       loadCase->F_Bmax, "N",
