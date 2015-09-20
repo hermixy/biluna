@@ -7,6 +7,7 @@
 
 FORMS += \
     ../src/gui/pcalc_en1591widget.ui \
+    ../src/gui/rb_databasetypedialog.ui \
     ../src/gui/rb_databasetablewidget.ui
 
 HEADERS += \
@@ -14,6 +15,7 @@ HEADERS += \
     ../src/actions/pcalc_actionclose.h \
     ../src/actions/pcalc_actioneditproject.h \
     ../src/actions/pcalc_actionen1591flange.h \
+    ../src/actions/pcalc_actionengasket.h \
     ../src/actions/pcalc_actionfactory.h \
     ../src/actions/pcalc_actionplugin.h \
     ../src/actions/pcalc_actionselectproject.h \
@@ -53,9 +55,11 @@ HEADERS += \
     ../src/calc/unittest/en1591_unittestfactory.h \
     ../src/gui/pcalc_dialogfactory.h \
     ../src/gui/pcalc_en1591widget.h \
+    ../src/gui/pcalc_engasketwidget.h \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditdialog.h \
     ../src/gui/rb_databasetablewidget.h \
+    ../src/gui/rb_databasetypedialog.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
     ../src/model/EN1591/pcalc_en1591_flange.h \
@@ -82,6 +86,7 @@ SOURCES += \
     ../src/actions/pcalc_actionclose.cpp \
     ../src/actions/pcalc_actioneditproject.cpp \
     ../src/actions/pcalc_actionen1591flange.cpp \
+    ../src/actions/pcalc_actionengasket.cpp \
     ../src/actions/pcalc_actionfactory.cpp \
     ../src/actions/pcalc_actionplugin.cpp \
     ../src/actions/pcalc_actionselectproject.cpp \
@@ -120,8 +125,10 @@ SOURCES += \
     ../src/calc/unittest/en1591_unittestfactory.cpp \
     ../src/gui/pcalc_dialogfactory.cpp \
     ../src/gui/pcalc_en1591widget.cpp \
+    ../src/gui/pcalc_engasketwidget.cpp \
     ../src/gui/pcalc_projecteditdialog.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
+    ../src/gui/rb_databasetypedialog.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \
     ../src/model/EN1591/pcalc_en1591_flange.cpp \
@@ -142,6 +149,7 @@ SOURCES += \
     ../src/utils/rb_tablemath.cpp
 
 RESOURCES += \
+    ../../db/src/gui/db.qrc
 
 OTHER_FILES += \
     ../src/actions/pcalc_actionplugin.json \
