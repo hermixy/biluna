@@ -13,105 +13,281 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QComboBox" name="comboBox">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>20</y>
-     <width>69</width>
-     <height>22</height>
-    </rect>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>3</number>
    </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_2">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>50</y>
-     <width>69</width>
-     <height>22</height>
-    </rect>
+   <property name="topMargin">
+    <number>3</number>
    </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>20</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
+   <property name="rightMargin">
+    <number>3</number>
    </property>
-   <property name="text">
-    <string>PushButton</string>
+   <property name="bottomMargin">
+    <number>3</number>
    </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>20</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
+   <property name="horizontalSpacing">
+    <number>-1</number>
    </property>
-   <property name="text">
-    <string>PushButton</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>50</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>PushButton</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_4">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>50</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>PushButton</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblType">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Type</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblSubType">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Sub Type</string>
-   </property>
-  </widget>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pbAddYAxis">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Add Y axis row</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../db/src/gui/db.qrc">
+       <normaloff>:/images/icons/add.png</normaloff>:/images/icons/add.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pbDeleteYAxis">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Delete Y axis row</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../db/src/gui/db.qrc">
+       <normaloff>:/images/icons/delete.png</normaloff>:/images/icons/delete.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3" colspan="6">
+    <widget class="QTableView" name="tvXYValue"/>
+   </item>
+   <item row="3" column="0" colspan="3">
+    <widget class="QTableView" name="tvYAxis">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3" colspan="6">
+    <widget class="QTableView" name="tvXAxis">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3" colspan="3">
+    <widget class="QLabel" name="lblSubType">
+     <property name="text">
+      <string>Sub Type</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="3">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Y-Axis v \ X-Axis &gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>140</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="6">
+    <widget class="QComboBox" name="cbSubType"/>
+   </item>
+   <item row="1" column="3">
+    <widget class="QPushButton" name="pbAddXAxis">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Add X axis column</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../db/src/gui/db.qrc">
+       <normaloff>:/images/icons/add.png</normaloff>:/images/icons/add.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="8">
+    <spacer name="horizontalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>215</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="5" colspan="4">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>367</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="lblType">
+     <property name="text">
+      <string>Type</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <widget class="QPushButton" name="pbDeleteXAxis">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Delete X axis column</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../db/src/gui/db.qrc">
+       <normaloff>:/images/icons/delete.png</normaloff>:/images/icons/delete.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QComboBox" name="cbType"/>
+   </item>
+   <item row="0" column="7">
+    <widget class="QPushButton" name="pbEdit">
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Edit type and sub type</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../db/src/gui/db.qrc">
+       <normaloff>:/images/icons/pencil.png</normaloff>:/images/icons/pencil.png</iconset>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../db/src/gui/db.qrc"/>
+ </resources>
  <connections/>
 </ui>

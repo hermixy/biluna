@@ -12,6 +12,7 @@
 
 #include "db_dialogfactory.h"
 #include "pcalc_en1591widget.h"
+#include "pcalc_engasketwidget.h"
 #include "pcalc_modelfactory.h"
 #include "pcalc_projectdialog.h"
 #include "pcalc_projecteditdialog.h"
@@ -72,6 +73,10 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
     switch (type) {
     case WidgetEN1591Flange: {
         wgt = new PCALC_EN1591Widget(parent);
+        break;
+    }
+    case WidgetENGasket: {
+        wgt = new PCALC_ENGasketWidget(parent);
         break;
     }
     default:

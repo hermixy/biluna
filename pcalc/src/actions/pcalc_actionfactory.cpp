@@ -15,6 +15,7 @@
 #include "pcalc_actionclose.h"
 #include "pcalc_actioneditproject.h"
 #include "pcalc_actionen1591flange.h"
+#include "pcalc_actionengasket.h"
 #include "pcalc_actionselectproject.h"
 #include "pcalc_dialogfactory.h"
 #include "pcalc_modelfactory.h"
@@ -98,6 +99,13 @@ void PCALC_ActionFactory::getPlantCalculationMenu(QMenu* menu,
     connect(DB_MODELFACTORY, SIGNAL(rootIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));
 
+
+    ga = PCALC_ActionENGasket::createGuiAction();
+    menu->addAction(ga);
+    tb->addAction(ga);
+    ga->setEnabled(false);
+    connect(PCALC_MODELFACTORY, SIGNAL(rootIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
 
     // menu->addSeparator();
 
