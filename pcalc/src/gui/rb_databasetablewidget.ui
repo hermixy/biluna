@@ -26,8 +26,8 @@
    <property name="bottomMargin">
     <number>3</number>
    </property>
-   <property name="horizontalSpacing">
-    <number>-1</number>
+   <property name="spacing">
+    <number>3</number>
    </property>
    <item row="1" column="0">
     <widget class="QPushButton" name="pbAddYAxis">
