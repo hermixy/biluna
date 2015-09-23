@@ -27,6 +27,7 @@ RB_List<RB_GuiAction*> RB_GuiAction::actions;
  */
 RB_GuiAction::RB_GuiAction(const RB_String& id, const RB_String& text) :
     QAction(text, NULL), identifier(id) {
+    RB_DEBUG->info("RB_GuiAction::RB_GuiAction() " + id);
     init(text);
 }
 
@@ -39,6 +40,7 @@ RB_GuiAction::RB_GuiAction(const RB_String& id, const RB_String& text) :
  */
 RB_GuiAction::RB_GuiAction(const RB_String& id, const RB_String& iconId, const RB_String& text) :
     QAction(QIcon(":/images/" + iconId + ".png"), text, NULL), identifier(id) {
+    RB_DEBUG->info("RB_GuiAction::RB_GuiAction(iconId) " + id);
     this->iconId = iconId;
     init(text);
 }
@@ -52,6 +54,7 @@ RB_GuiAction::RB_GuiAction(const RB_String& id, const RB_String& iconId, const R
  */
 RB_GuiAction::RB_GuiAction(const RB_String& id, const QIcon& icon, const RB_String& text) :
     QAction(icon, text, NULL), identifier(id) {
+    RB_DEBUG->info("RB_GuiAction::RB_GuiAction(icon) " + id);
     init(text);
 }
 
@@ -59,8 +62,7 @@ RB_GuiAction::RB_GuiAction(const RB_String& id, const QIcon& icon, const RB_Stri
 
 RB_GuiAction::~RB_GuiAction() {
     // TODO: remove this action from hashes and lists
-    RB_DEBUG->print("RB_GuiAction::~RB_GuiAction() %s",
-                    getIdentifier().toStdString().c_str());
+    RB_DEBUG->info("RB_GuiAction::~RB_GuiAction() " + getIdentifier());
 }
     
 
@@ -201,7 +203,7 @@ void RB_GuiAction::setCommand(const RB_String& cmd) {
     }
 
     initTexts();
-    RB_DEBUG->print("RB_GuiAction::setCommand: %s", (const char*)cmd.toLatin1());
+    RB_DEBUG->print("RB_GuiAction::setCommand: " + cmd);
 }
 
 
@@ -218,7 +220,7 @@ void RB_GuiAction::setKeycode(const RB_String& kc) {
     }
 
     initTexts();
-    RB_DEBUG->print("RB_GuiAction::setKeycode: %s", (const char*)kc.toLatin1());
+    RB_DEBUG->print("RB_GuiAction::setKeycode: " + kc);
 }
 
 
@@ -234,7 +236,7 @@ void RB_GuiAction::setShortcut(const RB_String& sc) {
     }
     QAction::setShortcuts(shortcutKeys);
     initTexts();
-    RB_DEBUG->print("RB_GuiAction::setShortcut: %s", (const char*)sc.toLatin1());
+    RB_DEBUG->print("RB_GuiAction::setShortcut: " + sc);
 }
 
 void RB_GuiAction::setShortcut(const QKeySequence& shortcut) {
@@ -254,7 +256,7 @@ void RB_GuiAction::setStatusTip(const RB_String& tip) {
 }
 
 bool RB_GuiAction::triggerByKeycode(const RB_String& kc) {
-    RB_DEBUG->print("RB_GuiAction::triggerByKeycode: %s", (const char*)kc.toLatin1());
+    RB_DEBUG->print("RB_GuiAction::triggerByKeycode: " + kc);
 
     if (actionsByKeycode.contains(kc) && actionsByKeycode[kc]!=NULL) {
         actionsByKeycode[kc]->slotTriggered();
@@ -267,7 +269,7 @@ bool RB_GuiAction::triggerByKeycode(const RB_String& kc) {
 
 
 bool RB_GuiAction::triggerByCommand(const RB_String& cmd) {
-    RB_DEBUG->print("RB_GuiAction::triggerByCommand: %s", (const char*)cmd.toLatin1());
+    RB_DEBUG->print("RB_GuiAction::triggerByCommand: " + cmd);
 
     if (actionsByCommand.contains(cmd) && actionsByCommand[cmd]!=NULL) {
         actionsByCommand[cmd]->slotTriggered();

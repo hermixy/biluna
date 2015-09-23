@@ -389,9 +389,8 @@ void ACC_GlTransactionWidget::on_pbCheckBalance_clicked() {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_GlTransactionWidget::on_pbCheckBalance_clicked() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_GlTransactionWidget::on_pbCheckBalance_clicked() "
+                        + query.lastError().text() + " ERROR");
         return;
     }
 

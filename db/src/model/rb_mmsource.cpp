@@ -72,7 +72,7 @@ RB_MmSource::RB_MmSource(QObject* parent, const QSqlDatabase& db, int hiddenColu
 
 
 RB_MmSource::~RB_MmSource() {
-    RB_DEBUG->print("RB_MmSource::~RB_MmSource()");
+    // RB_DEBUG->print("RB_MmSource::~RB_MmSource()");
 
     // HACK: this->isInMemoryModel() for models deleted (later)
     // at application close() and database already closed.
@@ -94,8 +94,8 @@ RB_MmSource::~RB_MmSource() {
         ++iter;
     }
 
-    RB_DEBUG->print("RB_MmSource::~RB_MmSource() - %s OK",
-                    mTableName.toStdString().c_str());
+    RB_DEBUG->print(QString("RB_MmSource::~RB_MmSource() - %1 OK")
+                    .arg(mTableName.toStdString()));
 }
 
 /**
@@ -286,9 +286,8 @@ bool RB_MmSource::setTableModel(const RB_String& list) {
             // use actual root object because always a XXX_Project is created
             mRoot = mObjectFactory->newObject("", NULL, "", true);
 
-            RB_DEBUG->print(RB_Debug::D_NOTICE,
-                            "RB_MmSource::setTableModel() mRoot is NULL "
-                            " or no database connection NOTICE");
+            RB_DEBUG->warning("RB_MmSource::setTableModel() mRoot is NULL "
+                              " or no database connection NOTICE");
         }
     }
 
@@ -343,9 +342,9 @@ bool RB_MmSource::setCloneModel(RB_ObjectBase* root, const RB_String& list) {
     RB_ObjectContainer* objC = root->getContainer(mListName);
 
     if (!objC) {
-        RB_DEBUG->print("RB_MmSource::setCloneModel(root, list, pMm) "
-                                            "list %s not found ERROR",
-                                            mListName.toStdString().c_str());
+        RB_DEBUG->print(QString("RB_MmSource::setCloneModel(root, list, pMm) "
+                                "list %s not found ERROR")
+                        .arg(mListName.toStdString().c_str()));
         delete mRoot;
         mRoot = NULL;
         return false;

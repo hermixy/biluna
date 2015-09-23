@@ -44,7 +44,7 @@ int ACC_SqlCommonFunctions::getLastTransNo(int transType,
                                            const RB_String& typeListId) {
 
     if (!ACC_MODELFACTORY->getDatabase().isOpen()) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
+        RB_DEBUG->error(
                         "ACC_SqlCommonFunctions::getLastTransNo()"
                         " database not open ERROR");
         return -1;
@@ -66,9 +66,8 @@ int ACC_SqlCommonFunctions::getLastTransNo(int transType,
         }
     }
 
-    RB_DEBUG->print(RB_Debug::D_ERROR,
-                    "ACC_SqlCommonFunctionsFunction::getLastTransNo() %s ERROR",
-                    query.lastError().text().toStdString().c_str());
+    RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getLastTransNo() "
+                    + query.lastError().text() + " ERROR");
     return -1;
 
 }
@@ -98,9 +97,8 @@ bool ACC_SqlCommonFunctions::setLastTransNo(int transType,
             + "' AND parent='" + ACC_MODELFACTORY->getRootId() + "'";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::setLastTransNo() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::setLastTransNo() "
+                        + query.lastError().text() + " ERROR");
 
         return false;
     }
@@ -125,7 +123,7 @@ int ACC_SqlCommonFunctions::getNextTransNo(int transType,
                                            const RB_String& typeListName) {
 
     if (!ACC_MODELFACTORY->getDatabase().isOpen()) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
+        RB_DEBUG->error(
                         "ACC_SqlCommonFunctions::getNextTransNo()"
                         " database not open ERROR");
         return -1;
@@ -146,9 +144,8 @@ int ACC_SqlCommonFunctions::getNextTransNo(int transType,
             }
         }
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::getNextTransNo() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getNextTransNo() "
+                        + query.lastError().text() + " ERROR");
         return -1;
     }
 
@@ -219,9 +216,8 @@ $QuerySQL = "SELECT stockact,
                      "AND acc_stockmaster.id = '" + stockId + "'";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::getSalesTaxes() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getSalesTaxes() "
+                        + query.lastError().text() + " ERROR");
     }
 
     // Get defaults if above not found
@@ -234,9 +230,8 @@ $QuerySQL = "SELECT stockact,
                "AND acc_stockmaster.id = '0'";
 
         if (!query.exec(qStr)) {
-            RB_DEBUG->print(RB_Debug::D_ERROR,
-                            "ACC_SqlCommonFunctionsFunction::getStockGlCode() 2 %s ERROR",
-                            query.lastError().text().toStdString().c_str());
+            RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getStockGlCode() 2 "
+                            + query.lastError().text() + " ERROR");
         }
     }
 }
@@ -257,9 +252,8 @@ void ACC_SqlCommonFunctions::getTaxAuthId(QSqlQuery& query,
           + "' ORDER BY acc_taxgroupauth.calculationorder";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctions::getTaxAuthId() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctions::getTaxAuthId() "
+                        + query.lastError().text() + " ERROR");
         RB_String str = " Tax Group ID = " + taxGroupId
                 + "\n Dispatch Tax Provice ID = " + taxProvinceId
                 + "\n Tax Category ID = " + taxCatId;
@@ -291,9 +285,8 @@ void ACC_SqlCommonFunctions::getSalesTaxes(QSqlQuery& query,
     getTaxQuery(qStr, taxGroupId, dispTaxProvinceId, taxCategoryId);
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctions::getSalesTaxes() 1 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctions::getSalesTaxes() "
+                        + query.lastError().text() + " ERROR");
         RB_String str = " Tax Group ID = " + taxGroupId
                 + "\n Dispatch Tax Provice ID = " + dispTaxProvinceId
                 + "\n Tax Category ID = " + taxCategoryId;
@@ -326,9 +319,8 @@ void ACC_SqlCommonFunctions::getPurchaseTaxes(QSqlQuery& query,
     getTaxQuery(qStr, taxGroupId, receiptTaxProvinceId, taxCategoryId);
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctions::getSalesTaxes() 1 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctions::getPurchaseTaxes() "
+                        + query.lastError().text() + " ERROR");
         RB_String str = " Tax Group ID = " + taxGroupId
                 + "\n Receipt Tax Provice ID = " + receiptTaxProvinceId
                 + "\n Tax Category ID = " + taxCategoryId;
@@ -428,9 +420,8 @@ void ACC_SqlCommonFunctions::getCompanyTaxes(QSqlQuery& query,
 
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctions::getCompanyTaxes() 1 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctions::getCompanyTaxes() "
+                        + query.lastError().text() + " ERROR");
         RB_String str = " Dispatch Tax Provice ID = " + dispTaxProvinceId;
         ACC_DIALOGFACTORY->commandMessage("ACC_SqlCommonFunctions::getCompanyTaxes() "
                                           + query.lastError().text() + "\n" + str);
@@ -481,15 +472,13 @@ void ACC_SqlCommonFunctions::getCogsGlAccount(QSqlQuery& query,
     qStr = "SELECT parent FROM acc_stockmaster WHERE id='" + stockId + "'";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::getCogsGlAccount() 1A %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getCogsGlAccount() 1A "
+                        + query.lastError().text() + " ERROR");
         return;
     } else {
         if (!query.first()) {
-            RB_DEBUG->print(RB_Debug::D_ERROR,
-                            "ACC_SqlCommonFunctionsFunction::getCogsGlAccount() 1B %s ERROR",
-                            query.lastError().text().toStdString().c_str());
+            RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getCogsGlAccount() 1B "
+                            + query.lastError().text() + " ERROR");
             return;
         }
         stockCategoryId = query.value(0).toString();
@@ -501,9 +490,8 @@ void ACC_SqlCommonFunctions::getCogsGlAccount(QSqlQuery& query,
 //           + "' AND salestype='" + salesType + "'";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::getCogsGlAccount() 2 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getCogsGlAccount() 2 "
+                        + query.lastError().text() + " ERROR");
     }
 
     // Get default GL account if above not found
@@ -513,9 +501,8 @@ void ACC_SqlCommonFunctions::getCogsGlAccount(QSqlQuery& query,
                "WHERE area='0' AND stkcat='0'"; // AND salestype='0'";
 
         if (!query.exec(qStr)) {
-            RB_DEBUG->print(RB_Debug::D_ERROR,
-                            "ACC_SqlCommonFunctionsFunction::getCogsGlAccount() 3 %s ERROR",
-                            query.lastError().text().toStdString().c_str());
+            RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getCogsGlAccount() 3 "
+                            + query.lastError().text() + " ERROR");
         }
     }
 }
@@ -545,9 +532,9 @@ void ACC_SqlCommonFunctions::getCogsGlAccount(QSqlQuery& query,
 //          + "' ORDER BY acc_taxgroupauth.calculationorder";
 
 //    if (!query.exec(qStr)) {
-//        RB_DEBUG->print(RB_Debug::D_ERROR,
-//                        "ACC_SqlCommonFunctionsFunction::getSalesGlAccount() 1 %s ERROR",
-//                        query.lastError().text().toStdString().c_str());
+//        RB_DEBUG->error(
+//                        "ACC_SqlCommonFunctionsFunction::getSalesGlAccount() 1 ",
+//                        + query.lastError().text() + " ERROR");
 //    }
 
 ////    // Get defaults if above not found
@@ -612,9 +599,9 @@ void ACC_SqlCommonFunctions::getSalesGlAccount(QSqlQuery& query,
 //    qStr = "SELECT parent FROM acc_stockmaster WHERE id='" + stockId + "'";
 
 //    if (!query.exec(qStr)) {
-//        RB_DEBUG->print(RB_Debug::D_ERROR,
-//                        "ACC_SqlCommonFunctionsFunction::getSalesGlAccount() 1 %s ERROR",
-//                        query.lastError().text().toStdString().c_str());
+//        RB_DEBUG->error(
+//                        "ACC_SqlCommonFunctionsFunction::getSalesGlAccount() 1 ",
+//                        + query.lastError().text() + " ERROR");
 //        return;
 //    } else {
 //        if (!query.first()) return;
@@ -636,9 +623,8 @@ void ACC_SqlCommonFunctions::getSalesGlAccount(QSqlQuery& query,
     qStr += "='" + stockCatId + "' AND `salestype_id`='" + salesTypeId + "'";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::getSalesGlAccount() 2 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getSalesGlAccount() "
+                        + query.lastError().text() + " ERROR");
     }
 
     // Get default GL accounts if above not found
@@ -650,9 +636,9 @@ void ACC_SqlCommonFunctions::getSalesGlAccount(QSqlQuery& query,
 //               "WHERE area='0' AND stkcat='0' AND salestype='0'";
 
 //        if (!query.exec(qStr)) {
-//            RB_DEBUG->print(RB_Debug::D_ERROR,
-//                            "ACC_SqlCommonFunctionsFunction::getSalesGlAccount() 3 %s ERROR",
-//                            query.lastError().text().toStdString().c_str());
+//            RB_DEBUG->error(
+//                            "ACC_SqlCommonFunctionsFunction::getSalesGlAccount() 3 ",
+//                            + query.lastError().text() + " ERROR");
 //        }
 //    }
 }
@@ -677,9 +663,8 @@ void ACC_SqlCommonFunctions::getPurchaseGlAccount(QSqlQuery& query,
     qStr += "='" + stockCatId + "'";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::getPurchaseGlAccount() 1 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getPurchaseGlAccount() "
+                        + query.lastError().text() + " ERROR");
     }
 
     // Get defaults if above not found
@@ -762,7 +747,7 @@ void ACC_SqlCommonFunctions::setDueDate(const RB_String& paymentTermsId,
     WHERE acc_customer.id='{b304f1da-1789-4ad0-9180-2b86d0c57f96}';
     */
     if (!ACC_MODELFACTORY->getDatabase().isOpen()) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
+        RB_DEBUG->error(
                         "ACC_SqlCommonFunctions::setDueDate()"
                         " database not open ERROR");
         return;
@@ -776,9 +761,8 @@ void ACC_SqlCommonFunctions::setDueDate(const RB_String& paymentTermsId,
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::setDueDate() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::setDueDate() "
+                        + query.lastError().text() + " ERROR");
         return;
     }
 
@@ -809,7 +793,7 @@ void ACC_SqlCommonFunctions::setDueDate(const RB_String& paymentTermsId,
  */
 bool ACC_SqlCommonFunctions::isAccountUsed(const RB_String& accountId) {
     if (!ACC_MODELFACTORY->getDatabase().isOpen()) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
+        RB_DEBUG->error(
                         "ACC_SqlCommonFunctions::isAccountUsed()"
                         " database not open ERROR");
         return true;
@@ -824,9 +808,8 @@ bool ACC_SqlCommonFunctions::isAccountUsed(const RB_String& accountId) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::isAccountUsed() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::isAccountUsed() "
+                        + query.lastError().text() + " ERROR");
         return true;
     }
 
@@ -849,28 +832,6 @@ QDate ACC_SqlCommonFunctions::lastBankTransactionDate(const RB_String& bankAccId
         return QDate();
     }
 
-    // Find GL in ACC_ChartMaster
-//    RB_String qStr = "SELECT id, accountname FROM acc_chartmaster "
-//            "WHERE acc_chartmaster.accountname LIKE '%" + bankAccount + "%' "
-//            "AND acc_chartmaster.parent='" + ACC_MODELFACTORY->getRootId() + "';";
-//    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
-
-//    if (query.exec(qStr)) {
-//        if (!query.first()) {
-//            RB_DEBUG->warning("ACC_SqlCommonFunctions::lastBankTransactionDate()"
-//                              " account not found WARNING");
-//            return QDate();
-//        }
-//    } else {
-//        RB_DEBUG->print(RB_Debug::D_ERROR,
-//                        "ACC_SqlCommonFunctionsFunction::lastBankTransactionDate() 1 "
-//                        "%s ERROR", query.lastError().text().toStdString().c_str());
-//    }
-
-//    RB_String chartMasterId = query.value(0).toString();
-//    // RB_String accountName = query.value(1).toString(); // test only
-//    query.clear();
-
     RB_String qStr = "SELECT MAX(acc_banktrans.transdate) FROM acc_transdoc "
             "INNER JOIN acc_banktrans ON acc_banktrans.transdoc_id=acc_transdoc.id "
             "WHERE acc_transdoc.parent='" + bankAccId + "';";
@@ -878,8 +839,7 @@ QDate ACC_SqlCommonFunctions::lastBankTransactionDate(const RB_String& bankAccId
 
     if (query.exec(qStr)) {
         if (!query.first()) {
-            RB_DEBUG->print(RB_Debug::D_NOTICE,
-                            "ACC_SqlCommonFunctions::lastBankTransactionDate()"
+            RB_DEBUG->info("ACC_SqlCommonFunctions::lastBankTransactionDate() 1 "
                             " MAX(transdate) not found INFORMATION");
             return QDate(1970, 1, 1);
         }
@@ -888,18 +848,16 @@ QDate ACC_SqlCommonFunctions::lastBankTransactionDate(const RB_String& bankAccId
 
         if (!date.isValid()) {
             // first time if no bank transactions have been made
-            RB_DEBUG->print(RB_Debug::D_NOTICE,
-                            "ACC_SqlCommonFunctions::lastBankTransactionDate()"
-                            " MAX(transdate) not valid INFORMATION");
+            RB_DEBUG->info("ACC_SqlCommonFunctions::lastBankTransactionDate() 2 "
+                           " MAX(transdate) not valid INFORMATION");
             return QDate(1970, 1, 1);
         }
 
         return date;
     }
 
-    RB_DEBUG->print(RB_Debug::D_ERROR,
-                    "ACC_SqlCommonFunctionsFunction::lastBankTransactionDate() 2 "
-                    "%s ERROR", query.lastError().text().toStdString().c_str());
+    RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::lastBankTransactionDate() 3 "
+                    + query.lastError().text() + " ERROR");
     return QDate();
 }
 
@@ -1000,9 +958,8 @@ void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
 // RB_DEBUG->print(qStr);
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::getInvoicesAccrued() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getInvoicesAccrued() "
+                        + query.lastError().text() + " ERROR");
         return;
     }
 }
@@ -1015,7 +972,7 @@ void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
  */
 bool ACC_SqlCommonFunctions::isGlTransOrphanExisting() {
     if (!ACC_MODELFACTORY->getDatabase().isOpen()) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
+        RB_DEBUG->error(
                         "ACC_SqlCommonFunctions::isGlTransOrphanExisting()"
                         " database not open ERROR");
         return false;
@@ -1032,9 +989,8 @@ bool ACC_SqlCommonFunctions::isGlTransOrphanExisting() {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::isGlTransOrphanExisting() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::isGlTransOrphanExisting() "
+                        + query.lastError().text() + " ERROR");
         return false;
     }
 
@@ -1056,7 +1012,7 @@ bool ACC_SqlCommonFunctions::isGlTransOrphanExisting() {
  */
 bool ACC_SqlCommonFunctions::isAllocNotConsistent() {
     if (!ACC_MODELFACTORY->getDatabase().isOpen()) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
+        RB_DEBUG->error(
                         "ACC_SqlCommonFunctions::isGlTransOrphanExisting()"
                         " database not open ERROR");
         return false;
@@ -1075,9 +1031,8 @@ bool ACC_SqlCommonFunctions::isAllocNotConsistent() {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_SqlCommonFunctionsFunction::isAllocNotConsistent() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::isAllocNotConsistent() "
+                        + query.lastError().text() + " ERROR");
         return false;
     }
 

@@ -87,9 +87,8 @@ void PENG_SqlCommonFunctions::getPedEqList(QSqlQuery& query,
     }
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "PENG_SqlCommonFunctions::getPedEqList() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("PENG_SqlCommonFunctions::getPedEqList() "
+                        + query.lastError().text() + " ERROR");
 //        TODO:only removed for testing
 //        PENG_DIALOGFACTORY->commandMessage("PENG_SqlCommonFunctions::getPedEqList() "
 //                                          + query.lastError().text());
@@ -149,9 +148,8 @@ void PENG_SqlCommonFunctions::getPedLineList(QSqlQuery& query,
     }
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "PENG_SqlCommonFunctions::getPedLineList() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("PENG_SqlCommonFunctions::getPedLineList() "
+                        + query.lastError().text() + " ERROR");
 //        TODO:only removed for testing
 //        PENG_DIALOGFACTORY->commandMessage("PENG_SqlCommonFunctions::getPedLineList() "
 //                                          + query.lastError().text());
@@ -178,9 +176,8 @@ bool PENG_SqlCommonFunctions::isDefaultRow() {
     QSqlQuery query(PENG_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "PENG_SqlCommonFunctionsFunction::isDefaultRow() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("PENG_SqlCommonFunctionsFunction::isDefaultRow() "
+                        + query.lastError().text() + " ERROR");
         return false;
     }
 
@@ -217,9 +214,8 @@ RB_Variant PENG_SqlCommonFunctions::selectFromWhere(const RB_String& field,
         if (!query.first()) return RB_Variant();
         return query.value(0);
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "PENG_SqlCommonFunctionsFunction::selectFromWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("PENG_SqlCommonFunctionsFunction::selectFromWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return RB_Variant();

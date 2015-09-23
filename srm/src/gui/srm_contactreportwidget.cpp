@@ -232,9 +232,8 @@ void SRM_ContactReportWidget::on_pbRefresh_clicked() {
 
     if (!q.exec(str)) {
         // error
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "srm_ContactReportWidget::on_pbRefresh_clicked() %s ERROR",
-                        q.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("srm_ContactReportWidget::on_pbRefresh_clicked() "
+                        + q.lastError().text() + " ERROR");
         return;
     }
 

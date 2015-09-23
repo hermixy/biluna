@@ -124,9 +124,8 @@ bool ACC_CreateGlTrialBalance::execute(RB_ObjectBase* trialBalanceList) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateGlTrialBalance::execute() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateGlTrialBalance::execute() "
+                         + query.lastError().text() + " ERROR");
 
     }
 

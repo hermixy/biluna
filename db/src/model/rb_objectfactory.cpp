@@ -48,8 +48,8 @@ RB_ObjectFactory::~RB_ObjectFactory() {
 //        ++iter;
 //    }
 
-    RB_DEBUG->print("RB_ObjectFactory::~RB_ObjectFactory() %s OK",
-                    this->getName().toStdString().c_str());
+    RB_DEBUG->print(QString("RB_ObjectFactory::~RB_ObjectFactory() %1 OK")
+                    .arg(this->getName()));
 }
 
 /**
@@ -252,8 +252,8 @@ RB_ObjectBase* RB_ObjectFactory::getModelStructure(const RB_String& objName) {
  * @param objName name of the object to be root of the model structure (-part)
  */
 RB_ObjectBase* RB_ObjectFactory::createModelStructure(const RB_String& objName) {
-    RB_DEBUG->print("RB_ObjectFactory::createModelStructure() %s",
-                                        objName.toStdString().c_str());
+    RB_DEBUG->print(QString("RB_ObjectFactory::createModelStructure() %s")
+                    .arg(objName.toStdString().c_str()));
     if (isFactoryInitiated() && !isObject(objName)) return NULL;
     RB_ObjectBase* obj = NULL;
     RB_ObjectContainer* tmpRoot = NULL;

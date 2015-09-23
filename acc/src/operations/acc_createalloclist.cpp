@@ -40,9 +40,8 @@ bool ACC_CreateAllocList::execute(RB_ObjectBase* allocList) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateAllocList::execute() 1 "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateAllocList::execute() 1 "
+                         + query.lastError().text() + " ERROR");
     }
 
     addObjectsToList(query, allocList);
@@ -51,9 +50,8 @@ bool ACC_CreateAllocList::execute(RB_ObjectBase* allocList) {
     query.clear();
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateAllocList::execute() 2 "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateAllocList::execute() 2 "
+                         + query.lastError().text() + " ERROR");
     }
 
     addObjectsToList(query, allocList);
@@ -62,9 +60,8 @@ bool ACC_CreateAllocList::execute(RB_ObjectBase* allocList) {
     query.clear();
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateAllocList::execute() 3 "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateAllocList::execute() 3 "
+                         + query.lastError().text() + " ERROR");
     }
 
     addObjectsToList(query, allocList);
@@ -73,9 +70,8 @@ bool ACC_CreateAllocList::execute(RB_ObjectBase* allocList) {
     query.clear();
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateAllocList::execute() 4 "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateAllocList::execute() 4 "
+                         + query.lastError().text() + " ERROR");
     }
 
     addObjectsToList(query, allocList);

@@ -10,6 +10,7 @@
 
 #include "acc_actionbankimport.h"
 
+#include "acc_actiongltransaction.h"
 #include "acc_dialogfactory.h"
 #include "acc_gltransactionwidget.h"
 #include "acc_modelfactory.h"
@@ -48,18 +49,22 @@ RB_Action* ACC_ActionBankImport::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void ACC_ActionBankImport::trigger() {
-    // Check required settings
-    if (ACC_MODELFACTORY->getRootId() == ""
-            || !ACC_MODELFACTORY->getDatabase().isOpen()) {
-        ACC_DIALOGFACTORY->requestWarningDialog(tr("No project selected.\n"
-                                                   "Connect first to database\n"
-                                                   "and then select project."));
-        return;
-    }
+    ACC_ActionGlTransaction action;
+    action.trigger();
 
-    // Create widget and corresponding dockwidget if applicable
+//    // Check required settings
+//    if (ACC_MODELFACTORY->getRootId() == ""
+//            || !ACC_MODELFACTORY->getDatabase().isOpen()) {
+//        ACC_DIALOGFACTORY->requestWarningDialog(tr("No project selected.\n"
+//                                                   "Connect first to database\n"
+//                                                   "and then select project."));
+//        return;
+//    }
+
+    // Check widget state
     RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
             ACC_DialogFactory::WidgetGlTransaction);
+
     if (mdiWin->isWindowModified()) {
         ACC_DIALOGFACTORY->requestWarningDialog(tr("Data in GL Transaction window is modified.\n"
                                                    "Please save your data first."));
@@ -72,7 +77,6 @@ void ACC_ActionBankImport::trigger() {
     dlg->deleteLater();
 
     // TODO: set corresponding bank account in ACC_GlTransactionWidget
-
-    mdiWin->show();
-    mdiWin->raise();
+    // ACC_GlTransactionWidget* wdgt = dynamic_cast<ACC_GlTransactionWidget*>(mdiWin);
+    // ...
 }

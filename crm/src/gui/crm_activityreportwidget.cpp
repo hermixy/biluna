@@ -266,9 +266,8 @@ void CRM_ActivityReportWidget::on_pbRefresh_clicked() {
 
     if (!q.exec(str)) {
         // error
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "CRM_ActivityReportWidget::on_pbRefresh_clicked() %s ERROR",
-                        q.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("CRM_ActivityReportWidget::on_pbRefresh_clicked() "
+                        + q.lastError().text() + " ERROR");
         QApplication::restoreOverrideCursor();
         return;
     }

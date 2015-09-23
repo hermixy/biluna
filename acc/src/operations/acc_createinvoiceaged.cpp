@@ -354,9 +354,8 @@ WHERE acc_supplier.supplierid >= '0'
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateInvoiceAged::execute() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateInvoiceAged::execute() "
+                         + query.lastError().text() + " ERROR");
     }
 
     /*

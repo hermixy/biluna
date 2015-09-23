@@ -74,8 +74,8 @@ void PENG_LineClassif::setValue(int number, const RB_Variant& var) {
             RB_ObjectBase::setPValue(number, mVar);
         } else {
             // error
-            RB_DEBUG->print("PENG_LineClassif::setValue(number, var) number: %i does not exist",
-                number);
+            RB_DEBUG->print("PENG_LineClassif::setValue(number, var) number: "
+                            + QString::number(number) + " does not exist");
             return;
         }
     }
@@ -95,8 +95,8 @@ void PENG_LineClassif::setValue(const RB_String& name, const RB_Variant& var) {
             RB_ObjectBase::setPValue(name, mVar);
         } else {
             // error
-            RB_DEBUG->print("PENG_LineClassif::setValue(name, var) name: %s does not exist",
-                name.toStdString().c_str());
+            RB_DEBUG->print("PENG_LineClassif::setValue(name, var) name: "
+                            + name + " does not exist ERROR");
             return;
         }
     }

@@ -148,9 +148,8 @@ void ACC_PostGlTransaction::setDebitCredit(RB_ObjectBase* glTrans) {
             mCreditAmt = query.value(1).toDouble();
         }
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_PostGlTransaction::setDebitCredit() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_PostGlTransaction::setDebitCredit() "
+                         + query.lastError().text() + " ERROR");
     }
 
     // update amount
@@ -186,9 +185,8 @@ bool ACC_PostGlTransaction::postTransaction(RB_ObjectBase* glTrans) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_PostGlTransaction::postTransaction() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_PostGlTransaction::postTransaction() "
+                         + query.lastError().text() + " ERROR");
         return false;
     }
 
@@ -257,9 +255,8 @@ void ACC_PostGlTransaction::setGlSumAmount(RB_ObjectBase* glTrans) {
             }
         }
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_PostGlTransaction::setGlSumAmount() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_PostGlTransaction::setGlSumAmount() "
+                         + query.lastError().text() + " ERROR");
         return;
     }
 
@@ -382,9 +379,8 @@ void ACC_PostGlTransaction::setCostCenterSumAmount(RB_ObjectBase* glTrans) {
             }
         }
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_PostGlTransaction::setCostCenterSumAmount() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_PostGlTransaction::setCostCenterSumAmount() "
+                         + query.lastError().text() + " ERROR");
         return;
     }
 
@@ -475,9 +471,8 @@ void ACC_PostGlTransaction::setCostCenterDebitCredit(RB_ObjectBase *glTrans) {
             mCostCenterCreditAmt = query.value(1).toDouble();
         }
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_PostGlTransaction::setCostCenterDebitCredit() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_PostGlTransaction::setCostCenterDebitCredit() "
+                         + query.lastError().text() + " ERROR");
     }
 
     // update amount
@@ -514,9 +509,8 @@ bool ACC_PostGlTransaction::postCostCenter(RB_ObjectBase* glTrans) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_PostGlTransaction::postCostCenter() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_PostGlTransaction::postCostCenter() "
+                         + query.lastError().text() + " ERROR");
         return false;
     }
 

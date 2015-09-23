@@ -187,9 +187,8 @@ int RB_SqlCommonFunctions::getLastUsedSystemSeqNumber(const QString &perspective
         }
     }
 
-    RB_DEBUG->print(RB_Debug::D_ERROR,
-                    "RB_SqlCommonFunctionsFunction::getLastUsedSystemSeqNumber() %s ERROR",
-                    query.lastError().text().toStdString().c_str());
+    RB_DEBUG->error("RB_SqlCommonFunctionsFunction::getLastUsedSystemSeqNumber() "
+                    + query.lastError().text() + " ERROR");
     return -1;
 }
 
@@ -223,9 +222,8 @@ bool RB_SqlCommonFunctions::setLastSystemSeqNumber(const QString& perspectiveCod
             + "' AND parent='" + parentId + "'";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "RB_SqlCommonFunctionsFunction::setLastSystemSeqNumber() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("RB_SqlCommonFunctionsFunction::setLastSystemSeqNumber() "
+                        + query.lastError().text() + " ERROR");
 
         return false;
     }
@@ -271,9 +269,8 @@ int RB_SqlCommonFunctions::getNextSystemSeqNumber(const QString& perspectiveCode
             }
         }
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "RB_SqlCommonFunctionsFunction::getNextSystemSeqNumber() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("RB_SqlCommonFunctionsFunction::getNextSystemSeqNumber() "
+                        + query.lastError().text() + " ERROR");
         return -1;
     }
 
@@ -384,9 +381,8 @@ RB_Variant RB_SqlCommonFunctions::selectFromWhereId(const RB_String& field,
         if (!query.first()) return RB_Variant();
         return query.value(0);
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "RB_SqlCommonFunctionsFunction::selectFromWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("RB_SqlCommonFunctionsFunction::selectFromWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return RB_Variant();
@@ -413,9 +409,8 @@ bool RB_SqlCommonFunctions::update(const RB_String& table,
 
     bool success = query.exec(qStr);
     if (!success) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "RB_SqlCommonFunctionsFunction::updateStringWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("RB_SqlCommonFunctionsFunction::updateStringWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return success;
@@ -446,9 +441,8 @@ RB_Variant RB_SqlCommonFunctions::selectFromWhere(const RB_String& field,
         if (!query.first()) return RB_Variant();
         return query.value(0);
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "RB_SqlCommonFunctionsFunction::selectFromWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("RB_SqlCommonFunctionsFunction::selectFromWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return RB_Variant();
@@ -468,9 +462,8 @@ void RB_SqlCommonFunctions::selectAllFromWhere(QSqlQuery& query,
     qStr = "SELECT * FROM " + table.toLower() + " WHERE " + whereStr + ";";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "RB_SqlCommonFunctionsFunction::getSelectAllFromWhere() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("RB_SqlCommonFunctionsFunction::getSelectAllFromWhere() "
+                        + query.lastError().text() + " ERROR");
     }
 }
 

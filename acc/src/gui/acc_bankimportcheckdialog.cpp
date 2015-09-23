@@ -97,7 +97,6 @@ ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() {
     delete mBankImportList;
     // delete mTransDocListRoot; deleted with mDocModel
     delete mGlTransList;
-    // delete mTransDocList; deleted by ACC_BankImportCheckDialog
     RB_DEBUG->print("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() OK");
 }
 

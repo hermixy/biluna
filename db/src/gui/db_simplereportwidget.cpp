@@ -235,9 +235,8 @@ void DB_SimpleReportWidget::on_pbRefresh_clicked() {
 
         if (!q.exec(sqlStr)) {
             // error
-            RB_DEBUG->print(RB_Debug::D_ERROR,
-                            "DB_SimpleReportWidget::on_pbRefresh_clicked() %s ERROR",
-                            q.lastError().text().toStdString().c_str());
+            RB_DEBUG->error("DB_SimpleReportWidget::on_pbRefresh_clicked() "
+                            + q.lastError().text() + " ERROR");
             teReport->setText(q.lastError().text());
             QApplication::restoreOverrideCursor();
             return;

@@ -76,9 +76,8 @@ The DESCRIBE INDEXES FOR TABLE command lists the following information about eac
     }
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "DB_SqlCommonFunctionsFunction::createDatabaseIndexList() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("DB_SqlCommonFunctionsFunction::createDatabaseIndexList() "
+                        + query.lastError().text() + " ERROR");
         return;
     }
 
@@ -105,9 +104,8 @@ void DB_SqlCommonFunctions::appendProjects(RB_ObjectContainer* list,
     RB_String qStr = "SELECT * FROM " + tableName + " WHERE `id` <> '0';";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "DB_SqlCommonFunctionsFunction::appendProjects() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("DB_SqlCommonFunctionsFunction::appendProjects() "
+                        + query.lastError().text() + " ERROR");
         return;
     }
 
@@ -169,9 +167,8 @@ ORDER BY persproject_idx;
             "ORDER BY persproject_idx;";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "DB_SqlCommonFunctionsFunction::getPermissionList() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("DB_SqlCommonFunctionsFunction::getPermissionList() "
+                        + query.lastError().text() + " ERROR");
         return;
     }
 
@@ -198,9 +195,8 @@ int DB_SqlCommonFunctions::getUserCount() {
     RB_String qStr = "SELECT id FROM db_systemuser WHERE id <> '0';";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "DB_SqlCommonFunctionsFunction::getUserCount() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("DB_SqlCommonFunctionsFunction::getUserCount() "
+                        + query.lastError().text() + " ERROR");
         return 0;
     }
 

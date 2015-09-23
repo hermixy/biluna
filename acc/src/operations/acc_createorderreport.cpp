@@ -136,9 +136,8 @@ bool ACC_CreateOrderReport::execute(RB_ObjectBase* orderList) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateOrderReport::execute() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateOrderReport::execute() "
+                         + query.lastError().text() + " ERROR");
     }
 
     while (query.next()) {

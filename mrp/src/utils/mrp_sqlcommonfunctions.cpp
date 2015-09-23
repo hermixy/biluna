@@ -80,9 +80,8 @@ void MRP_SqlCommonFunctions::selectLicenseData(QSqlQuery& query,
     qStr += "AND mrp_softwarelicense.id > '0'; ";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "MRP_SqlCommonFunctions::selectData() 1 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("MRP_SqlCommonFunctions::selectData()  "
+                        + query.lastError().text() + " ERROR");
         MRP_DIALOGFACTORY->commandMessage("MRP_SqlCommonFunctions::selectRouteDistanceData() "
                                           + query.lastError().text() + "\n");
     }

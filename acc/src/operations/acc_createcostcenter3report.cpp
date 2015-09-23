@@ -118,9 +118,8 @@ void ACC_CreateCostCenter3Report::execPeriod(RB_ObjectBase* costCenterSumList,
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateCostCenter3Report::execPeriod() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateCostCenter3Report::execPeriod() "
+                        + query.lastError().text() + " ERROR");
         return;
     }
 

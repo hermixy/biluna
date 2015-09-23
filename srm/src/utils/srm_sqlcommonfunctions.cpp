@@ -71,9 +71,8 @@ void SRM_SqlCommonFunctions::getTargetList(QSqlQuery& query,
 
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "srm_SqlCommonFunctions::getTargetList() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("srm_SqlCommonFunctions::getTargetList() "
+                        + query.lastError().text() + " ERROR");
         RB_String str = " groupId = " + groupId;
         SRM_DIALOGFACTORY->commandMessage("SRM_SqlCommonFunctions::getTargetList() "
                                           + query.lastError().text() + "\n" + str);
@@ -97,9 +96,8 @@ void SRM_SqlCommonFunctions::getTemplateId(QSqlQuery& query, const QString& targ
             "WHERE `srm_campaigntarget`.`id`='" + targetId + "';";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "srm_SqlCommonFunctions::getDocumentId() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("srm_SqlCommonFunctions::getDocumentId() "
+                        + query.lastError().text() + " ERROR");
         RB_String str = " targetId = " + targetId;
         SRM_DIALOGFACTORY->commandMessage("SRM_SqlCommonFunctions::getDocumentId() "
                                           + query.lastError().text() + "\n" + str);
@@ -153,9 +151,8 @@ RB_Variant SRM_SqlCommonFunctions::selectFromWhere(const RB_String& field,
         if (!query.first()) return RB_Variant();
         return query.value(0);
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "srm_SqlCommonFunctionsFunction::selectFromWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("srm_SqlCommonFunctionsFunction::selectFromWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return RB_Variant();

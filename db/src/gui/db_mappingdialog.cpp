@@ -500,8 +500,8 @@ void DB_MappingDialog::initMappingTable() {
 void DB_MappingDialog::setWidgets() {
     if (!mMapObject) return;
 	
-    RB_DEBUG->print("DB_MappingDialog::setWidgets() %s",
-                    mMapObject->getValue("mdatabase").toString().toStdString().c_str());
+    RB_DEBUG->print("DB_MappingDialog::setWidgets() "
+                    + mMapObject->getValue("mdatabase").toString());
 
     leSelectedTable->setText(mMapObject->getValue("mtable").toString());
     leParentId->setText(mMapObject->getValue("parent_id").toString());

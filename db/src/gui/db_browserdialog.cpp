@@ -293,9 +293,8 @@ void DB_BrowserDialog::showMysqlMetaData(const QString& t,
     QSqlQuery query(currentDb);
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "DB_BrowserDialog::showMysqlMetaData() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("DB_BrowserDialog::showMysqlMetaData() "
+                        + query.lastError().text() + " ERROR");
         return;
     }
 

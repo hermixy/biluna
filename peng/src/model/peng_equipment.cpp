@@ -200,8 +200,8 @@ void PENG_Equipment::setValue(int number, const RB_Variant& var) {
 
     if (!mVar.isValid()) {
         // error
-        RB_DEBUG->print("PENG_Equipment::setValue(number, var) number = %i "
-                                                "does not exist", number);
+        RB_DEBUG->error("PENG_Equipment::setValue(number, var) number = "
+                        + QString::number(number) + " does not exist ERROR");
         return;
     }
 
@@ -231,8 +231,8 @@ void PENG_Equipment::setValue(const RB_String& name, const RB_Variant& var) {
 
     if (!mVar.isValid()) {
         // error
-        RB_DEBUG->print("PENG_Equipment::setValue(number, var) name = %s "
-                                                        "does not exist", name.toStdString().c_str());
+        RB_DEBUG->error("PENG_Equipment::setValue(number, var) name = "
+                        + name + " does not exist ERROR");
         return;
     }
 

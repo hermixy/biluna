@@ -22,7 +22,7 @@
 
 int main(int argc, char *argv[]) {
 
-    RB_DEBUG->setLevel(RB_Debug::D_WARNING);
+    RB_DEBUG; // default is level is RB_Debug::D_WARNING
 
     // set locale to default environments to avoid . / , decimal confusion
     setlocale(LC_ALL, "C");
@@ -38,7 +38,8 @@ int main(int argc, char *argv[]) {
         if (QString("--debug") == argv[i]) {
             RB_DEBUG->setLevel(RB_Debug::D_DEBUGGING);
         }
-        RB_DEBUG->print("param %i: %s", i, argv[i]);
+        RB_DEBUG->print("param " + QString::number(i)
+                        + ": " + QString(argv[i]));
     }
 
 #ifdef Q_OS_MAC

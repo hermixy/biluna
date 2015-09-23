@@ -77,9 +77,8 @@ bool ACC_CreateCostCenterReport::execute(RB_ObjectBase* costCenterSumList) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateCostCenterReport::execute() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateCostCenterReport::execute() "
+                         + query.lastError().text() + " ERROR");
 
     }
 
