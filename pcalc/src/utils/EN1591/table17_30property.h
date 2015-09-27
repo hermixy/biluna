@@ -17,13 +17,16 @@ class E_GProperty {
 
 public:
     E_GProperty(const RB_String& materialCode,
-                double temperature,
                 double gasketStress,
+                double temperature,
                 double E_G);
-
+    //! sub
     RB_String mMaterialCode;
-    double mTemperature;
+    //! y-axis
     double mGasketStress;
+    //! x-axis
+    double mTemperature;
+    //! value
     double mE_G;
 };
 

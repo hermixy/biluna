@@ -180,9 +180,8 @@ void PENG_Line::setValue(int number, const RB_Variant& var) {
         if (mVar.isValid()) {
             RB_ObjectBase::setPValue(number, mVar);
         } else {
-            // error
-            RB_DEBUG->print("PENG_Line::setValue(number, var) number: %i does not exist",
-                number);
+            RB_DEBUG->error("PENG_Line::setValue(number, var) number: "
+                            + QString::number(number) + " does not exist ERROR");
             return;
         }
     }
@@ -201,9 +200,8 @@ void PENG_Line::setValue(const RB_String& name, const RB_Variant& var) {
         if (mVar.isValid()) {
             RB_ObjectBase::setPValue(name, mVar);
         } else {
-            // error
-            RB_DEBUG->print("PENG_Line::setValue(name, var) name: %s does not exist",
-                name.toStdString().c_str());
+            RB_DEBUG->error("PENG_Line::setValue(name, var) name: "
+                            + name + " does not exist");
             return;
         }
     }

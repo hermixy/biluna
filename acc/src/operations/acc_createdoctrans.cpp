@@ -64,9 +64,8 @@ bool ACC_CreateDocTrans::execute(RB_ObjectBase* docList) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateDocTrans::execute() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateDocTrans::execute() "
+                         + query.lastError().text() + " ERROR");
     }
 
     //  0 transdoc_id

@@ -22,7 +22,7 @@
 
 #include "db_global.h"
 #include "rb.h"
-#include "rb_string.h"
+#include "QString.h"
 
 class RB_Object;
 class RB_ObjectBase;
@@ -32,7 +32,6 @@ class RB_ObjectBase;
 
 /**
  * Debugging facilities.
- * @author Andrew Mustun, updated Rutger Botermans
  */
 class DB_EXPORT RB_Debug {
 
@@ -41,25 +40,18 @@ public:
      * Enum for debug levels. Only messages of the current
      * or a higher level are printed.
      * <ul>
-     *  <li>D_NOTHING:  nothing
-     *  <li>D_CRITICAL: critical messages
      *  <li>D_ERROR:    errors
      *  <li>D_WARNING:  warnings
-     *  <li>D_NOTICE:   notes
-     *  <li>D_INFORMATIONAL: infos
-     *  <li>D_DEBUGGING: very verbose
+     *  <li>D_INFORMATIONAL: information for backtracing
+     *  <li>D_DEBUGGING: very verbose for debugging purposes
      * </ul>
      */
-    enum RB_DebugLevel { D_NOTHING,
-                         D_CRITICAL,
-                         D_ERROR,
-                         D_WARNING,
-                         D_NOTICE,
-                         D_INFORMATIONAL,
-                         D_DEBUGGING };
-
-private:
-    RB_Debug();
+    enum RB_DebugLevel {
+        D_ERROR,
+        D_WARNING,          // default
+        D_INFORMATIONAL,    // for backtrace
+        D_DEBUGGING
+    };
 
 public:
     static RB_Debug* instance();
@@ -67,28 +59,26 @@ public:
 
     void setLevel(RB_DebugLevel level);
     RB_DebugLevel getLevel();
-    void print(RB_DebugLevel level, const char* format ...);
-    void print(const char* format ...);
-//    void print(const std::string& text);
-    void print(const RB_String& text);
-    void printUnicode(const RB_String& text);
+    void print(RB_DebugLevel level, const QString& text);
+    void print(const QString& text);
+    void printUnicode(const QString& text);
     void timestamp();
 //    void setStream(FILE* s) {
 //        stream = s;
 //    }
 
-    //
-    // added 2005-07-08 by rutger: use for integer, string and double:
-    // RB_DEBUG->print("param %i: %s %f", i, argv[i], 12.34);
+    // use for integer, string and double:
+    // RB_DEBUG->print(QString(param %i: %s %f").arg(i).arg(argv[i]).arg(12.34));
     // use for pointer
-    // RB_DEBUG->print("RB_Object* : %p", obj);
+    // RB_DEBUG->print(QString("RB_Object* : %p").arg(obj));
     // general use
-    // RB_DEBUG->print("%s line [%i] passed", __PRETTY_FUNCTION__, __LINE__);
-    void error(const RB_String& text);
-    void warning(const RB_String& text);
-    void debug(const RB_String& text); // same as print
+    // RB_DEBUG->print(QString("%s line [%i] passed").arg(__PRETTY_FUNCTION__).arg(__LINE__));
+    void error(const QString& text);
+    void warning(const QString& text);
+    void info(const QString& text);   // same as print
+    void debug(const QString& text);
 
-    void append(RB_String& str, const char* format ...);
+//    void append(QString& str, const char* format ...);
     void addMemberCreated();
     void addMemberDeleted();
     void addObjectCreated(RB_Object* obj);
@@ -97,16 +87,19 @@ public:
     void printMemberCreated();
     void printMemberDeleted();
     void printObject(RB_Object* obj);
-    void printObjectBase(RB_ObjectBase* obj,
-                         RB2::ResolveLevel level = RB2::ResolveNone);
     void printMessages();
     void printObjectCreated();
     void printObjectDeleted();
     void printObjectList();
 
-    bool isValidId(const RB_String& id);
+    bool isValidId(const QString& id);
 
 private:
+    RB_Debug();
+    void printObjectBase(RB_ObjectBase* obj,
+                         RB2::ResolveLevel level = RB2::ResolveNone);
+    QString pointerToString(void* ptr) const;
+
     static RB_Debug* uniqueInstance;
 
     RB_DebugLevel debugLevel;
@@ -119,11 +112,8 @@ private:
     int objectDeletedCount;
 
     // to test messages such as warnings, errors
-    int msgNothingCount;
-    int msgCriticalCount;
     int msgErrorCount;
     int msgWarningCount;
-    int msgNoticeCount;
     int msgInformationalCount;
     int msgDebuggingCount;
 

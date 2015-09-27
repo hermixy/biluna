@@ -540,9 +540,8 @@ bool DB_TransferDataAction::createFromMysqlTable(QSqlDatabase dbSource,
     QSqlQuery qSource(dbSource);
 
     if (!qSource.exec(sqlStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "DB_BrowserDialog::showMysqlMetaData() "
-                        "%s ERROR", qSource.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("DB_BrowserDialog::showMysqlMetaData() "
+                        + qSource.lastError().text() + " ERROR");
         return false;
     }
 

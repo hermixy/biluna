@@ -35,7 +35,7 @@
 // #include "rb_datetime.h"
 #include "rb_object.h"
 #include "rb_objectcontainer.h"
-#include "rb_string.h"
+#include "QString.h"
 #include "rb_system.h"
 
 
@@ -49,33 +49,26 @@ RB_Debug* RB_Debug::uniqueInstance = NULL;
  */
 RB_Debug* RB_Debug::instance() {
     if(uniqueInstance==NULL) {
-        QDateTime now = QDateTime::currentDateTime();
-        RB_String nowStr;
-#if QT_VERSION>=0x030000
-    nowStr = now.toString("yyyyMMdd_hhmmss");
-#else
-    nowStr = now.toString();
-#endif
-        //RB_String fName = RB_String("%1/debug_%2.log")
+        QString nowStr = QDateTime::currentDateTime().toString(Qt::ISODate);
+
+        //QString fName = QString("%1/debug_%2.log")
         //	.arg(RB_SYSTEM->getHomeDir())
         //	.arg(nowStr);
-        // RB_String fName = RB_String("debug_%1.log")
+        // QString fName = QString("debug_%1.log")
         //        .arg(nowStr);
 
-        uniqueInstance = new RB_Debug;
-        //uniqueInstance->stream = fopen(fName.latin1(), "wt");
-//        uniqueInstance->stream = stderr;
+        uniqueInstance = new RB_Debug();
+        // uniqueInstance->stream = fopen(fName.latin1(), "wt");
+        // uniqueInstance->stream = stderr;
+        uniqueInstance->print(nowStr);
 
         uniqueInstance->memberCreatedCount = 0;
         uniqueInstance->memberDeletedCount = 0;
         uniqueInstance->objectCreatedCount = 0;
         uniqueInstance->objectDeletedCount = 0;
 
-        uniqueInstance->msgNothingCount = 0;
-        uniqueInstance->msgCriticalCount = 0;
         uniqueInstance->msgErrorCount = 0;
         uniqueInstance->msgWarningCount = 0;
-        uniqueInstance->msgNoticeCount = 0;
         uniqueInstance->msgInformationalCount = 0;
         uniqueInstance->msgDebuggingCount = 0;
     }
@@ -87,9 +80,9 @@ RB_Debug* RB_Debug::instance() {
  * Deletes the one and only RB_Debug instance.
  */
 void RB_Debug::deleteInstance() {
-    // first delete objects
     std::list<RB_Object*>::iterator iter;
     iter = uniqueInstance->mObjectList.begin();
+
     while (iter != uniqueInstance->mObjectList.end()) {
         if (*iter != NULL) {
             delete *iter;
@@ -98,22 +91,20 @@ void RB_Debug::deleteInstance() {
         ++iter;
     }
 
-    // second clear/remove pointers
     uniqueInstance->mObjectList.clear();
 
-    // last delete unique instance
-    if (uniqueInstance!=NULL) {
-//        fclose(uniqueInstance->stream);
+    if (uniqueInstance != NULL) {
+        // fclose(uniqueInstance->stream);
         delete uniqueInstance;
     }
 }
 
 
 /**
- * Constructor for a point with default coordinates.
+ * Constructor with default D_DEBBUGING level
  */
 RB_Debug::RB_Debug() {
-    debugLevel = D_DEBUGGING;
+    debugLevel = D_WARNING;
 }
 
 /**
@@ -121,13 +112,11 @@ RB_Debug::RB_Debug() {
  */
 void RB_Debug::setLevel(RB_DebugLevel level) {
     debugLevel = level;
-    print("RB_DEBUG: Warnings", D_WARNING);
-    print("RB_DEBUG: Errors", D_ERROR);
-    print("RB_DEBUG: Notice", D_NOTICE);
-    print("RB_DEBUG: Informational", D_INFORMATIONAL);
-    print("RB_DEBUG: Debugging", D_DEBUGGING);
+    print(QString("RB_DEBUG: Errors %1").arg(D_ERROR));
+    print(QString("RB_DEBUG: Warnings %1").arg(D_WARNING));
+    print(QString("RB_DEBUG: Informational %1").arg(D_INFORMATIONAL));
+    print(QString("RB_DEBUG: Debugging %1").arg(D_DEBUGGING));
 }
-
 
 /**
  * Gets the current debugging level.
@@ -136,33 +125,12 @@ RB_Debug::RB_DebugLevel RB_Debug::getLevel() {
     return debugLevel;
 }
 
-
 /**
- * Prints the given message to stdout. Usefull example:
- * RB_DEBUG->print("%s line [%i] passed", __PRETTY_FUNCTION__, __LINE__);
- */
-void RB_Debug::print(const char* format ...) {
-    if(debugLevel==D_DEBUGGING) {
-//        char buffer[256];
-//        va_list args;
-//        va_start (args, format);
-//        vsprintf (buffer,format, args);
-//        RB_String strBuffer(buffer);
-//        va_end (args);
-
-        RB_String strBuffer;
-        append(strBuffer, format);
-        qDebug() << strBuffer << "\n" ;
-    }
-
-}
-
-/**
- * Print RB_String to output device with fprintf and fflush. Example use could be:
+ * Print QString to output device with fprintf and fflush. Example use could be:
  * @param text text for output
  */
-void RB_Debug::print(const RB_String& text) {
-    qDebug() << text << "\n";
+void RB_Debug::print(const QString& text) {
+    qDebug() << text;
 }
 
 
@@ -173,100 +141,66 @@ void RB_Debug::print(const RB_String& text) {
  *                  __PRETTY_FUNCTION__, __LINE__);
  * @param level Debug level.
  */
-void RB_Debug::print(RB_DebugLevel level, const char* format ...) {
-    if (level == D_NOTHING) {
-        ++msgNothingCount;
-    } else if (level == D_CRITICAL) {
-        ++msgCriticalCount;
-    } else if (level == D_ERROR) {
+void RB_Debug::print(RB_DebugLevel level, const QString& text) {
+    if (level == D_ERROR) {
         ++msgErrorCount;
     } else if (level == D_WARNING) {
         ++msgWarningCount;
-    } else if (level == D_NOTICE) {
-        ++msgNoticeCount;
     } else if (level == D_INFORMATIONAL) {
         ++msgInformationalCount;
-    } else if (level == D_DEBUGGING) {
+    } else /*if (level == D_DEBUGGING)*/ {
         ++msgDebuggingCount;
     }
 
-    if(debugLevel>=level) {
-//        char buffer[256];
-//        va_list args;
-//        va_start (args, format);
-//        vsprintf (buffer,format, args);
-//        RB_String strBuffer(buffer);
-//        va_end (args);
-
-        RB_String strBuffer;
-        append(strBuffer, format);
-        qDebug() << strBuffer << "\n" ;
+    if(debugLevel >= level) {
+        qDebug() << text;
     }
 }
 
 
 /**
- * Prints a time stamp in the format yyyyMMdd_hhmmss.
+ * Prints a time stamp in the format yyyyMMddThh:mm:ss
  */
 void RB_Debug::timestamp() {
-    QDateTime now = QDateTime::currentDateTime();
-    RB_String nowStr;
-
-#if QT_VERSION>=0x030000
-    nowStr = now.toString("yyyyMMdd_hh:mm:ss:zzz ");
-#else
-    nowStr = now.toString();
-#endif
-    qDebug() << nowStr << "\n";
+    qDebug() << QDateTime::currentDateTime().toString(Qt::ISODate);
 }
 
 /**
  * Prints the unicode for every character in the given string.
  */
-void RB_Debug::printUnicode(const RB_String& text) {
+void RB_Debug::printUnicode(const QString& text) {
     for (int i=0; i<(int)text.length(); i++) {
-        print("[%X] %c", text.at(i).unicode(), text.at(i).toLatin1());
+        print(QString("[%X] %c").arg(text.at(i).unicode())
+              .arg(text.at(i).toLatin1()));
     }
 }
 
 /**
  * Same as print(RB_Debug::D_ERROR, "message")
  */
-void RB_Debug::error(const RB_String& text) {
+void RB_Debug::error(const QString& text) {
     print(RB_Debug::D_ERROR, text.toStdString().c_str());
 }
 
 /**
  * Same as print(RB_Debug::D_WARNING, "message")
  */
-void RB_Debug::warning(const RB_String& text) {
+void RB_Debug::warning(const QString& text) {
     print(RB_Debug::D_WARNING, text.toStdString().c_str());
+}
+
+/**
+ * Same as print(RB_Debug::D_INFORMATIONAL, "message")
+ */
+void RB_Debug::info(const QString& text) {
+    print(RB_Debug::D_INFORMATIONAL, text.toStdString().c_str());
 }
 
 /**
  * Same as print(RB_Debug::D_DEBUGGING, "message")
  */
-void RB_Debug::debug(const RB_String& text) {
+void RB_Debug::debug(const QString& text) {
     print(RB_Debug::D_DEBUGGING, text.toStdString().c_str());
-}
-
-/**
- * Appends format to string, TODO: handle buffer overflow
- * @param str string to append format to
- * @param format to be added
- */
-void RB_Debug::append(RB_String& str, const char* format ...) {
-    char buffer[256];
-    va_list args;
-    va_start (args, format);
-#ifdef Q_OS_MAC
-    vsprintf (buffer,format, args);
-#else
-    vsprintf_s (buffer,format, args);
-#endif
-    RB_String strBuffer(buffer);
-    str.append(strBuffer);
-    va_end (args);
 }
 
 /**
@@ -275,7 +209,6 @@ void RB_Debug::append(RB_String& str, const char* format ...) {
 void RB_Debug::addMemberCreated() { 
 	++memberCreatedCount; 
 }
-
 
 /**
  * Add one (1) to the count of deleted members
@@ -294,28 +227,11 @@ void RB_Debug::addObjectDeleted(RB_Object *obj) {
     mObjectList.remove(obj);
 }
 
-
-/**
- * Print the number of created objects
- */
-//void RB_Debug::printObjectBaseCreated() {
-//    print("Created base objects: %i", this->objectBaseCreatedCount);
-//}
-
-
-/**
- * Print the number of deleted objects
- */
-//void RB_Debug::printObjectBaseDeleted() {
-//    print("Deleted base objects: %i", this->objectBaseDeletedCount);
-//}
-
-
 /**
  * Print the number of created members
  */
 void RB_Debug::printMemberCreated() {
-   	print("Created members: %i", this->memberCreatedCount); 
+    print(QString("Created members: %1").arg(this->memberCreatedCount));
 }
 
 
@@ -323,7 +239,7 @@ void RB_Debug::printMemberCreated() {
  * Print the number of deleted members
  */
 void RB_Debug::printMemberDeleted() { 
-    print("Deleted members: %i", this->memberDeletedCount);
+    print(QString("Deleted members: %1").arg(this->memberDeletedCount));
 }
 
 
@@ -335,14 +251,15 @@ void RB_Debug::printObject(RB_Object* obj) {
         return;
     }
 
-    RB_String str = "";
+    QString str = "";
     str = "  RB_Debug::printObject() START";
 
     if (!obj) {
-        str += "\n    object pointer is NULL";
+        str += "    object pointer is NULL";
     } else {
-        append(str, "\n    object pointer = %p", obj);
-        str += "\n    object name = " + obj->getName();
+        str.append(QString("    object pointer = %1")
+                   .arg(pointerToString(obj)));
+        str += "    object name = " + obj->getName();
     }
 }
 
@@ -350,32 +267,34 @@ void RB_Debug::printObject(RB_Object* obj) {
  * To print id, parent, name and members of an RB_ObjectBase object
  */
 void RB_Debug::printObjectBase(RB_ObjectBase* obj, RB2::ResolveLevel level) {
-    RB_String str = "";
+    QString str = "";
     str = "  RB_Debug::printObjectBase() START";
 	
 	if (!obj) {
-        str += "\n    object pointer is NULL";
+        str += "    object pointer is NULL";
 	} else {
-        append(str, "\n    object pointer = %p", obj);
-        str += "\n    object id = " + obj->getId();
-		str += "\n    object name = " + obj->getName();
+        str.append(QString("    object pointer = %s")
+                   .arg(pointerToString(obj)));
+        str += "    object id = " + obj->getId();
+        str += "    object name = " + obj->getName();
 		
 		RB_ObjectBase* parent = (RB_ObjectBase*)obj->getParent();
 		
 		if (parent) {
-            append(str, "\n    object parent pointer = %p", parent);
-			str += "\n    object parent id = " + parent->getId();
-			str += "\n    object parent name = " + parent->getName();
+            str.append(QString("    object parent pointer = %s")
+                       .arg(pointerToString(parent)));
+            str += "    object parent id = " + parent->getId();
+            str += "    object parent name = " + parent->getName();
 		} else {
-            str += "\n    object parent pointer = NULL";
-            str += "\n    object parent id = NULL";
-            str += "\n    object parent name = NULL";
+            str += "    object parent pointer = NULL";
+            str += "    object parent id = NULL";
+            str += "    object parent name = NULL";
 		}
 		
 		int noMember = obj->countMember();
 	
 		for (int i = 0; i < noMember; ++i) {
-			str += "\n    ";
+            str += "    ";
 			str += obj->getMember(i)->getName();
 			str += " = ";
 			str += obj->getMember(i)->getValue().toString();
@@ -446,38 +365,50 @@ void RB_Debug::printObjectBase(RB_ObjectBase* obj, RB2::ResolveLevel level) {
     print("  RB_Debug::printObjectBase() END");
 }
 
+QString RB_Debug::pointerToString(void* ptr) const {
+//    return QString("0x%1").arg((quintptr)ptr, QT_POINTER_SIZE * 2, 16, QChar('0'));
+    // alternative 1:
+//    QString str;
+//    str.sprintf("%08p", ptr);
+//    return str;
+    // alternative 2:
+//    const void* address = static_cast<const void*>(ptr);
+    QString addressString;
+    QTextStream addressStream(&addressString);
+    addressStream << ptr; // address;
+    return addressString;
+}
+
 void RB_Debug::printMessages() {
-    print("Nothing messages: %i", msgNothingCount);
-    print("Critical messages: %i", msgCriticalCount);
-    print("Error messages: %i", msgErrorCount);
-    print("Warning messages: %i", msgWarningCount);
-    print("Notice messages: %i", msgNoticeCount);
-    print("Informational messages: %i", msgInformationalCount);
-    print("Debugging messages: %i", msgDebuggingCount);
+    print(QString("Error messages: %1").arg(msgErrorCount));
+    print(QString("Warning messages: %1").arg(msgWarningCount));
+    print(QString("Informational messages: %1").arg(msgInformationalCount));
+    print(QString("Debugging messages: %1").arg(msgDebuggingCount));
 }
 
 void RB_Debug::printObjectCreated() {
-    print("Created objects: %i", this->objectCreatedCount);
+    print(QString("Created objects: %1").arg(this->objectCreatedCount));
 }
 
 void RB_Debug::printObjectDeleted() {
-    print("Deleted objects: %i", this->objectDeletedCount);
+    print(QString("Deleted objects: %1").arg(this->objectDeletedCount));
 }
 
 void RB_Debug::printObjectList() {
     print("Objects in list:");
-
     std::list<RB_Object*>::iterator iter;
     iter = mObjectList.begin();
+
     while (iter != mObjectList.end()) {
         if (*iter != NULL) {
-            print("  %p %s", (*iter), (*iter)->getName().toStdString().c_str());
+            print(QString("  %1 %2").arg(pointerToString(*iter))
+                  .arg((*iter)->getName().toStdString().c_str()));
         }
         ++iter;
     }
 }
 
-bool RB_Debug::isValidId(const RB_String& id) {
+bool RB_Debug::isValidId(const QString& id) {
     if (id.isEmpty() || id == "0" || id.size() < 38) {
         warning("Not a valid ID = " + id + " WARNING");
         return false;

@@ -56,9 +56,8 @@ bool ACC_CreateGlTransactions::execute(RB_ObjectBase* glTransList) {
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateGlTransactions::execute() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateGlTransactions::execute() "
+                         + query.lastError().text() + " ERROR");
     }
 
     //  0 accountcode

@@ -51,9 +51,8 @@ RB_Variant SAIL_SqlCommonFunctions::selectFromWhereId(const RB_String& field,
         if (!query.first()) return RB_Variant();
         return query.value(0);
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "SAIL_SqlCommonFunctionsFunction::selectFromWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("SAIL_SqlCommonFunctionsFunction::selectFromWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return RB_Variant();
@@ -80,9 +79,8 @@ bool SAIL_SqlCommonFunctions::update(const RB_String& table,
 
     bool success = query.exec(qStr);
     if (!success) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "SAIL_SqlCommonFunctionsFunction::updateStringWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("SAIL_SqlCommonFunctionsFunction::updateStringWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return success;
@@ -113,9 +111,8 @@ RB_Variant SAIL_SqlCommonFunctions::selectFromWhere(const RB_String& field,
         if (!query.first()) return RB_Variant();
         return query.value(0);
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "SAIL_SqlCommonFunctionsFunction::selectFromWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("SAIL_SqlCommonFunctionsFunction::selectFromWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return RB_Variant();
@@ -135,9 +132,8 @@ void SAIL_SqlCommonFunctions::selectAllFromWhere(QSqlQuery& query,
     qStr = "SELECT * FROM " + table.toLower() + " WHERE " + whereStr + ";";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "SAIL_SqlCommonFunctionsFunction::getSelectAllFromWhere() %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("SAIL_SqlCommonFunctionsFunction::getSelectAllFromWhere() "
+                        + query.lastError().text() + " ERROR");
     }
 }
 
@@ -166,9 +162,8 @@ void SAIL_SqlCommonFunctions::selectRouteDistanceData(QSqlQuery& query,
     }
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "SAIL_SqlCommonFunctions::selectRouteDistanceData() 1 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("SAIL_SqlCommonFunctions::selectRouteDistanceData() "
+                        + query.lastError().text() + " ERROR");
         SAIL_DIALOGFACTORY->commandMessage("SAIL_SqlCommonFunctions::selectRouteDistanceData() "
                                           + query.lastError().text() + "\n");
     }
@@ -219,9 +214,8 @@ void SAIL_SqlCommonFunctions::selectTrackDistanceData(QSqlQuery& query) {
     qStr += " WHERE sail_track.parent='" + rootId + "';";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "SAIL_SqlCommonFunctions::selectTrackDistanceData() 1 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("SAIL_SqlCommonFunctions::selectTrackDistanceData() "
+                        + query.lastError().text() + " ERROR");
         SAIL_DIALOGFACTORY->commandMessage("SAIL_SqlCommonFunctions::selectTrackDistanceData() "
                                           + query.lastError().text() + "\n");
     }
@@ -258,9 +252,8 @@ void SAIL_SqlCommonFunctions::selectRouteCoordinates(QSqlQuery& query,
     qStr += " ORDER BY sail_routecoordinate.seqno ASC;";
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "SAIL_SqlCommonFunctions::selectRouteCoordinates() 1 %s ERROR",
-                        query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("SAIL_SqlCommonFunctions::selectRouteCoordinates() "
+                        + query.lastError().text() + " ERROR");
         SAIL_DIALOGFACTORY->commandMessage("SAIL_SqlCommonFunctions::selectTrackDistanceData() "
                                           + query.lastError().text() + "\n");
     }

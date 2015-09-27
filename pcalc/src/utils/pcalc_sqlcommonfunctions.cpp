@@ -54,9 +54,8 @@ RB_Variant PCALC_SqlCommonFunctions::selectFromWhere(const RB_String& field,
         if (!query.first()) return RB_Variant();
         return query.value(0);
     } else {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "PCALC_SqlCommonFunctionsFunction::selectFromWhereId() "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("PCALC_SqlCommonFunctionsFunction::selectFromWhereId() "
+                        + query.lastError().text() + " ERROR");
     }
 
     return RB_Variant();

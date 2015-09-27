@@ -138,8 +138,8 @@ bool RB_ModelFactory::removeModel(int type) {
             // by the destructor of the model
             (*iter).second = NULL;
             success = true;
-            RB_DEBUG->print("RB_ModelFactory::removeModel() %i",
-                            model->getModelType());
+            RB_DEBUG->info(QString("RB_ModelFactory::removeModel() %1")
+                           .arg(model->getModelType()));
         }
     }
 

@@ -206,9 +206,8 @@ bool ACC_CreateCostCenterBalanceReport::execute(RB_ObjectBase* costCenterBalance
     setCustomerCostGroupSql(qStr); ACC_DIALOGFACTORY->commandMessage(qStr); // test only
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateCostCenterBalanceReport::execute() 1 "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateCostCenterBalanceReport::execute() 1 "
+                         + query.lastError().text() + " ERROR");
         RB_DEBUG->print(qStr);
     }
 
@@ -216,9 +215,8 @@ bool ACC_CreateCostCenterBalanceReport::execute(RB_ObjectBase* costCenterBalance
     setCustomerCostCenterSql(qStr); ACC_DIALOGFACTORY->commandMessage(qStr); // test only
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateCostCenterBalanceReport::execute() 2 "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateCostCenterBalanceReport::execute() 2 "
+                         + query.lastError().text() + " ERROR");
         RB_DEBUG->print(qStr);
     }
 
@@ -226,9 +224,8 @@ bool ACC_CreateCostCenterBalanceReport::execute(RB_ObjectBase* costCenterBalance
     setSupplierCostGroupSql(qStr); ACC_DIALOGFACTORY->commandMessage(qStr); // test only
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateCostCenterBalanceReport::execute() 3 "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateCostCenterBalanceReport::execute() 3 "
+                         + query.lastError().text() + " ERROR");
         RB_DEBUG->print(qStr);
     }
 
@@ -236,9 +233,8 @@ bool ACC_CreateCostCenterBalanceReport::execute(RB_ObjectBase* costCenterBalance
     setSupplierCostCenterSql(qStr); ACC_DIALOGFACTORY->commandMessage(qStr); // test only
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "ACC_CreateCostCenterBalanceReport::execute() 4 "
-                        "%s ERROR", query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CreateCostCenterBalanceReport::execute() 4 "
+                         + query.lastError().text() + " ERROR");
         RB_DEBUG->print(qStr);
     }
 

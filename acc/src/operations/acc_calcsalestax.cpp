@@ -49,9 +49,8 @@ bool ACC_CalcSalesTax::execute(RB_ObjectBase* taxList) {
     // Tax of sales payable high, function 22
     setQuery(qStr, ACC2::ControlTaxPayHigh);
     if (!query.exec(qStr)) {
-        RB_DEBUG->print(RB_Debug::D_ERROR,
-                "ACC_CalcSalesTax::execute() %s ERROR",
-                query.lastError().text().toStdString().c_str());
+        RB_DEBUG->error("ACC_CalcSalesTax::execute() "
+                        + query.lastError().text() + " ERROR");
         return false;
     }
     addObject(taxList, query, ACC2::ControlTaxPayHigh);
