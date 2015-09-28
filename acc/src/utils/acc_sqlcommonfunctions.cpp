@@ -862,29 +862,33 @@ QDate ACC_SqlCommonFunctions::lastBankTransactionDate(const RB_String& bankAccId
 }
 
 void ACC_SqlCommonFunctions::getDebtorAccrued(QSqlQuery& query,
+                                              const QDate& startDate,
                                               const QDate& endDate) {
     // enum TransType
     // TransDebtor = 10,           /**< Debtor, sales invoice or customer transaction type */
     // TransSalesOrder = 30,       /**< Sales order (Note: not sales invoice) */
 
-    getInvoicesAccrued(query, endDate, 10, 30);
+    getInvoicesAccrued(query, startDate, endDate, 10, 30);
 }
 
 void ACC_SqlCommonFunctions::getCreditorAccrued(QSqlQuery& query,
+                                                const QDate& startDate,
                                                 const QDate& endDate) {
     // enum TransType
     // TransCreditor = 20,         /**< Creditor, purchase invoice or supplier transaction type */
     // TransPurchOrder = 40,       /**< Purchase order (Note: not purchase invoice) */
 
-    getInvoicesAccrued(query, endDate, 20, 40);
+    getInvoicesAccrued(query, startDate, endDate, 20, 40);
 }
 
 void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
+                                                const QDate& startDate,
                                                 const QDate& endDate,
                                                 int debtCredType1,
                                                 int debtCredType2) {
 
     RB_String rootId = ACC_MODELFACTORY->getRootId();
+    RB_String start = startDate.toString(Qt::ISODate);
     RB_String end = endDate.toString(Qt::ISODate);
     RB_String docType1 = RB_String::number(debtCredType1);
     RB_String docType2 = RB_String::number(debtCredType2);
@@ -937,7 +941,7 @@ void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
         "AND (acc_transdoc.doctype=" + docType1 + " OR acc_transdoc.doctype=" + docType2 + ") "
         "AND acc_project.id='" + rootId + "' "
         "AND " + qSubStr2 + " ORDER BY acc_transdoc.transno";
-*/
+
     RB_String qStr = "SELECT SUBSTR(acc_transdoc.transdate,1,10) as transdocdate, "
             "acc_transdoc.transno, acc_transdoc.description, acc_transdoc.totalamountrec, "
             "acc_transdoc.totalamountpay, (SELECT SUM(acc_transallocn.amount) "
@@ -954,6 +958,25 @@ void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
             "AND acc_project.id='" + rootId + "' "
             "GROUP BY acc_transdoc.transno "
             "ORDER BY acc_transdoc.transno;";
+*/
+
+    RB_String qStr = "SELECT SUBSTR(acc_transdoc.transdate,1,10) as transdocdate, "
+                     "acc_transdoc.transno, acc_transdoc.description, "
+                     "acc_transdoc.totalamountrec, acc_transdoc.totalamountpay, "
+                     "SUBSTR(t2.transdate,1,10) AS dateallocdoc, t2.transno AS transnoallocdoc, "
+                     "acc_transallocn.amount as allocamount "
+                     "FROM acc_transdoc "
+                     "LEFT OUTER JOIN acc_transallocn ON acc_transallocn.docallocto_id = acc_transdoc.id "
+                     "INNER JOIN acc_chartmaster ON acc_chartmaster.id=acc_transdoc.parent "
+                     "INNER JOIN acc_project ON acc_project.id=acc_chartmaster.parent "
+                     "LEFT OUTER JOIN acc_transdoc as t2 ON t2.id=acc_transallocn.docfrom_id "
+                     "WHERE (acc_transdoc.settled=0 OR t2.transdate>'" + end
+            + "' OR t2.transdate<'0') AND acc_transdoc.transdate>'" + start
+            + "' AND acc_transdoc.transdate<='" + end
+            + "' AND (acc_transdoc.doctype=" + docType1
+            + " OR acc_transdoc.doctype=" + docType2
+            + ") AND acc_project.id='" + rootId
+            + "' ORDER BY acc_transdoc.transno;";
 
 // RB_DEBUG->print(qStr);
 

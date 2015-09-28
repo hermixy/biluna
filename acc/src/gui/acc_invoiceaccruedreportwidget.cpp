@@ -111,11 +111,13 @@ void ACC_InvoiceAccruedReportWidget::setColumnWidthsAndTitle() {
 
     // 8 columns
     setColumnWidth(10);
-    setColumnWidth(10);
-    setColumnWidth(50);
-    setColumnWidth(10);
-    setColumnWidth(10);
-    setColumnWidth(10);
+    setColumnWidth(9);
+    setColumnWidth(30);
+    setColumnWidth(9);
+    setColumnWidth(9);
+    setColumnWidth(15);
+    setColumnWidth(9);
+    setColumnWidth(9);
 
     // Title
     setAlternatingRow(true);
