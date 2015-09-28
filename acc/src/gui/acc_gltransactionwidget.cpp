@@ -992,8 +992,8 @@ void ACC_GlTransactionWidget::on_pbDeleteItem_clicked() {
 
     // remove gltrans (which reverses chartdetails/trialbalance), done at fileSave()
     mItemTransModel->removeRows(index.row(), 1, QModelIndex());
-    mItemTransModel->submitAllAndSelect();
-    mHandleAllocn.submitAllAndSelect();
+//    mItemTransModel->submitAllAndSelect(); might save a non valid transaction
+//    mHandleAllocn.submitAllAndSelect();
 
     mIsValidateAmounts = false;
     setWindowModified(true);
