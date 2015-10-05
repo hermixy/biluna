@@ -11,6 +11,8 @@
 
 #!/bin/bash
 
+echo "--- building Biluna ---"
+
 if [ "x$OS" == "xWindows_NT" ]
 then
     export MAKE="MinGW32-make -j2"
@@ -36,7 +38,7 @@ cd ..
 # and others are gui applications
 # Tests applications are not build
 
-for p in db te gl clp hlp ves pcc auth job frm web cad ldt eql gv ecc
+for p in db acc crm mrp pcalc peng sail scan srm bil
 do
 	if [ -d $p ]
 	then

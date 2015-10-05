@@ -45,3 +45,11 @@ With normal mainwindow this is set to NO!
 In XML file this NO is equal to:
 <key>LSUIElement</key>
 <string>NO</string>
+
+BUILD OPENSSL
+Create by hand the folder: /usr/local/ssl 
+In thrd/openssl:
+chmod +x <full path to>Configure (e.g. /Users/gudula/Documents/biluna/scripts/build_openssl.sh )
+sudo ./Configure darwin64-x86_64-cc -shared
+make (creates: libcrypto.1.0.0.dylib .. libel.1.0.0.dylib .. )
+make install 
