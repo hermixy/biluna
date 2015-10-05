@@ -74,9 +74,9 @@ public:
     virtual bool isAccountUsed(const RB_String& accountId);
     virtual QDate lastBankTransactionDate(const RB_String& bankAccId);
 
-    virtual void getDebtorAccrued(QSqlQuery& query,
+    virtual void getDebtorAccrued(QSqlQuery& query, const QDate& startDate,
                                   const QDate& endDate);
-    virtual void getCreditorAccrued(QSqlQuery& query,
+    virtual void getCreditorAccrued(QSqlQuery& query, const QDate& startDate,
                                     const QDate& endDate);
 
     // Debug only:
@@ -91,7 +91,7 @@ private:
                      const QString& taxLocationId,
                      const QString& dispReceiptTaxProvinceId,
                      const QString& taxCategoryId);
-    void getInvoicesAccrued(QSqlQuery& query,
+    void getInvoicesAccrued(QSqlQuery& query, const QDate &startDate,
                             const QDate& endDate,
                             int debtCredType1,
                             int debtCredType2);

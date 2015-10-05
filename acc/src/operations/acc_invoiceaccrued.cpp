@@ -38,12 +38,16 @@ ACC_InvoiceAccrued::~ACC_InvoiceAccrued() {
 bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
     ACC_SqlCommonFunctions sqlFunc;
 
+    QDate startDate = mEndDate;
+    startDate = startDate.addYears(-1);
+    startDate = startDate.addDays(1);
+
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (mIsDebtor) {
-        sqlFunc.getDebtorAccrued(query, mEndDate);
+        sqlFunc.getDebtorAccrued(query, startDate, mEndDate);
     } else {
-        sqlFunc.getCreditorAccrued(query, mEndDate);
+        sqlFunc.getCreditorAccrued(query, startDate, mEndDate);
     }
 
      /*
@@ -53,7 +57,9 @@ bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
      * 2 - description
      * 3 - totalamountrec
      * 4 - totalamountpay
-     * 5 - allocatedamount
+     * 5 - dateallocdoc
+     * 6 - transnoallocdoc
+     * 7 - allocatedamount
      */
 
     RB_String transDocDate = "";
@@ -61,6 +67,8 @@ bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
     RB_String description = "";
     RB_String totalAmountRec = "";
     RB_String totalAmountPay = "";
+    RB_String dateallocdoc = "";
+    RB_String transnoallocdoc = "";
     RB_String allocatedAmount = "";
 
     while (query.next()) {
@@ -69,7 +77,9 @@ bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
         description = query.value(2).toString();
         totalAmountRec = query.value(3).toString();
         totalAmountPay = query.value(4).toString();
-        allocatedAmount = query.value(5).toString();
+        dateallocdoc = query.value(5).toString();
+        transnoallocdoc = query.value(6).toString();
+        allocatedAmount = query.value(7).toString();
 
         RB_ObjectBase* obj = new RB_ObjectAtomic("", invoiceAccruedList, "ACC_InvoiceAccrued");
         invoiceAccruedList->addObject(obj);
@@ -78,6 +88,8 @@ bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
         obj->addMember("description", "-", description, RB2::MemberChar125);
         obj->addMember("totalamountrec", "-", totalAmountRec, RB2::MemberChar125);
         obj->addMember("totalamountpay", "-", totalAmountPay, RB2::MemberChar125);
+        obj->addMember("dateallocdoc", "-", dateallocdoc, RB2::MemberChar125);
+        obj->addMember("transnoallocdoc", "-", transnoallocdoc, RB2::MemberChar125);
         obj->addMember("allocatedamount", "-", allocatedAmount, RB2::MemberChar125);
     }
 

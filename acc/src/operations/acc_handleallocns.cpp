@@ -116,6 +116,12 @@ bool ACC_HandleAllocns::addAllocn(RB_MmProxy* itemModel,
                                   const RB_String& docToId,
                                   const RB_String& docToDspl,
                                   const RB_String& docFromId) {
+    if (!itemModel ||
+            (itemModel->getModelType() != (int)ACC_MODELFACTORY->ModelBankTrans
+             && itemModel->getModelType() != (int)ACC_MODELFACTORY->ModelMemoTrans)) {
+        RB_DEBUG->error("ACC_HandleAllocns::addAllocn() itemModel ERROR");
+        return false;
+    }
     // Undo existing allocation if exists
     // The relevant transAlloc, transDocTo and itemFrom are now part of list
     // Below is false because doc item is reversable and not deleted
@@ -148,15 +154,7 @@ bool ACC_HandleAllocns::addAllocn(RB_MmProxy* itemModel,
     double bankMemItemAmt = itemModel->getCurrentValue("amount", Qt::EditRole).toDouble();
     double newAllocAmt = 0.0;
 
-    if (bankMemItemAmt <= allocatableAmt
-            && itemModel->getModelType() == (int)ACC_MODELFACTORY->ModelBankTrans
-            && (transDocTo->getValue("doctype").toInt() == (int)ACC2::TransDebtor
-                 || transDocTo->getValue("doctype").toInt() == (int)ACC2::TransSalesOrder)) {
-        newAllocAmt = bankMemItemAmt;
-    } else if (bankMemItemAmt >= allocatableAmt
-                && itemModel->getModelType() == (int)ACC_MODELFACTORY->ModelBankTrans
-                && (transDocTo->getValue("doctype").toInt() == (int)ACC2::TransCreditor
-                     || transDocTo->getValue("doctype").toInt() == (int)ACC2::TransPurchOrder)) {
+    if (std::fabs(bankMemItemAmt) <= std::fabs(allocatableAmt)) {
         newAllocAmt = bankMemItemAmt;
     } else {
         // Bank/cash or memo item amount is too much for the transDocTo amount
