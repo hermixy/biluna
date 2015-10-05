@@ -56,12 +56,12 @@ ACC_BankImportCheckDialog::ACC_BankImportCheckDialog(QWidget *parent)
     mIsNumbersUpdated = false;
     mBankAccount = "";
 
-    mChartMasterModel = NULL;
+//    mChartMasterModel = NULL;
     mDocModel = NULL;
     mDocMapper = NULL;
     mItemModel = NULL;
     mItemMapper = NULL;
-    mAllocDocModel = NULL; // selection document only
+//    mAllocDocModel = NULL; // selection document only
 
     mGlTransList = new RB_ObjectContainer("", NULL, "ACC_GlTransList",
                                           ACC_OBJECTFACTORY);
@@ -90,7 +90,7 @@ ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() {
     //    delete mAllocDocModel;
     //    delete mAllocModel;
 
-    delete mChartMasterModel; // shared because of parent of document model
+//    delete mChartMasterModel; // shared because of parent of document model
     delete mDocModel;  // OK if not used anywhere else
     delete mItemModel; // OK if not used anywhere else
 
