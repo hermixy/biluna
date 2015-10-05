@@ -1,6 +1,7 @@
 devpath=/Users/gudula/Documents/biluna/bil/release
 appdir=$devpath/Biluna.app
 qtdir=/Users/gudula/Qt/5.5/clang_64
+# opensslpath=/usr/local/ssl
 
 echo "Creating folders for Biluna"
 mkdir $appdir
