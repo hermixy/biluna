@@ -226,7 +226,7 @@ void DB_CalculatorWidget::slotHandleKeypadNumericPress(DB_KeypadNumeric::Button 
             break;
 
         default: break;
-  }
+    }
 
     QTimer::singleShot(0, mEditor, SLOT(setFocus()));
 
@@ -241,12 +241,19 @@ void DB_CalculatorWidget::keyReleaseEvent(QKeyEvent* ke) {
         QString str = mEditor->toPlainText();
         int left = 0;
         int right = 0;
+
         for (int i = 0; i < str.size(); ++i) {
             if (str.at(i) == QChar('(')) {
                 left += 1;
             } else if (str.at(i) == QChar(')')) {
                 right += 1;
             }
+        }
+
+        QString nextChar = " ";
+
+        if (cursor.atEnd() || (!cursor.atEnd() && cursor.position())) {
+
         }
 
         if (left - 1 >= right) {
@@ -282,6 +289,28 @@ void DB_CalculatorWidget::createFixedConnections() {
 //            this , SLOT(handleEditorTextChange()));
 
     // ..
+}
+
+void DB_CalculatorWidget::addCloseParenthese() {
+    QTextCursor cursor = mEditor->textCursor();
+
+    if (cursor.hasSelection()) {
+        if (cursor.anchor() < cursor.position()) {
+            cursor.setPosition(cursor.position());
+            mEditor->setTextCursor(cursor);
+            mEditor->insert(")");
+        }
+// TODO: replace ( with ) and set ( at position
+//        else {
+//            cursor.setPosition(cursor.anchor());
+//            mEditor->setTextCursor(cursor);
+//            mEditor->insert(")");
+//        }
+    } else {
+        mEditor->insert(")");
+        cursor.setPosition(cursor.position() - 1);
+        mEditor->setTextCursor(cursor);
+    }
 }
 
 /**

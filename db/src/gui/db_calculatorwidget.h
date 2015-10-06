@@ -61,6 +61,7 @@ private:
     void setupUi();
     void clearEditor();
     void createFixedConnections();
+    void addCloseParenthese();
 
 
     Editor* mEditor;
