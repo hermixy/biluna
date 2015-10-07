@@ -125,7 +125,7 @@ private:
     RB_String mBankAccount;
 
     //! Chart of Accounts (GL) model for combobox
-    RB_MmProxy* mChartMasterModel;
+//    RB_MmProxy* mChartMasterModel;
     //! Document model of transaction
     RB_MmProxy* mDocModel;
     //! Item model, child of document model
@@ -133,7 +133,7 @@ private:
 //    //! GL transaction model, for deletion only
 //    RB_MmProxy* mGlTransModel;
     //! (Debtor, creditor) document transaction model for selection of allocation
-    RB_MmProxy* mAllocDocModel;
+//    RB_MmProxy* mAllocDocModel;
 //    //! ID list of documents (to be) deleted, for the deletion of GL transactions
 //    RB_StringList mDeleteDocIdList;
 

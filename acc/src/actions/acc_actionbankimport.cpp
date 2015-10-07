@@ -52,22 +52,14 @@ void ACC_ActionBankImport::trigger() {
     ACC_ActionGlTransaction action;
     action.trigger();
 
-//    // Check required settings
-//    if (ACC_MODELFACTORY->getRootId() == ""
-//            || !ACC_MODELFACTORY->getDatabase().isOpen()) {
-//        ACC_DIALOGFACTORY->requestWarningDialog(tr("No project selected.\n"
-//                                                   "Connect first to database\n"
-//                                                   "and then select project."));
-//        return;
-//    }
-
     // Check widget state
     RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
             ACC_DialogFactory::WidgetGlTransaction);
 
     if (mdiWin->isWindowModified()) {
-        ACC_DIALOGFACTORY->requestWarningDialog(tr("Data in GL Transaction window is modified.\n"
-                                                   "Please save your data first."));
+        ACC_DIALOGFACTORY->requestWarningDialog(
+                    tr("Data in GL Transaction window is modified.\n"
+                       "Please save your data first."));
         return;
     }
 

@@ -1835,6 +1835,8 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
         mItemTransMapper->addMapping(leItemAmount, mItemTransModel->fieldIndex("amount"));
         // Bank can be negative or positive value (debit or credit)
 //        leItemAmount->setValidator(new QDoubleValidator(-999999.99, 999999.99, 2, this));
+        mItemTransMapper->addMapping(leItemBankAccount, mItemTransModel->fieldIndex("bankaccountnumber"));
+        mItemTransMapper->addMapping(deItemDate, mItemTransModel->fieldIndex("transdate"));
 
         pbTotalPayable->show();
         pbTotalReceivable->show();
@@ -1843,6 +1845,10 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
         lblDebitCredit->show();
         lblIleCostCenter->hide();
         ileCostCenter->hide();
+        lblItemDate->show();
+        deItemDate->show();
+        lblItemBankAccount->show();
+        leItemBankAccount->show();
         gbItemTax->hide();
         break;
     }
@@ -1876,6 +1882,10 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
         lblDebitCredit->hide();
         lblIleCostCenter->show();
         ileCostCenter->show();
+        lblItemDate->hide();
+        deItemDate->hide();
+        lblItemBankAccount->hide();
+        leItemBankAccount->hide();
         gbItemTax->show();
         break;
     }
@@ -1909,6 +1919,10 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
         lblDebitCredit->hide();
         lblIleCostCenter->show();
         ileCostCenter->show();
+        lblItemDate->hide();
+        deItemDate->hide();
+        lblItemBankAccount->hide();
+        leItemBankAccount->hide();
         gbItemTax->show();
         break;
     }
@@ -1930,6 +1944,10 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
         lblDebitCredit->show();
         lblIleCostCenter->hide();
         ileCostCenter->hide();
+        lblItemDate->hide();
+        deItemDate->hide();
+        lblItemBankAccount->hide();
+        leItemBankAccount->hide();
         gbItemTax->hide();
         break;
     }
@@ -1965,8 +1983,10 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
     case ACC2::TransBankCash : {
         for (int i = 0; i < mItemTransModel->columnCount(QModelIndex()); ++i) {
             if (i != mItemTransModel->fieldIndex("description")
-                && i != mItemTransModel->fieldIndex("chartmaster_idx")
-                && i != mItemTransModel->fieldIndex("amount")) {
+                    && i != mItemTransModel->fieldIndex("chartmaster_idx")
+                    && i != mItemTransModel->fieldIndex("amount")
+                    && i != mItemTransModel->fieldIndex("bankaccountnumber")
+                    && i != mItemTransModel->fieldIndex("transdate")) {
                 tvItem->hideColumn(i);
             } else {
                 tvItem->showColumn(i);
@@ -2202,7 +2222,7 @@ void ACC_GlTransactionWidget::updateGlTransWidget() {
 }
 
 /**
- * Update GL transations
+ * Update GL transactions
  */
 void ACC_GlTransactionWidget::updateGlTransactions() {
     if (isWindowModified()) {
@@ -2622,7 +2642,8 @@ bool ACC_GlTransactionWidget::isValidTransDoc() {
 void ACC_GlTransactionWidget::updateBeforeSave() {
 
     int typeNo = mTransDocModel->getCurrentValue("transno").toInt();
-    QDateTime transDate = mTransDocModel->getCurrentValue("transdate").toDateTime();
+    QDateTime docDate = mTransDocModel->getCurrentValue("transdate").toDateTime();
+    QString transDocDate = docDate.toString(Qt::ISODate);
     RB_String transDocId = mTransDocModel->getCurrentValue("id").toString();
     QModelIndex idx;
 
@@ -2638,12 +2659,19 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
             idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transno"));
             mItemTransModel->setData(idx, typeNo, Qt::EditRole);
             idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transdate"));
-            mItemTransModel->setData(idx, transDate.toString(Qt::ISODate), Qt::EditRole);
+            QString itemDate = mItemTransModel->data(idx).toString();
+
+            if (itemDate > transDocDate) {
+                // apparently bank input by hand and document date updated
+                // only if date has been set to a previous date
+                mItemTransModel->setData(idx, transDocDate, Qt::EditRole);
+            }
+
             idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transdoc_id"));
             mItemTransModel->setData(idx, transDocId, Qt::EditRole);
         }
 
-        mHandleAllocn.updateTransDate(mItemTransModel, transDate);
+        mHandleAllocn.updateTransDate(mItemTransModel, docDate);
         break;
     }
     case ACC2::TransCreditor : {

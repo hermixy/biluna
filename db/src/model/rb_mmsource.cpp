@@ -95,7 +95,7 @@ RB_MmSource::~RB_MmSource() {
     }
 
     RB_DEBUG->print(QString("RB_MmSource::~RB_MmSource() - %1 OK")
-                    .arg(mTableName.toStdString()));
+                    .arg(mTableName));
 }
 
 /**

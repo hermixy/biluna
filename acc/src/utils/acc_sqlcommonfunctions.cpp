@@ -960,6 +960,8 @@ void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
             "ORDER BY acc_transdoc.transno;";
 */
 
+    // 'Z' in SQL are for including the date even if there is time behind date
+
     RB_String qStr = "SELECT SUBSTR(acc_transdoc.transdate,1,10) as transdocdate, "
                      "acc_transdoc.transno, acc_transdoc.description, "
                      "acc_transdoc.totalamountrec, acc_transdoc.totalamountpay, "
@@ -971,9 +973,9 @@ void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
                      "INNER JOIN acc_project ON acc_project.id=acc_chartmaster.parent "
                      "LEFT OUTER JOIN acc_transdoc as t2 ON t2.id=acc_transallocn.docfrom_id "
                      "WHERE (acc_transdoc.settled=0 OR t2.transdate>'" + end
-            + "' OR t2.transdate<'0') AND acc_transdoc.transdate>'" + start
+            + "Z' OR t2.transdate<'0') AND acc_transdoc.transdate>='" + start
             + "' AND acc_transdoc.transdate<='" + end
-            + "' AND (acc_transdoc.doctype=" + docType1
+            + "Z' AND (acc_transdoc.doctype=" + docType1
             + " OR acc_transdoc.doctype=" + docType2
             + ") AND acc_project.id='" + rootId
             + "' ORDER BY acc_transdoc.transno;";

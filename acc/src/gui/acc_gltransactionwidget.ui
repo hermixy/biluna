@@ -807,8 +807,11 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="layoutWidget_1">
-          <layout class="QGridLayout" name="gridLayout_9" columnstretch="2,3">
+         <widget class="QWidget" name="">
+          <layout class="QGridLayout" name="gridLayout_9">
+           <property name="spacing">
+            <number>3</number>
+           </property>
            <item row="0" column="0" colspan="2">
             <widget class="Line" name="line">
              <property name="orientation">
@@ -952,7 +955,7 @@
              </layout>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="2" column="0" rowspan="2">
             <layout class="QGridLayout" name="gridLayout_8">
              <property name="verticalSpacing">
               <number>3</number>
@@ -1134,6 +1137,37 @@
             </layout>
            </item>
            <item row="2" column="1">
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLabel" name="lblItemDate">
+               <property name="text">
+                <string>  Date</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDateEdit" name="deItemDate">
+               <property name="displayFormat">
+                <string>yyyy-MM-dd</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lblItemBankAccount">
+               <property name="text">
+                <string>Bank Account</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="leItemBankAccount"/>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="1">
             <widget class="QGroupBox" name="gbItemTax">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
