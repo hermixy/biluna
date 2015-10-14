@@ -84,6 +84,8 @@ class Editor : public QTextEdit
     void autoCalcEnabled( const QString & );
     void autoCalcDisabled();
     void returnPressed();
+    // added for Biluna
+    void leftParenPressed();
 
   public slots:
     void appendHistory( const QString & result, const QString & expression );

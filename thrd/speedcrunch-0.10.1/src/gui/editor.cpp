@@ -961,6 +961,13 @@ void Editor::keyPressEvent( QKeyEvent * e )
     return;
   }
 
+  // added for Biluna
+  if (e->key() == Qt::Key_ParenLeft) {
+      emit leftParenPressed();
+      e->accept();
+      return;
+  }
+
   QTextEdit::keyPressEvent( e );
 }
 
