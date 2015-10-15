@@ -333,6 +333,14 @@ RB_MmProxy* ACC_ModelFactory::getModel(int type, bool shared) {
         model->setDisplayRole(18, RB2::AlignFinancialAmount);
         model->setDisplayRole(22, RB2::AlignFinancialAmount);
         break;
+    case ModelTransDocSelect:
+        model = getTableModel(db, mObjectFactory, type, "ACC_TransDocList", shared);
+        model->setSourceSortOrder(RB2::SortOrderDescending, "transno");
+        model->setDisplayRole(16, RB2::AlignFinancialAmount);
+        model->setDisplayRole(17, RB2::AlignFinancialAmount);
+        model->setDisplayRole(18, RB2::AlignFinancialAmount);
+        model->setDisplayRole(22, RB2::AlignFinancialAmount);
+        break;
     case ModelUnitOfMeasure:
         model = getTableModel(db, mObjectFactory, type, "ACC_UnitOfMeasureList", shared);
         model->setSourceSortOrder(RB2::SortOrderAscending, "unitname");
@@ -541,6 +549,9 @@ RB_MmProxy* ACC_ModelFactory::getParentModel(int type) {
         break;
     case ModelTransDoc:
         iter = mModelList.find(ModelChartMaster);
+        break;
+    case ModelTransDocSelect:
+        iter = mModelList.find(ModelNone);
         break;
     case ModelUnitOfMeasure:
         iter = mModelList.find(ModelNone);

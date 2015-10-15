@@ -1279,6 +1279,46 @@ void ACC_GlTransactionWidget::on_ileAllocation_clicked() {
     mHandleAllocn.addAllocn(mItemTransModel, docToId, docToDspl,
                             mTransDocModel->getCurrentId());
 
+    // Set customer or supplier bank account if still empty
+    // TODO: the ACC does not handle multiple bank accounts
+    RB_String fieldName = "bankaccountnumber";
+    RB_String bankAccount =
+            mItemTransModel->getCurrentValue(fieldName).toString();
+
+    if (mTransType == ACC2::TransBankCash && !bankAccount.isEmpty()) {
+        RB_String tableName = "acc_customer";
+        RB_String custSuppId = obj->getValue("debtor_idx").toString();
+
+        if (custSuppId.isEmpty()) {
+            tableName = "acc_supplier";
+            custSuppId = obj->getValue("creditor_idx").toString();
+        }
+
+        if (!custSuppId.isEmpty()) {
+            custSuppId = custSuppId.remove(38, custSuppId.length());
+
+            // check if a bank account number already exists
+            ACC_SqlCommonFunctions f;
+            RB_String existingBankAccount =
+                    f.selectFromWhereId(fieldName,
+                                        tableName, custSuppId).toString();
+            if (existingBankAccount.isEmpty()) {
+                // set bank account number based on information from the payment
+                f.update(tableName, fieldName, bankAccount, custSuppId);
+            } else if (existingBankAccount != bankAccount) {
+                int result = ACC_DIALOGFACTORY->requestYesNoDialog(
+                            tr("Bank Account"),
+                            existingBankAccount + tr(" is the existing acount")
+                            + ",\n" + bankAccount
+                            + tr(" is the current account.") + ".\n"
+                            + tr("Replace the existing account?"));
+                if (result == QDialog::Accepted) {
+                    f.update(tableName, fieldName, bankAccount, custSuppId);
+                }
+            }
+        }
+    }
+
     dlg->deleteLater();
 }
 
@@ -2739,7 +2779,7 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
             mItemTransModel->setData(idx, typeNo, Qt::EditRole);
         }
 
-        mHandleAllocn.updateTransDate(mItemTransModel, transDate);
+        mHandleAllocn.updateTransDate(mItemTransModel, docDate);
         break;
     }
     default :

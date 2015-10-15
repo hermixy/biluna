@@ -105,6 +105,7 @@ protected:
     virtual void changeEvent(QEvent* e);
     virtual bool canInsertFromMimeData(const QMimeData* source) const;
     virtual void insertFromMimeData(const QMimeData* source);
+    virtual void keyPressEvent(QKeyEvent* ke);
 
 protected slots:
     void slotAdjustActions();
@@ -120,6 +121,8 @@ private:
 
     void setPaletteColors();
 
+    void handleLeftLimitCharPressed();
+
     bool mIsDialog;
     int mCursorAnchor;
     int mCursorPosition;
@@ -129,6 +132,12 @@ private:
     QColor mAlternateBaseColor;
     QColor mBaseColor;
     QColor mTextColor;
+
+    //! Left limit char such as { [ ( < " and '
+    QString mLeftLimitChar;
+    //! Right limit char such as } ] ) > " and '
+    QString mRightLimitChar;
+
 };
 
 #endif // RB_TEXTEDIT_H

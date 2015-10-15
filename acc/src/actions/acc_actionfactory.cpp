@@ -19,6 +19,7 @@
 #include "acc_actionassetvaluation.h"
 #include "acc_actionbankcsvmapping.h"
 #include "acc_actionbankimport.h"
+#include "acc_actionbankpaymentreport.h"
 #include "acc_actionchartmaster.h"
 #include "acc_actionclose.h"
 #include "acc_actioncogsglposting.h"
@@ -291,6 +292,12 @@ void ACC_ActionFactory::getAccountingMenu(QMenu* menu, QToolBar* tb = NULL) {
     ga = ACC_ActionPoInvoiceAgedReport::createGuiAction();
     subMenu->addAction(ga);
     tb->addAction(ga);
+    ga->setEnabled(false);
+    connect(ACC_MODELFACTORY, SIGNAL(rootIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
+
+    ga = ACC_ActionBankPaymentReport::createGuiAction();
+    subMenu->addAction(ga);
     ga->setEnabled(false);
     connect(ACC_MODELFACTORY, SIGNAL(rootIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));

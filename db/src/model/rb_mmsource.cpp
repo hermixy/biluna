@@ -460,13 +460,13 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
 
             if (fieldName.endsWith("_idx")) {
                 // the Uuid part with the curly braces without additional text
-                var = QSqlRelationalTableModel::data(idx, RB2::RoleOrigData);
+                var = data(idx, RB2::RoleOrigData);
                 mObject->setValue(col, var);
                 // the Uuid part including the curly braces removed
-                var = QSqlRelationalTableModel::data(idx, Qt::DisplayRole);
+                var = data(idx, Qt::DisplayRole);
                 mObject->setDValue(col, var);
             } else {
-                var = QSqlRelationalTableModel::data(idx, Qt::DisplayRole);
+                var = data(idx, Qt::DisplayRole);
                 mObject->setValue(col, var);
             }
         }

@@ -27,6 +27,17 @@ public:
 
     virtual void print(QPrinter* printer);
 
+protected:
+    void keyPressEvent(QKeyEvent* ke);
+
+private:
+    void handleLeftLimitCharPressed();
+
+    //! Left limit char such as { [ ( < " and '
+    QString mLeftLimitChar;
+    //! Right limit char such as } ] ) > " and '
+    QString mRightLimitChar;
+
 };
 
 #endif // RB_PLAINTEXTEDIT_H

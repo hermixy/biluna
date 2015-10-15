@@ -220,10 +220,9 @@ void DB_CalculatorWidget::slotHandleKeypadNumericPress(DB_KeypadNumeric::Button 
     }
 }
 
-// TODO: change to more generic function/class/utility and make general available
 void DB_CalculatorWidget::slotHandleLeftParenPressed() {
     // Handles keyPressEvent in Editor class if key == Qt::Key_ParenLeft
-    // and signal emitted for this widget to catch
+    // and signal emitted for this widget to catch, and key pad
 
     // cursor positions
     QTextCursor cursor = mEditor->textCursor();
