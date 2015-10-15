@@ -70,6 +70,8 @@ void DB_CalculatorWidget::setupUi() {
 
     mEditor = new Editor(mEvaluator, mFunctions, mConstants);
     vbLayout->addWidget(mEditor);
+    connect(mEditor, SIGNAL(leftParenPressed()),
+            this, SLOT(slotHandleLeftParenPressed()));
 
     QHBoxLayout* hbLayout = new QHBoxLayout();
     hbLayout->setMargin(0);
@@ -254,6 +256,10 @@ void DB_CalculatorWidget::slotHandleLeftParenPressed() {
         }
     }
 
+    cursor.setPosition(openCharPos, QTextCursor::MoveAnchor);
+    cursor.setPosition(closeCharPos, QTextCursor::KeepAnchor);
+    mEditor->setTextCursor(cursor);
+
     if (cursor.hasSelection()) {
         // selection of text prevails above left/right mismatch
         cursor.setPosition(closeCharPos, QTextCursor::MoveAnchor);
@@ -262,13 +268,12 @@ void DB_CalculatorWidget::slotHandleLeftParenPressed() {
         cursor.setPosition(openCharPos, QTextCursor::MoveAnchor);
         mEditor->setTextCursor(cursor);
         mEditor->insert("(");
+        cursor.setPosition(closeCharPos + 2, QTextCursor::MoveAnchor);
+        mEditor->setTextCursor(cursor);
     } else if (left < right) {
         // complete the left parenthese only
-        cursor.setPosition(openCharPos, QTextCursor::MoveAnchor);
-        mEditor->setTextCursor(cursor);
         mEditor->insert("(");
     } else {
-        cursor.setPosition(openCharPos, QTextCursor::MoveAnchor);
         mEditor->insert("()");
         cursor.setPosition(cursor.position() - 1);
         mEditor->setTextCursor(cursor);
