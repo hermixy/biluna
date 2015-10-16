@@ -88,9 +88,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="ileName">
+      <widget class="QLineEdit" name="leName">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
        <property name="placeholderText">
-        <string>Name</string>
+        <string>Name from navigation window</string>
        </property>
       </widget>
      </item>
@@ -158,9 +161,13 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>teReport</tabstop>
+  <tabstop>deFrom</tabstop>
+  <tabstop>deTo</tabstop>
   <tabstop>cbSelect</tabstop>
   <tabstop>pbRefresh</tabstop>
+  <tabstop>leName</tabstop>
+  <tabstop>leBankAccount</tabstop>
+  <tabstop>teReport</tabstop>
  </tabstops>
  <resources>
   <include location="../../../db/src/gui/db.qrc"/>

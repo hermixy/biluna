@@ -25,6 +25,15 @@ ACC_BankPaymentReportWidget::ACC_BankPaymentReportWidget(QWidget *parent)
                         : RB_SimpleReportWidget(parent) {
     setupUi(this);
     mTeReport = teReport;
+
+    RB_MmProxy* custSupplModel
+            = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelCustomer);
+    connect(custSupplModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+            this, SLOT(slotCustSupplSelectionChanged(QModelIndex,QModelIndex)));
+    custSupplModel
+                = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelSupplier);
+    connect(custSupplModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+            this, SLOT(slotCustSupplSelectionChanged(QModelIndex,QModelIndex)));
 }
 
 /**
@@ -65,10 +74,9 @@ void ACC_BankPaymentReportWidget::on_pbRefresh_clicked() {
                 new RB_ObjectContainer("", NULL, "ACC_BankPaymentList");
 
         ACC_CreateBankPaymentList oper;
-//        oper.setLimits(cbField->currentText(),
-//                       cbFrom->currentText(),
-//                       cbTo->currentText());
-//        oper.execute(paymentList);
+        oper.setLimits(ACC_MODELFACTORY->getRootId(), deFrom->text(),
+                       deTo->text(), leBankAccount->text());
+        oper.execute(paymentList);
 
         // Create report
         RB_String html;
@@ -90,20 +98,51 @@ void ACC_BankPaymentReportWidget::on_pbRefresh_clicked() {
     }
 }
 
+void ACC_BankPaymentReportWidget::slotCustSupplSelectionChanged(
+        const QModelIndex& current, const QModelIndex& /*previous*/) {
+    if (!current.isValid()) {
+        leName->clear();
+        leBankAccount->clear();
+    } else {
+        const RB_MmProxy* custSupplModel
+                = dynamic_cast<const RB_MmProxy*>(current.model());
+
+        if (custSupplModel) {
+            if (custSupplModel->getCurrentValue("name").toString().toLower()
+                    == "acc_customer") {
+                leName->setText(
+                        custSupplModel->getCurrentValue("mname").toString());
+            } else {
+                leName->setText(
+                        custSupplModel->getCurrentValue("suppname").toString());
+            }
+            leBankAccount->setText(
+               custSupplModel->getCurrentValue("bankaccountnumber").toString());
+        }
+    }
+}
+
 /**
  * Set report column widths and title
  */
 void ACC_BankPaymentReportWidget::setColumnWidthsAndTitle() {
     clearColumnWidths();
 
-    // 8 columns (1+6+1)
-    setColumnWidth(15);
-
-    for (int i = 0; i < 6; ++i) {
-        setColumnWidth(10);
-    }
-
+    /*
+    * SQL:
+    * 0 - description
+    * 1 - SUBSTR(chartmaster_idx, 39) as GL
+    * 2 - amount
+    * 3 - transno
+    * 4 - amountcleared as cleared
+    * 5 - SUBSTR(transdate, 1, 10) as transdate
+    */
+    setColumnWidth(55);
     setColumnWidth(25);
+
+    for (int i = 0; i < 4; ++i) {
+        setColumnWidth(5);
+    }
 
     // Title
     setAlternatingRow(true);
@@ -147,7 +186,7 @@ void ACC_BankPaymentReportWidget::changeEvent(QEvent *e) {
 }
 
 /**
- * Set comboboxes with alphabeth.
+ * Set date and combobox with default values
  */
 void ACC_BankPaymentReportWidget::setSelectionWidgets() {
     QDate date = QDate::currentDate();

@@ -78,6 +78,11 @@ public:
                                   const QDate& endDate);
     virtual void getCreditorAccrued(QSqlQuery& query, const QDate& startDate,
                                     const QDate& endDate);
+    virtual void getBankPaymentList(QSqlQuery& query,
+                                    const RB_String& projectId,
+                                    const RB_String& dateFrom,
+                                    const RB_String& dateTo,
+                                    const RB_String& bankAccountNumber);
 
     // Debug only:
     virtual bool isGlTransOrphanExisting();

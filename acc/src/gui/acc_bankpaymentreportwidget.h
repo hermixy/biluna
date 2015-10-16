@@ -42,6 +42,8 @@ public:
 
 public slots:
     virtual void on_pbRefresh_clicked();
+    virtual void slotCustSupplSelectionChanged(const QModelIndex& current,
+                                               const QModelIndex& previous);
 
 protected:
     void changeEvent(QEvent *e);

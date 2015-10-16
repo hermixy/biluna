@@ -8,7 +8,6 @@
  * See http://www.red-bag.com for further details.
  *****************************************************************/
 
-
 #include "acc_createbankpaymentlist.h"
 
 #include "acc_modelfactory.h"
@@ -19,7 +18,10 @@
  * Constructor
  */
 ACC_CreateBankPaymentList::ACC_CreateBankPaymentList() {
-    mObject = NULL;
+    mProjectId = "";
+    mDateFrom = "";
+    mDateTo = "";
+    mBankAccountNumber = "";
 }
 
 /**
@@ -34,63 +36,51 @@ ACC_CreateBankPaymentList::~ACC_CreateBankPaymentList() {
  * @param obj result object, if applicable
  * @return true on success, default false
  */
-bool ACC_CreateBankPaymentList::execute(RB_ObjectContainer* licenseList) {
-    ACC_SqlCommonFunctions sqlFunc;
-
-    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
-
-    if (mField.contains("last",Qt::CaseInsensitive)) {
-//        sqlFunc.selectLastNameData(query, mFieldFrom, mFieldTo);
-    } else if (mField.contains("end",Qt::CaseInsensitive)) {
-//        sqlFunc.selectLicenseEndData(query, mFieldFrom, mFieldTo);
-    } else if (mField.contains("modified",Qt::CaseInsensitive)) {
-//        sqlFunc.selectModifiedData(query, mFieldFrom, mFieldTo);
-    } else {
-        RB_DEBUG->error("ACC_CreateBankPaymentList::execute() error");
+bool ACC_CreateBankPaymentList::execute(RB_ObjectContainer* paymentList) {
+    if (!paymentList || mProjectId.isEmpty() || mDateFrom.isEmpty()
+            || mDateTo.isEmpty()) {
+        RB_DEBUG->error("ACC_CreateBankPaymentList::execute() ERROR");
         return false;
     }
 
+    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
+    ACC_SqlCommonFunctions sqlFunc;
+    sqlFunc.getBankPaymentList(query, mProjectId, mDateFrom, mDateTo,
+                               mBankAccountNumber);
+
      /*
      * SQL:
-     * 0 - contactname
-     * 1 - licensecode
-     * 2 - licensestart
-     * 3 - licenseend
-     * 4 - modified
-     * 5 - customer
-     * 6 - ordernumber
-     * 7 - comment
+     * 0 - description
+     * 1 - SUBSTR(chartmaster_idx, 39) as GL
+     * 2 - amount
+     * 3 - transno
+     * 4 - amountcleared as cleared
+     * 5 - SUBSTR(transdate, 1, 10) as transdate
      */
 
-    RB_String contactName = "";
-    RB_String licenseCode = "";
-    RB_String licenseStart = "";
-    RB_String licenseEnd = "";
-    RB_String modified = "";
-    RB_String customer = "";
-    RB_String orderNumber = "";
-    RB_String comment = "";
+    RB_String descr = "";
+    RB_String gl = "";
+    RB_String amount = "";
+    RB_String transno = "";
+    RB_String cleared = "";
+    RB_String transdate = "";
 
     while (query.next()) {
-        contactName = query.value(0).toString();
-        licenseCode = query.value(1).toString();
-        licenseStart = query.value(2).toString();
-        licenseEnd = query.value(3).toString();
-        modified = query.value(4).toString();
-        customer = query.value(5).toString();
-        orderNumber = query.value(6).toString();
-        comment = query.value(7).toString();
+        descr = query.value(0).toString();
+        gl = query.value(1).toString();
+        amount = query.value(2).toString();
+        transno = query.value(3).toString();
+        cleared = query.value(4).toString();
+        transdate = query.value(5).toString();
 
-        RB_ObjectBase* obj = new RB_ObjectAtomic("", licenseList, "ACC_LicenseData");
-        licenseList->addObject(obj);
-        obj->addMember("contactname", "-", contactName, RB2::MemberChar125);
-        obj->addMember("licensecode", "-", licenseCode, RB2::MemberChar125);
-        obj->addMember("licensestart", "-", licenseStart, RB2::MemberChar125);
-        obj->addMember("licenseend", "-", licenseEnd, RB2::MemberChar125);
-        obj->addMember("modifieddate", "-", modified, RB2::MemberChar125);
-        obj->addMember("customer", "-", customer, RB2::MemberChar125);
-        obj->addMember("ordernumber", "-", orderNumber, RB2::MemberChar125);
-        obj->addMember("comment", "-", comment, RB2::MemberChar255);
+        RB_ObjectBase* obj = new RB_ObjectAtomic("", paymentList, "ACC_BankPayment");
+        paymentList->addObject(obj);
+        obj->addMember("descr", "-", descr, RB2::MemberChar255);
+        obj->addMember("gl", "-", gl, RB2::MemberChar125);
+        obj->addMember("amount", "-", amount, RB2::MemberDouble);
+        obj->addMember("transno", "-", transno, RB2::MemberChar125);
+        obj->addMember("cleared", "-", cleared, RB2::MemberDouble);
+        obj->addMember("transdate", "-", transdate, RB2::MemberChar40);
     }
 
     return true;
@@ -107,4 +97,3 @@ bool ACC_CreateBankPaymentList::execute(RB_ObjectBase* /*input*/, RB_ObjectBase*
                     "not implemented ERROR");
     return false;
 }
-

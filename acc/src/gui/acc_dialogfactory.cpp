@@ -173,6 +173,15 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
 
     }
     case WidgetBankPaymentReport: {
+        // activate parent dockwidget, will findWidget() (dockWidget) first
+        RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
+                                        "dockwidget_navigation",
+                                        Qt::LeftDockWidgetArea);
+        ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
+        wdgt->slotShowTab(ACC_NavigationWidget::TabCustomer);
+        dw->show();
+
+        // create requested widget
         wgt = new ACC_BankPaymentReportWidget(parent);
         break;
 

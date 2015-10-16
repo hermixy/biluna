@@ -23,23 +23,26 @@ public:
     ACC_CreateBankPaymentList();
     virtual ~ACC_CreateBankPaymentList();
 
-    virtual bool execute(RB_ObjectContainer* licenseList = NULL);
-    virtual bool execute(RB_ObjectBase* input,
-                         RB_ObjectBase* output);
+    virtual bool execute(RB_ObjectContainer* paymentList);
+    virtual bool execute(RB_ObjectBase* /*input*/,
+                         RB_ObjectBase* /*output*/);
 
-    virtual void setLimits(const RB_String& field,
-                           const RB_String& fieldFrom,
-                           const RB_String& fieldTo) {
-        mField = field;
-        mFieldFrom = fieldFrom;
-        mFieldTo = fieldTo;
+    virtual void setLimits(const RB_String& projectId,
+                           const RB_String& dateFrom,
+                           const RB_String& dateTo,
+                           const RB_String& bankAccountNumber) {
+        mProjectId = projectId;
+        mDateFrom = dateFrom;
+        mDateTo = dateTo;
+        mBankAccountNumber = bankAccountNumber;
     }
 
-protected:
-    RB_ObjectBase* mObject;
-    RB_String mField;
-    RB_String mFieldFrom;
-    RB_String mFieldTo;
+private:
+    RB_String mProjectId;
+    RB_String mDateFrom;
+    RB_String mDateTo;
+    RB_String mBankAccountNumber;
+
 };
 
 #endif // ACC_CREATEBANKPAYMENTLIST_H
