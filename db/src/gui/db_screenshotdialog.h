@@ -36,6 +36,7 @@ protected:
 
 public slots:
     void on_pbNew_clicked();
+    void on_pbClipboard_clicked();
     void on_pbSave_clicked();
     void on_pbClose_clicked();
     void slotShootScreen();
@@ -43,6 +44,7 @@ public slots:
 
 private:
     void updateScreenshotLabel();
+    void setPixmap(QPixmap& selPixmap);
 
     Ui::DB_ScreenshotDialog* ui;
     QPixmap mOriginalPixmap;
