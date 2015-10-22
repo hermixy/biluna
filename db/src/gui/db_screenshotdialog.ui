@@ -224,7 +224,7 @@
      <item>
       <widget class="QPushButton" name="pbClipboard">
        <property name="toolTip">
-        <string>Save to clipboard</string>
+        <string>Save to clipboard [CTRL+C]</string>
        </property>
        <property name="text">
         <string>Clipboard</string>

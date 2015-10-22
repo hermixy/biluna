@@ -45,7 +45,8 @@ FORMS = \
     ../src/gui/rb_dialogbase.ui \
     ../src/gui/rb_idxlineedit.ui \
     ../src/gui/rb_projecteditdialog.ui \
-    ../src/gui/rb_toolbuttonbar.ui
+    ../src/gui/rb_toolbuttonbar.ui \
+    $$PWD/gui/rb_membereditdialog.ui
 
 
 HEADERS = \
@@ -215,6 +216,7 @@ HEADERS = \
     ../src/gui/rb_ledelegate.h \
     ../src/gui/rb_mainwindow.h \
     ../src/gui/rb_mdiwindow.h \
+    ../src/gui/rb_memberdelegate.h \
     ../src/gui/rb_plaintextedit.h \
     ../src/gui/rb_plotterwidget.h \
     ../src/gui/rb_projecteditdialog.h \
@@ -292,7 +294,8 @@ HEADERS = \
     ../src/visitors/rb_htmlwriter.h \
     ../src/visitors/rb_visitor.h \
     ../src/visitors/rb_xmlreader.h \
-    ../src/visitors/rb_xmlwriter.h
+    ../src/visitors/rb_xmlwriter.h \
+    $$PWD/gui/rb_membereditdialog.h
 
 SOURCES = \
     ../src/actions/db_actionfactory.cpp \
@@ -454,6 +457,7 @@ SOURCES = \
     ../src/gui/rb_idxlineedit.cpp \
     ../src/gui/rb_mainwindow.cpp \
     ../src/gui/rb_mdiwindow.cpp \
+    ../src/gui/rb_memberdelegate.cpp \
     ../src/gui/rb_ledelegate.cpp \
     ../src/gui/rb_plaintextedit.cpp \
     ../src/gui/rb_plotterwidget.cpp \
@@ -521,7 +525,8 @@ SOURCES = \
     ../src/visitors/rb_htmlwriter.cpp \
     ../src/visitors/rb_visitor.cpp \
     ../src/visitors/rb_xmlreader.cpp \
-    ../src/visitors/rb_xmlwriter.cpp
+    ../src/visitors/rb_xmlwriter.cpp \
+    $$PWD/gui/rb_membereditdialog.cpp
 
 
 RESOURCES = \

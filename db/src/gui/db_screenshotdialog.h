@@ -28,6 +28,7 @@ public:
     void init();
 
 protected:
+    void keyReleaseEvent(QKeyEvent* e);
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);

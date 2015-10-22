@@ -45,6 +45,21 @@ void DB_ScreenshotDialog::init() {
     RB_SETTINGS->endGroup();
 }
 
+void DB_ScreenshotDialog::keyReleaseEvent(QKeyEvent* e) {
+    int key = e->key();
+
+    if (key) { // switch case does not work, do not know why.
+        QPixmap selPixmap;
+        setPixmap(selPixmap);
+        QClipboard* clipboard = QApplication::clipboard();
+        clipboard->setPixmap(selPixmap);
+        e->accept();
+        return;
+    }
+
+    RB_Dialog::keyReleaseEvent(e);
+}
+
 void DB_ScreenshotDialog::mousePressEvent(QMouseEvent* event) {
     mStartPoint = event->pos();
 
