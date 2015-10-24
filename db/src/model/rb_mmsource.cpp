@@ -440,7 +440,6 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
     // QSqlRelationalTableModel
     int row = currentIndex.row();
     int colCount = columnCount();
-    RB_String fieldName = "";
     RB_Variant var;
 
     if (level == RB2::ResolveNone) {
@@ -452,24 +451,15 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
             RB_ObjectMember* mem = mObject->getMember(col);
 
             if (!mem) {
-                RB_DEBUG->error("RB_MmSource::getCurrentObject() member does not exist ERROR");
+                RB_DEBUG->error("RB_MmSource::getCurrentObject() member ERROR");
                 continue;
             }
 
-            fieldName = mem->getName();
-
-            if (fieldName.endsWith("_idx")) {
-                // the Uuid part with the curly braces without additional text
-                var = QSqlRelationalTableModel::data(idx, RB2::RoleOrigData);
-                mObject->setValue(col, var);
-                // the Uuid part including the curly braces removed
-                var = QSqlRelationalTableModel::data(idx, Qt::DisplayRole);
-                mObject->setDValue(col, var);
-            } else {
-                var = QSqlRelationalTableModel::data(idx, Qt::DisplayRole);
-                mObject->setValue(col, var);
-            }
+            var = data(idx, Qt::EditRole);
+            mObject->setValue(col, var);
         }
+
+        mObject->deleteFlag(RB2::FlagIsDirty);
     } else {
         // Children are to be added because of resolve level,
         // only possible by reading from database
@@ -481,6 +471,7 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
         mObject->setId(id);
         mObject->dbRead(database(), level);
     }
+
 
     return mObject;
 }
@@ -497,6 +488,48 @@ RB_ObjectBase* RB_MmSource::getCurrentObject() {
 //        RB_DEBUG->print(headerData(i, Qt::Horizontal).toString());
 //    }
 
+}
+
+/**
+ * Update current object. Works only if model current object and
+ * obj have the same ID.
+ * @brief RB_MmSource::updateCurrentObject
+ * @param obj
+ */
+void RB_MmSource::updateCurrentObject(RB_ObjectBase* obj) {
+    if (!obj || !obj->getFlag(RB2::FlagIsDirty)) {
+        return;
+    }
+
+    QModelIndex idx = getCurrentIndex();
+    int row = idx.row();
+    idx = index(row, 0, idx.parent()); // id
+
+    if (idx.data().toString() != obj->getId()) {
+        RB_DEBUG->error("RB_MmSource::updateCurrentObject() ERROR");
+        return;
+    }
+
+    QString fieldName = "";
+    int colCount = columnCount();
+
+    for (int col = RB2::HIDDENCOLUMNS; col < colCount; ++col) {
+        RB_ObjectMember* mem = mObject->getMember(col);
+
+        if (!mem) {
+            RB_DEBUG->error("RB_MmSource::updateCurrentObject() member ERROR");
+            continue;
+        }
+
+        fieldName = mem->getName();
+        idx = index(row, fieldIndex(fieldName), idx.parent());
+        RB_String currentStr = mem->getValue().toString();
+        RB_String previousStr = mem->getPreviousValue().toString();
+
+        if (currentStr != previousStr) {
+            setData(idx, mem->getValue());
+        }
+    }
 }
 
 /**
@@ -963,7 +996,7 @@ RB_Variant RB_MmSource::hiddenTableData(const QModelIndex& index, int role) cons
 
     if (role == Qt::DisplayRole) {
         if (fieldName.endsWith("_idx")) {
-            // example: {2deac140-ffb4-11df-a976-0800200c9a66}Debitor 8-4-4-4-12
+            // example: {2deac140-ffb4-11df-a976-0800200c9a66}Debtor 8-4-4-4-12
             RB_String str = QSqlRelationalTableModel::data(index, role).toString();
             // remove the Uuid part including the curly braces
             // Still necessary? refer to edit role
@@ -1433,7 +1466,7 @@ bool RB_MmSource::removeRows(int row, int count,
         if (success) {
             delete delObj;
         } else {
-            delObj->delFlag(RB2::FlagIsDeleted);
+            delObj->deleteFlag(RB2::FlagIsDeleted);
             objC->insert(row, delObj);
         }
     }
@@ -1837,7 +1870,7 @@ RB_Variant RB_MmSource::objectData(const QModelIndex& index, int role) const {
             for (int relRow = 0; relRow < count; ++relRow) {
                 QModelIndex idx = relModel->index(relRow, 0);
 
-                if (idx.data().toString() == obj->getValue(col)) {
+                if (idx.data().toString() == obj->getIdValue(col)) {
                     // ID found
                     QSqlRelation rel = relation(col - mHiddenColumns);
                     QString fieldName = rel.displayColumn();
@@ -1866,7 +1899,7 @@ RB_Variant RB_MmSource::objectData(const QModelIndex& index, int role) const {
             return obj->getDValue(col);
         }
     } else if (role == RB2::RoleOrigData) {
-        return obj->getValue(col);
+        return obj->getIdValue(col);
     }
 
     return RB_Variant();
@@ -1876,7 +1909,7 @@ RB_Variant RB_MmSource::objectData(const QModelIndex& index, int role) const {
  * Set the object data with value at index (at row and column)
  */
 bool RB_MmSource::setObjectData(const QModelIndex& index,
-                                    const RB_Variant& value, int role) {
+                                const RB_Variant& value, int role) {
     if (!index.isValid() || (!isTreeModel() && database().isOpen())) {
         RB_DEBUG->print("RB_MmSource::setObjectData() ERROR");
         return false;
@@ -1887,26 +1920,8 @@ bool RB_MmSource::setObjectData(const QModelIndex& index,
 
     RB_ObjectBase* obj = static_cast<RB_ObjectBase*>(index.internalPointer());
     int col = index.column();
-    RB_String fieldName = obj->getMember(col)->getName();
+    obj->setValue(col, value);
 
-    if (fieldName.endsWith("_idx")) {
-        // example: {2deac140-ffb4-11df-a976-0800200c9a66}Debitor
-        RB_String str = value.toString();
-        RB_String uuidStr = str.remove(38, str.length()); // remove the part after the Uuid
-        obj->setValue(col, uuidStr);
-        str = value.toString();
-
-        if (str != "0") {
-            RB_String displayStr = str.remove(0, 38); // remove the Uuid part including the curly braces
-            obj->setDValue(col, displayStr);
-        } else {
-            obj->setDValue(col, "");
-        }
-
-        // RB_DEBUG->printObject(obj);
-    } else {
-        obj->setValue(col, value);
-    }
     return true;
 }
 
@@ -1972,18 +1987,6 @@ void RB_MmSource::unsetModelStructure() {
     // restore model
     mRoot = tmpRoot;
 }
-
-/**
- * Get and/or create the data widget mapper
- */
-//RB_DataWidgetMapper* RB_MmSource::getMapper() {
-//    RB_DataWidgetMapper* mapper = new RB_DataWidgetMapper(this);
-//    mapper->setModel(this);
-//    connect(this, SIGNAL(currentRowChanged(QModelIndex)), mapper,
-//            SLOT(setCurrentModelIndex(QModelIndex)));
-//    return mapper;
-//    return NULL;
-//}
 
 /**
  * Get row (sequence) number for object, only applicable for in-memory models
@@ -2313,12 +2316,7 @@ now2 = QDateTime::currentDateTime(); check31 += now1.msecsTo(now2); now1 = now2;
 now2 = QDateTime::currentDateTime(); check32 += now1.msecsTo(now2); now1 = now2;
             fieldName = record.fieldName(i);
 now2 = QDateTime::currentDateTime(); check33 += now1.msecsTo(now2); now1 = now2;
-            if (fieldName.endsWith("_idx")) {
-                RB_String strVal = value.toString();
-                currentObj->setValue(i, strVal.remove(38, strVal.length()));
-                strVal = value.toString();
-                currentObj->setDValue(i, strVal.remove(0, 38));
-            } else if (fieldName.endsWith("_id")) {
+            if (fieldName.endsWith("_id")) {
                 currentObj->setValue(i /*fieldName*/, value);
                 setRelationalValue(i, value);
             } else {
@@ -2431,7 +2429,7 @@ now1 = now2;
 
     RB_FlagVisitor* vis = new RB_FlagVisitor();
     vis->setFlag(RB2::FlagFromDatabase);
-    vis->delFlag(RB2::FlagIsDirty);
+    vis->deleteFlag(RB2::FlagIsDirty);
     mRoot->acceptVisitor(*vis);
     delete vis;
 
@@ -2512,12 +2510,7 @@ void RB_MmSource::createSubTree(RB_ObjectBase* parent) {
            fieldName = record.fieldName(i);
            value = record.value(i);
 
-           if (fieldName.endsWith("_idx")) {
-               RB_String strVal = value.toString();
-               currentObj->setValue(i, strVal.remove(38, strVal.length()));
-               strVal = value.toString();
-               currentObj->setDValue(i, strVal.remove(0, 38));
-           } else if (fieldName.endsWith("_id")) {
+           if (fieldName.endsWith("_id")) {
                currentObj->setValue(i /*fieldName*/, value);
                setRelationalValue(i, value);
            } else {
@@ -2526,7 +2519,7 @@ void RB_MmSource::createSubTree(RB_ObjectBase* parent) {
         }
 
         currentObj->setFlag(RB2::FlagFromDatabase);
-        currentObj->delFlag(RB2::FlagIsDirty);
+        currentObj->deleteFlag(RB2::FlagIsDirty);
     }
 }
 

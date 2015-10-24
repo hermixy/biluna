@@ -157,8 +157,8 @@ void ACC_BankTransDoc::setBankTransData(RB_ObjectBase* bankTrans,
             + biObj->getValue("transseconddescription").toString();
     appendTransDocDescription(itemDescr);
     bankTrans->setValue("description",itemDescr);
-    bankTrans->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId());
-    bankTrans->setDValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultName());
+    bankTrans->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
+                        + ACC_QACHARTMASTER->getAccDefaultName());
 //    bankTrans->setValue("accountcontrol", 0);
     bankTrans->setValue("amount", biObj->getValue("transamount").toDouble());
     bankTrans->setValue("type", (int)ACC2::TransBankCash);

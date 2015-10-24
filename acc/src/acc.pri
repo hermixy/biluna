@@ -14,6 +14,7 @@ FORMS += \
     ../src/gui/acc_assetwidget.ui \
     ../src/gui/acc_bankimportcheckdialog.ui \
     ../src/gui/acc_bankmappingdialog.ui \
+    ../src/gui/acc_bankpaymentreportwidget.ui \
     ../src/gui/acc_chartmasterdialog.ui \
     ../src/gui/acc_cogsglpostingdialog.ui \
     ../src/gui/acc_contacteditwidget.ui \
@@ -69,6 +70,7 @@ HEADERS += \
     ../src/actions/acc_actionassetvaluation.h \
     ../src/actions/acc_actionbankcsvmapping.h \
     ../src/actions/acc_actionbankimport.h \
+    ../src/actions/acc_actionbankpaymentreport.h \
     ../src/actions/acc_actionchartmaster.h \
     ../src/actions/acc_actionclose.h \
     ../src/actions/acc_actioncogsglposting.h \
@@ -141,6 +143,7 @@ HEADERS += \
     ../src/gui/acc_assetwidget.h \
     ../src/gui/acc_bankimportcheckdialog.h \
     ../src/gui/acc_bankmappingdialog.h \
+    ../src/gui/acc_bankpaymentreportwidget.h \
     ../src/gui/acc_chartmasterdialog.h \
     ../src/gui/acc_cogsglpostingdialog.h \
     ../src/gui/acc_contacteditwidget.h \
@@ -283,6 +286,7 @@ HEADERS += \
     ../src/operations/acc_banktransdoc.h \
     ../src/operations/acc_calcsalestax.h \
     ../src/operations/acc_createalloclist.h \
+    ../src/operations/acc_createbankpaymentlist.h \
     ../src/operations/acc_createcostcenter3report.h \
     ../src/operations/acc_createcostcenterbalancereport.h \
     ../src/operations/acc_createcostcenterreport.h \
@@ -325,6 +329,7 @@ SOURCES += \
     ../src/actions/acc_actionassetvaluation.cpp \
     ../src/actions/acc_actionbankcsvmapping.cpp \
     ../src/actions/acc_actionbankimport.cpp \
+    ../src/actions/acc_actionbankpaymentreport.cpp \
     ../src/actions/acc_actionchartmaster.cpp \
     ../src/actions/acc_actionclose.cpp \
     ../src/actions/acc_actioncogsglposting.cpp \
@@ -395,6 +400,7 @@ SOURCES += \
     ../src/gui/acc_assetwidget.cpp \
     ../src/gui/acc_bankimportcheckdialog.cpp \
     ../src/gui/acc_bankmappingdialog.cpp \
+    ../src/gui/acc_bankpaymentreportwidget.cpp \
     ../src/gui/acc_chartmasterdialog.cpp \
     ../src/gui/acc_cogsglpostingdialog.cpp \
     ../src/gui/acc_contacteditwidget.cpp \
@@ -517,6 +523,7 @@ SOURCES += \
     ../src/operations/acc_banktransdoc.cpp \
     ../src/operations/acc_calcsalestax.cpp \
     ../src/operations/acc_createalloclist.cpp \
+    ../src/operations/acc_createbankpaymentlist.cpp \
     ../src/operations/acc_createcostcenter3report.cpp \
     ../src/operations/acc_createcostcenterbalancereport.cpp \
     ../src/operations/acc_createcostcenterreport.cpp \
@@ -565,6 +572,7 @@ OTHER_FILES += \
     ../src/gui/acc_assetwidget.dox \
     ../src/gui/acc_bankimportcheckdialog.dox \
     ../src/gui/acc_bankmappingdialog.dox \
+    ../src/gui/acc_bankpaymentreportwidget.dox \
     ../src/gui/acc_chartmasterdialog.dox \
     ../src/gui/acc_cogsglpostingdialog.dox \
     ../src/gui/acc_contacteditwidget.dox \

@@ -103,8 +103,8 @@ void ACC_Customer::createMembers() {
     addMember("lastpaiddate", "-", "", RB2::MemberChar20);
     addMember("bankname", "-", "", RB2::MemberChar125); // Bank name
     addMember("bankaddress", "-", "", RB2::MemberChar255);
-    addMember("bankcode", "-", "", RB2::MemberChar40); // swift/ABA/routing
-    addMember("bankaccountnumber", "-", "", RB2::MemberChar40); // IBAN/BIC
+    addMember("bankcode", "-", "", RB2::MemberChar40); // BIC/Swift/ABA/routing
+    addMember("bankaccountnumber", "-", "", RB2::MemberChar40); // IBAN
     addMember("creditlimit", "-", 0.0, RB2::MemberDouble);
     addMember("invaddrbranch", "-", 0, RB2::MemberInteger); // int_id TODO yes/no int
     addMember("discountcode", "-", "", RB2::MemberChar10);

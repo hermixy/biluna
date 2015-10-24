@@ -19,6 +19,7 @@
 #include "acc_assettypedialog.h"
 #include "acc_bankmappingdialog.h"
 #include "acc_bankimportcheckdialog.h"
+#include "acc_bankpaymentreportwidget.h"
 #include "acc_chartmasterdialog.h"
 #include "acc_cogsglpostingdialog.h"
 #include "acc_contacteditwidget.h"
@@ -168,6 +169,20 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
 
         // create requested widget
         wgt = new ACC_AssetValuationWidget(parent);
+        break;
+
+    }
+    case WidgetBankPaymentReport: {
+        // activate parent dockwidget, will findWidget() (dockWidget) first
+        RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
+                                        "dockwidget_navigation",
+                                        Qt::LeftDockWidgetArea);
+        ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
+        wdgt->slotShowTab(ACC_NavigationWidget::TabCustomer);
+        dw->show();
+
+        // create requested widget
+        wgt = new ACC_BankPaymentReportWidget(parent);
         break;
 
     }

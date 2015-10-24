@@ -35,8 +35,7 @@ public:
                     const RB_String& unit,
                     const RB_Variant& value,
                     RB2::MemberType type = RB2::MemberNone,
-                    const RB_Variant& prevValue = RB_Variant(),
-                    const RB_Variant& dispValue = RB_Variant());
+                    const RB_Variant& prevValue = RB_Variant());
     virtual ~RB_ObjectMember();
 
     virtual RB_ObjectBase* getParent() const;
@@ -54,10 +53,11 @@ public:
     virtual RB_Variant getValue() const;
     virtual void setPreviousValue(const RB_Variant& val);
     virtual RB_Variant getPreviousValue() const;
-    virtual void setDisplayValue(const RB_Variant& val);
     virtual RB_Variant getDisplayValue() const;
+    virtual RB_Variant getUuidValue() const;
 
     virtual RB_String toString();
+
 private:
     //! Pointer to parent RB_ObjectBase
     RB_ObjectBase* mParent;
@@ -71,8 +71,6 @@ private:
     RB_Variant mValue;
     //! Previous value of member/variable
     RB_Variant mPreviousValue;
-    //! Display value of member/variable for example in relational tables
-    RB_Variant mDisplayValue;
 
 };
 

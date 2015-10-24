@@ -29,7 +29,7 @@ ACC_SelectAllocnDialog::~ACC_SelectAllocnDialog() {
 
 void ACC_SelectAllocnDialog::init() {
     // false will create a new model and to be delete here in dialog
-    mModel = ACC_MODELFACTORY->getModel(ACC_MODELFACTORY->ModelTransDoc, false);
+    mModel = ACC_MODELFACTORY->getModel(ACC_MODELFACTORY->ModelTransDocSelect, false);
     // mModel->select();
     mModel->setRoot("none"); // because parent is ACC_ChartMaster not ACC_Project
 

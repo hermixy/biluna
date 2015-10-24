@@ -252,7 +252,7 @@ bool ACC_DbVisitor::dbUpdateList() {
 
             if (qInsert.exec()) {
                 obj->setFlag(RB2::FlagFromDatabase);
-                obj->delFlag(RB2::FlagIsDirty);
+                obj->deleteFlag(RB2::FlagIsDirty);
             } else {
                 RB_DEBUG->error("RB_DbVisitor::dbUpdate()1 ERROR");
                 RB_DEBUG->print(qInsert.lastError().text());
@@ -285,7 +285,7 @@ bool ACC_DbVisitor::dbUpdateList() {
 
             if (qUpdate.exec()) {
                 obj->setFlag(RB2::FlagFromDatabase);
-                obj->delFlag(RB2::FlagIsDirty);
+                obj->deleteFlag(RB2::FlagIsDirty);
             } else {
                 RB_DEBUG->error("RB_DbVisitor::dbUpdate()1 ERROR");
                 RB_DEBUG->print(qUpdate.lastError().text());

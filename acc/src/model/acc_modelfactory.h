@@ -106,7 +106,8 @@ public:
         ModelTaxGroupAuth,              /**< Tax group authorities, is container of tax authorities */
         ModelTaxProvince,               /**< Tax provinces of stock location or warehouses */
         ModelTransAllocn,               /**< Transaction allocation, e.g. invoice to bank receipt */
-        ModelTransDoc,                  /**< Transaction documents, e.g. reference to invoice */
+        ModelTransDoc,                  /**< Transaction documents, invoices, bank etc. */
+        ModelTransDocSelect,            /**< Select a transaction documents, e.g. reference to invoice */
         ModelUnitOfMeasure,             /**< Units of measurement for stock items */
         ModelDefault                    /**< Default- or all models */
     };

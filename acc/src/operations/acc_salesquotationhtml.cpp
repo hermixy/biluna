@@ -168,7 +168,7 @@ void ACC_SalesQuotationHtml::setAddress() {
  */
 RB_ObjectBase* ACC_SalesQuotationHtml::getInvoiceAddress(RB_ObjectBase* cust) {
     int invoiceHomeOffice = cust->getValue("invaddrbranch").toInt(); // TODO: invaddrbranch is confusing
-    RB_String custParentId = cust->getValue("custparent_idx").toString();
+    RB_String custParentId = cust->getIdValue("custparent_idx").toString();
 
     if (invoiceHomeOffice != 1 || custParentId.size() < 38 /* is ID size */) {
         return cust;

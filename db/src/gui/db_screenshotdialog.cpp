@@ -45,6 +45,21 @@ void DB_ScreenshotDialog::init() {
     RB_SETTINGS->endGroup();
 }
 
+void DB_ScreenshotDialog::keyReleaseEvent(QKeyEvent* e) {
+    int key = e->key();
+
+    if (key) { // switch case does not work, do not know why.
+        QPixmap selPixmap;
+        setPixmap(selPixmap);
+        QClipboard* clipboard = QApplication::clipboard();
+        clipboard->setPixmap(selPixmap);
+        e->accept();
+        return;
+    }
+
+    RB_Dialog::keyReleaseEvent(e);
+}
+
 void DB_ScreenshotDialog::mousePressEvent(QMouseEvent* event) {
     mStartPoint = event->pos();
 
@@ -108,6 +123,13 @@ void DB_ScreenshotDialog::on_pbNew_clicked() {
                        this, SLOT(slotShootScreen()));
 }
 
+void DB_ScreenshotDialog::on_pbClipboard_clicked() {
+    QPixmap selPixmap;
+    setPixmap(selPixmap);
+    QClipboard* clipboard = QApplication::clipboard();
+    clipboard->setPixmap(selPixmap);
+}
+
 void DB_ScreenshotDialog::on_pbSave_clicked() {
     QString format = "png";
     QString fileName = objectName() + ".png";
@@ -121,7 +143,61 @@ void DB_ScreenshotDialog::on_pbSave_clicked() {
     }
 
     QPixmap selPixmap;
+    setPixmap(selPixmap);
+    selPixmap.save(fileName, format.toLatin1());
+}
 
+void DB_ScreenshotDialog::on_pbClose_clicked() {
+    RB_SETTINGS->beginGroup(objectName());
+    RB_SETTINGS->setValue("hidewindow", ui->chbHide->isChecked() ? 1 : 0);
+    RB_SETTINGS->setValue("fullscreen", ui->chbFullPrimaryScreen->isChecked()
+                          ? 1 : 0);
+    RB_SETTINGS->setValue("savescaled", ui->chbSaveScaled->isChecked()
+                          ? 1 : 0);
+    RB_SETTINGS->setValue("maxwidth", ui->sbWidth->value());
+    RB_SETTINGS->setValue("maxheight", ui->sbHeight->value());
+    RB_SETTINGS->endGroup();
+
+    close();
+    accept();
+}
+
+void DB_ScreenshotDialog::slotShootScreen() {
+    if (ui->sbDelay->value() != 0) {
+         qApp->beep();
+    }
+
+    mOriginalPixmap = QPixmap(); // clear image for low memory situations
+                                 // on embedded devices.
+    QScreen* screen = QGuiApplication::primaryScreen();
+    mOriginalPixmap = ui->chbFullPrimaryScreen->isChecked()
+            ? screen->grabWindow(0)
+            : screen->grabWindow(DB_DIALOGFACTORY->getMainWindow()->winId());
+    this->updateScreenshotLabel();
+    ui->pbNew->setDisabled(false);
+
+    if (ui->chbHide->isChecked()) {
+         show();
+    }
+}
+
+void DB_ScreenshotDialog::slotUpdateCheckBox() {
+    if (ui->sbDelay->value() == 0) {
+        ui->chbHide->setDisabled(true);
+        ui->chbHide->setChecked(false);
+    } else {
+        ui->chbHide->setDisabled(false);
+    }
+}
+
+void DB_ScreenshotDialog::updateScreenshotLabel() {
+    ui->lblScreenshot->setPixmap(
+                mOriginalPixmap.scaled(ui->lblScreenshot->size(),
+                                       Qt::KeepAspectRatio,
+                                       Qt::SmoothTransformation));
+}
+
+void DB_ScreenshotDialog::setPixmap(QPixmap& selPixmap) {
     if (!mRubberBand || mRubberBand->isHidden()) {
         selPixmap = mOriginalPixmap;
     } else {
@@ -182,56 +258,4 @@ void DB_ScreenshotDialog::on_pbSave_clicked() {
                                      Qt::KeepAspectRatio,
                                      Qt::SmoothTransformation);
     }
-
-    selPixmap.save(fileName, format.toLatin1());
-}
-
-void DB_ScreenshotDialog::on_pbClose_clicked() {
-    RB_SETTINGS->beginGroup(objectName());
-    RB_SETTINGS->setValue("hidewindow", ui->chbHide->isChecked() ? 1 : 0);
-    RB_SETTINGS->setValue("fullscreen", ui->chbFullPrimaryScreen->isChecked()
-                          ? 1 : 0);
-    RB_SETTINGS->setValue("savescaled", ui->chbSaveScaled->isChecked()
-                          ? 1 : 0);
-    RB_SETTINGS->setValue("maxwidth", ui->sbWidth->value());
-    RB_SETTINGS->setValue("maxheight", ui->sbHeight->value());
-    RB_SETTINGS->endGroup();
-
-    close();
-    accept();
-}
-
-void DB_ScreenshotDialog::slotShootScreen() {
-    if (ui->sbDelay->value() != 0) {
-         qApp->beep();
-    }
-
-    mOriginalPixmap = QPixmap(); // clear image for low memory situations
-                                 // on embedded devices.
-    QScreen* screen = QGuiApplication::primaryScreen();
-    mOriginalPixmap = ui->chbFullPrimaryScreen->isChecked()
-            ? screen->grabWindow(0)
-            : screen->grabWindow(DB_DIALOGFACTORY->getMainWindow()->winId());
-    this->updateScreenshotLabel();
-    ui->pbNew->setDisabled(false);
-
-    if (ui->chbHide->isChecked()) {
-         show();
-    }
-}
-
-void DB_ScreenshotDialog::slotUpdateCheckBox() {
-    if (ui->sbDelay->value() == 0) {
-        ui->chbHide->setDisabled(true);
-        ui->chbHide->setChecked(false);
-    } else {
-        ui->chbHide->setDisabled(false);
-    }
-}
-
-void DB_ScreenshotDialog::updateScreenshotLabel() {
-    ui->lblScreenshot->setPixmap(
-                mOriginalPixmap.scaled(ui->lblScreenshot->size(),
-                                       Qt::KeepAspectRatio,
-                                       Qt::SmoothTransformation));
 }

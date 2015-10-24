@@ -117,6 +117,7 @@ public:
         WidgetAllocnReport,             /**< Allocation report widget */
         WidgetAsset,                    /**< Asset widget */
         WidgetAssetValuation,           /**< Asset or property valuation widget */
+        WidgetBankPaymentReport,        /**< Customer or supplier bank payment report */
         WidgetContactCustomerEdit,      /**< Edit customer contacts widget */
         WidgetContactSupplierEdit,      /**< Edit supplier contacts widget */
         WidgetCostCenterBalance,        /**< Cost center balance report widget */

@@ -881,6 +881,30 @@ void ACC_SqlCommonFunctions::getCreditorAccrued(QSqlQuery& query,
     getInvoicesAccrued(query, startDate, endDate, 20, 40);
 }
 
+void ACC_SqlCommonFunctions::getBankPaymentList(
+        QSqlQuery& query, const RB_String& projectId, const RB_String& dateFrom,
+        const RB_String& dateTo, const RB_String& bankAccountNumber) {
+    // 'Z' in SQL are for including the date even if there is time behind date
+
+    RB_String qStr = "SELECT  description, SUBSTR(chartmaster_idx, 39) as GL, "
+                     "amount, transno, amountcleared as cleared, "
+                     "SUBSTR(transdate, 1, 10) as transdate "
+                     "FROM acc_banktrans WHERE parent='"
+            + projectId + "' AND transdate>='"
+            + dateFrom + "' AND transdate<='"
+            + dateTo + "Z' ";
+    if (!bankAccountNumber.isEmpty()) {
+        qStr += "AND bankaccountnumber='" + bankAccountNumber + "' ";
+    }
+    qStr += "ORDER BY transdate;";
+
+    if (!query.exec(qStr)) {
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::getBankPaymentList() "
+                        + query.lastError().text() + " ERROR");
+        return;
+    }
+}
+
 void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
                                                 const QDate& startDate,
                                                 const QDate& endDate,

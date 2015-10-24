@@ -54,15 +54,12 @@ protected slots:
 
     void evaluateEditorExpression();
 //    void handleEditorTextChange();
-protected:
-    void keyReleaseEvent(QKeyEvent* ke);
+    void slotHandleLeftParenPressed();
 
 private:
     void setupUi();
     void clearEditor();
     void createFixedConnections();
-    void addCloseParenthese();
-
 
     Editor* mEditor;
     ResultDisplay* mResultDisplay;

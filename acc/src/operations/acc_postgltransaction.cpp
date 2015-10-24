@@ -51,7 +51,7 @@ bool ACC_PostGlTransaction::execute(RB_ObjectBase* glTrans) {
     if (!glTrans) return false;
 
     // Get the current cost center amount and if not create, now also the record is available
-    RB_String costCenterId = glTrans->getValue("costcenter_idx").toString();
+    RB_String costCenterId = glTrans->getIdValue("costcenter_idx").toString();
     if (costCenterId != "0" && costCenterId != "") {
         setCostCenterDebitCredit(glTrans);
         postCostCenter(glTrans);
@@ -109,7 +109,7 @@ bool ACC_PostGlTransaction::postSumList() {
  * @param glTrans GL transaction
  */
 void ACC_PostGlTransaction::setDebitCredit(RB_ObjectBase* glTrans) {
-    RB_String accountId = glTrans->getValue("chartmaster_idx").toString();
+    RB_String accountId = glTrans->getIdValue("chartmaster_idx").toString();
     int periodNo = glTrans->getValue("periodno").toInt();
     mDebitAmt = 0.0;
     mCreditAmt = 0.0;
@@ -180,7 +180,7 @@ bool ACC_PostGlTransaction::postTransaction(RB_ObjectBase* glTrans) {
     qStr = "UPDATE acc_glsum SET debit=" + RB_String::number(mDebitAmt, 'f', 6)
            + ", credit=" + RB_String::number(mCreditAmt, 'f', 6)
            + " WHERE period=" + glTrans->getValue("periodno").toString()
-           + " AND  parent='" + glTrans->getValue("chartmaster_idx").toString() + "';";
+           + " AND  parent='" + glTrans->getIdValue("chartmaster_idx").toString() + "';";
 
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
@@ -199,7 +199,7 @@ bool ACC_PostGlTransaction::postTransaction(RB_ObjectBase* glTrans) {
  * @param glTrans GL transaction
  */
 void ACC_PostGlTransaction::setGlSumAmount(RB_ObjectBase* glTrans) {
-    RB_String accountId = glTrans->getValue("chartmaster_idx").toString();
+    RB_String accountId = glTrans->getIdValue("chartmaster_idx").toString();
     int periodNo = glTrans->getValue("periodno").toInt();
     RB_ObjectBase* glSum = NULL;
 
@@ -307,7 +307,7 @@ bool ACC_PostGlTransaction::createCostCenterSumList(RB_ObjectContainer* glTransL
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
 
-        RB_String costCenterId = obj->getValue("costcenter_idx").toString();
+        RB_String costCenterId = obj->getIdValue("costcenter_idx").toString();
         if (costCenterId != "0" && costCenterId != "") {
             setCostCenterSumAmount(obj);
         }
@@ -323,7 +323,7 @@ bool ACC_PostGlTransaction::createCostCenterSumList(RB_ObjectContainer* glTransL
  * @param glTrans GL transaction
  */
 void ACC_PostGlTransaction::setCostCenterSumAmount(RB_ObjectBase* glTrans) {
-    RB_String costCenterId = glTrans->getValue("costcenter_idx").toString();
+    RB_String costCenterId = glTrans->getIdValue("costcenter_idx").toString();
     int periodNo = glTrans->getValue("periodno").toInt();
     RB_ObjectBase* costSum = NULL;
 
@@ -432,7 +432,7 @@ bool ACC_PostGlTransaction::postCostCenterSumList() {
  * @param glTrans GL transaction
  */
 void ACC_PostGlTransaction::setCostCenterDebitCredit(RB_ObjectBase *glTrans) {
-    RB_String costCenterId = glTrans->getValue("costcenter_idx").toString();
+    RB_String costCenterId = glTrans->getIdValue("costcenter_idx").toString();
     int periodNo = glTrans->getValue("periodno").toInt();
     mCostCenterDebitAmt = 0.0;
     mCostCenterCreditAmt = 0.0;
@@ -504,7 +504,7 @@ bool ACC_PostGlTransaction::postCostCenter(RB_ObjectBase* glTrans) {
     qStr = "UPDATE acc_costsum SET debit=" + RB_String::number(mCostCenterDebitAmt, 'f', 6)
            + ", credit=" + RB_String::number(mCostCenterCreditAmt, 'f', 6)
            + " WHERE period=" + glTrans->getValue("periodno").toString()
-           + " AND  parent='" + glTrans->getValue("costcenter_idx").toString() + "';";
+           + " AND  parent='" + glTrans->getIdValue("costcenter_idx").toString() + "';";
 
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
@@ -577,7 +577,7 @@ bool ACC_PostGlTransaction::recreate(int fromPrd, int toPrd) {
             glSum->setValue("accountname", chartMaster->getValue("accountname").toString());
             glSum->setValue("debit", debit);
             glSum->setValue("credit", credit);
-            glSum->delFlag(RB2::FlagFromDatabase);
+            glSum->deleteFlag(RB2::FlagFromDatabase);
 
             qStr = "DELETE FROM acc_glsum WHERE parent='"
                   + chartMaster->getId()
@@ -668,7 +668,7 @@ bool ACC_PostGlTransaction::recreateCostCenterSum(int fromPrd, int toPrd) {
             costSum->setValue("centername", costCenter->getValue("centername").toString());
             costSum->setValue("debit", debit);
             costSum->setValue("credit", credit);
-            costSum->delFlag(RB2::FlagFromDatabase);
+            costSum->deleteFlag(RB2::FlagFromDatabase);
 
             qStr = "DELETE FROM acc_costsum WHERE parent='"
                   + costCenter->getId()

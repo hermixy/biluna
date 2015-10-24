@@ -46,7 +46,7 @@ public:
         mFlags=mFlags|f;
     }
 
-    inline void delFlag(unsigned int f) {
+    virtual void deleteFlag(unsigned int f) {
         mFlags=mFlags&(~f);
     }
 

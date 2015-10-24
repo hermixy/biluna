@@ -49,7 +49,7 @@ bool ACC_PurchaseOrderHtml::execute(RB_ObjectBase* transDoc, RB_ObjectContainer*
     mCreditorTransList = ctList;
 
     // Get supplier data for reference only
-    RB_String id = transDoc->getValue("creditor_idx").toString();
+    RB_String id = transDoc->getIdValue("creditor_idx").toString();
 
     if (id.isEmpty() || id == "0") {
         return false;

@@ -70,6 +70,8 @@ void DB_CalculatorWidget::setupUi() {
 
     mEditor = new Editor(mEvaluator, mFunctions, mConstants);
     vbLayout->addWidget(mEditor);
+    connect(mEditor, SIGNAL(leftParenPressed()),
+            this, SLOT(slotHandleLeftParenPressed()));
 
     QHBoxLayout* hbLayout = new QHBoxLayout();
     hbLayout->setMargin(0);
@@ -116,24 +118,7 @@ void DB_CalculatorWidget::slotHandleKeypadFunctionPress(DB_KeypadFunction::Butto
     switch (pb) {
     case DB_KeypadFunction::KeyEE       : mEditor->insert( "e" ); break;
     case DB_KeypadFunction::KeyLeftPar  : {
-        QString str = mEditor->toPlainText();
-        int left = 0;
-        int right = 0;
-        for (int i = 0; i < str.size(); ++i) {
-            if (str.at(i) == QChar('(')) {
-                left += 1;
-            } else if (str.at(i) == QChar(')')) {
-                right += 1;
-            }
-        }
-
-        if (left >= right) {
-            mEditor->insert("()");
-            cursor.setPosition(cursor.position() - 1);
-            mEditor->setTextCursor(cursor);
-        } else {
-            mEditor->insert("(");
-        }
+        slotHandleLeftParenPressed();
         break;
     }
     case DB_KeypadFunction::KeyRightPar : mEditor->insert( ")" ); break;
@@ -235,38 +220,63 @@ void DB_CalculatorWidget::slotHandleKeypadNumericPress(DB_KeypadNumeric::Button 
     }
 }
 
-void DB_CalculatorWidget::keyReleaseEvent(QKeyEvent* ke) {
-    if (ke->key() == Qt::Key_ParenLeft) {
-        QTextCursor cursor = mEditor->textCursor();
-        QString str = mEditor->toPlainText();
-        int left = 0;
-        int right = 0;
+void DB_CalculatorWidget::slotHandleLeftParenPressed() {
+    // Handles keyPressEvent in Editor class if key == Qt::Key_ParenLeft
+    // and signal emitted for this widget to catch, and key pad
 
-        for (int i = 0; i < str.size(); ++i) {
-            if (str.at(i) == QChar('(')) {
-                left += 1;
-            } else if (str.at(i) == QChar(')')) {
-                right += 1;
-            }
-        }
+    // cursor positions
+    QTextCursor cursor = mEditor->textCursor();
 
-        QString nextChar = " ";
+    int openCharPos = 0;
+    int closeCharPos = 0;
 
-        if (cursor.atEnd() || (!cursor.atEnd() && cursor.position())) {
-
-        }
-
-        if (left - 1 >= right) {
-            // add right parentheses, the press event already inserted the left
-            mEditor->insert(")");
-            cursor.setPosition(cursor.position() - 1);
-            mEditor->setTextCursor(cursor);
-        }
-
-        return;
+    if (cursor.anchor() < cursor.position()) {
+        openCharPos = cursor.anchor();
+        closeCharPos = cursor.position();
+    } else {
+        openCharPos = cursor.position();
+        closeCharPos = cursor.anchor();
     }
 
-    RB_Widget::keyReleaseEvent(ke);
+    // check for number of right parenthese at the right
+    cursor.setPosition(openCharPos, QTextCursor::MoveAnchor);
+    cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor, 1);
+    mEditor->setTextCursor(cursor);
+
+    QString str = cursor.selectedText();
+    int left = 0;
+    int right = 0;
+
+    for (int i = 0; i < str.size(); ++i) {
+        if (str.at(i) == QChar('(')) {
+            left += 1;
+        } else if (str.at(i) == QChar(')')) {
+            right += 1;
+        }
+    }
+
+    cursor.setPosition(openCharPos, QTextCursor::MoveAnchor);
+    cursor.setPosition(closeCharPos, QTextCursor::KeepAnchor);
+    mEditor->setTextCursor(cursor);
+
+    if (cursor.hasSelection()) {
+        // selection of text prevails above left/right mismatch
+        cursor.setPosition(closeCharPos, QTextCursor::MoveAnchor);
+        mEditor->setTextCursor(cursor);
+        mEditor->insert(")");
+        cursor.setPosition(openCharPos, QTextCursor::MoveAnchor);
+        mEditor->setTextCursor(cursor);
+        mEditor->insert("(");
+        cursor.setPosition(closeCharPos + 2, QTextCursor::MoveAnchor);
+        mEditor->setTextCursor(cursor);
+    } else if (left < right) {
+        // complete the left parenthese only
+        mEditor->insert("(");
+    } else {
+        mEditor->insert("()");
+        cursor.setPosition(cursor.position() - 1);
+        mEditor->setTextCursor(cursor);
+    }
 }
 
 /**
@@ -289,28 +299,6 @@ void DB_CalculatorWidget::createFixedConnections() {
 //            this , SLOT(handleEditorTextChange()));
 
     // ..
-}
-
-void DB_CalculatorWidget::addCloseParenthese() {
-    QTextCursor cursor = mEditor->textCursor();
-
-    if (cursor.hasSelection()) {
-        if (cursor.anchor() < cursor.position()) {
-            cursor.setPosition(cursor.position());
-            mEditor->setTextCursor(cursor);
-            mEditor->insert(")");
-        }
-// TODO: replace ( with ) and set ( at position
-//        else {
-//            cursor.setPosition(cursor.anchor());
-//            mEditor->setTextCursor(cursor);
-//            mEditor->insert(")");
-//        }
-    } else {
-        mEditor->insert(")");
-        cursor.setPosition(cursor.position() - 1);
-        mEditor->setTextCursor(cursor);
-    }
 }
 
 /**

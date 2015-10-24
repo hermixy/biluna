@@ -321,6 +321,16 @@ RB_ObjectBase *RB_MmProxy::getCurrentObject() {
 }
 
 /**
+ * Update current object. Works only if model current object and
+ * obj have the same ID.
+ * @brief RB_MmProxy::updateCurrentObject
+ * @param obj
+ */
+void RB_MmProxy::updateCurrentObject(RB_ObjectBase *obj) {
+    getRbModel()->updateCurrentObject(obj);
+}
+
+/**
  * Relocate an object (row) to another position in the model,
  * @param fromPosition from sequence or row number
  * @param toPosition to sequence or row number

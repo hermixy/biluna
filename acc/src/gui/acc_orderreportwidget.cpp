@@ -396,7 +396,7 @@ void ACC_OrderReportWidget::addHeaderRow(RB_ObjectBase* obj) {
  */
 void ACC_OrderReportWidget::addDataRow(RB_ObjectBase* obj) {
     mHtml += "<tr><td>";
-    mHtml += obj->getValue("stk_idx").toString();
+    mHtml += obj->getDValue("stk_idx").toString();
     mHtml += "</td><td>";
     RB_String betweenCellsGray = "</td><td align='right' style='background-color: " + mAlternateBaseColor.name() + ";'>";
     RB_String betweenCellsWhite = "</td><td align='right'>";

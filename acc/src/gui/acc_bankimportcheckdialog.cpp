@@ -733,7 +733,7 @@ bool ACC_BankImportCheckDialog::ensureTransDocExisted(RB_ObjectContainer *transD
         strResult = f.selectFromWhereId("name", "acc_transdoc", strId).toString();
 
         if (strResult.isEmpty()) {
-            transDoc->delFlag(RB2::FlagFromDatabase);
+            transDoc->deleteFlag(RB2::FlagFromDatabase);
             transDoc->dbUpdate(ACC_MODELFACTORY->getDatabase(), RB2::ResolveNone);
             allExisted = false;
         }
@@ -1105,9 +1105,9 @@ void ACC_BankImportCheckDialog::createNewGlTrans(bool isSelectedDocOnly) {
                 gltrans->setValue("transdoc_id", mDocId);
 
                 gltrans->setValue("description", item->getValue("description").toString());
-                gltrans->setDValue("chartmaster_idx", item->getDValue("chartmaster_idx").toString()); // display role value
-                accountId = item->getValue("chartmaster_idx").toString();
-                gltrans->setValue("chartmaster_idx", accountId);  // original data role value, ID
+                RB_String accountName = item->getDValue("chartmaster_idx").toString(); // display role value
+                accountId = item->getIdValue("chartmaster_idx").toString();
+                gltrans->setValue("chartmaster_idx", accountId + accountName);
 
                 // no cost center
                 gltrans->setValue("costcenter_idx", "0");
@@ -1125,8 +1125,7 @@ void ACC_BankImportCheckDialog::createNewGlTrans(bool isSelectedDocOnly) {
                 totalAmount += amount;
 
                 // set allocation id and reference for bank, memorandum transaction and totals,
-                gltrans->setValue("transallocn_idx", item->getValue("transallocn_idx").toString());
-                gltrans->setDValue("transallocn_idx", item->getDValue("transallocn_idx").toString());
+                gltrans->setValue("transallocn_idx", item->getValue("transallocn_idx"));
 
                 // totals for bank, debit/credit is separate for bank only
                 if (amount >= 0.0) {
@@ -1160,8 +1159,7 @@ void ACC_BankImportCheckDialog::createNewHelper(const RB_String& descr,
     gltrans->setValue("periodno", mPeriod);
     gltrans->setValue("transdoc_id", mDocId);
     gltrans->setValue("description", descr);
-    gltrans->setValue("chartmaster_idx", acctId);  // original data role value
-    gltrans->setDValue("chartmaster_idx", acctName); // display role value
+    gltrans->setValue("chartmaster_idx", acctId + acctName);
     // accountcontrol
     RB_ObjectBase* aObj = ACC_QACHARTMASTER->getAcctObj(acctId);
     if (aObj) {
@@ -1206,11 +1204,11 @@ bool ACC_BankImportCheckDialog::isValidTransDoc() {
                 totalNegative += -amount;
             }
 
-            acct = item->getValue("chartmaster_idx").toString(); // id only
+            acct = item->getIdValue("chartmaster_idx").toString(); // id only
 
             // Can only book against Amount Payable (Crediteuren)
             // or Amount Receivable (Debiteuren) if allocation exists
-            RB_String allocId = item->getValue("transallocn_idx").toString(); // id only
+            RB_String allocId = item->getIdValue("transallocn_idx").toString(); // id only
 
             if (((acct == ACC_QACHARTMASTER->getAccPayId()
                         || acct == ACC_QACHARTMASTER->getAccRecId())

@@ -102,8 +102,7 @@ public:
     virtual RB_ObjectMember* addMember(const RB_String& name,
                            const RB_String& unit, const RB_Variant& value,
                            RB2::MemberType type = RB2::MemberNone,
-                           const RB_Variant& prevValue = RB_Variant(),
-                           const RB_Variant& dispValue = RB_Variant());
+                           const RB_Variant& prevValue = RB_Variant());
 
     virtual RB_Variant getValue(int number) const;
     virtual RB_Variant getValue(const RB_String& name) const;
@@ -115,8 +114,10 @@ public:
     virtual void setPValue(const RB_String& name, const RB_Variant& var);
     virtual RB_Variant getDValue(int number) const;
     virtual RB_Variant getDValue(const RB_String& name) const;
-    virtual void setDValue(int number, const RB_Variant& var);
-    virtual void setDValue(const RB_String& name, const RB_Variant& var);
+    virtual RB_Variant getIdValue(int number) const;
+    virtual RB_Variant getIdValue(const RB_String& name) const;
+
+    virtual void deleteFlag(unsigned int f);
 
     virtual bool dbRead(QSqlDatabase db,
                         RB2::ResolveLevel level = RB2::ResolveNone,

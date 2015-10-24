@@ -807,7 +807,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <layout class="QGridLayout" name="gridLayout_9">
            <property name="spacing">
             <number>3</number>
@@ -970,28 +970,6 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="leItemDescription">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>1</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="lblItemAmount">
                <property name="text">
@@ -1133,6 +1111,42 @@
              </item>
              <item row="4" column="1">
               <widget class="RB_IdxLineEdit" name="ileCostCenter"/>
+             </item>
+             <item row="0" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLineEdit" name="leItemDescription"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbEditInvoiceItemDetail">
+                 <property name="minimumSize">
+                  <size>
+                   <width>24</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>24</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Edit invoice item details</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../../db/src/gui/db.qrc">
+                   <normaloff>:/images/icons/pencil.png</normaloff>:/images/icons/pencil.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -1601,10 +1615,13 @@
   <tabstop>pbDeleteItem</tabstop>
   <tabstop>tvItem</tabstop>
   <tabstop>leItemDescription</tabstop>
+  <tabstop>pbEditInvoiceItemDetail</tabstop>
   <tabstop>leItemAmount</tabstop>
   <tabstop>ileAllocation</tabstop>
   <tabstop>ileItemAccount</tabstop>
   <tabstop>ileCostCenter</tabstop>
+  <tabstop>deItemDate</tabstop>
+  <tabstop>leItemBankAccount</tabstop>
   <tabstop>ileHighTaxAccount</tabstop>
   <tabstop>sbHighTaxPerc</tabstop>
   <tabstop>leHighTaxAmt</tabstop>

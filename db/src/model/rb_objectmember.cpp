@@ -23,8 +23,7 @@
 RB_ObjectMember::RB_ObjectMember(RB_ObjectBase* parent,
                                  const RB_String& name, const RB_String& unit,
                                  const RB_Variant& value, RB2::MemberType type,
-                                 const RB_Variant& prevValue,
-                                 const RB_Variant& dispValue) {
+                                 const RB_Variant& prevValue) {
     RB_DEBUG->addMemberCreated();
 
     mParent = parent;
@@ -34,7 +33,6 @@ RB_ObjectMember::RB_ObjectMember(RB_ObjectBase* parent,
     mValue = value;
     // if prevValue = RB_Variant() (default) than prevValue.isValid() == false
     mPreviousValue = prevValue;
-    mDisplayValue = dispValue;
 }
 
 /**
@@ -79,9 +77,8 @@ RB_String RB_ObjectMember::getUnit() const {
  * @return objMem clone of this (object) member
  */
 RB_ObjectMember* RB_ObjectMember::copy(RB2::ResolveLevel /*level*/) {
-    RB_ObjectMember* objMem = new RB_ObjectMember(NULL,
-                                            mName, mUnit, mValue, mType,
-                                            mPreviousValue, mDisplayValue);
+    RB_ObjectMember* objMem = new RB_ObjectMember(NULL, mName, mUnit, mValue,
+                                                  mType, mPreviousValue);
     return objMem;
 }
 
@@ -91,9 +88,8 @@ RB_ObjectMember* RB_ObjectMember::copy(RB2::ResolveLevel /*level*/) {
  * @return objMem clone of this (object) member
  */
 RB_ObjectMember* RB_ObjectMember::clone(RB2::ResolveLevel /*level*/) {
-    RB_ObjectMember* objMem = new RB_ObjectMember(mParent,
-                                            mName, mUnit, mValue, mType,
-                                            mPreviousValue, mDisplayValue);
+    RB_ObjectMember* objMem = new RB_ObjectMember(mParent, mName, mUnit, mValue,
+                                                  mType, mPreviousValue);
     return objMem;
 }
 
@@ -108,7 +104,6 @@ void RB_ObjectMember::revert() {
     }
 
     mValue = mPreviousValue;
-    mPreviousValue = RB_Variant(); // invalid
 }
 
 /**
@@ -133,8 +128,8 @@ RB_ObjectMember& RB_ObjectMember::operator= (const RB_ObjectMember& mem) {
         mValue = mem.getValue();
         mType = mem.getType();
         mPreviousValue = mem.getPreviousValue();
-        mDisplayValue = mem.getDisplayValue();
     }
+
     return *this;
 }
 
@@ -145,16 +140,22 @@ RB_ObjectMember& RB_ObjectMember::operator= (const RB_ObjectMember& mem) {
  * @param val set value to val
  */
 void RB_ObjectMember::setValue(const RB_Variant& val) {
+    RB_ObjectBase* p = getParent();
+
+    if (!p) {
+        RB_DEBUG->error("RB_ObjectMember::setValue() parent ERROR");
+    }
+
     if (!mPreviousValue.isValid()) {
-        mPreviousValue = mValue; // mValue is always valid
+        // first time loading of member value
+        mPreviousValue = val;
+    } else if (mPreviousValue.isValid() &&
+               !p->getFlag(RB2::FlagIsDirty)) {
+        // second time and first time changing of original value
+        p->setFlag(RB2::FlagIsDirty);
     }
 
     mValue = val;
-
-    RB_ObjectBase* p = getParent();
-    if (p) {
-        p->setFlag(RB2::FlagIsDirty);
-    }
 }
 
 /**
@@ -179,20 +180,30 @@ RB_Variant RB_ObjectMember::getPreviousValue() const {
 }
 
 /**
- * @param val set display value to val
- */
-void RB_ObjectMember::setDisplayValue(const RB_Variant& val) {
-    mDisplayValue = val;
-}
-
-/**
  * @return display value
  */
 RB_Variant RB_ObjectMember::getDisplayValue() const {
-    if (!mDisplayValue.isValid()) {
-        return getValue();
+    if (mName.endsWith("_idx")) {
+        QString strValue = mValue.toString();
+        // remove the Uuid part including the curly braces
+        return strValue.remove(0, 38);
     }
-    return mDisplayValue;
+
+    return mValue;
+}
+
+/**
+ * @brief RB_ObjectMember::getUuidValue
+ * @return return Uuid value
+ */
+RB_Variant RB_ObjectMember::getUuidValue() const {
+    if (mName.endsWith("_idx")) {
+        QString strValue = mValue.toString();
+        // remove the part after the Uuid, 0 is the first character
+        return strValue.remove(38, strValue.length());
+    }
+
+    return mValue;
 }
 
 /**
@@ -206,7 +217,6 @@ RB_String RB_ObjectMember::toString() {
     str += getValue().toString() + ", ";
     str += RB2::memberTypeToString(getType()) + ", ";
     str += getPreviousValue().toString() + ", ";
-    str += getDisplayValue().toString();
     return str;
 }
 

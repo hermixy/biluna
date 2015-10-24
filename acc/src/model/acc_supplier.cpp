@@ -74,8 +74,8 @@ void ACC_Supplier::createMembers() {
     addMember("lastpaiddate", "-", "2000-01-01T00:00:00", RB2::MemberDateTime);
     addMember("bankname", "-", "", RB2::MemberChar125); // Bank name
     addMember("bankaddress", "-", "", RB2::MemberChar255);
-    addMember("bankcode", "-", "", RB2::MemberChar40); // swift/ABA/routing
-    addMember("bankaccountnumber", "-", "", RB2::MemberChar40); // IBAN/BIC
+    addMember("bankcode", "-", "", RB2::MemberChar40); // BIC/swift/ABA/routing
+    addMember("bankaccountnumber", "-", "", RB2::MemberChar40); // IBAN
     addMember("remittance", "-", 0, RB2::MemberInteger);
     addMember("taxgroup_id", "-", "0", RB2::MemberChar40);
     addMember("factorcompany_id", "-", "0", RB2::MemberChar40);

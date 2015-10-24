@@ -325,10 +325,7 @@ void ACC_CalcSalesTax::addObject(RB_ObjectBase *taxList, QSqlQuery &query,
         obj->setValue("transdate", query.value("transdate"));
         obj->setValue("periodno", query.value("periodno"));
         obj->setValue("description", query.value("description"));
-        RB_String str = query.value("chartmaster_idx").toString();
-        obj->setValue("chartmaster_idx", str.remove(38,str.length()));
-        str = query.value("chartmaster_idx").toString();
-        obj->setDValue("chartmaster_idx", str.remove(0,38));
+        obj->setValue("chartmaster_idx", query.value("chartmaster_idx"));
         // Do not use query.value(14) in below setValue()
         // because the line will not show on the tax report if no record
         // 21 is extra field, see above creation of query
@@ -344,14 +341,8 @@ void ACC_CalcSalesTax::addObject(RB_ObjectBase *taxList, QSqlQuery &query,
         obj->setValue("tag_id", query.value("tag_id"));
         obj->setValue("transdoc_id", query.value("transdoc_id"));
         obj->setValue("itemtrans_id", query.value("itemtrans_id"));
-        str = query.value("transallocn_idx").toString();
-        obj->setValue("transallocn_idx", str.remove(38,str.length()));
-        str = query.value("transallocn_idx").toString();
-        obj->setDValue("transallocn_idx", str.remove(0,38));
-        str = query.value("costcenter_idx").toString();
-        obj->setValue("costcenter_idx", str.remove(38,str.length()));
-        str = query.value("costcenter_idx").toString();
-        obj->setDValue("costcenter_idx", str.remove(0,38));
+        obj->setValue("transallocn_idx", query.value("transallocn_idx"));
+        obj->setValue("costcenter_idx", query.value("costcenter_idx"));
     }
 
     // Make sure one object exists

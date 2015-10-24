@@ -80,6 +80,7 @@ public slots:
     virtual void on_pbTotalReceivable_clicked();
     virtual void on_pbTotalPayable_clicked();
     virtual void on_pbTotalTax_clicked();
+    virtual void on_pbEditInvoiceItemDetail_clicked();
     virtual void on_ileItemAccount_clicked();
     virtual void on_ileItemAccount_clear();
     virtual void on_ileAllocation_clicked();
