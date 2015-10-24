@@ -306,7 +306,7 @@ void RB_ObjectBase::revert() {
         ++iter;
     }
 
-    delFlag(RB2::FlagIsDirty);
+    deleteFlag(RB2::FlagIsDirty);
 }
 
 /**
@@ -471,12 +471,12 @@ int RB_ObjectBase::getMemberNo(const RB_String& name) const {
 RB_ObjectMember* RB_ObjectBase::addMember(
         const RB_String& name, const RB_String& unit,
         const RB_Variant& value, RB2::MemberType type,
-        const RB_Variant& prevValue, const RB_Variant& dispValue) {
+        const RB_Variant& prevValue) {
 
     RB_ObjectMember* newMember = new RB_ObjectMember(this,
                                                      name, unit,
                                                      value, type,
-                                                     prevValue, dispValue);
+                                                     prevValue);
     mMemberVector.push_back(newMember);
     return newMember;
 }
@@ -671,7 +671,8 @@ RB_Variant RB_ObjectBase::getDValue(int number) const {
     RB_ObjectMember* member = getMember(number);
 
     if (!member) {
-        RB_String str = "RB_ObjectBase::getDValue(int=" + RB_String::number(number) + ") ERROR";
+        RB_String str = "RB_ObjectBase::getDValue(int="
+                + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return RB_Variant();
     }
@@ -696,38 +697,43 @@ RB_Variant RB_ObjectBase::getDValue(const RB_String& name) const {
     return member->getDisplayValue();
 }
 
-/**
- * Short notation for getMember(int number)->setDisplayValue(RB_variant var)
- * @param number index number of display value member
- * @param var value
- */
-void RB_ObjectBase::setDValue(int number, const RB_Variant& var) {
+RB_Variant RB_ObjectBase::getIdValue(int number) const {
     RB_ObjectMember* member = getMember(number);
 
     if (!member) {
-        RB_String str = "RB_ObjectBase::setDValue(int=" + RB_String::number(number) + ") ERROR";
+        RB_String str = "RB_ObjectBase::getIdValue(int="
+                + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
-        return;
+        return RB_Variant();
     }
 
-    member->setDisplayValue(var);
+    return member->getUuidValue();
 }
 
-/**
- * Short notation for getMember(RB_String name)->setDisplayValue(RB_variant var)
- * @param name name of display value member
- * @param var value
- */
-void RB_ObjectBase::setDValue(const RB_String& name, const RB_Variant& var) {
+RB_Variant RB_ObjectBase::getIdValue(const QString &name) const {
     RB_ObjectMember* member = getMember(name);
 
     if (!member) {
-        RB_String str = "RB_ObjectBase::setDValue(RB_String=" + name + ", var) ERROR";
+        RB_String str = "RB_ObjectBase::getIdValue(RB_String=" + name + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
-        return;
+        return RB_Variant();
     }
 
-    member->setDisplayValue(var);
+    return member->getUuidValue();
+}
+
+void RB_ObjectBase::deleteFlag(unsigned int f) {
+    if (f == RB2::FlagIsDeleted) {
+        unsigned int memberCount = mMemberVector.size();
+        RB_ObjectMember* member = NULL;
+
+        for (unsigned int i = 0; i < memberCount; ++i) {
+            member = mMemberVector.at(i);
+            member->setPreviousValue(member->getValue());
+        }
+    }
+
+    RB_Flags::deleteFlag(f);
 }
 
 /**

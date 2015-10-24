@@ -733,7 +733,7 @@ bool ACC_BankImportCheckDialog::ensureTransDocExisted(RB_ObjectContainer *transD
         strResult = f.selectFromWhereId("name", "acc_transdoc", strId).toString();
 
         if (strResult.isEmpty()) {
-            transDoc->delFlag(RB2::FlagFromDatabase);
+            transDoc->deleteFlag(RB2::FlagFromDatabase);
             transDoc->dbUpdate(ACC_MODELFACTORY->getDatabase(), RB2::ResolveNone);
             allExisted = false;
         }

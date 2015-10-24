@@ -90,8 +90,8 @@ bool ACC_ProcessTransDoc::execute(RB_ObjectBase* td, RB_ObjectContainer* dctList
     ACC_SqlCommonFunctions f;
     QVariant var = f.selectFromWhereId("id", "acc_transdoc", mTransDoc->getId());
     if (!var.isValid()) {
-        mTransDoc->delFlag(RB2::FlagFromDatabase);
-        mTransDoc->delFlag(RB2::FlagIsDeleted);
+        mTransDoc->deleteFlag(RB2::FlagFromDatabase);
+        mTransDoc->deleteFlag(RB2::FlagIsDeleted);
         mTransDoc->setFlag(RB2::FlagIsDirty);
         mTransDoc->dbUpdate(ACC_MODELFACTORY->getDatabase(), RB2::ResolveNone);
     }

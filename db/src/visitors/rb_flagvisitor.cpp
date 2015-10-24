@@ -39,25 +39,25 @@ void RB_FlagVisitor::visitObject(RB_ObjectBase* obj) {
     if (mIsFlagIsDirty == 1) {
         obj->setFlag(RB2::FlagIsDirty);
     } else if (mIsFlagIsDirty == -1) {
-        obj->delFlag(RB2::FlagIsDirty);
+        obj->deleteFlag(RB2::FlagIsDirty);
     }
 
     if (mIsFlagFromDatabase == 1) {
         obj->setFlag(RB2::FlagFromDatabase);
     } else if (mIsFlagFromDatabase == -1) {
-        obj->delFlag(RB2::FlagFromDatabase);
+        obj->deleteFlag(RB2::FlagFromDatabase);
     }
 
     if (mIsFlagIsDeleted == 1) {
         obj->setFlag(RB2::FlagIsDeleted);
     } else if (mIsFlagIsDeleted == -1) {
-        obj->delFlag(RB2::FlagIsDeleted);
+        obj->deleteFlag(RB2::FlagIsDeleted);
     }
 
     if (mIsFlagChildrenCreated == 1) {
         obj->setFlag(RB2::FlagChildrenCreated);
     } else if (mIsFlagChildrenCreated == -1) {
-        obj->delFlag(RB2::FlagChildrenCreated);
+        obj->deleteFlag(RB2::FlagChildrenCreated);
     }
 
     if (mIsFlagIsDirty == 0 && mIsFlagFromDatabase == 0
@@ -99,7 +99,7 @@ void RB_FlagVisitor::setFlag(RB2::Flags flag) {
 /**
  * Delete flag
  */
-void RB_FlagVisitor::delFlag(RB2::Flags flag) {
+void RB_FlagVisitor::deleteFlag(RB2::Flags flag) {
     switch (flag) {
     case RB2::FlagIsDirty :
         mIsFlagIsDirty = -1;

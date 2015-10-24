@@ -73,6 +73,7 @@ public:
     virtual RB_ObjectBase* getObject(const QModelIndex& /*current*/,
                                      RB2::ResolveLevel level = RB2::ResolveAll) = 0;
     virtual RB_ObjectBase* getCurrentObject() = 0;
+    virtual void updateCurrentObject(RB_ObjectBase* /*obj*/) { }
     virtual QModelIndex promote(const QModelIndex& index) = 0;
     virtual QModelIndex demote(const QModelIndex& idx,
                                const RB_String& parentId) = 0;

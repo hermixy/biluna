@@ -212,12 +212,12 @@ bool RB_DbVisitor::dbRead() {
         }
 
         mObject->setFlag(RB2::FlagFromDatabase);
-        mObject->delFlag(RB2::FlagIsDirty);
+        mObject->deleteFlag(RB2::FlagIsDirty);
     } else {
         // no record available
         mObject->setValue("id", "");
-        mObject->delFlag(RB2::FlagFromDatabase);
-        mObject->delFlag(RB2::FlagIsDirty);
+        mObject->deleteFlag(RB2::FlagFromDatabase);
+        mObject->deleteFlag(RB2::FlagIsDirty);
     }
 
     return true;
@@ -288,16 +288,7 @@ bool RB_DbVisitor::dbReadList() {
                     // parent ID and name is set by factory
                     RB_ObjectMember* mem = childObj->getMember(fieldName);
                     if (mem) {
-                        if (!fieldName.endsWith("_idx")) {
-                            mem->setValue(rec.value(i));
-                        } else {
-                            value = rec.value(i).toString();
-                            // remove the part after the Uuid, 0 is the first character
-                            mem->setValue(value.remove(38, value.length()));
-                            value = rec.value(i).toString();
-                            // remove the Uuid part including the curly braces
-                            mem->setDisplayValue(value.remove(0, 38));
-                        }
+                        mem->setValue(rec.value(i));
                     }
                 }
             }
@@ -324,23 +315,13 @@ bool RB_DbVisitor::dbReadList() {
                            || fieldName.toLower() == "muser") {
                     childObj->setValue(fieldName.toLower(), rec.value(i));
                 } else {
-                    if (!fieldName.endsWith("_idx")) {
-                        childObj->addMember(fieldName, "-", rec.value(i));
-                    } else {
-                        value = rec.value(i).toString();
-                        // remove the Uuid part including the curly braces
-                        RB_ObjectMember* mem = childObj->addMember(fieldName,
-                                    "-", value.remove(38, value.length()));
-                        value = rec.value(i).toString();
-                        // remove the part after the Uuid
-                        mem->setDisplayValue(value.remove(0, 38));
-                    }
+                    childObj->addMember(fieldName.toLower(), "-", rec.value(i));
                 }
             }
         }
 
         childObj->setFlag(RB2::FlagFromDatabase);
-        childObj->delFlag(RB2::FlagIsDirty);
+        childObj->deleteFlag(RB2::FlagIsDirty);
     }
 
     return true;
@@ -434,7 +415,7 @@ bool RB_DbVisitor::dbUpdate() {
         if (q.exec()) {
 //            RB_DEBUG->print(q.executedQuery());
             mObject->setFlag(RB2::FlagFromDatabase);
-            mObject->delFlag(RB2::FlagIsDirty);
+            mObject->deleteFlag(RB2::FlagIsDirty);
         } else {
             RB_DEBUG->error("RB_DbVisitor::dbUpdate()1 ERROR");
             RB_DEBUG->print(q.lastError().text());
@@ -530,7 +511,7 @@ bool RB_DbVisitor::dbUpdateList() {
             if (qInsert.exec()) {
 //                RB_DEBUG->print(qInsert.executedQuery());
                 obj->setFlag(RB2::FlagFromDatabase);
-                obj->delFlag(RB2::FlagIsDirty);
+                obj->deleteFlag(RB2::FlagIsDirty);
             } else {
                 RB_DEBUG->error("RB_DbVisitor::dbUpdate()1 ERROR");
                 RB_DEBUG->print(qInsert.lastError().text());
@@ -570,7 +551,7 @@ bool RB_DbVisitor::dbUpdateList() {
             if (qUpdate.exec()) {
                 RB_DEBUG->print(qUpdate.executedQuery());
                 obj->setFlag(RB2::FlagFromDatabase);
-                obj->delFlag(RB2::FlagIsDirty);
+                obj->deleteFlag(RB2::FlagIsDirty);
             } else {
                 RB_DEBUG->error("RB_DbVisitor::dbUpdate()1 ERROR");
                 RB_DEBUG->print(qUpdate.lastError().text());

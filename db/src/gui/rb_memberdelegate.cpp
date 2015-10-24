@@ -38,7 +38,7 @@ QWidget* RB_MemberDelegate::createEditor(QWidget* parent,
         return le;
     }
 
-    RB_ObjectMember* mem = mObject->getMember(index.column());
+    RB_ObjectMember* mem = mObject->getMember(index.row());
 
     if (!mem) {
         return le;

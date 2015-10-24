@@ -185,7 +185,7 @@ void DB_XmlReader::readObject() {
         obj->setChanged(strChanged);
         obj->setUser(strUser);
 
-        obj->delFlag(RB2::FlagFromDatabase);
+        obj->deleteFlag(RB2::FlagFromDatabase);
         obj->setFlag(RB2::FlagIsDirty);
 
         mObjectStack.push(obj);
@@ -229,8 +229,6 @@ void DB_XmlReader::readMember() {
                 // TODO: handle unit differences
             } else if (attrs.at(i).name() == "pvalue") {
                 mem->setPreviousValue(attrs.at(i).value().toString());
-            } else if (attrs.at(i).name() == "dvalue") {
-                mem->setDisplayValue(attrs.at(i).value().toString());
             }
         }
 

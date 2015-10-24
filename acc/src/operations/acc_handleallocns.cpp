@@ -203,7 +203,7 @@ bool ACC_HandleAllocns::addAllocn(RB_MmProxy* itemModel,
         dt = itemModel->getCurrentValue("transdate").toDateTime();
     }
 
-    transAlloc->delFlag(RB2::FlagIsDeleted);
+    transAlloc->deleteFlag(RB2::FlagIsDeleted);
     transAlloc->setValue("amount", newAllocAmt);
     transAlloc->setValue("datealloc", dt);
     transAlloc->setValue("docfrom_id", docFromId);
@@ -621,7 +621,7 @@ void ACC_HandleAllocns::glTransToDefault(const RB_String& docToId) {
         glTrans->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId());
         glTrans->setDValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultName());
         glTrans->setValue("transallocn_idx", "0");
-        glTrans->delFlag(RB2::FlagIsDeleted);
+        glTrans->deleteFlag(RB2::FlagIsDeleted);
         mPostGlTrans.execute(glTrans);
 
         glTrans->dbUpdate(ACC_MODELFACTORY->getDatabase());

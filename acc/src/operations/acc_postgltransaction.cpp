@@ -577,7 +577,7 @@ bool ACC_PostGlTransaction::recreate(int fromPrd, int toPrd) {
             glSum->setValue("accountname", chartMaster->getValue("accountname").toString());
             glSum->setValue("debit", debit);
             glSum->setValue("credit", credit);
-            glSum->delFlag(RB2::FlagFromDatabase);
+            glSum->deleteFlag(RB2::FlagFromDatabase);
 
             qStr = "DELETE FROM acc_glsum WHERE parent='"
                   + chartMaster->getId()
@@ -668,7 +668,7 @@ bool ACC_PostGlTransaction::recreateCostCenterSum(int fromPrd, int toPrd) {
             costSum->setValue("centername", costCenter->getValue("centername").toString());
             costSum->setValue("debit", debit);
             costSum->setValue("credit", credit);
-            costSum->delFlag(RB2::FlagFromDatabase);
+            costSum->deleteFlag(RB2::FlagFromDatabase);
 
             qStr = "DELETE FROM acc_costsum WHERE parent='"
                   + costCenter->getId()

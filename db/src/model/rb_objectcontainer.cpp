@@ -1025,7 +1025,7 @@ bool RB_ObjectContainer::dbReadList(QSqlDatabase db,
         }
 
         childObj->setFlag(RB2::FlagFromDatabase);
-        childObj->delFlag(RB2::FlagIsDirty);
+        childObj->deleteFlag(RB2::FlagIsDirty);
         success = childObj->dbRead(db, resolveNext(level), true);
     }
 

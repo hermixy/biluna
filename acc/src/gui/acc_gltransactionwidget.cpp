@@ -26,6 +26,7 @@
 #include "db_dialogfactory.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_mdiwindow.h"
+#include "rb_membereditdialog.h"
 #include "rb_settings.h"
 #include "rb_sqlrelationaldelegate.h"
 
@@ -1159,6 +1160,29 @@ void ACC_GlTransactionWidget::on_pbTotalTax_clicked() {
 }
 
 /**
+ * @brief ACC_GlTransactionWidget::on_pbEditInvoiceItemDetail_clicked
+ */
+void ACC_GlTransactionWidget::on_pbEditInvoiceItemDetail_clicked() {
+    if (!tvItem->currentIndex().isValid()) {
+        ACC_DIALOGFACTORY->requestWarningDialog(tr("No item selected.\n"
+                                                   "Please select an item first."));
+        return;
+    }
+
+    RB_ObjectBase* obj = mItemTransModel->getCurrentObject();
+    QStringList strList;
+    strList << "narrative" << "unitprice" << "qtydispatched" << "stkuom"
+            << "discountpercent";
+
+    RB_MemberEditDialog* dlg = new RB_MemberEditDialog(this);
+    dlg->showObjectMembers(obj, strList);
+    dlg->exec();
+
+    mItemTransModel->updateCurrentObject(obj);
+    dlg->deleteLater();
+}
+
+/**
  * Button select item account clicked
  */
 void ACC_GlTransactionWidget::on_ileItemAccount_clicked() {
@@ -1880,6 +1904,7 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
 
         pbTotalPayable->show();
         pbTotalReceivable->show();
+        pbEditInvoiceItemDetail->hide();
         lblAllocation->show();
         ileAllocation->show();
         lblDebitCredit->show();
@@ -1917,6 +1942,7 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
 
         pbTotalPayable->show();
         pbTotalReceivable->hide();
+        pbEditInvoiceItemDetail->hide();
         lblAllocation->hide();
         ileAllocation->hide();
         lblDebitCredit->hide();
@@ -1954,6 +1980,7 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
 
         pbTotalPayable->hide();
         pbTotalReceivable->show();
+        pbEditInvoiceItemDetail->show();
         lblAllocation->hide();
         ileAllocation->hide();
         lblDebitCredit->hide();
@@ -1979,6 +2006,7 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
 
         pbTotalPayable->hide();
         pbTotalReceivable->hide();
+        pbEditInvoiceItemDetail->hide();
         lblAllocation->show();
         ileAllocation->show();
         lblDebitCredit->show();

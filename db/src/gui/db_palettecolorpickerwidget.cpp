@@ -322,7 +322,8 @@ void DB_PaletteColorPickerWidget::setItem(int row, int col,
  * @param wgt
  * @param palette
  */
-void DB_PaletteColorPickerWidget::setWidgetPalette(QWidget* wgt, const QPalette& palette) {
+void DB_PaletteColorPickerWidget::setWidgetPalette(QWidget* wgt,
+                                                   const QPalette& palette) {
     wgt->setPalette(palette);
 }
 

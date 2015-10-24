@@ -459,10 +459,10 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
             fieldName = mem->getName();
 
             if (fieldName.endsWith("_idx")) {
-                // the Uuid part with the curly braces without additional text
+                // the Uuid only with the curly braces, without additional text
                 var = data(idx, RB2::RoleOrigData);
                 mObject->setValue(col, var);
-                // the Uuid part including the curly braces removed
+                // text only, the Uuid part including the curly braces removed
                 var = data(idx, Qt::DisplayRole);
                 mObject->setDValue(col, var);
             } else {
@@ -470,6 +470,8 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
                 mObject->setValue(col, var);
             }
         }
+
+        mObject->deleteFlag(RB2::FlagIsDirty);
     } else {
         // Children are to be added because of resolve level,
         // only possible by reading from database
@@ -481,6 +483,7 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
         mObject->setId(id);
         mObject->dbRead(database(), level);
     }
+
 
     return mObject;
 }
@@ -497,6 +500,53 @@ RB_ObjectBase* RB_MmSource::getCurrentObject() {
 //        RB_DEBUG->print(headerData(i, Qt::Horizontal).toString());
 //    }
 
+}
+
+/**
+ * Update current object. Works only if model current object and
+ * obj have the same ID.
+ * @brief RB_MmSource::updateCurrentObject
+ * @param obj
+ */
+void RB_MmSource::updateCurrentObject(RB_ObjectBase* obj) {
+    if (!obj || !obj->getFlag(RB2::FlagIsDirty)) {
+        return;
+    }
+
+    QModelIndex idx = getCurrentIndex();
+    int row = idx.row();
+    idx = index(row, 0, idx.parent()); // id
+
+    if (idx.data().toString() != obj->getId()) {
+        RB_DEBUG->error("RB_MmSource::updateCurrentObject() ERROR");
+        return;
+    }
+
+    QString fieldName = "";
+    int colCount = columnCount();
+
+    for (int col = 1; col < colCount; ++col) {
+        RB_ObjectMember* mem = mObject->getMember(col);
+
+        if (!mem) {
+            RB_DEBUG->error("RB_MmSource::updateCurrentObject() member ERROR");
+            continue;
+        }
+
+        fieldName = mem->getName();
+        idx = index(row, fieldIndex(fieldName), idx.parent());
+
+        if (mem->getPreviousValue().toString().isEmpty()
+                && mem->getValue() != mem->getPreviousValue()) {
+            if (fieldName.endsWith("_idx")) {
+                // the Uuid part with the curly braces without additional text
+                setData(idx, mem->getValue().toString()
+                        + mem->getDisplayValue().toString());
+            } else {
+                setData(idx, mem->getValue());
+            }
+        }
+    }
 }
 
 /**
@@ -963,7 +1013,7 @@ RB_Variant RB_MmSource::hiddenTableData(const QModelIndex& index, int role) cons
 
     if (role == Qt::DisplayRole) {
         if (fieldName.endsWith("_idx")) {
-            // example: {2deac140-ffb4-11df-a976-0800200c9a66}Debitor 8-4-4-4-12
+            // example: {2deac140-ffb4-11df-a976-0800200c9a66}Debtor 8-4-4-4-12
             RB_String str = QSqlRelationalTableModel::data(index, role).toString();
             // remove the Uuid part including the curly braces
             // Still necessary? refer to edit role
@@ -1433,7 +1483,7 @@ bool RB_MmSource::removeRows(int row, int count,
         if (success) {
             delete delObj;
         } else {
-            delObj->delFlag(RB2::FlagIsDeleted);
+            delObj->deleteFlag(RB2::FlagIsDeleted);
             objC->insert(row, delObj);
         }
     }
@@ -1837,7 +1887,7 @@ RB_Variant RB_MmSource::objectData(const QModelIndex& index, int role) const {
             for (int relRow = 0; relRow < count; ++relRow) {
                 QModelIndex idx = relModel->index(relRow, 0);
 
-                if (idx.data().toString() == obj->getValue(col)) {
+                if (idx.data().toString() == obj->getIdValue(col)) {
                     // ID found
                     QSqlRelation rel = relation(col - mHiddenColumns);
                     QString fieldName = rel.displayColumn();
@@ -1866,7 +1916,7 @@ RB_Variant RB_MmSource::objectData(const QModelIndex& index, int role) const {
             return obj->getDValue(col);
         }
     } else if (role == RB2::RoleOrigData) {
-        return obj->getValue(col);
+        return obj->getIdValue(col);
     }
 
     return RB_Variant();
@@ -2431,7 +2481,7 @@ now1 = now2;
 
     RB_FlagVisitor* vis = new RB_FlagVisitor();
     vis->setFlag(RB2::FlagFromDatabase);
-    vis->delFlag(RB2::FlagIsDirty);
+    vis->deleteFlag(RB2::FlagIsDirty);
     mRoot->acceptVisitor(*vis);
     delete vis;
 
@@ -2526,7 +2576,7 @@ void RB_MmSource::createSubTree(RB_ObjectBase* parent) {
         }
 
         currentObj->setFlag(RB2::FlagFromDatabase);
-        currentObj->delFlag(RB2::FlagIsDirty);
+        currentObj->deleteFlag(RB2::FlagIsDirty);
     }
 }
 

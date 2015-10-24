@@ -30,7 +30,7 @@ public:
     virtual void leaveObject(RB_ObjectBase* obj);
 
     virtual void setFlag(RB2::Flags flag);
-    virtual void delFlag(RB2::Flags flag);
+    virtual void deleteFlag(RB2::Flags flag);
     virtual void reset();
 
 private:
