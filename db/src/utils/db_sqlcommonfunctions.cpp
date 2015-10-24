@@ -180,10 +180,7 @@ ORDER BY persproject_idx;
         obj->setValue("grouppermission_id", query.value("grouppermission_id"));
         obj->setValue("groupstart", query.value("groupstart"));
         obj->setValue("groupend", query.value("groupend"));
-        RB_String str = query.value("persproject_idx").toString();
-        obj->setValue("persproject_idx", str.remove(38, str.length())); // {Uuid}
-        str = query.value("persproject_idx").toString();
-        obj->setDValue("persproject_idx", str.remove(0, 38)); // PENG_Project - project number
+        obj->setValue("persproject_idx", query.value("persproject_idx")); // PENG_Project - project number
         obj->setValue("persprojectstatus_id", query.value("persprojectstatus_id"));
         obj->setValue("persprojectstart", query.value("persprojectstart"));
         obj->setValue("persprojectend", query.value("persprojectend"));

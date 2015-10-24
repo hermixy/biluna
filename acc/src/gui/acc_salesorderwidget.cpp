@@ -920,8 +920,7 @@ void ACC_SalesOrderWidget::createNewOrder(RB_ObjectBase* order) {
     orderIdx = mModel->index(row, mModel->fieldIndex("deladd6"));
     mModel->setData(orderIdx, order->getValue("deladd6"), Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("contact_idx"));
-    mModel->setData(orderIdx, order->getValue("contact_idx").toString()
-                    + order->getDValue("contact_idx").toString(), Qt::EditRole);
+    mModel->setData(orderIdx, order->getValue("contact_idx").toString(), Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("contactphone"));
     mModel->setData(orderIdx, order->getValue("contactphone"), Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("contactemail"));
@@ -969,8 +968,7 @@ void ACC_SalesOrderWidget::createNewOrder(RB_ObjectBase* order) {
         row = mChildModel->rowCount() - 1;
 
         detailIdx = mChildModel->index(row, mChildModel->fieldIndex("stk_idx"));
-        mChildModel->setData(detailIdx, orderDetail->getValue("stk_idx").toString()
-                             + orderDetail->getDValue("stk_idx").toString(), Qt::EditRole);
+        mChildModel->setData(detailIdx, orderDetail->getValue("stk_idx").toString(), Qt::EditRole);
         detailIdx = mChildModel->index(row, mChildModel->fieldIndex("stkdescription"));
         mChildModel->setData(detailIdx, orderDetail->getValue("stkdescription"), Qt::EditRole);
         detailIdx = mChildModel->index(row, mChildModel->fieldIndex("stkuom"));
@@ -1000,8 +998,7 @@ void ACC_SalesOrderWidget::createNewOrder(RB_ObjectBase* order) {
         detailIdx = mChildModel->index(row, mChildModel->fieldIndex("taxcat_id"));
         mChildModel->setData(detailIdx, orderDetail->getValue("taxcat_id"), Qt::EditRole);
         detailIdx = mChildModel->index(row, mChildModel->fieldIndex("costcenter_idx"));
-        mChildModel->setData(detailIdx, orderDetail->getValue("costcenter_idx").toString()
-                             + orderDetail->getDValue("costcenter_idx").toString(), Qt::EditRole);
+        mChildModel->setData(detailIdx, orderDetail->getValue("costcenter_idx").toString(), Qt::EditRole);
     }
 
     delete iter;

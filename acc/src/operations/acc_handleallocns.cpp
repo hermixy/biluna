@@ -520,8 +520,8 @@ void ACC_HandleAllocns::undoItemAllocationFromDC(RB_ObjectBase* transAlloc,
     RB_String docFromId = transAlloc->getValue("docfrom_id").toString();
 
     itemFrom->setValue("transallocn_idx", "0");
-    itemFrom->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId());
-    itemFrom->setDValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultName());
+    itemFrom->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
+                       + ACC_QACHARTMASTER->getAccDefaultName());
 
     if (getTransDocType(docFromId) == ACC2::TransBankCash) {
         itemFrom->setValue("amountcleared", 0.0);
@@ -618,8 +618,8 @@ void ACC_HandleAllocns::glTransToDefault(const RB_String& docToId) {
         glTrans->setFlag(RB2::FlagIsDeleted);
         mPostGlTrans.execute(glTrans);
 
-        glTrans->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId());
-        glTrans->setDValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultName());
+        glTrans->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
+                          + ACC_QACHARTMASTER->getAccDefaultName());
         glTrans->setValue("transallocn_idx", "0");
         glTrans->deleteFlag(RB2::FlagIsDeleted);
         mPostGlTrans.execute(glTrans);

@@ -649,6 +649,11 @@ void ACC_GlTransactionWidget::on_ileSupplier_clicked() {
  * transaction document is generated from a sales order.
  */
 void ACC_GlTransactionWidget::on_pbReprintInvoice_clicked() {
+    if (isWindowModified()) {
+        ACC_DIALOGFACTORY->requestWarningDialog(tr("Save your data first."));
+        return;
+    }
+
     if (!tvDocument->currentIndex().isValid()) {
         ACC_DIALOGFACTORY->requestWarningDialog(tr("No transaction document selected."));
         return;
@@ -692,6 +697,11 @@ void ACC_GlTransactionWidget::on_pbReprintInvoice_clicked() {
  * transaction document is generated from a purchase order.
  */
 void ACC_GlTransactionWidget::on_pbReprintPurchaseOrder_clicked() {
+    if (isWindowModified()) {
+        ACC_DIALOGFACTORY->requestWarningDialog(tr("Save your data first."));
+        return;
+    }
+
     if (!tvDocument->currentIndex().isValid()) {
         ACC_DIALOGFACTORY->requestWarningDialog(tr("No transaction document selected."));
         return;
@@ -1171,8 +1181,14 @@ void ACC_GlTransactionWidget::on_pbEditInvoiceItemDetail_clicked() {
 
     RB_ObjectBase* obj = mItemTransModel->getCurrentObject();
     QStringList strList;
-    strList << "narrative" << "unitprice" << "qtydispatched" << "stkuom"
-            << "discountpercent";
+
+    if (mTransType == ACC2::TransDebtor) {
+        strList << "narrative" << "unitprice" << "qtydispatched" << "stkuom"
+                << "discountpercent";
+    } else if (mTransType == ACC2::TransCreditor) {
+        strList << "narrative" << "unitprice" << "qtyreceived" << "stkuom"
+                << "discountpercent";
+    }
 
     RB_MemberEditDialog* dlg = new RB_MemberEditDialog(this);
     dlg->showObjectMembers(obj, strList);
@@ -1180,6 +1196,7 @@ void ACC_GlTransactionWidget::on_pbEditInvoiceItemDetail_clicked() {
 
     mItemTransModel->updateCurrentObject(obj);
     dlg->deleteLater();
+    enableWidgets(isValidTransDoc());
 }
 
 /**
@@ -1311,11 +1328,11 @@ void ACC_GlTransactionWidget::on_ileAllocation_clicked() {
 
     if (mTransType == ACC2::TransBankCash && !bankAccount.isEmpty()) {
         RB_String tableName = "acc_customer";
-        RB_String custSuppId = obj->getValue("debtor_idx").toString();
+        RB_String custSuppId = obj->getIdValue("debtor_idx").toString();
 
         if (custSuppId.isEmpty()) {
             tableName = "acc_supplier";
-            custSuppId = obj->getValue("creditor_idx").toString();
+            custSuppId = obj->getIdValue("creditor_idx").toString();
         }
 
         if (!custSuppId.isEmpty()) {
@@ -1942,7 +1959,7 @@ void ACC_GlTransactionWidget::setItemModel(ACC2::TransType type) {
 
         pbTotalPayable->show();
         pbTotalReceivable->hide();
-        pbEditInvoiceItemDetail->hide();
+        pbEditInvoiceItemDetail->show();
         lblAllocation->hide();
         ileAllocation->hide();
         lblDebitCredit->hide();
@@ -2354,16 +2371,14 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
         gltrans->setValue("description", itemDescr);
         idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("chartmaster_idx"));
         RB_String accountName = mItemTransModel->data(idx).toString();
-        gltrans->setDValue("chartmaster_idx", accountName); // display role value
         accountId = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
-        gltrans->setValue("chartmaster_idx", accountId);  // original data role value, ID
+        gltrans->setValue("chartmaster_idx", accountId + accountName);
 
         if (mTransType == ACC2::TransDebtor || mTransType == ACC2::TransCreditor) {
             idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("costcenter_idx"));
             RB_String costCenterName = mItemTransModel->data(idx).toString();
-            gltrans->setDValue("costcenter_idx", costCenterName); // display role value
             RB_String costCenterId = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
-            gltrans->setValue("costcenter_idx", costCenterId);  // original data role value, ID
+            gltrans->setValue("costcenter_idx", costCenterId + costCenterName);
         }
 
         // accountcontrol
@@ -2390,10 +2405,8 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
         if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo) {
             RB_String str;
             idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transallocn_idx"));
-            str = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
+            str += mItemTransModel->data(idx, Qt::EditRole).toString();
             gltrans->setValue("transallocn_idx", str);
-            str = mItemTransModel->data(idx, Qt::DisplayRole).toString();
-            gltrans->setDValue("transallocn_idx", str);
 
             // totals for bank, debit/credit is separate for bank only
             if (amount >= 0.0) {
@@ -2531,8 +2544,7 @@ void ACC_GlTransactionWidget::createNewHelper(const RB_String& descr,
     gltrans->setValue("periodno", mPeriod);
     gltrans->setValue("transdoc_id", mDocId);
     gltrans->setValue("description", descr);
-    gltrans->setValue("chartmaster_idx", acctId);  // original data role value
-    gltrans->setDValue("chartmaster_idx", acctName); // display role value
+    gltrans->setValue("chartmaster_idx", acctId + acctName);
     // accountcontrol
     RB_ObjectBase* aObj = ACC_QACHARTMASTER->getAcctObj(acctId);
     if (aObj) {

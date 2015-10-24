@@ -133,8 +133,7 @@ bool ACC_ProcessTransDoc::createGlTrans() {
     RB_String itemDescr = "";
     RB_String accountId = "";
     RB_String accountName = "";
-    RB_String costCenterId = "";
-    RB_String costCenterName = "";
+    RB_String costCenter = "";
     double amount = 0.0;
 
 
@@ -157,14 +156,11 @@ bool ACC_ProcessTransDoc::createGlTrans() {
 
         itemDescr = dt->getValue("description").toString();
         glTrans->setValue("description", itemDescr);
-        accountId = dt->getValue("chartmaster_idx").toString();
+        accountId = dt->getIdValue("chartmaster_idx").toString();
         accountName = dt->getDValue("chartmaster_idx").toString();
-        glTrans->setValue("chartmaster_idx", accountId);  // original data role value, ID
-        glTrans->setDValue("chartmaster_idx", accountName);
-        costCenterId = dt->getValue("costcenter_idx").toString();
-        costCenterName = dt->getDValue("costcenter_idx").toString();
-        glTrans->setValue("costcenter_idx", costCenterId);
-        glTrans->setDValue("costcenter_idx", costCenterName);
+        glTrans->setValue("chartmaster_idx", accountId + accountName);
+        costCenter = dt->getValue("costcenter_idx").toString();
+        glTrans->setValue("costcenter_idx", costCenter);
 
         // accountcontrol
         RB_ObjectBase* aObj = ACC_QACHARTMASTER->getAcctObj(accountId);
@@ -193,8 +189,6 @@ bool ACC_ProcessTransDoc::createGlTrans() {
             RB_String str;
             str = dt->getValue("transallocn_idx").toString();
             glTrans->setValue("transallocn_idx", str);
-            str = dt->getDValue("transallocn_idx").toString();
-            glTrans->setDValue("transallocn_idx", str);
 
             // totals for bank, debit/credit is separate for bank only
             if (amount >= 0.0) {
@@ -224,8 +218,7 @@ bool ACC_ProcessTransDoc::createGlTrans() {
                                    ACC_QACHARTMASTER->getAccPurchaseTaxHighId(), amount); // debit
                 }
 
-                glTrans->setValue("costcenter_idx", costCenterId);
-                glTrans->setDValue("costcenter_idx", costCenterName);
+                glTrans->setValue("costcenter_idx", costCenter);
                 totalAmount += amount;
             }
 
@@ -240,8 +233,7 @@ bool ACC_ProcessTransDoc::createGlTrans() {
                                    ACC_QACHARTMASTER->getAccPurchaseTaxLowId(), amount); // debit
                 }
 
-                glTrans->setValue("costcenter_idx", costCenterId);
-                glTrans->setDValue("costcenter_idx", costCenterName);
+                glTrans->setValue("costcenter_idx", costCenter);
                 totalAmount += amount;
             }
 
@@ -256,8 +248,7 @@ bool ACC_ProcessTransDoc::createGlTrans() {
                                    ACC_QACHARTMASTER->getAccPurchaseTaxOtherId(), amount); // debit
                 }
 
-                glTrans->setValue("costcenter_idx", costCenterId);
-                glTrans->setDValue("costcenter_idx", costCenterName);
+                glTrans->setValue("costcenter_idx", costCenter);
                 totalAmount += amount;
             }
         } // end if regular debtor or creditor
@@ -328,8 +319,8 @@ RB_ObjectBase* ACC_ProcessTransDoc::createGlHelper(const RB_String& descr,
     glTrans->setValue("periodno", mPeriod);
     glTrans->setValue("transdoc_id", mTransDocId);
     glTrans->setValue("description", descr);
-    glTrans->setDValue("chartmaster_idx", acctName); // display role value
-    glTrans->setValue("chartmaster_idx", acctId);  // original data role value
+    glTrans->setValue("chartmaster_idx", acctId + acctName);
+
     // accountcontrol
     RB_ObjectBase* aObj = ACC_QACHARTMASTER->getAcctObj(acctId);
     if (aObj) {

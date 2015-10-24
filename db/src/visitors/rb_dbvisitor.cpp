@@ -194,21 +194,11 @@ bool RB_DbVisitor::dbRead() {
     if (q.first()) {
         QSqlRecord rec = q.record();
         RB_String fieldName;
-        RB_String value;
         int count = rec.count();
 
         for (int i = 0; i < count; ++i) {
             fieldName = rec.fieldName(i);
-            if (!fieldName.endsWith("_idx")) {
-                mObject->setValue(fieldName, rec.value(i));
-            } else {
-                value = rec.value(i).toString();
-                // remove the part after the Uuid, 0 is the first character
-                mObject->setValue(fieldName, value.remove(38, value.length()));
-                value = rec.value(i).toString();
-                // remove the Uuid part including the curly braces
-                mObject->setDValue(fieldName, value.remove(0, 38));
-            }
+            mObject->setValue(fieldName, rec.value(i));
         }
 
         mObject->setFlag(RB2::FlagFromDatabase);

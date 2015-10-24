@@ -117,7 +117,7 @@ public:
     virtual RB_Variant getIdValue(int number) const;
     virtual RB_Variant getIdValue(const RB_String& name) const;
 
-    void deleteFlag(unsigned int f);
+    virtual void deleteFlag(unsigned int f);
 
     virtual bool dbRead(QSqlDatabase db,
                         RB2::ResolveLevel level = RB2::ResolveNone,

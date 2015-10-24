@@ -323,7 +323,7 @@ void RB_ObjectBase::createCopy(RB_ObjectBase* copy, RB2::ResolveLevel /*level*/)
         mem = mMemberVector.at(i);
         copy->addMember(mem->getName(), mem->getUnit(),
                         mem->getValue(), mem->getType(),
-                        mem->getPreviousValue(), mem->getDisplayValue());
+                        mem->getPreviousValue());
     }
 }
 
@@ -723,7 +723,7 @@ RB_Variant RB_ObjectBase::getIdValue(const QString &name) const {
 }
 
 void RB_ObjectBase::deleteFlag(unsigned int f) {
-    if (f == RB2::FlagIsDeleted) {
+    if (f == RB2::FlagIsDirty) {
         unsigned int memberCount = mMemberVector.size();
         RB_ObjectMember* member = NULL;
 

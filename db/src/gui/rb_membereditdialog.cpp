@@ -80,7 +80,7 @@ void RB_MemberEditDialog::on_pbOk_clicked() {
                 double value = item->text().toDouble();
                 mem->setValue(value);
             } else if (mem->getType() == RB2::MemberInteger) {
-                double value = item->text().toInt();
+                int value = item->text().toInt();
                 mem->setValue(value);
             } else {
                 mem->setValue(item->text());

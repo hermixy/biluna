@@ -48,7 +48,7 @@ bool ACC_SalesInvoiceHtml::execute(RB_ObjectBase* transDoc, RB_ObjectContainer* 
     mDebtorTransList = dtList;
 
     // Get customer data
-    RB_String id = transDoc->getValue("debtor_idx").toString();
+    RB_String id = transDoc->getIdValue("debtor_idx").toString();
     mExchangeRate = transDoc->getValue("rate").toDouble();
 
     if (id.isEmpty() || id == "0") {
@@ -143,7 +143,7 @@ void ACC_SalesInvoiceHtml::setAddress() {
     RB_String currency = f.selectFromWhereId("currcode", "ACC_Currency", currencyId).toString();
     mHtml.replace("{$ACC_Customer.currency}", currency);
 
-    RB_String contactId = mSalesOrder->getValue("contact_idx").toString();
+    RB_String contactId = mSalesOrder->getIdValue("contact_idx").toString();
 
     if (invoiceBranch == 0 || invoiceBranch == 1
             /*!cust->getValue("brpostaddress1").toString().isEmpty()
@@ -207,7 +207,7 @@ void ACC_SalesInvoiceHtml::setAddress() {
  */
 RB_ObjectBase* ACC_SalesInvoiceHtml::getInvoiceAddress(RB_ObjectBase* cust) {
     int invoiceHomeOffice = cust->getValue("invaddrbranch").toInt(); // TODO: invaddrbranch is confusing
-    RB_String custParentId = cust->getValue("custparent_idx").toString();
+    RB_String custParentId = cust->getIdValue("custparent_idx").toString();
 
     if (invoiceHomeOffice != 1 || custParentId.size() < 38 /* is ID size */) {
         return cust;

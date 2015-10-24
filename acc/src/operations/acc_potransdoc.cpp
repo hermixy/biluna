@@ -315,14 +315,14 @@ bool ACC_PoTransDoc::execute(RB_ObjectBase* transDoc, RB_ObjectContainer* ctList
             RB_ObjectBase* tax = iter->currentObject();
 
             if (!isFirstTax && (prevTaxAuthId != tax->getValue("taxauth_id").toString()
-                    || prevTaxChartMasterId != tax->getValue("taxacct_idx").toString()
+                    || prevTaxChartMasterId != tax->getIdValue("taxacct_idx").toString()
                     || tax->getValue("taxauth_id").toString().isEmpty()
-                    || tax->getValue("taxglacct_idx").toString().isEmpty())) {
+                    || tax->getIdValue("taxglacct_idx").toString().isEmpty())) {
                 // Create new debtor transaction
                 ct = ACC_OBJECTFACTORY->newObject(RB_Uuid::createUuid().toString(),
                                                   ctList, "", true);
                 prevTaxAuthId = tax->getValue("taxauth_id").toString();
-                prevTaxChartMasterId = tax->getValue("taxacct_idx").toString();
+                prevTaxChartMasterId = tax->getIdValue("taxacct_idx").toString();
                 prevTaxChartMasterName = tax->getDValue("taxacct_idx").toString();
 
                 ct->setValue("parent", ctParent);
@@ -388,7 +388,7 @@ bool ACC_PoTransDoc::execute(RB_ObjectBase* transDoc, RB_ObjectContainer* ctList
 //        ct->setValue("parent", ctParent);
 //        ct->setValue("transdoc_id", ctTransDocId);
 //        ct->setValue("description", tr("Freight cost") + " " + ctDescription);
-//        RB_String freightActId = ACC_MODELFACTORY->getRoot()->getValue("freightact_idx").toString();
+//        RB_String freightActId = ACC_MODELFACTORY->getRoot()->getIdValue("freightact_idx").toString();
 //        ct->setValue("chartmaster_id", freightActId);
 //        int actCtrl = f.selectFromWhereId("accountcontrol", "acc_charmaster", freightActId).toInt();
 //        ct->setValue("accountcontrol", actCtrl);
@@ -462,8 +462,8 @@ bool ACC_PoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
     transDoc->setValue("duedate", dueDate);
     transDoc->setValue("transno", -1);
     transDoc->setValue("debtor_idx", "0");
-    transDoc->setValue("creditor_idx", suppModel->getCurrentId());
-    transDoc->setDValue("creditor_idx", suppModel->getCurrentValue("suppname").toString()); // display value
+    transDoc->setValue("creditor_idx", suppModel->getCurrentId()
+                       + suppModel->getCurrentValue("suppname").toString());
     transDoc->setValue("refno", poModel->getCurrentValue("supplierref", RB2::RoleOrigData));
     RB_String str = "PO";
     str +=  " " + poModel->getCurrentValue("orderno").toString();
@@ -591,20 +591,22 @@ bool ACC_PoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
         if (obj) {
             ctChartMasterName = obj->getValue("accountcode").toString()
                     + " - " + obj->getValue("accountname").toString();
-            ct->setValue("chartmaster_idx", ctChartMasterId);
-            ct->setDValue("chartmaster_idx", ctChartMasterName);
+            ct->setValue("chartmaster_idx", ctChartMasterId + ctChartMasterName);
         } else {
             RB_DEBUG->error("ACC_PoTransDoc::exec() ACC_ChartMaster object ERROR");
         }
         ct->setValue("accountcontrol", ctActCtrl);
-        ct->setValue("taxhighchartmaster_idx", ACC_QACHARTMASTER->getAccPurchaseTaxHighId());
-        ct->setDValue("taxhighchartmaster_idx", ACC_QACHARTMASTER->getAccPurchaseTaxHighName());
+        ct->setValue("taxhighchartmaster_idx",
+                     ACC_QACHARTMASTER->getAccPurchaseTaxHighId()
+                     + ACC_QACHARTMASTER->getAccPurchaseTaxHighName());
         ct->setValue("taxhighamt", 0.0);
-        ct->setValue("taxlowchartmaster_idx", ACC_QACHARTMASTER->getAccPurchaseTaxLowId());
-        ct->setDValue("taxlowchartmaster_idx", ACC_QACHARTMASTER->getAccPurchaseTaxLowName());
+        ct->setValue("taxlowchartmaster_idx",
+                     ACC_QACHARTMASTER->getAccPurchaseTaxLowId()
+                     + ACC_QACHARTMASTER->getAccPurchaseTaxLowName());
         ct->setValue("taxlowamt", 0.0);
-        ct->setValue("taxotherchartmaster_idx", ACC_QACHARTMASTER->getAccPurchaseTaxOtherId());
-        ct->setDValue("taxotherchartmaster_idx", ACC_QACHARTMASTER->getAccPurchaseTaxOtherName());
+        ct->setValue("taxotherchartmaster_idx",
+                     ACC_QACHARTMASTER->getAccPurchaseTaxOtherId()
+                     + ACC_QACHARTMASTER->getAccPurchaseTaxOtherName());
         ct->setValue("hold", 0);
         ct->setValue("orderdetail_id", ctOrderDetailId);
         ct->setValue("taxotheramt", 0.0);
@@ -613,10 +615,8 @@ bool ACC_PoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
         idx =  odModel->index(row, odModel->fieldIndex("id"));
         RB_String str = idx.data(RB2::RoleOrigData).toString();
         ct->setValue("orderdetail_id", str);
-        ct->setValue("stk_idx", stockId);
-        ct->setDValue("stk_idx", stockCode);
-        ct->setValue("costcenter_idx", costCenterId);
-        ct->setDValue("costcenter_idx", costCenterCode);
+        ct->setValue("stk_idx", stockId + stockCode);
+        ct->setValue("costcenter_idx", costCenterId + costCenterCode);
         idx =  odModel->index(row, odModel->fieldIndex("narrative"));
         str = idx.data(RB2::RoleOrigData).toString();
         ct->setValue("narrative", str);
@@ -664,13 +664,15 @@ bool ACC_PoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
             tax->addMember("taxrate", "-", query.value(4), RB2::MemberDouble);
             tax->addMember("taxontax", "-", query.value(3), RB2::MemberInteger);
             tax->addMember("taxcalculationorder", "-", query.value(0), RB2::MemberInteger);
-            tax->addMember("taxacct_idx", "-", query.value(5), RB2::MemberChar40);
 
-            // Set display value
-            obj = ACC_QACHARTMASTER->getAcctObj(query.value(5).toString());
+            RB_String taxAcctId = query.value(5).toString();
+            obj = ACC_QACHARTMASTER->getAcctObj(taxAcctId);
+
             if (obj) {
-                tax->setDValue("taxacct_idx", obj->getValue("accountcode").toString() + " - "
-                               + obj->getValue("accountname").toString());
+                RB_String str = taxAcctId
+                        + obj->getValue("accountcode").toString() + " - "
+                        + obj->getValue("accountname").toString();
+                tax->addMember("taxacct_idx", "-", str, RB2::MemberChar40);
             } else {
                 RB_DEBUG->error("ACC_PoTransDoc::execute() tax account2 not found ERROR");
             }
@@ -683,21 +685,21 @@ bool ACC_PoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
             RB_ObjectBase* tax = iter->currentObject();
 
             if (!isFirstTax && (prevTaxAuthId != tax->getValue("taxauth_id").toString()
-                    || prevTaxChartMasterId != tax->getValue("taxacct_idx").toString()
+                    || prevTaxChartMasterId != tax->getIdValue("taxacct_idx").toString()
                     || tax->getValue("taxauth_id").toString().isEmpty()
-                    || tax->getValue("taxglacct_idx").toString().isEmpty())) {
+                    || tax->getIdValue("taxglacct_idx").toString().isEmpty())) {
                 // Create new debtor transaction
                 ct = ACC_OBJECTFACTORY->newObject(RB_Uuid::createUuid().toString(),
                                                   ctList, "", true);
                 prevTaxAuthId = tax->getValue("taxauth_id").toString();
-                prevTaxChartMasterId = tax->getValue("taxacct_idx").toString();
+                prevTaxChartMasterId = tax->getIdValue("taxacct_idx").toString();
                 prevTaxChartMasterName = tax->getDValue("taxacct_idx").toString();
 
                 ct->setValue("parent", ctParent);
                 ct->setValue("transdoc_id", ctTransDocId);
                 ct->setValue("description", ctDescription);
-                ct->setValue("chartmaster_idx", ctChartMasterId);
-                ct->setDValue("chartmaster_idx", ctChartMasterName);
+                ct->setValue("chartmaster_idx", ctChartMasterId
+                             + ctChartMasterName);
                 ct->setValue("accountcontrol", ctActCtrl);
                 if (isFirstTax) {
                     ct->setValue("amount", amount);
@@ -709,8 +711,8 @@ bool ACC_PoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
                 ct->setValue("taxhighamt", 0.0);
                 ct->setValue("taxlowchartmaster_idx", "0");
                 ct->setValue("taxlowamt", 0.0);
-                ct->setValue("taxotherchartmaster_idx", prevTaxChartMasterId);
-                ct->setDValue("taxotherchartmaster_idx", prevTaxChartMasterName);
+                ct->setValue("taxotherchartmaster_idx", prevTaxChartMasterId
+                             + prevTaxChartMasterName);
                 ct->setValue("hold", 0);
                 ct->setValue("orderdetail_id", ctOrderDetailId);
                 ct->setValue("taxauth_id", tax->getValue("taxauth_id"));
