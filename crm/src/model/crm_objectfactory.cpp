@@ -12,6 +12,7 @@
 
 #include "acc_contact.h"
 #include "acc_customer.h"
+#include "acc_project.h"
 #include "crm_activity.h"
 #include "crm_campaign.h"
 #include "crm_campaigntarget.h"
@@ -22,7 +23,6 @@
 #include "crm_group.h"
 #include "crm_groupcontact.h"
 #include "crm_leadsourcetype.h"
-#include "crm_project.h"
 #include "crm_sysseqno.h"
 #include "crm_syssetting.h"
 #include "crm_template.h"
@@ -90,16 +90,18 @@ RB_ObjectBase* CRM_ObjectFactory::newObject(const RB_String& id,
     if (parent != NULL) {
         str = parent->getName();
     } else {
-        str = "CRM_"; // root
+        str = "ACC_"; // root
     }
 
     RB_ObjectContainer* list = NULL;
     RB_ObjectBase* obj = NULL;
 
-    if (str == "CRM_") { // root
-        obj = new CRM_Project(uuid, NULL, "CRM_Project", this);
+    if (str == "ACC_") { // root
+        obj = new ACC_Project(uuid, NULL, "ACC_Project", this);
 
         uuid = ""; // RB_Uuid::createUuid().toString(); No Uuid for ..Lists
+        list = new RB_ObjectContainer(uuid, obj, "ACC_CustomerList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "CRM_ActivityList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "CRM_CampaignList", this);
@@ -112,13 +114,6 @@ RB_ObjectBase* CRM_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "CRM_TemplateList", this);
         obj->addObject(list);
-
-        // ACC objects, ONLY to be able to create the related CRM tables
-        list = new RB_ObjectContainer(uuid, obj, "ACC_ContactList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "ACC_CustomerList", this);
-        obj->addObject(list);
-
     } else if (str == "ACC_ContactList") { // from ACC Accounting
         obj = new ACC_Contact(uuid, parent, "ACC_Contact", this);
         // in ACC also children lists
@@ -131,6 +126,8 @@ RB_ObjectBase* CRM_ObjectFactory::newObject(const RB_String& id,
         // in ACC also children lists
 
         uuid = "";
+        list = new RB_ObjectContainer(uuid, obj, "ACC_ContactList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "CRM_CustomerDetailList", this);
         obj->addObject(list);
     } else if (str == "CRM_ActivityList") {

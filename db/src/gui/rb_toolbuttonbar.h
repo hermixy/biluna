@@ -32,7 +32,8 @@ public:
 
     virtual void initEdit(bool isTreeModel = false,
                           bool isSaveRevert = true,
-                          bool isFindFilter = false);
+                          bool isFindFilter = false,
+                          bool isShowAll = false);
     virtual void initDetailEdit(bool isSaveRevert = true);
     virtual void setText(const RB_String& txt);
     virtual RB_String getFindFilterText();
@@ -51,6 +52,7 @@ public slots:
     virtual void on_pbFind_clicked();
     virtual void on_pbFilterOn_clicked();
     virtual void on_pbFilterOff_clicked();
+    virtual void on_pbAll_clicked();
 
     virtual void on_pbDemote_clicked();
     virtual void on_pbPromote_clicked();
@@ -70,6 +72,7 @@ signals:
     void findClicked();
     void filterOnClicked();
     void filterOffClicked();
+    void allClicked();
 
     void demoteClicked();
     void promoteClicked();

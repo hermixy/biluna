@@ -50,20 +50,11 @@ CRM_CustomerWidget::~CRM_CustomerWidget() {
  * Initialize widget and models
  */
 void CRM_CustomerWidget::init() {
-    RB_StringList items;
-    items << tr("Account") << tr("All");
-    cbSelectedBy->addItems(items);
-    connect(cbSelectedBy, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(slotSelectedByChanged(int)));
-
     //
     // 1. Set model for customer mapper
     //
     mCustModel = CRM_MODELFACTORY->getModel(CRM_ModelFactory::ModelCustomer); // shared
-    mCustModel->setPrimaryParent("crm_parent");
-    mCustModel->setWhere("", false); // not select
     mCustModel->setRoot(CRM_MODELFACTORY->getRootId());
-    leSelectedBy->setText(CRM_MODELFACTORY->getRoot()->getValue("code").toString());
 
     //
     // 2. Get mapper for line edits etc.
@@ -89,12 +80,13 @@ void CRM_CustomerWidget::init() {
     mCustMapper->addMapping(this->leBranchContact, mCustModel->fieldIndex("contactname"));
     mCustMapper->addMapping(this->leEmail, mCustModel->fieldIndex("email"));
 
-    addComboBoxMapping(mCustModel, "parent", "ACC_Project", "id", "coyname",
-                       cbRelationWithCompany, mCustMapper);
+    addComboBoxMapping(mCustModel, "db_systemuser_id", "DB_SystemUser", "id", "username",
+                       cbInternalAccountHolder, mCustMapper);
+    QStringList items;
     items.clear();
     items << tr("No") << tr("Yes");
     cbExistingCustomer->setModel(new QStringListModel(items, this));
-    mCustMapper->addMapping(cbExistingCustomer, mCustModel->fieldIndex("crmtype_id"),
+    mCustMapper->addMapping(cbExistingCustomer, mCustModel->fieldIndex("crm_type_id"),
                             "currentIndex");
 
     //
@@ -162,8 +154,6 @@ void CRM_CustomerWidget::init() {
     // Because mCustDetModel has no setFormatTableView()
     connect(mCustDetModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(slotDataIsChanged(QModelIndex, QModelIndex)));
-
-    cbSelectedBy->setCurrentIndex(0); // account
 }
 
 /**
@@ -207,19 +197,18 @@ void CRM_CustomerWidget::on_pbAdd_clicked() {
 
     // NOTE: do not forget to set the default column values, specially for the
     //       relational table otherwise new row will not show!
-    QModelIndex idx;
-    idx = mCustModel->index(row, mCustModel->fieldIndex("parent"));
-    mCustModel->setData(idx, "0", Qt::EditRole);
-    idx = mCustModel->index(row, mCustModel->fieldIndex("crm_parent"));
-    mCustModel->setData(idx, CRM_MODELFACTORY->getRootId(), Qt::EditRole);
-    // separate button for setting 'parent' is ACC_Project (company)
+    QModelIndex index;
+    index = mCustModel->index(row, mCustModel->fieldIndex("crm_type_id"));
+    mCustModel->setData(index, 0, Qt::EditRole); // 0 = potential ACC customer
+    index = mCustModel->index(row, mCustModel->fieldIndex("db_systemuser_id"));
+    mCustModel->setData(index, "0", Qt::EditRole);
     // end NOTE
 
     // add related row
     mCurrentId = mCustModel->getCurrentId();
     slotHandleParentRowChanged();
 
-    tvCustomer->setCurrentIndex(mCustModel->index(row, RB2::HIDDENCOLUMNS, QModelIndex()));
+    tvCustomer->setCurrentIndex(mCustModel->index(row, RB2::HIDDENCOLUMNS));
     tvCustomer->scrollTo(tvCustomer->currentIndex());
     tabWidget->setCurrentIndex(0);
     leCustomerCode->setFocus();
@@ -263,49 +252,11 @@ void CRM_CustomerWidget::on_pbFilterOn_clicked() {
     }
     RB_String filter = "`acc_customer`.`customerno` LIKE '";
     filter += str + "'";
-    mCustModel->setWhere(filter, false);
-    mCustModel->setRoot("");
-    mCustModel->select();
-    leSelectedBy->setText(tr("Filter"));
+    mCustModel->setWhere(filter, true);
 }
 
 void CRM_CustomerWidget::on_pbFilterOff_clicked() {
-    slotSelectedByChanged(cbSelectedBy->currentIndex());
-}
-
-/**
- * Select by changed
- */
-void CRM_CustomerWidget::slotSelectedByChanged(int index) {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-
-    switch (index) {
-        case 0 : {
-            fileSave(false);
-            mCustModel->setPrimaryParent("crm_parent"); // already done
-            mCustModel->setWhere("", false); // not select
-            mCustModel->setRoot(CRM_MODELFACTORY->getRootId());
-            mCustModel->select();
-            RB_ObjectBase* obj = CRM_MODELFACTORY->getRoot();
-            leSelectedBy->setText(obj->getValue("code").toString());
-            leFilter->setText("");
-            break;
-        }
-        case 1 : {
-            fileSave(false);
-            // mCustModel->setPrimaryParent("parent");
-            mCustModel->setWhere("`acc_customer`.`id`<>'0'", false); // not select
-            mCustModel->setRoot("");
-            mCustModel->select();
-            leSelectedBy->setText("");
-            leFilter->setText("");
-            break;
-        }
-        default :
-            break;
-    }
-
-    QApplication::restoreOverrideCursor();
+    mCustModel->setWhere("", true);
 }
 
 /**
@@ -484,7 +435,7 @@ void CRM_CustomerWidget::on_pbSendEmail_clicked() {
     QDesktopServices::openUrl(QUrl("mailto:" + email + "?subject=<Subject>&body=Dear ,"));
 }
 
-void CRM_CustomerWidget::on_pbSelectAccount_clicked() {
+void CRM_CustomerWidget::on_pbSelectCompany_clicked() {
     if (!tvCustomer->currentIndex().isValid()) {
         CRM_DIALOGFACTORY->requestWarningDialog(tr("No item selected.\n"
                                                    "Please select an item first."));

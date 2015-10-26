@@ -49,26 +49,34 @@ RB_Action* ACC_ActionBankImport::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void ACC_ActionBankImport::trigger() {
-    ACC_ActionGlTransaction action;
-    action.trigger();
+    try {
+        ACC_ActionGlTransaction action;
+        action.trigger();
 
-    // Check widget state
-    RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
-            ACC_DialogFactory::WidgetGlTransaction);
+        // Check widget state
+        RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
+                ACC_DialogFactory::WidgetGlTransaction);
 
-    if (mdiWin->isWindowModified()) {
+        if (mdiWin->isWindowModified()) {
+            ACC_DIALOGFACTORY->requestWarningDialog(
+                        tr("Data in GL Transaction window is modified.\n"
+                           "Please save your data first."));
+            return;
+        }
+
+        // Create dialog
+        RB_Dialog* dlg = ACC_DIALOGFACTORY->getDialog(ACC_DialogFactory::DialogBankImport);
+        dlg->exec();
+        dlg->deleteLater();
+
+        // TODO: set corresponding bank account in ACC_GlTransactionWidget
+        // ACC_GlTransactionWidget* wdgt = dynamic_cast<ACC_GlTransactionWidget*>(mdiWin);
+        // ...
+    } catch(std::exception& e) {
+        ACC_DIALOGFACTORY->requestWarningDialog(e.what());
+    } catch(...) {
         ACC_DIALOGFACTORY->requestWarningDialog(
-                    tr("Data in GL Transaction window is modified.\n"
-                       "Please save your data first."));
-        return;
+                    "Error <unkown> in "
+                    "ACC_BankPaymentReportWidget::on_pbRefresh_clicked()");
     }
-
-    // Create dialog
-    RB_Dialog* dlg = ACC_DIALOGFACTORY->getDialog(ACC_DialogFactory::DialogBankImport);
-    dlg->exec();
-    dlg->deleteLater();
-
-    // TODO: set corresponding bank account in ACC_GlTransactionWidget
-    // ACC_GlTransactionWidget* wdgt = dynamic_cast<ACC_GlTransactionWidget*>(mdiWin);
-    // ...
 }

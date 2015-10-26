@@ -25,7 +25,7 @@ void RB_ToolButtonBar::initSlimTable(bool isEdit, bool isFindFilter) {
 }
 
 void RB_ToolButtonBar::initEdit(bool isTreeModel, bool isSaveRevert,
-                               bool isFindFilter) {
+                                bool isFindFilter, bool isShowAll) {
     setupUi(this);
 
     // pbAdd->setVisible(true);
@@ -44,6 +44,7 @@ void RB_ToolButtonBar::initEdit(bool isTreeModel, bool isSaveRevert,
     pbFilterOn->setVisible(isFindFilter);
     pbFilterOff->setVisible(isFindFilter);
     pbFilterOff->setEnabled(false);
+    pbAll->setVisible(isShowAll);
 
     pbDemote->setVisible(isTreeModel);
     pbPromote->setVisible(isTreeModel);
@@ -71,6 +72,7 @@ void RB_ToolButtonBar::initDetailEdit(bool isSaveRevert) {
     pbFilterOn->setVisible(false);
     pbFilterOff->setVisible(false);
     pbFilterOff->setEnabled(false);
+    pbAll->setVisible(false);
 
     pbDemote->setVisible(false);
     pbPromote->setVisible(false);
@@ -137,7 +139,11 @@ void RB_ToolButtonBar::on_pbFilterOn_clicked() {
 }
 
 void RB_ToolButtonBar::on_pbFilterOff_clicked() {
-   emit filterOffClicked();
+    emit filterOffClicked();
+}
+
+void RB_ToolButtonBar::on_pbAll_clicked() {
+    emit allClicked();
 }
 
 void RB_ToolButtonBar::on_pbDemote_clicked() {

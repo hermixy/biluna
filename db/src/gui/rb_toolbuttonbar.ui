@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>733</width>
+    <width>790</width>
     <height>28</height>
    </rect>
   </property>
@@ -35,6 +35,109 @@
    <property name="spacing">
     <number>1</number>
    </property>
+   <item row="0" column="18">
+    <widget class="QToolButton" name="pbUp">
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Move item up</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="db.qrc">
+       <normaloff>:/images/icons/arrow_up.png</normaloff>:/images/icons/arrow_up.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="7">
+    <spacer name="hsEditSaveRevert">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>13</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="15">
+    <spacer name="hsFilter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>13</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="4">
+    <widget class="QToolButton" name="pbEdit">
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Edit item</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="db.qrc">
+       <normaloff>:/images/icons/pencil.png</normaloff>:/images/icons/pencil.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="11">
+    <widget class="QLineEdit" name="leFilter">
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="placeholderText">
+      <string>Search/Filter</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="1">
     <widget class="QToolButton" name="pbAddChild">
      <property name="minimumSize">
@@ -64,27 +167,8 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="11">
-    <widget class="QLineEdit" name="leFilter">
-     <property name="minimumSize">
-      <size>
-       <width>75</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>150</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="placeholderText">
-      <string>Search/Filter</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="4">
-    <widget class="QToolButton" name="pbEdit">
+   <item row="0" column="17">
+    <widget class="QToolButton" name="pbPromote">
      <property name="minimumSize">
       <size>
        <width>24</width>
@@ -98,18 +182,18 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>Edit item</string>
+      <string>Promote item</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
       <iconset resource="db.qrc">
-       <normaloff>:/images/icons/pencil.png</normaloff>:/images/icons/pencil.png</iconset>
+       <normaloff>:/images/icons/arrow_promote.png</normaloff>:/images/icons/arrow_promote.png</iconset>
      </property>
     </widget>
    </item>
-   <item row="0" column="15">
+   <item row="0" column="16">
     <widget class="QToolButton" name="pbDemote">
      <property name="minimumSize">
       <size>
@@ -132,32 +216,6 @@
      <property name="icon">
       <iconset resource="db.qrc">
        <normaloff>:/images/icons/arrow_demote.png</normaloff>:/images/icons/arrow_demote.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="18">
-    <widget class="QToolButton" name="pbDown">
-     <property name="minimumSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>Move item down</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="db.qrc">
-       <normaloff>:/images/icons/arrow_down.png</normaloff>:/images/icons/arrow_down.png</iconset>
      </property>
     </widget>
    </item>
@@ -187,8 +245,8 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="16">
-    <widget class="QToolButton" name="pbPromote">
+   <item row="0" column="19">
+    <widget class="QToolButton" name="pbDown">
      <property name="minimumSize">
       <size>
        <width>24</width>
@@ -202,66 +260,52 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>Promote item</string>
+      <string>Move item down</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
       <iconset resource="db.qrc">
-       <normaloff>:/images/icons/arrow_promote.png</normaloff>:/images/icons/arrow_promote.png</iconset>
+       <normaloff>:/images/icons/arrow_down.png</normaloff>:/images/icons/arrow_down.png</iconset>
      </property>
     </widget>
    </item>
-   <item row="0" column="13">
-    <widget class="QToolButton" name="pbFilterOff">
-     <property name="minimumSize">
+   <item row="0" column="3">
+    <spacer name="hsAddDelete">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
       <size>
-       <width>24</width>
-       <height>24</height>
+       <width>13</width>
+       <height>20</height>
       </size>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>Filter off</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="db.qrc">
-       <normaloff>:/images/icons/filter_empty.png</normaloff>:/images/icons/filter_empty.png</iconset>
-     </property>
-    </widget>
+    </spacer>
    </item>
-   <item row="0" column="12">
-    <widget class="QToolButton" name="pbFilterOn">
-     <property name="minimumSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
+   <item row="0" column="20">
+    <widget class="QLabel" name="lblInfo">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="maximumSize">
+     <property name="sizeIncrement">
       <size>
-       <width>24</width>
-       <height>24</height>
+       <width>0</width>
+       <height>0</height>
       </size>
-     </property>
-     <property name="toolTip">
-      <string>Filter on</string>
      </property>
      <property name="text">
-      <string/>
+      <string>Click item to select, press [F2] to edit</string>
      </property>
-     <property name="icon">
-      <iconset resource="db.qrc">
-       <normaloff>:/images/icons/filter.png</normaloff>:/images/icons/filter.png</iconset>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
@@ -297,41 +341,81 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="3">
-    <spacer name="hsAddDelete">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
+   <item row="0" column="12">
+    <widget class="QToolButton" name="pbFilterOn">
+     <property name="minimumSize">
       <size>
-       <width>13</width>
-       <height>20</height>
+       <width>24</width>
+       <height>24</height>
       </size>
      </property>
-    </spacer>
-   </item>
-   <item row="0" column="19">
-    <widget class="QLabel" name="lblInfo">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="sizeIncrement">
+     <property name="maximumSize">
       <size>
-       <width>0</width>
-       <height>0</height>
+       <width>24</width>
+       <height>24</height>
       </size>
+     </property>
+     <property name="toolTip">
+      <string>Filter on</string>
      </property>
      <property name="text">
-      <string>Click item to select, press [F2] to edit</string>
+      <string/>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <property name="icon">
+      <iconset resource="db.qrc">
+       <normaloff>:/images/icons/filter.png</normaloff>:/images/icons/filter.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="13">
+    <widget class="QToolButton" name="pbFilterOff">
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Filter off</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="db.qrc">
+       <normaloff>:/images/icons/filter_empty.png</normaloff>:/images/icons/filter_empty.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="6">
+    <widget class="QToolButton" name="pbRevert">
+     <property name="minimumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Revert changes/refresh</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="db.qrc">
+       <normaloff>:/images/icons/arrow_undo.png</normaloff>:/images/icons/arrow_undo.png</iconset>
      </property>
     </widget>
    </item>
@@ -355,32 +439,6 @@
      <property name="icon">
       <iconset resource="db.qrc">
        <normaloff>:/images/icons/find.png</normaloff>:/images/icons/find.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
-    <widget class="QToolButton" name="pbSave">
-     <property name="minimumSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>Save to database</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="db.qrc">
-       <normaloff>:/images/icons/database_save.png</normaloff>:/images/icons/database_save.png</iconset>
      </property>
     </widget>
    </item>
@@ -416,8 +474,8 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="6">
-    <widget class="QToolButton" name="pbRevert">
+   <item row="0" column="5">
+    <widget class="QToolButton" name="pbSave">
      <property name="minimumSize">
       <size>
        <width>24</width>
@@ -431,14 +489,14 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>Revert changes</string>
+      <string>Save to database</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
       <iconset resource="db.qrc">
-       <normaloff>:/images/icons/arrow_undo.png</normaloff>:/images/icons/arrow_undo.png</iconset>
+       <normaloff>:/images/icons/database_save.png</normaloff>:/images/icons/database_save.png</iconset>
      </property>
     </widget>
    </item>
@@ -468,24 +526,8 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="7">
-    <spacer name="hsEditSaveRevert">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>13</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="17">
-    <widget class="QToolButton" name="pbUp">
+   <item row="0" column="14">
+    <widget class="QToolButton" name="pbAll">
      <property name="minimumSize">
       <size>
        <width>24</width>
@@ -498,33 +540,14 @@
        <height>24</height>
       </size>
      </property>
-     <property name="toolTip">
-      <string>Move item up</string>
-     </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
       <iconset resource="db.qrc">
-       <normaloff>:/images/icons/arrow_up.png</normaloff>:/images/icons/arrow_up.png</iconset>
+       <normaloff>:/images/icons/all.png</normaloff>:/images/icons/all.png</iconset>
      </property>
     </widget>
-   </item>
-   <item row="0" column="14">
-    <spacer name="hsFilter">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>13</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>
@@ -541,6 +564,7 @@
   <tabstop>pbPrevious</tabstop>
   <tabstop>pbNext</tabstop>
   <tabstop>pbFilterOff</tabstop>
+  <tabstop>pbAll</tabstop>
   <tabstop>pbDemote</tabstop>
   <tabstop>pbPromote</tabstop>
   <tabstop>pbUp</tabstop>

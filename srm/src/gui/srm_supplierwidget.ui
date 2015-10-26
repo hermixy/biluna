@@ -205,52 +205,6 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="lblSelectBy">
-          <property name="text">
-           <string>Selected by</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cbSelectedBy">
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>150</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leSelectedBy">
-          <property name="placeholderText">
-           <string>-</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -676,21 +630,21 @@
              <number>3</number>
             </property>
             <item row="0" column="0">
-             <widget class="QLabel" name="lblAccount">
+             <widget class="QLabel" name="lblCompany">
               <property name="text">
-               <string>Change Account</string>
+               <string>Move to Company</string>
               </property>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="lblRelationWithCompany">
+             <widget class="QLabel" name="lblInternalAccountHolder">
               <property name="text">
-               <string>Relation with Company</string>
+               <string>Internal Account Holder</string>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QComboBox" name="cbRelationWithCompany"/>
+             <widget class="QComboBox" name="cbInternalAccountHolder"/>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="label">
@@ -834,7 +788,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QToolButton" name="pbSelectAccount">
+             <widget class="QToolButton" name="pbSelectCompany">
               <property name="minimumSize">
                <size>
                 <width>24</width>
@@ -848,7 +802,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>Select account</string>
+               <string>Select company</string>
               </property>
               <property name="text">
                <string>...</string>
@@ -1259,8 +1213,6 @@
   <tabstop>leFilter</tabstop>
   <tabstop>pbFilterOn</tabstop>
   <tabstop>pbFilterOff</tabstop>
-  <tabstop>cbSelectedBy</tabstop>
-  <tabstop>leSelectedBy</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>leSupplierCode</tabstop>
   <tabstop>leSupplierName</tabstop>
@@ -1276,8 +1228,8 @@
   <tabstop>pbSendEmail</tabstop>
   <tabstop>lePhoneNumber</tabstop>
   <tabstop>leFaxNumber</tabstop>
-  <tabstop>pbSelectAccount</tabstop>
-  <tabstop>cbRelationWithCompany</tabstop>
+  <tabstop>pbSelectCompany</tabstop>
+  <tabstop>cbInternalAccountHolder</tabstop>
   <tabstop>cbExistingSupplier</tabstop>
   <tabstop>cbType</tabstop>
   <tabstop>leOwnership</tabstop>

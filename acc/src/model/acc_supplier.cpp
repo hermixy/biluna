@@ -94,6 +94,6 @@ void ACC_Supplier::createMembers() {
     addMember("area_id", "-", "0", RB2::MemberChar40);  // rel_id
 
     // supplier relation management 0=potential supplier, 1=existing supplier
-    addMember("srmtype_id", "-", 0, RB2::MemberInteger);  // int_id
-    addMember("srm_parent", "-", "0", RB2::MemberChar40); // is SRM Account (SRM_Project.id)
+    addMember("srm_type_id", "-", 0, RB2::MemberInteger);  // int_id
+    addMember("db_systemuser_id", "-", "0", RB2::MemberChar40); // is SRM Account Holder (DB_SystemUser.id)
 }

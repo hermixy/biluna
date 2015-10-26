@@ -41,7 +41,7 @@ public:
                                 const RB_String& typeName = "",
                                 bool addToParent = true);
 
-    RB_String mainListName() const { return "CRM_ProjectList"; }
+    RB_String mainListName() const { return "ACC_ProjectList"; }
 
     bool isSystemSetting(const RB_String& name);
     bool isProjectSetting(const RB_String& name);

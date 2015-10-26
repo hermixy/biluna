@@ -51,6 +51,7 @@ void ACC_CustMasterWidget::init() {
     //
     mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelCustomer);
     mModel->setRoot(ACC_MODELFACTORY->getRootId());
+    mModel->setWhere("crm_type_id = 1");
 
     //
     // 2. Relations
@@ -205,11 +206,10 @@ void ACC_CustMasterWidget::setDefaultValues(int row, const QModelIndex& idxParen
     mModel->setData(index, "0", Qt::EditRole);
     index = mModel->index(row, mModel->fieldIndex("lastusedacct_id"), idxParent);
     mModel->setData(index, "0", Qt::EditRole);
-    index = mModel->index(row, mModel->fieldIndex("crmtype_id"), idxParent);
-    mModel->setData(index, 0, Qt::EditRole);
-
-//    mModel->submit();
-
+    index = mModel->index(row, mModel->fieldIndex("crm_type_id"), idxParent);
+    mModel->setData(index, 1, Qt::EditRole); // 1 = yes existing ACC customer
+    index = mModel->index(row, mModel->fieldIndex("db_systemuser_id"), idxParent);
+    mModel->setData(index, "0", Qt::EditRole);
 }
 
 /**

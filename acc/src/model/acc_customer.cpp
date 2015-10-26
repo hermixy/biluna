@@ -144,7 +144,7 @@ void ACC_Customer::createMembers() {
     addMember("lastusedcostcenter_id", "-", "0", RB2::MemberChar40);  // rel_id
 
     // customer relation management 0=potential customer, 1=existing customer
-    addMember("crmtype_id", "-", 0, RB2::MemberInteger);  // int_id
-    addMember("crm_parent", "-", "0", RB2::MemberChar40); // is CRM Account (CRM_Project.id)
+    addMember("crm_type_id", "-", 0, RB2::MemberInteger);  // int_id
+    addMember("db_systemuser_id", "-", "0", RB2::MemberChar40); // is CRM Account Holder (DB_SystemUser.id)
 }
 

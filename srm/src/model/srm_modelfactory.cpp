@@ -110,13 +110,12 @@ RB_MmProxy* SRM_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelProject:
         // SRM_ProjectList actually does not exist but required to create model
-        model = getTableModel(db, mObjectFactory, type, "SRM_ProjectList", shared);
-        model->setSourceSortOrder(RB2::SortOrderAscending, "code");
+        model = getTableModel(db, mObjectFactory, type, "ACC_ProjectList", shared);
+        model->setSourceSortOrder(RB2::SortOrderAscending, "created");
         break;
     case ModelProjectEdit:
-        // SRM_ProjectList actually does not exist but required to create model
-        model = getTableModel(db, mObjectFactory, type, "SRM_ProjectList", shared);
-        model->setSourceSortOrder(RB2::SortOrderDescending, "created");
+        model = getTableModel(db, mObjectFactory, type, "ACC_ProjectList", shared);
+        model->setSourceSortOrder(RB2::SortOrderAscending, "created");
         break;
     case ModelPurchData:
         model = getTableModel(db, mObjectFactory, type, "ACC_PurchDataList", shared);
