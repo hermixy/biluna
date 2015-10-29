@@ -9,7 +9,7 @@
  *****************************************************************/
 
 #include <QtWidgets/QApplication>
-#include <QWebView>
+#include <QWebEngineView>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QBuffer>
@@ -150,7 +150,7 @@ public:
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QWebView webView;
+    QWebEngineView webView;
     RB_UrlBasedRenderer urlBasedRenderer;
     webView.page()->setNetworkAccessManager(&urlBasedRenderer);
     webView.setHtml("<HTML><BODY><P>Testing image:</P><IMG src=\"qt-render://button?width=100&height=100&radius=5&color=green&pattern=dense\" /><I>Rutger</I></BODY></HTML>");

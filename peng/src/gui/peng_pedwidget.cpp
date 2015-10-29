@@ -20,9 +20,6 @@
 #include "peng_objectfactory.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_debug.h"
-#include "rb_urlbasedrenderer.h"
-#include "rb_webfactory.h"
-
 
 /**
  * Constructor
@@ -804,7 +801,7 @@ void PENG_PedWidget::printWidget(QPrinter* pr) {
  * Function NOT USED
  * @param webView webview
  */
-void PENG_PedWidget::widgetToHtml(QWebView* webView) {
+void PENG_PedWidget::widgetToHtml(QWebEngineView* webView) {
     if (!mPedTable || !webView) {
         RB_DEBUG->error("PENG_PedWidget::widgetToHtml() NULL ERROR");
         return;

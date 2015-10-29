@@ -17,7 +17,7 @@
 class GV_Drawing;
 class PENG_NavigationWidget;
 class RB_DataWidgetMapper;
-class QWebView;
+class QWebEngineView;
 
 /**
  * Widget for the detail PED classification of equipment and pipe lines
@@ -82,7 +82,7 @@ private:
 	void setDialogFields();
     void setDialogFieldsLine();
     void printWidget(QPrinter* pr);
-    void widgetToHtml(QWebView* webView);
+    void widgetToHtml(QWebEngineView* webView);
     void widgetToHtml(GV_Drawing* dwg);
 
     void widgetToHtml(QTextEdit* te);

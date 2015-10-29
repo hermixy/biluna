@@ -15,7 +15,7 @@
 /**
  * Constructor
  */
-RB_WebView::RB_WebView(QWidget *parent) : QWebView(parent) {
+RB_WebView::RB_WebView(QWidget *parent) : QWebEngineView(parent) {
     mParentWidget = parent;
     mMaxMode = false;
     mGridLayout = NULL;
@@ -53,7 +53,7 @@ bool RB_WebView::isWidgetMaximized() {
 //        e->accept();
 //        break;
 //    default :
-//        QWebView::keyReleaseEvent(e);
+//        QWebEngineView::keyReleaseEvent(e);
 //        break;
 //    }
 //}
@@ -105,11 +105,11 @@ void RB_WebView::keyReleaseEvent(QKeyEvent* e) {
             mMaxMode = false;
             e->accept();
         } else {
-            QWebView::keyReleaseEvent(e);
+            QWebEngineView::keyReleaseEvent(e);
         }
         break;
     default :
-        QWebView::keyReleaseEvent(e);
+        QWebEngineView::keyReleaseEvent(e);
         break;
     }
 

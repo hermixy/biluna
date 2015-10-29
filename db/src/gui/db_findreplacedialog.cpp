@@ -15,7 +15,7 @@
 #include <QtWidgets>
 #include <QTextEdit>
 #include <QRegExp>
-#include <QWebView>
+#include <QWebEngineView>
 #include "rb_settings.h"
 
 
@@ -108,7 +108,7 @@ void DB_FindReplaceDialog::setTextEdit(QTextEdit* textEdit) {
     chbRegularExpression->setEnabled(true);
 }
 
-void DB_FindReplaceDialog::setWebView(QWebView *webView) {
+void DB_FindReplaceDialog::setWebView(QWebEngineView *webView) {
     mPlainTextEdit = NULL;
     mTextEdit = NULL;
     mWebView = webView;
@@ -284,33 +284,27 @@ void DB_FindReplaceDialog::find(bool down) {
 void DB_FindReplaceDialog::findWebView(bool down) {
     // backward search
     bool back = !down;
-    bool result = false;
 
-    const QString& toSearch = leSearchFor->text();
-    QWebPage::FindFlags flags;
+    const QString& searchTxt = leSearchFor->text();
+    QWebEnginePage::FindFlags flags;
     // flags |= QWebPage::FindWrapsAroundDocument;
     // flags |= QWebPage::HighlightAllOccurrences;
 
     if (back)
-        flags |= QWebPage::FindBackward;
+        flags |= QWebEnginePage::FindBackward;
     if (chbMatchCase->isChecked())
-        flags |= QWebPage::FindCaseSensitively;
+        flags |= QWebEnginePage::FindCaseSensitively;
 
     if (mWebView->hasSelection() && !back) {
-        mWebView->pageAction(QWebPage::MoveToNextChar)->trigger();
+//        mWebView->pageAction(QWebEnginePage::MoveToNextChar)->trigger();
+//        mWebView->page()->runJavaScript();
     } else {
-        mWebView->pageAction(QWebPage::MoveToPreviousChar)->trigger();
+//        mWebView->pageAction(QWebEnginePage::MoveToPreviousChar)->trigger();
     }
 
-    result = mWebView->findText(toSearch, flags);
-
-    if (result) {
-        showError("");
-        mWebViewFound = true;
-    } else {
-        showError(tr("no match found"));
-        mWebViewFound = false;
-    }
+    mWebView->findText(searchTxt, QWebEnginePage::FindFlags(),
+                       [this](bool found) {
+        if (!found) showError(tr("no match found"));});
 }
 
 
@@ -348,7 +342,7 @@ void DB_FindReplaceDialog::on_pbReplace_clicked() {
         } else {
             QClipboard* clipboard = QApplication::clipboard();
             clipboard->setText(leReplaceWith->text());
-            mWebView->pageAction(QWebPage::PasteAndMatchStyle)->trigger();
+            mWebView->pageAction(QWebEnginePage::PasteAndMatchStyle)->trigger();
             on_pbFind_clicked();
         }
     }
@@ -394,7 +388,7 @@ void DB_FindReplaceDialog::on_pbReplaceAll_clicked() {
         mWebViewFound = true;
 
         while (mWebView->hasSelection() && mWebViewFound){
-            mWebView->pageAction(QWebPage::PasteAndMatchStyle)->trigger();
+            mWebView->pageAction(QWebEnginePage::PasteAndMatchStyle)->trigger();
             on_pbFind_clicked();
             i++;
         }

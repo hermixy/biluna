@@ -284,7 +284,7 @@ void ACC_InvoiceAgedReportWidget::createTable(RB_ObjectContainer* invoiceList) {
     " tr { page-break-inside:avoid; page-break-after:auto }"
     " thead { display:table-header-group }"
     " tfoot { display:table-footer-group } }"
-    "</style></head><body>" does not work in QWebView (webkit)*/
+    "</style></head><body>" does not work in QWebEngineView (webkit)*/
 
     mHtml = "<table cellpadding=0 cellspacing=2 width='100%' style=\"font-size:8pt;font-family:'Times New Roman', Times, serif;\">"
     "<thead>"

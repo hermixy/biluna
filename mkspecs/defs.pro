@@ -16,7 +16,8 @@ UI_DIR	    = ../src/gui/ui
 INCLUDEPATH += ../mkspecs
 
 # webkitwidgets includes widgets
-QT += core gui help network printsupport sql svg uitools webkitwidgets widgets xml
+QT += core gui help network printsupport sql svg uitools webenginewidgets widgets xml
+
 #CONFIG += release
 CONFIG -= release
 

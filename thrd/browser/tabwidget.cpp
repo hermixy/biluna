@@ -1,7 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
-** Contact: http://www.qt-project.org/legal
+** Copyright (C) 2015 The Qt Company Ltd.
+** Contact: http://www.qt.io/licensing/
 **
 ** This file is part of the demonstration applications of the Qt Toolkit.
 **
@@ -10,27 +10,27 @@
 ** Licensees holding valid commercial Qt licenses may use this file in
 ** accordance with the commercial license agreement provided with the
 ** Software or, alternatively, in accordance with the terms contained in
-** a written agreement between you and Digia.  For licensing terms and
-** conditions see http://qt.digia.com/licensing.  For further information
-** use the contact form at http://qt.digia.com/contact-us.
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see http://www.qt.io/terms-conditions. For further
+** information use the contact form at http://www.qt.io/contact-us.
 **
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.LGPL included in the
-** packaging of this file.  Please review the following information to
+** packaging of this file. Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
 **
-** In addition, as a special exception, Digia gives you certain additional
-** rights.  These rights are described in the Digia Qt LGPL Exception
+** As a special exception, The Qt Company gives you certain additional
+** rights. These rights are described in The Qt Company LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
 ** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.  Please review the following information to
+** packaging of this file. Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
 **
@@ -41,17 +41,19 @@
 
 #include "tabwidget.h"
 
+//#include "browserapplication.h"
+//#include "browsermainwindow.h"
 #include "db_internetbrowserfactory.h"
 #include "db_internetbrowserwidget.h"
-#include "rb_mdiwindow.h"
-
-// #include "browsermainwindow.h"
+#include "downloadmanager.h"
 #include "history.h"
 #include "urllineedit.h"
 #include "webview.h"
 
 #include <QtCore/QMimeData>
 #include <QtGui/QClipboard>
+#include <QtWebEngineWidgets/QWebEngineDownloadItem>
+#include <QtWebEngineWidgets/QWebEngineProfile>
 #include <QtWidgets/QCompleter>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QMenu>
@@ -217,6 +219,7 @@ TabWidget::TabWidget(QWidget *parent)
     , m_lineEditCompleter(0)
     , m_lineEdits(0)
     , m_tabBar(new TabBar(this))
+    , m_profile(QWebEngineProfile::defaultProfile())
 {
     setElideMode(Qt::ElideRight);
 
@@ -292,7 +295,7 @@ void TabWidget::moveTab(int fromIndex, int toIndex)
     m_lineEdits->insertWidget(toIndex, lineEdit);
 }
 
-void TabWidget::addWebAction(QAction *action, QWebPage::WebAction webAction)
+void TabWidget::addWebAction(QAction *action, QWebEnginePage::WebAction webAction)
 {
     if (!action)
         return;
@@ -309,20 +312,28 @@ void TabWidget::currentChanged(int index)
 
     WebView *oldWebView = this->webView(m_lineEdits->currentIndex());
     if (oldWebView) {
+#if defined(QWEBENGINEVIEW_STATUSBARMESSAGE)
         disconnect(oldWebView, SIGNAL(statusBarMessage(QString)),
                 this, SIGNAL(showStatusBarMessage(QString)));
-        disconnect(oldWebView->page(), SIGNAL(linkHovered(QString,QString,QString)),
-                this, SIGNAL(linkHovered(QString)));
+#endif
+        disconnect(oldWebView->page(), SIGNAL(linkHovered(const QString&)),
+                this, SIGNAL(linkHovered(const QString&)));
         disconnect(oldWebView, SIGNAL(loadProgress(int)),
                 this, SIGNAL(loadProgress(int)));
+        disconnect(oldWebView->page()->profile(), SIGNAL(downloadRequested(QWebEngineDownloadItem*)),
+                this, SLOT(downloadRequested(QWebEngineDownloadItem*)));
     }
 
+#if defined(QWEBENGINEVIEW_STATUSBARMESSAGE)
     connect(webView, SIGNAL(statusBarMessage(QString)),
             this, SIGNAL(showStatusBarMessage(QString)));
-    connect(webView->page(), SIGNAL(linkHovered(QString,QString,QString)),
-            this, SIGNAL(linkHovered(QString)));
+#endif
+    connect(webView->page(), SIGNAL(linkHovered(const QString&)),
+            this, SIGNAL(linkHovered(const QString&)));
     connect(webView, SIGNAL(loadProgress(int)),
             this, SIGNAL(loadProgress(int)));
+    connect(webView->page()->profile(), SIGNAL(downloadRequested(QWebEngineDownloadItem*)),
+            this, SLOT(downloadRequested(QWebEngineDownloadItem*)));
 
     for (int i = 0; i < m_actions.count(); ++i) {
         WebActionMapper *mapper = m_actions[i];
@@ -448,11 +459,10 @@ WebView *TabWidget::newTab(bool makeCurrent)
 
     // webview
     WebView *webView = new WebView;
+    webView->setPage(new WebPage(m_profile, webView));
     urlLineEdit->setWebView(webView);
     connect(webView, SIGNAL(loadStarted()),
             this, SLOT(webViewLoadStarted()));
-    connect(webView, SIGNAL(loadFinished(bool)),
-            this, SLOT(webViewIconChanged()));
     connect(webView, SIGNAL(iconChanged()),
             this, SLOT(webViewIconChanged()));
     connect(webView, SIGNAL(titleChanged(QString)),
@@ -463,14 +473,22 @@ WebView *TabWidget::newTab(bool makeCurrent)
             this, SLOT(windowCloseRequested()));
     connect(webView->page(), SIGNAL(geometryChangeRequested(QRect)),
             this, SIGNAL(geometryChangeRequested(QRect)));
-    connect(webView->page(), SIGNAL(printRequested(QWebFrame*)),
-            this, SIGNAL(printRequested(QWebFrame*)));
+#if defined(QWEBENGINEPAGE_PRINTREQUESTED)
+    connect(webView->page(), SIGNAL(printRequested(QWebEngineFrame*)),
+            this, SIGNAL(printRequested(QWebEngineFrame*)));
+#endif
+#if defined(QWEBENGINEPAGE_MENUBARVISIBILITYCHANGEREQUESTED)
     connect(webView->page(), SIGNAL(menuBarVisibilityChangeRequested(bool)),
             this, SIGNAL(menuBarVisibilityChangeRequested(bool)));
+#endif
+#if defined(QWEBENGINEPAGE_STATUSBARVISIBILITYCHANGEREQUESTED)
     connect(webView->page(), SIGNAL(statusBarVisibilityChangeRequested(bool)),
             this, SIGNAL(statusBarVisibilityChangeRequested(bool)));
+#endif
+#if defined(QWEBENGINEPAGE_TOOLBARVISIBILITYCHANGEREQUESTED)
     connect(webView->page(), SIGNAL(toolBarVisibilityChangeRequested(bool)),
             this, SIGNAL(toolBarVisibilityChangeRequested(bool)));
+#endif
     addTab(webView, tr("(Untitled)"));
     if (makeCurrent)
         setCurrentWidget(webView);
@@ -512,15 +530,10 @@ void TabWidget::windowCloseRequested()
     WebView *webView = qobject_cast<WebView*>(webPage->view());
     int index = webViewIndex(webView);
     if (index >= 0) {
-        if (count() == 1) {
-            DB_InternetBrowserWidget* wdgt = DB_InternetBrowserFactory::getInstance()->browserWidget();
-                                            // webView->webPage()->browserWidget();
-            if (wdgt) {
-                wdgt->closeWidget();
-            }
-        } else {
+        if (count() == 1)
+            webView->webPage()->browserWidget()->close();
+        else
             closeTab(index);
-        }
     }
 }
 
@@ -555,6 +568,7 @@ void TabWidget::closeTab(int index)
 
     bool hasFocus = false;
     if (WebView *tab = webView(index)) {
+#if defined(QWEBENGINEPAGE_ISMODIFIED)
         if (tab->isModified()) {
             QMessageBox closeConfirmation(tab);
             closeConfirmation.setWindowFlags(Qt::Sheet);
@@ -568,10 +582,10 @@ void TabWidget::closeTab(int index)
             if (closeConfirmation.exec() == QMessageBox::No)
                 return;
         }
+#endif
         hasFocus = tab->hasFocus();
 
-        QWebSettings *globalSettings = QWebSettings::globalSettings();
-        if (!globalSettings->testAttribute(QWebSettings::PrivateBrowsingEnabled)) {
+        if (m_profile == QWebEngineProfile::defaultProfile()) {
             m_recentlyClosedTabsAction->setEnabled(true);
             m_recentlyClosedTabs.prepend(tab->url());
             if (m_recentlyClosedTabs.size() >= TabWidget::m_recentlyClosedTabsSize)
@@ -591,6 +605,19 @@ void TabWidget::closeTab(int index)
         emit lastTabClosed();
 }
 
+void TabWidget::setProfile(QWebEngineProfile *profile)
+{
+    m_profile = profile;
+    for (int i = 0; i < count(); ++i) {
+        QWidget *tabWidget = widget(i);
+        if (WebView *tab = qobject_cast<WebView*>(tabWidget)) {
+            WebPage* webPage = new WebPage(m_profile, tab);
+            webPage->load(tab->page()->url());
+            tab->setPage(webPage);
+        }
+    }
+}
+
 void TabWidget::webViewLoadStarted()
 {
     WebView *webView = qobject_cast<WebView*>(sender());
@@ -606,7 +633,7 @@ void TabWidget::webViewIconChanged()
     WebView *webView = qobject_cast<WebView*>(sender());
     int index = webViewIndex(webView);
     if (-1 != index) {
-        QIcon icon = DB_InternetBrowserFactory::getInstance()->icon(webView->url());
+        QIcon icon = webView->icon();
         setTabIcon(index, icon);
     }
 }
@@ -765,7 +792,13 @@ bool TabWidget::restoreState(const QByteArray &state)
     return true;
 }
 
-WebActionMapper::WebActionMapper(QAction *root, QWebPage::WebAction webAction, QObject *parent)
+void TabWidget::downloadRequested(QWebEngineDownloadItem *download)
+{
+    DB_InternetBrowserFactory::downloadManager()->download(download);
+    download->accept();
+}
+
+WebActionMapper::WebActionMapper(QAction *root, QWebEnginePage::WebAction webAction, QObject *parent)
     : QObject(parent)
     , m_currentParent(0)
     , m_root(root)
@@ -795,7 +828,7 @@ void WebActionMapper::addChild(QAction *action)
     connect(action, SIGNAL(changed()), this, SLOT(childChanged()));
 }
 
-QWebPage::WebAction WebActionMapper::webAction() const
+QWebEnginePage::WebAction WebActionMapper::webAction() const
 {
     return m_webAction;
 }
@@ -820,7 +853,7 @@ void WebActionMapper::childChanged()
     }
 }
 
-void WebActionMapper::updateCurrent(QWebPage *currentParent)
+void WebActionMapper::updateCurrent(QWebEnginePage *currentParent)
 {
     if (m_currentParent)
         disconnect(m_currentParent, SIGNAL(destroyed(QObject*)),
@@ -840,4 +873,3 @@ void WebActionMapper::updateCurrent(QWebPage *currentParent)
     connect(m_currentParent, SIGNAL(destroyed(QObject*)),
             this, SLOT(currentDestroyed()));
 }
-

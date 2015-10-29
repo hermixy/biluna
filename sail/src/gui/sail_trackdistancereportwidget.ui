@@ -120,7 +120,7 @@
        <number>0</number>
       </property>
       <item row="0" column="0">
-       <widget class="QWebView" name="wvReport">
+       <widget class="QWebEngineView" name="wvReport">
         <property name="url">
          <url>
           <string>about:blank</string>
@@ -135,9 +135,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebView</class>
+   <class>QWebEngineView</class>
    <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
+   <header>QtWebKitWidgets/QWebEngineView</header>
   </customwidget>
  </customwidgets>
  <resources>

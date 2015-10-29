@@ -11,7 +11,7 @@
 #include "db_actioneditfindreplace.h"
 
 #include <QTextEdit>
-#include <QWebView>
+#include <QWebEngineView>
 #include "db_dialogfactory.h"
 #include "db_findreplacedialog.h"
 #include "rb_mdiwindow.h"
@@ -67,7 +67,7 @@ RB_Action* DB_ActionEditFindReplace::factory() {
         frDlg->setTextEdit(te);
     } else if (QPlainTextEdit* pte = dynamic_cast<QPlainTextEdit*>(focusWgt)) {
         frDlg->setPlainTextEdit(pte);
-    } else if (QWebView* wv = dynamic_cast<QWebView*>(focusWgt)) {
+    } else if (QWebEngineView* wv = dynamic_cast<QWebEngineView*>(focusWgt)) {
         frDlg->setWebView(wv);
     } else {
         DB_DIALOGFACTORY->requestWarningDialog("Find/replace not applicable,\n"

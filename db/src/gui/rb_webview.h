@@ -12,11 +12,11 @@
 #define RB_WEBVIEW_H
 
 #include <QGridLayout>
-#include <QWebView>
+#include <QtWebEngineWidgets>
 #include "db_global.h"
 
 
-class DB_EXPORT RB_WebView : public QWebView {
+class DB_EXPORT RB_WebView : public QWebEngineView {
 
     Q_OBJECT
 

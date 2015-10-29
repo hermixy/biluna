@@ -43,16 +43,19 @@
 #define DB_INTERNETBROWSERWIDGET_H
 
 //#include <QtWidgets/QMainWindow>
-#include <QIcon>
+#include <QtGui/QIcon>
 #include <QtCore/QUrl>
 #include "rb_widget.h"
 #include "rb_string.h"
 #include "ui_db_internetbrowserwidget.h"
 
+QT_BEGIN_NAMESPACE
+class QWebEngineFrame;
+QT_END_NAMESPACE
+
 class AutoSaver;
 class BookmarksToolBar;
 class ChaseWidget;
-class QWebFrame;
 class TabWidget;
 class ToolbarSearch;
 class WebView;
@@ -60,7 +63,8 @@ class WebView;
 /**
  * The widget of the Browser Application.
  * Handles the tab widget and all the actions
- * Source code copied from the Qt demo/browser
+ * Source code copied from the Qt
+ * C:\Qt\5.5\Src\qtwebengine\examples\webenginewidgets\example\browser
  */
 class DB_EXPORT DB_InternetBrowserWidget : public RB_Widget,
                         private Ui::DB_InternetBrowserWidget {
@@ -81,10 +85,14 @@ public:
 
     QSize sizeHint() const;
 
-    TabWidget* tabWidget() const;
-    WebView* currentTab() const;
+    static const char *defaultHome;
+
+public:
+    TabWidget *tabWidget() const;
+    WebView *currentTab() const;
     QByteArray saveState(bool withTabs = true) const;
     bool restoreState(const QByteArray &state);
+    Q_INVOKABLE void runScriptOnOpenViews(const QString &);
 
 public slots:
     void loadPage(const QString &url);
@@ -97,10 +105,10 @@ private slots:
     void save();
 
     void slotLoadProgress(int);
-    void slotUpdateStatusBar(const QString& string);
-    void slotUpdateWindowTitle(const QString& title = QString());
+    void slotUpdateStatusbar(const QString &string);
+    void slotUpdateWindowTitle(const QString &title = QString());
 
-    void loadUrl(const QUrl& url);
+    void loadUrl(const QUrl &url);
     void slotPreferences();
 
 //    void slotFileNew();
@@ -117,7 +125,6 @@ private slots:
     void slotViewZoomIn();
     void slotViewZoomOut();
     void slotViewResetZoom();
-    void slotViewZoomTextOnly(bool enable);
 //    void slotViewToolbar();
 //    void slotViewBookmarksBar();
 //    void slotViewStatusbar();
@@ -137,7 +144,11 @@ private slots:
 //    void slotShowWindow();
     void slotSwapFocus();
 
-    void printRequested(QWebFrame *frame);
+    void slotStatusBarMessage(const QString& message);
+
+#if defined(QWEBENGINEPAGE_PRINT)
+    void printRequested(QWebEngineFrame *frame);
+#endif
     void geometryChangeRequested(const QRect &geometry);
     void updateToolbarActionText(bool visible);
     void updateBookmarksToolbarActionText(bool visible);
@@ -147,6 +158,7 @@ private:
     void setupMenu();
     void setupToolBar();
     void updateStatusbarActionText(bool visible);
+    void handleFindTextResult(bool found);
 
 private:
     QToolBar *m_navigationBar;
