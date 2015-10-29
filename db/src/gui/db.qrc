@@ -1068,9 +1068,10 @@
         <file>images/icons/email_edit_srm.png</file>
         <file>images/icons/page_white_gear_srm.png</file>
         <file>images/icons/group_link_supplier.png</file>
-		<file>styles/dark_orange.qss</file>
-		<file>styles/images_dark_orange/checkbox.png</file>
-		<file>styles/images_dark_orange/down_arrow.png</file>
-		<file>styles/images_dark_orange/handle.png</file>
+        <file>styles/dark_orange.qss</file>
+        <file>styles/images_dark_orange/checkbox.png</file>
+        <file>styles/images_dark_orange/down_arrow.png</file>
+        <file>styles/images_dark_orange/handle.png</file>
+        <file>images/icons/all.png</file>
     </qresource>
 </RCC>

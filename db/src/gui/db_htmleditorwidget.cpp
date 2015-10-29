@@ -28,7 +28,7 @@
 // #include "ui_inserthtmldialog.h"
 
 #include <QtWidgets>
-#include <QtWebKitWidgets>
+#include <QtWebEngineWidgets>
 #include "db_actionfactory.h"
 #include "db_actionfilesaveas.h"
 #include "db_dialogfactory.h"
@@ -57,8 +57,8 @@ DB_HtmlEditorWidget::DB_HtmlEditorWidget(QWidget *parent) : RB_Widget(parent)
     tabWidget->setTabText(1, "Source");
     plainTextEdit->setTabStopWidth(20); // in pixels, default is 80
 
-    connect(webView->page(), SIGNAL(contentsChanged()),
-            this, SLOT(slotContentChanged()));
+//    connect(webView->page(), SIGNAL(contentsChanged()),
+//            this, SLOT(slotContentChanged()));
     connect(plainTextEdit, SIGNAL(textChanged()),
             this, SLOT(slotContentChanged()));
     connect(tabWidget, SIGNAL(currentChanged(int)),
@@ -67,8 +67,8 @@ DB_HtmlEditorWidget::DB_HtmlEditorWidget(QWidget *parent) : RB_Widget(parent)
 //            this, SLOT(openLink(QUrl)));
     connect(webView->page(), SIGNAL(selectionChanged()),
             this, SLOT(adjustActions()));
-    connect(webView, SIGNAL(linkClicked(QUrl)),
-            this, SLOT(slotLoadUrl(QUrl)));
+//    connect(webView, SIGNAL(linkClicked(QUrl)),
+//            this, SLOT(slotLoadUrl(QUrl)));
 
 
     mCodeHighlighter = new DB_HtmlHighlighter(plainTextEdit->document());
@@ -101,7 +101,7 @@ DB_HtmlEditorWidget::DB_HtmlEditorWidget(QWidget *parent) : RB_Widget(parent)
     connect(ui->actionZoomOut, SIGNAL(triggered()), SLOT(zoomOut()));
     connect(ui->actionZoomIn, SIGNAL(triggered()), SLOT(zoomIn()));
 
-    // these are forward to internal QWebView
+    // these are forward to internal QWebEngineView
     FORWARD_ACTION(ui->actionEditUndo, QWebPage::Undo);
     FORWARD_ACTION(ui->actionEditRedo, QWebPage::Redo);
     FORWARD_ACTION(ui->actionEditCut, QWebPage::Cut);
@@ -192,8 +192,8 @@ QWidget* DB_HtmlEditorWidget::getMainWidget() {
 }
 
 void DB_HtmlEditorWidget::init() {
-    webView->page()->setContentEditable(true);
-    webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+    webView->page()->runJavaScript("document.documentElement.contentEditable = true");
+//    webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
     DB_ACTIONFACTORY->enableEditMenu(getWidgetType());
     DB_ACTIONFACTORY->enableFormatMenu(getWidgetType());
@@ -229,7 +229,7 @@ void DB_HtmlEditorWidget::fileNew()
         setCurrentFileName(QString());
         setWindowModified(false);
 
-        // quirk in QWebView: need an initial mouse click to show the cursor
+        // quirk in QWebEngineView: need an initial mouse click to show the cursor
         int mx = ui->webView->width() / 2;
         int my = ui->webView->height() / 2;
         QPoint center = QPoint(mx, my);
@@ -292,11 +292,13 @@ bool DB_HtmlEditorWidget::fileSaveAs() {
  * @param printer
  */
 void DB_HtmlEditorWidget::filePdf(QPrinter* printer) {
+#if defined(QWEBENGINEPAGE_PRINT)
     if (tabWidget->currentIndex() == 0) {
         webView->print(printer);
     } else {
         plainTextEdit->print(printer);
     }
+#endif
 }
 
 /**
@@ -304,11 +306,13 @@ void DB_HtmlEditorWidget::filePdf(QPrinter* printer) {
  * @param printer
  */
 void DB_HtmlEditorWidget::filePrint(QPrinter* printer) {
+#if defined(QWEBENGINEPAGE_PRINT)
     if (tabWidget->currentIndex() == 0) {
         webView->print(printer);
     } else {
         plainTextEdit->print(printer);
     }
+#endif
 }
 
 /**
@@ -316,11 +320,13 @@ void DB_HtmlEditorWidget::filePrint(QPrinter* printer) {
  * @param printer
  */
 void DB_HtmlEditorWidget::filePrintPreview(QPrinter* printer) {
+#if defined(QWEBENGINEPAGE_PRINT)
     if (tabWidget->currentIndex() == 0) {
         webView->print(printer);
     } else {
         plainTextEdit->print(printer);
     }
+#endif
 }
 
 /**
@@ -328,7 +334,7 @@ void DB_HtmlEditorWidget::filePrintPreview(QPrinter* printer) {
  */
 void DB_HtmlEditorWidget::editCut() {
     if (tabWidget->currentIndex() == 0) {
-        webView->pageAction(QWebPage::Cut)->trigger();
+        webView->pageAction(QWebEnginePage::Cut)->trigger();
     } else {
         plainTextEdit->cut();
     }
@@ -340,7 +346,7 @@ void DB_HtmlEditorWidget::editCut() {
 void DB_HtmlEditorWidget::editCopy() {
     // webView->triggerPageAction(QWebPage::Copy); alternative:
     if (tabWidget->currentIndex() == 0) {
-        webView->pageAction(QWebPage::Copy)->trigger();
+        webView->pageAction(QWebEnginePage::Copy)->trigger();
     } else {
         plainTextEdit->copy();
     }
@@ -351,7 +357,7 @@ void DB_HtmlEditorWidget::editCopy() {
  */
 void DB_HtmlEditorWidget::editPaste() {
     if (tabWidget->currentIndex() == 0) {
-        webView->pageAction(QWebPage::Paste)->trigger();
+        webView->pageAction(QWebEnginePage::Paste)->trigger();
     } else {
         plainTextEdit->paste();
     }
@@ -362,7 +368,7 @@ void DB_HtmlEditorWidget::editPaste() {
  */
 void DB_HtmlEditorWidget::editUndo() {
     if (tabWidget->currentIndex() == 0) {
-        webView->pageAction(QWebPage::Undo)->trigger();
+        webView->pageAction(QWebEnginePage::Undo)->trigger();
     } else {
         plainTextEdit->undo();
     }
@@ -373,9 +379,9 @@ void DB_HtmlEditorWidget::editUndo() {
  * Edit Redo.
  */
 void DB_HtmlEditorWidget::editRedo() {
-    webView->triggerPageAction(QWebPage::Redo);
+    webView->triggerPageAction(QWebEnginePage::Redo);
     if (tabWidget->currentIndex() == 0) {
-        webView->pageAction(QWebPage::Redo)->trigger();
+        webView->pageAction(QWebEnginePage::Redo)->trigger();
     } else {
         plainTextEdit->redo();
     }
@@ -386,7 +392,7 @@ void DB_HtmlEditorWidget::editRedo() {
  */
 void DB_HtmlEditorWidget::editSelectAll() {
     if (tabWidget->currentIndex() == 0) {
-        webView->pageAction(QWebPage::SelectAll)->trigger();
+        webView->pageAction(QWebEnginePage::SelectAll)->trigger();
     } else {
         plainTextEdit->selectAll();
     }
@@ -407,14 +413,14 @@ void DB_HtmlEditorWidget::editInsertImage(const RB_String& fn) {
 
     // HACK: to see the image
     // remember the vertical scrollbar position
-    int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
+/*    int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
     int max = webView->page()->mainFrame()->scrollBarMaximum(Qt::Vertical);
     int value = webView->page()->mainFrame()->scrollBarValue(Qt::Vertical);
     mVerticalScrollbarPerunage = (double)(value - min) / (max - min);
 
     RB_String content = webView->page()->mainFrame()->toHtml();
     webView->page()->mainFrame()->setHtml(content, url);
-
+*/
 //    min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
 //    max = webView->page()->mainFrame()->scrollBarMaximum(Qt::Vertical);
 //    value = (int)((perunage) * (max - min) + min);
@@ -509,7 +515,7 @@ void DB_HtmlEditorWidget::insertPlainTextEditHtmlTag(const RB_String& tag) {
  */
 void DB_HtmlEditorWidget::formatBold() {
     if (tabWidget->currentIndex() == 0) {
-        webView->triggerPageAction(QWebPage::ToggleBold);
+        execCommand("bold");
     } else {
         insertPlainTextEditHtmlTag("b");
     }
@@ -520,7 +526,7 @@ void DB_HtmlEditorWidget::formatBold() {
  */
 void DB_HtmlEditorWidget::formatItalic() {
     if (tabWidget->currentIndex() == 0) {
-        webView->triggerPageAction(QWebPage::ToggleItalic);
+        execCommand("italic");
     } else {
         insertPlainTextEditHtmlTag("i");
     }
@@ -531,7 +537,7 @@ void DB_HtmlEditorWidget::formatItalic() {
  */
 void DB_HtmlEditorWidget::formatUnderline() {
     if (tabWidget->currentIndex() == 0) {
-        webView->triggerPageAction(QWebPage::ToggleUnderline);
+        execCommand("underline");
     } else {
         insertPlainTextEditHtmlTag("u");
     }
@@ -542,44 +548,42 @@ void DB_HtmlEditorWidget::formatUnderline() {
  */
 void DB_HtmlEditorWidget::formatStrikethrough() {
     if (tabWidget->currentIndex() == 0) {
-        webView->triggerPageAction(QWebPage::ToggleStrikethrough);
-        // Alternative was:
-        // execCommand("strikeThrough");
+        execCommand("strikeThrough");
     } else {
         insertPlainTextEditHtmlTag("del");
     }
 }
 
 void DB_HtmlEditorWidget::formatAlignLeft() {
-    webView->triggerPageAction(QWebPage::AlignLeft);
+    execCommand("justifyLeft");
 }
 
 void DB_HtmlEditorWidget::formatAlignCenter() {
-    webView->triggerPageAction(QWebPage::AlignCenter);
+    execCommand("justifyCenter");
 }
 
 void DB_HtmlEditorWidget::formatAlignRight() {
-    webView->triggerPageAction(QWebPage::AlignRight);
+    execCommand("justifyRight");
 }
 
 void DB_HtmlEditorWidget::formatAlignJustify() {
-    webView->triggerPageAction(QWebPage::AlignJustified);
+    execCommand("justifyFull");
 }
 
 void DB_HtmlEditorWidget::formatIncreaseIndent() {
-    webView->triggerPageAction(QWebPage::Indent);
+    execCommand("indent");
 }
 
 void DB_HtmlEditorWidget::formatDecreaseIndent() {
-    webView->triggerPageAction(QWebPage::Outdent);
+    execCommand("outdent");
 }
 
 void DB_HtmlEditorWidget::formatNumberedList() {
-    webView->triggerPageAction(QWebPage::InsertOrderedList);
+    execCommand("insertOrderedList");
 }
 
 void DB_HtmlEditorWidget::formatBulletedList() {
-    webView->triggerPageAction(QWebPage::InsertUnorderedList);
+    execCommand("insertUnorderedList");
 }
 
 void DB_HtmlEditorWidget::formatFontName() {
@@ -635,7 +639,7 @@ void DB_HtmlEditorWidget::formatBackgroundColor() {
  * Remove formatting and style
  */
 void DB_HtmlEditorWidget::formatRemove() {
-    webView->triggerPageAction(QWebPage::RemoveFormat);
+    execCommand("removeFormat");
 }
 
 /*
@@ -768,9 +772,8 @@ void DB_HtmlEditorWidget::styleAddress() {
  * @param cmd command string
  */
 void DB_HtmlEditorWidget::execCommand(const QString &cmd) {
-    QWebFrame* frame = webView->page()->mainFrame();
     QString js = QString("document.execCommand(\"%1\", false, null)").arg(cmd);
-    frame->evaluateJavaScript(js);
+    webView->page()->runJavaScript(js);
 }
 
 /**
@@ -780,9 +783,8 @@ void DB_HtmlEditorWidget::execCommand(const QString &cmd) {
  * @param arg additional arguments
  */
 void DB_HtmlEditorWidget::execCommand(const QString &cmd, const QString &arg) {
-    QWebFrame* frame = webView->page()->mainFrame();
     QString js = QString("document.execCommand(\"%1\", false, \"%2\")").arg(cmd).arg(arg);
-    frame->evaluateJavaScript(js);
+    webView->page()->runJavaScript(js);
 }
 
 /**
@@ -793,10 +795,14 @@ void DB_HtmlEditorWidget::execCommand(const QString &cmd, const QString &arg) {
  * @return true
  */
 bool DB_HtmlEditorWidget::queryCommandState(const QString &cmd) {
-    QWebFrame* frame = webView->page()->mainFrame();
-    QString js = QString("document.queryCommandState(\"%1\", false, null)").arg(cmd);
-    QVariant result = frame->evaluateJavaScript(js);
-    return result.toString().simplified().toLower() == "true";
+//    QString js = QString("document.queryCommandState(\"%1\", false, null)").arg(cmd);
+//    QVariant* result = new QVariant();
+//    webView->page()->runJavaScript(js, [result] (const QVariant& cbValue) { result->setValue(cbValue); } );
+
+//    QString str = result->toString();
+//    delete result;
+//    return str.simplified().toLower() == "true";
+    return false;
 }
 
 /**
@@ -804,27 +810,27 @@ bool DB_HtmlEditorWidget::queryCommandState(const QString &cmd) {
  * @param wa enumerator of QWebPage::WebAction such as QWebPage::ToggleBold
  * @return true if valid
  */
-bool DB_HtmlEditorWidget::pageActionChecked(QWebPage::WebAction wa) {
-    return webView->pageAction(wa)->isChecked();
-}
+//bool DB_HtmlEditorWidget::pageActionChecked(QWebPage::WebAction wa) {
+//    return webView->pageAction(wa)->isChecked();
+//}
 
 /**
  * Determines the current enabled state of the enumerated action
  * @param wa enumerator of QWebPage::WebAction such as QWebPage::Undo
  * @return true if valid
  */
-bool DB_HtmlEditorWidget::pageActionEnabled(QWebPage::WebAction wa) {
-    return webView->pageAction(wa)->isEnabled();
-}
+//bool DB_HtmlEditorWidget::pageActionEnabled(QWebPage::WebAction wa) {
+//    return webView->pageAction(wa)->isEnabled();
+//}
 
 /*
 #define FOLLOW_ENABLE(a1, a2) a1->setEnabled(ui->webView->pageAction(a2)->isEnabled())
 #define FOLLOW_CHECK(a1, a2) a1->setChecked(ui->webView->pageAction(a2)->isChecked())
 */
 void DB_HtmlEditorWidget::adjustActions() {
-    DB_ACTIONFACTORY->setFormatBoldChecked(pageActionChecked(QWebPage::ToggleBold));
-    DB_ACTIONFACTORY->setFormatItalicChecked(pageActionChecked(QWebPage::ToggleItalic));
-    DB_ACTIONFACTORY->setFormatUnderlineChecked(pageActionChecked(QWebPage::ToggleUnderline));
+    DB_ACTIONFACTORY->setFormatBoldChecked(queryCommandState("bold"));
+    DB_ACTIONFACTORY->setFormatItalicChecked(queryCommandState("italic"));
+    DB_ACTIONFACTORY->setFormatUnderlineChecked(queryCommandState("underline"));
     DB_ACTIONFACTORY->setFormatStrikethroughChecked(queryCommandState("strikeThrough"));
     DB_ACTIONFACTORY->setFormatNumberedListChecked(queryCommandState("insertOrderedList"));
     DB_ACTIONFACTORY->setFormatBulletedListChecked(queryCommandState("insertUnorderedList"));
@@ -857,26 +863,30 @@ void DB_HtmlEditorWidget::adjustSource()
  * Change tab
  */
 void DB_HtmlEditorWidget::changeTab(int index) {
+    QString* htmlContent = new QString();
+
     if (mSourceDirty && (index == 1)) {
-        RB_String content = webView->page()->mainFrame()->toHtml();
-        plainTextEdit->setPlainText(content);
+        QWebEnginePage* page = webView->page();
+        page->toHtml([htmlContent] (const QString& cbValue) { *htmlContent = cbValue; });
+        plainTextEdit->setPlainText(*htmlContent);
+
         mSourceDirty = false;
 
-        int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
-        int max = webView->page()->mainFrame()->scrollBarMaximum(Qt::Vertical);
-        int value = webView->page()->mainFrame()->scrollBarValue(Qt::Vertical);
-        double perunage = (double)(value - min) / (max - min);
+//        int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
+//        int max = webView->page()->mainFrame()->scrollBarMaximum(Qt::Vertical);
+//        int value = webView->page()->mainFrame()->scrollBarValue(Qt::Vertical);
+//        double perunage = (double)(value - min) / (max - min);
 
-        QScrollBar* vsb = plainTextEdit->verticalScrollBar();
-        min = vsb->minimum();
-        max = vsb->maximum();
-        value = (int)((perunage) * (max - min) + min);
-        vsb->setValue(value);
+//        QScrollBar* vsb = plainTextEdit->verticalScrollBar();
+//        min = vsb->minimum();
+//        max = vsb->maximum();
+//        value = (int)((perunage) * (max - min) + min);
+//        vsb->setValue(value);
 
     } else if (mSourceDirty && (index == 0)) {
         RB_String content = plainTextEdit->toPlainText();
         QUrl url = webView->url();
-        webView->page()->mainFrame()->setHtml(content, url);
+        webView->page()->setHtml(content, url);
         mSourceDirty = false;
 
         QScrollBar* vsb = plainTextEdit->verticalScrollBar();
@@ -894,6 +904,8 @@ void DB_HtmlEditorWidget::changeTab(int index) {
         // HACK:
         QTimer::singleShot(200, this, SLOT(setWebViewScrollbar()));
     }
+
+    delete htmlContent;
 }
 
 void DB_HtmlEditorWidget::setWebViewScrollbar() {
@@ -903,10 +915,11 @@ void DB_HtmlEditorWidget::setWebViewScrollbar() {
 //    int value = vsb->value();
 //    double perunage = (double)(value - min) / (max - min);
 
-    int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
+/*    int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
     int max = webView->page()->mainFrame()->scrollBarMaximum(Qt::Vertical);
     int value = (int)((mVerticalScrollbarPerunage) * (max - min) + min);
     webView->page()->mainFrame()->setScrollBarValue(Qt::Vertical, value);
+*/
 }
 
 
@@ -1005,7 +1018,7 @@ bool DB_HtmlEditorWidget::loadFile(const QString& fn) {
     plainTextEdit->setPlainText(in.readAll());
     plainTextEdit->document()->setModified(false);
     RB_String content = plainTextEdit->toPlainText();
-    webView->page()->mainFrame()->setHtml(content, QUrl(file.fileName()));
+    webView->page()->setHtml(content, QUrl(file.fileName()));
     QApplication::restoreOverrideCursor();
 
 
@@ -1031,7 +1044,10 @@ bool DB_HtmlEditorWidget::saveFile(const RB_String &fn) {
     QApplication::setOverrideCursor(Qt::WaitCursor);
     QTextStream out(&file);
     if (tabWidget->currentIndex() == 0) {
-        out << webView->page()->mainFrame()->toHtml();
+        QString* html = new QString();
+        webView->page()->toHtml([html] (const QString& cbValue) { *html = cbValue; });
+        out << html;
+        delete html;
     } else {
         out << plainTextEdit->toPlainText();
     }

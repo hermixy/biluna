@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
-<plist version="0.9">
+<plist version="1.0">
 <dict>
-	<key>CFBundleIconFile</key>
-	<string>@ICON@</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+        <key>NSPrincipalClass</key>
+        <string>NSApplication</string>
+        <key>CFBundleIconFile</key>
+        <string>@ICON@</string>
+        <key>CFBundlePackageType</key>
+        <string>APPL</string>
         <key>CFBundleGetInfoString</key>
-	<string>Created by Qt/QMake</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.trolltech.DemoBrowser</string>
-	<key>CFBundleSignature</key>
-	<string>ttxt</string>
-	<key>CFBundleExecutable</key>
-	<string>@EXECUTABLE@</string>
-	<key>CFBundleDocumentTypes</key>
+        <string>Created by Qt/QMake</string>
+        <key>CFBundleIdentifier</key>
+        <string>com.trolltech.DemoBrowser</string>
+        <key>CFBundleSignature</key>
+        <string>ttxt</string>
+        <key>CFBundleExecutable</key>
+        <string>@EXECUTABLE@</string>
+        <key>CFBundleDocumentTypes</key>
         <array>
                 <dict>
                         <key>CFBundleTypeExtensions</key>
@@ -25,8 +27,8 @@
                                 <string>xht</string>
                                 <string>xhtml</string>
                         </array>
-			<key>CFBundleTypeIconFile</key>
-			<string>@ICON@</string>
+                        <key>CFBundleTypeIconFile</key>
+                        <string>@ICON@</string>
                         <key>CFBundleTypeName</key>
                         <string>HTML Document</string>
                         <key>CFBundleTypeOSTypes</key>
@@ -37,7 +39,7 @@
                         <string>Viewer</string>
                 </dict>
         </array>
-	<key>NOTE</key>
-        <string>DemoBrowser by Digia Plc and/or its subsidiary(-ies)</string>
+        <key>NOTE</key>
+        <string>DemoBrowser by The Qt Company Ltd.</string>
 </dict>
 </plist>

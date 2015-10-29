@@ -229,9 +229,9 @@ HEADERS = \
     ../src/gui/rb_textedit.h \
     ../src/gui/rb_textpreview.h \
     ../src/gui/rb_treeview.h \
-    ../src/gui/rb_webfactory.h \
+#    ../src/gui/rb_webfactory.h \
     ../src/gui/rb_webview.h \
-    ../src/gui/rb_webwidget.h \
+#    ../src/gui/rb_webwidget.h \
     ../src/gui/rb_widget.h \
     ../src/model/db_activity.h \
     ../src/model/db_calendar.h \
@@ -471,9 +471,9 @@ SOURCES = \
     ../src/gui/rb_toolbar.cpp \
     ../src/gui/rb_toolbuttonbar.cpp \
     ../src/gui/rb_treeview.cpp \
-    ../src/gui/rb_webfactory.cpp \
+#    ../src/gui/rb_webfactory.cpp \
     ../src/gui/rb_webview.cpp \
-    ../src/gui/rb_webwidget.cpp \
+#    ../src/gui/rb_webwidget.cpp \
     ../src/gui/rb_widget.cpp \
     ../src/model/db_activity.cpp \
     ../src/model/db_calendar.cpp \
@@ -595,7 +595,5 @@ OTHER_FILES = \
 #    ../src/gui/rb_tedelegate.h \
 #    ../src/gui/rb_textedit.h \
 #    ../src/gui/rb_treeview.h \
-#    ../src/gui/rb_webfactory.h \
-#    ../src/gui/rb_webwidget.h \
 #    ../src/gui/rb_widget.h \
     ../src/gui/thrd_chartwidget.dox

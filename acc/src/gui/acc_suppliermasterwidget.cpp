@@ -50,6 +50,7 @@ void ACC_SupplierMasterWidget::init() {
     //
     mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelSupplier);
     mModel->setRoot(ACC_MODELFACTORY->getRootId());
+    mModel->setWhere("srm_type_id = 1");
 
     //
     // 2. Relations, because of separate dockwidget and mdiwidget
@@ -154,6 +155,10 @@ void ACC_SupplierMasterWidget::on_pbAdd_clicked() {
     index = mModel->index(row, mModel->fieldIndex("factorcompany_id"));
     mModel->setData(index, "0", Qt::EditRole);
     index = mModel->index(row, mModel->fieldIndex("area_id"));
+    mModel->setData(index, "0", Qt::EditRole);
+    index = mModel->index(row, mModel->fieldIndex("srm_type_id"));
+    mModel->setData(index, 1, Qt::EditRole); // 1 = yes existing ACC supplier
+    index = mModel->index(row, mModel->fieldIndex("db_systemuser_id"));
     mModel->setData(index, "0", Qt::EditRole);
     // end NOTE
 

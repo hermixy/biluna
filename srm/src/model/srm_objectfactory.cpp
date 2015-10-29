@@ -11,6 +11,7 @@
 #include "srm_objectfactory.h"
 
 #include "acc_contact.h"
+#include "acc_project.h"
 #include "acc_purchdata.h"
 #include "acc_supplier.h"
 #include "srm_activity.h"
@@ -22,7 +23,6 @@
 #include "srm_group.h"
 #include "srm_groupcontact.h"
 #include "srm_leadsourcetype.h"
-#include "srm_project.h"
 #include "srm_supplierdetail.h"
 #include "srm_sysseqno.h"
 #include "srm_syssetting.h"
@@ -91,16 +91,18 @@ RB_ObjectBase* SRM_ObjectFactory::newObject(const RB_String& id,
     if (parent != NULL) {
         str = parent->getName();
     } else {
-        str = "SRM_"; // root
+        str = "ACC_"; // root
     }
 
     RB_ObjectContainer* list = NULL;
     RB_ObjectBase* obj = NULL;
 
-    if (str == "SRM_") { // root
-        obj = new SRM_Project(uuid, NULL, "SRM_Project", this);
+    if (str == "ACC_") { // root
+        obj = new ACC_Project(uuid, NULL, "ACC_Project", this);
 
         uuid = ""; // RB_Uuid::createUuid().toString(); No Uuid for ..Lists
+        list = new RB_ObjectContainer(uuid, obj, "ACC_SupplierList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SRM_ActivityList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SRM_CampaignList", this);
@@ -114,11 +116,6 @@ RB_ObjectBase* SRM_ObjectFactory::newObject(const RB_String& id,
         list = new RB_ObjectContainer(uuid, obj, "SRM_TemplateList", this);
         obj->addObject(list);
 
-        // ACC objects, ONLY to be able to create the related SRM tables
-        list = new RB_ObjectContainer(uuid, obj, "ACC_ContactList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "ACC_SupplierList", this);
-        obj->addObject(list);
 
     } else if (str == "ACC_ContactList") { // from ACC Accounting
         obj = new ACC_Contact(uuid, parent, "ACC_Contact", this);
@@ -134,6 +131,8 @@ RB_ObjectBase* SRM_ObjectFactory::newObject(const RB_String& id,
         // in ACC also children lists
 
         uuid = "";
+        list = new RB_ObjectContainer(uuid, obj, "ACC_ContactList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "ACC_PurchDataList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SRM_SupplierDetailList", this);

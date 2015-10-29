@@ -50,20 +50,11 @@ SRM_SupplierWidget::~SRM_SupplierWidget() {
  * Initialize widget and models
  */
 void SRM_SupplierWidget::init() {
-    RB_StringList items;
-    items << tr("Account") << tr("All");
-    cbSelectedBy->addItems(items);
-    connect(cbSelectedBy, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(slotSelectedByChanged(int)));
-
     //
     // 1. Set model for supplier mapper
     //
     mSuppModel = SRM_MODELFACTORY->getModel(SRM_ModelFactory::ModelSupplier); // shared
-    mSuppModel->setPrimaryParent("SRM_parent");
-    mSuppModel->setWhere("", false); // not select
     mSuppModel->setRoot(SRM_MODELFACTORY->getRootId());
-    leSelectedBy->setText(SRM_MODELFACTORY->getRoot()->getValue("code").toString());
 
     //
     // 2. Get mapper for line edits etc.
@@ -82,12 +73,13 @@ void SRM_SupplierWidget::init() {
     mSuppMapper->addMapping(lePhoneNumber, mSuppModel->fieldIndex("phoneno"));
     mSuppMapper->addMapping(leFaxNumber, mSuppModel->fieldIndex("faxno"));
 
-    addComboBoxMapping(mSuppModel, "parent", "ACC_Project", "id", "coyname",
-                       cbRelationWithCompany, mSuppMapper);
+    addComboBoxMapping(mSuppModel, "db_systemuser_id", "DB_SystemUser", "id", "username",
+                       cbInternalAccountHolder, mSuppMapper);
+    QStringList items;
     items.clear();
     items << tr("No") << tr("Yes");
     cbExistingSupplier->setModel(new QStringListModel(items, this));
-    mSuppMapper->addMapping(cbExistingSupplier, mSuppModel->fieldIndex("srmtype_id"),
+    mSuppMapper->addMapping(cbExistingSupplier, mSuppModel->fieldIndex("srm_type_id"),
                             "currentIndex");
 
     //
@@ -200,8 +192,6 @@ void SRM_SupplierWidget::init() {
             }
         }
     }
-
-    cbSelectedBy->setCurrentIndex(0); // account
 }
 
 /**
@@ -245,7 +235,8 @@ void SRM_SupplierWidget::on_pbAdd_clicked() {
 
     // NOTE: do not forget to set the default column values, specially for the
     //       relational table otherwise new row will not show!
-    QModelIndex index = mSuppModel->index(row, mSuppModel->fieldIndex("suppliercode"));
+    QModelIndex index;
+    index = mSuppModel->index(row, mSuppModel->fieldIndex("suppliercode"));
     mSuppModel->setData(index, tr("<NEW>"), Qt::EditRole);
     index = mSuppModel->index(row, mSuppModel->fieldIndex("currency_id"));
     mSuppModel->setData(index, "0", Qt::EditRole);
@@ -263,12 +254,10 @@ void SRM_SupplierWidget::on_pbAdd_clicked() {
     index = mSuppModel->index(row, mSuppModel->fieldIndex("area_id"));
     mSuppModel->setData(index, "0", Qt::EditRole);
 
-    index = mSuppModel->index(row, mSuppModel->fieldIndex("parent"));
+    index = mSuppModel->index(row, mSuppModel->fieldIndex("srm_type_id"));
+    mSuppModel->setData(index, 0, Qt::EditRole); // 0 = potential ACC supplier
+    index = mSuppModel->index(row, mSuppModel->fieldIndex("db_systemuser_id"));
     mSuppModel->setData(index, "0", Qt::EditRole);
-    index = mSuppModel->index(row, mSuppModel->fieldIndex("srm_parent"));
-    mSuppModel->setData(index, SRM_MODELFACTORY->getRootId(), Qt::EditRole);
-    // separate button for setting 'parent' is ACC_Project (company)
-
     // end NOTE
 
     tvSupplier->setCurrentIndex(mSuppModel->index(row, RB2::HIDDENCOLUMNS, QModelIndex()));
@@ -315,49 +304,11 @@ void SRM_SupplierWidget::on_pbFilterOn_clicked() {
     }
     RB_String filter = "`acc_supplier`.`suppliercode` LIKE '";
     filter += str + "'";
-    mSuppModel->setWhere(filter, false);
-    mSuppModel->setRoot("");
-    mSuppModel->select();
-    leSelectedBy->setText(tr("Filter"));
+    mSuppModel->setWhere(filter, true);
 }
 
 void SRM_SupplierWidget::on_pbFilterOff_clicked() {
-    slotSelectedByChanged(cbSelectedBy->currentIndex());
-}
-
-/**
- * Select by changed
- */
-void SRM_SupplierWidget::slotSelectedByChanged(int index) {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-
-    switch (index) {
-        case 0 : {
-            fileSave(false);
-            mSuppModel->setPrimaryParent("SRM_parent"); // already done
-            mSuppModel->setWhere("", false); // not select
-            mSuppModel->setRoot(SRM_MODELFACTORY->getRootId());
-            mSuppModel->select();
-            RB_ObjectBase* obj = SRM_MODELFACTORY->getRoot();
-            leSelectedBy->setText(obj->getValue("code").toString());
-            leFilter->setText("");
-            break;
-        }
-        case 1 : {
-            fileSave(false);
-            // mSuppModel->setPrimaryParent("parent");
-            mSuppModel->setWhere("`acc_supplier`.`id`<>'0'", false); // not select
-            mSuppModel->setRoot("");
-            mSuppModel->select();
-            leSelectedBy->setText("");
-            leFilter->setText("");
-            break;
-        }
-        default :
-            break;
-    }
-
-    QApplication::restoreOverrideCursor();
+    mSuppModel->setWhere("", true);
 }
 
 /**
@@ -421,7 +372,8 @@ void SRM_SupplierWidget::on_pbAddItem_clicked() {
 
     // NOTE: do not forget to set the default column values, specially for the
     //       relational table otherwise new row will not show!
-    QModelIndex index = mItemModel->index(row, mItemModel->fieldIndex("stockmaster_idx"));
+    QModelIndex index;
+    index = mItemModel->index(row, mItemModel->fieldIndex("stockmaster_idx"));
     mItemModel->setData(index, "0", Qt::EditRole);
     index = mItemModel->index(row, mItemModel->fieldIndex("price"));
     mItemModel->setData(index, 0.0, Qt::EditRole);
@@ -454,7 +406,7 @@ void SRM_SupplierWidget::on_pbDeleteItem_clicked() {
     }
 }
 
-void SRM_SupplierWidget::on_pbSelectAccount_clicked() {
+void SRM_SupplierWidget::on_pbSelectCompany_clicked() {
     if (!tvSupplier->currentIndex().isValid()) {
         SRM_DIALOGFACTORY->requestWarningDialog(tr("No item selected.\n"
                                                    "Please select an item first."));

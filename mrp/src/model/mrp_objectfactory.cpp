@@ -94,7 +94,7 @@ RB_ObjectBase* MRP_ObjectFactory::newObject(const RB_String& id,
         uuid = "";
         list = new RB_ObjectContainer(uuid, obj, "ACC_ContactList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "ACC_SalesOrderList", this);
+        list = new RB_ObjectContainer(uuid, obj, "ACC_SalesOrderList", this); // TODO: view only? How about Purchase Order?
         obj->addObject(list);
     } else if (str == "ACC_SalesOrderList") {
         obj = new ACC_SalesOrder(uuid, parent, "ACC_SalesOrder", this);

@@ -678,7 +678,7 @@ void ACC_GlTransactionWidget::on_pbReprintInvoice_clicked() {
     transDoc->dbRead(ACC_MODELFACTORY->getDatabase());
 
     // Show invoice dialog, all from ACC_SalesOrderWidget
-    // ACC_ReportPreviewDialog* dlg = new ACC_ReportPreviewDialog(this); QWebView
+    // ACC_ReportPreviewDialog* dlg = new ACC_ReportPreviewDialog(this); QWebEngineView
     ACC_OrderPreviewDialog* dlg = new ACC_OrderPreviewDialog(this);
     dlg->setWindowTitle("ACC - Sales Invoice");
 
@@ -726,7 +726,7 @@ void ACC_GlTransactionWidget::on_pbReprintPurchaseOrder_clicked() {
     transDoc->dbRead(ACC_MODELFACTORY->getDatabase());
 
     // Show invoice dialog, all from ACC_SalesOrderWidget
-    // ACC_ReportPreviewDialog* dlg = new ACC_ReportPreviewDialog(this); QWebView
+    // ACC_ReportPreviewDialog* dlg = new ACC_ReportPreviewDialog(this); QWebEngineView
     ACC_OrderPreviewDialog* dlg = new ACC_OrderPreviewDialog(this);
     dlg->setWindowTitle("ACC - Purchase Order");
 

@@ -12,23 +12,24 @@ FORMS += \
     ../../thrd/browser/history.ui \
     ../../thrd/browser/passworddialog.ui \
     ../../thrd/browser/proxy.ui \
-    ../../thrd/browser/settings.ui
+    ../../thrd/browser/settingsdialog.ui
 
 HEADERS += \
     ../../thrd/browser/autosaver.h \
     ../../thrd/browser/bookmarks.h \
-#     ../../thrd/browser/db_internetbrowserfactory.h \
+#     ../../thrd/browser/browserapplication.h \
 #     ../../thrd/browser/browsermainwindow.h \
     ../../thrd/browser/chasewidget.h \
     ../../thrd/browser/cookiejar.h \
     ../../thrd/browser/downloadmanager.h \
     ../../thrd/browser/edittableview.h \
     ../../thrd/browser/edittreeview.h \
+    ../../thrd/browser/featurepermissionbar.h \
     ../../thrd/browser/history.h \
     ../../thrd/browser/modelmenu.h \
     ../../thrd/browser/networkaccessmanager.h \
     ../../thrd/browser/searchlineedit.h \
-    ../../thrd/browser/settings.h \
+    ../../thrd/browser/settingsdialog.h \
     ../../thrd/browser/squeezelabel.h \
     ../../thrd/browser/tabwidget.h \
     ../../thrd/browser/toolbarsearch.h \
@@ -46,11 +47,12 @@ SOURCES += \
     ../../thrd/browser/downloadmanager.cpp \
     ../../thrd/browser/edittableview.cpp \
     ../../thrd/browser/edittreeview.cpp \
+    ../../thrd/browser/featurepermissionbar.cpp \
     ../../thrd/browser/history.cpp \
     ../../thrd/browser/modelmenu.cpp \
     ../../thrd/browser/networkaccessmanager.cpp \
     ../../thrd/browser/searchlineedit.cpp \
-    ../../thrd/browser/settings.cpp \
+    ../../thrd/browser/settingsdialog.cpp \
     ../../thrd/browser/squeezelabel.cpp \
     ../../thrd/browser/tabwidget.cpp \
     ../../thrd/browser/toolbarsearch.cpp \

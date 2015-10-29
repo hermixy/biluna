@@ -2082,7 +2082,6 @@ void RB_MmSource::createTableSortFilter(RB_String& filter) {
 
     QSqlQuery q(qStr, database());
     setQuery(q);
-//    select();
 }
 
 

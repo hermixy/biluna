@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = browser
-QT += webkitwidgets network widgets printsupport
+QT += webenginewidgets network widgets printsupport
 
 qtHaveModule(uitools):!embedded: QT += uitools
 else: DEFINES += QT_NO_UITOOLS
@@ -23,13 +23,12 @@ HEADERS += \
     browserapplication.h \
     browsermainwindow.h \
     chasewidget.h \
-    cookiejar.h \
     downloadmanager.h \
     edittableview.h \
     edittreeview.h \
+    featurepermissionbar.h\
     history.h \
     modelmenu.h \
-    networkaccessmanager.h \
     searchlineedit.h \
     settings.h \
     squeezelabel.h \
@@ -45,13 +44,12 @@ SOURCES += \
     browserapplication.cpp \
     browsermainwindow.cpp \
     chasewidget.cpp \
-    cookiejar.cpp \
     downloadmanager.cpp \
     edittableview.cpp \
     edittreeview.cpp \
+    featurepermissionbar.cpp\
     history.cpp \
     modelmenu.cpp \
-    networkaccessmanager.cpp \
     searchlineedit.cpp \
     settings.cpp \
     squeezelabel.cpp \
@@ -63,6 +61,11 @@ SOURCES += \
     main.cpp
 
 RESOURCES += data/data.qrc htmls/htmls.qrc
+
+contains(DEFINES, QWEBENGINEPAGE_SETNETWORKACCESSMANAGER) {
+    HEADERS += cookiejar.h networkaccessmanager.h
+    SOURCES += cookiejar.cpp networkaccessmanager.cpp
+}
 
 build_all:!build_pass {
     CONFIG -= build_all
@@ -77,24 +80,10 @@ mac {
     ICON = browser.icns
     QMAKE_INFO_PLIST = Info_mac.plist
     TARGET = Browser
-
-    # No 64-bit Flash on Mac, so build the browser 32-bit
-    contains(QT_CONFIG, x86) {
-        CONFIG -= x86_64
-        CONFIG += x86
-    }
-    contains(QT_CONFIG, ppc) {
-        CONFIG -= ppc64
-        CONFIG += ppc
-    }
-}
-
-wince*: {
-    DEPLOYMENT_PLUGIN += qjpeg qgif
 }
 
 EXAMPLE_FILES = Info_mac.plist browser.icns browser.ico browser.rc
 
 # install
-target.path = $$[QT_INSTALL_EXAMPLES]/webkitwidgets/browser
+target.path = $$[QT_INSTALL_EXAMPLES]/webenginewidgets/browser
 INSTALLS += target

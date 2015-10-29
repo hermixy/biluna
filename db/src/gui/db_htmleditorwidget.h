@@ -109,9 +109,8 @@ public:
     virtual void insertHtml(const RB_String& html);
 
     bool queryCommandState(const QString&);
-    bool pageActionChecked(QWebPage::WebAction wa);
-    bool pageActionEnabled(QWebPage::WebAction wa);
-
+//    bool pageActionChecked(QWebPage::WebAction wa);
+//    bool pageActionEnabled(QWebPage::WebAction wa);
 
 protected:
     void changeEvent(QEvent *e);

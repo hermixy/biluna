@@ -8,6 +8,8 @@
 HEADERS += \
     ../../acc/src/model/acc_contact.h \
     ../../acc/src/model/acc_customer.h \
+    ../../acc/src/model/acc_project.h \
+    ../../acc/src/model/acc_salesorder.h \
     ../src/actions/crm_actionactivity.h \
     ../src/actions/crm_actionactivityreport.h \
     ../src/actions/crm_actioncampaigntarget.h \
@@ -62,7 +64,6 @@ HEADERS += \
     ../src/model/crm_leadsourcetype.h \
     ../src/model/crm_modelfactory.h \
     ../src/model/crm_objectfactory.h \
-    ../src/model/crm_project.h \
     ../src/model/crm_sysseqno.h \
     ../src/model/crm_syssetting.h \
     ../src/model/crm_template.h \
@@ -71,6 +72,8 @@ HEADERS += \
 SOURCES += \
     ../../acc/src/model/acc_contact.cpp \
     ../../acc/src/model/acc_customer.cpp \
+    ../../acc/src/model/acc_project.cpp \
+    ../../acc/src/model/acc_salesorder.cpp \
     ../src/actions/crm_actionactivity.cpp \
     ../src/actions/crm_actionactivityreport.cpp \
     ../src/actions/crm_actioncampaigntarget.cpp \
@@ -117,7 +120,6 @@ SOURCES += \
     ../src/model/crm_leadsourcetype.cpp \
     ../src/model/crm_modelfactory.cpp \
     ../src/model/crm_objectfactory.cpp \
-    ../src/model/crm_project.cpp \
     ../src/model/crm_sysseqno.cpp \
     ../src/model/crm_syssetting.cpp \
     ../src/model/crm_template.cpp \

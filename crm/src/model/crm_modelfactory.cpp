@@ -118,14 +118,13 @@ RB_MmProxy* CRM_ModelFactory::getModel(int type, bool shared) {
         model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelProject:
-        // CRM_ProjectList actually does not exist but required to create model
-        model = getTableModel(db, mObjectFactory, type, "CRM_ProjectList", shared);
-        model->setSourceSortOrder(RB2::SortOrderAscending, "code");
+        // ACC_ProjectList actually does not exist but required to create model
+        model = getTableModel(db, mObjectFactory, type, "ACC_ProjectList", shared);
+        model->setSourceSortOrder(RB2::SortOrderAscending, "created");
         break;
     case ModelProjectEdit:
-        // CRM_ProjectList actually does not exist but required to create model
-        model = getTableModel(db, mObjectFactory, type, "CRM_ProjectList", shared);
-        model->setSourceSortOrder(RB2::SortOrderDescending, "created");
+        model = getTableModel(db, mObjectFactory, type, "ACC_ProjectList", shared);
+        model->setSourceSortOrder(RB2::SortOrderAscending, "created");
         break;
     case ModelSysSeqNo:
         model = getTableModel(db, mObjectFactory, type, "CRM_SysSeqNoList", shared);

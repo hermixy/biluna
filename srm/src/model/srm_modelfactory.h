@@ -52,16 +52,16 @@ public:
         ModelCampaign,                  /**< Sales campaigns, such as mailing */
         ModelCampaignTarget,            /**< Sales campaign target audience */
         ModelCampaignType,              /**< Sales campaign types, such as mailing, seminar */
-        ModelContact,                   /**< Contact or lead model from ACC*/
+        ModelContact,                   /**< ACC Contact or lead model*/
         ModelContactDetail,             /**< Detail contact or lead model */
         ModelDocument,                  /**< Document model */
         ModelGroup,                     /**< Sales campaigns target group, such as a mailing list */
         ModelGroupContact,              /**< A contact in a sales campaigns target group */
         ModelLeadSourceType,            /**< Lead source type, such as website, seminar, cold call */
-        ModelProject,                   /**< Project or CRM account model */
-        ModelProjectEdit,               /**< Edit project model */
-        ModelPurchData,                 /**< Supplier purchase data model, about items supplier can supply */
-        ModelSupplier,                  /**< Supplier model from ACC */
+        ModelProject,                   /**< ACC Project or SRM account model */
+        ModelProjectEdit,               /**< ACC Project or SRM account model */
+        ModelPurchData,                 /**< ACC Supplier purchase data model, about items supplier can supply */
+        ModelSupplier,                  /**< ACC Supplier model */
         ModelSupplierDetail,            /**< Supplier detail model */
         ModelSysSeqNo,                  /**< System sequence number model */
         ModelTemplate,                  /**< Template model */

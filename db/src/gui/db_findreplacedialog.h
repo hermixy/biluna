@@ -20,7 +20,7 @@
 class QPlainTextEdit;
 class QSettings;
 class QTextEdit;
-class QWebView;
+class QWebEngineView;
 
 /**
  * The dialog presents the typical widgets you find
@@ -56,7 +56,7 @@ public:
       * Associates the HTML editor where to perform the search
       * @param webView
       */
-    void setWebView(QWebView* webView);
+    void setWebView(QWebEngineView* webView);
 
     /// hides replace widgets from the form
     void hideReplaceWidgets();
@@ -148,7 +148,7 @@ protected:
     QTextEdit* mTextEdit;
 
     /// the web view/HTML editor (possibly) associated with this form
-    QWebView* mWebView;
+    QWebEngineView* mWebView;
 
     bool mIsFindDialog;
     bool mWebViewFound;

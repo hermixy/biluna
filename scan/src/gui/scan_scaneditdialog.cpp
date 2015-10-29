@@ -794,9 +794,9 @@ void SCAN_ScanEditDialog::changeEvent(QEvent *e) {
 }
 
 /**
- * Event filter handling the QWebView losing focus
+ * Event filter handling the QWebEngineView losing focus
  * and updating the QTextEdit which is mapped to model
- * @param obj QWebView with marked-up block text
+ * @param obj QWebEngineView with marked-up block text
  * @param e QEvent event
  */
 bool SCAN_ScanEditDialog::eventFilter(QObject* obj, QEvent* e) {

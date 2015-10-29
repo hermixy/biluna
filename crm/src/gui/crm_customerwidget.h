@@ -39,7 +39,6 @@ public slots:
     virtual void on_pbSave_clicked();
     virtual void on_pbFilterOn_clicked();
     virtual void on_pbFilterOff_clicked();
-    virtual void slotSelectedByChanged(int index);
 
     virtual void on_ileCustomerParent_clicked();
     virtual void on_pbCopyParent_clicked();
@@ -47,7 +46,7 @@ public slots:
     virtual void on_pbMapLocation_clicked();
     virtual void on_pbSendEmail_clicked();
 
-    virtual void on_pbSelectAccount_clicked();
+    virtual void on_pbSelectCompany_clicked();
 
 protected:
     void changeEvent(QEvent* e);

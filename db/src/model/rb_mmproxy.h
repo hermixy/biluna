@@ -217,6 +217,8 @@ private:
     int mModelType;
     //! Model factory
     RB_ModelFactory* mModelFactory;
+    //! Source model
+    RB_MmAbstract* mSourceModel;
     //! Item selection model
     QItemSelectionModel* mSelectionModel;
     //! Data widget mapper map

@@ -1,7 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
-** Contact: http://www.qt-project.org/legal
+** Copyright (C) 2015 The Qt Company Ltd.
+** Contact: http://www.qt.io/licensing/
 **
 ** This file is part of the demonstration applications of the Qt Toolkit.
 **
@@ -10,27 +10,27 @@
 ** Licensees holding valid commercial Qt licenses may use this file in
 ** accordance with the commercial license agreement provided with the
 ** Software or, alternatively, in accordance with the terms contained in
-** a written agreement between you and Digia.  For licensing terms and
-** conditions see http://qt.digia.com/licensing.  For further information
-** use the contact form at http://qt.digia.com/contact-us.
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see http://www.qt.io/terms-conditions. For further
+** information use the contact form at http://www.qt.io/contact-us.
 **
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.LGPL included in the
-** packaging of this file.  Please review the following information to
+** packaging of this file. Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
 **
-** In addition, as a special exception, Digia gives you certain additional
-** rights.  These rights are described in the Digia Qt LGPL Exception
+** As a special exception, The Qt Company gives you certain additional
+** rights. These rights are described in The Qt Company LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
 ** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.  Please review the following information to
+** packaging of this file. Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
 **
@@ -59,16 +59,21 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QStyle>
 
-#include <QWebHistoryInterface>
-#include <QWebSettings>
+#if defined(QWEBENGINEHISTORYINTERFACE)
+#include <QWebEngineHistoryInterface>
+#endif
+#include <QWebEngineSettings>
 
 #include <QtCore/QDebug>
 
 static const unsigned int HISTORY_VERSION = 23;
 
 HistoryManager::HistoryManager(QObject *parent)
-    : QWebHistoryInterface(parent)
-    , m_saveTimer(new AutoSaver(this))
+    :
+#if defined(QWEBENGINEHISTORYINTERFACE)
+      QWebEngineHistoryInterface(parent),
+#endif
+      m_saveTimer(new AutoSaver(this))
     , m_historyLimit(30)
     , m_historyModel(0)
     , m_historyFilterModel(0)
@@ -87,8 +92,12 @@ HistoryManager::HistoryManager(QObject *parent)
     m_historyFilterModel = new HistoryFilterModel(m_historyModel, this);
     m_historyTreeModel = new HistoryTreeModel(m_historyFilterModel, this);
 
-    // QWebHistoryInterface will delete the history manager
-    QWebHistoryInterface::setDefaultInterface(this);
+#if defined(QWEBENGINEHISTORYINTERFACE)
+    // QWebEngineHistoryInterface will delete the history manager
+    QWebEngineHistoryInterface::setDefaultInterface(this);
+#else
+    Q_UNUSED(parent);
+#endif
 }
 
 HistoryManager::~HistoryManager()
@@ -180,8 +189,7 @@ void HistoryManager::checkForExpired()
 
 void HistoryManager::addHistoryItem(const HistoryItem &item)
 {
-    QWebSettings *globalSettings = QWebSettings::globalSettings();
-    if (globalSettings->testAttribute(QWebSettings::PrivateBrowsingEnabled))
+    if (DB_InternetBrowserFactory::getInstance()->privateBrowsing())
         return;
 
     m_history.prepend(item);
@@ -513,7 +521,7 @@ int HistoryMenuModel::rowCount(const QModelIndex &parent) const
         return bumpedItems + folders;
     }
 
-    if (parent.internalId() == (quintptr)-1) {
+    if (parent.internalId() == quintptr(-1)) {
         if (parent.row() < bumpedRows())
             return 0;
     }
@@ -538,7 +546,7 @@ QModelIndex HistoryMenuModel::mapToSource(const QModelIndex &proxyIndex) const
     if (!proxyIndex.isValid())
         return QModelIndex();
 
-    if (proxyIndex.internalId() == (quintptr)-1) {
+    if (proxyIndex.internalId() == quintptr(-1)) {
         int bumpedItems = bumpedRows();
         if (proxyIndex.row() < bumpedItems)
             return m_treeModel->index(proxyIndex.row(), proxyIndex.column(), m_treeModel->index(0, 0));
@@ -559,7 +567,7 @@ QModelIndex HistoryMenuModel::index(int row, int column, const QModelIndex &pare
         || parent.column() > 0)
         return QModelIndex();
     if (!parent.isValid())
-        return createIndex(row, column, -1);
+        return createIndex(row, column, quintptr(-1));
 
     QModelIndex treeIndexParent = mapToSource(parent);
 
@@ -1289,4 +1297,3 @@ void HistoryTreeModel::sourceRowsRemoved(const QModelIndex &parent, int start, i
         endRemoveRows();
     }
 }
-

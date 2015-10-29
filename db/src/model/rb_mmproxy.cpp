@@ -22,6 +22,7 @@ RB_MmProxy::RB_MmProxy(QObject* parent)
     mParentManager = NULL;
     mModelType = -1;
     mModelFactory = NULL;
+    mSourceModel = NULL;
     mSelectionModel = NULL;
 //    mMapper = NULL;
 }

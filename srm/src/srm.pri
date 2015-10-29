@@ -7,6 +7,7 @@
 
 HEADERS += \
     ../../acc/src/model/acc_contact.h \
+    ../../acc/src/model/acc_project.h \
     ../../acc/src/model/acc_purchdata.h \
     ../../acc/src/model/acc_supplier.h \
     ../src/actions/srm_actionactivity.h \
@@ -62,7 +63,6 @@ HEADERS += \
     ../src/model/srm_leadsourcetype.h \
     ../src/model/srm_modelfactory.h \
     ../src/model/srm_objectfactory.h \
-    ../src/model/srm_project.h \
     ../src/model/srm_supplierdetail.h \
     ../src/model/srm_sysseqno.h \
     ../src/model/srm_syssetting.h \
@@ -72,6 +72,7 @@ HEADERS += \
 
 SOURCES += \
     ../../acc/src/model/acc_contact.cpp \
+    ../../acc/src/model/acc_project.cpp \
     ../../acc/src/model/acc_purchdata.cpp \
     ../../acc/src/model/acc_supplier.cpp \
     ../src/actions/srm_actionactivity.cpp \
@@ -119,7 +120,6 @@ SOURCES += \
     ../src/model/srm_leadsourcetype.cpp \
     ../src/model/srm_modelfactory.cpp \
     ../src/model/srm_objectfactory.cpp \
-    ../src/model/srm_project.cpp \
     ../src/model/srm_supplierdetail.cpp \
     ../src/model/srm_sysseqno.cpp \
     ../src/model/srm_syssetting.cpp \

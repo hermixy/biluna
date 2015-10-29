@@ -226,7 +226,7 @@ void SCAN_ScanResultWidget::filePrintPreview(QPrinter* pr) {
  * @return true if success
  */
 bool SCAN_ScanResultWidget::saveFile(const RB_String &fn) {
-    QWebView* wv = NULL;
+    QWebEngineView* wv = NULL;
     int tabNo = tabWidget->currentIndex();
 
     switch (tabNo) {

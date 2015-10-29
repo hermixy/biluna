@@ -630,7 +630,7 @@ void ACC_PurchaseOrderWidget::on_pbCheckOrder_clicked() {
     }
 
     // Show preview invoice dialog
-    //ACC_ReportPreviewDialog* dlg = new ACC_ReportPreviewDialog(this); QWebView
+    //ACC_ReportPreviewDialog* dlg = new ACC_ReportPreviewDialog(this); QWebEngineView
     ACC_OrderPreviewDialog* dlg = new ACC_OrderPreviewDialog(this);
     dlg->setWindowTitle("ACC - Preview Order");
     dlg->setCurrentFileName("po_" + leOrderNo->text());
@@ -685,7 +685,7 @@ void ACC_PurchaseOrderWidget::on_pbProcessOrder_clicked() {
     }
 
     // Show final invoice dialog
-    // ACC_ReportPreviewDialog* dlg = new ACC_ReportPreviewDialog(this); QWebView
+    // ACC_ReportPreviewDialog* dlg = new ACC_ReportPreviewDialog(this); QWebEngineView
     ACC_OrderPreviewDialog* dlg = new ACC_OrderPreviewDialog(this);
     dlg->setWindowTitle("ACC - Order");
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
-** Contact: http://www.qt-project.org/legal
+** Copyright (C) 2015 The Qt Company Ltd.
+** Contact: http://www.qt.io/licensing/
 **
 ** This file is part of the demonstration applications of the Qt Toolkit.
 **
@@ -10,27 +10,27 @@
 ** Licensees holding valid commercial Qt licenses may use this file in
 ** accordance with the commercial license agreement provided with the
 ** Software or, alternatively, in accordance with the terms contained in
-** a written agreement between you and Digia.  For licensing terms and
-** conditions see http://qt.digia.com/licensing.  For further information
-** use the contact form at http://qt.digia.com/contact-us.
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see http://www.qt.io/terms-conditions. For further
+** information use the contact form at http://www.qt.io/contact-us.
 **
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.LGPL included in the
-** packaging of this file.  Please review the following information to
+** packaging of this file. Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
 **
-** In addition, as a special exception, Digia gives you certain additional
-** rights.  These rights are described in the Digia Qt LGPL Exception
+** As a special exception, The Qt Company gives you certain additional
+** rights. These rights are described in The Qt Company LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
 ** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.  Please review the following information to
+** packaging of this file. Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
 **
@@ -45,6 +45,12 @@
 #include <QtWidgets/QTabBar>
 
 #include <QtWidgets/QShortcut>
+
+QT_BEGIN_NAMESPACE
+class QWebEngineDownloadItem;
+class QWebEngineProfile;
+QT_END_NAMESPACE
+
 /*
     Tab bar with a few more features such as a context menu and shortcuts
  */
@@ -84,7 +90,7 @@ private:
     int m_dragCurrentIndex;
 };
 
-#include <QWebPage>
+#include <QWebEnginePage>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -102,10 +108,10 @@ class WebActionMapper : public QObject
     Q_OBJECT
 
 public:
-    WebActionMapper(QAction *root, QWebPage::WebAction webAction, QObject *parent);
-    QWebPage::WebAction webAction() const;
+    WebActionMapper(QAction *root, QWebEnginePage::WebAction webAction, QObject *parent);
+    QWebEnginePage::WebAction webAction() const;
     void addChild(QAction *action);
-    void updateCurrent(QWebPage *currentParent);
+    void updateCurrent(QWebEnginePage *currentParent);
 
 private slots:
     void rootTriggered();
@@ -114,9 +120,9 @@ private slots:
     void currentDestroyed();
 
 private:
-    QWebPage *m_currentParent;
+    QWebEnginePage *m_currentParent;
     QAction *m_root;
-    QWebPage::WebAction m_webAction;
+    QWebEnginePage::WebAction m_webAction;
 };
 
 #include <QtCore/QUrl>
@@ -152,12 +158,14 @@ signals:
     void menuBarVisibilityChangeRequested(bool visible);
     void statusBarVisibilityChangeRequested(bool visible);
     void toolBarVisibilityChangeRequested(bool visible);
-    void printRequested(QWebFrame *frame);
+#if defined(QWEBENGINEPAGE_PRINTREQUESTED)
+    void printRequested(QWebEngineFrame *frame);
+#endif
 
 public:
     TabWidget(QWidget *parent = 0);
     void clear();
-    void addWebAction(QAction *action, QWebPage::WebAction webAction);
+    void addWebAction(QAction *action, QWebEnginePage::WebAction webAction);
 
     QAction *newTabAction() const;
     QAction *closeTabAction() const;
@@ -174,6 +182,8 @@ public:
 
     QByteArray saveState() const;
     bool restoreState(const QByteArray &state);
+
+    void setProfile(QWebEngineProfile *profile);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *event);
@@ -195,6 +205,7 @@ private slots:
     void currentChanged(int index);
     void aboutToShowRecentTabsMenu();
     void aboutToShowRecentTriggeredAction(QAction *action);
+    void downloadRequested(QWebEngineDownloadItem *download);
     void webViewLoadStarted();
     void webViewIconChanged();
     void webViewTitleChanged(const QString &title);
@@ -218,7 +229,7 @@ private:
     QCompleter *m_lineEditCompleter;
     QStackedWidget *m_lineEdits;
     TabBar *m_tabBar;
+    QWebEngineProfile *m_profile;
 };
 
 #endif // TABWIDGET_H
-
