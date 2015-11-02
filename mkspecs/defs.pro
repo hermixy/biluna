@@ -20,6 +20,7 @@ QT += core gui help network printsupport sql svg uitools webenginewidgets widget
 
 #CONFIG += release
 CONFIG -= release
+CONFIG += c++11
 
 if (release) {
 #    message("Release compile mode in defs.pro")

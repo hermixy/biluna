@@ -35,16 +35,14 @@ RB_MmProxy::~RB_MmProxy() {
     // Deactivate model, non-shared models are normally not listed
     // but some modeltypes are used for selection and can be shared
     // and non-shared, therefore check of shared flag also.
-    if (mModelFactory && getRbModel()->isShared()) {
+    if (mModelFactory && mSourceModel->isShared()) {
         mModelFactory->removeModel(getModelType());
     }
 
     // Delete source model
-    if (getRbModel()) {
-        RB_MmAbstract* m = getRbModel();
-        delete m;
-        // setSourceModel(NULL); not required
-    }
+    QSortFilterProxyModel::setSourceModel(NULL);
+    delete mSourceModel;
+    mSourceModel = NULL;
 
     // mMapper is deleted via QObject
     RB_DEBUG->print("RB_MmProxy::~RB_MmProxy() - OK");
@@ -92,10 +90,10 @@ void RB_MmProxy::setModelFactory(RB_ModelFactory* mf) {
 RB_ObjectBase* RB_MmProxy::setRoot(const RB_String& id) {
     if (!database().isOpen() && !mParentManager && mModelFactory) {
         // top level modelmanager is based on root object (of modelfactory)
-        getRbModel()->setRoot(mModelFactory->getRoot());
+        mSourceModel->setRoot(mModelFactory->getRoot());
         return mModelFactory->getRoot();
     }
-    return getRbModel()->setRoot(id);
+    return mSourceModel->setRoot(id);
 }
 
 /**
@@ -104,7 +102,7 @@ RB_ObjectBase* RB_MmProxy::setRoot(const RB_String& id) {
  * @param root root object of this model
  */
 void RB_MmProxy::setRoot(RB_ObjectBase* root) {
-    getRbModel()->setRoot(root);
+    mSourceModel->setRoot(root);
 
     // TODO: emit currentRowChanged(QModelIndex(), QModelIndex());
     // for in-memory models? See below.
@@ -117,9 +115,9 @@ void RB_MmProxy::setRoot(RB_ObjectBase* root) {
 void RB_MmProxy::setRoot(const QModelIndex& index) {
     const RB_MmProxy* proxy = dynamic_cast<const RB_MmProxy*>(index.model());
     if (proxy) {
-        getRbModel()->setRoot(proxy->mapToSource(index));
+        mSourceModel->setRoot(proxy->mapToSource(index));
     } else {
-        getRbModel()->setRoot(index);
+        mSourceModel->setRoot(index);
     }
 
     emit currentRowChanged(QModelIndex(), QModelIndex());
@@ -129,7 +127,7 @@ void RB_MmProxy::setRoot(const QModelIndex& index) {
  * @return root object
  */
 RB_ObjectBase* RB_MmProxy::getRoot() {
-    return getRbModel()->getRoot();
+    return mSourceModel->getRoot();
 }
 
 /**
@@ -137,7 +135,7 @@ RB_ObjectBase* RB_MmProxy::getRoot() {
  * @return success
  */
 //bool RB_MmProxy::saveRoot() {
-//    return getRbModel()->saveRoot();
+//    return mSourceModel->saveRoot();
 //}
 
 /**
@@ -149,7 +147,7 @@ RB_ObjectBase* RB_MmProxy::getProject() {
         pm = pm->getParentManager();
     }
 
-    RB_ObjectBase* obj = pm->getRbModel()->getRoot();
+    RB_ObjectBase* obj = pm->mSourceModel->getRoot();
 
     if (obj) {
         RB_String objName = obj->getName();
@@ -200,7 +198,7 @@ void RB_MmProxy::setParentManager(RB_MmProxy* pMm) {
         connect(mParentManager, SIGNAL(modelReverted()),
                 this, SLOT(slotParentModelReverted()));
 
-        connect(getRbModel(), SIGNAL(modelModified(bool)),
+        connect(mSourceModel, SIGNAL(modelModified(bool)),
                 mParentManager->sourceModel(), SLOT(slotChildModelModified(bool)));
     }
 }
@@ -210,16 +208,21 @@ void RB_MmProxy::setParentManager(RB_MmProxy* pMm) {
  * @param f object factory
  */
 void RB_MmProxy::setObjectFactory(RB_ObjectFactory* f) {
-    if (!getRbModel()) return;
-    getRbModel()->setObjectFactory(f);
+    if (!mSourceModel) return;
+    mSourceModel->setObjectFactory(f);
 }
 
 /**
  * @return object factory which defines the entire model
  */
 RB_ObjectFactory* RB_MmProxy::getObjectFactory() {
-    if (!getRbModel()) return NULL;
-    return getRbModel()->getObjectFactory();
+    if (!mSourceModel) return NULL;
+    return mSourceModel->getObjectFactory();
+}
+
+void RB_MmProxy::setSourceModel(QAbstractItemModel* sourceModel) {
+    mSourceModel = dynamic_cast<RB_MmAbstract*>(sourceModel);
+    QSortFilterProxyModel::setSourceModel(sourceModel);
 }
 
 /**
@@ -230,7 +233,7 @@ RB_ObjectFactory* RB_MmProxy::getObjectFactory() {
 bool RB_MmProxy::setTableModel(const RB_String& list,
                                     RB_MmProxy* pMm) {
     // Map dataChanged() signal for table and treeviews
-    connect(getRbModel(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+    connect(mSourceModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(slotDataChanged(QModelIndex,QModelIndex)));
     setParentManager(pMm);
 //    mParentManager = pMm;
@@ -239,7 +242,7 @@ bool RB_MmProxy::setTableModel(const RB_String& list,
 //        connect(mParentManager, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
 //                this, SLOT(slotParentCurrentRowChanged(QModelIndex,QModelIndex)));
 //    }
-    return getRbModel()->setTableModel(list);
+    return mSourceModel->setTableModel(list);
 }
 
 /**
@@ -253,11 +256,11 @@ bool RB_MmProxy::setTreeModel(const RB_String& list,
                                         RB_MmProxy* pMm,
                                         const QSqlDatabase& db) {
 
-    RB_MmSource* mm = dynamic_cast<RB_MmSource*>(getRbModel());
+    RB_MmSource* mm = dynamic_cast<RB_MmSource*>(mSourceModel);
     connect(this, SIGNAL(expanded(const QModelIndex&)),
             mm, SLOT(slotExpanded(const QModelIndex&)));
     // map dataChanged() signal for table and treeviews
-    connect(getRbModel(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+    connect(mSourceModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(slotDataChanged(QModelIndex,QModelIndex)));
     setParentManager(pMm);
 //    mParentManager = pMm;
@@ -266,7 +269,7 @@ bool RB_MmProxy::setTreeModel(const RB_String& list,
 //        connect(mParentManager, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
 //                this, SLOT(slotParentCurrentRowChanged(QModelIndex,QModelIndex)));
 //    }
-    return getRbModel()->setTreeModel(list, db);
+    return mSourceModel->setTreeModel(list, db);
 }
 
 /**
@@ -280,7 +283,7 @@ bool RB_MmProxy::setTreeModel(const RB_String& list,
 bool RB_MmProxy::setCloneModel(RB_ObjectBase* root,
                                     const RB_String& list,
                                     RB_MmProxy* pMm) {
-    bool success = getRbModel()->setCloneModel(root, list);
+    bool success = mSourceModel->setCloneModel(root, list);
     setParentManager(pMm);
 //    mParentManager = pMm;
 //    // Connect parent model row change to child model
@@ -295,8 +298,8 @@ bool RB_MmProxy::setCloneModel(RB_ObjectBase* root,
  * Save clone model
  */
 bool RB_MmProxy::saveCloneModel() {
-    getRbModel()->setModelIsModified(true);
-    return getRbModel()->saveCloneModel();
+    mSourceModel->setModelIsModified(true);
+    return mSourceModel->saveCloneModel();
 }
 
 /**
@@ -308,7 +311,7 @@ bool RB_MmProxy::saveCloneModel() {
  */
 RB_ObjectBase* RB_MmProxy::getObject(const QModelIndex& index,
                                      RB2::ResolveLevel level) {
-    return getRbModel()->getObject(mapToSource(index), level);
+    return mSourceModel->getObject(mapToSource(index), level);
 }
 
 /**
@@ -318,7 +321,7 @@ RB_ObjectBase* RB_MmProxy::getObject(const QModelIndex& index,
  *          and does not need to be deleted after use
  */
 RB_ObjectBase *RB_MmProxy::getCurrentObject() {
-    return getRbModel()->getCurrentObject();
+    return mSourceModel->getCurrentObject();
 }
 
 /**
@@ -328,7 +331,7 @@ RB_ObjectBase *RB_MmProxy::getCurrentObject() {
  * @param obj
  */
 void RB_MmProxy::updateCurrentObject(RB_ObjectBase *obj) {
-    getRbModel()->updateCurrentObject(obj);
+    mSourceModel->updateCurrentObject(obj);
 }
 
 /**
@@ -338,7 +341,7 @@ void RB_MmProxy::updateCurrentObject(RB_ObjectBase *obj) {
  */
 void RB_MmProxy::swapObject(const QModelIndex& fromIndex,
                             const QModelIndex& toIndex) {
-    getRbModel()->swapObject(mapToSource(fromIndex), mapToSource(toIndex),
+    mSourceModel->swapObject(mapToSource(fromIndex), mapToSource(toIndex),
                              mapToSource(fromIndex.parent()));
 }
 
@@ -350,7 +353,7 @@ void RB_MmProxy::swapObject(const QModelIndex& fromIndex,
 QModelIndex RB_MmProxy::promote(const QModelIndex& idx) {
     if (!isTreeModel() || !idx.isValid()) return idx;
 
-    RB_MmAbstract* sourceModel = getRbModel();
+    RB_MmAbstract* sourceModel = mSourceModel;
     QModelIndex newIndex = mapFromSource(sourceModel->promote(mapToSource(idx)));
     return newIndex;
 }
@@ -364,7 +367,7 @@ QModelIndex RB_MmProxy::promote(const QModelIndex& idx) {
 QModelIndex RB_MmProxy::demote(const QModelIndex& idx, const RB_String& parentId) {
     if (!isTreeModel() || !idx.isValid()) return idx;
 
-    RB_MmAbstract* sourceModel = getRbModel();
+    RB_MmAbstract* sourceModel = mSourceModel;
     QModelIndex newIndex = mapFromSource(sourceModel->demote(mapToSource(idx), parentId));
     return newIndex;
 }
@@ -400,7 +403,7 @@ void RB_MmProxy::slotChangeCurrentRow(const QModelIndex& current,
     QModelIndex cur = mapToSource(current);
     QModelIndex prev = mapToSource(previous);
 
-    getRbModel()->slotChangeCurrentRow(cur, prev);
+    mSourceModel->slotChangeCurrentRow(cur, prev);
     emit currentRowChanged(current, previous);
 }
 
@@ -417,7 +420,7 @@ void RB_MmProxy::slotParentCurrentRowChanged(const QModelIndex& current,
         return;
     }
 
-    if (getRbModel()->database().isOpen() && isModelModified()) {
+    if (mSourceModel->database().isOpen() && isModelModified()) {
         submitAll();
     }
 
@@ -452,7 +455,7 @@ void RB_MmProxy::slotParentModelReverted() {
  */
 void RB_MmProxy::slotDataChanged(const QModelIndex& topLeft,
                                  const QModelIndex& bottomRight) {
-    if (!topLeft.isValid() || !bottomRight.isValid() || !getRbModel()) return;
+    if (!topLeft.isValid() || !bottomRight.isValid() || !mSourceModel) return;
 
     QModelIndex tlIdx = QSortFilterProxyModel::mapFromSource(topLeft);
     QModelIndex brIdx = QSortFilterProxyModel::mapFromSource(bottomRight);
@@ -473,7 +476,7 @@ void RB_MmProxy::slotSetCurrentModelRow(int row) {
         return;
     }
     QModelIndex idx = index(row, 0, QModelIndex());
-    getRbModel()->slotChangeCurrentRow(mapToSource(idx), QModelIndex());
+    mSourceModel->slotChangeCurrentRow(mapToSource(idx), QModelIndex());
     emit currentRowChanged(idx, QModelIndex());
 }
 
@@ -485,7 +488,7 @@ void RB_MmProxy::slotSetCurrentModelRow(int row) {
  */
 void RB_MmProxy::slotRelModelUpdated(const QString& tableName) {
     if (tableName.isEmpty()) return;
-    if (tableName.toLower() == getRbModel()->tableName()) return;
+    if (tableName.toLower() == mSourceModel->tableName()) return;
 
     int cols = columnCount();
 
@@ -509,19 +512,19 @@ void RB_MmProxy::slotRelModelUpdated(const QString& tableName) {
 }
 
 void RB_MmProxy::reset() {
-    getRbModel()->reset();
+    mSourceModel->reset();
 }
 
 void RB_MmProxy::revert() {
     // Make sure children models are notified first
     emit modelReverted();
-    getRbModel()->revert();
+    mSourceModel->revert();
 }
 
 void RB_MmProxy::revertAll() {
     // Make sure children models are notified first
     emit modelReverted();
-    getRbModel()->revertAll();
+    mSourceModel->revertAll();
     // notify children models that nothing is selected
     emit currentRowChanged(QModelIndex(), QModelIndex());
     // extra for the selection model, does not emit any signal
@@ -530,7 +533,7 @@ void RB_MmProxy::revertAll() {
 }
 
 bool RB_MmProxy::submit() {
-    return getRbModel()->submit();
+    return mSourceModel->submit();
 }
 
 /**
@@ -544,16 +547,16 @@ bool RB_MmProxy::submitAll() {
     // Make sure children models are notified first
     emit modelBeforeSubmitted();
 
-    if (getRbModel()->rowCount() > 255) {
+    if (mSourceModel->rowCount() > 255) {
         undoFilterSort();
     }
 
-    bool res = getRbModel()->submitAll();
+    bool res = mSourceModel->submitAll();
 
     // Also emit the updated signal for relational tables to re-populate
     RB_ModelFactory* mf = getModelFactory();
     if (mf) {
-        mf->slotModelUpdated(getRbModel()->tableName());
+        mf->slotModelUpdated(mSourceModel->tableName());
     }
 
     return res;
@@ -563,7 +566,7 @@ bool RB_MmProxy::submitAllAndSelect() {
     // Make sure children models are notified first
     emit modelBeforeSubmitted();
 
-    bool success = getRbModel()->submitAllAndSelect();
+    bool success = mSourceModel->submitAllAndSelect();
 
 //    if (mMapper) {
 //        if (isTreeModel()) {
@@ -631,9 +634,9 @@ bool RB_MmProxy::hasChildren(const QModelIndex& parent) const {
 int RB_MmProxy::rowCount(const QModelIndex& parent) const {
     // HACK 2010-11-08: otherwise more lines are drawn in QTreeView, next line does not work
     // return QSortFilterProxyModel::rowCount(parent);
-    if (isTreeModel()) {
-        return getRbModel()->rowCount(mapToSource(parent));
-    } else {
+    if (mSourceModel && isTreeModel()) {
+        return mSourceModel->rowCount(mapToSource(parent));
+    } else if (mSourceModel) {
         return QSortFilterProxyModel::rowCount(parent);
     }
 
@@ -653,7 +656,11 @@ int RB_MmProxy::rowCount(const QModelIndex& parent) const {
  * @return the number of columns
  */
 int RB_MmProxy::columnCount(const QModelIndex& parent) const {
-    return getRbModel()->columnCount(parent); // TODO mapToSource(parent)?
+    if (mSourceModel) {
+        return mSourceModel->columnCount(parent); // TODO mapToSource(parent)?
+    }
+
+    return -1;
 }
 
 /**
@@ -665,7 +672,7 @@ int RB_MmProxy::columnCount(const QModelIndex& parent) const {
 RB_Variant RB_MmProxy::data(const QModelIndex& index, int role) const {
     QModelIndex sourceIndex = mapToSource(index);
     if (sourceIndex.isValid())
-        return getRbModel()->data(sourceIndex, role);
+        return mSourceModel->data(sourceIndex, role);
     return RB_Variant();
 }
 
@@ -682,7 +689,7 @@ RB_Variant RB_MmProxy::hiddenData(const QModelIndex& index, int role) const {
 
     QModelIndex sourceIndex = mapToSource(index);
     if (sourceIndex.isValid())
-        return getRbModel()->hiddenData(sourceIndex, role);
+        return mSourceModel->hiddenData(sourceIndex, role);
     return RB_Variant();
 }
 
@@ -697,7 +704,7 @@ bool RB_MmProxy::setData(const QModelIndex& index,
                           const QVariant& value, int role) {
     QModelIndex sourceIndex = mapToSource(index);
     if (sourceIndex.isValid())
-        return getRbModel()->setData(sourceIndex, value, role);
+        return mSourceModel->setData(sourceIndex, value, role);
     return false;
 }
 
@@ -712,7 +719,7 @@ bool RB_MmProxy::setHiddenData(const QModelIndex &index,
                           const QVariant &value, int role) {
     QModelIndex sourceIndex = mapToSource(index);
     if (sourceIndex.isValid())
-        return getRbModel()->setHiddenData(sourceIndex, value, role);
+        return mSourceModel->setHiddenData(sourceIndex, value, role);
     return false;
 }
 
@@ -722,7 +729,7 @@ bool RB_MmProxy::setHiddenData(const QModelIndex &index,
  * @returns RB2::RoleType
  */
 int RB_MmProxy::getDisplayRole(int col) const {
-    return getRbModel()->getDisplayRole(col);
+    return mSourceModel->getDisplayRole(col);
 }
 
 /**
@@ -731,14 +738,14 @@ int RB_MmProxy::getDisplayRole(int col) const {
  * @param role RB2::RoleType
  */
 void RB_MmProxy::setDisplayRole(int col, int role) {
-    getRbModel()->setDisplayRole(col, role);
+    mSourceModel->setDisplayRole(col, role);
 }
 
 /**
  * @returns text list in case of fixed texts in a combobox
  */
 RB_StringList RB_MmProxy::getTextList(int col) const {
-    return getRbModel()->getTextList(col);
+    return mSourceModel->getTextList(col);
 }
 
 /**
@@ -747,7 +754,7 @@ RB_StringList RB_MmProxy::getTextList(int col) const {
  * @param strL list with texts from the combobox
  */
 void RB_MmProxy::setTextList(int col, const RB_StringList& strL) {
-    getRbModel()->setTextList(col, strL);
+    mSourceModel->setTextList(col, strL);
 }
 
 /**
@@ -777,14 +784,18 @@ void RB_MmProxy::sort(int column, Qt::SortOrder order) {
  * @returns the index or column number for fieldName
  */
 int RB_MmProxy::fieldIndex(const QString& fieldName) const {
-    return getRbModel()->fieldIndex(fieldName);
+    if (mSourceModel) {
+        return mSourceModel->fieldIndex(fieldName);
+    }
+
+    return -1;
 }
 
 /**
  * @returns the relation object for the (visible) column
  */
 QSqlRelation RB_MmProxy::relation(int column) const {
-    return getRbModel()->relation(column);
+    return mSourceModel->relation(column);
 }
 
 /**
@@ -794,10 +805,10 @@ QSqlRelation RB_MmProxy::relation(int column) const {
  * @param relWhere where clause for relation table
  */
 void RB_MmProxy::setRelation(int column, const RB_SqlRelation& relation) {
-    if (getRbModel()->database().isOpen()) {
-        getRbModel()->setRelation(column, relation, NULL);
+    if (mSourceModel->database().isOpen()) {
+        mSourceModel->setRelation(column, relation, NULL);
     } else {
-        getRbModel()->setRelation(column, relation, getProject());
+        mSourceModel->setRelation(column, relation, getProject());
     }
 
     // If relational table is changed update the relationModel
@@ -816,7 +827,7 @@ void RB_MmProxy::setRelation(int column, const RB_SqlRelation& relation) {
  * @param column
  */
 QSqlTableModel* RB_MmProxy::relationModel(int column) const {
-    return getRbModel()->relationModel(column);
+    return mSourceModel->relationModel(column);
 }
 
 /**
@@ -826,9 +837,9 @@ QSqlTableModel* RB_MmProxy::relationModel(int column) const {
  * is removed.
  */
 bool RB_MmProxy::select() {
-    bool res = getRbModel()->select();
+    bool res = mSourceModel->select();
 
-    if (getRbModel()->rowCount() > 255) {
+    if (mSourceModel->rowCount() > 255) {
         sort(-1);
     }
 
@@ -839,7 +850,7 @@ bool RB_MmProxy::select() {
  * Removes all objects of in-memory model, does nothing with database model
  */
 void RB_MmProxy::clear() {
-    getRbModel()->clear();
+    mSourceModel->clear();
     QSortFilterProxyModel::invalidate();
 }
 
@@ -855,7 +866,7 @@ void RB_MmProxy::slotExpanded(const QModelIndex& index) {
  * @return source model as RB_MmAbstract
  */
 RB_MmAbstract* RB_MmProxy::sourceModel() const {
-    return getRbModel();
+    return mSourceModel;
 }
 
 /**
@@ -869,7 +880,7 @@ QObject* RB_MmProxy::sender() const {
  * @return database
  */
 QSqlDatabase RB_MmProxy::database() const {
-    return getRbModel()->database();
+    return mSourceModel->database();
 }
 
 /**
@@ -878,7 +889,7 @@ QSqlDatabase RB_MmProxy::database() const {
  * @returns true if model is modified
  */
 bool RB_MmProxy::isModelModified() {
-    return getRbModel()->isModelModified();
+    return mSourceModel->isModelModified();
 }
 
 /**
@@ -889,22 +900,22 @@ void RB_MmProxy::setModelIsModified(bool modified) {
     if (modified && getParentManager()) {
         getParentManager()->setModelIsModified(true);
     }
-    getRbModel()->setModelIsModified(modified);
+    mSourceModel->setModelIsModified(modified);
 }
 
 /**
  * @return Is this a tree model
  */
 bool RB_MmProxy::isTreeModel() const {
-    return getRbModel()->isTreeModel();
+    return mSourceModel->isTreeModel();
 }
 
 bool RB_MmProxy::isInMemoryModel() const {
-    return getRbModel()->isInMemoryModel();
+    return mSourceModel->isInMemoryModel();
 }
 
 void RB_MmProxy::setInMemoryModel(bool inMemory) {
-    return getRbModel()->setInMemoryModel(inMemory);
+    return mSourceModel->setInMemoryModel(inMemory);
 }
 
 /**
@@ -912,7 +923,7 @@ void RB_MmProxy::setInMemoryModel(bool inMemory) {
  * @param sourceFilter filter text after WHERE such as (WHERE) parent=3
  */
 void RB_MmProxy::setSourceFilter(const RB_String& sourceFilter) {
-    getRbModel()->setFilter(sourceFilter);
+    mSourceModel->setFilter(sourceFilter);
 }
 
 /**
@@ -920,7 +931,7 @@ void RB_MmProxy::setSourceFilter(const RB_String& sourceFilter) {
  * @return filter text is text after WHERE in SQL
  */
 RB_String RB_MmProxy::getSourceFilter() {
-    return getRbModel()->filter();
+    return mSourceModel->filter();
 }
 
 /**
@@ -929,7 +940,7 @@ RB_String RB_MmProxy::getSourceFilter() {
  * @param primParent primary parent name
  */
 void RB_MmProxy::setPrimaryParent(const RB_String& primParent) {
-    getRbModel()->setPrimaryParent(primParent);
+    mSourceModel->setPrimaryParent(primParent);
 }
 
 /**
@@ -941,7 +952,7 @@ void RB_MmProxy::setPrimaryParent(const RB_String& primParent) {
  * @param secParent second parent id
  */
 void RB_MmProxy::setSecondParent(const RB_String& secParent) {
-    getRbModel()->setSecondParent(secParent);
+    mSourceModel->setSecondParent(secParent);
 }
 
 /**
@@ -954,7 +965,7 @@ void RB_MmProxy::setSecondParent(const RB_String& secParent) {
  * and execute select()
  */
 void RB_MmProxy::setWhere(const RB_String& whereStatement, bool select) {
-    getRbModel()->setWhere(whereStatement, select);
+    mSourceModel->setWhere(whereStatement, select);
 }
 
 /**
@@ -962,14 +973,14 @@ void RB_MmProxy::setWhere(const RB_String& whereStatement, bool select) {
  * @param q query
  */
 void RB_MmProxy::setQuery(const QSqlQuery &q) {
-    getRbModel()->setSqlQuery(q);
+    mSourceModel->setSqlQuery(q);
 }
 
 /**
  * @returns sort order of source model filter, ascending, descending or none.
  */
 RB2::SortOrderType RB_MmProxy::getSourceSortOrder() {
-    return getRbModel()->getSortOrder();
+    return mSourceModel->getSortOrder();
 }
 
 /**
@@ -983,7 +994,7 @@ void RB_MmProxy::setSourceSortOrder(RB2::SortOrderType so,
                                 const RB_String& colName1,
                                 const RB_String& colName2,
                                 const RB_String& colName3) {
-    getRbModel()->setSortOrder(so, colName1, colName2, colName3);
+    mSourceModel->setSortOrder(so, colName1, colName2, colName3);
 }
 
 /**
@@ -991,7 +1002,7 @@ void RB_MmProxy::setSourceSortOrder(RB2::SortOrderType so,
  *
  */
 void RB_MmProxy::setShared(bool shared) {
-    getRbModel()->setShared(shared);
+    mSourceModel->setShared(shared);
 }
 
 /**
@@ -1049,13 +1060,13 @@ void RB_MmProxy::undoFilterSort() {
  * @param modelIsBaseClone
  */
 void RB_MmProxy::setBaseCloneModel(bool modelIsBaseClone) {
-    getRbModel()->setBaseCloneModel(modelIsBaseClone);
+    mSourceModel->setBaseCloneModel(modelIsBaseClone);
 }
 /**
  * @return Is this the base clone model
  */
 bool RB_MmProxy::isBaseCloneModel() {
-    return getRbModel()->isBaseCloneModel();
+    return mSourceModel->isBaseCloneModel();
 }
 
 /**
@@ -1134,13 +1145,6 @@ void RB_MmProxy::deleteMapper(const RB_String& mapperId) {
 }
 
 /**
- * @return model casted to RB_MmAbstract()
- */
-RB_MmAbstract* RB_MmProxy::getRbModel() const {
-    return dynamic_cast<RB_MmAbstract*>(QSortFilterProxyModel::sourceModel());
-}
-
-/**
  * Get current or last actual selected proxy index
  * @return index
  */
@@ -1148,7 +1152,7 @@ QModelIndex RB_MmProxy::getProxyIndex() const {
     if (!mSelectionModel) {
         RB_DEBUG->warning("RB_MmProxy::getProxyIndex(), "
                           "mSelectionModel is NULL WARNING");
-        return mapFromSource(getRbModel()->getCurrentIndex());
+        return mapFromSource(mSourceModel->getCurrentIndex());
     }
     return mSelectionModel->currentIndex();
 }
@@ -1159,7 +1163,7 @@ QModelIndex RB_MmProxy::getProxyIndex() const {
  * @return index
  */
 QModelIndex RB_MmProxy::getCurrentIndex() const {
-    return getRbModel()->getCurrentIndex();
+    return mSourceModel->getCurrentIndex();
 }
 
 /**
@@ -1179,7 +1183,7 @@ RB_String RB_MmProxy::getCurrentId() const {
  * @return list name, is table name with 'List'
  */
 RB_String RB_MmProxy::getListName() const {
-    return getRbModel()->getListName();
+    return mSourceModel->getListName();
 }
 
 /**
@@ -1234,7 +1238,7 @@ RB_Variant RB_MmProxy::getValue(const RB_String& id,
                                           const RB_String& fieldName,
                                           const RB_String& keyFieldName,
                                           const RB_Variant& keyValue) const {
-    return getRbModel()->getValue(id, fieldName, keyFieldName, keyValue);
+    return mSourceModel->getValue(id, fieldName, keyFieldName, keyValue);
 }
 
 /**
@@ -1247,6 +1251,6 @@ RB_Variant RB_MmProxy::getValue(const RB_String& id,
  */
 bool RB_MmProxy::setValue(const RB_String& id, const RB_String& fieldName,
                                 const RB_Variant& value, int role) {
-    return getRbModel()->setValue(id, fieldName, value, role);
+    return mSourceModel->setValue(id, fieldName, value, role);
 }
 
