@@ -67,7 +67,7 @@
 #include "acc_supplier.h"
 //#include "acc_supptranstaxes.h"
 #include "acc_sysacctcontrol.h"
-#include "acc_syssetting.h"
+//#include "acc_syssetting.h"
 #include "acc_systype.h"
 #include "acc_taxauthority.h"
 #include "acc_taxauthrate.h"
@@ -79,6 +79,7 @@
 #include "acc_transdoc.h"
 #include "acc_unitofmeasure.h"
 #include "db_objectfactory.h"
+#include "db_project.h" // for system (DB global) settings
 #include "rb_debug.h"
 #include "rb_uuid.h"
 
@@ -137,7 +138,7 @@ ACC_ObjectFactory* ACC_ObjectFactory::getInstance() {
  *  ACC_TaxGroupList
  *  ACC_TaxProvinceList
  *  ACC_UnitOfMeasureList
- * are part of ACC_SysSetting but are global system settings.
+ * are part of DB_Project but are global system settings.
  * The relevant global models will set the filter to WHERE id<>'0'
  * instead of WHERE parent='acc_project.id'. Their parent
  * is set to 'default'.
@@ -200,11 +201,12 @@ RB_ObjectBase* ACC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "ACC_SupplierList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "ACC_SysSettingList", this);
-        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "ACC_SysTypeList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "ACC_TransAllocnList", this);
+        obj->addObject(list);
+        // for ACC global system settings only, the current DB project is root id
+        list = new RB_ObjectContainer(uuid, obj, "DB_ProjectList", this);
         obj->addObject(list);
 
     } else if (str == "ACC_AccountControlList") {
@@ -400,8 +402,38 @@ RB_ObjectBase* ACC_ObjectFactory::newObject(const RB_String& id,
     } else if (str == "ACC_SysAcctControlList") {
         // not part of the database, only for in-memory model
         obj = new ACC_SysAcctControl(uuid, parent, "ACC_SysAcctControl", this);
-    } else if (str == "ACC_SysSettingList") {
-        obj = new ACC_SysSetting(uuid, parent, "ACC_SysSetting", this);
+    } else if (str == "ACC_SysTypeList") {
+        obj = new ACC_SysType(uuid, parent, "ACC_SysType", this);
+    } else if (str == "ACC_TaxAuthorityList") {
+        obj = new ACC_TaxAuthority(uuid, parent, "ACC_TaxAuthority", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer(uuid, obj, "ACC_TaxAuthRateList", this);
+        obj->addObject(list);
+    } else if (str == "ACC_TaxAuthRateList") {
+        obj = new ACC_TaxAuthRate(uuid, parent, "ACC_TaxAuthRate", this);
+    } else if (str == "ACC_TaxCategoryList") {
+        obj = new ACC_TaxCategory(uuid, parent, "ACC_TaxCategory", this);
+    } else if (str == "ACC_TaxGroupList") {
+        obj = new ACC_TaxGroup(uuid, parent, "ACC_TaxGroup", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer(uuid, obj, "ACC_TaxGroupAuthList", this);
+        obj->addObject(list);
+    } else if (str == "ACC_TaxGroupAuthList") {
+        obj = new ACC_TaxGroupAuth(uuid, parent, "ACC_TaxGroupAuth", this);
+    } else if (str == "ACC_TaxProvinceList") {
+        obj = new ACC_TaxProvince(uuid, parent, "ACC_TaxProvince", this);
+    } else if (str == "ACC_TransAllocnList") {
+        obj = new ACC_TransAllocn(uuid, parent, "ACC_TransAllocn", this);
+    } else if (str == "ACC_TransDocList") {
+        obj = new ACC_TransDoc(uuid, parent, "ACC_TransDoc", this);
+    } else if (str == "ACC_UnitOfMeasureList") {
+        obj = new ACC_UnitOfMeasure(uuid, parent, "ACC_UnitOfMeasure", this);
+    } else if (str == "DB_ProjectList") {
+        // for ACC global system settings only,
+        // the current DB project is always root id
+        obj = new DB_Project(uuid, parent, "DB_Project", this);
 
         // part of global relations
         uuid = "";
@@ -444,34 +476,6 @@ RB_ObjectBase* ACC_ObjectFactory::newObject(const RB_String& id,
         list = new RB_ObjectContainer(uuid, obj, "ACC_UnitOfMeasureList", this);
         obj->addObject(list);
 
-    } else if (str == "ACC_SysTypeList") {
-        obj = new ACC_SysType(uuid, parent, "ACC_SysType", this);
-    } else if (str == "ACC_TaxAuthorityList") {
-        obj = new ACC_TaxAuthority(uuid, parent, "ACC_TaxAuthority", this);
-
-        uuid = "";
-        list = new RB_ObjectContainer(uuid, obj, "ACC_TaxAuthRateList", this);
-        obj->addObject(list);
-    } else if (str == "ACC_TaxAuthRateList") {
-        obj = new ACC_TaxAuthRate(uuid, parent, "ACC_TaxAuthRate", this);
-    } else if (str == "ACC_TaxCategoryList") {
-        obj = new ACC_TaxCategory(uuid, parent, "ACC_TaxCategory", this);
-    } else if (str == "ACC_TaxGroupList") {
-        obj = new ACC_TaxGroup(uuid, parent, "ACC_TaxGroup", this);
-
-        uuid = "";
-        list = new RB_ObjectContainer(uuid, obj, "ACC_TaxGroupAuthList", this);
-        obj->addObject(list);
-    } else if (str == "ACC_TaxGroupAuthList") {
-        obj = new ACC_TaxGroupAuth(uuid, parent, "ACC_TaxGroupAuth", this);
-    } else if (str == "ACC_TaxProvinceList") {
-        obj = new ACC_TaxProvince(uuid, parent, "ACC_TaxProvince", this);
-    } else if (str == "ACC_TransAllocnList") {
-        obj = new ACC_TransAllocn(uuid, parent, "ACC_TransAllocn", this);
-    } else if (str == "ACC_TransDocList") {
-        obj = new ACC_TransDoc(uuid, parent, "ACC_TransDoc", this);
-    } else if (str == "ACC_UnitOfMeasureList") {
-        obj = new ACC_UnitOfMeasure(uuid, parent, "ACC_UnitOfMeasure", this);
     } else {
         RB_DEBUG->error("ACC_ObjectFactory::newObject() " + parent->getName() + " ERROR");
     }

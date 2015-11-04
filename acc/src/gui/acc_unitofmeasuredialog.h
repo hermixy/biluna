@@ -13,6 +13,7 @@
 
 #include <QtWidgets>
 #include "acc_modelfactory.h"
+#include "db_modelfactory.h"
 #include "db_tabledialog.h"
 
 class ACC_UnitOfMeasureDialog : public DB_TableDialog {
@@ -35,7 +36,7 @@ public:
     void init() {
         // Set model, root is already set by action or modelFactory
         mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelUnitOfMeasure);
-        mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         setWindowTitle(tr("ACC Edit Units of Measurement[*]"));

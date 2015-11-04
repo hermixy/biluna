@@ -16,9 +16,10 @@
 #include "sail_route.h"
 #include "sail_routecoordinate.h"
 #include "sail_symbol.h"
-#include "sail_syssetting.h"
+//#include "sail_syssetting.h"
 #include "sail_track.h"
 #include "db_objectfactory.h"
+#include "db_project.h"
 #include "rb_debug.h"
 #include "rb_uuid.h"
 
@@ -61,7 +62,7 @@ SAIL_ObjectFactory* SAIL_ObjectFactory::getInstance() {
  * NOTE:
  *  SAIL_Map
  *  SAIL_Symbol
- * are part of SAIL_SysSetting but are global system settings.
+ * are part of DB_Project.id because they are global system settings.
  * The relevant global models will set the filter to WHERE id<>'0'
  * instead of WHERE parent='acc_project.id'. Their parent
  * is set to 'default'.
@@ -92,13 +93,21 @@ RB_ObjectBase* SAIL_ObjectFactory::newObject(const RB_String& id,
         obj = new SAIL_Project(uuid, NULL, "SAIL_Project", this);
 
         uuid = ""; // RB_Uuid::createUuid().toString(); No Uuid for ..Lists
+        list = new RB_ObjectContainer(uuid, obj, "DB_ProjectList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SAIL_CoordinateList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SAIL_RouteList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "SAIL_SysSettingList", this);
-        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SAIL_TrackList", this);
+        obj->addObject(list);
+    } else if (str == "DB_ProjectList") {
+        obj = new DB_Project(uuid, parent, "DB_Project", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer(uuid, obj, "SAIL_MapList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer(uuid, obj, "SAIL_SymbolList", this);
         obj->addObject(list);
     } else if (str == "SAIL_CoordinateList") {
         obj = new SAIL_Coordinate(uuid, parent, "SAIL_Coordinate", this);
@@ -114,14 +123,6 @@ RB_ObjectBase* SAIL_ObjectFactory::newObject(const RB_String& id,
         obj = new SAIL_RouteCoordinate(uuid, parent, "SAIL_RouteCoordinate", this);
     } else if (str == "SAIL_SymbolList") {
         obj = new SAIL_Symbol(uuid, parent, "SAIL_Symbol", this);
-    } else if (str == "SAIL_SysSettingList") {
-        obj = new SAIL_SysSetting(uuid, parent, "SAIL_SysSetting", this);
-
-        uuid = "";
-        list = new RB_ObjectContainer(uuid, obj, "SAIL_MapList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "SAIL_SymbolList", this);
-        obj->addObject(list);
     } else if (str == "SAIL_TrackList") {
         obj = new SAIL_Track(uuid, parent, "SAIL_Track", this);
     } else {

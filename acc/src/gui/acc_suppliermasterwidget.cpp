@@ -158,7 +158,7 @@ void ACC_SupplierMasterWidget::on_pbAdd_clicked() {
     mModel->setData(index, "0", Qt::EditRole);
     index = mModel->index(row, mModel->fieldIndex("srm_type_id"));
     mModel->setData(index, 1, Qt::EditRole); // 1 = yes existing ACC supplier
-    index = mModel->index(row, mModel->fieldIndex("db_systemuser_id"));
+    index = mModel->index(row, mModel->fieldIndex("db_systemuser_idx"));
     mModel->setData(index, "0", Qt::EditRole);
     // end NOTE
 

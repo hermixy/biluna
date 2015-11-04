@@ -47,7 +47,7 @@ public:
                                      int build = -1);
     virtual bool checkExistingTables(const RB_String& perspective, RB_String& result);
 
-    virtual RB_ObjectFactory* getObjectFactory(const RB_String& objName);
+    virtual RB_ObjectFactory* getObjectFactory(const RB_String& objName = "");
     virtual bool isObject(const RB_String& objName);
 
     virtual void emitState();

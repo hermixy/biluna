@@ -58,6 +58,7 @@ public:
         DialogSelectContact,            /**< Select contact dialog */
         DialogSelectCustomer,           /**< Select customer dialog */
         DialogSelectGroup,              /**< Select group of contacts dialog */
+        DialogSelectSystemUser,         /**< Select DB system user */
         DialogSelectTemplate,           /**< Select template dialog */
         DialogSysSeqNo,                 /**< Edit system sequence number dialog */
         DialogDefault                   /**< Default- or all dialogs */

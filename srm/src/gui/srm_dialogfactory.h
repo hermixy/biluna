@@ -59,6 +59,7 @@ public:
         DialogSelectGroup,              /**< Select group of contacts dialog */
         DialogSelectStockMaster,        /**< Select a stock item dialog */
         DialogSelectSupplier,           /**< Select supplier dialog */
+        DialogSelectSystemUser,         /**< Select system user dialog */
         DialogSelectTemplate,           /**< Select template dialog */
         DialogSysSeqNo,                 /**< Edit system sequence number dialog */
         DialogDefault                   /**< Default- or all dialogs */

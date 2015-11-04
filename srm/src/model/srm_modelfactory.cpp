@@ -134,6 +134,10 @@ RB_MmProxy* SRM_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "SRM_SysSeqNoList", shared);
         model->setSourceSortOrder(RB2::SortOrderAscending, "seqnumbername");
         break;
+    case ModelSystemUser:
+        model = getTableModel(db, DB_MODELFACTORY->getObjectFactory(), type, "DB_SystemUserList", shared);
+        model->setSourceSortOrder(RB2::SortOrderAscending, "lastname");
+        break;
     case ModelTemplate:
         model = getTableModel(db, mObjectFactory, type, "SRM_TemplateList", shared);
         model->setSourceSortOrder(RB2::SortOrderAscending, "description");
@@ -205,6 +209,9 @@ RB_MmProxy* SRM_ModelFactory::getParentModel(int type) {
         iter = mModelList.find(ModelSupplier);
         break;
     case ModelSysSeqNo:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelSystemUser:
         iter = mModelList.find(ModelNone);
         break;
     case ModelTemplate:

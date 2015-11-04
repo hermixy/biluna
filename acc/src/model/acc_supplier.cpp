@@ -53,8 +53,8 @@ ACC_Supplier::~ACC_Supplier() {
  * - email email address
  * - lastusedacct_id last used GL account ID
  * - area_id purchase area ID
- * - srmtype_id SRM type ID 0=potential 1=existing
- * - srm_paprent SRM Account (SRM_Project.id)
+ * - srm_type_id SRM type ID 0=potential 1=existing
+ * - db_systemuser_idx system user
  */
 void ACC_Supplier::createMembers() {
     addMember("suppliercode", "-", "", RB2::MemberChar40);        // 3
@@ -95,5 +95,5 @@ void ACC_Supplier::createMembers() {
 
     // supplier relation management 0=potential supplier, 1=existing supplier
     addMember("srm_type_id", "-", 0, RB2::MemberInteger);  // int_id
-    addMember("db_systemuser_id", "-", "0", RB2::MemberChar40); // is SRM Account Holder (DB_SystemUser.id)
+    addMember("db_systemuser_idx", "-", "0", RB2::MemberChar165); // is SRM Account Holder (DB_SystemUser.id)
 }

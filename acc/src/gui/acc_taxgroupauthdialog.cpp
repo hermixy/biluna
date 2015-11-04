@@ -13,6 +13,7 @@
 #include "acc_dialogfactory.h"
 #include "acc_modelfactory.h"
 #include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_cmbdelegate.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_mdiwindow.h"
@@ -56,7 +57,7 @@ void ACC_TaxGroupAuthDialog::init() {
     // 1. Set model with ID (sets root object) and/or query
     //
     mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelTaxGroup);
-    mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+    mModel->setRoot(DB_MODELFACTORY->getRootId());
 
     //
     // 2. Set relations and mapper for line edits etc.

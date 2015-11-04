@@ -12,7 +12,6 @@
 
 #include <QPrintDialog>
 #include <QPrinter>
-#include <QWebFrame>
 #include "acc_createcostcenter3report.h"
 #include "acc_createcostcenterreport.h"
 #include "acc_dialogfactory.h"

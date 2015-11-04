@@ -13,6 +13,7 @@
 
 #include <QtWidgets>
 #include "sail_modelfactory.h"
+#include "db_modelfactory.h"
 #include "db_tabledialog.h"
 #include "rb_sqlrelation.h"
 
@@ -36,7 +37,7 @@ public:
     void init() {
         // Set model, root is already set by modelFactory
         mModel = SAIL_MODELFACTORY->getModel(SAIL_ModelFactory::ModelSymbol, false);
-        mModel->setRoot("syssetting");
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
 

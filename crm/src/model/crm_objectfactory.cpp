@@ -24,9 +24,10 @@
 #include "crm_groupcontact.h"
 #include "crm_leadsourcetype.h"
 #include "crm_sysseqno.h"
-#include "crm_syssetting.h"
+//#include "crm_syssetting.h"
 #include "crm_template.h"
 #include "db_objectfactory.h"
+#include "db_project.h"
 #include "rb_debug.h"
 #include "rb_uuid.h"
 
@@ -69,7 +70,8 @@ CRM_ObjectFactory* CRM_ObjectFactory::getInstance() {
  * NOTE:
  *  CRM_CampaignType
  *  CRM_LeadSourceType
- * are part of CRM_SysSetting but are global system settings.
+ *  CRM_SysSeqNo
+ * are part of DB_ProjectList because they are global system settings.
  * The relevant global models will set the filter to WHERE id<>'0'
  * instead of WHERE parent='acc_project.id'. Their parent
  * is set to 'default'.
@@ -110,9 +112,9 @@ RB_ObjectBase* CRM_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "CRM_GroupList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "CRM_SysSettingList", this);
-        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "CRM_TemplateList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer(uuid, obj, "DB_ProjectList", this);
         obj->addObject(list);
     } else if (str == "ACC_ContactList") { // from ACC Accounting
         obj = new ACC_Contact(uuid, parent, "ACC_Contact", this);
@@ -160,8 +162,10 @@ RB_ObjectBase* CRM_ObjectFactory::newObject(const RB_String& id,
         obj = new CRM_LeadSourceType(uuid, parent, "CRM_LeadSourceType", this);
     } else if (str == "CRM_SysSeqNoList") {
         obj = new CRM_SysSeqNo(uuid, parent, "CRM_SysSeqNo", this);
-    } else if (str == "CRM_SysSettingList") {
-        obj = new CRM_SysSetting(uuid, parent, "CRM_SysSetting", this);
+    } else if (str == "CRM_TemplateList") {
+        obj = new CRM_Template(uuid, parent, "CRM_Template", this);
+    } else if (str == "DB_ProjectList") {
+        obj = new DB_Project(uuid, parent, "DB_Project", this);
 
         uuid = "";
         list = new RB_ObjectContainer(uuid, obj, "CRM_CampaignTypeList", this);
@@ -170,8 +174,6 @@ RB_ObjectBase* CRM_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "CRM_SysSeqNoList", this);
         obj->addObject(list);
-    } else if (str == "CRM_TemplateList") {
-        obj = new CRM_Template(uuid, parent, "CRM_Template", this);
     } else {
         RB_DEBUG->error("CRM_ObjectFactory::newObject() " + parent->getName() + " ERROR");
     }

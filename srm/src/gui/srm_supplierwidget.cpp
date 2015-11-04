@@ -72,9 +72,8 @@ void SRM_SupplierWidget::init() {
     mSuppMapper->addMapping(leEmail, mSuppModel->fieldIndex("email"));
     mSuppMapper->addMapping(lePhoneNumber, mSuppModel->fieldIndex("phoneno"));
     mSuppMapper->addMapping(leFaxNumber, mSuppModel->fieldIndex("faxno"));
+    mSuppMapper->addMapping(ileInternalAccountHolder, mSuppModel->fieldIndex("db_systemuser_idx"));
 
-    addComboBoxMapping(mSuppModel, "db_systemuser_id", "DB_SystemUser", "id", "username",
-                       cbInternalAccountHolder, mSuppMapper);
     QStringList items;
     items.clear();
     items << tr("No") << tr("Yes");
@@ -420,12 +419,42 @@ void SRM_SupplierWidget::on_pbSelectCompany_clicked() {
         if (obj) {
             QModelIndex index = mSuppModel->getProxyIndex();
             QModelIndex idx = mSuppModel->index(
-                        index.row(), mSuppModel->fieldIndex("SRM_parent"));
+                        index.row(), mSuppModel->fieldIndex("parent"));
             mSuppModel->setData(idx, obj->getId());
         }
     } else {
         SRM_DIALOGFACTORY->requestWarningDialog(tr("No account selected.\n"
                                                    "Data is unchanged."));
+    }
+
+    dlg->deleteLater();
+}
+
+/**
+ * Button select account holder (system user) clicked
+ */
+void SRM_SupplierWidget::on_ileInternalAccountHolder_clicked() {
+    if (!tvSupplier->currentIndex().isValid()) {
+        SRM_DIALOGFACTORY->requestWarningDialog(tr("No supplier selected.\n"
+                                                   "Please select a supplier first."));
+        return;
+    }
+
+    RB_Dialog* dlg = SRM_DIALOGFACTORY->getDialog(SRM_DialogFactory::DialogSelectSystemUser);
+
+    if (dlg->exec() == QDialog::Accepted) {
+        RB_ObjectBase* obj = dlg->getCurrentObject();
+        if (obj) {
+            int row = tvSupplier->currentIndex().row();
+            QModelIndex index = mSuppModel->index(row, mSuppModel->fieldIndex("db_systemuser_idx"));
+            mSuppModel->setData(index, obj->getId()
+                                + obj->getValue("firstname").toString() + " "
+                                + obj->getValue("lastname").toString(),
+                                Qt::EditRole);
+        }
+    } else {
+        SRM_DIALOGFACTORY->requestWarningDialog(tr("No system user selected.\n"
+                                                   "System user is unchanged."));
     }
 
     dlg->deleteLater();

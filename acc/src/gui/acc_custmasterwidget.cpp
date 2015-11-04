@@ -208,7 +208,7 @@ void ACC_CustMasterWidget::setDefaultValues(int row, const QModelIndex& idxParen
     mModel->setData(index, "0", Qt::EditRole);
     index = mModel->index(row, mModel->fieldIndex("crm_type_id"), idxParent);
     mModel->setData(index, 1, Qt::EditRole); // 1 = yes existing ACC customer
-    index = mModel->index(row, mModel->fieldIndex("db_systemuser_id"), idxParent);
+    index = mModel->index(row, mModel->fieldIndex("db_systemuser_idx"), idxParent);
     mModel->setData(index, "0", Qt::EditRole);
 }
 

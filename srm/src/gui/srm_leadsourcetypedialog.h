@@ -38,7 +38,7 @@ public:
     void init() {
         // Set model, root="" is already set by modelFactory, however change to system root
         mModel = SRM_MODELFACTORY->getModel(SRM_ModelFactory::ModelLeadSourceType, false);
-        mModel->setRoot("syssetting" /*DB_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         setWindowTitle(tr("SRM Lead Source Type[*]"));

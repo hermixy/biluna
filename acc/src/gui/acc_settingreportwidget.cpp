@@ -18,6 +18,7 @@
 #include "acc_modelfactory.h"
 #include "db_actionfactory.h"
 #include "db_actionfilesaveas.h"
+#include "db_modelfactory.h"
 #include "rb_sqlrelation.h"
 
 
@@ -369,7 +370,7 @@ void ACC_SettingReportWidget::on_pbRefresh_clicked() {
     } else if (mModel && reportIdx != 15 && reportIdx != 16
             && reportIdx != 17 && reportIdx != 24 && reportIdx != 26
             && reportIdx != 27 && reportIdx != 28) {
-        mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
         mColCount = mModel->columnCount();
         createTable();
@@ -553,7 +554,7 @@ void ACC_SettingReportWidget::createChildTable() {
  */
 void ACC_SettingReportWidget::createAccountGroupTable() {
     RB_String tableName = "acc_accountgroup";
-    RB_String rootId = "syssetting"; // ACC_MODELFACTORY->getRootId();
+    RB_String rootId = DB_MODELFACTORY->getRootId();
 
     RB_String qStr =
             "SELECT t4.* FROM " + tableName.toLower() + " as t4 "
@@ -661,7 +662,7 @@ void ACC_SettingReportWidget::createPriceTable() {
  */
 void ACC_SettingReportWidget::createCostCenterGroupTable() {
     RB_String tableName = "acc_costgroup";
-    RB_String rootId = "syssetting"; // ACC_MODELFACTORY->getRootId();
+    RB_String rootId = DB_MODELFACTORY->getRootId();
 
     RB_String qStr =
             "SELECT t4.* FROM " + tableName.toLower() + " as t4 "

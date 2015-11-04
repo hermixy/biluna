@@ -13,6 +13,7 @@
 
 #include <QtWidgets>
 #include "acc_modelfactory.h"
+#include "db_modelfactory.h"
 #include "db_tabledialog.h"
 
 
@@ -38,7 +39,7 @@ public:
 
         // Set model, root is already set by modelFactory
         mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelTaxCategory);
-        mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         // lblRoot->setText(tr("Root"));

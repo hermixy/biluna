@@ -12,7 +12,6 @@
 
 #include <QPrintDialog>
 #include <QPrinter>
-#include <QWebFrame>
 #include "db_actionfilesaveas.h"
 #include "mrp_dialogfactory.h"
 #include "mrp_modelfactory.h"

@@ -14,6 +14,7 @@
 #include "acc_project.h"
 #include "acc_purchdata.h"
 #include "acc_supplier.h"
+#include "db_project.h"
 #include "srm_activity.h"
 #include "srm_campaign.h"
 #include "srm_campaigntarget.h"
@@ -25,7 +26,7 @@
 #include "srm_leadsourcetype.h"
 #include "srm_supplierdetail.h"
 #include "srm_sysseqno.h"
-#include "srm_syssetting.h"
+//#include "srm_syssetting.h"
 #include "srm_template.h"
 #include "db_objectfactory.h"
 #include "rb_debug.h"
@@ -70,7 +71,8 @@ SRM_ObjectFactory* SRM_ObjectFactory::getInstance() {
  * NOTE:
  *  SRM_CampaignType
  *  SRM_LeadSourceType
- * are part of SRM_SysSetting but are global system settings.
+ *  SRM_SysSeqNo
+ * are part of DB_ProjectList because they are global system settings.
  * The relevant global models will set the filter to WHERE id<>'0'
  * instead of WHERE parent='acc_project.id'. Their parent
  * is set to 'default'.
@@ -103,6 +105,8 @@ RB_ObjectBase* SRM_ObjectFactory::newObject(const RB_String& id,
         uuid = ""; // RB_Uuid::createUuid().toString(); No Uuid for ..Lists
         list = new RB_ObjectContainer(uuid, obj, "ACC_SupplierList", this);
         obj->addObject(list);
+        list = new RB_ObjectContainer(uuid, obj, "DB_ProjectList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SRM_ActivityList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SRM_CampaignList", this);
@@ -111,12 +115,22 @@ RB_ObjectBase* SRM_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SRM_GroupList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "SRM_SysSettingList", this);
-        obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "SRM_TemplateList", this);
         obj->addObject(list);
 
 
+    } else if (str == "DB_ProjectList") {
+        obj = new DB_Project(uuid, parent, "DB_Project", this);
+
+        // system setting objects, usually get the XXX_Project.id as parentId
+        // because they are perspective globals
+        uuid = "";
+        list = new RB_ObjectContainer(uuid, obj, "SRM_CampaignTypeList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer(uuid, obj, "SRM_LeadSourceTypeList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer(uuid, obj, "SRM_SysSeqNoList", this);
+        obj->addObject(list);
     } else if (str == "ACC_ContactList") { // from ACC Accounting
         obj = new ACC_Contact(uuid, parent, "ACC_Contact", this);
         // in ACC also children lists
@@ -167,18 +181,6 @@ RB_ObjectBase* SRM_ObjectFactory::newObject(const RB_String& id,
         obj = new SRM_SupplierDetail(uuid, parent, "SRM_SupplierDetail", this);
     } else if (str == "SRM_SysSeqNoList") {
         obj = new SRM_SysSeqNo(uuid, parent, "SRM_SysSeqNo", this);
-    } else if (str == "SRM_SysSettingList") {
-        obj = new SRM_SysSetting(uuid, parent, "SRM_SysSetting", this);
-
-        // system setting objects, usually get the XXX_Project.id as parentId
-        // because they are perspective globals
-        uuid = "";
-        list = new RB_ObjectContainer(uuid, obj, "SRM_CampaignTypeList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "SRM_LeadSourceTypeList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer(uuid, obj, "SRM_SysSeqNoList", this);
-        obj->addObject(list);
     } else if (str == "SRM_TemplateList") {
         obj = new SRM_Template(uuid, parent, "SRM_Template", this);
     } else {

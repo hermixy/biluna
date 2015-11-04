@@ -13,6 +13,7 @@
 #include "acc_modelfactory.h"
 #include "acc_objectfactory.h"
 #include "acc_sqlcommonfunctions.h"
+#include "db_modelfactory.h"
 #include "rb_database.h"
 #include "rb_objectatomic.h"
 #include "rb_objectcontainer.h"
@@ -51,7 +52,7 @@ void ACC_DbVisitor::visitObject(RB_ObjectBase* obj) {
         // Acc_Project and project settings are normally
         if (objName == "ACC_Project" || ACC_OBJECTFACTORY->isProjectSetting(objName)) {
             dbRead();
-        } else if (objName == "ACC_SysSettingList") {
+        } else if (objName == "DB_ProjectList") {
             // only one placeholder object or row in database with parent 'none'
             // objectcontainer parent is set to NULL in order to read with container parent ID
             RB_ObjectBase* parent = obj->getParent();
@@ -61,13 +62,13 @@ void ACC_DbVisitor::visitObject(RB_ObjectBase* obj) {
             obj->setParent(parent); // restore parent
         } else if (objName.endsWith("List", Qt::CaseInsensitive)
                    && (ACC_OBJECTFACTORY->isSystemSetting(objName))) {
-            // all system settings have the parent 'syssetting'
+            // all system settings have the parent current DB_Project.id
             // objectcontainer parent is set to NULL in order to read with container parent ID
             RB_ObjectBase* parent = obj->getParent();
 
             if (parent && (objName != parent->getParent()->getName())) { // tree test
                 obj->setParent(NULL);
-                obj->setValue("parent", "syssetting");
+                obj->setValue("parent", DB_MODELFACTORY->getRootId());
             }
 
             dbRead();
@@ -106,9 +107,9 @@ void ACC_DbVisitor::visitObject(RB_ObjectBase* obj) {
             // skip branch, reset in leave object
             mMemoryResolveLevel = getResolveLevel();
             setResolveLevel(RB2::ResolveNone);
-        } else if (objName == "ACC_SysSetting") {
-            // to ensure parent is set to syssetting
-            obj->setId("syssetting");
+        } else if (objName == "DB_Project") {
+            // to ensure parent is set to current DB_Project.id
+            obj->setId(DB_MODELFACTORY->getRootId());
         } else if (!isSystemSettingExisting()
                    && ACC_OBJECTFACTORY->isSystemSetting(objName)
                    && objName.endsWith("List")) {
@@ -317,7 +318,8 @@ void ACC_DbVisitor::init() {
 
     ACC_SqlCommonFunctions f;
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
-    f.selectAllFromWhere(query, "acc_accountgroup", "`parent`='syssetting'");
+    f.selectAllFromWhere(query, "acc_accountgroup", "`parent`='"
+                         + DB_MODELFACTORY->getRootId() + "'");
 
     if (query.first()) {
         mIsSysSettingExisting = true;
@@ -340,7 +342,7 @@ bool ACC_DbVisitor::isInitDone() {
 }
 
 /**
- * @returns true if acc_syssetting already exists
+ * @returns true if system setting already exists
  */
 bool ACC_DbVisitor::isSystemSettingExisting() {
     return mIsSysSettingExisting;

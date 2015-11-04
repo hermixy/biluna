@@ -79,9 +79,8 @@ void CRM_CustomerWidget::init() {
     mCustMapper->addMapping(this->leFaxNumber, mCustModel->fieldIndex("faxno"));
     mCustMapper->addMapping(this->leBranchContact, mCustModel->fieldIndex("contactname"));
     mCustMapper->addMapping(this->leEmail, mCustModel->fieldIndex("email"));
+    mCustMapper->addMapping(ileInternalAccountHolder, mCustModel->fieldIndex("db_systemuser_idx"));
 
-    addComboBoxMapping(mCustModel, "db_systemuser_id", "DB_SystemUser", "id", "username",
-                       cbInternalAccountHolder, mCustMapper);
     QStringList items;
     items.clear();
     items << tr("No") << tr("Yes");
@@ -200,7 +199,7 @@ void CRM_CustomerWidget::on_pbAdd_clicked() {
     QModelIndex index;
     index = mCustModel->index(row, mCustModel->fieldIndex("crm_type_id"));
     mCustModel->setData(index, 0, Qt::EditRole); // 0 = potential ACC customer
-    index = mCustModel->index(row, mCustModel->fieldIndex("db_systemuser_id"));
+    index = mCustModel->index(row, mCustModel->fieldIndex("db_systemuser_idx"));
     mCustModel->setData(index, "0", Qt::EditRole);
     // end NOTE
 
@@ -449,12 +448,42 @@ void CRM_CustomerWidget::on_pbSelectCompany_clicked() {
         if (obj) {
             QModelIndex index = mCustModel->getProxyIndex();
             QModelIndex idx = mCustModel->index(
-                        index.row(), mCustModel->fieldIndex("crm_parent"));
+                        index.row(), mCustModel->fieldIndex("parent"));
             mCustModel->setData(idx, obj->getId());
         }
     } else {
         CRM_DIALOGFACTORY->requestWarningDialog(tr("No account selected.\n"
                                                    "Data is unchanged."));
+    }
+
+    dlg->deleteLater();
+}
+
+/**
+ * Button select account holder (system user) clicked
+ */
+void CRM_CustomerWidget::on_ileInternalAccountHolder_clicked() {
+    if (!tvCustomer->currentIndex().isValid()) {
+        CRM_DIALOGFACTORY->requestWarningDialog(tr("No customer selected.\n"
+                                                   "Please select a customer first."));
+        return;
+    }
+
+    RB_Dialog* dlg = CRM_DIALOGFACTORY->getDialog(CRM_DialogFactory::DialogSelectSystemUser);
+
+    if (dlg->exec() == QDialog::Accepted) {
+        RB_ObjectBase* obj = dlg->getCurrentObject();
+        if (obj) {
+            int row = tvCustomer->currentIndex().row();
+            QModelIndex index = mCustModel->index(row, mCustModel->fieldIndex("db_systemuser_idx"));
+            mCustModel->setData(index, obj->getId()
+                                + obj->getValue("firstname").toString() + " "
+                                + obj->getValue("lastname").toString(),
+                                Qt::EditRole);
+        }
+    } else {
+        CRM_DIALOGFACTORY->requestWarningDialog(tr("No system user selected.\n"
+                                                   "System user is unchanged."));
     }
 
     dlg->deleteLater();

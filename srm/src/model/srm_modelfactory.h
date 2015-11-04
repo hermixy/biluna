@@ -64,6 +64,7 @@ public:
         ModelSupplier,                  /**< ACC Supplier model */
         ModelSupplierDetail,            /**< Supplier detail model */
         ModelSysSeqNo,                  /**< System sequence number model */
+        ModelSystemUser,                /**< DB system user model */
         ModelTemplate,                  /**< Template model */
         ModelDefault                    /**< Default- or all models */
     };

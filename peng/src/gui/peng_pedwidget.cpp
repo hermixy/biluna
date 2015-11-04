@@ -10,7 +10,7 @@
 #include "peng_pedwidget.h"
 
 #include <QtSvg>
-#include <QtWebKit>
+#include <QWebEngineView>
 #include "db_dialogfactory.h"
 #include "gv_drawing.h"
 #include "peng_determinepedclass.h"

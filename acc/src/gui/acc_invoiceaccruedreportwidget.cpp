@@ -12,7 +12,6 @@
 
 #include <QPrintDialog>
 #include <QPrinter>
-#include <QWebFrame>
 #include "db_actionfilesaveas.h"
 #include "acc_dialogfactory.h"
 #include "acc_invoiceaccrued.h"

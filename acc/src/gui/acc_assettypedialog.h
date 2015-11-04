@@ -14,6 +14,7 @@
 #include <QtWidgets>
 #include "db_tabledialog.h"
 #include "acc_modelfactory.h"
+#include "db_modelfactory.h"
 
 class ACC_AssetTypeDialog : public DB_TableDialog {
 
@@ -35,7 +36,7 @@ public:
     void init() {
         // Set model, root is already set by modelFactory
         mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelAssetType);
-        mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         setWindowTitle(tr("ACC Edit Asset Type[*]"));

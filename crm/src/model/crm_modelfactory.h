@@ -63,6 +63,7 @@ public:
         ModelProject,                   /**< ACC Project or CRM account model */
         ModelProjectEdit,               /**< ACC Project or CRM account model */
         ModelSysSeqNo,                  /**< System sequence number model */
+        ModelSystemUser,                /**< DB sytem user model */
         ModelTemplate,                  /**< Template model */
         ModelDefault                    /**< Default- or all models */
     };

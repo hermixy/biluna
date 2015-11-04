@@ -11,8 +11,6 @@
 #include "scan_scaneditdialog.h"
 
 #include <QStringListModel>
-#include <QWebFrame>
-#include <QtWebKit>
 #include "db_codehighlighter.h"
 #include "scan_dialogfactory.h"
 #include "scan_modelfactory.h"
@@ -38,13 +36,13 @@ SCAN_ScanEditDialog::SCAN_ScanEditDialog(QWidget *parent)
     mAnswerMapper = NULL;
     mBlockMapper = NULL;
 
-    mCodeHighlighter = new DB_CodeHighlighter(teBlock->document());
+    mCodeHighlighter = new DB_CodeHighlighter(pteBlock->document());
 
-    connect(wvBlock->page(), SIGNAL(contentsChanged()),
+    connect(teBlock, SIGNAL(contentsChanged()),
             this, SLOT(slotContentChanged()));
-    connect(wvBlock->page(), SIGNAL(selectionChanged()),
+    connect(teBlock, SIGNAL(selectionChanged()),
             this, SLOT(adjustActions()));
-    connect(teBlock, SIGNAL(textChanged()),
+    connect(pteBlock, SIGNAL(textChanged()),
             this, SLOT(slotContentChanged()));
     connect(twBlock, SIGNAL(currentChanged(int)),
             this, SLOT(changeTab(int)));
@@ -71,8 +69,8 @@ SCAN_ScanEditDialog::~SCAN_ScanEditDialog() {
  */
 void SCAN_ScanEditDialog::init() {
     setWindowTitle(getName());
-    wvBlock->page()->setContentEditable(true);
-    wvBlock->installEventFilter(this);
+//    teBlock->page()->setContentEditable(true);
+    teBlock->installEventFilter(this);
 
     // Set model and connect to table view
     mScanModel = SCAN_MODELFACTORY->getModel(SCAN_ModelFactory::ModelScan);
@@ -143,7 +141,7 @@ void SCAN_ScanEditDialog::init() {
     mBlockMapper = mBlockModel->getMapper();
     mBlockMapper->addMapping(leBlockNumber, mBlockModel->fieldIndex("number"));
     leBlockNumber->setValidator(new QIntValidator(0, 999, this));
-    mBlockMapper->addMapping(teBlock, mBlockModel->fieldIndex("blocktext"));
+    mBlockMapper->addMapping(pteBlock, mBlockModel->fieldIndex("blocktext"));
 
     SCAN_PrepareJrResult* oper = new SCAN_PrepareJrResult();
     cbContentType->setModel(new QStringListModel(oper->getContentTypeList(), this));
@@ -515,84 +513,84 @@ void SCAN_ScanEditDialog::on_pbDemoteBlock_clicked() {
  * Button align left clicked
  */
 void SCAN_ScanEditDialog::on_pbAlignLeft_clicked() {
-    wvBlock->triggerPageAction(QWebPage::AlignLeft);
+//    teBlock->triggerPageAction(QWebPage::AlignLeft);
 }
 
 /**
  * Button align right clicked
  */
 void SCAN_ScanEditDialog::on_pbAlignRight_clicked() {
-    wvBlock->triggerPageAction(QWebPage::AlignRight);
+//    teBlock->triggerPageAction(QWebPage::AlignRight);
 }
 
 /**
  * Button align center clicked
  */
 void SCAN_ScanEditDialog::on_pbAlignCenter_clicked() {
-    wvBlock->triggerPageAction(QWebPage::AlignCenter);
+//    teBlock->triggerPageAction(QWebPage::AlignCenter);
 }
 
 /**
  * Button align justify clicked
  */
 void SCAN_ScanEditDialog::on_pbAlignJustify_clicked() {
-    wvBlock->triggerPageAction(QWebPage::AlignJustified);
+//    teBlock->triggerPageAction(QWebPage::AlignJustified);
 }
 
 /**
  * Button bold clicked
  */
 void SCAN_ScanEditDialog::on_pbBold_clicked() {
-    wvBlock->triggerPageAction(QWebPage::ToggleBold);
+//    teBlock->triggerPageAction(QWebPage::ToggleBold);
 }
 
 /**
  * Button italic clicked
  */
 void SCAN_ScanEditDialog::on_pbItalic_clicked() {
-    wvBlock->triggerPageAction(QWebPage::ToggleItalic);
+//    teBlock->triggerPageAction(QWebPage::ToggleItalic);
 }
 
 /**
  * Button underline clicked
  */
 void SCAN_ScanEditDialog::on_pbUnderline_clicked() {
-    wvBlock->triggerPageAction(QWebPage::ToggleUnderline);
+//    teBlock->triggerPageAction(QWebPage::ToggleUnderline);
 }
 
 /**
  * Button strikethrough clicked
  */
 void SCAN_ScanEditDialog::on_pbStrikethrough_clicked() {
-    wvBlock->triggerPageAction(QWebPage::ToggleStrikethrough);
+//    teBlock->triggerPageAction(QWebPage::ToggleStrikethrough);
 }
 
 /**
  * Button increase indent clicked
  */
 void SCAN_ScanEditDialog::on_pbIndent_clicked() {
-    wvBlock->triggerPageAction(QWebPage::Indent);
+//    teBlock->triggerPageAction(QWebPage::Indent);
 }
 
 /**
  * Button decrease indent clicked
  */
 void SCAN_ScanEditDialog::on_pbOutdent_clicked() {
-    wvBlock->triggerPageAction(QWebPage::Outdent);
+//    teBlock->triggerPageAction(QWebPage::Outdent);
 }
 
 /**
  * Button numbered list clicked
  */
 void SCAN_ScanEditDialog::on_pbNumberList_clicked() {
-    wvBlock->triggerPageAction(QWebPage::InsertOrderedList);
+//    teBlock->triggerPageAction(QWebPage::InsertOrderedList);
 }
 
 /**
  * Button bulleted list clicked
  */
 void SCAN_ScanEditDialog::on_pbBulletList_clicked() {
-    wvBlock->triggerPageAction(QWebPage::InsertUnorderedList);
+//    teBlock->triggerPageAction(QWebPage::InsertUnorderedList);
 }
 
 /**
@@ -662,9 +660,9 @@ void SCAN_ScanEditDialog::on_pbBgColor_clicked() {
  * @param cmd command string
  */
 void SCAN_ScanEditDialog::execCommand(const QString &cmd) {
-    QWebFrame* frame = wvBlock->page()->mainFrame();
-    QString js = QString("document.execCommand(\"%1\", false, null)").arg(cmd);
-    frame->evaluateJavaScript(js);
+//    QWebFrame* frame = teBlock->page()->mainFrame();
+//    QString js = QString("document.execCommand(\"%1\", false, null)").arg(cmd);
+//    frame->evaluateJavaScript(js);
 }
 
 /**
@@ -674,9 +672,9 @@ void SCAN_ScanEditDialog::execCommand(const QString &cmd) {
  * @param arg additional arguments
  */
 void SCAN_ScanEditDialog::execCommand(const QString &cmd, const QString &arg) {
-    QWebFrame* frame = wvBlock->page()->mainFrame();
-    QString js = QString("document.execCommand(\"%1\", false, \"%2\")").arg(cmd).arg(arg);
-    frame->evaluateJavaScript(js);
+//    QWebFrame* frame = teBlock->page()->mainFrame();
+//    QString js = QString("document.execCommand(\"%1\", false, \"%2\")").arg(cmd).arg(arg);
+//    frame->evaluateJavaScript(js);
 }
 
 /**
@@ -687,10 +685,11 @@ void SCAN_ScanEditDialog::execCommand(const QString &cmd, const QString &arg) {
  * @return true
  */
 bool SCAN_ScanEditDialog::queryCommandState(const QString &cmd) {
-    QWebFrame* frame = wvBlock->page()->mainFrame();
-    QString js = QString("document.queryCommandState(\"%1\", false, null)").arg(cmd);
-    QVariant result = frame->evaluateJavaScript(js);
-    return result.toString().simplified().toLower() == "true";
+//    QWebFrame* frame = teBlock->page()->mainFrame();
+//    QString js = QString("document.queryCommandState(\"%1\", false, null)").arg(cmd);
+//    QVariant result = frame->evaluateJavaScript(js);
+//    return result.toString().simplified().toLower() == "true";
+    return false;
 }
 
 /**
@@ -698,29 +697,30 @@ bool SCAN_ScanEditDialog::queryCommandState(const QString &cmd) {
  * @param wa enumerator of QWebPage::WebAction such as QWebPage::ToggleBold
  * @return true if valid
  */
-bool SCAN_ScanEditDialog::pageActionChecked(QWebPage::WebAction wa) {
-    return wvBlock->pageAction(wa)->isChecked();
-}
+//bool SCAN_ScanEditDialog::pageActionChecked(QWebPage::WebAction wa) {
+//    return teBlock->pageAction(wa)->isChecked();
+//}
 
 /**
  * Determines the current enabled state of the enumerated action
  * @param wa enumerator of QWebPage::WebAction such as QWebPage::Undo
  * @return true if valid
  */
-bool SCAN_ScanEditDialog::pageActionEnabled(QWebPage::WebAction wa) {
-    return wvBlock->pageAction(wa)->isEnabled();
-}
+//bool SCAN_ScanEditDialog::pageActionEnabled(QWebPage::WebAction wa) {
+//    return teBlock->pageAction(wa)->isEnabled();
+//}
 
 /**
  * Adjust buttons for text editing based on text selection
  */
 void SCAN_ScanEditDialog::adjustActions() {
-    pbBold->setChecked(pageActionChecked(QWebPage::ToggleBold));
-    pbItalic->setChecked(pageActionChecked(QWebPage::ToggleItalic));
-    pbUnderline->setChecked(pageActionChecked(QWebPage::ToggleUnderline));
-    pbStrikethrough->setChecked(queryCommandState("strikeThrough"));
-    pbNumberList->setChecked(queryCommandState("insertOrderedList"));
-    pbBulletList->setChecked(queryCommandState("insertUnorderedList"));
+    // TODO: replace teBlock by RB_TextEdit
+//    pbBold->setChecked(pageActionChecked(QWebPage::ToggleBold));
+//    pbItalic->setChecked(pageActionChecked(QWebPage::ToggleItalic));
+//    pbUnderline->setChecked(pageActionChecked(QWebPage::ToggleUnderline));
+//    pbStrikethrough->setChecked(queryCommandState("strikeThrough"));
+//    pbNumberList->setChecked(queryCommandState("insertOrderedList"));
+//    pbBulletList->setChecked(queryCommandState("insertUnorderedList"));
 }
 
 /**
@@ -728,12 +728,12 @@ void SCAN_ScanEditDialog::adjustActions() {
  */
 void SCAN_ScanEditDialog::changeTab(int index) {
     if (mSourceDirty && (index == 1)) {
-        RB_String content = wvBlock->page()->mainFrame()->toHtml();
-        teBlock->setPlainText(content);
+        RB_String content = teBlock->toHtml();
+        pteBlock->setPlainText(content);
         mSourceDirty = false;
     } else if (mSourceDirty && (index == 0)) {
-        RB_String content = teBlock->toPlainText();
-        wvBlock->page()->mainFrame()->setHtml(content, QUrl());
+        RB_String content = pteBlock->toPlainText();
+        teBlock->setHtml(content);
         mSourceDirty = false;
     }
 }
@@ -742,7 +742,7 @@ void SCAN_ScanEditDialog::changeTab(int index) {
  * Slot for content of webview and textedit for block has changed
  */
 void SCAN_ScanEditDialog::slotContentChanged() {
-    if (wvBlock->hasFocus() || teBlock->hasFocus()) {
+    if (teBlock->hasFocus() || pteBlock->hasFocus()) {
         mSourceDirty = true;
         setWindowModified(true);
     }
@@ -754,7 +754,7 @@ void SCAN_ScanEditDialog::slotContentChanged() {
 void SCAN_ScanEditDialog::slotUpdateWebView(const QModelIndex& /*current*/,
                                             const QModelIndex& /*previous*/) {
     RB_String content = mBlockModel->getCurrentValue("blocktext").toString();
-    wvBlock->page()->mainFrame()->setHtml(content, QUrl());
+    teBlock->setHtml(content);
 }
 
 /**
@@ -800,13 +800,13 @@ void SCAN_ScanEditDialog::changeEvent(QEvent *e) {
  * @param e QEvent event
  */
 bool SCAN_ScanEditDialog::eventFilter(QObject* obj, QEvent* e) {
-    if (wvBlock == obj && e->type() == QEvent::FocusOut) {
-        if (wvBlock->isModified()) {
-            RB_String content = wvBlock->page()->mainFrame()->toHtml();
-            mBlockModel->setCurrentValue("blocktext", content, Qt::EditRole);
-            mSourceDirty = false;
-        }
-    }
+//    if (teBlock == obj && e->type() == QEvent::FocusOut) {
+//        if (teBlock->isWindowModified()) {
+//            RB_String content = teBlock->page()->mainFrame()->toHtml();
+//            mBlockModel->setCurrentValue("blocktext", content, Qt::EditRole);
+//            mSourceDirty = false;
+//        }
+//    }
 
     return RB_Dialog::eventFilter(obj, e);
 }

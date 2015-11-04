@@ -13,6 +13,7 @@
 #include "acc_dialogfactory.h"
 #include "acc_modelfactory.h"
 #include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_cmbdelegate.h"
 #include "rb_sqlrelationaldelegate.h"
 
@@ -45,7 +46,7 @@ void ACC_LocationDialog::init() {
     setWindowTitle(tr("Edit Company (Warehouse) Location[*]"));
 
     mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelLocation, false);
-    mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+    mModel->setRoot(DB_MODELFACTORY->getRootId());
 
     mMapper = mModel->getMapper();
     mMapper->addMapping(leLocationName, mModel->fieldIndex("locationname"));

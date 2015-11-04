@@ -10,9 +10,9 @@
 
 #include "sail_trackdistancereportwidget.h"
 
+#include <QtWidgets>
 #include <QPrintDialog>
 #include <QPrinter>
-#include <QWebFrame>
 #include "sail_dialogfactory.h"
 #include "sail_modelfactory.h"
 #include "sail_trackoperation.h"
@@ -48,7 +48,8 @@ void SAIL_TrackDistanceReportWidget::init() {
     mHtml += tr("Set wind direction above, and click refresh button ...");
     mHtml += "</p>";
 
-    wvReport->setHtml(mHtml);
+    teReport->setHtml(mHtml);
+
     readSettings();
 }
 
@@ -77,7 +78,7 @@ bool SAIL_TrackDistanceReportWidget::fileSaveAs() {
  * @param printer
  */
 void SAIL_TrackDistanceReportWidget::filePdf(QPrinter* printer) {
-    wvReport->print(printer);
+    teReport->print(printer);
 }
 
 /**
@@ -85,7 +86,7 @@ void SAIL_TrackDistanceReportWidget::filePdf(QPrinter* printer) {
  * @param printer
  */
 void SAIL_TrackDistanceReportWidget::filePrint(QPrinter* printer) {
-    wvReport->print(printer);
+    teReport->print(printer);
 }
 
 /**
@@ -93,49 +94,7 @@ void SAIL_TrackDistanceReportWidget::filePrint(QPrinter* printer) {
  * @param printer
  */
 void SAIL_TrackDistanceReportWidget::filePrintPreview(QPrinter* printer) {
-    wvReport->print(printer);
-}
-
-/**
- * Edit Cut.
- */
-void SAIL_TrackDistanceReportWidget::editCut() {
-    wvReport->pageAction(QWebPage::Cut)->trigger();
-}
-
-/**
- * Edit Copy.
- */
-void SAIL_TrackDistanceReportWidget::editCopy() {
-    wvReport->pageAction(QWebPage::Copy)->trigger();
-}
-
-/**
- * Edit Paste.
- */
-void SAIL_TrackDistanceReportWidget::editPaste() {
-    wvReport->triggerPageAction(QWebPage::Paste);
-}
-
-/**
- * Edit Undo.
- */
-void SAIL_TrackDistanceReportWidget::editUndo() {
-    wvReport->triggerPageAction(QWebPage::Undo);
-}
-
-/**
- * Edit Redo.
- */
-void SAIL_TrackDistanceReportWidget::editRedo() {
-    wvReport->triggerPageAction(QWebPage::Redo);
-}
-
-/**
- * Edit Select All.
- */
-void SAIL_TrackDistanceReportWidget::editSelectAll() {
-    wvReport->triggerPageAction(QWebPage::SelectAll);
+    teReport->print(printer);
 }
 
 /**
@@ -154,7 +113,7 @@ bool SAIL_TrackDistanceReportWidget::saveFile(const QString &fn) {
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
     QTextStream out(&file);
-    out << wvReport->page()->mainFrame()->toHtml();
+    out << teReport->toHtml();
     QApplication::restoreOverrideCursor();
 
     setCurrentFileName(fn);
@@ -179,7 +138,7 @@ void SAIL_TrackDistanceReportWidget::on_pbRefresh_clicked() {
         windFromDirection = windDirection - 180.0;
     } else {
         mHtml = "<p>" + tr("Wind direction out of range") + "</p>";
-        wvReport->setHtml(mHtml);
+        teReport->setHtml(mHtml);
         QApplication::restoreOverrideCursor();
         return;
     }
@@ -189,7 +148,7 @@ void SAIL_TrackDistanceReportWidget::on_pbRefresh_clicked() {
     double windFromDirection = leWindFrom->text().toDouble();
     if (windFromDirection < 0 || 360.0 < windFromDirection) {
         mHtml = "<p>" + tr("Wind direction out of range") + "</p>";
-        wvReport->setHtml(mHtml);
+        teReport->setHtml(mHtml);
         QApplication::restoreOverrideCursor();
         return;
     }
@@ -213,7 +172,7 @@ void SAIL_TrackDistanceReportWidget::on_pbRefresh_clicked() {
     mHtml += "<p>Bearing end = " + RB_String::number(bearing) + "</p>";
     */
 
-    wvReport->setHtml(mHtml);
+    teReport->setHtml(mHtml);
     QApplication::restoreOverrideCursor();
 }
 

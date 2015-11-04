@@ -270,7 +270,7 @@ HEADERS += \
     ../src/model/acc_suppliernote.h \
     ../src/model/acc_supplier.h \
     ../src/model/acc_sysacctcontrol.h \
-    ../src/model/acc_syssetting.h \
+#    ../src/model/acc_syssetting.h \
     ../src/model/acc_systype.h \
     ../src/model/acc_taxauthority.h \
     ../src/model/acc_taxauthrate.h \
@@ -507,7 +507,7 @@ SOURCES += \
     ../src/model/acc_suppliernote.cpp \
     ../src/model/acc_supplier.cpp \
     ../src/model/acc_sysacctcontrol.cpp \
-    ../src/model/acc_syssetting.cpp \
+#    ../src/model/acc_syssetting.cpp \
     ../src/model/acc_systype.cpp \
     ../src/model/acc_taxauthority.cpp \
     ../src/model/acc_taxauthrate.cpp \

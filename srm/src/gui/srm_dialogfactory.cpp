@@ -25,6 +25,7 @@
 #include "srm_selectsupplierdialog.h"
 //#include "srm_selectdocumentdialog.h"
 #include "srm_selectgroupdialog.h"
+#include "srm_selectsystemuserdialog.h"
 #include "srm_selecttemplatedialog.h"
 #include "srm_supplierreportwidget.h"
 #include "srm_supplierwidget.h"
@@ -181,6 +182,10 @@ RB_Dialog* SRM_DialogFactory::getDialog(int type) {
     }
     case DialogSelectSupplier: {
         dlg = new SRM_SelectSupplierDialog(mMainWindow);
+        break;
+    }
+    case DialogSelectSystemUser: {
+        dlg = new SRM_SelectSystemUserDialog(mMainWindow);
         break;
     }
     case DialogSelectTemplate: {

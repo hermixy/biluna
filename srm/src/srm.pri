@@ -47,6 +47,7 @@ HEADERS += \
     ../src/gui/srm_selectsupplierdialog.h \
     ../src/gui/srm_selectgroupdialog.h \
     ../src/gui/srm_selectprojectdialog.h \
+    ../src/gui/srm_selectsystemuserdialog.h \
     ../src/gui/srm_selecttemplatedialog.h \
     ../src/gui/srm_supplierreportwidget.h \
     ../src/gui/srm_supplierwidget.h \
@@ -65,7 +66,7 @@ HEADERS += \
     ../src/model/srm_objectfactory.h \
     ../src/model/srm_supplierdetail.h \
     ../src/model/srm_sysseqno.h \
-    ../src/model/srm_syssetting.h \
+#    ../src/model/srm_syssetting.h \
     ../src/model/srm_template.h \
     ../src/operations/srm_printtext.h \
     ../src/utils/srm_sqlcommonfunctions.h
@@ -122,7 +123,7 @@ SOURCES += \
     ../src/model/srm_objectfactory.cpp \
     ../src/model/srm_supplierdetail.cpp \
     ../src/model/srm_sysseqno.cpp \
-    ../src/model/srm_syssetting.cpp \
+#    ../src/model/srm_syssetting.cpp \
     ../src/model/srm_template.cpp \
     ../src/operations/srm_printtext.cpp \
     ../src/utils/srm_sqlcommonfunctions.cpp

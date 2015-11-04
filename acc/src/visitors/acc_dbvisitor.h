@@ -17,7 +17,7 @@
 
 /**
  * Visitor class for reading and writing from/to the database.
- * NOTE: if the system settings already exist the ACC_SysSetting children
+ * NOTE: if the system settings already exist the DB_ProjectList children
  * will not be written to database, if the project settings (ACC_ChartMaster)
  * exist for this project also the chart master records will not be
  * written to the database

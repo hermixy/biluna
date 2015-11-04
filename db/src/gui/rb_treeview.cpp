@@ -11,6 +11,7 @@
 #include "rb_treeview.h"
 
 #include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_mmproxy.h"
 #include "rb_toolbuttonbar.h"
 
@@ -200,10 +201,10 @@ void RB_TreeView::slotAddChild() {
     delete obj;
     // end NOTE
 
-    // Root is syssetting
+    // Root is current DB_Project.id because it is a system setting
     if (!idxParent.isValid()) {
         idx = mModel->index(row, mModel->fieldIndex("parent"), idxParent);
-        mModel->setHiddenData(idx, "syssetting", Qt::EditRole);
+        mModel->setHiddenData(idx, DB_MODELFACTORY->getRootId(), Qt::EditRole);
     }
 
     idx = mModel->index(mModel->rowCount(idxParent)-1, RB2::HIDDENCOLUMNS, idxParent);
