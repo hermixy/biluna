@@ -45,45 +45,30 @@ void ACC_DbVisitor::visitObject(RB_ObjectBase* obj) {
         return;
     }
 
-    RB_String objName = obj->getName();
+    RB_String objName = mObject->getName();
 
     switch (mAction) {
     case DbRead :
-        // Acc_Project and project settings are normally
-        if (objName == "ACC_Project" || ACC_OBJECTFACTORY->isProjectSetting(objName)) {
+        // ACC_Project and project settings only
+        if (objName == "ACC_Project"
+                || ACC_OBJECTFACTORY->isProjectSetting(objName)) {
             dbRead();
         } else if (objName == "DB_ProjectList") {
-            // only one placeholder object or row in database with parent 'none'
-            // objectcontainer parent is set to NULL in order to read with container parent ID
-            RB_ObjectBase* parent = obj->getParent();
-            obj->setParent(NULL);
-            obj->setValue("parent", "none");
-            dbRead();
-            obj->setParent(parent); // restore parent
-        } else if (objName.endsWith("List", Qt::CaseInsensitive)
-                   && (ACC_OBJECTFACTORY->isSystemSetting(objName))) {
+            // only one placeholder DB_Project with root id,
+            // not to be read from database
+            RB_ObjectBase* childObj =
+                    mObject->getFactory()->newObject("", mObject, "", true);
+            childObj->setId(DB_MODELFACTORY->getRootId());
+        } else if (ACC_OBJECTFACTORY->isSystemSetting(objName)
+                   && objName.endsWith("List", Qt::CaseInsensitive)) {
             // all system settings have the parent current DB_Project.id
-            // objectcontainer parent is set to NULL in order to read with container parent ID
-            RB_ObjectBase* parent = obj->getParent();
-
-            if (parent && (objName != parent->getParent()->getName())) { // tree test
-                obj->setParent(NULL);
-                obj->setValue("parent", DB_MODELFACTORY->getRootId());
-            }
-
-            dbRead();
-
-            if (parent && (objName != parent->getParent()->getName())) {
-                obj->setParent(parent); // restore parent
-            }
-        } else if (ACC_OBJECTFACTORY->isSystemSetting(objName)) {
-            // not really necessary, because of RB_ObjectAtomic and read in above list
             dbRead();
         }
+
         break;
     case DbUpdate :
         // If XXX_Project, check if system settings exist and whether there is valid project ID
-        if (objName.endsWith("_Project", Qt::CaseInsensitive)) {
+        if (objName.contains("ACC_Project", Qt::CaseInsensitive)) {
             if (!isInitDone()) {
                 init();
             }
@@ -109,7 +94,7 @@ void ACC_DbVisitor::visitObject(RB_ObjectBase* obj) {
             setResolveLevel(RB2::ResolveNone);
         } else if (objName == "DB_Project") {
             // to ensure parent is set to current DB_Project.id
-            obj->setId(DB_MODELFACTORY->getRootId());
+            mObject->setId(DB_MODELFACTORY->getRootId());
         } else if (!isSystemSettingExisting()
                    && ACC_OBJECTFACTORY->isSystemSetting(objName)
                    && objName.endsWith("List")) {
@@ -314,7 +299,6 @@ void ACC_DbVisitor::init() {
     }
 
     mProjectId = ACC_MODELFACTORY->getRootId();
-    // mObject->setId(mProjectId);
 
     ACC_SqlCommonFunctions f;
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
@@ -355,18 +339,3 @@ bool ACC_DbVisitor::isProjectSettingExisting() {
     return mIsProjectSettingExisting;
 }
 
-/**
- * Find the account group ID created when inserting the ACC_ChartMaster records
- * @param groupId accountgroup_id from ACC_ChartMaster
- * @return ID (Uuid) for ACC_AccountGroup or '0' if not found
- */
-//RB_String ACC_DbVisitor::findGroupId(const RB_String& groupId) {
-//    std::map<RB_String, RB_String>::const_iterator iter;
-//    iter = mGroupMap.find(groupId);
-
-//    if (iter != mGroupMap.end()) {
-//        return iter->second;
-//    }
-
-//    return "0";
-//}

@@ -47,8 +47,6 @@ private:
     bool mIsProjectSettingExisting;
 
     RB2::ResolveLevel mMemoryResolveLevel;
-
-//    std::map<RB_String, RB_String> mGroupMap;
 };
 
 #endif /*ACC_DBVISITOR_H*/

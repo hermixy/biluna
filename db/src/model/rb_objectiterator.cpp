@@ -15,8 +15,7 @@
  */
 RB_ObjectIterator::RB_ObjectIterator(std::list<RB_ObjectBase*>& objc)
                 : mContainer(objc) {
-    mDone = true;
-    mIndex = -1;
+    setDone();
 }
 
 
@@ -29,8 +28,7 @@ RB_ObjectIterator::~RB_ObjectIterator() {
  */
 void RB_ObjectIterator::first() {
     if (mContainer.size() == 0) {
-        mDone = true;
-        mIndex = -1;
+        setDone();
         return;
     }
     mIter = mContainer.begin();
@@ -43,8 +41,7 @@ void RB_ObjectIterator::first() {
  */
 void RB_ObjectIterator::last() {
     if (mContainer.size() == 0) {
-        mDone = true;
-        mIndex = -1;
+        setDone();
         return;
     }
     mIter = mContainer.end();
@@ -58,10 +55,10 @@ void RB_ObjectIterator::last() {
  */
 void RB_ObjectIterator::next(){
     if (mIter == mContainer.end()) {
-        mDone = true;
-        mIndex = -1;
-		return;			
+        setDone();
+        return;
 	}
+    RB_DEBUG->print(currentObject()->getName());
     ++mIter;
     ++mIndex;
 }
@@ -71,8 +68,7 @@ void RB_ObjectIterator::next(){
  */
 void RB_ObjectIterator::previous() {
     if (mIter == mContainer.begin()) {
-        mDone = true;
-        mIndex = -1;
+        setDone();
 		return;			
 	}
     --mIter;

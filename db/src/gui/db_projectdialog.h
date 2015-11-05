@@ -38,7 +38,7 @@ public:
     void init() {
         // Set model, root="" is already set by modelFactory
         mModel = DB_MODELFACTORY->getModel(DB_MODELFACTORY->ModelProject, false);
-        mModel->setRoot("none");
+        mModel->setRoot(""); // TODO: depending user rights
         mModel->select();
 
         setWindowTitle(tr("Select project"));

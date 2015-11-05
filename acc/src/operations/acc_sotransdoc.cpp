@@ -930,7 +930,7 @@ bool ACC_SoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
         taxList = NULL;
     }
 
-    // Freigh tcost
+    // Freight cost
     double freightCost = soModel->getCurrentValue("freightcost", Qt::DisplayRole).toDouble();
 
     if (freightCost >= 0.005 && totalAmount >= 0.005) {

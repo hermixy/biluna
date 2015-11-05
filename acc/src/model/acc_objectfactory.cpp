@@ -521,13 +521,13 @@ bool ACC_ObjectFactory::isSystemSetting(const RB_String& name) {
         return true;
     } else if (name == "ACC_TaxAuthorityList" || name == "ACC_TaxAuthority") {
         return true;
-    } else if (name == "ACC_TaxAuthRateList" || name == "ACC_TaxAuthRate") {
+    } else if (name == "ACC_TaxAuthRateList" || name == "ACC_TaxAuthRate") { // child
         return true;
     } else if (name == "ACC_TaxCategoryList" || name == "ACC_TaxCategory") {
         return true;
     } else if (name == "ACC_TaxGroupList" || name == "ACC_TaxGroup") {
         return true;
-    } else if (name == "ACC_TaxGroupAuthList" || name == "ACC_TaxGroupAuth") {
+    } else if (name == "ACC_TaxGroupAuthList" || name == "ACC_TaxGroupAuth") { //child
         return true;
     } else if (name == "ACC_TaxProvinceList" || name == "ACC_TaxProvince") {
         return true;

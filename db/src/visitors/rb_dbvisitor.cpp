@@ -257,7 +257,7 @@ bool RB_DbVisitor::dbReadList() {
 //    RB_DEBUG->print(q.executedQuery());
 
     RB_String fieldName;
-    RB_String value;
+//    RB_String value;
     QSqlRecord rec;
 
     while (q.next()) {
@@ -361,15 +361,6 @@ bool RB_DbVisitor::dbUpdate() {
                 } else {
                     q.addBindValue(RB_Uuid::createUuid().toString(), QSql::In);
                 }
-            } else if (mem->getName().endsWith("_idx")) {
-                if (mem->getValue().toString().size() == 38) {
-                    q.addBindValue(mem->getValue().toString()
-                                   + mem->getDisplayValue().toString(),
-                                   QSql::In);
-                } else {
-                    // invalid _idx field
-                    q.addBindValue("0", QSql::In);
-                }
             } else {
                 q.addBindValue(mem->getValue(), QSql::In);
             }
@@ -382,18 +373,7 @@ bool RB_DbVisitor::dbUpdate() {
         for (int i = 1; i < memberCount; ++i) { // not ID
             // parent has to have the correct ID
             RB_ObjectMember* mem = mObject->getMember(i);
-            if (mem->getName().endsWith("_idx")) {
-                if (mem->getValue().toString().size() == 38) {
-                    q.addBindValue(mem->getValue().toString()
-                                   + mem->getDisplayValue().toString(),
-                                   QSql::In);
-                } else {
-                    // invalid _idx field
-                    q.addBindValue("0", QSql::In);
-                }
-            } else {
-                q.addBindValue(mObject->getMember(i)->getValue(), QSql::In);
-            }
+            q.addBindValue(mem->getValue(), QSql::In);
         }
 
         // WHERE id=?
@@ -485,14 +465,6 @@ bool RB_DbVisitor::dbUpdateList() {
 //                    if (grParent) {
 //                        qInsert.addBindValue(grParent->getId(), QSql::In);
 //                    }
-                } else if (mem->getName().endsWith("_idx")) {
-                    if (mem->getValue().toString().size() == 38) {
-                        qInsert.addBindValue(mem->getValue().toString()
-                                       + mem->getDisplayValue().toString(),
-                                       QSql::In);
-                    } else {
-                        qInsert.addBindValue("0", QSql::In);
-                    }
                 } else {
                     qInsert.addBindValue(mem->getValue(), QSql::In);
                 }
@@ -520,20 +492,7 @@ bool RB_DbVisitor::dbUpdateList() {
 
             for (int i = 1; i < memberCount; ++i) { // not ID
                 RB_ObjectMember* mem = obj->getMember(i);
-                if (mem->getName().endsWith("_idx")) {
-                    if (mem->getValue().toString().size() == 38) {
-                        qUpdate.addBindValue(mem->getValue().toString()
-                                             + mem->getDisplayValue().toString(),
-                                             QSql::In);
-                    } else {
-                        // invalid _idx field
-                        qUpdate.addBindValue("0", QSql::In);
-                    }
-
-                } else {
-                    qUpdate.addBindValue(obj->getMember(i)->getValue(), QSql::In);
-                }
-
+                qUpdate.addBindValue(mem->getValue(), QSql::In);
             }
             // ID is last in where statement
             qUpdate.addBindValue(obj->getMember(0)->getValue(), QSql::In);

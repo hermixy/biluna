@@ -954,6 +954,8 @@ void DB_ModelFactory::createDefaultRowSql(RB_String& sqlStr, RB_ObjectBase* obj)
 /**
  * Check tables in database, list difference
  * TODO: other checks than only name to be added
+ * TODO: check for existing tables that are not used anymore
+ * based on perspective abbreviation
  * @param obj object(tree)
  * @param result result of the check
  */
