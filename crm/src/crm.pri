@@ -49,6 +49,7 @@ HEADERS += \
     ../src/gui/crm_selectcustomerdialog.h \
     ../src/gui/crm_selectgroupdialog.h \
     ../src/gui/crm_selectprojectdialog.h \
+    ../src/gui/crm_selectsystemuserdialog.h \
     ../src/gui/crm_selecttemplatedialog.h \
     ../src/gui/crm_sysseqnodialog.h \
     ../src/gui/crm_templatewidget.h \
@@ -65,7 +66,7 @@ HEADERS += \
     ../src/model/crm_modelfactory.h \
     ../src/model/crm_objectfactory.h \
     ../src/model/crm_sysseqno.h \
-    ../src/model/crm_syssetting.h \
+#    ../src/model/crm_syssetting.h \
     ../src/model/crm_template.h \
     ../src/utils/crm_sqlcommonfunctions.h
 
@@ -121,7 +122,7 @@ SOURCES += \
     ../src/model/crm_modelfactory.cpp \
     ../src/model/crm_objectfactory.cpp \
     ../src/model/crm_sysseqno.cpp \
-    ../src/model/crm_syssetting.cpp \
+#    ../src/model/crm_syssetting.cpp \
     ../src/model/crm_template.cpp \
     ../src/utils/crm_sqlcommonfunctions.cpp
 

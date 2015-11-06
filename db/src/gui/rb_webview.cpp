@@ -113,5 +113,6 @@ void RB_WebView::keyReleaseEvent(QKeyEvent* e) {
         break;
     }
 
+    emit keyWasReleasedEvent();
 }
 

@@ -13,6 +13,7 @@
 
 #include <QtWidgets>
 #include "acc_modelfactory.h"
+#include "db_modelfactory.h"
 #include "db_tabledialog.h"
 
 class ACC_SalesTypeDialog : public DB_TableDialog {
@@ -37,7 +38,7 @@ public:
     void init() {
         // Set model
         mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelSalesType);
-        mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         setWindowTitle(tr("ACC Edit Sales Types[*]"));

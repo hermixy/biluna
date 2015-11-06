@@ -16,6 +16,7 @@
 #include "acc_selectstockcategorydialog.h"
 #include "acc_qachartmaster.h"
 #include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_mdiwindow.h"
 #include "rb_sqlrelationaldelegate.h"
@@ -59,7 +60,7 @@ void ACC_TaxAuthRateDialog::init() {
     // 1. Set model with ID (sets root object) and/or query
     //
     mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelTaxAuthority);
-    mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+    mModel->setRoot(DB_MODELFACTORY->getRootId());
 
     //
     // 2. Set relations and mapper for line edits etc.

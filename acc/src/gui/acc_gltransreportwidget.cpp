@@ -12,7 +12,6 @@
 
 #include <QPrintDialog>
 #include <QPrinter>
-#include <QWebFrame>
 #include "acc_creategltransactions.h"
 #include "acc_dialogfactory.h"
 #include "acc_modelfactory.h"

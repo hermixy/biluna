@@ -14,6 +14,7 @@
 #include "acc_dialogfactory.h"
 #include "acc_modelfactory.h"
 #include "acc_qasysacctcontrol.h"
+#include "db_modelfactory.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_sqlrelationaldelegate.h"
 
@@ -53,7 +54,7 @@ void ACC_AccountControlDialog::init() {
     // Shared is false because ChartMaster is unfiltered compared to other
     //
     mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelAccountControl, false);
-    mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+    mModel->setRoot(DB_MODELFACTORY->getRootId());
 
     //
     // Get mapper for line edits etc.

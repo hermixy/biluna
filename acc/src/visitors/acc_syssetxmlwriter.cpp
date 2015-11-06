@@ -62,8 +62,8 @@ void ACC_SysSetXmlWriter::visitObject(RB_ObjectBase* obj) {
 
     RB_String objName = obj->getName();
 
-    if (objName == "ACC_Project" || objName == "ACC_SysSetting"
-            || objName == "ACC_SysSettingList"
+    if (objName == "ACC_Project" || objName == "DB_Project"
+            || objName == "DB_ProjectList"
             || ACC_OBJECTFACTORY->isSystemSetting(objName)
             || ACC_OBJECTFACTORY->isProjectSetting(objName)) {
 
@@ -88,8 +88,8 @@ void ACC_SysSetXmlWriter::visitObject(RB_ObjectBase* obj) {
 void ACC_SysSetXmlWriter::leaveObject(RB_ObjectBase* obj) {
     RB_String objName = obj->getName();
 
-    if (objName == "ACC_Project" || objName == "ACC_SysSetting"
-            || objName == "ACC_SysSettingList"
+    if (objName == "ACC_Project" || objName == "DB_Project"
+            || objName == "DB_ProjectList"
             || ACC_OBJECTFACTORY->isSystemSetting(objName)
             || ACC_OBJECTFACTORY->isProjectSetting(objName)) {
 

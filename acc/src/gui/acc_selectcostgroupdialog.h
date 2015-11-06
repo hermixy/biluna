@@ -13,6 +13,7 @@
 
 #include <QtWidgets>
 #include "acc_modelfactory.h"
+#include "db_modelfactory.h"
 #include "db_treedialog.h"
 #include "rb_sqlrelation.h"
 
@@ -36,7 +37,7 @@ public:
     void init() {
         // Set model, root is already set by modelFactory
         mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelCostGroup, false);
-        mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         setWindowTitle(tr("ACC Select cost group"));

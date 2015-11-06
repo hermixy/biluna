@@ -44,10 +44,7 @@ public:
     virtual QSqlDatabase getDatabase();
     virtual void setDatabase(const QSqlDatabase& db);
     virtual void setObjectFactory(RB_ObjectFactory* f);
-    virtual RB_ObjectFactory* getObjectFactory() {
-        return mObjectFactory;
-    }
-    virtual RB_ObjectFactory* getObjectFactory(const RB_String& objName);
+    virtual RB_ObjectFactory* getObjectFactory(const RB_String& objName = "");
     virtual bool isModelModified();
     virtual void setModelIsModified(bool modified);
 

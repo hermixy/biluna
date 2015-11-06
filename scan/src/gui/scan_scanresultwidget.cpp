@@ -11,8 +11,6 @@
 #include "scan_scanresultwidget.h"
 
 #include <QStringListModel>
-#include <QWebFrame>
-#include <QtWebKit>
 #include "db_actionfilesaveas.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_mdiwindow.h"
@@ -132,8 +130,8 @@ void SCAN_ScanResultWidget::init() {
     }
 
     mScanModel->select();
-    wvScoreResult->setHtml(tr("Click refresh button ..."));
-    wvReport->setHtml(tr("Click refresh button ..."));
+    teScoreResult->setHtml(tr("Click refresh button ..."));
+    teReport->setHtml(tr("Click refresh button ..."));
     QList<int> intList;
     intList << 200 << 400;
     splHorizontal->setSizes(intList);
@@ -226,7 +224,7 @@ void SCAN_ScanResultWidget::filePrintPreview(QPrinter* pr) {
  * @return true if success
  */
 bool SCAN_ScanResultWidget::saveFile(const RB_String &fn) {
-    QWebEngineView* wv = NULL;
+    QTextEdit* te = NULL;
     int tabNo = tabWidget->currentIndex();
 
     switch (tabNo) {
@@ -238,10 +236,10 @@ bool SCAN_ScanResultWidget::saveFile(const RB_String &fn) {
         break;
     }
     case 1 :
-        wv = wvScoreResult;
+        te = teScoreResult;
         break;
     case 2 :
-        wv = wvReport;
+        te = teReport;
         break;
     default :
         return false;
@@ -262,9 +260,9 @@ bool SCAN_ScanResultWidget::saveFile(const RB_String &fn) {
     if (fn.endsWith(".htm", Qt::CaseInsensitive)
         || fn.endsWith(".html", Qt::CaseInsensitive)
         || fn.endsWith(".xml", Qt::CaseInsensitive)) {
-        out << wv->page()->mainFrame()->toHtml();
+        out << te->toHtml();
     } else {
-        out << wv->page()->mainFrame()->toPlainText();
+        out << te->toPlainText();
     }
 
     QApplication::restoreOverrideCursor();
@@ -290,11 +288,11 @@ void SCAN_ScanResultWidget::printWidget(QPrinter* pr) {
     }
     case 1 :
         pr->setPageMargins(25,15,15,15,QPrinter::Millimeter);
-        wvScoreResult->print(pr);
+        teScoreResult->print(pr);
         break;
     case 2 :
         pr->setPageMargins(25,15,15,15,QPrinter::Millimeter);
-        wvReport->print(pr);
+        teReport->print(pr);
         break;
     default :
         break;
@@ -458,7 +456,7 @@ void SCAN_ScanResultWidget::on_pbDeleteQuestion_clicked() {
  * Button delete (all questions) clicked
  */
 void SCAN_ScanResultWidget::on_pbRefreshScore_clicked() {
-    wvScoreResult->setHtml(tr("Click refresh button to generate result ..."));
+    teScoreResult->setHtml(tr("Click refresh button to generate result ..."));
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
@@ -488,7 +486,7 @@ void SCAN_ScanResultWidget::on_pbRefreshScore_clicked() {
     // Prepare HTML and set text in textedit
     SCAN_PrepareJrResult* oper = new SCAN_PrepareJrResult();
     oper->execute(scanRes);
-    wvScoreResult->setHtml(oper->getResultHtml());
+    teScoreResult->setHtml(oper->getResultHtml());
 
     delete oper;
     delete scanRes;
@@ -500,7 +498,7 @@ void SCAN_ScanResultWidget::on_pbRefreshScore_clicked() {
  * Button delete (all questions) clicked
  */
 void SCAN_ScanResultWidget::on_pbRefreshReport_clicked() {
-    wvReport->setHtml(tr("Click refresh button to generate report ..."));
+    teReport->setHtml(tr("Click refresh button to generate report ..."));
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
@@ -542,7 +540,7 @@ void SCAN_ScanResultWidget::on_pbRefreshReport_clicked() {
 
     // Generate report
     SCAN_PrepareJrReport* operReport = new SCAN_PrepareJrReport();
-    wvReport->setHtml(operReport->getReport(scanReport, operResult));
+    teReport->setHtml(operReport->getReport(scanReport, operResult));
 
 
     // test

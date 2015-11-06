@@ -586,7 +586,7 @@ void DB_InternetBrowserWidget::setupToolBar()
 //    m_navigationBar->addWidget(m_tabWidget->lineEditStack());
     horizontalLayout->addWidget(m_tabWidget->lineEditStack());
 
-    m_toolbarSearch = new ToolbarSearch(m_navigationBar);
+    m_toolbarSearch = new ToolbarSearch(this);
 //    m_navigationBar->addWidget(m_toolbarSearch);
     horizontalLayout->addWidget(m_toolbarSearch);
     connect(m_toolbarSearch, SIGNAL(search(QUrl)), SLOT(loadUrl(QUrl)));

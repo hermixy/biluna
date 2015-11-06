@@ -27,6 +27,9 @@ public:
     void setGridLayout(QGridLayout* layout);
     bool isWidgetMaximized();
 
+signals:
+    void keyWasReleasedEvent();
+
 protected:
 //    void keyPressEvent(QKeyEvent* e);
     void keyReleaseEvent(QKeyEvent* e);

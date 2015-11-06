@@ -31,7 +31,7 @@ HEADERS += \
     ../src/model/sail_route.h \
     ../src/model/sail_routecoordinate.h \
     ../src/model/sail_symbol.h \
-    ../src/model/sail_syssetting.h \
+#    ../src/model/sail_syssetting.h \
     ../src/model/sail_track.h \
     ../src/operations/sail_routeoperation.h \
     ../src/operations/sail_trackoperation.h \
@@ -60,7 +60,7 @@ SOURCES += \
     ../src/model/sail_route.cpp \
     ../src/model/sail_routecoordinate.cpp \
     ../src/model/sail_symbol.cpp \
-    ../src/model/sail_syssetting.cpp \
+#    ../src/model/sail_syssetting.cpp \
     ../src/model/sail_track.cpp \
     ../src/operations/sail_routeoperation.cpp \
     ../src/operations/sail_trackoperation.cpp \

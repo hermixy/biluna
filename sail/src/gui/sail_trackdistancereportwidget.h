@@ -21,7 +21,8 @@ class RB_ObjectContainer;
 /**
  * View track distance report
  */
-class SAIL_TrackDistanceReportWidget : public RB_Widget, private Ui::SAIL_TrackDistanceReportWidget {
+class SAIL_TrackDistanceReportWidget : public RB_Widget,
+        private Ui::SAIL_TrackDistanceReportWidget {
 
     Q_OBJECT
 
@@ -40,12 +41,6 @@ public:
     virtual void filePdf(QPrinter* printer);
     virtual void filePrint(QPrinter* printer);
     virtual void filePrintPreview(QPrinter* printer);
-    virtual void editCut();
-    virtual void editCopy();
-    virtual void editPaste();
-    virtual void editUndo();
-    virtual void editRedo();
-    virtual void editSelectAll();
 
     virtual bool saveFile(const RB_String &fn);
 

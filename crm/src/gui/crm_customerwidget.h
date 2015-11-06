@@ -47,6 +47,7 @@ public slots:
     virtual void on_pbSendEmail_clicked();
 
     virtual void on_pbSelectCompany_clicked();
+    virtual void on_ileInternalAccountHolder_clicked();
 
 protected:
     void changeEvent(QEvent* e);

@@ -38,7 +38,7 @@ public:
     void init() {
         // Set model, root="" is already set by modelFactory, however change to system root
         mModel = CRM_MODELFACTORY->getModel(CRM_ModelFactory::ModelLeadSourceType, false);
-        mModel->setRoot("syssetting" /*DB_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         setWindowTitle(tr("CRM Lead Source Type[*]"));

@@ -55,6 +55,7 @@ public:
     virtual RB_ObjectFactory* getObjectFactory();
 
     // Starting point: set subModel (on same window)
+    virtual void setSourceModel(QAbstractItemModel* sourceModel);
     virtual bool setTableModel(const RB_String& list, RB_MmProxy* pMm);
     virtual bool setTreeModel(const RB_String& list, RB_MmProxy* pMm,
                               const QSqlDatabase& db = QSqlDatabase());
@@ -209,8 +210,6 @@ protected:
     virtual void reset();
 
 private:
-    RB_MmAbstract* getRbModel() const;
-
     //! Parent model manager
     RB_MmProxy* mParentManager;
     //! Model type, identifier used at model factory for managing models

@@ -170,7 +170,11 @@ void RB_ModelFactory::setObjectFactory(RB_ObjectFactory* f) {
     setRoot();
 }
 
-RB_ObjectFactory* RB_ModelFactory::getObjectFactory(const RB_String& /*objName*/) {
+RB_ObjectFactory* RB_ModelFactory::getObjectFactory(const RB_String& objName) {
+    if (objName.isEmpty()) {
+        return mObjectFactory;
+    }
+
     return NULL;
 }
 

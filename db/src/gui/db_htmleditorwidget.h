@@ -153,6 +153,8 @@ private:
     QDialog* mInsertHtmlDialog;
 
     double mVerticalScrollbarPerunage;
+    QVariant* mResult;
+
 };
 
 #endif // HTML_EDITOR_H

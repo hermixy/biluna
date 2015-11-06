@@ -613,7 +613,7 @@ void DB_BrowserDialog::on_pbUpdateTable_clicked() {
 /**
 Create SQL statement which will delete all rows except:
 \li id = 0
-\li parent = 'syssetting'
+\li parent = current DB_Project.id
 \li table is acc_chartmaster
 
 works only if SQL driver is SQLite
@@ -634,7 +634,8 @@ void DB_BrowserDialog::on_pbSettings_clicked() {
 
     foreach (const RB_String& s, strL) {
         if (s != "acc_project" && s != "acc_chartmaster") {
-            str += "DELETE from " + s + " WHERE id<>0 and parent<>'syssetting';\n";
+            str += "DELETE from " + s + " WHERE id<>0 and parent<>'"
+                    + DB_MODELFACTORY->getRootId() + "';\n";
         }
     }
 

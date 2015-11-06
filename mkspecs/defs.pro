@@ -17,8 +17,14 @@ INCLUDEPATH += ../mkspecs
 
 QT += core gui help network printsupport sql svg uitools webenginewidgets widgets xml
 
+<<<<<<< HEAD
 CONFIG += release
 #CONFIG -= release
+=======
+#CONFIG += release
+CONFIG -= release
+CONFIG += c++11
+>>>>>>> master
 
 if (release) {
 #    message("Release compile mode in defs.pro")

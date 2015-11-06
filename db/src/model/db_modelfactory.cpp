@@ -248,6 +248,10 @@ std::vector<RB_ModelFactory*> DB_ModelFactory::getFactoryList() {
  * @returns factory if found otherwise NULL
  */
 RB_ObjectFactory* DB_ModelFactory::getObjectFactory(const RB_String& objName) {
+    if (objName.isEmpty()) {
+        return mObjectFactory;
+    }
+
     RB_ObjectFactory* factory = NULL;
     RB_StringList strL = objName.split("_");
     RB_String perspective = strL.at(0);
@@ -878,13 +882,21 @@ bool DB_ModelFactory::createDefaultRows(RB_String& sqlStr, RB_ObjectBase* obj) {
 }
 
 /**
- * Add default row with ID='0' to new created table
+ * Add default row with id='0' to new created table. DB_Project is
+ * an exception, the id is a valid Uuid.
  * @parem sqlStr SQL statement to be set with add default row
  * @param obj object with table name
  */
 void DB_ModelFactory::createDefaultRowSql(RB_String& sqlStr, RB_ObjectBase* obj) {
     sqlStr += "INSERT INTO " + obj->getName().toLower() + " (`id`, `parent`";
-    RB_String valueStr = ") VALUES ('0', 'none'";
+    RB_String valueStr;
+
+    if (obj->getName().toLower() == "db_project") {
+        valueStr = ") VALUES ('" + obj->getId() + "', 'none'";
+    } else {
+        valueStr = ") VALUES ('0', 'none'";
+    }
+
     int memberCount = obj->countMember();
     RB_ObjectMember* mem = NULL;
 
@@ -942,6 +954,8 @@ void DB_ModelFactory::createDefaultRowSql(RB_String& sqlStr, RB_ObjectBase* obj)
 /**
  * Check tables in database, list difference
  * TODO: other checks than only name to be added
+ * TODO: check for existing tables that are not used anymore
+ * based on perspective abbreviation
  * @param obj object(tree)
  * @param result result of the check
  */

@@ -14,6 +14,7 @@
 #include "acc_dialogfactory.h"
 #include "acc_modelfactory.h"
 #include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_cmbdelegate.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_mdiwindow.h"
@@ -53,7 +54,7 @@ void ACC_AccountGroupDialog::init() {
     // 1. Set model with ID (sets root object) and/or query
     //
     mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelAccountGroup);
-    mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+    mModel->setRoot(DB_MODELFACTORY->getRootId());
 
     //
     // 2. Set relations and mapper for line edits etc.
@@ -151,7 +152,7 @@ void ACC_AccountGroupDialog::on_pbAddGroup_clicked() {
     // Root is syssetting
     if (!idxParent.isValid()) {
         index = mModel->index(row, mModel->fieldIndex("parent"), idxParent);
-        mModel->setHiddenData(index, "syssetting", Qt::EditRole);
+        mModel->setHiddenData(index, DB_MODELFACTORY->getRootId(), Qt::EditRole);
     }
 
     index = mModel->index(mModel->rowCount(idxParent)-1, 0, idxParent);

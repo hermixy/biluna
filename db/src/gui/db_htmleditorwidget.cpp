@@ -57,8 +57,8 @@ DB_HtmlEditorWidget::DB_HtmlEditorWidget(QWidget *parent) : RB_Widget(parent)
     tabWidget->setTabText(1, "Source");
     plainTextEdit->setTabStopWidth(20); // in pixels, default is 80
 
-//    connect(webView->page(), SIGNAL(contentsChanged()),
-//            this, SLOT(slotContentChanged()));
+    connect(webView, SIGNAL(keyWasReleasedEvent()),
+            this, SLOT(slotContentChanged()));
     connect(plainTextEdit, SIGNAL(textChanged()),
             this, SLOT(slotContentChanged()));
     connect(tabWidget, SIGNAL(currentChanged(int)),
@@ -73,6 +73,9 @@ DB_HtmlEditorWidget::DB_HtmlEditorWidget(QWidget *parent) : RB_Widget(parent)
 
     mCodeHighlighter = new DB_HtmlHighlighter(plainTextEdit->document());
     mVerticalScrollbarPerunage = 0.0;
+
+    QtWebEngine::initialize();
+    mResult = new QVariant();
 
 /*    QWidget *spacer = new QWidget(this);
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -167,6 +170,7 @@ DB_HtmlEditorWidget::~DB_HtmlEditorWidget() {
 //    delete ui;
 //    delete ui_dialog;
     delete mCodeHighlighter;
+    delete mResult;
 }
 
 /**
@@ -795,14 +799,11 @@ void DB_HtmlEditorWidget::execCommand(const QString &cmd, const QString &arg) {
  * @return true
  */
 bool DB_HtmlEditorWidget::queryCommandState(const QString &cmd) {
-//    QString js = QString("document.queryCommandState(\"%1\", false, null)").arg(cmd);
-//    QVariant* result = new QVariant();
-//    webView->page()->runJavaScript(js, [result] (const QVariant& cbValue) { result->setValue(cbValue); } );
+    QString js = QString("document.queryCommandState(\"%1\", false, null)").arg(cmd);
+    webView->page()->runJavaScript(js, [this] (const QVariant& value) { mResult->setValue(value); } );
 
-//    QString str = result->toString();
-//    delete result;
-//    return str.simplified().toLower() == "true";
-    return false;
+    QString str = mResult->toString();
+    return str.simplified().toLower() == "true";
 }
 
 /**
@@ -863,13 +864,16 @@ void DB_HtmlEditorWidget::adjustSource()
  * Change tab
  */
 void DB_HtmlEditorWidget::changeTab(int index) {
-    QString* htmlContent = new QString();
-
     if (mSourceDirty && (index == 1)) {
         QWebEnginePage* page = webView->page();
-        page->toHtml([htmlContent] (const QString& cbValue) { *htmlContent = cbValue; });
-        plainTextEdit->setPlainText(*htmlContent);
 
+        // Does not work because htmlContent does not exist at call back
+        // QString* htmlContent = new QString();
+        // page->toHtml([htmlContent] (const QString& cbValue) { *htmlContent = cbValue; });
+        // plainTextEdit->setPlainText(*htmlContent);
+        // delete htmlContent;
+
+        page->toHtml([this] (const QString& result) { plainTextEdit->setPlainText(result); });
         mSourceDirty = false;
 
 //        int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
@@ -905,7 +909,7 @@ void DB_HtmlEditorWidget::changeTab(int index) {
         QTimer::singleShot(200, this, SLOT(setWebViewScrollbar()));
     }
 
-    delete htmlContent;
+
 }
 
 void DB_HtmlEditorWidget::setWebViewScrollbar() {

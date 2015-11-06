@@ -13,6 +13,7 @@
 
 #include <QtWidgets>
 #include "db_tabledialog.h"
+#include "db_modelfactory.h"
 #include "acc_modelfactory.h"
 
 class ACC_SalesManDialog : public DB_TableDialog {
@@ -37,7 +38,7 @@ public:
     void init() {
         // Set model, root is already set by modelFactory
         mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelSalesMan);
-        mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         setWindowTitle(tr("ACC Edit Salesmen[*]"));

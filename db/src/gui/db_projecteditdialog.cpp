@@ -38,7 +38,7 @@ void DB_ProjectEditDialog::init() {
     // 1. Set model with ID
     //
     mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelProjectEdit, false);
-    mModel->setRoot("none");
+    mModel->setRoot(""); // TODO: depending user rights
 
     //
     // 2. Set relations and mapper for line edits etc.
@@ -96,6 +96,8 @@ void DB_ProjectEditDialog::on_pbAdd_clicked() {
     idx = mModel->index(row, mModel->fieldIndex("revision"), QModelIndex());
     mModel->setData(idx, 0, Qt::EditRole);
     // end NOTE
+
+    // TODO: set parent ID based on user group?
 
     tableView->setCurrentIndex(mModel->index(row, RB2::HIDDENCOLUMNS, QModelIndex()));
     tableView->scrollTo(mModel->index(row, RB2::HIDDENCOLUMNS, QModelIndex()));

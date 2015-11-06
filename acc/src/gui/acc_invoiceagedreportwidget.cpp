@@ -12,7 +12,6 @@
 
 #include <QPrintDialog>
 #include <QPrinter>
-#include <QWebFrame>
 #include "acc.h"
 #include "acc_createinvoiceaged.h"
 #include "acc_dialogfactory.h"

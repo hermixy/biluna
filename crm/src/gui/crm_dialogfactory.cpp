@@ -26,6 +26,7 @@
 #include "crm_selectcontactdialog.h"
 #include "crm_selectcustomerdialog.h"
 #include "crm_selectgroupdialog.h"
+#include "crm_selectsystemuserdialog.h"
 #include "crm_selecttemplatedialog.h"
 #include "crm_sysseqnodialog.h"
 #include "crm_templatewidget.h"
@@ -182,6 +183,10 @@ RB_Dialog* CRM_DialogFactory::getDialog(int type) {
     }
     case DialogSelectGroup: {
         dlg = new CRM_SelectGroupDialog(mMainWindow);
+        break;
+    }
+    case DialogSelectSystemUser: {
+        dlg = new CRM_SelectSystemUserDialog(mMainWindow);
         break;
     }
     case DialogSelectTemplate: {

@@ -23,22 +23,22 @@
  * iterator design pattern by the Gang of Four.
  */
 class DB_EXPORT RB_ObjectIterator {
-	
+
 public:
     RB_ObjectIterator(std::list<RB_ObjectBase*>& objc);
-	virtual ~RB_ObjectIterator();
+    virtual ~RB_ObjectIterator();
 
-	virtual void first();
-	virtual void last();
-	virtual void next();
-	virtual void previous();
-	virtual bool isDone() const;
-	virtual void setDone();
-	virtual void setCurrent(int row);
-	virtual RB_ObjectBase* currentObject();
+    virtual void first();
+    virtual void last();
+    virtual void next();
+    virtual void previous();
+    virtual bool isDone() const;
+    virtual void setDone();
+    virtual void setCurrent(int row);
+    virtual RB_ObjectBase* currentObject();
     virtual int index();
-	
-	
+
+
 private:
     //! Container of children RB_ObjectBase
     std::list<RB_ObjectBase*>& mContainer;

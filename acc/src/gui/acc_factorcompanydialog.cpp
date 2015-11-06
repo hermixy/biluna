@@ -13,6 +13,7 @@
 #include "acc_dialogfactory.h"
 #include "acc_modelfactory.h"
 #include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_mdiwindow.h"
 #include "rb_sqlrelationaldelegate.h"
@@ -51,7 +52,7 @@ void ACC_FactorCompanyDialog::init() {
     // Set model and connect to orders table view
     //
     mModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelFactorCompany);
-    mModel->setRoot("syssetting" /*ACC_MODELFACTORY->getRootId()*/);
+    mModel->setRoot(DB_MODELFACTORY->getRootId());
 
     mMapper = mModel->getMapper();
     mMapper->addMapping(leFactorName, mModel->fieldIndex("coyname"));

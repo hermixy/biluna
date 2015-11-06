@@ -74,8 +74,8 @@ ACC_Customer::~ACC_Customer() {
  * - specialinstructions special instructions
  * - custbranchcode customer branch code (used?)
  * - lastusedacct_id last used GL account ID
- * - crmtype_id CRM type ID 0=potential 1=existing
- * - crm_paprent CRM Account (CRM_Project.id)
+ * - crm_type_id CRM type ID 0=potential 1=existing (was crmtype_id)
+ * - db_systemuser_id system user (was crm_parent)
  */
 void ACC_Customer::createMembers() {
     addMember("customerno", "-", "", RB2::MemberChar40);      // 3
@@ -145,6 +145,6 @@ void ACC_Customer::createMembers() {
 
     // customer relation management 0=potential customer, 1=existing customer
     addMember("crm_type_id", "-", 0, RB2::MemberInteger);  // int_id
-    addMember("db_systemuser_id", "-", "0", RB2::MemberChar40); // is CRM Account Holder (DB_SystemUser.id)
+    addMember("db_systemuser_idx", "-", "0", RB2::MemberChar165); // is CRM Account Holder (DB_SystemUser.id)
 }
 

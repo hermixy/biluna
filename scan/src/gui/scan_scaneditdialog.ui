@@ -1471,13 +1471,7 @@
                  <number>1</number>
                 </property>
                 <item row="0" column="0">
-                 <widget class="QWebEngineView" name="wvBlock">
-                  <property name="url">
-                   <url>
-                    <string>about:blank</string>
-                   </url>
-                  </property>
-                 </widget>
+                 <widget class="QTextEdit" name="teBlock"/>
                 </item>
                </layout>
               </widget>
@@ -1502,7 +1496,7 @@
                  <number>1</number>
                 </property>
                 <item row="0" column="0">
-                 <widget class="QPlainTextEdit" name="teBlock"/>
+                 <widget class="QPlainTextEdit" name="pteBlock"/>
                 </item>
                </layout>
               </widget>
@@ -1797,13 +1791,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QWebEngineView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebEngineView</header>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>pbAddScan</tabstop>
   <tabstop>pbDeleteScan</tabstop>
@@ -1849,7 +1836,6 @@
   <tabstop>pbFontSize</tabstop>
   <tabstop>pbColor</tabstop>
   <tabstop>pbBgColor</tabstop>
-  <tabstop>wvBlock</tabstop>
   <tabstop>twBlock</tabstop>
   <tabstop>cbContentType</tabstop>
   <tabstop>cbValidity1</tabstop>
@@ -1863,7 +1849,7 @@
   <tabstop>cbValidity3</tabstop>
   <tabstop>leVal3Min</tabstop>
   <tabstop>leVal3Max</tabstop>
-  <tabstop>teBlock</tabstop>
+  <tabstop>pteBlock</tabstop>
  </tabstops>
  <resources>
   <include location="../../../db/src/gui/db.qrc"/>
