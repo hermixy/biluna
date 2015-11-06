@@ -15,17 +15,10 @@
 UI_DIR	    = ../src/gui/ui
 INCLUDEPATH += ../mkspecs
 
-# webkitwidgets includes widgets
-<<<<<<< HEAD
-QT += core gui help network printsupport sql svg uitools webkitwidgets widgets xml
-CONFIG += release
-#CONFIG -= release
-=======
 QT += core gui help network printsupport sql svg uitools webenginewidgets widgets xml
 
-#CONFIG += release
-CONFIG -= release
->>>>>>> master
+CONFIG += release
+#CONFIG -= release
 
 if (release) {
 #    message("Release compile mode in defs.pro")
