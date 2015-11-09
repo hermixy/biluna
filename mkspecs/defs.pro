@@ -15,7 +15,6 @@
 UI_DIR	    = ../src/gui/ui
 INCLUDEPATH += ../mkspecs
 
-# webkitwidgets includes widgets
 QT += core gui help network printsupport sql svg uitools webenginewidgets widgets xml
 
 #CONFIG += release
@@ -90,6 +89,9 @@ else {
     else {
         CONFIG(RB_DYNLIB) {
             # static or dynamic lib
+            # TODO: openssl-linked should be for libdb only
+            message(Release openssl-linked)
+            CONFIG += openssl-linked
             DESTDIR = ../lib
             target.path = ../../bil/release
             INSTALLS += target
@@ -143,11 +145,22 @@ else {
 
 macx {
     CONFIG -= app_bundle
-    LIBS += -lssl -lcrypto
+    #openssl
+    INCLUDEPATH += \
+        /usr/local/ssl/include
+    LIBS += \
+        -L/usr/local/ssl/lib -lssl \
+        -L/usr/local/ssl/lib -lcrypto
+#    HEADERS += \
+#        /Users/gudula/Documents/biluna/thrd/openssl-1.0.2d/include/openssl/evp.h
+    #latest architecture
+    QMAKE_MAC_SDK = macosx10.11
 }
 
 unix:!macx {
     INCLUDEPATH += /usr/include/openssl
     LIBS += /usr/bin/ -lopenssl
+    OPENSSL_LIBS= \
+        -L/opt/ssl/lib -lssl -lcrypto
 }
 
