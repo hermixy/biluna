@@ -234,8 +234,8 @@ void DB_InternetBrowserWidget::loadDefaultState()
 */
 QSize DB_InternetBrowserWidget::sizeHint() const
 {
-    QSize size;
-    size = DB_DIALOGFACTORY->getActiveMdiCentralWidget()->size() * qreal(0.9);
+    QSize size = QSize(800, 640);
+//    size = DB_DIALOGFACTORY->getActiveMdiCentralWidget()->size() * qreal(0.9);
     return size;
 }
 
