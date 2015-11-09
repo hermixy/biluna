@@ -407,29 +407,29 @@ void DB_InternetBrowserFactory::installTranslator(const QString &name)
 }
 
 #if defined(Q_OS_OSX)
-bool DB_InternetBrowserFactory::event(QEvent* event)
-{
-    switch (event->type()) {
-    case QEvent::ApplicationActivate: {
-        clean();
-        if (!m_browserWidgets.isEmpty()) {
-            DB_InternetBrowserWidget *mw = browserWidget();
-            if (mw && !mw->isMinimized()) {
-                browserWidget()->show();
-            }
-            return true;
-        }
-    }
-    case QEvent::FileOpen:
-        if (!m_browserWidgets.isEmpty()) {
-            browserWidget()->loadPage(static_cast<QFileOpenEvent *>(event)->file());
-            return true;
-        }
-    default:
-        break;
-    }
-    return QApplication::event(event);
-}
+//bool DB_InternetBrowserFactory::event(QEvent* event)
+//{
+//    switch (event->type()) {
+//    case QEvent::ApplicationActivate: {
+//        clean();
+//        if (!m_browserWidgets.isEmpty()) {
+//            DB_InternetBrowserWidget *mw = browserWidget();
+//            if (mw && !mw->isMinimized()) {
+//                browserWidget()->show();
+//            }
+//            return true;
+//        }
+//    }
+//    case QEvent::FileOpen:
+//        if (!m_browserWidgets.isEmpty()) {
+//            browserWidget()->loadPage(static_cast<QFileOpenEvent *>(event)->file());
+//            return true;
+//        }
+//    default:
+//        break;
+//    }
+//    return QApplication::event(event);
+//}
 #endif
 
 void DB_InternetBrowserFactory::openUrl(const QUrl &url)

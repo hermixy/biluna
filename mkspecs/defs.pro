@@ -17,14 +17,9 @@ INCLUDEPATH += ../mkspecs
 
 QT += core gui help network printsupport sql svg uitools webenginewidgets widgets xml
 
-<<<<<<< HEAD
 CONFIG += release
 #CONFIG -= release
-=======
-#CONFIG += release
-CONFIG -= release
 CONFIG += c++11
->>>>>>> master
 
 if (release) {
 #    message("Release compile mode in defs.pro")
@@ -154,8 +149,8 @@ macx {
     INCLUDEPATH += \
         /usr/local/ssl/include
     LIBS += \
-        -L/usr/local/ssl/include/openssl/lib -lssl \
-        -L/usr/local/ssl/include/openssl/lib -lcrypto
+        -L/usr/local/ssl/lib -lssl \
+        -L/usr/local/ssl/lib -lcrypto
 #    HEADERS += \
 #        /Users/gudula/Documents/biluna/thrd/openssl-1.0.2d/include/openssl/evp.h
     #latest architecture

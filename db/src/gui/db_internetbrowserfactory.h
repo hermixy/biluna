@@ -100,7 +100,7 @@ public:
     static BookmarksManager *bookmarksManager();
 
 #if defined(Q_OS_OSX)
-    bool event(QEvent *event);
+//    bool event(QEvent *event);
 #endif
 
 public slots:
