@@ -451,9 +451,8 @@ void DB_InternetBrowserWidget::setupMenu()
     viewMenu->addSeparator();
     viewMenu->addAction(tr("Page S&ource"), this, SLOT(slotViewPageSource()), tr("Ctrl+Alt+U"));
 
-//    QAction *a = viewMenu->addAction(tr("&Full Screen"), this, SLOT(slotViewFullScreen(bool)),  Qt::Key_F11);
-//    a->setCheckable(true);
-    QAction *a;
+    QAction *a = viewMenu->addAction(tr("&Full Screen"), this, SLOT(slotViewFullScreen(bool)),  Qt::Key_F11);
+    a->setCheckable(true);
 
     // History
     HistoryMenu *historyMenu = new HistoryMenu(this);

@@ -75,7 +75,6 @@ DB_HtmlEditorWidget::DB_HtmlEditorWidget(QWidget *parent) : RB_Widget(parent)
     mVerticalScrollbarPerunage = 0.0;
 
     QtWebEngine::initialize();
-    mResult = new QVariant();
 
 /*    QWidget *spacer = new QWidget(this);
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -170,7 +169,6 @@ DB_HtmlEditorWidget::~DB_HtmlEditorWidget() {
 //    delete ui;
 //    delete ui_dialog;
     delete mCodeHighlighter;
-    delete mResult;
 }
 
 /**
@@ -798,13 +796,13 @@ void DB_HtmlEditorWidget::execCommand(const QString &cmd, const QString &arg) {
  * @param cmd command
  * @return true
  */
-bool DB_HtmlEditorWidget::queryCommandState(const QString &cmd) {
-    QString js = QString("document.queryCommandState(\"%1\", false, null)").arg(cmd);
-    webView->page()->runJavaScript(js, [this] (const QVariant& value) { mResult->setValue(value); } );
+//bool DB_HtmlEditorWidget::queryCommandState(const QString &cmd) {
+//    QString js = QString("document.queryCommandState(\"%1\", false, null)").arg(cmd);
+//    webView->page()->runJavaScript(js, [this] (const QVariant& value) { mResult->setValue(value); } );
 
-    QString str = mResult->toString();
-    return str.simplified().toLower() == "true";
-}
+//    QString str = mResult->toString();
+//    return str.simplified().toLower() == "true";
+//}
 
 /**
  * Determines the current checked state of the enumerated action
@@ -829,12 +827,67 @@ bool DB_HtmlEditorWidget::queryCommandState(const QString &cmd) {
 #define FOLLOW_CHECK(a1, a2) a1->setChecked(ui->webView->pageAction(a2)->isChecked())
 */
 void DB_HtmlEditorWidget::adjustActions() {
-    DB_ACTIONFACTORY->setFormatBoldChecked(queryCommandState("bold"));
-    DB_ACTIONFACTORY->setFormatItalicChecked(queryCommandState("italic"));
-    DB_ACTIONFACTORY->setFormatUnderlineChecked(queryCommandState("underline"));
-    DB_ACTIONFACTORY->setFormatStrikethroughChecked(queryCommandState("strikeThrough"));
-    DB_ACTIONFACTORY->setFormatNumberedListChecked(queryCommandState("insertOrderedList"));
-    DB_ACTIONFACTORY->setFormatBulletedListChecked(queryCommandState("insertUnorderedList"));
+//    DB_ACTIONFACTORY->setFormatBoldChecked(queryCommandState("bold"));
+//    DB_ACTIONFACTORY->setFormatItalicChecked(queryCommandState("italic"));
+//    DB_ACTIONFACTORY->setFormatUnderlineChecked(queryCommandState("underline"));
+//    DB_ACTIONFACTORY->setFormatStrikethroughChecked(queryCommandState("strikeThrough"));
+//    DB_ACTIONFACTORY->setFormatNumberedListChecked(queryCommandState("insertOrderedList"));
+//    DB_ACTIONFACTORY->setFormatBulletedListChecked(queryCommandState("insertUnorderedList"));
+
+    webView->page()->runJavaScript(
+                QString("document.queryCommandState(\"bold\", false, null)"),
+                                   [this] (const QVariant& value) {
+            QString str = value.toString();
+            DB_ACTIONFACTORY->setFormatBoldChecked(
+                        str.simplified().toLower() == "true");
+        }
+    );
+
+    webView->page()->runJavaScript(
+                QString("document.queryCommandState(\"italic\", false, null)"),
+                                   [this] (const QVariant& value) {
+            QString str = value.toString();
+            DB_ACTIONFACTORY->setFormatItalicChecked(
+                        str.simplified().toLower() == "true");
+        }
+    );
+
+    webView->page()->runJavaScript(
+                QString("document.queryCommandState(\"underline\", false, null)"),
+                                   [this] (const QVariant& value) {
+            QString str = value.toString();
+            DB_ACTIONFACTORY->setFormatUnderlineChecked(
+                        str.simplified().toLower() == "true");
+        }
+    );
+
+    webView->page()->runJavaScript(
+                QString("document.queryCommandState(\"strikeThrough\", false, null)"),
+                                   [this] (const QVariant& value) {
+            QString str = value.toString();
+            DB_ACTIONFACTORY->setFormatStrikethroughChecked(
+                        str.simplified().toLower() == "true");
+        }
+    );
+
+    webView->page()->runJavaScript(
+                QString("document.queryCommandState(\"insertOrderedList\", false, null)"),
+                                   [this] (const QVariant& value) {
+            QString str = value.toString();
+            DB_ACTIONFACTORY->setFormatNumberedListChecked(
+                        str.simplified().toLower() == "true");
+        }
+    );
+
+    webView->page()->runJavaScript(
+                QString("document.queryCommandState(\"insertUnorderedList\", false, null)"),
+                                   [this] (const QVariant& value) {
+            QString str = value.toString();
+            DB_ACTIONFACTORY->setFormatBulletedListChecked(
+                        str.simplified().toLower() == "true");
+        }
+    );
+
 
 //    FOLLOW_ENABLE(ui->actionEditUndo, QWebPage::Undo);
 //    FOLLOW_ENABLE(ui->actionEditRedo, QWebPage::Redo);
