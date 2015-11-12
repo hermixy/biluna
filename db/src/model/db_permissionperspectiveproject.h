@@ -16,7 +16,8 @@
 /**
  * Permission perspective project, is a perspective project assigned
  * to a permission project. The assigned groups will have the relevant
- * permissions to the perspective project
+ * permissions to the perspective project.
+ * NOTE: not part of the object hierachy, for selection only
  */
 class DB_EXPORT DB_PermissionPerspectiveProject : public RB_ObjectContainer {
 

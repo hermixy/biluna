@@ -53,6 +53,7 @@ void DB_SystemGroupDialog::init() {
     ui->cbStatus->setModel(new QStringListModel(items, this));
     mMapper->addMapping(ui->cbStatus, mModel->fieldIndex("permission_id"),
                         "currentIndex");
+    mMapper->addMapping(ui->leTokenList, mModel->fieldIndex("tokenlist"));
 
     //
     // 3. Execute SELECT on model

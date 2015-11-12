@@ -81,6 +81,34 @@ void RB_ToolButtonBar::initDetailEdit(bool isSaveRevert) {
     pbDown->setVisible(false);
 }
 
+void RB_ToolButtonBar::initSelect(bool isFindFilter, bool isShowAll) {
+    setupUi(this);
+
+    pbAdd->setVisible(false);
+    pbAddChild->setVisible(false);
+    pbDelete->setVisible(false);
+
+    pbEdit->setVisible(false);
+    pbSave->setVisible(false);
+    pbRevert->setVisible(false);
+
+    pbPrevious->setVisible(false);
+    pbNext->setVisible(false);
+
+    pbFind->setVisible(isFindFilter);
+    leFilter->setVisible(isFindFilter);
+    pbFilterOn->setVisible(isFindFilter);
+    pbFilterOff->setVisible(isFindFilter);
+    pbFilterOff->setEnabled(isFindFilter);
+    pbAll->setVisible(isShowAll);
+
+    pbDemote->setVisible(false);
+    pbPromote->setVisible(false);
+
+    pbUp->setVisible(false);
+    pbDown->setVisible(false);
+}
+
 /**
 * Required by retranslate during .ui to .h file generation
 * @brief RB_ToolButtonBar::setText
