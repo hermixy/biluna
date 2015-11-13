@@ -1,2 +1,1 @@
-in C:\users\rutger\Documents\biluna\bil\release>
-C:\Qt\5.5\msvc2013\bin\windeployqt --release --verbose 1 (-webengine .. biluna.exe)
+C:\Qt\Qt5.5.1\5.5\msvc2013\bin\windeployqt --release --verbose 1 -network -printsupport -sql -svg -webenginewidgets -widgets -xml biluna.exe
