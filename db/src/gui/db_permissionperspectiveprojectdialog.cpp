@@ -54,7 +54,7 @@ void DB_PermissionPerspectiveProjectDialog::init() {
     //
     // 5. Set toolbuttonbar
     //
-    ui->tbbProject->initEdit(false, false, true);
+    ui->tbbProject->initSelect(true, false);
     ui->tvProject->setToolButtonBar(ui->tbbProject);
 
     //

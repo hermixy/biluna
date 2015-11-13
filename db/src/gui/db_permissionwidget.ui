@@ -693,11 +693,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>RB_IdxLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>rb_idxlineedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>RB_ToolButtonBar</class>
    <extends>QWidget</extends>
    <header>rb_toolbuttonbar.h</header>
@@ -707,6 +702,11 @@
    <class>RB_TableView</class>
    <extends>QTableView</extends>
    <header>rb_tableview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RB_IdxLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>rb_idxlineedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

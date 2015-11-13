@@ -42,8 +42,8 @@ DB_PermissionProject::~DB_PermissionProject() {
  */
 void DB_PermissionProject::createMembers() {
     addMember("number", "-", "<NEW>", RB2::MemberChar40);
-    addMember("description", "-", "YourPermissionGroup", RB2::MemberChar125);
-    addMember("customer", "-", "YourCustomer", RB2::MemberChar125);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("customer", "-", "", RB2::MemberChar125);
     addMember("persproject_idx", "-", "0", RB2::MemberChar165);
     addMember("mstatus_id", "-", 0, RB2::MemberInteger);
     addMember("start", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);

@@ -34,9 +34,11 @@ DB_SystemGroup::~DB_SystemGroup() {
  * \li description, description of the group
  * \li permission_id, None, [R] Read, [RU] Read Update,
  *  [CRUD] Create Read Update Delete, [CRUDX] Create Read Update Delete Execute
+ * \li tokenlist a list of tokens separated by semicolon (;)
  */
 void DB_SystemGroup::createMembers() {
     addMember("code", "-", "<NEW>", RB2::MemberChar40);
     addMember("description", "-", "", RB2::MemberChar125);
     addMember("permission_id", "-", 0, RB2::MemberInteger);
+    addMember("tokenlist", "-", "", RB2::MemberChar125);
 }
