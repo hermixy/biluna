@@ -820,21 +820,19 @@ void DB_ActionFactory::getSystemMenu(QMenu* menu, QToolBar* /* tb */) {
     subMenu->setTitle(tr("&Administrator"));
     menu->addMenu(subMenu);
 
-//#ifdef BILUNA_DEBUG
-    ga = DB_ActionSystemPermission::createGuiAction();
-    subMenu->addAction(ga);
-    ga->setEnabled(false);
-    connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
-            ga, SLOT(slotSetEnabled(int)));
-
     ga = DB_ActionSystemGroup::createGuiAction();
     subMenu->addAction(ga);
     ga->setEnabled(false);
     connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));
 
+    ga = DB_ActionSystemPermission::createGuiAction();
+    subMenu->addAction(ga);
+    ga->setEnabled(false);
+    connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
+
     subMenu->addSeparator();
-//#endif
 
     ga = DB_ActionSystemDatabaseBrowser::createGuiAction();
     subMenu->addAction(ga);

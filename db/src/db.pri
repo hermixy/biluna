@@ -265,6 +265,7 @@ HEADERS = \
     ../src/model/rb_objectmember.h \
     ../src/operations/rb_operationhtml.h \
     ../src/utils/db_global.h \
+    ../src/utils/db_permissionhandler.h \
     ../src/utils/db_sqlcommonfunctions.h \
     ../src/utils/db_utilityfactory.h \
     ../src/utils/rb_aesencryption.h \
@@ -503,6 +504,7 @@ SOURCES = \
     ../src/model/rb_objectiterator.cpp \
     ../src/model/rb_objectmember.cpp \
     ../src/operations/rb_operationhtml.cpp \
+    ../src/utils/db_permissionhandler.cpp \
     ../src/utils/db_sqlcommonfunctions.cpp \
     ../src/utils/db_utilityfactory.cpp \
     ../src/utils/rb_aesencryption.cpp \

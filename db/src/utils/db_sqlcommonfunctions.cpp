@@ -91,8 +91,7 @@ void DB_SqlCommonFunctions::setPerspectiveProjects(RB_ObjectContainer* list) {
     QStringList tableList = DB_MODELFACTORY->getDatabase().tables();
 
     foreach (const QString& tableName, tableList) {
-           if (tableName.endsWith("_Project", Qt::CaseInsensitive)
-                   && !tableName.contains("DB_Project", Qt::CaseInsensitive)) {
+           if (tableName.endsWith("_Project", Qt::CaseInsensitive)) {
                appendProjects(list, tableName);
            }
     }
@@ -123,16 +122,19 @@ void DB_SqlCommonFunctions::appendProjects(RB_ObjectContainer* list,
     }
 }
 
-void DB_SqlCommonFunctions::getPermissionList(RB_ObjectContainer* list) {
+void DB_SqlCommonFunctions::getPermissionList(RB_ObjectContainer* list,
+                                              const QString& userName,
+                                              const QString& password) {
     /*
-SELECT suser.start AS userstart,
+SELECT suser.username as username,
+suser.firstname as firstname,
+suser.lastname as lastname,
+suser.start AS userstart,
 suser.end AS userend,
-sgroup.mstatus_id AS groupstatus_id,
-pgroup.permission_id AS grouppermission_id,
-pgroup.start AS groupstart,
-pgroup.end AS groupend,
-persproject_idx AS persproject_idx,
-pproject.mstatus_id AS persprojectstatus_id,
+sgroup.permission_id AS crudx,
+sgroup.tokenlist AS tokenlist,
+pproject.persproject_idx AS persproject,
+pproject.mstatus_id AS persprojectstatus,
 pproject.start AS persprojectstart,
 pproject.end AS persprojectend
 FROM db_systemuser AS suser
@@ -140,6 +142,7 @@ INNER JOIN db_systemusergroup AS sugroup ON sugroup.parent=suser.id
 INNER JOIN db_systemgroup AS sgroup ON sgroup.id=SUBSTR(sugroup.group_idx,1,38)
 INNER JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id
 INNER JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id
+WHERE suser.parent='{4ea4abad-f86a-4749-8016-acfe53171f82}'
 ORDER BY persproject_idx;
      */
 
@@ -149,12 +152,13 @@ ORDER BY persproject_idx;
     }
 
     QSqlQuery query(DB_MODELFACTORY->getDatabase());
-    RB_String qStr = "SELECT suser.start AS userstart, "
+    RB_String qStr = "SELECT suser.username as username, "
+            "suser.firstname as firstname, "
+            "suser.lastname as lastname, "
+            "suser.start AS userstart, "
             "suser.end AS userend, "
-            "sgroup.mstatus_id AS groupstatus_id, "
-            "pgroup.permission_id AS grouppermission_id, "
-            "pgroup.start AS groupstart, "
-            "pgroup.end AS groupend, "
+            "sgroup.permission_id AS crudx_id, "
+            "sgroup.tokenlist AS tokenlist, "
             "pproject.persproject_idx AS persproject_idx, "
             "pproject.mstatus_id AS persprojectstatus_id, "
             "pproject.start AS persprojectstart, "
@@ -164,7 +168,10 @@ ORDER BY persproject_idx;
             "INNER JOIN db_systemgroup AS sgroup ON sgroup.id=SUBSTR(sugroup.group_idx,1,38) "
             "INNER JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id "
             "INNER JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id "
-            "ORDER BY persproject_idx;";
+            "WHERE suser.parent='";
+    qStr += DB_MODELFACTORY->getRootId() + "' AND suser.username='";
+    qStr += userName + "' AND suser.password='";
+    qStr += password + "' ORDER BY persproject_idx;";
 
     if (!query.exec(qStr)) {
         RB_DEBUG->error("DB_SqlCommonFunctionsFunction::getPermissionList() "
@@ -174,12 +181,13 @@ ORDER BY persproject_idx;
 
     while (query.next()) {
         RB_ObjectBase* obj = list->newObject("");
+        obj->setValue("username", query.value("username"));
+        obj->setValue("firstname", query.value("firstname"));
+        obj->setValue("lastname", query.value("lastname"));
         obj->setValue("userstart", query.value("userstart"));
         obj->setValue("userend", query.value("userend"));
-        obj->setValue("groupstatus_id", query.value("groupstatus_id"));
-        obj->setValue("grouppermission_id", query.value("grouppermission_id"));
-        obj->setValue("groupstart", query.value("groupstart"));
-        obj->setValue("groupend", query.value("groupend"));
+        obj->setValue("crudx_id", query.value("crudx_id"));
+        obj->setValue("tokenlist", query.value("tokenlist"));
         obj->setValue("persproject_idx", query.value("persproject_idx")); // PENG_Project - project number
         obj->setValue("persprojectstatus_id", query.value("persprojectstatus_id"));
         obj->setValue("persprojectstart", query.value("persprojectstart"));

@@ -218,15 +218,6 @@ void DB_PermissionWidget::slotProjectAdded() {
 }
 
 void DB_PermissionWidget::slotGroupAdded() {
-    QModelIndex idx = mPermissionGroupModel->index(mPermissionGroupModel->getCurrentIndex().row(),
-                                    mPermissionGroupModel->fieldIndex("start"));
-    QDate date = QDateTime::currentDateTime().date();
-    mPermissionGroupModel->setData(idx, date.toString(Qt::ISODate));
-    date = date.addMonths(1);
-    idx = mPermissionGroupModel->index(mPermissionGroupModel->getCurrentIndex().row(),
-                        mPermissionGroupModel->fieldIndex("end"));
-    mPermissionGroupModel->setData(idx, date.toString(Qt::ISODate));
-
     ui->ileUserSystemGroup->setFocus();
 }
 

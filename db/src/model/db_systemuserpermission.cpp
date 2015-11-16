@@ -30,24 +30,26 @@ DB_SystemUserPermission::~DB_SystemUserPermission() {
 
 /**
  * Create object members
+ * \li username
+ * \li firstname
+ * \li lastname
  * \li userstart
  * \li userend
- * \li groupstatus_id
- * \li grouppermission_id
- * \li groupstart
- * \li groupend
+ * \li crudx_id
+ * \li tokenlist
  * \li persproject_idx {Uuid}tablename - project number
  * \li persprojectstatus_id
  * \li persprojectstart
  * \li persprojectend
  */
 void DB_SystemUserPermission::createMembers() {
+    addMember("username", "-", "", RB2::MemberChar125);
+    addMember("firstname", "-", "", RB2::MemberChar125);
+    addMember("lastname", "-", "", RB2::MemberChar125);
     addMember("userstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
     addMember("userend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember("groupstatus_id", "-", 0, RB2::MemberInteger);
-    addMember("grouppermission_id", "-", 0, RB2::MemberInteger);
-    addMember("groupstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
-    addMember("groupend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
+    addMember("crudx_id", "-", 0, RB2::MemberInteger);
+    addMember("tokenlist", "-", 0, RB2::MemberInteger);
     addMember("persproject_idx", "-", "", RB2::MemberChar165);
     addMember("persprojectstatus_id", "-", 0, RB2::MemberInteger);
     addMember("persprojectstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);

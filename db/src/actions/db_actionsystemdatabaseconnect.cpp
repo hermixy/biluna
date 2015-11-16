@@ -13,6 +13,7 @@
 #include "db_actionsystemselectproject.h"
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
+#include "db_permissionhandler.h"
 #include "rb_database.h"
 #include "rb_mainwindow.h"
 #include "rb_modelfactory.h"
@@ -93,7 +94,7 @@ RB_Action* DB_ActionSystemDatabaseConnect::factory() {
             }
         } else {
             // in existing database, with db tables, permission might have been set
-//            DB_MODELFACTORY->setUserPermission();
+            DB_PERMISSIONHANDLER->setUserPermission();
         }
     }
 
