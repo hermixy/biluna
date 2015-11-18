@@ -42,6 +42,13 @@ RB_UtilityFactory::RB_UtilityFactory() {
  * Destructor
  */
 RB_UtilityFactory::~RB_UtilityFactory() {
+    // In implementation otherwise mUtilityVector already NULL
+    //    while (!mUtilityVector.empty()) {
+    //        RB_Utility* f = mUtilityVector.back();
+    //        delete f; // deletes utility and removes, therefor no pop_back()
+    //    }
+    //    mActiveFactory = NULL;
+
     RB_DEBUG->print("RB_UtilityFactory::~RB_UtilityFactory() OK");
 }
 

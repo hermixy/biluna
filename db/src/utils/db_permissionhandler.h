@@ -11,6 +11,7 @@
 #ifndef DB_PERMISSIONHANDLER_H
 #define DB_PERMISSIONHANDLER_H
 
+#include "rb_action.h"
 #include "rb_objectcontainer.h"
 #include "rb_utility.h"
 
@@ -28,15 +29,19 @@ public:
     void setUserPermission();
     bool isValidDbUser();
 
-    int getPerspectivePermission(const RB_String& perspectiveCode);
-    int getCrudxPermission(const RB_String& modelName,
-                                  const RB_String& projectId);
+    void conditionalExecute(RB_Action* action,
+                            int perspective,
+                            const QString& perspectiveProjectId = "",
+                            int permission = RB2::PermissionDefault,
+                            const QString& tokenList = "");
 
 private:
     DB_PermissionHandler();
     void setUserCount();
-    void handlePermissionSetting(RB_ObjectBase* projectObj,
-                                        RB_ObjectBase* permObj);
+    bool hasPermission(int perspective,
+                       const QString& perspectiveProjectId = "",
+                       int permission = RB2::PermissionDefault,
+                       const QString& tokenList = "");
 
     static DB_PermissionHandler* mActiveUtility;
     RB_ObjectContainer* mPermissionList;
@@ -44,6 +49,7 @@ private:
     QString mUserName;
     QString mPassword;
     int mUserCount;
+    bool mIsAdmin;
 
 };
 

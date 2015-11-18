@@ -98,13 +98,29 @@ RB_Action* DB_ActionSystemDatabaseConnect::factory() {
         }
     }
 
+    if (!DB_PERMISSIONHANDLER->isValidDbUser()) {
+        db.close();
+        DB_DIALOGFACTORY->requestWarningDialog(
+                    tr("Not a valid user,\n"
+                       "database connection closed."));
+        return nullptr;
+    }
+
     DB_DIALOGFACTORY->commandMessage("Database connected");
+    DB_DIALOGFACTORY->statusBarMessage(tr("Database connection is ready"), 2000);
 
     // Select project and if new database create the tables
     RB_Action* a = new DB_ActionSystemSelectProject();
     // no graphicsView with eventhandler which deletes the action
     a->trigger();
     delete a;
+
+    if (DB_MODELFACTORY->getRootId() != "") {
+        DB_DIALOGFACTORY->requestInformationDialog(
+                    tr("Database connection is ready,\n"
+                       "select a perspective from the menu."));
+    }
+
     a = NULL;
     return a;
 }
