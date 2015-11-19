@@ -28,8 +28,10 @@ public:
     virtual void createDatabaseIndexList(QStringList& indexList);
     virtual void setPerspectiveProjects(RB_ObjectContainer* list);
     virtual void getPermissionList(RB_ObjectContainer* list,
-                                   const QString& userName,
-                                   const QString& password);
+                                   const QString& userId);
+    virtual bool hasUserLoginPermission(const QString& userName,
+                                        const QString& password,
+                                        QString& userId);
     virtual int getUserCount();
 
 private:

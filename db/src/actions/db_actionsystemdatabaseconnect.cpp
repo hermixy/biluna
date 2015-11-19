@@ -11,6 +11,7 @@
 #include "db_actionsystemdatabaseconnect.h"
 
 #include "db_actionsystemselectproject.h"
+#include "db_connectiondialog.h"
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
 #include "db_permissionhandler.h"
@@ -53,20 +54,23 @@ RB_GuiAction* DB_ActionSystemDatabaseConnect::createGuiAction() {
 RB_Action* DB_ActionSystemDatabaseConnect::factory() {
     RB_ModelFactory* mf = NULL;
 
-    if (!RB_Database::database().isOpen()) {
-        RB_Dialog* dlg = DB_DIALOGFACTORY->getDialog(DB_DialogFactory::DialogDbConnection);
+    if (!RB_DATABASE->database().isOpen()) {
+        RB_Dialog* dlg = DB_DIALOGFACTORY->getDialog(
+                    DB_DialogFactory::DialogDbConnection);
 
         if (dlg->exec() == QDialog::Accepted) {
             mf = DB_DIALOGFACTORY->getModelFactory();
-            QSqlDatabase defaultDb = RB_DATABASE->database();
-            mf->setDatabase(defaultDb);
-            DB_DIALOGFACTORY->getMainWindow()->setWindowTitle("Biluna - " + defaultDb.databaseName());
+            mf->setDatabase(RB_DATABASE->database());
+            DB_DIALOGFACTORY->getMainWindow()->setWindowTitle(
+                        "Biluna - " + RB_DATABASE->database().databaseName());
         } else {
             dlg->deleteLater();
-            dlg = NULL;
             return NULL;
         }
 
+        DB_ConnectionDialog* conDlg = dynamic_cast<DB_ConnectionDialog*>(dlg);
+        DB_PERMISSIONHANDLER->setUserName(conDlg->userName());
+        DB_PERMISSIONHANDLER->setPassword(conDlg->userPassword());
         dlg->deleteLater();
     } else {
         DB_DIALOGFACTORY->requestWarningDialog(tr("Database is already open."));
@@ -75,14 +79,17 @@ RB_Action* DB_ActionSystemDatabaseConnect::factory() {
     if (!mf) {
         RB_DEBUG->error("DB_ActionSystemDatabaseConnect::factory() "
                         "mf is NULL ERROR");
-        return NULL;
+        QString connectionName = RB_DATABASE->database().connectionName();
+        RB_DATABASE->database().close();
+        RB_DATABASE->removeDatabase(connectionName);
+        return nullptr;
     }
 
     // Check whether tables exist (from an existing database)
-    QSqlDatabase db = mf->getDatabase();
-    if (db.isOpen()) {
-        if (db.tables().size() > 0
-            && !db.tables().contains("DB_Project", Qt::CaseInsensitive)) {
+    QSqlDatabase defaultDb = RB_DATABASE->database();
+    if (defaultDb.isOpen()) {
+        if (defaultDb.tables().size() > 0
+            && !defaultDb.tables().contains("DB_Project", Qt::CaseInsensitive)) {
             int res = DB_DIALOGFACTORY->requestYesNoDialog(tr("Existing database"),
                            tr("Tables exist in database,\n"
                               "Do you want to create the Biluna DB tables?"));
@@ -92,22 +99,35 @@ RB_Action* DB_ActionSystemDatabaseConnect::factory() {
                 DB_MODELFACTORY->emitState();
                 return NULL;
             }
-        } else {
-            // in existing database, with db tables, permission might have been set
-            DB_PERMISSIONHANDLER->setUserPermission();
         }
-    }
-
-    if (!DB_PERMISSIONHANDLER->isValidDbUser()) {
-        db.close();
-        DB_DIALOGFACTORY->requestWarningDialog(
-                    tr("Not a valid user,\n"
-                       "database connection closed."));
+    } else {
+        DB_DIALOGFACTORY->commandMessage("Not connected to database");
+        DB_DIALOGFACTORY->statusBarMessage(tr("Database connection invalid"), 2000);
         return nullptr;
     }
 
-    DB_DIALOGFACTORY->commandMessage("Database connected");
+    DB_DIALOGFACTORY->commandMessage(tr("Database connected"));
     DB_DIALOGFACTORY->statusBarMessage(tr("Database connection is ready"), 2000);
+
+    // Check whether DB tables exists, if not run create tables in database
+    if (!DB_MODELFACTORY->createMissingTables("DB", 0, 9, 14)) {
+        DB_DIALOGFACTORY->requestWarningDialog(tr("DB check- and update database ERROR."));
+        DB_MODELFACTORY->emitState();
+        return nullptr;
+    }
+
+    DB_PERMISSIONHANDLER->refresh();
+
+    if (!DB_PERMISSIONHANDLER->isValidDbUser()) {
+        QString connectionName = RB_DATABASE->database().connectionName();
+        RB_DATABASE->database().close();
+        RB_DATABASE->removeDatabase(connectionName);
+        DB_DIALOGFACTORY->requestWarningDialog(
+                    tr("Not a valid user,\n"
+                       "database connection closed."));
+        DB_DIALOGFACTORY->commandMessage(tr("Database disconnected"));
+        return nullptr;
+    }
 
     // Select project and if new database create the tables
     RB_Action* a = new DB_ActionSystemSelectProject();

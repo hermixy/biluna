@@ -14,6 +14,7 @@
 #include <QVariant>
 #include "db_global.h"
 #include "rb_aesencryption.h"
+#include "../../../biluna_private/db/src/utils/rb_utilityfactory_private.h"
 
 class RB_Utility;
 
@@ -22,7 +23,8 @@ class RB_Utility;
  * Abstract utility factory class, for the creation and deletion
  * of all utility managers
  */
-class DB_EXPORT RB_UtilityFactory {
+class DB_EXPORT RB_UtilityFactory
+        : public RB_UtilityFactory_Private {
 
 public:
     RB_UtilityFactory();

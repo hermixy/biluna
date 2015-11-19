@@ -64,13 +64,6 @@ RB_Action* DB_ActionSystemSelectProject::factory() {
  */
 void DB_ActionSystemSelectProject::trigger() {
     if (RB_DATABASE->database().isOpen()) {
-        // Check whether DB tables exists, if not run create tables in database
-        if (!DB_MODELFACTORY->createMissingTables("DB", 0, 9, 14)) {
-            DB_DIALOGFACTORY->requestWarningDialog(tr("DB check- and update database ERROR."));
-            DB_MODELFACTORY->emitState();
-            return;
-        }
-
         // Open project selection dialog
         RB_Dialog* dlg = DB_DIALOGFACTORY->getDialog(DB_DialogFactory::DialogProject);
 

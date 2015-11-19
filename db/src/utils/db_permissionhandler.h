@@ -26,7 +26,6 @@ public:
     virtual void refresh() override;
     void setUserName(const QString& userName);
     void setPassword(const QString& password);
-    void setUserPermission();
     bool isValidDbUser();
 
     void conditionalExecute(RB_Action* action,
@@ -37,7 +36,7 @@ public:
 
 private:
     DB_PermissionHandler();
-    void setUserCount();
+    void setUserPermission();
     bool hasPermission(int perspective,
                        const QString& perspectiveProjectId = "",
                        int permission = RB2::PermissionDefault,
@@ -46,9 +45,11 @@ private:
     static DB_PermissionHandler* mActiveUtility;
     RB_ObjectContainer* mPermissionList;
 
+    QString mUserId;
     QString mUserName;
     QString mPassword;
     int mUserCount;
+    bool mIsValidUser;
     bool mIsAdmin;
 
 };

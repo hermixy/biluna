@@ -21,8 +21,6 @@ RB_TcpSocket::RB_TcpSocket(QObject *parent) : QTcpSocket(parent) {
     mPort = -1;
     mTimerId = -1;
     mTimer = NULL;
-
-    mDatabaseInstance = NULL;
 }
 
 RB_TcpSocket::~RB_TcpSocket() {
@@ -53,10 +51,6 @@ void RB_TcpSocket::timerEvent(QTimerEvent* /* e */) {
     RB_DEBUG->print("RB_TcpSocket::timerEvent()");
     // connectToHost(mHostName, mPort, ReadWrite); not used
 
-    if (!mDatabaseInstance) {
-        return;
-    }
-
-    mDatabaseInstance->dummyQuery();
+    RB_DATABASE->dummyQuery();
 }
 

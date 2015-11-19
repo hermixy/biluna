@@ -18,7 +18,6 @@
 #include "db_global.h"
 #include "rb_string.h"
 
-class RB_Database;
 
 class DB_EXPORT RB_TcpSocket : public QTcpSocket {
 
@@ -30,9 +29,9 @@ public:
 
     void keepConnectionAlive(const RB_String& hostName,
                              int port, int mSec = 60000);
-    void setDatabaseInstance(RB_Database* db) {
-        mDatabaseInstance = db;
-    }
+//    void setDatabaseInstance(RB_Database* db) {
+//        mDatabaseInstance = db;
+//    }
 
 public slots:
     void slotConnectToHost();
@@ -46,7 +45,7 @@ private:
     int mTimerId;
 
     QTimer* mTimer;
-    RB_Database* mDatabaseInstance;
+//    RB_Database* mDatabaseInstance;
 };
 
 #endif // RB_TCPSOCKET_H

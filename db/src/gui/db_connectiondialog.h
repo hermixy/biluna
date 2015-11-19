@@ -81,8 +81,6 @@ private:
 
     QDir mPluginsDir;
     static int mConnectionNumber;
-//    bool mIsEncryption;
-//    RB_AesEncryption mAes;
     RB_StringList mConnectionList;
     RB_String mConnectionSeparator;
     RB_String mConnectionItemSeparator;

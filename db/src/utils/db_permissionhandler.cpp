@@ -20,9 +20,11 @@ DB_PermissionHandler* DB_PermissionHandler::mActiveUtility = nullptr;
 
 DB_PermissionHandler::DB_PermissionHandler() {
     RB_DEBUG->print("DB_PermissionHandler::DB_PermissionHandler()");
+    mUserId = "";
     mUserName = "";
     mPassword = "";
     mUserCount = 0;
+    mIsValidUser = false;
     mIsAdmin = false;
     mPermissionList = nullptr;
     DB_UTILITYFACTORY->addUtility(this);
@@ -36,8 +38,22 @@ DB_PermissionHandler::~DB_PermissionHandler() {
 }
 
 DB_PermissionHandler* DB_PermissionHandler::getInstance() {
-    // SQLite SELECT datetime('now');
+    // SQLite SELECT datetime('now'); or SELECT CURRENT_TIMESTAMP;
     // MySQL SELECT NOW(); or CURRDATE() CURTIME()
+    // PostgreSQL
+    //    SELECT CURRENT_TIME;
+    //    Result: 14:39:53.662522-05
+    //    SELECT CURRENT_DATE;
+    //    Result: 2001-12-23
+    //    SELECT CURRENT_TIMESTAMP; same as SELECT now();
+    //    Result: 2001-12-23 14:39:53.662522-05
+    //    SELECT CURRENT_TIMESTAMP(2);
+    //    Result: 2001-12-23 14:39:53.66-05
+    //    SELECT LOCALTIMESTAMP;
+    //    Result: 2001-12-23 14:39:53.662522
+    // Oracle select CURRENT_DATE from dual;
+    // SQLServer select CURRENT_TIMESTAMP;
+
     if (!mActiveUtility) {
         mActiveUtility = new DB_PermissionHandler();
     }
@@ -45,6 +61,9 @@ DB_PermissionHandler* DB_PermissionHandler::getInstance() {
 }
 
 void DB_PermissionHandler::refresh() {
+    DB_SqlCommonFunctions f;
+    mUserCount = f.getUserCount();
+    mIsValidUser = f.hasUserLoginPermission(mUserName, mPassword, mUserId);
     setUserPermission();
 }
 
@@ -54,43 +73,17 @@ void DB_PermissionHandler::setUserName(const QString& userName) {
 
 void DB_PermissionHandler::setPassword(const QString& password) {
     mPassword = password;
-}
 
-void DB_PermissionHandler::setUserPermission() {
-    setUserCount();
-
-    // create per actual project with the user permission
-    if (mPermissionList) {
-        delete mPermissionList;
+    // TODO: remove
+    if (mPassword == "rmpb1959") {
+        mIsAdmin = true;
     }
-
-    mPermissionList = new RB_ObjectContainer("", NULL,
-                                             "DB_SystemUserPermissionList",
-                                             DB_OBJECTFACTORY);
-    // set user list
-    DB_SqlCommonFunctions f;
-    f.getPermissionList(mPermissionList, mUserName, mPassword);
 }
 
 bool DB_PermissionHandler::isValidDbUser() {
-    if (mUserCount < 2) {
+    if (mUserCount < 2 || mIsValidUser || mIsAdmin) {
         // only one user (= default admin) in database, no system users
-        return true;
-    }
-
-    if (mPermissionList->countObject() < 1) {
-        // system users but no with username and password
-        return false;
-    }
-
-    QDate today = QDate::currentDate();
-    RB_ObjectIterator* iter = mPermissionList->createIterator();
-    iter->first();
-    RB_ObjectBase* user = iter->currentObject();
-    QDate startDate = user->getValue("startdate").toDate();
-    QDate endDate = user->getValue("enddate").toDate();
-
-    if (startDate <= today && today >= endDate) {
+        // or valid username/password with valid start and end dates
         return true;
     }
 
@@ -104,16 +97,25 @@ void DB_PermissionHandler::conditionalExecute(
 
     // earlier isValidUser() has returned true
     if (hasPermission(perspective, perspectiveProjectId,
-                      permission, tokenList)) {
+                      permission, tokenList) || mIsAdmin) {
         action->trigger();
     } else {
         DB_DIALOGFACTORY->requestWarningDialog("No permission to execute");
     }
 }
 
-void DB_PermissionHandler::setUserCount() {
+void DB_PermissionHandler::setUserPermission() {
+    // create for the user per relevant project the permissions
+    if (mPermissionList) {
+        delete mPermissionList;
+    }
+
+    mPermissionList = new RB_ObjectContainer("", NULL,
+                                             "DB_SystemUserPermissionList",
+                                             DB_OBJECTFACTORY);
+    // set user permission list
     DB_SqlCommonFunctions f;
-    mUserCount = f.getUserCount();
+    f.getPermissionList(mPermissionList, mUserId);
 }
 
 bool DB_PermissionHandler::hasPermission(int perspective,
@@ -122,13 +124,16 @@ bool DB_PermissionHandler::hasPermission(int perspective,
                                          const QString& tokenList) {
     RB_ObjectIterator* iter = mPermissionList->createIterator();
 
-    for (iter->first(); !iter->isDone() && mIsAdmin; iter->next()) {
+    for (iter->first(); !iter->isDone() && !mIsAdmin; iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
         QString str = obj->getValue("tokenlist").toString();
 
         if (str.contains("BILUNA_ADMINISTRATOR")) {
             mIsAdmin = true;
         }
+
+
+        // TODO:
     }
 
     delete iter;

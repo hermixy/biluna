@@ -217,6 +217,7 @@ HEADERS = \
     ../src/gui/rb_mainwindow.h \
     ../src/gui/rb_mdiwindow.h \
     ../src/gui/rb_memberdelegate.h \
+    ../src/gui/rb_membereditdialog.h \
     ../src/gui/rb_plaintextedit.h \
     ../src/gui/rb_plotterwidget.h \
     ../src/gui/rb_projecteditdialog.h \
@@ -268,6 +269,7 @@ HEADERS = \
     ../src/utils/db_permissionhandler.h \
     ../src/utils/db_sqlcommonfunctions.h \
     ../src/utils/db_utilityfactory.h \
+    ../../../biluna_private/db/src/utils/rb_utilityfactory_private.h \
     ../src/utils/rb_aesencryption.h \
     ../src/utils/rb_debug.h \
     ../src/utils/rb_hash.h \
@@ -295,8 +297,7 @@ HEADERS = \
     ../src/visitors/rb_htmlwriter.h \
     ../src/visitors/rb_visitor.h \
     ../src/visitors/rb_xmlreader.h \
-    ../src/visitors/rb_xmlwriter.h \
-    $$PWD/gui/rb_membereditdialog.h
+    ../src/visitors/rb_xmlwriter.h
 
 SOURCES = \
     ../src/actions/db_actionfactory.cpp \
@@ -459,6 +460,7 @@ SOURCES = \
     ../src/gui/rb_mainwindow.cpp \
     ../src/gui/rb_mdiwindow.cpp \
     ../src/gui/rb_memberdelegate.cpp \
+    ../src/gui/rb_membereditdialog.cpp \
     ../src/gui/rb_ledelegate.cpp \
     ../src/gui/rb_plaintextedit.cpp \
     ../src/gui/rb_plotterwidget.cpp \
@@ -520,6 +522,7 @@ SOURCES = \
     ../src/utils/rb_tcpsocket.cpp \
     ../src/utils/rb_utility.cpp \
     ../src/utils/rb_utilityfactory.cpp \
+    ../../../biluna_private/db/src/utils/rb_utilityfactory_private.cpp \
     ../src/visitors/db_xmlreader.cpp \
     ../src/visitors/rb_csvwriter.cpp \
     ../src/visitors/rb_dbvisitor.cpp \
@@ -527,8 +530,7 @@ SOURCES = \
     ../src/visitors/rb_htmlwriter.cpp \
     ../src/visitors/rb_visitor.cpp \
     ../src/visitors/rb_xmlreader.cpp \
-    ../src/visitors/rb_xmlwriter.cpp \
-    $$PWD/gui/rb_membereditdialog.cpp
+    ../src/visitors/rb_xmlwriter.cpp
 
 
 RESOURCES = \

@@ -35,12 +35,7 @@ public:
     void keepConnectionAlive(const QSqlDatabase& db, int mSec = 60000);
 
     virtual RB_String localDbName() const;
-    virtual RB_String userAuthName() const;
-    virtual RB_String userAuthPassword() const;
-
     virtual void setLocalDbName(const RB_String& name);
-    virtual void setUserAuthName(const RB_String& name);
-    virtual void setUserAuthPassword(const RB_String& pwd);
 
     virtual void dummyQuery();
 
@@ -49,9 +44,6 @@ private:
     // RB_Database(const QSqlDatabase& other);
 
     RB_String mLocalDbName;
-    RB_String mUserAuthName;
-    RB_String mUserAuthPassword;
-
     RB_TcpSocket* mTcpSocket;
 
     //! Unique instance
