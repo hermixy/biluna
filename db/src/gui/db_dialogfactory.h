@@ -112,6 +112,7 @@ public:
         WidgetInternet,                 /**< Internet viewer widget */
         WidgetPaletteColorPicker,       /**< Color picker for custom GUI palette */
         WidgetPermission,               /**< Permission widget */
+        WidgetPermissionReport,         /**< Permission report widget */
         WidgetPlainTextDocument,        /**< Plain text document widget */
         WidgetSimpleChart,              /**< Simple chart types review widget */
         WidgetSimpleReport,             /**< Simple report from database widget */

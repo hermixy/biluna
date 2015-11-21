@@ -30,6 +30,7 @@ FORMS = \
     ../src/gui/db_mappingdialog.ui \
     ../src/gui/db_palettecolorpickerwidget.ui \
     ../src/gui/db_permissionperspectiveprojectdialog.ui \
+    ../src/gui/db_permissionreportwidget.ui \
     ../src/gui/db_permissionwidget.ui \
     ../src/gui/db_plaintextwidget.ui \
     ../src/gui/db_plugintesterdialog.ui \
@@ -97,6 +98,7 @@ HEADERS = \
     ../src/actions/db_actionhelpcredits.h \
     ../src/actions/db_actionhelpindex.h \
     ../src/actions/db_actionhelpsubject.h \
+    ../src/actions/db_actionpermissionreport.h \
     ../src/actions/db_actionstyleaddress.h \
     ../src/actions/db_actionstyleheading1.h \
     ../src/actions/db_actionstyleheading2.h \
@@ -186,6 +188,7 @@ HEADERS = \
     ../src/gui/db_mappingdialog.h \
     ../src/gui/db_palettecolorpickerwidget.h \
     ../src/gui/db_permissionperspectiveprojectdialog.h \
+    ../src/gui/db_permissionreportwidget.h \
     ../src/gui/db_permissionwidget.h \
     ../src/gui/db_plaintextwidget.h \
     ../src/gui/db_plugintesterdialog.h \
@@ -347,6 +350,7 @@ SOURCES = \
     ../src/actions/db_actionhelpcredits.cpp \
     ../src/actions/db_actionhelpindex.cpp \
     ../src/actions/db_actionhelpsubject.cpp \
+    ../src/actions/db_actionpermissionreport.cpp \
     ../src/actions/db_actionstyleaddress.cpp \
     ../src/actions/db_actionstyleheading1.cpp \
     ../src/actions/db_actionstyleheading2.cpp \
@@ -433,6 +437,7 @@ SOURCES = \
     ../src/gui/db_mappingdialog.cpp \
     ../src/gui/db_palettecolorpickerwidget.cpp \
     ../src/gui/db_permissionperspectiveprojectdialog.cpp \
+    ../src/gui/db_permissionreportwidget.cpp \
     ../src/gui/db_permissionwidget.cpp \
     ../src/gui/db_plaintextwidget.cpp \
     ../src/gui/db_plugintesterdialog.cpp \
@@ -560,6 +565,7 @@ OTHER_FILES = \
     ../src/gui/db_mappingdialog.dox \
     ../src/gui/db_palettecolorpickerwidget.dox \
     ../src/gui/db_permissionprojectdialog.dox \
+    ../src/gui/db_permissionreportwidget.dox \
     ../src/gui/db_permissionwidget.dox \
     ../src/gui/db_plaintextwidget.dox \
 #    ../src/gui/db_plugintesterdialog.h \

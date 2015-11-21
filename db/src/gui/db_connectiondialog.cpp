@@ -543,7 +543,13 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
     leUserName->setText(userName);
     leUserPassword->setText(userPwd); // to clear previous password
 
-    lblConnection->setText(lvPrevious->currentIndex().data().toString());
+    if (connectionItemList.at(0).toInt() < 1) {
+        lblConnection->setText(connectionItemList.at(6)
+                               + " @ " + connectionItemList.at(2));
+    } else {
+        lblConnection->setText(connectionItemList.at(8));
+    }
+
     leCurrentUserName->setText(userName);
     leCurrentPassword->setText(userPwd); // to clear previous password
 
@@ -572,7 +578,7 @@ void DB_ConnectionDialog::slotLocalDbSelected(bool) {
     // leUserName->clear();
     leUserPassword->clear();
 
-    lblCurrent->setText("Use select or new ...");
+    lblConnection->setText("Use select or new ...");
     leCurrentUserName->setText("");
     leCurrentPassword->setText("");
 }

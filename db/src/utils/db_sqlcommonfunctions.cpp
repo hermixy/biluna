@@ -268,3 +268,53 @@ int DB_SqlCommonFunctions::getUserCount() {
     }
     return rows; // query.size(); does not work with SQLite
 }
+
+void DB_SqlCommonFunctions::getPermissionReportList(QSqlQuery& query) {
+    /*
+SELECT db_project.number as db_number,
+suser.username as username,
+suser.firstname as firstname,
+suser.lastname as lastname,
+suser.start AS userstart,
+suser.end AS userend,
+sgroup.permission_id AS crudx,
+sgroup.tokenlist AS tokenlist,
+SUBSTR(pproject.persproject_idx, 39) AS project,
+pproject.mstatus_id AS projstatus,
+pproject.start AS projstart,
+pproject.end AS projend
+FROM db_systemuser AS suser
+LEFT JOIN db_systemusergroup AS sugroup ON sugroup.parent=suser.id
+LEFT JOIN db_systemgroup AS sgroup ON sgroup.id=SUBSTR(sugroup.group_idx,1,38)
+LEFT JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id
+LEFT JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id
+LEFT JOIN db_project ON db_project.id=suser.parent
+WHERE suser.id <> '0';
+     */
+
+    RB_String qStr = "SELECT db_project.number as db_number, "
+            "suser.username as username, "
+            "suser.firstname as firstname, "
+            "suser.lastname as lastname, "
+            "suser.start AS userstart, "
+            "suser.end AS userend, "
+            "sgroup.permission_id AS crudx, "
+            "sgroup.tokenlist AS tokenlist, "
+            "SUBSTR(pproject.persproject_idx, 39) AS project, "
+            "pproject.mstatus_id AS projstatus, "
+            "pproject.start AS projstart, "
+            "pproject.end AS projend "
+            "FROM db_systemuser AS suser "
+            "LEFT JOIN db_systemusergroup AS sugroup ON sugroup.parent=suser.id "
+            "LEFT JOIN db_systemgroup AS sgroup ON sgroup.id=SUBSTR(sugroup.group_idx,1,38) "
+            "LEFT JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id "
+            "LEFT JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id "
+            "LEFT JOIN db_project ON db_project.id=suser.parent "
+            "WHERE suser.id <> '0';";
+
+    if (!query.exec(qStr)) {
+        RB_DEBUG->error("DB_SqlCommonFunctionsFunction::getPermissionReport() "
+                        + query.lastError().text() + " ERROR");
+    }
+
+}

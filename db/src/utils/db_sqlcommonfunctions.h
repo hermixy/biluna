@@ -33,6 +33,7 @@ public:
                                         const QString& password,
                                         QString& userId);
     virtual int getUserCount();
+    virtual void getPermissionReportList(QSqlQuery& query);
 
 private:
     void appendProjects(RB_ObjectContainer* list, const RB_String& tableName);

@@ -26,6 +26,7 @@
 #include "db_palettecolorpickerwidget.h"
 #include "db_permissionperspectiveprojectdialog.h"
 #include "db_permissionwidget.h"
+#include "db_permissionreportwidget.h"
 #include "db_plaintextwidget.h"
 #include "db_plugintesterdialog.h"
 #include "db_projectdialog.h"
@@ -160,6 +161,14 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = RB_DialogFactory::findWidget(type);
         if (wgt) return wgt;
         wgt = new DB_PermissionWidget(parent);
+        mWidgetList[type] = wgt;
+        break;
+    }
+    case WidgetPermissionReport:
+    {
+        wgt = RB_DialogFactory::findWidget(type);
+        if (wgt) return wgt;
+        wgt = new DB_PermissionReportWidget(parent);
         mWidgetList[type] = wgt;
         break;
     }
