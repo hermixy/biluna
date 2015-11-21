@@ -11,6 +11,7 @@
 
 #include <QtWidgets>
 #include <QItemSelection>
+#include <QSqlQuery>
 #include "rb.h"
 #include "rb_database.h"
 #include "rb_flagvisitor.h"
@@ -1651,6 +1652,7 @@ bool RB_MmSource::select() {
     }
 
     bool success = QSqlRelationalTableModel::select();
+//    RB_DEBUG->print(this->query().lastQuery());
 //    RB_DEBUG->print("RB_MmSource::select() table: " + this->tableName());
 //    RB_DEBUG->print("RB_MmSource::select() filter: " + this->filter());
 //    RB_DEBUG->print("RB_MmSource::select() last error: " + this->lastError().text());

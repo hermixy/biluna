@@ -116,10 +116,6 @@ public:
     virtual void setIsNewWidget(bool isNewWidget);
     virtual bool isNewWidget();
 
-    virtual bool isDuplicateIdxFound(RB_MmProxy* model,
-                                     const RB_String& fieldName,
-                                     const RB_String& id, int excludeRow);
-
 public slots:
     virtual void slotPrintPreview(QPrinter* pr);
     virtual void slotDataIsChanged(const QModelIndex&, const QModelIndex&);
@@ -160,6 +156,13 @@ protected:
 
     virtual bool maybeSave();
     virtual void beforeFileSave();
+
+    virtual bool isDuplicateIdxFound(RB_MmProxy* model,
+                                     const RB_String& fieldName,
+                                     const RB_String& id, int excludeRow);
+    virtual bool isDuplicateEntryFound(RB_MmProxy* model,
+                                       const RB_String& fieldName,
+                                       const RB_String& entry, int excludeRow);
 
     virtual void findInTable(const QString& text, QTableView* tv);
     virtual void findInTree(const QString& text, QTreeView* trv);

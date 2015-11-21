@@ -52,7 +52,7 @@ RB_GuiAction* DB_ActionSystemSelectProject::createGuiAction() {
 RB_Action* DB_ActionSystemSelectProject::factory() {
     RB_Action* a = new DB_ActionSystemSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    DB_PERMISSIONHANDLER->conditionalExecute(a, RB2::PerspectiveDB);
+    DB_PERMISSIONHANDLER->conditionalExecute(a);
 //    a->trigger();
     delete a;
     a = NULL;

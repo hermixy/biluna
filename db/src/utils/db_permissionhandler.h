@@ -27,9 +27,12 @@ public:
     void setUserName(const QString& userName);
     void setPassword(const QString& password);
     bool isValidDbUser();
+    bool isAdmin();
+    int getUserCount();
+    void getDbIdList(QStringList& dbIdList);
+    QDate getToday() const;
 
     void conditionalExecute(RB_Action* action,
-                            int perspective,
                             const QString& perspectiveProjectId = "",
                             int permission = RB2::PermissionDefault,
                             const QString& tokenList = "");
@@ -37,10 +40,10 @@ public:
 private:
     DB_PermissionHandler();
     void setUserPermission();
-    bool hasPermission(int perspective,
-                       const QString& perspectiveProjectId = "",
+    bool hasPermission(const QString& perspectiveProjectId = "",
                        int permission = RB2::PermissionDefault,
                        const QString& tokenList = "");
+    bool validTokenList(const QString &userTokens, const QString& tokenList);
 
     static DB_PermissionHandler* mActiveUtility;
     RB_ObjectContainer* mPermissionList;
@@ -51,6 +54,7 @@ private:
     int mUserCount;
     bool mIsValidUser;
     bool mIsAdmin;
+    QDate mToday;
 
 };
 

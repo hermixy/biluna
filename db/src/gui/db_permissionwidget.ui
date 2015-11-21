@@ -474,19 +474,6 @@
              <property name="verticalSpacing">
               <number>3</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_3">
-               <property name="text">
-                <string>Project Number</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="leProjectNumber"/>
-             </item>
              <item row="0" column="2">
               <widget class="QLabel" name="label_7">
                <property name="text">
@@ -573,7 +560,10 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
+             <item row="0" column="1">
+              <widget class="RB_IdxLineEdit" name="ilePerspectiveProject"/>
+             </item>
+             <item row="0" column="0">
               <widget class="QLabel" name="lblPerspectiveProject">
                <property name="text">
                 <string>Perspective Project</string>
@@ -582,9 +572,6 @@
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
-             </item>
-             <item row="3" column="1" colspan="3">
-              <widget class="RB_IdxLineEdit" name="ilePerspectiveProject"/>
              </item>
             </layout>
            </item>
@@ -725,10 +712,9 @@
   <tabstop>leHostName</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>tvProject</tabstop>
-  <tabstop>leProjectNumber</tabstop>
+  <tabstop>ilePerspectiveProject</tabstop>
   <tabstop>leDescription</tabstop>
   <tabstop>leCustomer</tabstop>
-  <tabstop>ilePerspectiveProject</tabstop>
   <tabstop>cbStatus</tabstop>
   <tabstop>deStartProject</tabstop>
   <tabstop>deEndProject</tabstop>

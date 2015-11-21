@@ -130,6 +130,9 @@ void DB_ConnectionDialog::init() {
         lvPrevious->selectionModel()->select(prevModel->index(0,0),
                                              QItemSelectionModel::Select);
         slotSetDbConnectionWidgets(prevModel->index(0,0), QModelIndex());
+
+        leCurrentPassword->setFocus();
+        leCurrentPassword->selectAll();
     }
 
     // Emits customContexMenuRequested()
@@ -277,11 +280,19 @@ RB_String DB_ConnectionDialog::localDatabaseName() const {
 }
 
 RB_String DB_ConnectionDialog::userName() const {
+    if (tabWidget->currentIndex() == 0) {
+        return leCurrentUserName->text();
+    }
+
     return leUserName->text();
 }
 
 
 RB_String DB_ConnectionDialog::userPassword() const {
+    if (tabWidget->currentIndex() == 0) {
+        return leCurrentPassword->text();
+    }
+
     return leUserPassword->text();
 }
 
@@ -473,6 +484,10 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
         leLocalDbName->clear();
         leUserName->clear();
         leUserPassword->clear();
+
+        lblConnection->setText("Use select or new ...");
+        leCurrentUserName->setText("");
+        leCurrentPassword->setText("");
         return;
     }
 
@@ -526,7 +541,12 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
 
     leLocalDbName->setText(localDbName);
     leUserName->setText(userName);
-    leUserPassword->setText(userPwd);
+    leUserPassword->setText(userPwd); // to clear previous password
+
+    lblConnection->setText(lvPrevious->currentIndex().data().toString());
+    leCurrentUserName->setText(userName);
+    leCurrentPassword->setText(userPwd); // to clear previous password
+
     updateUi();
 }
 
@@ -551,6 +571,10 @@ void DB_ConnectionDialog::slotLocalDbSelected(bool) {
     leTestConnection->clear();
     // leUserName->clear();
     leUserPassword->clear();
+
+    lblCurrent->setText("Use select or new ...");
+    leCurrentUserName->setText("");
+    leCurrentPassword->setText("");
 }
 
 void DB_ConnectionDialog::slotDeletePreviousConnection() {

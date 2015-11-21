@@ -125,7 +125,7 @@ RB_MmProxy* DB_ModelFactory::getModel(int type, bool shared) {
     }
     case ModelPermissionProject:
         model = getTableModel(db, mObjectFactory, type, "DB_PermissionProjectList", shared);
-        model->setSourceSortOrder(RB2::SortOrderDescending, "number");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "persproject_idx");
         break;
     case ModelProject:
         // DB_ProjectList actually does not exist but required to create model

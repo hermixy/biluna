@@ -57,6 +57,7 @@ protected slots:
     void slotUserCurrentRowChanged(QModelIndex current, QModelIndex previous);
     void slotUserRootChanged();
 
+    void slotCheckDuplicateUserName();
     void slotCheckDuplicatePerspectiveProject();
     void slotCheckDuplicateProjectGroup();
     void slotCheckDuplicateUserGroup();

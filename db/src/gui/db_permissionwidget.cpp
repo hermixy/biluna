@@ -76,16 +76,15 @@ void DB_PermissionWidget::init() {
     // 2. Set relations and mapper for line edits etc.
     //
     mPermissionProjectMapper = mPermissionProjectModel->getMapper();
-    mPermissionProjectMapper->addMapping(ui->leProjectNumber, mPermissionProjectModel->fieldIndex("number"));
-    mPermissionProjectMapper->addMapping(ui->leDescription, mPermissionProjectModel->fieldIndex("description"));
-    mPermissionProjectMapper->addMapping(ui->leCustomer, mPermissionProjectModel->fieldIndex("customer"));
     mPermissionProjectMapper->addMapping(ui->ilePerspectiveProject,
                         mPermissionProjectModel->fieldIndex("persproject_idx"));
     ui->ilePerspectiveProject->setDefaultDialog(DB_DIALOGFACTORY,
                                                 DB_DialogFactory::DialogPermissionPerspectiveProject,
                                                 "persproject_idx", "description");
+    mPermissionProjectMapper->addMapping(ui->leDescription, mPermissionProjectModel->fieldIndex("description"));
+    mPermissionProjectMapper->addMapping(ui->leCustomer, mPermissionProjectModel->fieldIndex("customer"));
     RB_StringList items;
-    items << tr("Live") << tr("Locked") << tr("Hidden") << tr("Test");
+    items  << tr("Hidden") << tr("Locked") << tr("Live") << tr("Test");
     ui->cbStatus->setModel(new QStringListModel(items, this));
     mPermissionProjectModel->setTextList(mPermissionProjectModel->fieldIndex("mstatus_id"), items);
     mPermissionProjectMapper->addMapping(ui->cbStatus, mPermissionProjectModel->fieldIndex("mstatus_id"),
@@ -156,6 +155,8 @@ void DB_PermissionWidget::init() {
             this, SLOT(slotUserGroupAdded()));
 
     // Prevent duplicates
+    connect(ui->leUserName, SIGNAL(editingFinished()),
+            this, SLOT(slotCheckDuplicateUserName()));
     connect(ui->ilePerspectiveProject, SIGNAL(clicked()),
             this, SLOT(slotCheckDuplicatePerspectiveProject()));
     connect(ui->ileProjectSystemGroup, SIGNAL(clicked()),
@@ -213,8 +214,7 @@ void DB_PermissionWidget::slotProjectAdded() {
                         mPermissionProjectModel->fieldIndex("end"));
     mPermissionProjectModel->setData(idx, date.toString(Qt::ISODate));
 
-    ui->leProjectNumber->setFocus();
-    ui->leProjectNumber->selectAll();
+    ui->ilePerspectiveProject->setFocus();
 }
 
 void DB_PermissionWidget::slotGroupAdded() {
@@ -270,6 +270,22 @@ void DB_PermissionWidget::slotUserCurrentRowChanged(QModelIndex current,
 void DB_PermissionWidget::slotUserRootChanged() {
     ui->lePassword->clear();
     ui->lePassword->setEnabled(false);
+}
+
+void DB_PermissionWidget::slotCheckDuplicateUserName() {
+    QModelIndex idx = ui->tvUser->currentIndex();
+    if (!idx.isValid()) {
+        return;
+    }
+
+    QString userName = mSystemUserModel->getCurrentValue("username").toString();
+
+    if (isDuplicateEntryFound(mSystemUserModel, "username",
+                              userName, idx.row())) {
+        mSystemUserModel->setCurrentValue("username", "", Qt::EditRole);
+        DB_DIALOGFACTORY->requestWarningDialog(tr("Username already selected,\n"
+                                                  "duplicate entry not allowed."));
+    }
 }
 
 void DB_PermissionWidget::slotCheckDuplicatePerspectiveProject() {
