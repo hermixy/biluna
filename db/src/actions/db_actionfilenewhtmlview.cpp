@@ -45,6 +45,7 @@ RB_Action* DB_ActionFileNewHtmlView::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionFileNewHtmlView::trigger() {
+    try {
 /*
     // No preliminary checks required
 
@@ -70,7 +71,13 @@ void DB_ActionFileNewHtmlView::trigger() {
     }
     mdiWin->show();
  */
-    DB_InternetBrowserWidget* wdgt = DB_INTERNETBROWSERFACTORY->newBrowserWidget();
-    wdgt->loadPage("http://www.google.com");
+        DB_InternetBrowserWidget* wdgt = DB_INTERNETBROWSERFACTORY->newBrowserWidget();
+        wdgt->loadPage("https://www.google.com");
+    } catch(std::exception& e) {
+        DB_DIALOGFACTORY->requestWarningDialog(e.what());
+    } catch(...) {
+        DB_DIALOGFACTORY->requestWarningDialog(
+                    "Error <unkown> in DB_InternetBrowserWidget.trigger()");
+    }
 }
 

@@ -11,7 +11,7 @@
 #include "db_utilityfactory.h"
 
 #include "rb_debug.h"
-
+#include "rb_utility.h"
 
 DB_UtilityFactory* DB_UtilityFactory::mActiveFactory = NULL;
 
@@ -29,6 +29,13 @@ DB_UtilityFactory::DB_UtilityFactory() : RB_UtilityFactory() {
  */
 DB_UtilityFactory::~DB_UtilityFactory() {
     closeAllFactories();
+
+    // Done here and not in base class, otherwise mActiveFactory is already NULL
+    while (!mUtilityVector.empty()) {
+        RB_Utility* f = mUtilityVector.back();
+        delete f; // deletes utility and removes, therefor no pop_back()
+    }
+
     mActiveFactory = NULL;
     RB_DEBUG->print("DB_UtilityFactory::~DB_UtilityFactory() OK");
 }

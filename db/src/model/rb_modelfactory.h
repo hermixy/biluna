@@ -73,11 +73,6 @@ public:
 
     virtual bool addDefaultRows();
 
-    static void setUserPermission();
-    static int getPerspectivePermission(const RB_String& perspectiveCode);
-    static int getCrudxPermission(const RB_String& modelName,
-                                  const RB_String& projectId);
-
 signals:
     //! Database is set, isOpen is true if database is open
     void databaseIsSet(int isOpen);
@@ -106,15 +101,6 @@ protected:
     //! Model is modified flag
     bool mModelIsModified;
 
-    static RB_ObjectContainer* mPermissionList;
-
-private:
-    static int userPermissionHelper(const RB_String& modelName,
-                                    const RB_String& projectId);
-    static void handlePermissionSetting(RB_ObjectBase* projectObj,
-                                        RB_ObjectBase* permObj);
-
-    static int mUserCount;
 };
 
 #endif // RB_MODELFACTORY_H

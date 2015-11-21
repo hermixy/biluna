@@ -58,6 +58,7 @@
 #include "db_actionhelpcredits.h"
 #include "db_actionhelpindex.h"
 #include "db_actionhelpsubject.h"
+#include "db_actionpermissionreport.h"
 #include "db_actionstyleaddress.h"
 #include "db_actionstyleheading1.h"
 #include "db_actionstyleheading2.h"
@@ -811,21 +812,12 @@ void DB_ActionFactory::getSystemMenu(QMenu* menu, QToolBar* /* tb */) {
     connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));
 
-
     menu->addSeparator();
-
 
     // create and add submenu - Administrator
     subMenu = new QMenu(DB_DIALOGFACTORY->getMainWindow());
     subMenu->setTitle(tr("&Administrator"));
     menu->addMenu(subMenu);
-
-//#ifdef BILUNA_DEBUG
-    ga = DB_ActionSystemPermission::createGuiAction();
-    subMenu->addAction(ga);
-    ga->setEnabled(false);
-    connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
-            ga, SLOT(slotSetEnabled(int)));
 
     ga = DB_ActionSystemGroup::createGuiAction();
     subMenu->addAction(ga);
@@ -833,8 +825,19 @@ void DB_ActionFactory::getSystemMenu(QMenu* menu, QToolBar* /* tb */) {
     connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));
 
+    ga = DB_ActionSystemPermission::createGuiAction();
+    subMenu->addAction(ga);
+    ga->setEnabled(false);
+    connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
+
+    ga = DB_ActionPermissionReport::createGuiAction();
+    subMenu->addAction(ga);
+    ga->setEnabled(false);
+    connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
+
     subMenu->addSeparator();
-//#endif
 
     ga = DB_ActionSystemDatabaseBrowser::createGuiAction();
     subMenu->addAction(ga);

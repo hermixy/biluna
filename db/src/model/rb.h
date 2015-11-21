@@ -347,13 +347,13 @@ public:
      * overrides the permissions of the users but not the admin and the super user
      */
     enum ProjectStatus {
-        ProjectNone = -3,           /**< No- or invalid project. */
-        ProjectDeleted = -2,        /**< The project is deleted/hidden for all users */
-        ProjectHidden = -1,         /**< The project is hidden for all users, except admin and superuser when creating a new project*/
+        ProjectNone = -4,           /**< No- or invalid project. */
+        ProjectDeleted = -3,        /**< The project is deleted/hidden for all users */
+        ProjectHidden = -2,         /**< The project is hidden for all users, except admin and superuser when creating a new project*/
+        ProjectLocked = -1,          /**< The project is locked or the data is frozen */
         ProjectLive = 0,            /**< The project is live, editable and is default/normal status*/
-        ProjectLocked = 1,          /**< The project is locked or the data is frozen */
-        ProjectTest = 2,            /**< The project is used for testing */
-        ProjectDefault = 3          /**< Default- or all project status */
+        ProjectTest = 1,            /**< The project is used for testing */
+        ProjectDefault = 2          /**< Default- or all project status */
     };
 
     /**

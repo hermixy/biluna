@@ -58,16 +58,6 @@ void ACC_ActionRecreateBalance::trigger() {
         return;
     }
 
-    int ret = ACC_DIALOGFACTORY->requestYesNoDialog(
-                tr("Recreate Balance Summaries"),
-                tr("Balance will be recreated.\n"
-                   "This will take some time.\n"
-                   "Do you want to continue?"));
-    if (ret == QMessageBox::No) {
-        ACC_DIALOGFACTORY->statusBarMessage(tr("No action"), 4000);
-        return;
-    }
-
     ACC_SelectYearDialog* dlg = new ACC_SelectYearDialog(ACC_DIALOGFACTORY->getMainWindow());
     dlg->init();
 
@@ -78,6 +68,16 @@ void ACC_ActionRecreateBalance::trigger() {
 
     int year = dlg->getYear();
     dlg->deleteLater();
+
+    int ret = ACC_DIALOGFACTORY->requestYesNoDialog(
+                tr("Recreate Balance Summaries"),
+                tr("Balance will be recreated.\n"
+                   "This will take some time.\n"
+                   "Do you want to continue?"));
+    if (ret == QMessageBox::No) {
+        ACC_DIALOGFACTORY->statusBarMessage(tr("No action"), 4000);
+        return;
+    }
 
     // Start end period, TODO: implement period (months only) selection dialog
     int start = year * 100 + 1;

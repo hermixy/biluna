@@ -40,7 +40,7 @@ DB_SystemUser::~DB_SystemUser() {
  */
 void DB_SystemUser::createMembers() {
     addMember("firstname", "-", "<NEW>", RB2::MemberChar40);
-    addMember("lastname", "-", "<NEW>", RB2::MemberChar125);
+    addMember("lastname", "-", "", RB2::MemberChar125);
     addMember("email", "-", "", RB2::MemberChar125);
     addMember("telephone", "-", "", RB2::MemberChar40);
     addMember("username", "-", "", RB2::MemberChar40);

@@ -310,6 +310,58 @@ void RB_Widget::setRelationalModelData(RB_MmProxy* pm,
 //    pm->setData(setIdx, var, Qt::DisplayRole);
 }
 
+bool RB_Widget::isDuplicateIdxFound(RB_MmProxy* model,
+                                    const RB_String& fieldName,
+                                    const RB_String& id,
+                                    int excludeRow) {
+    if (!model) {
+        return false;
+    }
+
+    QModelIndex iterIdx;
+    int col = model->fieldIndex(fieldName);
+    int rowCount = model->rowCount();
+    bool found = false;
+
+    for(int row = 0; row < rowCount && !found; row++) {
+        iterIdx = model->index(row, col, QModelIndex());
+
+        QString str = model->data(iterIdx, Qt::DisplayRole).toString();
+        QRegExp regExp(id, Qt::CaseInsensitive, QRegExp::Wildcard);
+
+        if (row != excludeRow && regExp.indexIn(str) >= 0) {
+            found = true;
+        }
+    }
+
+    return found;
+}
+
+bool RB_Widget::isDuplicateEntryFound(RB_MmProxy* model,
+                                      const QString& fieldName,
+                                      const QString& entry,
+                                      int excludeRow) {
+    if (!model) {
+        return false;
+    }
+
+    QModelIndex iterIdx;
+    int col = model->fieldIndex(fieldName);
+    int rowCount = model->rowCount();
+    bool found = false;
+
+    for(int row = 0; row < rowCount && !found; row++) {
+        iterIdx = model->index(row, col, QModelIndex());
+        QString str = model->data(iterIdx, Qt::DisplayRole).toString();
+
+        if (row != excludeRow && str == entry) {
+            found = true;
+        }
+    }
+
+    return found;
+}
+
 /**
  * Find text in table view
  * @param text search string
@@ -689,34 +741,6 @@ void RB_Widget::setIsNewWidget(bool isNewWidget) {
 bool RB_Widget::isNewWidget() {
     return mIsNewWidget;
 }
-
-bool RB_Widget::isDuplicateIdxFound(RB_MmProxy* model,
-                                    const RB_String& fieldName,
-                                    const RB_String& id,
-                                    int excludeRow) {
-    if (!model) {
-        return false;
-    }
-
-    QModelIndex iterIdx;
-    int col = model->fieldIndex(fieldName);
-    int rowCount = model->rowCount();
-    bool found = false;
-
-    for(int row = 0; row < rowCount && !found; row++) {
-        iterIdx = model->index(row, col, QModelIndex());
-
-        QString str = model->data(iterIdx, Qt::DisplayRole).toString();
-        QRegExp regExp(id, Qt::CaseInsensitive, QRegExp::Wildcard);
-
-        if (row != excludeRow && regExp.indexIn(str) >= 0) {
-            found = true;
-        }
-    }
-
-    return found;
-}
-
 
 /**
  * Filter the model based on the selected header column

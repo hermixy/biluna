@@ -2,6 +2,7 @@
 #define RB_UTILITY_H
 
 #include "db_global.h"
+#include "rb_debug.h"
 
 class RB_UtilityFactory;
 

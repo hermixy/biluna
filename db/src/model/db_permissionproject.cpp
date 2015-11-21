@@ -30,10 +30,9 @@ DB_PermissionProject::~DB_PermissionProject() {
 
 /**
  * Create members of object
- * -number, name/number of the project
+ * -persproject_idx, project of a perspective
  * -description, description of the project
  * -customer, customer or owner name
- * -persproject_idx, project of a perspective
  * -mstatus_id, status or Type of access to data live (view+edit)
  *   locked (view only) hidden (admin only)
  * -start, start date from which this project is valid for viewing and editing,
@@ -41,10 +40,9 @@ DB_PermissionProject::~DB_PermissionProject() {
  * -end, end date after which this project is not visible or editable by anybody
  */
 void DB_PermissionProject::createMembers() {
-    addMember("number", "-", "<NEW>", RB2::MemberChar40);
-    addMember("description", "-", "YourPermissionGroup", RB2::MemberChar125);
-    addMember("customer", "-", "YourCustomer", RB2::MemberChar125);
     addMember("persproject_idx", "-", "0", RB2::MemberChar165);
+    addMember("description", "-", "", RB2::MemberChar125);
+    addMember("customer", "-", "", RB2::MemberChar125);
     addMember("mstatus_id", "-", 0, RB2::MemberInteger);
     addMember("start", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
     addMember("end", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);

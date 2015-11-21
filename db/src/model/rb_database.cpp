@@ -21,10 +21,6 @@ RB_Database::RB_Database() : QSqlDatabase() {
     mTcpSocket = NULL;
 }
 
-//RB_Database::RB_Database(const QSqlDatabase& other) : QSqlDatabase(other) {
-//    mTcpSocket = NULL;
-//}
-
 RB_Database::~RB_Database() {
     if (mTcpSocket) {
         delete mTcpSocket;
@@ -48,11 +44,15 @@ RB_Database *RB_Database::getInstance() {
  * @param mSec should be larger 5000 milliseconds
  */
 void RB_Database::keepConnectionAlive(const QSqlDatabase& db, int mSec) {
-    if (db.driverName() == "QMYSQL" && !mTcpSocket && mSec >= 5000) {
-        mTcpSocket = new RB_TcpSocket();
-        mTcpSocket->setDatabaseInstance(this);
-        mTcpSocket->keepConnectionAlive(db.hostName(), db.port(), mSec);
+    if (db.driverName() == "QMYSQL" && mSec >= 5000) {
         mServerDatabase = db;
+
+        if (!mTcpSocket) {
+            mTcpSocket = new RB_TcpSocket();
+        }
+
+        mTcpSocket->keepConnectionAlive(mServerDatabase.hostName(),
+                                        mServerDatabase.port(), mSec);
     }
 }
 
@@ -65,41 +65,11 @@ RB_String RB_Database::localDbName() const {
 }
 
 /**
- * User name of the user (for authorization within the database)
- */
-RB_String RB_Database::userAuthName() const {
-    return this->mUserAuthName;
-}
-
-/**
- * Password of the user (for authorization within the database)
- */
-RB_String RB_Database::userAuthPassword() const {
-    return this->mUserAuthPassword;
-}
-
-/**
  * Set local database name
  * @param name local database name
  */
 void RB_Database::setLocalDbName(const RB_String& name) {
     this->mLocalDbName = name;
-}
-
-/**
- * Set user name of the user (for authorization within the database)
- * @param name user authorization name
- */
-void RB_Database::setUserAuthName(const RB_String& name) {
-    this->mUserAuthName = name;
-}
-
-/**
- * Set password of the user (for authorization within the database)
- * @param pwd user authorization password
- */
-void RB_Database::setUserAuthPassword(const RB_String& pwd) {
-    this->mUserAuthPassword = pwd;
 }
 
 void RB_Database::dummyQuery() {

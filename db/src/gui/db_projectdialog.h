@@ -14,6 +14,8 @@
 #include <QtWidgets>
 #include "db_tabledialog.h"
 #include "db_modelfactory.h"
+#include "db_permissionhandler.h"
+
 
 class DB_EXPORT DB_ProjectDialog : public DB_TableDialog {
 
@@ -38,7 +40,37 @@ public:
     void init() {
         // Set model, root="" is already set by modelFactory
         mModel = DB_MODELFACTORY->getModel(DB_MODELFACTORY->ModelProject, false);
-        mModel->setRoot(""); // TODO: depending user rights
+
+        if (!DB_PERMISSIONHANDLER->isAdmin()) {
+            // id set to "" will remove statement: parent='XXXX'
+            mModel->setRoot("");
+
+            QStringList dbIdList;
+            DB_PERMISSIONHANDLER->getDbIdList(dbIdList);
+            QString whereStatement = "INVALID_USER";
+
+            int idCount = dbIdList.size();
+
+            for (int i = 0; i < idCount; ++i) {
+                if (i > 0) {
+                    whereStatement += " OR ";
+                } else {
+                    whereStatement.clear();
+                }
+
+                whereStatement += "id='" + dbIdList.at(i) + "'";
+            }
+
+            RB_DEBUG->print(whereStatement);
+            mModel->setWhere(whereStatement);
+        } else if (DB_PERMISSIONHANDLER->isValidDbUser()) {
+            // Single user
+            mModel->setRoot("");
+        } else {
+            // Should not happen
+            mModel->setRoot("INVALID_USER");
+        }
+
         mModel->select();
 
         setWindowTitle(tr("Select project"));

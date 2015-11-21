@@ -130,6 +130,9 @@ void DB_ConnectionDialog::init() {
         lvPrevious->selectionModel()->select(prevModel->index(0,0),
                                              QItemSelectionModel::Select);
         slotSetDbConnectionWidgets(prevModel->index(0,0), QModelIndex());
+
+        leCurrentPassword->setFocus();
+        leCurrentPassword->selectAll();
     }
 
     // Emits customContexMenuRequested()
@@ -184,11 +187,6 @@ void DB_ConnectionDialog::writeSettings() {
         return;
     }
 
-//    if(!mIsEncryption) {
-//        RB_DEBUG->error("No encryption available");
-//        DB_DIALOGFACTORY->commandMessage("No encryption available");
-//    }
-
     if (this->tabWidget->currentIndex() == 0) {
         // move selected database connection to top
         int row = lvPrevious->currentIndex().row();
@@ -209,23 +207,11 @@ void DB_ConnectionDialog::writeSettings() {
 
         RB_String dbPwd = DB_UTILITYFACTORY->encrypt(leDbPassword->text());
 
-//        if (mIsEncryption) {
-//            dbPwd = mAes.encrypt(leDbPassword->text());
-//        } else {
-//            dbPwd = leDbPassword->text();
-//        }
-
         // Note: user password is also stored.
         RB_String userPwd = "";
 
         if (!leUserPassword->text().isEmpty()) {
             userPwd = DB_UTILITYFACTORY->encrypt(leUserPassword->text());
-
-//            if (mIsEncryption) {
-//                userPwd =  mAes.encrypt(leUserPassword->text());
-//            } else {
-//                userPwd = leUserPassword->text();
-//            }
         }
 
         QString dbConnection;
@@ -294,11 +280,19 @@ RB_String DB_ConnectionDialog::localDatabaseName() const {
 }
 
 RB_String DB_ConnectionDialog::userName() const {
+    if (tabWidget->currentIndex() == 0) {
+        return leCurrentUserName->text();
+    }
+
     return leUserName->text();
 }
 
 
 RB_String DB_ConnectionDialog::userPassword() const {
+    if (tabWidget->currentIndex() == 0) {
+        return leCurrentPassword->text();
+    }
+
     return leUserPassword->text();
 }
 
@@ -325,8 +319,7 @@ void DB_ConnectionDialog::on_okButton_clicked() {
             if (!db.open()) {
                 DB_DIALOGFACTORY->requestWarningDialog("Could not connect to database.\n"
                                                        + db.lastError().text());
-                RB_String defaultConn = RB_DATABASE->database().connectionName();
-                db = QSqlDatabase();
+                RB_String defaultConn = db.connectionName();
                 RB_DATABASE->removeDatabase(defaultConn);
                 reject();
                 QApplication::restoreOverrideCursor();
@@ -491,33 +484,12 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
         leLocalDbName->clear();
         leUserName->clear();
         leUserPassword->clear();
+
+        lblConnection->setText("Use select or new ...");
+        leCurrentUserName->setText("");
+        leCurrentPassword->setText("");
         return;
     }
-
-#if 0
-    RB_SETTINGS->beginGroup("database");
-    int dbSelection = RB_SETTINGS->value("dbselection", 0).toInt();
-    RB_String dbDriver = RB_SETTINGS->value("dbdriver", "None").toString();
-    RB_String dbName = RB_SETTINGS->value("dbname", "").toString();
-    RB_String dbUser = RB_SETTINGS->value("dbuser", "").toString();
-    RB_String dbPwd = RB_SETTINGS->value("dbpassword", "").toString();
-    if (mIsEncryption) {
-        dbPwd = mAes.decrypt(RB_SETTINGS->value("dbpassword", "").toByteArray());
-    } else {
-        DB_DIALOGFACTORY->commandMessage("No encryption available in init.");
-        RB_DEBUG->error("No encryption available in init.");
-    }
-    RB_String dbHost = RB_SETTINGS->value("dbhost", "").toString();
-    RB_String dbPort = RB_SETTINGS->value("dbport", -1).toString();
-    RB_String localDbName = RB_SETTINGS->value("localdbname", "").toString();
-    RB_String userName = RB_SETTINGS->value("username", "").toString();
-    // Note: user password is not stored.
-    //    RB_String userPwd = RB_SETTINGS->value("userpwd", "").toString();
-    //    if (isEncryption) {
-    //        userPwd = aes.decrypt(RB_SETTINGS->value("userpwd", "").toString());
-    //    }
-    RB_SETTINGS->endGroup();
-#endif
 
     // Set data in relevant widgets
     int row = curr.row();
@@ -536,13 +508,6 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
     RB_String dbPort = connectionItemList.at(3);
     RB_String dbUser = connectionItemList.at(4);
     RB_String dbPwd = DB_UTILITYFACTORY->decrypt(QVariant(connectionItemList.at(5)));
-//    if (mIsEncryption) {
-//        QVariant tmpDbPwd = connectionItemList.at(5);
-//        dbPwd = mAes.decrypt(tmpDbPwd.toByteArray());
-//    } else {
-//        DB_DIALOGFACTORY->commandMessage("No encryption available in init.");
-//        RB_DEBUG->error("No encryption available in init.");
-//    }
     RB_String dbName = connectionItemList.at(6);
     RB_String dbKeepAlive = connectionItemList.at(7);
     RB_String localDbName = connectionItemList.at(8);
@@ -551,11 +516,6 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
 
     if (connectionItemList.size() > 9) { // for compatibility only
         userPwd = DB_UTILITYFACTORY->decrypt(QVariant(connectionItemList.at(9)));
-//        userPwd = connectionItemList.at(9);
-//        if (mIsEncryption) {
-//            QVariant tmpUserPwd = connectionItemList.at(9);
-//            userPwd = mAes.decrypt(tmpUserPwd.toByteArray());
-//        }
     }
 
     rbServerDatabase->setChecked(dbSelection == 0);
@@ -581,7 +541,18 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
 
     leLocalDbName->setText(localDbName);
     leUserName->setText(userName);
-    leUserPassword->setText(userPwd);
+    leUserPassword->setText(userPwd); // to clear previous password
+
+    if (connectionItemList.at(0).toInt() < 1) {
+        lblConnection->setText(connectionItemList.at(6)
+                               + " @ " + connectionItemList.at(2));
+    } else {
+        lblConnection->setText(connectionItemList.at(8));
+    }
+
+    leCurrentUserName->setText(userName);
+    leCurrentPassword->setText(userPwd); // to clear previous password
+
     updateUi();
 }
 
@@ -606,6 +577,10 @@ void DB_ConnectionDialog::slotLocalDbSelected(bool) {
     leTestConnection->clear();
     // leUserName->clear();
     leUserPassword->clear();
+
+    lblConnection->setText("Use select or new ...");
+    leCurrentUserName->setText("");
+    leCurrentPassword->setText("");
 }
 
 void DB_ConnectionDialog::slotDeletePreviousConnection() {
@@ -707,8 +682,6 @@ void DB_ConnectionDialog::createDatabase(QSqlDatabase& db) {
         dbFn += leUserName->text() + ";Pwd=";
         dbFn += leUserPassword->text() + ";";
         db.setDatabaseName(dbFn);
-        // db.setUserName(leDbUser->text());
-        // db.setPassword(leDbPassword->text());
     } else if (rbLocalSqliteDb->isChecked()) {
         // check if we can write to that directory:
 #ifndef Q_OS_WIN

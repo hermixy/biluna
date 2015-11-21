@@ -14,34 +14,44 @@
 #include "rb_utility.h"
 
 //(From: http://etutorials.org/Programming/secure+programming/Chapter+12.+Anti-Tampering/12.11+Hiding+Strings/)
-#define A(c)            (c) - 0x17
-#define UNHIDE_STR(str) do { char *p = str;  while (*p) *p++ += 0x17; } while (0)
-#define HIDE_STR(str)   do { char *p = str;  while (*p) *p++ -= 0x17; } while (0)
+//#define A(c)            (c) - 0x17
+//#define UNHIDE_STR(str) do { char *p = str;  while (*p) *p++ += 0x17; } while (0)
+//#define HIDE_STR(str)   do { char *p = str;  while (*p) *p++ -= 0x17; } while (0)
 
 /**
  * Constructor
  */
-RB_UtilityFactory::RB_UtilityFactory() {
+RB_UtilityFactory::RB_UtilityFactory()
+                    : RB_UtilityFactory_Private () {
     RB_DEBUG->print("RB_UtilityFactory::RB_UtilityFactory()");
 
-    mIsEncryption = false;
+    mIsEncryption = initPrivate(mAes);
 
-    char charStr[] = { // ;lksdohe039hsl*
-      A(';'), A('l'), A('k'), A('s'), A('d'), A('o'), A('h'), A('e'),
-      A('0'), A('3'), A('9'), A('h'), A('s'), A('l'), A('*'), 0
-    };
+//    mIsEncryption = false;
 
-    UNHIDE_STR(charStr);
-    if(mAes.init(RB_String(charStr))) {
-        mIsEncryption = true;
-    }
-    HIDE_STR(charStr);
+//    char charStr[] = { // ;lksdohe039hsl*
+//      A(';'), A('l'), A('k'), A('s'), A('d'), A('o'), A('h'), A('e'),
+//      A('0'), A('3'), A('9'), A('h'), A('s'), A('l'), A('*'), 0
+//    };
+
+//    UNHIDE_STR(charStr);
+//    if(mAes.init(RB_String(charStr))) {
+//        mIsEncryption = true;
+//    }
+//    HIDE_STR(charStr);
 }
 
 /**
  * Destructor
  */
 RB_UtilityFactory::~RB_UtilityFactory() {
+    // In implementation otherwise mUtilityVector already NULL
+    //    while (!mUtilityVector.empty()) {
+    //        RB_Utility* f = mUtilityVector.back();
+    //        delete f; // deletes utility and removes, therefor no pop_back()
+    //    }
+    //    mActiveFactory = NULL;
+
     RB_DEBUG->print("RB_UtilityFactory::~RB_UtilityFactory() OK");
 }
 

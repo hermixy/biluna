@@ -30,6 +30,7 @@ FORMS = \
     ../src/gui/db_mappingdialog.ui \
     ../src/gui/db_palettecolorpickerwidget.ui \
     ../src/gui/db_permissionperspectiveprojectdialog.ui \
+    ../src/gui/db_permissionreportwidget.ui \
     ../src/gui/db_permissionwidget.ui \
     ../src/gui/db_plaintextwidget.ui \
     ../src/gui/db_plugintesterdialog.ui \
@@ -97,6 +98,7 @@ HEADERS = \
     ../src/actions/db_actionhelpcredits.h \
     ../src/actions/db_actionhelpindex.h \
     ../src/actions/db_actionhelpsubject.h \
+    ../src/actions/db_actionpermissionreport.h \
     ../src/actions/db_actionstyleaddress.h \
     ../src/actions/db_actionstyleheading1.h \
     ../src/actions/db_actionstyleheading2.h \
@@ -186,6 +188,7 @@ HEADERS = \
     ../src/gui/db_mappingdialog.h \
     ../src/gui/db_palettecolorpickerwidget.h \
     ../src/gui/db_permissionperspectiveprojectdialog.h \
+    ../src/gui/db_permissionreportwidget.h \
     ../src/gui/db_permissionwidget.h \
     ../src/gui/db_plaintextwidget.h \
     ../src/gui/db_plugintesterdialog.h \
@@ -217,6 +220,7 @@ HEADERS = \
     ../src/gui/rb_mainwindow.h \
     ../src/gui/rb_mdiwindow.h \
     ../src/gui/rb_memberdelegate.h \
+    ../src/gui/rb_membereditdialog.h \
     ../src/gui/rb_plaintextedit.h \
     ../src/gui/rb_plotterwidget.h \
     ../src/gui/rb_projecteditdialog.h \
@@ -265,8 +269,10 @@ HEADERS = \
     ../src/model/rb_objectmember.h \
     ../src/operations/rb_operationhtml.h \
     ../src/utils/db_global.h \
+    ../src/utils/db_permissionhandler.h \
     ../src/utils/db_sqlcommonfunctions.h \
     ../src/utils/db_utilityfactory.h \
+    ../../../biluna_private/db/src/utils/rb_utilityfactory_private.h \
     ../src/utils/rb_aesencryption.h \
     ../src/utils/rb_debug.h \
     ../src/utils/rb_hash.h \
@@ -294,8 +300,7 @@ HEADERS = \
     ../src/visitors/rb_htmlwriter.h \
     ../src/visitors/rb_visitor.h \
     ../src/visitors/rb_xmlreader.h \
-    ../src/visitors/rb_xmlwriter.h \
-    $$PWD/gui/rb_membereditdialog.h
+    ../src/visitors/rb_xmlwriter.h
 
 SOURCES = \
     ../src/actions/db_actionfactory.cpp \
@@ -345,6 +350,7 @@ SOURCES = \
     ../src/actions/db_actionhelpcredits.cpp \
     ../src/actions/db_actionhelpindex.cpp \
     ../src/actions/db_actionhelpsubject.cpp \
+    ../src/actions/db_actionpermissionreport.cpp \
     ../src/actions/db_actionstyleaddress.cpp \
     ../src/actions/db_actionstyleheading1.cpp \
     ../src/actions/db_actionstyleheading2.cpp \
@@ -431,6 +437,7 @@ SOURCES = \
     ../src/gui/db_mappingdialog.cpp \
     ../src/gui/db_palettecolorpickerwidget.cpp \
     ../src/gui/db_permissionperspectiveprojectdialog.cpp \
+    ../src/gui/db_permissionreportwidget.cpp \
     ../src/gui/db_permissionwidget.cpp \
     ../src/gui/db_plaintextwidget.cpp \
     ../src/gui/db_plugintesterdialog.cpp \
@@ -458,6 +465,7 @@ SOURCES = \
     ../src/gui/rb_mainwindow.cpp \
     ../src/gui/rb_mdiwindow.cpp \
     ../src/gui/rb_memberdelegate.cpp \
+    ../src/gui/rb_membereditdialog.cpp \
     ../src/gui/rb_ledelegate.cpp \
     ../src/gui/rb_plaintextedit.cpp \
     ../src/gui/rb_plotterwidget.cpp \
@@ -503,6 +511,7 @@ SOURCES = \
     ../src/model/rb_objectiterator.cpp \
     ../src/model/rb_objectmember.cpp \
     ../src/operations/rb_operationhtml.cpp \
+    ../src/utils/db_permissionhandler.cpp \
     ../src/utils/db_sqlcommonfunctions.cpp \
     ../src/utils/db_utilityfactory.cpp \
     ../src/utils/rb_aesencryption.cpp \
@@ -518,6 +527,7 @@ SOURCES = \
     ../src/utils/rb_tcpsocket.cpp \
     ../src/utils/rb_utility.cpp \
     ../src/utils/rb_utilityfactory.cpp \
+    ../../../biluna_private/db/src/utils/rb_utilityfactory_private.cpp \
     ../src/visitors/db_xmlreader.cpp \
     ../src/visitors/rb_csvwriter.cpp \
     ../src/visitors/rb_dbvisitor.cpp \
@@ -525,8 +535,7 @@ SOURCES = \
     ../src/visitors/rb_htmlwriter.cpp \
     ../src/visitors/rb_visitor.cpp \
     ../src/visitors/rb_xmlreader.cpp \
-    ../src/visitors/rb_xmlwriter.cpp \
-    $$PWD/gui/rb_membereditdialog.cpp
+    ../src/visitors/rb_xmlwriter.cpp
 
 
 RESOURCES = \
@@ -556,6 +565,7 @@ OTHER_FILES = \
     ../src/gui/db_mappingdialog.dox \
     ../src/gui/db_palettecolorpickerwidget.dox \
     ../src/gui/db_permissionprojectdialog.dox \
+    ../src/gui/db_permissionreportwidget.dox \
     ../src/gui/db_permissionwidget.dox \
     ../src/gui/db_plaintextwidget.dox \
 #    ../src/gui/db_plugintesterdialog.h \

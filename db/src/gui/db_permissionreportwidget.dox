@@ -1,0 +1,43 @@
+/*! \page acc_allocnreportwidget Allocation Report Window - Accounting ACC
+\section sec_acc_allocnreportwidget Allocation Report Window
+
+The allocation report window list the documents with the allocated item amounts.
+The documents are the sales and purchase invoices. The item amounts are the
+amounts from the Bank/Cash document items or from the Journal document items.
+The purpose of this report is to check the document allocation in case there
+are inconsistencies found in the open sales or purchase invoices report.
+From the menu select
+
+\li Accounting &gt; Reports &gt; Allocation Report
+
+NOTE: do not forget to SAVE all your changes in the Accounting windows
+before running the allocation report, otherwise the report will be generated
+with different data from the database.
+
+\image html acc_allocnreportwidget.png "Allocation Report Settings"
+
+Select the relevant period to be shown for the allocation report. The default
+months are set based on the previous and current month. Click the refresh
+button to generate the report. For an example refer to below image.
+
+\image html acc_allocnreportwidget_refresh.png "Allocation Report - refresh"
+
+The report is sorted based on the document GL account name and number. The
+columns are:
+\li Document name - Accounts Payable (Debtors) and Accounts Receivables (Creditors)
+\li Doc. No. - document number
+\li Doc. Amount - the total document amount, including tax
+\li Alloc. Date - the date when the allocation was made with the item amount
+\li Alloc. Amount - the amount of this allocation
+\li Item Doc. No. - the originating document number of the item and item amount
+\li Item Amount - the item amount, such as an item or line on a bank statement
+
+Click File &gt; Print or Print Preview to print the allocation report.
+
+Click File &gt; Save As to save the summary report to HTML format
+
+This HTML file can be opened with all Internet browsers such as Explorer,
+Firefox, Chrome and Opera but also with office applications such as MS Word,
+MS Excel, OpenOffice Write and OpenOffice Calc.
+
+*/

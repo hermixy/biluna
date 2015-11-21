@@ -20,6 +20,8 @@ QT += core gui help network printsupport sql svg uitools webenginewidgets widget
 CONFIG += release
 #CONFIG -= release
 CONFIG += c++11
+CONFIG += qt warn_on rtti
+CONFIG += embed_manifest_exe
 
 if (release) {
 #    message("Release compile mode in defs.pro")
@@ -27,7 +29,6 @@ if (release) {
     CONFIG -= debug
     CONFIG -= debug_and_release
     # CONFIG += release
-    CONFIG += qt warn_on rtti
     # CONFIG -= thread
     OBJECTS_DIR = ../build_release/obj
     MOC_DIR     = ../build_release/moc
@@ -44,7 +45,6 @@ else {
     CONFIG -= release
     CONFIG -= debug_and_release
     CONFIG += debug
-    CONFIG += qt warn_on rtti
     # CONFIG -= thread
     OBJECTS_DIR = ../build_debug/obj
     MOC_DIR     = ../build_debug/moc
@@ -115,7 +115,7 @@ win32 {
         C:/OpenSSL-Win32/include \
         C:/OpenSSL-Win32/include/openssl
 
-    # ssleay32.dll is old (is now libssl32.dll) but required for webkit
+    # ssleay32.dll is old (is now libssl32.dll) but required for webkit engine?
     LIBS += \
         -LC:/OpenSSL-Win32/lib -llibeay32 \
 #        -LC:/OpenSSL-Win32/ -llibssl32 \
@@ -134,7 +134,7 @@ else {
     # ssleay32.dll is old (is now libssl32.dll)?
     LIBS += \
         -LC:/OpenSSL-Win64/lib -llibeay32 \
-#        -LC:/OpenSSL-Win32/ -llibssl32 \
+#        -LC:/OpenSSL-Win64/ -llibssl32 \
         -LC:/OpenSSL-Win64/lib -lssleay32
 
     #openSSL encryption and decryption

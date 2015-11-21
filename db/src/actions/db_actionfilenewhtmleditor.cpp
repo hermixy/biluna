@@ -43,46 +43,54 @@ RB_Action* DB_ActionFileNewHtmlEditor::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionFileNewHtmlEditor::trigger() {
-    // No preliminary checks required
+    try {
 
-    // No model preparation
+        // No preliminary checks required
 
-    // Create widget with new document name
-    ++mUntitledNumber;
-    RB_String docName = tr("Untitled") + RB_String::number(mUntitledNumber);
+        // No model preparation
 
-    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
-            DB_DialogFactory::WidgetHtmlEditor, docName, true);
-    if (!mdiWin) return;
+        // Create widget with new document name
+        ++mUntitledNumber;
+        RB_String docName = tr("Untitled") + RB_String::number(mUntitledNumber);
 
-    DB_HtmlEditorWidget* wdgt = dynamic_cast<DB_HtmlEditorWidget*>(mdiWin->getWidget());
+        RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+                DB_DialogFactory::WidgetHtmlEditor, docName, true);
+        if (!mdiWin) return;
 
-    if (!wdgt) {
-        // widget set from outside
-        wdgt = dynamic_cast<DB_HtmlEditorWidget*>(mWidget);
-    }
+        DB_HtmlEditorWidget* wdgt = dynamic_cast<DB_HtmlEditorWidget*>(mdiWin->getWidget());
 
-    if (wdgt) {
-        // wdgt->init(); not required
-        wdgt->fileNew();
-    }
-    mdiWin->show();
-    mdiWin->raise();
+        if (!wdgt) {
+            // widget set from outside
+            wdgt = dynamic_cast<DB_HtmlEditorWidget*>(mWidget);
+        }
 
-    // show toolbars
-    QToolBar* toolBar = DB_DIALOGFACTORY->getMainWindow()->findChild<QToolBar*>("toolbar_edit");
-    if (toolBar) {
-        toolBar->show();
-    }
+        if (wdgt) {
+            // wdgt->init(); not required
+            wdgt->fileNew();
+        }
+        mdiWin->show();
+        mdiWin->raise();
 
-    toolBar = DB_DIALOGFACTORY->getMainWindow()->findChild<QToolBar*>("toolbar_edit_html");
-    if (toolBar) {
-        toolBar->show();
-    }
+        // show toolbars
+        QToolBar* toolBar = DB_DIALOGFACTORY->getMainWindow()->findChild<QToolBar*>("toolbar_edit");
+        if (toolBar) {
+            toolBar->show();
+        }
 
-    toolBar = DB_DIALOGFACTORY->getMainWindow()->findChild<QToolBar*>("toolbar_format");
-    if (toolBar) {
-        toolBar->show();
+        toolBar = DB_DIALOGFACTORY->getMainWindow()->findChild<QToolBar*>("toolbar_edit_html");
+        if (toolBar) {
+            toolBar->show();
+        }
+
+        toolBar = DB_DIALOGFACTORY->getMainWindow()->findChild<QToolBar*>("toolbar_format");
+        if (toolBar) {
+            toolBar->show();
+        }
+    } catch(std::exception& e) {
+        DB_DIALOGFACTORY->requestWarningDialog(e.what());
+    } catch(...) {
+        DB_DIALOGFACTORY->requestWarningDialog(
+                    "Error <unkown> in DB_ActionFileNewHtmlEditor::trigger()");
     }
 }
 

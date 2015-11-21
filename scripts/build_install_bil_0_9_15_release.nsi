@@ -34,7 +34,6 @@
 
 ; Language files
 !insertmacro MUI_LANGUAGE "English"
-
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
@@ -44,7 +43,7 @@ InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
 
-Section "MainSection" SEC01
+Section "BilunaMainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "..\bil\release\Biluna.exe"
@@ -55,70 +54,93 @@ Section "MainSection" SEC01
 ;  File "..\bil\release\gv.dll"
 SectionEnd
 
-Section "QtLibrarySection" SEC02
-  File "C:\Qt\5.5\msvc2013\bin\Qt5XmlPatterns.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Xml.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Widgets.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5WebKitWidgets.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5WebKit.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5WebChannel.dll"
-;  File "C:\Qt\5.5\msvc2013\bin\Qt5V8.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Svg.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Sql.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Sensors.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Script.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Quick.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Qml.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5PrintSupport.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Positioning.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5OpenGL.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Network.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Multimedia.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5MultimediaWidgets.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Help.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Gui.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5Core.dll"
-  File "C:\Qt\5.5\msvc2013\bin\Qt5CLucene.dll"
-;  File "C:\Qt\5.5\msvc2013\bin\phonon4.dll"
-;  File "C:\MinGW\bin\mingwm10.dll"
+Section "LibraryAndPluginSection" SEC10
+  ; Visual Studio VC 2013
   File "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT\msvcp120.dll"
   File "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT\msvcr120.dll"
-  File "C:\Qt\5.5\msvc2013\bin\icudt54.dll"
-  File "C:\Qt\5.5\msvc2013\bin\icuin54.dll"
-  File "C:\Qt\5.5\msvc2013\bin\icuuc54.dll"
-;  File "C:\Qt\5.5\msvc2013\bin\libgcc_s_dw2-1.dll" 
-;  File "C:\Qt\5.5\msvc2013\bin\libstdc++-6.dll" 
-;  File "C:\Qt\5.5\msvc2013\bin\libwinpthread-1.dll" 
-  File "C:\Qt\5.5\msvc2013\bin\assistant.exe"
-;  File "C:\Users\rutger\Documents\mysql-5.6.14-win32\lib\libmySQL.dll"
-  File "..\bil\release\libmySQL.dll"
+  File "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\1033\vcredist_x86.exe"
+  ; Database drivers
+  File "C:\Users\rutger\Documents\mysql-5.6.14-win32\lib\libmySQL.dll"
+  ; OpenSSL
   File "C:\OpenSSL-Win32\libeay32.dll"
-  File "C:\OpenSSL-Win32\libssl32.dll"
-  ; old now libssl32.dll but required for webkit
+  ; File "C:\OpenSSL-Win32\libssl32.dll"
+  ; old now libssl32.dll but required for webkit and webengine too?
   File "C:\OpenSSL-Win32\ssleay32.dll" 
-SectionEnd
-
-Section "QtImageFormatsSection" SEC03
+  ; Qt library
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\assistant.exe"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\d3dcompiler_47.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\icudt54.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\icuin54.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\icuuc54.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\libEGL.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\libGLESV2.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\opengl32sw.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\icudtl.dat"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\qtwebengine_resources.pak"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\qtwebengine_resources_100p.pak"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\qtwebengine_resources_200p.pak"
+  
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Core.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Gui.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Help.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5MultimediaWidgets.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Multimedia.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Network.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5OpenGL.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Positioning.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5PrintSupport.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Qml.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Quick.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Script.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Sensors.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Sql.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Svg.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5WebChannel.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5WebEngine.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5WebEngineCore.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5WebEngineWidgets.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5WebView.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Widgets.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Xml.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5XmlPatterns.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\QtWebEngineProcess.exe"
+  SetOutPath "$INSTDIR\bearer"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\bearer\qgenericbearer.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\bearer\qnativewifibearer.dll"
+  SetOutPath "$INSTDIR\iconengines"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\iconengines\qsvgicon.dll"
   SetOutPath "$INSTDIR\imageformats"
-  File "C:\Qt\5.5\msvc2013\plugins\imageformats\qwbmp.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\imageformats\qtiff.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\imageformats\qtga.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\imageformats\qsvg.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\imageformats\qmng.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\imageformats\qjpeg.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\imageformats\qico.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\imageformats\qgif.dll"
-SectionEnd
-
-Section "QtSqlDriversSection" SEC04
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qdds.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qgif.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qicns.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qico.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qjp2.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qjpeg.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qmng.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qsvg.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qtga.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qtiff.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qwbmp.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\imageformats\qwebp.dll"
+  SetOutPath "$INSTDIR\platforms"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\platforms\qminimal.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\platforms\qwindows.dll"
+  SetOutPath "$INSTDIR\position"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\position\qtposition_positionpoll.dll"
+  SetOutPath "$INSTDIR\printersupport"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\printsupport\windowsprintersupport.dll"
+  SetOutPath "$INSTDIR\qtwebengine"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\qtwebengine\ffmpegsumo.dll"
   SetOutPath "$INSTDIR\sqldrivers"
-  File "C:\Qt\5.5\msvc2013\plugins\sqldrivers\qsqlite.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\sqldrivers\qsqlmysql.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\sqldrivers\qsqlodbc.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\sqldrivers\qsqlpsql.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\sqldrivers\qsqlite.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\sqldrivers\qsqlmysql.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\sqldrivers\qsqlodbc.dll"
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\plugins\sqldrivers\qsqlpsql.dll"
+  ; SetOutPath "$INSTDIR\translations"
+  ; ...
 SectionEnd
 
-Section "PluginsSection" SEC05
+Section "BilunaPlugins" SEC50
   SetOutPath "$INSTDIR\plugins"
   File "..\bil\release\plugins\acc_actionplugin.dll"
   File "..\bil\release\plugins\crm_actionplugin.dll"
@@ -130,27 +152,16 @@ Section "PluginsSection" SEC05
   File "..\bil\release\plugins\srm_actionplugin.dll"
 SectionEnd
 
-Section "Platforms" SEC06
-  SetOutPath "$INSTDIR\platforms"
-  File "C:\Qt\5.5\msvc2013\plugins\platforms\qminimal.dll"
-  File "C:\Qt\5.5\msvc2013\plugins\platforms\qwindows.dll"
-SectionEnd
-
-Section "Platforms" SEC07
-  SetOutPath "$INSTDIR\printsupport"
-  File "C:\Qt\5.5\msvc2013\plugins\printsupport\windowsprintersupport.dll"
-SectionEnd
-  
-Section "DocumentationSection" SEC08
+Section "BilunaDocumentation" SEC60
   SetOutPath "$INSTDIR\doc"
   File "..\scripts\help\doc\doc.qch"
   File "..\scripts\help\doc\doc.qhc"
 SectionEnd
 
-Section "Data" SEC09
+Section "BilunaData" SEC70
   SetOutPath "$INSTDIR\data"
   File "..\acc\data\acc_chartmaster_syssetting_nl.xml"
-;  ...
+  ; ...
 SectionEnd
 
 Section -AdditionalIcons
@@ -171,7 +182,6 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
 
-
 Function un.onUninstSuccess
   HideWindow
   MessageBox MB_ICONINFORMATION|MB_OK "$(^Name) was successfully removed from your computer."
@@ -183,61 +193,38 @@ Function un.onInit
 FunctionEnd
 
 Section Uninstall
-;  Delete "$INSTDIR\doc\html\images\acc_accountcontroldialog.png"
-;  ...
-  Delete "$INSTDIR\data\acc_chartmaster_syssetting_nl.xml"
-;  ...
-  Delete "$INSTDIR\doc\doc.qhc"
-  Delete "$INSTDIR\doc\doc.qch"
-  Delete "$INSTDIR\${PRODUCT_NAME}.url"
-  Delete "$INSTDIR\uninst.exe"
-  Delete "$INSTDIR\plugins\acc_actionplugin.dll"
-  Delete "$INSTDIR\plugins\crm_actionplugin.dll"
-  Delete "$INSTDIR\plugins\mrp_actionplugin.dll"
-  Delete "$INSTDIR\plugins\pcalc_actionplugin.dll"
-  Delete "$INSTDIR\plugins\peng_actionplugin.dll"
-  Delete "$INSTDIR\plugins\sail_actionplugin.dll"
-  Delete "$INSTDIR\plugins\scan_actionplugin.dll"
-  Delete "$INSTDIR\plugins\srm_actionplugin.dll"
-  Delete "$INSTDIR\platforms\qminimal.dll"
-  Delete "$INSTDIR\platforms\qwindows.dll"
-  Delete "$INSTDIR\printsupport\windowsprintersupport.dll"
-  Delete "$INSTDIR\sqldrivers\qsqlite.dll"
-  Delete "$INSTDIR\sqldrivers\qsqlmysql.dll"
-  Delete "$INSTDIR\sqldrivers\qsqlodbc.dll"
-  Delete "$INSTDIR\sqldrivers\qsqlpsql.dll"
-  Delete "$INSTDIR\imageformats\qgif.dll"
-  Delete "$INSTDIR\imageformats\qico.dll"
-  Delete "$INSTDIR\imageformats\qjpeg.dll"
-  Delete "$INSTDIR\imageformats\qmng.dll"
-  Delete "$INSTDIR\imageformats\qsvg.dll"
-  Delete "$INSTDIR\imageformats\qtga.dll"
-  Delete "$INSTDIR\imageformats\qtiff.dll"
-  Delete "$INSTDIR\imageformats\qwbmp.dll"
-  
+  Delete "$INSTDIR\Biluna.exe"
+  Delete "$INSTDIR\db.dll"
+  ; Delete "$INSTDIR\gv.dll"
+  ; Visual Studio VC 2013
+  Delete "$INSTDIR\msvcp120.dll"
+  Delete "$INSTDIR\msvcr120.dll"
+  Delete "$INSTDIR\vcredist_x86.exe"
+  ; Database drivers
+  Delete "$INSTDIR\libmySQL.dll"
+  ; OpenSSL
+  Delete "$INSTDIR\libeay32.dll"
+  ; Delete "$INSTDIR\libssl32.dll"
+  ; old now libssl32.dll but required for webkit and webengine too?
+  Delete "$INSTDIR\ssleay32.dll" 
+  ; Qt library
   Delete "$INSTDIR\assistant.exe"
+  Delete "$INSTDIR\d3dcompiler_47.dll"
   Delete "$INSTDIR\icudt54.dll"
   Delete "$INSTDIR\icuin54.dll"
   Delete "$INSTDIR\icuuc54.dll"
-  Delete "$INSTDIR\libeay32.dll"
-  Delete "$INSTDIR\libssl32.dll"
-  Delete "$INSTDIR\ssleay32.dll"
-  Delete "$INSTDIR\libmySQL.dll"
-;  Delete "$INSTDIR\libgcc_s_dw2-1.dll"
-;  Delete "$INSTDIR\libstdc++-6.dll"
-;  Delete "$INSTDIR\libwinpthread-1.dll"
-;  Delete "$INSTDIR\mingwm10.dll"
-
-  Delete "$INSTDIR\msvcp120.dll"
-  Delete "$INSTDIR\msvcr120.dll"
-  
-;  Delete "$INSTDIR\phonon4.dll"
-  Delete "$INSTDIR\Qt5CLucene.dll"
+  Delete "$INSTDIR\libEGL.dll"
+  Delete "$INSTDIR\libGLESV2.dll"
+  Delete "$INSTDIR\opengl32sw.dll"
+  Delete "$INSTDIR\icudtl.dat"
+  Delete "$INSTDIR\qtwebengine_resources.pak"
+  Delete "$INSTDIR\qtwebengine_resources_100p.pak"
+  Delete "$INSTDIR\qtwebengine_resources_200p.pak"
   Delete "$INSTDIR\Qt5Core.dll"
   Delete "$INSTDIR\Qt5Gui.dll"
   Delete "$INSTDIR\Qt5Help.dll"
-  Delete "$INSTDIR\Qt5Multimedia.dll"
   Delete "$INSTDIR\Qt5MultimediaWidgets.dll"
+  Delete "$INSTDIR\Qt5Multimedia.dll"
   Delete "$INSTDIR\Qt5Network.dll"
   Delete "$INSTDIR\Qt5OpenGL.dll"
   Delete "$INSTDIR\Qt5Positioning.dll"
@@ -248,27 +235,83 @@ Section Uninstall
   Delete "$INSTDIR\Qt5Sensors.dll"
   Delete "$INSTDIR\Qt5Sql.dll"
   Delete "$INSTDIR\Qt5Svg.dll"
-;  Delete "$INSTDIR\Qt5V8.dll"
   Delete "$INSTDIR\Qt5WebChannel.dll"
-  Delete "$INSTDIR\Qt5WebKit.dll"
-  Delete "$INSTDIR\Qt5WebKitWidgets.dll"
+  Delete "$INSTDIR\Qt5WebEngine.dll"
+  Delete "$INSTDIR\Qt5WebEngineCore.dll"
+  Delete "$INSTDIR\Qt5WebEngineWidgets.dll"
+  Delete "$INSTDIR\Qt5WebView.dll"
   Delete "$INSTDIR\Qt5Widgets.dll"
   Delete "$INSTDIR\Qt5Xml.dll"
   Delete "$INSTDIR\Qt5XmlPatterns.dll"
-;  Delete "$INSTDIR\gv.dll"
-  Delete "$INSTDIR\db.dll"
-  Delete "$INSTDIR\Biluna.exe"
+  Delete "$INSTDIR\QtWebEngineProcess.exe"
+  ; SetOutPath "$INSTDIR\bearer"
+  Delete "$INSTDIR\bearer\qgenericbearer.dll"
+  Delete "$INSTDIR\bearer\qnativewifibearer.dll"
+  ; SetOutPath "$INSTDIR\iconengines"
+  Delete "$INSTDIR\iconengines\qsvgicon.dll"
+  ; SetOutPath "$INSTDIR\imageformats"
+  Delete "$INSTDIR\imageformats\qdds.dll"
+  Delete "$INSTDIR\imageformats\qgif.dll"
+  Delete "$INSTDIR\imageformats\qicns.dll"
+  Delete "$INSTDIR\imageformats\qico.dll"
+  Delete "$INSTDIR\imageformats\qjp2.dll"
+  Delete "$INSTDIR\imageformats\qjpeg.dll"
+  Delete "$INSTDIR\imageformats\qmng.dll"
+  Delete "$INSTDIR\imageformats\qsvg.dll"
+  Delete "$INSTDIR\imageformats\qtga.dll"
+  Delete "$INSTDIR\imageformats\qtiff.dll"
+  Delete "$INSTDIR\imageformats\qwbmp.dll"
+  Delete "$INSTDIR\imageformats\qwebp.dll"
+  ; SetOutPath "$INSTDIR\platforms"
+  Delete "$INSTDIR\platforms\qminimal.dll"
+  Delete "$INSTDIR\platforms\qwindows.dll"
+  ; SetOutPath "$INSTDIR\position"
+  Delete "$INSTDIR\position\qtposition_positionpoll.dll"
+  ; SetOutPath "$INSTDIR\printersupport"
+  Delete "$INSTDIR\printsupport\windowsprintersupport.dll"
+  ; SetOutPath "$INSTDIR\qtwebengine"
+  Delete "$INSTDIR\qtwebengine\ffmpegsumo.dll"
+  ; SetOutPath "$INSTDIR\sqldrivers"
+  Delete "$INSTDIR\sqldrivers\qsqlite.dll"
+  Delete "$INSTDIR\sqldrivers\qsqlmysql.dll"
+  Delete "$INSTDIR\sqldrivers\qsqlodbc.dll"
+  Delete "$INSTDIR\sqldrivers\qsqlpsql.dll"
+  ; SetOutPath "$INSTDIR\translations"
+  ; ...
+  ; SetOutPath "$INSTDIR\plugins"
+  Delete "$INSTDIR\plugins\acc_actionplugin.dll"
+  Delete "$INSTDIR\plugins\crm_actionplugin.dll"
+  Delete "$INSTDIR\plugins\mrp_actionplugin.dll"
+  Delete "$INSTDIR\plugins\pcalc_actionplugin.dll"
+  Delete "$INSTDIR\plugins\peng_actionplugin.dll"
+  Delete "$INSTDIR\plugins\sail_actionplugin.dll"
+  Delete "$INSTDIR\plugins\scan_actionplugin.dll"
+  Delete "$INSTDIR\plugins\srm_actionplugin.dll"
+  ; SetOutPath "$INSTDIR\doc"
+  Delete "$INSTDIR\doc\doc.qch"
+  Delete "$INSTDIR\doc\doc.qhc"
+  ; SetOutPath "$INSTDIR\data"
+  Delete "$INSTDIR\data\acc_chartmaster_syssetting_nl.xml"
+  
+  ; Installation files
+  Delete "$INSTDIR\${PRODUCT_NAME}.url"
+  Delete "$INSTDIR\uninst.exe"
 
   Delete "$SMPROGRAMS\Biluna\Uninstall.lnk"
   Delete "$SMPROGRAMS\Biluna\Website.lnk"
   Delete "$DESKTOP\Biluna.lnk"
   Delete "$SMPROGRAMS\Biluna\Biluna.lnk"
 
-  RMDir "$INSTDIR\sqldrivers"
-  RMDir "$INSTDIR\plugins"
+  RMDir "$INSTDIR\bearer"
+  RMDir "$INSTDIR\iconengines"
   RMDir "$INSTDIR\imageformats"
   RMDir "$INSTDIR\platforms"
+  RMDir "$INSTDIR\plugins"
+  RMDir "$INSTDIR\position"
   RMDir "$INSTDIR\printsupport"
+  RMDir "$INSTDIR\qtwebengine"
+  RMDir "$INSTDIR\sqldrivers"
+  ; RMDir "$INSTDIR\translations"
 
   RMDir "$INSTDIR\doc"
   RMDir "$INSTDIR\data"

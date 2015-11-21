@@ -89,6 +89,13 @@ protected:
     virtual void beforeFileSave();
     virtual void closeEvent(QCloseEvent* e);
 
+    virtual bool isDuplicateIdxFound(RB_MmProxy* model,
+                                     const RB_String& fieldName,
+                                     const RB_String& id, int excludeRow);
+    virtual bool isDuplicateEntryFound(RB_MmProxy* model,
+                                       const RB_String& fieldName,
+                                       const RB_String& entry, int excludeRow);
+
     virtual void findInTable(const QString& text, QTableView* tv);
     virtual void findInTree(const QString& text, QTreeView* trv);
     virtual void filterTable(QTableView* tv);

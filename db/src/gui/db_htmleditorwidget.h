@@ -108,7 +108,7 @@ public:
 
     virtual void insertHtml(const RB_String& html);
 
-    bool queryCommandState(const QString&);
+//    bool queryCommandState(const QString&);
 //    bool pageActionChecked(QWebPage::WebAction wa);
 //    bool pageActionEnabled(QWebPage::WebAction wa);
 
@@ -153,7 +153,6 @@ private:
     QDialog* mInsertHtmlDialog;
 
     double mVerticalScrollbarPerunage;
-    QVariant* mResult;
 
 };
 

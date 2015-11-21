@@ -26,6 +26,7 @@
 #include "db_palettecolorpickerwidget.h"
 #include "db_permissionperspectiveprojectdialog.h"
 #include "db_permissionwidget.h"
+#include "db_permissionreportwidget.h"
 #include "db_plaintextwidget.h"
 #include "db_plugintesterdialog.h"
 #include "db_projectdialog.h"
@@ -157,7 +158,18 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
     }
     case WidgetPermission:
     {
+        wgt = RB_DialogFactory::findWidget(type);
+        if (wgt) return wgt;
         wgt = new DB_PermissionWidget(parent);
+        mWidgetList[type] = wgt;
+        break;
+    }
+    case WidgetPermissionReport:
+    {
+        wgt = RB_DialogFactory::findWidget(type);
+        if (wgt) return wgt;
+        wgt = new DB_PermissionReportWidget(parent);
+        mWidgetList[type] = wgt;
         break;
     }
     case WidgetPlainTextDocument: {
@@ -459,6 +471,7 @@ void DB_DialogFactory::closeAllMdiWindows() {
  * Delete all MDI windows of other factories.
  * DB only:
  * - DB_SimpleReportWidget
+ * - DB_PermissionWidget
  */
 void DB_DialogFactory::deleteAllMdiWindows() {
     std::vector<RB_DialogFactory*>::iterator iter;
@@ -472,6 +485,10 @@ void DB_DialogFactory::deleteAllMdiWindows() {
 
     if (isWidgetActive(DB_DialogFactory::WidgetSimpleReport)) {
         RB_MdiWindow* mdiWindow = getMdiWindow(DB_DialogFactory::WidgetSimpleReport);
+        delete mdiWindow;
+    }
+    if (isWidgetActive(DB_DialogFactory::WidgetPermission)) {
+        RB_MdiWindow* mdiWindow = getMdiWindow(DB_DialogFactory::WidgetPermission);
         delete mdiWindow;
     }
 }

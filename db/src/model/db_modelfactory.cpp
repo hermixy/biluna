@@ -23,11 +23,6 @@ DB_ModelFactory* DB_ModelFactory::mActiveFactory = NULL;
 DB_ModelFactory::DB_ModelFactory(RB_MainWindow* mw) : RB_ModelFactory(mw) {
     RB_DEBUG->print("DB_ModelFactory::DB_ModelFactory()");
     this->setObjectFactory(DB_OBJECTFACTORY);
-
-    // static pointer
-    mPermissionList = new RB_ObjectContainer("", NULL,
-                                             "DB_SystemUserPermissionList",
-                                             DB_OBJECTFACTORY);
 }
 
 /**
@@ -38,11 +33,6 @@ DB_ModelFactory::~DB_ModelFactory() {
     disconnectFromDatabase();
 
     mActiveFactory = NULL;
-
-    // static pointer
-    delete mPermissionList;
-    mPermissionList = NULL;
-
     RB_DEBUG->print("DB_ModelFactory::~DB_ModelFactory() OK");
 }
 
@@ -135,7 +125,7 @@ RB_MmProxy* DB_ModelFactory::getModel(int type, bool shared) {
     }
     case ModelPermissionProject:
         model = getTableModel(db, mObjectFactory, type, "DB_PermissionProjectList", shared);
-        model->setSourceSortOrder(RB2::SortOrderDescending, "number");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "persproject_idx");
         break;
     case ModelProject:
         // DB_ProjectList actually does not exist but required to create model
