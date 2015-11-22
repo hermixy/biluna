@@ -11,13 +11,15 @@
 #include "acc_actionplugin.h"
 
 #include <QtWidgets>
-#include "db_actionfactory.h"
-#include "db_modelfactory.h"
+#include "acc_actionclose.h"
 #include "acc_actionfactory.h"
 #include "acc_actionselectproject.h"
 #include "acc_dialogfactory.h"
 #include "acc_modelfactory.h"
 #include "acc_utilityfactory.h"
+#include "db_actionfactory.h"
+#include "db_modelfactory.h"
+#include "db_permissionhandler.h"
 
 
 /**
@@ -88,9 +90,10 @@ void ACC_ActionPlugin::getGuiActions(RB_MainWindow* mw) {
     // was set in DB_ActionFactory::slotPluginClicked()
     QApplication::restoreOverrideCursor();
 
-    // Open select project dialog
-    ACC_ActionSelectProject a;
-    a.trigger();
+    // Open select project dialog or close perspective
+    ACC_ActionSelectProject selectAction;
+    // selectAction.trigger();
+    DB_PERMISSIONHANDLER->conditionalPlugin(&selectAction, "ACC");
 }
 
 // Q_EXPORT_PLUGIN2(acc_actionplugin, ACC_ActionPlugin);

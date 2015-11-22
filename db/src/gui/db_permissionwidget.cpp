@@ -83,6 +83,15 @@ void DB_PermissionWidget::init() {
                                                 "persproject_idx", "description");
     mPermissionProjectMapper->addMapping(ui->leDescription, mPermissionProjectModel->fieldIndex("description"));
     mPermissionProjectMapper->addMapping(ui->leCustomer, mPermissionProjectModel->fieldIndex("customer"));
+    /* Do not use RB2::ProjectStatus which is
+        ProjectDeleted = -3,        The project is deleted/hidden for all users
+        ProjectHidden = -2,         The project is hidden for all users,
+                                            except admin and superuser when creating a new project
+        ProjectLocked = -1,         The project is locked or the data is frozen
+        ProjectLive = 0,            The project is live, editable and is default/normal status
+        ProjectTest = 1,            The project is used for testing
+        Here we use only Hidden = 0 Locked = 1 Live = 2 Test = 3
+    */
     RB_StringList items;
     items  << tr("Hidden") << tr("Locked") << tr("Live") << tr("Test");
     ui->cbStatus->setModel(new QStringListModel(items, this));

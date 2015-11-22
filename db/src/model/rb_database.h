@@ -25,6 +25,9 @@ class RB_TcpSocket;
  * Before using the connection, it must be initialized. e.g.,
  * call some or all of setDatabaseName(), setUserName(), setPassword(),
  * setHostName(), setPort(), and setConnectOptions(), and, finally, open().
+ * TODO: still not sure whether this works correctly, the application still
+ * ends with 'Database connecting still in use, being closed, all queries
+ * stop' or something like that
  */
 class DB_EXPORT RB_Database : public QSqlDatabase {
 

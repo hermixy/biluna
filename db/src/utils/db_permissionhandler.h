@@ -32,6 +32,9 @@ public:
     void getDbIdList(QStringList& dbIdList);
     QDate getToday() const;
 
+
+    void conditionalPlugin(RB_Action* actionValid,
+                           const QString& plugInToken);
     void conditionalExecute(RB_Action* action,
                             const QString& perspectiveProjectId = "",
                             int permission = RB2::PermissionDefault,

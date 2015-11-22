@@ -10,6 +10,7 @@
 
 #include "db_permissionhandler.h"
 
+#include "db_actionfactory.h"
 #include "db_dialogfactory.h"
 #include "db_objectfactory.h"
 #include "db_sqlcommonfunctions.h"
@@ -129,12 +130,24 @@ QDate DB_PermissionHandler::getToday() const {
     return mToday;
 }
 
+void DB_PermissionHandler::conditionalPlugin(RB_Action* actionValid,
+                                             const QString& plugInToken) {
+    // earlier isValidUser() has returned true
+    if (mIsAdmin || hasPermission("", RB2::PermissionDefault, plugInToken)) {
+        actionValid->trigger();
+    } else {
+        DB_DIALOGFACTORY->requestWarningDialog("No permission to execute");
+        DB_ACTIONFACTORY->closePlugin("ACC");
+    }
+}
+
 void DB_PermissionHandler::conditionalExecute(
-        RB_Action* action, const QString& perspectiveProjectId, int permission,
-        const QString& tokenList) {
+        RB_Action* action, const QString& perspectiveProjectId,
+        int permission, const QString& tokenList) {
 
     // earlier isValidUser() has returned true
-    if (mIsAdmin || hasPermission(perspectiveProjectId,permission, tokenList)) {
+    if (mIsAdmin || hasPermission(perspectiveProjectId,
+                                  permission, tokenList)) {
         action->trigger();
     } else {
         DB_DIALOGFACTORY->requestWarningDialog("No permission to execute");
@@ -186,13 +199,13 @@ bool DB_PermissionHandler::hasPermission(const QString& perspectiveProjectId,
         RB_ObjectBase* obj = iter->currentObject();
         QString str = obj->getValue("tokenlist").toString();
 
-        if (!str.isEmpty()) {
-            if (str.contains("BILUNA_ADMINISTRATOR")) {
-                mIsAdmin = true;
-                return mIsAdmin;
-            } else {
-                tokenListValid = validTokenList(str, tokenList);
-            }
+        if (str.contains("BILUNA_ADMINISTRATOR")) {
+            mIsAdmin = true;
+            return mIsAdmin;
+        }
+
+        if (!tokenList.isEmpty()) {
+            tokenListValid = validTokenList(str, tokenList);
         } else {
             tokenListValid = true;
         }

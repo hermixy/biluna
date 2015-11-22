@@ -289,7 +289,8 @@ LEFT JOIN db_systemgroup AS sgroup ON sgroup.id=SUBSTR(sugroup.group_idx,1,38)
 LEFT JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id
 LEFT JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id
 LEFT JOIN db_project ON db_project.id=suser.parent
-WHERE suser.id <> '0';
+WHERE suser.id <> '0'
+ORDER BY db_number, username, project;
      */
 
     RB_String qStr = "SELECT db_project.number as db_number, "
@@ -310,7 +311,8 @@ WHERE suser.id <> '0';
             "LEFT JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id "
             "LEFT JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id "
             "LEFT JOIN db_project ON db_project.id=suser.parent "
-            "WHERE suser.id <> '0';";
+            "WHERE suser.id <> '0' "
+            "ORDER BY db_number, username, project;";
 
     if (!query.exec(qStr)) {
         RB_DEBUG->error("DB_SqlCommonFunctionsFunction::getPermissionReport() "

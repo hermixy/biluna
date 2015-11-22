@@ -343,13 +343,16 @@ public:
     };
 
     /**
-     * Project status in a database, the status of a project
-     * overrides the permissions of the users but not the admin and the super user
+     * Project status in a database, the status of a project, overrides
+     * the permissions of the users but not the admin and the super user
+     * NOT used for permissions! only mstatus. Refer to DB_PermissionWidget
+     * for permission enumerator Hidden = 0 Locked = 1 Live = 2 Test = 3
      */
     enum ProjectStatus {
         ProjectNone = -4,           /**< No- or invalid project. */
         ProjectDeleted = -3,        /**< The project is deleted/hidden for all users */
-        ProjectHidden = -2,         /**< The project is hidden for all users, except admin and superuser when creating a new project*/
+        ProjectHidden = -2,         /**< The project is hidden for all users,
+                                            except admin and superuser when creating a new project*/
         ProjectLocked = -1,          /**< The project is locked or the data is frozen */
         ProjectLive = 0,            /**< The project is live, editable and is default/normal status*/
         ProjectTest = 1,            /**< The project is used for testing */

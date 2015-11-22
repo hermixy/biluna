@@ -36,6 +36,9 @@ public:
 
     virtual void init();
 
+    void setDataRow(RB_String& html, const QSqlRecord& rec) override;
+
+
 public slots:
     virtual void on_pbRefresh_clicked();
 
@@ -45,6 +48,9 @@ protected:
 private:
     void setColumnWidthsAndTitle();
     void setWidgets();
+
+    QStringList mProjectStatusList;
+    QStringList mCrudxList;
 };
 
 #endif // DB_PERMISSIONREPORTWIDGET_H
