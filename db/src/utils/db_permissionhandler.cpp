@@ -10,7 +10,6 @@
 
 #include "db_permissionhandler.h"
 
-#include "db_actionfactory.h"
 #include "db_dialogfactory.h"
 #include "db_objectfactory.h"
 #include "db_sqlcommonfunctions.h"
@@ -130,14 +129,19 @@ QDate DB_PermissionHandler::getToday() const {
     return mToday;
 }
 
-void DB_PermissionHandler::conditionalPlugin(RB_Action* actionValid,
-                                             const QString& plugInToken) {
+bool DB_PermissionHandler::loadPermissionPlugin(const QString &pluginToken) {
+    return mIsAdmin || hasPermission("", RB2::PermissionDefault, pluginToken);
+}
+
+void DB_PermissionHandler::conditionalPlugin(RB_Action* action,
+                                             const QString& pluginToken) {
     // earlier isValidUser() has returned true
-    if (mIsAdmin || hasPermission("", RB2::PermissionDefault, plugInToken)) {
-        actionValid->trigger();
+    if (mIsAdmin || hasPermission("", RB2::PermissionDefault, pluginToken)) {
+        if (action) {
+            action->trigger();
+        }
     } else {
         DB_DIALOGFACTORY->requestWarningDialog("No permission to execute");
-        DB_ACTIONFACTORY->closePlugin("ACC");
     }
 }
 

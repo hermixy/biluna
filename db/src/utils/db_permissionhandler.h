@@ -33,8 +33,9 @@ public:
     QDate getToday() const;
 
 
+    bool loadPermissionPlugin(const QString& pluginToken);
     void conditionalPlugin(RB_Action* actionValid,
-                           const QString& plugInToken);
+                           const QString& pluginToken);
     void conditionalExecute(RB_Action* action,
                             const QString& perspectiveProjectId = "",
                             int permission = RB2::PermissionDefault,

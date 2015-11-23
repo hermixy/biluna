@@ -1212,6 +1212,12 @@ bool DB_ActionFactory::loadPlugin(const RB_String& pluginId,
         RB_ActionPlugin* iPlugin = qobject_cast<RB_ActionPlugin* >(plugin);
 
         if (iPlugin) {
+            if (!iPlugin->loadPermission()) {
+                delete iPlugin;
+                DB_DIALOGFACTORY->requestWarningDialog(tr("No permission for ")
+                                                 + pluginId);
+                return false;
+            }
             iPlugin->getGuiActions(mMainWindow);
             mPluginList[pluginId] = iPlugin;
             return true;

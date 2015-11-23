@@ -917,7 +917,8 @@ void DB_HtmlEditorWidget::adjustSource()
  * Change tab
  */
 void DB_HtmlEditorWidget::changeTab(int index) {
-    if (mSourceDirty && (index == 1)) {
+    // TODO: be able to catch content edited from webview
+    if (/*mSourceDirty &&*/ (index == 1)) {
         QWebEnginePage* page = webView->page();
 
         // Does not work because htmlContent does not exist at call back
@@ -926,7 +927,9 @@ void DB_HtmlEditorWidget::changeTab(int index) {
         // plainTextEdit->setPlainText(*htmlContent);
         // delete htmlContent;
 
-        page->toHtml([this] (const QString& result) { plainTextEdit->setPlainText(result); });
+        page->toHtml([this]
+                        (const QString& result)
+                        { plainTextEdit->setPlainText(result); });
         mSourceDirty = false;
 
 //        int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);

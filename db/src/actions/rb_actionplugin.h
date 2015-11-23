@@ -29,6 +29,8 @@ public:
     virtual RB_String getName() = 0;
     //! Get description of perspective
     virtual RB_String getDescription() = 0;
+    //! Get permission to load plugin
+    virtual bool loadPermission() { return true; }
     //! Get menu and toolbar actions
     virtual void getGuiActions(RB_MainWindow* mw) = 0;
 };

@@ -13,13 +13,19 @@
 #include "acc_dialogfactory.h"
 #include "acc_projectdialog.h"
 #include "acc_utilityfactory.h"
+#include "db_actionfactory.h"
 #include "db_modelfactory.h"
+#include "db_permissionhandler.h"
 #include "rb_database.h"
 #include "rb_mainwindow.h"
 
 
 ACC_ActionSelectProject::ACC_ActionSelectProject()
         : RB_Action() {
+    // nothing
+}
+
+ACC_ActionSelectProject::~ACC_ActionSelectProject() {
     // nothing
 }
 
@@ -52,9 +58,11 @@ RB_GuiAction* ACC_ActionSelectProject::createGuiAction() {
 RB_Action* ACC_ActionSelectProject::factory() {
     RB_Action* a = new ACC_ActionSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    a->trigger();
+    // a->trigger();
+    DB_PERMISSIONHANDLER->conditionalPlugin(a, "ACC");
     delete a;
-    a = NULL;
+    a = nullptr;
+    DB_ACTIONFACTORY->closePlugin("ACC");
     return a;
 }
 

@@ -59,6 +59,11 @@ RB_String ACC_ActionPlugin::getDescription() {
     return RB_String(tr("Accounting perspective"));
 }
 
+bool ACC_ActionPlugin::loadPermission() {
+    return DB_PERMISSIONHANDLER->loadPermissionPlugin("ACC");
+}
+
+
 /**
  * Get menu and toolbar actions
  * @param mw main window
@@ -91,9 +96,7 @@ void ACC_ActionPlugin::getGuiActions(RB_MainWindow* mw) {
     QApplication::restoreOverrideCursor();
 
     // Open select project dialog or close perspective
-    ACC_ActionSelectProject selectAction;
-    // selectAction.trigger();
-    DB_PERMISSIONHANDLER->conditionalPlugin(&selectAction, "ACC");
+    ACC_ActionSelectProject::factory();
 }
 
 // Q_EXPORT_PLUGIN2(acc_actionplugin, ACC_ActionPlugin);

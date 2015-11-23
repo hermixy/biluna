@@ -25,7 +25,7 @@ class ACC_ActionSelectProject : public RB_Action {
 
 public:
     ACC_ActionSelectProject();
-    virtual ~ACC_ActionSelectProject() { }
+    virtual ~ACC_ActionSelectProject();
 
     static RB_String getName() {
         return "Select project";
