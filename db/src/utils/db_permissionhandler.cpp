@@ -102,8 +102,10 @@ int DB_PermissionHandler::getUserCount() {
     return mUserCount;
 }
 
-void DB_PermissionHandler::getDbIdList(QStringList& dbIdList) {
-    dbIdList.clear();
+void DB_PermissionHandler::getProjectIdList(const QString& perspective,
+                                            QStringList& projectIdList) {
+    projectIdList.clear();
+    QString userPersp;
     int status;
     QDate start;
     QDate end;
@@ -112,13 +114,16 @@ void DB_PermissionHandler::getDbIdList(QStringList& dbIdList) {
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
+        userPersp = obj->getValue("perspective").toString();
         status = obj->getValue("persprojectstatus_id").toInt() - 2; // refer RB2
         start = obj->getValue("persprojectstart").toDate();
         end = obj->getValue("persprojectend").toDate();
 
-        if (status >= RB2::ProjectLive && start <= mToday && mToday <= end) {
+        if (userPersp.compare(perspective, Qt::CaseInsensitive) == 0
+                && status >= RB2::ProjectLive
+                && start <= mToday && mToday <= end) {
             QString idStr = obj->getIdValue("persproject_idx").toString();
-            dbIdList.append(idStr);
+            projectIdList.append(idStr);
         }
     }
 

@@ -548,12 +548,12 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="leCustomer"/>
+              <widget class="QLineEdit" name="leNote"/>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_6">
                <property name="text">
-                <string>Customer</string>
+                <string>Note</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -714,7 +714,7 @@
   <tabstop>tvProject</tabstop>
   <tabstop>ilePerspectiveProject</tabstop>
   <tabstop>leDescription</tabstop>
-  <tabstop>leCustomer</tabstop>
+  <tabstop>leNote</tabstop>
   <tabstop>cbStatus</tabstop>
   <tabstop>deStartProject</tabstop>
   <tabstop>deEndProject</tabstop>

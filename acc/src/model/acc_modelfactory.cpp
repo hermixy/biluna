@@ -169,7 +169,7 @@ RB_MmProxy* ACC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelFactorCompany:
         model = getTableModel(db, mObjectFactory, type, "ACC_FactorCompanyList", shared);
-        model->setSourceSortOrder(RB2::SortOrderAscending, "coyname");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "company");
         break;
 //    case ModelGlTrans :
 //        model = getTableModel(db, mObjectFactory, type, "ACC_GlTransList", shared);

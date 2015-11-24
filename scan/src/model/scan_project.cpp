@@ -30,9 +30,8 @@ SCAN_Project::~SCAN_Project() {
 
 
 void SCAN_Project::createMembers() {
-    addMember("number", "-", "NR0001", RB2::MemberChar125);
-    addMember("revision", "-", 0, RB2::MemberInteger);
-    addMember("description", "-", "Default", RB2::MemberChar125);
+    addMember("number", "-", "SCAN0001", RB2::MemberChar125);
+    addMember("description", "-", "Default", RB2::MemberChar255);
     addMember("company", "-", "YourCompany", RB2::MemberChar125);
     addMember("location", "-", "YourLocation", RB2::MemberChar125);
 }

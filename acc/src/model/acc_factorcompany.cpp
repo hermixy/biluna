@@ -37,7 +37,7 @@ ACC_FactorCompany::~ACC_FactorCompany() {
  * - email email address
  */
 void ACC_FactorCompany::createMembers() {
-    addMember("coyname", "-", "", RB2::MemberChar125);
+    addMember("company", "-", "", RB2::MemberChar125);
     addMember("address1", "-", "", RB2::MemberChar125);
     addMember("address2", "-", "", RB2::MemberChar125);
     addMember("address3", "-", "", RB2::MemberChar125);

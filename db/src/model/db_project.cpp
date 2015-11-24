@@ -29,8 +29,7 @@ DB_Project::~DB_Project() {
 
 void DB_Project::createMembers() {
     addMember("number", "-", "DB0001", RB2::MemberChar125);
-    addMember("revision", "-", 0, RB2::MemberInteger);
     addMember("description", "-", "Default", RB2::MemberChar255);
-    addMember("company", "-", "MyCompany", RB2::MemberChar125);
-    addMember("location", "-", "MyLocation", RB2::MemberChar125);
+    addMember("company", "-", "YourCompany", RB2::MemberChar125);
+    addMember("location", "-", "YourLocation", RB2::MemberChar125);
 }

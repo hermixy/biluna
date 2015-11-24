@@ -30,7 +30,10 @@ ACC_Project::~ACC_Project() {
 
 /**
  * Create members:
- * - coyname company name
+ * - number internal Biluna company number
+ * - description explanation text, leave empty if not require
+ * - company company name
+ * - location general geographical location, the detail address is stored elsewhere
  * - gstno goods and services tax reference number
  * - companynumber company number in certain countries, Chamber of Commerce number
  * - regoffice1 - 6 registered office address line 1 - 6
@@ -53,8 +56,13 @@ ACC_Project::~ACC_Project() {
  * - logo company logo image
  */
 void ACC_Project::createMembers() {
-    addMember("coyname", "-", "<Your Company>", RB2::MemberChar125);
-    //! Company goods sales tax reference number, VAT number
+    // Mandatory first XXX_Project fields
+    addMember("number", "-", "ACC0001", RB2::MemberChar125);
+    addMember("description", "-", "Default", RB2::MemberChar255);
+    addMember("company", "-", "YourCompany", RB2::MemberChar125);
+    addMember("location", "-", "YourLocation", RB2::MemberChar125);
+
+    // Company goods sales tax reference number, VAT number
     addMember("gstno", "-", "", RB2::MemberChar20);
     addMember("companynumber", "-", "0", RB2::MemberChar20);
     addMember("regoffice1", "-", "", RB2::MemberChar125);

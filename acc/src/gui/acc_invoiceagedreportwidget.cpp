@@ -259,7 +259,7 @@ void ACC_InvoiceAgedReportWidget::on_pbRefresh_clicked() {
  * Create overdue report table in webview, including header and footer
  */
 void ACC_InvoiceAgedReportWidget::createTable(RB_ObjectContainer* invoiceList) {
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     mCustSuppName = "";
 
     mSumAmount = 0.0;

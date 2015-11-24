@@ -236,7 +236,7 @@ void ACC_DocTransReportWidget::on_pbRefresh_clicked() {
  * Create document transaction table in webview, including header and footer
  */
 void ACC_DocTransReportWidget::createTable(RB_ObjectContainer* docTransactionList) {
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     mSumDebit = 0.0;
     mSumCredit = 0.0;
     mDocId = "";

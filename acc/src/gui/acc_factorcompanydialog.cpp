@@ -55,7 +55,7 @@ void ACC_FactorCompanyDialog::init() {
     mModel->setRoot(DB_MODELFACTORY->getRootId());
 
     mMapper = mModel->getMapper();
-    mMapper->addMapping(leFactorName, mModel->fieldIndex("coyname"));
+    mMapper->addMapping(leFactorName, mModel->fieldIndex("company"));
     mMapper->addMapping(leAddressLine1, mModel->fieldIndex("address1"));
     mMapper->addMapping(leAddressLine2, mModel->fieldIndex("address2"));
     mMapper->addMapping(leAddressLine3, mModel->fieldIndex("address3"));

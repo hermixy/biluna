@@ -260,7 +260,7 @@ void ACC_CostCenterBalanceReportWidget::on_pbRefresh_clicked() {
  * @param centerBalanceList list of data objects
  */
 void ACC_CostCenterBalanceReportWidget::createTable(RB_ObjectContainer* centerBalanceList) {
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     mGroupBudget1 = 0.0;
     mGroupForecast1 = 0.0;
     mGroupActual1 = 0.0;

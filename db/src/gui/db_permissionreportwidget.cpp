@@ -77,7 +77,7 @@ void DB_PermissionReportWidget::setDataRow(QString& html,
             setColumnData(html, mCrudxList.at(
                               rec.value(col).toInt()), col);
             break;
-        case 9:
+        case 10:
             setColumnData(html, mProjectStatusList.at(
                               rec.value(col).toInt()), col);
             break;
@@ -135,7 +135,8 @@ void DB_PermissionReportWidget::setColumnWidthsAndTitle() {
         setColumnWidth(7);
     }
 
-    setColumnWidth(15);
+    setColumnWidth(5);
+    setColumnWidth(10);
     setColumnWidth(15);
 
     for (int i = 0; i < 3; ++i) {

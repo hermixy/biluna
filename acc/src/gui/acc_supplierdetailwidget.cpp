@@ -105,7 +105,7 @@ void ACC_SupplierDetailWidget::init() {
     mMapper->addMapping(cbRemittanceAdvice, mModel->fieldIndex("remittance"), "currentIndex");
     addComboBoxMapping(mModel, "taxgroup_id", "ACC_TaxGroup", "id", "taxgroupdescr",
                        cbTaxGroup, mMapper);
-    addComboBoxMapping(mModel, "factorcompany_id", "ACC_FactorCompany", "id", "coyname",
+    addComboBoxMapping(mModel, "factorcompany_id", "ACC_FactorCompany", "id", "company",
                        cbFactorCompany, mMapper);
     mMapper->addMapping(leTaxReference, mModel->fieldIndex("taxref"));
     addComboBoxMapping(mModel, "area_id", "ACC_Area", "id", "areacode",

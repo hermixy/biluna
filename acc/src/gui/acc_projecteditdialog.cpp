@@ -59,7 +59,7 @@ void ACC_ProjectEditDialog::init() {
     // 2. Set relations and mapper for line edits etc.
     //
     mMapper = mModel->getMapper();
-    mMapper->addMapping(leCompanyName, mModel->fieldIndex("coyname"));
+    mMapper->addMapping(leCompanyName, mModel->fieldIndex("company"));
     mMapper->addMapping(leTaxAuthRef, mModel->fieldIndex("gstno"));
     mMapper->addMapping(leOfficalCoyNo, mModel->fieldIndex("companynumber"));
     mMapper->addMapping(leAddressLine1, mModel->fieldIndex("regoffice1"));
@@ -109,7 +109,7 @@ void ACC_ProjectEditDialog::init() {
     int colCount = mModel->columnCount(QModelIndex());
 
     for (int i = 0; i < colCount; ++i) {
-        if (i != mModel->fieldIndex("coyname") && i != mModel->fieldIndex("regoffice1")
+        if (i != mModel->fieldIndex("company") && i != mModel->fieldIndex("regoffice1")
                 && i != mModel->fieldIndex("regoffice2") && i != mModel->fieldIndex("regoffice3")
                 && i != mModel->fieldIndex("regoffice4") && i != mModel->fieldIndex("regoffice5")
                 && i != mModel->fieldIndex("regoffice6")) {
@@ -199,7 +199,7 @@ void ACC_ProjectEditDialog::on_pbAdd_clicked() {
     mModel->setData(idx, "1", Qt::EditRole);
     // end NOTE
 
-    tvCompany->setCurrentIndex(mModel->index(row, mModel->fieldIndex("coyname"), QModelIndex()));
+    tvCompany->setCurrentIndex(mModel->index(row, mModel->fieldIndex("company"), QModelIndex()));
     tvCompany->scrollTo(tvCompany->currentIndex());
     tabWidget->setCurrentIndex(0);
     leCompanyName->setFocus();

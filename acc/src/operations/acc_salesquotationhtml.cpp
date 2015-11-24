@@ -103,7 +103,7 @@ void ACC_SalesQuotationHtml::setCompanyData() {
     }
 
     // Invoice to be send to branch address
-    mHtml.replace("{$ACC_Project.coyname}", obj->getValue("coyname").toString());
+    mHtml.replace("{$ACC_Project.coyname}", obj->getValue("company").toString());
     mHtml.replace("{$ACC_Project.regoffice1}", obj->getValue("regoffice1").toString());
     mHtml.replace("{$ACC_Project.regoffice2}", obj->getValue("regoffice2").toString());
     mHtml.replace("{$ACC_Project.regoffice3}", obj->getValue("regoffice3").toString());

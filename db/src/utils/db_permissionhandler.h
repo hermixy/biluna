@@ -29,7 +29,7 @@ public:
     bool isValidDbUser();
     bool isAdmin();
     int getUserCount();
-    void getDbIdList(QStringList& dbIdList);
+    void getProjectIdList(const QString& perspective, QStringList& projectIdList);
     QDate getToday() const;
 
 

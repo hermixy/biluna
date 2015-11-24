@@ -33,7 +33,8 @@ void DB_PermissionPerspectiveProjectDialog::init() {
     //
     // 1. Set model with ID
     //
-    mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelPermissionPerspectiveProject, false);
+    mModel = DB_MODELFACTORY->getModel(
+                DB_ModelFactory::ModelPermissionPerspectiveProject, false);
     // mModel->setRoot();
 
     //
