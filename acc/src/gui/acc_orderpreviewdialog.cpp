@@ -74,7 +74,7 @@ void ACC_OrderPreviewDialog::filePrint(QPrinter* printer) {
  * Set html to show with this window,
  * usually ReportHeader+Content+ReportFooter.
  * The PageHeader and PageFooter are only used
- * for prining more than one page.
+ * for printing more than one page.
  * @param content html content
  */
 void ACC_OrderPreviewDialog::setHtml(const RB_String& content) {

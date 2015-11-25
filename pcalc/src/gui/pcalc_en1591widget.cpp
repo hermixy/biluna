@@ -314,10 +314,19 @@ void PCALC_EN1591Widget::init() {
          << "Tensioner Measure Bolt Elongation" << "Wrench Measure Nut Turn"
          << "Wrench Measure Torque Plus Nut Turn";
     cbTensionerType->setModel(new QStringListModel(items, this));
-    mBoltNutWasherMapper->addMapping(cbTensionerType,
-                                     mBoltNutWasherModel->fieldIndex(
-                                         "tensionertype_id"),
-                                     "currentIndex");
+    mBoltNutWasherMapper->addMapping(
+                cbTensionerType,
+                mBoltNutWasherModel->fieldIndex("tensionertype_id"),
+                "currentIndex");
+    items.clear();
+    items << "Summary Report" << "Detail Report"
+          << "Last Iteration Validation" << "All Iteration Validation";
+    cbCalculationReportType->setModel(new QStringListModel(items, this));
+    connect(cbCalculationReportType, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(slotDisableFormulaWidgets(int)));
+    cbCalculationReportType->setCurrentIndex(0);
+    slotDisableFormulaWidgets(cbCalculationReportType->currentIndex());
+
     mBoltNutWasherMapper->addMapping(ledB0,
                                      mBoltNutWasherModel->fieldIndex("db0"));
     mBoltNutWasherMapper->addMapping(ledB2,
@@ -520,22 +529,22 @@ bool PCALC_EN1591Widget::fileRevert() {
 /**
  * Menu file PDF
  */
-void PCALC_EN1591Widget::filePdf(QPrinter* /*pr*/) {
-
+void PCALC_EN1591Widget::filePdf(QPrinter* pr) {
+    filePrint(pr);
 }
 
 /**
  * On pushbutton add weldolet clicked.
  */
-void PCALC_EN1591Widget::filePrint(QPrinter* /*pr*/) {
-
+void PCALC_EN1591Widget::filePrint(QPrinter* pr) {
+    teCalculationReport->print(pr);
 }
 
 /**
  * On pushbutton add weldolet clicked.
  */
-void PCALC_EN1591Widget::filePrintPreview(QPrinter* /*pr*/) {
-
+void PCALC_EN1591Widget::filePrintPreview(QPrinter* pr) {
+    filePrint(pr);
 }
 
 void PCALC_EN1591Widget::changeEvent(QEvent *e) {
@@ -577,114 +586,23 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
         return;
     }
 
-    QString po = "<p>";
-    QString pc = "</p>";
-    QString tbo = "<table border='0'>";
-    QString tbc = "</table>";
-    QString tro = "<tr>";
-    QString trc = "</tr>";
-    QString tdo = "<td>";
-    QString tdc = "</td>";
-
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    PR->clear();
-    getTextEdit()->clear();
-    setInput();
-
-    QString dateTimeStr = QDateTime::currentDateTime().toString(Qt::ISODate);
-
-    // continue here with first calculation
-    // second the material, allow=>1, qual service=>1
-
-    Biluna::Calc::EN1591::EN1591Handler handler(NULL, NULL, NULL);
-    handler.exec();
-
-    // Create output report
-
-    QString outputStr;
-    outputStr.append(po + "-- Start calculation: " + dateTimeStr + pc);
-    outputStr.append(tbo);
-    outputStr.append(tro + "<td width='10%'>&nbsp;</td>"
-                           "<td width='7%'><strong>CALCULATION</strong></td>"
-                           "<td width='8%'>&nbsp;</td>"
-                           "<td width='75%'>&nbsp;</td>"
-                     + trc);
-    if (!cbLastValuesOnly->isChecked()) {
-        outputStr.append(tro + tdo + tdc
-                         + tdo + "<strong>INPUT</strong>" + tdc
-                         + tdo + tdc+ tdo + tdc + trc);
-        // input
-        RB_ObjectContainer* inList
-                = PR->getInOutContainer()->getContainer("PCALC_InputList");
-        RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
-        int memberCount = in->countMember();
-
-        for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
-            RB_ObjectMember* mem = in->getMember(i);
-            outputStr.append(tro + tdo + "Input:" + tdc
-                        + tdo + mem->getName() + " = " + tdc
-                        + tdo + mem->getValue().toString() + tdc + tdo + tdc + trc);
-
-        }
-
-        outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
-        outputStr.append(tro + tdo + tdc + tdo + "<strong>LOADCASES</strong>"
-                         + tdc + tdo + tdc + tdo + tdc + trc);
-
-        RB_ObjectContainer* loadCaseList =
-                PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
-        loadCaseList->sort(0, RB2::SortOrderAscending, RB2::MemberInteger);
-        RB_ObjectIterator* iterLoad = loadCaseList->createIterator();
-
-        for (iterLoad->first(); !iterLoad->isDone(); iterLoad->next()) {
-            in = iterLoad->currentObject();
-            memberCount = in->countMember();
-
-            for (int i = 0; i < memberCount; ++i) {
-                RB_ObjectMember* mem = in->getMember(i);
-                outputStr.append(tro + tdo + "Input:" + tdc
-                            + tdo + mem->getName() + " = " + tdc
-                            + tdo + mem->getValue().toString()) + tdc + trc;
-            }
-        }
-
-        delete iterLoad;
+    switch (cbCalculationReportType->currentIndex()) {
+    case 0:
+        // TODO: createSummaryReport();
+        break;
+    case 1:
+        createDetailReport();
+        break;
+    case 2:
+        createValidationReport();
+        break;
+    case 3:
+        createValidationReport();
+        break;
+    default:
+        teCalculationReport->setHtml("<p>Invalid report type</p>");
+        break;
     }
-
-    outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
-    outputStr.append(tro + tdo + tdc + tdo + "<strong>OUTPUT</strong>"
-                     + tdc + tdo + tdc + tdo + tdc + trc);
-
-    // output
-    RB_ObjectContainer* outList
-            = PR->getInOutContainer()->getContainer("PCALC_OutputList");
-    RB_ObjectIterator* iter = outList->createIterator();
-
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* obj = iter->currentObject();
-        outputStr.append(tro
-                + tdo + obj->getValue("formulanumber").toString()
-                         + " [" + obj->getValue("loadcaseno").toString() + "]" + tdc
-                + tdo + obj->getValue("variablename").toString() + " = " + tdc
-                + tdo + obj->getValue("result").toString() + tdc
-                + tdo + " = " + obj->getValue("formula").toString() + tdc + trc
-                    /*+ " " + obj->getValue("unit").toString()
-                    + " " + obj->getValue("loadcaseno").toString()
-                    + " " + obj->getValue("note").toString()*/);
-
-        QString str = obj->getValue("formulavalues").toString();
-        if (!str.isEmpty()) {
-            outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc
-                             + tdo + " = " + str + tdc + trc);
-        }
-    }
-
-    delete iter;
-    outputStr.append(tbc);
-    outputStr.append(po + "-- End calculation:"
-                     + QDateTime::currentDateTime().toString(Qt::ISODate) + pc);
-    getTextEdit()->setHtml(outputStr);
-    QApplication::restoreOverrideCursor();
 }
 
 void PCALC_EN1591Widget::on_pbUnitTest_clicked() {
@@ -789,6 +707,11 @@ void PCALC_EN1591Widget::slotHandleParentRowChanged() {
 
     idx = mShellModel->index(0, 0);
     mShellModel->slotChangeCurrentRow(idx, QModelIndex());
+}
+
+void PCALC_EN1591Widget::slotDisableFormulaWidgets(int index) {
+    sbFormulaFrom->setEnabled(index > 1);
+    sbFormulaTo->setEnabled(index > 1);
 }
 
 void PCALC_EN1591Widget::setInput() {
@@ -1002,13 +925,136 @@ void PCALC_EN1591Widget::setSettings() {
 
     // Add setting object to input list
     RB_ObjectAtomic* obj = new RB_ObjectAtomic("", inList, "PCALC_Setting");
-    obj->addMember("lastvalue", "-", cbLastValuesOnly->isChecked() ? 1 : 0,
+    obj->addMember("reporttype", "-", cbCalculationReportType->currentIndex(),
                    RB2::MemberInteger);
     obj->addMember("formulafrom", "-", sbFormulaFrom->value(),
                    RB2::MemberInteger);
     obj->addMember("formulato", "-", sbFormulaTo->value(),
                    RB2::MemberInteger);
     inList->addObject(obj);
+}
+
+void PCALC_EN1591Widget::createDetailReport() {
+    QFile file(":/reports/EN1591_detail_report.html");
+    file.open(QIODevice::ReadOnly);
+    QString report = file.readAll();
+    file.flush();
+    teCalculationReport->setHtml(report);
+}
+
+/**
+ * @brief PCALC_EN1591Widget::createValidationReport,
+ * last and all validation report
+ */
+void PCALC_EN1591Widget::createValidationReport() {
+    QString po = "<p>";
+    QString pc = "</p>";
+    QString tbo = "<table border='0'>";
+    QString tbc = "</table>";
+    QString tro = "<tr>";
+    QString trc = "</tr>";
+    QString tdo = "<td>";
+    QString tdc = "</td>";
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    PR->clear();
+    getTextEdit()->clear();
+    setInput();
+
+    QString dateTimeStr = QDateTime::currentDateTime().toString(Qt::ISODate);
+
+    // continue here with first calculation
+    // second the material, allow=>1, qual service=>1
+
+    Biluna::Calc::EN1591::EN1591Handler handler(NULL, NULL, NULL);
+    handler.exec();
+
+    // Create output report
+
+    QString outputStr;
+    outputStr.append(po + "-- Start calculation: " + dateTimeStr + pc);
+    outputStr.append(tbo);
+    outputStr.append(tro + "<td width='10%'>&nbsp;</td>"
+                           "<td width='7%'><strong>CALCULATION</strong></td>"
+                           "<td width='8%'>&nbsp;</td>"
+                           "<td width='75%'>&nbsp;</td>"
+                     + trc);
+    if (cbCalculationReportType->currentIndex() == 3) { // all iterations
+        outputStr.append(tro + tdo + tdc
+                         + tdo + "<strong>INPUT</strong>" + tdc
+                         + tdo + tdc+ tdo + tdc + trc);
+        // input
+        RB_ObjectContainer* inList
+                = PR->getInOutContainer()->getContainer("PCALC_InputList");
+        RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
+        int memberCount = in->countMember();
+
+        for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
+            RB_ObjectMember* mem = in->getMember(i);
+            outputStr.append(tro + tdo + "Input:" + tdc
+                        + tdo + mem->getName() + " = " + tdc
+                        + tdo + mem->getValue().toString() + tdc + tdo + tdc + trc);
+
+        }
+
+        outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
+        outputStr.append(tro + tdo + tdc + tdo + "<strong>LOADCASES</strong>"
+                         + tdc + tdo + tdc + tdo + tdc + trc);
+
+        RB_ObjectContainer* loadCaseList =
+                PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
+        loadCaseList->sort(0, RB2::SortOrderAscending, RB2::MemberInteger);
+        RB_ObjectIterator* iterLoad = loadCaseList->createIterator();
+
+        for (iterLoad->first(); !iterLoad->isDone(); iterLoad->next()) {
+            in = iterLoad->currentObject();
+            memberCount = in->countMember();
+
+            for (int i = 0; i < memberCount; ++i) {
+                RB_ObjectMember* mem = in->getMember(i);
+                outputStr.append(tro + tdo + "Input:" + tdc
+                            + tdo + mem->getName() + " = " + tdc
+                            + tdo + mem->getValue().toString()) + tdc + trc;
+            }
+        }
+
+        delete iterLoad;
+    }
+
+    outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
+    outputStr.append(tro + tdo + tdc + tdo + "<strong>OUTPUT</strong>"
+                     + tdc + tdo + tdc + tdo + tdc + trc);
+
+    // output
+    RB_ObjectContainer* outList
+            = PR->getInOutContainer()->getContainer("PCALC_OutputList");
+    RB_ObjectIterator* iter = outList->createIterator();
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* obj = iter->currentObject();
+        outputStr.append(tro
+                + tdo + obj->getValue("formulanumber").toString()
+                         + " [" + obj->getValue("loadcaseno").toString() + "]" + tdc
+                + tdo + obj->getValue("variablename").toString() + " = " + tdc
+                + tdo + obj->getValue("result").toString() + tdc
+                + tdo + " = " + obj->getValue("formula").toString() + tdc + trc
+                    /*+ " " + obj->getValue("unit").toString()
+                    + " " + obj->getValue("loadcaseno").toString()
+                    + " " + obj->getValue("note").toString()*/);
+
+        QString str = obj->getValue("formulavalues").toString();
+        if (!str.isEmpty()) {
+            outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc
+                             + tdo + " = " + str + tdc + trc);
+        }
+    }
+
+    delete iter;
+    outputStr.append(tbc);
+    outputStr.append(po + "-- End calculation:"
+                     + QDateTime::currentDateTime().toString(Qt::ISODate) + pc);
+    getTextEdit()->setHtml(outputStr);
+    QApplication::restoreOverrideCursor();
 }
 
 void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,
