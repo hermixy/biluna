@@ -10,6 +10,7 @@
 
 #include "peng_actionselectproject.h"
 
+#include "db_actionfactory.h"
 #include "db_modelfactory.h"
 #include "peng_dialogfactory.h"
 #include "peng_projectdialog.h"
@@ -51,9 +52,18 @@ RB_GuiAction* PENG_ActionSelectProject::createGuiAction() {
 RB_Action* PENG_ActionSelectProject::factory() {
     RB_Action* a = new PENG_ActionSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    a->trigger();
+    // a->trigger(); by conditionalPlugin()
+
+    const QString pluginType = "PENG";
+    bool result = DB_PERMISSIONHANDLER->conditionalPlugin(a, pluginType);
     delete a;
-    a = NULL;
+    a = nullptr;
+
+    if (!result) {
+        // Close plugin if was already opened by previous user
+        DB_ACTIONFACTORY->closePlugin(pluginType);
+    }
+
     return a;
 }
 

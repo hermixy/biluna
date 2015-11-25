@@ -10,11 +10,12 @@
 
 #include "sail_actionselectproject.h"
 
-#include "sail_dialogfactory.h"
-#include "sail_projectdialog.h"
+#include "db_actionfactory.h"
 #include "db_modelfactory.h"
 #include "rb_database.h"
 #include "rb_mainwindow.h"
+#include "sail_dialogfactory.h"
+#include "sail_projectdialog.h"
 
 
 SAIL_ActionSelectProject::SAIL_ActionSelectProject()
@@ -44,9 +45,18 @@ RB_GuiAction* SAIL_ActionSelectProject::createGuiAction() {
 RB_Action* SAIL_ActionSelectProject::factory() {
     RB_Action* a = new SAIL_ActionSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    a->trigger();
+    // a->trigger(); by conditionalPlugin()
+
+    const QString pluginType = "SAIL";
+    bool result = DB_PERMISSIONHANDLER->conditionalPlugin(a, pluginType);
     delete a;
-    a = NULL;
+    a = nullptr;
+
+    if (!result) {
+        // Close plugin if was already opened by previous user
+        DB_ACTIONFACTORY->closePlugin(pluginType);
+    }
+
     return a;
 }
 

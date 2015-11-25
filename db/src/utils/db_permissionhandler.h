@@ -34,9 +34,9 @@ public:
 
 
     bool loadPermissionPlugin(const QString& pluginToken);
-    void conditionalPlugin(RB_Action* actionValid,
+    bool conditionalPlugin(RB_Action* actionValid,
                            const QString& pluginToken);
-    void conditionalExecute(RB_Action* action,
+    bool conditionalExecute(RB_Action* action,
                             const QString& perspectiveProjectId = "",
                             int permission = RB2::PermissionDefault,
                             const QString& tokenList = "");

@@ -138,19 +138,22 @@ bool DB_PermissionHandler::loadPermissionPlugin(const QString &pluginToken) {
     return mIsAdmin || hasPermission("", RB2::PermissionDefault, pluginToken);
 }
 
-void DB_PermissionHandler::conditionalPlugin(RB_Action* action,
+bool DB_PermissionHandler::conditionalPlugin(RB_Action* action,
                                              const QString& pluginToken) {
     // earlier isValidUser() has returned true
     if (mIsAdmin || hasPermission("", RB2::PermissionDefault, pluginToken)) {
         if (action) {
             action->trigger();
+            return true;
         }
     } else {
         DB_DIALOGFACTORY->requestWarningDialog("No permission to execute");
     }
+
+    return false;
 }
 
-void DB_PermissionHandler::conditionalExecute(
+bool DB_PermissionHandler::conditionalExecute(
         RB_Action* action, const QString& perspectiveProjectId,
         int permission, const QString& tokenList) {
 
@@ -158,9 +161,12 @@ void DB_PermissionHandler::conditionalExecute(
     if (mIsAdmin || hasPermission(perspectiveProjectId,
                                   permission, tokenList)) {
         action->trigger();
+        return true;
     } else {
         DB_DIALOGFACTORY->requestWarningDialog("No permission to execute");
     }
+
+    return false;
 }
 
 void DB_PermissionHandler::setUserPermission() {

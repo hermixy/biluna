@@ -13,8 +13,6 @@
 
 #include "rb_action.h"
 
-class RB_MmSource;
-
 
 /**
  * Select project or CRM account from database

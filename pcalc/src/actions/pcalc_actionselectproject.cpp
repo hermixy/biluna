@@ -11,8 +11,8 @@
 #include "pcalc_actionselectproject.h"
 
 #include "db_modelfactory.h"
+#include "db_actionfactory.h"
 #include "pcalc_dialogfactory.h"
-#include "pcalc_modelfactory.h"
 #include "pcalc_projectdialog.h"
 #include "rb_database.h"
 #include "rb_mainwindow.h"
@@ -52,9 +52,18 @@ RB_GuiAction* PCALC_ActionSelectProject::createGuiAction() {
 RB_Action* PCALC_ActionSelectProject::factory() {
     RB_Action* a = new PCALC_ActionSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    a->trigger();
+    // a->trigger(); by conditionalPlugin()
+
+    const QString pluginType = "PCALC";
+    bool result = DB_PERMISSIONHANDLER->conditionalPlugin(a, pluginType);
     delete a;
-    a = NULL;
+    a = nullptr;
+
+    if (!result) {
+        // Close plugin if was already opened by previous user
+        DB_ACTIONFACTORY->closePlugin(pluginType);
+    }
+
     return a;
 }
 
@@ -64,8 +73,9 @@ RB_Action* PCALC_ActionSelectProject::factory() {
 void PCALC_ActionSelectProject::trigger() {
     if (RB_DATABASE->database().isOpen()) {
         // Check whether DB tables exists, if not run create tables in database
-        if (!DB_MODELFACTORY->createMissingTables("PCALC", 0, 9, 14)) {
-            PCALC_DIALOGFACTORY->requestWarningDialog(tr("PCALC check- and update database ERROR."));
+        if (!DB_MODELFACTORY->createMissingTables("PCALC", 0, 9, 15)) {
+            PCALC_DIALOGFACTORY->requestWarningDialog(
+                        tr("PCALC check- and update database ERROR."));
             return;
         }
 
@@ -98,14 +108,18 @@ void PCALC_ActionSelectProject::trigger() {
         PCALC_DIALOGFACTORY->deleteAllDockWidgets();
 
         if (PCALC_MODELFACTORY->getRootId() != "") {
-            PCALC_DIALOGFACTORY->requestWarningDialog(tr("Perspective is ready.\n"
-                                                       "Select action from perspective menu"));
-            PCALC_DIALOGFACTORY->commandMessage(tr("PCALC perspective is ready"));
-            PCALC_DIALOGFACTORY->statusBarMessage(tr("PCALC perspective is ready"), 2000);
+            PCALC_DIALOGFACTORY->requestWarningDialog(
+                        tr("Perspective is ready.\n"
+                           "Select action from perspective menu"));
+            PCALC_DIALOGFACTORY->commandMessage(
+                        tr("PCALC perspective is ready"));
+            PCALC_DIALOGFACTORY->statusBarMessage(
+                        tr("PCALC perspective is ready"), 2000);
         }
 
     } else {
-        PCALC_DIALOGFACTORY->requestWarningDialog(tr("Not connected to database."));
+        PCALC_DIALOGFACTORY->requestWarningDialog(
+                    tr("Not connected to database."));
     }
 
     PCALC_MODELFACTORY->emitState();
