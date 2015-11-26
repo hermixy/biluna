@@ -935,11 +935,42 @@ void PCALC_EN1591Widget::setSettings() {
 }
 
 void PCALC_EN1591Widget::createDetailReport() {
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    PR->clear();
+    getTextEdit()->clear();
+    setInput();
+
+//    QString dateTimeStr = QDateTime::currentDateTime().toString(Qt::ISODate);
+
+    // continue here with first calculation
+    // second the material, allow=>1, qual service=>1
+    Biluna::Calc::EN1591::EN1591Handler handler(NULL, NULL, NULL);
+    handler.exec();
+
+    // get report template
     QFile file(":/reports/EN1591_detail_report.html");
     file.open(QIODevice::ReadOnly);
     QString report = file.readAll();
     file.flush();
+
+    // parse html template and enter relevant values
+//    <td id="{$flange1.pB}">&nbsp;</td><td id="{$flange2.pB}">&nbsp;</td>
+//    existObj->setValue("variablename", variableName);
+//    existObj->setValue("result", result);
+    // output
+    RB_ObjectContainer* outList
+            = PR->getInOutContainer()->getContainer("PCALC_OutputList");
+    RB_ObjectBase* outObj = outList->getObject("variablename", "pB"); // (1)
+
+    if (outObj) {
+        double result = outObj->getValue("result").toDouble();
+        report.replace("<td id=\"{$flange1.pB}\">&nbsp;</td>",
+                       "<td id=\"{$flange1.pB}\"><div align=\"right\">"
+                       + QString::number(result) + "</div></td>");
+    }
+
     teCalculationReport->setHtml(report);
+    QApplication::restoreOverrideCursor();
 }
 
 /**

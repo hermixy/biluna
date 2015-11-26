@@ -26,20 +26,22 @@ bool Flange_Loose::Is_flange_Valid() {
         if (mShell != NULL) {
 
             if (cos(mShell->phiS) >= 1 / (1 + 0.01 * mShell->dS / mShell->eS)) {
-                PR->addDetail("Para 4.2", "result", str
-                              + " AND cos(phiS) >= 1 / (1 + 0.01 * dS / eS)",
+                PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+                              str + " AND cos(phiS) >= 1 / (1 + 0.01 * dS / eS)",
                               1, "-", strVal + " AND cos(" + QN(mShell->phiS)
                               + ") >= 1 / (1 + 0.01 * " + QN(mShell->dS)
                               + " / " + QN(mShell->eS) + ")", 0);
                 return true;
             }
         } else {
-            PR->addDetail("Para 4.2", "result", str, 1, "-", strVal, 0);
+            PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+                          str, 1, "-", strVal, 0);
             return true;
         }
     }
 
-    PR->addDetail("Para 4.2", "result", str, 0, "-", strVal, 0);
+    PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+                  str, 0, "-", strVal, 0);
     return false;
 }
 
@@ -48,7 +50,8 @@ bool Flange_Loose::Is_flange_Valid() {
  */
 void Flange_Loose::Calc_bF() {
     bF = (d8 - d0) / 2;
-    PR->addDetail("Formula 11", "bF", "(d8 - d0) / 2", bF, "mm",
+    PR->addDetail("Formula 11", "bF(" + QN(mFlangeNumber) + ")",
+                  "(d8 - d0) / 2", bF, "mm",
                   "(" + QN(d8) + " - " + QN(d0) + ") / 2", 0);
 }
 
@@ -57,7 +60,8 @@ void Flange_Loose::Calc_bF() {
  */
 void Flange_Loose::Calc_dF() {
     dF = (d8 + d0) / 2;
-    PR->addDetail("Formula 12", "bF", "(d8 + d0) / 2", dF, "mm",
+    PR->addDetail("Formula 12", "bF(" + QN(mFlangeNumber) + ")",
+                  "(d8 + d0) / 2", dF, "mm",
                   "(" + QN(d8) + " + " + QN(d0) + ") / 2", 0);
 }
 
@@ -66,7 +70,8 @@ void Flange_Loose::Calc_dF() {
  */
 void Flange_Loose::Calc_AF() {
     AF = (d8 - d0) * eF / 2;
-    PR->addDetail("Formula 13", "AF", "(d8 - d0) * eF / 2", AF, "mm^2",
+    PR->addDetail("Formula 13", "AF(" + QN(mFlangeNumber) + ")",
+                  "(d8 - d0) * eF / 2", AF, "mm^2",
                   "(" + QN(d8) + " - " + QN(d0) + ") * " + QN(eF) + " / 2", 0);
 }
 
@@ -75,7 +80,8 @@ void Flange_Loose::Calc_AF() {
  */
 void Flange_Loose::Calc_bL() {
     bL = (d4 - d6) / 2 - d5e;
-    PR->addDetail("Formula 14", "bL", "(d4 - d6) / 2 - d5e", bL, "mm",
+    PR->addDetail("Formula 14", "bL(" + QN(mFlangeNumber) + ")",
+                  "(d4 - d6) / 2 - d5e", bL, "mm",
                   "(" + QN(d4) + " - " + QN(d6) + ") / 2 - " + QN(d5e), 0);
 }
 
@@ -84,7 +90,8 @@ void Flange_Loose::Calc_bL() {
  */
 void Flange_Loose::Calc_dL() {
     dL = (d4 + d6) / 2;
-    PR->addDetail("Formula 15", "dL", "(d4 + d6) / 2", dL, "mm",
+    PR->addDetail("Formula 15", "dL(" + QN(mFlangeNumber) + ")",
+                  "(d4 + d6) / 2", dL, "mm",
                   "(" + QN(d4) + " + " + QN(d6) + ") / 2", 0);
 }
 
@@ -93,7 +100,8 @@ void Flange_Loose::Calc_dL() {
  */
 void Flange_Loose::Calc_AL() {
     AL = (d4 - d6) * eL / 2;
-    PR->addDetail("Formula 16", "AL", "(d4 - d6) * eL / 2", AL, "mm^2",
+    PR->addDetail("Formula 16", "AL(" + QN(mFlangeNumber) + ")",
+                  "(d4 - d6) * eL / 2", AL, "mm^2",
                   "(" + QN(d4) + " - " + QN(d6) + ") * " + QN(eL) + " / 2", 0);
 }
 
@@ -103,7 +111,8 @@ void Flange_Loose::Calc_AL() {
  */
 void Flange_Loose::Calc_beta() {
     beta = e2 / e1;
-    PR->addDetail("Formula 19", "beta", "e2 / e1", beta, "-",
+    PR->addDetail("Formula 19", "beta(" + QN(mFlangeNumber) + ")",
+                  "e2 / e1", beta, "-",
                   QN(e2) + " / " + QN(e1), 0);
 }
 
@@ -115,7 +124,7 @@ void Flange_Loose::Calc_eD() {
     eD = e1 * (1 + (beta - 1) * lH
                / pow(pow(beta / 3, 4)
                      * pow(d1 * e1, 2) + pow(lH, 4), 0.25));
-    PR->addDetail("Formula 18", "eD",
+    PR->addDetail("Formula 18", "eD(" + QN(mFlangeNumber) + ")",
                   "e1 * (1 + (beta - 1) * lH / ((beta / 3) ^ 4 * "
                   "(d1 * e1) ^ 2 + lH ^ 4) ^ 0.25)", eD, "mm",
                   QN(e1) + " * (1 + (" + QN(beta) + " - 1) * " + QN(lH)
@@ -131,7 +140,8 @@ void Flange_Loose::Calc_eE() {
 //    if (fabs(e2 - e1) < ACCURACY)     {
         // No hub because wallthickness hub is same as connecting pipe
         eE = mShell->eS;
-        PR->addDetail("Formula 21", "eE", "eS", eE, "mm", QN(mShell->eS), 0);
+        PR->addDetail("Formula 21", "eE(" + QN(mFlangeNumber) + ")",
+                      "eS", eE, "mm", QN(mShell->eS), 0);
 //    } else {
 //        // Tapered hub
 //        eE = e1 * (1 + ((beta - 1) * lH / ((beta / 3) * sqrt(e1 * d1) + lH)));
@@ -150,12 +160,13 @@ void Flange_Loose::Calc_dE() {
     if (fabs(e2 - e1) < ACCURACY)     {
         // No hub because wallthickness hub is same as connecting pipe
         dE = mShell->dS;
-        PR->addDetail("Formula 22", "dE", "dS", dE, "-", QN(mShell->dS), 0);
+        PR->addDetail("Formula 22", "dE(" + QN(mFlangeNumber) + ")",
+                      "dS", dE, "-", QN(mShell->dS), 0);
     } else {
         // Tapered hub
         dE = 0.5 * (std::min(d1 - e1 + eE, d2 + e2 - eE)
                     + std::max(d1 + e1 - eE, d2 - e2 + eE));
-        PR->addDetail("Formula 20", "dE",
+        PR->addDetail("Formula 20", "dE(" + QN(mFlangeNumber) + ")",
                       "0.5 * (Min(d1 - e1 + eE, d2 + e2 - eE) "
                       "+ Math.Max(d1 + e1 - eE, d2 - e2 + eE))", dE, "-",
                       "0.5 * (min(" + QN(d1) + " - " + QN(e1) + " + "
@@ -171,7 +182,7 @@ void Flange_Loose::Calc_dE() {
  */
 void Flange_Loose::Calc_gamma() {
     gamma = eE * dF / (bF * dE * cos(mShell->phiS));
-    PR->addDetail("Formula 25", "gamma",
+    PR->addDetail("Formula 25", "gamma(" + QN(mFlangeNumber) + ")",
                   "eE * dF / (bF * dE * cos(phiS))", gamma, "-",
                   QN(eE) + " * " + QN(dF) + " / (" + QN(bF) + " * "
                   + QN(dE) + " * cos(" + QN(mShell->phiS) + "))", 0);
@@ -182,7 +193,7 @@ void Flange_Loose::Calc_gamma() {
  */
 void Flange_Loose::Calc_theta() {
     theta = 0.55 * cos(mShell->phiS) * sqrt(dE * eE) / eF;
-    PR->addDetail("Formula 26", "theta",
+    PR->addDetail("Formula 26", "theta(" + QN(mFlangeNumber) + ")",
                   "0.55 * cos(phiS) * (dE * eE) ^ 0.5 / eF",
                   theta, "-",
                   "0.55 * cos(" + QN(mShell->phiS) + ") * ("
@@ -194,7 +205,8 @@ void Flange_Loose::Calc_theta() {
  */
 void Flange_Loose::Calc_lambda() {
     lambda = 1 - eP / eF;
-    PR->addDetail("Formula 27", "lambda", "1 - eP / eF", lambda, "-",
+    PR->addDetail("Formula 27", "lambda(" + QN(mFlangeNumber) + ")",
+                  "1 - eP / eF", lambda, "-",
                   "1 - " + QN(eP) + " / " + QN(eF), 0);
 }
 
@@ -207,7 +219,7 @@ void Flange_Loose::Calc_cF() {
                * (4 * (1 - 3 * lambda + 3 * pow(lambda, 2))
                   + 6 * (1 - 2 * lambda) * theta + 6 * pow(theta, 2))
                + 3 * pow(gamma, 2) * pow(theta, 4));
-    PR->addDetail("Formula 28", "cF",
+    PR->addDetail("Formula 28", "cF(" + QN(mFlangeNumber) + ")",
                   "(1 + gamma * theta) / (1 + gamma * theta * "
                   "(4 * (1 - 3 * lambda + 3 * (lambda ^ 2)) "
                   "+ 6 * (1 - 2 * lambda) * theta + 6 * theta ^ 2) "
@@ -226,7 +238,7 @@ void Flange_Loose::Calc_cF() {
 void Flange_Loose::Calc_hS() {
     hS = 1.1 * eF * sqrt(eE / dE) * (1 - 2 * lambda + theta)
             / (1 + gamma * theta);
-    PR->addDetail("Formula 29", "hS",
+    PR->addDetail("Formula 29", "hS(" + QN(mFlangeNumber) + ")",
                   "1.1 * eF * (eE / dE) ^ 0.5 * (1 - 2 * lambda + theta) "
                   "/ (1 + gamma * theta)", hS, "mm",
                   "1.1 * " + QN(eF) + " * (" + QN(eE) + " / " + QN(dE)
@@ -239,7 +251,7 @@ void Flange_Loose::Calc_hS() {
  */
 void Flange_Loose::Calc_hT() {
     hT = eF * (1 - 2 * lambda - gamma * theta * theta) / (1 + gamma * theta);
-    PR->addDetail("Formula 30", "hT",
+    PR->addDetail("Formula 30", "hT(" + QN(mFlangeNumber) + ")",
                   "eF * (1 - 2 * lambda - gamma * theta * theta)"
                   " / (1 + gamma * theta)", hT, "mm",
                   QN(eF) + " * (1 - 2 * " + QN(lambda) + " - " + QN(gamma)
@@ -254,7 +266,7 @@ void Flange_Loose::Calc_hQ() {
     hQ = (hS * kQ + hT * (2 * dF * eP / (dE * dE)
                           - 0.5 * tan(mShell->phiS)))
             * (pow((dE / mGasket->dGe), 2));
-    PR->addDetail("Formula 79", "hQ",
+    PR->addDetail("Formula 79", "hQ(" + QN(mFlangeNumber) + ")",
                   "(hS * kQ + hT * (2 * dF * eP / (dE * dE) "
                   "- 0.5 * tan(phiS))) * ((dE / dGe) ^ 2)",
                   hQ, "mm",
@@ -269,7 +281,7 @@ void Flange_Loose::Calc_hQ() {
  */
 void Flange_Loose::Calc_hR() {
     hR = hS * kR - hT * 0.5 * tan(mShell->phiS);
-    PR->addDetail("Formula 31", "hR",
+    PR->addDetail("Formula 31", "hR(" + QN(mFlangeNumber) + ")",
                   "hS * kR - hT * 0.5 * tan(phiS)", hR, "mm",
                   QN(hS) + " * " + QN(kR) + " - " + QN(hT)
                   + " * 0.5 * tan(" + QN(mShell->phiS) + ")", 0);
@@ -282,11 +294,13 @@ void Flange_Loose::Calc_kQ() {
     if ((mShell->sType == Shell::Conical)
             || (mShell->sType == Shell::Cylindrical))     {
         kQ = 0.85 / cos(mShell->phiS);
-        PR->addDetail("Formula 32", "kQ", "0.85 / cos(phiS)", kQ, "-",
+        PR->addDetail("Formula 32", "kQ(" + QN(mFlangeNumber) + ")",
+                      "0.85 / cos(phiS)", kQ, "-",
                       "0.85 / cos(" + QN(mShell->phiS) + ")", 0);
     } else if (mShell->sType == Shell::Spherical) {
         kQ = 0.35 / cos(mShell->phiS);
-        PR->addDetail("Formula 32", "kQ", "0.35 / cos(phiS)", kQ, "-",
+        PR->addDetail("Formula 32", "kQ(" + QN(mFlangeNumber) + ")",
+                      "0.35 / cos(phiS)", kQ, "-",
                       "0.35 / cos(" + QN(mShell->phiS) + ")", 0);
     }
 }
@@ -298,11 +312,13 @@ void Flange_Loose::Calc_kR() {
     if ((mShell->sType == Shell::Conical)
             || (mShell->sType == Shell::Cylindrical)) {
         kR = -0.15 / cos(mShell->phiS);
-        PR->addDetail("Formula 33", "kR", "-0.15 / cos(phiS)", kR, "-",
+        PR->addDetail("Formula 33", "kR(" + QN(mFlangeNumber) + ")",
+                      "-0.15 / cos(phiS)", kR, "-",
                       "-0.15 / cos(" + QN(mShell->phiS) + ")", 0);
     } else if (mShell->sType == Shell::Spherical) {
         kR = -0.65 / cos(mShell->phiS);
-        PR->addDetail("Formula 33", "kR", "-0.65 / cos(phiS)", kR, "-",
+        PR->addDetail("Formula 33", "kR(" + QN(mFlangeNumber) + ")",
+                      "-0.65 / cos(phiS)", kR, "-",
                       "-0.65 / cos(" + QN(mShell->phiS) + ")", 0);
     }
 }
@@ -312,10 +328,10 @@ void Flange_Loose::Calc_kR() {
  */
 void Flange_Loose::Calc_ZF() {
     ZF = 3 * dF * cF / (M_PI * bF * pow(eF, 3));
-    PR->addDetail("Formula 34", "ZF", "3 * dF * cF "
-              "/ (PI * bF * eF ^ 3)", ZF, "1/mm^2",
-              "3 * " + QN(dF) + " * " + QN(cF) + " / (pi * " + QN(bF)
-              + " * " + QN(eF) + " ^ 3)", 0);
+    PR->addDetail("Formula 34", "ZF(" + QN(mFlangeNumber) + ")",
+                  "3 * dF * cF / (PI * bF * eF ^ 3)", ZF, "1/mm^2",
+                  "3 * " + QN(dF) + " * " + QN(cF) + " / (pi * " + QN(bF)
+                  + " * " + QN(eF) + " ^ 3)", 0);
 }
 
 /**
@@ -323,7 +339,8 @@ void Flange_Loose::Calc_ZF() {
  */
 void Flange_Loose::Calc_ZL() {
     ZL = 3 * dL / (M_PI * bL * pow(eL, 3));
-    PR->addDetail("Formula 40", "ZL", "3 * dL / (PI * bL * eL ^ 3)",
+    PR->addDetail("Formula 40", "ZL(" + QN(mFlangeNumber) + ")",
+                  "3 * dL / (PI * bL * eL ^ 3)",
                   ZL, "1/mm^2", "3 * " + QN(dL) + " / (pi * "
                   + QN(bL) + " * " + QN(eL) + " ^ 3)", 0);
 }
@@ -333,8 +350,8 @@ void Flange_Loose::Calc_ZL() {
  */
 void Flange_Loose::Calc_d7min() {
     d7min = d6 + 2 * b0;
-    PR->addDetail("Formula 85", "d7min", "d6 + 2 * b0", d7min, "mm",
-                  QN(d6) + " + 2 * " + QN(b0), 0);
+    PR->addDetail("Formula 85", "d7min(" + QN(mFlangeNumber) + ")",
+                  "d6 + 2 * b0", d7min, "mm", QN(d6) + " + 2 * " + QN(b0), 0);
 }
 
 /**
@@ -342,7 +359,8 @@ void Flange_Loose::Calc_d7min() {
  */
 void Flange_Loose::Calc_d7max() {
     d7max = d8;
-    PR->addDetail("Formula 86", "d7max", "d8", d7max, "mm", QN(d8), 0);
+    PR->addDetail("Formula 86", "d7max(" + QN(mFlangeNumber) + ")",
+                  "d8", d7max, "mm", QN(d8), 0);
 }
 
 /**
@@ -362,9 +380,8 @@ void Flange_Loose::Calc_d70() {
 
     d7 = d70;
 
-    PR->addDetail("Formula 61", "d70",
-                  "(dGe + chi * d3e) / (1 + chi) [d7min;d7max]",
-                  d70, "mm",
+    PR->addDetail("Formula 61", "d70(" + QN(mFlangeNumber) + ")",
+                  "(dGe + chi * d3e) / (1 + chi) [d7min;d7max]", d70, "mm",
                   "(" + QN(mGasket->dGe) + " + " + QN(chi) + " * "
                   + QN(d3e) + ") / (1 + " + QN(chi) + ")", 0);
 }
@@ -375,8 +392,8 @@ void Flange_Loose::Calc_d70() {
  */
 void Flange_Loose::Calc_d7minMax() {
     d7 = std::min(std::max(d7min, d7), d7max);
-    PR->addDetail("Formula 84", "result", "min(max(d7min, d7), d7max)",
-                  d7, "mm",
+    PR->addDetail("Formula 84", "result(" + QN(mFlangeNumber) + ")",
+                  "min(max(d7min, d7), d7max)", d7, "mm",
                   "min(max(" + QN(d7min) + "; " + QN(d7) + "); "
                   + QN(d7max) + ")", 0);
 }
@@ -391,13 +408,13 @@ void Flange_Loose::Calc_chi(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         chi = ZL * loadCase->EF1 / (ZF * loadCase->EL1);
-        PR->addDetail("Formula 62", "chi",
+        PR->addDetail("Formula 62", "chi(" + QN(mFlangeNumber) + ")",
                       "ZL * EF1 / (ZF * EL1)", chi, "-",
                       QN(ZL) + " * " + QN(loadCase->EF1) + " / (" + QN(ZF)
                       + " * " + QN(loadCase->EL1) + ")", 0);
     } else {
         chi = ZL * loadCase->EF2 / (ZF * loadCase->EL2);
-        PR->addDetail("Formula 62", "chi",
+        PR->addDetail("Formula 62", "chi(" + QN(mFlangeNumber) + ")",
                       "ZL * EF2 / (ZF * EL2)", chi, "-",
                       QN(ZL) + " * " + QN(loadCase->EF2) + " / (" + QN(ZF)
                       + " * " + QN(loadCase->EL2) + ")", 0);
@@ -410,7 +427,7 @@ void Flange_Loose::Calc_chi(int loadCaseNo) {
  */
 void Flange_Loose::Calc_hG() {
     hG = (d7 - mGasket->dGe) / 2;
-    PR->addDetail("Formula 60, 87", "hG" + QN(getFlangeNumber()),
+    PR->addDetail("Formula 60, 87", "hG(" + QN(mFlangeNumber) + ")",
                   "(d7 - dGe) / 2", hG, "-",
                   "(" + QN(d7) + " - " + QN(mGasket->dGe) + ") / 2", 0);
 }
@@ -421,7 +438,7 @@ void Flange_Loose::Calc_hG() {
  */
 void Flange_Loose::Calc_hH() {
     hH = (d7 - dE) / 2;
-    PR->addDetail("Formula 88", "hH" + QN(getFlangeNumber()),
+    PR->addDetail("Formula 88", "hH(" + QN(mFlangeNumber) + ")",
                   "(d7 - dE) / 2", hH, "mm",
                   "(" + QN(d7) + " - " + QN(dE) + ") / 2", 0);
 }
@@ -431,8 +448,9 @@ void Flange_Loose::Calc_hH() {
  */
 void Flange_Loose::Calc_hL() {
     hL = (d3e - d7) / 2;
-    PR->addDetail("Formula 89", "hL" + QN(getFlangeNumber()), "(d3e - d7) / 2",
-                  hL, "mm", "(" + QN(d3e) + " - " + QN(d7) + ") / 2", 0);
+    PR->addDetail("Formula 89", "hL(" + QN(mFlangeNumber) + ")",
+                  "(d3e - d7) / 2", hL, "mm",
+                  "(" + QN(d3e) + " - " + QN(d7) + ") / 2", 0);
 }
 
 /**
@@ -455,7 +473,7 @@ void Flange_Loose::Calc_WL(int loadCaseNo) {
         loadCase->WL2 = tmp_WL;
     }
 
-    PR->addDetail("Formula 150", "WL" + QN(getFlangeNumber()),
+    PR->addDetail("Formula 150", "WL(" + QN(mFlangeNumber) + ")",
                   "PI / 2 * fL2 * bL * eL ^ 2", loadCase->WL2, "Nmm",
                   "pi / 2 * " + QN(tmp_fL) + " * " + QN(bL)
                   + " * " + QN(eL) + " ^ 2", loadCaseNo);
@@ -477,14 +495,14 @@ void Flange_Loose::Calc_PhiL(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         loadCase->PhiL1 = tmp_PhiL;
-        PR->addDetail("Formula 149", "PhiL1", "F_B * hL1 / WL1",
-                      loadCase->PhiL1, "-",
+        PR->addDetail("Formula 149", "PhiL(" + QN(mFlangeNumber) + ")",
+                      "F_B * hL1 / WL1", loadCase->PhiL1, "-",
                       QN(loadCase->F_B) + " * " + QN(hL) + " / " + QN(tmp_WL),
                       loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiL2 = tmp_PhiL;
-        PR->addDetail("Formula 149", "PhiL2", "F_B * hL2 / WL2",
-                      loadCase->PhiL2, "-",
+        PR->addDetail("Formula 149", "PhiL(" + QN(mFlangeNumber) + ")",
+                      "F_B * hL2 / WL2", loadCase->PhiL2, "-",
                       QN(loadCase->F_B) + " * " + QN(hL) + " / " + QN(tmp_WL),
                       loadCaseNo);
     }
@@ -500,14 +518,14 @@ bool Flange_Loose::Is_PhiL_valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = mLoadCaseList->at(loadCaseNo)->PhiL1 <= 1.0;
-        PR->addDetail("Formula 149", "result", "PhiL1 <= 1.0",
-                      static_cast<int>(result), "-",
+        PR->addDetail("Formula 149", "result(" + QN(mFlangeNumber) + ")",
+                      "PhiL1 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiL1) + " <= 1.0",
                       loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = mLoadCaseList->at(loadCaseNo)->PhiL2 <= 1.0;
-        PR->addDetail("Formula 149", "result", "PhiL2 <= 1.0",
-                      static_cast<int>(result), "-",
+        PR->addDetail("Formula 149", "result(" + QN(mFlangeNumber) + ")",
+                      "PhiL2 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiL1) + " <= 1.0",
                       loadCaseNo);
     }
@@ -549,14 +567,12 @@ void Flange_Loose::Calc_WQ(int loadCaseNo) {
 
     if (getFlangeNumber() == 1)     {
         loadCase->WQ1 = tmp_WQ;
-        PR->addDetail("With F. 151", "WQ1", str,
-                      loadCase->WQ1, "Nmm",
-                      strWQ, loadCaseNo);
+        PR->addDetail("With F. 151", "WQ(" + QN(mFlangeNumber) + ")",
+                      str, loadCase->WQ1, "Nmm", strWQ, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->WQ2 = tmp_WQ;
-        PR->addDetail("With F. 151", "WQ2", str,
-                      loadCase->WQ2, "Nmm",
-                      strWQ, loadCaseNo);
+        PR->addDetail("With F. 151", "WQ(" + QN(mFlangeNumber) + ")",
+                      str, loadCase->WQ2, "Nmm", strWQ, loadCaseNo);
     }
 }
 
@@ -582,7 +598,7 @@ void Flange_Loose::Calc_PhiF(int loadCaseNo) {
             loadCase->PhiF2 = tmp_PhiF;
         }
 
-        PR->addDetail("Formula 151", "PhiF" + QN(getFlangeNumber()),
+        PR->addDetail("Formula 151", "PhiF(" + QN(mFlangeNumber) + ")",
                       "abs(F_Q + F_R) * hH / WQ", loadCase->PhiF1, "-",
                       "abs(" + QN(loadCase->F_Q) + " + " + QN(loadCase->F_R)
                       + ") * " + QN(hH) + " / " + QN(tmp_WQ), loadCaseNo);

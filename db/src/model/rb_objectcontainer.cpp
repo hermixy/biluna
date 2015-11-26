@@ -31,6 +31,7 @@ RB_ObjectContainer::RB_ObjectContainer(const RB_String& id,
                     RB_ObjectBase* p, const RB_String& n,
                     RB_ObjectFactory* f, bool woMembers)
                         : RB_ObjectBase(id, p, n, f, woMembers) {
+    // nothing
 }
 
 /**

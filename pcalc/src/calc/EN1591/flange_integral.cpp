@@ -31,12 +31,14 @@ bool Flange_Integral::Is_flange_Valid() {
                 return true;
             }
         } else {
-            PR->addDetail("Para 4.2", "result", str, 1, "-", strVal, 0);
+            PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+                          str, 1, "-", strVal, 0);
             return true;
         }
     }
 
-    PR->addDetail("Para 4.2", "result", str, 0, "-", strVal, 0);
+    PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+                  str, 0, "-", strVal, 0);
     return false;
 }
 
@@ -45,7 +47,8 @@ bool Flange_Integral::Is_flange_Valid() {
  */
 void Flange_Integral::Calc_bF() {
     bF = (d4 - d0) / 2 - d5e;
-    PR->addDetail("Formula 7", "bF", "(d4 - d0) / 2 - d5e", bF, "mm",
+    PR->addDetail("Formula 7", "bF(" + QN(mFlangeNumber) + ")",
+                  "(d4 - d0) / 2 - d5e", bF, "mm",
                   "(" + QN(d4) + " - " + QN(d0) + ") / 2 - " + QN(d5e), 0);
 }
 
@@ -54,7 +57,8 @@ void Flange_Integral::Calc_bF() {
  */
 void Flange_Integral::Calc_dF() {
     dF = (d4 + d0) / 2;
-    PR->addDetail("Formula 9", "dF", "(d4 + d0) / 2", dF, "mm",
+    PR->addDetail("Formula 9", "dF(" + QN(mFlangeNumber) + ")",
+                  "(d4 + d0) / 2", dF, "mm",
                   "(" + QN(d4) + " + " + QN(d0) + ") / 2", 0);
 }
 
@@ -63,7 +67,8 @@ void Flange_Integral::Calc_dF() {
  */
 void Flange_Integral::Calc_AF() {
     AF = (d4 - d0) * eF / 2;
-    PR->addDetail("Formula 10", "AF", "(d4 - d0) * eF / 2", AF, "mm^2",
+    PR->addDetail("Formula 10", "AF(" + QN(mFlangeNumber) + ")",
+                  "(d4 - d0) * eF / 2", AF, "mm^2",
                   "(" + QN(d4) + " - " + QN(d0) + ") * " + QN(eF) + " / 2", 0);
 }
 
@@ -72,7 +77,8 @@ void Flange_Integral::Calc_AF() {
  */
 void Flange_Integral::Calc_bL() {
     bL = 0;
-    PR->addDetail("Formula 8", "bL", "0", bL, "mm", "0", 0);
+    PR->addDetail("Formula 8", "bL(" + QN(mFlangeNumber) + ")",
+                  "0", bL, "mm", "0", 0);
 }
 
 /**
@@ -80,7 +86,8 @@ void Flange_Integral::Calc_bL() {
  */
 void Flange_Integral::Calc_dL() {
     dL = 0;
-    PR->addDetail("Formula 8", "dL", "0", dL, "mm", "0", 0);
+    PR->addDetail("Formula 8", "dL(" + QN(mFlangeNumber) + ")",
+                  "0", dL, "mm", "0", 0);
 }
 
 /**
@@ -88,7 +95,8 @@ void Flange_Integral::Calc_dL() {
  */
 void Flange_Integral::Calc_AL() {
     AL = 0;
-    PR->addDetail("Formula 8", "AL", "0", AL, "mm", "0", 0);
+    PR->addDetail("Formula 8", "AL(" + QN(mFlangeNumber) + ")",
+                  "0", AL, "mm", "0", 0);
 }
 
 /**
@@ -97,8 +105,8 @@ void Flange_Integral::Calc_AL() {
  */
 void Flange_Integral::Calc_beta() {
     beta = e2 / e1;
-    PR->addDetail("Formula 19", "beta", "e2 / e1", beta, "-",
-                  QN(e2) + " / " + QN(e1), 0);
+    PR->addDetail("Formula 19", "beta(" + QN(mFlangeNumber) + ")",
+                  "e2 / e1", beta, "-", QN(e2) + " / " + QN(e1), 0);
 }
 
 /**
@@ -108,10 +116,9 @@ void Flange_Integral::Calc_beta() {
 void Flange_Integral::Calc_eD() {
     eD = e1 * (1 + (beta - 1) * lH / pow((pow(beta / 3, 4))
                                          * pow(d1 * e1, 2) + pow(lH, 4), 0.25));
-    PR->addDetail("Formula 18", "eD",
-                  "e1 * (1 + (beta - 1) * lH "
-                  "/ ((beta / 3) ^ 4 * ((d1 * e1) ^ 2) + lH ^ 4, 0.25))",
-                  eD, "mm",
+    PR->addDetail("Formula 18", "eD(" + QN(mFlangeNumber) + ")",
+                  "e1 * (1 + (beta - 1) * lH / ((beta / 3) ^ 4 *"
+                  " ((d1 * e1) ^ 2) + lH ^ 4, 0.25))", eD, "mm",
                   QN(e1) + " * (1 + (" + QN(beta) + " - 1) * " + QN(lH)
                   + " / (((" + QN(beta) + " / 3) ^ 4) * (" + QN(d1) + " * "
                   + QN(e1) + ") ^ 2 + " + QN(lH)  + " ^ 4) ^ 0.25)", 0);
@@ -125,11 +132,12 @@ void Flange_Integral::Calc_eE() {
     if (fabs(e2 - e1) < ACCURACY) {
         // No hub because wallthickness hub is same as connecting pipe
         eE = mShell->eS;
-        PR->addDetail("Formula 21", "eE", "eS", eE, "mm", QN(mShell->eS), 0);
+        PR->addDetail("Formula 21", "eE(" + QN(mFlangeNumber) + ")",
+                      "eS", eE, "mm", QN(mShell->eS), 0);
     } else {
         // Tapered hub
         eE = e1 * (1 + ((beta - 1) * lH / ((beta / 3) * sqrt(e1 * d1) + lH)));
-        PR->addDetail("Formula 17", "eE",
+        PR->addDetail("Formula 17", "eE(" + QN(mFlangeNumber) + ")",
                       "e1 * (1 + ((beta - 1) * lH / ((beta / 3) "
                       "* Math.Sqrt(e1 * d1) + lH)))", eE, "mm",
                       QN(e1) + " * (1 + ((" + QN(beta) + " - 1) * " + QN(lH)
@@ -146,12 +154,13 @@ void Flange_Integral::Calc_dE() {
     if (fabs(e2 - e1) < ACCURACY) {
         // No hub because wallthickness hub is same as connecting pipe
         dE = mShell->dS;
-        PR->addDetail("Formula 22", "dE", "dS", dE, "-", QN(mShell->dS), 0);
+        PR->addDetail("Formula 22", "dE(" + QN(mFlangeNumber) + ")",
+                      "dS", dE, "-", QN(mShell->dS), 0);
     } else {
         // Tapered hub
         dE = 0.5 * (std::min(d1 - e1 + eE, d2 + e2 - eE)
                     + std::max(d1 + e1 - eE, d2 - e2 + eE));
-        PR->addDetail("Formula 20", "dE",
+        PR->addDetail("Formula 20", "dE(" + QN(mFlangeNumber) + ")",
                       "0.5 * (Min(d1 - e1 + eE, d2 + e2 - eE) "
                       "+ Math.Max(d1 + e1 - eE, d2 - e2 + eE))", dE, "-",
                       "0.5 * (min(" + QN(d1) + " - " + QN(e1) + " + "
@@ -167,7 +176,7 @@ void Flange_Integral::Calc_dE() {
  */
 void Flange_Integral::Calc_gamma() {
     gamma = eE * dF / (bF * dE * cos(mShell->phiS));
-    PR->addDetail("Formula 25", "gamma",
+    PR->addDetail("Formula 25", "gamma(" + QN(mFlangeNumber) + ")",
                   "eE * dF / (bF * dE * cos(phiS))", gamma, "-",
                   QN(eE) + " * " + QN(dF) + " / (" + QN(bF) + " * "
                   + QN(dE) + " * cos(" + QN(mShell->phiS) + "))", 0);
@@ -178,7 +187,7 @@ void Flange_Integral::Calc_gamma() {
  */
 void Flange_Integral::Calc_theta() {
     theta = 0.55 * cos(mShell->phiS) * sqrt(dE * eE) / eF;
-    PR->addDetail("Formula 26", "theta",
+    PR->addDetail("Formula 26", "theta(" + QN(mFlangeNumber) + ")",
                   "0.55 * cos(phiS) * (dE * eE) ^ 0.5 / eF",
                   theta, "-",
                   "0.55 * cos(" + QN(mShell->phiS) + ") * ("
@@ -190,7 +199,8 @@ void Flange_Integral::Calc_theta() {
  */
 void Flange_Integral::Calc_lambda() {
     lambda = 1 - eP / eF;
-    PR->addDetail("Formula 27", "lambda", "1 - eP / eF", lambda, "-",
+    PR->addDetail("Formula 27", "lambda(" + QN(mFlangeNumber) + ")",
+                  "1 - eP / eF", lambda, "-",
                   "1 - " + QN(eP) + " / " + QN(eF), 0);
 }
 
@@ -203,7 +213,7 @@ void Flange_Integral::Calc_cF() {
                * (4 * (1 - 3 * lambda + 3 * pow(lambda, 2))
                   + 6 * (1 - 2 * lambda) * theta + 6 * pow(theta, 2))
                + 3 * pow(gamma, 2) * pow(theta, 4));
-    PR->addDetail("Formula 28", "cF",
+    PR->addDetail("Formula 28", "cF(" + QN(mFlangeNumber) + ")",
                   "(1 + gamma * theta) / (1 + gamma * theta * "
                   "(4 * (1 - 3 * lambda + 3 * (lambda ^ 2)) "
                   "+ 6 * (1 - 2 * lambda) * theta + 6 * theta ^ 2) "
@@ -222,7 +232,7 @@ void Flange_Integral::Calc_cF() {
 void Flange_Integral::Calc_hS() {
     hS = 1.1 * eF * sqrt(eE / dE) * (1 - 2 * lambda + theta)
             / (1 + gamma * theta);
-    PR->addDetail("Formula 29", "hS",
+    PR->addDetail("Formula 29", "hS(" + QN(mFlangeNumber) + ")",
                   "1.1 * eF * (eE / dE) ^ 0.5 * (1 - 2 * lambda + theta) "
                   "/ (1 + gamma * theta)", hS, "mm",
                   "1.1 * " + QN(eF) + " * (" + QN(eE) + " / " + QN(dE)
@@ -235,7 +245,7 @@ void Flange_Integral::Calc_hS() {
  */
 void Flange_Integral::Calc_hT() {
     hT = eF * (1 - 2 * lambda - gamma * theta * theta) / (1 + gamma * theta);
-    PR->addDetail("Formula 30", "hT",
+    PR->addDetail("Formula 30", "hT(" + QN(mFlangeNumber) + ")",
                   "eF * (1 - 2 * lambda - gamma * theta * theta)"
                   " / (1 + gamma * theta)", hT, "mm",
                   QN(eF) + " * (1 - 2 * " + QN(lambda) + " - " + QN(gamma)
@@ -250,7 +260,7 @@ void Flange_Integral::Calc_hQ() {
     hQ = (hS * kQ + hT * (2 * dF * eP / (dE * dE)
                           - 0.5 * tan(mShell->phiS)))
             * (pow((dE / mGasket->dGe), 2));
-    PR->addDetail("Formula 79", "hQ",
+    PR->addDetail("Formula 79", "hQ(" + QN(mFlangeNumber) + ")",
                   "(hS * kQ + hT * (2 * dF * eP / (dE * dE) "
                   "- 0.5 * tan(phiS))) * ((dE / dGe) ^ 2)",
                   hQ, "mm",
@@ -265,7 +275,7 @@ void Flange_Integral::Calc_hQ() {
  */
 void Flange_Integral::Calc_hR() {
     hR = hS * kR - hT * 0.5 * tan(mShell->phiS);
-    PR->addDetail("Formula 31", "hR",
+    PR->addDetail("Formula 31", "hR(" + QN(mFlangeNumber) + ")",
                   "hS * kR - hT * 0.5 * tan(phiS)", hR, "mm",
                   QN(hS) + " * " + QN(kR) + " - " + QN(hT)
                   + " * 0.5 * tan(" + QN(mShell->phiS) + ")", 0);
@@ -278,11 +288,13 @@ void Flange_Integral::Calc_kQ() {
     if ((mShell->sType == mShell->Conical)
             || (mShell->sType == mShell->Cylindrical)) {
         kQ = 0.85 / cos(mShell->phiS);
-        PR->addDetail("Formula 32", "kQ", "0.85 / cos(phiS)", kQ, "-",
+        PR->addDetail("Formula 32", "kQ(" + QN(mFlangeNumber) + ")",
+                      "0.85 / cos(phiS)", kQ, "-",
                       "0.85 / cos(" + QN(mShell->phiS) + ")", 0);
     } else if (mShell->sType == mShell->Spherical) {
         kQ = 0.35 / cos(mShell->phiS);
-        PR->addDetail("Formula 32", "kQ", "0.35 / cos(phiS)", kQ, "-",
+        PR->addDetail("Formula 32", "kQ(" + QN(mFlangeNumber) + ")",
+                      "0.35 / cos(phiS)", kQ, "-",
                       "0.35 / cos(" + QN(mShell->phiS) + ")", 0);
     }
 }
@@ -294,11 +306,13 @@ void Flange_Integral::Calc_kR() {
     if ((mShell->sType == mShell->Conical)
             || (mShell->sType == mShell->Cylindrical)) {
         kR = -0.15 / cos(mShell->phiS);
-        PR->addDetail("Formula 33", "kR", "-0.15 / cos(phiS)", kR, "-",
+        PR->addDetail("Formula 33", "kR(" + QN(mFlangeNumber) + ")",
+                      "-0.15 / cos(phiS)", kR, "-",
                       "-0.15 / cos(" + QN(mShell->phiS) + ")", 0);
     } else if (mShell->sType == mShell->Spherical) {
         kR = -0.65 / cos(mShell->phiS);
-        PR->addDetail("Formula 33", "kR", "-0.65 / cos(phiS)", kR, "-",
+        PR->addDetail("Formula 33", "kR(" + QN(mFlangeNumber) + ")",
+                      "-0.65 / cos(phiS)", kR, "-",
                       "-0.65 / cos(" + QN(mShell->phiS) + ")", 0);
     }
 }
@@ -308,10 +322,10 @@ void Flange_Integral::Calc_kR() {
  */
 void Flange_Integral::Calc_ZF() {
     ZF = 3 * dF * cF / (M_PI * bF * pow(eF, 3));
-    PR->addDetail("Formula 34", "ZF", "3 * dF * cF "
-              "/ (PI * bF * eF ^ 3)", ZF, "1/mm^2",
-              "3 * " + QN(dF) + " * " + QN(cF) + " / (pi * " + QN(bF)
-              + " * " + QN(eF) + " ^ 3)", 0);
+    PR->addDetail("Formula 34", "ZF(" + QN(mFlangeNumber) + ")",
+                  "3 * dF * cF / (PI * bF * eF ^ 3)", ZF, "1/mm^2",
+                  "3 * " + QN(dF) + " * " + QN(cF) + " / (pi * " + QN(bF)
+                  + " * " + QN(eF) + " ^ 3)", 0);
 }
 
 /**
@@ -319,7 +333,8 @@ void Flange_Integral::Calc_ZF() {
  */
 void Flange_Integral::Calc_ZL() {
     ZL = 0;
-    PR->addDetail("Formula 35", "ZL", "0", ZL, "1/mm^2", "0", 0);
+    PR->addDetail("Formula 35", "ZL(" + QN(mFlangeNumber) + ")",
+                  "0", ZL, "1/mm^2", "0", 0);
 }
 
 /**
@@ -327,7 +342,7 @@ void Flange_Integral::Calc_ZL() {
  */
 void Flange_Integral::Calc_hG() {
     hG = (d3e - mGasket->dGe) / 2;
-    PR->addDetail("Formula 59, 81", "hG" + QN(getFlangeNumber()),
+    PR->addDetail("Formula 59, 81", "hG(" + QN(mFlangeNumber) + ")",
                   "(d3e - dGe) / 2", hG, "mm",
                   "(" + QN(d3e) + " - " + QN(mGasket->dGe) + ") / 2", 0);
 }
@@ -337,7 +352,7 @@ void Flange_Integral::Calc_hG() {
  */
 void Flange_Integral::Calc_hH() {
     hH = (d3e - dE) / 2;
-    PR->addDetail("Formula 82", "hH" + QN(getFlangeNumber()),
+    PR->addDetail("Formula 82", "hH(" + QN(mFlangeNumber) + ")",
                   "(d3e - dE) / 2", hH, "mm",
                   "(" + QN(d3e) + " - " + QN(dE) + ") / 2", 0);
 }
@@ -347,8 +362,8 @@ void Flange_Integral::Calc_hH() {
  */
 void Flange_Integral::Calc_hL() {
     hL = 0.0;
-    PR->addDetail("Formula 83", "hL" + QN(getFlangeNumber()), "0",
-                  hL, "mm", "0", 0);
+    PR->addDetail("Formula 83", "hL(" + QN(mFlangeNumber) + ")",
+                  "0", hL, "mm", "0", 0);
 }
 
 END_NAMESPACE_BILUNA_CALC_EN1591
