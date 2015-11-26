@@ -469,9 +469,10 @@ void DB_DialogFactory::closeAllMdiWindows() {
 
 /**
  * Delete all MDI windows of other factories.
- * DB only:
- * - DB_SimpleReportWidget
+ * DB only deletes here:
  * - DB_PermissionWidget
+ * - DB_PermissionReportWidget
+ * - DB_SimpleReportWidget
  */
 void DB_DialogFactory::deleteAllMdiWindows() {
     std::vector<RB_DialogFactory*>::iterator iter;
@@ -483,12 +484,19 @@ void DB_DialogFactory::deleteAllMdiWindows() {
         ++iter;
     }
 
-    if (isWidgetActive(DB_DialogFactory::WidgetSimpleReport)) {
-        RB_MdiWindow* mdiWindow = getMdiWindow(DB_DialogFactory::WidgetSimpleReport);
-        delete mdiWindow;
-    }
+    // The below deletion is an exception here, handled differently in plugins
     if (isWidgetActive(DB_DialogFactory::WidgetPermission)) {
         RB_MdiWindow* mdiWindow = getMdiWindow(DB_DialogFactory::WidgetPermission);
+        delete mdiWindow;
+    }
+    if (isWidgetActive(DB_DialogFactory::WidgetPermissionReport)) {
+        RB_MdiWindow* mdiWindow = getMdiWindow(
+                    DB_DialogFactory::WidgetPermissionReport);
+        delete mdiWindow;
+    }
+    if (isWidgetActive(DB_DialogFactory::WidgetSimpleReport)) {
+        RB_MdiWindow* mdiWindow = getMdiWindow(
+                    DB_DialogFactory::WidgetSimpleReport);
         delete mdiWindow;
     }
 }

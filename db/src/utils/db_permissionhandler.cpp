@@ -102,8 +102,10 @@ int DB_PermissionHandler::getUserCount() {
     return mUserCount;
 }
 
-void DB_PermissionHandler::getDbIdList(QStringList& dbIdList) {
-    dbIdList.clear();
+void DB_PermissionHandler::getProjectIdList(const QString& perspective,
+                                            QStringList& projectIdList) {
+    projectIdList.clear();
+    QString userPersp;
     int status;
     QDate start;
     QDate end;
@@ -112,13 +114,16 @@ void DB_PermissionHandler::getDbIdList(QStringList& dbIdList) {
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
+        userPersp = obj->getValue("perspective").toString();
         status = obj->getValue("persprojectstatus_id").toInt() - 2; // refer RB2
         start = obj->getValue("persprojectstart").toDate();
         end = obj->getValue("persprojectend").toDate();
 
-        if (status >= RB2::ProjectLive && start <= mToday && mToday <= end) {
+        if (userPersp.compare(perspective, Qt::CaseInsensitive) == 0
+                && status >= RB2::ProjectLive
+                && start <= mToday && mToday <= end) {
             QString idStr = obj->getIdValue("persproject_idx").toString();
-            dbIdList.append(idStr);
+            projectIdList.append(idStr);
         }
     }
 
@@ -129,16 +134,39 @@ QDate DB_PermissionHandler::getToday() const {
     return mToday;
 }
 
-void DB_PermissionHandler::conditionalExecute(
-        RB_Action* action, const QString& perspectiveProjectId, int permission,
-        const QString& tokenList) {
+bool DB_PermissionHandler::loadPermissionPlugin(const QString &pluginToken) {
+    return mIsAdmin || hasPermission("", RB2::PermissionDefault, pluginToken);
+}
 
+bool DB_PermissionHandler::conditionalPlugin(RB_Action* action,
+                                             const QString& pluginToken) {
     // earlier isValidUser() has returned true
-    if (mIsAdmin || hasPermission(perspectiveProjectId,permission, tokenList)) {
-        action->trigger();
+    if (mIsAdmin || hasPermission("", RB2::PermissionDefault, pluginToken)) {
+        if (action) {
+            action->trigger();
+            return true;
+        }
     } else {
         DB_DIALOGFACTORY->requestWarningDialog("No permission to execute");
     }
+
+    return false;
+}
+
+bool DB_PermissionHandler::conditionalExecute(
+        RB_Action* action, const QString& perspectiveProjectId,
+        int permission, const QString& tokenList) {
+
+    // earlier isValidUser() has returned true
+    if (mIsAdmin || hasPermission(perspectiveProjectId,
+                                  permission, tokenList)) {
+        action->trigger();
+        return true;
+    } else {
+        DB_DIALOGFACTORY->requestWarningDialog("No permission to execute");
+    }
+
+    return false;
 }
 
 void DB_PermissionHandler::setUserPermission() {
@@ -186,13 +214,13 @@ bool DB_PermissionHandler::hasPermission(const QString& perspectiveProjectId,
         RB_ObjectBase* obj = iter->currentObject();
         QString str = obj->getValue("tokenlist").toString();
 
-        if (!str.isEmpty()) {
-            if (str.contains("BILUNA_ADMINISTRATOR")) {
-                mIsAdmin = true;
-                return mIsAdmin;
-            } else {
-                tokenListValid = validTokenList(str, tokenList);
-            }
+        if (str.contains("BILUNA_ADMINISTRATOR")) {
+            mIsAdmin = true;
+            return mIsAdmin;
+        }
+
+        if (!tokenList.isEmpty()) {
+            tokenListValid = validTokenList(str, tokenList);
         } else {
             tokenListValid = true;
         }

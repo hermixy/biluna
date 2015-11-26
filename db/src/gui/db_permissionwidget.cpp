@@ -71,18 +71,28 @@ void DB_PermissionWidget::init() {
     mSystemUserModel->setRoot(DB_MODELFACTORY->getRootId());
     mSystemUserGroupModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelSystemUserGroup);
 
-
     //
     // 2. Set relations and mapper for line edits etc.
     //
     mPermissionProjectMapper = mPermissionProjectModel->getMapper();
     mPermissionProjectMapper->addMapping(ui->ilePerspectiveProject,
                         mPermissionProjectModel->fieldIndex("persproject_idx"));
-    ui->ilePerspectiveProject->setDefaultDialog(DB_DIALOGFACTORY,
-                                                DB_DialogFactory::DialogPermissionPerspectiveProject,
-                                                "persproject_idx", "description");
+    // Not used because three fields instead of one needs to be set
+    //    ui->ilePerspectiveProject->setDefaultDialog(DB_DIALOGFACTORY,
+    //                     DB_DialogFactory::DialogPermissionPerspectiveProject,
+    //                     "persproject_idx", "number");
     mPermissionProjectMapper->addMapping(ui->leDescription, mPermissionProjectModel->fieldIndex("description"));
-    mPermissionProjectMapper->addMapping(ui->leCustomer, mPermissionProjectModel->fieldIndex("customer"));
+    ui->leDescription->setReadOnly(true); // data from XXX_Project
+    mPermissionProjectMapper->addMapping(ui->leNote, mPermissionProjectModel->fieldIndex("note"));
+    /* Do not use RB2::ProjectStatus which is
+        ProjectDeleted = -3,        The project is deleted/hidden for all users
+        ProjectHidden = -2,         The project is hidden for all users,
+                                            except admin and superuser when creating a new project
+        ProjectLocked = -1,         The project is locked or the data is frozen
+        ProjectLive = 0,            The project is live, editable and is default/normal status
+        ProjectTest = 1,            The project is used for testing
+        Here we use only Hidden = 0 Locked = 1 Live = 2 Test = 3
+    */
     RB_StringList items;
     items  << tr("Hidden") << tr("Locked") << tr("Live") << tr("Test");
     ui->cbStatus->setModel(new QStringListModel(items, this));
@@ -158,6 +168,8 @@ void DB_PermissionWidget::init() {
     connect(ui->leUserName, SIGNAL(editingFinished()),
             this, SLOT(slotCheckDuplicateUserName()));
     connect(ui->ilePerspectiveProject, SIGNAL(clicked()),
+            this, SLOT(slotSetPerspectiveProject()));
+    connect(ui->ilePerspectiveProject, SIGNAL(clicked()),
             this, SLOT(slotCheckDuplicatePerspectiveProject()));
     connect(ui->ileProjectSystemGroup, SIGNAL(clicked()),
             this, SLOT(slotCheckDuplicateProjectGroup()));
@@ -205,13 +217,16 @@ void DB_PermissionWidget::fileRevert() {
 }
 
 void DB_PermissionWidget::slotProjectAdded() {
-    QModelIndex idx = mPermissionProjectModel->index(mPermissionProjectModel->getCurrentIndex().row(),
-                                    mPermissionProjectModel->fieldIndex("start"));
+    QModelIndex idx = mPermissionProjectModel->index(
+                mPermissionProjectModel->getCurrentIndex().row(),
+                mPermissionProjectModel->fieldIndex("start"));
     QDate date = QDateTime::currentDateTime().date();
     mPermissionProjectModel->setData(idx, date.toString(Qt::ISODate));
+
+    idx = mPermissionProjectModel->index(
+                mPermissionProjectModel->getCurrentIndex().row(),
+                mPermissionProjectModel->fieldIndex("end"));
     date = date.addDays(1);
-    idx = mPermissionProjectModel->index(mPermissionProjectModel->getCurrentIndex().row(),
-                        mPermissionProjectModel->fieldIndex("end"));
     mPermissionProjectModel->setData(idx, date.toString(Qt::ISODate));
 
     ui->ilePerspectiveProject->setFocus();
@@ -222,13 +237,15 @@ void DB_PermissionWidget::slotGroupAdded() {
 }
 
 void DB_PermissionWidget::slotUserAdded() {
-    QModelIndex idx = mSystemUserModel->index(mSystemUserModel->getCurrentIndex().row(),
-                                    mSystemUserModel->fieldIndex("start"));
+    QModelIndex idx = mSystemUserModel->index(
+                mSystemUserModel->getCurrentIndex().row(),
+                mSystemUserModel->fieldIndex("start"));
     QDate date = QDateTime::currentDateTime().date();
     mSystemUserModel->setData(idx, date.toString(Qt::ISODate));
     date = date.addMonths(1);
-    idx = mSystemUserModel->index(mSystemUserModel->getCurrentIndex().row(),
-                        mSystemUserModel->fieldIndex("end"));
+    idx = mSystemUserModel->index(
+                mSystemUserModel->getCurrentIndex().row(),
+                mSystemUserModel->fieldIndex("end"));
     mSystemUserModel->setData(idx, date.toString(Qt::ISODate));
 
     ui->leFirstName->setFocus();
@@ -270,6 +287,43 @@ void DB_PermissionWidget::slotUserCurrentRowChanged(QModelIndex current,
 void DB_PermissionWidget::slotUserRootChanged() {
     ui->lePassword->clear();
     ui->lePassword->setEnabled(false);
+}
+
+void DB_PermissionWidget::slotSetPerspectiveProject() {
+    RB_Dialog* dlg = DB_DIALOGFACTORY->getDialog(
+                DB_DialogFactory::DialogPermissionPerspectiveProject);
+
+    if (dlg->exec() != QDialog::Accepted) {
+        dlg->deleteLater();
+        return;
+    }
+
+    RB_ObjectBase* obj = dlg->getCurrentObject();
+
+    if (!obj) {
+        DB_DIALOGFACTORY->requestWarningDialog(tr("No item selected,\n"
+                                                  "data unchanged."));
+        dlg->deleteLater();
+        return;
+    }
+
+    QModelIndex idx = mPermissionProjectModel->index(
+                mPermissionProjectModel->getCurrentIndex().row(),
+                mPermissionProjectModel->fieldIndex("perspective"));
+    QString str = obj->getValue("perspective").toString();
+    mPermissionProjectModel->setData(idx, str);
+
+    idx = mPermissionProjectModel->index(
+                mPermissionProjectModel->getCurrentIndex().row(),
+                mPermissionProjectModel->fieldIndex("persproject_idx"));
+    str = obj->getId() + obj->getValue("number").toString();
+    mPermissionProjectModel->setData(idx, str);
+
+    idx = mPermissionProjectModel->index(
+                mPermissionProjectModel->getCurrentIndex().row(),
+                mPermissionProjectModel->fieldIndex("description"));
+    str = obj->getValue("description").toString();
+    mPermissionProjectModel->setData(idx, str);
 }
 
 void DB_PermissionWidget::slotCheckDuplicateUserName() {

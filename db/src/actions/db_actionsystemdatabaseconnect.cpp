@@ -116,7 +116,7 @@ RB_Action* DB_ActionSystemDatabaseConnect::factory() {
         return nullptr;
     }
 
-    DB_PERMISSIONHANDLER->refresh();
+    DB_PERMISSIONHANDLER->refresh(); // with username and password
 
     if (!DB_PERMISSIONHANDLER->isValidDbUser()) {
         QString connectionName = RB_DATABASE->database().connectionName();

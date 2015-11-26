@@ -10,11 +10,12 @@
 
 #include "srm_actionselectproject.h"
 
-#include "srm_dialogfactory.h"
-#include "srm_projectdialog.h"
+#include "db_actionfactory.h"
 #include "db_modelfactory.h"
 #include "rb_database.h"
 #include "rb_mainwindow.h"
+#include "srm_dialogfactory.h"
+#include "srm_projectdialog.h"
 
 
 SRM_ActionSelectProject::SRM_ActionSelectProject()
@@ -44,9 +45,18 @@ RB_GuiAction* SRM_ActionSelectProject::createGuiAction() {
 RB_Action* SRM_ActionSelectProject::factory() {
     RB_Action* a = new SRM_ActionSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    a->trigger();
+    // a->trigger(); by conditionalPlugin()
+
+    const QString pluginType = "SCAN";
+    bool result = DB_PERMISSIONHANDLER->conditionalPlugin(a, pluginType);
     delete a;
-    a = NULL;
+    a = nullptr;
+
+    if (!result) {
+        // Close plugin if was already opened by previous user
+        DB_ACTIONFACTORY->closePlugin(pluginType);
+    }
+
     return a;
 }
 

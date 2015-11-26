@@ -293,7 +293,7 @@ void ACC_OrderReportWidget::createTable(RB_ObjectContainer* orderList) {
     itemdue
     */
 
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     QDateTime dt = QDateTime::currentDateTime();
     mOrderNumber = "";
     mOrderTotal = 0.0;

@@ -42,6 +42,15 @@ void DB_PermissionReportWidget::init() {
     DB_ACTIONFACTORY->enableEditMenu(getWidgetType());
     // DB_ACTIONFACTORY->enableFormatMenu(getWidgetType());
 
+    // From DB_PermissionWidget
+    mProjectStatusList.clear();
+    mProjectStatusList << tr("Hidden") << tr("Locked")
+                       << tr("Live") << tr("Test");
+
+    // From DB_SystemGroupDialog
+    mCrudxList.clear();
+    mCrudxList << tr("None") << "[R]" << "[RU]" << "[CRUD]" << "[CRUDX]";
+
     QString html;
     html = "<p>";
     html += tr("Select from/to period and click refresh button ...");
@@ -49,6 +58,37 @@ void DB_PermissionReportWidget::init() {
 
     tePermissionList->setHtml(html);
     readSettings();
+}
+
+void DB_PermissionReportWidget::setDataRow(QString& html,
+                                           const QSqlRecord& rec) {
+    mColRunner = 0;
+    mRowRunner = 0;
+
+    if (!mIsAlternatingRow || !mEvenRow) {
+        html += "<tr>";
+    } else {
+        html += "<tr bgcolor=\"" + mTeReport->getAlternateBaseColor().name() + "\">";
+    }
+
+    for (int col = 0; col < mMemCount; ++col) {
+        switch (col) {
+        case 6:
+            setColumnData(html, mCrudxList.at(
+                              rec.value(col).toInt()), col);
+            break;
+        case 10:
+            setColumnData(html, mProjectStatusList.at(
+                              rec.value(col).toInt()), col);
+            break;
+        default:
+            setColumnData(html, rec.value(col).toString(), col);
+            break;
+        }
+    }
+
+    html += "</tr>";
+    mEvenRow = !mEvenRow;
 }
 
 
@@ -95,7 +135,8 @@ void DB_PermissionReportWidget::setColumnWidthsAndTitle() {
         setColumnWidth(7);
     }
 
-    setColumnWidth(15);
+    setColumnWidth(5);
+    setColumnWidth(10);
     setColumnWidth(15);
 
     for (int i = 0; i < 3; ++i) {

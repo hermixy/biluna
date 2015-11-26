@@ -441,7 +441,7 @@ void ACC_SettingReportWidget::createTable() {
  * Create HTML header
  */
 void ACC_SettingReportWidget::createHeader() {
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     QDateTime dt = QDateTime::currentDateTime();
 
     mHtml = "<table cellpadding=0 cellspacing=2 width='100%' style=\"font-size:8pt;font-family:'Times New Roman', Times, serif;\">"

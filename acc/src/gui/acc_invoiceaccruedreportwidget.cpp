@@ -123,7 +123,7 @@ void ACC_InvoiceAccruedReportWidget::setColumnWidthsAndTitle() {
     setFirstDataFullRow(false);
 
     RB_ObjectBase* root = ACC_MODELFACTORY->getRoot();
-    RB_String reportTitle = root->getValue("coyname").toString();
+    RB_String reportTitle = root->getValue("company").toString();
     setReportTitle(reportTitle);
     if (cbDebtorCreditor->currentIndex() == 0) {
         setReportSubTitle(" Debtor Accrued");

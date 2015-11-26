@@ -232,7 +232,7 @@ void ACC_SalesTaxReportWidget::on_pbRefresh_clicked() {
  * Create journal transaction table in webview, including header and footer
  */
 void ACC_SalesTaxReportWidget::createTable(RB_ObjectContainer* taxList) {
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     QDateTime dt = QDateTime::currentDateTime();
 
     mHtml = "<table cellpadding=0 cellspacing=2 width='100%' style=\"font-size:8pt;font-family:'Times New Roman', Times, serif;\">"

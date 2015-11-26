@@ -13,13 +13,17 @@
 #include "acc_dialogfactory.h"
 #include "acc_projectdialog.h"
 #include "acc_utilityfactory.h"
-#include "db_modelfactory.h"
+#include "db_actionfactory.h"
 #include "rb_database.h"
 #include "rb_mainwindow.h"
 
 
 ACC_ActionSelectProject::ACC_ActionSelectProject()
         : RB_Action() {
+    // nothing
+}
+
+ACC_ActionSelectProject::~ACC_ActionSelectProject() {
     // nothing
 }
 
@@ -52,9 +56,18 @@ RB_GuiAction* ACC_ActionSelectProject::createGuiAction() {
 RB_Action* ACC_ActionSelectProject::factory() {
     RB_Action* a = new ACC_ActionSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    a->trigger();
+    // a->trigger(); by conditionalPlugin()
+
+    const QString pluginType = "ACC";
+    bool result = DB_PERMISSIONHANDLER->conditionalPlugin(a, pluginType);
     delete a;
-    a = NULL;
+    a = nullptr;
+
+    if (!result) {
+        // Close plugin if was already opened by previous user
+        DB_ACTIONFACTORY->closePlugin(pluginType);
+    }
+
     return a;
 }
 
@@ -64,8 +77,9 @@ RB_Action* ACC_ActionSelectProject::factory() {
 void ACC_ActionSelectProject::trigger() {
     if (RB_DATABASE->database().isOpen()) {
         // Check whether ACC tables exists, if not run create tables in database
-        if (!DB_MODELFACTORY->createMissingTables("ACC", 0, 9, 14)) {
-            ACC_DIALOGFACTORY->requestWarningDialog(tr("ACC check- and update database ERROR."));
+        if (!DB_MODELFACTORY->createMissingTables("ACC", 0, 9, 15)) {
+            ACC_DIALOGFACTORY->requestWarningDialog(
+                        tr("ACC check- and update database ERROR."));
             return;
         }
 

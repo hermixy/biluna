@@ -322,7 +322,7 @@ void ACC_CostCenterReportWidget::slotPeriodSelectionChanged(int index) {
  * Create trial balance table in webview, including header and footer
  */
 void ACC_CostCenterReportWidget::createTable(RB_ObjectContainer* trialBalanceList) {
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     mGroupBudget1 = 0.0;
     mGroupForecast1 = 0.0;
     mGroupActual1 = 0.0;

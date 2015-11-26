@@ -46,7 +46,7 @@ public:
             mModel->setRoot("");
 
             QStringList dbIdList;
-            DB_PERMISSIONHANDLER->getDbIdList(dbIdList);
+            DB_PERMISSIONHANDLER->getProjectIdList("DB", dbIdList);
             QString whereStatement = "INVALID_USER";
 
             int idCount = dbIdList.size();

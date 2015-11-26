@@ -149,7 +149,8 @@ SOURCES += \
     ../src/utils/rb_tablemath.cpp
 
 RESOURCES += \
-    ../../db/src/gui/db.qrc
+    ../../db/src/gui/db.qrc \
+    ../src/gui/pcalc.qrc
 
 OTHER_FILES += \
     ../src/actions/pcalc_actionplugin.json \

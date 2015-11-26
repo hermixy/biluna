@@ -58,7 +58,8 @@ void RB_ObjectIterator::next(){
         setDone();
         return;
 	}
-    RB_DEBUG->print(currentObject()->getName());
+    // RB_DEBUG->print("RB_ObjectIterator::next()"
+    //                 + currentObject()->getName());
     ++mIter;
     ++mIndex;
 }

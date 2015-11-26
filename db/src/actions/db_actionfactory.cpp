@@ -1142,8 +1142,6 @@ void DB_ActionFactory::slotPluginClicked() {
         ga->setChecked(false); // only to make sure
     } else {
         // load plugin
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_DIALOGFACTORY->statusBarMessage(tr("Loading perspective ..."), 4000);
 
         QDir pluginsDir;
         setPluginsDir(pluginsDir);
@@ -1168,9 +1166,6 @@ void DB_ActionFactory::slotPluginClicked() {
                 ga->setChecked(loadPlugin(pluginId, fileName));
             }
         }
-
-        DB_DIALOGFACTORY->statusBarMessage(tr("Done"), 4000);
-        QApplication::restoreOverrideCursor();
     }
 }
 
@@ -1201,6 +1196,9 @@ void DB_ActionFactory::setPluginsDir(QDir& pluginsDir) {
  */
 bool DB_ActionFactory::loadPlugin(const RB_String& pluginId,
                                   const RB_String& fileName) {
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    DB_DIALOGFACTORY->statusBarMessage(tr("Loading perspective ..."), 4000);
+
     QDir pluginsDir;
     setPluginsDir(pluginsDir);
 
@@ -1212,8 +1210,19 @@ bool DB_ActionFactory::loadPlugin(const RB_String& pluginId,
         RB_ActionPlugin* iPlugin = qobject_cast<RB_ActionPlugin* >(plugin);
 
         if (iPlugin) {
+            if (!iPlugin->loadPermission()) {
+                delete iPlugin;
+                DB_DIALOGFACTORY->statusBarMessage(
+                            tr("Plugin not loaded"), 4000);
+                QApplication::restoreOverrideCursor();
+                DB_DIALOGFACTORY->requestWarningDialog(
+                            tr("No permission for perspective ") + pluginId);
+                return false;
+            }
             iPlugin->getGuiActions(mMainWindow);
             mPluginList[pluginId] = iPlugin;
+            DB_DIALOGFACTORY->statusBarMessage(tr("Plugin loaded"), 4000);
+            QApplication::restoreOverrideCursor();
             return true;
         } else {
             RB_DEBUG->error("DB_ActionFactory::loadPlugin() " + fileName
@@ -1230,6 +1239,8 @@ bool DB_ActionFactory::loadPlugin(const RB_String& pluginId,
                                          + " could not create instance ERROR");
     }
 
+    DB_DIALOGFACTORY->statusBarMessage(tr("Error loading plugin"), 4000);
+    QApplication::restoreOverrideCursor();
     return false;
 }
 

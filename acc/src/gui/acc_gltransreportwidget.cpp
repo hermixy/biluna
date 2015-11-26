@@ -255,7 +255,7 @@ void ACC_GlTransReportWidget::on_pbRefresh_clicked() {
  * Create trial balance table in webview, including header and footer
  */
 void ACC_GlTransReportWidget::createTable(RB_ObjectContainer* glTransactionList) {
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     mSumDebit = 0.0;
     mSumCredit = 0.0;
     mAccountCode = "";

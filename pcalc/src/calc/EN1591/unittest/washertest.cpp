@@ -21,7 +21,7 @@ void WasherTest::setupTarget() {
     if (!target) {
         target = new Washer();
     }
-    target->washerNumber = 1;
+    target->mWasherNumber = 1;
 }
 
 void WasherTest::Calc_bWTest() {

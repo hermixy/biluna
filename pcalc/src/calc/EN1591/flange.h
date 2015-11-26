@@ -71,7 +71,7 @@ public:
     Gasket* mGasket;
     LoadCaseList* mLoadCaseList;
 
-private:
+protected:
     int mFlangeNumber;
 
 };

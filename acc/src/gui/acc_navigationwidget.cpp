@@ -44,7 +44,7 @@ ACC_NavigationWidget::~ACC_NavigationWidget() {
  */
 void ACC_NavigationWidget::init() {
     RB_ObjectBase* root = ACC_MODELFACTORY->getRoot();
-    leProject->setText(root->getValue("coyname").toString());
+    leProject->setText(root->getValue("company").toString());
 
     connect(tabWidget, SIGNAL(currentChanged(int)),
             this, SLOT(slotShowTab(int)));

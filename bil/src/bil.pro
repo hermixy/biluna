@@ -66,4 +66,3 @@ exists( ../../thrd/qtsingleapplication/src/qtsingleapplication.pri ) {
     # message and exit
     error( "An error has occurred, ../../thrd/qtsingleapplication/src/qtsingleapplication.pri is missing." )
 }
-

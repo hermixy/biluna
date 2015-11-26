@@ -29,6 +29,7 @@ public:
     virtual ~ACC_ActionPlugin();
     virtual RB_String getName();
     virtual RB_String getDescription();
+    virtual bool loadPermission() override;
     virtual void getGuiActions(RB_MainWindow* mw);
 
 private:

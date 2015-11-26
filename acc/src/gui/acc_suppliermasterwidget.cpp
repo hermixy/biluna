@@ -63,7 +63,7 @@ void ACC_SupplierMasterWidget::init() {
     mModel->setRelation(mModel->fieldIndex("taxgroup_id"),
            RB_SqlRelation("ACC_TaxGroup", "id", "taxgroupdescr"));
     mModel->setRelation(mModel->fieldIndex("factorcompany_id"),
-           RB_SqlRelation("ACC_FactorCompany", "id", "coyname"));
+           RB_SqlRelation("ACC_FactorCompany", "id", "company"));
     mModel->setRelation(mModel->fieldIndex("area_id"),
            RB_SqlRelation("ACC_Area", "id", "areacode"));
 

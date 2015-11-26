@@ -14,6 +14,7 @@
 #include <QtWidgets>
 #include "scan_modelfactory.h"
 #include "db_modelfactory.h"
+#include "db_permissionhandler.h"
 #include "db_tabledialog.h"
 
 class SCAN_ProjectDialog : public DB_TableDialog {
@@ -38,18 +39,33 @@ public:
         // Set model, root="" is already set by modelFactory, however change to system root
         mModel = SCAN_MODELFACTORY->getModel(SCAN_ModelFactory::ModelProject, false);
 
-        mModel->setRoot(DB_MODELFACTORY->getRootId());
+        if (!DB_PERMISSIONHANDLER->isAdmin()) {
+            // id set to "" will remove statement: parent='XXXX'
+            mModel->setRoot("");
+
+            QStringList projectIdList;
+            DB_PERMISSIONHANDLER->getProjectIdList("MRP", projectIdList);
+            QString whereStatement = "INVALID_USER";
+
+            int idCount = projectIdList.size();
+
+            for (int i = 0; i < idCount; ++i) {
+                if (i > 0) {
+                    whereStatement += " OR ";
+                } else {
+                    whereStatement.clear();
+                }
+
+                whereStatement += "id='" + projectIdList.at(i) + "'";
+            }
+
+            mModel->setWhere(whereStatement);
+        } else {
+            // Single user
+            mModel->setRoot(DB_MODELFACTORY->getRootId());
+        }
+
         mModel->select();
-
-//        for (int i = 0; i < mModel->columnCount(QModelIndex()); ++i) {
-//            if (i != mModel->fieldIndex("coyname") && i != mModel->fieldIndex("regoffice1")
-//                    && i != mModel->fieldIndex("regoffice2") && i != mModel->fieldIndex("regoffice3")
-//                    && i != mModel->fieldIndex("regoffice4") && i != mModel->fieldIndex("regoffice5")
-//                    && i != mModel->fieldIndex("regoffice6")) {
-//                tableView->hideColumn(i);
-//            }
-//        }
-
 
         setWindowTitle(tr("Select project"));
         lblRoot->setText(tr("Scan Project"));

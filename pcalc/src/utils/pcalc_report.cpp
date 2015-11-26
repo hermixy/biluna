@@ -67,8 +67,10 @@ void PCALC_Report::addDetail(const QString& formulaNumber,
         return;
     }
 
-    // Report filter settings
-    if (settingObj->getValue("lastvalue").toInt() == 1) {
+    // Report filter settings, based on index of cbCalculationReportType
+    // in pcalc_en1591widget.cpp
+    if (settingObj->getValue("reporttype").toInt() < 3) {
+        // only last iteration result
         RB_ObjectBase* existObj = getObject(mOutContainer, variableName,
                                             loadCaseNo);
         if (existObj) {

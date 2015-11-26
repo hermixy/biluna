@@ -10,11 +10,12 @@
 
 #include "scan_actionselectproject.h"
 
+#include "db_actionfactory.h"
 #include "db_modelfactory.h"
-#include "scan_dialogfactory.h"
-#include "scan_projectdialog.h"
 #include "rb_database.h"
 #include "rb_mainwindow.h"
+#include "scan_dialogfactory.h"
+#include "scan_projectdialog.h"
 
 
 SCAN_ActionSelectProject::SCAN_ActionSelectProject()
@@ -51,9 +52,18 @@ RB_GuiAction* SCAN_ActionSelectProject::createGuiAction() {
 RB_Action* SCAN_ActionSelectProject::factory() {
     RB_Action* a = new SCAN_ActionSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    a->trigger();
+    // a->trigger(); by conditionalPlugin()
+
+    const QString pluginType = "SCAN";
+    bool result = DB_PERMISSIONHANDLER->conditionalPlugin(a, pluginType);
     delete a;
-    a = NULL;
+    a = nullptr;
+
+    if (!result) {
+        // Close plugin if was already opened by previous user
+        DB_ACTIONFACTORY->closePlugin(pluginType);
+    }
+
     return a;
 }
 

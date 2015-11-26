@@ -127,12 +127,19 @@ void DB_ConnectionDialog::init() {
             this, SLOT(slotDbDataChanged(QString)));
 
     if (mConnectionList.size() > 0) {
+        tabWidget->setCurrentIndex(0);
         lvPrevious->selectionModel()->select(prevModel->index(0,0),
                                              QItemSelectionModel::Select);
         slotSetDbConnectionWidgets(prevModel->index(0,0), QModelIndex());
 
-        leCurrentPassword->setFocus();
-        leCurrentPassword->selectAll();
+        leUserPassword->setFocus();
+        leUserPassword->selectAll();
+    } else {
+        // first time
+        tabWidget->setCurrentIndex(1);
+        rbLocalSqliteDb->click();
+        leLocalDbName->setFocus();
+        leLocalDbName->selectAll();
     }
 
     // Emits customContexMenuRequested()
@@ -280,19 +287,11 @@ RB_String DB_ConnectionDialog::localDatabaseName() const {
 }
 
 RB_String DB_ConnectionDialog::userName() const {
-    if (tabWidget->currentIndex() == 0) {
-        return leCurrentUserName->text();
-    }
-
     return leUserName->text();
 }
 
 
 RB_String DB_ConnectionDialog::userPassword() const {
-    if (tabWidget->currentIndex() == 0) {
-        return leCurrentPassword->text();
-    }
-
     return leUserPassword->text();
 }
 
@@ -485,9 +484,6 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
         leUserName->clear();
         leUserPassword->clear();
 
-        lblConnection->setText("Use select or new ...");
-        leCurrentUserName->setText("");
-        leCurrentPassword->setText("");
         return;
     }
 
@@ -543,16 +539,6 @@ void DB_ConnectionDialog::slotSetDbConnectionWidgets(const QModelIndex& curr,
     leUserName->setText(userName);
     leUserPassword->setText(userPwd); // to clear previous password
 
-    if (connectionItemList.at(0).toInt() < 1) {
-        lblConnection->setText(connectionItemList.at(6)
-                               + " @ " + connectionItemList.at(2));
-    } else {
-        lblConnection->setText(connectionItemList.at(8));
-    }
-
-    leCurrentUserName->setText(userName);
-    leCurrentPassword->setText(userPwd); // to clear previous password
-
     updateUi();
 }
 
@@ -577,10 +563,6 @@ void DB_ConnectionDialog::slotLocalDbSelected(bool) {
     leTestConnection->clear();
     // leUserName->clear();
     leUserPassword->clear();
-
-    lblConnection->setText("Use select or new ...");
-    leCurrentUserName->setText("");
-    leCurrentPassword->setText("");
 }
 
 void DB_ConnectionDialog::slotDeletePreviousConnection() {

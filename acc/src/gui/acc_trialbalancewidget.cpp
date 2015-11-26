@@ -247,7 +247,7 @@ void ACC_TrialBalanceWidget::on_pbRefresh_clicked() {
  * Create trial balance table in webview, including header and footer
  */
 void ACC_TrialBalanceWidget::createTable(RB_ObjectContainer* trialBalanceList) {
-    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("coyname").toString();
+    RB_String coyName = ACC_MODELFACTORY->getRoot()->getValue("company").toString();
     mGroupSumDebit = 0.0;
     mGroupSumCredit = 0.0;
     mGroupTrialDebit = 0.0;

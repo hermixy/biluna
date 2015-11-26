@@ -109,6 +109,10 @@ void DB_SqlCommonFunctions::appendProjects(RB_ObjectContainer* list,
         return;
     }
 
+    QStringList perspList = tableName.split("_");
+    QString perspType = perspList.at(0);
+    perspType = perspType.toUpper();
+
     while (query.next()) {
         RB_ObjectBase* obj = list->newObject("");
         obj->setValue("id", query.value("id").toString());
@@ -118,8 +122,11 @@ void DB_SqlCommonFunctions::appendProjects(RB_ObjectContainer* list,
         obj->setValue("created", query.value("created").toString());
         obj->setValue("changed", query.value("changed").toString());
         obj->setValue("muser", query.value("muser").toString());
-        obj->setValue("description", query.value("name").toString()
-                       + " - " + query.value(7).toString());
+        obj->setValue("perspective", perspType);
+        obj->setValue("number", query.value("number").toString());
+        obj->setValue("description", query.value("description").toString());
+        obj->setValue("company", query.value("company").toString());
+        obj->setValue("location", query.value("location").toString());
     }
 }
 
@@ -162,6 +169,7 @@ ORDER BY SUBSTR(persproject_idx, 39);
             "suser.end AS userend, "
             "sgroup.permission_id AS crudx_id, "
             "sgroup.tokenlist AS tokenlist, "
+            "pproject.perspective AS perspective, "
             "pproject.persproject_idx AS persproject_idx, "
             "pproject.mstatus_id AS persprojectstatus_id, "
             "pproject.start AS persprojectstart, "
@@ -191,7 +199,8 @@ ORDER BY SUBSTR(persproject_idx, 39);
         obj->setValue("userend", query.value("userend"));
         obj->setValue("crudx_id", query.value("crudx_id"));
         obj->setValue("tokenlist", query.value("tokenlist"));
-        obj->setValue("persproject_idx", query.value("persproject_idx")); // PENG_Project - project number
+        obj->setValue("perspective", query.value("perspective"));
+        obj->setValue("persproject_idx", query.value("persproject_idx")); // id + Project number
         obj->setValue("persprojectstatus_id", query.value("persprojectstatus_id"));
         obj->setValue("persprojectstart", query.value("persprojectstart"));
         obj->setValue("persprojectend", query.value("persprojectend"));
@@ -289,7 +298,8 @@ LEFT JOIN db_systemgroup AS sgroup ON sgroup.id=SUBSTR(sugroup.group_idx,1,38)
 LEFT JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id
 LEFT JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id
 LEFT JOIN db_project ON db_project.id=suser.parent
-WHERE suser.id <> '0';
+WHERE suser.id <> '0'
+ORDER BY db_number, username, project;
      */
 
     RB_String qStr = "SELECT db_project.number as db_number, "
@@ -300,6 +310,7 @@ WHERE suser.id <> '0';
             "suser.end AS userend, "
             "sgroup.permission_id AS crudx, "
             "sgroup.tokenlist AS tokenlist, "
+            "pproject.perspective AS perspective, "
             "SUBSTR(pproject.persproject_idx, 39) AS project, "
             "pproject.mstatus_id AS projstatus, "
             "pproject.start AS projstart, "
@@ -310,7 +321,8 @@ WHERE suser.id <> '0';
             "LEFT JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id "
             "LEFT JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id "
             "LEFT JOIN db_project ON db_project.id=suser.parent "
-            "WHERE suser.id <> '0';";
+            "WHERE suser.id <> '0' "
+            "ORDER BY db_number, username, perspective, project;";
 
     if (!query.exec(qStr)) {
         RB_DEBUG->error("DB_SqlCommonFunctionsFunction::getPermissionReport() "

@@ -11,8 +11,8 @@
 #include "mrp_actionselectproject.h"
 
 #include "mrp_dialogfactory.h"
-#include "mrp_modelfactory.h"
 #include "mrp_selectprojectdialog.h"
+#include "db_actionfactory.h"
 #include "db_modelfactory.h"
 #include "rb_database.h"
 #include "rb_mainwindow.h"
@@ -45,9 +45,18 @@ RB_GuiAction* MRP_ActionSelectProject::createGuiAction() {
 RB_Action* MRP_ActionSelectProject::factory() {
     RB_Action* a = new MRP_ActionSelectProject();
     // no graphicsView with eventhandler which deletes the action
-    a->trigger();
+    // a->trigger(); by conditionalPlugin()
+
+    const QString pluginType = "MRP";
+    bool result = DB_PERMISSIONHANDLER->conditionalPlugin(a, pluginType);
     delete a;
-    a = NULL;
+    a = nullptr;
+
+    if (!result) {
+        // Close plugin if was already opened by previous user
+        DB_ACTIONFACTORY->closePlugin(pluginType);
+    }
+
     return a;
 }
 
@@ -57,7 +66,7 @@ RB_Action* MRP_ActionSelectProject::factory() {
 void MRP_ActionSelectProject::trigger() {
     if (RB_DATABASE->database().isOpen()) {
         // Check whether DB tables exists, if not run create tables in database
-        if (!DB_MODELFACTORY->createMissingTables("MRP", 0, 9, 13)) {
+        if (!DB_MODELFACTORY->createMissingTables("MRP", 0, 9, 15)) {
             MRP_DIALOGFACTORY->requestWarningDialog(tr("MRP check- and update database ERROR."));
             return;
         }

@@ -50,6 +50,7 @@ protected slots:
     void slotParentRowChanged(const QModelIndex& curr,
                               const QModelIndex& prev);
     void slotHandleParentRowChanged();
+    void slotDisableFormulaWidgets(int index);
 
 protected:
     void changeEvent(QEvent *e);
@@ -57,6 +58,8 @@ protected:
 private:
     void setInput();
     void setSettings();
+    void createDetailReport();
+    void createValidationReport();
     void addObjectMemberVariable(RB_ObjectBase* obj,
                                  const QString& variableName,
                                  const QString& unit, RB_MmProxy* model);

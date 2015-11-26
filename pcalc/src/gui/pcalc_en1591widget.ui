@@ -3240,11 +3240,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="cbLastValuesOnly">
-             <property name="text">
-              <string>Last values only</string>
-             </property>
-            </widget>
+            <widget class="QComboBox" name="cbCalculationReportType"/>
            </item>
            <item>
             <widget class="QLabel" name="lblFormulaFrom">
@@ -3463,7 +3459,6 @@
   <tabstop>leEW_2</tabstop>
   <tabstop>pbCalculate</tabstop>
   <tabstop>teCalculationReport</tabstop>
-  <tabstop>cbLastValuesOnly</tabstop>
   <tabstop>sbFormulaFrom</tabstop>
   <tabstop>sbFormulaTo</tabstop>
   <tabstop>pbUnitTest</tabstop>

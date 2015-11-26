@@ -27,7 +27,7 @@ RB_List<RB_GuiAction*> RB_GuiAction::actions;
  */
 RB_GuiAction::RB_GuiAction(const RB_String& id, const RB_String& text) :
     QAction(text, NULL), identifier(id) {
-    RB_DEBUG->info("RB_GuiAction::RB_GuiAction() " + id);
+    RB_DEBUG->info("RB_GuiAction::RB_GuiAction(id, text) " + id);
     init(text);
 }
 
@@ -54,7 +54,7 @@ RB_GuiAction::RB_GuiAction(const RB_String& id, const RB_String& iconId, const R
  */
 RB_GuiAction::RB_GuiAction(const RB_String& id, const QIcon& icon, const RB_String& text) :
     QAction(icon, text, NULL), identifier(id) {
-    RB_DEBUG->info("RB_GuiAction::RB_GuiAction(icon) " + id);
+    RB_DEBUG->info("RB_GuiAction::RB_GuiAction(id, icon, text) " + id);
     init(text);
 }
 

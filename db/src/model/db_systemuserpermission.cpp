@@ -37,6 +37,7 @@ DB_SystemUserPermission::~DB_SystemUserPermission() {
  * \li userend
  * \li crudx_id
  * \li tokenlist
+ * \li perspective perspective type e.g. ACC, CRM or SRM
  * \li persproject_idx {Uuid}tablename - project number
  * \li persprojectstatus_id
  * \li persprojectstart
@@ -49,7 +50,8 @@ void DB_SystemUserPermission::createMembers() {
     addMember("userstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
     addMember("userend", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);
     addMember("crudx_id", "-", 0, RB2::MemberInteger);
-    addMember("tokenlist", "-", 0, RB2::MemberInteger);
+    addMember("tokenlist", "-", 0, RB2::MemberChar125);
+    addMember("perspective", "-", 0, RB2::MemberChar10);
     addMember("persproject_idx", "-", "", RB2::MemberChar165);
     addMember("persprojectstatus_id", "-", 0, RB2::MemberInteger);
     addMember("persprojectstart", "-", "1970-01-01T00:00:00", RB2::MemberDateTime);

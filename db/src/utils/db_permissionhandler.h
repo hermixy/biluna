@@ -29,10 +29,14 @@ public:
     bool isValidDbUser();
     bool isAdmin();
     int getUserCount();
-    void getDbIdList(QStringList& dbIdList);
+    void getProjectIdList(const QString& perspective, QStringList& projectIdList);
     QDate getToday() const;
 
-    void conditionalExecute(RB_Action* action,
+
+    bool loadPermissionPlugin(const QString& pluginToken);
+    bool conditionalPlugin(RB_Action* actionValid,
+                           const QString& pluginToken);
+    bool conditionalExecute(RB_Action* action,
                             const QString& perspectiveProjectId = "",
                             int permission = RB2::PermissionDefault,
                             const QString& tokenList = "");

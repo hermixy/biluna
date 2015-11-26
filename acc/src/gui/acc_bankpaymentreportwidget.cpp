@@ -148,7 +148,7 @@ void ACC_BankPaymentReportWidget::setColumnWidthsAndTitle() {
     setFirstDataFullRow(false);
 
     RB_ObjectBase* root = ACC_MODELFACTORY->getRoot();
-    RB_String reportTitle = root->getValue("coyname").toString();
+    RB_String reportTitle = root->getValue("company").toString();
     setReportTitle(reportTitle);
     setReportSubTitle(" Bank Payments");
     RB_String accountNumber = leBankAccount->text().isEmpty()

@@ -43,7 +43,7 @@ public:
     void Calc_dW();
     void Calc_bKB();
 
-    int washerNumber;
+    int mWasherNumber;
 };
 
 END_NAMESPACE_BILUNA_CALC_EN1591
