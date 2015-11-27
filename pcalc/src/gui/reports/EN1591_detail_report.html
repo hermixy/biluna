@@ -5,40 +5,40 @@
 <h3>calculation parameters</h3>
 <table border="1" width="800" cellspacing="0" cellpadding="2">
 <tbody><tr><td><h4>flange parameters</h4></td><td>&nbsp;</td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td></tr>
-<tr><td>pitch between bolts</td><td>p<sub>B</sub></td><td id="{$flange1.pB}">&nbsp;</td><td id="{$flange2.pB}">&nbsp;</td><td>mm</td></tr>
-<tr><td>eff.diameter of bolt hole</td><td>d<sub>5e</sub></td><td>11,67</td><td>11,67</td><td>mm</td></tr>
-<tr><td>eff. bolt circle diameter</td><td>d<sub>3e</sub></td><td>394,89</td><td>394,89</td><td>mm</td></tr>
-<tr><td>cross-section area of flange ring</td><td>A<sub>F</sub></td><td>2290,20</td><td>2290,20</td><td>mm<sup>2</sup></td></tr>
-<tr><td>cross-section area of loose flange ring</td><td>A<sub>L</sub></td><td>0,00</td><td>0,00</td><td>mm<sup>2</sup></td></tr>
-<tr><td>eff width of flange ring</td><td>b<sub>F</sub></td><td>56,43</td><td>56,43</td><td>mm</td></tr>
-<tr><td>eff.diameter of flange ring</td><td>d<sub>F</sub></td><td>371,90</td><td>371,90</td><td>mm</td></tr>
-<tr><td>eff. thickness of flange ring</td><td>e<sub>F</sub></td><td>33,63</td><td>33,63</td><td>mm</td></tr>
-<tr><td>equ.wall thickness for flexibility</td><td>e<sub>E</sub></td><td>13,90</td><td>13,90</td><td>mm</td></tr>
-<tr><td>intermediate variable</td><td>ß</td><td>1,800</td><td>1,800</td><td>-</td></tr>
-<tr><td>mean diameter shell</td><td>d<sub>E</sub></td><td>317,70</td><td>317,70</td><td>mm</td></tr>
-<tr><td>lever arm correction</td><td>h<sub>P</sub></td><td>8,06</td><td>8,06</td><td>mm</td></tr>
-<tr><td>lever arm</td><td>h<sub>G</sub></td><td>25,95</td><td>25,95</td><td>mm</td></tr>
-<tr><td>lever arm</td><td>h<sub>H</sub></td><td>38,59</td><td>38,95</td><td>mm</td></tr>
-<tr><td>lever arm</td><td>h<sub>L</sub></td><td>0,00</td><td>0,00</td><td>mm</td></tr>
-<tr><td>intermediate variable</td><td>?</td><td>0,288</td><td>0,288</td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>?</td><td>1,087</td><td>1,087</td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>?</td><td>0,000</td><td>0,000</td><td>-</td></tr>
-<tr><td>correction factor</td><td>c<sub>F</sub></td><td>0,191</td><td>0,191</td><td>-</td></tr>
-<tr><td>lever arm correction</td><td>h<sub>S</sub></td><td>12,29</td><td>12.29</td><td>mm</td></tr>
-<tr><td>lever arm correction</td><td>h<sub>T</sub></td><td>16,88</td><td>16,88</td><td>mm</td></tr>
-<tr><td>lever arm correction</td><td>h<sub>Q</sub></td><td>12,56</td><td>12.56</td><td>mm</td></tr>
-<tr><td>lever arm correction</td><td>h<sub>R</sub></td><td>-1,84</td><td>-1,84</td><td>mm</td></tr>
-<tr><td>correction factor</td><td>k<sub>Q</sub></td><td>0,850</td><td>0,850</td><td>-</td></tr>
-<tr><td>correction factor</td><td>k<sub>R</sub></td><td>-0,150</td><td>-0,150</td><td>-</td></tr>
-<tr><td>rotational flexibility modulus of flange</td><td>Z<sub>F</sub></td><td>3,16E-05</td><td>3,16E-05</td><td>1/mm<sup>3</sup></td></tr>
-<tr><td>rotational flexibility modulus of flange</td><td>Z<sub>L</sub></td><td>0,00E+00</td><td>0,00E+00</td><td>1/mm<sup>3</sup></td></tr>
+<tr><td>pitch between bolts</td><td>p<sub>B</sub></td><td id="{$pB}">&nbsp;</td><td id="{$pB}">&nbsp;</td><td>mm</td></tr>
+<tr><td>eff.diameter of bolt hole</td><td>d<sub>5e</sub></td><td id="{$d5e(1)}">&nbsp;</td><td id="{$d5e(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>eff. bolt circle diameter</td><td>d<sub>3e</sub></td><td id="{$d3e}">&nbsp;</td><td id="{$d3e}">&nbsp;</td><td>mm</td></tr>
+<tr><td>cross-section area of flange ring</td><td>A<sub>F</sub></td><td id="{$AF(1)}">&nbsp;</td><td id="{$AF(2)}">&nbsp;</td><td>mm<sup>2</sup></td></tr>
+<tr><td>cross-section area of loose flange ring</td><td>A<sub>L</sub></td><td id="{$AL(1)}">&nbsp;</td><td id="{$AL(2)}">&nbsp;</td><td>mm<sup>2</sup></td></tr>
+<tr><td>eff width of flange ring</td><td>b<sub>F</sub></td><td id="{$bF(1)}">&nbsp;</td><td id="{$bF(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>eff.diameter of flange ring</td><td>d<sub>F</sub></td><td id="{$dF(1)}">&nbsp;</td><td id="{$dF(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>eff. thickness of flange ring</td><td>e<sub>F</sub></td><td id="{$eF(1)}">&nbsp;</td><td id="{$eF(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>equ.wall thickness for flexibility</td><td>e<sub>E</sub></td><td id="{$eE(1)}">&nbsp;</td><td id="{$eE(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>intermediate variable</td><td>&beta;</td><td id="{$beta(1)}">&nbsp;</td><td id="{$beta(2)}">&nbsp;</td><td>-</td></tr>
+<tr><td>mean diameter shell</td><td>d<sub>E</sub></td><td id="{$dE(1)}">&nbsp;</td><td id="{$dE(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>lever arm correction</td><td>h<sub>P</sub></td><td id="{$hP(1)}">&nbsp;</td><td id="{$hP(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>lever arm</td><td>h<sub>G</sub></td><td id="{$hG(1)}">&nbsp;</td><td id="{$hG(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>lever arm</td><td>h<sub>H</sub></td><td id="{$hH(1)}">&nbsp;</td><td id="{$hH(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>lever arm</td><td>h<sub>L</sub></td><td id="{$hL(1)}">&nbsp;</td><td id="{$hL(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>intermediate variable</td><td>&gamma;</td><td id="{$gamma(1)}">&nbsp;</td><td id="{$gamma(2)}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&theta;</td><td id="{$theta(1)}">&nbsp;</td><td id="{$theta(2)}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&lambda;</td><td id="{$lambda(1)}">&nbsp;</td><td id="{$lambda(2)}">&nbsp;</td><td>-</td></tr>
+<tr><td>correction factor</td><td>c<sub>F</sub></td><td id="{$cF(1)}">&nbsp;</td><td id="{$cF(2)}">&nbsp;</td><td>-</td></tr>
+<tr><td>lever arm correction</td><td>h<sub>S</sub></td><td id="{$hS(1)}">&nbsp;</td><td id="{$hS(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>lever arm correction</td><td>h<sub>T</sub></td><td id="{$hT(1)}">&nbsp;</td><td id="{$hT(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>lever arm correction</td><td>h<sub>Q</sub></td><td id="{$hQ(1)}">&nbsp;</td><td id="{$hQ(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>lever arm correction</td><td>h<sub>R</sub></td><td id="{$hR(1)}">&nbsp;</td><td id="{$hR(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>correction factor</td><td>k<sub>Q</sub></td><td id="{$kQ(1)}">&nbsp;</td><td id="{$kQ(2)}">&nbsp;</td><td>-</td></tr>
+<tr><td>correction factor</td><td>k<sub>R</sub></td><td id="{$kR(1)}">&nbsp;</td><td id="{$kR(2)}">&nbsp;</td><td>-</td></tr>
+<tr><td>rotational flexibility modulus of flange</td><td>Z<sub>F</sub></td><td id="{$ZF(1)}">&nbsp;</td><td id="{$ZF(2)}">&nbsp;</td><td>1/mm<sup>3</sup></td></tr>
+<tr><td>rotational flexibility modulus of flange</td><td>Z<sub>L</sub></td><td id="{$ZL(1)}">&nbsp;</td><td id="{$ZL(2)}">&nbsp;</td><td>1/mm<sup>3</sup></td></tr>
 <tr><td colspan="5"><h4>bolt parameters</h4></td></tr>
-<tr><td>eff.cross-section area</td><td>A<sub>B</sub></td><td>3916,70</td><td></td><td>mm<sup>2</sup></td></tr>
-<tr><td>axial flexibility modulus</td><td>X<sub>B</sub></td><td>2,92E-02</td><td></td><td>1/mm</td></tr>
+<tr><td>eff.cross-section area</td><td>A<sub>B</sub></td><td id="{$AB}">&nbsp;</td><td></td><td>mm<sup>2</sup></td></tr>
+<tr><td>axial flexibility modulus</td><td>X<sub>B</sub></td><td id="{$XB}">&nbsp;</td><td></td><td>1/mm</td></tr>
 <tr><td colspan="5"><h4>gasket parameters</h4></td></tr>
-<tr><td>theoretical gasket width</td><td>b<sub>Gt</sub></td><td>20,00</td><td></td><td>mm</td></tr>
-<tr><td>theoretica mean gasket diameter</td><td>d<sub>Gt</sub></td><td>343,00</td><td></td><td>mm</td></tr>
-<tr><td>theoretical gasket area</td><td>A<sub>Gt</sub></td><td>21551,33</td><td></td><td>mm<sup>2</sup></td></tr>
+<tr><td>theoretical gasket width</td><td>b<sub>Gt</sub></td><td id="{$bGt}">&nbsp;</td><td></td><td>mm</td></tr>
+<tr><td>theoretica mean gasket diameter</td><td>d<sub>Gt</sub></td><td id="{$dGt}">&nbsp;</td><td></td><td>mm</td></tr>
+<tr><td>theoretical gasket area</td><td>A<sub>Gt</sub></td><td id="{$AGt}">&nbsp;</td><td></td><td>mm<sup>2</sup></td></tr>
 <tr><td>gasket force for calculation of width</td><td>F<sub>G0</sub></td><td>1987,61</td><td></td><td>mm</td></tr>
 <tr><td>interim gasket width</td><td>b<sub>Gi</sub></td><td>20,00</td><td></td><td>mm</td></tr>
 <tr><td>effective gasket width</td><td>b<sub>Ge</sub></td><td>20,00</td><td></td><td>mm</td></tr>
@@ -53,7 +53,7 @@
 <tr><td>axial fluid-pressure force</td><td>F<sub>Q</sub></td><td></td><td>407</td><td>166</td><td>240</td><td>kN</td></tr>
 <tr><td>axial force (addition bending moment)</td><td>F<sub>R+</sub></td><td>0</td><td>0</td><td>174</td><td>174</td><td>kN</td></tr>
 <tr><td>axial force (subtraction bending moment</td><td>F<sub>R-</sub></td><td>0</td><td>0</td><td>174</td><td>174</td><td>kN</td></tr>
-<tr><td>differential axial expansion</td><td>?U</td><td>0,000</td><td>0,000</td><td>-0,008</td><td>0,010</td><td>mm</td></tr>
+<tr><td>differential axial expansion</td><td>&Delta;U</td><td>0,000</td><td>0,000</td><td>-0,008</td><td>0,010</td><td>mm</td></tr>
 <tr><td><h4>compliance of the joint</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>axial compliance related to FG</td><td>Y<sub>G</sub></td><td>4,57E-07</td><td>4,57E-07</td><td>4,61E-07</td><td>4,67E-07</td><td>mm/N</td></tr>
 <tr><td>axial compliance related to FQ</td><td>Y<sub>Q</sub></td><td>4,87E-07</td><td>4,87E-07</td><td>5,17E-07</td><td>5,23E-07</td><td>mm/N</td></tr>
@@ -79,46 +79,55 @@
 <table border="1" width="800" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>general</h4></td><td></td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td><td>&nbsp;</td><td><br></td></tr>
-<tr><td>reduced max. allowable load ratio</td><td>F</td><td>1,00</td><td>1,00</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>?</td><td>1,45</td><td>1,45</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>reduced max. allowable load ratio</td><td>&Phi;</td><td>1,00</td><td>1,00</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&chi;</td><td>1,45</td><td>1,45</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 <tr><td><h4>bolts</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>twisting moment applied to bolt shank</td><td>M<sub>t,B</sub></td><td>221,96</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nm</td></tr>
 <tr><td>plastic torsion modulus</td><td>I<sub>B</sub></td><td>1440,57</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm<sup>3</sup></td></tr>
-<tr><td>bolt load ratio</td><td>F<sub>B</sub></td><td>0,88</td><td>0,31</td><td>0,42</td><td>0,44</td><td>-</td></tr>
+<tr><td>bolt load ratio</td><td>&Phi;<sub>B</sub></td><td>0,88</td><td>0,31</td><td>0,42</td><td>0,44</td><td>-</td></tr>
 <tr><td><h4>gasket</h4></td><td> </td><td>assembly</td><td>test cond.</td><td>load cond. 2</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-<tr><td>gasket load ratio</td><td>F<sub>G</sub></td><td>0,33</td><td>0,07</td><td>0,07</td><td>0,05</td><td>-</td></tr>
+<tr><td>gasket load ratio</td><td>&Phi;<sub>G</sub></td><td>0,33</td><td>0,07</td><td>0,07</td><td>0,05</td><td>-</td></tr>
 <tr><td><h4>flange 1</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>equ. wall thickness for load limit</td><td>e<sub>D</sub></td><td>16,56</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
-<tr><td>intermediate variable</td><td>d<sub>Q</sub></td><td>0</td><td>0,180955 </td><td>0,126989 </td><td>0,185198 </td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>d<sub>R</sub></td><td>0</td><td>0 </td><td>0,077425 </td><td>0,078173 </td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&delta;<sub>Q</sub></td><td>0</td><td>0,180955 </td><td>0,126989 </td><td>0,185198 </td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&delta;<sub>R</sub></td><td>0</td><td>0 </td><td>0,077425 </td><td>0,078173 </td><td>-</td></tr>
 <tr><td>intermediate variable</td><td>c<sub>M</sub></td><td>1,153256</td><td>1,135505 </td><td>1,134236 </td><td>1,122273 </td><td>-</td></tr>
 <tr><td>correction factor (jS=-1)</td><td>c<sub>S</sub></td><td>0,785398</td><td>0,889574 </td><td>0,823925 </td><td>0,855154 </td><td>-</td></tr>
 <tr><td>correction factor (jS=1)</td><td>c<sub>S</sub></td><td>0,785398</td><td>0,676392 </td><td>0,73513 </td><td>0,698369 </td><td>-</td></tr>
 <tr><td>intermediate variable</td><td>j<sub>M</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
 <tr><td>intermediate variable</td><td>k<sub>M</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>opt</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>0<sub></sub></sub></td><td>0</td><td>-0,053093</td><td>-0,037259</td><td>-0,054338</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>max</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>min</sub></td><td>-0,425819</td><td>-0,502773</td><td>-0,469786</td><td>-0,492656</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>z</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>opt</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>0<sub></sub></sub></td><td>0</td><td>-0,053093</td><td>-0,037259</td><td>-0,054338</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>max</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>min</sub></td><td>-0,425819</td><td>-0,502773</td><td>-0,469786</td><td>-0,492656</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>z</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
 <tr><td>resistance of flange</td><td>W<sub>F</sub></td><td>5,75E+07</td><td>5,47E+07</td><td>3,24E+07</td><td>3,15E+07</td><td>Nmm</td></tr>
-<tr><td>flange load ratio</td><td>?<sub>F</sub></td><td>0,96</td><td>0,43</td><td>0,73</td><td>0,71</td><td>-</td></tr>
+<tr><td>flange load ratio</td><td>&Phi;<sub>F</sub></td><td>0,96</td><td>0,43</td><td>0,73</td><td>0,71</td><td>-</td></tr>
 <tr><td><h4>flange 2</h4></td><td></td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td></td></tr>
+<tr><td>reduced max. allowable load ratio</td><td>&Phi;</td><td>1,00</td><td>1,00</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&chi;</td><td>1,45</td><td>1,45</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td><h4>bolts</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
+<tr><td>twisting moment applied to bolt shank</td><td>M<sub>t,B</sub></td><td>221,96</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nm</td></tr>
+<tr><td>plastic torsion modulus</td><td>I<sub>B</sub></td><td>1440,57</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm<sup>3</sup></td></tr>
+<tr><td>bolt load ratio</td><td>&Phi;<sub>B</sub></td><td>0,88</td><td>0,31</td><td>0,42</td><td>0,44</td><td>-</td></tr>
+<tr><td><h4>gasket</h4></td><td> </td><td>assembly</td><td>test cond.</td><td>load cond. 2</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>gasket load ratio</td><td>&Phi;<sub>G</sub></td><td>0,33</td><td>0,07</td><td>0,07</td><td>0,05</td><td>-</td></tr>
+<tr><td><h4>flange 1</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>equ. wall thickness for load limit</td><td>e<sub>D</sub></td><td>16,56</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
-<tr><td>intermediate variable</td><td>d<sub>Q</sub></td><td>0</td><td>0,180955 </td><td>0,126989 </td><td>0,185198 </td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>d<sub>R</sub></td><td>0</td><td>0 </td><td>0,077425 </td><td>0,078173 </td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&delta;<sub>Q</sub></td><td>0</td><td>0,180955 </td><td>0,126989 </td><td>0,185198 </td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&delta;<sub>R</sub></td><td>0</td><td>0 </td><td>0,077425 </td><td>0,078173 </td><td>-</td></tr>
 <tr><td>intermediate variable</td><td>c<sub>M</sub></td><td>1,153256</td><td>1,135505 </td><td>1,134236 </td><td>1,122273 </td><td>-</td></tr>
 <tr><td>correction factor (jS=-1)</td><td>c<sub>S</sub></td><td>0,785398</td><td>0,889574 </td><td>0,823925 </td><td>0,855154 </td><td>-</td></tr>
 <tr><td>correction factor (jS=1)</td><td>c<sub>S</sub></td><td>0,785398</td><td>0,676392 </td><td>0,73513 </td><td>0,698369 </td><td>-</td></tr>
 <tr><td>intermediate variable</td><td>j<sub>M</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
 <tr><td>intermediate variable</td><td>k<sub>M</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>opt</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>0<sub></sub></sub></td><td>0</td><td>-0,053093</td><td>-0,037259</td><td>-0,054338</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>max</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>min</sub></td><td>-0,425819</td><td>-0,502773</td><td>-0,469786</td><td>-0,492656</td><td>-</td></tr>
-<tr><td>particular value</td><td>?<sub>z</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>opt</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>0<sub></sub></sub></td><td>0</td><td>-0,053093</td><td>-0,037259</td><td>-0,054338</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>max</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>min</sub></td><td>-0,425819</td><td>-0,502773</td><td>-0,469786</td><td>-0,492656</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>z</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
 <tr><td>resistance of flange</td><td>W<sub>F</sub></td><td>5,75E+07</td><td>5,47E+07</td><td>3,24E+07</td><td>3,15E+07</td><td>Nmm</td></tr>
-<tr><td>flange load ratio</td><td>?<sub>F</sub></td><td>0,96</td><td>0,43</td><td>0,73</td><td>0,71</td><td>-</td></tr>
+<tr><td>flange load ratio</td><td>&Phi;<sub>F</sub></td><td>0,96</td><td>0,43</td><td>0,73</td><td>0,71</td><td>-</td></tr>
 </tbody></table>
 <br>
 Vandaag 29 september check

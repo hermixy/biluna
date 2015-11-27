@@ -960,17 +960,25 @@ void PCALC_EN1591Widget::createDetailReport() {
     // output
     RB_ObjectContainer* outList
             = PR->getInOutContainer()->getContainer("PCALC_OutputList");
-    RB_ObjectBase* outObj = outList->getObject("variablename", "pB"); // (1)
+    QString varName = "";
+    double result = 0.0;
+    RB_ObjectIterator* iter = outList->createIterator();
 
-    if (outObj) {
-        double result = outObj->getValue("result").toDouble();
-        report.replace("<td id=\"{$flange1.pB}\">&nbsp;</td>",
-                       "<td id=\"{$flange1.pB}\"><div align=\"right\">"
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* outObj = iter->currentObject();
+        varName = outObj->getValue("variablename").toString();
+        result = outObj->getValue("result").toDouble();
+        report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
+                       "<td id=\"{$" + varName + "}\"><div align=\"right\">"
                        + QString::number(result) + "</div></td>");
     }
 
+    delete iter;
+
     teCalculationReport->setHtml(report);
     QApplication::restoreOverrideCursor();
+
+
 }
 
 /**
