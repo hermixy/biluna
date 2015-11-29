@@ -130,7 +130,7 @@ Flange_OUT::Flange_OUT(int flangeNo) : Flange_IN(flangeNo) {
 void Flange::Calc_eQ() {
     eQ = eF - eP;
     PR->addDetail("fig 4-10", "eQ(" + QN(mFlangeNumber) + ")",
-                  "eF - eP", eQ, "mm", QN(eF) + " - " + QN(eP), 0);
+                  "eF - eP", eQ, "mm", QN(eF) + " - " + QN(eP));
 }
 
 /**
@@ -152,14 +152,14 @@ void Flange::Calc_d5e() {
         PR->addDetail("Formula 4, 5", "d5(" + QN(mFlangeNumber) + ")",
                       "d5t * l5t / eFb", mBolt->mBoltHole->d5, "mm",
                       QN(mBolt->mBoltHole->d5t) + " * " + QN(mBolt->l5t)
-                      + " / " + QN(mBolt->mBoltHole->eFb), 0);
+                      + " / " + QN(mBolt->mBoltHole->eFb));
     }
 
     d5e = mBolt->mBoltHole->d5 * sqrt(mBolt->mBoltHole->d5 / pB);
     PR->addDetail("Formula 4, 5", "d5e(" + QN(mFlangeNumber) + ")",
                   "d5 * (d5 / pB) ^ 0.5", d5e, "mm",
                   QN(mBolt->mBoltHole->d5) + " * (" + QN(mBolt->mBoltHole->d5)
-                  + " / " + QN(pB) + ") ^ 0.5", 0);
+                  + " / " + QN(pB) + ") ^ 0.5");
 }
 
 /**
@@ -169,7 +169,7 @@ void Flange::Calc_d3e() {
     d3e = d3 * (1.0 - 2.0 / static_cast<double>(nB * nB));
     PR->addDetail("Formula 6", "d3e", "d3 * (1 - 2 / (nB * nB))", d3e, "mm",
                   QN(d3) + " * (1.0 - 2.0 / (" + QN(nB)
-                  + " * " + QN(nB) + "))", 0);
+                  + " * " + QN(nB) + "))");
 }
 
 /**
@@ -179,7 +179,7 @@ void Flange::Calc_AB() {
     mBolt->AB = nB * M_PI / 4 * pow((std::min(mBolt->dBe, mBolt->dBS)), 2);
     PR->addDetail("Formula 41", "AB", "nB * PI / 4 * (Min(dBe, dBS)) ^ 2",
                   mBolt->AB, "mm^2", QN(nB) + " * pi / 4 * (min("
-                  + QN(mBolt->dBe) + ", " + QN(mBolt->dBS) + ")) ^ 2", 0);
+                  + QN(mBolt->dBe) + ", " + QN(mBolt->dBS) + ")) ^ 2");
 }
 
 /**
@@ -196,7 +196,7 @@ void Flange::Calc_XB() {
                   + QN(mBolt->dBS) + ") + (" + QN(mBolt->lB) + " - "
                   + QN(mBolt->lS) + ") / (" + QN(mBolt->dBe) + " * "
                   + QN(mBolt->dBe) + ") + 0.8 / " + QN(mBolt->dB0) + ") / ("
-                  + QN(nB) + " * pi)", 0);
+                  + QN(nB) + " * pi)");
 }
 
 /**
@@ -208,7 +208,7 @@ void Flange::Calc_dK1() {
         PR->addDetail("Formula 46", "dK1(" + QN(mFlangeNumber) + ")",
                       "max(d5, dW1)", mWasher->dK1, "mm",
                       "max(" + QN(mBolt->mBoltHole->d5) + ", "
-                      + QN(mWasher->dW1) + ")", 0);
+                      + QN(mWasher->dW1) + ")");
     }
 }
 
@@ -221,7 +221,7 @@ void Flange::Calc_dK2() {
         PR->addDetail("Formula 47", "dK2(" + QN(mFlangeNumber) + ")",
                       "min(dB4, dW2)", mWasher->dK2, "mm",
                       "min(" + QN(mBolt->dB4) + ", "
-                      + QN(mWasher->dW2) + ")", 0);
+                      + QN(mWasher->dW2) + ")");
     }
 }
 
@@ -246,11 +246,11 @@ void Flange::Calc_XW() {
                       + ") + " + QN(mWasher->eW) + " / (" + QN(mWasher->bW)
                       + " - " + QN(mWasher->bKB) + ")) / (1 + " + QN(mWasher->eW)
                       + " / (" + QN(mWasher->bW) + " - " + QN(mWasher->bKB)
-                      + ")))", 0);
+                      + ")))");
     } else {
         mWasher->XW = 0;
         PR->addDetail("Formula 49, 50", "XW(" + QN(mFlangeNumber) + ")",
-                      "0", mWasher->XW, "1/mm", "0", 0);
+                      "0", mWasher->XW, "1/mm", "0");
     }
 }
 
@@ -266,7 +266,7 @@ void Flange::Calc_hP() {
                   "/ 6 + 2 * (eP ^ 2) * dF) / (dGe ^ 2)", hP, "mm",
                   "(((" + QN(tmpdGe) + " - " + QN(dE) + ") ^ 2) * (2 * "
                   + QN(tmpdGe)+ " + " + QN(dE) + ") / 6 + 2 * (" + QN(eP)
-                  + " ^ 2) * " + QN(dF) + ") / (" + QN(tmpdGe) + " ^ 2)", 0);
+                  + " ^ 2) * " + QN(dF) + ") / (" + QN(tmpdGe) + " ^ 2)");
 }
 
 /**
@@ -277,7 +277,7 @@ void Flange::Calc_etanplus() {
     PR->addDetail("Formula B.1", "etanplus",
                   "eta1plus * (1 + 3 / Sqrt(nB)) / 4",
                   mBolt->etanplus, "-", QN(mBolt->eta1plus) + " * (1 + 3 / "
-                  + QN(nB) + " ^ 0.5) / 4", 0);
+                  + QN(nB) + " ^ 0.5) / 4");
 }
 
 /**
@@ -288,7 +288,7 @@ void Flange::Calc_etanminus() {
     PR->addDetail("Formula B.2", "etanminus",
                   "eta1minus * (1 + 3 / Sqrt(nB)) / 4",
                   mBolt->etanminus, "-", QN(mBolt->eta1minus) + " * (1 + 3 / "
-                  + QN(nB) + " ^ 0.5) / 4", 0);
+                  + QN(nB) + " ^ 0.5) / 4");
 }
 
 void Flange::Calc_beta() {
@@ -368,13 +368,13 @@ bool Flange::Is_PhiF_valid(int loadCaseNo) {
         PR->addDetail("Formula 129", "result(" + QN(mFlangeNumber) + ")",
                       "PhiF1 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiF1)
-                      + " &lt;= 1.0", 0);
+                      + " &lt;= 1.0", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = mLoadCaseList->at(loadCaseNo)->PhiF2 <= 1.0;
         PR->addDetail("Formula 129", "result(" + QN(mFlangeNumber) + ")",
                       "PhiF2 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiF1)
-                      + " &lt;= 1.0", 0);
+                      + " &lt;= 1.0", loadCaseNo);
     }
 
     return result;
@@ -509,12 +509,14 @@ bool Flange::Is_cM_valid(int loadCaseNo) {
         result = mLoadCaseList->at(loadCaseNo)->cM1 >= 0.0;
         PR->addDetail("After Formula 134", "result(" + QN(mFlangeNumber) + ")",
                       "cM1 >= 0.0", static_cast<int>(result), "-",
-                      QN(mLoadCaseList->at(loadCaseNo)->cM1) + " &gt;= 0.0", 0);
+                      QN(mLoadCaseList->at(loadCaseNo)->cM1) + " &gt;= 0.0",
+                      loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = mLoadCaseList->at(loadCaseNo)->cM2 >= 0.0;
         PR->addDetail("After Formula 134", "result(" + QN(mFlangeNumber) + ")",
                       "cM2 >= 0.0", static_cast<int>(result), "-",
-                      QN(mLoadCaseList->at(loadCaseNo)->cM2) + " &gt;= 0.0", 0);
+                      QN(mLoadCaseList->at(loadCaseNo)->cM2) + " &gt;= 0.0",
+                      loadCaseNo);
     }
 
     return result;

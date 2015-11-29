@@ -121,6 +121,8 @@ void Calculator::exec() {
     while (!(isFG0largerFG0req && isFG0approximateFG0req)
            && counter < 10
            && (counter < 1 || assembly->mF_Bspec <= 0.0)) {
+        int loadCaseNo = 0;
+
         // Outside loop
         Loop_F55_to_108(assembly);
 
@@ -130,11 +132,12 @@ void Calculator::exec() {
 
         if (!(isFG0largerFG0req && isFG0approximateFG0req)
                 && (assembly->mF_Bspec <= 0.0)) {
-            LoadCase* loadCase0 = assembly->mLoadCaseList->at(0);
+            LoadCase* loadCase0 = assembly->mLoadCaseList->at(loadCaseNo);
             loadCase0->F_G = loadCase0->F_Greq;
             PR->addDetail("After F.108", "F_G",
                           "F_Greq (new initial force)",
-                          loadCase0->F_G, "N", QN(loadCase0->F_Greq), 0);
+                          loadCase0->F_G, "N", QN(loadCase0->F_Greq),
+                          loadCaseNo);
 
             // Also reset initial bolt load
             loadCase0->F_B = loadCase0->F_G + loadCase0->F_R;
@@ -309,8 +312,8 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
 
     assembly->mGasket->Calc_Q_smax(loadCaseNo);
 
-    assembly->Calc_bGi(loadCaseNo, mIsFirstApproximation);
-    assembly->mGasket->Calc_bGe(loadCaseNo);
+    assembly->Calc_bGi(mIsFirstApproximation);
+    assembly->mGasket->Calc_bGe();
     assembly->Calc_dGe();
     assembly->mGasket->Calc_AGe();
     assembly->Calc_Q_G();
@@ -330,7 +333,7 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
 
 void Calculator::F63_to_63(Assembly* assembly, int loadCaseNo) {
     assembly->mGasket->Calc_eG(loadCaseNo);
-    assembly->mGasket->Calc_XG(loadCaseNo);
+    assembly->mGasket->Calc_XG();
 }
 
 void Calculator::F77_to_89(Assembly* assembly, int loadCaseNo) {

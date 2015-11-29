@@ -51,35 +51,35 @@ void Bolt::Calc_eta1plus() {
     case ManualOperatorFeel:
         eta1plus = 0.3 + 0.5 * mut;
         PR->addDetail("Table B.1", "eta1plus", "0.3 + 0.5 * mut", eta1plus, "-",
-                      "0.3 + 0.5 * " + QN(mut), 0);
+                      "0.3 + 0.5 * " + QN(mut));
         break;
     case Impact:
         eta1plus = 0.2 + 0.5 * mut;
         PR->addDetail("Table B.1", "eta1plus", "0.2 + 0.5 * mut", eta1plus, "-",
-                      "0.2 + 0.5 * " + QN(mut), 0);
+                      "0.2 + 0.5 * " + QN(mut));
         break;
     case TorqueWrench:
         eta1plus = 0.1 + 0.5 * mut;
         PR->addDetail("Table B.1", "eta1plus", "0.1 + 0.5 * mut", eta1plus, "-",
-                      "0.1 + 0.5 * " + QN(mut), 0);
+                      "0.1 + 0.5 * " + QN(mut));
         break;
     case TensionerMeasureHydraulicPressure:
         eta1plus = 0.4; // only difference
-        PR->addDetail("Table B.1", "eta1plus", "0.4", eta1plus, "-", "0.4", 0);
+        PR->addDetail("Table B.1", "eta1plus", "0.4", eta1plus, "-", "0.4");
         break;
     case TensionerMeasureBoltElongation:
         eta1plus = 0.15;
         PR->addDetail("Table B.1", "eta1plus", "0.15", eta1plus, "-",
-                      "0.15", 0);
+                      "0.15");
         break;
     case WrenchMeasureNutTurn:
         eta1plus = 0.1;
-        PR->addDetail("Table B.1", "eta1plus", "0.1", eta1plus, "-", "0.1", 0);
+        PR->addDetail("Table B.1", "eta1plus", "0.1", eta1plus, "-", "0.1");
         break;
     case WrenchMeasureTorquePlusNutTurn:
         eta1plus = 0.07;
         PR->addDetail("Table B.1", "eta1plus", "0.07", eta1plus, "-",
-                      "0.07", 0);
+                      "0.07");
         break;
     default:
         // Default and ~ManualStandardRing (not defined as such)
@@ -97,43 +97,43 @@ void Bolt::Calc_eta1minus() {
     case ManualOperatorFeel:
         eta1minus = 0.3 + 0.5 * mut;
         PR->addDetail("Table B.1", "eta1minus", "0.3 + 0.5 * mut", eta1minus,
-                      "-", "0.3 + 0.5 * " + QN(mut), 0);
+                      "-", "0.3 + 0.5 * " + QN(mut));
         break;
     case Impact:
         eta1minus = 0.2 + 0.5 * mut;
         PR->addDetail("Table B.1", "eta1minus", "0.2 + 0.5 * mut", eta1minus,
-                      "-", "0.2 + 0.5 * " + QN(mut), 0);
+                      "-", "0.2 + 0.5 * " + QN(mut));
         break;
     case TorqueWrench:
         eta1minus = 0.1 + 0.5 * mut;
         PR->addDetail("Table B.1", "eta1minus", "0.1 + 0.5 * mut", eta1minus,
-                      "-", "0.1 + 0.5 * " + QN(mut), 0);
+                      "-", "0.1 + 0.5 * " + QN(mut));
         break;
     case TensionerMeasureHydraulicPressure:
         eta1minus = 0.2; // only difference
         PR->addDetail("Table B.1", "eta1minus", "0.2", eta1minus, "-",
-                      "0.2", 0);
+                      "0.2");
         break;
     case TensionerMeasureBoltElongation:
         eta1minus = 0.15;
         PR->addDetail("Table B.1", "eta1minus", "0.15", eta1minus, "-",
-                      "0.15", 0);
+                      "0.15");
         break;
     case WrenchMeasureNutTurn:
         eta1minus = 0.1;
         PR->addDetail("Table B.1", "eta1minus", "0.1", eta1minus, "-",
-                      "0.1", 0);
+                      "0.1");
         break;
     case WrenchMeasureTorquePlusNutTurn:
         eta1minus = 0.07;
         PR->addDetail("Table B.1", "eta1minus", "0.07", eta1minus, "-",
-                      "0.07", 0);
+                      "0.07");
         break;
     default:
         // Default and ManualStandardRing
         eta1minus = 0.5;
         PR->addDetail("With B.3 116", "eta1minus", "0.5", eta1minus, "-",
-                      "0.5", 0);
+                      "0.5");
         break;
     }
 }
@@ -143,7 +143,7 @@ void Bolt::Calc_IB() {
     IB = (M_PI / 12) * (pow((std::min(dBe, dBS)), 3));
     PR->addDetail("With F.", "IB",
                   "(pi / 12) * (min(dBe, dBS)) ^ 3", IB, "mm3",
-                  "(pi / 12) * (min(" + QN(dBe) + ", " + QN(dBS) + ")) ^ 3", 0);
+                  "(pi / 12) * (min(" + QN(dBe) + ", " + QN(dBS) + ")) ^ 3");
 }
 
 /**
@@ -155,14 +155,14 @@ void Bolt::Calc_kB() {
         pt = (dB0 - dBe) / 0.9382;
         PR->addDetail("Before F. B.7", "pt", "(dB0 - dBe) / 0.9382",
                   pt, "Nmm", "(" + QN(dB0) + " - " + QN(dBe)
-                      + ") / 0.9382", 0);
+                      + ") / 0.9382");
     }
 
     kB = 0.159 * pt + 0.577 * mut * dB2 + 0.5 * mun * dn;
     PR->addDetail("Formula B.7", "kB",
                   "0.159 * pt + 0.577 * mut * dB2 + 0.5 * mun * dn", kB, "-",
                   "0.159 * " + QN(pt) + " + 0.577 * " + QN(mut) + " * "
-                  + QN(dB2) + " + 0.5 * " + QN(mun) + " * " + QN(dn), 0);
+                  + QN(dB2) + " + 0.5 * " + QN(mun) + " * " + QN(dn));
 }
 
 END_NAMESPACE_BILUNA_CALC_EN1591

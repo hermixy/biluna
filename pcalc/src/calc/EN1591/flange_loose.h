@@ -44,7 +44,7 @@ public:
     virtual void Calc_d7max();
     virtual void Calc_d70();
     virtual void Calc_d7minMax();
-    virtual void Calc_chi(int loadCaseNo);
+    virtual void Calc_chi();
     virtual void Calc_hG();
     virtual void Calc_hH();
     virtual void Calc_hL();

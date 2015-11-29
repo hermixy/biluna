@@ -309,7 +309,7 @@ void AssemblyTest::Calc_bGiTest() {
 
     target->mGasket->frmType = Gasket::Flat;
     target->mGasket->bGt = 2.3;
-    target->Calc_bGi(i, isFirstApproximation);
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 2.3, target->mGasket->bGi);
 
     //target.LoadCaseList(0).Qsmax = 100.3
@@ -320,20 +320,20 @@ void AssemblyTest::Calc_bGiTest() {
     target->mGasket->r2 = 155.3;
     target->mGasket->phiG = 0.1;
     target->mGasket->bGt = 0.3;
-    target->mLoadCaseList->at(0)->Q_smax = 4561.23;
-    target->mLoadCaseList->at(0)->E_G = 6000.4;
-    target->Calc_bGi(i, isFirstApproximation);
+    target->mLoadCaseList->at(i)->Q_smax = 4561.23;
+    target->mLoadCaseList->at(i)->E_G = 6000.4;
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 14.5407000127705715317,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::CurvedDoubleContact;
-    target->Calc_bGi(i, isFirstApproximation);
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 20.5636551644587786355,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::OctagonalDoubleContact;
     target->mGasket->bGiOct = 3.2;
-    target->Calc_bGi(i, isFirstApproximation);
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 3.2, target->mGasket->bGi);
 
     isFirstApproximation = false;
@@ -354,28 +354,28 @@ void AssemblyTest::Calc_bGiTest() {
     target->mFlange2->hG = 4.3;
     target->mFlange2->ZF = 7.3;
     target->mLoadCaseList->at(i)->EF2 = 9.7;
-    target->Calc_bGi(i, isFirstApproximation);
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 0.45134629619661641586,
              target->mGasket->bGi);
 
     target->mGasket->insType = Gasket::SpiralGraphFillOuterInner; // Non metalic
-    target->Calc_bGi(i, isFirstApproximation);
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 0.638143,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::CurvedSimpleContact;
-    target->Calc_bGi(i, isFirstApproximation);
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 29.18099436801514326863,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::CurvedDoubleContact;
-    target->Calc_bGi(i, isFirstApproximation);
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 41.26815556620527463859,
              target->mGasket->bGi);
 
     target->mGasket->frmType = Gasket::OctagonalDoubleContact;
     target->mGasket->bGiOct = 7.2;
-    target->Calc_bGi(i, isFirstApproximation);
+    target->Calc_bGi(isFirstApproximation);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_bGiTest()", 7.2, target->mGasket->bGi);
     deleteTarget();
 }

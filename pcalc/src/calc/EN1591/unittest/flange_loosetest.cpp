@@ -340,7 +340,7 @@ void Flange_LooseTest::Calc_chiTest() {
     target->ZL = 3.4;
     loadCase->EF1 = 4.5;
     loadCase->EL1 = 5.6;
-    target->Calc_chi(loadCaseNo);
+    target->Calc_chi(/*loadCaseNo*/);
     areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_chiTest()", 1.1878881987577641,
              target->chi);
 }

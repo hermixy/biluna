@@ -144,7 +144,7 @@ Gasket::~Gasket() {
 void Gasket::Calc_bGt() {
     bGt = 0.5 * (dG2 - dG1);
     PR->addDetail("Formula 51", "bGt", "0.5 * (dG2 - dG1)", bGt, "mm",
-                  "0.5 * (" + QN(dG2) + " - " + QN(dG1) + ")", 0);
+                  "0.5 * (" + QN(dG2) + " - " + QN(dG1) + ")");
 }
 
 /**
@@ -154,7 +154,7 @@ void Gasket::Calc_bGt() {
 void Gasket::Calc_dGt() {
     dGt = 0.5 * (dG2 + dG1);
     PR->addDetail("Formula 52", "dGt", "0.5 * (dG2 + dG1)", dGt, "mm",
-                  "0.5 * (" + QN(dG2) + " + " + QN(dG1) + ")", 0);
+                  "0.5 * (" + QN(dG2) + " + " + QN(dG1) + ")");
 
     if (dG0 <= 0.0)     {
         dG0 = dGt;
@@ -167,27 +167,27 @@ void Gasket::Calc_dGt() {
 void Gasket::Calc_AGt() {
     AGt = M_PI * bGt * dGt;
     PR->addDetail("Formula 53", "AGt", "Math.PI * bGt * dGt", AGt, "mm^2",
-                  "pi * " + QN(bGt) + " + " + QN(dGt), 0);
+                  "pi * " + QN(bGt) + " + " + QN(dGt));
 }
 
 /**
- * @brief Formula 55: Effective gasket width,
- * set for all loadcases because it is not recalculated refer 6.4.3
+ * @brief Formula 55: Effective gasket width, equal for all loadcases
+ * because it is not recalculated refer 6.4.3
  * @param i load case number not used
  */
-void Gasket::Calc_bGe(int /* loadCaseNo */) {
+void Gasket::Calc_bGe() {
     bGe = std::min(bGi, bGt);
     PR->addDetail("Formula 55", "bGe", "Min(bGi, bGt)", bGe, "mm",
-                  "min(" + QN(bGi) + "; " + QN(bGt) + ")", 0);
+                  "min(" + QN(bGi) + "; " + QN(bGt) + ")");
 }
 
 /**
- * @brief Formula 56: Effective gasket area, loadcase number is only 0
+ * @brief Formula 56: Effective gasket area
  */
 void Gasket::Calc_AGe() {
     AGe = M_PI * bGe * dGe;
     PR->addDetail("Formula 56", "AGe", "PI * bGe * dGe", AGe, "mm^2",
-                  "pi * " + QN(bGe) + " * " + QN(dGe), 0);
+                  "pi * " + QN(bGe) + " * " + QN(dGe));
 }
 
 /**
@@ -226,9 +226,8 @@ void Gasket::Calc_Q_smax(int loadCaseNo) {
 
 /**
  * @brief Formula 63: Axial flexibility modulus of gasket
- * @param i load case number
  */
-void Gasket::Calc_XG(int /* loadCaseNo */) {
+void Gasket::Calc_XG() {
     XG = (mLoadCaseList->at(0)->eG / AGt)
             * ((bGt + mLoadCaseList->at(0)->eG / 2)
                / (bGe + mLoadCaseList->at(0)->eG / 2));
@@ -237,7 +236,7 @@ void Gasket::Calc_XG(int /* loadCaseNo */) {
               XG, "N/mm^2", "("+ QN(mLoadCaseList->at(0)->eG) + " / " + QN(AGt)
                   + ") * ((" + QN(bGt) + " + " + QN(mLoadCaseList->at(0)->eG)
                   + " / 2) / (" + QN(bGe) + " + " + QN(mLoadCaseList->at(0)->eG)
-                  + " / 2))", 0);
+                  + " / 2))");
 }
 
 /**
@@ -247,7 +246,7 @@ void Gasket::Calc_XG(int /* loadCaseNo */) {
 void Gasket::Calc_AQ() {
     AQ = pow(dGe, 2) * M_PI / 4;
     PR->addDetail("Formula 90", "AQ", "dGe ^ 2 * PI / 4", AQ, "mm^2",
-                  QN(dGe) + " ^ 2 * pi / 4", 0);
+                  QN(dGe) + " ^ 2 * pi / 4");
 }
 
 void Gasket::Calc_P_QR(int loadCaseNo) {
