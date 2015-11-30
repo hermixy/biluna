@@ -30,10 +30,9 @@ Assembly::Assembly() : Assembly_OUT() {
 
 /**
  * @brief Formula 54: Initial gasket force
- * Bolt area * allowable design stress bolt / by scatter factor -
- * net equivalent external force also sets loadcase 0 F_G.
+ * Bolt area * allowable design stress bolt / 3 -
+ * net equivalent external force. Sets loadcase [-1] F_G.
  * Different from EN13445 Appendix GA
- * @param loadCaseNo
  */
 void Assembly::Calc_F_GInitial() {
     int loadCaseNo = 0;
@@ -92,7 +91,7 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
         if (mGasket->frmType == Gasket::Flat) {
             mGasket->bGi = mGasket->bGt;
             PR->addDetail("Formula 64", "bGi", "bGt", mGasket->bGi, "mm",
-                          QN(mGasket->bGt), loadCaseNo);
+                          QN(mGasket->bGt));
         } else if (mGasket->frmType == Gasket::CurvedSimpleContact) {
             mGasket->bGi = pow((6 * mGasket->r2 * cos(mGasket->phiG)
                                 * mGasket->bGt * loadCase0->Q_smax
@@ -103,7 +102,7 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
                           "(6 * " + QN(mGasket->r2) + " * cos("
                           + QN(mGasket->phiG) + ") * " + QN(mGasket->bGt)
                           + " * " + QN(loadCase0->Q_smax) + " / "
-                          + QN(loadCase0->E_G) + ") ^ 0.5", loadCaseNo);
+                          + QN(loadCase0->E_G) + ") ^ 0.5");
         } else if (mGasket->frmType == Gasket::CurvedDoubleContact) {
             mGasket->bGi = pow((12 * mGasket->r2 * cos(mGasket->phiG)
                                 * mGasket->bGt * loadCase0->Q_smax
@@ -114,11 +113,11 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
                           "(12 * " + QN(mGasket->r2) + " * cos("
                           + QN(mGasket->phiG) + ") * " + QN(mGasket->bGt)
                           + " * " + QN(loadCase0->Q_smax) + " / "
-                          + QN(loadCase0->E_G) + ") ^ 0.5", loadCaseNo);
+                          + QN(loadCase0->E_G) + ") ^ 0.5");
         } else if (mGasket->frmType == Gasket::OctagonalDoubleContact) {
             mGasket->bGi = mGasket->bGiOct;
             PR->addDetail("Formula 72", "bGi", "bGiOct", mGasket->bGi, "mm",
-                          QN(mGasket->bGiOct), loadCaseNo);
+                          QN(mGasket->bGiOct));
         }
     } else {
         double bGp = loadCase0->F_G / (M_PI * mGasket->dGe
@@ -167,7 +166,7 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
                           + QN(mGasket->phiG) + ") * " + QN(loadCase0->F_G)
                           + ") / (pi * " + QN(mGasket->dGe) + " * "
                           + QN(loadCase0->E_G) + ") + (" + bGpStr
-                          + ") ^ 2) ^ 0.5", loadCaseNo);
+                          + ") ^ 2) ^ 0.5");
         } else if (mGasket->frmType == Gasket::CurvedDoubleContact) {
             //loadCase0->E_G = loadCase0->E0 + loadCase0->K1 * loadCase0->Qsmax
 
@@ -183,11 +182,11 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
                           + QN(mGasket->phiG) + ") * " + QN(loadCase0->F_G)
                           + ") / (pi * " + QN(mGasket->dGe) + " * "
                           + QN(loadCase0->E_G) + ") + (" + bGpStr
-                          + ") ^ 2) ^ 0.5", loadCaseNo);
+                          + ") ^ 2) ^ 0.5");
         } else if (mGasket->frmType == Gasket::OctagonalDoubleContact) {
             mGasket->bGi = mGasket->bGiOct;
             PR->addDetail("Formula 72", "bGi", "bGiOct", mGasket->bGi, "mm",
-                          QN(mGasket->bGiOct), loadCaseNo);
+                          QN(mGasket->bGiOct));
         }
     }
 }
@@ -233,22 +232,33 @@ void Assembly::Calc_F_R(int loadCaseNo) {
     loadCase->F_Rnegative = loadCase->mForce->F_Z - loadCase->mForce->M_AI
             * 4 / mFlange1->d3e;
 
-    // Set calculation value
+    PR->addDetail("Formula 96",
+              "F_Rnegative", "F_Z - M_AI * 4 / d3e",
+              loadCase->F_Rnegative, "N",
+              QN(loadCase->mForce->F_Z) + " - "
+              + QN(loadCase->mForce->M_AI) + " * 4 / " + QN(mFlange1->d3e),
+              loadCaseNo);
+    PR->addDetail("Formula 96",
+              "F_Rpositive", "F_Z + M_AI * 4 / d3e",
+              loadCase->F_Rpositive, "N",
+              QN(loadCase->mForce->F_Z) + " + "
+              + QN(loadCase->mForce->M_AI) + " * 4 / " + QN(mFlange1->d3e),
+              loadCaseNo);
+
+    // Set calculation value F_R
     if (fabs(loadCase->F_Rnegative) > fabs(loadCase->F_Rpositive)) {
         loadCase->F_R = loadCase->F_Rnegative;
         PR->addDetail("Formula 96",
-                  "F_Rnegative", "F_Z - M_AI * 4 / d3e",
-                  loadCase->F_Rnegative, "N",
-                  QN(loadCase->mForce->F_Z) + " - "
-                  + QN(loadCase->mForce->M_AI) + " * 4 / " + QN(mFlange1->d3e),
+                  "F_R", "F_Rnegative",
+                  loadCase->F_R, "N",
+                  QN(loadCase->F_Rnegative),
                   loadCaseNo);
     } else {
         loadCase->F_R = loadCase->F_Rpositive;
         PR->addDetail("Formula 96",
-                  "F_Rpositive", "F_Z + M_AI * 4 / d3e",
-                  loadCase->F_Rpositive, "N",
-                  QN(loadCase->mForce->F_Z) + " + "
-                  + QN(loadCase->mForce->M_AI) + " * 4 / " + QN(mFlange1->d3e),
+                  "F_R", "F_Rpositve",
+                  loadCase->F_R, "N",
+                  QN(loadCase->F_Rpositive),
                   loadCaseNo);
     }
 }

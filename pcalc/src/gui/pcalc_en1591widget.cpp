@@ -320,7 +320,8 @@ void PCALC_EN1591Widget::init() {
                 "currentIndex");
     items.clear();
     items << "Summary Report" << "Detail Report"
-          << "Last Iteration Validation" << "All Iteration Validation";
+          << "Last Iteration Validation" << "All Iteration Validation"
+          << "Unit Test Summary Report" << "Unit Test Detail Report";
     cbCalculationReportType->setModel(new QStringListModel(items, this));
     connect(cbCalculationReportType, SIGNAL(currentIndexChanged(int)),
             this, SLOT(slotDisableFormulaWidgets(int)));
@@ -489,6 +490,10 @@ void PCALC_EN1591Widget::init() {
     // Show detail row or add row if not exists
     connect(mAssemblyModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
             this, SLOT(slotParentRowChanged(QModelIndex,QModelIndex)));
+
+    teCalculationReport->setHtml(
+                "<p>" + tr("Select report type and click "
+                           "calculate to generate report") + "</p>");
 }
 
 /**
@@ -599,51 +604,16 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
     case 3:
         createValidationReport();
         break;
+    case 4:
+        createUnitTestSummary();
+        break;
+    case 5:
+        // createUnitTestDetail();
+        break;
     default:
         teCalculationReport->setHtml("<p>Invalid report type</p>");
         break;
     }
-}
-
-void PCALC_EN1591Widget::on_pbUnitTest_clicked() {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    PR->clear();
-    getTextEdit()->clear();
-    setSettings();
-
-    Biluna::Calc::EN1591::EN1591_UnitTestFactory testFactory;
-    testFactory.exec();
-
-    RB_ObjectContainer* outList =
-            PR->getInOutContainer()->getContainer("PCALC_OutputList");
-    RB_ObjectIterator* iter = outList->createIterator();
-    RB_String str;
-
-    getTextEdit()->append("-- Start UnitTest:"
-                          + QDateTime::currentDateTime().toString(Qt::ISODate));
-    int passedCount = 0;
-    int failedCount = 0;
-
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* obj = iter->currentObject();
-        str = obj->getValue("note").toString();
-
-        if (!str.isEmpty()) {
-            getTextEdit()->append(str);
-
-            if (str.contains("- test OK")) {
-                ++passedCount;
-            } else {
-                ++failedCount;
-            }
-        }
-    }
-
-    getTextEdit()->append("Tests Passed: " + QString::number(passedCount));
-    getTextEdit()->append("Tests Failed: " + QString::number(failedCount));
-    getTextEdit()->append("-- End UnitTest:"
-                          + QDateTime::currentDateTime().toString(Qt::ISODate));
-    QApplication::restoreOverrideCursor();
 }
 
 void PCALC_EN1591Widget::slotParentRowChanged(const QModelIndex& /*curr*/,
@@ -962,15 +932,28 @@ void PCALC_EN1591Widget::createDetailReport() {
             = PR->getInOutContainer()->getContainer("PCALC_OutputList");
     QString varName = "";
     double result = 0.0;
+    int loadCaseNo = -1;
     RB_ObjectIterator* iter = outList->createIterator();
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* outObj = iter->currentObject();
         varName = outObj->getValue("variablename").toString();
         result = outObj->getValue("result").toDouble();
-        report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
-                       "<td id=\"{$" + varName + "}\"><div align=\"right\">"
-                       + QString::number(result) + "</div></td>");
+        loadCaseNo = outObj->getValue("loadcaseno").toInt();
+
+        if (loadCaseNo < 0) {
+            report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
+                           "<td id=\"{$" + varName + "}\"><div align=\"right\">"
+                           + QString::number(result) + "</div></td>");
+        } else {
+            report.replace("<td id=\"{$" + varName
+                           + "[" + QString::number(loadCaseNo) + "]"
+                           + "}\">&nbsp;</td>",
+                           "<td id=\"{$" + varName
+                           + "[" + QString::number(loadCaseNo) + "]"
+                           + "}\"><div align=\"right\">"
+                           + QString::number(result) + "</div></td>");
+        }
     }
 
     delete iter;
@@ -1093,6 +1076,47 @@ void PCALC_EN1591Widget::createValidationReport() {
     outputStr.append(po + "-- End calculation:"
                      + QDateTime::currentDateTime().toString(Qt::ISODate) + pc);
     getTextEdit()->setHtml(outputStr);
+    QApplication::restoreOverrideCursor();
+}
+
+void PCALC_EN1591Widget::createUnitTestSummary() {
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    PR->clear();
+    getTextEdit()->clear();
+    setSettings();
+
+    Biluna::Calc::EN1591::EN1591_UnitTestFactory testFactory;
+    testFactory.exec();
+
+    RB_ObjectContainer* outList =
+            PR->getInOutContainer()->getContainer("PCALC_OutputList");
+    RB_ObjectIterator* iter = outList->createIterator();
+    RB_String str;
+
+    getTextEdit()->append("-- Start UnitTest:"
+                          + QDateTime::currentDateTime().toString(Qt::ISODate));
+    int passedCount = 0;
+    int failedCount = 0;
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* obj = iter->currentObject();
+        str = obj->getValue("note").toString();
+
+        if (!str.isEmpty()) {
+            getTextEdit()->append(str);
+
+            if (str.contains("- test OK")) {
+                ++passedCount;
+            } else {
+                ++failedCount;
+            }
+        }
+    }
+
+    getTextEdit()->append("Tests Passed: " + QString::number(passedCount));
+    getTextEdit()->append("Tests Failed: " + QString::number(failedCount));
+    getTextEdit()->append("-- End UnitTest:"
+                          + QDateTime::currentDateTime().toString(Qt::ISODate));
     QApplication::restoreOverrideCursor();
 }
 

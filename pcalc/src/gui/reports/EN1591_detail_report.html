@@ -37,28 +37,28 @@
 <tr><td>axial flexibility modulus</td><td>X<sub>B</sub></td><td id="{$XB}">&nbsp;</td><td></td><td>1/mm</td></tr>
 <tr><td colspan="5"><h4>gasket parameters</h4></td></tr>
 <tr><td>theoretical gasket width</td><td>b<sub>Gt</sub></td><td id="{$bGt}">&nbsp;</td><td></td><td>mm</td></tr>
-<tr><td>theoretica mean gasket diameter</td><td>d<sub>Gt</sub></td><td id="{$dGt}">&nbsp;</td><td></td><td>mm</td></tr>
+<tr><td>theoretical mean gasket diameter</td><td>d<sub>Gt</sub></td><td id="{$dGt}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>theoretical gasket area</td><td>A<sub>Gt</sub></td><td id="{$AGt}">&nbsp;</td><td></td><td>mm<sup>2</sup></td></tr>
-<tr><td>gasket force for calculation of width</td><td>F<sub>G0</sub></td><td id="{$F_G(1)}">&nbsp;</td><td></td><td>mm</td></tr>
+<tr><td>gasket force for calculation of width</td><td>F<sub>G0</sub></td><td id="{$F_G}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>interim gasket width</td><td>b<sub>Gi</sub></td><td id="{$bGi}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>effective gasket width</td><td>b<sub>Ge</sub></td><td id="{$bGe}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>effective mean gasket diameter</td><td>d<sub>Ge</sub></td><td id="{$dGe}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>effective gasket area</td><td>A<sub>Ge</sub></td><td id="{$AGe}">&nbsp;</td><td></td><td>mm<sup>2</sup></td></tr>
-<tr><td>arial flexibility modulus</td><td>X<sub>G</sub></td><td id="{$XG}">&nbsp;</td><td></td><td>1mm</td></tr>
+<tr><td>axial flexibility modulus</td><td>X<sub>G</sub></td><td id="{$XG}">&nbsp;</td><td></td><td>1mm</td></tr>
 </tbody></table>
 <h3>Internal forces</h3>
 <table border="1" width="800" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>loads</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>axial fluid-pressure force</td><td>F<sub>Q</sub></td><td></td><td>407</td><td>166</td><td>240</td><td>kN</td></tr>
-<tr><td>axial force (addition bending moment)</td><td>F<sub>R+</sub></td><td>0</td><td>0</td><td>174</td><td>174</td><td>kN</td></tr>
-<tr><td>axial force (subtraction bending moment</td><td>F<sub>R-</sub></td><td>0</td><td>0</td><td>174</td><td>174</td><td>kN</td></tr>
+<tr><td>axial fluid-pressure force</td><td>F<sub>Q</sub></td><td id="{$F_Q[0]}">&nbsp;</td><td id="{$F_Q[1]}">&nbsp;</td><td id="{$F_Q[2]}">&nbsp;</td><td id="{$F_Q[3]}">&nbsp;</td><td>kN</td></tr>
+<tr><td>axial force (addition bending moment)</td><td>F<sub>R+</sub></td><td id="{$F_Rpositive[0]}">&nbsp;</td><td id="{$F_Rpositive[1]}">&nbsp;</td><td id="{$F_Rpositive[2]}">&nbsp;</td><td id="{$F_Rpositive[3]}">&nbsp;</td><td>kN</td></tr>
+<tr><td>axial force (subtraction bending moment)</td><td>F<sub>R-</sub></td><td id="{$F_Rnegative[0]}">&nbsp;</td><td id="{$F_Rnegative[1]}">&nbsp;</td><td id="{$F_Rnegative[2]}">&nbsp;</td><td id="{$F_Rnegative[3]}">&nbsp;</td><td>kN</td></tr>
 <tr><td>differential axial expansion</td><td>&Delta;U</td><td>0,000</td><td>0,000</td><td>-0,008</td><td>0,010</td><td>mm</td></tr>
 <tr><td><h4>compliance of the joint</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>axial compliance related to FG</td><td>Y<sub>G</sub></td><td>4,57E-07</td><td>4,57E-07</td><td>4,61E-07</td><td>4,67E-07</td><td>mm/N</td></tr>
 <tr><td>axial compliance related to FQ</td><td>Y<sub>Q</sub></td><td>4,87E-07</td><td>4,87E-07</td><td>5,17E-07</td><td>5,23E-07</td><td>mm/N</td></tr>
 <tr><td>axial compliance related to FR</td><td>Y<sub>R</sub></td><td>4,36E-07</td><td>4,36E-07</td><td>4,62E-07</td><td>4,68E-07</td><td>mm/N</td></tr>
-<tr><td>minimum force necessary for the gasket</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp; </td></tr>
+<tr><td><h4>minimum force necessary for the gasket</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp; </td></tr>
 <tr><td>min.gasket force in assembly</td><td>F<sub>G0min</sub></td><td>1842,64</td><td><br></td><td><br></td><td><br></td><td>kN</td></tr>
 <tr><td>min.gasket force in sub.conditions</td><td>F<sub>GImin</sub></td><td>&nbsp;</td><td>323,27</td><td>323,27</td><td>323,27</td><td>kN</td></tr>
 <tr><td><h4>internal forces in assembly condition</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
@@ -104,15 +104,6 @@
 <tr><td>resistance of flange</td><td>W<sub>F</sub></td><td>5,75E+07</td><td>5,47E+07</td><td>3,24E+07</td><td>3,15E+07</td><td>Nmm</td></tr>
 <tr><td>flange load ratio</td><td>&Phi;<sub>F</sub></td><td>0,96</td><td>0,43</td><td>0,73</td><td>0,71</td><td>-</td></tr>
 <tr><td><h4>flange 2</h4></td><td></td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td></td></tr>
-<tr><td>reduced max. allowable load ratio</td><td>&Phi;</td><td>1,00</td><td>1,00</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>&chi;</td><td>1,45</td><td>1,45</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td><h4>bolts</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>twisting moment applied to bolt shank</td><td>M<sub>t,B</sub></td><td>221,96</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nm</td></tr>
-<tr><td>plastic torsion modulus</td><td>I<sub>B</sub></td><td>1440,57</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm<sup>3</sup></td></tr>
-<tr><td>bolt load ratio</td><td>&Phi;<sub>B</sub></td><td>0,88</td><td>0,31</td><td>0,42</td><td>0,44</td><td>-</td></tr>
-<tr><td><h4>gasket</h4></td><td> </td><td>assembly</td><td>test cond.</td><td>load cond. 2</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-<tr><td>gasket load ratio</td><td>&Phi;<sub>G</sub></td><td>0,33</td><td>0,07</td><td>0,07</td><td>0,05</td><td>-</td></tr>
-<tr><td><h4>flange 1</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>equ. wall thickness for load limit</td><td>e<sub>D</sub></td><td>16,56</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
 <tr><td>intermediate variable</td><td>&delta;<sub>Q</sub></td><td>0</td><td>0,180955 </td><td>0,126989 </td><td>0,185198 </td><td>-</td></tr>
 <tr><td>intermediate variable</td><td>&delta;<sub>R</sub></td><td>0</td><td>0 </td><td>0,077425 </td><td>0,078173 </td><td>-</td></tr>
