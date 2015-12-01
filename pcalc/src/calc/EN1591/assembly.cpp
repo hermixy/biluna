@@ -372,9 +372,10 @@ void Assembly::Calc_YB(int loadCaseNo) {
  */
 void Assembly::Calc_YG(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    LoadCase* loadCase0 = mLoadCaseList->at(0); // E_G based on Q_G0 = F_G0/AGe
     loadCase->Y_G = mFlange1->ZF * (pow(mFlange1->hG, 2)) / loadCase->EF1
             + mFlange2->ZF * (pow(mFlange2->hG, 2)) / loadCase->EF2
-            + loadCase->Y_B + mGasket->XG / loadCase->E_G;
+            + loadCase->Y_B + mGasket->XG / loadCase0->E_G;
     PR->addDetail("Formula 100", "Y_G", "Flange1.ZF * (hG1 ^ 2) / EF1 "
               "+ Flange2.ZF * (hG2 ^ 2) / EF2 + Y_B + XG / E_G",
               loadCase->Y_G, "mm/N",
@@ -383,7 +384,7 @@ void Assembly::Calc_YG(int loadCaseNo) {
               + QN(mFlange2->ZF) + " * (" + QN(mFlange2->hG) + "^2) / "
                   + QN(loadCase->EF2) + " + "
               + QN(loadCase->Y_B) + " + " + QN(mGasket->XG) + " / "
-                  + QN(loadCase->E_G),
+                  + QN(loadCase0->E_G),
               loadCaseNo);
 }
 

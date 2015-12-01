@@ -257,6 +257,14 @@ void AssemblyTest::Calc_YGTest() {
     target->Calc_YG(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YGTest()", 4.30676027830487,
              target->mLoadCaseList->at(i)->Y_G);
+    i = 1;
+    target->mLoadCaseList->at(i)->EF1 = 3.1;
+    target->mLoadCaseList->at(i)->EF2 = 3.2;
+    target->mLoadCaseList->at(i)->Y_B = 0.123;
+    target->mLoadCaseList->at(i)->E_G = 6.1; // should use from loadcaseno = 0
+    target->Calc_YG(i);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YGTest()", 4.30676027830487,
+             target->mLoadCaseList->at(i)->Y_G);
     deleteTarget();
 }
 
