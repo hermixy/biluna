@@ -80,11 +80,12 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     F_Bmin = 0.0;
     F_Bnom = 0.0;
     F_Breq = 0.0;
+    F_Bspec = 0.0;
 
     F_Gmax = 0.0;
     F_Gmin = 0.0;
     F_G = 0.0;
-    F_Gd = 0.0;
+    F_Gd = 0.0; // design
     F_Gdelta = 0.0;
     F_Greq = 0.0;
 

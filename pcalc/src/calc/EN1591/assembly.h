@@ -52,6 +52,7 @@ class Assembly : public Assembly_OUT {
 public:
     Assembly();
 
+    void Calc_F_GInitial_1();
     void Calc_F_GInitial();
     void Calc_dGe();
     void Calc_bGi(bool isFirstApproximation = false);
@@ -80,6 +81,7 @@ public:
     bool Is_F_B0nom_Valid();
 
     void Calc_F_G0max();
+    void Calc_F_G0d_2();
     void Calc_F_G0d();
     void Calc_F_G(int loadCaseNo);
     void Calc_F_B(int loadCaseNo);

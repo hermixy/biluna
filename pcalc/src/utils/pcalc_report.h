@@ -44,6 +44,7 @@ private:
     PCALC_Report();
     void createInputOutputObject();
     RB_ObjectBase* getObject(RB_ObjectContainer* outContainer,
+                             const QString& formulaNumber,
                              const QString& variableName,
                              int loadCaseNo);
 
@@ -52,6 +53,10 @@ private:
     RB_ObjectContainer* mInContainer;
     RB_ObjectContainer* mOutContainer;
     RB_ObjectBase* mLastOutput;
+    bool mIsSettingsDone;
+    int mReportType;
+    int mFormulaFrom;
+    int mFormulaTo;
 };
 
 END_NAMESPACE_BILUNA_CALC

@@ -1134,11 +1134,11 @@ void Flange::Calc_WF(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         loadCase->WF1 = tmp_WF;
-        PR->addDetail("Table 2 (F. 130)", "WF(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 130", "WF(" + QN(mFlangeNumber) + ")",
                       forStr, loadCase->WF1, "Nmm", valStr, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->WF2 = tmp_WF;
-        PR->addDetail("Table 2 (F. 130)", "WF(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 130", "WF(" + QN(mFlangeNumber) + ")",
                       forStr, loadCase->WF2, "Nmm", valStr, loadCaseNo);
     }
 }

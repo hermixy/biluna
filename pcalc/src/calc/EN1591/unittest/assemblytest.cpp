@@ -21,6 +21,7 @@ AssemblyTest::~AssemblyTest() {
 
 void AssemblyTest::exec() {
     Calc_dGeTest();
+    Calc_F_GInitial_1Test();
     Calc_F_GInitialTest();
     Calc_F_QTest();
     Calc_F_RTest();
@@ -40,6 +41,7 @@ void AssemblyTest::exec() {
     Calc_F_B0nomTest();
     Is_F_B0nom_ValidTest();
     Calc_F_G0maxTest();
+    Calc_F_G0d_2Test();
     Calc_F_G0dTest();
     Calc_F_GTest();
     Calc_F_BTest();
@@ -166,6 +168,18 @@ void AssemblyTest::Calc_dGeTest() {
     target->Calc_dGe();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dGeTest()", 25.8,
              target->mGasket->dGe);
+    deleteTarget();
+}
+
+void AssemblyTest::Calc_F_GInitial_1Test() {
+    SetupIntegralTarget();
+    int loadCaseNo = 0;
+    target->mLoadCaseList->at(loadCaseNo)->F_Bspec = 103.2;
+    target->mBolt->eta1minus = 1.3;
+    target->mLoadCaseList->at(loadCaseNo)->F_R = 6.7;
+    target->Calc_F_GInitial_1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GInitialTest_1()",
+             -37.66, target->mLoadCaseList->at(loadCaseNo)->F_G);
     deleteTarget();
 }
 
@@ -613,22 +627,28 @@ void AssemblyTest::Calc_F_G0maxTest() {
     deleteTarget();
 }
 
+void AssemblyTest::Calc_F_G0d_2Test() {
+    SetupIntegralTarget();
+    target->mLoadCaseList->at(0)->F_Bspec = 7.6;
+    target->mLoadCaseList->at(0)->F_Bmin = 0.7;
+    target->mLoadCaseList->at(0)->F_Bmax = 700;
+    target->mNR = 300;
+    target->mLoadCaseList->at(0)->F_R = -2.3;
+    target->Calc_F_G0d_2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0d_2Test()", 453.4111111111111,
+             target->mLoadCaseList->at(0)->F_Gd);
+    deleteTarget();
+}
+
 void AssemblyTest::Calc_F_G0dTest() {
     SetupIntegralTarget();
+    target->mLoadCaseList->at(0)->F_Bspec = 0.0;
     target->mLoadCaseList->at(0)->F_Gdelta = 5.6;
     target->mLoadCaseList->at(0)->F_Bmax = 0.7;
     target->mNR = 3;
     target->mLoadCaseList->at(0)->F_R = 2.3;
     target->Calc_F_G0d();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()", 5.6,
-             target->mLoadCaseList->at(0)->F_Gd);
-    target->mLoadCaseList->at(0)->F_Bmax = 700;
-    target->mNR = 300;
-    target->mLoadCaseList->at(0)->F_Bspec = 7.6;
-    target->mLoadCaseList->at(0)->F_Bmin = 0.7;
-    target->mLoadCaseList->at(0)->F_R = -2.3;
-    target->Calc_F_G0d();
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()", 453.4111111111111,
              target->mLoadCaseList->at(0)->F_Gd);
     deleteTarget();
 }

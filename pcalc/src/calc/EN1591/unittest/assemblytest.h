@@ -23,6 +23,7 @@ private:
     void deleteTarget();
 
     void Calc_dGeTest();
+    void Calc_F_GInitial_1Test();
     void Calc_F_GInitialTest();
     void Calc_F_QTest();
     void Calc_F_RTest();
@@ -42,6 +43,7 @@ private:
     void Calc_F_B0nomTest();
     void Is_F_B0nom_ValidTest();
     void Calc_F_G0maxTest();
+    void Calc_F_G0d_2Test();
     void Calc_F_G0dTest();
     void Calc_F_GTest();
     void Calc_F_BTest();

@@ -249,8 +249,8 @@ void EN1591Handler::setLoadCases() {
         LoadCase* lc = mCalc->mAssembly->mLoadCaseList->createLoadCase();
 
         if (loadCaseNoMemory == 0) {
-            lc->F_Bspec = mCalc->mAssembly->mF_Bspec; // TODO: change in calculations
-            lc->Q_A = mCalc->mAssembly->mQ_Aspec; // TODO: change in calculations
+            lc->F_Bspec = mCalc->mAssembly->mF_Bspec;
+            lc->Q_A = mCalc->mAssembly->mQ_Aspec; // TODO: still required
             ++loadCaseNoMemory;
         }
 

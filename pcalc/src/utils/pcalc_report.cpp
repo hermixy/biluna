@@ -12,6 +12,10 @@ PCALC_Report::PCALC_Report() : RB_Utility() {
     mInContainer = NULL;
     mOutContainer = NULL;
     mLastOutput = NULL;
+    mIsSettingsDone = false;
+    mReportType = -1;
+    mFormulaFrom = 0;
+    mFormulaTo = 999;
     createInputOutputObject();
     PCALC_UTILITYFACTORY->addUtility(this);
 }
@@ -24,6 +28,10 @@ void PCALC_Report::createInputOutputObject() {
     mInContainer = mInOutContainer->getContainer("PCALC_InputList");
     mOutContainer = mInOutContainer->getContainer("PCALC_OutputList");
     mLastOutput = NULL;
+    mIsSettingsDone = false;
+    mReportType = -1;
+    mFormulaFrom = 0;
+    mFormulaTo = 999;
 }
 
 PCALC_Report::~PCALC_Report() {
@@ -60,19 +68,26 @@ void PCALC_Report::addDetail(const QString& formulaNumber,
         return;
     }
 
-    RB_ObjectBase* settingObj = mInContainer->getObject("name", "PCALC_Setting");
+    if (!mIsSettingsDone) {
+        RB_ObjectBase* settingObj = mInContainer->getObject("name", "PCALC_Setting");
 
-    if (!settingObj) {
-        RB_DEBUG->error("PCALC_Report::addDetail() setting object ERROR");
-        return;
+        if (!settingObj) {
+            RB_DEBUG->error("PCALC_Report::addDetail() setting object ERROR");
+            return;
+        }
+
+        mReportType = settingObj->getValue("reporttype").toInt();
+        mFormulaFrom = settingObj->getValue("formulafrom").toInt();
+        mFormulaTo = settingObj->getValue("formulato").toInt();
+
     }
 
     // Report filter settings, based on index of cbCalculationReportType
     // in pcalc_en1591widget.cpp
-    if (settingObj->getValue("reporttype").toInt() < 3) {
+    if (mReportType < 3) {
         // only last iteration result
-        RB_ObjectBase* existObj = getObject(mOutContainer, variableName,
-                                            loadCaseNo);
+        RB_ObjectBase* existObj = getObject(mOutContainer, formulaNumber,
+                                            variableName, loadCaseNo);
         if (existObj) {
             existObj->setValue("formulanumber", formulaNumber);
             existObj->setValue("variablename", variableName);
@@ -86,12 +101,12 @@ void PCALC_Report::addDetail(const QString& formulaNumber,
         }
     }
 
-    int from = settingObj->getValue("formulafrom").toInt();
-    int to = settingObj->getValue("formulato").toInt();
-    RB_String formulaStr = "Formula ";
+    QStringList formulaStr = formulaNumber.split(" ");
+    int formulaNo = formulaStr.at(1).toInt();
 
-    if ((formulaNumber < formulaStr + QN(from) && from > 0)
-            || (formulaStr + QN(to) < formulaNumber && to < 999)) {
+    if ((mReportType == 2 || mReportType == 3)
+            && ((formulaNo < mFormulaFrom && mFormulaFrom > 0)
+            || (mFormulaTo < formulaNo && mFormulaTo < 999))) {
         return;
     }
 
@@ -153,6 +168,7 @@ void PCALC_Report::clear() {
 }
 
 RB_ObjectBase* PCALC_Report::getObject(RB_ObjectContainer* outContainer,
+                                       const QString& formulaNumber,
                                        const QString& variableName,
                                        int loadCaseNo) {
     RB_ObjectIterator* iter = outContainer->createIterator();
@@ -160,7 +176,8 @@ RB_ObjectBase* PCALC_Report::getObject(RB_ObjectContainer* outContainer,
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
 
-        if (obj->getValue("variablename").toString() == variableName
+        if (obj->getValue("formulanumber").toString() == formulaNumber
+                && obj->getValue("variablename").toString() == variableName
                 && obj->getValue("loadcaseno").toInt() == loadCaseNo) {
             return obj;
         }

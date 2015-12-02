@@ -287,7 +287,13 @@ void Calculator::F54_to_54(Assembly* assembly) 	{
     LoadCase* loadCase = assembly->mLoadCaseList->at(loadCaseNo);
     loadCase->mForce->Calc_M_AI();
     assembly->Calc_F_R(loadCaseNo);
-    assembly->Calc_F_GInitial();
+
+    if (loadCase->F_Bspec > 0.0) {
+        // use Formula 1 (and 2)
+        assembly->Calc_F_GInitial_1();
+    } else {
+        assembly->Calc_F_GInitial();
+    }
 }
 
 void Calculator::F55_to_62_table1(Assembly* assembly) {
@@ -391,7 +397,15 @@ void Calculator::F111_to_118(Assembly* assembly) {
 }
 
 void Calculator::F119_to_119(Assembly* assembly) {
-    assembly->Calc_F_G0d();
+    int loadCaseNo = 0;
+    LoadCase* loadCase = assembly->mLoadCaseList->at(loadCaseNo);
+
+    if (loadCase->F_Bspec > 0.0) {
+        // use Formula 2 (and 1)
+        assembly->Calc_F_G0d_2();
+    } else {
+        assembly->Calc_F_G0d();
+    }
 }
 
 void Calculator::F120_to_122(Assembly* assembly, int loadCaseNo) {
