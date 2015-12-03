@@ -44,43 +44,43 @@
 <tr><td>effective gasket width</td><td>b<sub>Ge</sub></td><td id="{$bGe}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>effective mean gasket diameter</td><td>d<sub>Ge</sub></td><td id="{$dGe}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>effective gasket area</td><td>A<sub>Ge</sub></td><td id="{$AGe}">&nbsp;</td><td></td><td>mm<sup>2</sup></td></tr>
-<tr><td>axial flexibility modulus</td><td>X<sub>G</sub></td><td id="{$XG}">&nbsp;</td><td></td><td>1mm</td></tr>
+<tr><td>axial flexibility modulus</td><td>X<sub>G</sub></td><td id="{$XG}">&nbsp;</td><td></td><td>1/mm</td></tr>
 </tbody></table>
 <h3>Internal forces</h3>
 <table border="1" width="800" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>loads</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>axial fluid-pressure force</td><td>F<sub>Q</sub></td><td id="{$F_Q[0]}">&nbsp;</td><td id="{$F_Q[1]}">&nbsp;</td><td id="{$F_Q[2]}">&nbsp;</td><td id="{$F_Q[3]}">&nbsp;</td><td>kN</td></tr>
-<tr><td>axial force (addition bending moment)</td><td>F<sub>R+</sub></td><td id="{$F_Rpositive[0]}">&nbsp;</td><td id="{$F_Rpositive[1]}">&nbsp;</td><td id="{$F_Rpositive[2]}">&nbsp;</td><td id="{$F_Rpositive[3]}">&nbsp;</td><td>kN</td></tr>
-<tr><td>axial force (subtraction bending moment)</td><td>F<sub>R-</sub></td><td id="{$F_Rnegative[0]}">&nbsp;</td><td id="{$F_Rnegative[1]}">&nbsp;</td><td id="{$F_Rnegative[2]}">&nbsp;</td><td id="{$F_Rnegative[3]}">&nbsp;</td><td>kN</td></tr>
-<tr><td>differential axial expansion</td><td>&Delta;U</td><td>0,000</td><td>0,000</td><td>-0,008</td><td>0,010</td><td>mm</td></tr>
+<tr><td>axial fluid-pressure force</td><td>F<sub>Q</sub></td><td id="{$F_Q[0]}">&nbsp;</td><td id="{$F_Q[1]}">&nbsp;</td><td id="{$F_Q[2]}">&nbsp;</td><td id="{$F_Q[3]}">&nbsp;</td><td>N</td></tr>
+<tr><td>axial force (addition bending moment)</td><td>F<sub>R+</sub></td><td id="{$F_Rpositive[0]}">&nbsp;</td><td id="{$F_Rpositive[1]}">&nbsp;</td><td id="{$F_Rpositive[2]}">&nbsp;</td><td id="{$F_Rpositive[3]}">&nbsp;</td><td>N</td></tr>
+<tr><td>axial force (subtraction bending moment)</td><td>F<sub>R-</sub></td><td id="{$F_Rnegative[0]}">&nbsp;</td><td id="{$F_Rnegative[1]}">&nbsp;</td><td id="{$F_Rnegative[2]}">&nbsp;</td><td id="{$F_Rnegative[3]}">&nbsp;</td><td>N</td></tr>
+<tr><td>differential axial expansion</td><td>&Delta;U</td><td id="{$dUI[0]}">&nbsp;</td><td id="{$dUI[1]}">&nbsp;</td><td id="{$dUI[2]}">&nbsp;</td><td id="{$dUI[3]}">&nbsp;</td><td>mm</td></tr>
 <tr><td><h4>compliance of the joint</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>axial compliance related to FG</td><td>Y<sub>G</sub></td><td>4,57E-07</td><td>4,57E-07</td><td>4,61E-07</td><td>4,67E-07</td><td>mm/N</td></tr>
-<tr><td>axial compliance related to FQ</td><td>Y<sub>Q</sub></td><td>4,87E-07</td><td>4,87E-07</td><td>5,17E-07</td><td>5,23E-07</td><td>mm/N</td></tr>
-<tr><td>axial compliance related to FR</td><td>Y<sub>R</sub></td><td>4,36E-07</td><td>4,36E-07</td><td>4,62E-07</td><td>4,68E-07</td><td>mm/N</td></tr>
+<tr><td>axial compliance related to FG</td><td>Y<sub>G</sub></td><td id="{$Y_G[0]}">&nbsp;</td><td id="{$Y_G[1]}">&nbsp;</td><td id="{$Y_G[2]}">&nbsp;</td><td id="{$Y_G[3]}">&nbsp;</td><td>mm/N</td></tr>
+<tr><td>axial compliance related to FQ</td><td>Y<sub>Q</sub></td><td id="{$Y_Q[0]}">&nbsp;</td><td id="{$Y_Q[1]}">&nbsp;</td><td id="{$Y_Q[2]}">&nbsp;</td><td id="{$Y_Q[3]}">&nbsp;</td><td>mm/N</td></tr>
+<tr><td>axial compliance related to FR</td><td>Y<sub>R</sub></td><td id="{$Y_R[0]}">&nbsp;</td><td id="{$Y_R[1]}">&nbsp;</td><td id="{$Y_R[2]}">&nbsp;</td><td id="{$Y_R[3]}">&nbsp;</td><td>mm/N</td></tr>
 <tr><td><h4>minimum force necessary for the gasket</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp; </td></tr>
-<tr><td>min.gasket force in assembly</td><td>F<sub>G0min</sub></td><td>1842,64</td><td><br></td><td><br></td><td><br></td><td>kN</td></tr>
-<tr><td>min.gasket force in sub.conditions</td><td>F<sub>GImin</sub></td><td>&nbsp;</td><td>323,27</td><td>323,27</td><td>323,27</td><td>kN</td></tr>
+<tr><td>min.gasket force in assembly</td><td>F<sub>G0min</sub></td><td id="{$F_Gmin[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
+<tr><td>min.gasket force in sub.conditions</td><td>F<sub>GImin</sub></td><td>&nbsp;</td><td id="{$F_Gmin[1]}">&nbsp;</td><td id="{$F_Gmin[2]}">&nbsp;</td><td id="{$F_Gmin[3]}">&nbsp;</td><td>N</td></tr>
 <tr><td><h4>internal forces in assembly condition</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>min. gasket force for sub. conditions</td><td>F<sub>Gdel</sub></td><td>874,90</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>kN</td></tr>
-<tr><td>min. gasket force for all conditions</td><td>F<sub>G0req</sub></td><td>1842,64</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>kN</td></tr>
-<tr><td>min. bolt force for all conditions</td><td>F<sub>B0req</sub></td><td>1842,33</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>kN</td></tr>
-<tr><td>scatter for global load above nom. value</td><td>e<sub>+</sub></td><td>0,070</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td>scatter for global load above nom. value</td><td>e<sub>-</sub></td><td>0,070</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td>nominal bolt force</td><td>F<sub>B0nom</sub></td><td>1217,00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>kN</td></tr>
-<tr><td>check of min.bolt force F<sub>B0req</sub></td><td>&nbsp;</td><td>ok</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td>max. bolt force</td><td>F<sub>B0max</sub></td><td>1302,19</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>kN</td></tr>
-<tr><td>max.bolt force</td><td>F<sub>G0max</sub></td><td>2080,00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>kN</td></tr>
+<tr><td>min. gasket force for sub. conditions</td><td>F<sub>Gdel</sub></td><td id="{$F_Gdelta[0]}">&nbsp;</td><td id="{$F_Gdelta[1]}">&nbsp;</td><td id="{$F_Gdelta[2]}">&nbsp;</td><td id="{$F_Gdelta[3]}">&nbsp;</td><td>N</td></tr>
+<tr><td>min. gasket force for all conditions</td><td>F<sub>G0req</sub></td><td id="{$F_Greq[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
+<tr><td>min. bolt force for all conditions</td><td>F<sub>B0req</sub></td><td id="{$F_Breq[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
+<tr><td>scatter for global load above nom. value</td><td>e<sub>+</sub></td><td id="{$etanplus}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>scatter for global load above nom. value</td><td>e<sub>-</sub></td><td id="{$etanminus}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>nominal bolt force</td><td>F<sub>B0nom</sub></td><td id="{$F_Bnom[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
+<tr><td>check of min.bolt force F<sub>B0req</sub></td><td>&nbsp;</td><td id="{$result114}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>max. bolt force</td><td>F<sub>B0max</sub></td><td id="{$F_Bmax[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
+<tr><td>max.bolt force</td><td>F<sub>G0max</sub></td><td id="{$F_Gmax}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td><h4>internal forces in subsequent condition</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>max. gasket force</td><td>F<sub>G0d</sub></td><td>874,90</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>kN</td></tr>
-<tr><td>accumulation of plastic deformation</td><td></td><td>no</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>max. gasket force</td><td>F<sub>G0d</sub></td><td id="{$F_Gd[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
+<tr><td>accumulation of plastic deformation</td><td></td><td>(later)</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 </tbody></table>
 <h3>Checking the admissibility of the load ratio</h3>
 <table border="1" width="800" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>general</h4></td><td></td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td><td>&nbsp;</td><td><br></td></tr>
 <tr><td>reduced max. allowable load ratio</td><td>&Phi;</td><td>1,00</td><td>1,00</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>&chi;</td><td>1,45</td><td>1,45</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&chi;</td><td id="{$chi(1)}">&nbsp;</td><td id="{$chi(2)}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 <tr><td><h4>bolts</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>twisting moment applied to bolt shank</td><td>M<sub>t,B</sub></td><td>221,96</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nm</td></tr>
 <tr><td>plastic torsion modulus</td><td>I<sub>B</sub></td><td>1440,57</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm<sup>3</sup></td></tr>

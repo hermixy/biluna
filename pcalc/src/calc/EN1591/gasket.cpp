@@ -209,7 +209,7 @@ void Gasket::Calc_eG(int loadCaseNo) {
             =  gasketCompressedThickness(mLoadCaseList->at(loadCaseNo));
 
     // TODO move addDetail() to relevant table
-    PR->addDetail("With F. 63",
+    PR->addDetail("With_F. 63",
                   "eG", "gasketCompressedThickness(loadCase)",
                   mLoadCaseList->at(loadCaseNo)->eG, "mm",
                   "Table value", loadCaseNo);
@@ -325,16 +325,16 @@ double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
         loadCase->Q_smax = TABLE16PROPERTY->getTable16_Q_smax(matCode,
                                                                loadCase->TG);
         if (loadCase->Q_smax > 0) {
-            PR->addDetail("Before F.65 etc.", "Q_smax", "Table 16 value",
+            PR->addDetail("Before_F. 65 etc.", "Q_smax", "Table 16 value",
                           loadCase->Q_smax, "-", "Table value", loadCaseNo);
         } else {
-            PR->addDetail("Before F.65 etc.", "Q_smax",
+            PR->addDetail("Before_F. 65 etc.", "Q_smax",
                           "Table 16 value out of range", loadCase->Q_smax,
                           "-", "Table value", loadCaseNo, "Out of range");
         }
     } else if (loadCase->Q_smax < 0.001) {
         loadCase->Q_smax = TABLEGSIMPLE->getTableG_Qmax(insType, loadCase->TG);
-        PR->addDetail("Before F.65 etc.", "Q_smax", "Table G value",
+        PR->addDetail("Before_F. 65 etc.", "Q_smax", "Table G value",
                       loadCase->Q_smax, "-", "Table value", loadCaseNo,
                       "Material not found");
     }
@@ -353,11 +353,11 @@ double Gasket::gasketCreepFactor(int loadCaseNo, LoadCase* loadCase) {
         loadCase->P_QR = TABLE16PROPERTY->getTable16_P_QR(matCode,
                                                            loadCase->TG);
         if (loadCase->P_QR > 0) {
-            PR->addDetail("Table 16", "PQR", "Table value",
+            PR->addDetail("Before_F. 105 Table 16", "PQR", "Table value",
                           loadCase->P_QR, "-",
                           "Table value", loadCaseNo);
         } else {
-            PR->addDetail("Table 16", "PQR", "Table value",
+            PR->addDetail("Before_F. 105 Table 16", "PQR", "Table value",
                           loadCase->P_QR, "-",
                           "Table value", loadCaseNo, "Out of range");
         }

@@ -60,6 +60,7 @@ private:
     void createDetailReport();
     void createValidationReport();
     void createUnitTestSummary();
+    void createUnitTestDetail();
     void addObjectMemberVariable(RB_ObjectBase* obj,
                                  const QString& variableName,
                                  const QString& unit, RB_MmProxy* model);

@@ -26,7 +26,8 @@ bool Flange_Loose::Is_flange_Valid() {
         if (mShell != NULL) {
 
             if (cos(mShell->phiS) >= 1 / (1 + 0.01 * mShell->dS / mShell->eS)) {
-                PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+                PR->addDetail("Before_F. 1 Para 4.2",
+                              "result(" + QN(mFlangeNumber) + ")",
                               str + " AND cos(phiS) >= 1 / (1 + 0.01 * dS / eS)",
                               1, "-", strVal + " AND cos(" + QN(mShell->phiS)
                               + ") >= 1 / (1 + 0.01 * " + QN(mShell->dS)
@@ -34,13 +35,14 @@ bool Flange_Loose::Is_flange_Valid() {
                 return true;
             }
         } else {
-            PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+            PR->addDetail("Before_F. 1 Para 4.2",
+                          "result(" + QN(mFlangeNumber) + ")",
                           str, 1, "-", strVal);
             return true;
         }
     }
 
-    PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Before_F. 1 Para 4.2", "result(" + QN(mFlangeNumber) + ")",
                   str, 0, "-", strVal);
     return false;
 }
@@ -392,7 +394,7 @@ void Flange_Loose::Calc_d70() {
  */
 void Flange_Loose::Calc_d7minMax() {
     d7 = std::min(std::max(d7min, d7), d7max);
-    PR->addDetail("Formula 84", "result(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Formula 84", "result84(" + QN(mFlangeNumber) + ")",
                   "min(max(d7min, d7), d7max)", d7, "mm",
                   "min(max(" + QN(d7min) + "; " + QN(d7) + "); "
                   + QN(d7max) + ")");
@@ -401,10 +403,10 @@ void Flange_Loose::Calc_d7minMax() {
 /**
  * @brief Formula 62: Intermediate working variable, loadCaseNo
  * is always 0, as also assumed for ZL in Formula 40
- * @param loadCaseNo
  */
-void Flange_Loose::Calc_chi(/*int loadCaseNo*/) {
-    LoadCase* loadCase = mLoadCaseList->at(0);
+void Flange_Loose::Calc_chi() {
+    int loadCaseNo = 0;
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
 
     if (getFlangeNumber() == 1) {
         chi = ZL * loadCase->EF1 / (ZF * loadCase->EL1);
@@ -567,11 +569,11 @@ void Flange_Loose::Calc_WQ(int loadCaseNo) {
 
     if (getFlangeNumber() == 1)     {
         loadCase->WQ1 = tmp_WQ;
-        PR->addDetail("With F. 151", "WQ(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("With_F. 151", "WQ(" + QN(mFlangeNumber) + ")",
                       str, loadCase->WQ1, "Nmm", strWQ, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->WQ2 = tmp_WQ;
-        PR->addDetail("With F. 151", "WQ(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("With_F. 151", "WQ(" + QN(mFlangeNumber) + ")",
                       str, loadCase->WQ2, "Nmm", strWQ, loadCaseNo);
     }
 }

@@ -134,7 +134,7 @@ void Calculator::exec() {
                 && (assembly->mF_Bspec <= 0.0)) {
             LoadCase* loadCase0 = assembly->mLoadCaseList->at(loadCaseNo);
             loadCase0->F_G = loadCase0->F_Greq;
-            PR->addDetail("After F.108", "F_G",
+            PR->addDetail("After_F. 108", "F_G",
                           "F_Greq (new initial force)",
                           loadCase0->F_G, "N", QN(loadCase0->F_Greq),
                           loadCaseNo);
@@ -329,8 +329,8 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
     assembly->mFlange2->Calc_d7min(); // loose flange only
     assembly->mFlange1->Calc_d7max(); // loose flange only
     assembly->mFlange2->Calc_d7max(); // loose flange only
-    assembly->mFlange1->Calc_chi(loadCaseNo); // loose flange only
-    assembly->mFlange2->Calc_chi(loadCaseNo); // loose flange only
+    assembly->mFlange1->Calc_chi(); // loose flange only
+    assembly->mFlange2->Calc_chi(); // loose flange only
     assembly->mFlange1->Calc_d70(loadCaseNo); // loose flange only
     assembly->mFlange2->Calc_d70(loadCaseNo); // loose flange only
     assembly->mFlange1->Calc_hG();

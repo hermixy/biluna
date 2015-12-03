@@ -23,7 +23,7 @@ bool Flange_Integral::Is_flange_Valid() {
     if (result) {
         if (mShell != NULL) {
             if (cos(mShell->phiS) >= 1 / (1 + 0.01 * mShell->dS / mShell->eS)) {
-                PR->addDetail("Para 4.2", "result", str
+                PR->addDetail("Before_F. 1 Para 4.2", "result1", str
                               + " AND cos(phiS) >= 1 / (1 + 0.01 * dS / eS)",
                               1, "-", strVal + " AND cos(" + QN(mShell->phiS)
                               + ") >= 1 / (1 + 0.01 * " + QN(mShell->dS)
@@ -31,13 +31,14 @@ bool Flange_Integral::Is_flange_Valid() {
                 return true;
             }
         } else {
-            PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+            PR->addDetail("Before_F. 1 Para 4.2",
+                          "result(" + QN(mFlangeNumber) + ")",
                           str, 1, "-", strVal);
             return true;
         }
     }
 
-    PR->addDetail("Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Before_F. 1 Para 4.2", "result(" + QN(mFlangeNumber) + ")",
                   str, 0, "-", strVal);
     return false;
 }
@@ -342,7 +343,7 @@ void Flange_Integral::Calc_ZL() {
  */
 void Flange_Integral::Calc_hG() {
     hG = (d3e - mGasket->dGe) / 2;
-    PR->addDetail("Formula 59, 81", "hG(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Formula 59 81", "hG(" + QN(mFlangeNumber) + ")",
                   "(d3e - dGe) / 2", hG, "mm",
                   "(" + QN(d3e) + " - " + QN(mGasket->dGe) + ") / 2");
 }

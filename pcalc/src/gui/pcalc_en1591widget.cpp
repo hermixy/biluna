@@ -608,7 +608,7 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
         createUnitTestSummary();
         break;
     case 5:
-        // createUnitTestDetail();
+        createUnitTestDetail();
         break;
     default:
         teCalculationReport->setHtml("<p>Invalid report type</p>");
@@ -1118,6 +1118,87 @@ void PCALC_EN1591Widget::createUnitTestSummary() {
     getTextEdit()->append("-- End UnitTest:"
                           + QDateTime::currentDateTime().toString(Qt::ISODate));
     QApplication::restoreOverrideCursor();
+}
+
+void PCALC_EN1591Widget::createUnitTestDetail() {
+    QString po = "<p>";
+    QString pc = "</p>";
+    QString tbo = "<table border='0'>";
+    QString tbc = "</table>";
+    QString tro = "<tr>";
+    QString trc = "</tr>";
+    QString tdo = "<td>";
+    QString tdc = "</td>";
+    int passedCount = 0;
+    int failedCount = 0;
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    PR->clear();
+    getTextEdit()->clear();
+    setSettings();
+
+    Biluna::Calc::EN1591::EN1591_UnitTestFactory testFactory;
+    testFactory.exec();
+
+    QString dateTimeStr = QDateTime::currentDateTime().toString(Qt::ISODate);
+    QString outputStr;
+    outputStr.append(po + "-- Start UnitTest: " + dateTimeStr + pc);
+    outputStr.append(tbo);
+    outputStr.append(tro + "<td width='10%'>&nbsp;</td>"
+                           "<td width='7%'><strong>UNIT TEST</strong></td>"
+                           "<td width='8%'>&nbsp;</td>"
+                           "<td width='75%'>&nbsp;</td>"
+                     + trc);
+    outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
+    outputStr.append(tro + tdo + tdc + tdo + "<strong>OUTPUT</strong>"
+                     + tdc + tdo + tdc + tdo + tdc + trc);
+
+    // output
+    RB_ObjectContainer* outList
+            = PR->getInOutContainer()->getContainer("PCALC_OutputList");
+    RB_ObjectIterator* iter = outList->createIterator();
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* obj = iter->currentObject();
+        outputStr.append(tro
+                + tdo + obj->getValue("formulanumber").toString()
+                         + " [" + obj->getValue("loadcaseno").toString() + "]" + tdc
+                + tdo + obj->getValue("variablename").toString() + " = " + tdc
+                + tdo + obj->getValue("result").toString() + tdc
+                + tdo + " = " + obj->getValue("formula").toString() + tdc + trc
+                    /*+ " " + obj->getValue("unit").toString()
+                    + " " + obj->getValue("loadcaseno").toString()
+                    + " " + obj->getValue("note").toString()*/);
+
+        QString str = obj->getValue("formulavalues").toString();
+        if (!str.isEmpty()) {
+            outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc
+                             + tdo + " = " + str + tdc + trc);
+        }
+
+        str = obj->getValue("note").toString();
+
+        if (!str.isEmpty()) {
+            outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc
+                             + tdo + str + tdc + trc);
+
+            if (str.contains("- test OK")) {
+                ++passedCount;
+            } else {
+                ++failedCount;
+            }
+        }
+    }
+
+    delete iter;
+    outputStr.append(tbc);
+    outputStr.append(po + "Tests Passed: " + QString::number(passedCount) + pc);
+    outputStr.append(po + "Tests Failed: " + QString::number(failedCount) + pc);
+    outputStr.append(po + "-- End UnitTest:"
+                     + QDateTime::currentDateTime().toString(Qt::ISODate) + pc);
+    getTextEdit()->setHtml(outputStr);
+    QApplication::restoreOverrideCursor();
+
 }
 
 void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,

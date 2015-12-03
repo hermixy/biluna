@@ -190,7 +190,7 @@ public:
     virtual void Calc_d7max();
     virtual void Calc_d70(int loadCaseNo);
     virtual void Calc_d7minMax(int loadCaseNo);
-    virtual void Calc_chi(int loadCaseNo);
+    virtual void Calc_chi();
 
     virtual bool Is_PhiF_valid(int loadCaseNo);
 

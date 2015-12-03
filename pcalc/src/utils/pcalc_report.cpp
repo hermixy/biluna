@@ -101,13 +101,17 @@ void PCALC_Report::addDetail(const QString& formulaNumber,
         }
     }
 
-    QStringList formulaStr = formulaNumber.split(" ");
-    int formulaNo = formulaStr.at(1).toInt();
+    QStringList formulaStrList = formulaNumber.split(" ");
+    if (formulaStrList.size() > 1) {
+        int formulaNo = formulaStrList.at(1).toInt();
 
-    if ((mReportType == 2 || mReportType == 3)
-            && ((formulaNo < mFormulaFrom && mFormulaFrom > 0)
-            || (mFormulaTo < formulaNo && mFormulaTo < 999))) {
-        return;
+        if ((mReportType == 2 || mReportType == 3)
+                && ((formulaNo < mFormulaFrom && mFormulaFrom > 0)
+                    || (mFormulaTo < formulaNo && mFormulaTo < 999))) {
+            return;
+        }
+    } else {
+        RB_DEBUG->error("PCALC_Report::addDetail() formula number ERROR");
     }
 
     // Add result to output object and container
