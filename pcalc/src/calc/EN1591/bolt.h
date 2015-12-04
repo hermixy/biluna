@@ -58,6 +58,7 @@ public:
     double AB;
     double IB;
     double kB; // B.7 calculation
+    double kB9; // B.9 calculation
     double lB;
     double XB;
     double eta1plus;
@@ -76,6 +77,7 @@ public:
     void Calc_eta1minus();
     void Calc_IB();
     void Calc_kB();
+    void Calc_kB9();
 };
 
 END_NAMESPACE_BILUNA_CALC_EN1591

@@ -55,7 +55,7 @@ private:
     void Calc_fETest();
     void Is_PhiG_ValidTest();
     void Calc_MtnomTest();
-//    void Calc_MtBTest();
+    void Calc_MtBnomTest();
     void Calc_F_BImaxminTest();
     void Calc_F_GImaxminTest();
     void Calc_ThetaFmaxminTest();

@@ -74,52 +74,71 @@
 <tr><td><h4>internal forces in subsequent condition</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>max. gasket force</td><td>F<sub>G0d</sub></td><td id="{$F_Gd[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td>accumulation of plastic deformation</td><td></td><td>(later)</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+
+
+</tbody></table>
+<h3>Check of thightness criteria</h3>
+<table border="1" width="800" cellspacing="0" cellpadding="2">
+<tbody>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
+<tr><td>compliance of min. required gasket stress</td><td>Qmin&gt;Qsmin</td><td>TODO ok</td><td>ok</td><td>ok</td><td>ok</td><td>-</td></tr>
 </tbody></table>
 <h3>Checking the admissibility of the load ratio</h3>
 <table border="1" width="800" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>general</h4></td><td></td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td><td>&nbsp;</td><td><br></td></tr>
 <tr><td>reduced max. allowable load ratio</td><td>&Phi;</td><td>1,00</td><td>1,00</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>&chi;</td><td id="{$chi(1)}">&nbsp;</td><td id="{$chi(2)}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable (Loose only)</td><td>&chi;</td><td id="{$chi(1)}">&nbsp;</td><td id="{$chi(2)}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 <tr><td><h4>bolts</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>twisting moment applied to bolt shank</td><td>M<sub>t,B</sub></td><td>221,96</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nm</td></tr>
-<tr><td>plastic torsion modulus</td><td>I<sub>B</sub></td><td>1440,57</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm<sup>3</sup></td></tr>
-<tr><td>bolt load ratio</td><td>&Phi;<sub>B</sub></td><td>0,88</td><td>0,31</td><td>0,42</td><td>0,44</td><td>-</td></tr>
+<tr><td>twisting moment applied to bolt shank</td><td>M<sub>t,B</sub></td><td id="{$MtBnom}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nm</td></tr>
+<tr><td>plastic torsion modulus</td><td>I<sub>B</sub></td><td id="{$IB}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm<sup>3</sup></td></tr>
+<tr><td>bolt load ratio</td><td>&Phi;<sub>B</sub></td><td id="{$PhiB[0]}">&nbsp;</td><td id="{$PhiB[1]}">&nbsp;</td><td id="{$PhiB[2]}">&nbsp;</td><td id="{$PhiB[3]}">&nbsp;</td><td>-</td></tr>
 <tr><td><h4>gasket</h4></td><td> </td><td>assembly</td><td>test cond.</td><td>load cond. 2</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-<tr><td>gasket load ratio</td><td>&Phi;<sub>G</sub></td><td>0,33</td><td>0,07</td><td>0,07</td><td>0,05</td><td>-</td></tr>
+<tr><td>gasket load ratio</td><td>&Phi;<sub>G</sub></td><td id="{$PhiG[0]}">&nbsp;</td><td id="{$PhiG[1]}">&nbsp;</td><td id="{$PhiG[2]}">&nbsp;</td><td id="{$PhiG[3]}">&nbsp;</td><td>-</td></tr>
 <tr><td><h4>flange 1</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>equ. wall thickness for load limit</td><td>e<sub>D</sub></td><td>16,56</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
-<tr><td>intermediate variable</td><td>&delta;<sub>Q</sub></td><td>0</td><td>0,180955 </td><td>0,126989 </td><td>0,185198 </td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>&delta;<sub>R</sub></td><td>0</td><td>0 </td><td>0,077425 </td><td>0,078173 </td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>c<sub>M</sub></td><td>1,153256</td><td>1,135505 </td><td>1,134236 </td><td>1,122273 </td><td>-</td></tr>
-<tr><td>correction factor (jS=-1)</td><td>c<sub>S</sub></td><td>0,785398</td><td>0,889574 </td><td>0,823925 </td><td>0,855154 </td><td>-</td></tr>
-<tr><td>correction factor (jS=1)</td><td>c<sub>S</sub></td><td>0,785398</td><td>0,676392 </td><td>0,73513 </td><td>0,698369 </td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>j<sub>M</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>k<sub>M</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>opt</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>0<sub></sub></sub></td><td>0</td><td>-0,053093</td><td>-0,037259</td><td>-0,054338</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>max</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>min</sub></td><td>-0,425819</td><td>-0,502773</td><td>-0,469786</td><td>-0,492656</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>z</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
-<tr><td>resistance of flange</td><td>W<sub>F</sub></td><td>5,75E+07</td><td>5,47E+07</td><td>3,24E+07</td><td>3,15E+07</td><td>Nmm</td></tr>
-<tr><td>flange load ratio</td><td>&Phi;<sub>F</sub></td><td>0,96</td><td>0,43</td><td>0,73</td><td>0,71</td><td>-</td></tr>
+<tr><td>equ. wall thickness for load limit</td><td>e<sub>D</sub></td><td id="{$eD(1)}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
+<tr><td>intermediate variable</td><td>&delta;<sub>Q</sub></td><td id="{$deltaQ(1)[0]}">&nbsp;</td><td id="{$deltaQ(1)[1]}">&nbsp;</td><td id="{$deltaQ(1)[2]}">&nbsp;</td><td id="{$deltaQ(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&delta;<sub>R</sub></td><td id="{$deltaR(1)[0]}">&nbsp;</td><td id="{$deltaR(1)[1]}">&nbsp;</td><td id="{$deltaR(1)[2]}">&nbsp;</td><td id="{$deltaR(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>c<sub>M</sub></td><td id="{$cM(1)[0]}">&nbsp;</td><td id="{$cM(1)[1]}">&nbsp;</td><td id="{$cM(1)[2]}">&nbsp;</td><td id="{$cM(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>correction factor (jS=-1)</td><td>c<sub>S</sub></td><td id="{$cS_minus(1)[0]}">&nbsp;</td><td id="{$cS_minus(1)[1]}">&nbsp;</td><td id="{$cS_minus(1)[2]}">&nbsp;</td><td id="{$cS_minus(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>correction factor (jS=1)</td><td>c<sub>S</sub></td><td id="{$cS_plus(1)[0]}">&nbsp;</td><td id="{$cS_plus(1)[1]}">&nbsp;</td><td id="{$cS_plus(1)[2]}">&nbsp;</td><td id="{$cS_plus(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>j<sub>M</sub></td><td id="{$jM(1)[0]}">&nbsp;</td><td id="{$jM(1)[1]}">&nbsp;</td><td id="{$jM(1)[2]}">&nbsp;</td><td id="{$jM(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>k<sub>M</sub></td><td id="{$kM(1)[0]}">&nbsp;</td><td id="{$kM(1)[1]}">&nbsp;</td><td id="{$kM(1)[2]}">&nbsp;</td><td id="{$kM(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>opt</sub></td><td id="{$PsiOpt(1)[0]}">&nbsp;</td><td id="{$PsiOpt(1)[1]}">&nbsp;</td><td id="{$PsiOpt(1)[2]}">&nbsp;</td><td id="{$PsiOpt(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>0<sub></sub></sub></td><td id="{$Psi0(1)[0]}">&nbsp;</td><td id="{$Psi0(1)[1]}">&nbsp;</td><td id="{$Psi0(1)[2]}">&nbsp;</td><td id="{$Psi0(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>max</sub></td><td id="{$PsiMax(1)[0]}">&nbsp;</td><td id="{$PsiMax(1)[1]}">&nbsp;</td><td id="{$PsiMax(1)[2]}">&nbsp;</td><td id="{$PsiMax(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>min</sub></td><td id="{$PsiMin(1)[0]}">&nbsp;</td><td id="{$PsiMin(1)[1]}">&nbsp;</td><td id="{$PsiMin(1)[2]}">&nbsp;</td><td id="{$PsiMin(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>z</sub></td><td id="{$PsiZ(1)[0]}">&nbsp;</td><td id="{$PsiZ(1)[1]}">&nbsp;</td><td id="{$PsiZ(1)[2]}">&nbsp;</td><td id="{$PsiZ(1)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>resistance of flange</td><td>W<sub>F</sub></td><td id="{$WF(1)[0]}">&nbsp;</td><td id="{$WF(1)[1]}">&nbsp;</td><td id="{$WF(1)[2]}">&nbsp;</td><td id="{$WF(1)[3]}">&nbsp;</td><td>Nmm</td></tr>
+<tr><td>flange load ratio</td><td>&Phi;<sub>F</sub></td><td id="{$PhiF(1)[0]}">&nbsp;</td><td id="{$PhiF(1)[1]}">&nbsp;</td><td id="{$PhiF(1)[2]}">&nbsp;</td><td id="{$PhiF(1)[3]}">&nbsp;</td><td>-</td></tr>
 <tr><td><h4>flange 2</h4></td><td></td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td></td></tr>
-<tr><td>equ. wall thickness for load limit</td><td>e<sub>D</sub></td><td>16,56</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
-<tr><td>intermediate variable</td><td>&delta;<sub>Q</sub></td><td>0</td><td>0,180955 </td><td>0,126989 </td><td>0,185198 </td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>&delta;<sub>R</sub></td><td>0</td><td>0 </td><td>0,077425 </td><td>0,078173 </td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>c<sub>M</sub></td><td>1,153256</td><td>1,135505 </td><td>1,134236 </td><td>1,122273 </td><td>-</td></tr>
-<tr><td>correction factor (jS=-1)</td><td>c<sub>S</sub></td><td>0,785398</td><td>0,889574 </td><td>0,823925 </td><td>0,855154 </td><td>-</td></tr>
-<tr><td>correction factor (jS=1)</td><td>c<sub>S</sub></td><td>0,785398</td><td>0,676392 </td><td>0,73513 </td><td>0,698369 </td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>j<sub>M</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>intermediate variable</td><td>k<sub>M</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>opt</sub></td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>0<sub></sub></sub></td><td>0</td><td>-0,053093</td><td>-0,037259</td><td>-0,054338</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>max</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>min</sub></td><td>-0,425819</td><td>-0,502773</td><td>-0,469786</td><td>-0,492656</td><td>-</td></tr>
-<tr><td>particular value</td><td>&Psi;<sub>z</sub></td><td>0,425819</td><td>0,33902</td><td>0,371296</td><td>0,341766</td><td>-</td></tr>
-<tr><td>resistance of flange</td><td>W<sub>F</sub></td><td>5,75E+07</td><td>5,47E+07</td><td>3,24E+07</td><td>3,15E+07</td><td>Nmm</td></tr>
-<tr><td>flange load ratio</td><td>&Phi;<sub>F</sub></td><td>0,96</td><td>0,43</td><td>0,73</td><td>0,71</td><td>-</td></tr>
+<tr><td>equ. wall thickness for load limit</td><td>e<sub>D</sub></td><td id="{$eD(2)}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
+<tr><td>intermediate variable</td><td>&delta;<sub>Q</sub></td><td id="{$deltaQ(2)[0]}">&nbsp;</td><td id="{$deltaQ(2)[1]}">&nbsp;</td><td id="{$deltaQ(2)[2]}">&nbsp;</td><td id="{$deltaQ(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>&delta;<sub>R</sub></td><td id="{$deltaR(2)[0]}">&nbsp;</td><td id="{$deltaR(2)[1]}">&nbsp;</td><td id="{$deltaR(2)[2]}">&nbsp;</td><td id="{$deltaR(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>c<sub>M</sub></td><td id="{$cM(2)[0]}">&nbsp;</td><td id="{$cM(2)[1]}">&nbsp;</td><td id="{$cM(2)[2]}">&nbsp;</td><td id="{$cM(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>correction factor (jS=-1)</td><td>c<sub>S</sub></td><td id="{$cS_minus(2)[0]}">&nbsp;</td><td id="{$cS_minus(2)[1]}">&nbsp;</td><td id="{$cS_minus(2)[2]}">&nbsp;</td><td id="{$cS_minus(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>correction factor (jS=1)</td><td>c<sub>S</sub></td><td id="{$cS_plus(2)[0]}">&nbsp;</td><td id="{$cS_plus(2)[1]}">&nbsp;</td><td id="{$cS_plus(2)[2]}">&nbsp;</td><td id="{$cS_plus(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>j<sub>M</sub></td><td id="{$jM(2)[0]}">&nbsp;</td><td id="{$jM(2)[1]}">&nbsp;</td><td id="{$jM(2)[2]}">&nbsp;</td><td id="{$jM(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>intermediate variable</td><td>k<sub>M</sub></td><td id="{$kM(2)[0]}">&nbsp;</td><td id="{$kM(2)[1]}">&nbsp;</td><td id="{$kM(2)[2]}">&nbsp;</td><td id="{$kM(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>opt</sub></td><td id="{$PsiOpt(2)[0]}">&nbsp;</td><td id="{$PsiOpt(2)[1]}">&nbsp;</td><td id="{$PsiOpt(2)[2]}">&nbsp;</td><td id="{$PsiOpt(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>0<sub></sub></sub></td><td id="{$Psi0(2)[0]}">&nbsp;</td><td id="{$Psi0(2)[1]}">&nbsp;</td><td id="{$Psi0(2)[2]}">&nbsp;</td><td id="{$Psi0(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>max</sub></td><td id="{$PsiMax(2)[0]}">&nbsp;</td><td id="{$PsiMax(2)[1]}">&nbsp;</td><td id="{$PsiMax(2)[2]}">&nbsp;</td><td id="{$PsiMax(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>min</sub></td><td id="{$PsiMin(2)[0]}">&nbsp;</td><td id="{$PsiMin(2)[1]}">&nbsp;</td><td id="{$PsiMin(2)[2]}">&nbsp;</td><td id="{$PsiMin(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>particular value</td><td>&Psi;<sub>z</sub></td><td id="{$PsiZ(2)[0]}">&nbsp;</td><td id="{$PsiZ(2)[1]}">&nbsp;</td><td id="{$PsiZ(2)[2]}">&nbsp;</td><td id="{$PsiZ(2)[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>resistance of flange</td><td>W<sub>F</sub></td><td id="{$WF(2)[0]}">&nbsp;</td><td id="{$WF(2)[1]}">&nbsp;</td><td id="{$WF(2)[2]}">&nbsp;</td><td id="{$WF(2)[3]}">&nbsp;</td><td>Nmm</td></tr>
+<tr><td>flange load ratio</td><td>&Phi;<sub>F</sub></td><td id="{$PhiF(2)[0]}">&nbsp;</td><td id="{$PhiF(2)[1]}">&nbsp;</td><td id="{$PhiF(2)[2]}">&nbsp;</td><td id="{$PhiF(2)[3]}">&nbsp;</td><td>-</td></tr>
 </tbody></table>
+<h3>Flange rotation</h3>
+<table border="1" width="800" cellspacing="0" cellpadding="2">
+<tbody>
+<tr><td colspan="7"><strong>flange 1</strong></td></tr>
+<tr><td>min. flange rotation</td><td>&Theta;<sub>Fmin</sub></td><td id="{$ThetaF1min[0]}">&nbsp;</td><td id="{$ThetaF1min[1]}">&nbsp;</td><td id="{$ThetaF1min[2]}">&nbsp;</td><td id="{$ThetaF1min[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>max. flange rotation</td><td>&Theta;<sub>Fmax</sub></td><td id="{$ThetaF1max[0]}">&nbsp;</td><td id="{$ThetaF1max[1]}">&nbsp;</td><td id="{$ThetaF1max[2]}">&nbsp;</td><td id="{$ThetaF1max[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td colspan="7"><strong>flange 2</strong></td></tr>
+<tr><td>min. flange rotation</td><td>&Theta;<sub>Fmin</sub></td><td id="{$ThetaF2min[0]}">&nbsp;</td><td id="{$ThetaF2min[1]}">&nbsp;</td><td id="{$ThetaF2min[2]}">&nbsp;</td><td id="{$ThetaF2min[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>max. flange rotation</td><td>&Theta;<sub>Fmax</sub></td><td id="{$ThetaF2max[0]}">&nbsp;</td><td id="{$ThetaF2max[1]}">&nbsp;</td><td id="{$ThetaF2max[2]}">&nbsp;</td><td id="{$ThetaF2max[3]}">&nbsp;</td><td>-</td></tr>
+</tbody></table>
+
 <br>
 Vandaag 29 september check
 </body></html>

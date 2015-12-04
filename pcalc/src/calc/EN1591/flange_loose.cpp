@@ -27,7 +27,7 @@ bool Flange_Loose::Is_flange_Valid() {
 
             if (cos(mShell->phiS) >= 1 / (1 + 0.01 * mShell->dS / mShell->eS)) {
                 PR->addDetail("Before_F. 1 Para 4.2",
-                              "result(" + QN(mFlangeNumber) + ")",
+                              "result1(" + QN(mFlangeNumber) + ")",
                               str + " AND cos(phiS) >= 1 / (1 + 0.01 * dS / eS)",
                               1, "-", strVal + " AND cos(" + QN(mShell->phiS)
                               + ") >= 1 / (1 + 0.01 * " + QN(mShell->dS)
@@ -36,7 +36,7 @@ bool Flange_Loose::Is_flange_Valid() {
             }
         } else {
             PR->addDetail("Before_F. 1 Para 4.2",
-                          "result(" + QN(mFlangeNumber) + ")",
+                          "result1(" + QN(mFlangeNumber) + ")",
                           str, 1, "-", strVal);
             return true;
         }
@@ -520,13 +520,13 @@ bool Flange_Loose::Is_PhiL_valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = mLoadCaseList->at(loadCaseNo)->PhiL1 <= 1.0;
-        PR->addDetail("Formula 149", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 149", "result149(" + QN(mFlangeNumber) + ")",
                       "PhiL1 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiL1) + " <= 1.0",
                       loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = mLoadCaseList->at(loadCaseNo)->PhiL2 <= 1.0;
-        PR->addDetail("Formula 149", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 149", "result149(" + QN(mFlangeNumber) + ")",
                       "PhiL2 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiL1) + " <= 1.0",
                       loadCaseNo);

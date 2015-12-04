@@ -161,7 +161,8 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     PhiL2 = 0.0;
     WQ1 = 0.0;
     WQ2 = 0.0;
-    MtB = 0.0;
+    MtBnom = 0.0;
+    Mtnom = 0.0;
     Q_G = 0.0;
     Q_A = 0.0;
     Q_0min = 0.0;

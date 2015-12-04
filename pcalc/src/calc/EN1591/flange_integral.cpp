@@ -32,13 +32,13 @@ bool Flange_Integral::Is_flange_Valid() {
             }
         } else {
             PR->addDetail("Before_F. 1 Para 4.2",
-                          "result(" + QN(mFlangeNumber) + ")",
+                          "result1(" + QN(mFlangeNumber) + ")",
                           str, 1, "-", strVal);
             return true;
         }
     }
 
-    PR->addDetail("Before_F. 1 Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Before_F. 1 Para 4.2", "result1(" + QN(mFlangeNumber) + ")",
                   str, 0, "-", strVal);
     return false;
 }

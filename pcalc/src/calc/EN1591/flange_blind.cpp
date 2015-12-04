@@ -16,14 +16,14 @@ Flange_Blind::~Flange_Blind() {
  */
 bool Flange_Blind::Is_flange_Valid() {
     if (0.2 <= bF / eF && bF / eF <= 5.0) {
-        PR->addDetail("Before_F. 1 Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Before_F. 1 Para 4.2", "result1(" + QN(mFlangeNumber) + ")",
                       "Is flange valid?", 1, "-",
                       "0.2 <= " + QN(bF) + " / " + QN(eF) + " AND "
                       + QN(bF) + " / " + QN(eF) + " <= 5.0");
         return true;
     }
 
-    PR->addDetail("Before_F. 1 Para 4.2", "result(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Before_F. 1 Para 4.2", "result1(" + QN(mFlangeNumber) + ")",
                   "Is flange valid?", 0, "-",
                   "0.2 <= " + QN(bF) + " / " + QN(eF) + " AND "
                   + QN(bF) + " / " + QN(eF) + " <= 5.0");
@@ -220,7 +220,7 @@ void Flange_Blind::Calc_hL() {
  */
 bool Flange_Blind::Is_d0_Valid() {
     bool result = d0 <= this->mGasket->dG1;
-    PR->addDetail("Legend with d0", "result(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Legend with d0", "resultd0(" + QN(mFlangeNumber) + ")",
                   "d0 <= mGasket->dG1",
                   static_cast<int>(result), "-",
                   QN(d0) + " <= " + QN(mGasket->dG1));
@@ -335,7 +335,7 @@ bool Flange_Blind::Is_PhiX_Valid(int loadCaseNo) {
     bool result = false;
     if (getFlangeNumber() == 1) {
         result = mLoadCaseList->at(loadCaseNo)->PhiX1 <= 1.0;
-        PR->addDetail("With_F. 147", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("With_F. 147", "result147(" + QN(mFlangeNumber) + ")",
                       "PhiX1 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiX1) + " <= 1.0",
                       loadCaseNo);
@@ -343,7 +343,7 @@ bool Flange_Blind::Is_PhiX_Valid(int loadCaseNo) {
     }
 
     result = mLoadCaseList->at(loadCaseNo)->PhiX2 <= 1.0;
-    PR->addDetail("With_F. 147", "result(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("With_F. 147", "result147(" + QN(mFlangeNumber) + ")",
                   "PhiX2 &lt;= 1.0", static_cast<int>(result), "-",
                   QN(mLoadCaseList->at(loadCaseNo)->PhiX2) + " &lt;= 1.0",
                   loadCaseNo);

@@ -365,13 +365,13 @@ bool Flange::Is_PhiF_valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = mLoadCaseList->at(loadCaseNo)->PhiF1 <= 1.0;
-        PR->addDetail("Formula 129", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 129", "result129(" + QN(mFlangeNumber) + ")",
                       "PhiF1 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiF1)
                       + " &lt;= 1.0", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = mLoadCaseList->at(loadCaseNo)->PhiF2 <= 1.0;
-        PR->addDetail("Formula 129", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 129", "result129(" + QN(mFlangeNumber) + ")",
                       "PhiF2 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiF1)
                       + " &lt;= 1.0", loadCaseNo);
@@ -507,13 +507,13 @@ bool Flange::Is_cM_valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = mLoadCaseList->at(loadCaseNo)->cM1 >= 0.0;
-        PR->addDetail("After_F. 134", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 134", "result134(" + QN(mFlangeNumber) + ")",
                       "cM1 >= 0.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->cM1) + " &gt;= 0.0",
                       loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = mLoadCaseList->at(loadCaseNo)->cM2 >= 0.0;
-        PR->addDetail("After_F. 134", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 134", "result134(" + QN(mFlangeNumber) + ")",
                       "cM2 >= 0.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->cM2) + " &gt;= 0.0",
                       loadCaseNo);
@@ -624,14 +624,14 @@ bool Flange::Is_cS_valid(int loadCaseNo) {
     bool result = false;
     if (getFlangeNumber() == 1) {
         result = loadCase->cS_minus1 >= 0.0 && loadCase->cS_plus1 >= 0.0;
-        PR->addDetail("With_F. 135", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("With_F. 135", "result135(" + QN(mFlangeNumber) + ")",
                       "cS_minus1 >= 0.0 And cS_plus1 >= 0.0",
                       static_cast<int>(result), "-",
                       QN(loadCase->cS_minus1) + " &gt;= 0.0 AND "
                       + QN(loadCase->cS_plus1) + " &gt;= 0.0", loadCaseNo);
     } else {
         result = loadCase->cS_minus2 >= 0.0 && loadCase->cS_plus2 >= 0.0;
-        PR->addDetail("With_F. 135", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("With_F. 135", "result135(" + QN(mFlangeNumber) + ")",
                       "cS_minus2 >= 0.0 And cS_plus2 >= 0.0",
                       static_cast<int>(result), "-",
                       QN(loadCase->cS_minus2) + " &gt;= 0.0 AND "
@@ -895,14 +895,14 @@ bool Flange::Is_PsiMaxMin_Valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = loadCase->PsiMax1 >= -1 && loadCase->PsiMin1 <= 1;
-        PR->addDetail("After_F. 144 Table 2", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 144 Table 2", "result144(" + QN(mFlangeNumber) + ")",
                       "PsiMax1 &gt;= -1 and PsiMin1 &lt;= 1",
                       static_cast<int>(result), "-", QN(loadCase->PsiMax1)
                       + " &gt;= -1 AND " + QN(loadCase->PsiMin1)
                       + " &lt;= 1", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = loadCase->PsiMax2 >= -1 && loadCase->PsiMin2 <= 1;
-        PR->addDetail("After_F. 144 Table 2", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 144 Table 2", "result144(" + QN(mFlangeNumber) + ")",
                       "PsiMax2 &gt;= -1 and PsiMin2 &lt;= 1",
                       static_cast<int>(result), "-", QN(loadCase->PsiMax2)
                       + " &gt;= -1 AND " + QN(loadCase->PsiMin2)
@@ -1189,14 +1189,14 @@ bool Flange::Is_PhiX_Valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = loadCase->PhiX1 <= 1.0;
-        PR->addDetail("After_F. 147", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 147", "result147(" + QN(mFlangeNumber) + ")",
                       "PhiX1 <= 1.0", static_cast<int>(result), "-",
                       QN(loadCase->PhiX1) + " <= 1.0", loadCaseNo);
     }
     else if (getFlangeNumber() == 2)
     {
         result = loadCase->PhiX2 <= 1.0;
-        PR->addDetail("After_F. 147", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 147", "result147(" + QN(mFlangeNumber) + ")",
                       "PhiX2 <= 1.0", static_cast<int>(result), "-",
                       QN(loadCase->PhiX2) + " <= 1.0", loadCaseNo);
     }

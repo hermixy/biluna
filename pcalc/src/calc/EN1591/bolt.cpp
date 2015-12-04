@@ -165,4 +165,24 @@ void Bolt::Calc_kB() {
                   + QN(dB2) + " + 0.5 * " + QN(mun) + " * " + QN(dn));
 }
 
+/**
+ * @brief Annex B, B.9 calculation of virtual friction factor,
+ * kB9 is kB excluding 0.5 * mun * dn
+ */
+void Bolt::Calc_kB9() {
+    if (pt <= 0.0) {
+        // from table B EN1591-2001 for ISO bolts/thread and Table A
+        pt = (dB0 - dBe) / 0.9382;
+        PR->addDetail("Before_F. 123 B.9", "pt", "(dB0 - dBe) / 0.9382",
+                  pt, "Nmm", "(" + QN(dB0) + " - " + QN(dBe)
+                      + ") / 0.9382");
+    }
+
+    kB9 = 0.159 * pt + 0.577 * mut * dB2;
+    PR->addDetail("Before_F. 123 B.9", "kB",
+                  "0.159 * pt + 0.577 * mut * dB2", kB, "-",
+                  "0.159 * " + QN(pt) + " + 0.577 * " + QN(mut) + " * "
+                  + QN(dB2));
+}
+
 END_NAMESPACE_BILUNA_CALC_EN1591

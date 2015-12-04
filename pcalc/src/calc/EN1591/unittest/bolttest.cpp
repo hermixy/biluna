@@ -16,6 +16,7 @@ void BoltTest::exec() {
     Calc_eta1minusTest();
     Calc_IBTest();
     Calc_kBTest();
+    Calc_kB9Test();
 }
 
 void BoltTest::setupTarget() {
@@ -123,6 +124,16 @@ void BoltTest::Calc_kBTest() {
     target->Calc_kB();
     areEqual(PR->getLastOutput(), "BoltTest::Calc_kBTest()",
              13.84415, target->kB);
+}
+
+void BoltTest::Calc_kB9Test() {
+    setupTarget();
+    target->pt = 3.1;
+    target->mut = 2.5;
+    target->dB2 = -7.3;
+    target->Calc_kB9();
+    areEqual(PR->getLastOutput(), "BoltTest::Calc_kB9Test()",
+             -10.03735, target->kB9);
 }
 
 END_NAMESPACE_BILUNA_CALC_EN1591

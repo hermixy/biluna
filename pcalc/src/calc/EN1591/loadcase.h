@@ -172,7 +172,7 @@ public:
     double PhiL2;
     double WQ1;
     double WQ2;
-    double MtB; // not used anymore
+    double MtBnom;
     double Mtnom;
     double Q_G;
     double Q_A;

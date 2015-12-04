@@ -971,26 +971,15 @@ void Assembly::Calc_Mtnom() {
 /**
  * @brief Formula B.9: Torsional moment during assembly in bolts,
  * only for loadcase = 0 with table B EN1591-2001 for ISO bolts/thread for pt
- * TODO: not used anymore
  */
-void Assembly::Calc_MtB() {
+void Assembly::Calc_MtBnom() {
     int loadCaseNo = 0;
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    // from table B EN1591-2001 for ISO bolts/thread and Table A
-    double pt = (mBolt->dB0 - mBolt->dBe) / 0.9382;
-    PR->addDetail("With_F. B.9", "pt", "(Bolt.dB0 - Bolt.dBe) / 0.9382",
-              pt, "Nmm", "(" + QN(mBolt->dB0) + " - " + QN(mBolt->dBe)
-                  + ") / 0.9382");
-    loadCase->MtB = (0.159 * pt + 0.577 * mBolt->mut * mBolt->dB2)
-            * mLoadCaseList->at(0)->F_Bnom / mFlange1->nB
-            * (1 + mBolt->etanplus);
-    PR->addDetail("With_F. B.9",
-              "MtB", "(0.159 * pt + 0.577 * mut * dB2) "
-              "* F_Bnom / Flange1.nB * (1 + etanplus)",
-              loadCase->MtB, "Nmm", "(0.159 * " + QN(pt) + " + 0.577 * "
-                  + QN(mBolt->mut) + " * " + QN(mBolt->dB2) + ") * "
-                  + QN(mLoadCaseList->at(0)->F_Bnom) + " / " + QN(mFlange1->nB)
-                  + " * (1 + " + QN(mBolt->etanplus) + ")");
+    loadCase->MtBnom = mBolt->kB9 * mLoadCaseList->at(0)->F_Bnom / mFlange1->nB;
+    PR->addDetail("Before_F. 123 B.9", "MtBnom", "kB9 * F_Bnom / nB",
+                  loadCase->MtBnom, "Nmm", QN(mBolt->kB9) + " * "
+                  + QN(mLoadCaseList->at(loadCaseNo)->F_Bnom) + " / "
+                  + QN(mFlange1->nB));
 }
 
 /**
