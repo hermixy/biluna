@@ -151,8 +151,8 @@ LEFT JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.i
 LEFT JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id
 WHERE suser.parent='{4ea4abad-f86a-4749-8016-acfe53171f82}'
 AND suser.id='XXX'
-AND userstart<=SUBSTR(CURRENT_TIMESTAMP, 1, 10)
-AND userend>=SUBSTR(CURRENT_TIMESTAMP, 1, 10)
+AND suser.start<=SUBSTR(CURRENT_TIMESTAMP, 1, 10)
+AND suser.end>=SUBSTR(CURRENT_TIMESTAMP, 1, 10)
 ORDER BY SUBSTR(persproject_idx, 39);
      */
 
@@ -180,8 +180,8 @@ ORDER BY SUBSTR(persproject_idx, 39);
             "LEFT JOIN db_permissiongroup AS pgroup ON SUBSTR(pgroup.group_idx,1,38)=sgroup.id "
             "LEFT JOIN db_permissionproject AS pproject ON pgroup.parent=pproject.id "
             "WHERE suser.id='";
-    qStr += userId + "' AND userstart<=SUBSTR(CURRENT_TIMESTAMP, 1, 10) "
-                     "AND userend>=SUBSTR(CURRENT_TIMESTAMP, 1, 10) "
+    qStr += userId + "' AND suser.start<=SUBSTR(CURRENT_TIMESTAMP, 1, 10) "
+                     "AND suser.end>=SUBSTR(CURRENT_TIMESTAMP, 1, 10) "
                      "ORDER BY SUBSTR(persproject_idx, 39);";
 
     if (!query.exec(qStr)) {
@@ -219,8 +219,8 @@ suser.start AS userstart,
 suser.end AS userend
 FROM db_systemuser AS suser
 WHERE suser.username='rutger'
-AND userstart<=SUBSTR(CURRENT_TIMESTAMP, 1, 10)
-AND userend>=SUBSTR(CURRENT_TIMESTAMP, 1, 10);
+AND suser.start<=SUBSTR(CURRENT_TIMESTAMP, 1, 10)
+AND suser.end>=SUBSTR(CURRENT_TIMESTAMP, 1, 10);
     */
 
     QSqlQuery query(DB_MODELFACTORY->getDatabase());
@@ -233,8 +233,8 @@ AND userend>=SUBSTR(CURRENT_TIMESTAMP, 1, 10);
             "suser.end AS userend "
             "FROM db_systemuser AS suser "
             "WHERE suser.username='";
-    qStr += userName + "' AND userstart<=SUBSTR(CURRENT_TIMESTAMP, 1, 10) "
-                       "AND userend>=SUBSTR(CURRENT_TIMESTAMP, 1, 10);";
+    qStr += userName + "' AND suser.start<=SUBSTR(CURRENT_TIMESTAMP, 1, 10) "
+                       "AND suser.end>=SUBSTR(CURRENT_TIMESTAMP, 1, 10);";
 
     if (!query.exec(qStr)) {
         RB_DEBUG->error(

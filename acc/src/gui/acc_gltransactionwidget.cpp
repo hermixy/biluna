@@ -1330,13 +1330,13 @@ void ACC_GlTransactionWidget::on_ileAllocation_clicked() {
         RB_String tableName = "acc_customer";
         RB_String custSuppId = obj->getIdValue("debtor_idx").toString();
 
-        if (custSuppId.isEmpty()) {
+        if (!ACC_MODELFACTORY->isValidId(custSuppId)) {
             tableName = "acc_supplier";
             custSuppId = obj->getIdValue("creditor_idx").toString();
         }
 
-        if (!custSuppId.isEmpty()) {
-            custSuppId = custSuppId.remove(38, custSuppId.length());
+        if (ACC_MODELFACTORY->isValidId(custSuppId)) {
+            // custSuppId = custSuppId.remove(38, custSuppId.length());
 
             // check if a bank account number already exists
             ACC_SqlCommonFunctions f;

@@ -1103,14 +1103,20 @@ bool DB_HtmlEditorWidget::saveFile(const RB_String &fn) {
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
     QTextStream out(&file);
+
     if (tabWidget->currentIndex() == 0) {
-        QString* html = new QString();
-        webView->page()->toHtml([html] (const QString& cbValue) { *html = cbValue; });
-        out << html;
-        delete html;
-    } else {
-        out << plainTextEdit->toPlainText();
+        // Does not work because html does not exist at call back
+        //    QString* html = new QString();
+        //    webView->page()->toHtml([html] (const QString& cbValue) { *html = cbValue; });
+        //    out << html;
+        //    delete html;
+        QWebEnginePage* page = webView->page();
+        page->toHtml([this]
+                        (const QString& result)
+                        { plainTextEdit->setPlainText(result); });
     }
+
+    out << plainTextEdit->toPlainText();
     QApplication::restoreOverrideCursor();
 
     // original
