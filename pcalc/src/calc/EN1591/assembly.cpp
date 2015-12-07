@@ -729,7 +729,6 @@ void Assembly::Calc_F_B0av() {
 
 /**
  * @brief Formula 112 113 117 118: Required nominal bolt force,
- * F_Bspec is set by the user
  */
 void Assembly::Calc_F_B0nom() {
     int loadCaseNo = 0;

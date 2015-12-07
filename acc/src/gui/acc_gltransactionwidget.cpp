@@ -1324,7 +1324,7 @@ void ACC_GlTransactionWidget::on_ileAllocation_clicked() {
     // TODO: the ACC does not handle multiple bank accounts
     RB_String fieldName = "bankaccountnumber";
     RB_String bankAccount =
-            mItemTransModel->getCurrentValue(fieldName).toString();
+            mItemTransModel->getCurrentValue(fieldName).toString().trimmed();
 
     if (mTransType == ACC2::TransBankCash && !bankAccount.isEmpty()) {
         RB_String tableName = "acc_customer";
@@ -1342,7 +1342,8 @@ void ACC_GlTransactionWidget::on_ileAllocation_clicked() {
             ACC_SqlCommonFunctions f;
             RB_String existingBankAccount =
                     f.selectFromWhereId(fieldName,
-                                        tableName, custSuppId).toString();
+                                        tableName,
+                                        custSuppId).toString().trimmed();
             if (existingBankAccount.isEmpty()) {
                 // set bank account number based on information from the payment
                 f.update(tableName, fieldName, bankAccount, custSuppId);
