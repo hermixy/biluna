@@ -56,7 +56,7 @@ public:
     void Calc_F_GInitial();
     void Calc_dGe();
     void Calc_bGi(bool isFirstApproximation = false);
-    void Calc_Q_G();
+    void Calc_Q_G(int loadCaseNo);
     void Calc_F_Q(int loadCaseNo);
     void Calc_F_R(int loadCaseNo);
     void Calc_dUI(int loadCaseNo);

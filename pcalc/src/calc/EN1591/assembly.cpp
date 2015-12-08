@@ -206,14 +206,16 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
 
 /**
  * @brief Formula 57: Initial gasket stress at assembly
+ * and the gasket stress in case of other loadcases
  */
-void Assembly::Calc_Q_G() {
-    int loadCaseNo = 0;
+void Assembly::Calc_Q_G(int loadCaseNo) {
+//    int loadCaseNo = 0;
     mLoadCaseList->at(loadCaseNo)->Q_G =
             mLoadCaseList->at(loadCaseNo)->F_G / mGasket->AGe;
     PR->addDetail("Formula 57", "Q_G", "F_G / AGe",
-                  mLoadCaseList->at(0)->Q_G, "N/mm^2",
-                  QN(mLoadCaseList->at(0)->F_G) + " / " + QN(mGasket->AGe));
+                  mLoadCaseList->at(loadCaseNo)->Q_G, "N/mm^2",
+                  QN(mLoadCaseList->at(loadCaseNo)->F_G) + " / "
+                  + QN(mGasket->AGe), loadCaseNo);
 }
 
 /**

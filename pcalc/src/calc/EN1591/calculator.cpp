@@ -311,7 +311,7 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
         assembly->mGasket->dGe = assembly->mGasket->dGt;
         assembly->mGasket->bGe = assembly->mGasket->bGt;
         assembly->mGasket->Calc_AGe();
-        assembly->Calc_Q_G();
+        assembly->Calc_Q_G(0);
         assembly->mGasket->Calc_E_G(0);
     }
     // HACK: End
@@ -322,7 +322,7 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
     assembly->mGasket->Calc_bGe();
     assembly->Calc_dGe();
     assembly->mGasket->Calc_AGe();
-    assembly->Calc_Q_G();
+    assembly->Calc_Q_G(0);
     assembly->mGasket->Calc_E_G(loadCaseNo);
 
     assembly->mFlange1->Calc_d7min(); // loose flange only
@@ -365,7 +365,7 @@ void Calculator::F90_to_102(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_R(loadCaseNo);
 //    assembly->Calc_lB(); already before Formula 42
     assembly->Calc_dUI(loadCaseNo);
-    assembly->Calc_Q_G(); // for determining EG Formula 100
+    assembly->Calc_Q_G(loadCaseNo); // for determining EG Formula 100
     assembly->mGasket->Calc_E_G(loadCaseNo);
     assembly->Calc_YB(loadCaseNo);
     assembly->Calc_YG(loadCaseNo);
@@ -411,6 +411,7 @@ void Calculator::F119_to_119(Assembly* assembly) {
 void Calculator::F120_to_122(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_G(loadCaseNo);
     assembly->Calc_F_B(loadCaseNo);
+    assembly->Calc_Q_G(loadCaseNo); // 3rd time?
 }
 
 void Calculator::F123_to_151(Assembly* assembly, int loadCaseNo) {

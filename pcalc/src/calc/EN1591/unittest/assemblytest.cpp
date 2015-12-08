@@ -958,7 +958,7 @@ void AssemblyTest::Calc_Q_GTest() {
     LoadCase* loadCase0 = target->mLoadCaseList->at(i);
     loadCase0->F_G = 1.1;
     target->mGasket->AGe = 2.2;
-    target->Calc_Q_G();
+    target->Calc_Q_G(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_GTest()", 0.5,
              loadCase0->Q_G);
     deleteTarget();
