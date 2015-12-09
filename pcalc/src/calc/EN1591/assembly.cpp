@@ -1188,11 +1188,11 @@ void Assembly::Calc_F_BImaxmin(int loadCaseNo) {
     if (loadCaseNo == 0) {
         loadCaseI->F_Bmin = loadCase0->F_Bnom * (1 - mBolt->etanminus);
         loadCaseI->F_Bmax = loadCase0->F_Bnom * (1 + mBolt->etanplus);
-        PR->addDetail("After_F. 151 C.3", "F_B0min", "F_B0nom * (1 - etanminus)",
+        PR->addDetail("After_F. 151 C.3", "F_Bmin", "F_B0nom * (1 - etanminus)",
                       loadCaseI->F_Bmin, "N",
                       QN(loadCase0->F_Bnom) + " * (1 - "
                       + QN(mBolt->etanminus) + ")", loadCaseNo);
-        PR->addDetail("After_F. 151 C.4", "F_B0max", "F_B0nom * (1 + etanplus)",
+        PR->addDetail("After_F. 151 C.4", "F_Bmax", "F_B0nom * (1 + etanplus)",
                       loadCaseI->F_Bmax, "N",
                       QN(loadCase0->F_Bnom) + " * (1 + "
                       + QN(mBolt->etanplus) + ")", loadCaseNo);
@@ -1201,11 +1201,11 @@ void Assembly::Calc_F_BImaxmin(int loadCaseNo) {
                 + (loadCaseI->F_Q + loadCaseI->F_R);
         loadCaseI->F_Bmax = loadCaseI->F_Gmax
                 + (loadCaseI->F_Q + loadCaseI->F_R);
-        PR->addDetail("After_F. 151 C.9", "F_BImin", "F_GImin + (F_QI + F_RI)",
+        PR->addDetail("After_F. 151 C.9", "F_Bmin", "F_GImin + (F_QI + F_RI)",
                       loadCaseI->F_Bmin, "N",
                       QN(loadCaseI->F_Gmin) + " + (" + QN(loadCaseI->F_Q)
                       + " + " + QN(loadCaseI->F_R) + ")", loadCaseNo);
-        PR->addDetail("After_F. 151 C.10", "F_BImax", "F_GImax + (F_QI + F_RI)",
+        PR->addDetail("After_F. 151 C.10", "F_Bmax", "F_GImax + (F_QI + F_RI)",
                       loadCaseI->F_Bmax, "N",
                       QN(loadCaseI->F_Gmax) + " + (" + QN(loadCaseI->F_Q)
                       + " + " + QN(loadCaseI->F_R) + ")", loadCaseNo);
@@ -1225,13 +1225,23 @@ void Assembly::Calc_F_GImaxmin(int loadCaseNo) {
     if (loadCaseNo == 0) {
         loadCaseI->F_Gmin = loadCaseI->F_Bmin - loadCaseI->F_R;
         loadCaseI->F_Gmax = loadCaseI->F_Bmax - loadCaseI->F_R;
-        PR->addDetail("After_F. 151 C.5", "F_G0min", "F_B0min - F_R",
+        PR->addDetail("After_F. 151 C.5", "F_Gmin", "F_B0min - F_R",
                       loadCaseI->F_Gmin, "N",
                       QN(loadCaseI->F_Bmin) + " - " + QN(loadCaseI->F_R),
                       loadCaseNo);
-        PR->addDetail("After_F. 151 C.6", "F_G0max", "F_B0max - F_R",
+        PR->addDetail("After_F. 151 C.6", "F_Gmax", "F_B0max - F_R",
                       loadCaseI->F_Gmax, "N",
                       QN(loadCaseI->F_Bmax) + " - " + QN(loadCaseI->F_R),
+                      loadCaseNo);
+        loadCaseI->Q_Gmin = loadCaseI->F_Gmin / mGasket->AGe;
+        loadCaseI->Q_Gmax = loadCaseI->F_Gmax / mGasket->AGe;
+        PR->addDetail("After_F. 151 C.5", "Q_Gmin", "F_Bmin / AGe",
+                      loadCaseI->Q_Gmin, "N/mm2",
+                      QN(loadCaseI->F_Gmin) + " / " + QN(mGasket->AGe),
+                      loadCaseNo);
+        PR->addDetail("After_F. 151 C.6", "Q_Gmax", "F_Bmax / AGe",
+                      loadCaseI->Q_Gmax, "N",
+                      QN(loadCaseI->F_Gmax) + " / " + QN(mGasket->AGe),
                       loadCaseNo);
     } else {
         double tmpF_G = loadCaseI->F_Q * loadCaseI->Y_Q +
@@ -1246,14 +1256,24 @@ void Assembly::Calc_F_GImaxmin(int loadCaseNo) {
                 + " - " + QN(loadCase0->F_R) + " * " + QN(loadCase0->Y_R)
                 + ") + " + QN(loadCaseI->dUI) + ") - " + QN(loadCaseI->delta_eGc)
                 + ") / " + QN(loadCaseI->Y_G);
-        PR->addDetail("After_F. 151 C.7", "F_GImin", "(F_G0min * Y_G0 - (F_QI * Y_QI "
+        PR->addDetail("After_F. 151 C.7", "F_Gmin", "(F_G0min * Y_G0 - (F_QI * Y_QI "
                       "+ (F_RI * Y_RI - F_R0 * Y_R0) + dUI) - delta_eGcI) / Y_GI",
                       loadCaseI->F_Gmin, "N", "(" + QN(loadCase0->F_Gmin)
                       + " * " + QN(loadCase0->Y_G) + str, loadCaseNo);
-        PR->addDetail("After_F. 151 C.8", "F_GImax", "(F_G0max * Y_G0 - (F_QI * Y_QI "
+        PR->addDetail("After_F. 151 C.8", "F_Gmax", "(F_G0max * Y_G0 - (F_QI * Y_QI "
                       "+ (F_RI * Y_RI - F_R0 * Y_R0) + dUI) - delta_eGcI) / Y_GI",
                       loadCaseI->F_Gmax, "N", "(" + QN(loadCase0->F_Gmax)
                       + " * " + QN(loadCase0->Y_G) + str, loadCaseNo);
+        loadCaseI->Q_Gmin = loadCaseI->F_Gmin / mGasket->AGe;
+        loadCaseI->Q_Gmax = loadCaseI->F_Gmax / mGasket->AGe;
+        PR->addDetail("After_F. 151 C.7", "Q_Gmin", "F_Bmin / AGe",
+                      loadCaseI->Q_Gmin, "N/mm2",
+                      QN(loadCaseI->F_Gmin) + " / " + QN(mGasket->AGe),
+                      loadCaseNo);
+        PR->addDetail("After_F. 151 C.8", "Q_Gmax", "F_Bmax / AGe",
+                      loadCaseI->Q_Gmax, "N",
+                      QN(loadCaseI->F_Gmax) + " / " + QN(mGasket->AGe),
+                      loadCaseNo);
     }
 }
 
@@ -1287,34 +1307,34 @@ void Assembly::Calc_ThetaFmaxmin(int loadCaseNo) {
             + QN(mFlange2->hP) + " + " + QN(mFlange2->hQ) + ") + "
             + QN(loadCase->F_R) + " *(" + QN(mFlange2->hH) + " + "
             + QN(mFlange2->hR) + ")";
-    PR->addDetail("After_F. 151 C.1", "ThetaF1min", "Flange1.ZF / EF1 * (F_Gmin * hG1 "
-                  "+ F_Q * (hH1 - Flange1.hP + Flange1.hQ) "
-                  "+ F_R * (hH1 + Flange1.hR))",
+    PR->addDetail("After_F. 151 C.1", "ThetaF1min",
+                  "radToDeg * ZF1 / EF1 * (F_Gmin * hG1 "
+                  "+ F_Q * (hH1 - hP1 + hQ1) + F_R * (hH1 + hR1))",
                   radToDeg * loadCase->ThetaF1min, "degree",
-                  QN(mFlange1->ZF) + " / " + QN(loadCase->EF1) + " * ("
-                  + QN(loadCase->F_Gmin) + " * " + QN(mFlange1->hG)
-                  + " + " + str1 + ")", loadCaseNo);
-    PR->addDetail("After_F. 151 C.1", "ThetaF1max", "Flange1.ZF / EF1 * (F_Gmax * hG1 "
-                  "+ F_Q * (hH1 - Flange1hP + Flange1.hQ) "
-                  "+ F_R * (hH1 + Flange1.hR))",
+                  QN(radToDeg) + " * " + QN(mFlange1->ZF) + " / "
+                  + QN(loadCase->EF1) + " * (" + QN(loadCase->F_Gmin) + " * "
+                  + QN(mFlange1->hG) + " + " + str1 + ")", loadCaseNo);
+    PR->addDetail("After_F. 151 C.1", "ThetaF1max",
+                  "radToDeg * ZF1 / EF1 * (F_Gmax * hG1 "
+                  "+ F_Q * (hH1 - hP1 + hQ1) + F_R * (hH1 + hR1))",
                   radToDeg * loadCase->ThetaF1max, "degree",
-                  QN(mFlange1->ZF) + " / " + QN(loadCase->EF1) + " * ("
-                  + QN(loadCase->F_Gmax) + " * " + QN(mFlange1->hG)
-                  + " + " + str1 + ")", loadCaseNo);
-    PR->addDetail("After_F. 151 C.2", "ThetaF2min", "Flange2.ZF / EF2 * (F_Gmin * .hG2 "
-                  "+ F_Q * (hH2 - Flange2.hP + Flange2.hQ) "
-                  "+ F_R * (hH2 + Flange2.hR))",
+                  QN(radToDeg) + " * " + QN(mFlange1->ZF) + " / "
+                  + QN(loadCase->EF1) + " * (" + QN(loadCase->F_Gmax) + " * "
+                  + QN(mFlange1->hG) + " + " + str1 + ")", loadCaseNo);
+    PR->addDetail("After_F. 151 C.2", "ThetaF2min",
+                  "radToDeg * ZF2 / EF2 * (F_Gmin * hG2 "
+                  "+ F_Q * (hH2 - hP2 + hQ2) + F_R * (hH2 + hR2))",
                   radToDeg * loadCase->ThetaF2min, "degree",
-                  QN(mFlange2->ZF) + " / " + QN(loadCase->EF2) + " * ("
-                  + QN(loadCase->F_Gmin) + " * " + QN(mFlange2->hG)
-                  + " + " + str2 + ")", loadCaseNo);
-    PR->addDetail("After_F. 151 C.2", "ThetaF2max", "Flange2.ZF / EF2 * (F_Gmax * hG2 "
-                  "+ F_Q * (hH2 - Flange2.hP + Flange2.hQ) "
-                  "+ F_R * (hH2 + Flange2.hR))",
+                  QN(radToDeg) + " * " + QN(mFlange2->ZF) + " / "
+                  + QN(loadCase->EF2) + " * (" + QN(loadCase->F_Gmin) + " * "
+                  + QN(mFlange2->hG) + " + " + str2 + ")", loadCaseNo);
+    PR->addDetail("After_F. 151 C.2", "ThetaF2max",
+                  "radToDeg * ZF2 / EF2 * (F_Gmax * hG2 "
+                  "+ F_Q * (hH2 - hP2 + hQ2) + F_R * (hH2 + hR2))",
                   radToDeg * loadCase->ThetaF2max, "degree",
-                  QN(mFlange2->ZF) + " / " + QN(loadCase->EF2) + " * ("
-                  + QN(loadCase->F_Gmax) + " * " + QN(mFlange2->hG)
-                  + " + " + str2 + ")", loadCaseNo);
+                  QN(radToDeg) + " * " + QN(mFlange2->ZF) + " / "
+                  + QN(loadCase->EF2) + " * (" + QN(loadCase->F_Gmax) + " * "
+                  + QN(mFlange2->hG) + " + " + str2 + ")", loadCaseNo);
 }
 
 /**
@@ -1331,13 +1351,13 @@ void Assembly::Calc_ThetaLmaxmin(int loadCaseNo) {
         loadCase->ThetaL1max = mFlange1->ZL / loadCase->EL1
                 * (loadCase->F_Bmax * mFlange1->hL);
         PR->addDetail("After_F. 151 C.2", "ThetaL1min",
-                      "radToDeg * Flange1.ZL / EL1 * (F_Bmin * hL1)",
+                      "radToDeg * ZL1 / EL1 * (F_Bmin * hL1)",
                       radToDeg * loadCase->ThetaL1min, "degree",
                       QN(radToDeg) + " * " + QN(mFlange1->ZL) + " / "
                       + QN(loadCase->EL1) + " * (" + QN(loadCase->F_Bmin)
                       + " * " + QN(mFlange1->hL) + ")", loadCaseNo);
         PR->addDetail("After_F. 151 C.2", "ThetaL1max",
-                      "radToDeg * Flange1.ZL / EL1 * (F_Bmax * hL1)",
+                      "radToDeg * ZL1 / EL1 * (F_Bmax * hL1)",
                   radToDeg * loadCase->ThetaL1max, "degree",
                       QN(radToDeg) + " * " + QN(mFlange1->ZL) + " / "
                       + QN(loadCase->EL1) + " * (" + QN(loadCase->F_Bmax)
@@ -1357,13 +1377,13 @@ void Assembly::Calc_ThetaLmaxmin(int loadCaseNo) {
         loadCase->ThetaL2max = mFlange2->ZL / loadCase->EL2
                 * (loadCase->F_Bmax * mFlange2->hL);
         PR->addDetail("After_F. 151 C.2",
-                  "ThetaL2min", "radToDeg * Flange2.ZL / EL2 * (F_Bmin * hL2)",
+                  "ThetaL2min", "radToDeg * ZL2 / EL2 * (F_Bmin * hL2)",
                   radToDeg * loadCase->ThetaL2min, "degree",
                       QN(radToDeg) + " * " + QN(mFlange2->ZL) + " / "
                       + QN(loadCase->EL2) + " * (" + QN(loadCase->F_Bmin)
                       + " * " + QN(mFlange2->hL) + ")", loadCaseNo);
         PR->addDetail("After_F. 151 C.2",
-                  "ThetaL2max", "radToDeg * Flange2.ZL / EL2 * (F_Bmax * hL2)",
+                  "ThetaL2max", "radToDeg * ZL2 / EL2 * (F_Bmax * hL2)",
                   radToDeg * loadCase->ThetaL2max, "degree",
                       QN(radToDeg) + " * " + QN(mFlange2->ZL) + " / "
                       + QN(loadCase->EL2) + " * (" + QN(loadCase->F_Bmax)

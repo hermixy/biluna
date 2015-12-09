@@ -62,23 +62,12 @@ public:
 
     double EGm;
     double E_G;
-//    double AGe; //
-//    double bGe; //
-//    double dGe; //
-//    double AQ; //
     double x;
     double F_R;
     double F_Rnegative;
     double F_Rpositive;
     double F_Q;
     double dUI;
-//    double d7; //
-//    double hG1;
-//    double hG2;
-//    double hH1;
-//    double hH2;
-//    double hL1;
-//    double hL2;
 
     double P_QR;
     // gasket creep delta ecG in Fomula 105, 106 and 120, 121 and C.8, C.9
@@ -174,8 +163,10 @@ public:
     double WQ2;
     double MtBnom;
     double Mtnom;
-    double Q_G;
     double Q_A;
+    double Q_G;
+    double Q_Gmin;
+    double Q_Gmax;
     double Q_0min;
     double Q_minL;
     double Q_sminL;

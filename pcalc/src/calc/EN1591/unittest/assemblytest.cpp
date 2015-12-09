@@ -871,11 +871,16 @@ void AssemblyTest::Calc_F_GImaxminTest() {
     target->mLoadCaseList->at(i)->F_Bmin = 1.1;
     target->mLoadCaseList->at(i)->F_Bmax = 1.2;
     target->mLoadCaseList->at(i)->F_R = 1.3;
+    target->mGasket->AGe = 15.3;
     target->Calc_F_GImaxmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.2,
              target->mLoadCaseList->at(i)->F_Gmin);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.1,
              target->mLoadCaseList->at(i)->F_Gmax);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
+             -0.01307189542483660131, target->mLoadCaseList->at(i)->Q_Gmin);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
+             -0.00653594771241830065, target->mLoadCaseList->at(i)->Q_Gmax);
     i = 1;
     target->mLoadCaseList->at(0)->F_Gmin = 2.1;
     target->mLoadCaseList->at(0)->Y_G = 3.1;
@@ -889,11 +894,16 @@ void AssemblyTest::Calc_F_GImaxminTest() {
     target->mLoadCaseList->at(i)->dUI = 2.8;
     target->mLoadCaseList->at(i)->Y_G = 2.9;
     target->mLoadCaseList->at(i)->delta_eGc = 0.0;
+    target->mGasket->AGe = 3.5;
     target->Calc_F_GImaxmin(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.11379310344827587,
-             target->mLoadCaseList->at(i)->F_Gmin);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.0068965517241379309,
-             target->mLoadCaseList->at(i)->F_Gmax);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
+             -0.11379310344827587, target->mLoadCaseList->at(i)->F_Gmin);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
+             -0.0068965517241379309, target->mLoadCaseList->at(i)->F_Gmax);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
+             -0.03251231527093596286, target->mLoadCaseList->at(i)->Q_Gmin);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
+             -0.00197044334975369454, target->mLoadCaseList->at(i)->Q_Gmax);
     deleteTarget();
 }
 
