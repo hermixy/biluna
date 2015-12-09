@@ -46,10 +46,12 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("d31", "mm", 0.0, RB2::MemberDouble);
     addMember("d41", "mm", 0.0, RB2::MemberDouble);
     addMember("dx1", "mm", 0.0, RB2::MemberDouble);
-    addMember("ef1", "mm", 0.0, RB2::MemberDouble);
-    addMember("eft1", "mm", 0.0, RB2::MemberDouble);
-    addMember("ep1", "mm", 0.0, RB2::MemberDouble);
+    addMember("drf1", "mm", 0.0, RB2::MemberDouble);
+    addMember("drec1", "mm", 0.0, RB2::MemberDouble);
+    addMember("efb1", "mm", 0.0, RB2::MemberDouble);
     addMember("erf1", "mm", 0.0, RB2::MemberDouble);
+    addMember("erec1", "mm", 0.0, RB2::MemberDouble);
+    addMember("eq1", "mm", 0.0, RB2::MemberDouble);
     addMember("ex1", "mm", 0.0, RB2::MemberDouble);
     // blind only
     addMember("d91", "mm", 0.0, RB2::MemberDouble);
@@ -77,10 +79,12 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("d32", "mm", 0.0, RB2::MemberDouble);
     addMember("d42", "mm", 0.0, RB2::MemberDouble);
     addMember("dx2", "mm", 0.0, RB2::MemberDouble);
-    addMember("ef2", "mm", 0.0, RB2::MemberDouble);
-    addMember("eft2", "mm", 0.0, RB2::MemberDouble);
-    addMember("ep2", "mm", 0.0, RB2::MemberDouble);
+    addMember("drf2", "mm", 0.0, RB2::MemberDouble);
+    addMember("drec2", "mm", 0.0, RB2::MemberDouble);
+    addMember("efb2", "mm", 0.0, RB2::MemberDouble);
     addMember("erf2", "mm", 0.0, RB2::MemberDouble);
+    addMember("erec2", "mm", 0.0, RB2::MemberDouble);
+    addMember("eq2", "mm", 0.0, RB2::MemberDouble);
     addMember("ex2", "mm", 0.0, RB2::MemberDouble);
     // blind only
     addMember("d92", "mm", 0.0, RB2::MemberDouble);

@@ -16,10 +16,10 @@ Flange_Loose::~Flange_Loose() {
  * @return true if flange is valid
  */
 bool Flange_Loose::Is_flange_Valid() {
-    QString str = "0.2 <= bF / eF AND 0.2 <= bL / eL AND bL / eL <= 5.0";
-    QString strVal = "0.2 <= " + QN(bF) + " / " + QN(eF) + " AND 0.2 <= "
+    QString str = "0.2 &lt;= bF / eF AND 0.2 &lt;= bL / eL AND bL / eL &lt;= 5.0";
+    QString strVal = "0.2 &lt;= " + QN(bF) + " / " + QN(eF) + " AND 0.2 &lt;= "
             + QN(bL) + " / " + QN(eL) + " AND "
-            + QN(bL) + " / " + QN(eL) + " <= 5.0";
+            + QN(bL) + " / " + QN(eL) + " &lt;= 5.0";
 
     if (0.2 <= bF / eF && 0.2 <= bL / eL && bL / eL <= 5.0) {
 
@@ -30,7 +30,7 @@ bool Flange_Loose::Is_flange_Valid() {
                               "result1(" + QN(mFlangeNumber) + ")",
                               str + " AND cos(phiS) >= 1 / (1 + 0.01 * dS / eS)",
                               1, "-", strVal + " AND cos(" + QN(mShell->phiS)
-                              + ") >= 1 / (1 + 0.01 * " + QN(mShell->dS)
+                              + ") &gt;= 1 / (1 + 0.01 * " + QN(mShell->dS)
                               + " / " + QN(mShell->eS) + ")");
                 return true;
             }
@@ -68,13 +68,23 @@ void Flange_Loose::Calc_dF() {
 }
 
 /**
- * @brief Formula 13 alternative: Area for effective axial thickness of flange
+ * @brief Before Formula 13: Area for effective axial thickness of flange
  */
 void Flange_Loose::Calc_AF() {
-    AF = (d8 - d0) * eF / 2;
-    PR->addDetail("Formula 13", "AF(" + QN(mFlangeNumber) + ")",
-                  "(d8 - d0) * eF / 2", AF, "mm^2",
-                  "(" + QN(d8) + " - " + QN(d0) + ") * " + QN(eF) + " / 2");
+    AF = (d8 - d0) * eFb / 2;
+    PR->addDetail("Before F. 13", "AF(" + QN(mFlangeNumber) + ")",
+                  "(d8 - d0) * eFb / 2", AF, "mm^2",
+                  "(" + QN(d8) + " - " + QN(d0) + ") * " + QN(eFb) + " / 2");
+}
+
+/**
+ * @brief Formula 13: Area for effective axial thickness of flange
+ */
+void Flange_Loose::Calc_eF() {
+    eF = 2 * AF / (d8 - d0);
+    PR->addDetail("Formula 13", "eF(" + QN(mFlangeNumber) + ")",
+                  "2 * AF / (d8 - d0)", AF, "mm^2",
+                  "2 * " + QN(AF) + " / (" + QN(d8) + " - " + QN(d0) + ")");
 }
 
 /**
@@ -98,13 +108,23 @@ void Flange_Loose::Calc_dL() {
 }
 
 /**
- * @brief Formula 16: Effective axial thickness loose flange
+ * @brief Before Formula 16: Effective area loose flange
  */
 void Flange_Loose::Calc_AL() {
     AL = (d4 - d6) * eL / 2;
-    PR->addDetail("Formula 16", "AL(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Before F. 16", "AL(" + QN(mFlangeNumber) + ")",
                   "(d4 - d6) * eL / 2", AL, "mm^2",
                   "(" + QN(d4) + " - " + QN(d6) + ") * " + QN(eL) + " / 2");
+}
+
+/**
+ * @brief Formula 16: Effective axial thickness loose flange
+ */
+void Flange_Loose::Calc_eL() {
+    eL = 2 * AL / (d4 - d6);
+    PR->addDetail("Formula 16", "eL(" + QN(mFlangeNumber) + ")",
+                  "2 * AL / (d4 - d6)", eL, "mm^2",
+                   "2 * " + QN(AL) + " / (" + QN(d4) + " - " + QN(d6) + ")");
 }
 
 /**

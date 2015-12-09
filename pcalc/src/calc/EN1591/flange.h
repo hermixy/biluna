@@ -36,10 +36,13 @@ public:
     double d0;
     double d3;
     double d4;
+    double dREC;
+    double dRF;
     double dX; // in case of groove
-    double eF;
-    double eFt;
-    double eP;
+    double eFb;
+    double eREC;
+    double eRF;
+    double eQ;
     double eX; // in case of groove
     double temp_d7;
 
@@ -54,7 +57,6 @@ public:
     // Integral loose only
     double e1;
     double e2;
-    double eRF; // height raised face
     double lH;
 
     // Loose only
@@ -86,7 +88,9 @@ public:
     double pB;
     double d5e;
     double d3e;
-    double eQ;
+    double eF;
+    double eFt;
+    double eP;
     double bF;
     double dF;
     double AF;
@@ -135,26 +139,29 @@ public:
      * @returns true if flange is valid
      */
     virtual bool Is_flange_Valid() = 0;
-    void Calc_eQ();
-    void Calc_pB();
-    void Calc_d5e();
-    void Calc_d3e();
-    void Calc_AB();
-    void Calc_XB();
-    void Calc_dK1();
-    void Calc_dK2();
-    void Calc_XW();
+    virtual void Calc_eP();
+    virtual void Calc_eFt();
+    virtual void Calc_pB();
+    virtual void Calc_d5e();
+    virtual void Calc_d3e();
+    virtual void Calc_AB();
+    virtual void Calc_XB();
+    virtual void Calc_dK1();
+    virtual void Calc_dK2();
+    virtual void Calc_XW();
     virtual void Calc_hP();
-    void Calc_etanplus();
-    void Calc_etanminus();
+    virtual void Calc_etanplus();
+    virtual void Calc_etanminus();
 
     virtual void Calc_bF() = 0;
     virtual void Calc_dF() = 0;
-    virtual void Calc_AF() = 0;
+    virtual void Calc_AF();
+    virtual void Calc_eF();
 
     virtual void Calc_bL() = 0;
     virtual void Calc_dL() = 0;
     virtual void Calc_AL() = 0;
+    virtual void Calc_eL();
 
     virtual void Calc_beta();
 

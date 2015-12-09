@@ -186,9 +186,6 @@ void Calculator::Loop_F55_to_108(Assembly* assembly) {
 }
 
 void Calculator::F3_to_24(Assembly* assembly) {
-    assembly->mFlange1->Calc_eQ();
-    assembly->mFlange2->Calc_eQ();
-
     assembly->mFlange1->Calc_pB();
     assembly->mFlange2->Calc_pB();
     assembly->mFlange1->Calc_d5e();
@@ -200,16 +197,28 @@ void Calculator::F3_to_24(Assembly* assembly) {
     assembly->mFlange2->Calc_bF();
     assembly->mFlange1->Calc_dF();
     assembly->mFlange2->Calc_dF();
-    assembly->mFlange1->Calc_AF();
-    assembly->mFlange2->Calc_AF();
     assembly->mFlange1->Calc_bL();
     assembly->mFlange2->Calc_bL();
     assembly->mFlange1->Calc_dL();
     assembly->mFlange2->Calc_dL();
+
+    assembly->mFlange1->Calc_AF();
+    assembly->mFlange2->Calc_AF();
     assembly->mFlange1->Calc_AL();
     assembly->mFlange2->Calc_AL();
+
+    assembly->mFlange1->Calc_eFt();
+    assembly->mFlange2->Calc_eFt();
+    assembly->mFlange1->Calc_eF();
+    assembly->mFlange2->Calc_eF();
+    assembly->mFlange1->Calc_eL();
+    assembly->mFlange2->Calc_eL();
+    assembly->mFlange1->Calc_eP();
+    assembly->mFlange2->Calc_eP();
+
     bool res = assembly->mFlange1->Is_flange_Valid();
     res = assembly->mFlange2->Is_flange_Valid(); // moved to before beta calculation
+
     assembly->mFlange1->Calc_beta();
     assembly->mFlange2->Calc_beta();
     assembly->mFlange1->Calc_eE();

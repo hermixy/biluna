@@ -103,7 +103,9 @@ void PCALC_Report::addDetail(const QString& formulaNumber,
 
     QStringList formulaStrList = formulaNumber.split(" ");
     if (formulaStrList.size() > 1) {
-        int formulaNo = formulaStrList.at(1).toInt();
+        QString formulaStr = formulaStrList.at(1);
+        formulaStr = formulaStr.remove(","); // remove comma if any
+        int formulaNo = formulaStr.toInt();
 
         if ((mReportType == 2 || mReportType == 3)
                 && ((formulaNo < mFormulaFrom && mFormulaFrom > 0)

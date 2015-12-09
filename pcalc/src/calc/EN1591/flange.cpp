@@ -25,16 +25,18 @@ Flange_IN::Flange_IN(int flangeNo) : RB_Object() {
     // depends on type of flange
 
     nB = 0;
-    d3 = 0;
     d0 = 0;
+    d3 = 0;
     d4 = 0;
-    temp_d7 = 0;
-    eF = 0;
-    eFt = 0;
-    eP = 1;
     dX = 0;
+    dREC = 0;
+    dRF = 0;
+    eFb = 0;
+    eREC = 0;
     eRF = 0;
+    eQ = 0;
     eX = 0;
+    temp_d7 = 0;
 
     // Blind only
     d9 = 0;
@@ -86,7 +88,9 @@ Flange_OUT::Flange_OUT(int flangeNo) : Flange_IN(flangeNo) {
     pB = 0.0;
     d5e = 0.0;
     d3e = 0.0;
-    eQ = 0.0;
+    eF = 0.0;
+    eFt = 0.0;
+    eP = 0.0;
     bF = 0.0;
     dF = 0.0;
     AF = 0.0;
@@ -124,13 +128,22 @@ Flange_OUT::Flange_OUT(int flangeNo) : Flange_IN(flangeNo) {
 }
 
 /**
- * @brief Figure 8-9: Portion of the flange thickness NOT subject
+ * @brief Figure 8-9: Portion of the flange thickness subject
  * to radial loading.
  */
-void Flange::Calc_eQ() {
-    eQ = eF - eP;
-    PR->addDetail("Before_F. 1 fig 4-10", "eQ(" + QN(mFlangeNumber) + ")",
-                  "eF - eP", eQ, "mm", QN(eF) + " - " + QN(eP));
+void Flange::Calc_eP() {
+    eP = eF - eQ;
+    PR->addDetail("Before_F. 1 fig 4-10", "eP(" + QN(mFlangeNumber) + ")",
+                  "eF - eQ", eP, "mm", QN(eF) + " - " + QN(eQ));
+}
+
+/**
+ * @brief Flange::Calc_eFt flange thickness at bolt plus raised face
+ */
+void Flange::Calc_eFt() {
+    eFt = eFb + eRF;
+    PR->addDetail("Before_F. 1", "eFt(" + QN(mFlangeNumber) + ")",
+                  "eFb + eRF", eFt, "mm", QN(eFb) + " + " + QN(eRF));
 }
 
 /**
@@ -149,14 +162,14 @@ void Flange::Calc_d5e() {
     if (mBolt->mBoltHole->isBlindHole) {
         mBolt->mBoltHole->d5 = mBolt->mBoltHole->d5t * mBolt->l5t
                 / mBolt->mBoltHole->eFb;
-        PR->addDetail("Formula 4, 5", "d5(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 4 5", "d5(" + QN(mFlangeNumber) + ")",
                       "d5t * l5t / eFb", mBolt->mBoltHole->d5, "mm",
                       QN(mBolt->mBoltHole->d5t) + " * " + QN(mBolt->l5t)
                       + " / " + QN(mBolt->mBoltHole->eFb));
     }
 
     d5e = mBolt->mBoltHole->d5 * sqrt(mBolt->mBoltHole->d5 / pB);
-    PR->addDetail("Formula 4, 5", "d5e(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Formula 4 5", "d5e(" + QN(mFlangeNumber) + ")",
                   "d5 * (d5 / pB) ^ 0.5", d5e, "mm",
                   QN(mBolt->mBoltHole->d5) + " * (" + QN(mBolt->mBoltHole->d5)
                   + " / " + QN(pB) + ") ^ 0.5");
@@ -289,6 +302,34 @@ void Flange::Calc_etanminus() {
                   "eta1minus * (1 + 3 / Sqrt(nB)) / 4",
                   mBolt->etanminus, "-", QN(mBolt->eta1minus) + " * (1 + 3 / "
                   + QN(nB) + " ^ 0.5) / 4");
+}
+
+/**
+ * @brief Before Formula 10: area flange ring + raised face - recess
+ * Raised face can be negative in case of spigot and recess
+ */
+void Flange::Calc_AF() {
+    AF = eFb * (d4 - d0) / 2 + eRF * (dRF - dREC) / 2 - eREC * (dREC - d0) / 2;
+    PR->addDetail("Before_F. 1", "AF(" + QN(mFlangeNumber) + ")",
+                  "eFb * (d4 - d0) / 2 + eRF * (dRF - dREC) / 2"
+                  " - eREC * (dREC - d0) / 2", AF, "mm2",
+                  QN(eFb) + " * (" + QN(d4) + " - " + QN(d0) + ") / 2 + "
+                  + QN(eRF) + " * (" + QN(dRF) + " - " + QN(dREC) + ") / 2 - "
+                  + QN(eREC) + " * (" + QN(dREC) + " - " + QN(d0) + ") / 2");
+}
+
+/**
+ * @brief Formula 10: Area for effective axial thickness of flange
+ */
+void Flange::Calc_eF() {
+    eF = 2 * AF / (d4 - d0);
+    PR->addDetail("Formula 10", "eF(" + QN(mFlangeNumber) + ")",
+                  "2 * AF / (d4 - d0)", eF, "mm^2",
+                  "2 * " + QN(AF) + " / (" + QN(d4) + " - " + QN(d0) + ")");
+}
+
+void Flange::Calc_eL() {
+    // does nothing, Formula 16
 }
 
 void Flange::Calc_beta() {

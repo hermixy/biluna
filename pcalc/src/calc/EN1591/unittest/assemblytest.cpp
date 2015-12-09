@@ -269,15 +269,18 @@ void AssemblyTest::Calc_YGTest() {
     target->mGasket->XG = 4.1;
     target->mLoadCaseList->at(i)->E_G = 5.1;
     target->Calc_YG(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YGTest()", 4.30676027830487,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YGTest()",
+             4.30676027830487,
              target->mLoadCaseList->at(i)->Y_G);
     i = 1;
     target->mLoadCaseList->at(i)->EF1 = 3.1;
     target->mLoadCaseList->at(i)->EF2 = 3.2;
     target->mLoadCaseList->at(i)->Y_B = 0.123;
-    target->mLoadCaseList->at(i)->E_G = 6.1; // should use from loadcaseno = 0
+    // determination of E_G should use QG0 and Temp. from loadCase
+    target->mLoadCaseList->at(i)->E_G = 6.1;
     target->Calc_YG(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YGTest()", 4.30676027830487,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YGTest()",
+             4.1749698572184029614,
              target->mLoadCaseList->at(i)->Y_G);
     deleteTarget();
 }

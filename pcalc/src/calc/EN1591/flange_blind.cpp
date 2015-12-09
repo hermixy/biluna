@@ -18,15 +18,15 @@ bool Flange_Blind::Is_flange_Valid() {
     if (0.2 <= bF / eF && bF / eF <= 5.0) {
         PR->addDetail("Before_F. 1 Para 4.2", "result1(" + QN(mFlangeNumber) + ")",
                       "Is flange valid?", 1, "-",
-                      "0.2 <= " + QN(bF) + " / " + QN(eF) + " AND "
-                      + QN(bF) + " / " + QN(eF) + " <= 5.0");
+                      "0.2 &lt;= " + QN(bF) + " / " + QN(eF) + " AND "
+                      + QN(bF) + " / " + QN(eF) + " &lt;= 5.0");
         return true;
     }
 
     PR->addDetail("Before_F. 1 Para 4.2", "result1(" + QN(mFlangeNumber) + ")",
                   "Is flange valid?", 0, "-",
-                  "0.2 <= " + QN(bF) + " / " + QN(eF) + " AND "
-                  + QN(bF) + " / " + QN(eF) + " <= 5.0");
+                  "0.2 &lt;= " + QN(bF) + " / " + QN(eF) + " AND "
+                  + QN(bF) + " / " + QN(eF) + " &lt;= 5.0");
     return false;
 }
 
@@ -48,16 +48,6 @@ void Flange_Blind::Calc_dF() {
     PR->addDetail("Formula 9", "dF(" + QN(mFlangeNumber) + ")",
                   "(d4 + d0) / 2", dF, "mm",
                   "(" + QN(d4) + " + " + QN(d0) + ") / 2");
-}
-
-/**
- * @brief Formula 10: Area for effective axial thickness of flange
- */
-void Flange_Blind::Calc_AF() {
-    AF = eF * (d4 - d0) / 2;
-    PR->addDetail("Formula 10", "AF(" + QN(mFlangeNumber) + ")",
-                  "(d4 - d0) * eF / 2", AF, "mm^2",
-                  QN(eF) + " * (" + QN(d4) + " - " + QN(d0) + ") / 2");
 }
 
 /**

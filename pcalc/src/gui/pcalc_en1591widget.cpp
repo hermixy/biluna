@@ -158,10 +158,12 @@ void PCALC_EN1591Widget::init() {
     mFlangeMapper->addMapping(led3_1, mFlangeModel->fieldIndex("d31"));
     mFlangeMapper->addMapping(led4_1, mFlangeModel->fieldIndex("d41"));
     mFlangeMapper->addMapping(ledX_1, mFlangeModel->fieldIndex("dx1"));
-    mFlangeMapper->addMapping(leeF_1, mFlangeModel->fieldIndex("ef1"));
-    mFlangeMapper->addMapping(leeFt_1, mFlangeModel->fieldIndex("eft1"));
-    mFlangeMapper->addMapping(leeP_1, mFlangeModel->fieldIndex("ep1"));
+    mFlangeMapper->addMapping(ledRF_1, mFlangeModel->fieldIndex("drf1"));
+    mFlangeMapper->addMapping(ledREC_1, mFlangeModel->fieldIndex("drec1"));
+    mFlangeMapper->addMapping(leeFb_1, mFlangeModel->fieldIndex("efb1"));
     mFlangeMapper->addMapping(leeRF_1, mFlangeModel->fieldIndex("erf1"));
+    mFlangeMapper->addMapping(leeREC_1, mFlangeModel->fieldIndex("erec1"));
+    mFlangeMapper->addMapping(leeQ_1, mFlangeModel->fieldIndex("eq1"));
     mFlangeMapper->addMapping(leeX_1, mFlangeModel->fieldIndex("ex1"));
 
     mFlangeMapper->addMapping(led9_1, mFlangeModel->fieldIndex("d91"));
@@ -195,10 +197,12 @@ void PCALC_EN1591Widget::init() {
     mFlangeMapper->addMapping(led3_2, mFlangeModel->fieldIndex("d32"));
     mFlangeMapper->addMapping(led4_2, mFlangeModel->fieldIndex("d42"));
     mFlangeMapper->addMapping(ledX_2, mFlangeModel->fieldIndex("dx2"));
-    mFlangeMapper->addMapping(leeF_2, mFlangeModel->fieldIndex("ef2"));
-    mFlangeMapper->addMapping(leeFt_2, mFlangeModel->fieldIndex("eft2"));
-    mFlangeMapper->addMapping(leeP_2, mFlangeModel->fieldIndex("ep2"));
+    mFlangeMapper->addMapping(ledRF_2, mFlangeModel->fieldIndex("drf2"));
+    mFlangeMapper->addMapping(ledREC_2, mFlangeModel->fieldIndex("drec2"));
+    mFlangeMapper->addMapping(leeFb_2, mFlangeModel->fieldIndex("efb2"));
     mFlangeMapper->addMapping(leeRF_2, mFlangeModel->fieldIndex("erf2"));
+    mFlangeMapper->addMapping(leeREC_2, mFlangeModel->fieldIndex("erec2"));
+    mFlangeMapper->addMapping(leeQ_2, mFlangeModel->fieldIndex("eq2"));
     mFlangeMapper->addMapping(leeX_2, mFlangeModel->fieldIndex("ex2"));
 
     mFlangeMapper->addMapping(led9_2, mFlangeModel->fieldIndex("d92"));
@@ -586,7 +590,7 @@ void PCALC_EN1591Widget::slotAssemblyAdded() {
 }
 
 void PCALC_EN1591Widget::on_pbCalculate_clicked() {
-    if (!mAssemblyModel->getCurrentIndex().isValid()) {
+    if (!tvAssembly->currentIndex().isValid()) {
         PCALC_DIALOGFACTORY->requestWarningDialog("No flange assembly selected");
         return;
     }
@@ -710,10 +714,12 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "d31", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d41", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "dx1", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "ef1", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "eft1", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "ep1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "drf1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "drec1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "efb1", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "erf1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "erec1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "eq1", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "ex1", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "d91", "-", mFlangeModel);
@@ -740,10 +746,12 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "d32", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d42", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "dx2", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "ef2", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "eft2", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "ep2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "drf2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "drec2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "efb2", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "erf2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "erec2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "eq2", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "ex2", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "d92", "-", mFlangeModel);

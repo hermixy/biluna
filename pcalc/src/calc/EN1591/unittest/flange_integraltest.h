@@ -31,7 +31,6 @@ private:
     void Calc_hGTest();
     void Calc_gammaTest();
     void Calc_ALTest();
-    void Calc_AFTest();
     void Calc_eETest();
     void Calc_eDTest();
     void Calc_dLTest();

@@ -35,7 +35,9 @@ void Flange_LooseTest::exec() {
     Calc_dLTest();
     Calc_eETest();
     Calc_AFTest();
+    Calc_eFTest();
     Calc_ALTest();
+    Calc_eLTest();
     Calc_gammaTest();
     Calc_hGTest();
     Calc_hHTest();
@@ -75,8 +77,8 @@ void Flange_LooseTest::setupTarget() {
     target->d6 = 325.4; //inside diameter loose
     target->d8 = 344.3; //outside diameter ring/collar
     target->eF = 21.7; //flange thickness
+    target->eFb = 7.3; //flange thickness
     target->eL = 15.3;
-    //target.AF = 3300.7 'cross section area
 }
 
 void Flange_LooseTest::Calc_ZFTest() {
@@ -195,14 +197,38 @@ void Flange_LooseTest::Calc_eETest() {
 
 void Flange_LooseTest::Calc_AFTest() {
     setupTarget();
+    target->d0 = 320.1;
+    target->d8 = 344.3;
+    target->eFb = 7.3;
     target->Calc_AF();
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_AFTest()", 262.57, target->AF);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_AFTest()",
+             88.33, target->AF);
+}
+
+void Flange_LooseTest::Calc_eFTest() {
+    setupTarget();
+    target->AF = 51.3;
+    target->d8 = 52.6;
+    target->d0 = 78.1;
+    target->Calc_eF();
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_eFTest()",
+             -4.02352941176470588235, target->eF);
 }
 
 void Flange_LooseTest::Calc_ALTest() {
     setupTarget();
     target->Calc_AL();
     areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_ALTest()", 442.17, target->AL);
+}
+
+void Flange_LooseTest::Calc_eLTest() {
+    setupTarget();
+    target->AL = -31.9;
+    target->d4 = 16.4;
+    target->d6 = 3.1;
+    target->Calc_eL();
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_eLTest()",
+             -4.7969924812030075188, target->eL);
 }
 
 void Flange_LooseTest::Calc_gammaTest() {

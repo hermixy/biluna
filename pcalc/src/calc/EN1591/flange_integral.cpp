@@ -16,17 +16,17 @@ Flange_Integral::~Flange_Integral() {
  */
 bool Flange_Integral::Is_flange_Valid() {
     bool result = 0.2 <= bF / eF && bF / eF <= 5.0;
-    QString str = "0.2 <= bF / eF AND bF / eF <= 5.0";
-    QString strVal = "0.2 <= " + QN(bF) + " / " + QN(eF) + " AND "
-            + QN(bF) + " / " + QN(eF) + " <= 5.0";
+    QString str = "0.2 &lt;= bF / eF AND bF / eF &lt;= 5.0";
+    QString strVal = "0.2 &lt;= " + QN(bF) + " / " + QN(eF) + " AND "
+            + QN(bF) + " / " + QN(eF) + " &lt;= 5.0";
 
     if (result) {
         if (mShell != NULL) {
             if (cos(mShell->phiS) >= 1 / (1 + 0.01 * mShell->dS / mShell->eS)) {
                 PR->addDetail("Before_F. 1 Para 4.2", "result1", str
-                              + " AND cos(phiS) >= 1 / (1 + 0.01 * dS / eS)",
+                              + " AND cos(phiS) &gt;= 1 / (1 + 0.01 * dS / eS)",
                               1, "-", strVal + " AND cos(" + QN(mShell->phiS)
-                              + ") >= 1 / (1 + 0.01 * " + QN(mShell->dS)
+                              + ") &gt;= 1 / (1 + 0.01 * " + QN(mShell->dS)
                               + " / " + QN(mShell->eS) + ")");
                 return true;
             }
@@ -61,16 +61,6 @@ void Flange_Integral::Calc_dF() {
     PR->addDetail("Formula 9", "dF(" + QN(mFlangeNumber) + ")",
                   "(d4 + d0) / 2", dF, "mm",
                   "(" + QN(d4) + " + " + QN(d0) + ") / 2");
-}
-
-/**
- * @brief Formula 10: Area for effective axial thickness of flange
- */
-void Flange_Integral::Calc_AF() {
-    AF = (d4 - d0) * eF / 2;
-    PR->addDetail("Formula 10", "AF(" + QN(mFlangeNumber) + ")",
-                  "(d4 - d0) * eF / 2", AF, "mm^2",
-                  "(" + QN(d4) + " - " + QN(d0) + ") * " + QN(eF) + " / 2");
 }
 
 /**

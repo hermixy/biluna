@@ -195,9 +195,8 @@ void Gasket::Calc_AGe() {
  * @param loadCaseNo
  */
 void Gasket::Calc_E_G(int loadCaseNo) {
-    mLoadCaseList->at(loadCaseNo)->E_G
-            = gasketCompressedElasticity(loadCaseNo,
-                                         mLoadCaseList->at(loadCaseNo));
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    loadCase->E_G = gasketCompressedElasticity(loadCaseNo);
 }
 
 /**
@@ -205,13 +204,13 @@ void Gasket::Calc_E_G(int loadCaseNo) {
  * @param loadCaseNo
  */
 void Gasket::Calc_eG(int loadCaseNo) {
-    mLoadCaseList->at(loadCaseNo)->eG
-            =  gasketCompressedThickness(mLoadCaseList->at(loadCaseNo));
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    loadCase->eG = gasketCompressedThickness(loadCase);
 
     // TODO move addDetail() to relevant table
     PR->addDetail("With_F. 63",
                   "eG", "gasketCompressedThickness(loadCase)",
-                  mLoadCaseList->at(loadCaseNo)->eG, "mm",
+                  loadCase->eG, "mm",
                   "Table value", loadCaseNo);
 }
 
@@ -260,21 +259,23 @@ void Gasket::Calc_P_QR(int loadCaseNo) {
  * @param loadCase
  * @return gasket compressed elasticity
  */
-double Gasket::gasketCompressedElasticity(int loadCaseNo, LoadCase* loadCase) {
+double Gasket::gasketCompressedElasticity(int loadCaseNo) {
     // TODO: refer www.gasketdata.org and EN1591-2 Table 17 - 30
 
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
     LoadCase* loadCase0 = mLoadCaseList->at(0);
+    double elasticity = 0.0;
 
     if (TABLE17_30PROPERTY->isGasketMaterialCodeExisting(matCode)) {
-        loadCase->E_G = TABLE17_30PROPERTY->getTableE_G(
+        elasticity = TABLE17_30PROPERTY->getTableE_G(
                     matCode, loadCase->TG, loadCase0->Q_G);
-        if (loadCase->E_G > 0) {
+        if (elasticity > 0) {
             PR->addDetail("F. 58 Table 17-30", "E_G", "Table 17-30 value",
-                          loadCase->E_G, "N/mm2", "Table value", loadCaseNo);
+                          elasticity, "N/mm2", "Table value", loadCaseNo);
         } else {
             PR->addDetail("F. 58 Table 17-30", "E_G",
                           "Table 17-30 value out of range",
-                          loadCase->E_G, "N/mm2", "Table value", loadCaseNo,
+                          elasticity, "N/mm2", "Table value", loadCaseNo,
                           "Out of range");
         }
     } else {
@@ -283,17 +284,13 @@ double Gasket::gasketCompressedElasticity(int loadCaseNo, LoadCase* loadCase) {
         double E0 = TABLEGSIMPLE->getTableG_E0(insType, loadCase->TG);
         double K1 = TABLEGSIMPLE->getTableG_K1(insType, loadCase->TG);
         double Q = loadCase->Q_G;
-        loadCase->E_G = E0 + K1 * Q;
+        elasticity = E0 + K1 * Q;
 
         PR->addDetail("F. 58 Table G", "E_G", "Table G value",
-                      loadCase->E_G, "N/mmm2", "Table value", loadCaseNo);
+                      elasticity, "N/mmm2", "Table value", loadCaseNo);
     }
 
-    return loadCase->E_G;
-
-    // Test only, Amtec
-//    if (loadCase->TG > 120) return 5404;
-//    return 3833.0;
+    return elasticity;
 }
 
 /**

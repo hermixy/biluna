@@ -134,7 +134,7 @@ public:
     void Calc_XG();
     void Calc_AQ();
     void Calc_P_QR(int loadCaseNo);
-    double gasketCompressedElasticity(int loadCaseNo, LoadCase* loadCase);
+    double gasketCompressedElasticity(int loadCaseNo);
     double gasketCompressedThickness(LoadCase* loadCase);
     double gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase);
     double gasketCreepFactor(int loadCaseNo, LoadCase* loadCase);

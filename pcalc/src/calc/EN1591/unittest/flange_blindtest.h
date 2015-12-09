@@ -25,7 +25,6 @@ private:
     void Calc_dFTest();
     void Calc_dLTest();
     void Calc_eETest();
-    void Calc_AFTest();
     void Calc_eLTest();
     void Calc_hGTest();
     void Calc_hHTest();

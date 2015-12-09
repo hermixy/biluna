@@ -455,6 +455,9 @@
                 <property name="spacing">
                  <number>3</number>
                 </property>
+                <item row="9" column="1">
+                 <widget class="QLineEdit" name="leeRF_1"/>
+                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="lblTypeFlange_1">
                   <property name="text">
@@ -468,18 +471,8 @@
                 <item row="4" column="1">
                  <widget class="QLineEdit" name="ledX_1"/>
                 </item>
-                <item row="5" column="1">
-                 <widget class="QLineEdit" name="leeF_1"/>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="lbld4_1">
-                  <property name="text">
-                   <string>d4</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
+                <item row="6" column="1">
+                 <widget class="QLineEdit" name="ledREC_1"/>
                 </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="lbld0_1">
@@ -504,6 +497,29 @@
                 <item row="0" column="1">
                  <widget class="QComboBox" name="cbTypeFlange_1"/>
                 </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="lbld4_1">
+                  <property name="text">
+                   <string>d4</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0">
+                 <widget class="QLabel" name="lbldREC_1">
+                  <property name="text">
+                   <string>dREC</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLineEdit" name="led3_1"/>
+                </item>
                 <item row="2" column="0">
                  <widget class="QLabel" name="lbld3_1">
                   <property name="text">
@@ -514,52 +530,36 @@
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="1">
-                 <widget class="QLineEdit" name="led0_1"/>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLineEdit" name="led3_1"/>
-                </item>
                 <item row="3" column="1">
                  <widget class="QLineEdit" name="led4_1"/>
                 </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="lbleF_1">
-                  <property name="text">
-                   <string>eF</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="led0_1"/>
                 </item>
-                <item row="6" column="0">
-                 <widget class="QLabel" name="lbleFt_1">
-                  <property name="text">
-                   <string>eFt</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="6" column="1">
-                 <widget class="QLineEdit" name="leeFt_1"/>
+                <item row="11" column="1">
+                 <widget class="QLineEdit" name="leeQ_1"/>
                 </item>
                 <item row="7" column="0">
-                 <widget class="QLabel" name="lbleP_1">
+                 <widget class="QLabel" name="lbleFb_1">
                   <property name="text">
-                   <string>eP</string>
+                   <string>eFb</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item row="7" column="1">
-                 <widget class="QLineEdit" name="leeP_1"/>
+                <item row="11" column="0">
+                 <widget class="QLabel" name="lbleQ_1">
+                  <property name="text">
+                   <string>eQ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
                 </item>
-                <item row="8" column="0">
+                <item row="12" column="0">
                  <widget class="QLabel" name="lbleX_1">
                   <property name="text">
                    <string>eX</string>
@@ -569,30 +569,23 @@
                   </property>
                  </widget>
                 </item>
-                <item row="8" column="1">
+                <item row="7" column="1">
+                 <widget class="QLineEdit" name="leeFb_1"/>
+                </item>
+                <item row="15" column="0" colspan="2">
+                 <widget class="QLineEdit" name="ileMaterialFlange_1"/>
+                </item>
+                <item row="12" column="1">
                  <widget class="QLineEdit" name="leeX_1"/>
                 </item>
-                <item row="9" column="0">
-                 <widget class="QLabel" name="lbleRF_1">
-                  <property name="text">
-                   <string>eRF</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="9" column="1">
-                 <widget class="QLineEdit" name="leeRF_1"/>
-                </item>
-                <item row="10" column="0" colspan="2">
+                <item row="14" column="0" colspan="2">
                  <widget class="QLabel" name="lblMaterialFlange_1">
                   <property name="text">
                    <string>Material Flange:</string>
                   </property>
                  </widget>
                 </item>
-                <item row="11" column="0" colspan="2">
-                 <widget class="QLineEdit" name="ileMaterialFlange_1"/>
-                </item>
-                <item row="12" column="0">
+                <item row="16" column="0">
                  <spacer name="verticalSpacer_11">
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -604,6 +597,42 @@
                    </size>
                   </property>
                  </spacer>
+                </item>
+                <item row="9" column="0">
+                 <widget class="QLabel" name="lbleRF_1">
+                  <property name="text">
+                   <string>eRF</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="10" column="1">
+                 <widget class="QLineEdit" name="leeREC_1"/>
+                </item>
+                <item row="10" column="0">
+                 <widget class="QLabel" name="lbleREC_1">
+                  <property name="text">
+                   <string>eREC</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <widget class="QLabel" name="lbldRF_1">
+                  <property name="text">
+                   <string>dRF</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <widget class="QLineEdit" name="ledRF_1"/>
                 </item>
                </layout>
               </widget>
@@ -629,6 +658,32 @@
                 <property name="spacing">
                  <number>3</number>
                 </property>
+                <item row="8" column="1">
+                 <widget class="QLineEdit" name="leeRF_2"/>
+                </item>
+                <item row="8" column="0">
+                 <widget class="QLabel" name="lbleRF_2">
+                  <property name="text">
+                   <string>eRF</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QLineEdit" name="ledX_2"/>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="lbldX_2">
+                  <property name="text">
+                   <string>dX</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="lblTypeFlange_2">
                   <property name="text">
@@ -652,6 +707,12 @@
                   </property>
                  </widget>
                 </item>
+                <item row="3" column="1">
+                 <widget class="QLineEdit" name="led4_2"/>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLineEdit" name="led3_2"/>
+                </item>
                 <item row="1" column="1">
                  <widget class="QLineEdit" name="led0_2"/>
                 </item>
@@ -665,9 +726,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
-                 <widget class="QLineEdit" name="led3_2"/>
-                </item>
                 <item row="3" column="0">
                  <widget class="QLabel" name="lbld4_2">
                   <property name="text">
@@ -678,39 +736,36 @@
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="1">
-                 <widget class="QLineEdit" name="led4_2"/>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="lbldX_2">
+                <item row="9" column="0">
+                 <widget class="QLabel" name="lbleREC_2">
                   <property name="text">
-                   <string>dX</string>
+                   <string>eREC</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="1">
-                 <widget class="QLineEdit" name="ledX_2"/>
+                <item row="9" column="1">
+                 <widget class="QLineEdit" name="leeREC_2"/>
                 </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="lbleF_2">
+                <item row="7" column="1">
+                 <widget class="QLineEdit" name="leeFb_2"/>
+                </item>
+                <item row="10" column="0">
+                 <widget class="QLabel" name="lbleQ_2">
                   <property name="text">
-                   <string>eF</string>
+                   <string>eQ</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item row="5" column="1">
-                 <widget class="QLineEdit" name="leeF_2"/>
-                </item>
-                <item row="6" column="0">
-                 <widget class="QLabel" name="lbleFt_2">
+                <item row="7" column="0">
+                 <widget class="QLabel" name="lbleFb_2">
                   <property name="text">
-                   <string>eFt</string>
+                   <string>eFb</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -718,22 +773,19 @@
                  </widget>
                 </item>
                 <item row="6" column="1">
-                 <widget class="QLineEdit" name="leeFt_2"/>
+                 <widget class="QLineEdit" name="ledREC_2"/>
                 </item>
-                <item row="7" column="0">
-                 <widget class="QLabel" name="lbleP_2">
+                <item row="6" column="0">
+                 <widget class="QLabel" name="lbldREC_2">
                   <property name="text">
-                   <string>eP</string>
+                   <string>dREC</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item row="7" column="1">
-                 <widget class="QLineEdit" name="leeP_2"/>
-                </item>
-                <item row="8" column="0">
+                <item row="11" column="0">
                  <widget class="QLabel" name="lbleX_2">
                   <property name="text">
                    <string>eX</string>
@@ -743,33 +795,13 @@
                   </property>
                  </widget>
                 </item>
-                <item row="8" column="1">
+                <item row="10" column="1">
+                 <widget class="QLineEdit" name="leeQ_2"/>
+                </item>
+                <item row="11" column="1">
                  <widget class="QLineEdit" name="leeX_2"/>
                 </item>
-                <item row="9" column="0">
-                 <widget class="QLabel" name="lbleRF_2">
-                  <property name="text">
-                   <string>eRF</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="9" column="1">
-                 <widget class="QLineEdit" name="leeRF_2"/>
-                </item>
-                <item row="10" column="0" colspan="2">
-                 <widget class="QLabel" name="lblMaterialFlange_2">
-                  <property name="text">
-                   <string>Material Flange:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="11" column="0" colspan="2">
-                 <widget class="QLineEdit" name="ileMaterialFlange_2"/>
-                </item>
-                <item row="12" column="0">
+                <item row="15" column="0">
                  <spacer name="verticalSpacer_3">
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -781,6 +813,29 @@
                    </size>
                   </property>
                  </spacer>
+                </item>
+                <item row="14" column="0" colspan="2">
+                 <widget class="QLineEdit" name="ileMaterialFlange_2"/>
+                </item>
+                <item row="13" column="0" colspan="2">
+                 <widget class="QLabel" name="lblMaterialFlange_2">
+                  <property name="text">
+                   <string>Material Flange:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <widget class="QLabel" name="lbldRF_2">
+                  <property name="text">
+                   <string>dRF</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <widget class="QLineEdit" name="ledRF_2"/>
                 </item>
                </layout>
               </widget>
@@ -3337,9 +3392,9 @@
   <tabstop>led3_1</tabstop>
   <tabstop>led4_1</tabstop>
   <tabstop>ledX_1</tabstop>
-  <tabstop>leeF_1</tabstop>
-  <tabstop>leeFt_1</tabstop>
-  <tabstop>leeP_1</tabstop>
+  <tabstop>ledREC_1</tabstop>
+  <tabstop>leeFb_1</tabstop>
+  <tabstop>leeQ_1</tabstop>
   <tabstop>leeX_1</tabstop>
   <tabstop>led9_1</tabstop>
   <tabstop>lee0_1</tabstop>
@@ -3360,9 +3415,9 @@
   <tabstop>led3_2</tabstop>
   <tabstop>led4_2</tabstop>
   <tabstop>ledX_2</tabstop>
-  <tabstop>leeF_2</tabstop>
-  <tabstop>leeFt_2</tabstop>
-  <tabstop>leeP_2</tabstop>
+  <tabstop>ledREC_2</tabstop>
+  <tabstop>leeFb_2</tabstop>
+  <tabstop>leeQ_2</tabstop>
   <tabstop>leeX_2</tabstop>
   <tabstop>ileMaterialFlange_2</tabstop>
   <tabstop>ileTypeGasket</tabstop>

@@ -30,7 +30,6 @@ void Flange_IntegralTest::exec() {
     Calc_hGTest();
     Calc_gammaTest();
     Calc_ALTest();
-    Calc_AFTest();
     Calc_eETest();
     Calc_eDTest();
     Calc_dLTest();
@@ -209,13 +208,6 @@ void Flange_IntegralTest::Calc_ALTest() {
     target->Calc_AL();
     areEqual(PR->getLastOutput(), "Flange_IntegralTest::Calc_ALTest()",
              0.0, target->eL);
-}
-
-void Flange_IntegralTest::Calc_AFTest() {
-    setupTarget();
-    target->Calc_AF();
-    areEqual(PR->getLastOutput(), "Flange_IntegralTest::Calc_AFTest()",
-             684.635, target->AF);
 }
 
 void Flange_IntegralTest::Calc_eETest() {

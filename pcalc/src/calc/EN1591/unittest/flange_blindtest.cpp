@@ -25,7 +25,6 @@ void Flange_BlindTest::exec() {
     Calc_dFTest();
     Calc_dLTest();
     Calc_eETest();
-    Calc_AFTest();
     Calc_eLTest();
     Calc_hGTest();
     Calc_hHTest();
@@ -105,12 +104,6 @@ void Flange_BlindTest::Calc_eETest() {
     setupTarget();
     target->Calc_eE();
     areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_eETest()", 0.0, target->eE);
-}
-
-void Flange_BlindTest::Calc_AFTest() {
-    setupTarget();
-    target->Calc_AF();
-    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_AFTest()", 684.635, target->AF);
 }
 
 void Flange_BlindTest::Calc_eLTest() {
