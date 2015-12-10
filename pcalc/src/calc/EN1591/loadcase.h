@@ -79,7 +79,9 @@ public:
     double F_Bav;
     double F_Bcalc;
     double F_Bmax;
+    double F_BmaxA; // Annex C
     double F_Bmin;
+    double F_BminA; // Annex C
     double F_Bnom;
     double F_Breq;
 
@@ -87,7 +89,9 @@ public:
     double F_Gd;
     double F_Gdelta;
     double F_Gmax;
+    double F_GmaxA; // Annex C
     double F_Gmin;
+    double F_GminA; // Annex C
     double F_Greq;
     double DGm;
     double Y_B;
@@ -165,8 +169,8 @@ public:
     double Mtnom;
     double Q_A;
     double Q_G;
-    double Q_Gmin;
-    double Q_Gmax;
+    double Q_GminA; // Annex C
+    double Q_GmaxA; // Annex C
     double Q_0min;
     double Q_minL;
     double Q_sminL;

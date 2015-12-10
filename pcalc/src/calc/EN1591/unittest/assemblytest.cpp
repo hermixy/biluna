@@ -849,42 +849,42 @@ void AssemblyTest::Calc_F_BImaxminTest() {
     target->mBolt->etanplus = 1.3;
     target->Calc_F_BImaxmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", -0.22,
-             target->mLoadCaseList->at(i)->F_Bmin);
+             target->mLoadCaseList->at(i)->F_BminA);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 2.53,
-             target->mLoadCaseList->at(i)->F_Bmax);
+             target->mLoadCaseList->at(i)->F_BmaxA);
     i = 1;
-    target->mLoadCaseList->at(i)->F_Gmin = 2.1;
+    target->mLoadCaseList->at(i)->F_GminA = 2.1;
     target->mLoadCaseList->at(i)->F_Q = 2.2;
     target->mLoadCaseList->at(i)->F_R = 2.3;
-    target->mLoadCaseList->at(i)->F_Gmax = 3.1;
+    target->mLoadCaseList->at(i)->F_GmaxA = 3.1;
     target->Calc_F_BImaxmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 6.6,
-             target->mLoadCaseList->at(i)->F_Bmin);
+             target->mLoadCaseList->at(i)->F_BminA);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BImaxminTest()", 7.6,
-             target->mLoadCaseList->at(i)->F_Bmax);
+             target->mLoadCaseList->at(i)->F_BmaxA);
     deleteTarget();
 }
 
 void AssemblyTest::Calc_F_GImaxminTest() {
     SetupIntegralTarget();
     int i = 0;
-    target->mLoadCaseList->at(i)->F_Bmin = 1.1;
-    target->mLoadCaseList->at(i)->F_Bmax = 1.2;
+    target->mLoadCaseList->at(i)->F_BminA = 1.1;
+    target->mLoadCaseList->at(i)->F_BmaxA = 1.2;
     target->mLoadCaseList->at(i)->F_R = 1.3;
     target->mGasket->AGe = 15.3;
     target->Calc_F_GImaxmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.2,
-             target->mLoadCaseList->at(i)->F_Gmin);
+             target->mLoadCaseList->at(i)->F_GminA);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()", -0.1,
-             target->mLoadCaseList->at(i)->F_Gmax);
+             target->mLoadCaseList->at(i)->F_GmaxA);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
-             -0.01307189542483660131, target->mLoadCaseList->at(i)->Q_Gmin);
+             -0.01307189542483660131, target->mLoadCaseList->at(i)->Q_GminA);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
-             -0.00653594771241830065, target->mLoadCaseList->at(i)->Q_Gmax);
+             -0.00653594771241830065, target->mLoadCaseList->at(i)->Q_GmaxA);
     i = 1;
-    target->mLoadCaseList->at(0)->F_Gmin = 2.1;
+    target->mLoadCaseList->at(0)->F_GminA = 2.1;
     target->mLoadCaseList->at(0)->Y_G = 3.1;
-    target->mLoadCaseList->at(0)->F_Gmax = 2.2;
+    target->mLoadCaseList->at(0)->F_GmaxA = 2.2;
     target->mLoadCaseList->at(i)->F_Q = 2.2;
     target->mLoadCaseList->at(i)->Y_Q = 2.3;
     target->mLoadCaseList->at(i)->F_R = 2.4;
@@ -897,13 +897,13 @@ void AssemblyTest::Calc_F_GImaxminTest() {
     target->mGasket->AGe = 3.5;
     target->Calc_F_GImaxmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
-             -0.11379310344827587, target->mLoadCaseList->at(i)->F_Gmin);
+             -0.11379310344827587, target->mLoadCaseList->at(i)->F_GminA);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
-             -0.0068965517241379309, target->mLoadCaseList->at(i)->F_Gmax);
+             -0.0068965517241379309, target->mLoadCaseList->at(i)->F_GmaxA);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
-             -0.03251231527093596286, target->mLoadCaseList->at(i)->Q_Gmin);
+             -0.03251231527093596286, target->mLoadCaseList->at(i)->Q_GminA);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GImaxminTest()",
-             -0.00197044334975369454, target->mLoadCaseList->at(i)->Q_Gmax);
+             -0.00197044334975369454, target->mLoadCaseList->at(i)->Q_GmaxA);
     deleteTarget();
 }
 
@@ -925,8 +925,8 @@ void AssemblyTest::Calc_ThetaFmaxminTest() {
     target->mFlange2->ZF = 4.1;
     loadCase->EF1 = 3.2;
     loadCase->EF2 = 4.2;
-    loadCase->F_Gmin = 3.3;
-    loadCase->F_Gmax = 4.3;
+    loadCase->F_GminA = 3.3;
+    loadCase->F_GmaxA = 4.3;
     target->mFlange1->hG = 3.4;
     target->mFlange2->hG = 4.4;
     target->Calc_ThetaFmaxmin(i);
@@ -947,11 +947,11 @@ void AssemblyTest::Calc_ThetaLmaxminTest() {
     LoadCase* loadCase = target->mLoadCaseList->at(i);
     target->mFlange1->ZL = 1.1;
     loadCase->EL1 = 1.2;
-    loadCase->F_Bmin = 1.3;
+    loadCase->F_BminA = 1.3;
     target->mFlange1->hL = 1.4;
     target->mFlange2->ZL = 2.1;
     loadCase->EL2 = 2.2;
-    loadCase->F_Bmax = 2.3;
+    loadCase->F_BmaxA = 2.3;
     target->mFlange2->hL = 2.4;
     target->Calc_ThetaLmaxmin(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_ThetaLmaxminTest()", 1.6683333333333332,
