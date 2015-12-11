@@ -513,19 +513,19 @@ void Flange_Loose::Calc_PhiL(int loadCaseNo) {
         tmp_WL = loadCase->WL2;
     }
 
-    double tmp_PhiL = loadCase->F_B * hL / tmp_WL;
+    double tmp_PhiL = loadCase->F_Bmax * hL / tmp_WL;
 
     if (getFlangeNumber() == 1) {
         loadCase->PhiL1 = tmp_PhiL;
         PR->addDetail("Formula 149", "PhiL(" + QN(mFlangeNumber) + ")",
-                      "F_B * hL1 / WL1", loadCase->PhiL1, "-",
-                      QN(loadCase->F_B) + " * " + QN(hL) + " / " + QN(tmp_WL),
+                      "F_Bmax * hL1 / WL1", loadCase->PhiL1, "-",
+                      QN(loadCase->F_Bmax) + " * " + QN(hL) + " / " + QN(tmp_WL),
                       loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiL2 = tmp_PhiL;
         PR->addDetail("Formula 149", "PhiL(" + QN(mFlangeNumber) + ")",
-                      "F_B * hL2 / WL2", loadCase->PhiL2, "-",
-                      QN(loadCase->F_B) + " * " + QN(hL) + " / " + QN(tmp_WL),
+                      "F_Bmax * hL2 / WL2", loadCase->PhiL2, "-",
+                      QN(loadCase->F_Bmax) + " * " + QN(hL) + " / " + QN(tmp_WL),
                       loadCaseNo);
     }
 }

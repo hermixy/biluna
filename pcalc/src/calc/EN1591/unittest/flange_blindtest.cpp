@@ -207,16 +207,13 @@ void Flange_BlindTest::Calc_PhiFTest() {
     int loadCaseNo = 0;
 
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
-    loadCase->F_B = 1.1;
+    loadCase->F_Bmax = 1.1;
     target->hG = 2.3;
     loadCase->F_Q = 3.4;
     target->rho = 4.5;
     target->mGasket->dGe = 5.6;
     loadCase->F_R = 6.7;
     loadCase->WF1 = 4.3;
-    //Dim tmp_PhiF = Math.Max(Math.Abs(tmpVal1 + tmpVal2), _
-    //               Math.Max(Math.Abs(tmpVal1), Math.Abs(tmpVal2))) / tmp_WF
-
 
     target->Calc_PhiF(loadCaseNo);
     areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_PhiFTest", 81.192248062015508,
@@ -260,7 +257,7 @@ void Flange_BlindTest::Calc_PhiXTest() {
     setupTarget();
     int loadCaseNo = 0;
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
-    loadCase->F_B = 9.3;
+    loadCase->F_Bmax = 9.3;
     target->d3 = 6.4;
     target->dX = 4.6;
     loadCase->WX1 = 3.2;

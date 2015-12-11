@@ -1194,9 +1194,9 @@ void Flange::Calc_PhiF(int loadCaseNo) {
         tmp_WF = loadCase->WF2;
     }
 
-    double tmp_PhiF = (fabs(loadCase->F_G * hG + loadCase->F_Q
+    double tmp_PhiF = (fabs(loadCase->F_Gmax * hG + loadCase->F_Q
                            * (hH - hP) + loadCase->F_R * hH)) / tmp_WF;
-    QString str = "(abs(" + QN(loadCase->F_G) + " * " + QN(hG) + " + "
+    QString str = "(abs(" + QN(loadCase->F_Gmax) + " * " + QN(hG) + " + "
             + QN(loadCase->F_Q) + " * (" + QN(hH) + " - " + QN(hP)
             + ") + " + QN(loadCase->F_R) + " * " + QN(hH) + ")) / "
             + QN(tmp_WF);
@@ -1204,12 +1204,12 @@ void Flange::Calc_PhiF(int loadCaseNo) {
     if (getFlangeNumber() == 1) {
         loadCase->PhiF1 = tmp_PhiF;
         PR->addDetail("Formula 129", "PhiF(" + QN(mFlangeNumber) + ")",
-                      "(abs(F_G * hG1 + F_Q * (hH1 - hP1) + F_R * hH1)) / WF1",
+                      "(abs(F_Gmax * hG1 + F_Q * (hH1 - hP1) + F_R * hH1)) / WF1",
                       loadCase->PhiF1, "-", str, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiF2 = tmp_PhiF;
         PR->addDetail("Formula 129", "PhiF(" + QN(mFlangeNumber) + ")",
-                      "(abs(F_G * hG2 + F_Q * (hH2 - hP2) + F_R * hH2)) / WF2",
+                      "(abs(F_Gmax * hG2 + F_Q * (hH2 - hP2) + F_R * hH2)) / WF2",
                       loadCase->PhiF2, "-", str, loadCaseNo);
     }
 }

@@ -3,7 +3,7 @@
 <p>Flange calculation according to EN 1591-1:2001 + A1:2009</p>
 <h2>detailed calculation results</h2>
 <h3>calculation parameters</h3>
-<table border="0" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody><tr><td><h4>flange parameters</h4></td><td>&nbsp;</td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td></tr>
 <tr><td>pitch between bolts</td><td>p<sub>B</sub></td><td id="{$pB}">&nbsp;</td><td id="{$pB}">&nbsp;</td><td>mm</td></tr>
 <tr><td>eff.diameter of bolt hole</td><td>d<sub>5e</sub></td><td id="{$d5e(1)}">&nbsp;</td><td id="{$d5e(2)}">&nbsp;</td><td>mm</td></tr>
@@ -55,7 +55,7 @@
 </tbody></table>
 
 <h3>Internal forces</h3>
-<table border="0" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>loads</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>axial fluid-pressure force</td><td>F<sub>Q</sub></td><td id="{$F_Q[0]}">&nbsp;</td><td id="{$F_Q[1]}">&nbsp;</td><td id="{$F_Q[2]}">&nbsp;</td><td id="{$F_Q[3]}">&nbsp;</td><td>N</td></tr>
@@ -87,20 +87,20 @@
 <tr><td><h4>internal forces in subsequent condition</h4></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td>max. gasket force</td><td>F<sub>G0d</sub></td><td id="{$F_Gd[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td>accumulation of plastic deformation</td><td></td><td>TODO:</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
-<tr><td>gasket force</td><td>F<sub>G</sub></td><td id="{$F_G[0]}">&nbsp;</td><td id="{$F_G[1]}">&nbsp;</td><td id="{$F_G[2]}">&nbsp;</td><td id="{$F_G[3]}">&nbsp;</td><td>N</td></tr>
-<tr><td>bolt force</td><td>F<sub>B</sub></td><td id="{$F_B[0]}">&nbsp;</td><td id="{$F_B[1]}">&nbsp;</td><td id="{$F_B[2]}">&nbsp;</td><td id="{$F_B[3]}">&nbsp;</td><td>N</td></tr>
+<tr><td>gasket force (Formula 120, 121)</td><td>F<sub>G</sub></td><td id="{$F_G[0]}">&nbsp;</td><td id="{$F_G[1]}">&nbsp;</td><td id="{$F_G[2]}">&nbsp;</td><td id="{$F_G[3]}">&nbsp;</td><td>N</td></tr>
+<tr><td>bolt force (Formula 122)</td><td>F<sub>B</sub></td><td id="{$F_B[0]}">&nbsp;</td><td id="{$F_B[1]}">&nbsp;</td><td id="{$F_B[2]}">&nbsp;</td><td id="{$F_B[3]}">&nbsp;</td><td>N</td></tr>
 <tr><td>gasket stress</td><td>Q<sub>G</sub></td><td id="{$Q_G[0]}">&nbsp;</td><td id="{$Q_G[1]}">&nbsp;</td><td id="{$Q_G[2]}">&nbsp;</td><td id="{$Q_G[3]}">&nbsp;</td><td>MPa</td></tr>
 </tbody></table>
 
 <h3>Check of thightness criteria</h3>
-<table border="0" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>compliance of min. required gasket stress</td><td>Qmin&gt;Qsmin</td><td>TODO ok</td><td>ok</td><td>ok</td><td>ok</td><td>-</td></tr>
 </tbody></table>
 
 <h3>Checking the admissibility of the load ratio</h3>
-<table border="0" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>general</h4></td><td></td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td><td>&nbsp;</td><td><br></td></tr>
 <tr><td>reduced max. allowable load ratio</td><td>&Phi;</td><td>1,00</td><td>1,00</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
@@ -146,7 +146,7 @@
 </tbody></table>
 
 <h3>flange rotation</h3>
-<table border="0" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td colspan="7"><strong>flange 1</strong></td></tr>
 <tr><td>min. flange rotation</td><td>&Theta;<sub>Fmin</sub></td><td id="{$ThetaF1min[0]}">&nbsp;</td><td id="{$ThetaF1min[1]}">&nbsp;</td><td id="{$ThetaF1min[2]}">&nbsp;</td><td id="{$ThetaF1min[3]}">&nbsp;</td><td>-</td></tr>
@@ -157,7 +157,7 @@
 </tbody></table>
 
 <h3>internal forces from FB0nom</h3>
-<table border="0" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>gasket force</td><td>F<sub>Gmin</sub></td><td id="{$F_GminA[0]}">&nbsp;</td><td id="{$F_GminA[1]}">&nbsp;</td><td id="{$F_GminA[2]}">&nbsp;</td><td id="{$F_GminA[3]}">&nbsp;</td><td>N</td></tr>

@@ -468,7 +468,7 @@ void FlangeTest::Calc_PhiFTest() {
     int loadCaseNo = 0;
 
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
-    loadCase->F_G = 1.1;
+    loadCase->F_Gmax = 1.1;
     target->hG = 2.2;
     loadCase->F_Q = 3.3;
     target->hH = 4.4;

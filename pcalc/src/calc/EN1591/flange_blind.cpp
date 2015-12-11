@@ -261,17 +261,17 @@ void Flange_Blind::Calc_PhiF(int loadCaseNo) {
         tmp_WF = loadCase->WF2;
     }
 
-    double tmpVal1 = loadCase->F_B * hG + loadCase->F_Q *(1 - pow(rho, 3))
+    double tmpVal1 = loadCase->F_Bmax * hG + loadCase->F_Q *(1 - pow(rho, 3))
             * mGasket->dGe / 6;
     double tmpVal2 = loadCase->F_R *(1 - rho) * mGasket->dGe / 2;
     double tmp_PhiF = std::max(fabs(tmpVal1 + tmpVal2),
                         std::max(fabs(tmpVal1), fabs(tmpVal2))) / tmp_WF;
-    QString str = "max(abs(F_B * hG + F_Q *(1 - rho ^ 3) * dGe / 6 "
-                  "+ F_R *(1 - rho) * dGe / 2), max(abs(F_B * hG "
+    QString str = "max(abs(F_Bmax * hG + F_Q *(1 - rho ^ 3) * dGe / 6 "
+                  "+ F_R *(1 - rho) * dGe / 2), max(abs(F_Bmax * hG "
                   "+ F_Q *(1 - rho ^ 3) * dGe / 6), "
                   "abs(F_R *(1 - rho) * dGe / 2))) / WF";
 
-    QString strVal1 = QN(loadCase->F_B) + " * " + QN(hG) + " + "
+    QString strVal1 = QN(loadCase->F_Bmax) + " * " + QN(hG) + " + "
             + QN(loadCase->F_Q) + " *(1 - " + QN(rho) + " ^ 3) * "
             + QN(mGasket->dGe) + " / 6";
     QString strVal2 = QN(loadCase->F_R) + " *(1 - " + QN(rho) + ") * "
@@ -300,17 +300,17 @@ void Flange_Blind::Calc_PhiX(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
 
     if (getFlangeNumber() == 1) {
-        loadCase->PhiX1 = loadCase->F_B * (d3 - dX) / (2 * loadCase->WX1);
+        loadCase->PhiX1 = loadCase->F_Bmax * (d3 - dX) / (2 * loadCase->WX1);
         PR->addDetail("Formula 147", "PhiX(" + QN(mFlangeNumber) + ")",
-                      "F_B * (d3 - dX) / (2 * WX1)", loadCase->PhiX1, "-",
-                      QN(loadCase->F_B) + " * (" + QN(d3) + " - "
+                      "F_Bmax * (d3 - dX) / (2 * WX1)", loadCase->PhiX1, "-",
+                      QN(loadCase->F_Bmax) + " * (" + QN(d3) + " - "
                       + QN(dX) + ") / (2 * " + QN(loadCase->WX1) + ")",
                       loadCaseNo);
     } else if (getFlangeNumber() == 2) {
-        loadCase->PhiX2 = loadCase->F_B * (d3 - dX) / (2 * loadCase->WX2);
+        loadCase->PhiX2 = loadCase->F_Bmax * (d3 - dX) / (2 * loadCase->WX2);
         PR->addDetail("Formula 147", "PhiX(" + QN(mFlangeNumber) + ")",
-                      "F_B * (d3 - dX) / (2 * WX2)", loadCase->PhiX2, "-",
-                      QN(loadCase->F_B) + " * (" + QN(d3) + " - "
+                      "F_Bmax * (d3 - dX) / (2 * WX2)", loadCase->PhiX2, "-",
+                      QN(loadCase->F_Bmax) + " * (" + QN(d3) + " - "
                       + QN(dX) + ") / (2 * " + QN(loadCase->WX2) + ")",
                       loadCaseNo);
     }

@@ -408,7 +408,7 @@ void Flange_LooseTest::Calc_PhiLTest() {
     setupTarget();
     int loadCaseNo = 0;
     target->setFlangeNumber(1);
-    target->mLoadCaseList->at(loadCaseNo)->F_B = 4.5;
+    target->mLoadCaseList->at(loadCaseNo)->F_Bmax = 4.5;
     target->hL = 6.3;
     target->mLoadCaseList->at(loadCaseNo)->WL1 = 5.1;
     target->Calc_PhiL(loadCaseNo);

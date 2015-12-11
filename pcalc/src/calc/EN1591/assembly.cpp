@@ -460,6 +460,14 @@ void Assembly::Calc_Q_A_Qsmin(int loadCaseNo) {
         if (loadCase0->Q_A > 0) {
             // TODO: User entered value, still necessary as comparison?
             return;
+        } else if (loadCase0->F_Bspec > 0) {
+            // cannot be done in Calc_F_GInitial_1() because AGe is not known
+            // F_G0 is set at Formula 1
+            loadCase0->Q_A = loadCase0->F_G / mGasket->AGe;
+            PR->addDetail("Before_F. 103", "Q_A", "F_G / AGe",
+                          loadCase0->Q_A, "N/mm2",
+                          QN(loadCase0->F_G) + " / " + QN(mGasket->AGe),
+                          loadCaseNo, "User present bolt force");
         } else {
             // original
             loadCase0->Q_A = TABLE02_15PROPERTY->getTableQA(mLeakageRate,
@@ -779,13 +787,13 @@ void Assembly::Calc_F_B0nom() {
     }
 
     // refer para 7.5.2 b for load limit calculations, loadCaseNo = 0
-    loadCase->F_B = loadCase->F_Bmax;
-    PR->addDetail("With_F. 117", "F_B", "F_Bmax",
-                  loadCase->F_B, "N", QN(loadCase->F_Bmax), loadCaseNo);
-    loadCase->F_G = loadCase->F_Bmax - loadCase->F_R;
-    PR->addDetail("With_F. 118", "F_G", "F_Bmax - F_R",
-                  loadCase->F_B, "N",
-                  QN(loadCase->F_Bmax) + " + " + QN(loadCase->F_R), loadCaseNo);
+//    loadCase->F_B = loadCase->F_Bmax;
+//    PR->addDetail("With_F. 117", "F_B", "F_Bmax",
+//                  loadCase->F_B, "N", QN(loadCase->F_Bmax), loadCaseNo);
+//    loadCase->F_G = loadCase->F_Bmax - loadCase->F_R;
+//    PR->addDetail("With_F. 118", "F_G", "F_Bmax - F_R",
+//                  loadCase->F_B, "N",
+//                  QN(loadCase->F_Bmax) + " + " + QN(loadCase->F_R), loadCaseNo);
 }
 
 /**
@@ -992,23 +1000,23 @@ void Assembly::Calc_PhiB(int loadCaseNo) {
     if (loadCaseNo == 0) {
         torsionVal =
                 3 * pow(loadCase->cA
-                        * loadCase->Mtnom * (1 + mBolt->etanplus)
+                        * loadCase->MtBnom * (1 + mBolt->etanplus)
                         / mBolt->IB, 2);
-        str1 = " + 3 * (cA * Mtnom * (1 + etanplus) / IB) ^ 2";
+        str1 = " + 3 * (cA * MtBnom * (1 + etanplus) / IB) ^ 2";
         str2 = " + 3 * (" + QN(loadCase->cA)
-                + " * " + QN(loadCase->Mtnom)
+                + " * " + QN(loadCase->MtBnom)
                 + " * (1 + " + QN(mBolt->etanplus)
                 + ") / " + QN(mBolt->IB) + ") ^ 2";
     }
 
     loadCase->PhiB = 1 / (loadCase->fB * loadCase->cB)
-            * pow((pow(loadCase->F_B / mBolt->AB, 2) + torsionVal), 0.5);
+            * pow((pow(loadCase->F_Bmax / mBolt->AB, 2) + torsionVal), 0.5);
     PR->addDetail("Formula 123", "PhiB",
-                  "1 / (fB * cB) * ((F_B / AB) ^ 2"
+                  "1 / (fB * cB) * ((F_Bmax / AB) ^ 2"
                   + str1 + ") ^ 0.5",
                   loadCase->PhiB, "-",
                   "1 / (" + QN(loadCase->fB) + " * " + QN(loadCase->cB)
-                  + ") * ((" + QN(loadCase->F_B) + " / " + QN(mBolt->AB)
+                  + ") * ((" + QN(loadCase->F_Bmax) + " / " + QN(mBolt->AB)
                   + ") ^ 2" + str2 + ") ^ 0.5", loadCaseNo);
 }
 
@@ -1121,10 +1129,10 @@ double Assembly::Calc_cB_helper(Flange* flange, int loadCaseNo) {
  */
 void Assembly::Calc_PhiG(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->PhiG = loadCase->F_G / (mGasket->AGt * loadCase->Q_smax);
-    PR->addDetail("Formula 128", "PhiG", "F_G / (AGt * Q_smax)",
+    loadCase->PhiG = loadCase->F_Gmax / (mGasket->AGt * loadCase->Q_smax);
+    PR->addDetail("Formula 128", "PhiG", "F_Gmax / (AGt * Q_smax)",
                   loadCase->PhiG, "-",
-                  QN(loadCase->F_G) + " / (" + QN(mGasket->AGt)
+                  QN(loadCase->F_Gmax) + " / (" + QN(mGasket->AGt)
                   + " * " + QN(loadCase->Q_smax) + ")", loadCaseNo);
 }
 

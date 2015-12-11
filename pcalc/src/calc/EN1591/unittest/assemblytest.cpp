@@ -32,6 +32,7 @@ void AssemblyTest::exec() {
     Calc_YRTest();
     Calc_bGiTest();
     Calc_dUTTest();
+    Calc_Q_A_QsminTest();
     Calc_F_GminTest();
     Calc_F_G0deltaTest();
     Calc_F_G0reqTest();
@@ -443,6 +444,20 @@ void AssemblyTest::Calc_dUTTest() {
     deleteTarget();
 }
 
+void AssemblyTest::Calc_Q_A_QsminTest() {
+    // special case if F_Bspec > 0
+    SetupIntegralTarget();
+    int i = 0;
+    LoadCase* loadCase = target->mLoadCaseList->at(i);
+    loadCase->F_Bspec = 0.3;
+    loadCase->F_G = 4.5;
+    target->mGasket->AGe = 8.3;
+    target->Calc_Q_A_Qsmin(i);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_A_QsminTest()",
+             0.54216867469879518072, loadCase->Q_A);
+    deleteTarget();
+}
+
 void AssemblyTest::Calc_F_GminTest() {
     SetupIntegralTarget();
     int i = 0;
@@ -742,10 +757,10 @@ void AssemblyTest::Calc_cBTest() {
 void AssemblyTest::Calc_PhiBTest() {
     SetupIntegralTarget();
     int i = 0;
-    target->mLoadCaseList->at(i)->F_B = 12.3;
+    target->mLoadCaseList->at(i)->F_Bmax = 12.3;
     target->mBolt->AB = 2.7;
     target->mLoadCaseList->at(i)->fB = 12.3;
-    target->mLoadCaseList->at(i)->Mtnom = 8.36;
+    target->mLoadCaseList->at(i)->MtBnom = 8.36;
     target->mBolt->IB = 13.78;
     target->mLoadCaseList->at(i)->cA = 5.8;
     target->mLoadCaseList->at(i)->cB = 1.0;
@@ -755,7 +770,7 @@ void AssemblyTest::Calc_PhiBTest() {
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()",
              0.92017261349202768449, target->mLoadCaseList->at(i)->PhiB);
     i = 1;
-    target->mLoadCaseList->at(i)->F_B = 12.3;
+    target->mLoadCaseList->at(i)->F_Bmax = 12.3;
     target->mBolt->AB = 2.7;
     target->mLoadCaseList->at(i)->fB = 12.3;
     target->mLoadCaseList->at(i)->cB = 1.0;
@@ -769,7 +784,7 @@ void AssemblyTest::Calc_PhiGTest() {
     SetupIntegralTarget();
     int i = 0;
     LoadCase* loadCase = target->mLoadCaseList->at(i);
-    loadCase->F_G = 1.1;
+    loadCase->F_Gmax = 1.1;
     target->mGasket->AGt = 2.2;
     loadCase->Q_smax = 3.3;
     target->Calc_PhiG(i);

@@ -34,6 +34,7 @@ private:
     void Calc_YRTest();
     void Calc_bGiTest();
     void Calc_dUTTest();
+    void Calc_Q_A_QsminTest();
     void Calc_F_GminTest();
     void Calc_F_G0deltaTest();
     void Calc_F_G0reqTest();
