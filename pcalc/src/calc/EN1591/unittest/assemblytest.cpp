@@ -16,7 +16,7 @@ AssemblyTest::AssemblyTest() : RB_UnitTest() {
 }
 
 AssemblyTest::~AssemblyTest() {
-    // nothing refer to deleteTarget
+    deleteTarget();
 }
 
 void AssemblyTest::exec() {
@@ -42,6 +42,8 @@ void AssemblyTest::exec() {
     Calc_F_B0nomTest();
     Is_F_B0nom_ValidTest();
     Calc_F_G0maxTest();
+    Calc_F_BmaxTest();
+    Calc_F_GmaxTest();
     Calc_F_G0d_2Test();
     Calc_F_G0dTest();
     Calc_F_GTest();
@@ -123,6 +125,7 @@ void AssemblyTest::SetupRemainingTarget() {
 }
 
 void AssemblyTest::deleteTarget() {
+    if (!target) return;
     delete target->mBolt;  // deletes BoltHole
     target->mBolt = NULL;
     target->mFlange1->mBolt = NULL;
@@ -642,6 +645,28 @@ void AssemblyTest::Calc_F_G0maxTest() {
     target->Calc_F_G0max();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0maxTest()", -4.9,
              target->mLoadCaseList->at(0)->F_Gmax);
+    deleteTarget();
+}
+
+void AssemblyTest::Calc_F_BmaxTest() {
+    SetupIntegralTarget();
+    int loadCaseNo = 1;
+    target->mLoadCaseList->at(loadCaseNo)->F_B = 8.7;
+    target->mBolt->etanplus = 1.9;
+    target->Calc_F_Bmax(loadCaseNo);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BmaxTest()", 25.23,
+             target->mLoadCaseList->at(loadCaseNo)->F_Bmax);
+    deleteTarget();
+}
+
+void AssemblyTest::Calc_F_GmaxTest() {
+    SetupIntegralTarget();
+    int loadCaseNo = 1;
+    target->mLoadCaseList->at(loadCaseNo)->F_Bmax = 8.2;
+    target->mLoadCaseList->at(loadCaseNo)->F_R = 7.9;
+    target->Calc_F_Gmax(loadCaseNo);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GmaxTest()", 0.3,
+             target->mLoadCaseList->at(loadCaseNo)->F_Gmax);
     deleteTarget();
 }
 

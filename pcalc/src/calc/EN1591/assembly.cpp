@@ -750,11 +750,6 @@ void Assembly::Calc_F_B0nom() {
                       loadCase->F_Bnom, "N",
                       QN(loadCase->F_Breq) + " / (1 - "
                       + QN(mBolt->etanminus) + ")", loadCaseNo);
-        loadCase->F_Bmax = loadCase->F_Bnom * (1 + mBolt->etanplus);
-        PR->addDetail("Formula 117", "F_Bmax", "F_Bnom * (1 + etanplus)",
-                      loadCase->F_Bmax, "N",
-                      QN(loadCase->F_Bnom) + " * (1 + "
-                      + QN(mBolt->etanplus) + ")", loadCaseNo);
     } else {
         // Use uncontrolled standard ring, F_Bav already calculated
         // Formula B.2, 116, 0.5 is fixed e1+ and e1-
@@ -777,23 +772,13 @@ void Assembly::Calc_F_B0nom() {
                       loadCase->F_Bmin, "N",
                       QN(loadCase->F_Bnom) + " * (1 - "
                       + QN(etanplusminus) + ")", loadCaseNo);
-
-
-        loadCase->F_Bmax = loadCase->F_Bnom * (1 + mBolt->etanplus);
-        PR->addDetail("Formula 113", "F_Bmax", "F_Bnom * (1 + etanplus)",
-                      loadCase->F_Bmax, "N",
-                      QN(loadCase->F_Bnom) + " * (1 + "
-                      + QN(mBolt->etanplus) + ")", loadCaseNo);
     }
 
-    // refer para 7.5.2 b for load limit calculations, loadCaseNo = 0
-//    loadCase->F_B = loadCase->F_Bmax;
-//    PR->addDetail("With_F. 117", "F_B", "F_Bmax",
-//                  loadCase->F_B, "N", QN(loadCase->F_Bmax), loadCaseNo);
-//    loadCase->F_G = loadCase->F_Bmax - loadCase->F_R;
-//    PR->addDetail("With_F. 118", "F_G", "F_Bmax - F_R",
-//                  loadCase->F_B, "N",
-//                  QN(loadCase->F_Bmax) + " + " + QN(loadCase->F_R), loadCaseNo);
+    loadCase->F_Bmax = loadCase->F_Bnom * (1 + mBolt->etanplus);
+    PR->addDetail("Formula 113 117", "F_Bmax", "F_B * (1 + etanplus)",
+                  loadCase->F_Bmax, "N",
+                  QN(loadCase->F_B) + " * (1 + "
+                  + QN(mBolt->etanplus) + ")", loadCaseNo);
 }
 
 /**
@@ -860,6 +845,31 @@ void Assembly::Calc_F_G0max() {
     PR->addDetail("Formula 118", "F_Gmax", "F_Bmax - F_R",
                   loadCase->F_Gmax, "N",
                   QN(loadCase->F_Bmax) + " - " + QN(loadCase->F_R));
+}
+
+/**
+ * @brief After Formula 122: calculate F_Bmax for load limit calculation
+ * @param loadCaseNo
+ */
+void Assembly::Calc_F_Bmax(int loadCaseNo) {
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    loadCase->F_Bmax = loadCase->F_B * (1 + mBolt->etanplus);
+    PR->addDetail("After_F. 122", "F_Bmax", "F_B * (1 + etanplus)",
+                  loadCase->F_Bmax, "N",
+                  QN(loadCase->F_B) + " * (1 + "
+                  + QN(mBolt->etanplus) + ")", loadCaseNo);
+}
+
+/**
+ * @brief After Formula 122: Maximum gasket load for load limit calculation
+ * @param loadCaseNo
+ */
+void Assembly::Calc_F_Gmax(int loadCaseNo) {
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    loadCase->F_Gmax = loadCase->F_Bmax - loadCase->F_R;
+    PR->addDetail("After_F. 122", "F_Gmax", "F_Bmax - F_R",
+                  loadCase->F_Gmax, "N",
+                  QN(loadCase->F_Bmax) + " - " + QN(loadCase->F_R), loadCaseNo);
 }
 
 /**

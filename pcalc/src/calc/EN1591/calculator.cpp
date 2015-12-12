@@ -141,6 +141,11 @@ void Calculator::exec() {
 
             // Also reset initial bolt load
             loadCase0->F_B = loadCase0->F_G + loadCase0->F_R;
+            PR->addDetail("After_F. 108", "F_B",
+                          "F_B (new initial force)",
+                          loadCase0->F_B, "N", QN(loadCase0->F_G)
+                          + " + " + QN(loadCase0->F_R),
+                          loadCaseNo);
         }
 
         mIsFirstApproximation = true;
@@ -421,6 +426,8 @@ void Calculator::F120_to_122(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_G(loadCaseNo);
     assembly->Calc_F_B(loadCaseNo);
     assembly->Calc_Q_G(loadCaseNo); // 3rd time?
+    assembly->Calc_F_Bmax(loadCaseNo);
+    assembly->Calc_F_Gmax(loadCaseNo);
 }
 
 void Calculator::F123_to_151(Assembly* assembly, int loadCaseNo) {
