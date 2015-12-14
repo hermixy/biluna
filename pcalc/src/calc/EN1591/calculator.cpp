@@ -426,8 +426,8 @@ void Calculator::F120_to_122(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_G(loadCaseNo);
     assembly->Calc_F_B(loadCaseNo);
     assembly->Calc_Q_G(loadCaseNo); // 3rd time?
-    assembly->Calc_F_Bmax(loadCaseNo);
-    assembly->Calc_F_Gmax(loadCaseNo);
+//    assembly->Calc_F_Bmax(loadCaseNo);
+//    assembly->Calc_F_Gmax(loadCaseNo);
 }
 
 void Calculator::F123_to_151(Assembly* assembly, int loadCaseNo) {

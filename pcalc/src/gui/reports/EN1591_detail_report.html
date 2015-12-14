@@ -1,6 +1,10 @@
 <html><head></head><body>
-<p>flange #: -&nbsp;<br>plant: -&nbsp;<br>ID code: -&nbsp;<br>nomenclature: -&nbsp;</p>
-<p>Flange calculation according to EN 1591-1:2001 + A1:2009</p>
+<h2>Flange calculation according to EN 1591-1:2014</h2>
+<table border="0" width="600" cellspacing="0" cellpadding="2">
+<tr><td><h4>flange number</h4></td><td id="{$number}">&nbsp;</td><td><h4>Date</h4></td><td id="{$date}">&nbsp;</td></tr>
+<tr><td><h4>description</h4></td><td id="{$description}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td><h4>engineer</h4></td><td id="{$nameengineer}">&nbsp;</td><td><h4>Revision</h4></td><td id="{$revision}">&nbsp;</td></tr>
+</table>
 <h2>detailed calculation results</h2>
 <h3>calculation parameters</h3>
 <table border="1" width="600" cellspacing="0" cellpadding="2">
@@ -46,7 +50,7 @@
 <tr><td>theoretical gasket width</td><td>b<sub>Gt</sub></td><td id="{$bGt}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>theoretical mean gasket diameter</td><td>d<sub>Gt</sub></td><td id="{$dGt}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>theoretical gasket area</td><td>A<sub>Gt</sub></td><td id="{$AGt}">&nbsp;</td><td></td><td>mm<sup>2</sup></td></tr>
-<tr><td>gasket force for calculation of width</td><td>F<sub>G0</sub></td><td id="{$F_G}">&nbsp;</td><td></td><td>mm</td></tr>
+<tr><td>gasket force for calculation of width</td><td>F<sub>G0</sub></td><td id="{$F_G}">&nbsp;</td><td></td><td>N</td></tr>
 <tr><td>interim gasket width</td><td>b<sub>Gi</sub></td><td id="{$bGi}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>effective gasket width</td><td>b<sub>Ge</sub></td><td id="{$bGe}">&nbsp;</td><td></td><td>mm</td></tr>
 <tr><td>effective mean gasket diameter</td><td>d<sub>Ge</sub></td><td id="{$dGe}">&nbsp;</td><td></td><td>mm</td></tr>
@@ -82,9 +86,9 @@
 <tr><td>nominal bolt force</td><td>F<sub>B0nom</sub></td><td id="{$F_Bnom[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td>check of min.bolt force</td><td>F<sub>B0req</sub></td><td id="{$result114}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 <tr><td>max. bolt force</td><td>F<sub>B0max</sub></td><td id="{$F_Bmax[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
-<tr><td>max.bolt force</td><td>F<sub>G0max</sub></td><td id="{$F_Gmax}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
+<tr><td>max. gasket force</td><td>F<sub>G0max</sub></td><td id="{$F_Gmax}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 
-<tr><td><h4>internal forces in subsequent condition</h4></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td><h4>required forces in subsequent condition</h4></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td>max. gasket force</td><td>F<sub>G0d</sub></td><td id="{$F_Gd[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td>accumulation of plastic deformation</td><td></td><td>TODO:</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 <tr><td>gasket force (Formula 120, 121)</td><td>F<sub>G</sub></td><td id="{$F_G[0]}">&nbsp;</td><td id="{$F_G[1]}">&nbsp;</td><td id="{$F_G[2]}">&nbsp;</td><td id="{$F_G[3]}">&nbsp;</td><td>N</td></tr>
@@ -96,7 +100,7 @@
 <table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>compliance of min. required gasket stress</td><td>Qmin&gt;Qsmin</td><td>TODO ok</td><td>ok</td><td>ok</td><td>ok</td><td>-</td></tr>
+<tr><td>compliance of min. required gasket stress</td><td>Qmin&gt;Qsmin</td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td>-</td></tr>
 </tbody></table>
 
 <h3>Checking the admissibility of the load ratio</h3>

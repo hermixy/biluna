@@ -219,8 +219,8 @@ void Flange::Calc_dK1() {
     if (mWasher->isPresent()) {
         mWasher->dK1 = std::max(mBolt->mBoltHole->d5, mWasher->dW1);
         PR->addDetail("Formula 46", "dK1(" + QN(mFlangeNumber) + ")",
-                      "max(d5, dW1)", mWasher->dK1, "mm",
-                      "max(" + QN(mBolt->mBoltHole->d5) + ", "
+                      "max(d5; dW1)", mWasher->dK1, "mm",
+                      "max(" + QN(mBolt->mBoltHole->d5) + "; "
                       + QN(mWasher->dW1) + ")");
     }
 }
@@ -1188,15 +1188,23 @@ void Flange::Calc_WF(int loadCaseNo) {
  */
 void Flange::Calc_PhiF(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    QString strF_G = "F_G";
+    double valF_G = loadCase->F_G;
+
+    if (loadCaseNo == 0) {
+        strF_G = "F_Gmax";
+        valF_G = loadCase->F_Gmax;
+    }
+
     double tmp_WF = loadCase->WF1;
 
     if (getFlangeNumber() == 2) {
         tmp_WF = loadCase->WF2;
     }
 
-    double tmp_PhiF = (fabs(loadCase->F_Gmax * hG + loadCase->F_Q
+    double tmp_PhiF = (fabs(valF_G * hG + loadCase->F_Q
                            * (hH - hP) + loadCase->F_R * hH)) / tmp_WF;
-    QString str = "(abs(" + QN(loadCase->F_Gmax) + " * " + QN(hG) + " + "
+    QString str = "(abs(" + QN(valF_G) + " * " + QN(hG) + " + "
             + QN(loadCase->F_Q) + " * (" + QN(hH) + " - " + QN(hP)
             + ") + " + QN(loadCase->F_R) + " * " + QN(hH) + ")) / "
             + QN(tmp_WF);
@@ -1204,12 +1212,14 @@ void Flange::Calc_PhiF(int loadCaseNo) {
     if (getFlangeNumber() == 1) {
         loadCase->PhiF1 = tmp_PhiF;
         PR->addDetail("Formula 129", "PhiF(" + QN(mFlangeNumber) + ")",
-                      "(abs(F_Gmax * hG1 + F_Q * (hH1 - hP1) + F_R * hH1)) / WF1",
+                      "(abs(" + strF_G + " * hG1 + F_Q * (hH1 - hP1) "
+                                         "+ F_R * hH1)) / WF1",
                       loadCase->PhiF1, "-", str, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiF2 = tmp_PhiF;
         PR->addDetail("Formula 129", "PhiF(" + QN(mFlangeNumber) + ")",
-                      "(abs(F_Gmax * hG2 + F_Q * (hH2 - hP2) + F_R * hH2)) / WF2",
+                      "(abs(" + strF_G + " * hG2 + F_Q * (hH2 - hP2) "
+                                         "+ F_R * hH2)) / WF2",
                       loadCase->PhiF2, "-", str, loadCaseNo);
     }
 }

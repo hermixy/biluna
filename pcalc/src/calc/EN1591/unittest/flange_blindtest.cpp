@@ -48,6 +48,7 @@ void Flange_BlindTest::setupTarget() {
         target->mGasket = new Gasket();
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
+        target->mLoadCaseList->createLoadCase();
     }
 
     target->d0 = 320.1; //inside diameter
@@ -205,7 +206,6 @@ void Flange_BlindTest::Calc_WFTest() {
 void Flange_BlindTest::Calc_PhiFTest() {
     setupTarget();
     int loadCaseNo = 0;
-
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
     loadCase->F_Bmax = 1.1;
     target->hG = 2.3;
@@ -216,7 +216,23 @@ void Flange_BlindTest::Calc_PhiFTest() {
     loadCase->WF1 = 4.3;
 
     target->Calc_PhiF(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_PhiFTest", 81.192248062015508,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_PhiFTest",
+             81.192248062015508,
+             target->mLoadCaseList->at(loadCaseNo)->PhiF1);
+
+    loadCaseNo = 1;
+    loadCase = target->mLoadCaseList->at(loadCaseNo);
+    loadCase->F_B = 1.1;
+    target->hG = 2.3;
+    loadCase->F_Q = 3.4;
+    target->rho = 4.5;
+    target->mGasket->dGe = 5.6;
+    loadCase->F_R = 6.7;
+    loadCase->WF1 = 8.6;
+
+    target->Calc_PhiF(loadCaseNo);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_PhiFTest",
+             40.596124031007754,
              target->mLoadCaseList->at(loadCaseNo)->PhiF1);
 }
 
@@ -263,7 +279,20 @@ void Flange_BlindTest::Calc_PhiXTest() {
     loadCase->WX1 = 3.2;
 
     target->Calc_PhiX(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_Calc_PhiXTest()", 2.615625,
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_Calc_PhiXTest()",
+             2.615625,
+             target->mLoadCaseList->at(loadCaseNo)->PhiX1);
+
+    loadCaseNo = 1;
+    loadCase = target->mLoadCaseList->at(loadCaseNo);
+    loadCase->F_B = 9.3;
+    target->d3 = 6.4;
+    target->dX = 4.6;
+    loadCase->WX1 = 6.4;
+
+    target->Calc_PhiX(loadCaseNo);
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_Calc_PhiXTest()",
+             1.3078125,
              target->mLoadCaseList->at(loadCaseNo)->PhiX1);
 }
 

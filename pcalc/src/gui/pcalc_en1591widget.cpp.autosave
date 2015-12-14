@@ -970,7 +970,7 @@ void PCALC_EN1591Widget::insertReportInputData(QString& report,
         varName = mem->getName();
         varData = mem->getValue().toString();
         report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
-                       "<td id=\"{$" + varName + "}\"><div align=\"right\">"
+                       "<td id=\"{$" + varName + "}\"><div align=\"left\">"
                        + varData + "</div></td>");
     }
 

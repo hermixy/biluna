@@ -58,6 +58,8 @@ private:
     void setInput();
     void setSettings();
     void createDetailReport();
+    void insertReportInputData(QString& report, RB_ObjectBase* obj);
+    void insertReportCalculationData(QString& report, RB_ObjectBase* obj);
     void createValidationReport();
     void createUnitTestSummary();
     void createUnitTestDetail();

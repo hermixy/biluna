@@ -255,29 +255,37 @@ void Flange_Blind::Calc_WF(int loadCaseNo) {
  */
 void Flange_Blind::Calc_PhiF(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    QString strF_B = "F_B";
+    double valF_B = loadCase->F_B;
+
+    if (loadCaseNo == 0) {
+        strF_B = "F_Bmax";
+        valF_B = loadCase->F_Bmax;
+    }
+
     double tmp_WF = loadCase->WF1;
 
     if (getFlangeNumber() == 2) {
         tmp_WF = loadCase->WF2;
     }
 
-    double tmpVal1 = loadCase->F_Bmax * hG + loadCase->F_Q *(1 - pow(rho, 3))
+    double tmpVal1 = valF_B * hG + loadCase->F_Q *(1 - pow(rho, 3))
             * mGasket->dGe / 6;
     double tmpVal2 = loadCase->F_R *(1 - rho) * mGasket->dGe / 2;
     double tmp_PhiF = std::max(fabs(tmpVal1 + tmpVal2),
                         std::max(fabs(tmpVal1), fabs(tmpVal2))) / tmp_WF;
-    QString str = "max(abs(F_Bmax * hG + F_Q *(1 - rho ^ 3) * dGe / 6 "
-                  "+ F_R *(1 - rho) * dGe / 2), max(abs(F_Bmax * hG "
-                  "+ F_Q *(1 - rho ^ 3) * dGe / 6), "
+    QString str = "max(abs(" + strF_B + " * hG + F_Q *(1 - rho ^ 3) * dGe / 6 "
+                  "+ F_R *(1 - rho) * dGe / 2); max(abs(" + strF_B + " * hG "
+                  "+ F_Q *(1 - rho ^ 3) * dGe / 6); "
                   "abs(F_R *(1 - rho) * dGe / 2))) / WF";
 
-    QString strVal1 = QN(loadCase->F_Bmax) + " * " + QN(hG) + " + "
+    QString strVal1 = QN(valF_B) + " * " + QN(hG) + " + "
             + QN(loadCase->F_Q) + " *(1 - " + QN(rho) + " ^ 3) * "
             + QN(mGasket->dGe) + " / 6";
     QString strVal2 = QN(loadCase->F_R) + " *(1 - " + QN(rho) + ") * "
             + QN(mGasket->dGe) + " / 2";
     QString strPhiF = "max(abs(" + strVal1 + " + " + strVal2
-            + "), max(abs(" + strVal1 + "), abs(" + strVal2 + "))) / "
+            + "); max(abs(" + strVal1 + "); abs(" + strVal2 + "))) / "
             + QN(tmp_WF);
 
 
@@ -298,19 +306,26 @@ void Flange_Blind::Calc_PhiF(int loadCaseNo) {
  */
 void Flange_Blind::Calc_PhiX(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    QString strF_B = "F_B";
+    double valF_B = loadCase->F_B;
+
+    if (loadCaseNo == 0) {
+        strF_B = "F_Bmax";
+        valF_B = loadCase->F_Bmax;
+    }
 
     if (getFlangeNumber() == 1) {
-        loadCase->PhiX1 = loadCase->F_Bmax * (d3 - dX) / (2 * loadCase->WX1);
+        loadCase->PhiX1 = valF_B * (d3 - dX) / (2 * loadCase->WX1);
         PR->addDetail("Formula 147", "PhiX(" + QN(mFlangeNumber) + ")",
-                      "F_Bmax * (d3 - dX) / (2 * WX1)", loadCase->PhiX1, "-",
-                      QN(loadCase->F_Bmax) + " * (" + QN(d3) + " - "
+                      strF_B + " * (d3 - dX) / (2 * WX1)", loadCase->PhiX1, "-",
+                      QN(valF_B) + " * (" + QN(d3) + " - "
                       + QN(dX) + ") / (2 * " + QN(loadCase->WX1) + ")",
                       loadCaseNo);
     } else if (getFlangeNumber() == 2) {
-        loadCase->PhiX2 = loadCase->F_Bmax * (d3 - dX) / (2 * loadCase->WX2);
+        loadCase->PhiX2 = valF_B * (d3 - dX) / (2 * loadCase->WX2);
         PR->addDetail("Formula 147", "PhiX(" + QN(mFlangeNumber) + ")",
-                      "F_Bmax * (d3 - dX) / (2 * WX2)", loadCase->PhiX2, "-",
-                      QN(loadCase->F_Bmax) + " * (" + QN(d3) + " - "
+                      strF_B + " * (d3 - dX) / (2 * WX2)", loadCase->PhiX2, "-",
+                      QN(valF_B) + " * (" + QN(d3) + " - "
                       + QN(dX) + ") / (2 * " + QN(loadCase->WX2) + ")",
                       loadCaseNo);
     }

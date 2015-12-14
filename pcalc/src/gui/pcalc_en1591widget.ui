@@ -3274,7 +3274,7 @@
           <number>3</number>
          </property>
          <item row="1" column="0">
-          <widget class="QTextEdit" name="teCalculationReport"/>
+          <widget class="RB_TextEdit" name="teCalculationReport"/>
          </item>
          <item row="0" column="0">
           <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -3374,6 +3374,11 @@
    <class>RB_TableView</class>
    <extends>QTableView</extends>
    <header location="global">rb_tableview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RB_TextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>rb_textedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

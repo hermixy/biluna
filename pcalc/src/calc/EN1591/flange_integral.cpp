@@ -152,12 +152,12 @@ void Flange_Integral::Calc_dE() {
         dE = 0.5 * (std::min(d1 - e1 + eE, d2 + e2 - eE)
                     + std::max(d1 + e1 - eE, d2 - e2 + eE));
         PR->addDetail("Formula 20", "dE(" + QN(mFlangeNumber) + ")",
-                      "0.5 * (Min(d1 - e1 + eE, d2 + e2 - eE) "
-                      "+ Math.Max(d1 + e1 - eE, d2 - e2 + eE))", dE, "-",
+                      "0.5 * (min(d1 - e1 + eE; d2 + e2 - eE) "
+                      "+ max(d1 + e1 - eE; d2 - e2 + eE))", dE, "-",
                       "0.5 * (min(" + QN(d1) + " - " + QN(e1) + " + "
-                      + QN(eE) + ", " + QN(d2) + " + " + QN(e2) + " - "
+                      + QN(eE) + "; " + QN(d2) + " + " + QN(e2) + " - "
                       + QN(eE) + ") + max(" + QN(d1) + " + " + QN(e1) + " - "
-                      + QN(eE) + ", " + QN(d2) + " - " + QN(e2) + " + "
+                      + QN(eE) + "; " + QN(d2) + " - " + QN(e2) + " + "
                       + QN(eE) + "))");
     }
 }

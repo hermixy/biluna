@@ -189,12 +189,12 @@ void Flange_Loose::Calc_dE() {
         dE = 0.5 * (std::min(d1 - e1 + eE, d2 + e2 - eE)
                     + std::max(d1 + e1 - eE, d2 - e2 + eE));
         PR->addDetail("Formula 20", "dE(" + QN(mFlangeNumber) + ")",
-                      "0.5 * (Min(d1 - e1 + eE, d2 + e2 - eE) "
-                      "+ Math.Max(d1 + e1 - eE, d2 - e2 + eE))", dE, "-",
+                      "0.5 * (min(d1 - e1 + eE; d2 + e2 - eE) "
+                      "+ max(d1 + e1 - eE; d2 - e2 + eE))", dE, "-",
                       "0.5 * (min(" + QN(d1) + " - " + QN(e1) + " + "
-                      + QN(eE) + ", " + QN(d2) + " + " + QN(e2) + " - "
+                      + QN(eE) + "; " + QN(d2) + " + " + QN(e2) + " - "
                       + QN(eE) + ") + max(" + QN(d1) + " + " + QN(e1) + " - "
-                      + QN(eE) + ", " + QN(d2) + " - " + QN(e2) + " + "
+                      + QN(eE) + "; " + QN(d2) + " - " + QN(e2) + " + "
                       + QN(eE) + "))");
     }
 }
@@ -415,7 +415,7 @@ void Flange_Loose::Calc_d70() {
 void Flange_Loose::Calc_d7minMax() {
     d7 = std::min(std::max(d7min, d7), d7max);
     PR->addDetail("Formula 84", "result84(" + QN(mFlangeNumber) + ")",
-                  "min(max(d7min, d7), d7max)", d7, "mm",
+                  "min(max(d7min; d7); d7max)", d7, "mm",
                   "min(max(" + QN(d7min) + "; " + QN(d7) + "); "
                   + QN(d7max) + ")");
 }
@@ -507,25 +507,33 @@ void Flange_Loose::Calc_WL(int loadCaseNo) {
  */
 void Flange_Loose::Calc_PhiL(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    QString strF_B = "F_B";
+    double valF_B = loadCase->F_B;
+
+    if (loadCaseNo == 0) {
+        strF_B = "F_Bmax";
+        valF_B = loadCase->F_Bmax;
+    }
+
     double tmp_WL = loadCase->WL1;
 
     if (getFlangeNumber() == 2) {
         tmp_WL = loadCase->WL2;
     }
 
-    double tmp_PhiL = loadCase->F_Bmax * hL / tmp_WL;
+    double tmp_PhiL = valF_B * hL / tmp_WL;
 
     if (getFlangeNumber() == 1) {
         loadCase->PhiL1 = tmp_PhiL;
         PR->addDetail("Formula 149", "PhiL(" + QN(mFlangeNumber) + ")",
-                      "F_Bmax * hL1 / WL1", loadCase->PhiL1, "-",
-                      QN(loadCase->F_Bmax) + " * " + QN(hL) + " / " + QN(tmp_WL),
+                      strF_B + " * hL1 / WL1", loadCase->PhiL1, "-",
+                      QN(valF_B) + " * " + QN(hL) + " / " + QN(tmp_WL),
                       loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiL2 = tmp_PhiL;
         PR->addDetail("Formula 149", "PhiL(" + QN(mFlangeNumber) + ")",
-                      "F_Bmax * hL2 / WL2", loadCase->PhiL2, "-",
-                      QN(loadCase->F_Bmax) + " * " + QN(hL) + " / " + QN(tmp_WL),
+                      strF_B + " * hL2 / WL2", loadCase->PhiL2, "-",
+                      QN(valF_B) + " * " + QN(hL) + " / " + QN(tmp_WL),
                       loadCaseNo);
     }
 }

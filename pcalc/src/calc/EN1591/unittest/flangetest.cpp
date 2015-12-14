@@ -60,6 +60,7 @@ void FlangeTest::setupTarget() {
         target->mBolt = new Bolt();
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
+        target->mLoadCaseList->createLoadCase();
         target->mGasket = new Gasket();
     }
 
@@ -466,7 +467,6 @@ void FlangeTest::Calc_WFTest() {
 void FlangeTest::Calc_PhiFTest() {
     setupTarget();
     int loadCaseNo = 0;
-
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
     loadCase->F_Gmax = 1.1;
     target->hG = 2.2;
@@ -478,6 +478,21 @@ void FlangeTest::Calc_PhiFTest() {
 
     target->Calc_PhiF(loadCaseNo);
     areEqual(PR->getLastOutput(), "FlangeTest::Calc_PhiFTest()", 3.2142857142857144,
+             target->mLoadCaseList->at(loadCaseNo)->PhiF1);
+
+    loadCaseNo = 1;
+    loadCase = target->mLoadCaseList->at(loadCaseNo);
+    loadCase->F_G = -9.1;
+    target->hG = 2.3;
+    loadCase->F_Q = 6.3;
+    target->hH = 4.7;
+    target->hP = 5.4;
+    loadCase->F_R = -9.9;
+    loadCase->WF1 = 8.7;
+
+    target->Calc_PhiF(loadCaseNo);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PhiFTest()",
+             8.26091954022988505747,
              target->mLoadCaseList->at(loadCaseNo)->PhiF1);
 }
 

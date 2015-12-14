@@ -539,13 +539,6 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
 
         double tmpVal2 = 0;
         QString tmpVal2Str = "";
-
-        if (mGasket->frmType == Gasket::Flat) {
-            tmpVal2 = -2 * loadCase->mForce->M_AI / mGasket->dGt;
-            tmpVal2Str = "-2 * " + QN(loadCase->mForce->M_AI) + " / "
-                    + QN(mGasket->dGt) + " ";
-        }
-
         double muG = loadCase->muG;
 
         if (muG <= 0) {
@@ -554,22 +547,28 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
             delete table;
         }
 
-        tmpVal2 += loadCase->mForce->F_LI / muG
+        tmpVal2 = loadCase->mForce->F_LI / muG
                 + 2 * loadCase->mForce->M_Z / (muG * mGasket->dGt);
-        tmpVal2Str += QN(loadCase->mForce->F_LI) + " / " + QN(muG) + " + 2 * "
+        tmpVal2Str = QN(loadCase->mForce->F_LI) + " / " + QN(muG) + " + 2 * "
                 + QN(loadCase->mForce->M_Z) + " / (" + QN(muG) + " * "
                 + QN(mGasket->dGt) + ")";
+
+        if (mGasket->frmType == Gasket::Flat) {
+            tmpVal2 += -2 * loadCase->mForce->M_AI / mGasket->dGt;
+            tmpVal2Str += " - 2 * " + QN(loadCase->mForce->M_AI) + " / "
+                    + QN(mGasket->dGt);
+        }
 
         double tmpVal3 = -(loadCase->F_Q + loadCase->F_R);
         QString tmpVal3Str = "-("+ QN(loadCase->F_Q) + " + "
                 + QN(loadCase->F_R) + ")";
         loadCase->F_Gmin = std::max(std::max(tmpVal1, tmpVal2), tmpVal3);
         PR->addDetail("Formula 104", "F_Gmin",
-                      "Max(Max(AGe * Q_sminL, "
+                      "max(max(AGe * Q_sminL, "
                       "F_LI / muG + 2 * M_Z / (muG * dGt) - 2 * M_AI / dGt), "
                       "F_Q + F_R)",
-                      loadCase->F_Gmin, "N", "max(max(" + tmpVal1Str + ", "
-                      + tmpVal2Str + "), " + tmpVal3Str + ")",
+                      loadCase->F_Gmin, "N", "max(max(" + tmpVal1Str + "; "
+                      + tmpVal2Str + "); " + tmpVal3Str + ")",
                       loadCaseNo);
     }
 }
@@ -599,6 +598,12 @@ void Assembly::Calc_delta_eGc(int loadCaseNo) {
                       + QN(mGasket->dG1_EN13555) + " ^ 2) * "
                       + QN(loadCase0->Q_A) + " * (1 - "
                       + QN(loadCaseI->P_QR) + ")", loadCaseNo);
+//    } else if (0 < loadCaseI->P_QR && loadCaseI->P_QR < 1) {
+//        // Table 16
+
+//        loadCaseI->delta_eGc = 0;
+//        PR->addDetail("Before_F. 105", "delta_eGc", "0",
+//                  loadCaseI->delta_eGc, "mm", "No data available", loadCaseNo);
     } else {
         // no further gasket information available
         loadCaseI->delta_eGc = 0;
@@ -646,7 +651,7 @@ void Assembly::Calc_F_Gdelta(int loadCaseNo) {
     mLoadCaseList->at(0)->F_Gdelta =
             std::max(mLoadCaseList->at(0)->F_Gdelta, tmpF_Gdelta);
     PR->addDetail("Formula 105",
-                  "F_Gdelta", "Max(F_Gdelta, tmpF_Gdelta)",
+                  "F_Gdelta", "max(F_Gdelta; tmpF_Gdelta)",
                   mLoadCaseList->at(0)->F_Gdelta, "N",
                   "max(" + QN(mLoadCaseList->at(0)->F_Gdelta) + "; "
                   + QN(tmpF_Gdelta) + ")", loadCaseNo);
@@ -851,26 +856,26 @@ void Assembly::Calc_F_G0max() {
  * @brief After Formula 122: calculate F_Bmax for load limit calculation
  * @param loadCaseNo
  */
-void Assembly::Calc_F_Bmax(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->F_Bmax = loadCase->F_B * (1 + mBolt->etanplus);
-    PR->addDetail("After_F. 122", "F_Bmax", "F_B * (1 + etanplus)",
-                  loadCase->F_Bmax, "N",
-                  QN(loadCase->F_B) + " * (1 + "
-                  + QN(mBolt->etanplus) + ")", loadCaseNo);
-}
+//void Assembly::Calc_F_Bmax(int loadCaseNo) {
+//    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+//    loadCase->F_Bmax = loadCase->F_B * (1 + mBolt->etanplus);
+//    PR->addDetail("After_F. 122", "F_Bmax", "F_B * (1 + etanplus)",
+//                  loadCase->F_Bmax, "N",
+//                  QN(loadCase->F_B) + " * (1 + "
+//                  + QN(mBolt->etanplus) + ")", loadCaseNo);
+//}
 
 /**
  * @brief After Formula 122: Maximum gasket load for load limit calculation
  * @param loadCaseNo
  */
-void Assembly::Calc_F_Gmax(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->F_Gmax = loadCase->F_Bmax - loadCase->F_R;
-    PR->addDetail("After_F. 122", "F_Gmax", "F_Bmax - F_R",
-                  loadCase->F_Gmax, "N",
-                  QN(loadCase->F_Bmax) + " - " + QN(loadCase->F_R), loadCaseNo);
-}
+//void Assembly::Calc_F_Gmax(int loadCaseNo) {
+//    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+//    loadCase->F_Gmax = loadCase->F_Bmax - loadCase->F_R;
+//    PR->addDetail("After_F. 122", "F_Gmax", "F_Bmax - F_R",
+//                  loadCase->F_Gmax, "N",
+//                  QN(loadCase->F_Bmax) + " - " + QN(loadCase->F_R), loadCaseNo);
+//}
 
 /**
  * @brief Formula 2 (119): Increased gasket load due to more
@@ -891,7 +896,7 @@ void Assembly::Calc_F_G0d_2() {
     loadCase->F_Gd = std::max(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",
-                  "max(" + varStr + ", (2 / 3) "
+                  "max(" + varStr + "; (2 / 3) "
                   "* (1 - 10 / NR) * F_Bmax - F_R)",
                   loadCase->F_Gd, "N",
                   "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / " + QN(mNR)
@@ -919,7 +924,7 @@ void Assembly::Calc_F_G0d() {
     loadCase->F_Gd = std::max(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",
-                  "max(" + varStr + ", (2 / 3) "
+                  "max(" + varStr + "; (2 / 3) "
                   "* (1 - 10 / NR) * F_Bmax - F_R)",
                   loadCase->F_Gd, "N",
                   "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / " + QN(mNR)
@@ -1002,10 +1007,12 @@ void Assembly::Calc_MtBnom() {
  * @param loadCaseNo
  */
 void Assembly::Calc_PhiB(int loadCaseNo) {
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
     double torsionVal = 0.0;
     QString str1 = "";
     QString str2 = "";
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    QString strF_B = "F_B";
+    double valF_B = loadCase->F_B;
 
     if (loadCaseNo == 0) {
         torsionVal =
@@ -1017,16 +1024,18 @@ void Assembly::Calc_PhiB(int loadCaseNo) {
                 + " * " + QN(loadCase->MtBnom)
                 + " * (1 + " + QN(mBolt->etanplus)
                 + ") / " + QN(mBolt->IB) + ") ^ 2";
+        strF_B = "F_Bmax";
+        valF_B = loadCase->F_Bmax;
     }
 
     loadCase->PhiB = 1 / (loadCase->fB * loadCase->cB)
-            * pow((pow(loadCase->F_Bmax / mBolt->AB, 2) + torsionVal), 0.5);
+            * pow((pow(valF_B / mBolt->AB, 2) + torsionVal), 0.5);
     PR->addDetail("Formula 123", "PhiB",
-                  "1 / (fB * cB) * ((F_Bmax / AB) ^ 2"
+                  "1 / (fB * cB) * ((" + strF_B + " / AB) ^ 2"
                   + str1 + ") ^ 0.5",
                   loadCase->PhiB, "-",
                   "1 / (" + QN(loadCase->fB) + " * " + QN(loadCase->cB)
-                  + ") * ((" + QN(loadCase->F_Bmax) + " / " + QN(mBolt->AB)
+                  + ") * ((" + QN(valF_B) + " / " + QN(mBolt->AB)
                   + ") ^ 2" + str2 + ") ^ 0.5", loadCaseNo);
 }
 
@@ -1139,10 +1148,18 @@ double Assembly::Calc_cB_helper(Flange* flange, int loadCaseNo) {
  */
 void Assembly::Calc_PhiG(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->PhiG = loadCase->F_Gmax / (mGasket->AGt * loadCase->Q_smax);
-    PR->addDetail("Formula 128", "PhiG", "F_Gmax / (AGt * Q_smax)",
+    QString strF_G = "F_G";
+    double valF_G = loadCase->F_G;
+
+    if (loadCaseNo == 0) {
+        strF_G = "F_Gmax";
+        valF_G = loadCase->F_Gmax;
+    }
+
+    loadCase->PhiG = valF_G / (mGasket->AGt * loadCase->Q_smax);
+    PR->addDetail("Formula 128", "PhiG", strF_G + " / (AGt * Q_smax)",
                   loadCase->PhiG, "-",
-                  QN(loadCase->F_Gmax) + " / (" + QN(mGasket->AGt)
+                  QN(valF_G) + " / (" + QN(mGasket->AGt)
                   + " * " + QN(loadCase->Q_smax) + ")", loadCaseNo);
 }
 
@@ -1293,6 +1310,11 @@ void Assembly::Calc_F_GImaxmin(int loadCaseNo) {
                       QN(loadCaseI->F_GmaxA) + " / " + QN(mGasket->AGe),
                       loadCaseNo);
     }
+
+    PR->addDetail("After_F. 151", "Q_GminCheck", "Q_GminA >= Q_Gmin",
+                  loadCaseI->Q_GminA >= loadCaseI->Q_G ? 1 : 0, "-",
+                  QN(loadCaseI->Q_GminA) + " >= " + QN(loadCaseI->Q_G),
+                  loadCaseNo);
 }
 
 /**

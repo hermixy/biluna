@@ -412,7 +412,17 @@ void Flange_LooseTest::Calc_PhiLTest() {
     target->hL = 6.3;
     target->mLoadCaseList->at(loadCaseNo)->WL1 = 5.1;
     target->Calc_PhiL(loadCaseNo);
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_PhiLTest()", 5.5588235294117645,
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_PhiLTest()",
+             5.5588235294117645,
+             target->mLoadCaseList->at(loadCaseNo)->PhiL1);
+
+    loadCaseNo = 1;
+    target->mLoadCaseList->at(loadCaseNo)->F_B = 4.5;
+    target->hL = 6.3;
+    target->mLoadCaseList->at(loadCaseNo)->WL1 = 10.2;
+    target->Calc_PhiL(loadCaseNo);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_PhiLTest()",
+             2.77941176470588225,
              target->mLoadCaseList->at(loadCaseNo)->PhiL1);
 }
 
