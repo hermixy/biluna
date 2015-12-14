@@ -110,6 +110,10 @@ bool ACC_PostGlTransaction::postSumList() {
  */
 void ACC_PostGlTransaction::setDebitCredit(RB_ObjectBase* glTrans) {
     RB_String accountId = glTrans->getIdValue("chartmaster_idx").toString();
+    if (!ACC_MODELFACTORY->isValidId(accountId)) {
+        RB_DEBUG->error("ACC_PostGlTransaction::setDebitCredit() id ERROR");
+    }
+RB_DEBUG->print(accountId);
     int periodNo = glTrans->getValue("periodno").toInt();
     mDebitAmt = 0.0;
     mCreditAmt = 0.0;
@@ -117,7 +121,7 @@ void ACC_PostGlTransaction::setDebitCredit(RB_ObjectBase* glTrans) {
     // get existing amounts
     RB_String qStr = "";
     qStr = "SELECT debit, credit FROM acc_glsum WHERE parent='"
-           + accountId + "' AND period=" + RB_String::number(periodNo)+ ";";
+           + accountId + "' AND period=" + RB_String::number(periodNo) + ";";
 
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
@@ -176,11 +180,18 @@ void ACC_PostGlTransaction::setDebitCredit(RB_ObjectBase* glTrans) {
  * @returns true on success
  */
 bool ACC_PostGlTransaction::postTransaction(RB_ObjectBase* glTrans) {
+    RB_String accountId = glTrans->getIdValue("chartmaster_idx").toString();
+    if (!ACC_MODELFACTORY->isValidId(accountId)) {
+        RB_DEBUG->error("ACC_PostGlTransaction::setDebitCredit() id ERROR");
+    }
+
+    int periodNo = glTrans->getValue("periodno").toInt();
+
     RB_String qStr = "";
     qStr = "UPDATE acc_glsum SET debit=" + RB_String::number(mDebitAmt, 'f', 6)
            + ", credit=" + RB_String::number(mCreditAmt, 'f', 6)
-           + " WHERE period=" + glTrans->getValue("periodno").toString()
-           + " AND  parent='" + glTrans->getIdValue("chartmaster_idx").toString() + "';";
+           + " WHERE period=" + RB_String::number(periodNo)
+           + " AND  parent='" + accountId + "';";
 
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 

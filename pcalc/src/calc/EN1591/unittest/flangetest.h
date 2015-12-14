@@ -22,7 +22,10 @@ private:
     void Calc_d5eTest();
     void Calc_pBTest();
     void Calc_hPTest();
-    void Calc_eQTest();
+    void Calc_ePTest();
+    void Calc_eFtTest();
+    void Calc_AFTest();
+    void Calc_eFTest();
     void Calc_ABTest();
     void Calc_XBTest();
     void Calc_etanminusTest();

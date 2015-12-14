@@ -52,10 +52,11 @@ class Assembly : public Assembly_OUT {
 public:
     Assembly();
 
+    void Calc_F_GInitial_1();
     void Calc_F_GInitial();
     void Calc_dGe();
-    void Calc_bGi(int loadCaseNo, bool isFirstApproximation = false);
-    void Calc_Q_G();
+    void Calc_bGi(bool isFirstApproximation = false);
+    void Calc_Q_G(int loadCaseNo);
     void Calc_F_Q(int loadCaseNo);
     void Calc_F_R(int loadCaseNo);
     void Calc_dUI(int loadCaseNo);
@@ -76,15 +77,19 @@ public:
 
     void Calc_F_B0av();
     void Calc_F_B0nom();
+    void Calc_F_B0max();
 
     bool Is_F_B0nom_Valid();
 
     void Calc_F_G0max();
+//    void Calc_F_Bmax(int loadCaseNo);
+//    void Calc_F_Gmax(int loadCaseNo);
+    void Calc_F_G0d_2();
     void Calc_F_G0d();
     void Calc_F_G(int loadCaseNo);
     void Calc_F_B(int loadCaseNo);
     void Calc_Mtnom();
-    void Calc_MtB(); // not used any more
+    void Calc_MtBnom();
     void Calc_PhiB(int loadCaseNo);
 
     bool Is_PhiB_Valid(int loadCaseNo);

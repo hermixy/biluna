@@ -121,6 +121,8 @@ void Calculator::exec() {
     while (!(isFG0largerFG0req && isFG0approximateFG0req)
            && counter < 10
            && (counter < 1 || assembly->mF_Bspec <= 0.0)) {
+        int loadCaseNo = 0;
+
         // Outside loop
         Loop_F55_to_108(assembly);
 
@@ -130,14 +132,20 @@ void Calculator::exec() {
 
         if (!(isFG0largerFG0req && isFG0approximateFG0req)
                 && (assembly->mF_Bspec <= 0.0)) {
-            LoadCase* loadCase0 = assembly->mLoadCaseList->at(0);
+            LoadCase* loadCase0 = assembly->mLoadCaseList->at(loadCaseNo);
             loadCase0->F_G = loadCase0->F_Greq;
-            PR->addDetail("After F.108", "F_G",
+            PR->addDetail("After_F. 108", "F_G",
                           "F_Greq (new initial force)",
-                          loadCase0->F_G, "N", QN(loadCase0->F_Greq), 0);
+                          loadCase0->F_G, "N", QN(loadCase0->F_Greq),
+                          loadCaseNo);
 
             // Also reset initial bolt load
             loadCase0->F_B = loadCase0->F_G + loadCase0->F_R;
+            PR->addDetail("After_F. 108", "F_B",
+                          "F_B (new initial force)",
+                          loadCase0->F_B, "N", QN(loadCase0->F_G)
+                          + " + " + QN(loadCase0->F_R),
+                          loadCaseNo);
         }
 
         mIsFirstApproximation = true;
@@ -183,9 +191,6 @@ void Calculator::Loop_F55_to_108(Assembly* assembly) {
 }
 
 void Calculator::F3_to_24(Assembly* assembly) {
-    assembly->mFlange1->Calc_eQ();
-    assembly->mFlange2->Calc_eQ();
-
     assembly->mFlange1->Calc_pB();
     assembly->mFlange2->Calc_pB();
     assembly->mFlange1->Calc_d5e();
@@ -197,16 +202,28 @@ void Calculator::F3_to_24(Assembly* assembly) {
     assembly->mFlange2->Calc_bF();
     assembly->mFlange1->Calc_dF();
     assembly->mFlange2->Calc_dF();
-    assembly->mFlange1->Calc_AF();
-    assembly->mFlange2->Calc_AF();
     assembly->mFlange1->Calc_bL();
     assembly->mFlange2->Calc_bL();
     assembly->mFlange1->Calc_dL();
     assembly->mFlange2->Calc_dL();
+
+    assembly->mFlange1->Calc_AF();
+    assembly->mFlange2->Calc_AF();
     assembly->mFlange1->Calc_AL();
     assembly->mFlange2->Calc_AL();
+
+    assembly->mFlange1->Calc_eFt();
+    assembly->mFlange2->Calc_eFt();
+    assembly->mFlange1->Calc_eF();
+    assembly->mFlange2->Calc_eF();
+    assembly->mFlange1->Calc_eL();
+    assembly->mFlange2->Calc_eL();
+    assembly->mFlange1->Calc_eP();
+    assembly->mFlange2->Calc_eP();
+
     bool res = assembly->mFlange1->Is_flange_Valid();
     res = assembly->mFlange2->Is_flange_Valid(); // moved to before beta calculation
+
     assembly->mFlange1->Calc_beta();
     assembly->mFlange2->Calc_beta();
     assembly->mFlange1->Calc_eE();
@@ -284,7 +301,13 @@ void Calculator::F54_to_54(Assembly* assembly) 	{
     LoadCase* loadCase = assembly->mLoadCaseList->at(loadCaseNo);
     loadCase->mForce->Calc_M_AI();
     assembly->Calc_F_R(loadCaseNo);
-    assembly->Calc_F_GInitial();
+
+    if (loadCase->F_Bspec > 0.0) {
+        // use Formula 1 (and 2)
+        assembly->Calc_F_GInitial_1();
+    } else {
+        assembly->Calc_F_GInitial();
+    }
 }
 
 void Calculator::F55_to_62_table1(Assembly* assembly) {
@@ -302,26 +325,26 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
         assembly->mGasket->dGe = assembly->mGasket->dGt;
         assembly->mGasket->bGe = assembly->mGasket->bGt;
         assembly->mGasket->Calc_AGe();
-        assembly->Calc_Q_G();
+        assembly->Calc_Q_G(0);
         assembly->mGasket->Calc_E_G(0);
     }
     // HACK: End
 
     assembly->mGasket->Calc_Q_smax(loadCaseNo);
 
-    assembly->Calc_bGi(loadCaseNo, mIsFirstApproximation);
-    assembly->mGasket->Calc_bGe(loadCaseNo);
+    assembly->Calc_bGi(mIsFirstApproximation);
+    assembly->mGasket->Calc_bGe();
     assembly->Calc_dGe();
     assembly->mGasket->Calc_AGe();
-    assembly->Calc_Q_G();
+    assembly->Calc_Q_G(0);
     assembly->mGasket->Calc_E_G(loadCaseNo);
 
     assembly->mFlange1->Calc_d7min(); // loose flange only
     assembly->mFlange2->Calc_d7min(); // loose flange only
     assembly->mFlange1->Calc_d7max(); // loose flange only
     assembly->mFlange2->Calc_d7max(); // loose flange only
-    assembly->mFlange1->Calc_chi(loadCaseNo); // loose flange only
-    assembly->mFlange2->Calc_chi(loadCaseNo); // loose flange only
+    assembly->mFlange1->Calc_chi(); // loose flange only
+    assembly->mFlange2->Calc_chi(); // loose flange only
     assembly->mFlange1->Calc_d70(loadCaseNo); // loose flange only
     assembly->mFlange2->Calc_d70(loadCaseNo); // loose flange only
     assembly->mFlange1->Calc_hG();
@@ -330,7 +353,7 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
 
 void Calculator::F63_to_63(Assembly* assembly, int loadCaseNo) {
     assembly->mGasket->Calc_eG(loadCaseNo);
-    assembly->mGasket->Calc_XG(loadCaseNo);
+    assembly->mGasket->Calc_XG();
 }
 
 void Calculator::F77_to_89(Assembly* assembly, int loadCaseNo) {
@@ -356,7 +379,7 @@ void Calculator::F90_to_102(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_R(loadCaseNo);
 //    assembly->Calc_lB(); already before Formula 42
     assembly->Calc_dUI(loadCaseNo);
-    assembly->Calc_Q_G(); // for determining EG Formula 100
+    assembly->Calc_Q_G(loadCaseNo); // for determining EG Formula 100
     assembly->mGasket->Calc_E_G(loadCaseNo);
     assembly->Calc_YB(loadCaseNo);
     assembly->Calc_YG(loadCaseNo);
@@ -388,19 +411,31 @@ void Calculator::F111_to_118(Assembly* assembly) {
 }
 
 void Calculator::F119_to_119(Assembly* assembly) {
-    assembly->Calc_F_G0d();
+    int loadCaseNo = 0;
+    LoadCase* loadCase = assembly->mLoadCaseList->at(loadCaseNo);
+
+    if (loadCase->F_Bspec > 0.0) {
+        // use Formula 2 (and 1)
+        assembly->Calc_F_G0d_2();
+    } else {
+        assembly->Calc_F_G0d();
+    }
 }
 
 void Calculator::F120_to_122(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_G(loadCaseNo);
     assembly->Calc_F_B(loadCaseNo);
+    assembly->Calc_Q_G(loadCaseNo); // 3rd time?
+//    assembly->Calc_F_Bmax(loadCaseNo);
+//    assembly->Calc_F_Gmax(loadCaseNo);
 }
 
 void Calculator::F123_to_151(Assembly* assembly, int loadCaseNo) {
     // bolt load
-    // assembly->Calc_MtB(); not used anymore
     assembly->mBolt->Calc_kB();
     assembly->Calc_Mtnom();
+    assembly->mBolt->Calc_kB9();
+    assembly->Calc_MtBnom();
     assembly->mBolt->Calc_IB();
     assembly->Calc_cA(loadCaseNo);
     assembly->Calc_cB(loadCaseNo);

@@ -21,9 +21,11 @@ public:
     virtual void Calc_bF();
     virtual void Calc_dF();
     virtual void Calc_AF();
+    virtual void Calc_eF();
     virtual void Calc_bL();
     virtual void Calc_dL();
     virtual void Calc_AL();
+    virtual void Calc_eL();
     virtual void Calc_beta();
     virtual void Calc_eD();
     virtual void Calc_eE();
@@ -44,7 +46,7 @@ public:
     virtual void Calc_d7max();
     virtual void Calc_d70();
     virtual void Calc_d7minMax();
-    virtual void Calc_chi(int loadCaseNo);
+    virtual void Calc_chi();
     virtual void Calc_hG();
     virtual void Calc_hH();
     virtual void Calc_hL();

@@ -25,16 +25,18 @@ Flange_IN::Flange_IN(int flangeNo) : RB_Object() {
     // depends on type of flange
 
     nB = 0;
-    d3 = 0;
     d0 = 0;
+    d3 = 0;
     d4 = 0;
-    temp_d7 = 0;
-    eF = 0;
-    eFt = 0;
-    eP = 1;
     dX = 0;
+    dREC = 0;
+    dRF = 0;
+    eFb = 0;
+    eREC = 0;
     eRF = 0;
+    eQ = 0;
     eX = 0;
+    temp_d7 = 0;
 
     // Blind only
     d9 = 0;
@@ -86,7 +88,9 @@ Flange_OUT::Flange_OUT(int flangeNo) : Flange_IN(flangeNo) {
     pB = 0.0;
     d5e = 0.0;
     d3e = 0.0;
-    eQ = 0.0;
+    eF = 0.0;
+    eFt = 0.0;
+    eP = 0.0;
     bF = 0.0;
     dF = 0.0;
     AF = 0.0;
@@ -124,13 +128,22 @@ Flange_OUT::Flange_OUT(int flangeNo) : Flange_IN(flangeNo) {
 }
 
 /**
- * @brief Figure 8-9: Portion of the flange thickness NOT subject
+ * @brief Figure 8-9: Portion of the flange thickness subject
  * to radial loading.
  */
-void Flange::Calc_eQ() {
-    eQ = eF - eP;
-    PR->addDetail("fig 4-10", "eQ(" + QN(mFlangeNumber) + ")",
-                  "eF - eP", eQ, "mm", QN(eF) + " - " + QN(eP), 0);
+void Flange::Calc_eP() {
+    eP = eF - eQ;
+    PR->addDetail("Before_F. 1 fig 4-10", "eP(" + QN(mFlangeNumber) + ")",
+                  "eF - eQ", eP, "mm", QN(eF) + " - " + QN(eQ));
+}
+
+/**
+ * @brief Flange::Calc_eFt flange thickness at bolt plus raised face
+ */
+void Flange::Calc_eFt() {
+    eFt = eFb + eRF;
+    PR->addDetail("Before_F. 1", "eFt(" + QN(mFlangeNumber) + ")",
+                  "eFb + eRF", eFt, "mm", QN(eFb) + " + " + QN(eRF));
 }
 
 /**
@@ -149,17 +162,17 @@ void Flange::Calc_d5e() {
     if (mBolt->mBoltHole->isBlindHole) {
         mBolt->mBoltHole->d5 = mBolt->mBoltHole->d5t * mBolt->l5t
                 / mBolt->mBoltHole->eFb;
-        PR->addDetail("Formula 4, 5", "d5(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 4 5", "d5(" + QN(mFlangeNumber) + ")",
                       "d5t * l5t / eFb", mBolt->mBoltHole->d5, "mm",
                       QN(mBolt->mBoltHole->d5t) + " * " + QN(mBolt->l5t)
-                      + " / " + QN(mBolt->mBoltHole->eFb), 0);
+                      + " / " + QN(mBolt->mBoltHole->eFb));
     }
 
     d5e = mBolt->mBoltHole->d5 * sqrt(mBolt->mBoltHole->d5 / pB);
-    PR->addDetail("Formula 4, 5", "d5e(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Formula 4 5", "d5e(" + QN(mFlangeNumber) + ")",
                   "d5 * (d5 / pB) ^ 0.5", d5e, "mm",
                   QN(mBolt->mBoltHole->d5) + " * (" + QN(mBolt->mBoltHole->d5)
-                  + " / " + QN(pB) + ") ^ 0.5", 0);
+                  + " / " + QN(pB) + ") ^ 0.5");
 }
 
 /**
@@ -169,7 +182,7 @@ void Flange::Calc_d3e() {
     d3e = d3 * (1.0 - 2.0 / static_cast<double>(nB * nB));
     PR->addDetail("Formula 6", "d3e", "d3 * (1 - 2 / (nB * nB))", d3e, "mm",
                   QN(d3) + " * (1.0 - 2.0 / (" + QN(nB)
-                  + " * " + QN(nB) + "))", 0);
+                  + " * " + QN(nB) + "))");
 }
 
 /**
@@ -179,7 +192,7 @@ void Flange::Calc_AB() {
     mBolt->AB = nB * M_PI / 4 * pow((std::min(mBolt->dBe, mBolt->dBS)), 2);
     PR->addDetail("Formula 41", "AB", "nB * PI / 4 * (Min(dBe, dBS)) ^ 2",
                   mBolt->AB, "mm^2", QN(nB) + " * pi / 4 * (min("
-                  + QN(mBolt->dBe) + ", " + QN(mBolt->dBS) + ")) ^ 2", 0);
+                  + QN(mBolt->dBe) + ", " + QN(mBolt->dBS) + ")) ^ 2");
 }
 
 /**
@@ -196,7 +209,7 @@ void Flange::Calc_XB() {
                   + QN(mBolt->dBS) + ") + (" + QN(mBolt->lB) + " - "
                   + QN(mBolt->lS) + ") / (" + QN(mBolt->dBe) + " * "
                   + QN(mBolt->dBe) + ") + 0.8 / " + QN(mBolt->dB0) + ") / ("
-                  + QN(nB) + " * pi)", 0);
+                  + QN(nB) + " * pi)");
 }
 
 /**
@@ -206,9 +219,9 @@ void Flange::Calc_dK1() {
     if (mWasher->isPresent()) {
         mWasher->dK1 = std::max(mBolt->mBoltHole->d5, mWasher->dW1);
         PR->addDetail("Formula 46", "dK1(" + QN(mFlangeNumber) + ")",
-                      "max(d5, dW1)", mWasher->dK1, "mm",
-                      "max(" + QN(mBolt->mBoltHole->d5) + ", "
-                      + QN(mWasher->dW1) + ")", 0);
+                      "max(d5; dW1)", mWasher->dK1, "mm",
+                      "max(" + QN(mBolt->mBoltHole->d5) + "; "
+                      + QN(mWasher->dW1) + ")");
     }
 }
 
@@ -221,7 +234,7 @@ void Flange::Calc_dK2() {
         PR->addDetail("Formula 47", "dK2(" + QN(mFlangeNumber) + ")",
                       "min(dB4, dW2)", mWasher->dK2, "mm",
                       "min(" + QN(mBolt->dB4) + ", "
-                      + QN(mWasher->dW2) + ")", 0);
+                      + QN(mWasher->dW2) + ")");
     }
 }
 
@@ -234,7 +247,7 @@ void Flange::Calc_XW() {
                 * ((2 * mWasher->bW / (mWasher->bW + mWasher->bKB) + mWasher->eW
                     / (mWasher->bW - mWasher->bKB))
                    / (1 + mWasher->eW / (mWasher->bW - mWasher->bKB)));
-        PR->addDetail("Formula 49, 50","XW(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 49 50","XW(" + QN(mFlangeNumber) + ")",
                       "(eW / (nB * Math.PI * dW * bW)) "
                       "* ((2 * bW / (bW + bKB) + eW "
                       "/ (bW - bKB)) / (1 + eW "
@@ -246,11 +259,11 @@ void Flange::Calc_XW() {
                       + ") + " + QN(mWasher->eW) + " / (" + QN(mWasher->bW)
                       + " - " + QN(mWasher->bKB) + ")) / (1 + " + QN(mWasher->eW)
                       + " / (" + QN(mWasher->bW) + " - " + QN(mWasher->bKB)
-                      + ")))", 0);
+                      + ")))");
     } else {
         mWasher->XW = 0;
-        PR->addDetail("Formula 49, 50", "XW(" + QN(mFlangeNumber) + ")",
-                      "0", mWasher->XW, "1/mm", "0", 0);
+        PR->addDetail("Formula 49 50", "XW(" + QN(mFlangeNumber) + ")",
+                      "0", mWasher->XW, "1/mm", "0");
     }
 }
 
@@ -266,7 +279,7 @@ void Flange::Calc_hP() {
                   "/ 6 + 2 * (eP ^ 2) * dF) / (dGe ^ 2)", hP, "mm",
                   "(((" + QN(tmpdGe) + " - " + QN(dE) + ") ^ 2) * (2 * "
                   + QN(tmpdGe)+ " + " + QN(dE) + ") / 6 + 2 * (" + QN(eP)
-                  + " ^ 2) * " + QN(dF) + ") / (" + QN(tmpdGe) + " ^ 2)", 0);
+                  + " ^ 2) * " + QN(dF) + ") / (" + QN(tmpdGe) + " ^ 2)");
 }
 
 /**
@@ -277,7 +290,7 @@ void Flange::Calc_etanplus() {
     PR->addDetail("Formula B.1", "etanplus",
                   "eta1plus * (1 + 3 / Sqrt(nB)) / 4",
                   mBolt->etanplus, "-", QN(mBolt->eta1plus) + " * (1 + 3 / "
-                  + QN(nB) + " ^ 0.5) / 4", 0);
+                  + QN(nB) + " ^ 0.5) / 4");
 }
 
 /**
@@ -288,7 +301,35 @@ void Flange::Calc_etanminus() {
     PR->addDetail("Formula B.2", "etanminus",
                   "eta1minus * (1 + 3 / Sqrt(nB)) / 4",
                   mBolt->etanminus, "-", QN(mBolt->eta1minus) + " * (1 + 3 / "
-                  + QN(nB) + " ^ 0.5) / 4", 0);
+                  + QN(nB) + " ^ 0.5) / 4");
+}
+
+/**
+ * @brief Before Formula 10: area flange ring + raised face - recess
+ * Raised face can be negative in case of spigot and recess
+ */
+void Flange::Calc_AF() {
+    AF = eFb * (d4 - d0) / 2 + eRF * (dRF - dREC) / 2 - eREC * (dREC - d0) / 2;
+    PR->addDetail("Before_F. 1", "AF(" + QN(mFlangeNumber) + ")",
+                  "eFb * (d4 - d0) / 2 + eRF * (dRF - dREC) / 2"
+                  " - eREC * (dREC - d0) / 2", AF, "mm2",
+                  QN(eFb) + " * (" + QN(d4) + " - " + QN(d0) + ") / 2 + "
+                  + QN(eRF) + " * (" + QN(dRF) + " - " + QN(dREC) + ") / 2 - "
+                  + QN(eREC) + " * (" + QN(dREC) + " - " + QN(d0) + ") / 2");
+}
+
+/**
+ * @brief Formula 10: Area for effective axial thickness of flange
+ */
+void Flange::Calc_eF() {
+    eF = 2 * AF / (d4 - d0);
+    PR->addDetail("Formula 10", "eF(" + QN(mFlangeNumber) + ")",
+                  "2 * AF / (d4 - d0)", eF, "mm^2",
+                  "2 * " + QN(AF) + " / (" + QN(d4) + " - " + QN(d0) + ")");
+}
+
+void Flange::Calc_eL() {
+    // does nothing, Formula 16
 }
 
 void Flange::Calc_beta() {
@@ -351,7 +392,7 @@ void Flange::Calc_d7minMax(int /*loadCaseNo*/) {
     // does nothing, for loose flange Formula 84
 }
 
-void Flange::Calc_chi(int /*loadCaseNo*/) {
+void Flange::Calc_chi() {
     // does nothing, for loose flange Formula 63
 }
 
@@ -365,16 +406,16 @@ bool Flange::Is_PhiF_valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = mLoadCaseList->at(loadCaseNo)->PhiF1 <= 1.0;
-        PR->addDetail("Formula 129", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 129", "result129(" + QN(mFlangeNumber) + ")",
                       "PhiF1 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiF1)
-                      + " &lt;= 1.0", 0);
+                      + " &lt;= 1.0", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = mLoadCaseList->at(loadCaseNo)->PhiF2 <= 1.0;
-        PR->addDetail("Formula 129", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 129", "result129(" + QN(mFlangeNumber) + ")",
                       "PhiF2 <= 1.0", static_cast<int>(result), "-",
                       QN(mLoadCaseList->at(loadCaseNo)->PhiF1)
-                      + " &lt;= 1.0", 0);
+                      + " &lt;= 1.0", loadCaseNo);
     }
 
     return result;
@@ -507,14 +548,16 @@ bool Flange::Is_cM_valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = mLoadCaseList->at(loadCaseNo)->cM1 >= 0.0;
-        PR->addDetail("After Formula 134", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 134", "result134(" + QN(mFlangeNumber) + ")",
                       "cM1 >= 0.0", static_cast<int>(result), "-",
-                      QN(mLoadCaseList->at(loadCaseNo)->cM1) + " &gt;= 0.0", 0);
+                      QN(mLoadCaseList->at(loadCaseNo)->cM1) + " &gt;= 0.0",
+                      loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         result = mLoadCaseList->at(loadCaseNo)->cM2 >= 0.0;
-        PR->addDetail("After Formula 134", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 134", "result134(" + QN(mFlangeNumber) + ")",
                       "cM2 >= 0.0", static_cast<int>(result), "-",
-                      QN(mLoadCaseList->at(loadCaseNo)->cM2) + " &gt;= 0.0", 0);
+                      QN(mLoadCaseList->at(loadCaseNo)->cM2) + " &gt;= 0.0",
+                      loadCaseNo);
     }
 
     return result;
@@ -622,14 +665,14 @@ bool Flange::Is_cS_valid(int loadCaseNo) {
     bool result = false;
     if (getFlangeNumber() == 1) {
         result = loadCase->cS_minus1 >= 0.0 && loadCase->cS_plus1 >= 0.0;
-        PR->addDetail("With Formula 135", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("With_F. 135", "result135(" + QN(mFlangeNumber) + ")",
                       "cS_minus1 >= 0.0 And cS_plus1 >= 0.0",
                       static_cast<int>(result), "-",
                       QN(loadCase->cS_minus1) + " &gt;= 0.0 AND "
                       + QN(loadCase->cS_plus1) + " &gt;= 0.0", loadCaseNo);
     } else {
         result = loadCase->cS_minus2 >= 0.0 && loadCase->cS_plus2 >= 0.0;
-        PR->addDetail("With Formula 135", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("With_F. 135", "result135(" + QN(mFlangeNumber) + ")",
                       "cS_minus2 >= 0.0 And cS_plus2 >= 0.0",
                       static_cast<int>(result), "-",
                       QN(loadCase->cS_minus2) + " &gt;= 0.0 AND "
@@ -892,21 +935,19 @@ bool Flange::Is_PsiMaxMin_Valid(int loadCaseNo) {
     bool result = false;
 
     if (getFlangeNumber() == 1) {
-        result = loadCase->PsiMax1 >= -1
-                && loadCase->PsiMin1 <= 1;
-        PR->addDetail("After Table 2", "result(" + QN(mFlangeNumber) + ")",
-                      "PsiMax1 >= -1 and PsiMin1 <= 1",
+        result = loadCase->PsiMax1 >= -1 && loadCase->PsiMin1 <= 1;
+        PR->addDetail("After_F. 144 Table 2", "result144(" + QN(mFlangeNumber) + ")",
+                      "PsiMax1 &gt;= -1 and PsiMin1 &lt;= 1",
                       static_cast<int>(result), "-", QN(loadCase->PsiMax1)
-                      + " >= -1 AND " + QN(loadCase->PsiMin1)
-                      + " <= 1", loadCaseNo);
+                      + " &gt;= -1 AND " + QN(loadCase->PsiMin1)
+                      + " &lt;= 1", loadCaseNo);
     } else if (getFlangeNumber() == 2) {
-        result = loadCase->PsiMax2 >= -1
-                && loadCase->PsiMin2 <= 1;
-        PR->addDetail("After Table 2", "result(" + QN(mFlangeNumber) + ")",
-                      "PsiMax2 >= -1 and PsiMin2 <= 1",
+        result = loadCase->PsiMax2 >= -1 && loadCase->PsiMin2 <= 1;
+        PR->addDetail("After_F. 144 Table 2", "result144(" + QN(mFlangeNumber) + ")",
+                      "PsiMax2 &gt;= -1 and PsiMin2 &lt;= 1",
                       static_cast<int>(result), "-", QN(loadCase->PsiMax2)
-                      + " >= -1 AND " + QN(loadCase->PsiMin2)
-                      + " <= 1", loadCaseNo);
+                      + " &gt;= -1 AND " + QN(loadCase->PsiMin2)
+                      + " &lt;= 1", loadCaseNo);
     }
 
     return result;
@@ -992,17 +1033,17 @@ void Flange::Calc_PsiZ(int loadCaseNo) {
     }
 
     if (getFlangeNumber() == 1) {
-        PR->addDetail("Table 2", "kM(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Before_F. 140 Table 2", "kM(" + QN(mFlangeNumber) + ")",
                       "para 8.4 note d", loadCase->kM1,
                       "Table 2", QN(loadCase->kM1), loadCaseNo);
-        PR->addDetail("Table 2 (F. 140)", "PsiZ(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Before_F. 140 Table 2", "PsiZ(" + QN(mFlangeNumber) + ")",
                       "para 8.4 note d",
                       loadCase->PsiZ1, "-", QN(loadCase->PsiZ1), loadCaseNo);
     } else if (getFlangeNumber() == 2) {
-        PR->addDetail("Table 2", "kM(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Before_F. 140 Table 2", "kM(" + QN(mFlangeNumber) + ")",
                       "para 8.4 note d", loadCase->kM2,
                       "Table 2", QN(loadCase->kM2), loadCaseNo);
-        PR->addDetail("Table 2 (F. 140)", "PsiZ(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Before_F. 140 Table 2", "PsiZ(" + QN(mFlangeNumber) + ")",
                       "para 8.4 note d",
                       loadCase->PsiZ2, "-", QN(loadCase->PsiZ2), loadCaseNo);
     }
@@ -1132,11 +1173,11 @@ void Flange::Calc_WF(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         loadCase->WF1 = tmp_WF;
-        PR->addDetail("Table 2 (F. 130)", "WF(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 130", "WF(" + QN(mFlangeNumber) + ")",
                       forStr, loadCase->WF1, "Nmm", valStr, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->WF2 = tmp_WF;
-        PR->addDetail("Table 2 (F. 130)", "WF(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("Formula 130", "WF(" + QN(mFlangeNumber) + ")",
                       forStr, loadCase->WF2, "Nmm", valStr, loadCaseNo);
     }
 }
@@ -1147,15 +1188,23 @@ void Flange::Calc_WF(int loadCaseNo) {
  */
 void Flange::Calc_PhiF(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    QString strF_G = "F_G";
+    double valF_G = loadCase->F_G;
+
+    if (loadCaseNo == 0) {
+        strF_G = "F_Gmax";
+        valF_G = loadCase->F_Gmax;
+    }
+
     double tmp_WF = loadCase->WF1;
 
     if (getFlangeNumber() == 2) {
         tmp_WF = loadCase->WF2;
     }
 
-    double tmp_PhiF = (fabs(loadCase->F_G * hG + loadCase->F_Q
+    double tmp_PhiF = (fabs(valF_G * hG + loadCase->F_Q
                            * (hH - hP) + loadCase->F_R * hH)) / tmp_WF;
-    QString str = "(abs(" + QN(loadCase->F_G) + " * " + QN(hG) + " + "
+    QString str = "(abs(" + QN(valF_G) + " * " + QN(hG) + " + "
             + QN(loadCase->F_Q) + " * (" + QN(hH) + " - " + QN(hP)
             + ") + " + QN(loadCase->F_R) + " * " + QN(hH) + ")) / "
             + QN(tmp_WF);
@@ -1163,12 +1212,14 @@ void Flange::Calc_PhiF(int loadCaseNo) {
     if (getFlangeNumber() == 1) {
         loadCase->PhiF1 = tmp_PhiF;
         PR->addDetail("Formula 129", "PhiF(" + QN(mFlangeNumber) + ")",
-                      "(abs(F_G * hG1 + F_Q * (hH1 - hP1) + F_R * hH1)) / WF1",
+                      "(abs(" + strF_G + " * hG1 + F_Q * (hH1 - hP1) "
+                                         "+ F_R * hH1)) / WF1",
                       loadCase->PhiF1, "-", str, loadCaseNo);
     } else if (getFlangeNumber() == 2) {
         loadCase->PhiF2 = tmp_PhiF;
         PR->addDetail("Formula 129", "PhiF(" + QN(mFlangeNumber) + ")",
-                      "(abs(F_G * hG2 + F_Q * (hH2 - hP2) + F_R * hH2)) / WF2",
+                      "(abs(" + strF_G + " * hG2 + F_Q * (hH2 - hP2) "
+                                         "+ F_R * hH2)) / WF2",
                       loadCase->PhiF2, "-", str, loadCaseNo);
     }
 }
@@ -1189,14 +1240,14 @@ bool Flange::Is_PhiX_Valid(int loadCaseNo) {
 
     if (getFlangeNumber() == 1) {
         result = loadCase->PhiX1 <= 1.0;
-        PR->addDetail("After F. 147", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 147", "result147(" + QN(mFlangeNumber) + ")",
                       "PhiX1 <= 1.0", static_cast<int>(result), "-",
                       QN(loadCase->PhiX1) + " <= 1.0", loadCaseNo);
     }
     else if (getFlangeNumber() == 2)
     {
         result = loadCase->PhiX2 <= 1.0;
-        PR->addDetail("After F. 147", "result(" + QN(mFlangeNumber) + ")",
+        PR->addDetail("After_F. 147", "result147(" + QN(mFlangeNumber) + ")",
                       "PhiX2 <= 1.0", static_cast<int>(result), "-",
                       QN(loadCase->PhiX2) + " <= 1.0", loadCaseNo);
     }

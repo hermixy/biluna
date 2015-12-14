@@ -68,10 +68,12 @@ void EN1591Handler::setDimensions() {
     fl1->d3 = in->getValue("d31").toDouble();
     fl1->d4 = in->getValue("d41").toDouble();
     fl1->dX = in->getValue("dx1").toDouble();
-    fl1->eF = in->getValue("ef1").toDouble();
-    fl1->eFt = in->getValue("eft1").toDouble();
-    fl1->eP = in->getValue("ep1").toDouble();
+    fl1->dRF = in->getValue("drf1").toDouble();
+    fl1->dREC = in->getValue("drec1").toDouble();
+    fl1->eFb = in->getValue("efb1").toDouble();
     fl1->eRF = in->getValue("erf1").toDouble();
+    fl1->eREC = in->getValue("erec1").toDouble();
+    fl1->eQ = in->getValue("eq1").toDouble();
     fl1->eX = in->getValue("ex1").toDouble();
 
     fl1->d9 = in->getValue("d91").toDouble();
@@ -100,10 +102,12 @@ void EN1591Handler::setDimensions() {
         fl2->d3 = fl1->d3;
         fl2->d4 = fl1->d4;
         fl2->dX = fl1->dX;
-        fl2->eF = fl1->eF;
-        fl2->eFt = fl1->eFt;
-        fl2->eP = fl1->eP;
+        fl2->dRF = fl1->dRF;
+        fl2->dREC = fl1->dREC;
+        fl2->eFb = fl1->eFb;
         fl2->eRF = fl1->eRF;
+        fl2->eREC = fl1->eREC;
+        fl2->eQ = fl1->eQ;
         fl2->eX = fl1->eX;
 
         fl2->d9 = fl1->d9;
@@ -127,10 +131,12 @@ void EN1591Handler::setDimensions() {
         fl2->d3 = in->getValue("d32").toDouble();
         fl2->d4 = in->getValue("d42").toDouble();
         fl2->dX = in->getValue("dx2").toDouble();
-        fl2->eF = in->getValue("ef2").toDouble();
-        fl2->eFt = in->getValue("eft2").toDouble();
-        fl2->eP = in->getValue("ep2").toDouble();
-        fl1->eRF = in->getValue("erf2").toDouble();
+        fl2->dRF = in->getValue("drf2").toDouble();
+        fl2->dREC = in->getValue("drec2").toDouble();
+        fl2->eFb = in->getValue("efb2").toDouble();
+        fl2->eRF = in->getValue("erf2").toDouble();
+        fl2->eREC = in->getValue("erec2").toDouble();
+        fl2->eQ = in->getValue("eq2").toDouble();
         fl2->eX = in->getValue("ex2").toDouble();
 
         fl2->d9 = in->getValue("d92").toDouble();
@@ -249,8 +255,8 @@ void EN1591Handler::setLoadCases() {
         LoadCase* lc = mCalc->mAssembly->mLoadCaseList->createLoadCase();
 
         if (loadCaseNoMemory == 0) {
-            lc->F_Bspec = mCalc->mAssembly->mF_Bspec; // TODO: change in calculations
-            lc->Q_A = mCalc->mAssembly->mQ_Aspec; // TODO: change in calculations
+            lc->F_Bspec = mCalc->mAssembly->mF_Bspec;
+            lc->Q_A = mCalc->mAssembly->mQ_Aspec; // TODO: still required
             ++loadCaseNoMemory;
         }
 

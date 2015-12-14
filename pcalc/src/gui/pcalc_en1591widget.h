@@ -44,7 +44,6 @@ public:
 public slots:
     virtual void slotAssemblyAdded();
     virtual void on_pbCalculate_clicked();
-    virtual void on_pbUnitTest_clicked();
 
 protected slots:
     void slotParentRowChanged(const QModelIndex& curr,
@@ -59,7 +58,11 @@ private:
     void setInput();
     void setSettings();
     void createDetailReport();
+    void insertReportInputData(QString& report, RB_ObjectBase* obj);
+    void insertReportCalculationData(QString& report, RB_ObjectBase* obj);
     void createValidationReport();
+    void createUnitTestSummary();
+    void createUnitTestDetail();
     void addObjectMemberVariable(RB_ObjectBase* obj,
                                  const QString& variableName,
                                  const QString& unit, RB_MmProxy* model);

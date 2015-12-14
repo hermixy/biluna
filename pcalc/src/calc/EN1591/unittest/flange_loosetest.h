@@ -32,7 +32,9 @@ private:
     void Calc_dLTest();
     void Calc_eETest();
     void Calc_AFTest();
+    void Calc_eFTest();
     void Calc_ALTest();
+    void Calc_eLTest();
     void Calc_gammaTest();
     void Calc_hGTest();
     void Calc_hHTest();
@@ -52,26 +54,6 @@ private:
     void Calc_WQTest();
     void Calc_WFTest();
     void Calc_PhiFTest();
-
-    // '''<summary>
-    // '''A test for Calc_ThetaL
-    // '''</summary>
-    //<TestMethod()> _
-    //Public Sub Calc_ThetaLTest()
-    //    setupTarget()
-    //    Dim loadCaseNo As Integer = 0
-
-    //    With target.LoadCaseList(loadCaseNo)
-    //        target.ZL = 7.8
-    //        .EL1 = 6.7
-    //        .F_B = 4.5
-    //        .hL1 = 9.4
-    //        target.Calc_ThetaL(loadCaseNo)
-    //        Assert.AreEqual(49.244776119402985, .ThetaL1, ACCURACY)
-    //    End With
-
-    //End Sub
-
     void Is_flange_ValidTest();
 
     Flange_Loose *target;

@@ -20,7 +20,6 @@ public:
     virtual bool Is_flange_Valid();
     virtual void Calc_bF();
     virtual void Calc_dF();
-    virtual void Calc_AF();
     virtual void Calc_bL();
     virtual void Calc_dL();
     virtual void Calc_AL();

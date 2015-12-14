@@ -126,15 +126,15 @@ public:
     void Calc_bGt();
     void Calc_dGt();
     void Calc_AGt();
-    void Calc_bGe(int loadCaseNo);
+    void Calc_bGe();
     void Calc_AGe();
     void Calc_E_G(int loadCaseNo);
     void Calc_eG(int loadCaseNo);
     void Calc_Q_smax(int loadCaseNo);
-    void Calc_XG(int loadCaseNo);
+    void Calc_XG();
     void Calc_AQ();
     void Calc_P_QR(int loadCaseNo);
-    double gasketCompressedElasticity(int loadCaseNo, LoadCase* loadCase);
+    double gasketCompressedElasticity(int loadCaseNo);
     double gasketCompressedThickness(LoadCase* loadCase);
     double gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase);
     double gasketCreepFactor(int loadCaseNo, LoadCase* loadCase);

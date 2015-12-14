@@ -77,19 +77,19 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     F_Bav = 0.0;
     F_Bcalc = 0.0;
     F_Bmax = 0.0;
-//    F_Bmax = 0.0;
+    F_BmaxA = 0.0;
     F_Bmin = 0.0;
-//    F_Bmin = 0.0;
+    F_BminA = 0.0;
     F_Bnom = 0.0;
     F_Breq = 0.0;
 
-    F_Gmax = 0.0;
-//    F_Gmax = 0.0;
-    F_Gmin = 0.0;
-//    F_Gmin = 0.0;
     F_G = 0.0;
-    F_Gd = 0.0;
+    F_Gd = 0.0; // design
     F_Gdelta = 0.0;
+    F_Gmax = 0.0;
+    F_GmaxA = 0.0;
+    F_Gmin = 0.0;
+    F_GminA = 0.0;
     F_Greq = 0.0;
 
     DGm = 0.0;
@@ -164,8 +164,11 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     PhiL2 = 0.0;
     WQ1 = 0.0;
     WQ2 = 0.0;
-    MtB = 0.0;
+    MtBnom = 0.0;
+    Mtnom = 0.0;
     Q_G = 0.0;
+    Q_GmaxA = 0.0; // Annex C
+    Q_GminA = 0.0; // Annex C
     Q_A = 0.0;
     Q_0min = 0.0;
     Q_minL = 0.0;

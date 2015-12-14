@@ -72,6 +72,7 @@ public:
     virtual void emitState();
 
     virtual bool addDefaultRows();
+    virtual bool isValidId(const QString& id);
 
 signals:
     //! Database is set, isOpen is true if database is open

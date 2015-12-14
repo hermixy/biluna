@@ -74,15 +74,14 @@ void GasketTest::Calc_AQTest() {
 
 void GasketTest::Calc_bGeTest() {
     setupTarget();
-    int i = 0;
     target->bGi = 2.1;
     target->bGt = -9.1;
-    target->Calc_bGe(i);
+    target->Calc_bGe();
     areEqual(PR->getLastOutput(), "GasketTest::Calc_bGeTest()", -9.1,
                      target->bGe);
     target->bGi = -2.2;
     target->bGt = 9.1;
-    target->Calc_bGe(i);
+    target->Calc_bGe();
     areEqual(PR->getLastOutput(), "GasketTest::Calc_bGeTest()", -2.2,
                      target->bGe);
 }
@@ -94,7 +93,7 @@ void GasketTest::Calc_XGTest() {
     target->bGt = 12.3;
     target->AGt = 8.3;
     target->bGe = 7.7;
-    target->Calc_XG(i);
+    target->Calc_XG();
     areEqual(PR->getLastOutput(), "GasketTest::Calc_XGTest()", 0.970281124497992, target->XG);
 }
 

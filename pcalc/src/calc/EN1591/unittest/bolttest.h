@@ -22,6 +22,7 @@ private:
     void Calc_eta1minusTest();
     void Calc_IBTest();
     void Calc_kBTest();
+    void Calc_kB9Test();
 
     Bolt *target;
 };

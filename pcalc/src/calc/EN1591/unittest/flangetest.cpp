@@ -25,7 +25,10 @@ void FlangeTest::exec() {
     Calc_d5eTest();
     Calc_pBTest();
     Calc_hPTest();
-    Calc_eQTest();
+    Calc_ePTest();
+    Calc_eFtTest();
+    Calc_AFTest();
+    Calc_eFTest();
     Calc_ABTest();
     Calc_XBTest();
     Calc_etanminusTest();
@@ -57,10 +60,11 @@ void FlangeTest::setupTarget() {
         target->mBolt = new Bolt();
         target->mLoadCaseList = new LoadCaseList();
         target->mLoadCaseList->createLoadCase(); // includes force creation
+        target->mLoadCaseList->createLoadCase();
         target->mGasket = new Gasket();
     }
 
-    target->eP = 0.8;
+    target->eQ = 0.8;
     target->eF = 15.6;
     target->nB = 16;
     target->d3 = 410.45;
@@ -108,11 +112,44 @@ void FlangeTest::Calc_hPTest() {
              44.730940732332016, target->hP);
 }
 
-void FlangeTest::Calc_eQTest() {
+void FlangeTest::Calc_ePTest() {
     setupTarget();
-    target->Calc_eQ();
-    areEqual(PR->getLastOutput(), "FlangeTest::Calc_eQTest()",
-             14.8, target->eQ);
+    target->Calc_eP();
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_ePTest()",
+             14.8, target->eP);
+}
+
+void FlangeTest::Calc_eFtTest() {
+    setupTarget();
+    target->eRF = 0.8;
+    target->eFb = 15.6;
+    target->Calc_eFt();
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_eFtTest()",
+             16.4, target->eFt);
+}
+
+void FlangeTest::Calc_AFTest() {
+    setupTarget();
+    target->eFb = 1.1;
+    target->d4 = 1.2;
+    target->d0 = 1.3;
+    target->eRF = 1.4;
+    target->dRF = 1.5;
+    target->dREC = 1.6;
+    target->eREC = 1.7;
+    target->Calc_AF();
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_AFTest()",
+             -0.38, target->AF);
+}
+
+void FlangeTest::Calc_eFTest() {
+    setupTarget();
+    target->AF = 9.2;
+    target->d4 = 10.3;
+    target->d0 = -1.3;
+    target->Calc_eF();
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_eFTest()",
+             1.58620689655172413793, target->eF);
 }
 
 void FlangeTest::Calc_ABTest() {
@@ -430,9 +467,8 @@ void FlangeTest::Calc_WFTest() {
 void FlangeTest::Calc_PhiFTest() {
     setupTarget();
     int loadCaseNo = 0;
-
     LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
-    loadCase->F_G = 1.1;
+    loadCase->F_Gmax = 1.1;
     target->hG = 2.2;
     loadCase->F_Q = 3.3;
     target->hH = 4.4;
@@ -442,6 +478,21 @@ void FlangeTest::Calc_PhiFTest() {
 
     target->Calc_PhiF(loadCaseNo);
     areEqual(PR->getLastOutput(), "FlangeTest::Calc_PhiFTest()", 3.2142857142857144,
+             target->mLoadCaseList->at(loadCaseNo)->PhiF1);
+
+    loadCaseNo = 1;
+    loadCase = target->mLoadCaseList->at(loadCaseNo);
+    loadCase->F_G = -9.1;
+    target->hG = 2.3;
+    loadCase->F_Q = 6.3;
+    target->hH = 4.7;
+    target->hP = 5.4;
+    loadCase->F_R = -9.9;
+    loadCase->WF1 = 8.7;
+
+    target->Calc_PhiF(loadCaseNo);
+    areEqual(PR->getLastOutput(), "FlangeTest::Calc_PhiFTest()",
+             8.26091954022988505747,
              target->mLoadCaseList->at(loadCaseNo)->PhiF1);
 }
 

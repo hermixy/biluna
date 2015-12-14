@@ -946,19 +946,9 @@ void PCALC_EN1591Widget::createDetailReport() {
             = PR->getInOutContainer()->getContainer("PCALC_OutputList");
     RB_ObjectIterator* iter = outList->createIterator();
 
-<<<<<<< HEAD
-    if (outObj) {
-        double result = outObj->getValue("result").toDouble();
-        report.replace("<td id=\"{$flange1.pB}\">&nbsp;</td>",
-                       "<td id=\"{$flange1.pB}\"><div align=\"right\">"
-                       + QString::number(result) + "</div></td>");
-        // Now we have pB(1) in template
-
-=======
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* outObj = iter->currentObject();
         insertReportCalculationData(report, outObj);
->>>>>>> master
     }
 
     delete iter;

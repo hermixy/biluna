@@ -445,3 +445,12 @@ bool RB_ModelFactory::addDefaultRows() {
 void RB_ModelFactory::slotModelUpdated(const QString& tableName) {
     emit modelUpdated(tableName);
 }
+
+bool RB_ModelFactory::isValidId(const QString& id) {
+    if (id.isEmpty() || id == "0" || id.size() < 38) {
+        RB_DEBUG->info("Not a valid ID = " + id + " INFO");
+        return false;
+    }
+
+    return true;
+}

@@ -23,6 +23,7 @@ private:
     void deleteTarget();
 
     void Calc_dGeTest();
+    void Calc_F_GInitial_1Test();
     void Calc_F_GInitialTest();
     void Calc_F_QTest();
     void Calc_F_RTest();
@@ -33,6 +34,7 @@ private:
     void Calc_YRTest();
     void Calc_bGiTest();
     void Calc_dUTTest();
+    void Calc_Q_A_QsminTest();
     void Calc_F_GminTest();
     void Calc_F_G0deltaTest();
     void Calc_F_G0reqTest();
@@ -42,6 +44,9 @@ private:
     void Calc_F_B0nomTest();
     void Is_F_B0nom_ValidTest();
     void Calc_F_G0maxTest();
+//    void Calc_F_BmaxTest();
+//    void Calc_F_GmaxTest();
+    void Calc_F_G0d_2Test();
     void Calc_F_G0dTest();
     void Calc_F_GTest();
     void Calc_F_BTest();
@@ -53,7 +58,7 @@ private:
     void Calc_fETest();
     void Is_PhiG_ValidTest();
     void Calc_MtnomTest();
-//    void Calc_MtBTest();
+    void Calc_MtBnomTest();
     void Calc_F_BImaxminTest();
     void Calc_F_GImaxminTest();
     void Calc_ThetaFmaxminTest();
