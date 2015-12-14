@@ -967,6 +967,8 @@ void PCALC_EN1591Widget::createDetailReport() {
         report.replace("<td id=\"{$flange1.pB}\">&nbsp;</td>",
                        "<td id=\"{$flange1.pB}\"><div align=\"right\">"
                        + QString::number(result) + "</div></td>");
+        // Now we have pB(1) in template
+
     }
 
     teCalculationReport->setHtml(report);
