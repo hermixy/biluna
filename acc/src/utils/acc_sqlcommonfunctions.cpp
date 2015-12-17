@@ -739,7 +739,7 @@ void ACC_SqlCommonFunctions::getTrialBalance(QSqlQuery& /*query*/,
  * @param dueDate due to be set
  */
 void ACC_SqlCommonFunctions::setDueDate(const RB_String& paymentTermsId,
-                                             QDateTime& dueDate) {
+                                             QDate& dueDate) {
     /*
     SELECT daysbeforedue, dayinfollowingmonth
     FROM acc_paymentterm INNER JOIN acc_customer
@@ -772,7 +772,7 @@ void ACC_SqlCommonFunctions::setDueDate(const RB_String& paymentTermsId,
         return;
     }
 
-    dueDate = QDateTime::currentDateTime();
+    dueDate = QDate::currentDate();
 
     if (query.value(1).toInt() == 0) {
         dueDate = dueDate.addDays(query.value(0).toInt());
@@ -780,9 +780,9 @@ void ACC_SqlCommonFunctions::setDueDate(const RB_String& paymentTermsId,
         // following month
         int dayInFollowingMonth = query.value(0).toInt();
         dueDate = dueDate.addMonths(1);
-        dueDate.setDate(QDate(dueDate.date().year(),
-                              dueDate.date().month(),
-                              dayInFollowingMonth));
+        dueDate.setDate(dueDate.year(),
+                        dueDate.month(),
+                        dayInFollowingMonth);
     }
 }
 
