@@ -92,6 +92,8 @@ public:
 
     virtual bool insertRows(int row, int count,
                             const QModelIndex& parent = QModelIndex());
+    virtual bool copyRows(int row, int count,
+                          const QModelIndex& parent = QModelIndex());
     virtual bool removeRows(int row, int count,
                             const QModelIndex& parent = QModelIndex());
     virtual bool removeRelatedRow(const RB_String& id);
@@ -113,7 +115,6 @@ public:
     virtual void setModelStructure();
     virtual void unsetModelStructure();
 
-//    virtual RB_DataWidgetMapper* getMapper();
     virtual int getRow(const RB_String& member, const RB_Variant& value);
 
     virtual QModelIndex getCurrentIndex() const;
