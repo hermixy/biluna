@@ -92,8 +92,7 @@ public:
 
     virtual bool insertRows(int row, int count,
                             const QModelIndex& parent = QModelIndex());
-    virtual bool copyRows(int row, int count,
-                          const QModelIndex& parent = QModelIndex());
+    virtual bool copyCurrentRow();
     virtual bool removeRows(int row, int count,
                             const QModelIndex& parent = QModelIndex());
     virtual bool removeRelatedRow(const RB_String& id);
@@ -149,6 +148,7 @@ public slots:
     virtual void slotExpanded(const QModelIndex& index);
     virtual void slotChangeCurrentRow(const QModelIndex& current,
                                   const QModelIndex& previous);
+    virtual void slotCopyRows(const QString& parentId);
     virtual void revert();
     virtual void revertAll();
     virtual bool submit();

@@ -1400,8 +1400,31 @@ bool RB_MmSource::insertRows(int row, int count,
     return success;
 }
 
-bool RB_MmSource::copyRows(int row, int count, const QModelIndex &parent) {
+/**
+ * @brief RB_MmSource::copyRow
+ * @return true on success
+ */
+bool RB_MmSource::copyCurrentRow() {
+    RB_ObjectBase* obj = getCurrentObject();
 
+    if (!obj) {
+        return false;
+    }
+
+    QModelIndex idx = QModelIndex();
+    QModelIndex parentIdx = mCurrentIndex.parent();
+
+    insertRows(0, 1, parentIdx);
+    int count = obj->countMember();
+
+    for (int i = RB2::HIDDENCOLUMNS; i < count; i++) {
+        idx = index(0, i, parentIdx);
+        setData(idx, obj->getValue(i));
+    }
+
+    QModelIndex copyIdx = index(0, 0, parentIdx);
+    QString copyId = copyIdx.data().toString();
+    emit currentRowCopied(copyId); // to slotCopyRows(const QString& parentId);
 }
 
 /**
@@ -1717,6 +1740,33 @@ void RB_MmSource::slotChangeCurrentRow(const QModelIndex& current,
     if (!current.isValid()) {
         RB_DEBUG->print(RB_Debug::D_INFORMATIONAL,
             "RB_MmSource::slotChangeCurrentRow() current index not valid INFO");
+    }
+}
+
+/**
+ * @brief slot to copy all rows of this child model based on parent ID
+ * @param parentId
+ */
+void RB_MmSource::slotCopyRows(const QString& parentId) {
+    // child models: always a table model
+    QModelIndex idx = QModelIndex();
+    QVariant value;
+    int cCount = columnCount();
+    int rCount = rowCount();
+    insertRows(rCount, rCount);
+
+    for (int row = 0; row < rCount; row++) {
+        // set parent ID
+        idx = index(rCount + row, 1);
+        setData(idx, parentId);
+
+        for (int col = RB2::HIDDENCOLUMNS; col < cCount; col++) {
+            // copy other values
+            idx = index(row, col);
+            value = idx.data();
+            idx = index(rCount + row, col);
+            setData(idx, value);
+        }
     }
 }
 

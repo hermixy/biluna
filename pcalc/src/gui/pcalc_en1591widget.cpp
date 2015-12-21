@@ -494,6 +494,15 @@ void PCALC_EN1591Widget::init() {
     // Show detail row or add row if not exists
     connect(mAssemblyModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
             this, SLOT(slotParentRowChanged(QModelIndex,QModelIndex)));
+    // Connections for models not formated via setFormatListView
+    connect(mBoltNutWasherModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mFlangeModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mGasketModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mShellModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
 
     teCalculationReport->setHtml(
                 "<p>" + tr("Select report type and click "
@@ -955,8 +964,6 @@ void PCALC_EN1591Widget::createDetailReport() {
 
     teCalculationReport->setHtml(report);
     QApplication::restoreOverrideCursor();
-
-
 }
 
 void PCALC_EN1591Widget::insertReportInputData(QString& report,

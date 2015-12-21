@@ -91,6 +91,7 @@ public:
 
     virtual bool setHiddenData(const QModelIndex& index, const RB_Variant &value,
                                int role = Qt::EditRole) = 0;
+    virtual bool copyCurrentRow() = 0;
 
     // QSqlRelationalTableModel functions, to be overriden for in-memory model
     virtual int fieldIndex(const QString& /*fieldName*/) const { return -1; }
@@ -150,6 +151,7 @@ public slots:
 
 signals:
     void modelModified(bool modified);
+    void currentRowCopied(const QString& copyId);
 
 protected:
     //! Root object of this model
