@@ -1320,11 +1320,12 @@ RB_Variant RB_MmSource::headerData(int section, Qt::Orientation orientation,
  */
 bool RB_MmSource::insertRows(int row, int count,
                                     const QModelIndex& parent) {
-    // RB_DEBUG->print("RB_MmSource::removeRows()");
+    // RB_DEBUG->print("RB_MmSource::insertRows()");
     RB_SETTINGS->beginGroup("database");
     RB_String username = RB_SETTINGS->value("username", "unknown").toString();
     RB_SETTINGS->endGroup();
     bool success = false;
+
     if (!isTreeModel() && database().isOpen()) {
         success = true;
 
@@ -1397,6 +1398,10 @@ bool RB_MmSource::insertRows(int row, int count,
     setModelIsModified(success);
     emit dataChanged(index(row, 0), index(row + count - 1, 2));
     return success;
+}
+
+bool RB_MmSource::copyRows(int row, int count, const QModelIndex &parent) {
+
 }
 
 /**

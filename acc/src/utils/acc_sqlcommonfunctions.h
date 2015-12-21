@@ -70,7 +70,7 @@ public:
                                  int toPeriod);
 
     virtual void setDueDate(const RB_String& paymentTermsId,
-                            QDateTime& dueDate);
+                            QDate &dueDate);
     virtual bool isAccountUsed(const RB_String& accountId);
     virtual QDate lastBankTransactionDate(const RB_String& bankAccId);
 

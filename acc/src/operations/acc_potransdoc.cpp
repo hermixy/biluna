@@ -454,10 +454,10 @@ bool ACC_PoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
     transDoc->setValue("doctype", (int)ACC2::TransPurchOrder);
     transDoc->setValue("docname", actName);
     transDoc->setValue("salestype_id", 0 /*suppModel->getCurrentValue("salestype_id", RB2::RoleOrigData)*/);
-    QDateTime invoiceDate = poModel->getCurrentValue("suppinvoicedate").toDateTime();
+    QDate invoiceDate = poModel->getCurrentValue("suppinvoicedate").toDate();
     transDoc->setValue("transdate", invoiceDate);
     RB_String paymentId = suppModel->getCurrentValue("paymentterm_id", RB2::RoleOrigData).toString();
-    QDateTime dueDate;
+    QDate dueDate;
     f.setDueDate(paymentId, dueDate);
     transDoc->setValue("duedate", dueDate);
     transDoc->setValue("transno", -1);

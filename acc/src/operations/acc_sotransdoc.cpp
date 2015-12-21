@@ -591,10 +591,10 @@ bool ACC_SoTransDoc::preparePreview(RB_ObjectBase* transDoc, RB_ObjectContainer*
     transDoc->setValue("doctype", (int)ACC2::TransSalesOrder);
     transDoc->setValue("docname", actName);
     transDoc->setValue("salestype_id", custModel->getCurrentValue("salestype_id", RB2::RoleOrigData));
-    QDateTime today = QDateTime::currentDateTime();
+    QDate today = QDate::currentDate();
     transDoc->setValue("transdate", today);
     RB_String paymentId = custModel->getCurrentValue("paymentterm_id", RB2::RoleOrigData).toString();
-    QDateTime dueDate;
+    QDate dueDate;
     f.setDueDate(paymentId, dueDate);
     transDoc->setValue("duedate", dueDate);
 //    int number = isPost ? f.getNextTransNo((int)ACC2::TransDebtor, "none", "Debtor") : -1; // only at post
