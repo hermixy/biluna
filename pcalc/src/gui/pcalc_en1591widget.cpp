@@ -67,10 +67,10 @@ void PCALC_EN1591Widget::init() {
     //
     // 0. Set button toolbar
     //
-    tbbAssembly->initSlimTable(true, false);
+    tbbAssembly->initSlimTable(true, false, true);
     tvAssembly->setToolButtonBar(tbbAssembly);
 
-    tbbLoadCase->initSlimTable(true, false);
+    tbbLoadCase->initSlimTable(true, false, true);
     tvLoadCase->setToolButtonBar(tbbLoadCase);
 
     //

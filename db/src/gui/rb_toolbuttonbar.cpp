@@ -20,8 +20,10 @@ RB_ToolButtonBar::~RB_ToolButtonBar() {
 
 }
 
-void RB_ToolButtonBar::initSlimTable(bool isEdit, bool isFindFilter) {
-    setupSlimTable(isEdit, isFindFilter);
+void RB_ToolButtonBar::initSlimTable(bool isEdit,
+                                     bool isFindFilter,
+                                     bool isCopyItem) {
+    setupSlimTable(isEdit, isFindFilter, isCopyItem);
 }
 
 void RB_ToolButtonBar::initEdit(bool isTreeModel, bool isSaveRevert,
@@ -33,6 +35,7 @@ void RB_ToolButtonBar::initEdit(bool isTreeModel, bool isSaveRevert,
     // pbDelete->setVisible(true);
 
     pbEdit->setVisible(false /*isSaveRevert*/);
+    pbCopy->setVisible(false);
     pbSave->setVisible(isSaveRevert);
     pbRevert->setVisible(isSaveRevert);
 
@@ -61,6 +64,7 @@ void RB_ToolButtonBar::initDetailEdit(bool isSaveRevert) {
     pbDelete->setVisible(false);
 
     pbEdit->setVisible(false /*isSaveRevert*/);
+    pbCopy->setVisible(false);
     pbSave->setVisible(isSaveRevert);
     pbRevert->setVisible(isSaveRevert);
 
@@ -89,6 +93,7 @@ void RB_ToolButtonBar::initSelect(bool isFindFilter, bool isShowAll) {
     pbDelete->setVisible(false);
 
     pbEdit->setVisible(false);
+    pbCopy->setVisible(false);
     pbSave->setVisible(false);
     pbRevert->setVisible(false);
 
@@ -139,7 +144,11 @@ void RB_ToolButtonBar::on_pbDelete_clicked() {
 }
 
 void RB_ToolButtonBar::on_pbEdit_clicked() {
-   emit editClicked();
+    emit editClicked();
+}
+
+void RB_ToolButtonBar::on_pbCopy_clicked() {
+    emit copyClicked();
 }
 
 void RB_ToolButtonBar::on_pbSave_clicked() {
@@ -194,7 +203,9 @@ void RB_ToolButtonBar::changeEvent(QEvent* /*e*/) {
 
 }
 
-void RB_ToolButtonBar::setupSlimTable(bool isEdit, bool isFindFilter) {
+void RB_ToolButtonBar::setupSlimTable(bool isEdit,
+                                      bool isFindFilter,
+                                      bool isCopyItem) {
     // copied (partly) from ui_rb_toolbuttonbar.h
 
     if (this->objectName().isEmpty())
@@ -242,6 +253,20 @@ void RB_ToolButtonBar::setupSlimTable(bool isEdit, bool isFindFilter) {
         pbDelete->setIconSize(QSize(16, 16));
 
         gridLayout->addWidget(pbDelete, 0, ++col);
+
+        if (isCopyItem) {
+            pbCopy = new QToolButton(this);
+            pbCopy->setObjectName(QStringLiteral("pbCopy"));
+            pbCopy->setMinimumSize(QSize(24, 24));
+            pbCopy->setMaximumSize(QSize(24, 24));
+            QIcon icon3;
+            icon3.addFile(QStringLiteral(":/images/icons/page_copy.png"), QSize(), QIcon::Normal, QIcon::Off);
+            pbCopy->setIcon(icon3);
+            pbCopy->setIconSize(QSize(16, 16));
+
+            gridLayout->addWidget(pbCopy, 0, ++col);
+            connect(pbCopy, SIGNAL(clicked()), this, SLOT(on_pbCopy_clicked()));
+        }
 
         if (isFindFilter) {
             hsAddDelete = new QSpacerItem(10, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);

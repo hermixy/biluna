@@ -28,7 +28,9 @@ public:
     explicit RB_ToolButtonBar(QWidget *parent = 0);
     ~RB_ToolButtonBar();
 
-    virtual void initSlimTable(bool isEdit = true, bool isFindFilter = false);
+    virtual void initSlimTable(bool isEdit = true,
+                               bool isFindFilter = false,
+                               bool isCopyItem = false);
 
     virtual void initEdit(bool isTreeModel = false,
                           bool isSaveRevert = true,
@@ -45,6 +47,7 @@ public slots:
     virtual void on_pbAddChild_clicked();
     virtual void on_pbDelete_clicked();
     virtual void on_pbEdit_clicked();
+    virtual void on_pbCopy_clicked();
     virtual void on_pbSave_clicked();
     virtual void on_pbRevert_clicked();
 
@@ -65,6 +68,7 @@ signals:
     void addChildClicked();
     void deleteClicked();
     void editClicked();
+    void copyClicked();
     void saveClicked();
     void revertClicked();
 
@@ -84,7 +88,7 @@ protected:
     void changeEvent(QEvent *e);
 
 private:
-    void setupSlimTable(bool isEdit, bool isFindFilter);
+    void setupSlimTable(bool isEdit, bool isFindFilter, bool isCopyItem = false);
 
     // Only used in setupSlimTable() for dockwidget for example
 //    QGridLayout* gridLayout;
