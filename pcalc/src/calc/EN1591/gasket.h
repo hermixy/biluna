@@ -84,15 +84,14 @@ public:
     double dG0;
     double dG1;
     double dG2;
+
     double dG1_EN13555;
     double dG2_EN13555;
     double eGt;
-    double K;
+    double K; // stiffness of test rig, usually 500 kN/mm or 1500 kN/mm
+
     double phiG;
     double r2;
-
-    // Use eG, E_G(0) and Q_smax from EN13445 tables in appendix G
-    bool mIsSimplified;
 };
 
 

@@ -18,9 +18,11 @@
  * @param strL string list for the combobox items
  */
 RB_CmbDelegate::RB_CmbDelegate(QObject* parent, const QStringList& strL,
-                               RB_MmProxy *proxyModel) : QStyledItemDelegate(parent) {
+                               RB_MmProxy *proxyModel, bool isSetText)
+                : QStyledItemDelegate(parent) {
     mProxyModel = proxyModel;
     mStrL = strL;
+    mIsSetText = isSetText;
 //    mLabel = new QLabel();
 //    mLabel->setTextFormat(Qt::RichText); // accept richtext
 //    mLabel->setWordWrap(false);
@@ -122,7 +124,11 @@ void RB_CmbDelegate::setEditorData(QWidget* editor,
 void RB_CmbDelegate::setModelData(QWidget* editor, QAbstractItemModel *model,
                                    const QModelIndex &index) const {
     QComboBox* cb = static_cast<QComboBox*>(editor);
-    model->setData(index, cb->currentIndex());
+    if (!mIsSetText) {
+        model->setData(index, cb->currentIndex());
+    } else {
+        model->setData(index, cb->currentText());
+    }
 }
 
 

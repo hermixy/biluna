@@ -28,6 +28,8 @@ FORMS = \
     ../src/gui/db_inserthtmldialog.ui \
     ../src/gui/db_internetbrowserwidget.ui \
     ../src/gui/db_mappingdialog.ui \
+    ../src/gui/rb_membereditdialog.ui \
+    ../src/gui/db_modelobjectdialog.ui \
     ../src/gui/db_palettecolorpickerwidget.ui \
     ../src/gui/db_permissionperspectiveprojectdialog.ui \
     ../src/gui/db_permissionreportwidget.ui \
@@ -46,8 +48,8 @@ FORMS = \
     ../src/gui/rb_dialogbase.ui \
     ../src/gui/rb_idxlineedit.ui \
     ../src/gui/rb_projecteditdialog.ui \
-    ../src/gui/rb_toolbuttonbar.ui \
-    $$PWD/gui/rb_membereditdialog.ui
+    ../src/gui/rb_toolbuttonbar.ui
+
 
 
 HEADERS = \
@@ -123,6 +125,7 @@ HEADERS = \
     ../src/actions/db_actionsystemtoolsdevelop.h \
     ../src/actions/db_actionsystemtoolsexportmodel.h \
     ../src/actions/db_actionsystemtoolsimportmodel.h \
+    ../src/actions/db_actionsystemtoolsmodelobject.h \
     ../src/actions/db_actionsystemtoolsplugins.h \
     ../src/actions/db_actionsystemtoolsregexp.h \
     ../src/actions/db_actionsystemtoolssignalspy.h \
@@ -186,6 +189,7 @@ HEADERS = \
     ../src/gui/db_keypadnumeric.h \
     ../src/gui/db_mappingdelegate.h \
     ../src/gui/db_mappingdialog.h \
+    ../src/gui/db_modelobjectdialog.h \
     ../src/gui/db_palettecolorpickerwidget.h \
     ../src/gui/db_permissionperspectiveprojectdialog.h \
     ../src/gui/db_permissionreportwidget.h \
@@ -267,6 +271,8 @@ HEADERS = \
     ../src/model/rb_objectfactory.h \
     ../src/model/rb_objectiterator.h \
     ../src/model/rb_objectmember.h \
+    ../src/operations/db_createmodelobject.h \
+    ../src/operations/rb_operation.h \
     ../src/operations/rb_operationhtml.h \
     ../src/utils/db_global.h \
     ../src/utils/db_permissionhandler.h \
@@ -375,6 +381,7 @@ SOURCES = \
     ../src/actions/db_actionsystemtoolsdevelop.cpp \
     ../src/actions/db_actionsystemtoolsexportmodel.cpp \
     ../src/actions/db_actionsystemtoolsimportmodel.cpp \
+    ../src/actions/db_actionsystemtoolsmodelobject.cpp \
     ../src/actions/db_actionsystemtoolsplugins.cpp \
     ../src/actions/db_actionsystemtoolsregexp.cpp \
     ../src/actions/db_actionsystemtoolssignalspy.cpp \
@@ -435,6 +442,7 @@ SOURCES = \
     ../src/gui/db_keypadnumeric.cpp \
     ../src/gui/db_mappingdelegate.cpp \
     ../src/gui/db_mappingdialog.cpp \
+    ../src/gui/db_modelobjectdialog.cpp \
     ../src/gui/db_palettecolorpickerwidget.cpp \
     ../src/gui/db_permissionperspectiveprojectdialog.cpp \
     ../src/gui/db_permissionreportwidget.cpp \
@@ -510,6 +518,7 @@ SOURCES = \
     ../src/model/rb_objectfactory.cpp \
     ../src/model/rb_objectiterator.cpp \
     ../src/model/rb_objectmember.cpp \
+    ../src/operations/db_createmodelobject.cpp \
     ../src/operations/rb_operationhtml.cpp \
     ../src/utils/db_permissionhandler.cpp \
     ../src/utils/db_sqlcommonfunctions.cpp \

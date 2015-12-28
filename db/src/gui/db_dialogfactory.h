@@ -74,6 +74,7 @@ public:
         DialogDbMapping,                       /**< Execute (database) mapping dialog */
         DialogFindReplace,                     /**< Find and replace dialog */
         DialogInsertHTML,                      /**< Insert HTML dialog */
+        DialogModelObject,                     /**< Create a model object dialog */
         DialogPermissionPerspectiveProject,    /**< Permission perspective project selection dialog */
         DialogPluginTester,                    /**< Available plugins dialog */
         DialogProject,                         /**< Select project from database dialog */

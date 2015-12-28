@@ -1032,9 +1032,14 @@ void AssemblyTest::Calc_delta_eGcTest() {
     LoadCase* loadCase0 = target->mLoadCaseList->at(0);
     int i = 1;
     LoadCase* loadCase = target->mLoadCaseList->at(i);
+    loadCase->delta_eGc_EN13555 = 7.3;
+    loadCase->Y_G = 3.8;
+    target->mGasket->K = 500000.0;
+    target->Calc_delta_eGc(i);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()",
+             13870000, loadCase->delta_eGc);
     loadCase->delta_eGc_EN13555 = 0.0;
     loadCase->Y_G = 1.3;
-    target->mGasket->K = 500000.0;
     target->mGasket->dG2_EN13555 = 2.4;
     target->mGasket->dG1_EN13555 = 9.1;
     loadCase0->Q_A = 15.3;
