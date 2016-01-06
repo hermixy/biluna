@@ -9,8 +9,10 @@
 
 #include "db_modelobjectdialog.h"
 
+#include "db_createmodelobject.h"
 #include "db_dialogfactory.h"
 #include "rb_cmbdelegate.h"
+#include "rb_settings.h"
 #include "ui_db_modelobjectdialog.h"
 
 DB_ModelObjectDialog::DB_ModelObjectDialog(QWidget *parent) :
@@ -35,17 +37,34 @@ void DB_ModelObjectDialog::init() {
     ui->twMemberList->setHorizontalHeaderLabels(items);
     ui->twMemberList->setItemDelegateForColumn(3, getNewMemberTypeDelegate());
 
+    QRegExp rxPersp("^[A-z]*$");
+    ui->lePerspective->setValidator(new QRegExpValidator(rxPersp, this));
+    QRegExp rxObjName("^[A-z0-9]*$");
+    ui->leObjectName->setValidator(new QRegExpValidator(rxObjName, this));
+
+    connect(ui->tbbMemberList, SIGNAL(addClicked()),
+            this, SLOT(addClicked()));
+    connect(ui->tbbMemberList, SIGNAL(deleteClicked()),
+            this, SLOT(deleteClicked()));
+
     readSettings();
 }
 
 void DB_ModelObjectDialog::addClicked() {
-    int row = ui->twMemberList->currentRow();
+    int row = ui->twMemberList->currentRow() + 1;
 
-    if (row < 0 || row > ui->twMemberList->rowCount() - 1) {
-        row = ui->twMemberList->rowCount() - 1;
+    if (row < 0) {
+        row = ui->twMemberList->rowCount();
     }
 
-    ui->twMemberList->insertRow(row + 1);
+    ui->twMemberList->insertRow(row);
+
+    QTableWidgetItem* item = new QTableWidgetItem("<NEW>");
+    ui->twMemberList->setItem(row, 0, item);
+    ui->twMemberList->setFocus();
+    QModelIndex idx = ui->twMemberList->model()->index(row, 0);
+    ui->twMemberList->selectionModel()
+            ->setCurrentIndex(idx, QItemSelectionModel::ClearAndSelect);
 }
 
 void DB_ModelObjectDialog::deleteClicked() {
@@ -72,7 +91,42 @@ void DB_ModelObjectDialog::on_pbHelp_clicked() {
 }
 
 void DB_ModelObjectDialog::on_pbSave_clicked() {
-    DB_DIALOGFACTORY->requestInformationDialog("test");
+    RB_SETTINGS->beginGroup("paths");
+    QString savePath = RB_SETTINGS->value("savePath", "").toString();
+    RB_SETTINGS->endGroup();
+
+    QString filter = "All files (*.*);;Text files (*.txt);;";
+    QString fn = QFileDialog::getSaveFileName(
+                DB_DIALOGFACTORY->getMainWindow(),
+                tr("Save file"),
+                savePath + "/" + ui->lePerspective->text().toLower() + "_"
+                + ui->leObjectName->text().toLower() + ".h "
+                + ui->lePerspective->text().toLower() + "_"
+                + ui->leObjectName->text().toLower() + ".cpp",
+                filter);
+
+    if (fn.isEmpty()) {
+        DB_DIALOGFACTORY->requestInformationDialog(tr("Files not saved"));
+        return;
+    }
+
+    DB_CreateModelObject oper;
+    oper.setBaseObject(ui->cbBaseObject->currentText());
+    oper.setPerspective(ui->lePerspective->text());
+    oper.setObjectName(ui->leObjectName->text());
+    oper.setDescription(ui->leDescription->text());
+    oper.setFilePath(QFileInfo(fn).path());
+
+    RB_ObjectContainer* memberList = new RB_ObjectContainer();
+    createMemberList(memberList);
+    oper.execute(memberList);
+    delete memberList;
+
+    savePath = QFileInfo(fn).absolutePath();
+    RB_SETTINGS->beginGroup("paths");
+    RB_SETTINGS->setValue("savePath", savePath);
+    RB_SETTINGS->endGroup();
+
     writeSettings();
     accept();
 }
@@ -80,6 +134,30 @@ void DB_ModelObjectDialog::on_pbSave_clicked() {
 void DB_ModelObjectDialog::on_pbCancel_clicked() {
     writeSettings();
     reject();
+}
+
+void DB_ModelObjectDialog::createMemberList(RB_ObjectContainer* memberList) {
+    int memberCol = 0;
+    int unitCol = 1;
+    int defaultCol = 2;
+    int typeCol = 3;
+    RB_ObjectAtomic* memberObj = nullptr;
+    bool woMembers = true;
+
+    int rowCount = ui->twMemberList->rowCount();
+
+    for (int row = 0; row < rowCount; ++row) {
+        memberObj = new RB_ObjectAtomic("", memberList, "", nullptr, woMembers);
+        memberObj->addMember("member", "-",
+                             ui->twMemberList->item(row, memberCol)->text());
+        memberObj->addMember("unit", "-",
+                             ui->twMemberList->item(row, unitCol)->text());
+        memberObj->addMember("type", "-",
+                             ui->twMemberList->item(row, typeCol)->text());
+        memberObj->addMember("default", "-",
+                             ui->twMemberList->item(row, defaultCol)->text());
+        memberList->addObject(memberObj);
+    }
 }
 
 RB_CmbDelegate* DB_ModelObjectDialog::getNewMemberTypeDelegate() {

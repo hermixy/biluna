@@ -93,7 +93,7 @@ void DB_CreateModelObject::createSourceContent(RB_ObjectBase* memberList) {
             "}\n";
     mSourceContent += "\n";
     mSourceContent += objCamelCase + "::" + objCamelCase  + "(" + objCamelCase
-        + "obj) : RB_ObjectContainer(obj) {\n"
+        + "* obj) : RB_ObjectContainer(obj) {\n"
         "	createMembers();\n"
         "	*this = *project;\n"
         "}\n";
@@ -108,8 +108,13 @@ void DB_CreateModelObject::createSourceContent(RB_ObjectBase* memberList) {
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
+        QString memberName = obj->getValue("member").toString();
+        memberName = memberName.simplified();
+        memberName = memberName.remove(" ");
+        memberName = memberName.toLower();
+
         mSourceContent += "    addMember(\""
-                + obj->getValue("member").toString() + "\", \""
+                + memberName + "\", \""
                 + obj->getValue("unit").toString() + "\", ";
         QString memberType = "RB2::" + obj->getValue("type").toString();
 
@@ -123,8 +128,14 @@ void DB_CreateModelObject::createSourceContent(RB_ObjectBase* memberList) {
                 mSourceContent += "0, ";
             }
         } else {
-            mSourceContent += "\"" + obj->getValue("default").toString()
-                    + "\", ";
+            if (memberType.contains("MemberChar")
+                    || memberType.contains("MemberString")
+                    || memberType.contains("MemberDate")) {
+                mSourceContent += "\"" + obj->getValue("default").toString()
+                        + "\", ";
+            } else {
+                mSourceContent += obj->getValue("default").toString() + ", ";
+            }
         }
 
         mSourceContent += memberType + ");\n";
@@ -146,9 +157,10 @@ void DB_CreateModelObject::setFileHeader(QString& content,
     " *\n"
     " * Copyright (C) " + QString::number(QDate::currentDate().year())
             + " Red-Bag. All rights reserved.\n"
-    " * This file is part of the Biluna DB project.\n"
+    " * This file is part of the Biluna " + mPerspectiveCode.toUpper()
+            + " project.\n"
     " *\n"
-    " * See http://www.red-bag.com for further details.\n"
+    " * See http://www.biluna.com for further details.\n"
     " *****************************************************************/\n";
 }
 

@@ -27,13 +27,13 @@ public:
     virtual bool execute(RB_ObjectBase* /*input*/,
                          RB_ObjectBase* /*output*/) { return false; }
 
-protected:
     void setBaseObject(const QString& baseObjName);
     void setPerspective(const QString& perspCode);
     void setObjectName(const QString& objName);
     void setDescription(const QString& description);
     void setFilePath(const QString& filePath);
 
+protected:
     void createHeaderContent();
     void createSourceContent(RB_ObjectBase* memberList);
     void setFileHeader(QString& content, const QString& fileExtension);

@@ -255,6 +255,16 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>cbBaseObject</tabstop>
+  <tabstop>lePerspective</tabstop>
+  <tabstop>leObjectName</tabstop>
+  <tabstop>leDescription</tabstop>
+  <tabstop>twMemberList</tabstop>
+  <tabstop>pbSave</tabstop>
+  <tabstop>pbCancel</tabstop>
+  <tabstop>pbHelp</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

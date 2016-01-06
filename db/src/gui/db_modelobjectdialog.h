@@ -35,6 +35,7 @@ public slots:
     void on_pbCancel_clicked();
 
 private:
+    void createMemberList(RB_ObjectContainer* memberList);
     RB_CmbDelegate* getNewMemberTypeDelegate();
 
     Ui::DB_ModelObjectDialog* ui;
