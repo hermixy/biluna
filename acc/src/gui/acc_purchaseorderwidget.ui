@@ -415,28 +415,6 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QDateTimeEdit" name="dteOrderDate">
-               <property name="minimumSize">
-                <size>
-                 <width>150</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>150</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="displayFormat">
-                <string>yyyy-MM-dd</string>
-               </property>
-               <property name="calendarPopup">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_32">
                <property name="text">
@@ -461,8 +439,30 @@
                </property>
               </widget>
              </item>
+             <item row="3" column="1">
+              <widget class="QDateEdit" name="dteOrderDate">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="displayFormat">
+                <string>yyyy-MM-dd</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
              <item row="4" column="1">
-              <widget class="QDateTimeEdit" name="dteReceiptDate">
+              <widget class="QDateEdit" name="dteReceiptDate">
                <property name="minimumSize">
                 <size>
                  <width>150</width>
@@ -1712,7 +1712,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QDateTimeEdit" name="dteItemDue">
+              <widget class="QDateEdit" name="dteItemDue">
                <property name="minimumSize">
                 <size>
                  <width>175</width>
@@ -1724,6 +1724,12 @@
                  <width>175</width>
                  <height>16777215</height>
                 </size>
+               </property>
+               <property name="displayFormat">
+                <string>yyyy-MM-dd</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
                </property>
               </widget>
              </item>

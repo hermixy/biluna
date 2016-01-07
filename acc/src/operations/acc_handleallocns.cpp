@@ -31,6 +31,8 @@ ACC_HandleAllocns::ACC_HandleAllocns() {
     mTransAllocList = new RB_ObjectContainer("", NULL, "ACC_TransAllocnList",
                                              ACC_OBJECTFACTORY);
     mTransAllocList->setId(ACC_MODELFACTORY->getRootId()); // will be used as parent
+    mGlTransList = new RB_ObjectContainer("", NULL, "ACC_GlTransList",
+                                          ACC_OBJECTFACTORY);
     mIsAllocListCreated = false;
 }
 
@@ -42,6 +44,7 @@ ACC_HandleAllocns::~ACC_HandleAllocns() {
     delete mBankTransList;
     delete mMemoTransList;
     delete mTransAllocList;
+    delete mGlTransList;
 }
 
 /**
@@ -67,21 +70,6 @@ bool ACC_HandleAllocns::submitAllAndSelect() {
     success = success ? mTransAllocList->dbUpdate(ACC_MODELFACTORY->getDatabase(),
                                                   RB2::ResolveOne) : false;
 
-    RB_ObjectIterator* iter = mTransAllocList->createIterator();
-
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* transAlloc = iter->currentObject();
-
-        if (transAlloc->getFlag(RB2::FlagIsDeleted)
-                && transAlloc->getFlag(RB2::FlagFromDatabase)) {
-            // undo allocation and set bank/cash or memo to default account
-            // due to transDocTo amount is changed
-            glTransToDefault(transAlloc->getValue("docallocto_id").toString());
-        }
-    }
-
-    delete iter;
-
     // Commit transaction
     ACC_MODELFACTORY->getDatabase().commit();
 
@@ -99,6 +87,7 @@ bool ACC_HandleAllocns::revertAll() {
     success = success ? mMemoTransList->erase() : false;
     success = success ? mTransAllocList->erase(): false;
     mIsAllocListCreated = false;
+    mGlTransList->erase();
     return success;
 }
 
@@ -296,7 +285,7 @@ void ACC_HandleAllocns::delDocAllocn(const RB_String& docToId, bool isDeleted) {
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         transAlloc = iter->currentObject();
-        undoItemAllocationFromDC(transAlloc, isDeleted);
+        undoItemAllocationToDC(transAlloc, isDeleted);
     }
 
     delete iter;
@@ -426,10 +415,10 @@ void ACC_HandleAllocns::updateItemAllocnAmt(RB_MmProxy* itemModel,
  * @param dt date time
  */
 void ACC_HandleAllocns::updateTransDate(RB_MmProxy* itemModel,
-                                           const QDateTime& dt) {
+                                        const QDate& date) {
     createAllocList(itemModel);
 
-    if (mTransAllocList->countObject() < 1) {
+    if (mTransAllocList->objectCount() < 1) {
         return;
     }
 
@@ -437,10 +426,44 @@ void ACC_HandleAllocns::updateTransDate(RB_MmProxy* itemModel,
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* transAlloc = iter->currentObject();
-        transAlloc->setValue("datealloc", dt);
+        transAlloc->setValue("datealloc", date);
     }
 
     delete iter;
+}
+
+/**
+ * @brief Update the overall GL transaction list based on changed allocations
+ * @param glTransList
+ */
+bool ACC_HandleAllocns::updateGlTransList(RB_ObjectContainer* glTransList) {
+    // Handle open allocation items
+    RB_ObjectIterator* iter = mTransAllocList->createIterator();
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* transAlloc = iter->currentObject();
+
+        if (transAlloc->getFlag(RB2::FlagIsDeleted)
+                && transAlloc->getFlag(RB2::FlagFromDatabase)) {
+            // undo allocation and set bank/cash or memo to default account
+            // due to transDocTo amount is changed
+            glTransToDefault(transAlloc->getValue("docallocto_id").toString());
+        }
+    }
+
+    delete iter;
+
+    // Reparent glTrans items to overall glTransList
+    RB_ObjectIterator* glIter = mGlTransList->createIterator();
+
+    for (glIter->first(); !glIter->isDone(); glIter->next()) {
+        RB_ObjectBase* glTrans = glIter->currentObject();
+        glTrans->setParent(glTransList);
+        glTransList->addObject(glTrans);
+    }
+
+    delete glIter;
+    return true;
 }
 
 /**
@@ -506,7 +529,7 @@ void ACC_HandleAllocns::undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
 }
 
 /**
- * Undo the bank/memo transaction item allocation, set chartmaster_idx
+ * Undo the debtor/creditor transaction item allocation, set chartmaster_idx
  * to default GL account and amountcleared for bank/cash only to zero. The
  * transaction document alloc and settled is set in ACC_GlTransWidget.
  * Called from Debtor/Creditor document deletion or totalamountrec/pay changed
@@ -514,7 +537,7 @@ void ACC_HandleAllocns::undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
  * @param isPost is true if this action is to be posted immediately
  * from transDocTo to the database, does not delete the allocation.
  */
-void ACC_HandleAllocns::undoItemAllocationFromDC(RB_ObjectBase* transAlloc,
+void ACC_HandleAllocns::undoItemAllocationToDC(RB_ObjectBase* transAlloc,
                                                     bool isPost) {
     RB_ObjectBase* itemFrom = getItemFrom(transAlloc);
     RB_String docFromId = transAlloc->getValue("docfrom_id").toString();
@@ -615,16 +638,22 @@ void ACC_HandleAllocns::glTransToDefault(const RB_String& docToId) {
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* glTrans = iter->currentObject();
+        RB_ObjectBase* glClone = new RB_ObjectAtomic(glTrans);
         glTrans->setFlag(RB2::FlagIsDeleted);
-        mPostGlTrans.execute(glTrans);
+        glTrans->setParent(mGlTransList);
+        mGlTransList->addObject(glTrans);
+//        mPostGlTrans.execute(glTrans);
 
-        glTrans->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
+        glClone->setId(RB_Uuid::createUuid().toString());
+        glClone->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
                           + ACC_QACHARTMASTER->getAccDefaultName());
-        glTrans->setValue("transallocn_idx", "0");
-        glTrans->deleteFlag(RB2::FlagIsDeleted);
-        mPostGlTrans.execute(glTrans);
+        glClone->setValue("transallocn_idx", "0");
+        glClone->deleteFlag(RB2::FlagIsDeleted);
+        glClone->setParent(mGlTransList);
+        mGlTransList->addObject(glClone);
+//        mPostGlTrans.execute(glClone);
 
-        glTrans->dbUpdate(ACC_MODELFACTORY->getDatabase());
+//        glTrans->dbUpdate(ACC_MODELFACTORY->getDatabase());
     }
 
     delete iter;

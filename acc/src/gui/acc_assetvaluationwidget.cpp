@@ -456,7 +456,7 @@ void ACC_AssetValuationWidget::on_pbRefresh_clicked() {
     inputList->dbReadList(ACC_MODELFACTORY->getDatabase());
 
     RB_String htmlStr = "";
-    int inputCount = inputList->countObject();
+    int inputCount = inputList->objectCount();
 
     if (inputCount < 1) {
         htmlStr = "<p>" + tr("No input found.") + "</p>";

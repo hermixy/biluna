@@ -79,7 +79,7 @@ public:
     virtual bool isList() { return false; }
 
     // abstract container definitions
-    virtual int countObject() const { return 0; }
+    virtual int objectCount() const;
     virtual RB_ObjectBase* getObject(const RB_String& id = "") = 0;
     virtual RB_ObjectBase* getObject(const RB_String& memberName,
                                      const RB_Variant& value);
@@ -95,7 +95,7 @@ public:
 
     virtual bool eraseChildren() = 0;
 
-    virtual int countMember() const;
+    virtual int memberCount() const;
     virtual RB_ObjectMember* getMember(int number) const;
     virtual RB_ObjectMember* getMember(const RB_String& name) const;
     virtual int getMemberNo(const RB_String& name) const;
@@ -119,6 +119,7 @@ public:
 
     virtual void deleteFlag(unsigned int f);
 
+    virtual bool dbReadWhere(QSqlDatabase db, const QString& whereStatement);
     virtual bool dbRead(QSqlDatabase db,
                         RB2::ResolveLevel level = RB2::ResolveNone,
                         bool calledFromList = false, bool useParentId = false);

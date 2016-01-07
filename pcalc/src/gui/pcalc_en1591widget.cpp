@@ -970,7 +970,7 @@ void PCALC_EN1591Widget::insertReportInputData(QString& report,
                                                RB_ObjectBase* obj) {
     QString varName = "";
     QString varData = "";
-    int memberCount = obj->countMember();
+    int memberCount = obj->memberCount();
 
     for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
         RB_ObjectMember* mem = obj->getMember(i);
@@ -1049,7 +1049,7 @@ void PCALC_EN1591Widget::createValidationReport() {
         RB_ObjectContainer* inList
                 = PR->getInOutContainer()->getContainer("PCALC_InputList");
         RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
-        int memberCount = in->countMember();
+        int memberCount = in->memberCount();
 
         for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
             RB_ObjectMember* mem = in->getMember(i);
@@ -1070,7 +1070,7 @@ void PCALC_EN1591Widget::createValidationReport() {
 
         for (iterLoad->first(); !iterLoad->isDone(); iterLoad->next()) {
             in = iterLoad->currentObject();
-            memberCount = in->countMember();
+            memberCount = in->memberCount();
 
             for (int i = 0; i < memberCount; ++i) {
                 RB_ObjectMember* mem = in->getMember(i);

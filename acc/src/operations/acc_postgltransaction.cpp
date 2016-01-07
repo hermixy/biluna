@@ -16,6 +16,7 @@
 #include "acc_modelfactory.h"
 #include "acc_objectfactory.h"
 #include "acc_qachartmaster.h"
+#include "acc_qacostcenter.h"
 #include "acc_sqlcommonfunctions.h"
 
 
@@ -26,7 +27,7 @@ ACC_PostGlTransaction::ACC_PostGlTransaction() {
     mDebitAmt = 0.0;
     mCreditAmt = 0.0;
     mGlSumList = NULL;
-    mCostCenterSumList = NULL;
+    mCcSumList = NULL;
 }
 
 /**
@@ -36,8 +37,8 @@ ACC_PostGlTransaction::~ACC_PostGlTransaction() {
     if (mGlSumList) {
         delete mGlSumList;
     }
-    if (mCostCenterSumList) {
-        delete mCostCenterSumList;
+    if (mCcSumList) {
+        delete mCcSumList;
     }
 }
 
@@ -47,19 +48,40 @@ ACC_PostGlTransaction::~ACC_PostGlTransaction() {
  * @param glTrans GL transaction
  * @return true on success
  */
-bool ACC_PostGlTransaction::execute(RB_ObjectBase* glTrans) {
-    if (!glTrans) return false;
+bool ACC_PostGlTransaction::execute(RB_ObjectContainer* glTransList) {
+    if (!glTransList) return false;
 
     // Get the current cost center amount and if not create, now also the record is available
-    RB_String costCenterId = glTrans->getIdValue("costcenter_idx").toString();
-    if (costCenterId != "0" && costCenterId != "") {
-        setCostCenterDebitCredit(glTrans);
-        postCostCenter(glTrans);
+//    RB_String costCenterId = glTrans->getIdValue("costcenter_idx").toString();
+//    if (costCenterId != "0" && costCenterId != "") {
+//        setCcDebitCredit(glTrans);
+//        postCc(glTrans);
+//    }
+
+//    // Get the current actual amount and if not create, now also the record is available
+//    setDebitCredit(glTrans);
+//    return postTransaction(glTrans);
+
+    // new
+    if (mCcSumList) {
+        delete mCcSumList;
     }
 
-    // Get the current actual amount and if not create, now also the record is available
-    setDebitCredit(glTrans);
-    return postTransaction(glTrans);
+    mCcSumList = new RB_ObjectContainer("", NULL, "ACC_CostSumList",
+                                        ACC_OBJECTFACTORY);
+
+    if (mGlSumList) {
+        delete mGlSumList;
+    }
+
+    mGlSumList = new RB_ObjectContainer("", NULL, "ACC_GlSumList",
+                                        ACC_OBJECTFACTORY);
+
+    bool success = createGlSumList(glTransList);
+    success = success && updateGlSumList(glTransList);
+    success = success && createCcSumList(glTransList);
+    success = success && updateCcSumList(glTransList);
+    return success;
 }
 
 /**
@@ -67,6 +89,7 @@ bool ACC_PostGlTransaction::execute(RB_ObjectBase* glTrans) {
  * called from ACC_GlTransactionWidget
  * @param returns true upon success
  */
+/*
 bool ACC_PostGlTransaction::createSumList(RB_ObjectContainer* glTransList) {
     if (!glTransList) return false;
 
@@ -74,7 +97,8 @@ bool ACC_PostGlTransaction::createSumList(RB_ObjectContainer* glTransList) {
         delete mGlSumList;
     }
 
-    mGlSumList = new RB_ObjectContainer("", NULL, "ACC_GlSumList", ACC_OBJECTFACTORY);
+    mGlSumList = new RB_ObjectContainer("", NULL, "ACC_GlSumList",
+                                        ACC_OBJECTFACTORY);
 
     RB_ObjectIterator* iter = glTransList->createIterator();
     for (iter->first(); !iter->isDone(); iter->next()) {
@@ -84,23 +108,149 @@ bool ACC_PostGlTransaction::createSumList(RB_ObjectContainer* glTransList) {
     delete iter;
 
     // return true;
-    return createCostCenterSumList(glTransList);
+    return createCcSumList(glTransList);
 }
-
+*/
 /**
  * Post summary list, updated with deleted and/or added ACC_GlTtrans
  * @returns true on success
  */
+/*
 bool ACC_PostGlTransaction::postSumList() {
     if (mGlSumList) {
         bool success = mGlSumList->dbUpdateList(ACC_MODELFACTORY->getDatabase(),
                                                 RB2::ResolveOne);
         if (success) {
-            return postCostCenterSumList();
+            return postCcSumList();
         }
     }
 
     return false;
+}
+*/
+/**
+ * @brief Create Gl summary list based on new
+ * and existing (to be deleted) transactions
+ * @param glTransList
+ * @return true on success
+ */
+bool ACC_PostGlTransaction::createGlSumList(RB_ObjectContainer* glTransList) {
+    if (!glTransList || !mGlSumList) {
+        RB_DEBUG->error("ACC_PostGlTransaction::createGlSumList() "
+                        "NULL ERROR");
+        return false;
+    }
+
+    QString where = "";
+    QString accountId = "";
+    int periodNo = 0;
+    bool isFirst = true;
+
+    RB_ObjectIterator* iter = glTransList->createIterator();
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* glTrans = iter->currentObject();
+        accountId = glTrans->getIdValue("chartmaster_idx").toString();
+        periodNo = glTrans->getValue("periodno").toInt();
+
+        if (!isFirst) {
+            where += " OR ";
+            isFirst = false;
+        }
+
+        where += "(parent='" + accountId + "' AND period="
+                + QString::number(periodNo) + ")";
+    }
+
+    delete iter;
+    mGlSumList->dbReadWhere(ACC_MODELFACTORY->getDatabase(), where);
+    return true;
+}
+
+/**
+ * @brief Update GL summary list
+ * @param glTransList
+ */
+bool ACC_PostGlTransaction::updateGlSumList(RB_ObjectContainer* glTransList) {
+    if (!glTransList || !mGlSumList) {
+        RB_DEBUG->error("ACC_PostGlTransaction::updateGlSumList() "
+                        "NULL ERROR");
+        return false;
+    }
+
+    RB_ObjectIterator* iter = glTransList->createIterator();
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        // Get relevant GL summary
+        RB_ObjectBase* glTrans = iter->currentObject();
+        RB_ObjectBase* targetGlSum = nullptr;
+        RB_ObjectIterator* sumIter = mGlSumList->createIterator();
+
+        for (sumIter->first(); !sumIter->isDone(); sumIter->next()) {
+            RB_ObjectBase* glSum = iter->currentObject();
+
+            if (glTrans->getIdValue("chartmaster_idx")
+                    == glSum->getValue("parent")
+                    && glTrans->getIdValue("periodno")
+                    == glSum->getValue("periodno")) {
+                targetGlSum = glSum;
+                sumIter->setDone();
+            }
+
+        }
+
+        delete iter;
+
+        // Create GL summary if not already existing
+        if (!targetGlSum) {
+            // No chartdetail yet available, create new
+            targetGlSum = mGlSumList->newObject();
+
+            QString accountId = glTrans->getIdValue("chartmaster_idx").toString();
+            int periodNo = glTrans->getValue("periodno").toInt();
+            QString accountCode = "0";
+            QString accountName = "Default";
+            RB_ObjectBase* acctObj = ACC_QACHARTMASTER->getAcctObj(accountId);
+
+            if (acctObj) {
+                accountCode = acctObj->getValue("accountcode").toString();
+                accountName = acctObj->getValue("accountname").toString();
+            }
+
+            targetGlSum->setValue("parent", accountId);
+            targetGlSum->setValue("period", periodNo);
+            targetGlSum->setValue("accountcode", accountCode);
+            targetGlSum->setValue("accountname", accountName);
+            targetGlSum->setValue("debit", 0.0);
+            targetGlSum->setValue("credit", 0.0);
+        }
+
+        // Update the summary amount
+        double debitAmt = targetGlSum->getValue("debit").toDouble();
+        double creditAmt = targetGlSum->getValue("credit").toDouble();
+        double amount = glTrans->getValue("amount").toDouble();
+
+        // update amount
+        if (!glTrans->getFlag(RB2::FlagIsDeleted)) {
+            if (amount > 0) {
+                debitAmt += amount;
+            } else {
+                creditAmt -= amount;
+            }
+        } else {
+            if (amount > 0) {
+                debitAmt -= amount;
+            } else {
+                creditAmt += amount;
+            }
+        }
+
+        targetGlSum->setValue("debit", debitAmt);
+        targetGlSum->setValue("credit", creditAmt);
+    }
+
+    delete iter;
+    return true;
 }
 
 /**
@@ -108,12 +258,13 @@ bool ACC_PostGlTransaction::postSumList() {
  * if not exists, create ACC_GlSum record
  * @param glTrans GL transaction
  */
+/*
 void ACC_PostGlTransaction::setDebitCredit(RB_ObjectBase* glTrans) {
     RB_String accountId = glTrans->getIdValue("chartmaster_idx").toString();
     if (!ACC_MODELFACTORY->isValidId(accountId)) {
         RB_DEBUG->error("ACC_PostGlTransaction::setDebitCredit() id ERROR");
     }
-RB_DEBUG->print(accountId);
+
     int periodNo = glTrans->getValue("periodno").toInt();
     mDebitAmt = 0.0;
     mCreditAmt = 0.0;
@@ -173,12 +324,13 @@ RB_DEBUG->print(accountId);
         }
     }
 }
-
+*/
 /**
  * Post (or unpost) the GL transaction to the GL Summary per month
  * @param glTrans GL transaction
  * @returns true on success
  */
+/*
 bool ACC_PostGlTransaction::postTransaction(RB_ObjectBase* glTrans) {
     RB_String accountId = glTrans->getIdValue("chartmaster_idx").toString();
     if (!ACC_MODELFACTORY->isValidId(accountId)) {
@@ -203,12 +355,13 @@ bool ACC_PostGlTransaction::postTransaction(RB_ObjectBase* glTrans) {
 
     return true;
 }
-
+*/
 /**
  * Set amount of ACC_GlSum and, if not exists, create ACC_GlSum record
  * helper function of createSumList()
  * @param glTrans GL transaction
  */
+/*
 void ACC_PostGlTransaction::setGlSumAmount(RB_ObjectBase* glTrans) {
     RB_String accountId = glTrans->getIdValue("chartmaster_idx").toString();
     int periodNo = glTrans->getValue("periodno").toInt();
@@ -298,42 +451,140 @@ void ACC_PostGlTransaction::setGlSumAmount(RB_ObjectBase* glTrans) {
     glSum->setValue("debit", debitAmt);
     glSum->setValue("credit", creditAmt);
 }
-
+*/
 /**
  * Create cost center summary list, used when for example
  * when ACC_GlTrans is deleted
  * called from ACC_GlTransactionWidget
  * @param returns true upon success
  */
-bool ACC_PostGlTransaction::createCostCenterSumList(RB_ObjectContainer* glTransList) {
-    if (!glTransList) return false;
 
-    if (mCostCenterSumList) {
-        delete mCostCenterSumList;
+bool ACC_PostGlTransaction::createCcSumList(RB_ObjectContainer* glTransList) {
+    if (!glTransList || !mCcSumList) {
+        RB_DEBUG->error("ACC_PostGlTransaction::createCcSumList() "
+                        "NULL ERROR");
+        return false;
     }
 
-    mCostCenterSumList = new RB_ObjectContainer("", NULL, "ACC_CostSumList", ACC_OBJECTFACTORY);
+    QString where = "";
+    QString costCenterId = "";
+    int periodNo = 0;
+    bool isFirst = true;
 
     RB_ObjectIterator* iter = glTransList->createIterator();
+
     for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* obj = iter->currentObject();
+        RB_ObjectBase* glTrans = iter->currentObject();
+        costCenterId = glTrans->getIdValue("costcenter_idx").toString();
+        periodNo = glTrans->getValue("periodno").toInt();
 
-        RB_String costCenterId = obj->getIdValue("costcenter_idx").toString();
-        if (costCenterId != "0" && costCenterId != "") {
-            setCostCenterSumAmount(obj);
+        if (!isFirst) {
+            where += " OR ";
+            isFirst = false;
         }
-    }
-    delete iter;
 
+        where += "(parent='" + costCenterId + "' AND period="
+                + QString::number(periodNo) + ")";
+    }
+
+    delete iter;
+    mCcSumList->dbReadWhere(ACC_MODELFACTORY->getDatabase(), where);
+    return true;
+}
+
+/**
+ * @brief Update cost center summary list
+ * @param glTransList
+ */
+bool ACC_PostGlTransaction::updateCcSumList(RB_ObjectContainer* glTransList) {
+    if (!glTransList || !mCcSumList) {
+        RB_DEBUG->error("ACC_PostGlTransaction::updateCcSumList() "
+                        "NULL ERROR");
+        return false;
+    }
+
+    RB_ObjectIterator* iter = glTransList->createIterator();
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        // Get relevant GL summary
+        RB_ObjectBase* glTrans = iter->currentObject();
+        RB_ObjectBase* targetCcSum = nullptr;
+        RB_ObjectIterator* sumIter = mCcSumList->createIterator();
+
+        for (sumIter->first(); !sumIter->isDone(); sumIter->next()) {
+            RB_ObjectBase* ccSum = iter->currentObject();
+
+            if (glTrans->getIdValue("chartmaster_idx")
+                    == ccSum->getValue("parent")
+                    && glTrans->getIdValue("periodno")
+                    == ccSum->getValue("periodno")) {
+                targetCcSum = ccSum;
+                sumIter->setDone();
+            }
+
+        }
+
+        delete iter;
+
+        // Create GL summary if not already existing
+        if (!targetCcSum) {
+            // No chartdetail yet available, create new
+            targetCcSum = mCcSumList->newObject();
+
+            QString centerId = glTrans->getIdValue("costcenter_idx").toString();
+            int periodNo = glTrans->getValue("periodno").toInt();
+            QString centerCode = "0";
+            QString centerName = "Default";
+            RB_ObjectBase* ccObj = ACC_QACOSTCENTER->getCostCenterObj(centerId);
+
+            if (ccObj) {
+                centerCode = ccObj->getValue("centercode").toString();
+                centerName = ccObj->getValue("centername").toString();
+            }
+
+            targetCcSum->setValue("parent", centerId);
+            targetCcSum->setValue("period", periodNo);
+            targetCcSum->setValue("centercode", centerCode);
+            targetCcSum->setValue("centername", centerName);
+            targetCcSum->setValue("debit", 0.0);
+            targetCcSum->setValue("credit", 0.0);
+        }
+
+        // Update the summary amount
+        double debitAmt = targetCcSum->getValue("debit").toDouble();
+        double creditAmt = targetCcSum->getValue("credit").toDouble();
+        double amount = glTrans->getValue("amount").toDouble();
+
+        // update amount
+        if (!glTrans->getFlag(RB2::FlagIsDeleted)) {
+            if (amount > 0) {
+                debitAmt += amount;
+            } else {
+                creditAmt -= amount;
+            }
+        } else {
+            if (amount > 0) {
+                debitAmt -= amount;
+            } else {
+                creditAmt += amount;
+            }
+        }
+
+        targetCcSum->setValue("debit", debitAmt);
+        targetCcSum->setValue("credit", creditAmt);
+    }
+
+    delete iter;
     return true;
 }
 
 /**
  * Set amount of ACC_CostSum and, if not exists, create ACC_CostSum record
- * helper function of createCostCenterSumList()
+ * helper function of createCcSumList()
  * @param glTrans GL transaction
  */
-void ACC_PostGlTransaction::setCostCenterSumAmount(RB_ObjectBase* glTrans) {
+/*
+void ACC_PostGlTransaction::setCcSumAmount(RB_ObjectBase* glTrans) {
     RB_String costCenterId = glTrans->getIdValue("costcenter_idx").toString();
     int periodNo = glTrans->getValue("periodno").toInt();
     RB_ObjectBase* costSum = NULL;
@@ -356,7 +607,7 @@ void ACC_PostGlTransaction::setCostCenterSumAmount(RB_ObjectBase* glTrans) {
             }
 
             // Find costSum if already created
-            RB_ObjectIterator* iter = mCostCenterSumList->createIterator();
+            RB_ObjectIterator* iter = mCcSumList->createIterator();
             for (iter->first(); !iter->isDone() && !costSum; iter->next()) {
                 RB_ObjectBase* obj = iter->currentObject();
 
@@ -370,7 +621,7 @@ void ACC_PostGlTransaction::setCostCenterSumAmount(RB_ObjectBase* glTrans) {
             // costSum not found and to be created
             if (!costSum) {
                 costSum = ACC_OBJECTFACTORY->newObject(RB_Uuid::createUuid().toString(),
-                                                     mCostCenterSumList, "ACC_CostSum");
+                                                     mCcSumList, "ACC_CostSum");
                 costSum->setValue("parent", costCenterId);
                 costSum->setValue("period", periodNo);
                 costSum->setValue("centercode", centerCode);
@@ -380,23 +631,23 @@ void ACC_PostGlTransaction::setCostCenterSumAmount(RB_ObjectBase* glTrans) {
             }
         } else {
             RB_String id = query.value(0).toString();
-            costSum = mCostCenterSumList->getObject(id);
+            costSum = mCcSumList->getObject(id);
 
             if (!costSum) {
                 costSum = ACC_OBJECTFACTORY->newObject(RB_Uuid::createUuid().toString(),
-                                                       mCostCenterSumList, "ACC_CostSum");
+                                                       mCcSumList, "ACC_CostSum");
                 costSum->setId(id);
                 costSum->dbRead(ACC_MODELFACTORY->getDatabase(), RB2::ResolveNone);
             }
         }
     } else {
-        RB_DEBUG->error("ACC_PostGlTransaction::setCostCenterSumAmount() "
+        RB_DEBUG->error("ACC_PostGlTransaction::setCcSumAmount() "
                          + query.lastError().text() + " ERROR");
         return;
     }
 
     if (!costSum){
-        RB_DEBUG->error("ACC_PostGlTransaction::setCostCenterSumAmount() ERROR");
+        RB_DEBUG->error("ACC_PostGlTransaction::setCcSumAmount() ERROR");
         return;
     }
 
@@ -422,31 +673,34 @@ void ACC_PostGlTransaction::setCostCenterSumAmount(RB_ObjectBase* glTrans) {
     costSum->setValue("debit", debitAmt);
     costSum->setValue("credit", creditAmt);
 }
-
+*/
 /**
  * Post cost center summary list, updated with deleted
  * and/or added ACC_GlTtrans
  * @returns true on success
  */
-bool ACC_PostGlTransaction::postCostCenterSumList() {
-    if (mCostCenterSumList) {
-        return mCostCenterSumList->dbUpdateList(ACC_MODELFACTORY->getDatabase(),
+/*
+bool ACC_PostGlTransaction::postCcSumList() {
+    if (mCcSumList) {
+        return mCcSumList->dbUpdateList(ACC_MODELFACTORY->getDatabase(),
                                                 RB2::ResolveOne);
     }
 
     return false;
 }
+*/
 
 /**
  * Set debit/credit amount of ACC_CostSum and,
  * if not exists, create ACC_CostSum record
  * @param glTrans GL transaction
  */
-void ACC_PostGlTransaction::setCostCenterDebitCredit(RB_ObjectBase *glTrans) {
+/*
+void ACC_PostGlTransaction::setCcDebitCredit(RB_ObjectBase *glTrans) {
     RB_String costCenterId = glTrans->getIdValue("costcenter_idx").toString();
     int periodNo = glTrans->getValue("periodno").toInt();
-    mCostCenterDebitAmt = 0.0;
-    mCostCenterCreditAmt = 0.0;
+    mCcDebitAmt = 0.0;
+    mCcCreditAmt = 0.0;
 
     // get existing amounts
     RB_String qStr = "";
@@ -478,11 +732,11 @@ void ACC_PostGlTransaction::setCostCenterDebitCredit(RB_ObjectBase *glTrans) {
             costSum->dbUpdate(ACC_MODELFACTORY->getDatabase());
             delete costSum;
         } else {
-            mCostCenterDebitAmt = query.value(0).toDouble();
-            mCostCenterCreditAmt = query.value(1).toDouble();
+            mCcDebitAmt = query.value(0).toDouble();
+            mCcCreditAmt = query.value(1).toDouble();
         }
     } else {
-        RB_DEBUG->error("ACC_PostGlTransaction::setCostCenterDebitCredit() "
+        RB_DEBUG->error("ACC_PostGlTransaction::setCcDebitCredit() "
                          + query.lastError().text() + " ERROR");
     }
 
@@ -490,37 +744,38 @@ void ACC_PostGlTransaction::setCostCenterDebitCredit(RB_ObjectBase *glTrans) {
     if (!glTrans->getFlag(RB2::FlagIsDeleted)) {
         double amount = glTrans->getValue("amount").toDouble();
         if (amount > 0) {
-            mCostCenterDebitAmt += amount;
+            mCcDebitAmt += amount;
         } else {
-            mCostCenterCreditAmt -= amount;
+            mCcCreditAmt -= amount;
         }
     } else {
         double amount = glTrans->getValue("amount").toDouble();
         if (amount > 0) {
-            mCostCenterDebitAmt -= amount;
+            mCcDebitAmt -= amount;
         } else {
-            mCostCenterCreditAmt += amount;
+            mCcCreditAmt += amount;
         }
     }
 
 }
-
+*/
 /**
  * Post (or unpost) the GL transaction to the cost center summary per month
  * @param glTrans GL transaction
  * @returns true on success
  */
-bool ACC_PostGlTransaction::postCostCenter(RB_ObjectBase* glTrans) {
+/*
+bool ACC_PostGlTransaction::postCc(RB_ObjectBase* glTrans) {
     RB_String qStr = "";
-    qStr = "UPDATE acc_costsum SET debit=" + RB_String::number(mCostCenterDebitAmt, 'f', 6)
-           + ", credit=" + RB_String::number(mCostCenterCreditAmt, 'f', 6)
+    qStr = "UPDATE acc_costsum SET debit=" + RB_String::number(mCcDebitAmt, 'f', 6)
+           + ", credit=" + RB_String::number(mCcCreditAmt, 'f', 6)
            + " WHERE period=" + glTrans->getValue("periodno").toString()
            + " AND  parent='" + glTrans->getIdValue("costcenter_idx").toString() + "';";
 
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
 
     if (!query.exec(qStr)) {
-        RB_DEBUG->error("ACC_PostGlTransaction::postCostCenter() "
+        RB_DEBUG->error("ACC_PostGlTransaction::postCc() "
                          + query.lastError().text() + " ERROR");
         return false;
     }
@@ -528,15 +783,26 @@ bool ACC_PostGlTransaction::postCostCenter(RB_ObjectBase* glTrans) {
     return true;
 
 }
-
+*/
 /**
- * Recreate glSum in case of emergency,
- * TODO: handle in inner join queries instead of individual per account
+ * Recreate GL summary and cost center summary in case of emergency,
  * @param fromPrd from period
  * @param toPrd up to and including period
  * @return true on success
  */
 bool ACC_PostGlTransaction::recreate(int fromPrd, int toPrd) {
+    bool success = recreateGlSum(fromPrd, toPrd);
+    return success && recreateCcSum(fromPrd, toPrd);
+}
+
+/**
+ * Recreate GL summary in case of emergency,
+ * TODO: handle in inner join queries instead of individual per account
+ * @param fromPrd from period
+ * @param toPrd up to and including period
+ * @return true on success
+ */
+bool ACC_PostGlTransaction::recreateGlSum(int fromPrd, int toPrd) {
     RB_ObjectContainer* chartMasterList = ACC_QACHARTMASTER->getAcctList();
 
     ACC_SqlCommonFunctions util;
@@ -613,7 +879,7 @@ bool ACC_PostGlTransaction::recreate(int fromPrd, int toPrd) {
     delete glSum;
     delete iter;
     // Note: do not delete chartMasterList
-    return recreateCostCenterSum(fromPrd, toPrd);
+    return true;
 }
 
 /**
@@ -623,9 +889,9 @@ bool ACC_PostGlTransaction::recreate(int fromPrd, int toPrd) {
  * @param toPrd up to and including period
  * @return true on success
  */
-bool ACC_PostGlTransaction::recreateCostCenterSum(int fromPrd, int toPrd) {
+bool ACC_PostGlTransaction::recreateCcSum(int fromPrd, int toPrd) {
     RB_ObjectContainer* costCenterList =
-           new RB_ObjectContainer("", NULL, "ACC_CostCenterList", ACC_OBJECTFACTORY);
+           new RB_ObjectContainer("", NULL, "ACC_CcList", ACC_OBJECTFACTORY);
     costCenterList->setValue("parent", ACC_MODELFACTORY->getRootId());
     costCenterList->dbReadList(ACC_MODELFACTORY->getDatabase(), RB2::ResolveOne);
 
@@ -650,7 +916,7 @@ bool ACC_PostGlTransaction::recreateCostCenterSum(int fromPrd, int toPrd) {
                    + " AND amount>=0;";
 
             if (!query.exec(qStr)) {
-               RB_DEBUG->error("ACC_PostGlTransaction::recreateCostCenterSum() 21 ERROR");
+               RB_DEBUG->error("ACC_PostGlTransaction::recreateCcSum() 21 ERROR");
                return false;
             }
 
@@ -664,7 +930,7 @@ bool ACC_PostGlTransaction::recreateCostCenterSum(int fromPrd, int toPrd) {
                    + " AND amount<0;";
 
             if (!query.exec(qStr)) {
-               RB_DEBUG->error("ACC_PostGlTransaction::recreateCostCenterSum() 3 ERROR");
+               RB_DEBUG->error("ACC_PostGlTransaction::recreateCcSum() 3 ERROR");
                return false;
             }
 
@@ -686,7 +952,7 @@ bool ACC_PostGlTransaction::recreateCostCenterSum(int fromPrd, int toPrd) {
                   + "' AND period=" + RB_String::number(i)+ ";";
 
             if (!query.exec(qStr)) {
-               RB_DEBUG->error("ACC_PostGlTransaction::recreateCostCenterSum() 4 ERROR");
+               RB_DEBUG->error("ACC_PostGlTransaction::recreateCcSum() 4 ERROR");
                return false;
             }
 

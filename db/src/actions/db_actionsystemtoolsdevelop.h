@@ -36,6 +36,12 @@ public:
     static RB_GuiAction* createGuiAction();
     static RB_Action* factory();
     virtual void trigger();
+
+private:
+    void testEncryption();
+    void testIdxSplit();
+    void updateDatabaseIdxFields();
+    void testDbReadWhere();
 };
 
 #endif

@@ -64,10 +64,10 @@ void ACC_ValueAssetHelper::visitObject(RB_ObjectBase *obj) {
 
         RB_ObjectContainer* objC = obj->getContainer("ACC_AttrTreeList");
 
-        if (mPeriodAttr && (objC && objC->countObject() <= 0)) {
+        if (mPeriodAttr && (objC && objC->objectCount() <= 0)) {
             // Period already and no children, create period output list
             createPeriodOutput(obj, tmpVal);
-        } else if (!objC || (objC && objC->countObject() <= 0)) {
+        } else if (!objC || (objC && objC->objectCount() <= 0)) {
             // No children, add to output list
             obj->detachFromParent();
             mOutputList->addObject(obj);

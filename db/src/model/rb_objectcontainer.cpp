@@ -224,7 +224,7 @@ bool RB_ObjectContainer::isList() {
  * Count object in container (same as size() which returns a unsigned int)
  * @return number of objects in container
  */
-int RB_ObjectContainer::countObject() const {
+int RB_ObjectContainer::objectCount() const {
     return (int)mObjectList.size();
 }
 
@@ -234,7 +234,7 @@ int RB_ObjectContainer::countObject() const {
  * @return object if not in list returns NULL
  */
 RB_ObjectBase* RB_ObjectContainer::getObject(int row) {
-    if (row < 0 || row >= countObject()) {
+    if (row < 0 || row >= objectCount()) {
         return NULL;
     }
 
@@ -364,7 +364,7 @@ bool RB_ObjectContainer::newObject(int row, int /*count*/) {
  * @return RB_ObjectContainer
  */
 RB_ObjectContainer* RB_ObjectContainer::getContainer(int number) {
-    if (number < 0 || number >= countObject()) {
+    if (number < 0 || number >= objectCount()) {
         return NULL;
     }
 
@@ -890,7 +890,7 @@ void RB_ObjectContainer::sort(const RB_String& columnName, RB2::SortOrderType or
     //	columnName.toStdString().c_str());
     RB_ObjectBase* obj = NULL;
 
-    if (countObject()) {
+    if (objectCount()) {
             obj = getObject(0);
     } else {
             return;

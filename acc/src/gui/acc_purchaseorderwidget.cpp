@@ -313,7 +313,7 @@ void ACC_PurchaseOrderWidget::on_pbAddOrder_clicked() {
     orderIdx = mModel->index(row, mModel->fieldIndex("orderno"));
     mModel->setData(orderIdx, orderNo, Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("orderdate"));
-    QDateTime dt = QDateTime::currentDateTime();
+    QDate dt = QDate::currentDate();
     mModel->setData(orderIdx, dt, Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("receiptdate"));
     mModel->setData(orderIdx, dt, Qt::EditRole);
@@ -483,7 +483,7 @@ void ACC_PurchaseOrderWidget::on_pbAddDetail_clicked() {
     // end NOTE
 
     idx = mChildModel->index(row, mChildModel->fieldIndex("itemdue"));
-    mChildModel->setData(idx, QDateTime::currentDateTime(), Qt::EditRole);
+    mChildModel->setData(idx, QDate::currentDate(), Qt::EditRole);
 
     tvDetails->setCurrentIndex(mChildModel->index(row,
                                mChildModel->fieldIndex("stk_idx"), QModelIndex()));
@@ -660,8 +660,8 @@ void ACC_PurchaseOrderWidget::on_pbProcessOrder_clicked() {
         return;
     }
 
-    QDateTime dt = mModel->getCurrentValue("suppinvoicedate").toDateTime();
-    QDateTime cdt = QDateTime::currentDateTime();
+    QDate dt = mModel->getCurrentValue("suppinvoicedate").toDate();
+    QDate cdt = QDate::currentDate();
     if (!dt.isValid() || dt.daysTo(cdt) > 365) {
         ACC_DIALOGFACTORY->requestInformationDialog(tr("Not a valid supplier invoice date."));
         return;

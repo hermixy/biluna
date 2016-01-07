@@ -170,7 +170,7 @@ void RB_Debug::timestamp() {
  */
 void RB_Debug::printUnicode(const QString& text) {
     for (int i=0; i<(int)text.length(); i++) {
-        print(QString("[%X] %c").arg(text.at(i).unicode())
+        print(QString("[%1] %1").arg(text.at(i).unicode())
               .arg(text.at(i).toLatin1()));
     }
 }
@@ -243,21 +243,21 @@ void RB_Debug::printMemberDeleted() {
 }
 
 
-void RB_Debug::printObject(RB_Object* obj) {
+void RB_Debug::printObject(RB_Object* obj, RB2::ResolveLevel level) {
     RB_ObjectBase* objB = dynamic_cast<RB_ObjectBase*>(obj);
 
     if (objB) {
-        printObjectBase(objB);
+        printObjectBase(objB, level);
         return;
     }
 
     QString str = "";
-    str = "  RB_Debug::printObject() START";
+    str = "  RB_Debug::printObject() START\n";
 
     if (!obj) {
-        str += "    object pointer is NULL";
+        str += "    object pointer is NULL\n";
     } else {
-        str.append(QString("    object pointer = %1")
+        str.append(QString("    object pointer = %1\n")
                    .arg(pointerToString(obj)));
         str += "    object name = " + obj->getName();
     }
@@ -268,30 +268,30 @@ void RB_Debug::printObject(RB_Object* obj) {
  */
 void RB_Debug::printObjectBase(RB_ObjectBase* obj, RB2::ResolveLevel level) {
     QString str = "";
-    str = "  RB_Debug::printObjectBase() START";
+    str = "  RB_Debug::printObjectBase() START\n";
 	
 	if (!obj) {
-        str += "    object pointer is NULL";
+        str += "    object pointer is NULL\n";
 	} else {
-        str.append(QString("    object pointer = %s")
+        str.append(QString("    object pointer = %1\n")
                    .arg(pointerToString(obj)));
-        str += "    object id = " + obj->getId();
-        str += "    object name = " + obj->getName();
+        str += "    object id = " + obj->getId() + "\n";
+        str += "    object name = " + obj->getName() + "\n";
 		
 		RB_ObjectBase* parent = (RB_ObjectBase*)obj->getParent();
 		
 		if (parent) {
-            str.append(QString("    object parent pointer = %s")
+            str.append(QString("    object parent pointer = %1\n")
                        .arg(pointerToString(parent)));
-            str += "    object parent id = " + parent->getId();
-            str += "    object parent name = " + parent->getName();
+            str += "    object parent id = " + parent->getId() + "\n";
+            str += "    object parent name = " + parent->getName() + "\n";
 		} else {
-            str += "    object parent pointer = NULL";
-            str += "    object parent id = NULL";
-            str += "    object parent name = NULL";
+            str += "    object parent pointer = NULL\n";
+            str += "    object parent id = NULL\n";
+            str += "    object parent name = NULL\n";
 		}
 		
-		int noMember = obj->countMember();
+        int noMember = obj->memberCount();
 	
 		for (int i = 0; i < noMember; ++i) {
             str += "    ";
@@ -301,7 +301,7 @@ void RB_Debug::printObjectBase(RB_ObjectBase* obj, RB2::ResolveLevel level) {
             str += "; display = ";
             str += obj->getMember(i)->getDisplayValue().toString();
             str += "; previous = ";
-            str += obj->getMember(i)->getPreviousValue().toString();
+            str += obj->getMember(i)->getPreviousValue().toString() + "\n";
         }
 
 		print(str);

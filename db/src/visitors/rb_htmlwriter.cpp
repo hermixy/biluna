@@ -92,7 +92,7 @@ void RB_HtmlWriter::visitObject(RB_ObjectBase* obj) {
         mWriter.writeStartElement("table");
         mWriter.writeAttribute("border", "1");
 
-        for (int i = RB2::HIDDENCOLUMNS; i < obj->countMember(); i++) {
+        for (int i = RB2::HIDDENCOLUMNS; i < obj->memberCount(); i++) {
             counter = i - RB2::HIDDENCOLUMNS;
             if (counter % 2 == 0) { // even, (counter & 0) does not work?
                 mWriter.writeStartElement("tr");
@@ -127,7 +127,7 @@ void RB_HtmlWriter::visitObject(RB_ObjectBase* obj) {
             }
         }
 
-        counter = obj->countMember() - RB2::HIDDENCOLUMNS;
+        counter = obj->memberCount() - RB2::HIDDENCOLUMNS;
 
         if (counter % 2 != 0) { // uneven
             mWriter.writeStartElement("td");

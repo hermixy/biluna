@@ -466,7 +466,7 @@ void DB_ModelFactory::createUpdateTableSql(RB_String& sqlStr,
     createSql(sqlStr, obj, true); // CREATE TEMPORARY TABLE `" + tmpTableName
 
     sqlStr += "INSERT INTO `" + tableName + "_tmp` SELECT\n";
-    int count = obj->countMember();
+    int count = obj->memberCount();
     for (int i = 0; i < count; ++i) {
         if (i < count - 1) {
             sqlStr += " `" + obj->getMember(i)->getName().toLower() + "`,\n";
@@ -513,13 +513,13 @@ void DB_ModelFactory::createSql(RB_String& sqlStr, RB_ObjectBase* obj, bool isTe
         RB_ObjectContainer* objC = (RB_ObjectContainer*)obj;
 
         if (objC->getName().endsWith("List")) {
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 createSql(sqlStr, objC->getObject(i), isTempTable);
             }
         } else {
             createTableSql(sqlStr, objC, isTempTable);
 
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 createSql(sqlStr, objC->getObject(i), isTempTable);
             }
         }
@@ -679,7 +679,7 @@ void DB_ModelFactory::createTableSql(RB_String& sqlStr, RB_ObjectBase* obj,
         sqlStr += obj->getName().toLower() + "_tmp` (";
     }
 
-    int mCount = obj->countMember();
+    int mCount = obj->memberCount();
 
     for (int i = 0; i < mCount; ++i) {
         RB_ObjectMember* mem = obj->getMember(i);
@@ -814,7 +814,7 @@ bool DB_ModelFactory::createTables(RB_String& sqlStr, RB_ObjectBase* obj) {
         RB_ObjectContainer* objC = (RB_ObjectContainer*)obj;
 
         if (objC->getName().endsWith("List")) {
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 createTables(sqlStr, objC->getObject(i));
             }
         } else {
@@ -822,7 +822,7 @@ bool DB_ModelFactory::createTables(RB_String& sqlStr, RB_ObjectBase* obj) {
                 createTableSql(sqlStr, objC);
             }
 
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 createTables(sqlStr, objC->getObject(i));
             }
         }
@@ -847,7 +847,7 @@ bool DB_ModelFactory::createDefaultRows(RB_String& sqlStr, RB_ObjectBase* obj) {
         RB_ObjectContainer* objC = (RB_ObjectContainer*)obj;
 
         if (objC->isList()) {
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 createDefaultRows(sqlStr, objC->getObject(i));
             }
         } else {
@@ -855,7 +855,7 @@ bool DB_ModelFactory::createDefaultRows(RB_String& sqlStr, RB_ObjectBase* obj) {
                 createDefaultRowSql(sqlStr, objC);
             }
 
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 createDefaultRows(sqlStr, objC->getObject(i));
             }
         }
@@ -887,7 +887,7 @@ void DB_ModelFactory::createDefaultRowSql(RB_String& sqlStr, RB_ObjectBase* obj)
         valueStr = ") VALUES ('0', 'none'";
     }
 
-    int memberCount = obj->countMember();
+    int memberCount = obj->memberCount();
     RB_ObjectMember* mem = NULL;
 
 
@@ -957,7 +957,7 @@ bool DB_ModelFactory::checkTables(RB_ObjectBase* obj, RB_String& result) {
         bool difference = false;
 
         if (objC->getName().endsWith("List")) {
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 checkTables(objC->getObject(i), result);
             }
         } else {
@@ -993,7 +993,7 @@ bool DB_ModelFactory::checkTables(RB_ObjectBase* obj, RB_String& result) {
 //                    model->setData(model->index(i, 6), fld.defaultValue());
                 }
 
-                memCount = objC->countMember();
+                memCount = objC->memberCount();
 
                 for (int i = 0; i < memCount; ++i) {
                     mem = objC->getMember(i);
@@ -1009,7 +1009,7 @@ bool DB_ModelFactory::checkTables(RB_ObjectBase* obj, RB_String& result) {
                 result += "  OK\n";
             }
 
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 checkTables(objC->getObject(i), result);
             }
         }
@@ -1036,7 +1036,7 @@ bool DB_ModelFactory::checkTables(RB_ObjectBase* obj, RB_String& result) {
                 }
             }
 
-            memCount = obj->countMember();
+            memCount = obj->memberCount();
 
             for (int i = 0; i < memCount; ++i) {
                 mem = obj->getMember(i);
@@ -1069,7 +1069,7 @@ void DB_ModelFactory::createNonExistingTables(QString &sqlStr, RB_ObjectBase *ob
         RB_ObjectContainer* objC = (RB_ObjectContainer*)obj;
 
         if (objC->getName().endsWith("List")) {
-            for (int i = 0; i < objC->countObject(); ++i) {
+            for (int i = 0; i < objC->objectCount(); ++i) {
                 createNonExistingTables(sqlStr, objC->getObject(i));
             }
         } else {
@@ -1077,7 +1077,7 @@ void DB_ModelFactory::createNonExistingTables(QString &sqlStr, RB_ObjectBase *ob
                 createTableSql(sqlStr, obj);
                 createDefaultRowSql(sqlStr, obj);
             } else {
-                for (int i = 0; i < objC->countObject(); ++i) {
+                for (int i = 0; i < objC->objectCount(); ++i) {
                     createNonExistingTables(sqlStr, objC->getObject(i));
                 }
             }

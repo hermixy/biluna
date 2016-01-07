@@ -234,8 +234,11 @@ bool ACC_GlTransactionWidget::fileSave(bool /*withSelect*/) {
     // update transaction document and items including tax
     updateBeforeSave();
 
-    // save and post GL transactions, database transaction/commit
-    bool success = savePostGlTrans();
+    // create GL transactions, existing from database to be deleted
+    // and new current transactions to be saved in database
+    bool success = createGlTrans();
+    // update GL transaction with allocation changes
+    success = success && mHandleAllocn.updateGlTransList(mGlTransList);
     // save allocation, related transdoc and itemtrans, database transaction/commit
     success = success ? mHandleAllocn.submitAllAndSelect() : false;
     // save visible models
@@ -282,8 +285,9 @@ bool ACC_GlTransactionWidget::fileSave(bool /*withSelect*/) {
 /**
  * Save and post GL transactions to database, GL Summary and Cost Summary
  */
-bool ACC_GlTransactionWidget::savePostGlTrans() {
+bool ACC_GlTransactionWidget::createGlTrans() {
     // Clear container and create existing transactions
+    mGlTransList->erase();
     createExistingGlTrans();
 
     // Set existing to be deleted
@@ -294,13 +298,10 @@ bool ACC_GlTransactionWidget::savePostGlTrans() {
     }
     delete iter;
 
-    bool success = processGlTrans();
-
-    // Clear container and create new GL transations
+    // Add new GL transations
     createNewGlTrans();
 
-    success = success ? processGlTrans() : false;
-    return success;
+    return true;
 }
 
 /**
@@ -313,22 +314,23 @@ bool ACC_GlTransactionWidget::processGlTrans() {
 
     bool success = true;
     ACC_PostGlTransaction oper;
+    success = oper.execute(mGlTransList);
 
-    RB_ObjectIterator* iter = mGlTransList->createIterator();
+//    RB_ObjectIterator* iter = mGlTransList->createIterator();
 
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* glTrans = iter->currentObject();
-        success = oper.execute(glTrans);
+//    for (iter->first(); !iter->isDone(); iter->next()) {
+//        RB_ObjectBase* glTrans = iter->currentObject();
+//        success = oper.execute(glTrans);
 
-        if (!success) {
-            // Abort
-            ACC_MODELFACTORY->getDatabase().rollback();
-            RB_DEBUG->error("ACC_GlTransactionWidget::processGlTrans() post glTrans ERROR");
-            return false;
-        }
-    }
+//        if (!success) {
+//            // Abort
+//            ACC_MODELFACTORY->getDatabase().rollback();
+//            RB_DEBUG->error("ACC_GlTransactionWidget::processGlTrans() post glTrans ERROR");
+//            return false;
+//        }
+//    }
 
-    delete iter;
+//    delete iter;
 
     // Insert glTrans items
     success = success ? mGlTransList->dbUpdateList(ACC_MODELFACTORY->getDatabase(),
@@ -524,21 +526,23 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
 
     // remove gltrans (which reverses chartdetails), code is partly from fileSave()
     ACC_MODELFACTORY->getDatabase().transaction();
+    mGlTransList->erase();
     createExistingGlTrans();
 
     // Unpost existing transactions
     ACC_PostGlTransaction oper;
+    oper.execute(mGlTransList);
 
-    RB_ObjectIterator* iter = mGlTransList->createIterator();
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        // set display value for account
-        RB_ObjectBase* obj = iter->currentObject();
-        obj->setFlag(RB2::FlagIsDeleted);
-        if (!oper.execute(obj)) {
-            RB_DEBUG->error("ACC_GlTransactionWidget::fileSave() unposting ERROR");
-        }
-    }
-    delete iter;
+//    RB_ObjectIterator* iter = mGlTransList->createIterator();
+//    for (iter->first(); !iter->isDone(); iter->next()) {
+//        // set display value for account
+//        RB_ObjectBase* obj = iter->currentObject();
+//        obj->setFlag(RB2::FlagIsDeleted);
+//        if (!oper.execute(obj)) {
+//            RB_DEBUG->error("ACC_GlTransactionWidget::fileSave() unposting ERROR");
+//        }
+//    }
+//    delete iter;
 
     // Delete GL transactions, if not journal item model
     RB_String transDocId = mTransDocModel->getCurrentId();
@@ -1632,7 +1636,7 @@ void ACC_GlTransactionWidget::slotDataIsChanged(const QModelIndex& current,
     if ((mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo)
             && current.model() == mTransDocModel
             && current.column() == mTransDocModel->fieldIndex("transdate")) {
-        mHandleAllocn.updateTransDate(mItemTransModel, current.data().toDateTime());
+        mHandleAllocn.updateTransDate(mItemTransModel, current.data().toDate());
         bool success = isValidTransDoc();
         enableWidgets(success);
     }
@@ -2250,7 +2254,7 @@ void ACC_GlTransactionWidget::updateGlTransWidget() {
     // date, description, account, debet, credit
     int colCount = 6;
     twGlTransactions->setColumnCount(colCount);
-    int rowCount = mGlTransList->countObject(); // depending the number of GL transactions
+    int rowCount = mGlTransList->objectCount(); // depending the number of GL transactions
     twGlTransactions->setRowCount(rowCount + 1); // + 1 for totals
     twGlTransactions->verticalHeader()->setDefaultSectionSize(20); // row height
     twGlTransactions->horizontalHeader()->setDefaultSectionSize(80);
@@ -2313,9 +2317,11 @@ void ACC_GlTransactionWidget::updateGlTransWidget() {
 void ACC_GlTransactionWidget::updateGlTransactions() {
     if (isWindowModified()) {
         // new if window is modified
+        mGlTransList->erase();
         createNewGlTrans();
     } else {
         // use existing if window is not modified
+        mGlTransList->erase();
         createExistingGlTrans();
     }
 }
@@ -2325,7 +2331,6 @@ void ACC_GlTransactionWidget::updateGlTransactions() {
  * TODO in case amount is zero and only tax exists do not create glTrans
  * of zero for the amount but only for the tax, this is the case with
  * salesorder and complex taxation
- * @param clearList true if transaction list should be cleared
  */
 void ACC_GlTransactionWidget::createNewGlTrans() {
     double totalAmount = 0.0;
@@ -2337,8 +2342,6 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
     RB_ObjectBase* gltrans = NULL;
     QModelIndex idxItem = tvItem->currentIndex();
     QModelIndex idx;
-
-    if (mGlTransList->countMember() > 0) mGlTransList->erase();
 
     mRootId = ACC_MODELFACTORY->getRootId();
     mType = mTransDocModel->getCurrentValue("doctype").toInt();
@@ -2560,11 +2563,12 @@ void ACC_GlTransactionWidget::createNewHelper(const RB_String& descr,
  * (Re)Create the existing transactions
  */
 void ACC_GlTransactionWidget::createExistingGlTrans() {
-    if (mGlTransList->countMember() > 0) mGlTransList->erase();
     QModelIndex idxDoc = tvDocument->currentIndex();
     RB_String docId = mTransDocModel->data(mTransDocModel->index(idxDoc.row(), 0)).toString();
-    mGlTransList->setValue("parent", docId); // NOTE: actual parent is ACC_Project
-    mGlTransList->dbReadList(ACC_MODELFACTORY->getDatabase(), RB2::ResolveAll, "transdoc_id");
+    mGlTransList->setValue("parent", docId);
+    // NOTE: actual parent is ACC_Project, now use 'transdoc_id'
+    mGlTransList->dbReadList(ACC_MODELFACTORY->getDatabase(),
+                             RB2::ResolveAll, "transdoc_id");
 }
 
 /**
@@ -2723,7 +2727,7 @@ bool ACC_GlTransactionWidget::isValidTransDoc() {
 void ACC_GlTransactionWidget::updateBeforeSave() {
 
     int typeNo = mTransDocModel->getCurrentValue("transno").toInt();
-    QDateTime docDate = mTransDocModel->getCurrentValue("transdate").toDateTime();
+    QDate docDate = mTransDocModel->getCurrentValue("transdate").toDate();
     QString transDocDate = docDate.toString(Qt::ISODate);
     RB_String transDocId = mTransDocModel->getCurrentValue("id").toString();
     QModelIndex idx;

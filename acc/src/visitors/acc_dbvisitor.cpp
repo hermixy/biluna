@@ -176,7 +176,7 @@ bool ACC_DbVisitor::dbUpdateList() {
 
             if (isFirstInsertObject) {
                 prepareInsertQuery(qInsert, obj);
-                memberCount = obj->countMember();
+                memberCount = obj->memberCount();
                 isFirstInsertObject = false;
             }
 
@@ -251,7 +251,7 @@ bool ACC_DbVisitor::dbUpdateList() {
 
             if (isFirstUpdateObject) {
                 prepareUpdateQuery(qUpdate, obj);
-                memberCount = obj->countMember();
+                memberCount = obj->memberCount();
                 isFirstUpdateObject = false;
             }
 

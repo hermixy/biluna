@@ -74,14 +74,15 @@ bool ACC_ProcessTransDoc::execute(RB_ObjectBase* td, RB_ObjectContainer* dctList
 
     // Post transactions to ACC_GlSum and ACC_CostSum
     ACC_PostGlTransaction* oper =  new ACC_PostGlTransaction();
-    RB_ObjectIterator* iter = mGlTransList->createIterator();
+//    RB_ObjectIterator* iter = mGlTransList->createIterator();
 
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* glTrans = iter->currentObject();
-        if (!oper->execute(glTrans)) {
-            RB_DEBUG->error("ACC_ProcessTransDoc::execute() ERROR");
-        }
-    }
+//    for (iter->first(); !iter->isDone(); iter->next()) {
+//        RB_ObjectBase* glTrans = iter->currentObject();
+//        if (!oper->execute(glTrans)) {
+//            RB_DEBUG->error("ACC_ProcessTransDoc::execute() ERROR");
+//        }
+//    }
+    oper->execute(mGlTransList);
 
     // Commit SQL transaction
     ACC_MODELFACTORY->getDatabase().commit();
@@ -96,7 +97,7 @@ bool ACC_ProcessTransDoc::execute(RB_ObjectBase* td, RB_ObjectContainer* dctList
         mTransDoc->dbUpdate(ACC_MODELFACTORY->getDatabase(), RB2::ResolveNone);
     }
 
-    delete iter;
+//    delete iter;
     delete oper;
     delete mGlTransList;
     mGlTransList = NULL;
@@ -117,7 +118,7 @@ bool ACC_ProcessTransDoc::createGlTrans() {
     double totalCredit = 0.0; // negative amounts
     RB_ObjectBase* glTrans = NULL; // ACC_GlTrans
 
-    if (mGlTransList->countMember() > 0) mGlTransList->erase();
+    if (mGlTransList->memberCount() > 0) mGlTransList->erase();
 
     mRootId = ACC_MODELFACTORY->getRootId();
     mDate = mTransDoc->getValue("transdate").toString();

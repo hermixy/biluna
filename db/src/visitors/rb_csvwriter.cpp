@@ -110,7 +110,7 @@ void RB_CsvWriter::writeCharacters(const RB_String& str) {
  * @param obj is an object from the model
  */
 void RB_CsvWriter::writeMemberName(RB_ObjectBase* obj) {
-    for (int i = 0; i < obj->countMember(); i++) {
+    for (int i = 0; i < obj->memberCount(); i++) {
         if (i > 0) {
             writeCharacters(mSeparatorCharacter);
         }
@@ -124,7 +124,7 @@ void RB_CsvWriter::writeMemberName(RB_ObjectBase* obj) {
  * @param obj is an object from the model
  */
 void RB_CsvWriter::writeMemberValue(RB_ObjectBase* obj) {
-    for (int i = 0; i < obj->countMember(); i++) {
+    for (int i = 0; i < obj->memberCount(); i++) {
         if (i > 0) {
             writeCharacters(mSeparatorCharacter);
         }

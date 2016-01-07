@@ -145,7 +145,7 @@ void RB_TableView::slotAdd() {
     }
 
     RB_ObjectBase* obj = mModel->getObjectFactory()->newSingleObject(objectName);
-    int memberCount = obj->countMember();
+    int memberCount = obj->memberCount();
 
     QModelIndex idx;
 
@@ -334,7 +334,7 @@ void RB_TableView::slotFilterOn() {
     RB_String fieldName = "";
     RB_ObjectBase* obj = mModel->getObject(idx, RB2::ResolveNone);
 
-    for (int i = RB2::HIDDENCOLUMNS; i < obj->countMember()
+    for (int i = RB2::HIDDENCOLUMNS; i < obj->memberCount()
          && fieldName.isEmpty(); ++i) {
         RB_String testName = obj->getMember(i)->getName();
 

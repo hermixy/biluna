@@ -607,7 +607,7 @@ bool SCAN_ScanResultWidget::uploadScan(RB_ObjectBase* scan) {
     mQuestionModel->undoFilterSort();
 
     RB_ObjectContainer* qList = scan->getContainer("SCAN_QuestionList");
-    if (qList->countObject() < 1) return false;
+    if (qList->objectCount() < 1) return false;
 
     RB_ObjectIterator* qIter = qList->createIterator();
     QModelIndex index;
@@ -629,7 +629,7 @@ bool SCAN_ScanResultWidget::uploadScan(RB_ObjectBase* scan) {
         tvQuestion->scrollTo(mQuestionModel->index(row, RB2::HIDDENCOLUMNS, QModelIndex()));
 
         RB_ObjectContainer* aList = question->getContainer("SCAN_AnswerList");
-        if (aList->countObject() < 1) return false;
+        if (aList->objectCount() < 1) return false;
 
         RB_ObjectIterator* aIter = aList->createIterator();
 

@@ -310,6 +310,7 @@ HEADERS += \
     ../src/operations/acc_sotransdoc.h \
     ../src/operations/acc_valueasset.h \
     ../src/utils/acc_qachartmaster.h \
+    ../src/utils/acc_qacostcenter.h \
     ../src/utils/acc_qasysacctcontrol.h \
     ../src/utils/acc_sqlcommonfunctions.h \
     ../src/utils/acc_utilityfactory.h \
@@ -547,6 +548,7 @@ SOURCES += \
     ../src/operations/acc_sotransdoc.cpp \
     ../src/operations/acc_valueasset.cpp \
     ../src/utils/acc_qachartmaster.cpp \
+    ../src/utils/acc_qacostcenter.cpp \
     ../src/utils/acc_qasysacctcontrol.cpp \
     ../src/utils/acc_sqlcommonfunctions.cpp \
     ../src/utils/acc_utilityfactory.cpp \

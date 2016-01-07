@@ -25,22 +25,31 @@ public:
     ACC_PostGlTransaction();
     virtual ~ACC_PostGlTransaction();
 
-    virtual bool execute(RB_ObjectBase* glTrans);
-    virtual bool createSumList(RB_ObjectContainer* glTransList);
-    virtual bool postSumList();
+    virtual bool execute(RB_ObjectContainer* glTransList);
+//    virtual bool createSumList(RB_ObjectContainer* glTransList);
+//    virtual bool postSumList();
     virtual bool recreate(int fromPrd, int toPrd);
 
 private:
-    void setDebitCredit(RB_ObjectBase* glTrans);
-    bool postTransaction(RB_ObjectBase* glTrans);
-    void setGlSumAmount(RB_ObjectBase* glTrans);
+    // new
+    bool createGlSumList(RB_ObjectContainer* glTransList);
+    bool updateGlSumList(RB_ObjectContainer* glTransList);
 
-    bool createCostCenterSumList(RB_ObjectContainer* glTransList);
-    void setCostCenterSumAmount(RB_ObjectBase* glTrans);
-    bool postCostCenterSumList();
-    void setCostCenterDebitCredit(RB_ObjectBase* glTrans);
-    bool postCostCenter(RB_ObjectBase* glTrans);
-    bool recreateCostCenterSum(int fromPrd, int toPrd);
+    // existing
+//    void setDebitCredit(RB_ObjectBase* glTrans);
+//    bool postTransaction(RB_ObjectBase* glTrans);
+//    void setGlSumAmount(RB_ObjectBase* glTrans);
+
+    bool createCcSumList(RB_ObjectContainer* glTransList);
+    bool updateCcSumList(RB_ObjectContainer* glTransList);
+//    void setCcSumAmount(RB_ObjectBase* glTrans);
+//    bool postCcSumList();
+//    void setCcDebitCredit(RB_ObjectBase* glTrans);
+
+//    bool postCc(RB_ObjectBase* glTrans);
+
+    bool recreateGlSum(int fromPrd, int toPrd);
+    bool recreateCcSum(int fromPrd, int toPrd);
 
     //! Current debit amount for GL transaction period
     double mDebitAmt;
@@ -50,11 +59,11 @@ private:
     RB_ObjectContainer* mGlSumList;
 
     //! Current debit amount for cost center period
-    double mCostCenterDebitAmt;
+    double mCcDebitAmt;
     //! Current credit amount for cost center period
-    double mCostCenterCreditAmt;
+    double mCcCreditAmt;
     //! List of cost center summaries
-    RB_ObjectContainer* mCostCenterSumList;
+    RB_ObjectContainer* mCcSumList;
 
 };
 

@@ -45,7 +45,8 @@ public:
     virtual void delDocAllocn(const RB_String& docId, bool isDeleted);
 
     virtual void updateItemAllocnAmt(RB_MmProxy *itemModel, double amt);
-    virtual void updateTransDate(RB_MmProxy* itemModel, const QDateTime& dt);
+    virtual void updateTransDate(RB_MmProxy* itemModel, const QDate &date);
+    virtual bool updateGlTransList(RB_ObjectContainer* glTransList);
 
     virtual RB_ObjectContainer* getTransDocList();
 
@@ -53,8 +54,8 @@ protected:
     void undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
                                   RB_MmProxy* itemModel,
                                   bool isPost);
-    void undoItemAllocationFromDC(RB_ObjectBase* transAlloc,
-                                  bool isPost);
+    void undoItemAllocationToDC(RB_ObjectBase* transAlloc,
+                                bool isPost);
     RB_ObjectBase* getItemFrom(RB_ObjectBase* transAlloc);
     void glTransToDefault(const RB_String& docToId);
     void createAllocList(RB_MmProxy* itemModel);
@@ -74,6 +75,8 @@ protected:
     RB_ObjectContainer* mMemoTransList;
     //! Transaction allocation list
     RB_ObjectContainer* mTransAllocList;
+    //! GL transaction list changed by allocations
+    RB_ObjectContainer* mGlTransList;
     //! Flag true if existing allocation list is created
     bool mIsAllocListCreated;
 

@@ -44,7 +44,7 @@ public:
     virtual bool isList();
 
     // container functions
-    virtual int countObject() const;
+    virtual int objectCount() const;
     virtual RB_ObjectBase* getObject(int row);
     virtual RB_ObjectBase* getObject(const RB_String& id = "");
     virtual RB_ObjectBase* getObject(const RB_String& memberName,
