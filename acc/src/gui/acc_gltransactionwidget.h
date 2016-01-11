@@ -108,7 +108,7 @@ protected slots:
     virtual void slotRefreshBankModel();
 
 private:
-    bool createGlTrans();
+    void setGlTransAsDelete();
     bool processGlTrans();
 
     void setDocWidgets(ACC2::TransType type);

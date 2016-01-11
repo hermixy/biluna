@@ -21,6 +21,7 @@
 /**
  * Iterator for iterating through std::list containers. Based on the
  * iterator design pattern by the Gang of Four.
+ * TODO: removing object from container corrupts the iterator 2016-01-11
  */
 class DB_EXPORT RB_ObjectIterator {
 

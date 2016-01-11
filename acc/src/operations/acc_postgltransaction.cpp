@@ -79,8 +79,10 @@ bool ACC_PostGlTransaction::execute(RB_ObjectContainer* glTransList) {
 
     bool success = createGlSumList(glTransList);
     success = success && updateGlSumList(glTransList);
+    success = success && mGlSumList->dbUpdateList(ACC_MODELFACTORY->getDatabase());
     success = success && createCcSumList(glTransList);
     success = success && updateCcSumList(glTransList);
+    success = success && mCcSumList->dbUpdateList(ACC_MODELFACTORY->getDatabase());
     return success;
 }
 
@@ -155,11 +157,11 @@ bool ACC_PostGlTransaction::createGlSumList(RB_ObjectContainer* glTransList) {
 
         if (!isFirst) {
             where += " OR ";
-            isFirst = false;
         }
 
         where += "(parent='" + accountId + "' AND period="
                 + QString::number(periodNo) + ")";
+        isFirst = false;
     }
 
     delete iter;
@@ -199,7 +201,7 @@ bool ACC_PostGlTransaction::updateGlSumList(RB_ObjectContainer* glTransList) {
 
         }
 
-        delete iter;
+        delete sumIter;
 
         // Create GL summary if not already existing
         if (!targetGlSum) {
@@ -480,11 +482,11 @@ bool ACC_PostGlTransaction::createCcSumList(RB_ObjectContainer* glTransList) {
 
         if (!isFirst) {
             where += " OR ";
-            isFirst = false;
         }
 
         where += "(parent='" + costCenterId + "' AND period="
                 + QString::number(periodNo) + ")";
+        isFirst = false;
     }
 
     delete iter;
@@ -524,7 +526,7 @@ bool ACC_PostGlTransaction::updateCcSumList(RB_ObjectContainer* glTransList) {
 
         }
 
-        delete iter;
+        delete sumIter;
 
         // Create GL summary if not already existing
         if (!targetCcSum) {
@@ -891,7 +893,7 @@ bool ACC_PostGlTransaction::recreateGlSum(int fromPrd, int toPrd) {
  */
 bool ACC_PostGlTransaction::recreateCcSum(int fromPrd, int toPrd) {
     RB_ObjectContainer* costCenterList =
-           new RB_ObjectContainer("", NULL, "ACC_CcList", ACC_OBJECTFACTORY);
+           new RB_ObjectContainer("", NULL, "ACC_CostSumList", ACC_OBJECTFACTORY);
     costCenterList->setValue("parent", ACC_MODELFACTORY->getRootId());
     costCenterList->dbReadList(ACC_MODELFACTORY->getDatabase(), RB2::ResolveOne);
 

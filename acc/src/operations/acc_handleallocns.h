@@ -32,17 +32,17 @@ public:
 
     bool submitAllAndSelect();
     bool revertAll();
+    void clear();
 
     virtual bool addAllocn(RB_MmProxy* itemModel,
                            const RB_String& docToId,
                            const RB_String& docToDspl,
                            const RB_String& docFromId);
 
-    virtual void delItemAllocn(RB_MmProxy* itemModel,
-                               bool isDocItemDeleted);
+    virtual void delItemAllocn(RB_MmProxy* itemModel);
     virtual void delItemListAllocn(RB_MmProxy* itemModel);
 
-    virtual void delDocAllocn(const RB_String& docId, bool isDeleted);
+    virtual void delDocAllocn(const RB_String& docId);
 
     virtual void updateItemAllocnAmt(RB_MmProxy *itemModel, double amt);
     virtual void updateTransDate(RB_MmProxy* itemModel, const QDate &date);
@@ -52,10 +52,8 @@ public:
 
 protected:
     void undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
-                                  RB_MmProxy* itemModel,
-                                  bool isPost);
-    void undoItemAllocationToDC(RB_ObjectBase* transAlloc,
-                                bool isPost);
+                                  RB_MmProxy* itemModel);
+    void undoItemAllocationToDC(RB_ObjectBase* transAlloc);
     RB_ObjectBase* getItemFrom(RB_ObjectBase* transAlloc);
     void glTransToDefault(const RB_String& docToId);
     void createAllocList(RB_MmProxy* itemModel);

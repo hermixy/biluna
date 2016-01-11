@@ -407,7 +407,7 @@ void ACC_BankImportCheckDialog::on_ileAllocation_clear() {
         return;
     }
 
-    mHandleAllocn.delItemAllocn(mItemModel, false);
+    mHandleAllocn.delItemAllocn(mItemModel);
     mItemModel->setCurrentValue("chartmaster_idx", "0", Qt::EditRole);
     //    slotDataChanged();
 }

@@ -236,13 +236,19 @@ bool ACC_GlTransactionWidget::fileSave(bool /*withSelect*/) {
 
     // create GL transactions, existing from database to be deleted
     // and new current transactions to be saved in database
-    bool success = createGlTrans();
+    mGlTransList->erase();
+    createExistingGlTrans();
+    setGlTransAsDelete();
+    createNewGlTrans();
     // update GL transaction with allocation changes
-    success = success && mHandleAllocn.updateGlTransList(mGlTransList);
-    // save allocation, related transdoc and itemtrans, database transaction/commit
-    success = success ? mHandleAllocn.submitAllAndSelect() : false;
+    bool success = mHandleAllocn.updateGlTransList(mGlTransList);
+    // save allocation, related transdoc and itemtrans, in transaction/commit
+    success = success && mHandleAllocn.submitAllAndSelect();
+    // process the extended GL transactionlist to GL summary
+    // and save to database
+    success = success && processGlTrans();
     // save visible models
-    success = success ? mItemTransModel->submitAllAndSelect() : false ;
+    success = success && mItemTransModel->submitAllAndSelect();
 
     if ((mTransType == ACC2::TransCreditor || mTransType == ACC2::TransDebtor)
                 && mTransDocModel->getCurrentValue("refno").toString().isEmpty()) {
@@ -251,7 +257,7 @@ bool ACC_GlTransactionWidget::fileSave(bool /*withSelect*/) {
         mTransDocModel->setCurrentValue("refno", refNo, Qt::EditRole);
     }
 
-    success = success ? mTransDocModel->submitAllAndSelect() : false;
+    success = success && mTransDocModel->submitAllAndSelect();
 
     if (success) {
         setWindowModified(false);
@@ -285,23 +291,19 @@ bool ACC_GlTransactionWidget::fileSave(bool /*withSelect*/) {
 /**
  * Save and post GL transactions to database, GL Summary and Cost Summary
  */
-bool ACC_GlTransactionWidget::createGlTrans() {
-    // Clear container and create existing transactions
-    mGlTransList->erase();
-    createExistingGlTrans();
+void ACC_GlTransactionWidget::setGlTransAsDelete() {
+    if (!mGlTransList) {
+        RB_DEBUG->error("ACC_GlTransactionWidget::setGlTransAsDelete() "
+                        "NULL list ERROR");
+    }
 
-    // Set existing to be deleted
+    // Set (existing) list to be deleted
     RB_ObjectIterator* iter = mGlTransList->createIterator();
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* glTrans = iter->currentObject();
         glTrans->setFlag(RB2::FlagIsDeleted);
     }
     delete iter;
-
-    // Add new GL transations
-    createNewGlTrans();
-
-    return true;
 }
 
 /**
@@ -309,39 +311,21 @@ bool ACC_GlTransactionWidget::createGlTrans() {
  * and Cost Summary. Done in a database transaction/commit
  */
 bool ACC_GlTransactionWidget::processGlTrans() {
-    // Start transaction
     ACC_MODELFACTORY->getDatabase().transaction();
-
-    bool success = true;
+    // Process for GL summary and cost centers
     ACC_PostGlTransaction oper;
-    success = oper.execute(mGlTransList);
-
-//    RB_ObjectIterator* iter = mGlTransList->createIterator();
-
-//    for (iter->first(); !iter->isDone(); iter->next()) {
-//        RB_ObjectBase* glTrans = iter->currentObject();
-//        success = oper.execute(glTrans);
-
-//        if (!success) {
-//            // Abort
-//            ACC_MODELFACTORY->getDatabase().rollback();
-//            RB_DEBUG->error("ACC_GlTransactionWidget::processGlTrans() post glTrans ERROR");
-//            return false;
-//        }
-//    }
-
-//    delete iter;
-
-    // Insert glTrans items
-    success = success ? mGlTransList->dbUpdateList(ACC_MODELFACTORY->getDatabase(),
-                                                 RB2::ResolveOne) : false;
-    // Commit
-    ACC_MODELFACTORY->getDatabase().commit();
-
+    bool success = oper.execute(mGlTransList);
+    // Save GL transaction to database
+    success = success && mGlTransList->dbUpdateList(
+                            ACC_MODELFACTORY->getDatabase(), RB2::ResolveOne);
     if (!success) {
-        RB_DEBUG->error("ACC_GlTransactionWidget::processTrans() update mGlTransList ERROR");
+        RB_DEBUG->error("ACC_GlTransactionWidget::processTrans() "
+                        "process and update mGlTransList ERROR");
     }
 
+    if (!ACC_MODELFACTORY->getDatabase().commit()) {
+        ACC_MODELFACTORY->getDatabase().rollback();
+    }
     return success;
 }
 
@@ -515,11 +499,13 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
     }
 
     // reverse, delete and remove allocation
+    mHandleAllocn.clear();
+
     if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo) {
         mHandleAllocn.delItemListAllocn(mItemTransModel);
     } else if (mTransType == ACC2::TransCreditor || mTransType == ACC2::TransDebtor) {
         RB_String docId = mTransDocModel->getCurrentId();
-        mHandleAllocn.delDocAllocn(docId, true);
+        mHandleAllocn.delDocAllocn(docId);
     } else {
         return;
     }
@@ -528,23 +514,20 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
     ACC_MODELFACTORY->getDatabase().transaction();
     mGlTransList->erase();
     createExistingGlTrans();
+    setGlTransAsDelete();
 
-    // Unpost existing transactions
-    ACC_PostGlTransaction oper;
-    oper.execute(mGlTransList);
+    // update GL transaction with allocation changes
+    bool success = mHandleAllocn.updateGlTransList(mGlTransList);
+    // save allocation, related transdoc and itemtrans, in transaction/commit
+    success = success && mHandleAllocn.submitAllAndSelect();
+    // process the extended GL transactionlist to GL summary
+    // and save to database
+    success = success && processGlTrans();
+    // save visible models
+    success = success && mItemTransModel->submitAllAndSelect();
 
-//    RB_ObjectIterator* iter = mGlTransList->createIterator();
-//    for (iter->first(); !iter->isDone(); iter->next()) {
-//        // set display value for account
-//        RB_ObjectBase* obj = iter->currentObject();
-//        obj->setFlag(RB2::FlagIsDeleted);
-//        if (!oper.execute(obj)) {
-//            RB_DEBUG->error("ACC_GlTransactionWidget::fileSave() unposting ERROR");
-//        }
-//    }
-//    delete iter;
-
-    // Delete GL transactions, if not journal item model
+    // Extra (?) delete GL transactions, if not journal item model
+    ACC_MODELFACTORY->getDatabase().transaction();
     RB_String transDocId = mTransDocModel->getCurrentId();
     QSqlQuery query(ACC_MODELFACTORY->getDatabase());
     RB_String sqlStr = "DELETE FROM acc_gltrans WHERE transdoc_id='" + transDocId + "';";
@@ -553,7 +536,9 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
         RB_DEBUG->error("ACC_GlTransactionWidget::fileSave() delete gltrans ERROR");
     }
 
-    ACC_MODELFACTORY->getDatabase().commit();
+    if (!ACC_MODELFACTORY->getDatabase().commit()) {
+        ACC_MODELFACTORY->getDatabase().rollback();
+    }
 
     // Remove item and document model rows
     //
@@ -570,14 +555,13 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
     mSaveInProgress = true;
     ACC_MODELFACTORY->getDatabase().transaction();
 
-    bool success = true;
     success = success ? mItemTransModel->submitAll() : false ; // TODO: also in in RB_MmProxy::slotParentCurrentRowChanged()
     success = success ? mTransDocModel->submitAllAndSelect() : false;
-    success = success ? mHandleAllocn.submitAllAndSelect() : false;
 
     if (success && ACC_MODELFACTORY->getDatabase().commit()) {
         setWindowModified(false);
     } else {
+        ACC_MODELFACTORY->getDatabase().rollback();
         RB_DEBUG->error("ACC_GlTransactionWidget::pbDeleteDoc() transaction ERROR");
     }
 
@@ -996,19 +980,16 @@ void ACC_GlTransactionWidget::on_pbDeleteItem_clicked() {
 
     if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo){
         // delete allocation and document settled
-        mHandleAllocn.delItemAllocn(mItemTransModel, true);
+        mHandleAllocn.delItemAllocn(mItemTransModel);
     } else if (mTransType == ACC2::TransCreditor || mTransType == ACC2::TransDebtor) {
-        // not here, only required when amount changes
-//        RB_String docId = mTransDocModel->getCurrentId();
-//        mHandleAllocn.delDocAllocn(docId, true);
-//        mTransDocModel->setCurrentValue("alloc", 0.0, Qt::EditRole);
-//        mTransDocModel->setCurrentValue("settled", 0, Qt::EditRole);
+        // not applicable here, for creditor and debtor allocation is
+        // on document level
     }
 
     // remove gltrans (which reverses chartdetails/trialbalance), done at fileSave()
     mItemTransModel->removeRows(index.row(), 1, QModelIndex());
-//    mItemTransModel->submitAllAndSelect(); might save a non valid transaction
-//    mHandleAllocn.submitAllAndSelect();
+    // mItemTransModel->submitAllAndSelect() mHandleAllocn.submitAllAndSelect()
+    // is done in fileSave, to allow for fileRevert
 
     mIsValidateAmounts = false;
     setWindowModified(true);
@@ -1378,7 +1359,7 @@ void ACC_GlTransactionWidget::on_ileAllocation_clear() {
         return;
     }
 
-    mHandleAllocn.delItemAllocn(mItemTransModel, false);
+    mHandleAllocn.delItemAllocn(mItemTransModel);
     mItemTransModel->setCurrentValue("chartmaster_idx", "0", Qt::EditRole);
 }
 
@@ -1658,7 +1639,7 @@ void ACC_GlTransactionWidget::slotDataIsChanged(const QModelIndex& current,
                 // Show message of allocation deletion and bank/memo transaction numbers
                 ACC_DIALOGFACTORY->requestInformationDialog(tr("The related allocation(s)\n"
                                                                "will be removed."));
-                mHandleAllocn.delDocAllocn(mTransDocModel->getCurrentId(), false);
+                mHandleAllocn.delDocAllocn(mTransDocModel->getCurrentId());
                 mTransDocModel->setCurrentValue("alloc", 0.0, Qt::EditRole);
                 mTransDocModel->setCurrentValue("settled", 0, Qt::EditRole);
             }

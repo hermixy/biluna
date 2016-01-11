@@ -72,23 +72,22 @@ bool ACC_HandleAllocns::submitAllAndSelect() {
 
     // Commit transaction
     ACC_MODELFACTORY->getDatabase().commit();
-
-    success = success ? mTransDocList->erase() : false;
-    success = success ? mBankTransList->erase() : false;
-    success = success ? mMemoTransList->erase() : false;
-    success = success ? mTransAllocList->erase(): false;
-    mIsAllocListCreated = false;
+    this->clear();
     return success;
 }
 
 bool ACC_HandleAllocns::revertAll() {
-    bool success = mTransDocList->erase();
-    success = success ? mBankTransList->erase() : false;
-    success = success ? mMemoTransList->erase() : false;
-    success = success ? mTransAllocList->erase(): false;
+    this->clear();
+    return true;
+}
+
+void ACC_HandleAllocns::clear() {
+    mTransDocList->erase();
+    mBankTransList->erase();
+    mMemoTransList->erase();
+    mTransAllocList->erase();
     mIsAllocListCreated = false;
     mGlTransList->erase();
-    return success;
 }
 
 /**
@@ -114,7 +113,7 @@ bool ACC_HandleAllocns::addAllocn(RB_MmProxy* itemModel,
     // Undo existing allocation if exists
     // The relevant transAlloc, transDocTo and itemFrom are now part of list
     // Below is false because doc item is reversable and not deleted
-    delItemAllocn(itemModel, false);
+    delItemAllocn(itemModel);
 
     // Get the transDocTo from the update list or add to the list
     RB_ObjectBase* transDocTo = getTransDocTo(docToId);
@@ -212,8 +211,7 @@ bool ACC_HandleAllocns::addAllocn(RB_MmProxy* itemModel,
  * @param itemModel GL transaction item model
  * @param isDocItemDeleted true if item will be deleted
  */
-void ACC_HandleAllocns::delItemAllocn(RB_MmProxy* itemModel,
-                                         bool isDocItemDeleted) {
+void ACC_HandleAllocns::delItemAllocn(RB_MmProxy* itemModel) {
     RB_String itemId = itemModel->getCurrentId();
 
     if (itemId.size() < 38) {
@@ -227,7 +225,7 @@ void ACC_HandleAllocns::delItemAllocn(RB_MmProxy* itemModel,
     RB_ObjectBase* transAlloc = mTransAllocList->getObject("itemallocfrom_id", itemId);
 
     if (transAlloc) {
-        undoItemAllocationFromBM(transAlloc, itemModel, isDocItemDeleted);
+        undoItemAllocationFromBM(transAlloc, itemModel);
     }
 }
 
@@ -244,19 +242,23 @@ void ACC_HandleAllocns::delItemListAllocn(RB_MmProxy* itemModel) {
     }
 
     int itemRowCount = itemModel->rowCount();
-    QModelIndex currentIdx = itemModel->getCurrentIndex();
+
+    if (itemRowCount < 1) {
+        return;
+    }
+
+//    QModelIndex currentIdx = itemModel->getCurrentIndex();
     QModelIndex idx = QModelIndex();
-    bool isDeleted = true;
 
     for (int i = 0; i < itemRowCount; ++i) {
         idx = itemModel->index(i, 0);
         itemModel->getSelectionModel()
                 ->setCurrentIndex(idx, QItemSelectionModel::ClearAndSelect);
-        delItemAllocn(itemModel, isDeleted);
+        delItemAllocn(itemModel);
     }
 
-    itemModel->getSelectionModel()
-            ->setCurrentIndex(currentIdx, QItemSelectionModel::ClearAndSelect);
+//    itemModel->getSelectionModel()
+//            ->setCurrentIndex(currentIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 /**
@@ -270,7 +272,7 @@ void ACC_HandleAllocns::delItemListAllocn(RB_MmProxy* itemModel) {
  * @param docToId document ID
  * @param isDeleted document or item is deleted and is not reversable
  */
-void ACC_HandleAllocns::delDocAllocn(const RB_String& docToId, bool isDeleted) {
+void ACC_HandleAllocns::delDocAllocn(const RB_String& docToId) {
     createAllocList(docToId);
 
     // Get transAlloc, check if at least one exists
@@ -285,7 +287,7 @@ void ACC_HandleAllocns::delDocAllocn(const RB_String& docToId, bool isDeleted) {
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         transAlloc = iter->currentObject();
-        undoItemAllocationToDC(transAlloc, isDeleted);
+        undoItemAllocationToDC(transAlloc);
     }
 
     delete iter;
@@ -458,8 +460,9 @@ bool ACC_HandleAllocns::updateGlTransList(RB_ObjectContainer* glTransList) {
 
     for (glIter->first(); !glIter->isDone(); glIter->next()) {
         RB_ObjectBase* glTrans = glIter->currentObject();
-        glTrans->setParent(glTransList);
-        glTransList->addObject(glTrans);
+        RB_ObjectBase* glClone = new RB_ObjectAtomic(glTrans);
+        glClone->setParent(glTransList);
+        glTransList->addObject(glClone);
     }
 
     delete glIter;
@@ -475,8 +478,7 @@ bool ACC_HandleAllocns::updateGlTransList(RB_ObjectContainer* glTransList) {
  * from transDocTo to the database, does not delete the allocation.
  */
 void ACC_HandleAllocns::undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
-                                                    RB_MmProxy* itemModel,
-                                                    bool isPost) {
+                                                    RB_MmProxy* itemModel) {
     RB_String docToId = transAlloc->getValue("docallocto_id").toString();
 
     if (docToId.size() < 38) {
@@ -514,18 +516,8 @@ void ACC_HandleAllocns::undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
     transAlloc->setFlag(RB2::FlagIsDeleted);
     transAlloc->setValue("amount", 0.0); // in case re-used
 
-    if (isPost) {
-        // Post to database, usually in case of an item
-        // or debtor creditor transdoc deletion
-        transAlloc->dbUpdate(ACC_MODELFACTORY->getDatabase());
-        transDocTo->dbUpdate(ACC_MODELFACTORY->getDatabase());
-
-        // repost the corresponding ACC_GlTrans
-        glTransToDefault(transAlloc->getValue("docallocto_id").toString());
-
-        mTransAllocList->remove(transAlloc, true);
-        mTransDocList->remove(transDocTo, true);
-    }
+    // Update the corresponding ACC_GlTrans
+    glTransToDefault(transAlloc->getValue("docallocto_id").toString());
 }
 
 /**
@@ -534,12 +526,16 @@ void ACC_HandleAllocns::undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
  * transaction document alloc and settled is set in ACC_GlTransWidget.
  * Called from Debtor/Creditor document deletion or totalamountrec/pay changed
  * @param alloc allocation object to be undone
- * @param isPost is true if this action is to be posted immediately
- * from transDocTo to the database, does not delete the allocation.
  */
-void ACC_HandleAllocns::undoItemAllocationToDC(RB_ObjectBase* transAlloc,
-                                                    bool isPost) {
+void ACC_HandleAllocns::undoItemAllocationToDC(RB_ObjectBase* transAlloc) {
     RB_ObjectBase* itemFrom = getItemFrom(transAlloc);
+
+    if (!itemFrom) {
+        RB_DEBUG->error("ACC_HandleAllocns::undoItemAllocationToDC() "
+                        "NULL object ERROR");
+        return;
+    }
+
     RB_String docFromId = transAlloc->getValue("docfrom_id").toString();
 
     itemFrom->setValue("transallocn_idx", "0");
@@ -554,22 +550,8 @@ void ACC_HandleAllocns::undoItemAllocationToDC(RB_ObjectBase* transAlloc,
     transAlloc->setFlag(RB2::FlagIsDeleted);
     transAlloc->setValue("amount", 0.0); // in case re-used
 
-    if (isPost) {
-        // Post to database, usually in case of an item
-        // or debtor creditor transdoc deletion
-        // transAlloc deleted by calling function
-        transAlloc->dbUpdate(ACC_MODELFACTORY->getDatabase());
-
-        if (itemFrom) {
-            itemFrom->dbUpdate(ACC_MODELFACTORY->getDatabase());
-            itemFrom->getParent()->remove(itemFrom, true);
-        }
-
-        // repost the corresponding ACC_GlTrans
-        glTransToDefault(transAlloc->getValue("docallocto_id").toString());
-
-        mTransAllocList->remove(transAlloc, true);
-    }
+    // Prepare the corresponding ACC_GlTrans
+    glTransToDefault(transAlloc->getValue("docallocto_id").toString());
 }
 
 RB_ObjectBase* ACC_HandleAllocns::getItemFrom(RB_ObjectBase* transAlloc) {
@@ -639,11 +621,11 @@ void ACC_HandleAllocns::glTransToDefault(const RB_String& docToId) {
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* glTrans = iter->currentObject();
         RB_ObjectBase* glClone = new RB_ObjectAtomic(glTrans);
-        glTrans->setFlag(RB2::FlagIsDeleted);
-        glTrans->setParent(mGlTransList);
-        mGlTransList->addObject(glTrans);
-//        mPostGlTrans.execute(glTrans);
+        glClone->setFlag(RB2::FlagIsDeleted);
+        glClone->setParent(mGlTransList);
+        mGlTransList->addObject(glClone);
 
+        glClone = new RB_ObjectAtomic(glTrans);
         glClone->setId(RB_Uuid::createUuid().toString());
         glClone->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
                           + ACC_QACHARTMASTER->getAccDefaultName());
@@ -651,9 +633,6 @@ void ACC_HandleAllocns::glTransToDefault(const RB_String& docToId) {
         glClone->deleteFlag(RB2::FlagIsDeleted);
         glClone->setParent(mGlTransList);
         mGlTransList->addObject(glClone);
-//        mPostGlTrans.execute(glClone);
-
-//        glTrans->dbUpdate(ACC_MODELFACTORY->getDatabase());
     }
 
     delete iter;
