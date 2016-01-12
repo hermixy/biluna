@@ -247,7 +247,6 @@ void ACC_HandleAllocns::delItemListAllocn(RB_MmProxy* itemModel) {
         return;
     }
 
-//    QModelIndex currentIdx = itemModel->getCurrentIndex();
     QModelIndex idx = QModelIndex();
 
     for (int i = 0; i < itemRowCount; ++i) {
@@ -256,9 +255,6 @@ void ACC_HandleAllocns::delItemListAllocn(RB_MmProxy* itemModel) {
                 ->setCurrentIndex(idx, QItemSelectionModel::ClearAndSelect);
         delItemAllocn(itemModel);
     }
-
-//    itemModel->getSelectionModel()
-//            ->setCurrentIndex(currentIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 /**

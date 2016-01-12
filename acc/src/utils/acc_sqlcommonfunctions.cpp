@@ -675,62 +675,61 @@ void ACC_SqlCommonFunctions::getPurchaseGlAccount(QSqlQuery& query,
 }
 
 /**
- * TODO: not used?
+ * TODO: not used? Now for testing
  */
 void ACC_SqlCommonFunctions::getTrialBalance(QSqlQuery& /*query*/,
                                              int fromPeriod,
                                              int toPeriod) {
-    /*
-    $SQL = 'SELECT accountgroup.groupname,
-            accountgroup.parentgroupname,
-            accountgroup.pandl,
-            chartdetails.accountcode ,
-            chartmaster.accountname,
-            Sum(CASE WHEN chartdetails.period=' . $_POST['FromPeriod'] . ' THEN chartdetails.bfwd ELSE 0 END) AS firstprdbfwd,
-            Sum(CASE WHEN chartdetails.period=' . $_POST['FromPeriod'] . ' THEN chartdetails.bfwdbudget ELSE 0 END) AS firstprdbudgetbfwd,
-            Sum(CASE WHEN chartdetails.period=' . $_POST['ToPeriod'] . ' THEN chartdetails.bfwd + chartdetails.actual ELSE 0 END) AS lastprdcfwd,
-            Sum(CASE WHEN chartdetails.period=' . $_POST['ToPeriod'] . ' THEN chartdetails.actual ELSE 0 END) AS monthactual,
-            Sum(CASE WHEN chartdetails.period=' . $_POST['ToPeriod'] . ' THEN chartdetails.budget ELSE 0 END) AS monthbudget,
-            Sum(CASE WHEN chartdetails.period=' . $_POST['ToPeriod'] . ' THEN chartdetails.bfwdbudget + chartdetails.budget ELSE 0 END) AS lastprdbudgetcfwd
-        FROM chartmaster INNER JOIN accountgroup ON chartmaster.group_ = accountgroup.groupname
-            INNER JOIN chartdetails ON chartmaster.accountcode= chartdetails.accountcode
-        GROUP BY accountgroup.groupname,
-                accountgroup.pandl,
-                accountgroup.sequenceintb,
-                accountgroup.parentgroupname,
-                chartdetails.accountcode,
-                chartmaster.accountname
-        ORDER BY accountgroup.pandl desc,
-            accountgroup.sequenceintb,
-            accountgroup.groupname,
-            chartdetails.accountcode';
-    */
+/*
+SELECT acc_accountgroup.sequenceintb,
+acc_accountgroup.groupname,
+acc_accountgroup.pandl,
+acc_chartmaster.accountcode,
+acc_chartmaster.accountname,
+SUBSTR(acc_gltrans.chartmaster_idx, 39) as account,
+SUM(CASE WHEN acc_gltrans.periodno>=201501 AND acc_gltrans.periodno<=201512 AND acc_gltrans.amount > 0 THEN acc_gltrans.amount ELSE 0 END) AS debit,
+SUM(CASE WHEN acc_gltrans.periodno>=201501 AND acc_gltrans.periodno<=201512 AND acc_gltrans.amount < 0 THEN acc_gltrans.amount ELSE 0 END) AS credit
+FROM acc_chartmaster
+INNER JOIN acc_accountgroup ON acc_chartmaster.accountgroup_id = acc_accountgroup.id
+INNER JOIN acc_gltrans ON acc_chartmaster.id= substr(acc_gltrans.chartmaster_idx,1,38)
+WHERE acc_chartmaster.parent='{ddfd9618-47e7-455a-993c-a5797dc3d5f9}'
+GROUP BY acc_accountgroup.groupname,
+acc_accountgroup.pandl,
+acc_accountgroup.sequenceintb,
+acc_chartmaster.accountcode,
+acc_chartmaster.accountname
+ORDER BY acc_accountgroup.pandl ASC,
+acc_accountgroup.sequenceintb,
+acc_accountgroup.groupname,
+acc_chartmaster.accountcode;
+*/
     RB_String fromPrd = RB_String::number(fromPeriod);
     RB_String toPrd = RB_String::number(toPeriod);
+    RB_String rootId = ACC_MODELFACTORY->getRootId();
     RB_String qStr = "";
-    qStr = "SELECT accountgroup.groupname, "
-           "accountgroup.parentgroupname, "
-            "accountgroup.pandl, "
-            "chartdetails.accountcode , "
-            "chartmaster.accountname, "
-            "Sum(CASE WHEN chartdetails.period='" + fromPrd + "' THEN chartdetails.bfwd ELSE 0 END) AS firstprdbfwd, "
-            "Sum(CASE WHEN chartdetails.period='" + fromPrd + "' THEN chartdetails.bfwdbudget ELSE 0 END) AS firstprdbudgetbfwd, "
-            "Sum(CASE WHEN chartdetails.period='" + toPrd + "' THEN chartdetails.bfwd + chartdetails.actual ELSE 0 END) AS lastprdcfwd, "
-            "Sum(CASE WHEN chartdetails.period='" + toPrd + "' THEN chartdetails.actual ELSE 0 END) AS monthactual, "
-            "Sum(CASE WHEN chartdetails.period='" + toPrd + "' THEN chartdetails.budget ELSE 0 END) AS monthbudget, "
-            "Sum(CASE WHEN chartdetails.period='" + toPrd + "' THEN chartdetails.bfwdbudget + chartdetails.budget ELSE 0 END) AS lastprdbudgetcfwd "
-        "FROM chartmaster INNER JOIN accountgroup ON chartmaster.group_ = accountgroup.groupname "
-            "INNER JOIN chartdetails ON chartmaster.accountcode= chartdetails.accountcode "
-        "GROUP BY accountgroup.groupname, "
-                "accountgroup.pandl, "
-                "accountgroup.sequenceintb, "
-                "accountgroup.parentgroupname, "
-                "chartdetails.accountcode, "
-                "chartmaster.accountname "
-        "ORDER BY accountgroup.pandl desc, "
-            "accountgroup.sequenceintb, "
-            "accountgroup.groupname, "
-            "chartdetails.accountcode";
+    qStr = "SELECT acc_accountgroup.sequenceintb, "
+           "acc_accountgroup.groupname, "
+           "acc_accountgroup.pandl, "
+           "acc_chartmaster.accountcode, "
+           "acc_chartmaster.accountname, "
+           "SUBSTR(acc_gltrans.chartmaster_idx, 39) as account, "
+           "SUM(CASE WHEN acc_gltrans.periodno>=" + fromPrd + " AND acc_gltrans.periodno<=" + toPrd +
+           " AND acc_gltrans.amount > 0 THEN acc_gltrans.amount ELSE 0 END) AS debit, "
+           "SUM(CASE WHEN acc_gltrans.periodno>=" + fromPrd + " AND acc_gltrans.periodno<=" + toPrd +
+           "AND acc_gltrans.amount < 0 THEN acc_gltrans.amount ELSE 0 END) AS credit "
+           "FROM acc_chartmaster
+           "INNER JOIN acc_accountgroup ON acc_chartmaster.accountgroup_id = acc_accountgroup.id "
+           "INNER JOIN acc_gltrans ON acc_chartmaster.id= substr(acc_gltrans.chartmaster_idx,1,38) "
+           "WHERE acc_chartmaster.parent='" + rootId + "' "
+           "GROUP BY acc_accountgroup.groupname, "
+           "acc_accountgroup.pandl, "
+           "acc_accountgroup.sequenceintb, "
+           "acc_chartmaster.accountcode, "
+           "acc_chartmaster.accountname "
+           "ORDER BY acc_accountgroup.pandl ASC, "
+           "acc_accountgroup.sequenceintb, "
+           "acc_accountgroup.groupname, "
+           "acc_chartmaster.accountcode;";
 }
 
 /**
