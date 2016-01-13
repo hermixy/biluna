@@ -104,7 +104,6 @@ protected:
 protected slots:
     virtual void slotLedgerAccountChanged(int number);
     virtual void slotTabChanged(int);
-    virtual void slotValidateAmounts();
     virtual void slotRefreshBankModel();
 
 private:
@@ -171,8 +170,6 @@ private:
     //! Transaction validation message
     RB_String mValidationMessage;
 
-    //! True if validate amounts is already scheduled
-    bool mIsValidateAmounts;
     //! True if slotAmountItemEdited is passed
     bool mIsItemChangedPassed;
     //! Time for single shot for validation

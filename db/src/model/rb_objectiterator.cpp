@@ -31,6 +31,7 @@ void RB_ObjectIterator::first() {
         setDone();
         return;
     }
+
     mIter = mContainer.begin();
     mDone = false;
     mIndex = 0;
@@ -44,6 +45,7 @@ void RB_ObjectIterator::last() {
         setDone();
         return;
     }
+
     mIter = mContainer.end();
 	previous();
     mDone = false;
@@ -58,8 +60,7 @@ void RB_ObjectIterator::next(){
         setDone();
         return;
 	}
-    // RB_DEBUG->print("RB_ObjectIterator::next()"
-    //                 + currentObject()->getName());
+
     ++mIter;
     ++mIndex;
 }
@@ -72,6 +73,7 @@ void RB_ObjectIterator::previous() {
         setDone();
 		return;			
 	}
+
     --mIter;
     --mIndex;
 }
@@ -83,6 +85,7 @@ bool RB_ObjectIterator::isDone() const {
     if (mDone) {
 		return true;	
 	}
+
     return mIter == mContainer.end();
 }
 
@@ -116,6 +119,7 @@ RB_ObjectBase* RB_ObjectIterator::currentObject() {
 		// throw iteratorOutOfBounds;
 		return NULL;
 	}
+
     return dynamic_cast<RB_ObjectBase*>(*mIter);
 }
 

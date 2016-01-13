@@ -132,8 +132,9 @@ void DB_ConnectionDialog::init() {
                                              QItemSelectionModel::Select);
         slotSetDbConnectionWidgets(prevModel->index(0,0), QModelIndex());
 
-        leUserPassword->setFocus();
-        leUserPassword->selectAll();
+        // leUserPassword->setFocus();
+        // leUserPassword->selectAll();
+        lvPrevious->setFocus();
     } else {
         // first time
         tabWidget->setCurrentIndex(1);

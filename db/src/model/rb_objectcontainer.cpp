@@ -57,7 +57,7 @@ RB_ObjectContainer::~RB_ObjectContainer() {
  * the containerList are not copied
  * @param objc object container
  */
-RB_ObjectContainer& RB_ObjectContainer::operator= (const RB_ObjectContainer& objc) {
+RB_ObjectContainer& RB_ObjectContainer::operator=(const RB_ObjectContainer& objc) {
     if (&objc != this) {
         RB_ObjectBase::operator=(objc);
     }

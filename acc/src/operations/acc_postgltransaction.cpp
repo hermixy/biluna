@@ -799,12 +799,64 @@ bool ACC_PostGlTransaction::recreate(int fromPrd, int toPrd) {
 
 /**
  * Recreate GL summary in case of emergency,
- * TODO: handle in inner join queries instead of individual per account
  * @param fromPrd from period
  * @param toPrd up to and including period
  * @return true on success
  */
 bool ACC_PostGlTransaction::recreateGlSum(int fromPrd, int toPrd) {
+    // // start new
+    RB_ObjectContainer* glSumList =
+           new RB_ObjectContainer("", NULL, "ACC_GlSumList", ACC_OBJECTFACTORY);
+    glSumList->setValue("parent", ACC_MODELFACTORY->getRootId());
+    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
+    ACC_SqlCommonFunctions util;
+    double debit = 0.0;
+    double credit = 0.0;
+
+    for (int period = fromPrd; period < toPrd + 1; ++period) {
+        util.getTrialBalance(query, period, period);
+
+        while (query.next()) {
+            QSqlRecord rec = query.record();
+            debit = rec.value("debit").toDouble();
+            credit = rec.value("credit").toDouble();
+
+            if (std::fabs(debit) > 0.005 || std::fabs(credit) > 0.005) {
+                // Create new ACC_GlSum
+                RB_ObjectBase* glSum =
+                        glSumList->newObject(RB_Uuid::createUuid().toString());
+                glSum->setValue("parent", rec.value("parent").toString());
+                glSum->setValue("period", period);
+                glSum->setValue("accountcode",
+                                  rec.value("accountcode").toString());
+                glSum->setValue("accountname",
+                                  rec.value("accountname").toString());
+                glSum->setValue("debit", debit);
+                glSum->setValue("credit", credit);
+            }
+        }
+
+        query.clear();
+
+        if (period % 100 == 12) {
+            period += 87; // only first twelve (months)
+        }
+    }
+
+    // Delete old
+    util.clearTrialBalance(fromPrd, toPrd);
+
+    // Upload new
+    bool success = glSumList->dbUpdateList(ACC_MODELFACTORY->getDatabase());
+    delete glSumList;
+
+    return success;
+
+
+    return true;
+    // // end new
+
+/*
     RB_ObjectContainer* chartMasterList = ACC_QACHARTMASTER->getAcctList();
 
     ACC_SqlCommonFunctions util;
@@ -882,6 +934,7 @@ bool ACC_PostGlTransaction::recreateGlSum(int fromPrd, int toPrd) {
     delete iter;
     // Note: do not delete chartMasterList
     return true;
+*/
 }
 
 /**
@@ -892,6 +945,55 @@ bool ACC_PostGlTransaction::recreateGlSum(int fromPrd, int toPrd) {
  * @return true on success
  */
 bool ACC_PostGlTransaction::recreateCcSum(int fromPrd, int toPrd) {
+    RB_ObjectContainer* costSumList =
+           new RB_ObjectContainer("", NULL, "ACC_CostSumList", ACC_OBJECTFACTORY);
+    costSumList->setValue("parent", ACC_MODELFACTORY->getRootId());
+    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
+    ACC_SqlCommonFunctions util;
+    double debit = 0.0;
+    double credit = 0.0;
+
+    for (int period = fromPrd; period < toPrd + 1; ++period) {
+        util.getCostCenterSum(query, period, period);
+
+        while (query.next()) {
+            QSqlRecord rec = query.record();
+            debit = rec.value("debit").toDouble();
+            credit = rec.value("credit").toDouble();
+
+            if (std::fabs(debit) > 0.005 || std::fabs(credit) > 0.005) {
+                // Create new ACC_CostSum
+                RB_ObjectBase* costSum =
+                        costSumList->newObject(RB_Uuid::createUuid().toString());
+                costSum->setValue("parent", rec.value("parent").toString());
+                costSum->setValue("period", period);
+                costSum->setValue("centercode",
+                                  rec.value("centercode").toString());
+                costSum->setValue("centername",
+                                  rec.value("centername").toString());
+                costSum->setValue("debit", debit);
+                costSum->setValue("credit", credit);
+            }
+        }
+
+        query.clear();
+
+        if (period % 100 == 12) {
+            period += 87; // only first twelve (months)
+        }
+    }
+
+    // Delete old
+    util.clearCostCenterSum(fromPrd, toPrd);
+
+    // Upload new
+    bool success = costSumList->dbUpdateList(ACC_MODELFACTORY->getDatabase());
+    delete costSumList;
+
+    return success;
+
+    // end new
+/*
     RB_ObjectContainer* costCenterList =
            new RB_ObjectContainer("", NULL, "ACC_CostSumList", ACC_OBJECTFACTORY);
     costCenterList->setValue("parent", ACC_MODELFACTORY->getRootId());
@@ -974,4 +1076,5 @@ bool ACC_PostGlTransaction::recreateCcSum(int fromPrd, int toPrd) {
     delete costCenterList;
 
     return true;
+*/
 }

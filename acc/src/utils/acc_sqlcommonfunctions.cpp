@@ -675,32 +675,31 @@ void ACC_SqlCommonFunctions::getPurchaseGlAccount(QSqlQuery& query,
 }
 
 /**
- * TODO: not used? Now for testing
+ * Get trial balance to recreate the ACC_GlSum table.
+ * During recreation the fromPeriod and toPeriod are the same, usually a month.
+ * @param query query object
+ * @param fromPeriod period from which to start
+ * @param toPeriod period to which to end
  */
-void ACC_SqlCommonFunctions::getTrialBalance(QSqlQuery& /*query*/,
+void ACC_SqlCommonFunctions::getTrialBalance(QSqlQuery& query,
                                              int fromPeriod,
                                              int toPeriod) {
 /*
 SELECT acc_accountgroup.sequenceintb,
 acc_accountgroup.groupname,
 acc_accountgroup.pandl,
+acc_chartmaster.id as parent,
 acc_chartmaster.accountcode,
 acc_chartmaster.accountname,
-SUBSTR(acc_gltrans.chartmaster_idx, 39) as account,
 SUM(CASE WHEN acc_gltrans.periodno>=201501 AND acc_gltrans.periodno<=201512 AND acc_gltrans.amount > 0 THEN acc_gltrans.amount ELSE 0 END) AS debit,
-SUM(CASE WHEN acc_gltrans.periodno>=201501 AND acc_gltrans.periodno<=201512 AND acc_gltrans.amount < 0 THEN acc_gltrans.amount ELSE 0 END) AS credit
+SUM(CASE WHEN acc_gltrans.periodno>=201501 AND acc_gltrans.periodno<=201512 AND acc_gltrans.amount < 0 THEN -acc_gltrans.amount ELSE 0 END) AS credit
 FROM acc_chartmaster
 INNER JOIN acc_accountgroup ON acc_chartmaster.accountgroup_id = acc_accountgroup.id
-INNER JOIN acc_gltrans ON acc_chartmaster.id= substr(acc_gltrans.chartmaster_idx,1,38)
+INNER JOIN acc_gltrans ON acc_chartmaster.id = SUBSTR(acc_gltrans.chartmaster_idx,1,38)
 WHERE acc_chartmaster.parent='{ddfd9618-47e7-455a-993c-a5797dc3d5f9}'
-GROUP BY acc_accountgroup.groupname,
-acc_accountgroup.pandl,
-acc_accountgroup.sequenceintb,
-acc_chartmaster.accountcode,
-acc_chartmaster.accountname
+GROUP BY acc_chartmaster.accountcode
 ORDER BY acc_accountgroup.pandl ASC,
 acc_accountgroup.sequenceintb,
-acc_accountgroup.groupname,
 acc_chartmaster.accountcode;
 */
     RB_String fromPrd = RB_String::number(fromPeriod);
@@ -710,26 +709,196 @@ acc_chartmaster.accountcode;
     qStr = "SELECT acc_accountgroup.sequenceintb, "
            "acc_accountgroup.groupname, "
            "acc_accountgroup.pandl, "
+           "acc_chartmaster.id as parent, "
            "acc_chartmaster.accountcode, "
            "acc_chartmaster.accountname, "
-           "SUBSTR(acc_gltrans.chartmaster_idx, 39) as account, "
-           "SUM(CASE WHEN acc_gltrans.periodno>=" + fromPrd + " AND acc_gltrans.periodno<=" + toPrd +
-           " AND acc_gltrans.amount > 0 THEN acc_gltrans.amount ELSE 0 END) AS debit, "
-           "SUM(CASE WHEN acc_gltrans.periodno>=" + fromPrd + " AND acc_gltrans.periodno<=" + toPrd +
-           "AND acc_gltrans.amount < 0 THEN acc_gltrans.amount ELSE 0 END) AS credit "
-           "FROM acc_chartmaster
+           "SUM(CASE WHEN acc_gltrans.periodno>=" + fromPrd + " AND acc_gltrans.periodno<="
+            + toPrd + " AND acc_gltrans.amount > 0 THEN acc_gltrans.amount ELSE 0 END) AS debit, "
+           "SUM(CASE WHEN acc_gltrans.periodno>=" + fromPrd + " AND acc_gltrans.periodno<="
+            + toPrd + " AND acc_gltrans.amount < 0 THEN -acc_gltrans.amount ELSE 0 END) AS credit "
+           "FROM acc_chartmaster "
            "INNER JOIN acc_accountgroup ON acc_chartmaster.accountgroup_id = acc_accountgroup.id "
-           "INNER JOIN acc_gltrans ON acc_chartmaster.id= substr(acc_gltrans.chartmaster_idx,1,38) "
+           "INNER JOIN acc_gltrans ON acc_chartmaster.id = SUBSTR(acc_gltrans.chartmaster_idx,1,38) "
            "WHERE acc_chartmaster.parent='" + rootId + "' "
-           "GROUP BY acc_accountgroup.groupname, "
-           "acc_accountgroup.pandl, "
-           "acc_accountgroup.sequenceintb, "
-           "acc_chartmaster.accountcode, "
-           "acc_chartmaster.accountname "
+           "GROUP BY acc_chartmaster.accountcode "
            "ORDER BY acc_accountgroup.pandl ASC, "
            "acc_accountgroup.sequenceintb, "
-           "acc_accountgroup.groupname, "
            "acc_chartmaster.accountcode;";
+
+    if (!query.exec(qStr)) {
+        RB_DEBUG->error("ACC_SqlCommonFunctions::getTrialBalance() "
+                        + query.lastError().text() + " ERROR");
+    }
+}
+
+/**
+ * Clear trial balance (GL summary) for selected period
+ * @param fromPeriod
+ * @param toPeriod
+ */
+void ACC_SqlCommonFunctions::clearTrialBalance(int fromPeriod, int toPeriod) {
+/*
+MySQL:
+DELETE acc_glsum FROM acc_glsum
+INNER JOIN acc_costcenter ON acc_costcenter.id = acc_glsum.parent
+WHERE acc_costcenter.parent='{ddfd9618-47e7-455a-993c-a5797dc3d5f9}'
+AND acc_glsum.period >= 201601
+AND acc_glsum.period <= 201601;
+SQLite:
+DELETE FROM acc_glsum WHERE id IN
+(SELECT sel.id FROM acc_glsum AS sel
+INNER JOIN acc_chartmaster ON acc_chartmaster.id = acc_glsum.parent
+WHERE acc_chartmaster.parent='{82cce3e9-b337-4fe2-b31c-93c2ba1424bc}'
+AND acc_glsum.period >= 201601
+AND acc_glsum.period <= 201601);
+*/
+    if (!ACC_MODELFACTORY->getDatabase().isOpen()) {
+        RB_DEBUG->error(
+                        "ACC_SqlCommonFunctions::clearTrialBalance()"
+                        " database not open ERROR");
+        return;
+    }
+
+    RB_String rootId = ACC_MODELFACTORY->getRootId();
+    RB_String fromPrd = RB_String::number(fromPeriod);
+    RB_String toPrd = RB_String::number(toPeriod);
+    RB_String qStr = "";
+
+    if (ACC_MODELFACTORY->getDatabase().driverName() == "QMYSQL") {
+        qStr = "DELETE acc_glsum FROM acc_glsum "
+                "INNER JOIN acc_chartmaster ON acc_chartmaster.id = acc_glsum.parent "
+                "WHERE acc_chartmaster.parent='" + rootId + "' "
+                "AND acc_glsum.period >= " + fromPrd + " "
+                "AND acc_glsum.period <= " + toPrd + ";";
+    } else if (ACC_MODELFACTORY->getDatabase().driverName() == "QSQLITE") {
+        qStr = "DELETE FROM acc_glsum WHERE id IN "
+                "(SELECT sel.id FROM acc_glsum AS sel "
+                "INNER JOIN acc_chartmaster ON acc_chartmaster.id = acc_glsum.parent "
+                "WHERE acc_chartmaster.parent='" + rootId + "' "
+                "AND acc_glsum.period >= " + fromPrd + " "
+                "AND acc_glsum.period <= " + toPrd + ");";
+    }
+
+    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
+
+    if (!query.exec(qStr)) {
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::clearTrialBalance() "
+                        + query.lastError().text() + " ERROR");
+    }
+}
+
+/**
+ * Get Cost Center summary to recreate the ACC_CostSum table.
+ * During recreation the fromPeriod and toPeriod are the same, usually a month.
+ * @param query query object
+ * @param fromPeriod period from which to start
+ * @param toPeriod period to which to end
+ */
+void ACC_SqlCommonFunctions::getCostCenterSum(QSqlQuery& query,
+                                              int fromPeriod,
+                                              int toPeriod) {
+/*
+SELECT acc_costgroup.sequenceno,
+acc_costgroup.groupname,
+acc_costgroup.costprofit,
+acc_costcenter.id as parent,
+acc_costcenter.centercode,
+acc_costcenter.centername,
+SUM(CASE WHEN acc_gltrans.periodno>=201501 AND acc_gltrans.periodno<=201512 AND acc_gltrans.amount > 0 THEN acc_gltrans.amount ELSE 0 END) AS debit,
+SUM(CASE WHEN acc_gltrans.periodno>=201501 AND acc_gltrans.periodno<=201512 AND acc_gltrans.amount < 0 THEN -acc_gltrans.amount ELSE 0 END) AS credit
+FROM acc_costcenter
+INNER JOIN acc_costgroup ON SUBSTR(acc_costcenter.centergroup_idx,1,38) = acc_costgroup.id
+INNER JOIN acc_gltrans ON acc_costcenter.id= SUBSTR(acc_gltrans.costcenter_idx,1,38)
+WHERE acc_costcenter.parent='{ddfd9618-47e7-455a-993c-a5797dc3d5f9}'
+GROUP BY acc_costcenter.centercode
+ORDER BY acc_costgroup.costprofit ASC,
+acc_costgroup.sequenceno,
+acc_costcenter.centercode;
+*/
+    RB_String fromPrd = RB_String::number(fromPeriod);
+    RB_String toPrd = RB_String::number(toPeriod);
+    RB_String rootId = ACC_MODELFACTORY->getRootId();
+    RB_String qStr = "";
+    qStr = "SELECT acc_costgroup.sequenceno, "
+            "acc_costgroup.groupname, "
+            "acc_costgroup.costprofit, "
+            "acc_costcenter.id as parent, "
+            "acc_costcenter.centercode, "
+            "acc_costcenter.centername, "
+            "SUM(CASE WHEN acc_gltrans.periodno>=" + fromPrd + " AND acc_gltrans.periodno<="
+            + toPrd + " AND acc_gltrans.amount > 0 THEN acc_gltrans.amount ELSE 0 END) AS debit, "
+            "SUM(CASE WHEN acc_gltrans.periodno>=" + fromPrd + " AND acc_gltrans.periodno<="
+            + toPrd + " AND acc_gltrans.amount < 0 THEN -acc_gltrans.amount ELSE 0 END) AS credit "
+            "FROM acc_costcenter "
+            "INNER JOIN acc_costgroup ON SUBSTR(acc_costcenter.centergroup_idx,1,38) = acc_costgroup.id "
+            "INNER JOIN acc_gltrans ON acc_costcenter.id= SUBSTR(acc_gltrans.costcenter_idx,1,38) "
+            "WHERE acc_costcenter.parent='" + rootId + "' "
+            "GROUP BY acc_costcenter.centercode "
+            "ORDER BY acc_costgroup.costprofit ASC, "
+            "acc_costgroup.sequenceno, "
+            "acc_costcenter.centercode; ";
+
+
+    if (!query.exec(qStr)) {
+        RB_DEBUG->error("ACC_SqlCommonFunctions::getCostCenterSum() "
+                        + query.lastError().text() + " ERROR");
+    }
+}
+
+/**
+ * Clear cost center summary for selected period
+ * @param fromPeriod
+ * @param toPeriod
+ */
+void ACC_SqlCommonFunctions::clearCostCenterSum(int fromPeriod, int toPeriod) {
+/*
+MySQL:
+DELETE acc_costsum FROM acc_costsum
+INNER JOIN acc_costcenter ON acc_costcenter.id = acc_costsum.parent
+WHERE acc_costcenter.parent='{ddfd9618-47e7-455a-993c-a5797dc3d5f9}'
+AND acc_costsum.period >= 201601
+AND acc_costsum.period <= 201601;
+SQLite:
+DELETE FROM acc_costsum WHERE id IN
+(SELECT sel.id FROM acc_costsum AS sel
+INNER JOIN acc_costcenter ON acc_costcenter.id = acc_costsum.parent
+WHERE acc_costcenter.parent='{82cce3e9-b337-4fe2-b31c-93c2ba1424bc}'
+AND acc_costsum.period >= 201601
+AND acc_costsum.period <= 201601);
+*/
+    if (!ACC_MODELFACTORY->getDatabase().isOpen()) {
+        RB_DEBUG->error(
+                        "ACC_SqlCommonFunctions::clearCostCenterSum()"
+                        " database not open ERROR");
+        return;
+    }
+
+    RB_String rootId = ACC_MODELFACTORY->getRootId();
+    RB_String fromPrd = RB_String::number(fromPeriod);
+    RB_String toPrd = RB_String::number(toPeriod);
+    RB_String qStr = "";
+
+    if (ACC_MODELFACTORY->getDatabase().driverName() == "QMYSQL") {
+        qStr = "DELETE acc_costsum FROM acc_costsum "
+                "INNER JOIN acc_costcenter ON acc_costcenter.id = acc_costsum.parent "
+                "WHERE acc_costcenter.parent='" + rootId + "' "
+                "AND acc_costsum.period >= " + fromPrd + " "
+                "AND acc_costsum.period <= " + toPrd + ";";
+    } else if (ACC_MODELFACTORY->getDatabase().driverName() == "QSQLITE") {
+        qStr = "DELETE FROM acc_costsum WHERE id IN "
+                "(SELECT sel.id FROM acc_costsum AS sel "
+                "INNER JOIN acc_costcenter ON acc_costcenter.id = acc_costsum.parent "
+                "WHERE acc_costcenter.parent='" + rootId + "' "
+                "AND acc_costsum.period >= " + fromPrd + " "
+                "AND acc_costsum.period <= " + toPrd + ");";
+    }
+
+    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
+
+    if (!query.exec(qStr)) {
+        RB_DEBUG->error("ACC_SqlCommonFunctionsFunction::clearCostCenterSum() "
+                        + query.lastError().text() + " ERROR");
+    }
 }
 
 /**

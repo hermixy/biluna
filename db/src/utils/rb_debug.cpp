@@ -142,6 +142,10 @@ void RB_Debug::print(const QString& text) {
  * @param level Debug level.
  */
 void RB_Debug::print(RB_DebugLevel level, const QString& text) {
+    if(debugLevel >= level) {
+        qDebug() << text;
+    }
+
     if (level == D_ERROR) {
         ++msgErrorCount;
     } else if (level == D_WARNING) {
@@ -150,10 +154,6 @@ void RB_Debug::print(RB_DebugLevel level, const QString& text) {
         ++msgInformationalCount;
     } else /*if (level == D_DEBUGGING)*/ {
         ++msgDebuggingCount;
-    }
-
-    if(debugLevel >= level) {
-        qDebug() << text;
     }
 }
 

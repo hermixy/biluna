@@ -53,7 +53,6 @@ ACC_GlTransactionWidget::ACC_GlTransactionWidget(QWidget *parent)
     mAddDeleteInProgress = false;
     mValidationMessage = "";
 
-    mIsValidateAmounts = false;
     mIsItemChangedPassed = false;
 }
 
@@ -267,7 +266,6 @@ bool ACC_GlTransactionWidget::fileSave(bool /*withSelect*/) {
         fileRevert();
     }
 
-    mIsValidateAmounts = false;
     mIsItemChangedPassed = false;
     mSaveInProgress = false;
     enableWidgets(true);
@@ -565,7 +563,6 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
         RB_DEBUG->error("ACC_GlTransactionWidget::pbDeleteDoc() transaction ERROR");
     }
 
-    mIsValidateAmounts = false;
     mSaveInProgress = false;
     enableWidgets(true);
     QApplication::restoreOverrideCursor();
@@ -964,7 +961,7 @@ void ACC_GlTransactionWidget::on_pbDeleteItem_clicked() {
         return;
     }
 
-    if (!mItemTransModel || !mTransDocModel->getProxyIndex().isValid()) {
+    if (!mItemTransModel->getProxyIndex().isValid()) {
         mAddDeleteInProgress = false;
         return;
     }
@@ -976,22 +973,21 @@ void ACC_GlTransactionWidget::on_pbDeleteItem_clicked() {
     }
 
     // reverse, remove allocation in case of bank/cash or journal item
-    mIsValidateAmounts = true; // prevent single shot for validation to early
-
     if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo){
         // delete allocation and document settled
         mHandleAllocn.delItemAllocn(mItemTransModel);
     } else if (mTransType == ACC2::TransCreditor || mTransType == ACC2::TransDebtor) {
-        // not applicable here, for creditor and debtor allocation is
-        // on document level
+        // nothing
     }
 
     // remove gltrans (which reverses chartdetails/trialbalance), done at fileSave()
-    mItemTransModel->removeRows(index.row(), 1, QModelIndex());
-    // mItemTransModel->submitAllAndSelect() mHandleAllocn.submitAllAndSelect()
-    // is done in fileSave, to allow for fileRevert
+    int row = index.row();
+    // mItemTransModel->setCurrentValue("amount", 0.0, Qt::EditRole);
+    // mItemTransModel->submitAllAndSelect();
+    // mHandleAllocn.submitAllAndSelect();
+    // tvItem->hideRow(row);
+    mItemTransModel->removeRows(row, 1, QModelIndex());
 
-    mIsValidateAmounts = false;
     setWindowModified(true);
 
     bool success = isValidTransDoc();
@@ -1023,7 +1019,6 @@ void ACC_GlTransactionWidget::on_pbRevert_clicked() {
     fileRevert();
     tvDocument->setCurrentIndex(QModelIndex());
     enableWidgets(true);
-    mIsValidateAmounts = false;
 }
 
 /**
@@ -1045,8 +1040,13 @@ void ACC_GlTransactionWidget::on_pbTotalReceivable_clicked() {
     RB_String acct = ""; // chartmaster_idx
 
     // debtor transactions, positive bank/cash journal transactions
-    for (int i = 0; i < itemRowCount; ++i) {
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("amount"));
+    for (int row = 0; row < itemRowCount; ++row) {
+        if (mItemTransModel->headerData(row, Qt::Vertical).toString() == "!") {
+            // Skip rows that will be deleted with saving to database
+            continue;
+        }
+
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("amount"));
         amount = mItemTransModel->data(idx).toDouble();
 
         if (mTransType == ACC2::TransDebtor) {
@@ -1055,27 +1055,24 @@ void ACC_GlTransactionWidget::on_pbTotalReceivable_clicked() {
             totalRec += amount >=0 ? amount : 0.0; // bank/cash and journal can be negative
         }
 
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("chartmaster_idx"));
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("chartmaster_idx"));
         acct = mItemTransModel->data(idx, RB2::RoleOrigData).toString(); // RB2::RoleOrigData gets ID
 
         if (mTransType == ACC2::TransDebtor && acct != ACC_QACHARTMASTER->getAccSalesRevId()
                     && acct != ACC_QACHARTMASTER->getAccPurchRevId()) {
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxhighamt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxhighamt"));
             totalRec += mItemTransModel->data(idx).toDouble();
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxlowamt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxlowamt"));
             totalRec += mItemTransModel->data(idx).toDouble();
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxotheramt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxotheramt"));
             totalRec += mItemTransModel->data(idx).toDouble();
         }
     }
 
     // set total transaction
-    int row = tvDocument->currentIndex().row();
-    idx = mTransDocModel->index(row, mTransDocModel->fieldIndex("totalamountrec"));
+    int currentRow = tvDocument->currentIndex().row();
+    idx = mTransDocModel->index(currentRow, mTransDocModel->fieldIndex("totalamountrec"));
     mTransDocModel->setData(idx, totalRec);
-
-//    slotAmountDocChanged();
-//    slotDataIsChanged();
 }
 
 /**
@@ -1090,8 +1087,13 @@ void ACC_GlTransactionWidget::on_pbTotalPayable_clicked() {
     RB_String acct = ""; // chartmaster_idx
 
     // creditor transactions, negative bank/cash journal transactions
-    for (int i = 0; i < itemRowCount; ++i) {
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("amount"));
+    for (int row = 0; row < itemRowCount; ++row) {
+        if (mItemTransModel->headerData(row, Qt::Vertical).toString() == "!") {
+            // Skip rows that will be deleted with saving to database
+            continue;
+        }
+
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("amount"));
         amount = mItemTransModel->data(idx).toDouble();
 
         if (mTransType == ACC2::TransCreditor) {
@@ -1099,23 +1101,23 @@ void ACC_GlTransactionWidget::on_pbTotalPayable_clicked() {
         } else if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo) {
             totalPay += amount < 0 ? -amount : 0.0; // total payable is a positive number
         }
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("chartmaster_idx"));
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("chartmaster_idx"));
         acct = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
 
         if (mTransType == ACC2::TransCreditor && acct != ACC_QACHARTMASTER->getAccSalesRevId()
                         && acct != ACC_QACHARTMASTER->getAccPurchRevId()) {
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxhighamt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxhighamt"));
             totalPay += mItemTransModel->data(idx).toDouble();
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxlowamt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxlowamt"));
             totalPay += mItemTransModel->data(idx).toDouble();
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxotheramt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxotheramt"));
             totalPay += mItemTransModel->data(idx).toDouble();
         }
     }
 
     // set total transaction
-    int row = tvDocument->currentIndex().row();
-    idx = mTransDocModel->index(row, mTransDocModel->fieldIndex("totalamountpay"));
+    int currentRow = tvDocument->currentIndex().row();
+    idx = mTransDocModel->index(currentRow, mTransDocModel->fieldIndex("totalamountpay"));
     mTransDocModel->setData(idx, totalPay);
 }
 
@@ -1133,17 +1135,22 @@ void ACC_GlTransactionWidget::on_pbTotalTax_clicked() {
     int itemRowCount = mItemTransModel->rowCount();
     RB_String acct = ""; // chartmaster_idx
 
-    for (int i = 0; i < itemRowCount; ++i) {
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("chartmaster_idx"));
+    for (int row = 0; row < itemRowCount; ++row) {
+        if (mItemTransModel->headerData(row, Qt::Vertical).toString() == "!") {
+            // Skip rows that will be deleted with saving to database
+            continue;
+        }
+
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("chartmaster_idx"));
         acct = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
 
         if (acct != ACC_QACHARTMASTER->getAccSalesRevId()
                     && acct != ACC_QACHARTMASTER->getAccPurchRevId()) {
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxhighamt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxhighamt"));
             totalTax += mItemTransModel->data(idx).toDouble();
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxlowamt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxlowamt"));
             totalTax += mItemTransModel->data(idx).toDouble();
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxotheramt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxotheramt"));
             totalTax += mItemTransModel->data(idx).toDouble();
         }
     }
@@ -1632,8 +1639,10 @@ void ACC_GlTransactionWidget::slotDataIsChanged(const QModelIndex& current,
     }
 
     // Amounts changed
-    if ((current.model() == mTransDocModel && current.column() == mTransDocModel->fieldIndex("totalamountrec"))
-            || (current.model() == mTransDocModel && current.column() == mTransDocModel->fieldIndex("totalamountpay"))) {
+    if ((current.model() == mTransDocModel
+         && current.column() == mTransDocModel->fieldIndex("totalamountrec"))
+            || (current.model() == mTransDocModel
+                && current.column() == mTransDocModel->fieldIndex("totalamountpay"))) {
         if (mTransType == ACC2::TransDebtor || mTransType == ACC2::TransCreditor) {
             double prevAllocAmt = mTransDocModel->getCurrentValue("alloc", Qt::EditRole).toDouble();
 
@@ -1651,19 +1660,15 @@ void ACC_GlTransactionWidget::slotDataIsChanged(const QModelIndex& current,
         enableWidgets(success);
     }
 
-    if (current.model() == mItemTransModel && current.column() == mItemTransModel->fieldIndex("amount")) {
+    if (current.model() == mItemTransModel
+            && current.column() == mItemTransModel->fieldIndex("amount")) {
         if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo) {
-            // Check if there is an allocation, already in ACC_HandleAllocn
-//            RB_String allocId = mItemTransModel->getCurrentValue("transallocn_idx",
-//                                                            RB2::RoleOrigData).toString();
-//            if (allocId.size() >= 38) {
-                // Amount from bank/cash (ACC_BankTrans) or from journal (ACC_GlTrans)
-                double amt = current.data().toDouble(); // leItemAmount->text().toDouble();
+            // Amount from bank/cash (ACC_BankTrans) or from journal (ACC_GlTrans)
+            double amt = current.data().toDouble(); // leItemAmount->text().toDouble();
 
-                // a bank/cash amount change to a larger amount
-                // is reversed to maximum allocatable by below operation
-                mHandleAllocn.updateItemAllocnAmt(mItemTransModel, amt);
-//            }
+            // a bank/cash amount change to a larger amount
+            // is reversed to maximum allocatable by below operation
+            mHandleAllocn.updateItemAllocnAmt(mItemTransModel, amt);
         }
 
         bool success = isValidTransDoc();
@@ -1671,21 +1676,19 @@ void ACC_GlTransactionWidget::slotDataIsChanged(const QModelIndex& current,
     }
 
     if (mTransType == ACC2::TransDebtor || mTransType == ACC2::TransCreditor) {
-        if ((current.model() == mTransDocModel && current.column() == mTransDocModel->fieldIndex("totaltax"))
-                || (current.model() == mItemTransModel && (current.column() == mItemTransModel->fieldIndex("taxhighamt")
-                                                      || current.column() == mItemTransModel->fieldIndex("taxlowamt")
-                                                      || current.column() == mItemTransModel->fieldIndex("taxotheramt")
-                                                      || current.column() == mItemTransModel->fieldIndex("taxhighchartmaster_idx")
-                                                      || current.column() == mItemTransModel->fieldIndex("taxlowchartmaster_idx")
-                                                      || current.column() == mItemTransModel->fieldIndex("taxotherchartmaster_idx")))) {
+        if ((current.model() == mTransDocModel
+             && current.column() == mTransDocModel->fieldIndex("totaltax"))
+                || (current.model() == mItemTransModel
+                    && (current.column() == mItemTransModel->fieldIndex("taxhighamt")
+                        || current.column() == mItemTransModel->fieldIndex("taxlowamt")
+                        || current.column() == mItemTransModel->fieldIndex("taxotheramt")
+                        || current.column() == mItemTransModel->fieldIndex("taxhighchartmaster_idx")
+                        || current.column() == mItemTransModel->fieldIndex("taxlowchartmaster_idx")
+                        || current.column() == mItemTransModel->fieldIndex("taxotherchartmaster_idx")))) {
             bool success = isValidTransDoc();
             enableWidgets(success);
         }
     }
-}
-
-void ACC_GlTransactionWidget::slotValidateAmounts() {
-    mIsValidateAmounts = false;
 }
 
 /**
@@ -2568,8 +2571,13 @@ bool ACC_GlTransactionWidget::isValidTransDoc() {
     double amount;
     int itemRowCount = mItemTransModel->rowCount();
 
-    for (int i = 0; i < itemRowCount; ++i) {
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("chartmaster_idx"));
+    for (int row = 0; row < itemRowCount; ++row) {
+        if (mItemTransModel->headerData(row, Qt::Vertical).toString() == "!") {
+            // Skip rows that will be deleted with saving to database
+            continue;
+        }
+
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("chartmaster_idx"));
         acct = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
 
         // check valid account, TODO: check also for relevancy of account
@@ -2577,7 +2585,7 @@ bool ACC_GlTransactionWidget::isValidTransDoc() {
         message += chartmasterIdx.size() < 38
                 ? tr("- invalid item account\n") : "" ;
 
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("amount"));
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("amount"));
         amount = mItemTransModel->data(idx).toDouble();
 
         if (amount >= 0) {
@@ -2600,11 +2608,11 @@ bool ACC_GlTransactionWidget::isValidTransDoc() {
             if (acct != ACC_QACHARTMASTER->getAccSalesRevId()
                         && acct != ACC_QACHARTMASTER->getAccPurchRevId()) {
                 // include tax only if not tax is reversed
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxhighamt"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxhighamt"));
                 amount = mItemTransModel->data(idx).toDouble();
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxlowamt"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxlowamt"));
                 amount += mItemTransModel->data(idx).toDouble();
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxotheramt"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxotheramt"));
                 amount += mItemTransModel->data(idx).toDouble();
 
                 if (!ACC_QACHARTMASTER->isTaxableAccount(acct) && amount > 0.0) {
@@ -2620,13 +2628,13 @@ bool ACC_GlTransactionWidget::isValidTransDoc() {
                 totalTax += amount;
             } else {
                 // high and low tax should be zero if tax is reversed
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxhighamt"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxhighamt"));
                 amount = mItemTransModel->data(idx).toDouble();
                 if (amount != 0.0) {
                     message += tr("- High tax should be zero in case of tax reversed\n");
                 }
 
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxlowamt"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxlowamt"));
                 amount += mItemTransModel->data(idx).toDouble();
                 if (amount != 0.0) {
                     message += tr("- Low tax should be zero in case of tax reversed\n");
@@ -2643,7 +2651,7 @@ bool ACC_GlTransactionWidget::isValidTransDoc() {
         } else if (mTransType == ACC2::TransBankCash) {
             // Can only book against Amount Payable (Crediteuren)
             // or Amount Receivable (Debiteuren) if allocation exists
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transallocn_idx"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transallocn_idx"));
             RB_String allocId = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
 
             if (((acct == ACC_QACHARTMASTER->getAccPayId()
