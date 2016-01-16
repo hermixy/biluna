@@ -11,6 +11,7 @@
 #include "acc_postgltransaction.h"
 
 #include <cmath>
+#include "acc.h"
 #include "acc_costsum.h"
 #include "acc_glsum.h"
 #include "acc_modelfactory.h"
@@ -187,18 +188,17 @@ bool ACC_PostGlTransaction::updateGlSumList(RB_ObjectContainer* glTransList) {
         RB_ObjectBase* glTrans = iter->currentObject();
         RB_ObjectBase* targetGlSum = nullptr;
         RB_ObjectIterator* sumIter = mGlSumList->createIterator();
+        RB_String chartMasterId = glTrans->getIdValue("chartmaster_idx").toString();
+        int periodNo = glTrans->getValue("periodno").toInt();
 
         for (sumIter->first(); !sumIter->isDone(); sumIter->next()) {
-            RB_ObjectBase* glSum = iter->currentObject();
+            RB_ObjectBase* glSum = sumIter->currentObject();
 
-            if (glTrans->getIdValue("chartmaster_idx")
-                    == glSum->getValue("parent")
-                    && glTrans->getIdValue("periodno")
-                    == glSum->getValue("periodno")) {
+            if (chartMasterId == glSum->getValue("parent").toString()
+                    && periodNo == glSum->getValue("period").toInt()) {
                 targetGlSum = glSum;
                 sumIter->setDone();
             }
-
         }
 
         delete sumIter;
@@ -208,18 +208,16 @@ bool ACC_PostGlTransaction::updateGlSumList(RB_ObjectContainer* glTransList) {
             // No chartdetail yet available, create new
             targetGlSum = mGlSumList->newObject();
 
-            QString accountId = glTrans->getIdValue("chartmaster_idx").toString();
-            int periodNo = glTrans->getValue("periodno").toInt();
             QString accountCode = "0";
             QString accountName = "Default";
-            RB_ObjectBase* acctObj = ACC_QACHARTMASTER->getAcctObj(accountId);
+            RB_ObjectBase* acctObj = ACC_QACHARTMASTER->getAcctObj(chartMasterId);
 
             if (acctObj) {
                 accountCode = acctObj->getValue("accountcode").toString();
                 accountName = acctObj->getValue("accountname").toString();
             }
 
-            targetGlSum->setValue("parent", accountId);
+            targetGlSum->setValue("parent", chartMasterId);
             targetGlSum->setValue("period", periodNo);
             targetGlSum->setValue("accountcode", accountCode);
             targetGlSum->setValue("accountname", accountName);
@@ -249,6 +247,8 @@ bool ACC_PostGlTransaction::updateGlSumList(RB_ObjectContainer* glTransList) {
 
         targetGlSum->setValue("debit", debitAmt);
         targetGlSum->setValue("credit", creditAmt);
+        RB_String dt = QDateTime::currentDateTime().toString(Qt::ISODate);
+        targetGlSum->setValue("changed", dt);
     }
 
     delete iter;
@@ -490,6 +490,7 @@ bool ACC_PostGlTransaction::createCcSumList(RB_ObjectContainer* glTransList) {
     }
 
     delete iter;
+
     mCcSumList->dbReadWhere(ACC_MODELFACTORY->getDatabase(), where);
     return true;
 }
@@ -508,19 +509,26 @@ bool ACC_PostGlTransaction::updateCcSumList(RB_ObjectContainer* glTransList) {
     RB_ObjectIterator* iter = glTransList->createIterator();
 
     for (iter->first(); !iter->isDone(); iter->next()) {
-        // Get relevant GL summary
         RB_ObjectBase* glTrans = iter->currentObject();
-        RB_ObjectBase* targetCcSum = nullptr;
+        RB_String costCenterId =
+                glTrans->getIdValue("costcenter_idx").toString();
+        int periodNo = glTrans->getValue("periodno").toInt();
+
+        if (costCenterId.size() < 38) {
+            // Prevent '0' as id
+            continue;
+        }
+
+        // Get relevant GL summary
+        RB_ObjectBase* targetCostSum = nullptr;
         RB_ObjectIterator* sumIter = mCcSumList->createIterator();
 
         for (sumIter->first(); !sumIter->isDone(); sumIter->next()) {
-            RB_ObjectBase* ccSum = iter->currentObject();
+            RB_ObjectBase* costSum = sumIter->currentObject();
 
-            if (glTrans->getIdValue("chartmaster_idx")
-                    == ccSum->getValue("parent")
-                    && glTrans->getIdValue("periodno")
-                    == ccSum->getValue("periodno")) {
-                targetCcSum = ccSum;
+            if (costCenterId == costSum->getValue("parent").toString()
+                    && periodNo == costSum->getValue("period").toInt()) {
+                targetCostSum = costSum;
                 sumIter->setDone();
             }
 
@@ -529,32 +537,30 @@ bool ACC_PostGlTransaction::updateCcSumList(RB_ObjectContainer* glTransList) {
         delete sumIter;
 
         // Create GL summary if not already existing
-        if (!targetCcSum) {
+        if (!targetCostSum) {
             // No chartdetail yet available, create new
-            targetCcSum = mCcSumList->newObject();
+            targetCostSum = mCcSumList->newObject();
 
-            QString centerId = glTrans->getIdValue("costcenter_idx").toString();
-            int periodNo = glTrans->getValue("periodno").toInt();
             QString centerCode = "0";
             QString centerName = "Default";
-            RB_ObjectBase* ccObj = ACC_QACOSTCENTER->getCostCenterObj(centerId);
+            RB_ObjectBase* ccObj = ACC_QACOSTCENTER->getCostCenterObj(costCenterId);
 
             if (ccObj) {
                 centerCode = ccObj->getValue("centercode").toString();
                 centerName = ccObj->getValue("centername").toString();
             }
 
-            targetCcSum->setValue("parent", centerId);
-            targetCcSum->setValue("period", periodNo);
-            targetCcSum->setValue("centercode", centerCode);
-            targetCcSum->setValue("centername", centerName);
-            targetCcSum->setValue("debit", 0.0);
-            targetCcSum->setValue("credit", 0.0);
+            targetCostSum->setValue("parent", costCenterId);
+            targetCostSum->setValue("period", periodNo);
+            targetCostSum->setValue("centercode", centerCode);
+            targetCostSum->setValue("centername", centerName);
+            targetCostSum->setValue("debit", 0.0);
+            targetCostSum->setValue("credit", 0.0);
         }
 
         // Update the summary amount
-        double debitAmt = targetCcSum->getValue("debit").toDouble();
-        double creditAmt = targetCcSum->getValue("credit").toDouble();
+        double debitAmt = targetCostSum->getValue("debit").toDouble();
+        double creditAmt = targetCostSum->getValue("credit").toDouble();
         double amount = glTrans->getValue("amount").toDouble();
 
         // update amount
@@ -572,8 +578,10 @@ bool ACC_PostGlTransaction::updateCcSumList(RB_ObjectContainer* glTransList) {
             }
         }
 
-        targetCcSum->setValue("debit", debitAmt);
-        targetCcSum->setValue("credit", creditAmt);
+        targetCostSum->setValue("debit", debitAmt);
+        targetCostSum->setValue("credit", creditAmt);
+        RB_String dt = QDateTime::currentDateTime().toString(Qt::ISODate);
+        targetCostSum->setValue("changed", dt);
     }
 
     delete iter;
@@ -851,90 +859,6 @@ bool ACC_PostGlTransaction::recreateGlSum(int fromPrd, int toPrd) {
     delete glSumList;
 
     return success;
-
-
-    return true;
-    // // end new
-
-/*
-    RB_ObjectContainer* chartMasterList = ACC_QACHARTMASTER->getAcctList();
-
-    ACC_SqlCommonFunctions util;
-    RB_String qStr = "";
-    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
-
-    // Recreate glSum in this period
-    //
-    ACC_GlSum* glSum = new ACC_GlSum("", NULL, "ACC_GlSum");
-    RB_ObjectIterator* iter = chartMasterList->createIterator();
-
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* chartMaster = iter->currentObject();
-
-        for (int i = fromPrd; i < toPrd + 1; ++i) {
-            qStr = "SELECT SUM(amount) FROM acc_gltrans WHERE ";
-            util.substrIdxId("chartmaster_idx", qStr);
-            qStr += "='"
-                   + chartMaster->getId() + "' AND periodno=" + RB_String::number(i)
-                   + " AND amount>=0;";
-
-            if (!query.exec(qStr)) {
-               RB_DEBUG->error("ACC_PostGlTransaction::recreate() 21 ERROR");
-               return false;
-            }
-
-            query.first();
-            double debit = query.value(0).toDouble();
-
-            qStr = "SELECT SUM(amount) FROM acc_gltrans WHERE ";
-            util.substrIdxId("chartmaster_idx", qStr);
-            qStr += "='"
-                   + chartMaster->getId() + "' AND periodno=" + RB_String::number(i)
-                   + " AND amount<0;";
-
-            if (!query.exec(qStr)) {
-               RB_DEBUG->error("ACC_PostGlTransaction::recreate() 3 ERROR");
-               return false;
-            }
-
-            query.first();
-            double credit = -query.value(0).toDouble();
-
-            // Set new glSum
-            glSum->setValue("id", RB_Uuid::createUuid().toString());
-            glSum->setValue("parent", chartMaster->getId());
-            glSum->setValue("period", i);
-            glSum->setValue("accountcode", chartMaster->getValue("accountcode").toInt());
-            glSum->setValue("accountname", chartMaster->getValue("accountname").toString());
-            glSum->setValue("debit", debit);
-            glSum->setValue("credit", credit);
-            glSum->deleteFlag(RB2::FlagFromDatabase);
-
-            qStr = "DELETE FROM acc_glsum WHERE parent='"
-                  + chartMaster->getId()
-                  + "' AND period=" + RB_String::number(i)+ ";";
-
-            if (!query.exec(qStr)) {
-               RB_DEBUG->error("ACC_PostGlTransaction::recreate() 4 ERROR");
-               return false;
-            }
-
-            // Update new glSum, if relevant
-            if (std::fabs(debit) > 0.005 || std::fabs(credit) > 0.005) {
-                glSum->dbUpdate(ACC_MODELFACTORY->getDatabase());
-            }
-
-            if (i % 100 == 12) {
-                i += 87; // only first twelve (months)
-            }
-        }
-    }
-
-    delete glSum;
-    delete iter;
-    // Note: do not delete chartMasterList
-    return true;
-*/
 }
 
 /**

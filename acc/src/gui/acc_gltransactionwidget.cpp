@@ -935,8 +935,7 @@ void ACC_GlTransactionWidget::on_pbDeleteItem_clicked() {
     if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo) {
         ret = DB_DIALOGFACTORY->requestYesNoDialog(
                 tr("Delete item ..."),
-                tr("This action cannot be undone.\n"
-                   "Do you want to delete this item?"));
+                tr("Do you want to delete this item?"));
     } else if (mTransType == ACC2::TransCreditor || mTransType == ACC2::TransDebtor) {
         // Allocated amount
         double allocAmt = mTransDocModel->getCurrentValue("alloc").toDouble();
@@ -944,14 +943,12 @@ void ACC_GlTransactionWidget::on_pbDeleteItem_clicked() {
         if (allocAmt < -0.005 || allocAmt > 0.005) {
             ret = ACC_DIALOGFACTORY->requestYesNoDialog(
                         tr("Delete item ..."),
-                        tr("This action cannot be undone.\n"
-                           "Do you want to delete this item\n"
+                        tr("Do you want to delete this item\n"
                            "and the related allocation?"));
         } else {
             ret = DB_DIALOGFACTORY->requestYesNoDialog(
                     tr("Delete item ..."),
-                    tr("This action cannot be undone.\n"
-                       "Do you want to delete this item?"));
+                    tr("Do you want to delete this item?"));
         }
     }
 
@@ -982,11 +979,10 @@ void ACC_GlTransactionWidget::on_pbDeleteItem_clicked() {
 
     // remove gltrans (which reverses chartdetails/trialbalance), done at fileSave()
     int row = index.row();
-    // mItemTransModel->setCurrentValue("amount", 0.0, Qt::EditRole);
-    // mItemTransModel->submitAllAndSelect();
-    // mHandleAllocn.submitAllAndSelect();
-    // tvItem->hideRow(row);
     mItemTransModel->removeRows(row, 1, QModelIndex());
+    tvItem->hideRow(row);
+    tvItem->selectionModel()->setCurrentIndex(QModelIndex(),
+                                              QItemSelectionModel::ClearAndSelect);
 
     setWindowModified(true);
 
@@ -2342,7 +2338,12 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
     double amount = 0.0;
     int itemRowCount = mItemTransModel->rowCount();
 
-    for (int i = 0; i < itemRowCount; ++i) {
+    for (int row = 0; row < itemRowCount; ++row) {
+        if (mItemTransModel->headerData(row, Qt::Vertical).toString() == "!") {
+            // Skip rows that will be deleted with saving to database
+            continue;
+        }
+
         // add transaction per item
         gltrans = ACC_OBJECTFACTORY->newObject(RB_Uuid::createUuid().toString(), mGlTransList, "", true);
 
@@ -2356,16 +2357,19 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
         gltrans->setValue("periodno", mPeriod);
         gltrans->setValue("transdoc_id", mDocId);
 
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("description"));
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("id"));
+        mItemId = mItemTransModel->data(idx).toString();
+        gltrans->setValue("itemtrans_id", mItemId);
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("description"));
         itemDescr = idx.isValid() ? mItemTransModel->data(idx).toString() : "ERROR";
         gltrans->setValue("description", itemDescr);
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("chartmaster_idx"));
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("chartmaster_idx"));
         RB_String accountName = mItemTransModel->data(idx).toString();
         accountId = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
         gltrans->setValue("chartmaster_idx", accountId + accountName);
 
         if (mTransType == ACC2::TransDebtor || mTransType == ACC2::TransCreditor) {
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("costcenter_idx"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("costcenter_idx"));
             RB_String costCenterName = mItemTransModel->data(idx).toString();
             RB_String costCenterId = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
             gltrans->setValue("costcenter_idx", costCenterId + costCenterName);
@@ -2379,7 +2383,7 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
             gltrans->setValue("accountcontrol", 0);
         }
 
-        idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("amount"));
+        idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("amount"));
         amount = mItemTransModel->data(idx).toDouble();
 
         if (mTransType == ACC2::TransDebtor || mTransType == ACC2::TransBankCash
@@ -2394,7 +2398,7 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
         // set allocation id and reference for bank, memorandum transaction and totals,
         if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo) {
             RB_String str;
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transallocn_idx"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transallocn_idx"));
             str += mItemTransModel->data(idx, Qt::EditRole).toString();
             gltrans->setValue("transallocn_idx", str);
 
@@ -2417,12 +2421,12 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
         // Sales taxes for regular debtor and creditor
         if ((mTransType == ACC2::TransDebtor || mTransType == ACC2::TransCreditor)
                                             && isTax) {
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxhighamt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxhighamt"));
             amount = mItemTransModel->data(idx).toDouble();
 
             if (std::fabs(amount) > 0.005) {
                 // not necessary:  && accountId != mSalesRevId && accountId != mPurchRevId) {
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxhighchartmaster_idx"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxhighchartmaster_idx"));
                 taxAcctId = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
                 taxAcctName = mItemTransModel->data(idx, Qt::DisplayRole).toString();
 
@@ -2435,11 +2439,11 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
                 totalAmount += amount;
             }
 
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxlowamt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxlowamt"));
             amount = mItemTransModel->data(idx).toDouble();
 
             if (std::fabs(amount) > 0.005) {
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxlowchartmaster_idx"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxlowchartmaster_idx"));
                 taxAcctId = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
                 taxAcctName = mItemTransModel->data(idx, Qt::DisplayRole).toString();
 
@@ -2452,11 +2456,11 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
                 totalAmount += amount;
             }
 
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxotheramt"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxotheramt"));
             amount = mItemTransModel->data(idx).toDouble();
 
             if (std::fabs(amount) > 0.005) {
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxotherchartmaster_idx"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxotherchartmaster_idx"));
                 taxAcctId = mItemTransModel->data(idx, RB2::RoleOrigData).toString();
                 taxAcctName = mItemTransModel->data(idx, Qt::DisplayRole).toString();
 
@@ -2477,7 +2481,7 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
         if (mTransType == ACC2::TransDebtor || mTransType == ACC2::TransCreditor) {
             if (itemAcctControl == ACC2::ControlSalesRevTax /*14*/
                     || itemAcctControl == ACC2::ControlPurchaseRevTax /*34*/) {
-                idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxotheramt"));
+                idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxotheramt"));
                 taxRev = mItemTransModel->data(idx).toDouble();
             }
 
@@ -2533,6 +2537,7 @@ void ACC_GlTransactionWidget::createNewHelper(const RB_String& descr,
     gltrans->setValue("transdocno", mTypeNo);
     gltrans->setValue("periodno", mPeriod);
     gltrans->setValue("transdoc_id", mDocId);
+    gltrans->setValue("itemtrans_id", mItemId);
     gltrans->setValue("description", descr);
     gltrans->setValue("chartmaster_idx", acctId + acctName);
     // accountcontrol
@@ -2728,13 +2733,13 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
         int transType = (int)ACC2::TransBankCash;
         int itemRowCount = mItemTransModel->rowCount();
 
-        for (int i = 0; i < itemRowCount; ++i) {
+        for (int row = 0; row < itemRowCount; ++row) {
             // update itemModel, ACC_BankTrans
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("type"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("type"));
             mItemTransModel->setData(idx, transType, Qt::EditRole);
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transno"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transno"));
             mItemTransModel->setData(idx, typeNo, Qt::EditRole);
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transdate"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transdate"));
             QString itemDate = mItemTransModel->data(idx).toString();
 
             if (itemDate > transDocDate) {
@@ -2743,7 +2748,7 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
                 mItemTransModel->setData(idx, transDocDate, Qt::EditRole);
             }
 
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transdoc_id"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transdoc_id"));
             mItemTransModel->setData(idx, transDocId, Qt::EditRole);
         }
 
@@ -2753,9 +2758,9 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
     case ACC2::TransCreditor : {
         int itemRowCount = mItemTransModel->rowCount();
 
-        for (int i = 0; i < itemRowCount; ++i) {
+        for (int row = 0; row < itemRowCount; ++row) {
             // update itemModel, ACC_CreditorTrans
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transdoc_id"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transdoc_id"));
             mItemTransModel->setData(idx, transDocId, Qt::EditRole);
 
             // Get tax authority id
@@ -2771,7 +2776,7 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
                 taxAuthId = query.value(fieldNo).toString();
             }
 
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxauth_id"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxauth_id"));
             mItemTransModel->setData(idx, taxAuthId, Qt::EditRole);
         }
 
@@ -2780,9 +2785,9 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
     case ACC2::TransDebtor : {
         int itemRowCount = mItemTransModel->rowCount();
 
-        for (int i = 0; i < itemRowCount; ++i) {
+        for (int row = 0; row < itemRowCount; ++row) {
             // update itemModel, ACC_DebtorTrans
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transdoc_id"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transdoc_id"));
             mItemTransModel->setData(idx, transDocId, Qt::EditRole);
 
             // Get tax authority id
@@ -2798,7 +2803,7 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
                 taxAuthId = query.value(fieldNo).toString();
             }
 
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("taxauth_id"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("taxauth_id"));
             mItemTransModel->setData(idx, taxAuthId, Qt::EditRole);
         }
 
@@ -2807,11 +2812,11 @@ void ACC_GlTransactionWidget::updateBeforeSave() {
     case ACC2::TransMemo : {
         int itemRowCount = mItemTransModel->rowCount();
 
-        for (int i = 0; i < itemRowCount; ++i) {
+        for (int row = 0; row < itemRowCount; ++row) {
             // update itemModel, ACC_MemoTrans
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transdoc_id"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transdoc_id"));
             mItemTransModel->setData(idx, transDocId, Qt::EditRole);
-            idx = mItemTransModel->index(i, mItemTransModel->fieldIndex("transno"));
+            idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transno"));
             mItemTransModel->setData(idx, typeNo, Qt::EditRole);
         }
 

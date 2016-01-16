@@ -166,6 +166,7 @@ private:
     int mTypeNo;
     int mPeriod;
     RB_String mDocId;
+    RB_String mItemId;
 
     //! Transaction validation message
     RB_String mValidationMessage;

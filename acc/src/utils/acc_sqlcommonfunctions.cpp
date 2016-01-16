@@ -831,7 +831,7 @@ acc_costcenter.centercode;
             + toPrd + " AND acc_gltrans.amount < 0 THEN -acc_gltrans.amount ELSE 0 END) AS credit "
             "FROM acc_costcenter "
             "INNER JOIN acc_costgroup ON SUBSTR(acc_costcenter.centergroup_idx,1,38) = acc_costgroup.id "
-            "INNER JOIN acc_gltrans ON acc_costcenter.id= SUBSTR(acc_gltrans.costcenter_idx,1,38) "
+            "INNER JOIN acc_gltrans ON acc_costcenter.id=SUBSTR(acc_gltrans.costcenter_idx,1,38) "
             "WHERE acc_costcenter.parent='" + rootId + "' "
             "GROUP BY acc_costcenter.centercode "
             "ORDER BY acc_costgroup.costprofit ASC, "
