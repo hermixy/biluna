@@ -219,19 +219,20 @@ void ACC_HandleAllocns::delItemAllocn(RB_MmProxy* itemModel) {
         return;
     }
 
+    // Get all allocations from this docFromId (in itemModel)
     createAllocList(itemModel);
 
     // Get transAlloc, check if already edited
     RB_ObjectBase* transAlloc = mTransAllocList->getObject("itemallocfrom_id", itemId);
 
     if (transAlloc) {
-        undoItemAllocationFromBM(transAlloc, itemModel);
+        undoItemAllocationFromBM(transAlloc);
     }
 }
 
 /**
  * Delete the item list allocation of a bank/cash or memo journal
- * (General Ledger) document, cannot be undone.
+ * (General Ledger) document.
  * @param bankGlTransModel GL transaction model with the document transactions
  */
 void ACC_HandleAllocns::delItemListAllocn(RB_MmProxy* itemModel) {
@@ -258,21 +259,22 @@ void ACC_HandleAllocns::delItemListAllocn(RB_MmProxy* itemModel) {
 }
 
 /**
- * Delete the allocations memo or bankcash item allocation(s)
- * to a debtor or creditor document:
+ * Delete the allocations to a debtor or creditor document
+ * from memo or bankcash item allocation(s):
  * \li called with a debtor or creditor document ID when this document
  * is deleted,
  * \li called when the amount in the debtor or creditor document is changed.
  * In that case the change is reversable.
  *
- * @param docToId document ID
+ * @param docToId creditor or debtor document ID
  * @param isDeleted document or item is deleted and is not reversable
  */
 void ACC_HandleAllocns::delDocAllocn(const RB_String& docToId) {
     createAllocList(docToId);
 
     // Get transAlloc, check if at least one exists
-    RB_ObjectBase* transAlloc = mTransAllocList->getObject("docallocto_id", docToId);
+    RB_ObjectBase* transAlloc = mTransAllocList->getObject("docallocto_id",
+                                                           docToId);
 
     if (!transAlloc) {
         // Check if alloc exists in database or is already created
@@ -435,22 +437,6 @@ void ACC_HandleAllocns::updateTransDate(RB_MmProxy* itemModel,
  * @param glTransList
  */
 bool ACC_HandleAllocns::updateGlTransList(RB_ObjectContainer* glTransList) {
-    // Handle open allocation items
-    RB_ObjectIterator* iter = mTransAllocList->createIterator();
-
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* transAlloc = iter->currentObject();
-
-        if (transAlloc->getFlag(RB2::FlagIsDeleted)
-                && transAlloc->getFlag(RB2::FlagFromDatabase)) {
-            // undo allocation and set bank/cash or memo to default account
-            // due to transDocTo amount is changed
-            glTransToDefault(transAlloc->getValue("docallocto_id").toString());
-        }
-    }
-
-    delete iter;
-
     // Reparent glTrans items to overall glTransList
     RB_ObjectIterator* glIter = mGlTransList->createIterator();
 
@@ -473,8 +459,7 @@ bool ACC_HandleAllocns::updateGlTransList(RB_ObjectContainer* glTransList) {
  * @param isPost is true if this action is to be posted immediately
  * from transDocTo to the database, does not delete the allocation.
  */
-void ACC_HandleAllocns::undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
-                                                    RB_MmProxy* itemModel) {
+void ACC_HandleAllocns::undoItemAllocationFromBM(RB_ObjectBase* transAlloc) {
     RB_String docToId = transAlloc->getValue("docallocto_id").toString();
 
     if (docToId.size() < 38) {
@@ -490,30 +475,15 @@ void ACC_HandleAllocns::undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
     // Can be positive (ref. totalamountrec) or negative (ref. totalamountpay)
     double docToAllocAmt = getAllocatedAmount(docToId);
 
-    // Unset transallocn_idx at bank/cash or memo transaction item
-    // set chartmaster_idx to default GL account
-    // and amountcleared for bank/cash only
-    // Called from bank/cash or memo
-    itemModel->setCurrentValue("transallocn_idx", "0", Qt::EditRole);
-    itemModel->setCurrentValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
-                               + ACC_QACHARTMASTER->getAccDefaultName(),
-                               Qt::EditRole);
-    if (itemModel->getModelType() == ACC_ModelFactory::ModelBankTrans) {
-        itemModel->setCurrentValue("amountcleared", 0.0, Qt::EditRole);
-    }
-
     // Unset allocated value and settled
     // at debtor or creditor transaction document
     docToAllocAmt -= allocAmt;
     transDocTo->setValue("alloc", docToAllocAmt);
     transDocTo->setValue("settled", 0); // debtor or creditor document always 0
 
-    // Finalize the preparation of the undo allocation
+    // Finalize the preparation of the undo of this allocation
     transAlloc->setFlag(RB2::FlagIsDeleted);
     transAlloc->setValue("amount", 0.0); // in case re-used
-
-    // Update the corresponding ACC_GlTrans
-    glTransToDefault(transAlloc->getValue("docallocto_id").toString());
 }
 
 /**
@@ -532,13 +502,15 @@ void ACC_HandleAllocns::undoItemAllocationToDC(RB_ObjectBase* transAlloc) {
         return;
     }
 
-    RB_String docFromId = transAlloc->getValue("docfrom_id").toString();
-
+    itemFrom->setValue("accountcontrol", ACC2::ControlDefault);
     itemFrom->setValue("transallocn_idx", "0");
-    itemFrom->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
+    itemFrom->setValue("chartmaster_idx",
+                       ACC_QACHARTMASTER->getAccDefaultId()
                        + ACC_QACHARTMASTER->getAccDefaultName());
+    int accountControl = itemFrom->getValue("accountcontrol").toInt();
 
-    if (getTransDocType(docFromId) == ACC2::TransBankCash) {
+    if (accountControl == (int)ACC2::ControlBank
+            || accountControl == (int)ACC2::ControlCash) {
         itemFrom->setValue("amountcleared", 0.0);
     }
 
@@ -546,8 +518,9 @@ void ACC_HandleAllocns::undoItemAllocationToDC(RB_ObjectBase* transAlloc) {
     transAlloc->setFlag(RB2::FlagIsDeleted);
     transAlloc->setValue("amount", 0.0); // in case re-used
 
-    // Prepare the corresponding ACC_GlTrans
-    glTransToDefault(transAlloc->getValue("docallocto_id").toString());
+    // Prepare the corresponding ACC_GlTrans based on allocation document from
+    // or use itemFrom->getId()
+    glTransToDefault(transAlloc);
 }
 
 RB_ObjectBase* ACC_HandleAllocns::getItemFrom(RB_ObjectBase* transAlloc) {
@@ -569,9 +542,11 @@ RB_ObjectBase* ACC_HandleAllocns::getItemFrom(RB_ObjectBase* transAlloc) {
 
     // Get itemFrom in case of Debtor or Creditor transaction,
     // first check if already edited
-    RB_ObjectBase* itemFrom = mBankTransList->getObject(itemFromId);
+    RB_ObjectBase* itemFrom = nullptr;
 
-    if (!itemFrom) {
+    if (transType == ACC2::TransBankCash) {
+        itemFrom = mBankTransList->getObject(itemFromId);
+    } else {
         itemFrom = mMemoTransList->getObject(itemFromId);
     }
 
@@ -600,39 +575,40 @@ RB_ObjectBase* ACC_HandleAllocns::getItemFrom(RB_ObjectBase* transAlloc) {
 }
 
 /**
- * Undo the allocation to document by updating the corresponding
+ * Undo the allocation to document debtor/creditor by updating the corresponding
  * GL transaction (ACC_GlTrans), and set the GL Chart Master account to default
- * @param docToId ID of 'document to' of allocation to be removed
+ * @param docFromId ID of creditor or debtor 'document from'
+ * allocation to be removed
  */
-void ACC_HandleAllocns::glTransToDefault(const RB_String& docToId) {
-    // Temporary GL transaction list to be set to default
-    RB_ObjectContainer* glTransList;
-    glTransList = new RB_ObjectContainer("", NULL, "ACC_GlTransList", ACC_OBJECTFACTORY);
-    glTransList->setValue("parent", docToId); // NOTE: actual parent is ACC_Project
-    glTransList->dbReadList(ACC_MODELFACTORY->getDatabase(), RB2::ResolveOne,
-                            "SUBSTR(transallocn_idx, 1, 38)");
-
-    RB_ObjectIterator* iter = glTransList->createIterator();
-
-    for (iter->first(); !iter->isDone(); iter->next()) {
-        RB_ObjectBase* glTrans = iter->currentObject();
-        RB_ObjectBase* glClone = new RB_ObjectAtomic(glTrans);
-        glClone->setFlag(RB2::FlagIsDeleted);
-        glClone->setParent(mGlTransList);
-        mGlTransList->addObject(glClone);
-
-        glClone = new RB_ObjectAtomic(glTrans);
-        glClone->setId(RB_Uuid::createUuid().toString());
-        glClone->setValue("chartmaster_idx", ACC_QACHARTMASTER->getAccDefaultId()
-                          + ACC_QACHARTMASTER->getAccDefaultName());
-        glClone->setValue("transallocn_idx", "0");
-        glClone->deleteFlag(RB2::FlagIsDeleted);
-        glClone->setParent(mGlTransList);
-        mGlTransList->addObject(glClone);
+void ACC_HandleAllocns::glTransToDefault(RB_ObjectBase* transAlloc) {
+    // Get glTrans and add to mGlTransList
+    RB_ObjectBase* glTrans = getGlTrans(transAlloc);
+    if (!glTrans) {
+        return;
     }
 
-    delete iter;
-    delete glTransList;
+    int accountControl = glTrans->getValue("accountcontrol").toInt();
+
+    // only applicable for bank and memo items to Creditor and Debtor GL accounts
+    if (accountControl != (int)ACC2::ControlCreditor
+            && accountControl != (int)ACC2::ControlDebtor) {
+        return;
+    }
+
+    // Clone glTrans, set to default and add to mGlTransList
+    RB_ObjectBase* glClone = new RB_ObjectAtomic(glTrans);
+    glClone->setValue("id", RB_Uuid::createUuid().toString());
+    glClone->setValue("chartmaster_idx",
+                      ACC_QACHARTMASTER->getAccDefaultId()
+                      + ACC_QACHARTMASTER->getAccDefaultName());
+    glClone->setValue("accountcontrol", (int)ACC2::ControlDefault);
+    glClone->setValue("transallocn_idx", "0");
+    glClone->deleteFlag(RB2::FlagFromDatabase);
+    glClone->setParent(mGlTransList);
+    mGlTransList->addObject(glClone);
+
+    // Set delete flag to revert booking
+    glTrans->setFlag(RB2::FlagIsDeleted);
 }
 
 /**
@@ -690,10 +666,9 @@ void ACC_HandleAllocns::createAllocList(const RB_String& docToId) {
 }
 
 /**
- * NOT YET USED
- * Update allocation list with all allocation to the transaction document
- * (a debtor or creditor invoice document) with ID docToId
- * @brief ACC_HandleAllocns::updateAllocList
+ * @brief Update allocation list with all allocation to the transaction document
+ * (a debtor or creditor invoice document) with ID docToId,
+ * do not delete already selected allocations. Called from getAllocatedAmount()
  * @param docToId ID of document to which allocations are made
  */
 void ACC_HandleAllocns::updateAllocList(const RB_String& docToId) {
@@ -710,6 +685,24 @@ void ACC_HandleAllocns::updateAllocList(const RB_String& docToId) {
     mTransAllocList->setValue("parent", docToId);
     mTransAllocList->dbReadList(ACC_MODELFACTORY->getDatabase(),
                                 RB2::ResolveOne, "docallocto_id");
+}
+
+RB_ObjectBase* ACC_HandleAllocns::getGlTrans(RB_ObjectBase* transAlloc) {
+    QString itemFromId = transAlloc->getValue("itemallocfrom_id").toString();
+    QString docToId = transAlloc->getValue("docallocto_id").toString();
+    RB_ObjectBase* glTrans = mGlTransList->newObject("");
+
+    bool success =
+            glTrans->dbReadWhere(ACC_MODELFACTORY->getDatabase(),
+                                 "itemtrans_id='" + itemFromId
+                                 + "' AND SUBSTR(transallocn_idx,1,38)='"
+                                        + docToId + "'");
+    if (!success) {
+        RB_DEBUG->print(itemFromId + " " + docToId);
+        RB_DEBUG->error("ACC_HandleAllocns::getGlTrans() not found ERROR");
+    }
+
+    return glTrans;
 }
 
 /**

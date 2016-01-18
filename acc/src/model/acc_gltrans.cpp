@@ -67,6 +67,6 @@ void ACC_GlTrans::createMembers() {
     addMember("tag_id", "-", "0", RB2::MemberChar40);
     addMember("transdoc_id", "-", "0", RB2::MemberChar40);
     addMember("itemtrans_id", "-", "0", RB2::MemberChar40);
-    addMember("transallocn_idx", "-", "0", RB2::MemberChar165);
+    addMember("transallocn_idx", "-", "0", RB2::MemberChar165); // TODO: rename to allocdocfrom_idx because confusing, is not the actual transallocation but the document from which the allocation comes
     addMember("costcenter_idx", "-", "0", RB2::MemberChar165);
 }

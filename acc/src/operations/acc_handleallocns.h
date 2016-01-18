@@ -51,16 +51,16 @@ public:
     virtual RB_ObjectContainer* getTransDocList();
 
 protected:
-    void undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
-                                  RB_MmProxy* itemModel);
+    void undoItemAllocationFromBM(RB_ObjectBase* transAlloc);
     void undoItemAllocationToDC(RB_ObjectBase* transAlloc);
     RB_ObjectBase* getItemFrom(RB_ObjectBase* transAlloc);
-    void glTransToDefault(const RB_String& docToId);
+    void glTransToDefault(RB_ObjectBase *transAlloc);
     void createAllocList(RB_MmProxy* itemModel);
     void createAllocList(const RB_String& docToId);
     void updateAllocList(const RB_String& docToId);
-    RB_ObjectBase* getTransAllocn(RB_MmProxy* itemModel);
 
+    RB_ObjectBase* getGlTrans(RB_ObjectBase* transAlloc);
+    RB_ObjectBase* getTransAllocn(RB_MmProxy* itemModel);
     RB_ObjectBase* getTransDocTo(const RB_String& docToId);
     double getAllocatedAmount(const RB_String& docToId);
     ACC2::TransType getTransDocType(const RB_String& docId);

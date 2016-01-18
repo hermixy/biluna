@@ -251,16 +251,18 @@ void RB_Debug::printObject(RB_Object* obj, RB2::ResolveLevel level) {
         return;
     }
 
-    QString str = "";
-    str = "  RB_Debug::printObject() START\n";
+    print("  RB_Debug::printObject() START");
 
+    QString str = "";
     if (!obj) {
-        str += "    object pointer is NULL\n";
+        str = "    object pointer is NULL";
     } else {
         str.append(QString("    object pointer = %1\n")
                    .arg(pointerToString(obj)));
         str += "    object name = " + obj->getName();
     }
+    print(str);
+    print("  RB_Debug::printObject() END");
 }
 
 /**
@@ -268,43 +270,41 @@ void RB_Debug::printObject(RB_Object* obj, RB2::ResolveLevel level) {
  */
 void RB_Debug::printObjectBase(RB_ObjectBase* obj, RB2::ResolveLevel level) {
     QString str = "";
-    str = "  RB_Debug::printObjectBase() START\n";
+    print("  RB_Debug::printObjectBase() START");
 	
 	if (!obj) {
-        str += "    object pointer is NULL\n";
+        print("    object pointer is NULL");
 	} else {
-        str.append(QString("    object pointer = %1\n")
-                   .arg(pointerToString(obj)));
-        str += "    object id = " + obj->getId() + "\n";
-        str += "    object name = " + obj->getName() + "\n";
+        print(QString("    object pointer = %1").arg(pointerToString(obj)));
+        print("    object id = " + obj->getId());
+        print("    object name = " + obj->getName());
 		
 		RB_ObjectBase* parent = (RB_ObjectBase*)obj->getParent();
 		
 		if (parent) {
-            str.append(QString("    object parent pointer = %1\n")
+            print(QString("    object parent pointer = %1")
                        .arg(pointerToString(parent)));
-            str += "    object parent id = " + parent->getId() + "\n";
-            str += "    object parent name = " + parent->getName() + "\n";
+            print("    object parent id = " + parent->getId());
+            print("    object parent name = " + parent->getName());
 		} else {
-            str += "    object parent pointer = NULL\n";
-            str += "    object parent id = NULL\n";
-            str += "    object parent name = NULL\n";
+            print("    object parent pointer = NULL");
+            print("    object parent id = NULL");
+            print("    object parent name = NULL");
 		}
 		
         int noMember = obj->memberCount();
 	
 		for (int i = 0; i < noMember; ++i) {
-            str += "    ";
+            str = "    ";
 			str += obj->getMember(i)->getName();
 			str += " = ";
 			str += obj->getMember(i)->getValue().toString();
             str += "; display = ";
             str += obj->getMember(i)->getDisplayValue().toString();
             str += "; previous = ";
-            str += obj->getMember(i)->getPreviousValue().toString() + "\n";
+            str += obj->getMember(i)->getPreviousValue().toString();
+            print(str);
         }
-
-		print(str);
 	}
 	
 	if (obj && obj->isContainer() && level != RB2::ResolveNone) {

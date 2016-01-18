@@ -509,7 +509,7 @@ bool RB_DbVisitor::dbUpdateList() {
             qUpdate.addBindValue(obj->getMember(0)->getValue(), QSql::In);
 
             if (qUpdate.exec()) {
-                RB_DEBUG->print(qUpdate.executedQuery());
+//                RB_DEBUG->print(qUpdate.executedQuery());
                 obj->setFlag(RB2::FlagFromDatabase);
                 obj->deleteFlag(RB2::FlagIsDirty);
             } else {

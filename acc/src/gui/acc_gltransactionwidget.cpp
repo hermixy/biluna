@@ -502,8 +502,8 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
     if (mTransType == ACC2::TransBankCash || mTransType == ACC2::TransMemo) {
         mHandleAllocn.delItemListAllocn(mItemTransModel);
     } else if (mTransType == ACC2::TransCreditor || mTransType == ACC2::TransDebtor) {
-        RB_String docId = mTransDocModel->getCurrentId();
-        mHandleAllocn.delDocAllocn(docId);
+        RB_String docToId = mTransDocModel->getCurrentId();
+        mHandleAllocn.delDocAllocn(docToId);
     } else {
         return;
     }
@@ -521,22 +521,20 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
     // process the extended GL transactionlist to GL summary
     // and save to database
     success = success && processGlTrans();
-    // save visible models
-    success = success && mItemTransModel->submitAllAndSelect();
 
     // Extra (?) delete GL transactions, if not journal item model
-    ACC_MODELFACTORY->getDatabase().transaction();
-    RB_String transDocId = mTransDocModel->getCurrentId();
-    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
-    RB_String sqlStr = "DELETE FROM acc_gltrans WHERE transdoc_id='" + transDocId + "';";
+//    ACC_MODELFACTORY->getDatabase().transaction();
+//    RB_String transDocId = mTransDocModel->getCurrentId();
+//    QSqlQuery query(ACC_MODELFACTORY->getDatabase());
+//    RB_String sqlStr = "DELETE FROM acc_gltrans WHERE transdoc_id='" + transDocId + "';";
 
-    if (!query.exec(sqlStr)) {
-        RB_DEBUG->error("ACC_GlTransactionWidget::fileSave() delete gltrans ERROR");
-    }
+//    if (!query.exec(sqlStr)) {
+//        RB_DEBUG->error("ACC_GlTransactionWidget::fileSave() delete gltrans ERROR");
+//    }
 
-    if (!ACC_MODELFACTORY->getDatabase().commit()) {
-        ACC_MODELFACTORY->getDatabase().rollback();
-    }
+//    if (!ACC_MODELFACTORY->getDatabase().commit()) {
+//        ACC_MODELFACTORY->getDatabase().rollback();
+//    }
 
     // Remove item and document model rows
     //
@@ -553,8 +551,9 @@ void ACC_GlTransactionWidget::on_pbDeleteDoc_clicked() {
     mSaveInProgress = true;
     ACC_MODELFACTORY->getDatabase().transaction();
 
-    success = success ? mItemTransModel->submitAll() : false ; // TODO: also in in RB_MmProxy::slotParentCurrentRowChanged()
-    success = success ? mTransDocModel->submitAllAndSelect() : false;
+    // save visible models
+    success = success && mItemTransModel->submitAllAndSelect(); // TODO: also in in RB_MmProxy::slotParentCurrentRowChanged()
+    success = success && mTransDocModel->submitAllAndSelect();
 
     if (success && ACC_MODELFACTORY->getDatabase().commit()) {
         setWindowModified(false);
@@ -1365,7 +1364,16 @@ void ACC_GlTransactionWidget::on_ileAllocation_clear() {
     }
 
     mHandleAllocn.delItemAllocn(mItemTransModel);
-    mItemTransModel->setCurrentValue("chartmaster_idx", "0", Qt::EditRole);
+    mItemTransModel->setCurrentValue("accountcontrol", (int)ACC2::ControlDefault,
+                                     Qt::EditRole);
+    mItemTransModel->setCurrentValue("transallocn_idx", "0", Qt::EditRole);
+    mItemTransModel->setCurrentValue("chartmaster_idx",
+                               ACC_QACHARTMASTER->getAccDefaultId()
+                               + ACC_QACHARTMASTER->getAccDefaultName(),
+                               Qt::EditRole);
+    if (mItemTransModel->getModelType() == ACC_ModelFactory::ModelBankTrans) {
+        mItemTransModel->setCurrentValue("amountcleared", 0.0, Qt::EditRole);
+    }
 }
 
 /**
