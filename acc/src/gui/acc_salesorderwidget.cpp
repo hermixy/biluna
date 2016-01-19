@@ -327,7 +327,7 @@ void ACC_SalesOrderWidget::on_pbAddOrder_clicked() {
     orderIdx = mModel->index(row, mModel->fieldIndex("shipvia_id"));
     mModel->setData(orderIdx, custIdx.data(RB2::RoleOrigData), Qt::EditRole);
 
-    QDateTime dt = QDateTime::currentDateTime();
+    QDate dt = QDate::currentDate();
     orderIdx = mModel->index(row, mModel->fieldIndex("orddate"));
     mModel->setData(orderIdx, dt, Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("deliverydate"));

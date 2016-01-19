@@ -33,7 +33,7 @@ RB_ObjectAtomic::RB_ObjectAtomic(const RB_String& id, RB_ObjectBase* p,
  * TODO: after extensive testing remove debug functions
  * @param obj object to be copied
  */
-RB_ObjectAtomic::RB_ObjectAtomic(RB_ObjectAtomic* obja) : RB_ObjectBase(obja) {
+RB_ObjectAtomic::RB_ObjectAtomic(RB_ObjectBase* obj) : RB_ObjectBase(obj) {
 	// test only
 	// std::cout << "->RB_ObjectAtomic::RB_ObjectAtomic() " << this 
 	//			<<  " - copy " << name << std::endl;

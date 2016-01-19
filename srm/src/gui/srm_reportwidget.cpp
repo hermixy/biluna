@@ -207,7 +207,7 @@ void SRM_ReportWidget::setReportHeader(RB_String& html) {
  */
 void SRM_ReportWidget::setTableHeader(RB_String& html, RB_ObjectBase* obj) {
     mReportColCount = mColumnWidthVector.size();
-    mMemCount = obj->countMember() - (int)RB2::HIDDENCOLUMNS;
+    mMemCount = obj->memberCount() - (int)RB2::HIDDENCOLUMNS;
     mNoDataRow = (int)((mMemCount - 1) / (mReportColCount - 1));
 
     if ((mMemCount - 1) % (mReportColCount - 1)) {
@@ -286,7 +286,7 @@ void SRM_ReportWidget::setTableHeader(RB_String& html, RB_ObjectBase* obj) {
  */
 void SRM_ReportWidget::setTableHeader(RB_String& html, const QSqlRecord& rec) {
     mReportColCount = mColumnWidthVector.size();
-    mMemCount = rec.count(); // obj->countMember() - (int)RB2::HIDDENCOLUMNS;
+    mMemCount = rec.count(); // obj->memberCount() - (int)RB2::HIDDENCOLUMNS;
     mNoDataRow = (int)((mMemCount - 1) / (mReportColCount - 1));
 
     if ((mMemCount - 1) % (mReportColCount - 1)) {

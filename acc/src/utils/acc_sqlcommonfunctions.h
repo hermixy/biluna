@@ -68,6 +68,13 @@ public:
     virtual void getTrialBalance(QSqlQuery& query,
                                  int fromPeriod,
                                  int toPeriod);
+    virtual void clearTrialBalance(int fromPeriod,
+                                   int toPeriod);
+    virtual void getCostCenterSum(QSqlQuery& query,
+                                  int fromPeriod,
+                                  int toPeriod);
+    virtual void clearCostCenterSum(int fromPeriod,
+                                    int toPeriod);
 
     virtual void setDueDate(const RB_String& paymentTermsId,
                             QDate &dueDate);

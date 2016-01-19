@@ -409,7 +409,7 @@ void RB_SimpleReportWidget::setReportHeader(RB_String& html) {
  * @param obj data object
  */
 void RB_SimpleReportWidget::setTableHeader(RB_String& html, RB_ObjectBase* obj) {
-    setColumnProperties(obj->countMember() - (int)RB2::HIDDENCOLUMNS);
+    setColumnProperties(obj->memberCount() - (int)RB2::HIDDENCOLUMNS);
     setReportHeader(html);
 
     mColRunner = 0;
@@ -551,7 +551,7 @@ void RB_SimpleReportWidget::setReportFooter(RB_String& html) {
  */
 void RB_SimpleReportWidget::setColumnProperties(int dataFieldCount) {
     mReportColCount = mColumnWidthVector.size(); //  > 0 ? mColumnWidthVector.size() : 1;
-    mMemCount = dataFieldCount; // rec.count() or obj->countMember() - (int)RB2::HIDDENCOLUMNS
+    mMemCount = dataFieldCount; // rec.count() or obj->memberCount() - (int)RB2::HIDDENCOLUMNS
 
     if (mReportColCount > 1) {
         mNoDataRow = (int)((mMemCount - 1) / (mReportColCount - 1));

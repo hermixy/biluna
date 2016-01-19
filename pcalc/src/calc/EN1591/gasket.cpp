@@ -18,7 +18,7 @@ Gasket_IN::Gasket_IN() : RB_Object(){
     matCode = "";
     frmType = Flat;
     insType = SpiralGraphFillOuterInner;
-    K = 0;
+    K = 500000; // usual or 1,000,000 or 1,500,000 [N/mm]
     phiG = 0;
     r2 = 0;
 

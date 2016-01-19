@@ -13,6 +13,8 @@
 #include "db_modelfactory.h"
 #include "rb_mainwindow.h"
 
+#include "db_version.h"
+#include "db_objectfactory.h"
 #include "rb_aesencryption.h"
 
 #define A(c)            (c) - 0x17
@@ -53,20 +55,29 @@ RB_Action* DB_ActionSystemToolsDevelop::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionSystemToolsDevelop::trigger() {
+    testDbReadWhere();
+    // DB_DIALOGFACTORY->requestWarningDialog(tr("This function is disabled."));
+}
 
-    DB_DIALOGFACTORY->requestWarningDialog(tr("This function is disabled."));
-    return;
-
+void DB_ActionSystemToolsDevelop::testEncryption() {
     /*
     (From: http://etutorials.org/Programming/secure+programming/Chapter+12.+Anti-Tampering/12.11+Hiding+Strings/)
 
-    Strings can also be stored encrypted in the binary and in memory. You can achieve this by generating separate object files with the encrypted strings in them, by encrypting the strings in the binary after compilation, or by initializing the strings with encrypted characters. The following code demonstrates the last technique, using the A macro to subtract a constant value from each character in the string. Note that this is not a strong encryption method, but rather a quick and simple obfuscation of the value of each character.
+    Strings can also be stored encrypted in the binary and in memory. You can
+    achieve this by generating separate object files with the encrypted strings
+    in them, by encrypting the strings in the binary after compilation, or by
+    initializing the strings with encrypted characters. The following code
+    demonstrates the last technique, using the A macro to subtract a constant
+    value from each character in the string. Note that this is not a strong
+    encryption method, but rather a quick and simple obfuscation of the value of each character.
 
     #define A(c)            (c) - 0x19
     #define UNHIDE_STR(str) do { char *p = str;  while (*p) *p++ += 0x19; } while (0)
     #define HIDE_STR(str)   do { char *p = str;  while (*p) *p++ -= 0x19; } while (0)
 
-    Each character of the string must be initialized, which makes this method somewhat cumbersome, but it allows the obfuscation to take place at compile time:
+    Each character of the string must be initialized, which makes this method
+    somewhat cumbersome, but it allows the obfuscation to take place at
+    compile time:
 
     #include
 
@@ -105,19 +116,21 @@ void DB_ActionSystemToolsDevelop::trigger() {
     RB_DEBUG->print(QLatin1String(baTest3));
     RB_String strTest4 = aes.decrypt(baTest3);
     RB_DEBUG->print(strTest4);
-    return;
+}
 
-
+void DB_ActionSystemToolsDevelop::testIdxSplit() {
     // String starts counting from 0, SQL starts with 1
     RB_String strTest = "{00000000-0000-0000-0000-000000ID5100}And some text";
     RB_String strTest1 = strTest;
     RB_String strTest2 = strTest;
     strTest1 = strTest1.remove(38, strTest1.length());
     strTest2 = strTest2.remove(0, 38);
-    strTest = "";
-    return;
+    RB_DEBUG->print(strTest);
+    RB_DEBUG->print(strTest1);
+    RB_DEBUG->print(strTest2);
+}
 
-
+void DB_ActionSystemToolsDevelop::updateDatabaseIdxFields() {
     // Update database
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
@@ -238,4 +251,26 @@ void DB_ActionSystemToolsDevelop::trigger() {
 
     QApplication::restoreOverrideCursor();
 }
+
+void DB_ActionSystemToolsDevelop::testDbReadWhere() {
+/*
+ select * from db_version where
+ (id = '{78df8f92-21ab-4742-b53f-1210e50b8451}' AND perspectivecode = 'DB') OR
+ (id='{18fb4cfd-d4ce-494b-8bc6-90b0e7af020a}' AND perspectivecode = 'DB') OR
+ (id='{daa41183-8a36-473d-a596-fca5ad4ad51e}' AND minor = 14)
+*/
+    if (!DB_MODELFACTORY->getDatabase().isOpen()) {
+        return;
+    }
+
+    RB_ObjectContainer* versionList =
+            new RB_ObjectContainer("", nullptr, "DB_VersionList", DB_OBJECTFACTORY);
+    versionList->dbReadWhere(DB_MODELFACTORY->getDatabase(),
+                             "(id = '{78df8f92-21ab-4742-b53f-1210e50b8451}' AND perspectivecode = 'DB') OR "
+                             "(id='{18fb4cfd-d4ce-494b-8bc6-90b0e7af020a}' AND perspectivecode = 'DB') OR "
+                             "(id='{daa41183-8a36-473d-a596-fca5ad4ad51e}' AND minor = 14)");
+    RB_DEBUG->printObject(versionList, RB2::ResolveAll);
+    delete versionList;
+}
+
 

@@ -104,11 +104,10 @@ protected:
 protected slots:
     virtual void slotLedgerAccountChanged(int number);
     virtual void slotTabChanged(int);
-    virtual void slotValidateAmounts();
     virtual void slotRefreshBankModel();
 
 private:
-    bool savePostGlTrans();
+    void setGlTransAsDelete();
     bool processGlTrans();
 
     void setDocWidgets(ACC2::TransType type);
@@ -167,12 +166,11 @@ private:
     int mTypeNo;
     int mPeriod;
     RB_String mDocId;
+    RB_String mItemId;
 
     //! Transaction validation message
     RB_String mValidationMessage;
 
-    //! True if validate amounts is already scheduled
-    bool mIsValidateAmounts;
     //! True if slotAmountItemEdited is passed
     bool mIsItemChangedPassed;
     //! Time for single shot for validation

@@ -23,6 +23,7 @@
 #include "db_internetbrowserwidget.h"
 #include "db_mappingdialog.h"
 #include "db_modelfactory.h"
+#include "db_modelobjectdialog.h"
 #include "db_palettecolorpickerwidget.h"
 #include "db_permissionperspectiveprojectdialog.h"
 #include "db_permissionwidget.h"
@@ -267,6 +268,12 @@ RB_Dialog* DB_DialogFactory::getDialog(int type) {
         case DialogInsertHTML:
         {
             dlg = new DB_InsertHtmlDialog(mMainWindow);
+            dlg->init();
+            break;
+        }
+        case DialogModelObject:
+        {
+            dlg = new DB_ModelObjectDialog(mMainWindow);
             dlg->init();
             break;
         }

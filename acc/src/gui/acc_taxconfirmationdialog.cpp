@@ -85,7 +85,7 @@ void ACC_TaxConfirmationDialog::setFields() {
     headerItem = new QTableWidgetItem(tr("Other Tax"));
     tableWidget->setHorizontalHeaderItem(4, headerItem);
 
-    tableWidget->setRowCount(mDebCredTransList->countObject()+1);
+    tableWidget->setRowCount(mDebCredTransList->objectCount()+1);
 
     int taxRow = 0;
     QTableWidgetItem* twItem = NULL;

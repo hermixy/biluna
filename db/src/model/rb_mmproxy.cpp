@@ -183,6 +183,9 @@ void RB_MmProxy::setParentManager(RB_MmProxy* pMm) {
                    this, SLOT(slotParentModelSubmitted()));
         disconnect(mParentManager, SIGNAL(modelReverted()),
                    this, SLOT(slotParentModelReverted()));
+        disconnect(mParentManager->sourceModel(),
+                   SIGNAL(currentRowCopied(QString)),
+                   mSourceModel, SLOT(slotCopyRows(QString)));
 
         disconnect(this, SIGNAL(modelModified(bool)),
                    mParentManager, SLOT(slotChildModelModified(bool)));
@@ -197,6 +200,8 @@ void RB_MmProxy::setParentManager(RB_MmProxy* pMm) {
                 this, SLOT(slotParentModelSubmitted()));
         connect(mParentManager, SIGNAL(modelReverted()),
                 this, SLOT(slotParentModelReverted()));
+        connect(mParentManager->sourceModel(), SIGNAL(currentRowCopied(QString)),
+                mSourceModel, SLOT(slotCopyRows(QString)));
 
         connect(mSourceModel, SIGNAL(modelModified(bool)),
                 mParentManager->sourceModel(), SLOT(slotChildModelModified(bool)));
@@ -765,6 +770,10 @@ void RB_MmProxy::setTextList(int col, const RB_StringList& strL) {
 RB_Variant RB_MmProxy::headerData(int section, Qt::Orientation orientation,
                                     int role) const {
     return QSortFilterProxyModel::headerData(section, orientation, role);
+}
+
+bool RB_MmProxy::copyCurrentRow() {
+    return mSourceModel->copyCurrentRow();
 }
 
 /**

@@ -56,7 +56,6 @@ RB_ObjectBase::RB_ObjectBase(const RB_String& id, RB_ObjectBase* p,
 
 /**
  * Copy constructor, does not create or set members only id, parent and name
- * TODO: why not copy values of other members?
  * TODO: after extensive testing remove debug functions
  * @param obj object to be copied
  */
@@ -74,16 +73,26 @@ RB_ObjectBase::RB_ObjectBase(RB_ObjectBase* obj) : RB_Object(obj) {
         addMember("parent", "-", "", RB2::MemberChar40);
     }
     addMember("name", "-", obj->getName(), RB2::MemberChar40);
-    addMember("status", "-", RB2::StatusDefault, RB2::MemberInteger);
-    addMember("created", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
-    addMember("changed", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
-    addMember("muser", "-", "noname", RB2::MemberChar20);
+    addMember("status", "-", (int)RB2::StatusDefault, RB2::MemberInteger);
+    addMember("created", "-", QDateTime::currentDateTime().toString(Qt::ISODate), RB2::MemberChar20);
+    addMember("changed", "-", QDateTime::currentDateTime().toString(Qt::ISODate), RB2::MemberChar20);
+    addMember("muser", "-", "system", RB2::MemberChar20);
+
+    int memCount = obj->memberCount();
+
+    for (int i = RB2::HIDDENCOLUMNS; i < memCount; i++) {
+        RB_ObjectMember* mem = obj->getMember(i);
+        addMember(mem->getName(),
+                  mem->getUnit(),
+                  mem->getValue(),
+                  mem->getType(),
+                  mem->getPreviousValue());
+    }
 
     mFactory = obj->getFactory();
     mOriginal = obj->getOriginal();
     mClonedObject = true;
-
-//    setFlags(obj->getFlags());
+    setFlags(obj->getFlags());
 }
 
 /**
@@ -103,8 +112,8 @@ RB_ObjectBase::~RB_ObjectBase() {
 RB_ObjectBase& RB_ObjectBase::operator= (const RB_ObjectBase& obj) {
     if (&obj != this && getName() == obj.getName()) {
         // RB_ObjectBase has no members during creation of object
-        int thisCount = countMember();
-        int objCount = obj.countMember();
+        int thisCount = memberCount();
+        int objCount = obj.memberCount();
 
         // do not copy id, parent and name
         for (int i = 2; i < objCount; i++) {
@@ -317,7 +326,7 @@ void RB_ObjectBase::revert() {
  */
 void RB_ObjectBase::createCopy(RB_ObjectBase* copy, RB2::ResolveLevel /*level*/) {
     RB_ObjectMember* mem = NULL;
-    int memCount = this->countMember();
+    int memCount = this->memberCount();
 
     for (int i = RB2::HIDDENCOLUMNS; i < memCount; ++i) {
         mem = mMemberVector.at(i);
@@ -383,8 +392,12 @@ RB_ObjectBase *RB_ObjectBase::getObject(const QString& /*memberName*/,
 /**
  * @return total number of members in this object
  */
-int RB_ObjectBase::countMember() const {
+int RB_ObjectBase::memberCount() const {
     return (int)mMemberVector.size();
+}
+
+int RB_ObjectBase::objectCount() const {
+    return 0;
 }
 
 /**
@@ -396,7 +409,7 @@ int RB_ObjectBase::countMember() const {
 RB_ObjectMember* RB_ObjectBase::getMember(int number) const {
     RB_ObjectMember* member = NULL;
 
-    if (number < 0 || number >= countMember()) {
+    if (number < 0 || number >= memberCount()) {
         RB_String str = "RB_ObjectBase::getMember(int="
                         + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
@@ -417,7 +430,7 @@ RB_ObjectMember* RB_ObjectBase::getMember(const RB_String& name) const {
     // Do not use RB_ObjectIterator since members are part of std::vector
     RB_ObjectMember* member = NULL;
     RB_ObjectMember* tmpMember = NULL;
-    int memCount = countMember();
+    int memCount = memberCount();
 
     for (int i = 0; !member && i < memCount; i++) {
         tmpMember = getMember(i);
@@ -439,7 +452,7 @@ RB_ObjectMember* RB_ObjectBase::getMember(const RB_String& name) const {
  */
 int RB_ObjectBase::getMemberNo(const RB_String& name) const {
     int number = -1;
-    int memCount = countMember();
+    int memCount = memberCount();
 
     // Do not use RB_ObjectIterator since members are part of std::vector
     for (int i = 0; i < memCount && number < 0; i++) {
@@ -734,6 +747,27 @@ void RB_ObjectBase::deleteFlag(unsigned int f) {
     }
 
     RB_Flags::deleteFlag(f);
+}
+
+/**
+ * @brief Read one object from database
+ * @param db
+ * @param whereStatement
+ * @return true on success
+ */
+bool RB_ObjectBase::dbReadWhere(QSqlDatabase db,
+                                const QString& whereStatement) {
+    RB_DbVisitor* vis = new RB_DbVisitor();
+    vis->setDatabase(db);
+    vis->setResolveLevel(RB2::ResolveNone);
+    vis->setCalledFromList(false);
+    vis->setUseParentId(false);
+    vis->setWhereStatement(whereStatement);
+    vis->setDbRead();
+
+    this->acceptVisitor(*vis);
+    delete vis;
+    return true;
 }
 
 /**

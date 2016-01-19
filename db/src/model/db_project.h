@@ -24,7 +24,7 @@ class DB_EXPORT DB_Project : public RB_ObjectContainer {
 
 public:
     DB_Project(const RB_String& id = "", RB_ObjectBase* p = NULL,
-                const RB_String& n = "", RB_ObjectFactory* f = NULL);
+               const RB_String& n = "", RB_ObjectFactory* f = NULL);
     DB_Project(DB_Project* project);
     virtual ~DB_Project();
     

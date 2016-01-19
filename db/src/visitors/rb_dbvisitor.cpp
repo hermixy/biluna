@@ -26,6 +26,7 @@ RB_DbVisitor::RB_DbVisitor() {
     mCalledFromList = false;
     mUseParentId = false;
     mIsUpdateNewId = false;
+    mWhereStatement = "";
 }
 
 /**
@@ -154,6 +155,13 @@ void RB_DbVisitor::setUpdateNewId(bool isNewId = true) {
     mIsUpdateNewId = isNewId;
 }
 
+/**
+ * @brief Set 'where' in SQL statement
+ * @param whereStatement
+ */
+void RB_DbVisitor::setWhereStatement(const QString& whereStatement) {
+    mWhereStatement = whereStatement;
+}
 
 /**
  * Read object data from database
@@ -172,7 +180,9 @@ bool RB_DbVisitor::dbRead() {
 
     RB_String sqlStr = "SELECT * FROM " + mObject->getName().toLower();
 
-    if (!mUseParentId) {
+    if (!mWhereStatement.isEmpty()) {
+        sqlStr += " WHERE " + mWhereStatement + ";";
+    } else if (!mUseParentId) {
         sqlStr += " WHERE id='" + mObject->getId() + "';";
     } else {
         sqlStr += " WHERE parent='" + mObject->getValue("parent").toString() + "';";
@@ -234,7 +244,9 @@ bool RB_DbVisitor::dbReadList() {
     RB_String tableName = mObject->getName().remove("List");
     RB_String sqlStr = "SELECT * FROM " + tableName.toLower();
 
-    if (mObject->getParent()) {
+    if (!mWhereStatement.isEmpty()) {
+        sqlStr += " WHERE " + mWhereStatement + ";";
+    } else if (mObject->getParent()) {
         sqlStr += " WHERE parent='" + mObject->getParent()->getId() + "';";
     } else if (!mIdFieldName.isEmpty()) {
         // RB_ObjectContainer list was send without parent to read from a table
@@ -257,7 +269,6 @@ bool RB_DbVisitor::dbReadList() {
 //    RB_DEBUG->print(q.executedQuery());
 
     RB_String fieldName;
-//    RB_String value;
     QSqlRecord rec;
 
     while (q.next()) {
@@ -351,7 +362,7 @@ bool RB_DbVisitor::dbUpdate() {
 
     if(!mObject->getFlag(RB2::FlagFromDatabase) && !mObject->isList()) {
         prepareInsertQuery(q, mObject);
-        int memberCount = mObject->countMember();
+        int memberCount = mObject->memberCount();
 
         for (int i = 0; i < memberCount; ++i) {
             RB_ObjectMember* mem = mObject->getMember(i);
@@ -368,7 +379,7 @@ bool RB_DbVisitor::dbUpdate() {
     } else if (mObject->getFlag(RB2::FlagFromDatabase) && !mObject->isList()
                && mObject->getFlag(RB2::FlagIsDirty)) {
         prepareUpdateQuery(q, mObject);
-        int memberCount = mObject->countMember();
+        int memberCount = mObject->memberCount();
 
         for (int i = 1; i < memberCount; ++i) { // not ID
             // parent has to have the correct ID
@@ -445,7 +456,7 @@ bool RB_DbVisitor::dbUpdateList() {
 
             if (isFirstInsertObject) {
                 prepareInsertQuery(qInsert, obj);
-                memberCount = obj->countMember();
+                memberCount = obj->memberCount();
                 isFirstInsertObject = false;
             }
 
@@ -486,7 +497,7 @@ bool RB_DbVisitor::dbUpdateList() {
 
             if (isFirstUpdateObject) {
                 prepareUpdateQuery(qUpdate, obj);
-                memberCount = obj->countMember();
+                memberCount = obj->memberCount();
                 isFirstUpdateObject = false;
             }
 
@@ -498,7 +509,7 @@ bool RB_DbVisitor::dbUpdateList() {
             qUpdate.addBindValue(obj->getMember(0)->getValue(), QSql::In);
 
             if (qUpdate.exec()) {
-                RB_DEBUG->print(qUpdate.executedQuery());
+//                RB_DEBUG->print(qUpdate.executedQuery());
                 obj->setFlag(RB2::FlagFromDatabase);
                 obj->deleteFlag(RB2::FlagIsDirty);
             } else {
@@ -657,7 +668,7 @@ void RB_DbVisitor::prepareInsertQuery(QSqlQuery& q, RB_ObjectBase* obj) {
     RB_String insertStr = "INSERT INTO `" + obj->getName().toLower() + "` (`";
     RB_String valueStr = "`) VALUES (";
     bool isFirstRow = true;
-    int memberCount = obj->countMember();
+    int memberCount = obj->memberCount();
 
     for (int i = 0; i < memberCount; ++i) {
         if (!isFirstRow) {
@@ -688,7 +699,7 @@ void RB_DbVisitor::prepareUpdateQuery(QSqlQuery& q, RB_ObjectBase* obj) {
 
     bool isFirstRow = true;
     RB_String sqlStr = "UPDATE `" + obj->getName().toLower() + "` SET `";
-    int memberCount = obj->countMember();
+    int memberCount = obj->memberCount();
 
     for (int i = 1; i < memberCount; ++i) { // not ID
         if (!isFirstRow) {

@@ -113,7 +113,7 @@ void PENG_Equipment::createMembers() {
  * @return component count
  */
 int PENG_Equipment::countComponent() {
-    int listCount = countObject();
+    int listCount = objectCount();
     RB_ObjectContainer* list = NULL;
     int componentCount = 0;
 
@@ -123,7 +123,7 @@ int PENG_Equipment::countComponent() {
 
         // use only the component lists
         if (ln != "RB_NodeList" && ln != "PENG_SectionList") {
-                componentCount += list->countObject();
+                componentCount += list->objectCount();
         }
     }
 
@@ -137,7 +137,7 @@ int PENG_Equipment::countComponent() {
  */
 int PENG_Equipment::countNode() {
     RB_ObjectContainer* list = getContainer("RB_NodeList");
-    int componentCount = list->countObject();
+    int componentCount = list->objectCount();
 
     return componentCount;
 }
@@ -149,7 +149,7 @@ int PENG_Equipment::countNode() {
  * @retval component or NULL if not found
  */
 PENG_Component* PENG_Equipment::component(const RB_String& id) {
-    int listCount = countObject();
+    int listCount = objectCount();
 
     if (listCount < 1) {
         RB_DEBUG->print("PENG_Equipment::component() no objects in list WARNING");

@@ -86,7 +86,8 @@ public:
 
     void printMemberCreated();
     void printMemberDeleted();
-    void printObject(RB_Object* obj);
+    void printObject(RB_Object* obj,
+                     RB2::ResolveLevel level = RB2::ResolveNone);
     void printMessages();
     void printObjectCreated();
     void printObjectDeleted();

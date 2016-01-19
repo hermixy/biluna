@@ -27,7 +27,7 @@ void RB_MemberEditDialog::showObjectMembers(RB_ObjectBase* obj,
     }
 
     int colCount = 2;
-    int rowCount = obj->countMember();
+    int rowCount = obj->memberCount();
 
     ui->twMember->setColumnCount(colCount);
     ui->twMember->setRowCount(rowCount);

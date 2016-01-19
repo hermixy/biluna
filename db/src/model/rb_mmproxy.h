@@ -101,6 +101,8 @@ public:
                                int role = Qt::EditRole);
     virtual RB_Variant headerData(int section, Qt::Orientation orientation,
                             int role = Qt::DisplayRole) const;
+
+    virtual bool copyCurrentRow();
     virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
     virtual int fieldIndex(const QString& fieldName) const;

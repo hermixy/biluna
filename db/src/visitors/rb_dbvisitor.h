@@ -39,6 +39,7 @@ public:
     virtual void setUseParentId(bool useParentId);
     virtual void setIdFieldName(const QString& idFieldName);
     virtual void setUpdateNewId(bool isNewId);
+    virtual void setWhereStatement(const QString& whereStatement);
 
 protected:
     virtual bool dbRead();
@@ -61,6 +62,7 @@ protected:
     bool mUseParentId;
     RB_String mIdFieldName;
     bool mIsUpdateNewId;
+    RB_String mWhereStatement;
 
     enum DbAction {
         DbNone,

@@ -70,8 +70,8 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
 
     // gasket creep delta ecG in Fomula 105, 106 and 120, 121 and C.8, C.9
     delta_eGc = 0.0;
-
     delta_eGc_EN13555 = 0.0;
+
     eG = 0.0;
     F_B = 0.0;
     F_Bav = 0.0;

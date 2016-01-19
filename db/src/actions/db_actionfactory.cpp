@@ -83,6 +83,7 @@
 #include "db_actionsystemtoolsdevelop.h"
 #include "db_actionsystemtoolsexportmodel.h"
 #include "db_actionsystemtoolsimportmodel.h"
+#include "db_actionsystemtoolsmodelobject.h"
 #include "db_actionsystemtoolsplugins.h"
 #include "db_actionsystemtoolsregexp.h"
 #include "db_actionsystemtoolssignalspy.h"
@@ -901,6 +902,10 @@ void DB_ActionFactory::getSystemMenu(QMenu* menu, QToolBar* /* tb */) {
     connect(DB_MODELFACTORY, SIGNAL(databaseIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));
 #endif
+
+    ga = DB_ActionSystemToolsModelObject::createGuiAction();
+    subMenu->addAction(ga);
+    ga->setEnabled(true);
 
     menu->addSeparator();
 

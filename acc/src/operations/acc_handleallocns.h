@@ -32,36 +32,35 @@ public:
 
     bool submitAllAndSelect();
     bool revertAll();
+    void clear();
 
     virtual bool addAllocn(RB_MmProxy* itemModel,
                            const RB_String& docToId,
                            const RB_String& docToDspl,
                            const RB_String& docFromId);
 
-    virtual void delItemAllocn(RB_MmProxy* itemModel,
-                               bool isDocItemDeleted);
+    virtual void delItemAllocn(RB_MmProxy* itemModel);
     virtual void delItemListAllocn(RB_MmProxy* itemModel);
 
-    virtual void delDocAllocn(const RB_String& docId, bool isDeleted);
+    virtual void delDocAllocn(const RB_String& docId);
 
     virtual void updateItemAllocnAmt(RB_MmProxy *itemModel, double amt);
-    virtual void updateTransDate(RB_MmProxy* itemModel, const QDateTime& dt);
+    virtual void updateTransDate(RB_MmProxy* itemModel, const QDate &date);
+    virtual bool updateGlTransList(RB_ObjectContainer* glTransList);
 
     virtual RB_ObjectContainer* getTransDocList();
 
 protected:
-    void undoItemAllocationFromBM(RB_ObjectBase* transAlloc,
-                                  RB_MmProxy* itemModel,
-                                  bool isPost);
-    void undoItemAllocationFromDC(RB_ObjectBase* transAlloc,
-                                  bool isPost);
+    void undoItemAllocationFromBM(RB_ObjectBase* transAlloc);
+    void undoItemAllocationToDC(RB_ObjectBase* transAlloc);
     RB_ObjectBase* getItemFrom(RB_ObjectBase* transAlloc);
-    void glTransToDefault(const RB_String& docToId);
+    void glTransToDefault(RB_ObjectBase *transAlloc);
     void createAllocList(RB_MmProxy* itemModel);
     void createAllocList(const RB_String& docToId);
     void updateAllocList(const RB_String& docToId);
-    RB_ObjectBase* getTransAllocn(RB_MmProxy* itemModel);
 
+    RB_ObjectBase* getGlTrans(RB_ObjectBase* transAlloc);
+    RB_ObjectBase* getTransAllocn(RB_MmProxy* itemModel);
     RB_ObjectBase* getTransDocTo(const RB_String& docToId);
     double getAllocatedAmount(const RB_String& docToId);
     ACC2::TransType getTransDocType(const RB_String& docId);
@@ -74,6 +73,8 @@ protected:
     RB_ObjectContainer* mMemoTransList;
     //! Transaction allocation list
     RB_ObjectContainer* mTransAllocList;
+    //! GL transaction list changed by allocations
+    RB_ObjectContainer* mGlTransList;
     //! Flag true if existing allocation list is created
     bool mIsAllocListCreated;
 

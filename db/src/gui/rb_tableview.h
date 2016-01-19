@@ -38,6 +38,7 @@ public slots:
     virtual void slotAddChild();
     virtual void slotDelete();
     virtual void slotEdit();
+    virtual void slotCopy();
     virtual void slotSave();
     virtual void slotRevert();
 

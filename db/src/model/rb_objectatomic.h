@@ -27,7 +27,7 @@ public:
     RB_ObjectAtomic(const RB_String& id = "", RB_ObjectBase* p = 0,
                     const RB_String& n = "", RB_ObjectFactory* f = NULL,
                     bool woMembers = false);
-    RB_ObjectAtomic(RB_ObjectAtomic* obja);
+    RB_ObjectAtomic(RB_ObjectBase* obj);
     virtual ~RB_ObjectAtomic();
 
     virtual RB_ObjectBase* copy(RB2::ResolveLevel level = RB2::ResolveNone);

@@ -20,6 +20,8 @@ DB_ScreenshotDialog::DB_ScreenshotDialog(QWidget* parent) :
     ui(new Ui::DB_ScreenshotDialog) {
     ui->setupUi(this);
     mRubberBand = NULL;
+
+    readSettings();
 }
 
 DB_ScreenshotDialog::~DB_ScreenshotDialog() {
@@ -29,7 +31,6 @@ DB_ScreenshotDialog::~DB_ScreenshotDialog() {
 void DB_ScreenshotDialog::init() {
     setWindowTitle(tr("DB Screenshot"));
     slotShootScreen();
-    readSettings();
 
     RB_SETTINGS->beginGroup(objectName());
     ui->chbHide->setChecked(
@@ -157,7 +158,7 @@ void DB_ScreenshotDialog::on_pbClose_clicked() {
     RB_SETTINGS->setValue("maxwidth", ui->sbWidth->value());
     RB_SETTINGS->setValue("maxheight", ui->sbHeight->value());
     RB_SETTINGS->endGroup();
-
+    writeSettings();
     close();
     accept();
 }

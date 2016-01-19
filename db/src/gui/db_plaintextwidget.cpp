@@ -211,6 +211,8 @@ bool DB_PlainTextWidget::saveFile(const RB_String &fn) {
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     out << pte->toPlainText();
+    // If QTextStream operates on a string, flush does nothing.
+    out.flush();
 
     QApplication::restoreOverrideCursor();
 

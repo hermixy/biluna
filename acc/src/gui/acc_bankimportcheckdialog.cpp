@@ -149,7 +149,7 @@ bool ACC_BankImportCheckDialog::fileSave(bool /*withSelect*/) {
 
     // Create updated glSum with deleted and new transactions
     ACC_PostGlTransaction oper;
-    oper.createSumList(mGlTransList);
+    oper.execute(mGlTransList);
 
     // Start transaction
     //
@@ -159,7 +159,7 @@ bool ACC_BankImportCheckDialog::fileSave(bool /*withSelect*/) {
     bool success = mGlTransList->dbUpdateList(ACC_MODELFACTORY->getDatabase(),
                                                  RB2::ResolveOne);
     // Update glSum to database
-    success = success ? oper.postSumList() : false;
+//    success = success ? oper.postSumList() : false;
 
     RB_ObjectContainer* transDocList = mTransDocListRoot->getContainer("ACC_TransDocList");
     success = success ? transDocList->dbUpdateList(ACC_MODELFACTORY->getDatabase(), RB2::ResolveAll) : false;
@@ -407,7 +407,7 @@ void ACC_BankImportCheckDialog::on_ileAllocation_clear() {
         return;
     }
 
-    mHandleAllocn.delItemAllocn(mItemModel, false);
+    mHandleAllocn.delItemAllocn(mItemModel);
     mItemModel->setCurrentValue("chartmaster_idx", "0", Qt::EditRole);
     //    slotDataChanged();
 }
@@ -823,9 +823,9 @@ void ACC_BankImportCheckDialog::fillTable(RB_ObjectBase* importBankList) {
             }
 
             // set table dimensions and header
-            mColCount = obj->countMember();
+            mColCount = obj->memberCount();
             tw->setColumnCount(mColCount - RB2::HIDDENCOLUMNS);
-            tw->setRowCount(list->countObject());
+            tw->setRowCount(list->objectCount());
             setTableHeader(obj);
             isHeaderSet = true;
         }
@@ -935,7 +935,7 @@ bool ACC_BankImportCheckDialog::prepareImportList(const QDate& lastTransDate) {
         }
     }
 
-    if (mBankImportList->countObject() <= 0) {
+    if (mBankImportList->objectCount() <= 0) {
         return false;
     }
 
@@ -989,7 +989,7 @@ void ACC_BankImportCheckDialog::updateGlTransWidget() {
     // date, description, account, debet, credit
     int colCount = 6;
     twGlTransactions->setColumnCount(colCount);
-    int rowCount = mGlTransList->countObject(); // depending the number of GL transactions
+    int rowCount = mGlTransList->objectCount(); // depending the number of GL transactions
     twGlTransactions->setRowCount(rowCount + 1); // + 1 for totals
     twGlTransactions->verticalHeader()->setDefaultSectionSize(20); // row height
     twGlTransactions->horizontalHeader()->setDefaultSectionSize(80);
@@ -1062,7 +1062,7 @@ void ACC_BankImportCheckDialog::createNewGlTrans(bool isSelectedDocOnly) {
     double totalCredit = 0.0; // negative amounts
     RB_ObjectBase* gltrans = NULL;
 
-    if (mGlTransList->countMember() > 0) mGlTransList->erase();
+    if (mGlTransList->memberCount() > 0) mGlTransList->erase();
 
     mRootId = ACC_MODELFACTORY->getRootId();
 
@@ -1256,7 +1256,7 @@ bool ACC_BankImportCheckDialog::isValidTransDoc() {
  */
 void ACC_BankImportCheckDialog::updateBeforeSave() {
     int transNo = 0;
-    QDateTime transDate = QDateTime();
+    QDate transDate = QDate();
     RB_String transDocId = "";
     int transType = (int)ACC2::TransBankCash;
 
@@ -1269,7 +1269,7 @@ void ACC_BankImportCheckDialog::updateBeforeSave() {
         RB_ObjectIterator* itemIter = itemList->createIterator();
 
         transNo = transDoc->getValue("transno").toInt();
-        transDate = transDoc->getValue("transdate").toDateTime();
+        transDate = transDoc->getValue("transdate").toDate();
         transDocId = transDoc->getValue("id").toString();
 
         for (itemIter->first(); !itemIter->isDone(); itemIter->next()) {

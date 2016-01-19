@@ -142,6 +142,10 @@ void RB_Debug::print(const QString& text) {
  * @param level Debug level.
  */
 void RB_Debug::print(RB_DebugLevel level, const QString& text) {
+    if(debugLevel >= level) {
+        qDebug() << text;
+    }
+
     if (level == D_ERROR) {
         ++msgErrorCount;
     } else if (level == D_WARNING) {
@@ -150,10 +154,6 @@ void RB_Debug::print(RB_DebugLevel level, const QString& text) {
         ++msgInformationalCount;
     } else /*if (level == D_DEBUGGING)*/ {
         ++msgDebuggingCount;
-    }
-
-    if(debugLevel >= level) {
-        qDebug() << text;
     }
 }
 
@@ -170,7 +170,7 @@ void RB_Debug::timestamp() {
  */
 void RB_Debug::printUnicode(const QString& text) {
     for (int i=0; i<(int)text.length(); i++) {
-        print(QString("[%X] %c").arg(text.at(i).unicode())
+        print(QString("[%1] %1").arg(text.at(i).unicode())
               .arg(text.at(i).toLatin1()));
     }
 }
@@ -243,24 +243,26 @@ void RB_Debug::printMemberDeleted() {
 }
 
 
-void RB_Debug::printObject(RB_Object* obj) {
+void RB_Debug::printObject(RB_Object* obj, RB2::ResolveLevel level) {
     RB_ObjectBase* objB = dynamic_cast<RB_ObjectBase*>(obj);
 
     if (objB) {
-        printObjectBase(objB);
+        printObjectBase(objB, level);
         return;
     }
 
-    QString str = "";
-    str = "  RB_Debug::printObject() START";
+    print("  RB_Debug::printObject() START");
 
+    QString str = "";
     if (!obj) {
-        str += "    object pointer is NULL";
+        str = "    object pointer is NULL";
     } else {
-        str.append(QString("    object pointer = %1")
+        str.append(QString("    object pointer = %1\n")
                    .arg(pointerToString(obj)));
         str += "    object name = " + obj->getName();
     }
+    print(str);
+    print("  RB_Debug::printObject() END");
 }
 
 /**
@@ -268,33 +270,32 @@ void RB_Debug::printObject(RB_Object* obj) {
  */
 void RB_Debug::printObjectBase(RB_ObjectBase* obj, RB2::ResolveLevel level) {
     QString str = "";
-    str = "  RB_Debug::printObjectBase() START";
+    print("  RB_Debug::printObjectBase() START");
 	
 	if (!obj) {
-        str += "    object pointer is NULL";
+        print("    object pointer is NULL");
 	} else {
-        str.append(QString("    object pointer = %s")
-                   .arg(pointerToString(obj)));
-        str += "    object id = " + obj->getId();
-        str += "    object name = " + obj->getName();
+        print(QString("    object pointer = %1").arg(pointerToString(obj)));
+        print("    object id = " + obj->getId());
+        print("    object name = " + obj->getName());
 		
 		RB_ObjectBase* parent = (RB_ObjectBase*)obj->getParent();
 		
 		if (parent) {
-            str.append(QString("    object parent pointer = %s")
+            print(QString("    object parent pointer = %1")
                        .arg(pointerToString(parent)));
-            str += "    object parent id = " + parent->getId();
-            str += "    object parent name = " + parent->getName();
+            print("    object parent id = " + parent->getId());
+            print("    object parent name = " + parent->getName());
 		} else {
-            str += "    object parent pointer = NULL";
-            str += "    object parent id = NULL";
-            str += "    object parent name = NULL";
+            print("    object parent pointer = NULL");
+            print("    object parent id = NULL");
+            print("    object parent name = NULL");
 		}
 		
-		int noMember = obj->countMember();
+        int noMember = obj->memberCount();
 	
 		for (int i = 0; i < noMember; ++i) {
-            str += "    ";
+            str = "    ";
 			str += obj->getMember(i)->getName();
 			str += " = ";
 			str += obj->getMember(i)->getValue().toString();
@@ -302,9 +303,8 @@ void RB_Debug::printObjectBase(RB_ObjectBase* obj, RB2::ResolveLevel level) {
             str += obj->getMember(i)->getDisplayValue().toString();
             str += "; previous = ";
             str += obj->getMember(i)->getPreviousValue().toString();
+            print(str);
         }
-
-		print(str);
 	}
 	
 	if (obj && obj->isContainer() && level != RB2::ResolveNone) {

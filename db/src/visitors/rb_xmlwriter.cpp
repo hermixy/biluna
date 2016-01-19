@@ -94,7 +94,7 @@ void RB_XmlWriter::visitObject(RB_ObjectBase* obj) {
 
     // write members with their attributes
     if (!obj->getName().endsWith("List")) {
-        for (int i = RB2::HIDDENCOLUMNS; i < obj->countMember(); i++) {
+        for (int i = RB2::HIDDENCOLUMNS; i < obj->memberCount(); i++) {
             RB_ObjectMember* mem = obj->getMember(i);
             mWriter.writeStartElement(mem->getName());
 
@@ -184,7 +184,7 @@ void RB_XmlWriter::writeObject(RB_ObjectBase* obj) {
     mWriter.writeAttribute("muser", obj->getUser());
 
     // write members with their attributes
-    for (int i = RB2::HIDDENCOLUMNS; i < obj->countMember(); i++) {
+    for (int i = RB2::HIDDENCOLUMNS; i < obj->memberCount(); i++) {
         RB_ObjectMember* mem = obj->getMember(i);
         mWriter.writeStartElement(mem->getName());
 

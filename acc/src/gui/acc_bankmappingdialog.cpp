@@ -373,9 +373,9 @@ void ACC_BankMappingDialog::fillTable(RB_ObjectBase* importBankList) {
 //            }
 
             // set table dimensions and header
-            mColCount = obj->countMember();
+            mColCount = obj->memberCount();
             tw->setColumnCount(mColCount - RB2::HIDDENCOLUMNS);
-            tw->setRowCount(list->countObject());
+            tw->setRowCount(list->objectCount());
             setTableHeader(obj);
             isHeaderSet = true;
         }

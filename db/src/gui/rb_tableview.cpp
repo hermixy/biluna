@@ -48,6 +48,8 @@ void RB_TableView::setToolButtonBar(RB_ToolButtonBar* tbb) {
 
     connect(mToolButtonBar, SIGNAL(editClicked()),
             this, SLOT(slotEdit()));
+    connect(mToolButtonBar, SIGNAL(copyClicked()),
+            this, SLOT(slotCopy()));
     connect(mToolButtonBar, SIGNAL(saveClicked()),
             this, SLOT(slotSave()));
     connect(mToolButtonBar, SIGNAL(revertClicked()),
@@ -85,6 +87,8 @@ void RB_TableView::removeToolButtonBar() {
 
     disconnect(mToolButtonBar, SIGNAL(editClicked()),
                this, SLOT(slotEdit()));
+    disconnect(mToolButtonBar, SIGNAL(copyClicked()),
+               this, SLOT(slotCopy()));
     disconnect(mToolButtonBar, SIGNAL(saveClicked()),
                this, SLOT(slotSave()));
     disconnect(mToolButtonBar, SIGNAL(revertClicked()),
@@ -141,7 +145,7 @@ void RB_TableView::slotAdd() {
     }
 
     RB_ObjectBase* obj = mModel->getObjectFactory()->newSingleObject(objectName);
-    int memberCount = obj->countMember();
+    int memberCount = obj->memberCount();
 
     QModelIndex idx;
 
@@ -185,6 +189,26 @@ void RB_TableView::slotDelete() {
 
 void RB_TableView::slotEdit() {
     DB_DIALOGFACTORY->requestWarningDialog("Not yet implemented");
+}
+
+void RB_TableView::slotCopy() {
+    if(!mModel)  return;
+    QModelIndex idx = currentIndex();
+
+    if (!idx.isValid()) {
+        DB_DIALOGFACTORY->requestInformationDialog(tr("No item selected"));
+        return;
+    }
+
+    int res = DB_DIALOGFACTORY->requestYesNoDialog(tr("Copy item"),
+                                          tr("Do you want to copy\n"
+                                             "the current item?"));
+    if (res != QMessageBox::Yes) {
+        return;
+    }
+
+    mModel->undoFilterSort();
+    mModel->copyCurrentRow();
 }
 
 void RB_TableView::slotSave() {
@@ -310,7 +334,7 @@ void RB_TableView::slotFilterOn() {
     RB_String fieldName = "";
     RB_ObjectBase* obj = mModel->getObject(idx, RB2::ResolveNone);
 
-    for (int i = RB2::HIDDENCOLUMNS; i < obj->countMember()
+    for (int i = RB2::HIDDENCOLUMNS; i < obj->memberCount()
          && fieldName.isEmpty(); ++i) {
         RB_String testName = obj->getMember(i)->getName();
 

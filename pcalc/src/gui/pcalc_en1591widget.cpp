@@ -67,10 +67,10 @@ void PCALC_EN1591Widget::init() {
     //
     // 0. Set button toolbar
     //
-    tbbAssembly->initSlimTable(true, false);
+    tbbAssembly->initSlimTable(true, false, true);
     tvAssembly->setToolButtonBar(tbbAssembly);
 
-    tbbLoadCase->initSlimTable(true, false);
+    tbbLoadCase->initSlimTable(true, false, true);
     tvLoadCase->setToolButtonBar(tbbLoadCase);
 
     //
@@ -494,6 +494,15 @@ void PCALC_EN1591Widget::init() {
     // Show detail row or add row if not exists
     connect(mAssemblyModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
             this, SLOT(slotParentRowChanged(QModelIndex,QModelIndex)));
+    // Connections for models not formated via setFormatListView
+    connect(mBoltNutWasherModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mFlangeModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mGasketModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mShellModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
 
     teCalculationReport->setHtml(
                 "<p>" + tr("Select report type and click "
@@ -965,15 +974,13 @@ void PCALC_EN1591Widget::createDetailReport() {
 
     teCalculationReport->setHtml(report);
     QApplication::restoreOverrideCursor();
-
-
 }
 
 void PCALC_EN1591Widget::insertReportInputData(QString& report,
                                                RB_ObjectBase* obj) {
     QString varName = "";
     QString varData = "";
-    int memberCount = obj->countMember();
+    int memberCount = obj->memberCount();
 
     for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
         RB_ObjectMember* mem = obj->getMember(i);
@@ -1052,7 +1059,7 @@ void PCALC_EN1591Widget::createValidationReport() {
         RB_ObjectContainer* inList
                 = PR->getInOutContainer()->getContainer("PCALC_InputList");
         RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
-        int memberCount = in->countMember();
+        int memberCount = in->memberCount();
 
         for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
             RB_ObjectMember* mem = in->getMember(i);
@@ -1073,7 +1080,7 @@ void PCALC_EN1591Widget::createValidationReport() {
 
         for (iterLoad->first(); !iterLoad->isDone(); iterLoad->next()) {
             in = iterLoad->currentObject();
-            memberCount = in->countMember();
+            memberCount = in->memberCount();
 
             for (int i = 0; i < memberCount; ++i) {
                 RB_ObjectMember* mem = in->getMember(i);

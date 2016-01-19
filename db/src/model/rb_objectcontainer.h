@@ -22,6 +22,9 @@
  * Template of container in model (now list, could also be vector or deque)
  * has always one (1) parent object and one or many same children which are
  * (different) containers.
+ * TODO: removing object from container corrupts the iterator 2016-01-11,
+ * keep pointer to iterator to handle adding or removal of objects
+ * during iteration
  */
 class DB_EXPORT RB_ObjectContainer : public RB_ObjectBase {
 
@@ -44,7 +47,7 @@ public:
     virtual bool isList();
 
     // container functions
-    virtual int countObject() const;
+    virtual int objectCount() const;
     virtual RB_ObjectBase* getObject(int row);
     virtual RB_ObjectBase* getObject(const RB_String& id = "");
     virtual RB_ObjectBase* getObject(const RB_String& memberName,

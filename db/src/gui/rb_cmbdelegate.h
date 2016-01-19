@@ -25,16 +25,17 @@ class DB_EXPORT RB_CmbDelegate : public QStyledItemDelegate {
 
 public:
     RB_CmbDelegate(QObject* parent, const QStringList& strL,
-                   RB_MmProxy* proxyModel = NULL);
+                   RB_MmProxy* proxyModel = NULL, bool isSetText = false);
     virtual ~RB_CmbDelegate();
 
-    virtual QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const;
+    virtual QWidget* createEditor(QWidget *parent,
+                                  const QStyleOptionViewItem &option,
+                                  const QModelIndex &index) const;
 //    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,
 //                       const QModelIndex& index ) const;
     virtual void setEditorData(QWidget *editor, const QModelIndex &index) const;
     virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
-                      const QModelIndex &index) const;
+                              const QModelIndex &index) const;
 
     virtual void updateEditorGeometry(QWidget *editor,
         const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -48,6 +49,7 @@ private:
     QStringList mStrL;
     QLabel* mLabel;
     RB_MmProxy* mProxyModel;
+    bool mIsSetText;
 
 };
 

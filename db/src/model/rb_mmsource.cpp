@@ -301,7 +301,7 @@ bool RB_MmSource::setTableModel(const RB_String& list) {
     mObject = mObjectFactory->newSingleObject(mTableName);
 
     if (mObject) {
-        mNoColumns = mObject->countMember();
+        mNoColumns = mObject->memberCount();
     } else {
         mNoColumns = 0;
         RB_DEBUG->print(RB_Debug::D_ERROR,
@@ -605,7 +605,7 @@ void RB_MmSource::swapObject(const QModelIndex& fromIndex,
         setData(idx, fromParentId, Qt::EditRole);
         idx = index(toIndex.row(), 2, parent);
         setData(idx, fromObj->getName(), Qt::EditRole);
-        for (int i = 0; i < fromObj->countMember(); ++i) {
+        for (int i = 0; i < fromObj->memberCount(); ++i) {
             idx = index(toIndex.row(), i + 3, parent);
             setData(idx, fromObj->getValue(i), Qt::EditRole);
         }
@@ -617,7 +617,7 @@ void RB_MmSource::swapObject(const QModelIndex& fromIndex,
         setData(idx, toParentId, Qt::EditRole);
         idx = index(fromIndex.row(), 2, parent);
         setData(idx, toObj->getName(), Qt::EditRole);
-        for (int i = 0; i < fromObj->countMember(); ++i) {
+        for (int i = 0; i < fromObj->memberCount(); ++i) {
             idx = index(fromIndex.row(), i + 3, parent);
             setData(idx, toObj->getValue(i), Qt::EditRole);
         }
@@ -705,7 +705,7 @@ QModelIndex RB_MmSource::promote(const QModelIndex& idx) {
     obj->setFlag(RB2::FlagIsDirty);
     RB_ObjectContainer* grpList = grpObj->getContainer(obj->getName() + "List");
     grpList->addObject(obj);
-    int rowCount = grpList->countObject();
+    int rowCount = grpList->objectCount();
     createIndex(rowCount - 1, 0, obj); // only to create new index in index list
     endMoveRows();
 
@@ -748,7 +748,7 @@ QModelIndex RB_MmSource::demote(const QModelIndex& idx, const RB_String& parentI
     obj->setFlag(RB2::FlagIsDirty);
     RB_ObjectContainer* sList = sibling->getContainer(sibling->getName() + "List");
     sList->addObject(obj);
-    int rowCount = sList->countObject();
+    int rowCount = sList->objectCount();
     createIndex(rowCount - 1, 0, obj); // only to create index in index list
     endMoveRows();
 
@@ -859,7 +859,7 @@ int RB_MmSource::rowCount(const QModelIndex& parent) const {
 
     if (!parent.isValid()) {
         // invalid QModelIndex is root, thus all rows in table or root tree
-        int count = objC->countObject();
+        int count = objC->objectCount();
         return count;
     } else if (isTreeModel()) {
         // child in tree
@@ -869,27 +869,27 @@ int RB_MmSource::rowCount(const QModelIndex& parent) const {
 
     // Tree or in-memory model
     if (obj->getFlag(RB2::FlagChildrenCreated)) {
-        int count = objC->countObject();
+        int count = objC->objectCount();
         return count;
     }
 
     // Should never continue here?
     if (obj->getGrandParent()
         && obj->getGrandParent()->getFlag(RB2::FlagChildrenCreated)) {
-        return objC->countObject();
+        return objC->objectCount();
     }
 
     if (obj->getGrandParent()
         && obj->getGrandParent()->getGrandParent()
         && obj->getGrandParent()->getGrandParent()->getFlag(RB2::FlagChildrenCreated)) {
-        return objC->countObject();
+        return objC->objectCount();
     }
 
     if (obj->getGrandParent()
         && obj->getGrandParent()->getGrandParent()
         && obj->getGrandParent()->getGrandParent()->getGrandParent()
         && obj->getGrandParent()->getGrandParent()->getGrandParent()->getFlag(RB2::FlagChildrenCreated)) {
-        return objC->countObject();
+        return objC->objectCount();
     }
 
     if (objC) {
@@ -989,7 +989,7 @@ RB_Variant RB_MmSource::hiddenTableData(const QModelIndex& index, int role) cons
     RB_String fieldName = "";
     bool isIntegerField = false;
 
-    if (mObject && mObject->countMember() > index.column()) {
+    if (mObject && mObject->memberCount() > index.column()) {
         fieldName = mObject->getMember(index.column())->getName();
         isIntegerField = (mObject->getMember(index.column())->getType()
                 == RB2::MemberInteger);
@@ -1177,7 +1177,7 @@ bool RB_MmSource::setData(const QModelIndex &index,
 
     // Check if data is changed, otherwise do nothing
     RB_String fieldName = "";
-    if (mObject && mObject->countMember() > index.column()) {
+    if (mObject && mObject->memberCount() > index.column()) {
         fieldName = mObject->getMember(index.column())->getName();
     }
 
@@ -1300,7 +1300,7 @@ RB_Variant RB_MmSource::headerData(int section, Qt::Orientation orientation,
     // Field names (instead of Qt default column number starting with 1)
     if ((isTreeModel() || !database().isOpen()) && orientation == Qt::Horizontal) {
         if (mObject && sect >= 0
-                && mObject->countMember() > sect) {
+                && mObject->memberCount() > sect) {
             return mObject->getMember(sect)->getName();
         }
 
@@ -1344,7 +1344,7 @@ bool RB_MmSource::insertRows(int row, int count,
             // otherwise mapper does not clear these fields with insertRows()
             if (mObject) {
                 RB_ObjectMember* mem;
-                int count = mObject->countMember();
+                int count = mObject->memberCount();
 
                 for (int j = 7; j < count; ++j) {
                     mem = mObject->getMember(j);
@@ -1400,8 +1400,32 @@ bool RB_MmSource::insertRows(int row, int count,
     return success;
 }
 
-bool RB_MmSource::copyRows(int row, int count, const QModelIndex &parent) {
+/**
+ * @brief RB_MmSource::copyRow
+ * @return true on success
+ */
+bool RB_MmSource::copyCurrentRow() {
+    RB_ObjectBase* obj = getCurrentObject();
 
+    if (!obj) {
+        return false;
+    }
+
+    QModelIndex idx = QModelIndex();
+    QModelIndex parentIdx = mCurrentIndex.parent();
+
+    insertRows(0, 1, parentIdx);
+    int count = obj->memberCount();
+
+    for (int i = RB2::HIDDENCOLUMNS; i < count; i++) {
+        idx = index(0, i, parentIdx);
+        setData(idx, obj->getValue(i));
+    }
+
+    QModelIndex copyIdx = index(0, 0, parentIdx);
+    QString copyId = copyIdx.data().toString();
+    emit currentRowCopied(copyId); // to slotCopyRows(const QString& parentId);
+    return true;
 }
 
 /**
@@ -1720,6 +1744,33 @@ void RB_MmSource::slotChangeCurrentRow(const QModelIndex& current,
     }
 }
 
+/**
+ * @brief slot to copy all rows of this child model based on parent ID
+ * @param parentId
+ */
+void RB_MmSource::slotCopyRows(const QString& parentId) {
+    // child models: always a table model
+    QModelIndex idx = QModelIndex();
+    QVariant value;
+    int cCount = columnCount();
+    int rCount = rowCount();
+    insertRows(rCount, rCount);
+
+    for (int row = 0; row < rCount; row++) {
+        // set parent ID
+        idx = index(rCount + row, 1);
+        setData(idx, parentId);
+
+        for (int col = RB2::HIDDENCOLUMNS; col < cCount; col++) {
+            // copy other values
+            idx = index(row, col);
+            value = idx.data();
+            idx = index(rCount + row, col);
+            setData(idx, value);
+        }
+    }
+}
+
 void RB_MmSource::reset() {
     // TODO: in-memory and tree model reset
     //QSqlRelationalTableModel::reset();
@@ -1821,7 +1872,7 @@ RB_Variant RB_MmSource::objectData(const QModelIndex& index, int role) const {
     RB_ObjectBase* obj = static_cast<RB_ObjectBase*>(index.internalPointer());
 
     int col = index.column();
-    if (!obj || col < 0 || col > obj->countMember() - 1) {
+    if (!obj || col < 0 || col > obj->memberCount() - 1) {
         return RB_Variant();
     }
 

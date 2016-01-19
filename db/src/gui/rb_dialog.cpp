@@ -417,18 +417,21 @@ void RB_Dialog::formatTreeView(RB_TreeView* trv, RB_MmProxy* m) {
  * Read dialog size settings (position has been removed)
  */
 void RB_Dialog::readSettings() {
-//    QPoint pnt = QPoint(100,100);
-//    if (parentWidget()) {
-//        pnt = parentWidget()->pos() + QPoint(20, 20);
-//    }
     RB_SETTINGS->beginGroup(objectName());
-//    QPoint pos = RB_SETTINGS->value("pos", pnt).toPoint();
-    QSize size = RB_SETTINGS->value("size", sizeHint()).toSize();
+    QSize dlgSize = RB_SETTINGS->value("size", sizeHint()).toSize();
     readChildrenSettings(this);
     RB_SETTINGS->endGroup();
 
-    resize(size);
-//    move(pos);
+    // Center dialog to parent
+    if (parentWidget()) {
+        QSize pwSize = parentWidget()->size();
+        QPoint pos = parentWidget()->pos()
+                + QPoint(pwSize.width() / 2, pwSize.height() / 2)
+                - QPoint(dlgSize.width() / 2, dlgSize.height() / 2);
+        move(pos);
+    }
+
+    resize(dlgSize);
 }
 
 /**
@@ -488,7 +491,6 @@ void RB_Dialog::readChildrenSettings(QWidget* wObj) {
  */
 void RB_Dialog::writeSettings() {
     RB_SETTINGS->beginGroup(objectName());
-//    RB_SETTINGS->setValue("pos", pos());
     RB_SETTINGS->setValue("size", size());
     writeChildrenSettings(this);
     RB_SETTINGS->endGroup();
