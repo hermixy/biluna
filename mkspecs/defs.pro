@@ -17,8 +17,8 @@ INCLUDEPATH += ../mkspecs
 
 QT += core gui help network printsupport sql svg uitools webenginewidgets widgets xml
 
-#CONFIG += release
-CONFIG -= release
+CONFIG += release
+#CONFIG -= release
 CONFIG += c++11
 CONFIG += qt warn_on rtti
 CONFIG += embed_manifest_exe
