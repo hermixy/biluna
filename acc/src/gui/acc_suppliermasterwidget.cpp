@@ -71,6 +71,8 @@ void ACC_SupplierMasterWidget::init() {
     // 3. Select after relations have been set, only for database models
     //
     mModel->select();
+    mModel->setHeaderData(0, Qt::Horizontal, tr("Code"));
+    mModel->setHeaderData(1, Qt::Horizontal, tr("Name"));
 
     //
     // 4. Connect model to main view
@@ -124,7 +126,6 @@ bool ACC_SupplierMasterWidget::fileSave(bool withSelect) {
  */
 void ACC_SupplierMasterWidget::on_pbAdd_clicked() {
     if (!mModel) return;
-
     mModel->undoFilterSort();
 
     // Make sure corresponding detail MDI window is open for maybeSave()

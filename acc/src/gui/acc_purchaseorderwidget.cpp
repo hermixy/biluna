@@ -88,12 +88,12 @@ void ACC_PurchaseOrderWidget::init() {
     mMapper->addMapping(this->leRequisitionNo, mModel->fieldIndex("requisitionno"));
     addComboBoxMapping(mModel,"receiptat_id", "ACC_Location", "id",
                        "locationname", cbWarehouse, mMapper);
-    mMapper->addMapping(dteOrderDate, mModel->fieldIndex("orderdate"));
+    mMapper->addMapping(deOrderDate, mModel->fieldIndex("orderdate"));
     mMapper->addMapping(ileContact, mModel->fieldIndex("contact_idx"));
     mMapper->addMapping(leContactPhoneNumber, mModel->fieldIndex("contactphone"));
     mMapper->addMapping(leContactEmail, mModel->fieldIndex("contactemail"));
     mMapper->addMapping(leSupplierReference, mModel->fieldIndex("supplierref"));
-    mMapper->addMapping(dteReceiptDate, mModel->fieldIndex("receiptdate"));
+    mMapper->addMapping(deReceiptDate, mModel->fieldIndex("receiptdate"));
     mMapper->addMapping(leRevision, mModel->fieldIndex("revision"));
     addComboBoxMapping(mModel,"shipvia_id", "ACC_Shipper", "id",
                        "shippername", cbFreightMethod, mMapper);
@@ -158,7 +158,7 @@ void ACC_PurchaseOrderWidget::init() {
     // not mChildMapper->addMapping(leOrderedQuantity, mChildModel->fieldIndex("quantity"));
     mChildMapper->addMapping(leAlreadyDispatched, mChildModel->fieldIndex("qtyinvoiced"));
     mChildMapper->addMapping(leCurrentDispatch, mChildModel->fieldIndex("qtyreceived"));
-    mChildMapper->addMapping(dteItemDue, mChildModel->fieldIndex("itemdue"));
+    mChildMapper->addMapping(deItemDue, mChildModel->fieldIndex("itemdue"));
 
     setFormatTableView(tvDetails, mChildModel);
 
@@ -314,13 +314,13 @@ void ACC_PurchaseOrderWidget::on_pbAddOrder_clicked() {
     mModel->setData(orderIdx, orderNo, Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("orderdate"));
     QDate dt = QDate::currentDate();
-    mModel->setData(orderIdx, dt, Qt::EditRole);
+    mModel->setData(orderIdx, dt.toString(Qt::ISODate), Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("receiptdate"));
-    mModel->setData(orderIdx, dt, Qt::EditRole);
+    mModel->setData(orderIdx, dt.toString(Qt::ISODate), Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("revision"));
     mModel->setData(orderIdx, 0, Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("suppinvoicedate"));
-    mModel->setData(orderIdx, dt, Qt::EditRole);
+    mModel->setData(orderIdx, dt.toString(Qt::ISODate), Qt::EditRole);
 
     // tvOrders->setCurrentIndex(mModel->index(row, RB2::HIDDENCOLUMNS));
     tvOrders->scrollTo(tvOrders->currentIndex());
@@ -483,8 +483,8 @@ void ACC_PurchaseOrderWidget::on_pbAddDetail_clicked() {
     // end NOTE
 
     idx = mChildModel->index(row, mChildModel->fieldIndex("itemdue"));
-    mChildModel->setData(idx, QDate::currentDate(), Qt::EditRole);
-
+    mChildModel->setData(idx, QDate::currentDate().toString(Qt::ISODate),
+                         Qt::EditRole);
     tvDetails->setCurrentIndex(mChildModel->index(row,
                                mChildModel->fieldIndex("stk_idx"), QModelIndex()));
     tvDetails->scrollTo(tvDetails->currentIndex());
