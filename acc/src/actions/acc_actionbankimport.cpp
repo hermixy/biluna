@@ -55,6 +55,7 @@ void ACC_ActionBankImport::trigger() {
 
         // Check widget state.
         // TODO: crashes application?
+
 //        RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
 //                ACC_DialogFactory::WidgetGlTransaction);
 
