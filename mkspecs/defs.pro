@@ -17,13 +17,27 @@ INCLUDEPATH += ../mkspecs
 
 QT += core gui help network printsupport sql svg uitools webenginewidgets widgets xml
 
-#CONFIG += release
-CONFIG -= release
+#CONFIG += release set in qmake setting of QtCreator
 CONFIG += c++11
 CONFIG += qt warn_on rtti
 CONFIG += embed_manifest_exe
 
-if (release) {
+CONFIG(debug, debug|release) {
+#    message("Debug compile mode in defs.pro")
+    # QT += testlib
+    CONFIG -= release
+    CONFIG -= debug_and_release
+    CONFIG += debug
+    # CONFIG -= thread
+    OBJECTS_DIR = ../build_debug/obj
+    MOC_DIR     = ../build_debug/moc
+    RCC_DIR     = ../build_debug/res
+
+    DEFINES += BILUNA_DEBUG
+
+    QT_DEBUG_PLUGINS=1
+}
+else {
 #    message("Release compile mode in defs.pro")
     QT -= testlib #remove otherwise MS Windows starts with command line
     CONFIG -= debug
@@ -38,21 +52,6 @@ if (release) {
         DEFINES += BILUNA_DEMO
         DEFINES += QT_NO_PRINTER
     }
-}
-else {
-#    message("Debug compile mode in defs.pro")
-    # QT += testlib
-    CONFIG -= release
-    CONFIG -= debug_and_release
-    CONFIG += debug
-    # CONFIG -= thread
-    OBJECTS_DIR = ../build_debug/obj
-    MOC_DIR     = ../build_debug/moc
-    RCC_DIR     = ../build_debug/res
-
-    DEFINES += BILUNA_DEBUG
-
-    QT_DEBUG_PLUGINS=1
 }
 
 # Target path will be overriden in bil.pro and test applications
