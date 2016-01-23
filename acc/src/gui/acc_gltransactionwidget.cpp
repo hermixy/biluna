@@ -340,6 +340,7 @@ void ACC_GlTransactionWidget::fileRevert() {
     setWindowModified(false);
 
     leBalance->clear();
+    mTransDocModel->select();
 }
 
 /**

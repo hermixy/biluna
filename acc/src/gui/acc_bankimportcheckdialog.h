@@ -62,9 +62,6 @@ public:
 public slots:
     virtual void on_pbOpenFile_clicked();
 
-    virtual void on_ileItemAccount_clicked();
-    virtual void on_ileAllocation_clicked();
-    virtual void on_ileAllocation_clear();
     virtual void on_pbHelp_clicked();
     virtual void on_pbPrevious_clicked();
     virtual void on_pbNext_clicked();
@@ -124,19 +121,10 @@ private:
     bool mIsNumbersUpdated;
     RB_String mBankAccount;
 
-    //! Chart of Accounts (GL) model for combobox
-//    RB_MmProxy* mChartMasterModel;
     //! Document model of transaction
     RB_MmProxy* mDocModel;
     //! Item model, child of document model
     RB_MmProxy* mItemModel;
-//    //! GL transaction model, for deletion only
-//    RB_MmProxy* mGlTransModel;
-    //! (Debtor, creditor) document transaction model for selection of allocation
-//    RB_MmProxy* mAllocDocModel;
-//    //! ID list of documents (to be) deleted, for the deletion of GL transactions
-//    RB_StringList mDeleteDocIdList;
-
     //! Data widget mapper for document model
     RB_DataWidgetMapper* mDocMapper;
     //! Data widget mapper for item model
@@ -149,8 +137,6 @@ private:
     //! Current transaction types
     ACC2::TransType mTransType;
 
-//    //! Current transaction document
-//    ACC_TransDoc* mTransDoc;
     //! GL transaction list
     RB_ObjectContainer* mGlTransList;
 
@@ -165,17 +151,8 @@ private:
     //! Transaction validation message
     RB_String mValidationMessage;
 
-//    //! True if validate amounts is already scheduled
-//    bool mIsValidateAmounts;
-//    //! True if slotAmountItemChanged is passed
-//    bool mIsItemChangedPassed;
-//    //! Time for single shot for validation
-//    QTimer mTimer;
     //! Handle allocation operation
     ACC_HandleAllocns mHandleAllocn;
-
-//    //! Combobox style without dropdown arrow
-//    RB_String mCbStyle;
 
     //! Bank GL account ID
     RB_String mBankGlAccId;
