@@ -83,7 +83,7 @@ void DB_ActionFilePrint::trigger() {
 }
 
 /**
- * @brief DB_ActionFilePrint::printDialog
+ * @brief Print content of a dialog, for example used by ACC_OrderPreviewDialog
  * @param dialog
  */
 void DB_ActionFilePrint::printDialog(RB_Dialog* dialog) {

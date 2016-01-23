@@ -11,7 +11,7 @@
 #include "db_actionfilepdf.h"
 
 #include <QPrinter>
-#include <QPrintDialog>
+#include <QPageSetupDialog>
 #include "db_actionfactory.h"
 #include "db_actionfilesaveas.h"
 #include "db_dialogfactory.h"
@@ -51,67 +51,94 @@ RB_Action* DB_ActionFilePdf::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionFilePdf::trigger() {
-    // No preliminary checks required
-
-    // No models to prepare
-
     // Get active widget
     RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getActiveMdiWindow();
-    if (!mdiWin) return;
+
+    if (!mdiWin) {
+        return;
+    }
+
     RB_Widget* wdgt = mdiWin->getWidget();
+
     if (!wdgt) {
         wdgt = mWidget;
-    }
-    if (!wdgt) return;
 
-#ifndef QT_NO_PRINTER
+        if (!wdgt) {
+            return;
+        }
+    }
+
     // Get file name, can be path + fileName or only fileName
     RB_String fn = wdgt->getSaveAsFileName(); // empty if untitled
+    prepareSaveFileName(fn);
 
-    RB_String fileName = QFileInfo(fn).fileName();
-    RB_StringList strL = fileName.split(".");
-    fileName = strL.at(0);
-    fileName.replace(QRegExp("[^a-zA-Z\\d\\s]"), "_");
-    fileName += ".pdf";
-    RB_String filters = "PDF files (*.pdf);;All files (*.*)";
-
-    if (fn.contains(QDir::separator())) {
-        // fn was path plus file name
-        fn = QFileInfo(fn).absolutePath() + "/" + fileName;
-    } else {
-        // fn was only file name
-        fn = fileName;
-    }
-
-    getSaveFileName(fn, filters);
-
-    if (fn.isEmpty()) return;
-
+#ifndef QT_NO_PRINTER
     QPrinter* pr = DB_ACTIONFACTORY->getPrinter();
     wdgt->setPrinterProperties(pr);
+
+    QPageSetupDialog* dlg = new QPageSetupDialog(pr, wdgt);
+    int result = dlg->exec();
+    dlg->deleteLater();
+
+    if (result != QDialog::Accepted) {
+        return;
+    }
+
+    RB_String filters = "PDF files (*.pdf);;All files (*.*)";
+    getSaveFileName(fn, filters);
+
+    if (fn.isEmpty()) {
+        return;
+    }
 
     pr->setOutputFormat(QPrinter::PdfFormat);
     pr->setOutputFileName(fn);
     wdgt->filePdf(pr);
- #endif
-
+#endif
 }
 
 /**
- * @brief DB_ActionFilePdf::printDialog
+ * @brief Print content of a dialog, for example used by ACC_OrderPreviewDialog
  * @param dialog
  */
-void DB_ActionFilePdf::printDialog(RB_Dialog* dialog) {
-#ifndef QT_NO_PRINTER
+void DB_ActionFilePdf::printDialog(RB_Dialog* dialog, bool showPageEdit) {
     // Get file name, can be path + fileName or only fileName
     RB_String fn = dialog->getSaveAsFileName(); // empty if untitled
+    prepareSaveFileName(fn);
 
+#ifndef QT_NO_PRINTER
+    QPrinter* pr = DB_ACTIONFACTORY->getPrinter();
+    dialog->setPrinterProperties(pr);
+
+    if (showPageEdit) {
+        QPageSetupDialog* dlg = new QPageSetupDialog(pr, dialog);
+        int result = dlg->exec();
+        dlg->deleteLater();
+
+        if (result != QDialog::Accepted) {
+            return;
+        }
+    }
+
+    RB_String filters = "PDF files (*.pdf);;All files (*.*)";
+    getSaveFileName(fn, filters);
+
+    if (fn.isEmpty()) {
+        return;
+    }
+
+    pr->setOutputFormat(QPrinter::PdfFormat);
+    pr->setOutputFileName(fn);
+    dialog->filePdf(pr);
+#endif
+}
+
+void DB_ActionFilePdf::prepareSaveFileName(QString& fn) {
     RB_String fileName = QFileInfo(fn).fileName();
     RB_StringList strL = fileName.split(".");
     fileName = strL.at(0);
     fileName.replace(QRegExp("[^a-zA-Z\\d\\s]"), "_");
     fileName += ".pdf";
-    RB_String filters = "PDF files (*.pdf);;All files (*.*)";
 
     if (fn.contains(QDir::separator())) {
         // fn was path plus file name
@@ -120,18 +147,6 @@ void DB_ActionFilePdf::printDialog(RB_Dialog* dialog) {
         // fn was only file name
         fn = fileName;
     }
-
-    getSaveFileName(fn, filters);
-
-    if (fn.isEmpty()) return;
-
-    QPrinter* pr = DB_ACTIONFACTORY->getPrinter();
-    dialog->setPrinterProperties(pr);
-
-    pr->setOutputFormat(QPrinter::PdfFormat);
-    pr->setOutputFileName(fn);
-    dialog->filePdf(pr);
- #endif
 }
 
 /**
