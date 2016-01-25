@@ -51,6 +51,7 @@ public:
 //        DialogBaseTest,                        /**< Test of base dialogs */
         // start numbering from 193100
         DialogNone = 193100,            /**< Invalid dialog */
+        DialogENGasket,                 /**< EN gasket properties */
         DialogProject,                  /**< Select project from database dialog */
         DialogProjectEdit,              /**< Edit project dialog */
         DialogDefault                   /**< Default- or all dialogs */
@@ -75,7 +76,6 @@ public:
         // start numbering from 192100
         WidgetNone = 192100,            /**< Invalid model */
         WidgetEN1591Flange,             /**< EN1591 flange calculation */
-        WidgetENGasket,                 /**< EN gasket properties */
         WidgetDefault                   /**< Default- or all models */
     };
 

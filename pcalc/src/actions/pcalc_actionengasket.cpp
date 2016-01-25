@@ -57,7 +57,7 @@ void PCALC_ActionENGasket::trigger() {
     }
 
     // Create widget and corresponding dockwidget if applicable
-    RB_MdiWindow* mdiWin = PCALC_DIALOGFACTORY->getMdiWindow(
-            PCALC_DialogFactory::WidgetENGasket);
-    mdiWin->show();
+    RB_Dialog* dlg = PCALC_DIALOGFACTORY->getDialog(
+            PCALC_DialogFactory::DialogENGasket);
+    dlg->exec();
 }
