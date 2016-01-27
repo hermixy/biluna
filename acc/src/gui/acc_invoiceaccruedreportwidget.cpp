@@ -12,11 +12,12 @@
 
 #include <QPrintDialog>
 #include <QPrinter>
-#include "db_actionfilesaveas.h"
+#include "acc.h"
 #include "acc_dialogfactory.h"
 #include "acc_invoiceaccrued.h"
 #include "acc_modelfactory.h"
 #include "acc_qachartmaster.h"
+#include "db_actionfilesaveas.h"
 
 
 /**
@@ -28,6 +29,12 @@ ACC_InvoiceAccruedReportWidget::ACC_InvoiceAccruedReportWidget(QWidget *parent)
     mTeReport = teReport;
     mFiscalYearStart.setDate(1970,1,1);
     mFiscalYearEnd.setDate(1970, 1, 1);
+    mAmountRec = 0.0;
+    mAmountPay = 0.0;
+    mAmountAlloc = 0.0;
+    mTotalAmountRec = 0.0;
+    mTotalAmountPay = 0.0;
+    mPreviousTransDocNo = "";
 }
 
 /**
@@ -57,6 +64,12 @@ void ACC_InvoiceAccruedReportWidget::init() {
  * Initialize and software license report
  */
 void ACC_InvoiceAccruedReportWidget::on_pbRefresh_clicked() {
+    mAmountRec = 0.0;
+    mAmountPay = 0.0;
+    mAmountAlloc = 0.0;
+    mTotalAmountRec = 0.0;
+    mTotalAmountPay = 0.0;
+    mPreviousTransDocNo = "";
     RB_ObjectContainer* invoiceAccruedList = NULL;
 
     try {
@@ -91,7 +104,9 @@ void ACC_InvoiceAccruedReportWidget::on_pbRefresh_clicked() {
     } catch(std::exception& e) {
         delete invoiceAccruedList;
         QApplication::restoreOverrideCursor();
-        ACC_DIALOGFACTORY->requestWarningDialog(e.what());
+        ACC_DIALOGFACTORY->requestWarningDialog(
+             QString("ACC_InvoiceAccruedReportWidget::on_pbRefresh_clicked()\n")
+             + QString("Exception: ") + QString(e.what()));
     } catch(...) {
         delete invoiceAccruedList;
         QApplication::restoreOverrideCursor();
@@ -159,6 +174,129 @@ void ACC_InvoiceAccruedReportWidget::changeEvent(QEvent *e) {
     default:
         break;
     }
+}
+
+/**
+ * Set the actual data, overrides RB_SimpleReportWidget
+ * @param html HTML to be set
+ * @param obj data object
+ */
+void ACC_InvoiceAccruedReportWidget::setDataRow(QString& html,
+                                                RB_ObjectBase* obj) {
+    mColRunner = 0;
+    mRowRunner = 0;
+
+    if (!mIsAlternatingRow || !mEvenRow) {
+        html += "<tr>";
+    } else {
+        html += "<tr bgcolor=\"" + mTeReport->getAlternateBaseColor().name() + "\">";
+    }
+
+    double amount = 0.0;
+    QString str = "";
+    QString transDocNo = obj->getValue((int)RB2::HIDDENCOLUMNS + 1).toString();
+    bool sameAsPreviousNo = mPreviousTransDocNo == transDocNo;
+
+    for (int col = 0; col < mMemCount; ++col) {
+        if (sameAsPreviousNo && col < 5) {
+            str = "";
+        } else if (col == 3 || col == 4 || col == 7){
+            amount = obj->getValue((int)RB2::HIDDENCOLUMNS + col).toDouble();
+
+            if (col == 3) {
+                mAmountRec += amount;
+                mTotalAmountRec += amount;
+            } else if (col == 4) {
+                mAmountPay += amount;
+                mTotalAmountPay += amount;
+            } else if (col == 7) {
+                if (amount > 0) {
+                    mAmountAlloc += amount;
+                    mTotalAmountRec -= amount;
+                } else if (amount < 0) {
+                    mAmountAlloc += amount;
+                    mTotalAmountPay += amount;
+                }
+            }
+
+            str = "<p style=\"text-align: right;\">";
+            str += QString::number(ACC2::roundMoney(amount), 'f', 2);
+            str += "</p>";
+        } else if (col == 5 || col ==6) {
+            str = "<p style=\"text-align: right;\">";
+            str += obj->getValue((int)RB2::HIDDENCOLUMNS + col).toString();
+            str += "</p>";
+        } else {
+            str = obj->getValue((int)RB2::HIDDENCOLUMNS + col).toString();
+        }
+
+        setColumnData(html, str, col);
+    }
+
+    mPreviousTransDocNo = transDocNo;
+    html += "</tr>";
+    mEvenRow = !mEvenRow;
+}
+
+void ACC_InvoiceAccruedReportWidget::setDataFooter(QString &html) {
+    QString startCell = "<td><p style=\"text-align: right;\"><strong>";
+    QString endCell = "</strong></p></td>";
+
+    if (!mIsAlternatingRow || !mEvenRow) {
+        html += "<tr>";
+    } else {
+        html += "<tr bgcolor=\"" + mTeReport->getAlternateBaseColor().name() + "\">";
+    }
+
+    for (int col = 0; col < mMemCount; ++col) {
+        if (col == 2) {
+            html += startCell + "Subtotals:" + endCell;
+        } else if (col == 3) {
+            html += startCell
+                    + QString::number(ACC2::roundMoney(mAmountRec), 'f', 2)
+                    + endCell;
+        } else if (col == 4) {
+            html += startCell
+                    + QString::number(ACC2::roundMoney(mAmountPay), 'f', 2)
+                    + endCell;
+        } else if (col == 7) {
+            html += startCell
+                    + QString::number(ACC2::roundMoney(mAmountAlloc), 'f', 2)
+                    + endCell;
+        } else {
+            html += "<td>&nbsp;</td>";
+
+        }
+    }
+
+    html += "</tr>";
+    mEvenRow = !mEvenRow;
+
+    if (!mIsAlternatingRow || !mEvenRow) {
+        html += "<tr>";
+    } else {
+        html += "<tr bgcolor=\"" + mTeReport->getAlternateBaseColor().name() + "\">";
+    }
+
+    for (int col = 0; col < mMemCount; ++col) {
+        if (col == 2) {
+            html += startCell + "Total Open Amount:" + endCell;
+        } else if (col == 3) {
+            html += startCell
+                    + QString::number(ACC2::roundMoney(mTotalAmountRec), 'f', 2)
+                    + endCell;
+        } else if (col == 4) {
+            html += startCell
+                    + QString::number(ACC2::roundMoney(mTotalAmountPay), 'f', 2)
+                    + endCell;
+        } else {
+            html += "<td>&nbsp;</td>";
+
+        }
+    }
+
+    html += "</tr>";
+    mEvenRow = !mEvenRow;
 }
 
 /**

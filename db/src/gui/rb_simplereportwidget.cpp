@@ -354,6 +354,7 @@ void RB_SimpleReportWidget::createReport(RB_String& html,
 
     delete iter;
 
+    setDataFooter(html);
     setTableFooter(html);
     setReportFooter(html);
 }
@@ -376,6 +377,7 @@ void RB_SimpleReportWidget::createReport(RB_String& html, QSqlQuery& query) {
         setDataRow(html, rec);
     }
 
+    setDataFooter(html);
     setTableFooter(html);
     setReportFooter(html);
 }
@@ -636,7 +638,8 @@ void RB_SimpleReportWidget::setColumnName(RB_String& html,
  * @param mColRunner column counter/runner
  * @param mRowRunner row counter/runner
  */
-void RB_SimpleReportWidget::setColumnData(RB_String& html, const RB_String& colData,
+void RB_SimpleReportWidget::setColumnData(RB_String& html,
+                                          const RB_String& colData,
                                           int col) {
     if (mIsFirstDataFullRow && col == 0) {
         html += "<td colspan=\"" + RB_String::number(mReportColCount)
@@ -652,7 +655,8 @@ void RB_SimpleReportWidget::setColumnData(RB_String& html, const RB_String& colD
         if (!mIsAlternatingRow || !mEvenRow) {
             html += "</tr><tr>";
         } else {
-            html += "</tr><tr bgcolor=\"" + mTeReport->getAlternateBaseColor().name() + "\">";
+            html += "</tr><tr bgcolor=\""
+                    + mTeReport->getAlternateBaseColor().name() + "\">";
         }
 
         // skip first cell in new row
