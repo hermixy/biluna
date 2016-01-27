@@ -55,16 +55,15 @@ void ACC_ActionBankImport::trigger() {
 
         // Check widget state.
         // TODO: crashes application?
+        RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
+                ACC_DialogFactory::WidgetGlTransaction);
 
-//        RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
-//                ACC_DialogFactory::WidgetGlTransaction);
-
-//        if (mdiWin->isWindowModified()) {
-//            ACC_DIALOGFACTORY->requestWarningDialog(
-//                        tr("Data in GL Transaction window is modified.\n"
-//                           "Please save your data first."));
-//            return;
-//        }
+        if (mdiWin->isWindowModified()) {
+            ACC_DIALOGFACTORY->requestWarningDialog(
+                        tr("Data in GL Transaction window is modified.\n"
+                           "Please save your data first."));
+            return;
+        }
 
         // Create dialog
         RB_Dialog* dlg = ACC_DIALOGFACTORY->getDialog(ACC_DialogFactory::DialogBankImport);
@@ -75,10 +74,12 @@ void ACC_ActionBankImport::trigger() {
         // ACC_GlTransactionWidget* wdgt = dynamic_cast<ACC_GlTransactionWidget*>(mdiWin);
         // ...
     } catch(std::exception& e) {
-        ACC_DIALOGFACTORY->requestWarningDialog(e.what());
+        ACC_DIALOGFACTORY->requestWarningDialog(
+                    "Error " + QString(e.what())
+                    + "\nin ACC_ActionBankImport::trigger()");
     } catch(...) {
         ACC_DIALOGFACTORY->requestWarningDialog(
-                    "Error <unkown> in "
-                    "ACC_BankPaymentReportWidget::on_pbRefresh_clicked()");
+                    "Error <unkown> in \n"
+                    "ACC_ActionBankImport::trigger()");
     }
 }

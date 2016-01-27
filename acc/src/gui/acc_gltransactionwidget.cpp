@@ -1710,7 +1710,7 @@ void ACC_GlTransactionWidget::slotRefreshBankModel() {
         return;
     }
 
-    fileSave(true);
+    fileRevert();
 }
 
 /**
