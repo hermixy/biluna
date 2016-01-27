@@ -440,7 +440,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QDateEdit" name="dteOrderDate">
+              <widget class="QDateEdit" name="deOrderDate">
                <property name="minimumSize">
                 <size>
                  <width>150</width>
@@ -462,7 +462,7 @@
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QDateEdit" name="dteReceiptDate">
+              <widget class="QDateEdit" name="deReceiptDate">
                <property name="minimumSize">
                 <size>
                  <width>150</width>
@@ -1712,7 +1712,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QDateEdit" name="dteItemDue">
+              <widget class="QDateEdit" name="deItemDue">
                <property name="minimumSize">
                 <size>
                  <width>175</width>
@@ -1777,8 +1777,8 @@
   <tabstop>leOrderNo</tabstop>
   <tabstop>leRequisitionNo</tabstop>
   <tabstop>cbWarehouse</tabstop>
-  <tabstop>dteOrderDate</tabstop>
-  <tabstop>dteReceiptDate</tabstop>
+  <tabstop>deOrderDate</tabstop>
+  <tabstop>deReceiptDate</tabstop>
   <tabstop>cbQuotationOnly</tabstop>
   <tabstop>leSupplierReference</tabstop>
   <tabstop>leRevision</tabstop>
@@ -1815,7 +1815,7 @@
   <tabstop>leOrderedQuantity</tabstop>
   <tabstop>leAlreadyDispatched</tabstop>
   <tabstop>leCurrentDispatch</tabstop>
-  <tabstop>dteItemDue</tabstop>
+  <tabstop>deItemDue</tabstop>
  </tabstops>
  <resources>
   <include location="../../../db/src/gui/db.qrc"/>

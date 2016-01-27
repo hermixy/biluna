@@ -145,12 +145,16 @@ private slots:
     void setWebViewScrollbar();
 
 private:
+    void setWebPageContentToPlainTextWidget();
+    void setContent(const QString& content);
     bool mSourceDirty;
 //    QLabel *zoomLabel;
 //    QSlider *zoomSlider;
     DB_HtmlHighlighter* mCodeHighlighter;
 //    Ui_Dialog *ui_dialog;
     QDialog* mInsertHtmlDialog;
+    // To support lambda function
+    QString mContent;
 
     double mVerticalScrollbarPerunage;
 

@@ -27,8 +27,8 @@ RB_GuiAction* ACC_ActionInvoiceAccruedReport::createGuiAction() {
     if (!ga) {
         ga = new RB_GuiAction(ACC_ActionInvoiceAccruedReport::getName(),
                               // QIcon(":/images/icons/report_key.png"),
-                              tr("Invoice Accr&ued Report"));
-        ga->setStatusTip(tr("Invoice accrued report"));
+                              tr("Invoice Accr&ued/Open"));
+        ga->setStatusTip(tr("Invoice accrued/open at year end report"));
         ga->setFactory(ACC_ActionInvoiceAccruedReport::factory);
     }
     return ga;

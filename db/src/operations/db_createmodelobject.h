@@ -37,6 +37,7 @@ protected:
     void createHeaderContent();
     void createSourceContent(RB_ObjectBase* memberList);
     void setFileHeader(QString& content, const QString& fileExtension);
+    void formatMemberName(QString& memberName);
     bool writeFiles();
 
     QString mBaseObjectName;

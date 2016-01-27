@@ -38,8 +38,10 @@ public:
     static RB_GuiAction* createGuiAction();
     static RB_Action* factory();
     virtual void trigger();
-    virtual void printDialog(RB_Dialog* dialog);
+    virtual void printDialog(RB_Dialog* dialog, bool showPageEdit = false);
 
+private:
+    void prepareSaveFileName(QString& fn);
     void getSaveFileName(RB_String& fn, const RB_String& filters = RB_String());
 };
 

@@ -919,17 +919,7 @@ void DB_HtmlEditorWidget::adjustSource()
 void DB_HtmlEditorWidget::changeTab(int index) {
     // TODO: be able to catch content edited from webview
     if (/*mSourceDirty &&*/ (index == 1)) {
-        QWebEnginePage* page = webView->page();
-
-        // Does not work because htmlContent does not exist at call back
-        // QString* htmlContent = new QString();
-        // page->toHtml([htmlContent] (const QString& cbValue) { *htmlContent = cbValue; });
-        // plainTextEdit->setPlainText(*htmlContent);
-        // delete htmlContent;
-
-        page->toHtml([this]
-                        (const QString& result)
-                        { plainTextEdit->setPlainText(result); });
+        setWebPageContentToPlainTextWidget();
         mSourceDirty = false;
 
 //        int min = webView->page()->mainFrame()->scrollBarMinimum(Qt::Vertical);
@@ -980,6 +970,22 @@ void DB_HtmlEditorWidget::setWebViewScrollbar() {
     int value = (int)((mVerticalScrollbarPerunage) * (max - min) + min);
     webView->page()->mainFrame()->setScrollBarValue(Qt::Vertical, value);
 */
+}
+
+void DB_HtmlEditorWidget::setWebPageContentToPlainTextWidget() {
+    // Does not work because html does not exist at call back
+    //    QString* html = new QString();
+    //    webView->page()->toHtml([html] (const QString& cbValue) { *html = cbValue; });
+    //    out << html;
+    //    delete html;
+    QWebEnginePage* page = webView->page();
+    page->toHtml([this]
+                    (const QString& result)
+    { plainTextEdit->setPlainText(result); });
+}
+
+void DB_HtmlEditorWidget::setContent(const QString &content) {
+    mContent = content;
 }
 
 
@@ -1101,30 +1107,28 @@ bool DB_HtmlEditorWidget::saveFile(const RB_String &fn) {
         return false;
     }
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    QTextStream out(&file);
-
-    if (tabWidget->currentIndex() == 0) {
-        // Does not work because html does not exist at call back
-        //    QString* html = new QString();
-        //    webView->page()->toHtml([html] (const QString& cbValue) { *html = cbValue; });
-        //    out << html;
-        //    delete html;
-        QWebEnginePage* page = webView->page();
-        page->toHtml([this]
-                        (const QString& result)
-                        { plainTextEdit->setPlainText(result); });
-    }
-
-    out << plainTextEdit->toPlainText();
-    QApplication::restoreOverrideCursor();
-
     // original
 //    // FIXME: here we always use UTF-8 encoding
 //    QString content = webView->page()->mainFrame()->toHtml();
 //    QByteArray data = content.toUtf8();
 //    qint64 c = file.write(data);
 //    bool success = (c >= data.length());
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    QTextStream out(&file);
+    int tabIndex = tabWidget->currentIndex();
+
+    // Hack for lambda function with mContent
+    if (tabIndex == 0) {
+        QWebEnginePage* page = webView->page();
+        page->toHtml([this]
+                        (const QString& result)
+                        { setContent(result); });
+        out << mContent;
+    } else {
+        out << plainTextEdit->toPlainText();
+    }
+    QApplication::restoreOverrideCursor();
 
     setCurrentFileName(fn);
     setIsNewWidget(false);

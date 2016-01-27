@@ -11,16 +11,15 @@
 #include "pcalc_en1591_assembly.h"
 
 
-PCALC_EN1591_Assembly::PCALC_EN1591_Assembly(const RB_String& id,
-                                           RB_ObjectBase *p,
-                                           const RB_String& n,
-                                           RB_ObjectFactory* f)
-                                        : RB_ObjectContainer(id, p, n, f) {
+PCALC_EN1591_Assembly::PCALC_EN1591_Assembly(
+                        const RB_String& id, RB_ObjectBase *p,
+                        const RB_String& n, RB_ObjectFactory* f)
+                        : RB_ObjectContainer(id, p, n, f) {
 	 createMembers();
 }
 
 PCALC_EN1591_Assembly::PCALC_EN1591_Assembly(PCALC_EN1591_Assembly* component)
-            : RB_ObjectContainer(component) {
+                        : RB_ObjectContainer(component) {
 	createMembers();
 	*this = *component;
 }
@@ -43,4 +42,4 @@ void PCALC_EN1591_Assembly::createMembers() {
     addMember("revision", "-", 0, RB2::MemberInteger);
     addMember("date", "-", "", RB2::MemberDateTime);
     addMember("nameengineer", "-", "", RB2::MemberChar125);
- }
+}

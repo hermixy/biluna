@@ -89,8 +89,8 @@ void ACC_SalesOrderWidget::init() {
     mMapper->addMapping(leDeliverTo, mModel->fieldIndex("deliverto"));
     addComboBoxMapping(mModel,"fromstkloc_id", "ACC_Location", "id",
                        "locationname", cbWarehouse, mMapper);
-    mMapper->addMapping(dteOrderDate, mModel->fieldIndex("orddate"));
-    mMapper->addMapping(dteDispatchDate, mModel->fieldIndex("deliverydate"));
+    mMapper->addMapping(deOrderDate, mModel->fieldIndex("orddate"));
+    mMapper->addMapping(deDispatchDate, mModel->fieldIndex("deliverydate"));
     mMapper->addMapping(ileContact, mModel->fieldIndex("contact_idx"));
     mMapper->addMapping(leContactPhoneNumber, mModel->fieldIndex("contactphone"));
     mMapper->addMapping(leContactEmail, mModel->fieldIndex("contactemail"));
@@ -156,7 +156,7 @@ void ACC_SalesOrderWidget::init() {
     // not mChildMapper->addMapping(leOrderedQuantity, mChildModel->fieldIndex("quantity"));
     mChildMapper->addMapping(leAlreadyDispatched, mChildModel->fieldIndex("qtyinvoiced"));
     mChildMapper->addMapping(leCurrentDispatch, mChildModel->fieldIndex("qtydispatched"));
-    mChildMapper->addMapping(dteItemDue, mChildModel->fieldIndex("itemdue"));
+    mChildMapper->addMapping(deItemDue, mChildModel->fieldIndex("itemdue"));
 
     setFormatTableView(tvDetails, mChildModel);
 
@@ -329,9 +329,9 @@ void ACC_SalesOrderWidget::on_pbAddOrder_clicked() {
 
     QDate dt = QDate::currentDate();
     orderIdx = mModel->index(row, mModel->fieldIndex("orddate"));
-    mModel->setData(orderIdx, dt, Qt::EditRole);
+    mModel->setData(orderIdx, dt.toString(Qt::ISODate), Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("deliverydate"));
-    mModel->setData(orderIdx, dt, Qt::EditRole);
+    mModel->setData(orderIdx, dt.toString(Qt::ISODate), Qt::EditRole);
     orderIdx = mModel->index(row, mModel->fieldIndex("orderno"));
     mModel->setData(orderIdx, orderNo, Qt::EditRole);
 
@@ -497,7 +497,8 @@ void ACC_SalesOrderWidget::on_pbAddDetail_clicked() {
     // end NOTE
 
     idx = mChildModel->index(row, mChildModel->fieldIndex("itemdue"));
-    mChildModel->setData(idx, QDateTime::currentDateTime(), Qt::EditRole);
+    mChildModel->setData(idx, QDate::currentDate().toString(Qt::ISODate),
+                         Qt::EditRole);
 
     tvDetails->setCurrentIndex(mChildModel->index(row,
                                mChildModel->fieldIndex("stk_idx"), QModelIndex()));

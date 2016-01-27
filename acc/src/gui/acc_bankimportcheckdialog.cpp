@@ -56,12 +56,10 @@ ACC_BankImportCheckDialog::ACC_BankImportCheckDialog(QWidget *parent)
     mIsNumbersUpdated = false;
     mBankAccount = "";
 
-//    mChartMasterModel = NULL;
     mDocModel = NULL;
     mDocMapper = NULL;
     mItemModel = NULL;
     mItemMapper = NULL;
-//    mAllocDocModel = NULL; // selection document only
 
     mGlTransList = new RB_ObjectContainer("", NULL, "ACC_GlTransList",
                                           ACC_OBJECTFACTORY);
@@ -80,22 +78,12 @@ ACC_BankImportCheckDialog::ACC_BankImportCheckDialog(QWidget *parent)
  * Destructor
  */
 ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() {
-    // store selected gl number from cbLedgerAccount
-    RB_SETTINGS->beginGroup(objectName());
-    RB_SETTINGS->setValue("glno", cbLedgerAccount->currentIndex());
-    RB_SETTINGS->endGroup();
-
     // non-shared models are always deleted by the widgets,
     // can be MDI window or dialog, but also a dockWindow with table or tree
-    //    delete mAllocDocModel;
-    //    delete mAllocModel;
-
-//    delete mChartMasterModel; // shared because of parent of document model
     delete mDocModel;  // OK if not used anywhere else
     delete mItemModel; // OK if not used anywhere else
 
     delete mBankImportList;
-    // delete mTransDocListRoot; deleted with mDocModel
     delete mGlTransList;
     RB_DEBUG->print("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() OK");
 }
@@ -158,18 +146,16 @@ bool ACC_BankImportCheckDialog::fileSave(bool /*withSelect*/) {
     // Insert glTrans items
     bool success = mGlTransList->dbUpdateList(ACC_MODELFACTORY->getDatabase(),
                                                  RB2::ResolveOne);
-    // Update glSum to database
-//    success = success ? oper.postSumList() : false;
 
-    RB_ObjectContainer* transDocList = mTransDocListRoot->getContainer("ACC_TransDocList");
-    success = success ? transDocList->dbUpdateList(ACC_MODELFACTORY->getDatabase(), RB2::ResolveAll) : false;
+    RB_ObjectContainer* transDocList =
+            mTransDocListRoot->getContainer("ACC_TransDocList");
+    success = success && transDocList->dbUpdateList(
+                ACC_MODELFACTORY->getDatabase(), RB2::ResolveAll);
 
     // Set last and highest used bank statement number in system type list
     ACC_SqlCommonFunctions f;
-    success = success ? f.setLastTransNo(ACC2::TransBankCash, mBankGlAccId, mLastImportedNo) : false;
-
-    // TODO: implement
-//    success = success ? mHandleAllocn.submitAllAndSelect() : false;
+    success = success && f.setLastTransNo(ACC2::TransBankCash, mBankGlAccId,
+                                          mLastImportedNo);
 
     // Commit or rollback
     //
@@ -184,7 +170,8 @@ bool ACC_BankImportCheckDialog::fileSave(bool /*withSelect*/) {
 
     mSaveInProgress = false;
 
-    // HACK: MySQL on MS Windows does not store the ACC_TransDoc's. I do not know why.
+    // HACK: MySQL on MS Windows does not store the ACC_TransDoc's.
+    // I do not know why.
     bool allTransDocExisted = ensureTransDocExisted(transDocList);
     QApplication::restoreOverrideCursor();
 
@@ -268,148 +255,6 @@ void ACC_BankImportCheckDialog::on_pbOpenFile_clicked() {
     } else {
         pbNext->setEnabled(false);
     }
-}
-
-/**
- * Button select item account clicked
- */
-void ACC_BankImportCheckDialog::on_ileItemAccount_clicked() {
-    if (!tvItem->currentIndex().isValid()) {
-        ACC_DIALOGFACTORY->requestWarningDialog(tr("No item selected.\n"
-                                                   "Please select an item first."));
-        return;
-    }
-
-    RB_Dialog* dlg = ACC_DIALOGFACTORY->getDialog(ACC_DialogFactory::DialogSelectChartMaster);
-
-
-    if (dlg->exec() == QDialog::Accepted) {
-        RB_ObjectBase* obj = dlg->getCurrentObject();
-
-        if (obj) {
-            if (isDebtorCreditorAccount(obj)) {
-                return; // do nothing
-            }
-
-            QModelIndex index = mItemModel->getProxyIndex();
-            QModelIndex idx = mItemModel->index(
-                        index.row(), mItemModel->fieldIndex("chartmaster_idx"));
-            RB_String acctId = obj->getId();
-            mItemModel->setData(idx, acctId
-                            + obj->getValue("accountcode").toString() + " - "
-                            + obj->getValue("accountname").toString());
-
-            int row = tvDocument->currentIndex().row();
-            QModelIndex custSupIdIdx;
-            if (mTransType == ACC2::TransDebtor) {
-                custSupIdIdx = mDocModel->index(row, mDocModel->fieldIndex("debtor_idx"));
-            } else if (mTransType == ACC2::TransCreditor) {
-                custSupIdIdx = mDocModel->index(row, mDocModel->fieldIndex("creditor_idx"));
-            }
-            RB_String csId = mDocModel->data(custSupIdIdx, RB2::RoleOrigData).toString();
-
-            ACC_SqlCommonFunctions oper;
-
-            if (mTransType == ACC2::TransDebtor && !csId.isEmpty()) {
-                oper.update("ACC_Customer", "lastusedacct_id", acctId, csId);
-            } else if (mTransType == ACC2::TransCreditor && !csId.isEmpty()) {
-                oper.update("ACC_Supplier", "lastusedacct_id", acctId, csId);
-            }
-
-            if (mTransType == ACC2::TransDebtor || mTransType == ACC2::TransCreditor) {
-                idx = mItemModel->index(row, mItemModel->fieldIndex("taxhighamt"));
-                mItemModel->setData(idx, 0.0);
-                idx = mItemModel->index(row, mItemModel->fieldIndex("taxlowamt"));
-                mItemModel->setData(idx, 0.0);
-                idx = mItemModel->index(row, mItemModel->fieldIndex("taxotheramt"));
-                mItemModel->setData(idx, 0.0);
-            }
-        }
-    } else {
-        ACC_DIALOGFACTORY->requestWarningDialog(tr("No account selected.\n"
-                                                   "Data is unchanged."));
-    }
-
-    dlg->deleteLater();
-//    slotDataChanged();
-}
-
-/**
- * Button allocation clicked, to allocate invoice with payments or journal entry
- */
-void ACC_BankImportCheckDialog::on_ileAllocation_clicked() {
-    if (!tvItem->currentIndex().isValid()) {
-        ACC_DIALOGFACTORY->requestWarningDialog(tr("No item selected.\n"
-                                                   "Please select an item first."));
-        return;
-    }
-
-    // Open dialog to select transaction document customer (debtor) or supplier (creditor)
-    ACC_SelectAllocnDialog* dlg = new ACC_SelectAllocnDialog(this);
-    dlg->init();
-
-    if (leItemAmount->text().toDouble() >= 0.0) {
-        dlg->setFilterType(ACC2::AllocnCustomer);
-    } else {
-        dlg->setFilterType(ACC2::AllocnSupplier);
-    }
-
-    dlg->init();
-
-    if (dlg->exec() != QDialog::Accepted) {
-        dlg->deleteLater();
-        return;
-    }
-
-    // Handle allocation between current item model and (alloc.) document model
-    RB_ObjectBase* obj = dlg->getCurrentObject();
-    if (!obj) {
-        ACC_DIALOGFACTORY->requestWarningDialog(tr("No item selected,\n"
-                                                   "allocation unchanged."));
-        dlg->deleteLater();
-        return;
-    }
-    RB_String docToId = obj->getId();
-    RB_String docToDspl = obj->getValue("transno").toString(); //display value
-    int transType = obj->getValue("doctype").toInt();
-
-    // Reset to the receivable or payable GL account
-    if (transType == ACC2::TransDebtor || transType == ACC2::TransSalesOrder) {
-        mItemModel->setCurrentValue("chartmaster_idx",
-                                    ACC_QACHARTMASTER->getAccRecId()
-                                    + ACC_QACHARTMASTER->getAccRecName(),
-                                    Qt::EditRole);
-    } else if (transType == ACC2::TransCreditor || transType == ACC2::TransPurchOrder) {
-        mItemModel->setCurrentValue("chartmaster_idx",
-                                    ACC_QACHARTMASTER->getAccPayId()
-                                    + ACC_QACHARTMASTER->getAccPayName(),
-                                    Qt::EditRole);
-    } else {
-        RB_DEBUG->error("ACC_GlTransactionWidget::on_ileAllocation_clicked() "
-                        "Document type ERROR");
-        return;
-    }
-
-    mHandleAllocn.addAllocn(mItemModel, docToId, docToDspl,
-                            mDocModel->getCurrentId());
-
-    dlg->deleteLater();
-//    slotDataChanged();
-}
-
-/**
- * Button clear/remove allocation clicked
- */
-void ACC_BankImportCheckDialog::on_ileAllocation_clear() {
-    if (!tvItem->currentIndex().isValid()) {
-        ACC_DIALOGFACTORY->requestWarningDialog(tr("No item is selected.\n"
-                                                   "Allocation is unchanged."));
-        return;
-    }
-
-    mHandleAllocn.delItemAllocn(mItemModel);
-    mItemModel->setCurrentValue("chartmaster_idx", "0", Qt::EditRole);
-    //    slotDataChanged();
 }
 
 /**
@@ -717,10 +562,12 @@ bool ACC_BankImportCheckDialog::isDebtorCreditorAccount(RB_ObjectBase* actObj) {
 /**
  * HACK
  */
-bool ACC_BankImportCheckDialog::ensureTransDocExisted(RB_ObjectContainer *transDocList) {
+bool ACC_BankImportCheckDialog::ensureTransDocExisted(
+        RB_ObjectContainer* transDocList) {
     if (!transDocList) {
         RB_DEBUG->error("ACC_BankImportCheckDialog::ensureTransDocExisted() ERROR");
     }
+
     bool allExisted = true;
     ACC_SqlCommonFunctions f;
     RB_String strId = "";

@@ -85,15 +85,15 @@ void DB_CreateModelObject::createSourceContent(RB_ObjectBase* memberList) {
             + "_" + mObjectName.toLower() + ".h\"\n";
     mSourceContent += "\n";
     QString objCamelCase = mPerspectiveCode.toUpper() + "_" + mObjectName;
-    mSourceContent += objCamelCase + "::" + objCamelCase
-            + "(const QString& id, RB_ObjectBase* p,\n"
-            "                    const QString& n, RB_ObjectFactory* f)\n"
-            "					: RB_ObjectContainer (id, p, n, f) {\n"
+    mSourceContent += objCamelCase + "::" + objCamelCase + "(\n"
+            "                   const QString& id, RB_ObjectBase* p,\n"
+            "                   const QString& n, RB_ObjectFactory* f)\n"
+            "					: " + mBaseObjectName + " (id, p, n, f) {\n"
             "	createMembers();\n"
             "}\n";
     mSourceContent += "\n";
     mSourceContent += objCamelCase + "::" + objCamelCase  + "(" + objCamelCase
-        + "* obj) : RB_ObjectContainer(obj) {\n"
+        + "* obj) : \n                   " + mBaseObjectName + "(obj) {\n"
         "	createMembers();\n"
         "	*this = *project;\n"
         "}\n";
@@ -102,16 +102,29 @@ void DB_CreateModelObject::createSourceContent(RB_ObjectBase* memberList) {
         "	// clean up children done in RB_ObjectBase and RB_ObjectContainer\n"
         "}\n";
     mSourceContent += "\n";
-    mSourceContent += "void " + objCamelCase + "::createMembers() {\n";
+    mSourceContent += "/**\n";
+    mSourceContent += " * Create members:\n";
 
     RB_ObjectIterator* iter = memberList->createIterator();
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
         QString memberName = obj->getValue("member").toString();
-        memberName = memberName.simplified();
-        memberName = memberName.remove(" ");
-        memberName = memberName.toLower();
+        formatMemberName(memberName);
+        QString description = obj->getValue("description").toString();
+        mSourceContent += " * \\li " + memberName + " " + description + "\n";
+    }
+
+    // NOTE: iter is reused below, delete is further below
+    mSourceContent += " */\n";
+
+
+    mSourceContent += "void " + objCamelCase + "::createMembers() {\n";
+
+    for (iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* obj = iter->currentObject();
+        QString memberName = obj->getValue("member").toString();
+        formatMemberName(memberName);
 
         mSourceContent += "    addMember(\""
                 + memberName + "\", \""
@@ -161,7 +174,13 @@ void DB_CreateModelObject::setFileHeader(QString& content,
             + " project.\n"
     " *\n"
     " * See http://www.biluna.com for further details.\n"
-    " *****************************************************************/\n";
+              " *****************************************************************/\n";
+}
+
+void DB_CreateModelObject::formatMemberName(QString& memberName) {
+    memberName = memberName.simplified();
+    memberName = memberName.remove(" ");
+    memberName = memberName.toLower();
 }
 
 bool DB_CreateModelObject::writeFiles() {

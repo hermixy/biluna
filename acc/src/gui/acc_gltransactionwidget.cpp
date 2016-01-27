@@ -340,6 +340,7 @@ void ACC_GlTransactionWidget::fileRevert() {
     setWindowModified(false);
 
     leBalance->clear();
+    mTransDocModel->select();
 }
 
 /**
@@ -400,7 +401,7 @@ void ACC_GlTransactionWidget::on_pbAddDoc_clicked() {
 
     // NOTE: do not forget to set the default column values, specially for the
     //       relational table otherwise new row will not show!
-    QDateTime today = QDateTime::currentDateTime();
+    QDate today = QDate::currentDate();
     QModelIndex index = mTransDocModel->index(row, mTransDocModel->fieldIndex("transdate"));
     // mTransDocModel->setData(index, today.date().toString("yyyy-MM-dd"), Qt::EditRole);
     mTransDocModel->setData(index, today, Qt::EditRole);
@@ -873,8 +874,8 @@ void ACC_GlTransactionWidget::on_pbAddItem_clicked() {
         mItemTransModel->setData(idx, (int)ACC2::TransBankCash, Qt::EditRole); // bank/cash document
         // set defaults
         idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("transdate"), QModelIndex());
-        RB_Variant dateTime = mTransDocModel->getCurrentValue("transdate");
-        mItemTransModel->setData(idx, dateTime, Qt::EditRole);
+        RB_Variant date = mTransDocModel->getCurrentValue("transdate");
+        mItemTransModel->setData(idx, date, Qt::EditRole);
         idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("currency_id"), QModelIndex());
         mItemTransModel->setData(idx, "EUR", Qt::EditRole);
         idx = mItemTransModel->index(row, mItemTransModel->fieldIndex("chartmaster_idx"), QModelIndex());
@@ -2337,8 +2338,8 @@ void ACC_GlTransactionWidget::createNewGlTrans() {
     mType = mTransDocModel->getCurrentValue("doctype").toInt();
     mTypeNo = mTransDocModel->getCurrentValue("transno").toInt();
     mDate = mTransDocModel->getCurrentValue("transdate", Qt::DisplayRole).toString();
-    QDateTime dateTime = mTransDocModel->getCurrentValue("transdate", Qt::DisplayRole).toDateTime();
-    mPeriod = dateTime.date().year() * 100 + dateTime.date().month();
+    QDate date = mTransDocModel->getCurrentValue("transdate", Qt::DisplayRole).toDate();
+    mPeriod = date.year() * 100 + date.month();
     mDocId = mTransDocModel->getCurrentId();
     RB_String docDescr = mTransDocModel->getCurrentValue("description", Qt::DisplayRole).toString();
     RB_String itemDescr = "";

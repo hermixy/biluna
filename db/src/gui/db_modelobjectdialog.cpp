@@ -30,10 +30,10 @@ void DB_ModelObjectDialog::init() {
     ui->cbBaseObject->addItems(items);
     ui->tbbMemberList->initEdit(false, false, false, false);
 
-    ui->twMemberList->setColumnCount(4);
+    ui->twMemberList->setColumnCount(5);
     ui->twMemberList->setRowCount(2);
     items.clear();
-    items << "name" << "unit" << "default" << "type";
+    items << "name" << "unit" << "default" << "type" << "description";
     ui->twMemberList->setHorizontalHeaderLabels(items);
     ui->twMemberList->setItemDelegateForColumn(3, getNewMemberTypeDelegate());
 
@@ -141,6 +141,7 @@ void DB_ModelObjectDialog::createMemberList(RB_ObjectContainer* memberList) {
     int unitCol = 1;
     int defaultCol = 2;
     int typeCol = 3;
+    int descrCol = 4;
     RB_ObjectAtomic* memberObj = nullptr;
     bool woMembers = true;
 
@@ -156,6 +157,8 @@ void DB_ModelObjectDialog::createMemberList(RB_ObjectContainer* memberList) {
                              ui->twMemberList->item(row, typeCol)->text());
         memberObj->addMember("default", "-",
                              ui->twMemberList->item(row, defaultCol)->text());
+        memberObj->addMember("description", "-",
+                             ui->twMemberList->item(row, descrCol)->text());
         memberList->addObject(memberObj);
     }
 }

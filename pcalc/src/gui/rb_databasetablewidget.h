@@ -14,6 +14,9 @@ class RB_DatabaseTableWidget : public RB_Widget {
 public:
     RB_DatabaseTableWidget(QWidget* parent = 0);
     virtual ~RB_DatabaseTableWidget();
+    QString getName() const { return QString(); }
+    RB2::PerspectiveType getPerspectiveType() const { return RB2::PerspectiveNone; }
+
 
 private:
     Ui::RB_DatabaseTableWidget *ui;

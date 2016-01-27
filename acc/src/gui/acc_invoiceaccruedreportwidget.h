@@ -43,6 +43,9 @@ public slots:
 
 protected:
     void changeEvent(QEvent *e);
+    // overrides
+    virtual void setDataRow(RB_String& html, RB_ObjectBase* obj);
+    virtual void setDataFooter(RB_String& html);
 
 private:
     void setColumnWidthsAndTitle();
@@ -50,6 +53,12 @@ private:
 
     QDate mFiscalYearStart;
     QDate mFiscalYearEnd;
+    double mAmountRec;
+    double mAmountPay;
+    double mAmountAlloc;
+    double mTotalAmountRec;
+    double mTotalAmountPay;
+    QString mPreviousTransDocNo;
 };
 
 #endif // ACC_INVOICEACCRUEDREPORTWIDGET_H

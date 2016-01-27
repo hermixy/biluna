@@ -53,16 +53,18 @@ void ACC_ActionBankImport::trigger() {
         ACC_ActionGlTransaction action;
         action.trigger();
 
-        // Check widget state
-        RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
-                ACC_DialogFactory::WidgetGlTransaction);
+        // Check widget state.
+        // TODO: crashes application?
 
-        if (mdiWin->isWindowModified()) {
-            ACC_DIALOGFACTORY->requestWarningDialog(
-                        tr("Data in GL Transaction window is modified.\n"
-                           "Please save your data first."));
-            return;
-        }
+//        RB_MdiWindow* mdiWin = ACC_DIALOGFACTORY->getMdiWindow(
+//                ACC_DialogFactory::WidgetGlTransaction);
+
+//        if (mdiWin->isWindowModified()) {
+//            ACC_DIALOGFACTORY->requestWarningDialog(
+//                        tr("Data in GL Transaction window is modified.\n"
+//                           "Please save your data first."));
+//            return;
+//        }
 
         // Create dialog
         RB_Dialog* dlg = ACC_DIALOGFACTORY->getDialog(ACC_DialogFactory::DialogBankImport);
