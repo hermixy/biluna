@@ -60,7 +60,7 @@ PCALC_EN1591Widget::~PCALC_EN1591Widget() {
 }
 
 RB_String PCALC_EN1591Widget::getSaveAsFileName() {
-    return ""; // "pcalc_EN1591_" + mModel->getCurrentValue("number").toString();
+    return "pcalc_EN1591_" + mAssemblyModel->getCurrentValue("number").toString();
 }
 
 void PCALC_EN1591Widget::init() {

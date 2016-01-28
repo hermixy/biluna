@@ -26,9 +26,18 @@ PCALC_En13555PqrDeltaeGC::~PCALC_En13555PqrDeltaeGC() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
+/**
+ * Create members:
+ * \li c test rig stifness [kN/mm], 'k' is used in calculations
+ * \li qa gasket strees at assembly [N/mm2],
+ * the highest one at temperature is Qsmax
+ * \li temp temperature [Celsius]
+ * \li pqr Pqr [-]
+ * \li deltaegc delta eGC [mm]
+ */
 void PCALC_En13555PqrDeltaeGC::createMembers() {
     addMember("c", "kN/mm", 0.0, RB2::MemberDouble);
-    addMember("qg", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("qa", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("temp", "Celsius", 0.0, RB2::MemberDouble);
     addMember("pqr", "-", 0.0, RB2::MemberDouble);
     addMember("deltaegc", "mm", 0.0, RB2::MemberDouble);

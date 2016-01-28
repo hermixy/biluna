@@ -26,7 +26,7 @@ PCALC_En13555EGeG::~PCALC_En13555EGeG() {
 }
 
 void PCALC_En13555EGeG::createMembers() {
-    addMember("qg", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("qa", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("temp", "Celsius", 0.0, RB2::MemberDouble);
     addMember("capitaleg", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("eg", "mm", 0.0, RB2::MemberDouble);

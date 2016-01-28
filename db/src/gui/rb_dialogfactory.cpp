@@ -11,6 +11,7 @@
 #include "rb_dialogfactory.h"
 
 #include "rb_debug.h"
+#include "rb_dialogwindow.h"
 #include "rb_dockwidget.h"
 #include "rb_mainwindow.h"
 #include "rb_mdiwindow.h"
@@ -220,6 +221,32 @@ bool RB_DialogFactory::isWidgetActive(int type) {
     RB_Widget* wgt = findWidget(type);
     if (wgt) return true;
     return false;
+}
+
+/**
+ * Get dialog
+ * @param type type of widget
+ * @return RB_DialogWindow
+ */
+RB_DialogWindow *RB_DialogFactory::getDialogWindow(int type,
+                                                   const RB_String& docName,
+                                                   bool isNewWidget) {
+    if (!mMainWindow) {
+        RB_DEBUG->error("RB_DialogFactory::getDialogWindow() ERROR");
+        return NULL;
+    }
+
+    RB_DialogWindow* dlgWindow = NULL;
+    RB_Widget* wgt = getWidget(type, mMainWindow);
+
+    if (wgt) {
+        wgt->setName(docName);
+        wgt->setIsNewWidget(isNewWidget);
+        dlgWindow = new RB_DialogWindow(mMainWindow, wgt);
+        wgt->init(); // here because widget->init() will set size of dialog
+    }
+
+    return dlgWindow;
 }
 
 /**

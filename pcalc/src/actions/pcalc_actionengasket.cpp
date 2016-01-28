@@ -12,7 +12,7 @@
 
 #include "pcalc_dialogfactory.h"
 #include "pcalc_modelfactory.h"
-#include "rb_mdiwindow.h"
+#include "rb_dialogwindow.h"
 
 
 PCALC_ActionENGasket::PCALC_ActionENGasket()
@@ -57,7 +57,7 @@ void PCALC_ActionENGasket::trigger() {
     }
 
     // Create widget and corresponding dockwidget if applicable
-    RB_Dialog* dlg = PCALC_DIALOGFACTORY->getDialog(
-            PCALC_DialogFactory::DialogENGasket);
+    RB_DialogWindow* dlg = PCALC_DIALOGFACTORY->getDialogWindow(
+            PCALC_DialogFactory::WidgetEN13555Gasket);
     dlg->exec();
 }

@@ -8,7 +8,7 @@
  * See http://www.red-bag.com for further details.
  *****************************************************************/
 
-#include "rb_mdiwindow.h"
+#include "rb_dialogwindow.h"
 
 #include <QCloseEvent>
 #include "rb_debug.h"
@@ -21,33 +21,68 @@
  * @param mw main window
  * @param mwgt main widget to be shown on MDI window
  */
-RB_MdiWindow::RB_MdiWindow(RB_MainWindow* mw, RB_Widget* mwgt)
-            : QMdiSubWindow(mw) {
-    RB_DEBUG->print("RB_MdiWindow::RB_MdiWindow()");
+RB_DialogWindow::RB_DialogWindow(RB_MainWindow* mw, RB_Widget* mwgt)
+            : QDialog(mw) {
+    RB_DEBUG->print("RB_DialogWindow::RB_DialogWindow()");
 
     if (!mw || !mwgt) return;
     mMainWindow = mw;
     mCentralWidget = mwgt;
 
-    setWidget(mCentralWidget);
     setWindowIcon(QIcon(":/images/biluna16.png"));
     setAttribute(Qt::WA_DeleteOnClose);
 
+    // create layout and bottom buttons, dw is dialog window
+    gridLayout_dw = new QGridLayout(this);
+    gridLayout_dw->setObjectName(QStringLiteral("gridLayout_dw"));
+    gridLayout_dw->setHorizontalSpacing(0);
+    gridLayout_dw->setVerticalSpacing(0);
+    gridLayout_dw->setContentsMargins(0, 0, 0, 0);
+    gridLayout_dw->addWidget(mCentralWidget, 0, 0, 1, 1);
+
+    horizontalLayout_dw = new QHBoxLayout();
+    horizontalLayout_dw->setContentsMargins(3, 3, 3, 3);
+    horizontalLayout_dw->setObjectName(QStringLiteral("horizontalLayout_dw"));
+    pbHelp = new QPushButton(this);
+    pbHelp->setObjectName(QStringLiteral("pbHelp"));
+    pbHelp->setText(tr("&Help"));
+    horizontalLayout_dw->addWidget(pbHelp);
+
+    horizontalSpacer_dw = new QSpacerItem(40, 20, QSizePolicy::Expanding,
+                                       QSizePolicy::Minimum);
+    horizontalLayout_dw->addItem(horizontalSpacer_dw);
+
+    pbOk = new QPushButton(this);
+    pbOk->setObjectName(QStringLiteral("pbOk"));
+    pbOk->setText(tr("&OK"));
+    horizontalLayout_dw->addWidget(pbOk);
+
+    pbCancel = new QPushButton(this);
+    pbCancel->setObjectName(QStringLiteral("pbCancel"));
+    pbCancel->setText(tr("&Cancel"));
+    horizontalLayout_dw->addWidget(pbCancel);
+
+    gridLayout_dw->addLayout(horizontalLayout_dw, 1, 0, 1, 1);
+
+    // connection
     connect(mCentralWidget, SIGNAL(modificationChanged(bool)),
             this, SLOT(slotChangedModification(bool)));
     connect(mCentralWidget, SIGNAL(widgetClose()), this, SLOT(close()));
+    connect(pbHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
+    connect(pbOk, SIGNAL(clicked()), this, SLOT(slotOk()));
+    connect(pbCancel, SIGNAL(clicked()), this, SLOT(slotCancel()));
 }
 
 /**
  * Destructor
  */
-RB_MdiWindow::~RB_MdiWindow() {
+RB_DialogWindow::~RB_DialogWindow() {
     // Regular delete was not required since mWidget is created
-    // with RB_MdiWindow as parent. However crash of DB_InternetBrowserWidget
+    // with RB_DialogWindow as parent. However crash of DB_InternetBrowserWidget
     // deleteLater() provides object leak in case of application close()
 //    setWidget(NULL);
 //    mCentralWidget->deleteLater();
-    RB_DEBUG->print("RB_MdiWindow::~RB_MdiWindow() OK");
+    RB_DEBUG->print("RB_DialogWindow::~RB_DialogWindow() OK");
 }
 
 /**
@@ -55,7 +90,7 @@ RB_MdiWindow::~RB_MdiWindow() {
  * drawing from database.
  * @return ID of document
  */
-RB_String RB_MdiWindow::getId() const {
+RB_String RB_DialogWindow::getId() const {
     return mCentralWidget->getId();
 }
 
@@ -64,7 +99,7 @@ RB_String RB_MdiWindow::getId() const {
  * window type in case of unique window
  * @return name of document or window type, shown as window title
  */
-RB_String RB_MdiWindow::getName() const {
+RB_String RB_DialogWindow::getName() const {
     return mCentralWidget->getName();
 }
 
@@ -73,7 +108,7 @@ RB_String RB_MdiWindow::getName() const {
  * only gives the file name
  * @return full file path and file name
  */
-QString RB_MdiWindow::getSaveAsFileName() const {
+QString RB_DialogWindow::getSaveAsFileName() const {
     return mCentralWidget->getSaveAsFileName();
 }
 
@@ -82,7 +117,7 @@ QString RB_MdiWindow::getSaveAsFileName() const {
  * when managing the open or active windows in the MDI area.
  * @return type of central widget
  */
-int RB_MdiWindow::getWidgetType() const {
+int RB_DialogWindow::getWidgetType() const {
     return mCentralWidget->getWidgetType();
 }
 
@@ -90,7 +125,7 @@ int RB_MdiWindow::getWidgetType() const {
  * Set type of central widget
  * @param type type of widget (enumerator)
  */
-void RB_MdiWindow::setWidgetType(int type) {
+void RB_DialogWindow::setWidgetType(int type) {
     mCentralWidget->setWidgetType(type);
 }
 
@@ -99,7 +134,7 @@ void RB_MdiWindow::setWidgetType(int type) {
  * identify the corresponding dockwindows for creation and/or activation
  * @return parent widget type
  */
-int RB_MdiWindow::getParentWidgetType() const {
+int RB_DialogWindow::getParentWidgetType() const {
     return mCentralWidget->getParentWidgetType();
 }
 
@@ -107,7 +142,7 @@ int RB_MdiWindow::getParentWidgetType() const {
  * Set parent widget type, parent widget type is a MDI window widget type
  * @param type parent widget type
  */
-void RB_MdiWindow::setParentWidgetType(int type) {
+void RB_DialogWindow::setParentWidgetType(int type) {
     mCentralWidget->setParentWidgetType(type);
 }
 
@@ -116,7 +151,7 @@ void RB_MdiWindow::setParentWidgetType(int type) {
  * the engineering departments
  * @return perspective type
  */
-RB2::PerspectiveType RB_MdiWindow::getPerspectiveType() const {
+RB2::PerspectiveType RB_DialogWindow::getPerspectiveType() const {
     return mCentralWidget->getPerspectiveType();
 }
 
@@ -124,7 +159,7 @@ RB2::PerspectiveType RB_MdiWindow::getPerspectiveType() const {
  * Get central widget
  * @return central widget
  */
-RB_Widget* RB_MdiWindow::getWidget() {
+RB_Widget* RB_DialogWindow::getWidget() {
     return mCentralWidget;
 }
 
@@ -132,24 +167,62 @@ RB_Widget* RB_MdiWindow::getWidget() {
  * Show window, overriding non-virtual base function to set correct
  * window title based on widget name first.
  */
-void RB_MdiWindow::show() {
+void RB_DialogWindow::show() {
     updateWindowTitle(false);
-    QMdiSubWindow::show();
+    QDialog::show();
+}
+
+/**
+ * Show window, dialog modal
+ * @return result
+ */
+int RB_DialogWindow::exec() {
+    updateWindowTitle(false);
+    return QDialog::exec();
 }
 
 /**
  * Set window is modified state when model/document is dirty or saved
  * @param dirty true will add asterisk, false will remove asterisk
  */
-void  RB_MdiWindow::slotChangedModification(bool dirty){
+void  RB_DialogWindow::slotChangedModification(bool dirty){
     updateWindowTitle(dirty);
+}
+
+/**
+ * Slot handling Help button clicked
+ */
+void RB_DialogWindow::slotHelp() {
+    if (mCentralWidget) {
+        mMainWindow->slotHelpSubject(mCentralWidget->getHelpSubject());
+    }
+}
+
+/**
+ * Slot handling Ok button clicked
+ */
+void RB_DialogWindow::slotOk() {
+    if (mCentralWidget) {
+        // database select not required, dialog is closed
+        bool withSelect = false;
+        mCentralWidget->fileSave(withSelect);
+    }
+
+    QDialog::accept();
+}
+
+/**
+ * Slot handling Cancel button clicked
+ */
+void RB_DialogWindow::slotCancel() {
+    QDialog::reject();
 }
 
 /**
  * Close event of MDI window
  * @param event event
  */
-void RB_MdiWindow::closeEvent(QCloseEvent* e) {
+void RB_DialogWindow::closeEvent(QCloseEvent* e) {
     if (isWindowModified()) {
         if (mCentralWidget->closeWidget()) {
             e->accept();
@@ -165,14 +238,15 @@ void RB_MdiWindow::closeEvent(QCloseEvent* e) {
  * Update window title based on the central widget title
  * @param dirty is true if document has been edited and not yet saved
  */
-void RB_MdiWindow::updateWindowTitle(bool dirty) {
+void RB_DialogWindow::updateWindowTitle(bool dirty) {
     if (isWindowModified() && dirty) {
         // Widget already set modified
         return;
     }
 
     if (mCentralWidget->getName().isEmpty()) {
-        RB_DEBUG->warning("RB_MdiWindow::updateWindowTitle() document name empty WARNING");
+        RB_DEBUG->warning("RB_DialogWindow::updateWindowTitle() "
+                          "document name empty WARNING");
     } else {
         // placeholder [*] always required
         setWindowTitle(mCentralWidget->getName() + "[*]");

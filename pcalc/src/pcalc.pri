@@ -7,8 +7,7 @@
 
 FORMS += \
     ../src/gui/pcalc_en1591widget.ui \
-    ../src/gui/rb_databasetablewidget.ui \
-    ../src/gui/rb_databasetypedialog.ui
+    ../src/gui/rb_databasetablewidget.ui
 
 HEADERS += \
     ../../peng/src/model/peng_project.h \
@@ -54,12 +53,11 @@ HEADERS += \
     ../src/calc/unittest/rb_unittestfactory.h \
     ../src/calc/unittest/en1591_unittestfactory.h \
     ../src/gui/pcalc_dialogfactory.h \
+    ../src/gui/pcalc_en13555gasketwidget.h \
     ../src/gui/pcalc_en1591widget.h \
-    ../src/gui/pcalc_engasketdialog.h \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditdialog.h \
     ../src/gui/rb_databasetablewidget.h \
-    ../src/gui/rb_databasetypedialog.h \
     ../src/model/EN1591/pcalc_en13555egeg.h \
     ../src/model/EN1591/pcalc_en13555gasket.h \
     ../src/model/EN1591/pcalc_en13555manufacturer.h \
@@ -130,11 +128,10 @@ SOURCES += \
     ../src/calc/unittest/rb_unittestfactory.cpp \
     ../src/calc/unittest/en1591_unittestfactory.cpp \
     ../src/gui/pcalc_dialogfactory.cpp \
+    ../src/gui/pcalc_en13555gasketwidget.cpp \
     ../src/gui/pcalc_en1591widget.cpp \
-    ../src/gui/pcalc_engasketdialog.cpp \
     ../src/gui/pcalc_projecteditdialog.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
-    ../src/gui/rb_databasetypedialog.cpp \
     ../src/model/EN1591/pcalc_en13555egeg.cpp \
     ../src/model/EN1591/pcalc_en13555gasket.cpp \
     ../src/model/EN1591/pcalc_en13555manufacturer.cpp \
