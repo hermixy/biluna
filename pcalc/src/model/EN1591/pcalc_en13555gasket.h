@@ -15,11 +15,11 @@
 /**
  * Gasket type for EN13555 tests and EN1591 calculations
  */
-class DB_EXPORT PCALC_En13555Gasket : public RB_ObjectContainer {
+class PCALC_En13555Gasket : public RB_ObjectContainer {
 
 public:
     PCALC_En13555Gasket(const QString& id = "", RB_ObjectBase* p = NULL,
-               const QString& n = , RB_ObjectFactory* f = NULL);
+               const QString& n = "", RB_ObjectFactory* f = NULL);
     PCALC_En13555Gasket(PCALC_En13555Gasket* obj);
     virtual ~PCALC_En13555Gasket();
 

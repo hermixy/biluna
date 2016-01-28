@@ -20,7 +20,7 @@ PCALC_En13555Manufacturer::PCALC_En13555Manufacturer(
                     PCALC_En13555Manufacturer* obj)
                     : RB_ObjectContainer(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
 PCALC_En13555Manufacturer::~PCALC_En13555Manufacturer() {

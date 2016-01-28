@@ -18,7 +18,7 @@ PCALC_En13555EGeG::PCALC_En13555EGeG(const QString& id, RB_ObjectBase* p,
 PCALC_En13555EGeG::PCALC_En13555EGeG(PCALC_En13555EGeG* obj)
                     : RB_ObjectAtomic(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
 PCALC_En13555EGeG::~PCALC_En13555EGeG() {

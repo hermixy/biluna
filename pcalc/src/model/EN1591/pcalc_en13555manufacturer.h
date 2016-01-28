@@ -15,11 +15,11 @@
 /**
  * Gasket manufacturer
  */
-class DB_EXPORT PCALC_En13555Manufacturer : public RB_ObjectContainer {
+class PCALC_En13555Manufacturer : public RB_ObjectContainer {
 
 public:
     PCALC_En13555Manufacturer(const QString& id = "", RB_ObjectBase* p = NULL,
-               const QString& n = , RB_ObjectFactory* f = NULL);
+               const QString& n = "", RB_ObjectFactory* f = NULL);
     PCALC_En13555Manufacturer(PCALC_En13555Manufacturer* obj);
     virtual ~PCALC_En13555Manufacturer();
 

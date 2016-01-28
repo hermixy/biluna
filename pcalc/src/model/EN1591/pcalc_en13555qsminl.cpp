@@ -18,7 +18,7 @@ PCALC_En13555QsminL::PCALC_En13555QsminL(const QString& id, RB_ObjectBase* p,
 PCALC_En13555QsminL::PCALC_En13555QsminL(PCALC_En13555QsminL* obj)
                     : RB_ObjectAtomic(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
 PCALC_En13555QsminL::~PCALC_En13555QsminL() {

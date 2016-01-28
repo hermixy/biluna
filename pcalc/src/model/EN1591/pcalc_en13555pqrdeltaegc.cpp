@@ -19,7 +19,7 @@ PCALC_En13555PqrDeltaeGC::PCALC_En13555PqrDeltaeGC(
 PCALC_En13555PqrDeltaeGC::PCALC_En13555PqrDeltaeGC(PCALC_En13555PqrDeltaeGC* obj)
                     : RB_ObjectAtomic(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
 PCALC_En13555PqrDeltaeGC::~PCALC_En13555PqrDeltaeGC() {

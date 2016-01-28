@@ -65,7 +65,7 @@ void DB_CreateModelObject::createHeaderContent() {
     mHeaderContent += "public:\n";
     mHeaderContent += "    " + objCamelCase + "(const QString& id = \"\", "
                                               "RB_ObjectBase* p = NULL,\n"
-    "               const QString& n = "", RB_ObjectFactory* f = NULL);\n";
+    "               const QString& n = \"\", RB_ObjectFactory* f = NULL);\n";
     mHeaderContent += "    " + objCamelCase + "(" + objCamelCase + "* obj);\n";
     mHeaderContent += "    virtual ~" + objCamelCase + "();\n";
     mHeaderContent += "\n";
@@ -95,7 +95,7 @@ void DB_CreateModelObject::createSourceContent(RB_ObjectBase* memberList) {
     mSourceContent += objCamelCase + "::" + objCamelCase  + "(" + objCamelCase
         + "* obj) : \n                   " + mBaseObjectName + "(obj) {\n"
         "	createMembers();\n"
-        "	*this = *project;\n"
+        "	*this = *obj;\n"
         "}\n";
     mSourceContent += "\n";
     mSourceContent += objCamelCase + "::~" + objCamelCase  + "() {\n"

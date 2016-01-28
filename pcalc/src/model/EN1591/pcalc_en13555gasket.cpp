@@ -18,7 +18,7 @@ PCALC_En13555Gasket::PCALC_En13555Gasket(const QString& id, RB_ObjectBase* p,
 PCALC_En13555Gasket::PCALC_En13555Gasket(PCALC_En13555Gasket* obj)
                     : RB_ObjectContainer(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
 PCALC_En13555Gasket::~PCALC_En13555Gasket() {

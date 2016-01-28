@@ -18,7 +18,7 @@ PCALC_En13555QminL::PCALC_En13555QminL(const QString& id, RB_ObjectBase* p,
 PCALC_En13555QminL::PCALC_En13555QminL(PCALC_En13555QminL* obj)
                     : RB_ObjectAtomic(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
 PCALC_En13555QminL::~PCALC_En13555QminL() {
