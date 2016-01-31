@@ -31,6 +31,12 @@ public:
 
     QString getHelpSubject() const;
 
+public slots:
+    void slotPbSelectManuf_clicked();
+    void slotPbClearManuf_clicked();
+    void slotPbSelectType_clicked();
+    void slotPbClearType_clicked();
+
 };
 
 #endif // PCALC_EN13555GASKETWIDGET_H

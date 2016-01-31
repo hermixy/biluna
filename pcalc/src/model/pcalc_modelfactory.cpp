@@ -68,6 +68,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
     QSqlDatabase db = RB_DATABASE->database(mDatabaseConnection);
 
     switch (type) {
+    case ModelEN13555Manuf:
+        model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555ManufacturerList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "manufacturer");
+        break;
     case ModelEN1591Assembly:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN1591_AssemblyList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
@@ -121,6 +125,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
     std::map<int, RB_MmProxy*>::iterator iter;
 
     switch (type) {
+    case ModelEN13555Manuf:
+        iter = mModelList.find(ModelNone);
+        break;
     case ModelEN1591Assembly:
         iter = mModelList.find(ModelNone);
         break;

@@ -42,6 +42,7 @@ public:
     enum ModelType {
         // start numbering from 191100
         ModelNone = 191100,             /**< Invalid model */
+        ModelEN13555Manuf,              /**< EN13555 Manufacturer of gasket model */
         ModelEN1591Assembly,            /**< EN1591 Assembly model */
         ModelEN1591BoltNutWasher,       /**< EN1591 Bolt Nut Washer model */
         ModelEN1591Flange,              /**< EN1591 Flange model */

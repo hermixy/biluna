@@ -9,23 +9,23 @@
 
 #include "pcalc_en13555egeg.h"
 
-PCALC_En13555EGeG::PCALC_En13555EGeG(const QString& id, RB_ObjectBase* p,
+PCALC_EN13555EGeG::PCALC_EN13555EGeG(const QString& id, RB_ObjectBase* p,
                     const QString& n, RB_ObjectFactory* f)
                     : RB_ObjectAtomic (id, p, n, f) {
 	createMembers();
 }
 
-PCALC_En13555EGeG::PCALC_En13555EGeG(PCALC_En13555EGeG* obj)
+PCALC_EN13555EGeG::PCALC_EN13555EGeG(PCALC_EN13555EGeG* obj)
                     : RB_ObjectAtomic(obj) {
 	createMembers();
     *this = *obj;
 }
 
-PCALC_En13555EGeG::~PCALC_En13555EGeG() {
+PCALC_EN13555EGeG::~PCALC_EN13555EGeG() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
-void PCALC_En13555EGeG::createMembers() {
+void PCALC_EN13555EGeG::createMembers() {
     addMember("qa", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("temp", "Celsius", 0.0, RB2::MemberDouble);
     addMember("capitaleg", "N/mm2", 0.0, RB2::MemberDouble);

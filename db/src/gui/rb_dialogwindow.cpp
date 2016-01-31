@@ -159,8 +159,32 @@ RB2::PerspectiveType RB_DialogWindow::getPerspectiveType() const {
  * Get central widget
  * @return central widget
  */
-RB_Widget* RB_DialogWindow::getWidget() {
+RB_Widget* RB_DialogWindow::getCentralWidget() {
     return mCentralWidget;
+}
+
+/**
+ * Get current data object from main model
+ * @return RB_ObjectBase data object
+ */
+RB_ObjectBase *RB_DialogWindow::getCurrentObject() {
+    return mCentralWidget->getCurrentObject();
+}
+
+/**
+ * Get current child data object from submodel 1
+ * @return RB_ObjectBase data object
+ */
+RB_ObjectBase *RB_DialogWindow::getCurrentChild1Object() {
+    return mCentralWidget->getCurrentChild1Object();
+}
+
+/**
+ * Get current child data object from submodel 2
+ * @return RB_ObjectBase data object
+ */
+RB_ObjectBase *RB_DialogWindow::getCurrentChild2Object() {
+    return mCentralWidget->getCurrentChild2Object();
 }
 
 /**
@@ -215,6 +239,11 @@ void RB_DialogWindow::slotOk() {
  * Slot handling Cancel button clicked
  */
 void RB_DialogWindow::slotCancel() {
+    if (mCentralWidget) {
+        // revert changes otherwise saved to database
+        mCentralWidget->fileRevert();
+    }
+
     QDialog::reject();
 }
 

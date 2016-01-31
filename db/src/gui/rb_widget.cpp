@@ -844,6 +844,15 @@ bool RB_Widget::fileSaveAs() {
 }
 
 /**
+ * File Revert, undo all changes to models
+ * To be overriden by actual widget, shows 'not implemented' message
+ */
+void RB_Widget::fileRevert() {
+    QMessageBox::warning(this, tr("Warning"),
+                         tr("File Revert not implemented"));
+}
+
+/**
  * File export PDF.
  * To be overriden by actual widget, prints widget
  */

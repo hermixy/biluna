@@ -52,6 +52,10 @@ public:
     virtual RB_DialogFactory* getDialogFactory();
 
     virtual QWidget* getMainWidget() { return NULL; }
+    virtual RB_ObjectBase* getCurrentObject() { return NULL; }
+    virtual void setCurrentObject() { }
+    virtual RB_ObjectBase* getCurrentChild1Object() { return NULL; }
+    virtual RB_ObjectBase* getCurrentChild2Object() { return NULL; }
 
     //! Get contextType such as DB and LDT
     virtual RB2::PerspectiveType getPerspectiveType() const = 0;
@@ -62,6 +66,7 @@ public:
     virtual void fileOpen();
     virtual bool fileSave(bool withSelect);
     virtual bool fileSaveAs();
+    virtual void fileRevert();
     virtual void filePdf(QPrinter* pr);
     virtual void filePrint(QPrinter* pr);
     virtual void filePrintPreview(QPrinter* pr);

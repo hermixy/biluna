@@ -77,6 +77,7 @@ public:
         // start numbering from 192100
         WidgetNone = 192100,            /**< Invalid model */
         WidgetEN13555Gasket,            /**< EN13555 gasket properties */
+        WidgetEN13555Manuf,             /**< EN13555 Manufacturer edit and selection */
         WidgetEN1591Flange,             /**< EN1591 flange calculation */
         WidgetDefault                   /**< Default- or all models */
     };

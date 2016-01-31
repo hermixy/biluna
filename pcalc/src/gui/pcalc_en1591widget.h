@@ -33,7 +33,7 @@ public:
     virtual void init();
     virtual bool fileSave(bool withSelect);
     virtual bool fileSaveAs();
-    virtual bool fileRevert();
+    virtual void fileRevert();
     virtual void filePdf(QPrinter* pr);
     virtual void filePrint(QPrinter* pr);
     virtual void filePrintPreview(QPrinter* pr);

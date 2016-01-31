@@ -536,12 +536,11 @@ bool PCALC_EN1591Widget::fileSaveAs() {
     return false;
 }
 
-bool PCALC_EN1591Widget::fileRevert() {
+void PCALC_EN1591Widget::fileRevert() {
     mLoadCaseModel->revertAll();
     mAssemblyModel->revertAll();
 
     setWindowModified(false);
-    return true;
 }
 
 /**

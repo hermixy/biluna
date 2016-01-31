@@ -9,20 +9,20 @@
 
 #include "pcalc_en13555pqrdeltaegc.h"
 
-PCALC_En13555PqrDeltaeGC::PCALC_En13555PqrDeltaeGC(
+PCALC_EN13555PqrDeltaeGC::PCALC_EN13555PqrDeltaeGC(
                     const QString& id, RB_ObjectBase* p,
                     const QString& n, RB_ObjectFactory* f)
                     : RB_ObjectAtomic (id, p, n, f) {
 	createMembers();
 }
 
-PCALC_En13555PqrDeltaeGC::PCALC_En13555PqrDeltaeGC(PCALC_En13555PqrDeltaeGC* obj)
+PCALC_EN13555PqrDeltaeGC::PCALC_EN13555PqrDeltaeGC(PCALC_EN13555PqrDeltaeGC* obj)
                     : RB_ObjectAtomic(obj) {
 	createMembers();
     *this = *obj;
 }
 
-PCALC_En13555PqrDeltaeGC::~PCALC_En13555PqrDeltaeGC() {
+PCALC_EN13555PqrDeltaeGC::~PCALC_EN13555PqrDeltaeGC() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
@@ -35,7 +35,7 @@ PCALC_En13555PqrDeltaeGC::~PCALC_En13555PqrDeltaeGC() {
  * \li pqr Pqr [-]
  * \li deltaegc delta eGC [mm]
  */
-void PCALC_En13555PqrDeltaeGC::createMembers() {
+void PCALC_EN13555PqrDeltaeGC::createMembers() {
     addMember("c", "kN/mm", 0.0, RB2::MemberDouble);
     addMember("qa", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("temp", "Celsius", 0.0, RB2::MemberDouble);

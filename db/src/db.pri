@@ -42,6 +42,7 @@ FORMS = \
     ../src/gui/db_simplereportwidget.ui \
     ../src/gui/db_systemgroupdialog.ui \
     ../src/gui/db_tabledialog.ui \
+    ../src/gui/db_tablewidget.ui \
     ../src/gui/db_textwidget.ui \
     ../src/gui/db_treedialog.ui \
     ../src/gui/db_xmlviewvalidatorwidget.ui \
@@ -207,6 +208,7 @@ HEADERS = \
     ../src/gui/db_sqlhighlighter.h \
     ../src/gui/db_systemgroupdialog.h \
     ../src/gui/db_tabledialog.h \
+    ../src/gui/db_tablewidget.h \
     ../src/gui/db_treedialog.h \
     ../src/gui/db_textwidget.h \
     ../src/gui/db_versiondialog.h \
@@ -459,6 +461,7 @@ SOURCES = \
     ../src/gui/db_sqlhighlighter.cpp \
     ../src/gui/db_systemgroupdialog.cpp \
     ../src/gui/db_tabledialog.cpp \
+    ../src/gui/db_tablewidget.cpp \
     ../src/gui/db_treedialog.cpp \
     ../src/gui/db_textwidget.cpp \
     ../src/gui/db_xmlviewvalidatorwidget.cpp \
