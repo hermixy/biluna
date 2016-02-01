@@ -13,10 +13,12 @@
 #include "pcalc_dialogfactory.h"
 #include "pcalc_modelfactory.h"
 #include "rb_dialogwindow.h"
+#include "ui_rb_databasetablewidget.h"
 
 PCALC_EN13555GasketWidget::PCALC_EN13555GasketWidget(QWidget* parent)
     : RB_DatabaseTableWidget(parent) {
-    // TODO
+
+    mModel = nullptr;
 }
 
 PCALC_EN13555GasketWidget::~PCALC_EN13555GasketWidget() {
@@ -24,16 +26,36 @@ PCALC_EN13555GasketWidget::~PCALC_EN13555GasketWidget() {
 }
 
 void PCALC_EN13555GasketWidget::init() {
+    QStringList items;
+    items << tr("None") << "QminL" << "QsminL" << "PQR delta_eGC" << "EG eG";
+    ui->cbProperty->addItems(items);
 
+    connect(ui->cbProperty, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(slotSetPropertyTable(int)));
+
+    ui->tableView->setToolButtonBar(ui->tbbData);
+    ui->cbProperty->setCurrentIndex(0);
+    readSettings();
 }
 
 bool PCALC_EN13555GasketWidget::fileSave(bool withSelect) {
-    // TODO:
-    return true;
+    bool success = true;
+
+    if (mModel) {
+        if (withSelect) {
+            success = mModel->submitAllAndSelect();
+        } else {
+            success = mModel->submitAll();
+        }
+    }
+
+    return success;
 }
 
 void PCALC_EN13555GasketWidget::fileRevert() {
-    // TODO:
+    if (mModel) {
+        mModel->revert();
+    }
     return;
 }
 
@@ -58,6 +80,7 @@ void PCALC_EN13555GasketWidget::on_pbSelectManuf_clicked() {
 
 void PCALC_EN13555GasketWidget::on_pbClearManuf_clicked() {
     setCodeManufacturer(nullptr);
+    on_pbClearType_clicked();
 }
 
 void PCALC_EN13555GasketWidget::on_pbSelectType_clicked() {
@@ -87,5 +110,69 @@ void PCALC_EN13555GasketWidget::on_pbSelectType_clicked() {
 
 void PCALC_EN13555GasketWidget::on_pbClearType_clicked() {
     setType(nullptr);
+    ui->cbProperty->setCurrentIndex(0);
+    slotSetPropertyTable(0);
+}
+
+void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
+    switch (index) {
+    case 0: {
+        if (mModel) {
+            fileSave(false);
+            delete mModel;
+            ui->tableView->setModel(nullptr);
+        }
+
+        break;
+    }
+    case 1: {
+        fileSave(false);
+        if (mModel) delete mModel;
+        mModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelEN13555QminL, false);
+        setModelTableView(mModel);
+        break;
+    }
+    case 2: {
+        fileSave(false);
+        if (mModel) delete mModel;
+        mModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelEN13555QsminL, false);
+        setModelTableView(mModel);
+        break;
+    }
+    case 3: {
+        fileSave(false);
+        if (mModel) delete mModel;
+        mModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelEN13555PQRdeltaeGC, false);
+        setModelTableView(mModel);
+        break;
+    }
+    case 4: {
+        fileSave(false);
+        if (mModel) delete mModel;
+        mModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelEN13555EGeG, false);
+        setModelTableView(mModel);
+        break;
+    }
+    default:
+        break;
+    }
+
+}
+
+void PCALC_EN13555GasketWidget::setModelTableView(RB_MmProxy* model) {
+    model->setRoot(mTypeId);
+    model->select();
+    formatTableView(ui->tableView, model);
+
+    // Hide columns
+    int colCount = model->columnCount();
+
+    for (int i = 0; i < RB2::HIDDENCOLUMNS && i < colCount; ++i) {
+        ui->tableView->hideColumn(i);
+    }
 }
 

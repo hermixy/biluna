@@ -29,7 +29,10 @@ RB_TableView::RB_TableView(QWidget* parent) : QTableView(parent) {
 void RB_TableView::setModel(RB_MmProxy* model) {
     QTableView::setModel(model);
     mModel = model;
-    mParentModel = mModel->getParentManager();
+
+    if (mModel) {
+        mParentModel = mModel->getParentManager();
+    }
 }
 
 void RB_TableView::setToolButtonBar(RB_ToolButtonBar* tbb) {

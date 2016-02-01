@@ -299,7 +299,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QTableView" name="tableView"/>
+        <widget class="RB_TableView" name="tableView"/>
        </item>
       </layout>
      </widget>
@@ -365,7 +365,24 @@
    <header>rb_toolbuttonbar.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>RB_TableView</class>
+   <extends>QTableView</extends>
+   <header>rb_tableview.h</header>
+  </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>leManuf</tabstop>
+  <tabstop>pbSelectManuf</tabstop>
+  <tabstop>pbClearManuf</tabstop>
+  <tabstop>leType</tabstop>
+  <tabstop>pbSelectType</tabstop>
+  <tabstop>pbClearType</tabstop>
+  <tabstop>cbProperty</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>cbXcoord</tabstop>
+  <tabstop>cbYcoord</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../db/src/gui/db.qrc"/>
  </resources>

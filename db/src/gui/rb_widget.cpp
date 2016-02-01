@@ -16,6 +16,7 @@
 #include "db_modelfactory.h"
 #include "db_seltreesiblingdialog.h"
 #include "rb_dialogfactory.h"
+#include "rb_dialogwindow.h"
 #include "rb_mainwindow.h"
 #include "rb_mdiwindow.h"
 #include "rb_settings.h"
@@ -1376,7 +1377,8 @@ void RB_Widget::formatTreeView(RB_TreeView* trv, RB_MmProxy* m) {
 }
 
 /**
- * Read widget size settings
+ * Read widget size settings, always at end of init() method
+ * of widget implementation
  */
 void RB_Widget::readSettings() {
     if (!mDialogFactory) {
@@ -1385,16 +1387,41 @@ void RB_Widget::readSettings() {
         return;
     }
 
-    RB_SETTINGS->beginGroup(objectName());
-    QMdiArea* mdiArea = mDialogFactory->getMainWindow()->getMdiArea();
-    if (parentWidget() && mdiArea->viewMode() != QMdiArea::TabbedView) {
-        QPoint point = RB_SETTINGS->value("parentpos", QPoint(10, 10)).toPoint();
-        parentWidget()->move(point);
-        QSize size = RB_SETTINGS->value("parentsize", parentWidget()->sizeHint()).toSize();
-        parentWidget()->resize(size);
+    RB_DialogWindow* dlgWindow = dynamic_cast<RB_DialogWindow*>(parentWidget());
+
+    if (dlgWindow) {
+        // parent is RB_DialogWindow
+        RB_SETTINGS->beginGroup(objectName());
+        QSize dlgSize = RB_SETTINGS->value("size", sizeHint()).toSize();
+        readChildrenSettings(this);
+        RB_SETTINGS->endGroup();
+
+        // Center dialog to parent
+        if (parentWidget()) {
+            QSize pwSize = parentWidget()->size();
+            QPoint pos = parentWidget()->pos()
+                    + QPoint(pwSize.width() / 2, pwSize.height() / 2)
+                    - QPoint(dlgSize.width() / 2, dlgSize.height() / 2);
+            move(pos);
+        }
+
+        resize(dlgSize);
+    } else {
+        // parent is RB_MdiWindow
+        RB_SETTINGS->beginGroup(objectName());
+        QMdiArea* mdiArea = mDialogFactory->getMainWindow()->getMdiArea();
+        if (parentWidget() && mdiArea->viewMode() != QMdiArea::TabbedView) {
+            QPoint point = RB_SETTINGS->value("parentpos",
+                                              QPoint(10, 10)).toPoint();
+            parentWidget()->move(point);
+            QSize size = RB_SETTINGS->value("parentsize",
+                                            parentWidget()->sizeHint()).toSize();
+            parentWidget()->resize(size);
+        }
+
+        readChildrenSettings(this);
+        RB_SETTINGS->endGroup();
     }
-    readChildrenSettings(this);
-    RB_SETTINGS->endGroup();
 }
 
 /**
@@ -1460,14 +1487,23 @@ void RB_Widget::writeSettings() {
     }
 
     RB_SETTINGS->beginGroup(objectName());
-    QMdiArea* mdiArea = mDialogFactory->getMainWindow()->getMdiArea();
+    RB_DialogWindow* dlgWindow = dynamic_cast<RB_DialogWindow*>(parentWidget());
 
-    if (parentWidget()
-            && mdiArea->viewMode() != QMdiArea::TabbedView
-            && !parentWidget()->isMinimized()) {
-        RB_SETTINGS->setValue("parentpos", parentWidget()->pos());
-        RB_SETTINGS->setValue("parentsize", parentWidget()->size());
+    if (dlgWindow) {
+        // parent is RB_DialogWindow
+        RB_SETTINGS->setValue("size", size());
+    } else {
+        // parent is RB_MdiWindow
+        QMdiArea* mdiArea = mDialogFactory->getMainWindow()->getMdiArea();
+
+        if (parentWidget()
+                && mdiArea->viewMode() != QMdiArea::TabbedView
+                && !parentWidget()->isMinimized()) {
+            RB_SETTINGS->setValue("parentpos", parentWidget()->pos());
+            RB_SETTINGS->setValue("parentsize", parentWidget()->size());
+        }
     }
+
     writeChildrenSettings(this);
     RB_SETTINGS->endGroup();
 }
@@ -1496,8 +1532,10 @@ void RB_Widget::writeChildrenSettings(QWidget* wObj) {
 
             for (int col = 0; col < colCount; ++col) {
                 if (!tv->horizontalHeader()->isSectionHidden(col)) {
-                    RB_SETTINGS->setValue(tv->objectName() + "_col" + RB_String::number(col),
-                                          tv->horizontalHeader()->sectionSize(col));
+                    RB_SETTINGS->setValue(tv->objectName() + "_col"
+                                          + RB_String::number(col),
+                                          tv->horizontalHeader()
+                                            ->sectionSize(col));
                 }
             }
         } else if (trv) {
@@ -1505,7 +1543,8 @@ void RB_Widget::writeChildrenSettings(QWidget* wObj) {
 
             for (int col = 0; col < colCount; ++col) {
                 if (!trv->header()->isSectionHidden(col)) {
-                    RB_SETTINGS->setValue(trv->objectName() + "_col" + RB_String::number(col),
+                    RB_SETTINGS->setValue(trv->objectName() + "_col"
+                                          + RB_String::number(col),
                                           trv->header()->sectionSize(col));
                 }
             }

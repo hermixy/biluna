@@ -90,6 +90,7 @@ RB_MdiWindow* RB_DialogFactory::getMdiWindow(int type, const RB_String& docName,
         RB_DEBUG->print(RB_Debug::D_ERROR, "RB_DialogFactory::getMdiWindow() ERROR");
         return NULL;
     }
+
     QMdiArea* mdiArea = mMainWindow->getMdiArea();
     if (!mdiArea) return NULL;
     RB_MdiWindow* mdiWindow = NULL;
@@ -110,6 +111,7 @@ RB_MdiWindow* RB_DialogFactory::getMdiWindow(int type, const RB_String& docName,
         if (wgt) {
             mdiWindow = new RB_MdiWindow(mMainWindow, wgt);
             mMainWindow->getMdiArea()->addSubWindow(mdiWindow);
+            wgt->setParent(mdiWindow);
             wgt->init(); // here because widget->init() will set size of MDI window
         }
     }
@@ -237,12 +239,13 @@ RB_DialogWindow *RB_DialogFactory::getDialogWindow(int type,
     }
 
     RB_DialogWindow* dlgWindow = NULL;
-    RB_Widget* wgt = getWidget(type, mMainWindow);
+    RB_Widget* wgt = getWidget(type, NULL);
 
     if (wgt) {
         wgt->setName(docName);
         wgt->setIsNewWidget(isNewWidget);
         dlgWindow = new RB_DialogWindow(mMainWindow, wgt);
+        wgt->setParent(dlgWindow);
         wgt->init(); // here because widget->init() will set size of dialog
     }
 
