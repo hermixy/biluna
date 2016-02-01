@@ -38,9 +38,6 @@ public:
     virtual void commandMessage(const RB_String& message);
     virtual void commandMessage(const RB_StringList& message);
 
-    void emitBankStatementsImported();
-
-
     /**
      * DB Dialog types, example = 113XXX:
      * - 11 = ACC,
@@ -146,9 +143,6 @@ public:
         WidgetTrialBalance,             /**< View trial balance */
         WidgetDefault                   /**< Default- or all models */
     };
-
-signals:
-    void bankStatementsImported();
 
 private:
     //! Private constructor

@@ -528,7 +528,6 @@ void ACC_BankImportCheckDialog::on_pbNext_clicked() {
  */
 void ACC_BankImportCheckDialog::on_pbImport_clicked() {
     fileSave(true);
-    ACC_DIALOGFACTORY->emitBankStatementsImported();
     accept();
 }
 

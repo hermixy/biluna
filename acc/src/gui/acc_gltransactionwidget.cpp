@@ -110,8 +110,6 @@ void ACC_GlTransactionWidget::init() {
 
     connect(cbLedgerAccount, SIGNAL(currentIndexChanged(int)),
             this, SLOT(slotLedgerAccountChanged(int)));
-    connect(ACC_DIALOGFACTORY, SIGNAL(bankStatementsImported()),
-            this, SLOT(slotRefreshBankModel()));
 
     //
     // 1. Set model
