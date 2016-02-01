@@ -72,6 +72,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555ManufacturerList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "manufacturer");
         break;
+    case ModelEN13555Gasket:
+        model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555GasketList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
+        break;
     case ModelEN1591Assembly:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN1591_AssemblyList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
@@ -126,6 +130,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
 
     switch (type) {
     case ModelEN13555Manuf:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelEN13555Gasket:
         iter = mModelList.find(ModelNone);
         break;
     case ModelEN1591Assembly:

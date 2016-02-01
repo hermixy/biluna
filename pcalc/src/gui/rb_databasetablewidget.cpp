@@ -8,7 +8,9 @@
  *****************************************************************/
 
 #include "rb_databasetablewidget.h"
+#include "rb_dialogfactory.h"
 #include "rb_dialogwindow.h"
+#include "rb_modelfactory.h"
 #include "ui_rb_databasetablewidget.h"
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QTableView>
@@ -137,22 +139,6 @@ void RB_DatabaseTableWidget::setType(RB_ObjectBase *obj) {
         mTypeId = obj->getId();
         ui->leType->setText(obj->getValue("type").toString());
     }
-}
-
-void RB_DatabaseTableWidget::on_pbSelectManuf_clicked() {
-    emit pbSelectManufClicked();
-}
-
-void RB_DatabaseTableWidget::on_pbClearManuf_clicked() {
-    emit pbClearManufClicked();
-}
-
-void RB_DatabaseTableWidget::on_pbSelectType_clicked() {
-    emit pbSelectTypeClicked();
-}
-
-void RB_DatabaseTableWidget::on_pbClearType_clicked() {
-    emit pbClearTypeClicked();
 }
 
 

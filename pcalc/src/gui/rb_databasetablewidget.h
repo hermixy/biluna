@@ -30,16 +30,10 @@ public:
     void setType(RB_ObjectBase* obj);
 
 public slots:
-    void on_pbSelectManuf_clicked();
-    void on_pbClearManuf_clicked();
-    void on_pbSelectType_clicked();
-    void on_pbClearType_clicked();
-
-signals:
-    void pbSelectManufClicked();
-    void pbClearManufClicked();
-    void pbSelectTypeClicked();
-    void pbClearTypeClicked();
+    virtual void on_pbSelectManuf_clicked() = 0;
+    virtual void on_pbClearManuf_clicked() = 0;
+    virtual void on_pbSelectType_clicked() = 0;
+    virtual void on_pbClearType_clicked() = 0;
 
 protected:
     QString mCodeManufId;

@@ -30,7 +30,8 @@ RB_DialogWindow::RB_DialogWindow(RB_MainWindow* mw, RB_Widget* mwgt)
     mCentralWidget = mwgt;
 
     setWindowIcon(QIcon(":/images/biluna16.png"));
-    setAttribute(Qt::WA_DeleteOnClose);
+    // setAttribute(Qt::WA_DeleteOnClose); not for dialog because
+    // getCurrentObject() method can be called after close.
 
     // create layout and bottom buttons, dw is dialog window
     gridLayout_dw = new QGridLayout(this);
@@ -80,8 +81,8 @@ RB_DialogWindow::~RB_DialogWindow() {
     // Regular delete was not required since mWidget is created
     // with RB_DialogWindow as parent. However crash of DB_InternetBrowserWidget
     // deleteLater() provides object leak in case of application close()
-//    setWidget(NULL);
-//    mCentralWidget->deleteLater();
+    //    setWidget(NULL);
+    //    mCentralWidget->deleteLater();
     RB_DEBUG->print("RB_DialogWindow::~RB_DialogWindow() OK");
 }
 
@@ -167,7 +168,7 @@ RB_Widget* RB_DialogWindow::getCentralWidget() {
  * Get current data object from main model
  * @return RB_ObjectBase data object
  */
-RB_ObjectBase *RB_DialogWindow::getCurrentObject() {
+RB_ObjectBase* RB_DialogWindow::getCurrentObject() {
     return mCentralWidget->getCurrentObject();
 }
 
@@ -175,7 +176,7 @@ RB_ObjectBase *RB_DialogWindow::getCurrentObject() {
  * Get current child data object from submodel 1
  * @return RB_ObjectBase data object
  */
-RB_ObjectBase *RB_DialogWindow::getCurrentChild1Object() {
+RB_ObjectBase* RB_DialogWindow::getCurrentChild1Object() {
     return mCentralWidget->getCurrentChild1Object();
 }
 
@@ -183,7 +184,7 @@ RB_ObjectBase *RB_DialogWindow::getCurrentChild1Object() {
  * Get current child data object from submodel 2
  * @return RB_ObjectBase data object
  */
-RB_ObjectBase *RB_DialogWindow::getCurrentChild2Object() {
+RB_ObjectBase* RB_DialogWindow::getCurrentChild2Object() {
     return mCentralWidget->getCurrentChild2Object();
 }
 

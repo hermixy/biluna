@@ -19,6 +19,7 @@ class PCALC_EN13555GasketWidget : public RB_DatabaseTableWidget {
 
 public:
     PCALC_EN13555GasketWidget(QWidget *parent = 0);
+    virtual ~PCALC_EN13555GasketWidget();
 
     QString getId() const { return RB_String(); }
     QString getName() const { return QString("EN13555 Gasket Properties"); }
@@ -28,14 +29,15 @@ public:
 
     void init();
     bool fileSave(bool withSelect);
+    void fileRevert();
 
     QString getHelpSubject() const;
 
 public slots:
-    void slotPbSelectManuf_clicked();
-    void slotPbClearManuf_clicked();
-    void slotPbSelectType_clicked();
-    void slotPbClearType_clicked();
+    virtual void on_pbSelectManuf_clicked();
+    virtual void on_pbClearManuf_clicked();
+    virtual void on_pbSelectType_clicked();
+    virtual void on_pbClearType_clicked();
 
 };
 

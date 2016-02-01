@@ -60,4 +60,5 @@ void PCALC_ActionENGasket::trigger() {
     RB_DialogWindow* dlg = PCALC_DIALOGFACTORY->getDialogWindow(
             PCALC_DialogFactory::WidgetEN13555Gasket);
     dlg->exec();
+    dlg->deleteLater();
 }

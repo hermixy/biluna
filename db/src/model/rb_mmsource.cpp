@@ -1332,7 +1332,8 @@ bool RB_MmSource::insertRows(int row, int count,
         for (int i = 0; i < count && success; ++i) {
             success = RB_MmAbstract::insertRows(row + i, 1, parent);
             setHiddenData(index(row + i, 0), RB_Uuid::createUuid().toString());
-            setHiddenData(index(row + i, 1), mRoot->getId());
+            RB_String parentId = mRoot->getId() == "" ? mRoot->getId() : "none";
+            setHiddenData(index(row + i, 1), parentId);
             setHiddenData(index(row + i, 2), mTableName);
             setHiddenData(index(row + i, 3), (int)RB2::StatusDefault);
             RB_String dt = QDateTime::currentDateTime().toString(Qt::ISODate);
@@ -1346,7 +1347,7 @@ bool RB_MmSource::insertRows(int row, int count,
                 RB_ObjectMember* mem;
                 int count = mObject->memberCount();
 
-                for (int j = 7; j < count; ++j) {
+                for (int j = RB2::HIDDENCOLUMNS; j < count; ++j) {
                     mem = mObject->getMember(j);
 
                     if (mem->getType() == RB2::MemberInteger

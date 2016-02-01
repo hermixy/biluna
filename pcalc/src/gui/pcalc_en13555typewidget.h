@@ -1,6 +1,6 @@
 /*****************************************************************
  * $Id: pcalc_selecten13555manufwidget.h 1965 2013-08-08 16:33:15Z rutger $
- * Created: Jan 31, 2016 21:25:40 PM - rutger
+ * Created: Feb 01, 2016 21:25:40 PM - rutger
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
  * This file is part of the Biluna PCALC project.
@@ -8,8 +8,8 @@
  * See http://www.red-bag.com for further details.
  *****************************************************************/
 
-#ifndef PCALC_EN13555MANUFWIDGET_H
-#define PCALC_EN13555MANUFWIDGET_H
+#ifndef PCALC_EN13555TYPEWIDGET_H
+#define PCALC_EN13555TYPEWIDGET_H
 
 #include <QtWidgets>
 #include "pcalc_modelfactory.h"
@@ -18,16 +18,16 @@
 
 
 /**
- * @brief Widget to select and edit a manufacturer of EN13555 gasket.
+ * @brief Widget to select and edit a type of EN13555 gasket.
  * Currently used as a dialog
  */
-class PCALC_EN13555ManufWidget : public DB_TableWidget {
+class PCALC_EN13555TypeWidget : public DB_TableWidget {
 
     Q_OBJECT
 
 public:
-    PCALC_EN13555ManufWidget(QWidget* parent);
-    virtual ~PCALC_EN13555ManufWidget();
+    PCALC_EN13555TypeWidget(QWidget* parent);
+    virtual ~PCALC_EN13555TypeWidget();
 
     virtual RB_String getId() const { return RB_String(); }
     virtual RB_String getName() const;
@@ -43,4 +43,4 @@ public:
     void on_pbAdd_clicked();
 };
 
-#endif // PCALC_EN13555MANUFWIDGET_H
+#endif // PCALC_EN13555TYPEWIDGET_H
