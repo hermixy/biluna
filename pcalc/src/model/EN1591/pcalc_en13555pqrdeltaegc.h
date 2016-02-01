@@ -15,13 +15,13 @@
 /**
  * EN13555 gasket properties P_QR and delta_e_GC
  */
-class DB_EXPORT PCALC_En13555PqrDeltaeGC : public RB_ObjectAtomic {
+class PCALC_EN13555PqrDeltaeGC : public RB_ObjectAtomic {
 
 public:
-    PCALC_En13555PqrDeltaeGC(const QString& id = "", RB_ObjectBase* p = NULL,
-               const QString& n = , RB_ObjectFactory* f = NULL);
-    PCALC_En13555PqrDeltaeGC(PCALC_En13555PqrDeltaeGC* obj);
-    virtual ~PCALC_En13555PqrDeltaeGC();
+    PCALC_EN13555PqrDeltaeGC(const QString& id = "", RB_ObjectBase* p = NULL,
+               const QString& n = "", RB_ObjectFactory* f = NULL);
+    PCALC_EN13555PqrDeltaeGC(PCALC_EN13555PqrDeltaeGC* obj);
+    virtual ~PCALC_EN13555PqrDeltaeGC();
 
 private:
     void createMembers();

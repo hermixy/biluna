@@ -15,13 +15,13 @@
 /**
  * Gasket QminL property according EN13555
  */
-class DB_EXPORT PCALC_En13555QminL : public RB_ObjectAtomic {
+class PCALC_EN13555QminL : public RB_ObjectAtomic {
 
 public:
-    PCALC_En13555QminL(const QString& id = "", RB_ObjectBase* p = NULL,
-               const QString& n = , RB_ObjectFactory* f = NULL);
-    PCALC_En13555QminL(PCALC_En13555QminL* obj);
-    virtual ~PCALC_En13555QminL();
+    PCALC_EN13555QminL(const QString& id = "", RB_ObjectBase* p = NULL,
+               const QString& n = "", RB_ObjectFactory* f = NULL);
+    PCALC_EN13555QminL(PCALC_EN13555QminL* obj);
+    virtual ~PCALC_EN13555QminL();
 
 private:
     void createMembers();

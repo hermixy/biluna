@@ -9,24 +9,24 @@
 
 #include "pcalc_en13555qminl.h"
 
-PCALC_En13555QminL::PCALC_En13555QminL(const QString& id, RB_ObjectBase* p,
+PCALC_EN13555QminL::PCALC_EN13555QminL(const QString& id, RB_ObjectBase* p,
                     const QString& n, RB_ObjectFactory* f)
                     : RB_ObjectAtomic (id, p, n, f) {
 	createMembers();
 }
 
-PCALC_En13555QminL::PCALC_En13555QminL(PCALC_En13555QminL* obj)
+PCALC_EN13555QminL::PCALC_EN13555QminL(PCALC_EN13555QminL* obj)
                     : RB_ObjectAtomic(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
-PCALC_En13555QminL::~PCALC_En13555QminL() {
+PCALC_EN13555QminL::~PCALC_EN13555QminL() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
-void PCALC_En13555QminL::createMembers() {
-    addMember("testpress", "N/mm2", 0, RB2::MemberDouble);
-    addMember("leakrate", "-", 0, RB2::MemberDouble);
-    addMember("qminl", "N/mm2", 0, RB2::MemberDouble);
+void PCALC_EN13555QminL::createMembers() {
+    addMember("testpress", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("leakrate", "-", 0.0, RB2::MemberDouble);
+    addMember("qminl", "N/mm2", 0.0, RB2::MemberDouble);
 }

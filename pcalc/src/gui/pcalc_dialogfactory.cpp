@@ -12,7 +12,9 @@
 
 #include "db_dialogfactory.h"
 #include "pcalc_en1591widget.h"
-#include "pcalc_engasketdialog.h"
+#include "pcalc_en13555gasketwidget.h"
+#include "pcalc_en13555manufwidget.h"
+#include "pcalc_en13555typewidget.h"
 #include "pcalc_modelfactory.h"
 #include "pcalc_projectdialog.h"
 #include "pcalc_projecteditdialog.h"
@@ -71,6 +73,18 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
     if (wgt) return wgt; // widget already found
 
     switch (type) {
+    case WidgetEN13555Gasket: {
+        wgt = new PCALC_EN13555GasketWidget(parent);
+        break;
+    }
+    case WidgetEN13555Manuf: {
+        wgt = new PCALC_EN13555ManufWidget(parent);
+        break;
+    }
+    case WidgetEN13555Type: {
+        wgt = new PCALC_EN13555TypeWidget(parent);
+        break;
+    }
     case WidgetEN1591Flange: {
         wgt = new PCALC_EN1591Widget(parent);
         break;
@@ -103,10 +117,6 @@ RB_Dialog* PCALC_DialogFactory::getDialog(int type) {
     RB_Dialog* dlg = NULL;
 
     switch (type) {
-    case DialogENGasket: {
-        dlg = new PCALC_ENGasketDialog(mMainWindow);
-        break;
-    }
     case DialogProject: {
         dlg = new PCALC_ProjectDialog(mMainWindow);
         break;

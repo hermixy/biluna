@@ -9,25 +9,25 @@
 
 #include "pcalc_en13555manufacturer.h"
 
-PCALC_En13555Manufacturer::PCALC_En13555Manufacturer(
+PCALC_EN13555Manufacturer::PCALC_EN13555Manufacturer(
                     const QString& id, RB_ObjectBase* p,
                     const QString& n, RB_ObjectFactory* f)
 					: RB_ObjectContainer (id, p, n, f) {
 	createMembers();
 }
 
-PCALC_En13555Manufacturer::PCALC_En13555Manufacturer(
-                    PCALC_En13555Manufacturer* obj)
+PCALC_EN13555Manufacturer::PCALC_EN13555Manufacturer(
+                    PCALC_EN13555Manufacturer* obj)
                     : RB_ObjectContainer(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
-PCALC_En13555Manufacturer::~PCALC_En13555Manufacturer() {
+PCALC_EN13555Manufacturer::~PCALC_EN13555Manufacturer() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
-void PCALC_En13555Manufacturer::createMembers() {
+void PCALC_EN13555Manufacturer::createMembers() {
     addMember("manufacturer", "-", "<NEW>", RB2::MemberChar125);
     addMember("website", "-", "", RB2::MemberChar125);
 }

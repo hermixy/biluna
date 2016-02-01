@@ -21,6 +21,7 @@
 #include "rb_stringlist.h"
 #include "rb_widget.h"
 
+class RB_DialogWindow;
 class RB_DockWidget;
 class RB_MainWindow;
 class RB_MdiWindow;
@@ -56,6 +57,9 @@ public:
     virtual bool isWidgetActive(int type);
     //! To be overridden by implementation, not a slot because of return value
     virtual RB_Dialog* getDialog(int type) = 0;
+    virtual RB_DialogWindow* getDialogWindow(int type,
+                                             const QString& docName = "",
+                                             bool isNewWidget = false);
 
     virtual void requestInformationDialog(const RB_String& info);
     virtual RB_String requestTextInputDialog(const RB_String& dialogTitle,

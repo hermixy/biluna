@@ -9,23 +9,23 @@
 
 #include "pcalc_en13555qsminl.h"
 
-PCALC_En13555QsminL::PCALC_En13555QsminL(const QString& id, RB_ObjectBase* p,
+PCALC_EN13555QsminL::PCALC_EN13555QsminL(const QString& id, RB_ObjectBase* p,
                     const QString& n, RB_ObjectFactory* f)
                     : RB_ObjectAtomic (id, p, n, f) {
 	createMembers();
 }
 
-PCALC_En13555QsminL::PCALC_En13555QsminL(PCALC_En13555QsminL* obj)
+PCALC_EN13555QsminL::PCALC_EN13555QsminL(PCALC_EN13555QsminL* obj)
                     : RB_ObjectAtomic(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
-PCALC_En13555QsminL::~PCALC_En13555QsminL() {
+PCALC_EN13555QsminL::~PCALC_EN13555QsminL() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
-void PCALC_En13555QsminL::createMembers() {
+void PCALC_EN13555QsminL::createMembers() {
     addMember("testpress", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("leakrate", "-", 0.0, RB2::MemberDouble);
     addMember("qa", "N/mm2", 0.0, RB2::MemberDouble);

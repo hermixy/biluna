@@ -85,6 +85,7 @@ ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() {
 
     delete mBankImportList;
     delete mGlTransList;
+    ACC_DIALOGFACTORY->requestInformationDialog("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() OK");
     RB_DEBUG->print("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() OK");
 }
 

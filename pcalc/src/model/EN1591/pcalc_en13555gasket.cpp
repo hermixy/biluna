@@ -9,26 +9,25 @@
 
 #include "pcalc_en13555gasket.h"
 
-PCALC_En13555Gasket::PCALC_En13555Gasket(const QString& id, RB_ObjectBase* p,
+PCALC_EN13555Gasket::PCALC_EN13555Gasket(const QString& id, RB_ObjectBase* p,
                     const QString& n, RB_ObjectFactory* f)
 					: RB_ObjectContainer (id, p, n, f) {
 	createMembers();
 }
 
-PCALC_En13555Gasket::PCALC_En13555Gasket(PCALC_En13555Gasket* obj)
+PCALC_EN13555Gasket::PCALC_EN13555Gasket(PCALC_EN13555Gasket* obj)
                     : RB_ObjectContainer(obj) {
 	createMembers();
-	*this = *project;
+    *this = *obj;
 }
 
-PCALC_En13555Gasket::~PCALC_En13555Gasket() {
+PCALC_EN13555Gasket::~PCALC_EN13555Gasket() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
-void PCALC_En13555Gasket::createMembers() {
+void PCALC_EN13555Gasket::createMembers() {
     addMember("type", "-", "", RB2::MemberChar125);
-    addMember("subtype", "-", "", RB2::MemberChar125);
-    addMember("testoutdiam", "mm", "0.0", RB2::MemberChar125);
-    addMember("testindiam", "mm", "0.0", RB2::MemberChar125);
-    addMember("issue", "-", "1970-01-01", RB2::MemberChar125);
+    addMember("testoutdiam", "mm", 0.0, RB2::MemberDouble);
+    addMember("testindiam", "mm", 0.0, RB2::MemberDouble);
+    addMember("issue", "-", "1970-01-01", RB2::MemberChar10);
 }

@@ -9,7 +9,7 @@ LANGUAGE    = C++
 TARGET      = pcalc_actionplugin
 
 CONFIG      += qt plugin warn_on
-QT          += core network sql svg webkit xml
+QT          += charts
 
 # compiler settings for release, debug and some paths
 exists( ../../mkspecs/defs.pro ) {

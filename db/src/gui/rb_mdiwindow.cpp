@@ -21,7 +21,8 @@
  * @param mw main window
  * @param mwgt main widget to be shown on MDI window
  */
-RB_MdiWindow::RB_MdiWindow(RB_MainWindow* mw, RB_Widget* mwgt) : QMdiSubWindow(mw) {
+RB_MdiWindow::RB_MdiWindow(RB_MainWindow* mw, RB_Widget* mwgt)
+            : QMdiSubWindow(mw) {
     RB_DEBUG->print("RB_MdiWindow::RB_MdiWindow()");
 
     if (!mw || !mwgt) return;
@@ -42,7 +43,7 @@ RB_MdiWindow::RB_MdiWindow(RB_MainWindow* mw, RB_Widget* mwgt) : QMdiSubWindow(m
  */
 RB_MdiWindow::~RB_MdiWindow() {
     // Regular delete was not required since mWidget is created
-    // with RB_MdiWindow as parent. However crash of DB_InternetBrowsereWidget
+    // with RB_MdiWindow as parent. However crash of DB_InternetBrowserWidget
     // deleteLater() provides object leak in case of application close()
 //    setWidget(NULL);
 //    mCentralWidget->deleteLater();

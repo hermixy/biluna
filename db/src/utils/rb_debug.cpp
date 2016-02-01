@@ -147,7 +147,7 @@ void RB_Debug::print(RB_DebugLevel level, const QString& text) {
     }
 
     if (level == D_ERROR) {
-        ++msgErrorCount;
+         ++msgErrorCount;
     } else if (level == D_WARNING) {
         ++msgWarningCount;
     } else if (level == D_INFORMATIONAL) {

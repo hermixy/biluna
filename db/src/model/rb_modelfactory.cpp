@@ -27,6 +27,7 @@ RB_ModelFactory::RB_ModelFactory(RB_MainWindow* mw) {
     mObjectFactory = NULL;
     mRoot = NULL; // not connected to root of DB_ModelFactory
     mModelIsModified = false;
+    mStoredId = "";
 
     // mPermissionList in DB_ModelFactory
 }
@@ -111,6 +112,22 @@ void RB_ModelFactory::setRootId(const RB_String& id) {
     }
 
     mRoot->setId(id);
+}
+
+/**
+ * Get stored/saved id, for example directly after previous selection
+ * @return stored id
+ */
+RB_String RB_ModelFactory::getStoredId() const {
+    return mStoredId;
+}
+
+/**
+ * Set stored/saved id, for example directly after previous selection
+ * @return stored id
+ */
+void RB_ModelFactory::setStoredId(const QString& id) {
+    mStoredId = id;
 }
 
 /**

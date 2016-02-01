@@ -38,6 +38,8 @@ public:
     virtual void commandMessage(const RB_String& message);
 
     /**
+     * DO NOT USE ANYMORE, USE RB_DialogWindow!!!
+     *
      * PCALC Dialog types, example = 193XXX:
      * - 19 = PCALC,
      * - 3 = dialog,
@@ -51,7 +53,6 @@ public:
 //        DialogBaseTest,                        /**< Test of base dialogs */
         // start numbering from 193100
         DialogNone = 193100,            /**< Invalid dialog */
-        DialogENGasket,                 /**< EN gasket properties */
         DialogProject,                  /**< Select project from database dialog */
         DialogProjectEdit,              /**< Edit project dialog */
         DialogDefault                   /**< Default- or all dialogs */
@@ -75,6 +76,9 @@ public:
 //        WidgetTestTreeChild,            /**< Child table widget with tree parent */
         // start numbering from 192100
         WidgetNone = 192100,            /**< Invalid model */
+        WidgetEN13555Gasket,            /**< EN13555 gasket properties */
+        WidgetEN13555Manuf,             /**< EN13555 gasket manufacturer edit and selection */
+        WidgetEN13555Type,              /**< EN13555 gasket type edit and selection */
         WidgetEN1591Flange,             /**< EN1591 flange calculation */
         WidgetDefault                   /**< Default- or all models */
     };

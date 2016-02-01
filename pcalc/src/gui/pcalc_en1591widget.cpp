@@ -60,7 +60,7 @@ PCALC_EN1591Widget::~PCALC_EN1591Widget() {
 }
 
 RB_String PCALC_EN1591Widget::getSaveAsFileName() {
-    return ""; // "pcalc_EN1591_" + mModel->getCurrentValue("number").toString();
+    return "pcalc_EN1591_" + mAssemblyModel->getCurrentValue("number").toString();
 }
 
 void PCALC_EN1591Widget::init() {
@@ -536,12 +536,11 @@ bool PCALC_EN1591Widget::fileSaveAs() {
     return false;
 }
 
-bool PCALC_EN1591Widget::fileRevert() {
+void PCALC_EN1591Widget::fileRevert() {
     mLoadCaseModel->revertAll();
     mAssemblyModel->revertAll();
 
     setWindowModified(false);
-    return true;
 }
 
 /**

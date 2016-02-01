@@ -36,6 +36,8 @@ public:
     virtual void setRoot(RB_ObjectBase* root = NULL);
     virtual RB_String getRootId() const;
     virtual void setRootId(const RB_String& id);
+    virtual RB_String getStoredId() const;
+    virtual void setStoredId(const RB_String& id = "");
 
     virtual RB_MmProxy* getModel(int type, bool shared) = 0;
     virtual RB_MmProxy* getParentModel(int type) = 0;
@@ -101,6 +103,8 @@ protected:
     RB_ObjectBase* mRoot;
     //! Model is modified flag
     bool mModelIsModified;
+    //! Stored ID for immediate use after setting
+    RB_String mStoredId;
 
 };
 
