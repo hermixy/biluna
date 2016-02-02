@@ -68,13 +68,14 @@ void ACC_ActionBankImport::trigger() {
         // Create dialog
         RB_Dialog* dlg = ACC_DIALOGFACTORY->getDialog(
                     ACC_DialogFactory::DialogBankImport);
-        dlg->exec();
-        dlg->deleteLater();
+        if (dlg->exec() == QDialog::Accepted) {
+            // TODO: set corresponding bank account in ACC_GlTransactionWidget
+            ACC_GlTransactionWidget* wdgt =
+                    dynamic_cast<ACC_GlTransactionWidget*>(mdiWin->getWidget());
+            wdgt->slotRefreshBankModel();
+        }
 
-        // TODO: set corresponding bank account in ACC_GlTransactionWidget
-        ACC_GlTransactionWidget* wdgt =
-                dynamic_cast<ACC_GlTransactionWidget*>(mdiWin);
-        wdgt->slotRefreshBankModel();
+        dlg->deleteLater();
     } catch(std::exception& e) {
         ACC_DIALOGFACTORY->requestWarningDialog(
                     "Error " + QString(e.what())
