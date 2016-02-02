@@ -11,15 +11,29 @@
 #define RB_DATABASETABLEWIDGET_H
 
 #include "rb_widget.h"
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QLogValueAxis>
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QVXYModelMapper>
 
 
 namespace Ui {
 class RB_DatabaseTableWidget;
 }
 
+using namespace QtCharts;
+
 class RB_DatabaseTableWidget : public RB_Widget {
 
     Q_OBJECT
+enum ScaleType {
+    ScaleLinear,
+    ScaleXLog,
+    ScaleYLog,
+    ScaleBothLog
+};
 
 public:
     RB_DatabaseTableWidget(QWidget* parent = 0);
@@ -28,6 +42,8 @@ public:
     void init();
     void setCodeManufacturer(RB_ObjectBase* obj);
     void setType(RB_ObjectBase* obj);
+    void setChartModel(RB_MmProxy* model, const QString& xField,
+                       const QString& yField, ScaleType scale);
 
 public slots:
     virtual void on_pbSelectManuf_clicked() = 0;
@@ -39,37 +55,9 @@ protected:
     QString mCodeManufId;
     QString mTypeId;
 
-private:
+// private:
     Ui::RB_DatabaseTableWidget* ui;
+    QChart* mChart;
 
 };
-
-
-#include <QtCore/QAbstractTableModel>
-#include <QtCore/QHash>
-#include <QtCore/QRect>
-
-class CustomTableModel : public QAbstractTableModel
-{
-    Q_OBJECT
-public:
-    explicit CustomTableModel(QObject *parent = 0);
-
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
-    Qt::ItemFlags flags(const QModelIndex &index) const;
-
-    void addMapping(QString color, QRect area);
-    void clearMapping() { m_mapping.clear(); }
-
-private:
-    QList<QVector<qreal> * > m_data;
-    QHash<QString, QRect> m_mapping;
-    int m_columnCount;
-    int m_rowCount;
-};
-
 #endif // RB_DATABASETABLEWIDGET_H

@@ -56,6 +56,7 @@ RB_DialogWindow::RB_DialogWindow(RB_MainWindow* mw, RB_Widget* mwgt)
     pbOk = new QPushButton(this);
     pbOk->setObjectName(QStringLiteral("pbOk"));
     pbOk->setText(tr("&OK"));
+    pbOk->setDefault(true);
     horizontalLayout_dw->addWidget(pbOk);
 
     pbCancel = new QPushButton(this);

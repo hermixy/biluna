@@ -608,9 +608,3 @@ void ACC_DialogFactory::commandMessage(const RB_StringList& messageList) {
     DB_DIALOGFACTORY->commandMessage(messageList);
 }
 
-/**
- * @brief ACC_DialogFactory::slotEmitBankStatementsImported
- */
-void ACC_DialogFactory::emitBankStatementsImported() {
-    emit bankStatementsImported();
-}

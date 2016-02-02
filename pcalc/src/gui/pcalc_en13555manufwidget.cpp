@@ -53,7 +53,6 @@ void PCALC_EN13555ManufWidget::init() {
 
     this->setHelpSubject("PCALC_EN13555ManufWidget");
 
-    readSettings();
     int count = PCALC_MODELFACTORY->hiddenColumnCount();
 
     for (int i = 0; i < count; i++) {

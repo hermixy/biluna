@@ -95,6 +95,7 @@ public slots:
 public slots:
     virtual void slotDataIsChanged(const QModelIndex& current,
                                    const QModelIndex& previous);
+    virtual void slotRefreshBankModel();
 
 protected:
     virtual bool maybeSave();
@@ -104,7 +105,6 @@ protected:
 protected slots:
     virtual void slotLedgerAccountChanged(int number);
     virtual void slotTabChanged(int);
-    virtual void slotRefreshBankModel();
 
 private:
     void setGlTransAsDelete();

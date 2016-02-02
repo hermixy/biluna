@@ -38,6 +38,12 @@ public slots:
     virtual void on_pbClearManuf_clicked();
     virtual void on_pbSelectType_clicked();
     virtual void on_pbClearType_clicked();
+    virtual void slotSetPropertyTable(int index);
+
+private:
+    void setModelTableView(RB_MmProxy* model);
+
+    RB_MmProxy* mModel;
 
 };
 

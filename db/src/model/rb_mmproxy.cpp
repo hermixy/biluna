@@ -41,6 +41,12 @@ RB_MmProxy::~RB_MmProxy() {
 
     // Delete source model
     QSortFilterProxyModel::setSourceModel(NULL);
+	
+	// prevent deletion of not existing root in case of child model
+	if (this->isInMemoryModel() && getParentManager()) {
+		mSourceModel->setRoot(nullptr);
+	}
+	
     delete mSourceModel;
     mSourceModel = NULL;
 

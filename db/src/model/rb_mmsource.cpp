@@ -73,14 +73,17 @@ RB_MmSource::RB_MmSource(QObject* parent, const QSqlDatabase& db, int hiddenColu
 
 
 RB_MmSource::~RB_MmSource() {
-    // RB_DEBUG->print("RB_MmSource::~RB_MmSource()");
-
-    // HACK: this->isInMemoryModel() for models deleted (later)
-    // at application close() and database already closed.
-    if (mRoot && (database().isOpen() || this->isInMemoryModel())) {
-        //  Dummy root objects for database
-        delete mRoot;
-        mRoot = NULL;
+    if (mRoot) { 
+		if (database().isOpen() || this->isInMemoryModel()) {
+			// Root object for database or in-memory object model
+			// For child objects the root has been set to NULL
+			// in RB_MmProxy();;~RB_MmProxy
+			delete mRoot;
+			mRoot = NULL;
+		}
+		
+		// if full object model without database, 
+		// root is to be deleted in main application
     }
 
     if (mObject) {
@@ -1332,7 +1335,7 @@ bool RB_MmSource::insertRows(int row, int count,
         for (int i = 0; i < count && success; ++i) {
             success = RB_MmAbstract::insertRows(row + i, 1, parent);
             setHiddenData(index(row + i, 0), RB_Uuid::createUuid().toString());
-            RB_String parentId = mRoot->getId() == "" ? mRoot->getId() : "none";
+            RB_String parentId = mRoot->getId() != "" ? mRoot->getId() : "none";
             setHiddenData(index(row + i, 1), parentId);
             setHiddenData(index(row + i, 2), mTableName);
             setHiddenData(index(row + i, 3), (int)RB2::StatusDefault);

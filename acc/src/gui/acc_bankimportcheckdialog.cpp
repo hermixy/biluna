@@ -80,12 +80,13 @@ ACC_BankImportCheckDialog::ACC_BankImportCheckDialog(QWidget *parent)
 ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() {
     // non-shared models are always deleted by the widgets,
     // can be MDI window or dialog, but also a dockWindow with table or tree
-    delete mDocModel;  // OK if not used anywhere else
-    delete mItemModel; // OK if not used anywhere else
+    ACC_DIALOGFACTORY->requestInformationDialog("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog()\nSTART");
+    // Delete model, deletes root (mTransDocListRoot) and object hierarchy
+    delete mDocModel;
+    delete mItemModel;
 
     delete mBankImportList;
     delete mGlTransList;
-    ACC_DIALOGFACTORY->requestInformationDialog("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() OK");
     RB_DEBUG->print("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() OK");
 }
 
@@ -276,6 +277,7 @@ void ACC_BankImportCheckDialog::on_pbPrevious_clicked() {
     mItemModel = NULL;
     delete mDocModel;
     mDocModel = NULL;
+//    mTransDocListRoot = NULL;
 
     pbPrevious->setEnabled(false);
     pbNext->setEnabled(true); // still valid data
@@ -528,7 +530,6 @@ void ACC_BankImportCheckDialog::on_pbNext_clicked() {
  */
 void ACC_BankImportCheckDialog::on_pbImport_clicked() {
     fileSave(true);
-    ACC_DIALOGFACTORY->emitBankStatementsImported();
     accept();
 }
 
