@@ -74,13 +74,14 @@ void PCALC_EN13555GasketWidget::on_pbSelectManuf_clicked() {
     }
 
     RB_ObjectBase* obj = dlg->getCurrentObject();
+    on_pbClearType_clicked();
     setCodeManufacturer(obj);
     dlg->deleteLater();
 }
 
 void PCALC_EN13555GasketWidget::on_pbClearManuf_clicked() {
-    setCodeManufacturer(nullptr);
     on_pbClearType_clicked();
+    setCodeManufacturer(nullptr);
 }
 
 void PCALC_EN13555GasketWidget::on_pbSelectType_clicked() {
@@ -104,19 +105,23 @@ void PCALC_EN13555GasketWidget::on_pbSelectType_clicked() {
     }
 
     RB_ObjectBase* obj = dlg->getCurrentObject();
+    slotSetPropertyTable(0);
     setType(obj);
     dlg->deleteLater();
 }
 
 void PCALC_EN13555GasketWidget::on_pbClearType_clicked() {
+    slotSetPropertyTable(0);
     setType(nullptr);
     ui->cbProperty->setCurrentIndex(0);
-    slotSetPropertyTable(0);
 }
 
 void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
+    // items << tr("None") << "QminL" << "QsminL" << "PQR delta_eGC" << "EG eG";
+    QStringList items;
+
     switch (index) {
-    case 0: {
+    case 0: { // None
         if (mModel) {
             fileSave(false);
             delete mModel;
@@ -125,15 +130,24 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
 
         break;
     }
-    case 1: {
+    case 1: { // QminL
         fileSave(false);
         if (mModel) delete mModel;
         mModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelEN13555QminL, false);
         setModelTableView(mModel);
+
+        items.clear();
+        items << tr("None") << "testpressure" << "leakrate" << "qminl";
+        ui->cbXcoord->addItems(items);
+        ui->cbXcoord->setCurrentIndex(3);
+        ui->cbYcoord->addItems(items);
+        ui->cbYcoord->setCurrentIndex(2);
+        setChartModel(mModel, ui->cbXcoord->currentText(),
+                      ui->cbYcoord->currentText(), ScaleYLog);
         break;
     }
-    case 2: {
+    case 2: { // QsminL
         fileSave(false);
         if (mModel) delete mModel;
         mModel = PCALC_MODELFACTORY->getModel(
@@ -141,7 +155,7 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         setModelTableView(mModel);
         break;
     }
-    case 3: {
+    case 3: { // PQR delta_eGC
         fileSave(false);
         if (mModel) delete mModel;
         mModel = PCALC_MODELFACTORY->getModel(
@@ -149,7 +163,7 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         setModelTableView(mModel);
         break;
     }
-    case 4: {
+    case 4: { // EG eG
         fileSave(false);
         if (mModel) delete mModel;
         mModel = PCALC_MODELFACTORY->getModel(

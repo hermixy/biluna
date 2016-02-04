@@ -28,14 +28,15 @@ using namespace QtCharts;
 class RB_DatabaseTableWidget : public RB_Widget {
 
     Q_OBJECT
-enum ScaleType {
-    ScaleLinear,
-    ScaleXLog,
-    ScaleYLog,
-    ScaleBothLog
-};
 
 public:
+    enum ScaleType {
+        ScaleLinear,
+        ScaleXLog,
+        ScaleYLog,
+        ScaleBothLog
+    };
+
     RB_DatabaseTableWidget(QWidget* parent = 0);
     virtual ~RB_DatabaseTableWidget();
 
@@ -44,6 +45,7 @@ public:
     void setType(RB_ObjectBase* obj);
     void setChartModel(RB_MmProxy* model, const QString& xField,
                        const QString& yField, ScaleType scale);
+
 
 public slots:
     virtual void on_pbSelectManuf_clicked() = 0;

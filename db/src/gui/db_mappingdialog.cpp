@@ -19,7 +19,6 @@
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
 #include "db_selectmappingdialog.h"
-#include "db_transferdataaction.h"
 #include "db_xmlreader.h"
 #include "rb_debug.h"
 #include "rb_settings.h"
@@ -715,7 +714,7 @@ void DB_MappingDialog::importCsvFile() {
                 } else if (strIns == "parent" && leParentId->text().isEmpty()) {
                     query.bindValue(1, strVal, QSql::In);
                 } else if (strIns != tr("(none)") && strIns != "id"
-                           && strIns != "parent") {
+                           && strIns != "parent" && strIns != "name") {
                     query.bindValue(colRunner, strVal, QSql::In);
                     ++colRunner;
                 }

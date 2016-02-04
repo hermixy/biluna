@@ -75,7 +75,7 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
 
     // series 1
     QLineSeries* series = new QLineSeries(mChart);
-    series->setName("Line 1");
+    series->setName(yField + " " + tr("graph"));
     QVXYModelMapper* mapper = new QVXYModelMapper(mChart);
     mapper->setXColumn(model->fieldIndex(xField));
     mapper->setYColumn(model->fieldIndex(yField));
@@ -106,7 +106,7 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
 //    model->addMapping(seriesColorHex, QRect(2, 0, 2, model->rowCount()));
 
     //    mChart->legend()->hide();
-    mChart->setTitle(yField + "values");
+    mChart->setTitle(yField + " " + tr("values"));
 
 
     // Axis
@@ -118,7 +118,7 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
         axisX = new QLogValueAxis(mChart);
     }
 //    axisX->setLabelFormat("%g");
-    axisX->setTitleText(xField + "Data point");
+    axisX->setTitleText(xField + " " + tr("Data point"));
     mChart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
 
@@ -131,7 +131,7 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
     }
 
 //    axisY->setLabelFormat("%g");
-    axisY->setTitleText(yField + "Values");
+    axisY->setTitleText(yField + " " + tr("Values"));
     mChart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 

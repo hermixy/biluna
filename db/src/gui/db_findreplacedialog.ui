@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>349</width>
-    <height>193</height>
+    <height>212</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -119,6 +119,16 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="text">
              <string>R&amp;egular Expression</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblExample">
+            <property name="toolTip">
+             <string>Regular expression example</string>
+            </property>
+            <property name="text">
+             <string>e.g.: style=&quot;([^&quot;]*)&quot;</string>
             </property>
            </widget>
           </item>
