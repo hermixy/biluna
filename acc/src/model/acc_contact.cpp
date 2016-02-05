@@ -53,7 +53,9 @@ ACC_Contact::~ACC_Contact() {
  * - primaryaddress1 - 6 primary address lines
  * - altaddress1 - 6 alternative address lines
  * - description additional description about this contact
- * - rm_id ID of the CRM perspective account (CRM_Project.id) or SRM (SRM_Project.id)
+ * - rm_id ID of the ACC perspective account (ACC_Project.id) to be able
+ * to see all contacts in a QSqlRelationalTable
+ * without the use of INNER JOIN
  */
 void ACC_Contact::createMembers() {
     addMember("salutation", "-", "", RB2::MemberChar20);
