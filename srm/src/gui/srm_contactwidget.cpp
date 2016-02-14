@@ -322,13 +322,17 @@ void SRM_ContactWidget::slotSelectedByChanged(int index) {
             if (mIsInitialized) {
                 fileSave(false);
             }
-            mContactModel->setPrimaryParent("rm_id");
-            mContactModel->setWhere("", false); // not select
-            mContactModel->setRoot(SRM_MODELFACTORY->getRootId());
+			
+            // mContactModel->setPrimaryParent("rm_id");
+            mContactModel->setWhere(
+                        "acc_contact.parent in (select acc_supplier.id "
+                        "from acc_supplier where acc_supplier.parent='"
+                        + SRM_MODELFACTORY->getRootId() + "')", false); // not select
+            mContactModel->setRoot("");
             mContactModel->select();
 
             RB_ObjectBase* obj = SRM_MODELFACTORY->getRoot();
-            leSelectedBy->setText(obj->getValue("code").toString());
+            leSelectedBy->setText(obj->getValue("number").toString());
             leFilter->setText("");
 
             break;

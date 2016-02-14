@@ -286,7 +286,7 @@ void CRM_ContactWidget::slotSelectedByChanged(int index) {
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     switch (index) {
-        case 0 : {
+        case 0 : { // by customer
             if (!mCustomerModel) {
                 QApplication::restoreOverrideCursor();
                 CRM_DIALOGFACTORY->requestInformationDialog(tr("The customer window is opened\n"
@@ -313,7 +313,7 @@ void CRM_ContactWidget::slotSelectedByChanged(int index) {
 
             break;
         }
-        case 1 : {
+        case 1 : { // by account
             if (mCustomerModel) {
                 disconnect(mCustomerModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
                            this, SLOT(slotCustomerRowChanged(QModelIndex,QModelIndex)));
@@ -322,18 +322,22 @@ void CRM_ContactWidget::slotSelectedByChanged(int index) {
             if (mIsInitialized) {
                 fileSave(false);
             }
-            mContactModel->setPrimaryParent("rm_id");
-            mContactModel->setWhere("", false); // not select
-            mContactModel->setRoot(CRM_MODELFACTORY->getRootId());
+			
+            // mContactModel->setPrimaryParent("rm_id");
+            mContactModel->setWhere(
+                        "acc_contact.parent in (select acc_customer.id "
+                        "from acc_customer where acc_customer.parent='"
+                        + CRM_MODELFACTORY->getRootId() + "')", false); // not select
+            mContactModel->setRoot("");
             mContactModel->select();
 
             RB_ObjectBase* obj = CRM_MODELFACTORY->getRoot();
-            leSelectedBy->setText(obj->getValue("code").toString());
+            leSelectedBy->setText(obj->getValue("number").toString());
             leFilter->setText("");
 
             break;
         }
-        case 2 : {
+        case 2 : { // select all
             if (mCustomerModel) {
                 disconnect(mCustomerModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
                            this, SLOT(slotCustomerRowChanged(QModelIndex,QModelIndex)));
