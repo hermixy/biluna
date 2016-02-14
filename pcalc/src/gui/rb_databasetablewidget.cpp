@@ -113,25 +113,31 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
     QAbstractAxis* axisX;
 
     if (scale == ScaleLinear || scale == ScaleYLog) {
-        axisX = new QValueAxis(mChart);
+        QValueAxis* axX = new QValueAxis(mChart);
+        axX->setLabelFormat("%g");
+        axisX = axX;
     } else {
-        axisX = new QLogValueAxis(mChart);
+        QLogValueAxis* axX = new QLogValueAxis(mChart);
+        axX->setLabelFormat("%g");
+        axisX = axX;
     }
-//    axisX->setLabelFormat("%g");
-    axisX->setTitleText(xField + " " + tr("Data point"));
+    axisX->setTitleText(xField + " " + tr("data points"));
     mChart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
 
     QAbstractAxis* axisY;
 
     if (scale == ScaleLinear || scale == ScaleXLog) {
-        axisY = new QValueAxis(mChart);
+        QValueAxis* axY = new QValueAxis(mChart);
+        axY->setLabelFormat("%g");
+        axisY = axY;
     } else {
-        axisY = new QLogValueAxis(mChart);
+        QLogValueAxis* axY = new QLogValueAxis(mChart);
+        axY->setLabelFormat("%g");
+        axisY = axY;
     }
 
-//    axisY->setLabelFormat("%g");
-    axisY->setTitleText(yField + " " + tr("Values"));
+    axisY->setTitleText(yField + " " + tr("values"));
     mChart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 
