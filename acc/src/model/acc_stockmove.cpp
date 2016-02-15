@@ -90,7 +90,7 @@ void ACC_StockMove::createMembers() {
     addMember("type", "-", 0, RB2::MemberInteger);          // 3
     addMember("transno", "-", "", RB2::MemberChar40);       // rel_id
     addMember("location_id", "-", "", RB2::MemberChar40);       // rel_id
-    addMember("transdate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+    addMember("transdate", "-", "1900-01-01", RB2::MemberDateTime);
     addMember("debtor_id", "-", "", RB2::MemberChar40);      // rel_id
     addMember("branch_id", "-", "", RB2::MemberChar40);    // rel_id
     addMember("price", "-", 0.0, RB2::MemberDouble);

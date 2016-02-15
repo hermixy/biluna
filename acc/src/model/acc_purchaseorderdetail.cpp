@@ -65,7 +65,7 @@ void ACC_PurchaseOrderDetail::createMembers() {
     addMember("completed", "-", 0, RB2::MemberInteger);
     addMember("narrative", "-", "", RB2::MemberChar255);
     addMember("poline", "-", "", RB2::MemberChar125);
-    addMember("itemdue", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+    addMember("itemdue", "-", "1900-01-01", RB2::MemberDateTime);
     // Tax category id for easy retrieval for example during creation of stockmoves
     addMember("taxcat_id", "-", "0", RB2::MemberChar40);
     addMember("costcenter_idx", "-", "0", RB2::MemberChar165);

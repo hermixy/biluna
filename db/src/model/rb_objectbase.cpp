@@ -42,8 +42,8 @@ RB_ObjectBase::RB_ObjectBase(const RB_String& id, RB_ObjectBase* p,
         }
         addMember("name", "-", n, RB2::MemberChar40);
         addMember("status", "-", 0 /* RB2::StatusDefault */, RB2::MemberInteger);
-        addMember("created", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
-        addMember("changed", "-", "0000-00-00T00:00:00", RB2::MemberChar20);
+        addMember("created", "-", "1900-01-01T00:00:00", RB2::MemberChar20);
+        addMember("changed", "-", "1900-01-01T00:00:00", RB2::MemberChar20);
         addMember("muser", "-", "system", RB2::MemberChar20);
     }
 

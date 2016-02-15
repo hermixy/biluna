@@ -60,7 +60,7 @@ void ACC_SalesOrder::createMembers() {
     addMember("buyername", "-", "", RB2::MemberChar125);
     addMember("ordertitle", "-", "", RB2::MemberChar125);
     addMember("comments", "-", "", RB2::MemberString);
-    addMember("orddate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
+    addMember("orddate", "-", "1900-01-01", RB2::MemberDateTime);
     addMember("ordertype", "-", "", RB2::MemberChar40);
     addMember("shipvia_id", "-", "0", RB2::MemberChar40);
     addMember("deladd1", "-", "", RB2::MemberChar125);
@@ -76,11 +76,11 @@ void ACC_SalesOrder::createMembers() {
     addMember("deliverblind", "-", 0, RB2::MemberInteger); // no company details
     addMember("freightcost", "-", 0.0, RB2::MemberDouble);
     addMember("fromstkloc_id", "-", "0", RB2::MemberChar40);
-    addMember("deliverydate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
-    addMember("quotedate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
-    addMember("confirmeddate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
+    addMember("deliverydate", "-", "1900-01-01", RB2::MemberDateTime);
+    addMember("quotedate", "-", "1900-01-01", RB2::MemberDateTime);
+    addMember("confirmeddate", "-", "1900-01-01", RB2::MemberDateTime);
     addMember("printedpackingslip", "-", 0, RB2::MemberInteger);
-    addMember("datepackingslipprinted", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+    addMember("datepackingslipprinted", "-", "1900-01-01", RB2::MemberDateTime);
     addMember("quotation", "-", 0, RB2::MemberInteger);
     // added
     // Extra comment to be shown on the invoice

@@ -184,6 +184,7 @@ protected:
     virtual void changeEvent(QEvent* e);
 
     virtual void setPaletteColors();
+    virtual bool isParentDialogWindow(QWidget* wgt);
 
 
     //! Size hint for widget

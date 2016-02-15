@@ -120,7 +120,7 @@ void ACC_SoTransDoc::setStockMoveData(RB_ObjectBase *sm, int row) {
     sm->setValue("type", 10);
     sm->setValue("transno", 0);                        // invoice is not set, done in oper.exec()
     sm->setValue("loccode", custModel->getCurrentValue("defaultlocation_id", Qt::UserRole + 1));
-    sm->setValue("transdate", "0000-00-00T00:00:00");   // transaction date not set, done in oper.exec()
+    sm->setValue("transdate", "1900-01-01");   // transaction date not set, done in oper.exec()
     // TODO: sm->setValue("debtorno", custModel->getCurrentId());
     sm->setValue("branchcode", custModel->getCurrentId());
     idx = odModel->index(row, odModel->fieldIndex("unitprice"));

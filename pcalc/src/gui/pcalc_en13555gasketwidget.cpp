@@ -26,6 +26,8 @@ PCALC_EN13555GasketWidget::~PCALC_EN13555GasketWidget() {
 }
 
 void PCALC_EN13555GasketWidget::init() {
+    setObjectName("PCALC_EN13555GasketWidget"); // ui is RB_DatabaseTableWidget
+
     QStringList items;
     items << tr("None") << "QminL" << "QsminL" << "PQR delta_eGC" << "EG eG";
     ui->cbProperty->addItems(items);
@@ -117,7 +119,6 @@ void PCALC_EN13555GasketWidget::on_pbClearType_clicked() {
 }
 
 void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
-    // items << tr("None") << "QminL" << "QsminL" << "PQR delta_eGC" << "EG eG";
     QStringList items;
 
     switch (index) {
@@ -125,6 +126,7 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         if (mModel) {
             fileSave(false);
             delete mModel;
+            mModel = nullptr;
             ui->tableView->setModel(nullptr);
         }
 
@@ -139,8 +141,10 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
 
         items.clear();
         items << tr("None") << "testpressure" << "leakrate" << "qminl";
+        ui->cbXcoord->clear();
         ui->cbXcoord->addItems(items);
         ui->cbXcoord->setCurrentIndex(3);
+        ui->cbYcoord->clear();
         ui->cbYcoord->addItems(items);
         ui->cbYcoord->setCurrentIndex(2);
         setChartModel(mModel, ui->cbXcoord->currentText(),
@@ -153,6 +157,18 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         mModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelEN13555QsminL, false);
         setModelTableView(mModel);
+break;
+        items.clear();
+        items << tr("None") << "testpress" << "leakrate" << "qa" << "qsminl";
+
+        ui->cbXcoord->clear();
+        ui->cbXcoord->addItems(items);
+        ui->cbXcoord->setCurrentIndex(4);
+        ui->cbYcoord->clear();
+        ui->cbYcoord->addItems(items);
+        ui->cbYcoord->setCurrentIndex(2);
+        setChartModel(mModel, ui->cbXcoord->currentText(),
+                      ui->cbYcoord->currentText(), ScaleYLog);
         break;
     }
     case 3: { // PQR delta_eGC

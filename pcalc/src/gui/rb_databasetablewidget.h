@@ -59,7 +59,14 @@ protected:
 
 // private:
     Ui::RB_DatabaseTableWidget* ui;
+
     QChart* mChart;
+    QLineSeries* mSeries;
+    QVXYModelMapper* mMapper;
+    QAbstractAxis* mAxisX;
+    QAbstractAxis* mAxisY;
+    QChartView* mChartView;
+    QGridLayout* mChartLayout;
 
 };
 #endif // RB_DATABASETABLEWIDGET_H

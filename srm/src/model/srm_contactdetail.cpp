@@ -51,7 +51,7 @@ Web Site, Word of mouth, Email, Campaign, Other
  */
 void SRM_ContactDetail::createMembers() {
     addMember("leadsource_id", "-", "0", RB2::MemberChar40);
-    addMember("birthday", "-", "0000-00-00", RB2::MemberChar20);
+    addMember("birthday", "-", "1900-01-01", RB2::MemberChar20);
     addMember("spousname", "-", "", RB2::MemberChar125);
     addMember("childrennames", "-", "", RB2::MemberChar125);
     addMember("hobbies", "-", "", RB2::MemberChar125);

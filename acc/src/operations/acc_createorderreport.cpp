@@ -54,8 +54,8 @@ bool ACC_CreateOrderReport::execute(RB_ObjectBase* orderList) {
     SUBSTR(`acc_salesorderdetail`.`stk_idx`, 39) as stk_idx, `acc_salesorderdetail`.`stkdescription`, `acc_salesorderdetail`.`stkuom`, `acc_salesorderdetail`.`unitprice`,
     `acc_salesorderdetail`.`discountpercent`, `acc_salesorderdetail`.`quantity`, `acc_salesorderdetail`.`qtyinvoiced`, `acc_salesorderdetail`.`qtydispatched`, `acc_salesorderdetail`.`itemdue`
     FROM `acc_salesorder` INNER JOIN `acc_salesorderdetail` ON `acc_salesorder`.`id`=`acc_salesorderdetail`.`parent`
-    WHERE `acc_salesorder`.`orddate`>='0000-00-00 00:00:00'
-    AND `acc_salesorder`.`orddate`<='0000-00-00T00:00:00'
+    WHERE `acc_salesorder`.`orddate`>='1900-01-01'
+    AND `acc_salesorder`.`orddate`<='1900-01-01'
     AND  `acc_salesorder`.`orderno`>='13000039' // for testing only
     ORDER BY `acc_salesorder`.`orderno` ASC;
 

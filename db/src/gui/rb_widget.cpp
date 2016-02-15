@@ -735,6 +735,26 @@ void RB_Widget::setPaletteColors() {
                                                QPalette::Text);
 }
 
+/**
+ * Check if a parent widget is a RB_DialogWindow
+ * @param wgt
+ * @return true if a parent widget is of type RB_DialogWindow
+ */
+bool RB_Widget::isParentDialogWindow(QWidget* wgt) {
+    if (!wgt) {
+        return false;
+    }
+
+    RB_DialogWindow* dlgWindow =
+            dynamic_cast<RB_DialogWindow*>(wgt->parentWidget());
+
+    if (dlgWindow) {
+        return true;
+    }
+
+    return isParentDialogWindow(wgt->parentWidget());
+}
+
 void RB_Widget::setIsNewWidget(bool isNewWidget) {
     mIsNewWidget = isNewWidget;
 }
@@ -1387,9 +1407,7 @@ void RB_Widget::readSettings() {
         return;
     }
 
-    RB_DialogWindow* dlgWindow = dynamic_cast<RB_DialogWindow*>(parentWidget());
-
-    if (dlgWindow) {
+    if (isParentDialogWindow(this)) {
         // parent is RB_DialogWindow
         RB_SETTINGS->beginGroup(objectName());
         QSize dlgSize = RB_SETTINGS->value("size", sizeHint()).toSize();
@@ -1487,9 +1505,8 @@ void RB_Widget::writeSettings() {
     }
 
     RB_SETTINGS->beginGroup(objectName());
-    RB_DialogWindow* dlgWindow = dynamic_cast<RB_DialogWindow*>(parentWidget());
 
-    if (dlgWindow) {
+    if (isParentDialogWindow(this)) {
         // parent is RB_DialogWindow
         RB_SETTINGS->setValue("size", size());
     } else {

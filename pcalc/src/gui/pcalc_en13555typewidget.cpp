@@ -29,6 +29,8 @@ RB_String PCALC_EN13555TypeWidget::getName() const {
 }
 
 void PCALC_EN13555TypeWidget::init() {
+    setObjectName("PCALC_EN13555TypeWidget"); // ui is DB_TableWidget
+
     // Set model, root="" is already set by modelFactory, however change to system root
     mModel = PCALC_MODELFACTORY->getModel(PCALC_ModelFactory::ModelEN13555Gasket, false);
     mModel->setRoot(PCALC_MODELFACTORY->getStoredId());
