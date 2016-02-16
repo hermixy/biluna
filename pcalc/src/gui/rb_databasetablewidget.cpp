@@ -78,12 +78,14 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
     }
 
     // data series
-    if (!mSeries || mMapper) {
-        mSeries = new QLineSeries(mChart);
-        mSeries->setName(yField + " " + tr("graph"));
-        mMapper = new QVXYModelMapper(mChart);
+    if (mSeries && mMapper) {
+        delete mSeries;
+        delete mMapper;
     }
 
+    mSeries = new QLineSeries(mChart);
+    mSeries->setName(yField + " " + tr("graph"));
+    mMapper = new QVXYModelMapper(mChart);
     mMapper->setXColumn(model->fieldIndex(xField));
     mMapper->setYColumn(model->fieldIndex(yField));
     mMapper->setSeries(mSeries);

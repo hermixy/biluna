@@ -157,7 +157,7 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         mModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelEN13555QsminL, false);
         setModelTableView(mModel);
-break;
+
         items.clear();
         items << tr("None") << "testpress" << "leakrate" << "qa" << "qsminl";
 

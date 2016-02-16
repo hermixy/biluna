@@ -86,11 +86,11 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelEN13555QminL:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555QminLList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "leakrate");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "leakrate");
         break;
     case ModelEN13555QsminL:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555QsminLList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "leakrate", "qa");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "qa", "leakrate");
         break;
     case ModelEN1591Assembly:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN1591_AssemblyList");
