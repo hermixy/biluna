@@ -899,6 +899,16 @@ QSqlDatabase RB_MmProxy::database() const {
 }
 
 /**
+ * Get database with all standards, such as material properties
+ * and component dimensions
+ * @return Standard database
+ */
+QSqlDatabase RB_MmProxy::stdDatabase() const {
+    // TODO: allow for different location
+    return mSourceModel->database();
+}
+
+/**
  * To keep track of model changes for considering save action at exit of
  * the application
  * @returns true if model is modified

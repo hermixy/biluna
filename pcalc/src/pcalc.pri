@@ -75,6 +75,7 @@ HEADERS += \
     ../src/model/pcalc.h \
     ../src/model/pcalc_modelfactory.h \
     ../src/model/pcalc_objectfactory.h \
+    ../src/utils/EN1591/en13555property.h \
     ../src/utils/EN1591/table02_15property.h \
     ../src/utils/EN1591/table16property.h \
     ../src/utils/EN1591/table17_30property.h \
@@ -150,6 +151,7 @@ SOURCES += \
     ../src/model/EN1591/pcalc_en1591_shell.cpp \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
+    ../src/utils/EN1591/en13555property.cpp \
     ../src/utils/EN1591/table02_15property.cpp \
     ../src/utils/EN1591/table16property.cpp \
     ../src/utils/EN1591/table17_30property.cpp \

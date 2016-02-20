@@ -158,15 +158,17 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
                     PCALC_ModelFactory::ModelEN13555QsminL, false);
         setModelTableView(mModel);
 
+        break; // HACK: because of crash during input
+
         items.clear();
-        items << tr("None") << "testpress" << "leakrate" << "qa" << "qsminl";
+        items << tr("None") << "testpress" << "qa" << "leakrate" << "qsminl";
 
         ui->cbXcoord->clear();
         ui->cbXcoord->addItems(items);
         ui->cbXcoord->setCurrentIndex(4);
         ui->cbYcoord->clear();
         ui->cbYcoord->addItems(items);
-        ui->cbYcoord->setCurrentIndex(2);
+        ui->cbYcoord->setCurrentIndex(3);
         setChartModel(mModel, ui->cbXcoord->currentText(),
                       ui->cbYcoord->currentText(), ScaleYLog);
         break;
@@ -179,11 +181,11 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         setModelTableView(mModel);
 
         items.clear();
-        items << tr("None") << "c" << "qa" << "temp" << "pqr" << "deltaegc";
+        items << tr("None") << "c" << "temp" << "qa" << "pqr" << "deltaegc";
 
         ui->cbXcoord->clear();
         ui->cbXcoord->addItems(items);
-        ui->cbXcoord->setCurrentIndex(2);
+        ui->cbXcoord->setCurrentIndex(3);
         ui->cbYcoord->clear();
         ui->cbYcoord->addItems(items);
         ui->cbYcoord->setCurrentIndex(4);
@@ -199,11 +201,11 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         setModelTableView(mModel);
 
         items.clear();
-        items << tr("None") << "qa" << "temp" << "capitaleg" << "eg";
+        items << tr("None") << "temp" << "qa" << "capitaleg" << "eg";
 
         ui->cbXcoord->clear();
         ui->cbXcoord->addItems(items);
-        ui->cbXcoord->setCurrentIndex(1);
+        ui->cbXcoord->setCurrentIndex(2);
         ui->cbYcoord->clear();
         ui->cbYcoord->addItems(items);
         ui->cbYcoord->setCurrentIndex(4);

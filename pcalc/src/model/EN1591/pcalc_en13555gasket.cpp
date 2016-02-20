@@ -25,9 +25,18 @@ PCALC_EN13555Gasket::~PCALC_EN13555Gasket() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
+/**
+ * Create members
+ * \li type type of gasket
+ * \li testoutdiam test outside diameter [mm]
+ * \li testindiam test instide diamter [mm]
+ * \li testthickn test thickness [mm]
+ * \li issue issue date or revision of datasheet
+ */
 void PCALC_EN13555Gasket::createMembers() {
     addMember("type", "-", "", RB2::MemberChar125);
     addMember("testoutdiam", "mm", 0.0, RB2::MemberDouble);
     addMember("testindiam", "mm", 0.0, RB2::MemberDouble);
+    addMember("testthickn", "mm", 0.0, RB2::MemberDouble);
     addMember("issue", "-", "1970-01-01", RB2::MemberChar10);
 }

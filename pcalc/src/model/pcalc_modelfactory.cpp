@@ -70,7 +70,7 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
     switch (type) {
     case ModelEN13555EGeG:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555EGeGList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "qa", "temp");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qa");
         break;
     case ModelEN13555Gasket:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555GasketList");
@@ -82,7 +82,7 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelEN13555PQRdeltaeGC:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555PqrDeltaeGCList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "qa", "temp");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qa");
         break;
     case ModelEN13555QminL:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555QminLList");
