@@ -117,7 +117,6 @@ public:
 
     // Only for database
     virtual QSqlDatabase database() const;
-    virtual QSqlDatabase stdDatabase() const;
     virtual bool createTables() { return false; }
     virtual void setCurrentConnection(const RB_String&) { }
     virtual RB_String getCurrentConnection() const { return RB_String(); }

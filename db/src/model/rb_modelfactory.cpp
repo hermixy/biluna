@@ -171,7 +171,7 @@ QSqlDatabase RB_ModelFactory::getDatabase() {
  * Set database
  * @param dbConnection actual connection string
  */
-void RB_ModelFactory::setDatabase(const QSqlDatabase &db) {
+void RB_ModelFactory::setDatabase(const QSqlDatabase& db) {
     mDatabaseConnection = db.connectionName();
 }
 

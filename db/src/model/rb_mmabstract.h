@@ -172,7 +172,7 @@ protected:
     bool mIsTreeModel;
     //! In-memory model flag, true if in-memory model
     bool mIsInMemoryModel;
-    //! Current connected database for tree model
+    //! Current connected database for workspace or standards
     RB_String mDatabaseConnection;
     //! Number of columns minus hidden 3 (minus id, parent, name etc.)
     int mNoColumns;

@@ -15,6 +15,7 @@
 #include "pcalc_en13555gasketwidget.h"
 #include "pcalc_en13555manufwidget.h"
 #include "pcalc_en13555typewidget.h"
+#include "pcalc_en1591selectgasketwidget.h"
 #include "pcalc_modelfactory.h"
 #include "pcalc_projectdialog.h"
 #include "pcalc_projecteditdialog.h"
@@ -87,6 +88,10 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
     }
     case WidgetEN1591Flange: {
         wgt = new PCALC_EN1591Widget(parent);
+        break;
+    }
+    case WidgetEN1591SelectGasket: {
+        wgt = new PCALC_EN1591SelectGasketWidget(parent);
         break;
     }
     default:

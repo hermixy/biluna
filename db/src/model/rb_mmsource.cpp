@@ -1718,13 +1718,7 @@ void RB_MmSource::clear() {
  * @returns database for normal table model or for tree model
  */
 QSqlDatabase RB_MmSource::database() const {
-//    if (isTreeModel()) {
-        return RB_DATABASE->database(mDatabaseConnection);
-//    } else if (!mIsInMemoryModel) {
-//        return QSqlRelationalTableModel::database();
-//    }
-
-//    return QSqlDatabase();
+    return RB_DATABASE->database(mDatabaseConnection);
 }
 
 /**

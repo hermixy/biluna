@@ -139,9 +139,9 @@ double EN13555Property::getTableQsminL(double leakageRate,
 //    // TODO: complete
 //}
 
-RB_String EN13555Property::gasketId(const RB_String& manufacturer,
-                                              const RB_String &gasketType) {
-    return QString();
+//RB_String EN13555Property::gasketId(const RB_String& manufacturer,
+//                                              const RB_String &gasketIdx) {
+//    return QString();
 //    bool existing = false;
 
 //    for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
@@ -154,7 +154,7 @@ RB_String EN13555Property::gasketId(const RB_String& manufacturer,
 //    }
 
 //    return existing;
-}
+//}
 
 //void EN13555Property::cl(double leakageRate,
 //                            const QString& materialCode,

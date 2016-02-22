@@ -71,8 +71,8 @@ public:
 
 
     // continue here ... how to allow for custom and tables 2-16 selection?
-    RB_String gasketId(const RB_String& manufacturer,
-                       const RB_String& gasketType);
+//    RB_String gasketId(const RB_String& manufacturer,
+//                       const RB_String& gasketIdx);
 
 
 private:

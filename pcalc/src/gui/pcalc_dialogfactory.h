@@ -80,7 +80,8 @@ public:
         WidgetEN13555Manuf,             /**< EN13555 gasket manufacturer edit and selection */
         WidgetEN13555Type,              /**< EN13555 gasket type edit and selection */
         WidgetEN1591Flange,             /**< EN1591 flange calculation */
-        WidgetDefault                   /**< Default- or all models */
+        WidgetEN1591SelectGasket,       /**< EN1591 select gasket dialog */
+        WidgetDefault                   /**< Default- or all widgets */
     };
 
 private:

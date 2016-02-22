@@ -65,7 +65,7 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         if (model) return model;
     }
 
-    QSqlDatabase db = RB_DATABASE->database(mDatabaseConnection);
+    QSqlDatabase db = RB_DATABASE->database(mDatabaseConnection); // same as getDatabase();
 
     switch (type) {
     case ModelEN13555EGeG:
@@ -149,7 +149,7 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         iter = mModelList.find(ModelNone);
         break;
     case ModelEN13555Gasket:
-        iter = mModelList.find(ModelNone);
+        iter = mModelList.find(ModelEN13555Manuf);
         break;
     case ModelEN13555Manuf:
         iter = mModelList.find(ModelNone);
