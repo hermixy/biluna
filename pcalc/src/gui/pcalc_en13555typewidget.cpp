@@ -25,7 +25,7 @@ PCALC_EN13555TypeWidget::~PCALC_EN13555TypeWidget() {
 }
 
 RB_String PCALC_EN13555TypeWidget::getName() const {
-    return(tr("Select EN13555 Gasket Type[*]"));
+    return(tr("Select EN13555 Gasket Type"));
 }
 
 void PCALC_EN13555TypeWidget::init() {

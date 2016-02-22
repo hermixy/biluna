@@ -139,8 +139,10 @@ double EN13555Property::getTableQsminL(double leakageRate,
 //    // TODO: complete
 //}
 
-bool EN13555Property::isGasketInDatabase(const RB_String& manufacturer, const QString &gasketType) {
-    bool existing = false;
+RB_String EN13555Property::gasketId(const RB_String& manufacturer,
+                                              const RB_String &gasketType) {
+    return QString();
+//    bool existing = false;
 
 //    for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
 //                it != mList.end() && !existing; it++) {
@@ -151,7 +153,7 @@ bool EN13555Property::isGasketInDatabase(const RB_String& manufacturer, const QS
 //        }
 //    }
 
-    return existing;
+//    return existing;
 }
 
 //void EN13555Property::cl(double leakageRate,

@@ -22,6 +22,12 @@ PCALC_EN13555GasketWidget::PCALC_EN13555GasketWidget(QWidget* parent)
 }
 
 PCALC_EN13555GasketWidget::~PCALC_EN13555GasketWidget() {
+    // Dialogs create and delete models by themselves
+    if (mModel) {
+        delete mModel;
+        mModel = nullptr;
+    }
+
     RB_DEBUG->print("PCALC_EN13555GasketWidget::~PCALC_EN13555GasketWidget() OK");
 }
 
@@ -138,6 +144,8 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         mModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelEN13555QminL, false);
         setModelTableView(mModel);
+
+        break; // HACK: because of crash during input
 
         items.clear();
         items << tr("None") << "testpressure" << "leakrate" << "qminl";
