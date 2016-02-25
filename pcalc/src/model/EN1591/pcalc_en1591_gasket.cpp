@@ -34,7 +34,7 @@ PCALC_EN1591_Gasket::~PCALC_EN1591_Gasket() {
  * \li -
  */
 void PCALC_EN1591_Gasket::createMembers() {
-    addMember("materialcode_ix", "-", "0", RB2::MemberChar165);
+    addMember("gaskettype_idx", "-", "0", RB2::MemberChar165);
     addMember("formtype_id", "-", 0, RB2::MemberInteger);
     addMember("manufacturetype", "-", 0, RB2::MemberChar125);
     addMember("insertfilltype_id", "-", 0, RB2::MemberInteger);

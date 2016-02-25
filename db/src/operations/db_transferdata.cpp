@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: db_transferdataaction.cpp 1983 2013-09-02 18:10:02Z rutger $
+ * $Id: db_transferdata.cpp 1983 2013-09-02 18:10:02Z rutger $
  * Created: May 23, 2008 9:07:28 PM - Rutger Botermans
  *
  * Copyright (C) 2008 Red-Bag. All rights reserved.
@@ -8,7 +8,7 @@
  * See http://www.red-bag.com for further details.
  *****************************************************************/
 
-#include "db_transferdataaction.h"
+#include "db_transferdata.h"
 
 #include <QtSql>
 #include "db_dialogfactory.h"
@@ -22,12 +22,12 @@
 #include "rb_xmlwriter.h"
 
 
-DB_TransferDataAction::DB_TransferDataAction(){
+DB_TransferData::DB_TransferData(){
 	mDbRoot = NULL;
 	mErrorMessage = "";
 }
 
-DB_TransferDataAction::~DB_TransferDataAction() {
+DB_TransferData::~DB_TransferData() {
     delete mDbRoot;
 }
 
@@ -38,9 +38,9 @@ DB_TransferDataAction::~DB_TransferDataAction() {
  * @param dbSource source database
  * @param dbDestination destination database
  */
-bool DB_TransferDataAction::transferDatabase(QSqlDatabase dbSource,
+bool DB_TransferData::transferDatabase(QSqlDatabase dbSource,
                                              QSqlDatabase dbDestination) {
-    RB_DEBUG->print("DB_TransferDataAction::transferDatabase");
+    RB_DEBUG->print("DB_TransferData::transferDatabase");
 
     // Tables visible to the user
     RB_StringList tableList = dbSource.tables(QSql::Tables);
@@ -51,7 +51,7 @@ bool DB_TransferDataAction::transferDatabase(QSqlDatabase dbSource,
 
         if (!success) {
             RB_DEBUG->print(RB_Debug::D_ERROR,
-                    "DB_TransferDataAction::transferDatabase() ERROR");
+                    "DB_TransferData::transferDatabase() ERROR");
             return false;
         }
     }
@@ -66,15 +66,15 @@ bool DB_TransferDataAction::transferDatabase(QSqlDatabase dbSource,
  * @param dbDestination destination database
  * @param tableName table name
  */
-bool DB_TransferDataAction::transferDatabaseTable(QSqlDatabase dbSource,
+bool DB_TransferData::transferDatabaseTable(QSqlDatabase dbSource,
                                                   QSqlDatabase dbDestination,
                                                   const RB_String& tableName) {
     // create database table
     bool success = createDatabaseTable(dbSource, dbDestination, tableName);
 
     if (!success) {
-        RB_DEBUG->print("DB_TransferDataAction::transferDatabaseTable() "
-                "could not create table ERROR");
+        RB_DEBUG->print("DB_TransferData::transferDatabaseTable() "
+                        "could not create table ERROR");
         return false;
     }
 
@@ -84,66 +84,15 @@ bool DB_TransferDataAction::transferDatabaseTable(QSqlDatabase dbSource,
 }
 
 /**
- * Transfer (copy) entire database to SQLite database 
- * @param dbSource source database
- * @param dbDestination destination database
- */
-//bool DB_TransferDataAction::transferDatabaseSqlite(QSqlDatabase dbSource,
-//								QSqlDatabase dbDestination) {
-//	RB_DEBUG->print("DB_TransferDataAction::transferDatabaseSqlite()");
-//
-//	// Tables visible to the user
-//	RB_StringList tableList = dbSource.tables(QSql::Tables);
-//	bool success = false;
-//
-//	for (int i = 0; i < tableList.size(); ++i) {
-//		success = transferTableSqlite(dbSource, dbDestination, tableList.at(i));
-//
-//		if (!success) {
-//			RB_DEBUG->print(RB_Debug::D_ERROR,
-//					"DB_TransferDataAction::transferDatabaseSqlite() ERROR");
-//			return false;
-//		}
-//	}
-//
-//	return true;
-//}
-
-/**
- * Transfer data from a database table to a new SQLite table
- * @param dbSource source database
- * @param dbDestination destination database
- * @param tableName table name with data to be transfered (copied)
- */
-//bool DB_TransferDataAction::transferTableSqlite(QSqlDatabase dbSource,
-//                      QSqlDatabase dbDestination,
-//			const RB_String& tableName) {
-//	RB_DEBUG->print("DB_TransferDataAction::transferTableSqlite()");
-//
-//    // create database table
-//	bool success = createDatabaseTable(dbSource, dbDestination, tableName);
-//
-//	if (!success) {
-//		RB_DEBUG->print("DB_TransferDataAction::transferTableSqlite() "
-//				"could not create table");
-//		return false;
-//	}
-//
-//    // success = fillDatabaseTable(dbSource, dbDestination, tableName);
-//	success = fillSqliteTable(dbSource, dbDestination, tableName);
-//	return success;
-//}
-
-/**
  * Transfer data from a database or database table to a XML file
  * @param db source database
  * @param fileName XML file
  * @param tableName table name with data to be transfered (copied)
  */
-bool DB_TransferDataAction::transferDbXmlFile(QSqlDatabase db,
+bool DB_TransferData::transferDbXmlFile(QSqlDatabase db,
                                             const RB_String& fileName,
                                             const RB_String& tableName) {
-    RB_DEBUG->print("DB_TransferDataAction::transferTableXmlFile()");
+    RB_DEBUG->print("DB_TransferData::transferTableXmlFile()");
 	
     // create root
     if (!mDbRoot) {
@@ -167,7 +116,7 @@ bool DB_TransferDataAction::transferDbXmlFile(QSqlDatabase db,
 
     QFile file(fileName);
     if (!file.open(QFile::ReadWrite | QFile::Text)) {
-        RB_DEBUG->warning("DB_TransferDataAction::transferTableXmlFile() "
+        RB_DEBUG->warning("DB_TransferData::transferTableXmlFile() "
                           "cannot write file");
         return false;
     }
@@ -189,10 +138,10 @@ bool DB_TransferDataAction::transferDbXmlFile(QSqlDatabase db,
  * @param fileName CSV file
  * @param tableName table name with data to be transfered (copied)
  */
-bool DB_TransferDataAction::transferDbXmlFileHierarchy(
+bool DB_TransferData::transferDbXmlFileHierarchy(
                             QSqlDatabase db, const QString& fileName,
                             const QString& tableName, const QString& id) {
-    RB_DEBUG->print("DB_TransferDataAction::transferDbXmlFileHierarchy()");
+    RB_DEBUG->print("DB_TransferData::transferDbXmlFileHierarchy()");
 
     RB_StringList strL = tableName.split("_");
     RB_ObjectFactory* f = DB_OBJECTFACTORY->getFactory(strL.at(0).toUpper());
@@ -225,10 +174,10 @@ bool DB_TransferDataAction::transferDbXmlFileHierarchy(
  * @param fileName CSV file
  * @param tableName table name with data to be transfered (copied)
  */
-bool DB_TransferDataAction::transferDbCsvCommaFile(QSqlDatabase db,
+bool DB_TransferData::transferDbCsvCommaFile(QSqlDatabase db,
                                 const RB_String& fileName,
                                 const RB_String& tableName) {
-    RB_DEBUG->print("DB_TransferDataAction::transferTableCsvSemicolonFile");
+    RB_DEBUG->print("DB_TransferData::transferTableCsvSemicolonFile");
 	
     // create root
     if (!mDbRoot) {
@@ -248,7 +197,7 @@ bool DB_TransferDataAction::transferDbCsvCommaFile(QSqlDatabase db,
     // export file
     QFile file(fileName);
     if (!file.open(QFile::ReadWrite | QFile::Text)) {
-        RB_DEBUG->warning("DB_TransferDataAction::transferTableXmlFile() "
+        RB_DEBUG->warning("DB_TransferData::transferTableXmlFile() "
                           "cannot write file");
         return false;
     }
@@ -270,7 +219,7 @@ bool DB_TransferDataAction::transferDbCsvCommaFile(QSqlDatabase db,
  * @param fileName CSV file
  * @param tableName table name with data to be transfered (copied)
  */
-bool DB_TransferDataAction::transferDbCsvSemicolonFile(QSqlDatabase db, 
+bool DB_TransferData::transferDbCsvSemicolonFile(QSqlDatabase db,
                                 const RB_String& fileName,
                                 const RB_String& tableName) {
     // create root
@@ -291,7 +240,7 @@ bool DB_TransferDataAction::transferDbCsvSemicolonFile(QSqlDatabase db,
     // export file
     QFile file(fileName);
     if (!file.open(QFile::ReadWrite | QFile::Text)) {
-        RB_DEBUG->warning("DB_TransferDataAction::transferDbCsvSemicolonFile() "
+        RB_DEBUG->warning("DB_TransferData::transferDbCsvSemicolonFile() "
                           "cannot write file");
         return false;
     }
@@ -313,10 +262,10 @@ bool DB_TransferDataAction::transferDbCsvSemicolonFile(QSqlDatabase db,
  * @param tableName table name with data to be transfered (copied)
  * @param fileName CSV file
  */
-bool DB_TransferDataAction::transferDbCsvTabFile(QSqlDatabase db,
+bool DB_TransferData::transferDbCsvTabFile(QSqlDatabase db,
                                 const RB_String& fileName,
                                 const RB_String& tableName) {
-    RB_DEBUG->print("DB_TransferDataAction::transferDbCsvTabFile");
+    RB_DEBUG->print("DB_TransferData::transferDbCsvTabFile");
 	
 	// create root
     if (!mDbRoot) {
@@ -336,7 +285,7 @@ bool DB_TransferDataAction::transferDbCsvTabFile(QSqlDatabase db,
     // export file
     QFile file(fileName);
     if (!file.open(QFile::ReadWrite | QFile::Text)) {
-        RB_DEBUG->warning("DB_TransferDataAction::transferTableXmlFile() "
+        RB_DEBUG->warning("DB_TransferData::transferTableXmlFile() "
                           "cannot write file");
         return false;
     }
@@ -357,14 +306,14 @@ bool DB_TransferDataAction::transferDbCsvTabFile(QSqlDatabase db,
  * @param db source database
  * @param tableName table name with data to be transfered (copied)
  */
-void DB_TransferDataAction::createTableModel(QSqlDatabase db,
-                                             const RB_String& tableName) {
+void DB_TransferData::createTableModel(QSqlDatabase db,
+                                       const RB_String& tableName) {
 	
     RB_String strData = "";
     QSqlTableModel* model = new QSqlTableModel(NULL, db);
     model->setTable(tableName);
     model->select();
-    
+
 //    if (model->lastError().type() != QSqlError::NoError)
 //        emit statusMessage(model->lastError().text());
 
@@ -420,7 +369,7 @@ void DB_TransferDataAction::createTableModel(QSqlDatabase db,
  * @param dbDestination destination database
  * @param tableName table name with data to be transfered (copied)
  */
-bool DB_TransferDataAction::createDatabaseTable(QSqlDatabase dbSource,
+bool DB_TransferData::createDatabaseTable(QSqlDatabase dbSource,
                                                 QSqlDatabase dbDestination,
                                                 const RB_String& tableName) {
     if (dbSource.driverName() == "QMYSQL") {
@@ -449,7 +398,8 @@ bool DB_TransferDataAction::createDatabaseTable(QSqlDatabase dbSource,
 
     if (firstField.contains("id", Qt::CaseInsensitive)) {
         if (dbDestination.driverName() == "QMYSQL") {
-            sqlStr += ", PRIMARY KEY (`" + firstField + "`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+            sqlStr += ", PRIMARY KEY (`" + firstField
+                    + "`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
         } else {
             sqlStr += ", PRIMARY KEY (`" + firstField + "`));";
         }
@@ -461,7 +411,7 @@ bool DB_TransferDataAction::createDatabaseTable(QSqlDatabase dbSource,
 	
 	if (query.lastError().type() != QSqlError::NoError) {
 		RB_DEBUG->print(RB_Debug::D_ERROR, 
-				"DB_TransferDataAction::createDatabaseTable() ERROR");
+                "DB_TransferData::createDatabaseTable() ERROR");
 		mErrorMessage = query.lastError().driverText();
 		return false;
 	}
@@ -527,7 +477,7 @@ bool DB_TransferDataAction::createDatabaseTable(QSqlDatabase dbSource,
 
 
  */
-bool DB_TransferDataAction::createFromMysqlTable(QSqlDatabase dbSource,
+bool DB_TransferData::createFromMysqlTable(QSqlDatabase dbSource,
                                                  QSqlDatabase dbDestination,
                                                  const QString& tableName) {
     RB_String sqlStr = "";
@@ -606,7 +556,8 @@ bool DB_TransferDataAction::createFromMysqlTable(QSqlDatabase dbSource,
 
     if (!primaryKeyField.isEmpty()) {
         if (dbDestination.driverName() == "QMYSQL") {
-            sqlStr += ", PRIMARY KEY (`" + primaryKeyField + "`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+            sqlStr += ", PRIMARY KEY (`" + primaryKeyField
+                    + "`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
         } else {
             sqlStr += ", PRIMARY KEY (`" + primaryKeyField + "`));";
         }
@@ -618,7 +569,7 @@ bool DB_TransferDataAction::createFromMysqlTable(QSqlDatabase dbSource,
 
     if (qDest.lastError().type() != QSqlError::NoError) {
         RB_DEBUG->print(RB_Debug::D_ERROR,
-                "DB_TransferDataAction::createFromMysqlTable() ERROR");
+                "DB_TransferData::createFromMysqlTable() ERROR");
         mErrorMessage = qDest.lastError().driverText();
         return false;
     }
@@ -681,7 +632,7 @@ Insert if not exists is used in this 'fillDatabaseTable()' function.
  * @param dbDestination destination database
  * @param tableName table name with data to be transfered (copied)
  */
-bool DB_TransferDataAction::fillDatabaseTable(QSqlDatabase dbSource, 
+bool DB_TransferData::fillDatabaseTable(QSqlDatabase dbSource,
 												QSqlDatabase dbDestination,
 												const RB_String& tableName) {
 
@@ -734,7 +685,7 @@ bool DB_TransferDataAction::fillDatabaseTable(QSqlDatabase dbSource,
 
             if (query1.lastError().type() != QSqlError::NoError) {
                 RB_DEBUG->print(RB_Debug::D_ERROR,
-                        "DB_TransferDataAction::fillDatabaseTable() ERROR");
+                        "DB_TransferData::fillDatabaseTable() ERROR");
                 mErrorMessage = query.lastError().driverText();
                 return false;
             }
@@ -787,7 +738,7 @@ bool DB_TransferDataAction::fillDatabaseTable(QSqlDatabase dbSource,
 
 	if (query1.lastError().type() != QSqlError::NoError) {
 		RB_DEBUG->print(RB_Debug::D_ERROR, 
-				"DB_TransferDataAction::fillDatabaseTable() ERROR");
+                "DB_TransferData::fillDatabaseTable() ERROR");
         mErrorMessage = query1.lastError().driverText();
 		return false;
 	}
@@ -806,7 +757,7 @@ bool DB_TransferDataAction::fillDatabaseTable(QSqlDatabase dbSource,
  * @param dbDestination destination database
  * @param tableName table name with data to be transfered (copied)
  */
-bool DB_TransferDataAction::fillSqliteTable(QSqlDatabase dbSource, 
+bool DB_TransferData::fillSqliteTable(QSqlDatabase dbSource,
 												QSqlDatabase dbDestination,
 												const RB_String& tableName) {
 	RB_String sqlStr = "SELECT * FROM " + tableName + ";";
@@ -860,7 +811,7 @@ bool DB_TransferDataAction::fillSqliteTable(QSqlDatabase dbSource,
 
         if (query1.lastError().type() != QSqlError::NoError) {
             RB_DEBUG->print(RB_Debug::D_ERROR,
-                    "DB_TransferDataAction::fillSqliteTable() ERROR");
+                    "DB_TransferData::fillSqliteTable() ERROR");
             mErrorMessage = query1.lastError().driverText();
             return false;
         }
@@ -878,7 +829,7 @@ bool DB_TransferDataAction::fillSqliteTable(QSqlDatabase dbSource,
  * @param fld field of record
  * @param fldStr SQL string for field properties to be set
  */
-void DB_TransferDataAction::setFieldProperties(const QSqlField& fld,
+void DB_TransferData::setFieldProperties(const QSqlField& fld,
                                                QString& fldStr) {
     setDataTypeToSqlType(fld.type(), fld.length(), fldStr);
 
@@ -918,7 +869,7 @@ void DB_TransferDataAction::setFieldProperties(const QSqlField& fld,
  * @param strType SQL data type as string
  * @param length length of the string for the VARCHAR or otherwise STRING
  */
-void DB_TransferDataAction::setDataTypeToSqlType(QVariant::Type qtType,
+void DB_TransferData::setDataTypeToSqlType(QVariant::Type qtType,
 											int length, RB_String& strType) {
     strType = " ";
 

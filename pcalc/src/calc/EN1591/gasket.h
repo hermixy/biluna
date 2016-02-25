@@ -78,7 +78,7 @@ public:
         LowAlloyOrStainlessSteelGraphFill
     };
 
-    RB_String matCode; // Gasket code from database
+    RB_String gasketIdx; // Gasket type and id from database
     FormType frmType;
     InsFilLayMatType insType;
     double dG0;

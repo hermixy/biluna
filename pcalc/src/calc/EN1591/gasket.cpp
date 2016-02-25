@@ -15,7 +15,7 @@ Gasket_IN::Gasket_IN() : RB_Object(){
     dG1_EN13555 = 0;
     dG2_EN13555 = 0;
     eGt = 0;
-    matCode = "";
+    gasketIdx = "";
     frmType = Flat;
     insType = SpiralGraphFillOuterInner;
     K = 500000; // usual or 1,000,000 or 1,500,000 [N/mm]
@@ -266,9 +266,9 @@ double Gasket::gasketCompressedElasticity(int loadCaseNo) {
     LoadCase* loadCase0 = mLoadCaseList->at(0);
     double elasticity = 0.0;
 
-    if (TABLE17_30PROPERTY->isGasketMaterialCodeExisting(matCode)) {
+    if (TABLE17_30PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
         elasticity = TABLE17_30PROPERTY->getTableE_G(
-                    matCode, loadCase->TG, loadCase0->Q_G);
+                    gasketIdx, loadCase->TG, loadCase0->Q_G);
         if (elasticity > 0) {
             PR->addDetail("F. 58 Table 17-30", "E_G", "Table 17-30 value",
                           elasticity, "N/mm2", "Table value", loadCaseNo);
@@ -318,8 +318,8 @@ double Gasket::gasketCompressedThickness(LoadCase* loadCase) {
  * @return gasket maximum load at temperature
  */
 double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
-    if (TABLE16PROPERTY->isGasketMaterialCodeExisting(matCode)) {
-        loadCase->Q_smax = TABLE16PROPERTY->getTable16_Q_smax(matCode,
+    if (TABLE16PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
+        loadCase->Q_smax = TABLE16PROPERTY->getTable16_Q_smax(gasketIdx,
                                                                loadCase->TG);
         if (loadCase->Q_smax > 0) {
             PR->addDetail("Before_F. 65 etc.", "Q_smax", "Table 16 value",
@@ -346,8 +346,8 @@ double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
  * @return
  */
 double Gasket::gasketCreepFactor(int loadCaseNo, LoadCase* loadCase) {
-    if (TABLE16PROPERTY->isGasketMaterialCodeExisting(matCode)) {
-        loadCase->P_QR = TABLE16PROPERTY->getTable16_P_QR(matCode,
+    if (TABLE16PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
+        loadCase->P_QR = TABLE16PROPERTY->getTable16_P_QR(gasketIdx,
                                                            loadCase->TG);
         if (loadCase->P_QR > 0) {
             PR->addDetail("Before_F. 105 Table 16", "PQR", "Table value",

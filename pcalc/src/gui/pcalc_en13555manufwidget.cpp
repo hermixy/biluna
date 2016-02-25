@@ -20,15 +20,17 @@ PCALC_EN13555ManufWidget::~PCALC_EN13555ManufWidget() {
     // Dialogs create and delete models by themselves
     if (mModel) {
         delete mModel;
-        mModel = NULL;
+        mModel = nullptr;
     }
 }
 
 RB_String PCALC_EN13555ManufWidget::getName() const {
-    return(tr("Select EN13555 Manufacturer[*]"));
+    return(tr("Select EN13555 Manufacturer"));
 }
 
 void PCALC_EN13555ManufWidget::init() {
+    setObjectName("PCALC_EN13555ManufWidget"); // ui is DB_TableWidget
+
     // Set model, root="" is already set by modelFactory, however change to system root
     mModel = PCALC_MODELFACTORY->getModel(PCALC_ModelFactory::ModelEN13555Manuf, false);
     mModel->setRoot("");

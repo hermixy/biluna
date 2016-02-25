@@ -1678,6 +1678,11 @@ bool RB_MmSource::select() {
         createTree();
         endResetModel();
         return true;
+	} else if (mSortColumnName2 != "" && database().isOpen()) {
+		// setQuery(QSqlQuery) is set in createTableSortFilter()
+        beginResetModel();
+        endResetModel();
+        return true;
     } else if (!database().isOpen()) {
         beginResetModel();
         endResetModel();
@@ -1713,13 +1718,7 @@ void RB_MmSource::clear() {
  * @returns database for normal table model or for tree model
  */
 QSqlDatabase RB_MmSource::database() const {
-//    if (isTreeModel()) {
-        return RB_DATABASE->database(mDatabaseConnection);
-//    } else if (!mIsInMemoryModel) {
-//        return QSqlRelationalTableModel::database();
-//    }
-
-//    return QSqlDatabase();
+    return RB_DATABASE->database(mDatabaseConnection);
 }
 
 /**
@@ -2105,7 +2104,7 @@ void RB_MmSource::createTableSortFilter(RB_String& filter) {
             setFilter(filter + " AND `" + mTableName.toLower() + "`.`status` >= 0");
         }
         return;
-    } else if (mSortColumnName1 == "" || sortOrder =="") {
+    } else if (mSortColumnName1 == "" || sortOrder == "") {
         // setFilter() also executes select
         if (filter.isEmpty()) {
             setFilter("`" + mTableName.toLower() + "`.`status` >= 0");
@@ -2115,7 +2114,7 @@ void RB_MmSource::createTableSortFilter(RB_String& filter) {
         return;
     }
 
-    // Exceptional more columns
+    // Exceptional: more columns
     RB_String sortBy = "";
 
     if (mSortColumnName1 != "") {
@@ -2143,6 +2142,7 @@ void RB_MmSource::createTableSortFilter(RB_String& filter) {
     }
 
     QSqlQuery q(qStr, database());
+	// setQuery() also executes select internally
     setQuery(q);
 }
 

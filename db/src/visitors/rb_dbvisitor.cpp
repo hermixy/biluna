@@ -353,7 +353,7 @@ bool RB_DbVisitor::dbUpdate() {
         return dbDelete();
     }
 
-    if (mObject->getValue("created").toString() == "0000-00-00T00:00:00") {
+    if (mObject->getValue("created").toString() <= "1900-01-01Z") { // Z to include time
         mObject->setValue("created", QDateTime::currentDateTime().toString(Qt::ISODate));
     }
     mObject->setValue("changed", QDateTime::currentDateTime().toString(Qt::ISODate));
@@ -449,7 +449,7 @@ bool RB_DbVisitor::dbUpdateList() {
 
         if(!obj->getFlag(RB2::FlagFromDatabase) && !obj->isList()) {
             // can be an object from outside
-            if (obj->getValue("created").toString() == "0000-00-00T00:00:00") {
+            if (obj->getValue("created").toString() <= "1900-01-01Z") { // Z to include time
                 obj->setValue("created", QDateTime::currentDateTime().toString(Qt::ISODate));
                 obj->setValue("changed", QDateTime::currentDateTime().toString(Qt::ISODate));
             }

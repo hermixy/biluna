@@ -6,6 +6,7 @@
 # ----------------------------------------------------------
 
 FORMS += \
+    ../src/gui/pcalc_en1591selectgasketwidget.ui \
     ../src/gui/pcalc_en1591widget.ui \
     ../src/gui/rb_databasetablewidget.ui
 
@@ -56,6 +57,7 @@ HEADERS += \
     ../src/gui/pcalc_en13555gasketwidget.h \
     ../src/gui/pcalc_en13555manufwidget.h \
     ../src/gui/pcalc_en13555typewidget.h \
+    ../src/gui/pcalc_en1591selectgasketwidget.h \
     ../src/gui/pcalc_en1591widget.h \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditdialog.h \
@@ -75,6 +77,7 @@ HEADERS += \
     ../src/model/pcalc.h \
     ../src/model/pcalc_modelfactory.h \
     ../src/model/pcalc_objectfactory.h \
+    ../src/utils/EN1591/en13555property.h \
     ../src/utils/EN1591/table02_15property.h \
     ../src/utils/EN1591/table16property.h \
     ../src/utils/EN1591/table17_30property.h \
@@ -133,6 +136,7 @@ SOURCES += \
     ../src/gui/pcalc_en13555gasketwidget.cpp \
     ../src/gui/pcalc_en13555manufwidget.cpp \
     ../src/gui/pcalc_en13555typewidget.cpp \
+    ../src/gui/pcalc_en1591selectgasketwidget.cpp \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditdialog.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
@@ -150,6 +154,7 @@ SOURCES += \
     ../src/model/EN1591/pcalc_en1591_shell.cpp \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
+    ../src/utils/EN1591/en13555property.cpp \
     ../src/utils/EN1591/table02_15property.cpp \
     ../src/utils/EN1591/table16property.cpp \
     ../src/utils/EN1591/table17_30property.cpp \

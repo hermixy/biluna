@@ -21,7 +21,7 @@
 #include "db_modelfactory.h"
 #include "db_objectfactory.h"
 #include "db_sqlhighlighter.h"
-#include "db_transferdataaction.h"
+#include "db_transferdata.h"
 #include "rb_settings.h"
 
 DB_BrowserDialog::DB_BrowserDialog(QWidget *parent) : RB_Dialog(parent) {
@@ -658,8 +658,8 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
     if (srcType == DB_BrowserDialog::SrcAllTables
                 && destType == DB_BrowserDialog::DestDatabase) {
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-        bool success = action.transferDatabase(
+        DB_TransferData oper;
+        bool success = oper.transferDatabase(
             connectionWidgetSrc->currentDatabase(),
             connectionWidgetDest->currentDatabase());
         QApplication::restoreOverrideCursor();
@@ -672,14 +672,14 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
                     QObject::tr("Could not export tables, \r"
                             "no permission to directory or SQL error.\r"));
 //            QMessageBox::warning(NULL, QObject::tr("SQLite SQL Warning"),
-//                    action.errorMessage());
+//                    oper.errorMessage());
         }
 
     } else if (srcType == DB_BrowserDialog::SrcSelectedTable
                     && destType == DB_BrowserDialog::DestDatabase) {
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-        bool success = action.transferDatabaseTable(
+        DB_TransferData oper;
+        bool success = oper.transferDatabaseTable(
             connectionWidgetSrc->currentDatabase(),
             connectionWidgetDest->currentDatabase(),
             connectionWidgetSrc->currentTableName());
@@ -726,10 +726,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
             return;
         }
 
-        // transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-        bool success = action.transferDbXmlFile(
+        DB_TransferData oper;
+        bool success = oper.transferDbXmlFile(
                     connectionWidgetSrc->currentDatabase(), fileName);
         QApplication::restoreOverrideCursor();
 
@@ -775,10 +775,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
             return;
         }
 
-        // transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-        bool success = action.transferDbXmlFile(
+        DB_TransferData oper;
+        bool success = oper.transferDbXmlFile(
                     connectionWidgetSrc->currentDatabase(), fileName,
                     connectionWidgetSrc->currentTableName());
         QApplication::restoreOverrideCursor();
@@ -808,10 +808,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
         QModelIndex rootIdx = idx.model()->index(idx.row(), 0);
 
 
-        // transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-        bool success = action.transferDbXmlFileHierarchy(
+        DB_TransferData oper;
+        bool success = oper.transferDbXmlFileHierarchy(
                     connectionWidgetSrc->currentDatabase(),
                     fileName,
                     connectionWidgetSrc->currentTableName(),
@@ -862,10 +862,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
 	    	return;
 	    }
 
-		// transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-		bool success = action.transferDbCsvCommaFile(
+        DB_TransferData oper;
+        bool success = oper.transferDbCsvCommaFile(
                 connectionWidgetSrc->currentDatabase(), fileName);
         QApplication::restoreOverrideCursor();
 
@@ -911,10 +911,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
 	    	return;
 	    }
 
-		// transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-        bool success = action.transferDbCsvCommaFile(
+        DB_TransferData oper;
+        bool success = oper.transferDbCsvCommaFile(
                 connectionWidgetSrc->currentDatabase(), fileName,
                 connectionWidgetSrc->currentTableName());
         QApplication::restoreOverrideCursor();
@@ -960,10 +960,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
 	    	return;
 	    }
 
-		// transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-		bool success = action.transferDbCsvSemicolonFile(
+        DB_TransferData oper;
+        bool success = oper.transferDbCsvSemicolonFile(
                 connectionWidgetSrc->currentDatabase(), fileName);
         QApplication::restoreOverrideCursor();
 
@@ -1009,10 +1009,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
 	    	return;
 	    }
 
-		// transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-        bool success = action.transferDbCsvSemicolonFile(
+        DB_TransferData oper;
+        bool success = oper.transferDbCsvSemicolonFile(
                 connectionWidgetSrc->currentDatabase(), fileName,
                 connectionWidgetSrc->currentTableName());
         QApplication::restoreOverrideCursor();
@@ -1059,10 +1059,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
 	    	return;
 	    }
 
-		// transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-		bool success = action.transferDbCsvTabFile(
+        DB_TransferData oper;
+        bool success = oper.transferDbCsvTabFile(
                 connectionWidgetSrc->currentDatabase(), fileName);
         QApplication::restoreOverrideCursor();
 
@@ -1108,10 +1108,10 @@ void DB_BrowserDialog::on_pbTransferData_clicked() {
 	    	return;
 	    }
 
-		// transfer data action
+        // transfer data operation
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        DB_TransferDataAction action;
-        bool success = action.transferDbCsvTabFile(
+        DB_TransferData oper;
+        bool success = oper.transferDbCsvTabFile(
                 connectionWidgetSrc->currentDatabase(), fileName,
                 connectionWidgetSrc->currentTableName());
         QApplication::restoreOverrideCursor();

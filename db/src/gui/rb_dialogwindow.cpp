@@ -29,6 +29,7 @@ RB_DialogWindow::RB_DialogWindow(RB_MainWindow* mw, RB_Widget* mwgt)
     mMainWindow = mw;
     mCentralWidget = mwgt;
 
+    setObjectName("RB_DialogWindow");
     setWindowIcon(QIcon(":/images/biluna16.png"));
     // setAttribute(Qt::WA_DeleteOnClose); not for dialog because
     // getCurrentObject() method can be called after close.

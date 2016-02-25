@@ -159,7 +159,7 @@ void EN1591Handler::setDimensions() {
 
     // gasket
     Gasket* gkt = mCalc->mAssembly->mGasket;
-    gkt->matCode = in->getValue("materialcode_ix").toString();
+    gkt->gasketIdx = in->getValue("gaskettype_idx").toString();
     gkt->frmType = (Gasket::FormType)in->getValue("formtype_id").toInt();
     gkt->insType =
             (Gasket::InsFilLayMatType)in->getValue("insertfilltype_id").toInt();

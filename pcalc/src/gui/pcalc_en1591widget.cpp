@@ -20,6 +20,8 @@
 #include "pcalc_modelfactory.h"
 #include "pcalc_objectfactory.h"
 #include "pcalc_report.h"
+#include "rb_dialogwindow.h"
+#include "rb_idxlineedit.h"
 // #include "peng_graphicsview.h"
 
 
@@ -64,6 +66,9 @@ RB_String PCALC_EN1591Widget::getSaveAsFileName() {
 }
 
 void PCALC_EN1591Widget::init() {
+    ileTypeGasket->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetEN1591SelectGasket,
+                                    "gaskettype_idx", "type");
     //
     // 0. Set button toolbar
     //
@@ -228,7 +233,7 @@ void PCALC_EN1591Widget::init() {
     // gasket
     mGasketMapper = mGasketModel->getMapper();
     mGasketMapper->addMapping(ileTypeGasket,
-                              mGasketModel->fieldIndex("materialcode_ix"));
+                              mGasketModel->fieldIndex("gaskettype_idx"));
     items.clear();
     items << "Flat" << "Curved Simple Contact" << "Curved Double Contact"
           << "Octagonal Double Contact";
@@ -628,6 +633,12 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
     }
 }
 
+void PCALC_EN1591Widget::slotTypeGasketSelectClicked() {
+    RB_DialogWindow* dlg = PCALC_DIALOGFACTORY->getDialogWindow(
+                PCALC_DialogFactory::WidgetEN1591SelectGasket);
+    dlg->exec();
+}
+
 void PCALC_EN1591Widget::slotParentRowChanged(const QModelIndex& /*curr*/,
                                               const QModelIndex& /*prev*/) {
     mCurrentId = mAssemblyModel->getCurrentId();
@@ -780,7 +791,7 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "materialloosering2_idx", "-", mFlangeModel);
 
     // gasket
-    addObjectMemberVariable(objIn, "materialcode_ix", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "gaskettype_idx", "-", mGasketModel);
     addObjectMemberVariable(objIn, "formtype_id", "-", mGasketModel);
     addObjectMemberVariable(objIn, "insertfilltype_id", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg0", "-", mGasketModel);

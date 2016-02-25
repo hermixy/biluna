@@ -138,7 +138,6 @@ HEADERS = \
     ../src/actions/db_actiontoolssimplereport.h \
     ../src/actions/db_actiontoolstextfilelist.h \
     ../src/actions/db_actiontoolsxmlview.h \
-    ../src/actions/db_transferdataaction.h \
     ../src/actions/rb_action.h \
     ../src/actions/rb_actiondebugexportmodel.h \
     ../src/actions/rb_actiondebugplugin.h \
@@ -275,6 +274,7 @@ HEADERS = \
     ../src/model/rb_objectiterator.h \
     ../src/model/rb_objectmember.h \
     ../src/operations/db_createmodelobject.h \
+    ../src/operations/db_transferdata.h \
     ../src/operations/rb_operation.h \
     ../src/operations/rb_operationhtml.h \
     ../src/utils/db_global.h \
@@ -396,7 +396,6 @@ SOURCES = \
     ../src/actions/db_actiontoolssimplereport.cpp \
     ../src/actions/db_actiontoolstextfilelist.cpp \
     ../src/actions/db_actiontoolsxmlview.cpp \
-    ../src/actions/db_transferdataaction.cpp \
     ../src/actions/rb_action.cpp \
     ../src/actions/rb_actiondebugexportmodel.cpp \
     ../src/actions/rb_actiondebugplugin.cpp \
@@ -524,6 +523,7 @@ SOURCES = \
     ../src/model/rb_objectiterator.cpp \
     ../src/model/rb_objectmember.cpp \
     ../src/operations/db_createmodelobject.cpp \
+    ../src/operations/db_transferdata.cpp \
     ../src/operations/rb_operationhtml.cpp \
     ../src/utils/db_permissionhandler.cpp \
     ../src/utils/db_sqlcommonfunctions.cpp \

@@ -82,9 +82,9 @@ void ACC_PurchaseOrder::createMembers() {
 //    addMember("ordertype", "-", "", RB2::MemberChar10);
 //    addMember("freightcost", "-", 0.0, RB2::MemberDouble);
 //    addMember("fromstkloc_id", "-", "0", RB2::MemberChar40);
-//    addMember("quotedate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
-//    addMember("confirmeddate", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+//    addMember("quotedate", "-", "1900-01-01", RB2::MemberDateTime);
+//    addMember("confirmeddate", "-", "1900-01-01", RB2::MemberDateTime);
 //    addMember("printedpackingslip", "-", 0, RB2::MemberInteger);
-//    addMember("datepackingslipprinted", "-", "0000-00-00 00:00:00", RB2::MemberDateTime);
+//    addMember("datepackingslipprinted", "-", "1900-01-01", RB2::MemberDateTime);
 }
 

@@ -1522,7 +1522,7 @@
              </spacer>
             </item>
             <item row="0" column="1" colspan="2">
-             <widget class="QLineEdit" name="ileTypeGasket"/>
+             <widget class="RB_IdxLineEdit" name="ileTypeGasket"/>
             </item>
             <item row="5" column="0">
              <widget class="QLabel" name="lblInsType">
@@ -3365,20 +3365,25 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>RB_TableView</class>
+   <extends>QTableView</extends>
+   <header>rb_tableview.h</header>
+  </customwidget>
+  <customwidget>
    <class>RB_ToolButtonBar</class>
    <extends>QWidget</extends>
    <header>rb_toolbuttonbar.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>RB_TableView</class>
-   <extends>QTableView</extends>
-   <header location="global">rb_tableview.h</header>
-  </customwidget>
-  <customwidget>
    <class>RB_TextEdit</class>
    <extends>QTextEdit</extends>
    <header>rb_textedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RB_IdxLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>rb_idxlineedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

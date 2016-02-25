@@ -1387,28 +1387,15 @@ void RB_Widget::readSettings() {
         return;
     }
 
-    RB_DialogWindow* dlgWindow = dynamic_cast<RB_DialogWindow*>(parentWidget());
+    RB_SETTINGS->beginGroup(objectName());
+    RB_DialogWindow* dlgW = dynamic_cast<RB_DialogWindow*>(parentWidget());
 
-    if (dlgWindow) {
+    if (dlgW) {
         // parent is RB_DialogWindow
-        RB_SETTINGS->beginGroup(objectName());
-        QSize dlgSize = RB_SETTINGS->value("size", sizeHint()).toSize();
-        readChildrenSettings(this);
-        RB_SETTINGS->endGroup();
-
-        // Center dialog to parent
-        if (parentWidget()) {
-            QSize pwSize = parentWidget()->size();
-            QPoint pos = parentWidget()->pos()
-                    + QPoint(pwSize.width() / 2, pwSize.height() / 2)
-                    - QPoint(dlgSize.width() / 2, dlgSize.height() / 2);
-            move(pos);
-        }
-
-        resize(dlgSize);
+        QSize dlgSize = RB_SETTINGS->value("size", dlgW->sizeHint()).toSize();
+        dlgW->resize(dlgSize);
     } else {
         // parent is RB_MdiWindow
-        RB_SETTINGS->beginGroup(objectName());
         QMdiArea* mdiArea = mDialogFactory->getMainWindow()->getMdiArea();
         if (parentWidget() && mdiArea->viewMode() != QMdiArea::TabbedView) {
             QPoint point = RB_SETTINGS->value("parentpos",
@@ -1419,9 +1406,10 @@ void RB_Widget::readSettings() {
             parentWidget()->resize(size);
         }
 
-        readChildrenSettings(this);
-        RB_SETTINGS->endGroup();
     }
+
+    readChildrenSettings(this);
+    RB_SETTINGS->endGroup();
 }
 
 /**
@@ -1487,11 +1475,12 @@ void RB_Widget::writeSettings() {
     }
 
     RB_SETTINGS->beginGroup(objectName());
-    RB_DialogWindow* dlgWindow = dynamic_cast<RB_DialogWindow*>(parentWidget());
+    // RB_DialogWindow* dlgW = dynamic_cast<RB_DialogWindow*>(parentWidget());
 
-    if (dlgWindow) {
+    // HACK: above cast does not work, therefor objectname comparison
+    if (parentWidget()->objectName() == "RB_DialogWindow") {
         // parent is RB_DialogWindow
-        RB_SETTINGS->setValue("size", size());
+        RB_SETTINGS->setValue("size", parentWidget()->size());
     } else {
         // parent is RB_MdiWindow
         QMdiArea* mdiArea = mDialogFactory->getMainWindow()->getMdiArea();

@@ -53,7 +53,6 @@ ACC_Contact::~ACC_Contact() {
  * - primaryaddress1 - 6 primary address lines
  * - altaddress1 - 6 alternative address lines
  * - description additional description about this contact
- * - rm_id ID of the CRM perspective account (CRM_Project.id) or SRM (SRM_Project.id)
  */
 void ACC_Contact::createMembers() {
     addMember("salutation", "-", "", RB2::MemberChar20);
@@ -90,7 +89,4 @@ void ACC_Contact::createMembers() {
     addMember("altaddress5", "-", "", RB2::MemberChar125);
     addMember("altaddress6", "-", "", RB2::MemberChar125);
     addMember("description", "-", "", RB2::MemberChar2500);
-
-    // customer/supplier relation management
-    addMember("rm_id", "-", "0", RB2::MemberChar40);
 }

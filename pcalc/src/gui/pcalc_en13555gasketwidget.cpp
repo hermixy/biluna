@@ -22,10 +22,18 @@ PCALC_EN13555GasketWidget::PCALC_EN13555GasketWidget(QWidget* parent)
 }
 
 PCALC_EN13555GasketWidget::~PCALC_EN13555GasketWidget() {
+    // Dialogs create and delete models by themselves
+    if (mModel) {
+        delete mModel;
+        mModel = nullptr;
+    }
+
     RB_DEBUG->print("PCALC_EN13555GasketWidget::~PCALC_EN13555GasketWidget() OK");
 }
 
 void PCALC_EN13555GasketWidget::init() {
+    setObjectName("PCALC_EN13555GasketWidget"); // ui is RB_DatabaseTableWidget
+
     QStringList items;
     items << tr("None") << "QminL" << "QsminL" << "PQR delta_eGC" << "EG eG";
     ui->cbProperty->addItems(items);
@@ -74,13 +82,14 @@ void PCALC_EN13555GasketWidget::on_pbSelectManuf_clicked() {
     }
 
     RB_ObjectBase* obj = dlg->getCurrentObject();
+    on_pbClearType_clicked();
     setCodeManufacturer(obj);
     dlg->deleteLater();
 }
 
 void PCALC_EN13555GasketWidget::on_pbClearManuf_clicked() {
-    setCodeManufacturer(nullptr);
     on_pbClearType_clicked();
+    setCodeManufacturer(nullptr);
 }
 
 void PCALC_EN13555GasketWidget::on_pbSelectType_clicked() {
@@ -104,57 +113,112 @@ void PCALC_EN13555GasketWidget::on_pbSelectType_clicked() {
     }
 
     RB_ObjectBase* obj = dlg->getCurrentObject();
+    slotSetPropertyTable(0);
     setType(obj);
     dlg->deleteLater();
 }
 
 void PCALC_EN13555GasketWidget::on_pbClearType_clicked() {
+    slotSetPropertyTable(0);
     setType(nullptr);
     ui->cbProperty->setCurrentIndex(0);
-    slotSetPropertyTable(0);
 }
 
 void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
+    QStringList items;
+
     switch (index) {
-    case 0: {
+    case 0: { // None
         if (mModel) {
             fileSave(false);
             delete mModel;
+            mModel = nullptr;
             ui->tableView->setModel(nullptr);
         }
 
         break;
     }
-    case 1: {
+    case 1: { // QminL
         fileSave(false);
         if (mModel) delete mModel;
         mModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelEN13555QminL, false);
         setModelTableView(mModel);
+
+        break; // HACK: because of crash during input
+
+        items.clear();
+        items << tr("None") << "testpressure" << "leakrate" << "qminl";
+        ui->cbXcoord->clear();
+        ui->cbXcoord->addItems(items);
+        ui->cbXcoord->setCurrentIndex(3);
+        ui->cbYcoord->clear();
+        ui->cbYcoord->addItems(items);
+        ui->cbYcoord->setCurrentIndex(2);
+        setChartModel(mModel, ui->cbXcoord->currentText(),
+                      ui->cbYcoord->currentText(), ScaleYLog);
         break;
     }
-    case 2: {
+    case 2: { // QsminL
         fileSave(false);
         if (mModel) delete mModel;
         mModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelEN13555QsminL, false);
         setModelTableView(mModel);
+
+        break; // HACK: because of crash during input
+
+        items.clear();
+        items << tr("None") << "testpress" << "qa" << "leakrate" << "qsminl";
+
+        ui->cbXcoord->clear();
+        ui->cbXcoord->addItems(items);
+        ui->cbXcoord->setCurrentIndex(4);
+        ui->cbYcoord->clear();
+        ui->cbYcoord->addItems(items);
+        ui->cbYcoord->setCurrentIndex(3);
+        setChartModel(mModel, ui->cbXcoord->currentText(),
+                      ui->cbYcoord->currentText(), ScaleYLog);
         break;
     }
-    case 3: {
+    case 3: { // PQR delta_eGC
         fileSave(false);
         if (mModel) delete mModel;
         mModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelEN13555PQRdeltaeGC, false);
         setModelTableView(mModel);
+
+        items.clear();
+        items << tr("None") << "c" << "temp" << "qa" << "pqr" << "deltaegc";
+
+        ui->cbXcoord->clear();
+        ui->cbXcoord->addItems(items);
+        ui->cbXcoord->setCurrentIndex(3);
+        ui->cbYcoord->clear();
+        ui->cbYcoord->addItems(items);
+        ui->cbYcoord->setCurrentIndex(4);
+        setChartModel(mModel, ui->cbXcoord->currentText(),
+                      ui->cbYcoord->currentText(), ScaleLinear);
         break;
     }
-    case 4: {
+    case 4: { // EG eG
         fileSave(false);
         if (mModel) delete mModel;
         mModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelEN13555EGeG, false);
         setModelTableView(mModel);
+
+        items.clear();
+        items << tr("None") << "temp" << "qa" << "capitaleg" << "eg";
+
+        ui->cbXcoord->clear();
+        ui->cbXcoord->addItems(items);
+        ui->cbXcoord->setCurrentIndex(2);
+        ui->cbYcoord->clear();
+        ui->cbYcoord->addItems(items);
+        ui->cbYcoord->setCurrentIndex(4);
+        setChartModel(mModel, ui->cbXcoord->currentText(),
+                      ui->cbYcoord->currentText(), ScaleLinear);
         break;
     }
     default:

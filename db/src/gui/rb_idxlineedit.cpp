@@ -11,6 +11,7 @@
 #include "rb_idxlineedit.h"
 
 #include "rb_dialogfactory.h"
+#include "rb_dialogwindow.h"
 #include "rb_mmproxy.h"
 
 /**
@@ -105,38 +106,70 @@ void RB_IdxLineEdit::setEnabled(bool enable) {
 void RB_IdxLineEdit::slotClicked(bool checked) {
     if (!mModel || !mDialogFactory || mDialogType < 0
             || mTargetFieldName.isEmpty() || mFirstSourceFieldName.isEmpty()) {
-        RB_DEBUG->print("RB_IdxLineEdit::slotClicked() "
-                        "default dialog prerequisites not set");
+        RB_DEBUG->warning("RB_IdxLineEdit::slotClicked() "
+                          "default dialog prerequisites not set");
     } else if (!mModel->getCurrentIndex().isValid()) {
         mDialogFactory->requestWarningDialog(tr("No item selected.\n"
                                                 "Please select an item first."));
     } else {
         RB_Dialog* dlg = mDialogFactory->getDialog(mDialogType);
 
-        if (dlg->exec() != QDialog::Accepted) {
+        if (dlg) {
+            // TODO: remove when RB_Dialog is not used anymore
+            if (dlg->exec() != QDialog::Accepted) {
+                dlg->deleteLater();
+                return;
+            }
+
+            RB_ObjectBase* obj = dlg->getCurrentObject();
+
+            if (!obj) {
+                mDialogFactory->requestWarningDialog(tr("No item selected,\n"
+                                                        "data unchanged."));
+                dlg->deleteLater();
+                return;
+            }
+
+            RB_String str = obj->getId() + obj->getValue(mFirstSourceFieldName).toString();
+
+            if (!mSecondSourceFieldName.isEmpty()) {
+                str += " - " + obj->getValue(mSecondSourceFieldName).toString();
+            }
+
+            QModelIndex idx = mModel->index(mModel->getCurrentIndex().row(),
+                                            mModel->fieldIndex(mTargetFieldName));
+            mModel->setData(idx, str);
             dlg->deleteLater();
-            return;
+        } else {
+            // new
+            RB_DialogWindow* dlgW = mDialogFactory->getDialogWindow(mDialogType);
+
+            if (dlgW->exec() != QDialog::Accepted) {
+                dlgW->deleteLater();
+                return;
+            }
+
+            RB_ObjectBase* obj = dlgW->getCurrentObject();
+
+            if (!obj) {
+                mDialogFactory->requestWarningDialog(tr("No item selected,\n"
+                                                        "data unchanged."));
+                dlgW->deleteLater();
+                return;
+            }
+
+            RB_String str = obj->getId() + obj->getValue(mFirstSourceFieldName).toString();
+
+            if (!mSecondSourceFieldName.isEmpty()) {
+                str += " - " + obj->getValue(mSecondSourceFieldName).toString();
+            }
+
+            QModelIndex idx = mModel->index(mModel->getCurrentIndex().row(),
+                                            mModel->fieldIndex(mTargetFieldName));
+            mModel->setData(idx, str);
+            dlgW->deleteLater();
         }
 
-        RB_ObjectBase* obj = dlg->getCurrentObject();
-
-        if (!obj) {
-            mDialogFactory->requestWarningDialog(tr("No item selected,\n"
-                                                    "data unchanged."));
-            dlg->deleteLater();
-            return;
-        }
-
-        RB_String str = obj->getId() + obj->getValue(mFirstSourceFieldName).toString();
-
-        if (!mSecondSourceFieldName.isEmpty()) {
-            str += " - " + obj->getValue(mSecondSourceFieldName).toString();
-        }
-
-        QModelIndex idx = mModel->index(mModel->getCurrentIndex().row(),
-                                        mModel->fieldIndex(mTargetFieldName));
-        mModel->setData(idx, str);
-        dlg->deleteLater();
     }
 
     emit clicked(checked);

@@ -26,6 +26,12 @@ RB_DatabaseTableWidget::RB_DatabaseTableWidget(QWidget *parent)
     mCodeManufId = "";
     mTypeId = "";
     mChart = nullptr;
+    mSeries = nullptr;
+    mMapper = nullptr;
+    mAxisX = nullptr;
+    mAxisY = nullptr;
+    mChartView = nullptr;
+    mChartLayout = nullptr;
 
     init();
 }
@@ -62,85 +68,86 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
                                            const QString& xField,
                                            const QString& yField,
                                            ScaleType scale) {
-    if (mChart) {
-        delete mChart;
+    if (!mChart) {
+        mChart = new QChart();
+        mChart->setAnimationOptions(QChart::AllAnimations);
     }
 
     if (!model) {
         return;
     }
 
-    mChart = new QChart;
-    mChart->setAnimationOptions(QChart::AllAnimations);
+    // data series
+    if (mSeries && mMapper) {
+        delete mSeries;
+        delete mMapper;
+    }
 
-    // series 1
-    QLineSeries* series = new QLineSeries(mChart);
-    series->setName("Line 1");
-    QVXYModelMapper* mapper = new QVXYModelMapper(mChart);
-    mapper->setXColumn(model->fieldIndex(xField));
-    mapper->setYColumn(model->fieldIndex(yField));
-    mapper->setSeries(series);
-    mapper->setModel(model);
-    mChart->addSeries(series);
+    mSeries = new QLineSeries(mChart);
+    mSeries->setName(yField + " " + tr("graph"));
+    mMapper = new QVXYModelMapper(mChart);
+    mMapper->setXColumn(model->fieldIndex(xField));
+    mMapper->setYColumn(model->fieldIndex(yField));
+    mMapper->setSeries(mSeries);
+    mMapper->setModel(model);
+    mChart->addSeries(mSeries);
 
     // for storing color hex from the series
-//    QString seriesColorHex = "#000000";
+    //    QString seriesColorHex = "#000000";
 
     // get the color of the series and use it for showing the mapped area
-//    seriesColorHex = "#" + QString::number(series->pen().color().rgb(), 16).right(6).toUpper();
-//    model->addMapping(seriesColorHex, QRect(0, 0, 2, model->rowCount()));
+    //    seriesColorHex = "#" + QString::number(series->pen().color().rgb(), 16).right(6).toUpper();
+    //    model->addMapping(seriesColorHex, QRect(0, 0, 2, model->rowCount()));
 
-    // series 2
-//    series = new QLineSeries;
-//    series->setName("Line 2");
-
-//    mapper = new QVXYModelMapper(this);
-//    mapper->setXColumn(2);
-//    mapper->setYColumn(3);
-//    mapper->setSeries(series);
-//    mapper->setModel(model);
-//    mChart->addSeries(series);
-
-//    // get the color of the series and use it for showing the mapped area
-//    seriesColorHex = "#" + QString::number(series->pen().color().rgb(), 16).right(6).toUpper();
-//    model->addMapping(seriesColorHex, QRect(2, 0, 2, model->rowCount()));
-
-    //    mChart->legend()->hide();
-    mChart->setTitle(yField + "values");
+    mChart->setTitle(yField + " " + tr("values"));
 
 
     // Axis
-    QAbstractAxis* axisX;
+    if (mAxisX || mAxisY) {
+        delete mAxisX;
+        mAxisX = nullptr;
+        delete mAxisY;
+        mAxisY = nullptr;
+    }
 
     if (scale == ScaleLinear || scale == ScaleYLog) {
-        axisX = new QValueAxis(mChart);
+        QValueAxis* axX = new QValueAxis(mChart);
+        axX->setLabelFormat("%g");
+        mAxisX = axX;
     } else {
-        axisX = new QLogValueAxis(mChart);
+        QLogValueAxis* axX = new QLogValueAxis(mChart);
+        axX->setLabelFormat("%g");
+        mAxisX = axX;
     }
-//    axisX->setLabelFormat("%g");
-    axisX->setTitleText(xField + "Data point");
-    mChart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
-
-    QAbstractAxis* axisY;
+    mAxisX->setTitleText(xField);
+    mChart->addAxis(mAxisX, Qt::AlignBottom);
+    mSeries->attachAxis(mAxisX);
 
     if (scale == ScaleLinear || scale == ScaleXLog) {
-        axisY = new QValueAxis(mChart);
+        QValueAxis* axY = new QValueAxis(mChart);
+        axY->setLabelFormat("%g");
+        mAxisY = axY;
     } else {
-        axisY = new QLogValueAxis(mChart);
+        QLogValueAxis* axY = new QLogValueAxis(mChart);
+        axY->setLabelFormat("%g");
+        mAxisY = axY;
     }
 
-//    axisY->setLabelFormat("%g");
-    axisY->setTitleText(yField + "Values");
-    mChart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
+    mAxisY->setTitleText(yField);
+    mChart->addAxis(mAxisY, Qt::AlignLeft);
+    mSeries->attachAxis(mAxisY);
 
-    QChartView* chartView = new QChartView(mChart);
-    chartView->setRenderHint(QPainter::Antialiasing);
+    // Chart viewer
+    if (!mChartView) {
+        mChartView = new QChartView(mChart);
+        mChartView->setRenderHint(QPainter::Antialiasing);
+    }
 
-    // mChart layout
-    QGridLayout* chartLayout = new QGridLayout;
-    chartLayout->addWidget(chartView, 0, 0);
-    chartLayout->setMargin(0);
-    ui->chartFrame->setLayout(chartLayout);
+    // Layout
+    if (!mChartLayout) {
+        mChartLayout = new QGridLayout;
+        mChartLayout->addWidget(mChartView, 0, 0);
+        mChartLayout->setMargin(0);
+        ui->chartFrame->setLayout(mChartLayout);
+    }
 }

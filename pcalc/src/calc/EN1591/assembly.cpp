@@ -471,7 +471,7 @@ void Assembly::Calc_Q_A_Qsmin(int loadCaseNo) {
         } else {
             // original
             loadCase0->Q_A = TABLE02_15PROPERTY->getTableQA(mLeakageRate,
-                                                            mGasket->matCode);
+                                                            mGasket->gasketIdx);
             if (loadCase0->Q_A >0) {
                 PR->addDetail("Before_F. 103", "Q_A", "Table 2-15 value",
                               loadCase0->Q_A, "N/mm2", "Table value", loadCaseNo);
@@ -490,7 +490,7 @@ void Assembly::Calc_Q_A_Qsmin(int loadCaseNo) {
         LoadCase* loadCaseI = mLoadCaseList->at(loadCaseNo);
         loadCaseI->Q_sminL
                 = TABLE02_15PROPERTY->getTableQsminL(mLeakageRate,
-                                                     mGasket->matCode,
+                                                     mGasket->gasketIdx,
                                                      loadCase0->Q_A);
         if (loadCaseI->Q_sminL > 0) {
             PR->addDetail("Before_F. 104", "Q_sminL", "Table 2-15 value",

@@ -59,7 +59,7 @@ void ACC_BankTrans::createMembers() {
     addMember("amountcleared", "-", 0.0, RB2::MemberDouble);
     addMember("exrate", "-", 1.0, RB2::MemberDouble);
     addMember("functionalexrate", "-", 1.0, RB2::MemberDouble);
-    addMember("transdate", "-", "0000-00-00T00:00:00", RB2::MemberDateTime);
+    addMember("transdate", "-", "1900-01-01", RB2::MemberDateTime);
     addMember("banktranstype", "-", "", RB2::MemberChar40);
     addMember("currency_id", "-", "0", RB2::MemberChar40);
     addMember("transallocn_idx", "-", "0", RB2::MemberChar165);

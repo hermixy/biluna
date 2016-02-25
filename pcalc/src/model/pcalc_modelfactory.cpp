@@ -65,12 +65,12 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         if (model) return model;
     }
 
-    QSqlDatabase db = RB_DATABASE->database(mDatabaseConnection);
+    QSqlDatabase db = RB_DATABASE->database(mDatabaseConnection); // same as getDatabase();
 
     switch (type) {
     case ModelEN13555EGeG:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555EGeGList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "qa", "temp");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qa");
         break;
     case ModelEN13555Gasket:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555GasketList");
@@ -82,15 +82,15 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelEN13555PQRdeltaeGC:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555PqrDeltaeGCList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "qa", "temp");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qa");
         break;
     case ModelEN13555QminL:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555QminLList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "leakrate");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "leakrate");
         break;
     case ModelEN13555QsminL:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN13555QsminLList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "leakrate", "qa");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "qa", "leakrate");
         break;
     case ModelEN1591Assembly:
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN1591_AssemblyList");
@@ -149,7 +149,7 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         iter = mModelList.find(ModelNone);
         break;
     case ModelEN13555Gasket:
-        iter = mModelList.find(ModelNone);
+        iter = mModelList.find(ModelEN13555Manuf);
         break;
     case ModelEN13555Manuf:
         iter = mModelList.find(ModelNone);
