@@ -524,12 +524,6 @@ void CRM_DocumentWidget::on_ileCustomer_clicked() {
     }
 
     RB_Dialog* dlg = CRM_DIALOGFACTORY->getDialog(CRM_DialogFactory::DialogSelectCustomer);
-    CRM_SelectCustomerDialog* customerDlg = dynamic_cast<CRM_SelectCustomerDialog*>(dlg);
-    QString projectId = CRM_MODELFACTORY->getRootId();
-
-    if (RB_DEBUG->isValidId(projectId)) {
-        customerDlg->setProjectId(projectId);
-    }
 
     if (dlg && dlg->exec() == QDialog::Accepted) {
         RB_ObjectBase* obj = dlg->getCurrentObject();

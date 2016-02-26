@@ -31,7 +31,7 @@ public:
 
     virtual RB_MmProxy* getModel(int type, bool shared = true);
     virtual RB_MmProxy* getParentModel(int type);
-    virtual void setDatabase(const QSqlDatabase& db);
+//    virtual void setDatabase(const QSqlDatabase& db);
 
     virtual std::vector<RB_ModelFactory*> getFactoryList();
     virtual void registerFactory(RB_ModelFactory* factory);

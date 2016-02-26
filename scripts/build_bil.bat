@@ -1,1 +1,1 @@
-FOR %%d IN (db acc crm mrp pcalc peng sail scan srm bil) DO ECHO %%d && cd ..\%%d\src && C:\Qt\Qt5.5.1\5.5\msvc2013\bin\qmake.exe && C:\Qt\Qt5.5.1\Tools\QtCreator\bin\jom.exe clean && C:\Qt\Qt5.5.1\5.5\msvc2013\bin\qmake.exe && C:\Qt\Qt5.5.1\Tools\QtCreator\bin\jom.exe && C:\Qt\Qt5.5.1\Tools\QtCreator\bin\jom.exe install && cd ..\..\scripts
+FOR %%d IN (db acc crm mrp pcalc peng sail scan srm bil) DO ECHO %%d && cd ..\%%d\src && C:\Qt\Qt5.5.1\Tools\QtCreator\bin\jom.exe && C:\Qt\Qt5.5.1\Tools\QtCreator\bin\jom.exe install && cd ..\..\scripts

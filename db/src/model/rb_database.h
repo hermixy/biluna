@@ -18,6 +18,8 @@
 class RB_TcpSocket;
 
 #define RB_DATABASE RB_Database::getInstance()
+#define CUSTOM_CONNECTION "customConnection"
+#define STANDARD_CONNECTION "standardConnection"
 
 /**
  * Database connection and data object.
@@ -35,25 +37,19 @@ public:
     virtual ~RB_Database();
     static RB_Database* getInstance();
 
+    QSqlDatabase standardDatabase();
+    QSqlDatabase customDatabase();
+
     void keepConnectionAlive(const QSqlDatabase& db, int mSec = 60000);
-
-    virtual RB_String localDbName() const;
-    virtual void setLocalDbName(const RB_String& name);
-
     virtual void dummyQuery();
 
 private:
     RB_Database();
-    // RB_Database(const QSqlDatabase& other);
 
-    RB_String mLocalDbName;
     RB_TcpSocket* mTcpSocket;
 
     //! Unique instance
     static RB_Database* mActiveDatabase;
-
-    // For servers that have connections closed
-    QSqlDatabase mServerDatabase;
 };
 
 #endif // RB_DATABASE_H

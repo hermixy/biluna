@@ -64,7 +64,7 @@ RB_MmProxy* MRP_ModelFactory::getModel(int type, bool shared) {
         if (model) return model;
     }
 
-    QSqlDatabase db = RB_DATABASE->database(mDatabaseConnection);
+    QSqlDatabase db = getDatabase();
 
     switch (type) {
     case ModelContact:

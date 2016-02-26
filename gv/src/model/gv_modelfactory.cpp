@@ -64,7 +64,7 @@ RB_MmProxy* GV_ModelFactory::getModel(int type, bool shared) {
         if (model) return model;
     }
 
-    QSqlDatabase db = RB_Database::database(mDatabaseConnection);
+    QSqlDatabase db = getDatabase();
 
     switch (type) {
     case ModelDrawing:

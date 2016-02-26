@@ -42,6 +42,7 @@ void RB_TcpSocket::keepConnectionAlive(const RB_String& hostName,
     mTimerId = startTimer(mSec); // implicit connection to timerEvent
 }
 
+// not used?
 void RB_TcpSocket::slotConnectToHost() {
     RB_DEBUG->print("RB_TcpSocket::slotConnectToHost()");
     connectToHost(mHostName, mPort, ReadWrite);

@@ -44,7 +44,9 @@ public:
     virtual bool removeModel(int type);
 
     virtual QSqlDatabase getDatabase();
-    virtual void setDatabase(const QSqlDatabase& db);
+    virtual QSqlDatabase getStandardDatabase();
+    virtual QSqlDatabase getCustomDatabase();
+//    virtual void setDatabase(const QSqlDatabase& db);
     virtual void setObjectFactory(RB_ObjectFactory* f);
     virtual RB_ObjectFactory* getObjectFactory(const RB_String& objName = "");
     virtual bool isModelModified();
@@ -92,7 +94,7 @@ public slots:
 
 protected:
     //! Database connection
-    RB_String mDatabaseConnection;
+//    RB_String mDatabaseConnection;
     //! Main window
     RB_MainWindow* mMainWindow;
     //! List of models

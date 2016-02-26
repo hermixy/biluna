@@ -33,20 +33,10 @@ public:
         }
     }
 
-    void setProjectId(const QString& projectId) {
-        mModel->setWhere("`acc_supplier`.`srm_parent` = '" + projectId + "'", false);
-        mModel->select();
-    }
-
     void init() {
         // Set model, root is already set by modelFactory
         mModel = SRM_MODELFACTORY->getModel(SRM_ModelFactory::ModelSupplier, false);
-//        // Relation
-//        mModel->setRelation(mModel->fieldIndex("accountgroup_id"),
-//               RB_SqlRelation("ACC_AccountGroups", "id", "groupname"));
-//        mModel->setRoot(SRM_MODELFACTORY->getRootId());
-        mModel->setWhere("`acc_supplier`.`id` <> '0'", false);
-        mModel->setRoot("");
+        mModel->setRoot(SRM_MODELFACTORY->getRootId());
         mModel->select();
 
 
