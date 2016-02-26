@@ -60,7 +60,7 @@ RB_Action* DB_ActionSystemDatabaseConnect::factory() {
 
         if (dlg->exec() == QDialog::Accepted) {
             mf = DB_DIALOGFACTORY->getModelFactory();
-            mf->setDatabase(RB_DATABASE->database());
+//            mf->setDatabase(RB_DATABASE->database());
             DB_DIALOGFACTORY->getMainWindow()->setWindowTitle(
                         "Biluna - " + RB_DATABASE->database().databaseName());
         } else {
@@ -110,7 +110,7 @@ RB_Action* DB_ActionSystemDatabaseConnect::factory() {
     DB_DIALOGFACTORY->statusBarMessage(tr("Database connection is ready"), 2000);
 
     // Check whether DB tables exists, if not run create tables in database
-    if (!DB_MODELFACTORY->createMissingTables("DB", 0, 9, 14)) {
+    if (!DB_MODELFACTORY->createMissingTables("DB", 0, 9, 15)) {
         DB_DIALOGFACTORY->requestWarningDialog(tr("DB check- and update database ERROR."));
         DB_MODELFACTORY->emitState();
         return nullptr;

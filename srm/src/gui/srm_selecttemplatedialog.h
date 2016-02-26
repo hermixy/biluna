@@ -49,7 +49,7 @@ public:
         lblRoot->hide();
         leRoot->hide();
 
-        gbTable->setTitle(tr("Groups"));
+        gbTable->setTitle(tr("Template List"));
 //        pbAdd->setText(tr("&Add"));  //  has icon
 //        pbDelete->setText(tr("&Delete")); //  has icon
 //        pbUp->setText(tr("&Up")); //  has icon

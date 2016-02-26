@@ -11,6 +11,7 @@
 #define RB_H
 
 #include <cmath>
+#include <QString>
 #include <Qt>
 #include "db_global.h"
 #include "rb_string.h"
@@ -28,13 +29,20 @@
  */
 class DB_EXPORT RB2 {
 public:
+    // software version change also in help doxygen_help.cfg file
+    static const int VERSION_MAJOR = 0;
+    static const int VERSION_MEDIOR = 9;
+    static const int VERSION_MINOR = 15;
+    static const int VERSION_BUILD = 0;
+
     const static int HIDDENCOLUMNS = 7;
     const static int MODELPREFIX_TO_MODELTYPE_MULTIPLIER = 1000; // thousand
     const static int PERSPECTIVE_TO_MODELPREFIX_MULTIPLIER = 10; // hundred
 
     static int modelTypeToPerspective(int modelType) {
-        return (int) std::floor(modelType / (MODELPREFIX_TO_MODELTYPE_MULTIPLIER
-                                             * PERSPECTIVE_TO_MODELPREFIX_MULTIPLIER));
+        return (int) std::floor(modelType
+                                / (MODELPREFIX_TO_MODELTYPE_MULTIPLIER
+                                   * PERSPECTIVE_TO_MODELPREFIX_MULTIPLIER));
     }
 
     static RB_String getCbToLeStyle() {

@@ -22,7 +22,6 @@
 RB_ModelFactory::RB_ModelFactory(RB_MainWindow* mw) {
     RB_DEBUG->print("RB_ModelFactory::RB_ModelFactory()");
     // always default database connection
-    mDatabaseConnection = RB_DATABASE->database().connectionName();
     mMainWindow = mw;
     mObjectFactory = NULL;
     mRoot = NULL; // not connected to root of DB_ModelFactory
@@ -161,19 +160,35 @@ bool RB_ModelFactory::removeModel(int type) {
 }
 
 /**
- * Get database (actual connection) object
+ * Get work database (actual connection) object
  */
 QSqlDatabase RB_ModelFactory::getDatabase() {
-    return RB_DATABASE->database(mDatabaseConnection);
+    return RB_DATABASE->database(); // default
 }
 
 /**
- * Set database
- * @param dbConnection actual connection string
+ * Get standard database
+ * @return QSqlDatabase database with standard information
  */
-void RB_ModelFactory::setDatabase(const QSqlDatabase& db) {
-    mDatabaseConnection = db.connectionName();
+QSqlDatabase RB_ModelFactory::getStandardDatabase() {
+    return RB_DATABASE->database(STANDARD_CONNECTION);
 }
+
+/**
+ * Get custom database (copy of standard database with user standard data)
+ * @return QSqlDatabase database with custom information
+ */
+QSqlDatabase RB_ModelFactory::getCustomDatabase() {
+    return RB_DATABASE->database(CUSTOM_CONNECTION);
+}
+
+///**
+// * Set database
+// * @param dbConnection actual connection string
+// */
+//void RB_ModelFactory::setDatabase(const QSqlDatabase& db) {
+//    mDatabaseConnection = db.connectionName();
+//}
 
 /**
  * Set object factory and setRoot()
@@ -428,10 +443,10 @@ int RB_ModelFactory::hiddenColumnCount() {
 
 /**
  * Emit state signals of this modelfactory,
- * such as is database open
+ * such as is work database open
  */
 void RB_ModelFactory::emitState() {
-    if (RB_DATABASE->database(mDatabaseConnection).isOpen()) {
+    if (RB_DATABASE->database().isOpen()) {
         emit databaseIsSet(RB2::ValidTrue);
         emit databaseIsNotSet(RB2::ValidFalse);
 

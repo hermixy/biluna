@@ -524,12 +524,6 @@ void SRM_DocumentWidget::on_ileSupplier_clicked() {
     }
 
     RB_Dialog* dlg = SRM_DIALOGFACTORY->getDialog(SRM_DialogFactory::DialogSelectSupplier);
-    SRM_SelectSupplierDialog* supplierDlg = dynamic_cast<SRM_SelectSupplierDialog*>(dlg);
-    QString projectId = SRM_MODELFACTORY->getRootId();
-
-    if (RB_DEBUG->isValidId(projectId)) {
-        supplierDlg->setProjectId(projectId);
-    }
 
     if (dlg && dlg->exec() == QDialog::Accepted) {
         RB_ObjectBase* obj = dlg->getCurrentObject();

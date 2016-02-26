@@ -33,20 +33,10 @@ public:
         }
     }
 
-    void setProjectId(const QString& projectId) {
-        mModel->setWhere("`acc_customer`.`crm_parent` = '" + projectId + "'", false);
-        mModel->select();
-    }
-
     void init() {
         // Set model, root is already set by modelFactory
         mModel = CRM_MODELFACTORY->getModel(CRM_ModelFactory::ModelCustomer, false);
-//        // Relation
-//        mModel->setRelation(mModel->fieldIndex("accountgroup_id"),
-//               RB_SqlRelation("ACC_AccountGroups", "id", "groupname"));
-//        mModel->setRoot(CRM_MODELFACTORY->getRootId());
-        mModel->setWhere("id <> '0'", false);
-        mModel->setRoot("");
+        mModel->setRoot(CRM_MODELFACTORY->getRootId());
         mModel->select();
 
 
@@ -56,7 +46,7 @@ public:
         lblRoot->hide();
         leRoot->hide();
 
-        gbTable->setTitle(tr("Customer"));
+        gbTable->setTitle(tr("Customer List"));
 //        pbAdd->setText(tr("&Add"));  //  has icon
 //        pbDelete->setText(tr("&Delete")); //  has icon
 //        pbUp->setText(tr("&Up")); //  has icon

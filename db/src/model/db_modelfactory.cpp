@@ -81,24 +81,12 @@ RB_MmProxy* DB_ModelFactory::getModel(int type, bool shared) {
             // shared model 1- exists or 2- has been removed/deleted and set to NULL
             model = (*iter).second;
         }
+
         // Model already created
         if (model) return model;
-
-        // TODO: Look in other modelFactories, future or not?
-        //        std::vector<RB_ModelFactory*>::iterator iterF;
-        //        iterF = mFactoryList.begin();
-        //        while (iterF != mFactoryList.end()) {
-        //            if(*iterF) {
-        //                RB_ModelFactory* f
-        //                        = dynamic_cast<RB_ModelFactory*>(*iterF);
-        //                model = f->getModel(type, shared);
-        //                if (model) return model;
-        //            }
-        //            ++iterF;
-        //        }
     }
 
-    QSqlDatabase db = RB_DATABASE->database(mDatabaseConnection);
+    QSqlDatabase db = getDatabase();
 
     switch (type) {
     case ModelActivity:
@@ -268,24 +256,24 @@ RB_ObjectFactory* DB_ModelFactory::getObjectFactory(const RB_String& objName) {
  * Set database
  * @param dbConnection actual connection name
  */
-void DB_ModelFactory::setDatabase(const QSqlDatabase& db) {
-    RB_ModelFactory::setDatabase(db);
+//void DB_ModelFactory::setDatabase(const QSqlDatabase& db) {
+//    RB_ModelFactory::setDatabase(db);
 
-    std::vector<RB_ModelFactory*>::iterator iter;
-    iter = mFactoryList.begin();
-    while (iter != mFactoryList.end()) {
-        if(*iter) {
-            RB_ModelFactory* f
-                    = dynamic_cast<RB_ModelFactory*>(*iter);
-            f->setDatabase(db);
-        } else {
-            RB_DEBUG->print(RB_Debug::D_ERROR,
-                            "DB_ModelFactory::setDatabase() "
-                            "*iter == NULL ERROR");
-        }
-        ++iter;
-    }
-}
+//    std::vector<RB_ModelFactory*>::iterator iter;
+//    iter = mFactoryList.begin();
+//    while (iter != mFactoryList.end()) {
+//        if(*iter) {
+//            RB_ModelFactory* f
+//                    = dynamic_cast<RB_ModelFactory*>(*iter);
+//            f->setDatabase(db);
+//        } else {
+//            RB_DEBUG->print(RB_Debug::D_ERROR,
+//                            "DB_ModelFactory::setDatabase() "
+//                            "*iter == NULL ERROR");
+//        }
+//        ++iter;
+//    }
+//}
 
 /**
  * Register factory
@@ -369,7 +357,7 @@ void DB_ModelFactory::closeAllFactories() {
 void DB_ModelFactory::disconnectFromDatabase() {
     RB_DEBUG->print("DB_ModelFactory::disconnectFromDatabase()");
     // Set invalid database first to all models
-    setDatabase(QSqlDatabase());
+//    setDatabase(QSqlDatabase());
 
     // Close all database connections
     QStringList strL = RB_DATABASE->connectionNames();

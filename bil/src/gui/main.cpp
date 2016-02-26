@@ -14,6 +14,7 @@
 #include "qtsingleapplication.h"
 
 #include "bil_mainwindow.h"
+#include "rb.h"
 #include "rb_debug.h"
 #include "rb_settings.h"
 #include "rb_system.h"
@@ -58,7 +59,11 @@ int main(int argc, char *argv[]) {
     // set application name, version. directory name and path, initialize system
     QFileInfo prgInfo(QFile::decodeName(argv[0]));
     QString prgDir(prgInfo.path());
-    RB_SYSTEM->init(RB_APPNAME, RB_VERSION, RB_APPDIR, prgDir);
+    QString version = QString::number(RB2::VERSION_MAJOR) + "."
+            + QString::number(RB2::VERSION_MEDIOR) + "."
+            + QString::number(RB2::VERSION_MINOR) + "."
+            + QString::number(RB2::VERSION_BUILD);
+    RB_SYSTEM->init(RB_APPNAME, version, RB_APPDIR, prgDir);
 
     // initialize resource in static lib DB
     Q_INIT_RESOURCE(db);
