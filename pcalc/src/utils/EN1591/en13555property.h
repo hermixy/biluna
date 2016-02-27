@@ -40,7 +40,7 @@ NAMESPACE_BILUNA_CALC_EN1591
 //};
 
 
-#define TABLE02_15PROPERTY EN13555Property::getInstance()
+#define EN13555PROPERTY EN13555Property::getInstance()
 
 /**
  * @brief EN13555 properties QminL QsminL Qsmax Pqr deltaEgc EG eG.
@@ -53,19 +53,16 @@ public:
     virtual ~EN13555Property();
     static EN13555Property* getInstance();
 
+    bool getGasket(const QString& gasketIdx);
     void refresh() {}
 
 
-    double getTableQA(double leakageRate,
-                         const RB_String& gasketId,
-                         double testPressure = 40.0);
-    double getTableQminL(double leakageRate,
-                         const RB_String& gasketId,
-                         double testPressure = 40.0);
-    double getTableQsminL(double leakageRate,
-                          const RB_String& materialCode,
-                          double QA,
-                          double testPressure = 40.0);
+    double getQA(const RB_String& gasketIdx, double leakageRate,
+                 double testPressure = 40.0);
+    double getQminL(const RB_String& gasketIdx, double leakageRate,
+                    double testPressure = 40.0);
+    double getQsminL(const RB_String& gasketIdx, double leakageRate,
+                     double QA, double testPressure = 40.0);
 
 
 
@@ -78,6 +75,8 @@ public:
 private:
     EN13555Property();
 
+    bool loadGasket(const QString& gasketId);
+
 //    void createList();
 //    void cl(double leakageRate, const RB_String& materialCode,
 //            double testPressure, double QA, double QminL, double QsminL);
@@ -87,7 +86,7 @@ private:
 
     static EN13555Property* mActiveUtility;
 
-    RB_ObjectContainer* mList;
+    RB_ObjectContainer* mGasketList;
 
 //    std::vector<QminLQsminLProperty*> mList;
 //    double mTargetQA;

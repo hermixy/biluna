@@ -64,7 +64,6 @@ private:
     void Calc_ThetaFmaxminTest();
     void Calc_ThetaLmaxminTest();
     void Calc_Q_GTest();
-    void Calc_delta_eGcTest();
     void Calc_F_B0avTest();
 
     Assembly* target;

@@ -32,6 +32,11 @@ public:
 
     static double ACCURACY; //1.0e-6 required by integral a.o.
 
+    // materialIdx, material type  and id from database for material properties
+    // same purpose as gasketIdx for gaskets
+    RB_String materialIdx;
+    RB_String materialLooseIdx;
+
     int nB;
     double d0;
     double d3;

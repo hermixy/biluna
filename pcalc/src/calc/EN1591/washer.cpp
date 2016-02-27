@@ -3,6 +3,9 @@
 NAMESPACE_BILUNA_CALC_EN1591
 
 Washer_IN::Washer_IN() : RB_Object() {
+    setName("PCALC EN1591 Washer");
+
+    materialIdx = "";
     eW = 0;
     dW1 = 0;
     dW2 = 0;

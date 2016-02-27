@@ -18,6 +18,10 @@ public:
         Spherical
     };
 
+    // materialIdx, material type  and id from database for material properties
+    // same purpose as gasketIdx for gaskets
+    RB_String materialIdx;
+
     ShellType sType;
     double dS;
     double eS;

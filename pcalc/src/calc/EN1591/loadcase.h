@@ -11,6 +11,7 @@ public:
     LoadCase_IN();
     virtual ~LoadCase_IN();
 
+    int number; // loadcase number
     Force* mForce;
     double alphaB;
     double alphaG;

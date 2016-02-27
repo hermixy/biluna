@@ -574,46 +574,6 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
 }
 
 /**
- * @brief Before Formula 105 annex F: Creep of gasket
- * under seating pressure and temperature
- * @param loadCaseNo
- */
-void Assembly::Calc_delta_eGc(int loadCaseNo) {
-    LoadCase* loadCaseI = mLoadCaseList->at(loadCaseNo);
-    LoadCase* loadCase0 = mLoadCaseList->at(0);
-
-    if (loadCaseI->delta_eGc_EN13555 > 0) {
-        // delta_eGc_EN13555 (=test) is available F.3
-        loadCaseI->delta_eGc = mGasket->K * loadCaseI->Y_G
-                * loadCaseI->delta_eGc_EN13555;
-        PR->addDetail("Before_F. 105 an. F.3",
-                      "delta_eGc", "K * Y_G * delta_eGc_test",
-                      loadCaseI->delta_eGc, "mm",
-                      QN(mGasket->K) + " * " + QN(loadCaseI->Y_G) + " * "
-                      + QN(loadCaseI->delta_eGc_EN13555), loadCaseNo);
-    } else if (loadCaseI->P_QR > 0) {
-        // only P_QR is available from EN13555 F.2, text and F.3
-        loadCaseI->delta_eGc = loadCaseI->Y_G * (M_PI / 4)
-                * (pow(mGasket->dG2_EN13555, 2) - pow(mGasket->dG1_EN13555, 2))
-                * loadCase0->Q_A * (1 - loadCaseI->P_QR);
-        PR->addDetail("Before_F. 105 an. F.2, F.3",
-                      "delta_eGc", "Y_G * (PI / 4) "
-                      "* (dG2_EN13555 ^ 2 - dG1_EN13555 ^ 2) * Q_A * (1 - P_QR)",
-                      loadCaseI->delta_eGc, "mm",
-                      QN(loadCaseI->Y_G) + " * (pi / 4) * ("
-                      + QN(mGasket->dG2_EN13555) + " ^ 2 - "
-                      + QN(mGasket->dG1_EN13555) + " ^ 2) * "
-                      + QN(loadCase0->Q_A) + " * (1 - "
-                      + QN(loadCaseI->P_QR) + ")", loadCaseNo);
-    } else {
-        // no further gasket information available
-        loadCaseI->delta_eGc = 0;
-        PR->addDetail("Before_F. 105", "delta_eGc", "0",
-                  loadCaseI->delta_eGc, "mm", "No data available", loadCaseNo);
-    }
-}
-
-/**
  * @brief Formula 105: Required gasket force based on load conditions
  * @param loadCaseNo
  */

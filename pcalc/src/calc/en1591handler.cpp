@@ -23,6 +23,12 @@ EN1591Handler::~EN1591Handler() {
     mCalc = NULL;
 }
 
+/**
+ * Execute setting of input values and kick off calculator
+ * Note: set gasket properties is not done here because there will
+ * be an iteration required over the gasket properties
+ * to get to the calculation result
+ */
 void EN1591Handler::exec() {
     int flange1Type; // items << "Blind" << "Integral" << "Loose";
     int flange2Type;
@@ -40,16 +46,17 @@ void EN1591Handler::exec() {
     mCalc = new Calculator((Calculator::FlangeType)flange1Type,
                            (Calculator::FlangeType)flange2Type);
 
-    setDimensions();
+    setDimensionsMaterialId();
     setAllowances();
     setQualityFactors();
     setLoadCases();
     setMaterialProperties();
+    // No setGasketProperties() !
 
     mCalc->exec();
 }
 
-void EN1591Handler::setDimensions() {
+void EN1591Handler::setDimensionsMaterialId() {
     RB_ObjectContainer* inList
             = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
@@ -90,8 +97,8 @@ void EN1591Handler::setDimensions() {
     fl1->d6 = in->getValue("d61").toDouble();
     fl1->d8 = in->getValue("d81").toDouble();
     fl1->eL = in->getValue("el1").toDouble();
-    // TODO: materialflange1_idx
-    // TODO: materialloosering1_idx
+    fl1->materialIdx = in->getValue("materialflange1_idx").toString();
+    fl1->materialLooseIdx = in->getValue("materialloosering1_idx").toString();
 
     Flange* fl2 = mCalc->mAssembly->mFlange2;
     fl2->nB = fl1->nB; // always same number of bolts
@@ -124,8 +131,9 @@ void EN1591Handler::setDimensions() {
         fl2->d6 = fl1->d6;
         fl2->d8 = fl1->d8;
         fl2->eL = fl1->eL;
-        // TODO: materialflange1_idx
-        // TODO: materialloosering1_idx
+
+        fl2->materialIdx = fl1->materialIdx;
+        fl2->materialLooseIdx = fl1->materialLooseIdx;
     } else {
         fl2->d0 = in->getValue("d02").toDouble();
         fl2->d3 = in->getValue("d32").toDouble();
@@ -153,8 +161,9 @@ void EN1591Handler::setDimensions() {
         fl2->d6 = in->getValue("d62").toDouble();
         fl2->d8 = in->getValue("d82").toDouble();
         fl2->eL = in->getValue("el2").toDouble();
-        // TODO: materialflange2_idx
-        // TODO: materialloosering2_idx
+
+        fl2->materialIdx = in->getValue("materialflange2_idx").toString();
+        fl2->materialLooseIdx = in->getValue("materialloosering2_idx").toString();
     }
 
     // gasket
@@ -190,7 +199,7 @@ void EN1591Handler::setDimensions() {
     blt->mun = in->getValue("mun").toDouble();
     blt->mut = in->getValue("mut").toDouble();
     blt->ruptureElongationA = in->getValue("ruptureelongationa").toDouble();
-    // TODO materialbolt_idx
+    blt->materialIdx = in->getValue("materialbolt_idx").toString();
     // bolthole
     BoltHole* bhl = blt->mBoltHole;
     bhl->d5 = in->getValue("d5").toDouble();
@@ -202,21 +211,20 @@ void EN1591Handler::setDimensions() {
     wr->eW = in->getValue("ew").toDouble();
     wr->dW1 = in->getValue("dw1").toDouble();
     wr->dW2 = in->getValue("dw2").toDouble();
-    // TODO materialwasher_idx
+    wr->materialIdx = in->getValue("materialwasher_idx").toString();
     // input only allows one type of washer could be change to two different
     wr = mCalc->mAssembly->mFlange2->mWasher;
     wr->eW = in->getValue("ew").toDouble();
     wr->dW1 = in->getValue("dw1").toDouble();
     wr->dW2 = in->getValue("dw2").toDouble();
-    // TODO materialwasher_idx
-
+    wr->materialIdx = in->getValue("materialwasher_idx").toString(); // same
     // shell
     Shell* sh1 = mCalc->mAssembly->mFlange1->mShell;
     sh1->sType = (Shell::ShellType)in->getValue("typeshell1_id").toInt();
     sh1->dS = in->getValue("ds1").toDouble();
     sh1->eS = in->getValue("es1").toDouble();
     sh1->phiS = in->getValue("phis1").toDouble();
-    // TODO materialshell1_idx
+    sh1->materialIdx = in->getValue("materialshell1_idx").toString();
     Shell* sh2 = mCalc->mAssembly->mFlange2->mShell;
 
     if (in->getValue("shell2equal").toInt() != 0) {
@@ -225,13 +233,13 @@ void EN1591Handler::setDimensions() {
         sh2->dS = sh1->dS;
         sh2->eS = sh1->eS;
         sh2->phiS = sh1->phiS;
-        // TODO materialshell2_idx
+        sh2->materialIdx = sh1->materialIdx;
     } else {
         sh2->sType = (Shell::ShellType)in->getValue("typeshell2_id").toInt();
         sh2->dS = in->getValue("ds2").toDouble();
         sh2->eS = in->getValue("es2").toDouble();
         sh2->phiS = in->getValue("phis2").toDouble();
-        // TODO materialshell2_idx
+        sh2->materialIdx = in->getValue("materialshell2_idx").toString();
     }
 }
 
@@ -256,10 +264,11 @@ void EN1591Handler::setLoadCases() {
 
         if (loadCaseNoMemory == 0) {
             lc->F_Bspec = mCalc->mAssembly->mF_Bspec;
-            lc->Q_A = mCalc->mAssembly->mQ_Aspec; // TODO: still required
+            lc->Q_A = mCalc->mAssembly->mQ_Aspec; // TODO: still required?
             ++loadCaseNoMemory;
         }
 
+        lc->number = lcIn->getValue("loadcaseno").toInt();
         // pressure temperature
         lc->P = lcIn->getValue("p").toDouble();
         lc->T0 = lcIn->getValue("t0").toDouble();

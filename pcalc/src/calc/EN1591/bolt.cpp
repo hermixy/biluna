@@ -5,6 +5,7 @@ NAMESPACE_BILUNA_CALC_EN1591
 Bolt_IN::Bolt_IN() : RB_Object(){
     setName("PCALC EN1591 Bolt");
 
+    materialIdx = "";
     bType = Stud;
     tType = ManualStandardRing;
     dB0 = 0;

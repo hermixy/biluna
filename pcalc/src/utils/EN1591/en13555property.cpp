@@ -8,6 +8,7 @@
  *****************************************************************/
 
 #include "en13555property.h"
+#include "pcalc_modelfactory.h"
 #include "pcalc_objectfactory.h"
 #include "pcalc_utilityfactory.h"
 NAMESPACE_BILUNA_CALC_EN1591
@@ -17,9 +18,9 @@ EN13555Property* EN13555Property::mActiveUtility = 0;
 
 EN13555Property::EN13555Property() : RB_TableMath(), RB_Utility() {
     RB_DEBUG->print("EN13555Property::EN13555Property()");
-    mList = new RB_ObjectContainer("", nullptr,
-                                   "PCALC_EN13555ManufacturerList",
-                                   PCALC_OBJECTFACTORY);
+    mGasketList = new RB_ObjectContainer("", nullptr,
+                                         "PCALC_EN13555GasketList",
+                                         PCALC_OBJECTFACTORY);
 //    mTargetQA = 0.0;
 //    mLeft = NULL;
 //    mRight = NULL;
@@ -28,8 +29,8 @@ EN13555Property::EN13555Property() : RB_TableMath(), RB_Utility() {
 }
 
 EN13555Property::~EN13555Property() {
-    delete mList;
-    mList = nullptr;
+    delete mGasketList;
+    mGasketList = nullptr;
 
     PCALC_UTILITYFACTORY->removeUtility(this);
     mActiveUtility = NULL;
@@ -44,9 +45,22 @@ EN13555Property* EN13555Property::getInstance() {
     return mActiveUtility;
 }
 
-double EN13555Property::getTableQA(double leakageRate,
-                                      const QString& gasketId,
-                                      double testPressure) {
+bool EN13555Property::getGasket(const QString& gasketIdx) {
+    bool success = false;
+    QString gasketId = RB2::IdxId(gasketIdx);
+    RB_ObjectBase* obj = mGasketList->getObject(gasketId);
+
+    if (obj) {
+        success = true;
+    } else {
+        success = loadGasket(gasketId);
+    }
+
+    return success;
+}
+
+double EN13555Property::getQA(const QString& gasketIdx, double leakageRate,
+                              double testPressure) {
 //    QminLQsminLProperty* minQAobj = NULL;
 
 //    for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
@@ -69,9 +83,8 @@ double EN13555Property::getTableQA(double leakageRate,
     return -1.0;
 }
 
-double EN13555Property::getTableQminL(double leakageRate,
-                                         const RB_String& materialCode,
-                                         double testPressure) {
+double EN13555Property::getQminL(const RB_String& gasketIdx, double leakageRate,
+                                 double testPressure) {
 //    bool existing = false;
 
 //    for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
@@ -88,10 +101,8 @@ double EN13555Property::getTableQminL(double leakageRate,
     return -1.0;
 }
 
-double EN13555Property::getTableQsminL(double leakageRate,
-                                          const QString& materialCode,
-                                          double QA,
-                                          double testPressure) {
+double EN13555Property::getQsminL(const QString& gasketIdx, double leakageRate,
+                                  double QA, double testPressure) {
 //    mLeft = NULL;
 //    mRight = NULL;
 //    mTargetQA = QA;
@@ -128,6 +139,13 @@ double EN13555Property::getTableQsminL(double leakageRate,
 
     return value;
 }
+
+bool EN13555Property::loadGasket(const QString& gasketId) {
+    QSqlDatabase db = PCALC_MODELFACTORY->getStandardDatabase();
+    RB_ObjectBase* gasket = mGasketList->newObject(gasketId);
+    return gasket->dbRead(db, RB2::ResolveAll);
+}
+
 
 //void EN13555Property::createList() {
 //    // leakageRate, materialCode, testPressure, QA, QminL, QsminL

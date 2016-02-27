@@ -30,6 +30,10 @@ public:
         WrenchMeasureTorquePlusNutTurn
     };
 
+    // materialIdx, material type  and id from database for material properties
+    // same purpose as gasketIdx for gaskets
+    RB_String materialIdx;
+
     BoltType bType;
     TensionerType tType;
     double dB0;

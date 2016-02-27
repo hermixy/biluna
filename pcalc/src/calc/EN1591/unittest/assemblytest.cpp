@@ -62,7 +62,6 @@ void AssemblyTest::exec() {
     Calc_ThetaFmaxminTest();
     Calc_ThetaLmaxminTest();
     Calc_Q_GTest();
-    Calc_delta_eGcTest();
     Calc_F_B0avTest();
 }
 
@@ -1024,35 +1023,6 @@ void AssemblyTest::Calc_Q_GTest() {
     target->Calc_Q_G(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_GTest()", 0.5,
              loadCase0->Q_G);
-    deleteTarget();
-}
-
-void AssemblyTest::Calc_delta_eGcTest() {
-    SetupIntegralTarget();
-    LoadCase* loadCase0 = target->mLoadCaseList->at(0);
-    int i = 1;
-    LoadCase* loadCase = target->mLoadCaseList->at(i);
-    loadCase->delta_eGc_EN13555 = 7.3;
-    loadCase->Y_G = 3.8;
-    target->mGasket->K = 500000.0;
-    target->Calc_delta_eGc(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()",
-             13870000, loadCase->delta_eGc);
-    loadCase->delta_eGc_EN13555 = 0.0;
-    loadCase->Y_G = 1.3;
-    target->mGasket->dG2_EN13555 = 2.4;
-    target->mGasket->dG1_EN13555 = 9.1;
-    loadCase0->Q_A = 15.3;
-    loadCase->P_QR = 0.0456;
-    target->Calc_delta_eGc(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()",
-             -1148.7558557602242, loadCase->delta_eGc);
-    target->mGasket->dG2_EN13555 = 0.0;
-    target->mGasket->dG1_EN13555 = 0.0;
-    loadCase->P_QR = 0.0;
-    target->Calc_delta_eGc(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()", 0.0,
-             loadCase->delta_eGc);
     deleteTarget();
 }
 

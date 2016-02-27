@@ -78,7 +78,9 @@ public:
         LowAlloyOrStainlessSteelGraphFill
     };
 
-    RB_String gasketIdx; // Gasket type and id from database
+    // gasketIdx, gasket type  and id from database for material properties
+    // same purpose as materialIdx for flanges and bolts
+    RB_String gasketIdx;
     FormType frmType;
     InsFilLayMatType insType;
     double dG0;
@@ -132,11 +134,12 @@ public:
     void Calc_Q_smax(int loadCaseNo);
     void Calc_XG();
     void Calc_AQ();
-    void Calc_P_QR(int loadCaseNo);
-    double gasketCompressedElasticity(int loadCaseNo);
-    double gasketCompressedThickness(LoadCase* loadCase);
-    double gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase);
-    double gasketCreepFactor(int loadCaseNo, LoadCase* loadCase);
+    void setLoadCaseValues(int loadCaseNo);
+    void Calc_delta_eGc(int loadCaseNo);
+    double gasketCompressedElasticity(int loadCaseNo);            // E_G
+    double gasketCompressedThickness(LoadCase* loadCase);         // e_G
+    double gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase); // Q_smax
+    double gasketCreepFactor(int loadCaseNo, LoadCase* loadCase); // P_QR
 
     LoadCaseList* mLoadCaseList;
 

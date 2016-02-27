@@ -10,11 +10,14 @@ double Flange_IN::ACCURACY = 0.000001; //1.0e-6 required for integral a.o.
 
 
 Flange_IN::Flange_IN(int flangeNo) : RB_Object() {
+    // setName("PCALC EN1591 Flange"); in blind, integral and loose
 
     if (flangeNo != 1 && flangeNo != 2) {
         qDebug("Flange constructor: flange Number ERROR.");
     }
 
+    materialIdx = "";
+    materialLooseIdx = "";
     mFlangeNumber = flangeNo;
     mShell = new Shell(); // also for blind!
     mWasher = new Washer();

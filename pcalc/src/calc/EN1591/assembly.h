@@ -67,7 +67,6 @@ public:
     void Calc_YR(int loadCaseNo);
     void Calc_Q_A_Qsmin(int loadCaseNo);
     void Calc_F_Gmin(int loadCaseNo);
-    void Calc_delta_eGc(int loadCaseNo);
     void Calc_F_Gdelta(int loadCaseNo);
     void Calc_F_G0req();
     void Calc_F_B0req();

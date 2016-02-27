@@ -1,4 +1,5 @@
 ﻿#include "gasket.h"
+#include "en13555property.h"
 #include "pcalc_report.h"
 #include "table16property.h"
 #include "table17_30property.h"
@@ -9,6 +10,7 @@ NAMESPACE_BILUNA_CALC_EN1591
 Gasket_IN::Gasket_IN() : RB_Object(){
     setName("PCALC EN1591 Gasket");
 
+    gasketIdx = "";
     dG0 = 0;
     dG1 = 0;
     dG2 = 0;
@@ -248,9 +250,64 @@ void Gasket::Calc_AQ() {
                   QN(dGe) + " ^ 2 * pi / 4");
 }
 
-void Gasket::Calc_P_QR(int loadCaseNo) {
-    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->P_QR = gasketCreepFactor(loadCaseNo, loadCase);
+/**
+ * Set LoadCase values, called by Assembly::Calc_delta_eGc()
+ * @param loadCase
+ */
+void Gasket::setLoadCaseValues(int loadCaseNo) {
+    bool success = EN13555PROPERTY->getGasket(gasketIdx);
+
+    if (!success) {
+        RB_DEBUG->error("Gasket::setLoadCaseValues() get gasket ERROR");
+    }
+
+    // get delta_eGc_EN13555 first
+
+    // if not delta_eGc_EN13555 then get P_QR
+
+    // if also not P_QR
+//    loadCase->delta_eGc_EN13555 = -1
+//    loadCase->P_QR = gasketCreepFactor(loadCaseNo, loadCase);
+}
+
+/**
+ * @brief Before Formula 105 annex F: Creep of gasket
+ * under seating pressure and temperature
+ * @param loadCaseNo
+ */
+void Gasket::Calc_delta_eGc(int loadCaseNo) {
+    LoadCase* loadCaseI = mLoadCaseList->at(loadCaseNo);
+    LoadCase* loadCase0 = mLoadCaseList->at(0);
+
+    if (loadCaseI->delta_eGc_EN13555 > 0) {
+        // delta_eGc_EN13555 (=test) is available F.3
+        loadCaseI->delta_eGc = K * loadCaseI->Y_G
+                * loadCaseI->delta_eGc_EN13555;
+        PR->addDetail("Before_F. 105 an. F.3",
+                      "delta_eGc", "K * Y_G * delta_eGc_test",
+                      loadCaseI->delta_eGc, "mm",
+                      QN(K) + " * " + QN(loadCaseI->Y_G) + " * "
+                      + QN(loadCaseI->delta_eGc_EN13555), loadCaseNo);
+    } else if (loadCaseI->P_QR > 0) {
+        // only P_QR is available from EN13555 F.2, text and F.3
+        loadCaseI->delta_eGc = loadCaseI->Y_G * (M_PI / 4)
+                * (pow(dG2_EN13555, 2) - pow(dG1_EN13555, 2))
+                * loadCase0->Q_A * (1 - loadCaseI->P_QR);
+        PR->addDetail("Before_F. 105 an. F.2, F.3",
+                      "delta_eGc", "Y_G * (PI / 4) "
+                      "* (dG2_EN13555 ^ 2 - dG1_EN13555 ^ 2) * Q_A * (1 - P_QR)",
+                      loadCaseI->delta_eGc, "mm",
+                      QN(loadCaseI->Y_G) + " * (pi / 4) * ("
+                      + QN(dG2_EN13555) + " ^ 2 - "
+                      + QN(dG1_EN13555) + " ^ 2) * "
+                      + QN(loadCase0->Q_A) + " * (1 - "
+                      + QN(loadCaseI->P_QR) + ")", loadCaseNo);
+    } else {
+        // no further gasket information available
+        loadCaseI->delta_eGc = 0;
+        PR->addDetail("Before_F. 105", "delta_eGc", "0",
+                  loadCaseI->delta_eGc, "mm", "No data available", loadCaseNo);
+    }
 }
 
 /**

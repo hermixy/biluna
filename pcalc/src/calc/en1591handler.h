@@ -28,7 +28,7 @@ public:
     void exec();
 
 protected:
-    void setDimensions();
+    void setDimensionsMaterialId();
     void setAllowances();
     void setQualityFactors();
     void setLoadCases();
