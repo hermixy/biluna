@@ -136,6 +136,7 @@ public:
     void Calc_AQ();
     void setLoadCaseValues(int loadCaseNo);
     void Calc_delta_eGc(int loadCaseNo);
+    double gasketDeflection(LoadCase* loadCase);                  // delta_eGc_EN13555
     double gasketCompressedElasticity(int loadCaseNo);            // E_G
     double gasketCompressedThickness(LoadCase* loadCase);         // e_G
     double gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase); // Q_smax

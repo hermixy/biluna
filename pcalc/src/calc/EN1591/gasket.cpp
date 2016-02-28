@@ -310,6 +310,10 @@ void Gasket::Calc_delta_eGc(int loadCaseNo) {
     }
 }
 
+double Gasket::gasketDeflection(LoadCase *loadCase) {
+    return 0.0;
+}
+
 /**
  * @brief Temporary solution for calculation of EG
  * \todo  refer www.gasketdata.org and EN1591-2 Table 17 - 30

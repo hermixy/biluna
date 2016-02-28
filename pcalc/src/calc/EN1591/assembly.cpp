@@ -542,7 +542,7 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
         double muG = loadCase->muG;
 
         if (muG <= 0) {
-            TableEProperty* table = new TableEProperty(); // TODO: static class
+            TableEProperty* table = new TableEProperty(); // TODO: from database
             muG = table->getTableE_muG(mGasket->insType);
             delete table;
         }
@@ -592,7 +592,7 @@ void Assembly::Calc_F_Gdelta(int loadCaseNo) {
                    + loadCase->dUI + loadCase->delta_eGc)
             / mLoadCaseList->at(0)->Y_G;
 
-    // Tuckmantel suggestion:
+    // TODO: Tuckmantel suggestion:
     //tmpF_Gdelta = (.F_Gmin * .Y_G + .F_Q * .Y_Q _
     //               + (.F_R * .Y_R - mLoadCaseList->at(0)->F_R _
     //               * mLoadCaseList->at(0)->Y_R) + .delta_eGc + .dUI) _

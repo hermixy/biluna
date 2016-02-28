@@ -56,13 +56,15 @@ public:
     bool getGasket(const QString& gasketIdx);
     void refresh() {}
 
+    double getdeltaeGc(const RB_String& gasketIdx, double leakageRate,
+                        double designPressure);
 
     double getQA(const RB_String& gasketIdx, double leakageRate,
-                 double testPressure = 40.0);
+                 double designPressure);
     double getQminL(const RB_String& gasketIdx, double leakageRate,
-                    double testPressure = 40.0);
+                    double designPressure);
     double getQsminL(const RB_String& gasketIdx, double leakageRate,
-                     double QA, double testPressure = 40.0);
+                     double QA, double designPressure);
 
 
 
@@ -76,10 +78,11 @@ private:
     EN13555Property();
 
     bool loadGasket(const QString& gasketId);
+    double closestInnerPressure(double designPressure);
 
 //    void createList();
 //    void cl(double leakageRate, const RB_String& materialCode,
-//            double testPressure, double QA, double QminL, double QsminL);
+//            double designPressure, double QA, double QminL, double QsminL);
 
 //    void updateLeft(QminLQsminLProperty* obj);
 //    void updateRight(QminLQsminLProperty* obj);
@@ -87,6 +90,7 @@ private:
     static EN13555Property* mActiveUtility;
 
     RB_ObjectContainer* mGasketList;
+    RB_ObjectBase* mCurrentGasket;
 
 //    std::vector<QminLQsminLProperty*> mList;
 //    double mTargetQA;

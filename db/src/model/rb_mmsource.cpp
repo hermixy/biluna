@@ -39,10 +39,7 @@ RB_MmSource::RB_MmSource(QObject* parent, const QSqlDatabase& db, int hiddenColu
     mModified = false;
     mIsTreeModel = false;
     mIsInMemoryModel = false;
-    mDatabaseConnection = "";
-    if (db.isOpen()) {
-        mDatabaseConnection = db.connectionName();
-    }
+    mDatabaseConnection = db.connectionName();
     mNoColumns = 0;
     mPrimaryParent = "parent";
     mSecondParent = "";

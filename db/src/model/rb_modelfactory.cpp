@@ -171,7 +171,11 @@ QSqlDatabase RB_ModelFactory::getDatabase() {
  * @return QSqlDatabase database with standard information
  */
 QSqlDatabase RB_ModelFactory::getStandardDatabase() {
-    return RB_DATABASE->database(STANDARD_CONNECTION);
+    QSqlDatabase db = RB_DATABASE->database(STANDARD_CONNECTION);
+    if (db.isValid()) {
+        return db;
+    }
+    return getDatabase();
 }
 
 /**
@@ -179,7 +183,11 @@ QSqlDatabase RB_ModelFactory::getStandardDatabase() {
  * @return QSqlDatabase database with custom information
  */
 QSqlDatabase RB_ModelFactory::getCustomDatabase() {
-    return RB_DATABASE->database(CUSTOM_CONNECTION);
+    QSqlDatabase db = RB_DATABASE->database(CUSTOM_CONNECTION);
+    if (db.isValid()) {
+        return db;
+    }
+    return getDatabase();
 }
 
 ///**
