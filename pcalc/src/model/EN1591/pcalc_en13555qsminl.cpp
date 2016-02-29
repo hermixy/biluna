@@ -26,7 +26,7 @@ PCALC_EN13555QsminL::~PCALC_EN13555QsminL() {
 }
 
 void PCALC_EN13555QsminL::createMembers() {
-    addMember("testpress", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("testpress", "Bar", 0.0, RB2::MemberDouble);
     addMember("qa", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("leakrate", "-", 0.0, RB2::MemberDouble);
     addMember("qsminl", "N/mm2", 0.0, RB2::MemberDouble);

@@ -13,10 +13,10 @@
 
 #include "db_dialogfactory.h"
 #include "rb_idxlineedit.h"
-// #include "rb_idxlineeditdelegate.h"
 #include "rb_objectbase.h"
 #include "rb_mmproxy.h"
 #include "rb_sqlrelationaldelegate.h"
+#include "rb_uomlineedit.h"
 
 
 /**
@@ -74,6 +74,14 @@ void RB_DataWidgetMapper::addMapping(QWidget* widget, int section) {
         ile->setModel(mProxyModel);
     }
 
+    RB_UomLineEdit* ule = dynamic_cast<RB_UomLineEdit*>(widget);
+    if (ule) {
+        wdgt = ule->getLineEdit();
+        ule->setSection(section);
+        ule->setModel(mProxyModel);
+        ule->setUom();
+    }
+
     QDataWidgetMapper::addMapping(wdgt, section);
     wdgt->installEventFilter(this);
     connect(wdgt, SIGNAL(destroyed(QObject*)),
@@ -126,6 +134,14 @@ void RB_DataWidgetMapper::addMapping(QWidget* widget, int section,
         ile->setModel(mProxyModel);
     }
 
+    RB_UomLineEdit* ule = dynamic_cast<RB_UomLineEdit*>(widget);
+    if (ule) {
+        wdgt = ule->getLineEdit();
+        ule->setSection(section);
+        ule->setModel(mProxyModel);
+        ule->setUom();
+    }
+
     QDataWidgetMapper::addMapping(wdgt, section, propertyName);
     wdgt->installEventFilter(this);
     connect(wdgt, SIGNAL(destroyed(QObject*)),
@@ -144,6 +160,8 @@ void RB_DataWidgetMapper::removeMapping(QWidget* widget) {
     QWidget* wdgt = widget;
     RB_IdxLineEdit* ile = dynamic_cast<RB_IdxLineEdit*>(widget);
     if (ile) wdgt = ile->getLineEdit();
+    RB_UomLineEdit* ule = dynamic_cast<RB_UomLineEdit*>(widget);
+    if (ule) wdgt = ule->getLineEdit();
 
     QDataWidgetMapper::removeMapping(wdgt);
     mObjectList.remove(mObjectList.indexOf(widget));
@@ -185,6 +203,7 @@ void RB_DataWidgetMapper::slotClearWidgets() {
         QSpinBox* sb = dynamic_cast<QSpinBox*>(obj);
         QTextEdit* te = dynamic_cast<QTextEdit*>(obj);
         RB_IdxLineEdit* ile = dynamic_cast<RB_IdxLineEdit*>(obj);
+        RB_UomLineEdit* ule = dynamic_cast<RB_UomLineEdit*>(obj);
 
         if (chb) {
             chb->setEnabled(false);
@@ -219,7 +238,11 @@ void RB_DataWidgetMapper::slotClearWidgets() {
         } else if (ile) {
             ile->setEnabled(false);
             le = ile->getLineEdit();
-            le->clear(); // setText(""); // ->clear();
+            le->clear();
+        } else if (ule) {
+            ule->setEnabled(false);
+            le = ule->getLineEdit();
+            le->clear();
         }
     }
 
@@ -296,9 +319,10 @@ void RB_DataWidgetMapper::slotActivateWidgets(int row) {
                 mProxyModel->index(row, section, parent),
                 Qt::UserRole);
         QString str = var.toString();
+        RB_IdxLineEdit* ile = dynamic_cast<RB_IdxLineEdit*>(w);
+        RB_UomLineEdit* ule = dynamic_cast<RB_UomLineEdit*>(w);
 
         if (!str.isEmpty()) {
-            RB_IdxLineEdit* ile = dynamic_cast<RB_IdxLineEdit*>(w);
             if (ile) {
                 ile->getLineEdit()->setStyleSheet(str);
             } else {
@@ -309,9 +333,11 @@ void RB_DataWidgetMapper::slotActivateWidgets(int row) {
         w->setEnabled(true); // could have been done with signal/slot
 
         // HACK:
-        RB_IdxLineEdit* ile = dynamic_cast<RB_IdxLineEdit*>(w);
         if (ile) {
             ile->setEnabled(true);
+        }
+        if (ule) {
+            ule->setEnabled(true);
         }
     }
 }

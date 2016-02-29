@@ -29,6 +29,70 @@ Assembly::Assembly() : Assembly_OUT() {
 }
 
 /**
+ * @brief Assembly::Calc_dG1: theoretical inside gasket diameter
+ * Figure 4
+ */
+void Assembly::Calc_dG1() {
+    double fl1 = std::max(std::max(mFlange1->d0,
+                                   mFlange1->dREC), mGasket->dGin);
+    mGasket->dG1 = std::max(std::max(mFlange2->d0,
+                            mFlange2->dREC), fl1);
+    PR->addDetail("Before_F. 51", "dG1", "max(d0(1,2); dREC(1,2)); dGin)",
+                  mGasket->dG1, "mm", "max(" + QN(mFlange1->d0) + ";  "
+                  + QN(mFlange2->d0) + "; " + QN(mFlange1->dREC) + "; "
+                  + QN(mFlange2->dREC) + "; " + QN(mGasket->dGin) + ")");
+}
+
+/**
+ * @brief Assembly::Calc_dG2: theoretical outside gasket diameter
+ * Figure 4
+ */
+void Assembly::Calc_dG2() {
+    if (mFlange1->dRF > mFlange1->d0
+            && mFlange1->dRF > mFlange1->dREC
+            && mFlange2->dRF > mFlange2->d0
+            && mFlange2->dRF > mFlange2->dREC) {
+        // both have valid raised face
+        double fl1 = std::min(std::min(mFlange1->d4,
+                                       mFlange1->dRF), mGasket->dGout);
+        mGasket->dG2 = std::min(std::min(mFlange2->d4,
+                                mFlange2->dRF), fl1);
+        PR->addDetail("Before_F. 51", "dG2", "min(d4(1,2); dRF(1,2)); dGout)",
+                      mGasket->dG2, "mm", "min(" + QN(mFlange1->d4) + ";  "
+                      + QN(mFlange2->d4) + "; " + QN(mFlange1->dRF) + "; "
+                      + QN(mFlange2->dRF) + "; " + QN(mGasket->dGout) + ")");
+    } else if (mFlange1->dRF > mFlange1->d0
+                   && mFlange1->dRF > mFlange1->dREC) {
+        // flange1 has valid raised face
+        double fl1 = std::min(std::min(mFlange1->d4,
+                                       mFlange1->dRF), mGasket->dGout);
+        mGasket->dG2 = std::min(mFlange2->d4, fl1);
+        PR->addDetail("Before_F. 51", "dG2", "min(d4(1,2); dRF(1)); dGout)",
+                      mGasket->dG2, "mm", "min(" + QN(mFlange1->d4) + ";  "
+                      + QN(mFlange2->d4) + "; " + QN(mFlange1->dRF) + "; "
+                       + "; " + QN(mGasket->dGout) + ")");
+    } else if (mFlange2->dRF > mFlange2->d0
+                  && mFlange2->dRF > mFlange2->dREC) {
+        // flange2 has valid raised face
+        double fl1 = std::min(mFlange1->d4, mGasket->dGout);
+        mGasket->dG2 = std::min(std::min(mFlange2->d4,
+                              mFlange2->dRF), fl1);
+        PR->addDetail("Before_F. 51", "dG2", "min(d4(1,2); dRF(2)); dGout)",
+                    mGasket->dG2, "mm", "min(" + QN(mFlange1->d4) + ";  "
+                    + QN(mFlange2->d4) + "; "
+                    + QN(mFlange2->dRF) + "; " + QN(mGasket->dGout) + ")");
+
+    } else {
+        // no valid raised faces
+        double fl1 = std::min(mFlange1->d4, mGasket->dGout);
+        mGasket->dG2 = std::min(mFlange2->d4, fl1);
+        PR->addDetail("Before_F. 51", "dG2", "min(d4(1,2); dGout)",
+                      mGasket->dG2, "mm", "min(" + QN(mFlange1->d4) + ";  "
+                      + QN(mFlange2->d4) + "; " + QN(mGasket->dGout) + ")");
+    }
+}
+
+/**
  * @brief Formula 1 (54): Initial gasket force is specified
  */
 void Assembly::Calc_F_GInitial_1() {

@@ -52,6 +52,8 @@ class Assembly : public Assembly_OUT {
 public:
     Assembly();
 
+    void Calc_dG1();
+    void Calc_dG2();
     void Calc_F_GInitial_1();
     void Calc_F_GInitial();
     void Calc_dGe();

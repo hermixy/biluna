@@ -9,6 +9,7 @@
  *****************************************************************/
 
 #include "rb_tablemath.h"
+#include "rb_objectiterator.h"
 NAMESPACE_BILUNA_CALC
 
 RB_TableMath::RB_TableMath() {
@@ -87,6 +88,98 @@ double RB_TableMath::getBilinearValue(
     }
 
     return value;
+}
+
+double RB_TableMath::getInterpolatedValue(
+        RB_ObjectContainer* fromObjC, const QString &xField,
+        const QString &yField, const QString &zField, double xValue,
+        double yValue, const QString& extraField, double extraValue) {
+    mXfield = xField;
+    mYfield = yField;
+    mZfield = zField;
+    mXvalue = xValue;
+    mYvalue = yValue;
+    mExtraField = extraField;
+    mExtraValue = extraValue;
+    mTopLeft = nullptr;
+    mTopRight = nullptr;
+    mBottomLeft = nullptr;
+    mBottomRight = nullptr;
+
+    RB_ObjectIterator* iter = fromObjC->createIterator();
+
+    for(iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* obj = iter->currentObject();
+        updateCornerObjects(obj);
+    }
+
+    delete iter;
+
+    double value = getBilinearValue(
+                xValue, yValue,
+                mTopLeft->getValue(mXfield).toDouble(),
+                mTopLeft->getValue(mYfield).toDouble(),
+                mTopLeft->getValue(mZfield).toDouble(),
+                mTopRight->getValue(mXfield).toDouble(),
+                mTopRight->getValue(mYfield).toDouble(),
+                mTopRight->getValue(mZfield).toDouble(),
+                mBottomLeft->getValue(mXfield).toDouble(),
+                mBottomLeft->getValue(mYfield).toDouble(),
+                mBottomLeft->getValue(mZfield).toDouble(),
+                mBottomRight->getValue(mXfield).toDouble(),
+                mBottomRight->getValue(mYfield).toDouble(),
+                mBottomRight->getValue(mZfield).toDouble());
+    return value;
+}
+
+void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
+    if (!mExtraField.isEmpty()
+            && obj->getValue(mExtraField).toString() != mExtraValue) {
+        return;
+    }
+
+    double xValue = obj->getValue(mXfield).toDouble();
+    double yValue = obj->getValue(mYfield).toDouble();
+
+    // Top left
+    if (!mTopLeft && xValue < mXvalue && yValue > mYvalue) {
+        mTopLeft = obj;
+    } else if (xValue > mTopLeft->getValue(mXfield).toDouble()
+               && yValue < mTopLeft->getValue(mYfield).toDouble()
+               && xValue < mXvalue
+               && yValue > mYvalue) {
+        mTopLeft = obj;
+    }
+
+    // Top right
+    if (!mTopRight && xValue > mXvalue && yValue > mYvalue) {
+        mTopRight = obj;
+    } else if (xValue < mTopRight->getValue(mXfield).toDouble()
+               && yValue < mTopRight->getValue(mYfield).toDouble()
+               && xValue > mXvalue
+               && yValue > mYvalue) {
+        mTopRight = obj;
+    }
+
+    // Bottom left
+    if (!mBottomLeft && xValue < mXvalue && yValue < mYvalue) {
+        mBottomLeft = obj;
+    } else if (xValue > mBottomLeft->getValue(mXfield).toDouble()
+               && yValue > mBottomLeft->getValue(mYfield).toDouble()
+               && xValue < mXvalue
+               && yValue < mYvalue) {
+        mBottomLeft = obj;
+    }
+
+    // Bottom right
+    if (!mBottomRight && xValue > mXvalue && yValue < mYvalue) {
+        mBottomRight = obj;
+    } else if (xValue < mBottomRight->getValue(mXfield).toDouble()
+               && yValue > mBottomRight->getValue(mYfield).toDouble()
+               && xValue > mXvalue
+               && yValue < mYvalue) {
+        mBottomRight = obj;
+    }
 }
 
 END_NAMESPACE_BILUNA_CALC

@@ -22,6 +22,7 @@ EN13555Property::EN13555Property() : RB_TableMath(), RB_Utility() {
     mGasketList = new RB_ObjectContainer("", nullptr,
                                          "PCALC_EN13555GasketList",
                                          PCALC_OBJECTFACTORY);
+    mCurrentGasket = nullptr;
 //    mTargetQA = 0.0;
 //    mLeft = NULL;
 //    mRight = NULL;
@@ -49,6 +50,7 @@ EN13555Property* EN13555Property::getInstance() {
 bool EN13555Property::getGasket(const QString& gasketIdx) {
     bool success = false;
     QString gasketId = RB2::IdxId(gasketIdx);
+
     mCurrentGasket = mGasketList->getObject(gasketId);
 
     if (mCurrentGasket) {
@@ -69,10 +71,25 @@ bool EN13555Property::getGasket(const QString& gasketIdx) {
  * @return delta eGc from EN13555 test tables
  */
 double EN13555Property::getdeltaeGc(const QString& gasketIdx,
-                                    double leakageRate,
-                                    double designPressure) {
-    // Inner test pressure
-    double innerPressure = closestInnerPressure(designPressure);
+                                    double designPressure,
+                                    double designTemp) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::getdeltaeGc() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+    // Inner test pressure, no required here?
+//    double innerPressureBar = closestInnerPressureBar(designPressure);
+
+
+    // continue here ...
+
+//    double deltaeGc = getInterpolatedValue(
+//                mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
+//                "", "", "",
+//                ,
+//                ,
+//                "testpress", innerPressureBar);
 
     return 0.0;
 }
@@ -170,7 +187,13 @@ bool EN13555Property::loadGasket(const QString& gasketId) {
  * @param designPressure the assembly design pressure [N/mm2]
  * @return closest inner test pressure [N/mm2]
  */
-double EN13555Property::closestInnerPressure(double designPressure) {
+double EN13555Property::closestInnerPressureBar(double designPressure) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::closestInnerPressureBar() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
     RB_ObjectContainer* objC =
             mCurrentGasket->getContainer("PCALC_EN13555QminLList");
     RB_ObjectIterator* iter = objC->createIterator();
@@ -179,13 +202,16 @@ double EN13555Property::closestInnerPressure(double designPressure) {
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
-
-
+        double pressureBar = obj->getValue("testpress").toDouble();
+        if (std::abs(designPressureBar - pressureBar)
+                < std::abs(designPressureBar - closestPressureBar)) {
+            closestPressureBar = pressureBar;
+        }
     }
 
     delete iter;
 
-    return 0.0;
+    return closestPressureBar;
 }
 
 

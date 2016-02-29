@@ -56,8 +56,8 @@ public:
     bool getGasket(const QString& gasketIdx);
     void refresh() {}
 
-    double getdeltaeGc(const RB_String& gasketIdx, double leakageRate,
-                        double designPressure);
+    double getdeltaeGc(const RB_String& gasketIdx, double designPressure,
+                        double designTemp);
 
     double getQA(const RB_String& gasketIdx, double leakageRate,
                  double designPressure);
@@ -78,7 +78,7 @@ private:
     EN13555Property();
 
     bool loadGasket(const QString& gasketId);
-    double closestInnerPressure(double designPressure);
+    double closestInnerPressureBar(double designPressure);
 
 //    void createList();
 //    void cl(double leakageRate, const RB_String& materialCode,

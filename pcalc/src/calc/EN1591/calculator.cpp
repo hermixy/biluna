@@ -284,6 +284,8 @@ void Calculator::F41_to_53(Assembly* assembly) 	{
 
     // mIsFirstApproximation And loadCaseNo = 0
     // call this function only once in the beginning
+    assembly->Calc_dG1();
+    assembly->Calc_dG2();
     assembly->mGasket->Calc_bGt();
     assembly->mGasket->Calc_dGt();
     assembly->mGasket->Calc_AGt();

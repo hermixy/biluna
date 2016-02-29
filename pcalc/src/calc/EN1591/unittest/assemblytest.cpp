@@ -20,6 +20,8 @@ AssemblyTest::~AssemblyTest() {
 }
 
 void AssemblyTest::exec() {
+    Calc_dG1Test();
+    Calc_dG2Test();
     Calc_dGeTest();
     Calc_F_GInitial_1Test();
     Calc_F_GInitialTest();
@@ -144,6 +146,96 @@ void AssemblyTest::deleteTarget() {
     target->mFlange2 = NULL;
     delete target;
     target = NULL;
+}
+
+void AssemblyTest::Calc_dG1Test() {
+    SetupIntegralTarget();
+    target->mFlange1->d0 = 1.0;
+    target->mFlange1->dREC = 2.0;
+    target->mFlange2->d0 = 3.0;
+    target->mFlange2->dREC = 4.0;
+    target->mGasket->dGin = 5.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 5.0,
+             target->mGasket->dG1);
+    target->mFlange1->d0 = 6.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 6.0,
+             target->mGasket->dG1);
+    target->mFlange1->dREC = 7.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 7.0,
+             target->mGasket->dG1);
+    target->mFlange2->d0 = 8.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 8.0,
+             target->mGasket->dG1);
+    target->mFlange2->dREC = 9.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 9.0,
+             target->mGasket->dG1);
+    deleteTarget();
+}
+
+void AssemblyTest::Calc_dG2Test() {
+    SetupIntegralTarget();
+    target->mFlange1->d0 = 1.0;
+    target->mFlange1->dREC = 2.0;
+    target->mFlange2->d0 = 3.0;
+    target->mFlange2->dREC = 4.0;
+    // valid raised faces
+    target->mGasket->dGout = 10.0;
+    target->mFlange1->d4 = 11.0;
+    target->mFlange1->dRF = 12.0;
+    target->mFlange2->d4 = 13.0;
+    target->mFlange2->dRF = 14.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 10.0,
+             target->mGasket->dG2);
+    target->mGasket->dGout = 15.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 11.0,
+             target->mGasket->dG2);
+    target->mFlange1->d4 = 16.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 12.0,
+             target->mGasket->dG2);
+    target->mFlange1->dRF = 17.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 13.0,
+             target->mGasket->dG2);
+    target->mFlange2->d4 = 18.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 14.0,
+             target->mGasket->dG2);
+    // flange 1 valid raised face
+    target->mGasket->dGout = 15.0;
+    target->mFlange1->d4 = 14.0;
+    target->mFlange1->dRF = 13.0;
+    target->mFlange2->d4 = 12.0;
+    target->mFlange2->dRF = 0.5; // one is invalid
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 12.0,
+             target->mGasket->dG2);
+    // flange 2 valid raised face
+    target->mGasket->dGout = 15.0;
+    target->mFlange1->d4 = 14.0;
+    target->mFlange1->dRF = 0.5;
+    target->mFlange2->d4 = 12.5;
+    target->mFlange2->dRF = 13.0; // one is invalid
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 12.5,
+             target->mGasket->dG2);
+    // no valid raised faces
+    target->mGasket->dGout = 15.0;
+    target->mFlange1->d4 = 17.0;
+    target->mFlange1->dRF = 0.5;
+    target->mFlange2->d4 = 15.5;
+    target->mFlange2->dRF = 0.3; // one is invalid
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 15.0,
+             target->mGasket->dG2);
+    deleteTarget();
 }
 
 void AssemblyTest::Calc_dGeTest() {

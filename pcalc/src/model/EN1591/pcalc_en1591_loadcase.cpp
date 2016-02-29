@@ -52,9 +52,9 @@ void PCALC_EN1591_LoadCase::createMembers() {
     addMember("fx", "N", 0.0, RB2::MemberDouble);
     addMember("fy", "N", 0.0, RB2::MemberDouble);
     addMember("fz", "N", 0.0, RB2::MemberDouble);
-    addMember("mx", "N", 0.0, RB2::MemberDouble);
-    addMember("my", "N", 0.0, RB2::MemberDouble);
-    addMember("mz", "N", 0.0, RB2::MemberDouble);
+    addMember("mx", "Nmm", 0.0, RB2::MemberDouble);
+    addMember("my", "Nmm", 0.0, RB2::MemberDouble);
+    addMember("mz", "Nmm", 0.0, RB2::MemberDouble);
     // stress expansion elasticity
     addMember("fb", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("fn", "N/mm2", 0.0, RB2::MemberDouble);

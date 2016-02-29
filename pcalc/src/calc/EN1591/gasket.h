@@ -84,8 +84,8 @@ public:
     FormType frmType;
     InsFilLayMatType insType;
     double dG0;
-    double dG1;
-    double dG2;
+    double dGin;
+    double dGout;
 
     double dG1_EN13555;
     double dG2_EN13555;
@@ -101,6 +101,9 @@ class Gasket_OUT : public Gasket_IN {
 
 public:
     Gasket_OUT();
+
+    double dG1;
+    double dG2;
 
     double bGi;
     double bGiOct;

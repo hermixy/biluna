@@ -22,6 +22,8 @@ private:
     void SetupRemainingTarget();
     void deleteTarget();
 
+    void Calc_dG1Test();
+    void Calc_dG2Test();
     void Calc_dGeTest();
     void Calc_F_GInitial_1Test();
     void Calc_F_GInitialTest();

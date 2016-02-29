@@ -296,8 +296,8 @@ void PCALC_EN1591Widget::init() {
                               mGasketModel->fieldIndex("insertfilltype_id"),
                               "currentIndex");
     mGasketMapper->addMapping(ledG0, mGasketModel->fieldIndex("dg0"));
-    mGasketMapper->addMapping(ledG1, mGasketModel->fieldIndex("dg1"));
-    mGasketMapper->addMapping(ledG2, mGasketModel->fieldIndex("dg2"));
+    mGasketMapper->addMapping(ledGin, mGasketModel->fieldIndex("dgin"));
+    mGasketMapper->addMapping(ledGout, mGasketModel->fieldIndex("dgout"));
     mGasketMapper->addMapping(ledG1_EN13555, mGasketModel->fieldIndex("dg1en13555"));
     mGasketMapper->addMapping(ledG2_EN13555, mGasketModel->fieldIndex("dg2en13555"));
     mGasketMapper->addMapping(leeGt, mGasketModel->fieldIndex("egt"));
@@ -795,8 +795,8 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "formtype_id", "-", mGasketModel);
     addObjectMemberVariable(objIn, "insertfilltype_id", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg0", "-", mGasketModel);
-    addObjectMemberVariable(objIn, "dg1", "-", mGasketModel);
-    addObjectMemberVariable(objIn, "dg2", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "dgin", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "dgout", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg1en13555", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg2en13555", "-", mGasketModel);
     addObjectMemberVariable(objIn, "egt", "-", mGasketModel);
@@ -1258,7 +1258,7 @@ void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,
     QModelIndex idx = model->index(
                 model->getCurrentIndex().row(),
                 model->fieldIndex(variableName));
-    obj->addMember(variableName, unit, model->data(idx));
+    obj->addMember(variableName, unit, model->data(idx, RB2::RoleOrigData));
 }
 
 void PCALC_EN1591Widget::addLoadCaseVariable(RB_ObjectBase* loadCase,

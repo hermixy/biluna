@@ -26,7 +26,7 @@ PCALC_EN13555QminL::~PCALC_EN13555QminL() {
 }
 
 void PCALC_EN13555QminL::createMembers() {
-    addMember("testpress", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("testpress", "Bar", 0.0, RB2::MemberDouble);
     addMember("leakrate", "-", 0.0, RB2::MemberDouble);
     addMember("qminl", "N/mm2", 0.0, RB2::MemberDouble);
 }

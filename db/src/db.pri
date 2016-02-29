@@ -49,8 +49,8 @@ FORMS = \
     ../src/gui/rb_dialogbase.ui \
     ../src/gui/rb_idxlineedit.ui \
     ../src/gui/rb_projecteditdialog.ui \
-    ../src/gui/rb_toolbuttonbar.ui
-
+    ../src/gui/rb_toolbuttonbar.ui \
+    ../src/gui/rb_uomlineedit.ui
 
 
 HEADERS = \
@@ -239,6 +239,7 @@ HEADERS = \
     ../src/gui/rb_textedit.h \
     ../src/gui/rb_textpreview.h \
     ../src/gui/rb_treeview.h \
+    ../src/gui/rb_uomlineedit.h \
 #    ../src/gui/rb_webfactory.h \
     ../src/gui/rb_webview.h \
 #    ../src/gui/rb_webwidget.h \
@@ -491,6 +492,7 @@ SOURCES = \
     ../src/gui/rb_toolbar.cpp \
     ../src/gui/rb_toolbuttonbar.cpp \
     ../src/gui/rb_treeview.cpp \
+    ../src/gui/rb_uomlineedit.cpp \
 #    ../src/gui/rb_webfactory.cpp \
     ../src/gui/rb_webview.cpp \
 #    ../src/gui/rb_webwidget.cpp \

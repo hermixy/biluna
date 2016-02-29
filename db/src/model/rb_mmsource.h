@@ -54,6 +54,7 @@ public:
 
     virtual RB_ObjectBase* getObject(const QModelIndex& currentIndex,
                                      RB2::ResolveLevel level = RB2::ResolveAll);
+    virtual RB_ObjectBase* getBaseObject();
     virtual RB_ObjectBase* getCurrentObject();
     virtual void updateCurrentObject(RB_ObjectBase* obj);
     virtual void swapObject(const QModelIndex& fromIndex,

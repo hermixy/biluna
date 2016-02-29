@@ -12,8 +12,8 @@ Gasket_IN::Gasket_IN() : RB_Object(){
 
     gasketIdx = "";
     dG0 = 0;
-    dG1 = 0;
-    dG2 = 0;
+    dGin = 0;
+    dGout = 0;
     dG1_EN13555 = 0;
     dG2_EN13555 = 0;
     eGt = 0;
@@ -142,6 +142,8 @@ Gasket::~Gasket() {
 
 /**
  * @brief Formula 51: Theoretical gasket width
+ * dG2 should be smaller or equal to Flange::dRF Raised Face
+ * dG1 should be larger or equal to Flange::dREC Recess
  */
 void Gasket::Calc_bGt() {
     bGt = 0.5 * (dG2 - dG1);
@@ -152,6 +154,8 @@ void Gasket::Calc_bGt() {
 /**
  * @brief Formula 52:Theoretical calculated gasket diameter,
  * if dG0 not set, will set dG0 = dGt
+ * dG2 should be smaller or equal to Flange::dRF Raised Face
+ * dG1 should be larger or equal to Flange::dREC Recess
  */
 void Gasket::Calc_dGt() {
     dGt = 0.5 * (dG2 + dG1);

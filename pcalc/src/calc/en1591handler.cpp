@@ -51,7 +51,7 @@ void EN1591Handler::exec() {
     setQualityFactors();
     setLoadCases();
     setMaterialProperties();
-    // No setGasketProperties() !
+    // No setGasketProperties()! because of iterations
 
     mCalc->exec();
 }
@@ -173,10 +173,10 @@ void EN1591Handler::setDimensionsMaterialId() {
     gkt->insType =
             (Gasket::InsFilLayMatType)in->getValue("insertfilltype_id").toInt();
     gkt->dG0 = in->getValue("dg0").toDouble();
-    gkt->dG1 = in->getValue("dg1").toDouble();
-    gkt->dG2 = in->getValue("dg2").toDouble();
-    gkt->dG1_EN13555 = in->getValue("dg1en13555").toDouble();
-    gkt->dG2_EN13555 = in->getValue("dg2en13555").toDouble();
+    gkt->dGin = in->getValue("dgin").toDouble();
+    gkt->dGout = in->getValue("dgout").toDouble();
+    gkt->dG1_EN13555 = in->getValue("dg1en13555").toDouble(); // TODO: required?
+    gkt->dG2_EN13555 = in->getValue("dg2en13555").toDouble(); // TODO: required?
     gkt->eGt = in->getValue("egt").toDouble();
     gkt->K = in->getValue("k").toDouble();
     gkt->phiG = in->getValue("phig").toDouble();
