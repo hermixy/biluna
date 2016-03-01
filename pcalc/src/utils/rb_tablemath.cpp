@@ -114,8 +114,12 @@ double RB_TableMath::getInterpolatedValue(
     }
 
     delete iter;
+    double value = 0.0;
 
-    double value = getBilinearValue(
+    if (!mTopLeft || !mTopRight || !mBottomLeft || !mBottomRight) {
+        value = getOutOfBoundValue();
+    } else {
+        value = getBilinearValue(
                 xValue, yValue,
                 mTopLeft->getValue(mXfield).toDouble(),
                 mTopLeft->getValue(mYfield).toDouble(),
@@ -129,12 +133,14 @@ double RB_TableMath::getInterpolatedValue(
                 mBottomRight->getValue(mXfield).toDouble(),
                 mBottomRight->getValue(mYfield).toDouble(),
                 mBottomRight->getValue(mZfield).toDouble());
+    }
+
     return value;
 }
 
 void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
     if (!mExtraField.isEmpty()
-            && obj->getValue(mExtraField).toString() != mExtraValue) {
+            && obj->getValue(mExtraField).toDouble() != mExtraValue) {
         return;
     }
 
@@ -144,7 +150,8 @@ void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
     // Top left
     if (!mTopLeft && xValue < mXvalue && yValue > mYvalue) {
         mTopLeft = obj;
-    } else if (xValue > mTopLeft->getValue(mXfield).toDouble()
+    } else if (mTopLeft
+               && xValue > mTopLeft->getValue(mXfield).toDouble()
                && yValue < mTopLeft->getValue(mYfield).toDouble()
                && xValue < mXvalue
                && yValue > mYvalue) {
@@ -154,7 +161,8 @@ void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
     // Top right
     if (!mTopRight && xValue > mXvalue && yValue > mYvalue) {
         mTopRight = obj;
-    } else if (xValue < mTopRight->getValue(mXfield).toDouble()
+    } else if (mTopRight
+               && xValue < mTopRight->getValue(mXfield).toDouble()
                && yValue < mTopRight->getValue(mYfield).toDouble()
                && xValue > mXvalue
                && yValue > mYvalue) {
@@ -164,7 +172,8 @@ void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
     // Bottom left
     if (!mBottomLeft && xValue < mXvalue && yValue < mYvalue) {
         mBottomLeft = obj;
-    } else if (xValue > mBottomLeft->getValue(mXfield).toDouble()
+    } else if (mBottomLeft
+               && xValue > mBottomLeft->getValue(mXfield).toDouble()
                && yValue > mBottomLeft->getValue(mYfield).toDouble()
                && xValue < mXvalue
                && yValue < mYvalue) {
@@ -174,12 +183,67 @@ void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
     // Bottom right
     if (!mBottomRight && xValue > mXvalue && yValue < mYvalue) {
         mBottomRight = obj;
-    } else if (xValue < mBottomRight->getValue(mXfield).toDouble()
+    } else if (mBottomRight
+               && xValue < mBottomRight->getValue(mXfield).toDouble()
                && yValue > mBottomRight->getValue(mYfield).toDouble()
                && xValue > mXvalue
                && yValue < mYvalue) {
         mBottomRight = obj;
     }
+}
+
+/**
+ * @brief RB_TableMath::setOutOfBoundCornerObjects set missing corner objects
+ * if position of value requested is outside the table bounderies.
+ * For example: asAs a minimum only one corner object is found,
+ * then all other corner objects will be set to this corner object.
+ * Vertical neighbor is first choice, horizontal second and diagonal last.
+ */
+double RB_TableMath::getOutOfBoundValue() {
+
+    // continue here
+
+//    if (!mTopLeft) {
+//        if (mBottomLeft) {
+//            mTopLeft = mBottomLeft;
+//        } else if (mTopRight) {
+//            mTopLeft = mTopRight;
+//        } else {
+//            mTopLeft = mBottomRight;
+//        }
+//    }
+
+//    if (!mTopRight) {
+//        if (mBottomRight) {
+//            mTopRight = mBottomRight;
+//        } else if (mTopLeft) {
+//            mTopRight = mTopLeft;
+//        } else {
+//            mTopRight = mBottomLeft;
+//        }
+//    }
+
+//    if (!mBottomLeft) {
+//        if (mTopLeft) {
+//            mBottomLeft = mTopLeft;
+//        } else if (mBottomRight) {
+//            mBottomLeft = mBottomRight;
+//        } else {
+//            mBottomLeft = mTopRight;
+//        }
+//    }
+
+//    if (!mBottomRight) {
+//        if (mTopRight) {
+//            mBottomRight = mTopRight;
+//        } else if (mBottomLeft) {
+//            mBottomRight = mBottomLeft;
+//        } else {
+//            mBottomRight = mTopLeft;
+//        }
+//    }
+
+    return 0.0;
 }
 
 END_NAMESPACE_BILUNA_CALC

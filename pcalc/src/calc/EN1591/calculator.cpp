@@ -395,7 +395,9 @@ void Calculator::F103_to_104(Assembly* assembly, int loadCaseNo) {
 }
 
 void Calculator::F105_to_105(Assembly* assembly, int loadCaseNo) {
-    assembly->mGasket->setLoadCaseValues(0);
+    if (loadCaseNo == 1) {
+        assembly->mGasket->setLoadCaseValues(0);
+    }
     assembly->mGasket->setLoadCaseValues(loadCaseNo);
     // includes direct delta_eGc, uses P_QR or set delta_eGc to zero
     assembly->mGasket->Calc_delta_eGc(loadCaseNo);

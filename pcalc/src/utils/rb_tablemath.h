@@ -13,7 +13,6 @@
 
 #include "rb_objectcontainer.h"
 #include "rb_namespace.h"
-#include "rb_tablemathtest.h"
 
 NAMESPACE_BILUNA_CALC
 
@@ -41,6 +40,7 @@ public:
 
 private:
     void updateCornerObjects(RB_ObjectBase* obj);
+    double getOutOfBoundValue();
 
     QString mXfield;
     QString mYfield;

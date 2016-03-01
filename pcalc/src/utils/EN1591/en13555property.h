@@ -56,9 +56,8 @@ public:
     bool getGasket(const QString& gasketIdx);
     void refresh() {}
 
-    double getdeltaeGc(const RB_String& gasketIdx, double designPressure,
-                        double designTemp);
-
+    double get_deltaeGc(double gasketPressure, double designTemp);
+    double get_PQR(double gasketPressure, double designTemp);
     double getQA(const RB_String& gasketIdx, double leakageRate,
                  double designPressure);
     double getQminL(const RB_String& gasketIdx, double leakageRate,

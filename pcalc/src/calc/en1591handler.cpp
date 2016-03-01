@@ -46,17 +46,17 @@ void EN1591Handler::exec() {
     mCalc = new Calculator((Calculator::FlangeType)flange1Type,
                            (Calculator::FlangeType)flange2Type);
 
-    setDimensionsMaterialId();
+    setDimMatInput();
     setAllowances();
     setQualityFactors();
-    setLoadCases();
+    setLoadCaseInput();
     setMaterialProperties();
     // No setGasketProperties()! because of iterations
 
     mCalc->exec();
 }
 
-void EN1591Handler::setDimensionsMaterialId() {
+void EN1591Handler::setDimMatInput() {
     RB_ObjectContainer* inList
             = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
@@ -251,7 +251,7 @@ void EN1591Handler::setQualityFactors() {
     // nothing
 }
 
-void EN1591Handler::setLoadCases() {
+void EN1591Handler::setLoadCaseInput() {
     RB_ObjectContainer* loadList
             = PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
     loadList->sort(0, RB2::SortOrderAscending, RB2::MemberInteger);

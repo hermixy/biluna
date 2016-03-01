@@ -64,34 +64,46 @@ bool EN13555Property::getGasket(const QString& gasketIdx) {
 }
 
 /**
- * Get delta eGc
- * @param gasketIdx
- * @param leakageRate [-]
- * @param designPressure [N/mm2]
+ * Get delta_eGc
+ * @param gasketPressure[N/mm2]
+ * @param designtemp [Celsius]
  * @return delta eGc from EN13555 test tables
  */
-double EN13555Property::getdeltaeGc(const QString& gasketIdx,
-                                    double designPressure,
+double EN13555Property::get_deltaeGc(double gasketPressure,
                                     double designTemp) {
     if (!mCurrentGasket) {
-        RB_DEBUG->error("EN13555Property::getdeltaeGc() "
+        RB_DEBUG->error("EN13555Property::get_deltaeGc() "
                         "mCurrentGasket NULL ERROR");
         return 0.0;
     }
-    // Inner test pressure, no required here?
-//    double innerPressureBar = closestInnerPressureBar(designPressure);
 
+    double deltaeGc = getInterpolatedValue(
+                mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
+                "qa", "temp", "deltaegc",
+                gasketPressure, designTemp);
 
-    // continue here ...
+    return deltaeGc;
+}
 
-//    double deltaeGc = getInterpolatedValue(
-//                mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
-//                "", "", "",
-//                ,
-//                ,
-//                "testpress", innerPressureBar);
+/**
+ * @brief EN13555Property::get_PQR Get P_QR
+ * @param gasketPressure
+ * @param designTemp
+ * @return P_QR from EN13555 test tables
+ */
+double EN13555Property::get_PQR(double gasketPressure, double designTemp) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_PQR() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
 
-    return 0.0;
+    double P_QR = getInterpolatedValue(
+                mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
+                "qa", "temp", "pqr",
+                gasketPressure, designTemp);
+
+    return P_QR;
 }
 
 double EN13555Property::getQA(const QString& gasketIdx, double leakageRate,

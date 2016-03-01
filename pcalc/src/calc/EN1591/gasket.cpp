@@ -266,12 +266,23 @@ void Gasket::setLoadCaseValues(int loadCaseNo) {
     }
 
     // get delta_eGc_EN13555 first
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    loadCase->delta_eGc_EN13555 = EN13555PROPERTY->get_deltaeGc(loadCase->Q_G,
+                                                                loadCase->TG);
 
-    // if not delta_eGc_EN13555 then get P_QR
+    if (loadCase->delta_eGc_EN13555 > 0.0) {
+        return;
+    }
+
+    loadCase->P_QR = EN13555PROPERTY->get_PQR(loadCase->Q_G,
+                                              loadCase->TG);
+
+    if (loadCase->P_QR > 0.0) {
+        return;
+    }
 
     // if also not P_QR
-//    loadCase->delta_eGc_EN13555 = -1
-//    loadCase->P_QR = gasketCreepFactor(loadCaseNo, loadCase);
+    loadCase->P_QR = gasketCreepFactor(loadCaseNo, loadCase);
 }
 
 /**
@@ -413,7 +424,7 @@ double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
 double Gasket::gasketCreepFactor(int loadCaseNo, LoadCase* loadCase) {
     if (TABLE16PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
         loadCase->P_QR = TABLE16PROPERTY->getTable16_P_QR(gasketIdx,
-                                                           loadCase->TG);
+                                                          loadCase->TG);
         if (loadCase->P_QR > 0) {
             PR->addDetail("Before_F. 105 Table 16", "PQR", "Table value",
                           loadCase->P_QR, "-",
