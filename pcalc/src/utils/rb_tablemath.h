@@ -41,6 +41,10 @@ public:
 private:
     void updateCornerObjects(RB_ObjectBase* obj);
     double getOutOfBoundValue();
+    double getThreeCornerValue();
+    double getTwoCornerValue();
+    double getOneCornerValue();
+
 
     QString mXfield;
     QString mYfield;

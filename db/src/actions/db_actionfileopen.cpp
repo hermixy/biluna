@@ -101,6 +101,9 @@ void DB_ActionFileOpen::trigger() {
         } else {
             return;
         }
+    } else if (fileName.endsWith(".odt")) {
+        mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+                DB_DialogFactory::WidgetTextDocument, fileName, false);
     } else if (fileName.endsWith(".txt")) {
         mdiWin = DB_DIALOGFACTORY->getMdiWindow(
                 DB_DialogFactory::WidgetPlainTextDocument, fileName, false);
@@ -192,9 +195,10 @@ void DB_ActionFileOpen::getOpenFileName(RB_String& fn,
                     tr("Open file"),
                     openPath,
                     "All files (*.*);;"
-                    "Text files (*.txt);;"
+                    "Open Document Format files (*.odt);;"
                     "Hyper Text Markup Language files (*.html *.htm);;"
-                    "eXtensible Markup Language files (*.xml)");
+                    "eXtensible Markup Language files (*.xml)"
+                    "Plain Text files (*.txt);;");
                     // "SQLite (*.db3)",	// selected filter
                     // 0); 					// option
     }

@@ -91,8 +91,8 @@ double RB_TableMath::getBilinearValue(
 }
 
 double RB_TableMath::getInterpolatedValue(
-        RB_ObjectContainer* fromObjC, const QString &xField,
-        const QString &yField, const QString &zField, double xValue,
+        RB_ObjectContainer* fromObjC, const QString& xField,
+        const QString& yField, const QString& zField, double xValue,
         double yValue, const QString& extraField, double extraValue) {
     mXfield = xField;
     mYfield = yField;
@@ -120,7 +120,7 @@ double RB_TableMath::getInterpolatedValue(
         value = getOutOfBoundValue();
     } else {
         value = getBilinearValue(
-                xValue, yValue,
+                mXvalue, mYvalue,
                 mTopLeft->getValue(mXfield).toDouble(),
                 mTopLeft->getValue(mYfield).toDouble(),
                 mTopLeft->getValue(mZfield).toDouble(),
@@ -148,46 +148,46 @@ void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
     double yValue = obj->getValue(mYfield).toDouble();
 
     // Top left
-    if (!mTopLeft && xValue < mXvalue && yValue > mYvalue) {
+    if (!mTopLeft && xValue <= mXvalue && yValue >= mYvalue) {
         mTopLeft = obj;
     } else if (mTopLeft
-               && xValue > mTopLeft->getValue(mXfield).toDouble()
-               && yValue < mTopLeft->getValue(mYfield).toDouble()
-               && xValue < mXvalue
-               && yValue > mYvalue) {
+               && xValue >= mTopLeft->getValue(mXfield).toDouble()
+               && yValue <= mTopLeft->getValue(mYfield).toDouble()
+               && xValue <= mXvalue
+               && yValue >= mYvalue) {
         mTopLeft = obj;
     }
 
     // Top right
-    if (!mTopRight && xValue > mXvalue && yValue > mYvalue) {
+    if (!mTopRight && xValue >= mXvalue && yValue >= mYvalue) {
         mTopRight = obj;
     } else if (mTopRight
-               && xValue < mTopRight->getValue(mXfield).toDouble()
-               && yValue < mTopRight->getValue(mYfield).toDouble()
-               && xValue > mXvalue
-               && yValue > mYvalue) {
+               && xValue <= mTopRight->getValue(mXfield).toDouble()
+               && yValue <= mTopRight->getValue(mYfield).toDouble()
+               && xValue >= mXvalue
+               && yValue >= mYvalue) {
         mTopRight = obj;
     }
 
     // Bottom left
-    if (!mBottomLeft && xValue < mXvalue && yValue < mYvalue) {
+    if (!mBottomLeft && xValue <= mXvalue && yValue <= mYvalue) {
         mBottomLeft = obj;
     } else if (mBottomLeft
-               && xValue > mBottomLeft->getValue(mXfield).toDouble()
-               && yValue > mBottomLeft->getValue(mYfield).toDouble()
-               && xValue < mXvalue
-               && yValue < mYvalue) {
+               && xValue >= mBottomLeft->getValue(mXfield).toDouble()
+               && yValue >= mBottomLeft->getValue(mYfield).toDouble()
+               && xValue <= mXvalue
+               && yValue <= mYvalue) {
         mBottomLeft = obj;
     }
 
     // Bottom right
-    if (!mBottomRight && xValue > mXvalue && yValue < mYvalue) {
+    if (!mBottomRight && xValue >= mXvalue && yValue <= mYvalue) {
         mBottomRight = obj;
     } else if (mBottomRight
-               && xValue < mBottomRight->getValue(mXfield).toDouble()
-               && yValue > mBottomRight->getValue(mYfield).toDouble()
-               && xValue > mXvalue
-               && yValue < mYvalue) {
+               && xValue <= mBottomRight->getValue(mXfield).toDouble()
+               && yValue >= mBottomRight->getValue(mYfield).toDouble()
+               && xValue >= mXvalue
+               && yValue <= mYvalue) {
         mBottomRight = obj;
     }
 }
@@ -200,49 +200,187 @@ void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
  * Vertical neighbor is first choice, horizontal second and diagonal last.
  */
 double RB_TableMath::getOutOfBoundValue() {
+    double value = 0.0;
+    int missingCornerCount = 0;
 
-    // continue here
+    if (!mTopLeft) {
+        ++missingCornerCount;
+    }
+    if (!mTopRight) {
+        ++missingCornerCount;
+    }
+    if (!mBottomLeft) {
+        ++missingCornerCount;
+    }
+    if (!mBottomRight) {
+        ++missingCornerCount;
+    }
 
-//    if (!mTopLeft) {
-//        if (mBottomLeft) {
-//            mTopLeft = mBottomLeft;
-//        } else if (mTopRight) {
-//            mTopLeft = mTopRight;
-//        } else {
-//            mTopLeft = mBottomRight;
-//        }
-//    }
+    switch (missingCornerCount) {
+    case 3:
+        value = getThreeCornerValue();
+        break;
+    case 2:
+        value = getTwoCornerValue();
+        break;
+    case 1:
+        value = getOneCornerValue();
+        break;
+    default:
+        break;
+    }
 
-//    if (!mTopRight) {
-//        if (mBottomRight) {
-//            mTopRight = mBottomRight;
-//        } else if (mTopLeft) {
-//            mTopRight = mTopLeft;
-//        } else {
-//            mTopRight = mBottomLeft;
-//        }
-//    }
+    return value;
+}
 
-//    if (!mBottomLeft) {
-//        if (mTopLeft) {
-//            mBottomLeft = mTopLeft;
-//        } else if (mBottomRight) {
-//            mBottomLeft = mBottomRight;
-//        } else {
-//            mBottomLeft = mTopRight;
-//        }
-//    }
+double RB_TableMath::getThreeCornerValue() {
+    RB_ObjectBase* tempObj = nullptr;
 
-//    if (!mBottomRight) {
-//        if (mTopRight) {
-//            mBottomRight = mTopRight;
-//        } else if (mBottomLeft) {
-//            mBottomRight = mBottomLeft;
-//        } else {
-//            mBottomRight = mTopLeft;
-//        }
-//    }
+    if (!mTopLeft) {
+        if (mBottomLeft && mTopRight) {
+            tempObj = mTopLeft = mBottomLeft->clone();
+            mTopLeft->setValue(mXfield, mBottomLeft->getValue(mXfield));
+            mTopLeft->setValue(mYfield, mTopRight->getValue(mYfield));
+            mTopLeft->setValue(mZfield,
+                               (mBottomLeft->getValue(mZfield).toDouble()
+                                + mTopRight->getValue(mZfield).toDouble()) / 2);
+        } else {
+             RB_DEBUG->error("RB_TableMath::getThreeCornerValue() 1 ERROR");
+             return 0.0;
+        }
+    }
 
+    if (!mTopRight) {
+        if (mTopLeft && mBottomRight) {
+            tempObj = mTopRight = mBottomRight->clone();
+            mTopRight->setValue(mXfield, mBottomRight->getValue(mXfield));
+            mTopRight->setValue(mYfield, mTopLeft->getValue(mYfield));
+            mTopRight->setValue(mZfield,
+                               (mBottomRight->getValue(mZfield).toDouble()
+                                + mTopLeft->getValue(mZfield).toDouble()) / 2);
+        } else {
+             RB_DEBUG->error("RB_TableMath::getThreeCornerValue() 2 ERROR");
+             return 0.0;
+        }
+    }
+
+    if (!mBottomLeft) {
+        if (mTopLeft && mBottomRight) {
+            tempObj = mBottomLeft = mTopLeft->clone();
+            mBottomLeft->setValue(mXfield, mTopLeft->getValue(mXfield));
+            mBottomLeft->setValue(mYfield, mBottomRight->getValue(mYfield));
+            mBottomLeft->setValue(mZfield,
+                               (mTopLeft->getValue(mZfield).toDouble()
+                                + mBottomRight->getValue(mZfield).toDouble()) / 2);
+        } else {
+             RB_DEBUG->error("RB_TableMath::getThreeCornerValue() 3 ERROR");
+             return 0.0;
+        }
+    }
+
+    if (!mBottomRight) {
+        if (mBottomLeft && mTopRight) {
+            tempObj = mBottomRight = mTopRight->clone();
+            mBottomRight->setValue(mXfield, mTopRight->getValue(mXfield));
+            mBottomRight->setValue(mYfield, mBottomLeft->getValue(mYfield));
+            mBottomRight->setValue(mZfield,
+                               (mTopRight->getValue(mZfield).toDouble()
+                                + mBottomLeft->getValue(mZfield).toDouble()) / 2);
+        } else {
+             RB_DEBUG->error("RB_TableMath::getThreeCornerValue() 2 ERROR");
+             return 0.0;
+        }
+    }
+
+    double value = getBilinearValue(
+                mXvalue, mYvalue,
+                mTopLeft->getValue(mXfield).toDouble(),
+                mTopLeft->getValue(mYfield).toDouble(),
+                mTopLeft->getValue(mZfield).toDouble(),
+                mTopRight->getValue(mXfield).toDouble(),
+                mTopRight->getValue(mYfield).toDouble(),
+                mTopRight->getValue(mZfield).toDouble(),
+                mBottomLeft->getValue(mXfield).toDouble(),
+                mBottomLeft->getValue(mYfield).toDouble(),
+                mBottomLeft->getValue(mZfield).toDouble(),
+                mBottomRight->getValue(mXfield).toDouble(),
+                mBottomRight->getValue(mYfield).toDouble(),
+                mBottomRight->getValue(mZfield).toDouble());
+
+
+    delete tempObj;
+    return value;
+}
+
+double RB_TableMath::getTwoCornerValue() {
+    RB_ObjectBase* obj1 = nullptr;
+    RB_ObjectBase* obj2 = nullptr;
+
+    if (mTopLeft) {
+        obj1 = mTopLeft;
+    }
+
+    if (mTopRight) {
+        if (!obj1) {
+            obj1 = mTopRight;
+        } else {
+            obj2 = mTopRight;
+        }
+    }
+
+    if (mBottomLeft) {
+        if (!obj1) {
+            obj1 = mBottomLeft;
+        } else if (!obj2) {
+            obj2 = mBottomLeft;
+        } else {
+            RB_DEBUG->error("RB_TableMath::getTwoCornerValue() 1 ERROR");
+        }
+    }
+
+    if (mBottomRight) {
+        if (!obj1) {
+            RB_DEBUG->error("RB_TableMath::getTwoCornerValue() 2 ERROR");
+        } else if (!obj2) {
+            obj2 = mBottomRight;
+        } else {
+            RB_DEBUG->error("RB_TableMath::getTwoCornerValue() 3 ERROR");
+        }
+    }
+
+    if (!obj1 || !obj2) {
+        RB_DEBUG->error("RB_TableMath::getTwoCornerValue() 4 ERROR");
+        return 0.0;
+    }
+
+    double x1 = obj1->getValue(mXfield).toDouble();
+    double y1 = obj1->getValue(mYfield).toDouble();
+    double x2 = obj2->getValue(mXfield).toDouble();
+    double y2 = obj2->getValue(mYfield).toDouble();
+    double x = mXvalue;
+    double y = mYvalue;
+    double lengthTo1 = pow(pow(x - x1, 2) + pow(y - y1, 2), 0.5);
+    double lengthTo2 = pow(pow(x - x2, 2) + pow(y - y2, 2), 0.5);
+    double value = (lengthTo1 * obj2->getValue(mZfield).toDouble()
+            + lengthTo2 * obj1->getValue(mZfield).toDouble())
+            / (lengthTo1 + lengthTo2);
+    return value;
+}
+
+double RB_TableMath::getOneCornerValue() {
+    if (mTopLeft) {
+        return mTopLeft->getValue(mZfield).toDouble();
+    }
+    if (mTopRight) {
+        return mTopRight->getValue(mZfield).toDouble();
+    }
+    if (mBottomLeft) {
+        return mBottomLeft->getValue(mZfield).toDouble();
+    }
+    if (mBottomRight) {
+        return mBottomRight->getValue(mZfield).toDouble();
+    }
+    RB_DEBUG->error("RB_TableMath::getOneCornerValue() ERROR");
     return 0.0;
 }
 
