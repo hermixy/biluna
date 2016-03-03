@@ -18,6 +18,7 @@ public:
 private:
     void setupTarget();
     void getBilinearValueTest();
+    void getLinearValueTest();
     void updateCornerObjectsTest();
     void getThreeCornerValueTest();
     void getTwoCornerValueTest();

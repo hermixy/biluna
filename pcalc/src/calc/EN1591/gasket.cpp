@@ -212,12 +212,7 @@ void Gasket::Calc_E_G(int loadCaseNo) {
 void Gasket::Calc_eG(int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
     loadCase->eG = gasketCompressedThickness(loadCase);
-
-    // TODO move addDetail() to relevant table
-    PR->addDetail("With_F. 63",
-                  "eG", "gasketCompressedThickness(loadCase)",
-                  loadCase->eG, "mm",
-                  "Table value", loadCaseNo);
+    // report detail at method gasketCompressedThickness()
 }
 
 /**
@@ -259,30 +254,23 @@ void Gasket::Calc_AQ() {
  * @param loadCase
  */
 void Gasket::setLoadCaseValues(int loadCaseNo) {
-    bool success = EN13555PROPERTY->getGasket(gasketIdx);
+    bool success = EN13555PROPERTY->setCurrentGasket(gasketIdx);
 
     if (!success) {
-        RB_DEBUG->error("Gasket::setLoadCaseValues() get gasket ERROR");
+        RB_DEBUG->error("Gasket::setLoadCaseValues() set current gasket ERROR");
     }
 
+    // Gasket Deflection, is method gasketDeflection() still necessary
     // get delta_eGc_EN13555 first
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->delta_eGc_EN13555 = EN13555PROPERTY->get_deltaeGc(loadCase->Q_G,
-                                                                loadCase->TG);
+    loadCase->delta_eGc_EN13555 = gasketDeflection(loadCase);
 
     if (loadCase->delta_eGc_EN13555 > 0.0) {
         return;
     }
 
-    loadCase->P_QR = EN13555PROPERTY->get_PQR(loadCase->Q_G,
-                                              loadCase->TG);
-
-    if (loadCase->P_QR > 0.0) {
-        return;
-    }
-
-    // if also not P_QR
-    loadCase->P_QR = gasketCreepFactor(loadCaseNo, loadCase);
+    // sets dG2_EN13555 and dG1_EN13555 if P_QR from EN13555
+    loadCase->P_QR = gasketCreepFactor(loadCase);
 }
 
 /**
@@ -303,7 +291,7 @@ void Gasket::Calc_delta_eGc(int loadCaseNo) {
                       loadCaseI->delta_eGc, "mm",
                       QN(K) + " * " + QN(loadCaseI->Y_G) + " * "
                       + QN(loadCaseI->delta_eGc_EN13555), loadCaseNo);
-    } else if (loadCaseI->P_QR > 0) {
+    } else if (loadCaseI->P_QR > 0 && dG2_EN13555 > 0 && dG1_EN13555 > 0) {
         // only P_QR is available from EN13555 F.2, text and F.3
         loadCaseI->delta_eGc = loadCaseI->Y_G * (M_PI / 4)
                 * (pow(dG2_EN13555, 2) - pow(dG1_EN13555, 2))
@@ -325,8 +313,70 @@ void Gasket::Calc_delta_eGc(int loadCaseNo) {
     }
 }
 
-double Gasket::gasketDeflection(LoadCase *loadCase) {
-    return 0.0;
+double Gasket::gasketDeflection(LoadCase* loadCase) {
+    double value = EN13555PROPERTY->get_deltaeGc(loadCase->Q_G, loadCase->TG);
+    PR->addDetail("With_F. 105",
+                  "delta_eGc_EN13555", "gasketDeflection(loadCase)",
+                  value, "-",
+                  "Table value", loadCase->number);
+    return value;
+}
+
+double Gasket::gasketCreepFactor(LoadCase* loadCase) {
+    double value = EN13555PROPERTY->get_PQR(loadCase->Q_G, loadCase->TG);
+
+    if (value <= 0.0) {
+        value = gasketSimpleCreepFactor(loadCase);
+    }
+
+    PR->addDetail("With_F. 105",
+                  "P_QR", "gasketCreepFactor(loadCase)",
+                  value, "-",
+                  "Table value", loadCase->number);
+    return value;
+}
+
+/**
+ * @brief Gasket simple creep factor P_QR (Table 16)
+ * @param loadCaseNo loadcase number
+ * @param loadCase
+ * @return
+ */
+double Gasket::gasketSimpleCreepFactor(LoadCase* loadCase) {
+    double value = 0.0;
+
+    if (TABLE16PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
+        value = TABLE16PROPERTY->getTable16_P_QR(gasketIdx, loadCase->TG);
+
+        if (value > 0) {
+            PR->addDetail("Before_F. 105 Table 16", "PQR", "Table value",
+                          value, "-",
+                          "Table value", loadCase->number);
+            if (dG2_EN13555 <= 0.0 || dG2_EN13555 <= 0.0) {
+                dG2_EN13555 = 92; // default value in [mm]
+                dG2_EN13555 = 49; // default value in [mm]
+                PR->addDetail("Before_F. 105 Table 16", "dG2_EN13555",
+                              "Default value", dG2_EN13555, "-",  "Table value",
+                              loadCase->number,
+                              "Default, update manually to required value");
+                PR->addDetail("Before_F. 105 Table 16", "dG1_EN13555",
+                              "Default value", dG1_EN13555, "-",  "Table value",
+                              loadCase->number,
+                              "Default, update manually to required value");
+            }
+        } else {
+            PR->addDetail("Before_F. 105 Table 16", "PQR", "Table value",
+                          value, "-",
+                          "Table value", loadCase->number, "Out of range");
+        }
+    } else {
+        value = 0.0;
+        PR->addDetail("Table 16", "PQR", "Table value",
+                      value, "-",
+                      "Table value", loadCase->number, "Material not found");
+    }
+
+    return value;
 }
 
 /**
@@ -336,37 +386,40 @@ double Gasket::gasketDeflection(LoadCase *loadCase) {
  * @return gasket compressed elasticity
  */
 double Gasket::gasketCompressedElasticity(int loadCaseNo) {
-    // TODO: refer www.gasketdata.org and EN1591-2 Table 17 - 30
-
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
     LoadCase* loadCase0 = mLoadCaseList->at(0);
-    double elasticity = 0.0;
+    double EG = EN13555PROPERTY->get_EG(loadCase->Q_G, loadCase->TG);
 
-    if (TABLE17_30PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
-        elasticity = TABLE17_30PROPERTY->getTableE_G(
-                    gasketIdx, loadCase->TG, loadCase0->Q_G);
-        if (elasticity > 0) {
-            PR->addDetail("F. 58 Table 17-30", "E_G", "Table 17-30 value",
-                          elasticity, "N/mm2", "Table value", loadCaseNo);
-        } else {
-            PR->addDetail("F. 58 Table 17-30", "E_G",
-                          "Table 17-30 value out of range",
-                          elasticity, "N/mm2", "Table value", loadCaseNo,
-                          "Out of range");
-        }
+    if (EG > 0.0) {
+        PR->addDetail("Formula 58", "E_G", "EN13555 Table value",
+                      EG, "N/mm2", "Table value", loadCaseNo);
     } else {
-        // Simple or EN1591 2001 version
-        // E_G = E0 + K1 * Q
-        double E0 = TABLEGSIMPLE->getTableG_E0(insType, loadCase->TG);
-        double K1 = TABLEGSIMPLE->getTableG_K1(insType, loadCase->TG);
-        double Q = loadCase->Q_G;
-        elasticity = E0 + K1 * Q;
+        if (TABLE17_30PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
+            EG = TABLE17_30PROPERTY->getTableE_G(
+                        gasketIdx, loadCase->TG, loadCase0->Q_G);
+            if (EG > 0) {
+                PR->addDetail("F. 58 Table 17-30", "E_G", "Table 17-30 value",
+                              EG, "N/mm2", "Table value", loadCaseNo);
+            } else {
+                PR->addDetail("F. 58 Table 17-30", "E_G",
+                              "Table 17-30 value out of range",
+                              EG, "N/mm2", "Table value", loadCaseNo,
+                              "Out of range");
+            }
+        } else {
+            // Simple or EN1591 2001 version
+            // E_G = E0 + K1 * Q
+            double E0 = TABLEGSIMPLE->getTableG_E0(insType, loadCase->TG);
+            double K1 = TABLEGSIMPLE->getTableG_K1(insType, loadCase->TG);
+            double Q = loadCase->Q_G;
+            EG = E0 + K1 * Q;
 
-        PR->addDetail("F. 58 Table G", "E_G", "Table G value",
-                      elasticity, "N/mmm2", "Table value", loadCaseNo);
+            PR->addDetail("F. 58 Table G", "E_G", "Table G value",
+                          EG, "N/mmm2", "Table value", loadCaseNo);
+        }
     }
 
-    return elasticity;
+    return EG;
 }
 
 /**
@@ -375,25 +428,23 @@ double Gasket::gasketCompressedElasticity(int loadCaseNo) {
  * @return gasket compressed thickness
  */
 double Gasket::gasketCompressedThickness(LoadCase* loadCase) {
-    // TODO refer www.gasketdata.org
-    double tmpeG = 0;
-    tmpeG = eGt;
-
-//    if (loadCase->Q_G < 1) {
-//        tmpeG = eGt;
-//    } else {
-//        tmpeG = (eGt - eGt * 0.4) + eGt * 0.4 / (pow(loadCase->Q_G, 0.25));
-//    }
-
-    return tmpeG;
+    double value = EN13555PROPERTY->get_eG(loadCase->Q_G, loadCase->TG);
+    PR->addDetail("With_F. 63",
+                  "eG", "gasketCompressedThickness(loadCase)",
+                  value, "mm",
+                  "Table value", loadCase->number);
+    return value;
 }
 
 /**
- * @brief Maximum gasket load Q_smax (Table 16)
+ * @brief Maximum gasket load Q_smax EN13555 or Table 16
  * @param loadCase
  * @return gasket maximum load at temperature
  */
 double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
+    double Q_smax = 0.0;
+
+
     if (TABLE16PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
         loadCase->Q_smax = TABLE16PROPERTY->getTable16_Q_smax(gasketIdx,
                                                                loadCase->TG);
@@ -413,35 +464,6 @@ double Gasket::gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase) {
     }
 
     return loadCase->Q_smax;
-}
-
-/**
- * @brief Gasket creep factor P_QR (Table 16)
- * @param loadCaseNo loadcase number
- * @param loadCase
- * @return
- */
-double Gasket::gasketCreepFactor(int loadCaseNo, LoadCase* loadCase) {
-    if (TABLE16PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
-        loadCase->P_QR = TABLE16PROPERTY->getTable16_P_QR(gasketIdx,
-                                                          loadCase->TG);
-        if (loadCase->P_QR > 0) {
-            PR->addDetail("Before_F. 105 Table 16", "PQR", "Table value",
-                          loadCase->P_QR, "-",
-                          "Table value", loadCaseNo);
-        } else {
-            PR->addDetail("Before_F. 105 Table 16", "PQR", "Table value",
-                          loadCase->P_QR, "-",
-                          "Table value", loadCaseNo, "Out of range");
-        }
-    } else {
-        loadCase->P_QR = 0.0;
-        PR->addDetail("Table 16", "PQR", "Table value",
-                      loadCase->P_QR, "-",
-                      "Table value", loadCaseNo, "Material not found");
-    }
-
-    return loadCase->P_QR;
 }
 
 

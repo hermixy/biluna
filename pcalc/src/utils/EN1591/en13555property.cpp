@@ -47,7 +47,7 @@ EN13555Property* EN13555Property::getInstance() {
     return mActiveUtility;
 }
 
-bool EN13555Property::getGasket(const QString& gasketIdx) {
+bool EN13555Property::setCurrentGasket(const QString& gasketIdx) {
     bool success = false;
     QString gasketId = RB2::IdxId(gasketIdx);
 
@@ -77,7 +77,7 @@ double EN13555Property::get_deltaeGc(double gasketPressure,
         return 0.0;
     }
 
-    double deltaeGc = getInterpolatedValue(
+    double deltaeGc = getBilInterpValue(
                 mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
                 "qa", "temp", "deltaegc",
                 gasketPressure, designTemp);
@@ -98,12 +98,72 @@ double EN13555Property::get_PQR(double gasketPressure, double designTemp) {
         return 0.0;
     }
 
-    double P_QR = getInterpolatedValue(
+    double P_QR = getBilInterpValue(
                 mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
                 "qa", "temp", "pqr",
                 gasketPressure, designTemp);
 
     return P_QR;
+}
+
+/**
+ * @brief EN13555Property::get_eG get gasket compressed thickness eG
+ * @param gasketPressure
+ * @param designTemp
+ * @return eG compressed thickness
+ */
+double EN13555Property::get_eG(double gasketPressure, double designTemp) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_eG() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double eG = getBilInterpValue(
+                mCurrentGasket->getContainer("PCALC_EN13555EGeGList"),
+                "qa", "temp", "eg",
+                gasketPressure, designTemp);
+
+    return eG;
+}
+
+/**
+ * @brief EN13555Property::get_EG get gasket elasticity
+ * @param gasketPressure
+ * @param designTemp
+ * @return EG elasticity
+ */
+double EN13555Property::get_EG(double gasketPressure, double designTemp) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_EG() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double EG = getBilInterpValue(
+                mCurrentGasket->getContainer("PCALC_EN13555EGeGList"),
+                "qa", "temp", "capitaleg",
+                gasketPressure, designTemp);
+
+    return EG;
+}
+
+/**
+ * @brief EN13555Property::get_Qsmax get Q_smax
+ * @param designTemp
+ * @return Q_smax maximum allowable gasket pressure at temperature
+ */
+double EN13555Property::get_Qsmax(double designTemp) {
+
+
+    // continue here ...
+    // with linear interpolation, already in RB_TableMath
+
+
+
+
+
+
 }
 
 double EN13555Property::getQA(const QString& gasketIdx, double leakageRate,
@@ -225,63 +285,5 @@ double EN13555Property::closestInnerPressureBar(double designPressure) {
 
     return closestPressureBar;
 }
-
-
-//void EN13555Property::createList() {
-//    // leakageRate, materialCode, designPressure, QA, QminL, QsminL
-//    // Table 02, includes interpolated values
-//    cl(1.0, "3-3-100-1", 10.0, 160.0, 10.0, 10.0);
-//    cl(1.0, "3-3-100-1", 40.0, 40.0, 30.0, 10.0);
-//    cl(1.0, "3-3-100-1", 40.0, 60.0, 30.0, 10.0);
-
-//    // TODO: complete
-//}
-
-//RB_String EN13555Property::gasketId(const RB_String& manufacturer,
-//                                              const RB_String &gasketIdx) {
-//    return QString();
-//    bool existing = false;
-
-//    for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
-//                it != mList.end() && !existing; it++) {
-//        QminLQsminLProperty* tmpObj = (*it);
-
-//        if (tmpObj->mMaterialCode == materialCode) {
-//            existing = true;
-//        }
-//    }
-
-//    return existing;
-//}
-
-//void EN13555Property::cl(double leakageRate,
-//                            const QString& materialCode,
-//                            double designPressure,
-//                            double QA,
-//                            double QminL,
-//                            double QsminL) {
-//    mList.push_back(new QminLQsminLProperty(leakageRate,
-//                                            materialCode,
-//                                            designPressure,
-//                                            QA,
-//                                            QminL,
-//                                            QsminL));
-//}
-
-//void EN13555Property::updateLeft(QminLQsminLProperty* obj) {
-//    if (obj->mQA <= mTargetQA) {
-//        if (!mLeft || obj->mQA > mLeft->mQA) {
-//            mLeft = obj;
-//        }
-//    }
-//}
-
-//void EN13555Property::updateRight(QminLQsminLProperty* obj) {
-//    if (obj->mQA >= mTargetQA) {
-//        if (!mRight || obj->mQA < mRight->mQA) {
-//            mRight = obj;
-//        }
-//    }
-//}
 
 END_NAMESPACE_BILUNA_CALC_EN1591

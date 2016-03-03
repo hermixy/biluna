@@ -90,7 +90,42 @@ double RB_TableMath::getBilinearValue(
     return value;
 }
 
-double RB_TableMath::getInterpolatedValue(
+/**
+ * @brief RB_TableMath::getLinearValue get linear interpolated value
+ * @param valX x-coordinate for which the y value is required
+ * @param p11X
+ * @param p11val
+ * @param p12X
+ * @param p12val
+ * @return
+ */
+double RB_TableMath::getLinearValue(double valX,
+                                    double p1X, double p1val,
+                                    double p2X, double p2val) {
+    if (p1X > valX || valX > p2X) {
+        RB_DEBUG->error("RB_TableMath::getLinearValue() p1X valX p2X ERROR");
+        return 0.0;
+    } else if (p1X == p2X) {
+        return (p1val + p2val) / 2;
+    }
+    double ratio = (valX - p1X) / (p2X - p1X);
+    double value = p1val * (1 - ratio) + p2val * ratio;
+    return value;
+}
+
+/**
+ * @brief RB_TableMath::getBilInterpValue get bilinear interpolated value
+ * @param fromObjC
+ * @param xField
+ * @param yField
+ * @param zField
+ * @param xValue
+ * @param yValue
+ * @param extraField
+ * @param extraValue
+ * @return result value
+ */
+double RB_TableMath::getBilInterpValue(
         RB_ObjectContainer* fromObjC, const QString& xField,
         const QString& yField, const QString& zField, double xValue,
         double yValue, const QString& extraField, double extraValue) {

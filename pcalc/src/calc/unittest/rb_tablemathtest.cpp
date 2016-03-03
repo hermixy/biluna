@@ -14,6 +14,7 @@ RB_TableMathTest::~RB_TableMathTest() {
 
 void RB_TableMathTest::exec() {
     getBilinearValueTest();
+    getLinearValueTest();
     updateCornerObjectsTest();
     getThreeCornerValueTest();
     getTwoCornerValueTest();
@@ -66,6 +67,20 @@ void RB_TableMathTest::getBilinearValueTest() {
                                    1.0, 0.0, 1.3);
     areEqual(PR->getLastOutput(),
              "RB_TableMathTest::Calc_getBilinearValueTest()", 1.3, res);
+}
+
+void RB_TableMathTest::getLinearValueTest() {
+    setupTarget();
+    double res = target->getLinearValue(1.25,
+                                        0.1, -7.0,
+                                        3.3, 18.1);
+    areEqual(PR->getLastOutput(),
+             "RB_TableMathTest::Calc_getLinearValueTest()", 2.0203125, res);
+    res = target->getLinearValue(1.25,
+                                 1.25, -7.0,
+                                 1.25, 18.1);
+    areEqual(PR->getLastOutput(),
+             "RB_TableMathTest::Calc_getLinearValueTest()", 5.55, res);
 }
 
 void RB_TableMathTest::updateCornerObjectsTest() {

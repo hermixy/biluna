@@ -32,11 +32,14 @@ public:
                             double p12X, double p12Y, double p12val,
                             double p21X, double p21Y, double p21val,
                             double p22X, double p22Y, double p22val);
-    double getInterpolatedValue(RB_ObjectContainer* fromObjC,
-                                const QString& xField, const QString& yField,
-                                const QString& zField, double xValue,
-                                double yValue, const QString& extraField = "",
-                                double extraValue = 0.0);
+    double getLinearValue(double valX,
+                          double p1X, double p1val,
+                          double p2X, double p2val);
+    double getBilInterpValue(RB_ObjectContainer* fromObjC,
+                             const QString& xField, const QString& yField,
+                             const QString& zField, double xValue,
+                             double yValue, const QString& extraField = "",
+                             double extraValue = 0.0);
 
 private:
     void updateCornerObjects(RB_ObjectBase* obj);

@@ -53,11 +53,16 @@ public:
     virtual ~EN13555Property();
     static EN13555Property* getInstance();
 
-    bool getGasket(const QString& gasketIdx);
+    bool setCurrentGasket(const QString& gasketIdx);
     void refresh() {}
 
     double get_deltaeGc(double gasketPressure, double designTemp);
     double get_PQR(double gasketPressure, double designTemp);
+    double get_eG(double gasketPressure, double designTemp);
+    double get_EG(double gasketPressure, double designTemp);
+    double get_Qsmax(double designTemp);
+
+
     double getQA(const RB_String& gasketIdx, double leakageRate,
                  double designPressure);
     double getQminL(const RB_String& gasketIdx, double leakageRate,
@@ -79,22 +84,10 @@ private:
     bool loadGasket(const QString& gasketId);
     double closestInnerPressureBar(double designPressure);
 
-//    void createList();
-//    void cl(double leakageRate, const RB_String& materialCode,
-//            double designPressure, double QA, double QminL, double QsminL);
-
-//    void updateLeft(QminLQsminLProperty* obj);
-//    void updateRight(QminLQsminLProperty* obj);
-
     static EN13555Property* mActiveUtility;
-
     RB_ObjectContainer* mGasketList;
     RB_ObjectBase* mCurrentGasket;
 
-//    std::vector<QminLQsminLProperty*> mList;
-//    double mTargetQA;
-//    QminLQsminLProperty* mLeft;
-//    QminLQsminLProperty* mRight;
 };
 
 END_NAMESPACE_BILUNA_CALC_EN1591
