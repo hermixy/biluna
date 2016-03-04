@@ -83,6 +83,12 @@ private:
 
     bool loadGasket(const QString& gasketId);
     double closestInnerPressureBar(double designPressure);
+    double getMaxLinInterpValue(RB_ObjectContainer* fromObjC,
+                                const QString& xField, const QString& yField,
+                                double xValue, const QString& extraField = "",
+                                double extraValue = 0.0);
+    void updateMaxLeftRightObjects(RB_ObjectBase* obj);
+
 
     static EN13555Property* mActiveUtility;
     RB_ObjectContainer* mGasketList;

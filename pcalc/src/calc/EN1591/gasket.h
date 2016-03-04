@@ -139,12 +139,12 @@ public:
     void Calc_AQ();
     void setLoadCaseValues(int loadCaseNo);
     void Calc_delta_eGc(int loadCaseNo);
-    double gasketDeflection(LoadCase* loadCase);                  // delta_eGc_EN13555
-    double gasketCreepFactor(LoadCase* loadCase);                 // P_QR
-    double gasketSimpleCreepFactor(LoadCase* loadCase); // P_QR simple
-    double gasketCompressedElasticity(int loadCaseNo);            // E_G
-    double gasketCompressedThickness(LoadCase* loadCase);         // e_G
-    double gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase); // Q_smax
+    double gasketDeflection(LoadCase* loadCase);                // delta_eGc_EN13555
+    double gasketCreepFactor(LoadCase* loadCase);               // P_QR
+    double gasketSimpleCreepFactor(LoadCase* loadCase);         // P_QR simple
+    double gasketCompressedElasticity(int loadCaseNo);          // E_G
+    double gasketCompressedThickness(LoadCase* loadCase);       // e_G
+    double gasketMaximumLoad(LoadCase* loadCase);               // Q_smax
 
     LoadCaseList* mLoadCaseList;
 

@@ -38,7 +38,7 @@ PCALC_EN13555PqrDeltaeGC::~PCALC_EN13555PqrDeltaeGC() {
 void PCALC_EN13555PqrDeltaeGC::createMembers() {
     addMember("c", "kN/mm", 0.0, RB2::MemberDouble);
     addMember("temp", "Celsius", 0.0, RB2::MemberDouble);
-    addMember("qa", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("qg", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("pqr", "-", 0.0, RB2::MemberDouble);
     addMember("deltaegc", "mm", 0.0, RB2::MemberDouble);
 }

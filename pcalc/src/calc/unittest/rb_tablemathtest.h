@@ -23,6 +23,7 @@ private:
     void getThreeCornerValueTest();
     void getTwoCornerValueTest();
     void getOneCornerValueTest();
+    void updateLeftRightObjectsTest();
 
     RB_TableMath* target;
 

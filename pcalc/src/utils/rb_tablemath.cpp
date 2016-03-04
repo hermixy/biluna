@@ -173,6 +173,46 @@ double RB_TableMath::getBilInterpValue(
     return value;
 }
 
+double RB_TableMath::getLinInterpValue(RB_ObjectContainer *fromObjC,
+                                       const QString &xField,
+                                       const QString &yField,
+                                       double xValue,
+                                       const QString &extraField,
+                                       double extraValue) {
+    mXfield = xField;
+    mYfield = yField;
+    mXvalue = xValue;
+    mExtraField = extraField;
+    mExtraValue = extraValue;
+    mTopLeft = nullptr;
+    mTopRight = nullptr;
+    mBottomLeft = nullptr;
+    mBottomRight = nullptr;
+
+    RB_ObjectIterator* iter = fromObjC->createIterator();
+
+    for(iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* obj = iter->currentObject();
+        updateLeftRightObjects(obj);
+    }
+
+    delete iter;
+    double value = 0.0;
+
+    if (!mTopLeft || !mTopRight) {
+        value = getOutOfBoundValue();
+    } else {
+        value = getLinearValue(
+                mXvalue,
+                mTopLeft->getValue(mXfield).toDouble(),
+                mTopLeft->getValue(mYfield).toDouble(),
+                mTopRight->getValue(mXfield).toDouble(),
+                mTopRight->getValue(mYfield).toDouble());
+    }
+
+    return value;
+}
+
 void RB_TableMath::updateCornerObjects(RB_ObjectBase* obj) {
     if (!mExtraField.isEmpty()
             && obj->getValue(mExtraField).toDouble() != mExtraValue) {
@@ -253,13 +293,13 @@ double RB_TableMath::getOutOfBoundValue() {
 
     switch (missingCornerCount) {
     case 3:
-        value = getThreeCornerValue();
+        value = getOneCornerValue();
         break;
     case 2:
         value = getTwoCornerValue();
         break;
     case 1:
-        value = getOneCornerValue();
+        value = getThreeCornerValue();
         break;
     default:
         break;
@@ -417,6 +457,33 @@ double RB_TableMath::getOneCornerValue() {
     }
     RB_DEBUG->error("RB_TableMath::getOneCornerValue() ERROR");
     return 0.0;
+}
+
+void RB_TableMath::updateLeftRightObjects(RB_ObjectBase* obj) {
+    if (!mExtraField.isEmpty()
+            && obj->getValue(mExtraField).toDouble() != mExtraValue) {
+        return;
+    }
+
+    double xValue = obj->getValue(mXfield).toDouble();
+
+    // Top left
+    if (!mTopLeft && xValue <= mXvalue) {
+        mTopLeft = obj;
+    } else if (mTopLeft
+               && xValue >= mTopLeft->getValue(mXfield).toDouble()
+               && xValue <= mXvalue) {
+        mTopLeft = obj;
+    }
+
+    // Top right
+    if (!mTopRight && xValue >= mXvalue) {
+        mTopRight = obj;
+    } else if (mTopRight
+               && xValue <= mTopRight->getValue(mXfield).toDouble()
+               && xValue >= mXvalue) {
+        mTopRight = obj;
+    }
 }
 
 END_NAMESPACE_BILUNA_CALC

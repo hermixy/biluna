@@ -189,7 +189,7 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         setModelTableView(mModel);
 
         items.clear();
-        items << tr("None") << "c" << "temp" << "qa" << "pqr" << "deltaegc";
+        items << tr("None") << "c" << "temp" << "qg" << "pqr" << "deltaegc";
 
         ui->cbXcoord->clear();
         ui->cbXcoord->addItems(items);
@@ -209,7 +209,7 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         setModelTableView(mModel);
 
         items.clear();
-        items << tr("None") << "temp" << "qa" << "capitaleg" << "eg";
+        items << tr("None") << "temp" << "qg" << "capitaleg" << "eg";
 
         ui->cbXcoord->clear();
         ui->cbXcoord->addItems(items);

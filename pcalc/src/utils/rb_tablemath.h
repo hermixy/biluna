@@ -40,13 +40,18 @@ public:
                              const QString& zField, double xValue,
                              double yValue, const QString& extraField = "",
                              double extraValue = 0.0);
+    double getLinInterpValue(RB_ObjectContainer* fromObjC,
+                             const QString& xField, const QString& yField,
+                             double xValue, const QString& extraField = "",
+                             double extraValue = 0.0);
 
-private:
+protected:
     void updateCornerObjects(RB_ObjectBase* obj);
     double getOutOfBoundValue();
     double getThreeCornerValue();
     double getTwoCornerValue();
     double getOneCornerValue();
+    void updateLeftRightObjects(RB_ObjectBase* obj);
 
 
     QString mXfield;

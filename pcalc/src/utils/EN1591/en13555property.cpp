@@ -79,7 +79,7 @@ double EN13555Property::get_deltaeGc(double gasketPressure,
 
     double deltaeGc = getBilInterpValue(
                 mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
-                "qa", "temp", "deltaegc",
+                "qg", "temp", "deltaegc",
                 gasketPressure, designTemp);
 
     return deltaeGc;
@@ -100,7 +100,7 @@ double EN13555Property::get_PQR(double gasketPressure, double designTemp) {
 
     double P_QR = getBilInterpValue(
                 mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
-                "qa", "temp", "pqr",
+                "qg", "temp", "pqr",
                 gasketPressure, designTemp);
 
     return P_QR;
@@ -121,7 +121,7 @@ double EN13555Property::get_eG(double gasketPressure, double designTemp) {
 
     double eG = getBilInterpValue(
                 mCurrentGasket->getContainer("PCALC_EN13555EGeGList"),
-                "qa", "temp", "eg",
+                "qg", "temp", "eg",
                 gasketPressure, designTemp);
 
     return eG;
@@ -142,7 +142,7 @@ double EN13555Property::get_EG(double gasketPressure, double designTemp) {
 
     double EG = getBilInterpValue(
                 mCurrentGasket->getContainer("PCALC_EN13555EGeGList"),
-                "qa", "temp", "capitaleg",
+                "qg", "temp", "capitaleg",
                 gasketPressure, designTemp);
 
     return EG;
@@ -154,16 +154,17 @@ double EN13555Property::get_EG(double gasketPressure, double designTemp) {
  * @return Q_smax maximum allowable gasket pressure at temperature
  */
 double EN13555Property::get_Qsmax(double designTemp) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_Qsmax() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
 
+    double Qsmax = getMaxLinInterpValue(
+                mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
+                "temp", "qg", designTemp);
 
-    // continue here ...
-    // with linear interpolation, already in RB_TableMath
-
-
-
-
-
-
+    return Qsmax;
 }
 
 double EN13555Property::getQA(const QString& gasketIdx, double leakageRate,
@@ -284,6 +285,97 @@ double EN13555Property::closestInnerPressureBar(double designPressure) {
     delete iter;
 
     return closestPressureBar;
+}
+
+/**
+ * @brief EN13555Property::getMaxLinInterpValue special for Qsmax from
+ * P_QR and delta_eGc table
+ * @param fromObjC
+ * @param xField
+ * @param yField
+ * @param xValue
+ * @param extraField
+ * @param extraValue
+ * @return value
+ */
+double EN13555Property::getMaxLinInterpValue(RB_ObjectContainer *fromObjC,
+                                             const QString &xField,
+                                             const QString &yField,
+                                             double xValue,
+                                             const QString &extraField,
+                                             double extraValue) {
+
+    mXfield = xField;
+    mYfield = yField;
+    mXvalue = xValue;
+    mYvalue = 0.0; // now to be set to determine maximum
+    mExtraField = extraField;
+    mExtraValue = extraValue;
+    mTopLeft = nullptr;
+    mTopRight = nullptr;
+    mBottomLeft = nullptr;
+    mBottomRight = nullptr;
+
+    RB_ObjectIterator* iter = fromObjC->createIterator();
+
+    for(iter->first(); !iter->isDone(); iter->next()) {
+        RB_ObjectBase* obj = iter->currentObject();
+        updateMaxLeftRightObjects(obj);
+    }
+
+    delete iter;
+    double value = 0.0;
+
+    if (!mTopLeft || !mTopRight) {
+        value = getOutOfBoundValue();
+    } else {
+        value = getLinearValue(
+                mXvalue,
+                mTopLeft->getValue(mXfield).toDouble(),
+                mTopLeft->getValue(mYfield).toDouble(),
+                mTopRight->getValue(mXfield).toDouble(),
+                mTopRight->getValue(mYfield).toDouble());
+    }
+
+    return value;
+}
+
+/**
+ * @brief EN13555Property::updateMaxLeftRightObjects special for Qsmax from
+ * P_QR and delta_eGc table
+ * @param obj
+ */
+void EN13555Property::updateMaxLeftRightObjects(RB_ObjectBase* obj) {
+    if (!mExtraField.isEmpty()
+            && obj->getValue(mExtraField).toDouble() != mExtraValue) {
+        return;
+    }
+
+    double xValue = obj->getValue(mXfield).toDouble();
+    double yValue = obj->getValue(mYfield).toDouble();
+
+    // Top left
+    if (!mTopLeft && xValue <= mXvalue && yValue >= mYvalue) {
+        mTopLeft = obj;
+        mYvalue = yValue;
+    } else if (mTopLeft
+               && xValue >= mTopLeft->getValue(mXfield).toDouble()
+               && xValue <= mXvalue && yValue >= mYvalue) {
+        mTopLeft = obj;
+        mYvalue = yValue;
+    }
+
+    // Top right
+    if (!mTopRight && xValue >= mXvalue && yValue >= mYvalue) {
+        mTopRight = obj;
+        mYvalue = yValue;
+    } else if (mTopRight
+               && xValue <= mTopRight->getValue(mXfield).toDouble()
+               && xValue >= mXvalue && yValue >= mYvalue) {
+        mTopRight = obj;
+        mYvalue = yValue;
+    }
+
 }
 
 END_NAMESPACE_BILUNA_CALC_EN1591
