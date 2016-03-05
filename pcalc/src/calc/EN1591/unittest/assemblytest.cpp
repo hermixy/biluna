@@ -270,7 +270,7 @@ void AssemblyTest::Calc_F_GInitial_1Test() {
     SetupIntegralTarget();
     int loadCaseNo = 0;
     target->mLoadCaseList->at(loadCaseNo)->F_Bspec = 103.2;
-    target->mBolt->eta1minus = 1.3;
+    target->mBolt->etanminus = 1.3;
     target->mLoadCaseList->at(loadCaseNo)->F_R = 6.7;
     target->Calc_F_GInitial_1();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GInitialTest_1()",

@@ -66,7 +66,6 @@ void EN1591Handler::setDimMatInput() {
             = pow(10, -(in->getValue("leakagerate").toInt()));
     // TODO: now calculation value from loadCase 0, change to assembly value only
     mCalc->mAssembly->mF_Bspec = in->getValue("f_bspecified").toDouble();
-    mCalc->mAssembly->mQ_Aspec = in->getValue("q_aspecified").toDouble();
 
     Flange* fl1 = mCalc->mAssembly->mFlange1;
     fl1->nB = in->getValue("nb").toInt();
@@ -264,7 +263,6 @@ void EN1591Handler::setLoadCaseInput() {
 
         if (loadCaseNoMemory == 0) {
             lc->F_Bspec = mCalc->mAssembly->mF_Bspec;
-            lc->Q_A = mCalc->mAssembly->mQ_Aspec; // TODO: still required?
             ++loadCaseNoMemory;
         }
 

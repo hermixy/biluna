@@ -103,10 +103,10 @@ void Assembly::Calc_F_GInitial_1() {
         RB_DEBUG->error("Assembly::Calc_F_GInitial_1() F_Bspec <= 0 ERROR");
     }
 
-    loadCase->F_G = loadCase->F_Bspec * (1 - mBolt->eta1minus) - loadCase->F_R;
-    PR->addDetail("Formula 54 (1)", "F_G", "F_Bspec * (1 - eta1minus) - F_R",
+    loadCase->F_G = loadCase->F_Bspec * (1 - mBolt->etanminus) - loadCase->F_R;
+    PR->addDetail("Formula 54 (1)", "F_G", "F_Bspec * (1 - etanminus) - F_R",
                   loadCase->F_G, "N", QN(loadCase->F_Bspec) + " * (1 - "
-                  + QN(mBolt->eta1minus) + ") - " + QN(loadCase->F_R));
+                  + QN(mBolt->etanminus) + ") - " + QN(loadCase->F_R));
 }
 
 /**
@@ -521,10 +521,7 @@ void Assembly::Calc_Q_A_Qsmin(int loadCaseNo) {
     LoadCase* loadCase0 = mLoadCaseList->at(0);
 
     if (loadCaseNo == 0) {
-        if (loadCase0->Q_A > 0) {
-            // TODO: User entered value, still necessary as comparison?
-            return;
-        } else if (loadCase0->F_Bspec > 0) {
+        if (loadCase0->F_Bspec > 0) {
             // cannot be done in Calc_F_GInitial_1() because AGe is not known
             // F_G0 is set at Formula 1
             loadCase0->Q_A = loadCase0->F_G / mGasket->AGe;

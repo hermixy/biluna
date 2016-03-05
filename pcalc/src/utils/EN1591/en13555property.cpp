@@ -167,31 +167,25 @@ double EN13555Property::get_Qsmax(double designTemp) {
     return Qsmax;
 }
 
-double EN13555Property::getQA(const QString& gasketIdx, double leakageRate,
-                              double designPressure) {
-//    QminLQsminLProperty* minQAobj = NULL;
+double EN13555Property::get_QsminL(double leakageRate, double QA,
+                                   double designPressure) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_QsminL() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
 
-//    for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
-//                it != mList.end(); it++) {
-//        QminLQsminLProperty* tmpObj = (*it);
+    double testPressure =
+            EN13555PROPERTY->closestInnerPressureBar(designPressure);
+    double QsminL = getBilInterpValue(
+                mCurrentGasket->getContainer("PCALC_EN13555QsminLList"),
+                "leakrate", "qa", "qsminl",
+                leakageRate, QA, "testpress", testPressure);
 
-//        if (tmpObj->mLeakageRate == leakageRate
-//                && tmpObj->mMaterialCode == materialCode
-//                && tmpObj->mdesignPressure == designPressure) {
-//            if (!minQAobj || (minQAobj->mQA > tmpObj->mQA)) {
-//                minQAobj = tmpObj;
-//            }
-//        }
-//    }
-
-//    if (minQAobj) {
-//        return minQAobj->mQA;
-//    }
-
-    return -1.0;
+    return QsminL;
 }
 
-double EN13555Property::getQminL(const RB_String& gasketIdx, double leakageRate,
+double EN13555Property::get_QminL(const RB_String& gasketIdx, double leakageRate,
                                  double designPressure) {
 //    bool existing = false;
 
@@ -207,45 +201,6 @@ double EN13555Property::getQminL(const RB_String& gasketIdx, double leakageRate,
 //    }
 
     return -1.0;
-}
-
-double EN13555Property::getQsminL(const QString& gasketIdx, double leakageRate,
-                                  double QA, double designPressure) {
-//    mLeft = NULL;
-//    mRight = NULL;
-//    mTargetQA = QA;
-
-//    for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
-//                it != mList.end(); it++) {
-//        QminLQsminLProperty* tmpObj = (*it);
-
-//        if (tmpObj->mLeakageRate == leakageRate
-//                && tmpObj->mMaterialCode == materialCode
-//                && tmpObj->mdesignPressure == designPressure) {
-//            updateLeft(tmpObj);
-//            updateRight(tmpObj);
-//        }
-//    }
-
-    double value = -1.0;
-
-//    if (mLeft && mRight) {
-//        double denominator = mRight->mQA - mLeft->mQA;
-
-//        if (denominator != 0) {
-//            value = mLeft->mQsminL + (QA - mLeft->mQA)
-//                    * (mRight->mQsminL - mLeft->mQsminL)
-//                    / (mRight->mQA - mLeft->mQA);
-//        } else {
-//            value = mRight->mQsminL;
-//        }
-//    } else if (mRight) {
-//        value = mRight->mQsminL;
-//    } else if (mLeft) {
-//        value = mLeft->mQsminL;
-//    }
-
-    return value;
 }
 
 bool EN13555Property::loadGasket(const QString& gasketId) {
@@ -327,7 +282,11 @@ double EN13555Property::getMaxLinInterpValue(RB_ObjectContainer *fromObjC,
     double value = 0.0;
 
     if (!mTopLeft || !mTopRight) {
+        // mZfield is returned, set to qg to retrieve the correct value qsmax
+        QString temp = mZfield;
+        mZfield = "qg";
         value = getOutOfBoundValue();
+        mZfield = temp;
     } else {
         value = getLinearValue(
                 mXvalue,

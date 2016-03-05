@@ -302,6 +302,26 @@
             <property name="spacing">
              <number>3</number>
             </property>
+            <item row="1" column="2">
+             <widget class="QLabel" name="lblF_Bspec">
+              <property name="text">
+               <string>FB specified</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="RB_UomLineEdit" name="leF_Bspec"/>
+            </item>
+            <item row="3" column="2" colspan="2">
+             <widget class="QCheckBox" name="chbFlange2Equal">
+              <property name="text">
+               <string>Flange 2 is equal to flange 1</string>
+              </property>
+             </widget>
+            </item>
             <item row="3" column="0">
              <widget class="QLabel" name="lblLeakageRate">
               <property name="text">
@@ -314,6 +334,36 @@
             </item>
             <item row="3" column="1">
              <widget class="QComboBox" name="cbLeakageRate"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lblnB">
+              <property name="text">
+               <string>Number of bolts</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lblNoReassemblies">
+              <property name="text">
+               <string>Number of reassemblies</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="sbnB">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
             </item>
             <item row="1" column="1">
              <widget class="QSpinBox" name="sbNoReassemblies">
@@ -343,68 +393,18 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lblNoReassemblies">
-              <property name="text">
-               <string>Number of reassemblies</string>
+            <item row="1" column="4">
+             <spacer name="horizontalSpacer_14">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
               </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="lblnB">
-              <property name="text">
-               <string>Number of bolts</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QSpinBox" name="sbnB">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="maximum">
-               <number>999</number>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2" colspan="2">
-             <widget class="QCheckBox" name="chbFlange2Equal">
-              <property name="text">
-               <string>Flange 2 is equal to flange 1</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QLabel" name="lblF_Bspec">
-              <property name="text">
-               <string>FB specified</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="3">
-             <widget class="RB_UomLineEdit" name="leF_Bspec"/>
-            </item>
-            <item row="1" column="2">
-             <widget class="QLabel" name="lblQ_Aspec">
-              <property name="text">
-               <string>QA specified</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="RB_UomLineEdit" name="leQ_Aspec"/>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -4026,10 +4026,8 @@
   <tabstop>teCalculationReport</tabstop>
   <tabstop>leeRF_1</tabstop>
   <tabstop>sbFormulaFrom</tabstop>
-  <tabstop>leQ_Aspec</tabstop>
   <tabstop>leeREC_1</tabstop>
   <tabstop>ledRF_2</tabstop>
-  <tabstop>leF_Bspec</tabstop>
   <tabstop>cbCalculationReportType</tabstop>
   <tabstop>pbCalculate</tabstop>
  </tabstops>

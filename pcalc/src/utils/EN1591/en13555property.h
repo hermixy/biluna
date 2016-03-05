@@ -61,14 +61,11 @@ public:
     double get_eG(double gasketPressure, double designTemp);
     double get_EG(double gasketPressure, double designTemp);
     double get_Qsmax(double designTemp);
+    double get_QsminL(double leakageRate, double QA, double designPressure);
 
 
-    double getQA(const RB_String& gasketIdx, double leakageRate,
-                 double designPressure);
-    double getQminL(const RB_String& gasketIdx, double leakageRate,
+    double get_QminL(const RB_String& gasketIdx, double leakageRate,
                     double designPressure);
-    double getQsminL(const RB_String& gasketIdx, double leakageRate,
-                     double QA, double designPressure);
 
 
 

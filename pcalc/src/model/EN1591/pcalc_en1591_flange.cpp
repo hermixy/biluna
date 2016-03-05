@@ -38,7 +38,6 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("nb", "-", 0, RB2::MemberInteger);
     addMember("leakagerate", "-", 0, RB2::MemberInteger);
     addMember("f_bspecified", "N", 0.0, RB2::MemberDouble);
-    addMember("q_aspecified", "N/mm2", 0.0, RB2::MemberDouble);
 
     // flange 1
     addMember("typeflange1_id", "-", 0, RB2::MemberInteger);
