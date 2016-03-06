@@ -25,6 +25,7 @@ private:
     void Calc_AQTest();
     void Calc_bGeTest();
     void Calc_XGTest();
+    void Calc_Q_A_QsminTest();
     void Calc_delta_eGcTest();
 
     Gasket* target;

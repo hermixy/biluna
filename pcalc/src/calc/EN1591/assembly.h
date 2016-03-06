@@ -13,8 +13,6 @@
 #include "rb_namespace.h"
 #include "rb_object.h"
 #include "shell.h"
-#include "tableeproperty.h"
-#include "tablegproperty.h"
 #include "washer.h"
 
 NAMESPACE_BILUNA_CALC_EN1591
@@ -30,8 +28,6 @@ public:
     Flange* mFlange1;
     Flange* mFlange2;
     LoadCaseList* mLoadCaseList;
-    double mNR;
-    double mLeakageRate;
     double mF_Bspec; // transferred to loadcase(0)
     double mQ_Aspec; // transferred to loadcase(0)
 };
@@ -67,7 +63,6 @@ public:
     void Calc_YG(int loadCaseNo);
     void Calc_YQ(int loadCaseNo);
     void Calc_YR(int loadCaseNo);
-    void Calc_Q_A_Qsmin(int loadCaseNo);
     void Calc_F_Gmin(int loadCaseNo);
     void Calc_F_Gdelta(int loadCaseNo);
     void Calc_F_G0req();

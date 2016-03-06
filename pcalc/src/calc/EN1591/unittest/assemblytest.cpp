@@ -34,7 +34,6 @@ void AssemblyTest::exec() {
     Calc_YRTest();
     Calc_bGiTest();
     Calc_dUTTest();
-    Calc_Q_A_QsminTest();
     Calc_F_GminTest();
     Calc_F_G0deltaTest();
     Calc_F_G0reqTest();
@@ -538,20 +537,6 @@ void AssemblyTest::Calc_dUTTest() {
     deleteTarget();
 }
 
-void AssemblyTest::Calc_Q_A_QsminTest() {
-    // special case if F_Bspec > 0
-    SetupIntegralTarget();
-    int i = 0;
-    LoadCase* loadCase = target->mLoadCaseList->at(i);
-    loadCase->F_Bspec = 0.3;
-    loadCase->F_G = 4.5;
-    target->mGasket->AGe = 8.3;
-    target->Calc_Q_A_Qsmin(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_A_QsminTest()",
-             0.54216867469879518072, loadCase->Q_A);
-    deleteTarget();
-}
-
 void AssemblyTest::Calc_F_GminTest() {
     SetupIntegralTarget();
     int i = 0;
@@ -766,7 +751,7 @@ void AssemblyTest::Calc_F_G0d_2Test() {
     target->mLoadCaseList->at(0)->F_Bspec = 7.6;
     target->mLoadCaseList->at(0)->F_Bmin = 0.7;
     target->mLoadCaseList->at(0)->F_Bmax = 700;
-    target->mNR = 300;
+    target->mGasket->mNR = 300;
     target->mLoadCaseList->at(0)->F_R = -2.3;
     target->Calc_F_G0d_2();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0d_2Test()", 453.4111111111111,
@@ -779,7 +764,7 @@ void AssemblyTest::Calc_F_G0dTest() {
     target->mLoadCaseList->at(0)->F_Bspec = 0.0;
     target->mLoadCaseList->at(0)->F_Gdelta = 5.6;
     target->mLoadCaseList->at(0)->F_Bmax = 0.7;
-    target->mNR = 3;
+    target->mGasket->mNR = 3;
     target->mLoadCaseList->at(0)->F_R = 2.3;
     target->Calc_F_G0d();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()", 5.6,

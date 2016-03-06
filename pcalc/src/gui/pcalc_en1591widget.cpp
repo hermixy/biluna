@@ -139,18 +139,9 @@ void PCALC_EN1591Widget::init() {
     // flange
     //
     mFlangeMapper = mFlangeModel->getMapper();
-    mFlangeMapper->addMapping(sbNoReassemblies,
-                              mFlangeModel->fieldIndex("nr"));
-    mFlangeMapper->addMapping(sbnB, mFlangeModel->fieldIndex("nb"));
-    RB_StringList items;
-    items << "10e0" << "10e-1" << "10e-2" << "10e-3" << "10e-4" << "10e-5"
-              << "10e-6" << "10e-7" << "10e-8";
-    cbLeakageRate->setModel(new QStringListModel(items, this));
-    mFlangeMapper->addMapping(cbLeakageRate,
-                              mFlangeModel->fieldIndex("leakagerate"),
-                              "currentIndex");
     mFlangeMapper->addMapping(leF_Bspec, mFlangeModel->fieldIndex("f_bspecified"));
-    items.clear();
+    mFlangeMapper->addMapping(sbnB, mFlangeModel->fieldIndex("nb"));
+    QStringList items;
     items << "Blind" << "Integral" << "Loose";
     cbTypeFlange_1->setModel(new QStringListModel(items, this));
 //    mFlangeModel->setTextList(mFlangeModel->fieldIndex("typeflange1_id"),
@@ -293,6 +284,15 @@ void PCALC_EN1591Widget::init() {
     cbInsType->setModel(new QStringListModel(items, this));
     mGasketMapper->addMapping(cbInsType,
                               mGasketModel->fieldIndex("insertfilltype_id"),
+                              "currentIndex");
+    mGasketMapper->addMapping(sbNoReassemblies,
+                              mGasketModel->fieldIndex("nr"));
+    items.clear();
+    items << "10e0" << "10e-1" << "10e-2" << "10e-3" << "10e-4" << "10e-5"
+              << "10e-6" << "10e-7" << "10e-8";
+    cbLeakageRate->setModel(new QStringListModel(items, this));
+    mGasketMapper->addMapping(cbLeakageRate,
+                              mGasketModel->fieldIndex("leakagerate"),
                               "currentIndex");
     mGasketMapper->addMapping(ledG0, mGasketModel->fieldIndex("dg0"));
     mGasketMapper->addMapping(ledGin, mGasketModel->fieldIndex("dgin"));
@@ -721,11 +721,8 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "nameengineer", "-", mAssemblyModel);
 
     // flanges
-    addObjectMemberVariable(objIn, "nr", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "nb", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "leakagerate", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "f_bspecified", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "q_aspecified", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "typeflange1_id", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d01", "-", mFlangeModel);
@@ -793,6 +790,8 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "gaskettype_idx", "-", mGasketModel);
     addObjectMemberVariable(objIn, "formtype_id", "-", mGasketModel);
     addObjectMemberVariable(objIn, "insertfilltype_id", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "nr", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "leakagerate", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg0", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dgin", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dgout", "-", mGasketModel);

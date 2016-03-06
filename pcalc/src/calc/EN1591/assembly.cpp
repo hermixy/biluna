@@ -1,6 +1,6 @@
 ﻿#include "assembly.h"
 #include "pcalc_report.h"
-#include "table02_15property.h"
+#include "tableeproperty.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
 
@@ -12,7 +12,6 @@ Assembly_IN::Assembly_IN() : RB_Object() {
     mFlange1 = NULL;
     mFlange2 = NULL;
     mLoadCaseList = NULL;
-    mNR = 0.0;
     mF_Bspec = 0.0;
 }
 
@@ -511,66 +510,6 @@ void Assembly::Calc_YR(int loadCaseNo) {
 }
 
 /**
- * @brief Before Formula 103 and 104 Q_A or Qsmin,
- * including Annex/Table G: Minimum gasket force in assemblage
- * NOTE 1: if no leakage rate is requested use Q0,min and m (m * |P|)
- * from Annex G instead of resp. QA and Qsmin.
- * NOTE 2: Q_A can be set by user to a different value
- */
-void Assembly::Calc_Q_A_Qsmin(int loadCaseNo) {
-    LoadCase* loadCase0 = mLoadCaseList->at(0);
-
-    if (loadCaseNo == 0) {
-        if (loadCase0->F_Bspec > 0) {
-            // cannot be done in Calc_F_GInitial_1() because AGe is not known
-            // F_G0 is set at Formula 1
-            loadCase0->Q_A = loadCase0->F_G / mGasket->AGe;
-            PR->addDetail("Before_F. 103", "Q_A", "F_G / AGe",
-                          loadCase0->Q_A, "N/mm2",
-                          QN(loadCase0->F_G) + " / " + QN(mGasket->AGe),
-                          loadCaseNo, "User present bolt force");
-        } else {
-            // original
-            loadCase0->Q_A = TABLE02_15PROPERTY->getTableQA(mLeakageRate,
-                                                            mGasket->gasketIdx);
-            if (loadCase0->Q_A >0) {
-                PR->addDetail("Before_F. 103", "Q_A", "Table 2-15 value",
-                              loadCase0->Q_A, "N/mm2", "Table value", loadCaseNo);
-            } else {
-                // Q_A not found
-                TableGProperty* table = new TableGProperty(); // TODO: static class
-                double Q0min = table->getTableG_Q0min(mGasket->insType);
-                delete table;
-                loadCase0->Q_A = Q0min;
-                PR->addDetail("Before_F. 103", "Q_A", "Q0min (Table G)",
-                              loadCase0->Q_A, "N/mm2",
-                              QN(Q0min), loadCaseNo);
-            }
-        }
-    } else {
-        LoadCase* loadCaseI = mLoadCaseList->at(loadCaseNo);
-        loadCaseI->Q_sminL
-                = TABLE02_15PROPERTY->getTableQsminL(mLeakageRate,
-                                                     mGasket->gasketIdx,
-                                                     loadCase0->Q_A);
-        if (loadCaseI->Q_sminL > 0) {
-            PR->addDetail("Before_F. 104", "Q_sminL", "Table 2-15 value",
-                          loadCaseI->Q_sminL, "N/mm2",
-                          "Table value", loadCaseNo);
-        } else {
-            TableGProperty* table = new TableGProperty(); // TODO: static class
-            double m = table->getTableG_m(mGasket->insType);
-            delete table;
-            loadCaseI->Q_sminL = m * abs(loadCaseI->P);
-            PR->addDetail("Before_F. 104", "Q_sminL", "m * |P| (Table G)",
-                          loadCaseI->Q_sminL, "N/mm2",
-                          QN(m) + " * abs(" + QN(loadCaseI->P) + ")",
-                          loadCaseNo);
-        }
-    }
-}
-
-/**
  * @brief Formula 103, 104 and Annex/Table E
  * @param loadCaseNo
  */
@@ -915,13 +854,14 @@ void Assembly::Calc_F_G0d_2() {
     }
 
     // TODO: the second argument does almost nothing
-    loadCase->F_Gd = std::max(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mNR)
+    loadCase->F_Gd = std::max(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",
                   "max(" + varStr + "; (2 / 3) "
                   "* (1 - 10 / NR) * F_Bmax - F_R)",
                   loadCase->F_Gd, "N",
-                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / " + QN(mNR)
+                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / "
+                  + QN(mGasket->mNR)
                   + ") * " + QN(loadCase->F_Bmax) + " - "
                   + QN(loadCase->F_R) + ")",
                   0);
@@ -943,13 +883,14 @@ void Assembly::Calc_F_G0d() {
     }
 
     // TODO: the second argument does almost nothing
-    loadCase->F_Gd = std::max(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mNR)
+    loadCase->F_Gd = std::max(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",
                   "max(" + varStr + "; (2 / 3) "
                   "* (1 - 10 / NR) * F_Bmax - F_R)",
                   loadCase->F_Gd, "N",
-                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / " + QN(mNR)
+                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / "
+                  + QN(mGasket->mNR)
                   + ") * " + QN(loadCase->F_Bmax) + " - "
                   + QN(loadCase->F_R) + ")",
                   0);

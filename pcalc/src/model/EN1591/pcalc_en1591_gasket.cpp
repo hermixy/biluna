@@ -35,6 +35,8 @@ PCALC_EN1591_Gasket::~PCALC_EN1591_Gasket() {
  * \li formtype_id id of gasket form type
  * \li manufacturetype type of manufacturing
  * \li insertfilltype_id id of gasket filler
+ * \li nr number of reassemblies
+ * \li leakagerate leakage rate L
  * \li dg0 first contact diameter of oval gasket types
  * \li dgin inside diameter
  * \li dgout outside diameter
@@ -50,6 +52,8 @@ void PCALC_EN1591_Gasket::createMembers() {
     addMember("formtype_id", "-", 0, RB2::MemberInteger);
     addMember("manufacturetype", "-", 0, RB2::MemberChar125);
     addMember("insertfilltype_id", "-", 0, RB2::MemberInteger);
+    addMember("nr", "-", 0, RB2::MemberInteger);
+    addMember("leakagerate", "-", 0, RB2::MemberInteger);
     addMember("dg0", "mm", 0.0, RB2::MemberDouble);
     addMember("dgin", "mm", 0.0, RB2::MemberDouble);
     addMember("dgout", "mm", 0.0, RB2::MemberDouble);

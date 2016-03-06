@@ -83,6 +83,10 @@ public:
     RB_String gasketIdx;
     FormType frmType;
     InsFilLayMatType insType;
+
+    double mNR;
+    double mLeakageRate;
+
     double dG0;
     double dGin;
     double dGout;
@@ -138,6 +142,7 @@ public:
     void Calc_XG();
     void Calc_AQ();
     void setLoadCaseValues(int loadCaseNo);
+    void Calc_Q_A_Qsmin(int loadCaseNo);
     void Calc_delta_eGc(int loadCaseNo);
     double gasketDeflection(LoadCase* loadCase);                // delta_eGc_EN13555
     double gasketCreepFactor(LoadCase* loadCase);               // P_QR

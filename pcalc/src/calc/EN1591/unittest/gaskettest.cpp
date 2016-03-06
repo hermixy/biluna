@@ -23,6 +23,7 @@ void GasketTest::exec() {
     Calc_AQTest();
     Calc_bGeTest();
     Calc_XGTest();
+    Calc_Q_A_QsminTest();
     Calc_delta_eGcTest();
 }
 
@@ -97,6 +98,19 @@ void GasketTest::Calc_XGTest() {
     target->bGe = 7.7;
     target->Calc_XG();
     areEqual(PR->getLastOutput(), "GasketTest::Calc_XGTest()", 0.970281124497992, target->XG);
+}
+
+void GasketTest::Calc_Q_A_QsminTest() {
+    // special case if F_Bspec > 0
+    setupTarget();
+    int i = 0;
+    LoadCase* loadCase = target->mLoadCaseList->at(i);
+    loadCase->F_Bspec = 0.3;
+    loadCase->F_G = 4.5;
+    target->AGe = 8.3;
+    target->Calc_Q_A_Qsmin(i);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_Q_A_QsminTest()",
+             0.54216867469879518072, loadCase->Q_A);
 }
 
 void GasketTest::Calc_delta_eGcTest() {

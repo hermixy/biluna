@@ -61,9 +61,6 @@ void EN1591Handler::setDimMatInput() {
             = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
 
-    mCalc->mAssembly->mNR = in->getValue("nr").toInt();
-    mCalc->mAssembly->mLeakageRate
-            = pow(10, -(in->getValue("leakagerate").toInt()));
     // TODO: now calculation value from loadCase 0, change to assembly value only
     mCalc->mAssembly->mF_Bspec = in->getValue("f_bspecified").toDouble();
 
@@ -171,6 +168,8 @@ void EN1591Handler::setDimMatInput() {
     gkt->frmType = (Gasket::FormType)in->getValue("formtype_id").toInt();
     gkt->insType =
             (Gasket::InsFilLayMatType)in->getValue("insertfilltype_id").toInt();
+    gkt->mNR = in->getValue("nr").toInt();
+    gkt->mLeakageRate = pow(10, -(in->getValue("leakagerate").toInt()));
     gkt->dG0 = in->getValue("dg0").toDouble();
     gkt->dGin = in->getValue("dgin").toDouble();
     gkt->dGout = in->getValue("dgout").toDouble();

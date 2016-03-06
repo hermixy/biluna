@@ -392,7 +392,7 @@ void Calculator::F90_to_102(Assembly* assembly, int loadCaseNo) {
 }
 
 void Calculator::F103_to_104(Assembly* assembly, int loadCaseNo) {
-    assembly->Calc_Q_A_Qsmin(loadCaseNo);
+    assembly->mGasket->Calc_Q_A_Qsmin(loadCaseNo);
     assembly->Calc_F_Gmin(loadCaseNo);
 }
 

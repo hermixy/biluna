@@ -1,8 +1,11 @@
 ﻿#include "gasket.h"
 #include "en13555property.h"
 #include "pcalc_report.h"
+#include "table02_15property.h"
 #include "table16property.h"
 #include "table17_30property.h"
+#include "tableeproperty.h"
+#include "tablegproperty.h"
 #include "tablegsimple.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
@@ -11,15 +14,20 @@ Gasket_IN::Gasket_IN() : RB_Object(){
     setName("PCALC EN1591 Gasket");
 
     gasketIdx = "";
+    frmType = Flat;
+    insType = SpiralGraphFillOuterInner;
+
+    mNR = 0;
+    mLeakageRate = 0;
+
     dG0 = 0;
     dGin = 0;
     dGout = 0;
+
     dG1_EN13555 = 0;
     dG2_EN13555 = 0;
     eGt = 0;
-    gasketIdx = "";
-    frmType = Flat;
-    insType = SpiralGraphFillOuterInner;
+
     K = 500000; // usual or 1,000,000 or 1,500,000 [N/mm]
     phiG = 0;
     r2 = 0;
@@ -250,7 +258,7 @@ void Gasket::Calc_AQ() {
 }
 
 /**
- * Set LoadCase values, called by Assembly::Calc_delta_eGc()
+ * Set LoadCase values, called by calculator before Calc_delta_eGc()
  * @param loadCase
  */
 void Gasket::setLoadCaseValues(int loadCaseNo) {
@@ -272,6 +280,76 @@ void Gasket::setLoadCaseValues(int loadCaseNo) {
     // sets dG2_EN13555 and dG1_EN13555 if P_QR from EN13555
     loadCase->P_QR = gasketCreepFactor(loadCase);
 }
+
+/**
+ * @brief Before Formula 103 and 104 Q_A or Qsmin,
+ * including Annex/Table G: Minimum gasket force in assemblage
+ * NOTE 1: if no leakage rate is requested use Q0,min and m (m * |P|)
+ * from Annex G instead of resp. QA and Qsmin.
+ * NOTE 2: Q_A can be set by user to a different value
+ */
+void Gasket::Calc_Q_A_Qsmin(int loadCaseNo) {
+    LoadCase* loadCase0 = mLoadCaseList->at(0);
+
+    if (loadCaseNo == 0) {
+        if (loadCase0->F_Bspec > 0) {
+            // cannot be done in Calc_F_GInitial_1() because AGe is not known
+            // F_G0 is set at Formula 1
+            loadCase0->Q_A = loadCase0->F_G / AGe;
+            PR->addDetail("Before_F. 103", "Q_A", "F_G / AGe",
+                          loadCase0->Q_A, "N/mm2",
+                          QN(loadCase0->F_G) + " / " + QN(AGe),
+                          loadCaseNo, "User present bolt force");
+        } else {
+            // TODO: original, is this true or is this the intention to set QA??
+            loadCase0->Q_A = TABLE02_15PROPERTY->getTableQA(mLeakageRate,
+                                                            gasketIdx);
+            if (loadCase0->Q_A >0) {
+                PR->addDetail("Before_F. 103", "Q_A", "Table 2-15 value",
+                              loadCase0->Q_A, "N/mm2", "Table value", loadCaseNo);
+            } else {
+                // Q_A not found
+                TableGProperty* table = new TableGProperty(); // TODO: static class
+                double Q0min = table->getTableG_Q0min(insType);
+                delete table;
+                loadCase0->Q_A = Q0min;
+                PR->addDetail("Before_F. 103", "Q_A", "Q0min (Table G)",
+                              loadCase0->Q_A, "N/mm2",
+                              QN(Q0min), loadCaseNo);
+            }
+        }
+    } else {
+        LoadCase* loadCaseI = mLoadCaseList->at(loadCaseNo);
+        loadCaseI->Q_sminL = EN13555PROPERTY->get_QsminL(mLeakageRate,
+                                                         loadCase0->Q_A,
+                                                         loadCaseI->P);
+        if (loadCaseI->Q_sminL > 0) {
+            PR->addDetail("Before_F. 104", "Q_sminL", "EN13555 value",
+                          loadCaseI->Q_sminL, "N/mm2",
+                          "Table value", loadCaseNo);
+        } else {
+            loadCaseI->Q_sminL
+                    = TABLE02_15PROPERTY->getTableQsminL(mLeakageRate,
+                                                         gasketIdx,
+                                                         loadCase0->Q_A);
+            if (loadCaseI->Q_sminL > 0) {
+                PR->addDetail("Before_F. 104", "Q_sminL", "Table 2-15 value",
+                              loadCaseI->Q_sminL, "N/mm2",
+                              "Table value", loadCaseNo);
+            } else {
+                TableGProperty* table = new TableGProperty(); // TODO: static class
+                double m = table->getTableG_m(insType);
+                delete table;
+                loadCaseI->Q_sminL = m * abs(loadCaseI->P);
+                PR->addDetail("Before_F. 104", "Q_sminL", "m * |P| (Table G)",
+                              loadCaseI->Q_sminL, "N/mm2",
+                              QN(m) + " * abs(" + QN(loadCaseI->P) + ")",
+                              loadCaseNo);
+            }
+        }
+    }
+}
+
 
 /**
  * @brief Before Formula 105 annex F: Creep of gasket
