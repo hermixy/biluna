@@ -37,7 +37,6 @@ LoadCase_IN::LoadCase_IN() : RB_Object() {
     fW1 = 0;
     fW2 = 0;
 
-    muG = 0;
     P = 0;
 
     T0 = 0;
@@ -233,7 +232,6 @@ void LoadCase::setInputData(LoadCase *loadCaseIn) {
     fW1 = loadCaseIn->fW1;
     fW2 = loadCaseIn->fW2;
 
-    muG = loadCaseIn->muG;
     P = loadCaseIn->P;
 
     // Temperatures

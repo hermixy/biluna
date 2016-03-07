@@ -27,6 +27,7 @@ Gasket_IN::Gasket_IN() : RB_Object(){
     dG1_EN13555 = 0;
     dG2_EN13555 = 0;
     eGt = 0;
+    muG = 0;
 
     K = 500000; // usual or 1,000,000 or 1,500,000 [N/mm]
     phiG = 0;

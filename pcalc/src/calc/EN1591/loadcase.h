@@ -42,7 +42,6 @@ public:
     double fS2;
     double fW1;
     double fW2;
-    double muG;
     double P;
     double T0;
     double TB;

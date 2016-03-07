@@ -32,16 +32,12 @@ PCALC_EN13555GasketWidget::~PCALC_EN13555GasketWidget() {
 }
 
 void PCALC_EN13555GasketWidget::init() {
+    RB_DatabaseTableWidget::init();
     setObjectName("PCALC_EN13555GasketWidget"); // ui is RB_DatabaseTableWidget
 
     QStringList items;
     items << tr("None") << "QminL" << "QsminL" << "PQR delta_eGC" << "EG eG";
     ui->cbProperty->addItems(items);
-
-    connect(ui->cbProperty, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(slotSetPropertyTable(int)));
-
-    ui->tableView->setToolButtonBar(ui->tbbData);
     ui->cbProperty->setCurrentIndex(0);
     readSettings();
 }

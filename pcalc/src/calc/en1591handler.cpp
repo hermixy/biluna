@@ -61,9 +61,6 @@ void EN1591Handler::setDimMatInput() {
             = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
 
-    // TODO: now calculation value from loadCase 0, change to assembly value only
-    mCalc->mAssembly->mF_Bspec = in->getValue("f_bspecified").toDouble();
-
     Flange* fl1 = mCalc->mAssembly->mFlange1;
     fl1->nB = in->getValue("nb").toInt();
     // typeflange1_id already used
@@ -175,6 +172,7 @@ void EN1591Handler::setDimMatInput() {
     gkt->dGout = in->getValue("dgout").toDouble();
     gkt->dG1_EN13555 = in->getValue("dg1en13555").toDouble(); // TODO: required?
     gkt->dG2_EN13555 = in->getValue("dg2en13555").toDouble(); // TODO: required?
+    gkt->muG = in->getValue("mug").toDouble();
     gkt->eGt = in->getValue("egt").toDouble();
     gkt->K = in->getValue("k").toDouble();
     gkt->phiG = in->getValue("phig").toDouble();
@@ -261,7 +259,10 @@ void EN1591Handler::setLoadCaseInput() {
         LoadCase* lc = mCalc->mAssembly->mLoadCaseList->createLoadCase();
 
         if (loadCaseNoMemory == 0) {
-            lc->F_Bspec = mCalc->mAssembly->mF_Bspec;
+            RB_ObjectContainer* inList
+                    = PR->getInOutContainer()->getContainer("PCALC_InputList");
+            RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
+            lc->F_Bspec = in->getValue("f_bspecified").toDouble();
             ++loadCaseNoMemory;
         }
 

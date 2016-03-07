@@ -272,8 +272,8 @@ void Flange_Blind::Calc_PhiF(int loadCaseNo) {
     double tmpVal1 = valF_B * hG + loadCase->F_Q *(1 - pow(rho, 3))
             * mGasket->dGe / 6;
     double tmpVal2 = loadCase->F_R *(1 - rho) * mGasket->dGe / 2;
-    double tmp_PhiF = std::max(fabs(tmpVal1 + tmpVal2),
-                        std::max(fabs(tmpVal1), fabs(tmpVal2))) / tmp_WF;
+    double tmp_PhiF = std::fmax(fabs(tmpVal1 + tmpVal2),
+                        std::fmax(fabs(tmpVal1), fabs(tmpVal2))) / tmp_WF;
     QString str = "max(abs(" + strF_B + " * hG + F_Q *(1 - rho ^ 3) * dGe / 6 "
                   "+ F_R *(1 - rho) * dGe / 2); max(abs(" + strF_B + " * hG "
                   "+ F_Q *(1 - rho ^ 3) * dGe / 6); "

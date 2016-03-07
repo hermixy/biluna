@@ -552,7 +552,7 @@ void AssemblyTest::Calc_F_GminTest() {
     // tmpVal1 = 5.9082
     target->mLoadCaseList->at(i)->mForce->M_AI = 7.8;
     target->mGasket->dGt = 20.1;
-    target->mLoadCaseList->at(i)->muG = 0.1;
+    target->mGasket->muG = 0.1;
     target->mLoadCaseList->at(i)->mForce->F_LI = 4.1;
     target->mLoadCaseList->at(i)->mForce->M_AI = 13.2;
     target->mLoadCaseList->at(i)->mForce->M_Z = 3.9;

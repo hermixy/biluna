@@ -33,6 +33,11 @@ RB_DatabaseTableWidget::RB_DatabaseTableWidget(QWidget *parent)
     mChartView = nullptr;
     mChartLayout = nullptr;
 
+    mModel = nullptr;
+    mScaleType = ScaleLinear;
+    mXfield = "";
+    mYfield = "";
+
     init();
 }
 
@@ -42,6 +47,14 @@ RB_DatabaseTableWidget::~RB_DatabaseTableWidget() {
 
 void RB_DatabaseTableWidget::init() {
     ui->tbbData->initSlimTable(true, false, true);
+    ui->tableView->setToolButtonBar(ui->tbbData);
+
+    connect(ui->cbProperty, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(slotSetPropertyTable(int)));
+    connect(ui->cbXcoord, SIGNAL(currentTextChanged(QString)),
+            this, SLOT(slotSetXcoord(QString)));
+    connect(ui->cbYcoord, SIGNAL(currentTextChanged(QString)),
+            this, SLOT(slotSetYcoord(QString)));
 }
 
 void RB_DatabaseTableWidget::setCodeManufacturer(RB_ObjectBase *obj) {
@@ -52,6 +65,8 @@ void RB_DatabaseTableWidget::setCodeManufacturer(RB_ObjectBase *obj) {
         mCodeManufId = obj->getId();
         ui->leManuf->setText(obj->getValue("manufacturer").toString());
     }
+
+    mModel = nullptr;
 }
 
 void RB_DatabaseTableWidget::setType(RB_ObjectBase *obj) {
@@ -62,6 +77,8 @@ void RB_DatabaseTableWidget::setType(RB_ObjectBase *obj) {
         mTypeId = obj->getId();
         ui->leType->setText(obj->getValue("type").toString());
     }
+
+    mModel = nullptr;
 }
 
 void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
@@ -75,6 +92,8 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
 
     if (!model) {
         return;
+    } else {
+        mModel = model;
     }
 
     // data series
@@ -82,6 +101,9 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
         delete mSeries;
         delete mMapper;
     }
+    mScaleType = scale;
+    mXfield = xField;
+    mYfield = yField;
 
     mSeries = new QLineSeries(mChart);
     mSeries->setName(yField + " " + tr("graph"));
@@ -151,3 +173,18 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
         ui->chartFrame->setLayout(mChartLayout);
     }
 }
+
+void RB_DatabaseTableWidget::slotSetXcoord(const QString& currentText) {
+    if (!mModel) {
+        return;
+    }
+    setChartModel(mModel, currentText, mYfield, mScaleType);
+}
+
+void RB_DatabaseTableWidget::slotSetYcoord(const QString& currentText) {
+    if (!mModel) {
+        return;
+    }
+    setChartModel(mModel, mXfield, currentText, mScaleType);
+}
+

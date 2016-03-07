@@ -28,8 +28,6 @@ public:
     Flange* mFlange1;
     Flange* mFlange2;
     LoadCaseList* mLoadCaseList;
-    double mF_Bspec; // transferred to loadcase(0)
-    double mQ_Aspec; // transferred to loadcase(0)
 };
 
 

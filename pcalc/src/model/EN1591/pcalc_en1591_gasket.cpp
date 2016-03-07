@@ -43,6 +43,7 @@ PCALC_EN1591_Gasket::~PCALC_EN1591_Gasket() {
  * \li dg1en13555 EN13555 test gasket inside diameter
  * \li dg2en13555 EN13555 test gasket outside diameter
  * \li egt theoretical thickness
+ * \li mug gasket flange friction coefficient
  * \li k stiffness of test rig
  * \li phig angle of triangular cross section gasket
  * \li r2 radius of oval or triangular cross section gasket
@@ -60,6 +61,7 @@ void PCALC_EN1591_Gasket::createMembers() {
     addMember("dg1en13555", "mm", 0.0, RB2::MemberDouble);
     addMember("dg2en13555", "mm", 0.0, RB2::MemberDouble);
     addMember("egt", "mm", 0.0, RB2::MemberDouble);
+    addMember("mug", "-", 0.0, RB2::MemberDouble);
     addMember("k", "-", 0.0, RB2::MemberDouble);
     addMember("phig", "-", 0.0, RB2::MemberDouble);
     addMember("r2", "mm", 0.0, RB2::MemberDouble);

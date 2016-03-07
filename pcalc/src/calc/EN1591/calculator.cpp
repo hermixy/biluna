@@ -107,6 +107,7 @@ void Calculator::exec() {
 
     mIterNo = 0;
     mLoadCaseCount = assembly->mLoadCaseList->size();
+    LoadCase* loadCase0 = assembly->mLoadCaseList->at(0);
 
     F3_to_24(assembly);
     F25_to_40(assembly);
@@ -120,7 +121,7 @@ void Calculator::exec() {
 
     while (!(isFG0largerFG0req && isFG0approximateFG0req)
            && counter < 10
-           && (counter < 1 || assembly->mF_Bspec <= 0.0)) {
+           && (counter < 1 || loadCase0->F_Bspec <= 0.0)) {
         int loadCaseNo = 0;
 
         // Outside loop
@@ -131,8 +132,8 @@ void Calculator::exec() {
         isFG0approximateFG0req = assembly->Is_F_G0act_within_0_1_percent_of_F_G0req();
 
         if (!(isFG0largerFG0req && isFG0approximateFG0req)
-                && (assembly->mF_Bspec <= 0.0)) {
-            LoadCase* loadCase0 = assembly->mLoadCaseList->at(loadCaseNo);
+                && (loadCase0->F_Bspec <= 0.0)) {
+            loadCase0 = assembly->mLoadCaseList->at(loadCaseNo);
             loadCase0->F_G = loadCase0->F_Greq;
             PR->addDetail("After_F. 108", "F_G",
                           "F_Greq (new initial force)",
@@ -383,7 +384,7 @@ void Calculator::F90_to_102(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_R(loadCaseNo);
 //    assembly->Calc_lB(); already before Formula 42
     assembly->Calc_dUI(loadCaseNo);
-    assembly->Calc_Q_G(loadCaseNo); // for determining EG Formula 100
+    assembly->Calc_Q_G(loadCaseNo); // extra for determining EG Formula 100
     assembly->mGasket->Calc_E_G(loadCaseNo);
     assembly->Calc_YB(loadCaseNo);
     assembly->Calc_YG(loadCaseNo);
@@ -431,7 +432,7 @@ void Calculator::F119_to_119(Assembly* assembly) {
 void Calculator::F120_to_122(Assembly* assembly, int loadCaseNo) {
     assembly->Calc_F_G(loadCaseNo);
     assembly->Calc_F_B(loadCaseNo);
-    assembly->Calc_Q_G(loadCaseNo); // 3rd time?
+    assembly->Calc_Q_G(loadCaseNo); // to calculate the subsequent conditions
 //    assembly->Calc_F_Bmax(loadCaseNo);
 //    assembly->Calc_F_Gmax(loadCaseNo);
 }

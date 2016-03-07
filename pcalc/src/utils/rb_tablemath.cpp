@@ -59,23 +59,46 @@ double RB_TableMath::getBilinearValue(
     double val2 = 0.0;
     double p2Y = 0.0;
 
-    if (p12X == p11X && p22X == p21X) {
+    if (p12X == p11X) {
         // now p11val and p12val normally should be the same,
         // same for p21val p22val
         val1 = (p11val + p12val) / 2;
-        val2 = (p21val + p22val) / 2;
         p1Y = p11Y;
-        p2Y = p21Y;
     } else {
         val1 = (p12X - valX) / (p12X - p11X) * p11val
                 + (valX - p11X) / (p12X - p11X) * p12val;
-        val2 = (p22X - valX) / (p22X - p21X) * p21val
-                + (valX - p21X) / (p22X - p21X) * p22val;
         p1Y = (p12X - valX) / (p12X - p11X) * p11Y
                 + (valX - p11X) / (p12X - p11X) * p12Y;
+
+    }
+
+    if (p22X == p21X) {
+        val2 = (p21val + p22val) / 2;
+        p2Y = p21Y;
+    } else {
+        val2 = (p22X - valX) / (p22X - p21X) * p21val
+                + (valX - p21X) / (p22X - p21X) * p22val;
         p2Y = (p22X - valX) / (p22X - p21X) * p21Y
                 + (valX - p21X) / (p22X - p21X) * p22Y;
     }
+
+//    if (p12X == p11X && p22X == p21X) {
+//        // now p11val and p12val normally should be the same,
+//        // same for p21val p22val
+//        val1 = (p11val + p12val) / 2;
+//        val2 = (p21val + p22val) / 2;
+//        p1Y = p11Y;
+//        p2Y = p21Y;
+//    } else {
+//        val1 = (p12X - valX) / (p12X - p11X) * p11val
+//                + (valX - p11X) / (p12X - p11X) * p12val;
+//        val2 = (p22X - valX) / (p22X - p21X) * p21val
+//                + (valX - p21X) / (p22X - p21X) * p22val;
+//        p1Y = (p12X - valX) / (p12X - p11X) * p11Y
+//                + (valX - p11X) / (p12X - p11X) * p12Y;
+//        p2Y = (p22X - valX) / (p22X - p21X) * p21Y
+//                + (valX - p21X) / (p22X - p21X) * p22Y;
+//    }
 
     double value = 0.0;
 

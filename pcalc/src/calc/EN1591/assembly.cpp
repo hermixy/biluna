@@ -12,7 +12,6 @@ Assembly_IN::Assembly_IN() : RB_Object() {
     mFlange1 = NULL;
     mFlange2 = NULL;
     mLoadCaseList = NULL;
-    mF_Bspec = 0.0;
 }
 
 Assembly_IN::~Assembly_IN() {
@@ -32,9 +31,9 @@ Assembly::Assembly() : Assembly_OUT() {
  * Figure 4
  */
 void Assembly::Calc_dG1() {
-    double fl1 = std::max(std::max(mFlange1->d0,
+    double fl1 = std::fmax(std::fmax(mFlange1->d0,
                                    mFlange1->dREC), mGasket->dGin);
-    mGasket->dG1 = std::max(std::max(mFlange2->d0,
+    mGasket->dG1 = std::fmax(std::fmax(mFlange2->d0,
                             mFlange2->dREC), fl1);
     PR->addDetail("Before_F. 51", "dG1", "max(d0(1,2); dREC(1,2)); dGin)",
                   mGasket->dG1, "mm", "max(" + QN(mFlange1->d0) + ";  "
@@ -539,13 +538,13 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
 
         double tmpVal2 = 0;
         QString tmpVal2Str = "";
-        double muG = loadCase->muG;
+        double muG = mGasket->muG;
 
-        if (muG <= 0) {
-            TableEProperty* table = new TableEProperty(); // TODO: from database
-            muG = table->getTableE_muG(mGasket->insType);
-            delete table;
-        }
+//        if (muG <= 0) {
+//            TableEProperty* table = new TableEProperty(); // TODO: from database
+//            muG = table->getTableE_muG(mGasket->insType);
+//            delete table;
+//        }
 
         tmpVal2 = loadCase->mForce->F_LI / muG
                 + 2 * loadCase->mForce->M_Z / (muG * mGasket->dGt);
@@ -562,7 +561,7 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
         double tmpVal3 = -(loadCase->F_Q + loadCase->F_R);
         QString tmpVal3Str = "-("+ QN(loadCase->F_Q) + " + "
                 + QN(loadCase->F_R) + ")";
-        loadCase->F_Gmin = std::max(std::max(tmpVal1, tmpVal2), tmpVal3);
+        loadCase->F_Gmin = std::fmax(std::fmax(tmpVal1, tmpVal2), tmpVal3);
         PR->addDetail("Formula 104", "F_Gmin",
                       "max(max(AGe * Q_sminL, "
                       "F_LI / muG + 2 * M_Z / (muG * dGt) - 2 * M_AI / dGt), "
@@ -610,7 +609,7 @@ void Assembly::Calc_F_Gdelta(int loadCaseNo) {
                   + ") + " + QN(loadCase->dUI) + " + " + QN(loadCase->delta_eGc)
                   + ") / " + QN(mLoadCaseList->at(0)->Y_G), loadCaseNo);
     mLoadCaseList->at(0)->F_Gdelta =
-            std::max(mLoadCaseList->at(0)->F_Gdelta, tmpF_Gdelta);
+            std::fmax(mLoadCaseList->at(0)->F_Gdelta, tmpF_Gdelta);
     PR->addDetail("Formula 105",
                   "F_Gdelta", "max(F_Gdelta; tmpF_Gdelta)",
                   mLoadCaseList->at(0)->F_Gdelta, "N",
@@ -624,7 +623,7 @@ void Assembly::Calc_F_Gdelta(int loadCaseNo) {
 void Assembly::Calc_F_G0req() {
     int loadCaseNo = 0;
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    loadCase->F_Greq = std::max(loadCase->F_Gmin, loadCase->F_Gdelta);
+    loadCase->F_Greq = std::fmax(loadCase->F_Gmin, loadCase->F_Gdelta);
     PR->addDetail("Formula 107", "F_Greq", "max(F_Gmin, F_Gdelta))",
                   loadCase->F_Greq, "N",
                   "max(" + QN(loadCase->F_Gmin) + "; "
@@ -667,14 +666,15 @@ bool Assembly::Is_F_G0act_within_0_1_percent_of_F_G0req() {
     bool result = false;
     int loadCaseNo = 0;
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-    result = loadCase->F_Greq <= loadCase->F_G
-            && loadCase->F_G <= loadCase->F_Greq * 1.001; // 0.1%
+    double FGreq = loadCase->F_Greq;
+    double FG = loadCase->F_G;
+    result = FGreq <= FG && FG <= FGreq * 1.001; // 0.1%
     PR->addDetail("Formula 110",
                   "result110", "F_Greq &lt;= F_G And F_G &lt;= F_Greq * 1.001",
                   static_cast<int>(result), "-",
-                  QN(loadCase->F_Greq) + " &lt;= " + QN(loadCase->F_G)
-                  + " &amp;&amp; " + QN(loadCase->F_G)
-                  + " &lt;= " + QN(loadCase->F_Greq) + " * 1.001", loadCaseNo);
+                  QN(FGreq) + " &lt;= " + QN(FG)
+                  + " &amp;&amp; " + QN(FG)
+                  + " &lt;= " + QN(FGreq) + " * 1.001", loadCaseNo);
     return result;
 }
 
@@ -854,7 +854,7 @@ void Assembly::Calc_F_G0d_2() {
     }
 
     // TODO: the second argument does almost nothing
-    loadCase->F_Gd = std::max(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
+    loadCase->F_Gd = std::fmax(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",
                   "max(" + varStr + "; (2 / 3) "
@@ -883,7 +883,7 @@ void Assembly::Calc_F_G0d() {
     }
 
     // TODO: the second argument does almost nothing
-    loadCase->F_Gd = std::max(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
+    loadCase->F_Gd = std::fmax(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",
                   "max(" + varStr + "; (2 / 3) "

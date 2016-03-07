@@ -300,6 +300,7 @@ void PCALC_EN1591Widget::init() {
     mGasketMapper->addMapping(ledG1_EN13555, mGasketModel->fieldIndex("dg1en13555"));
     mGasketMapper->addMapping(ledG2_EN13555, mGasketModel->fieldIndex("dg2en13555"));
     mGasketMapper->addMapping(leeGt, mGasketModel->fieldIndex("egt"));
+    mGasketMapper->addMapping(lemuG, mGasketModel->fieldIndex("mug"));
     mGasketMapper->addMapping(leK, mGasketModel->fieldIndex("k"));
     mGasketMapper->addMapping(lephiG, mGasketModel->fieldIndex("phig"));
     mGasketMapper->addMapping(ler2, mGasketModel->fieldIndex("r2"));
@@ -798,6 +799,7 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "dg1en13555", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg2en13555", "-", mGasketModel);
     addObjectMemberVariable(objIn, "egt", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "mug", "-", mGasketModel);
     addObjectMemberVariable(objIn, "k", "-", mGasketModel);
     addObjectMemberVariable(objIn, "phig", "-", mGasketModel);
     addObjectMemberVariable(objIn, "r2", "-", mGasketModel);

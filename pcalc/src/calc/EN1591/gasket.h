@@ -94,6 +94,7 @@ public:
     double dG1_EN13555;
     double dG2_EN13555;
     double eGt;
+    double muG;
     double K; // stiffness of test rig, usually 500 kN/mm or 1500 kN/mm
 
     double phiG;
