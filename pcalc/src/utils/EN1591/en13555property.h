@@ -61,25 +61,14 @@ public:
     double get_eG(double gasketPressure, double designTemp);
     double get_EG(double gasketPressure, double designTemp);
     double get_Qsmax(double designTemp);
-    double get_QsminL(double leakageRate, double QA, double designPressure);
-
-
-    double get_QminL(const RB_String& gasketIdx, double leakageRate,
-                    double designPressure);
-
-
-
-
-    // continue here ... how to allow for custom and tables 2-16 selection?
-//    RB_String gasketId(const RB_String& manufacturer,
-//                       const RB_String& gasketIdx);
-
+    double get_QsminL(double leakageRate, double QA, double testPressure);
+    double get_QminL(double leakageRate, double testPressure);
 
 private:
     EN13555Property();
 
     bool loadGasket(const QString& gasketId);
-    double closestInnerPressureBar(double designPressure);
+    double closestInnerPressureBar(double testPressure);
     double getMaxLinInterpValue(RB_ObjectContainer* fromObjC,
                                 const QString& xField, const QString& yField,
                                 double xValue, const QString& extraField = "",

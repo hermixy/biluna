@@ -85,9 +85,9 @@
 <tr><td>scatter for global load above nom. value</td><td>e<sub>-</sub></td><td id="{$etanminus}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 <tr><td>min. bolt force</td><td>F<sub>B0min</sub></td><td id="{$F_Bmin[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td>nominal bolt force</td><td>F<sub>B0nom</sub></td><td id="{$F_Bnom[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
-<tr><td>check of min.bolt force</td><td>F<sub>B0req</sub></td><td id="{$result114}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 <tr><td>max. bolt force</td><td>F<sub>B0max</sub></td><td id="{$F_Bmax[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td>max. gasket force</td><td>F<sub>G0max</sub></td><td id="{$F_Gmax}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
+<tr><td>check of min.bolt force F<sub>B0req</sub></td><td>-</td><td id="{$result114}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 
 <tr><td><h4>required forces in subsequent condition</h4></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td>max. gasket force</td><td>F<sub>G0d</sub></td><td id="{$F_Gd[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
@@ -101,7 +101,8 @@
 <table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>compliance of min. required gasket stress</td><td>Qmin&gt;Qsmin</td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td>-</td></tr>
+<tr><td>min. required gasket stress</td><td>Q<sub>minL</sub>/Q<sub>sminL</sub></td><td id="{$Q_minL[0]}">&nbsp;</td><td id="{$Q_sminL[1]}">&nbsp;</td><td id="{$Q_sminL[2]}">&nbsp;</td><td id="{$Q_sminL[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>compliance of min. required gasket stress</td><td>Qmin&gt;Qsmin</td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[3]}">&nbsp;</td><td>-</td></tr>
 </tbody></table>
 
 <h3>Checking the admissibility of the load ratio</h3>

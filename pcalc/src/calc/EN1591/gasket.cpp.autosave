@@ -294,10 +294,13 @@ void Gasket::Calc_Q_A_Qsmin(int loadCaseNo) {
     LoadCase* loadCase1 = mLoadCaseList->at(1); // test condition
 
     if (loadCaseNo == 0) {
-        loadCase0->Q_minL = EN13555PROPERTY->get_QminL(mLeakageRate,
-                                                       loadCase1->P);
-        PR->addDetail("Before_F. 103", "Q_minL", "Table value",
-                      loadCase0->Q_minL, "N/mm2", "Table value", loadCaseNo);
+        if (mLeakageRate > 0) { // otherwise test TODO: clean up this code
+            loadCase0->Q_minL = EN13555PROPERTY->get_QminL(mLeakageRate,
+                                                           loadCase1->P);
+            PR->addDetail("Before_F. 103", "Q_minL", "Table value",
+                          loadCase0->Q_minL, "N/mm2", "Table value", loadCaseNo);
+        }
+        
         if (loadCase0->F_Bspec > 0) {
             // cannot be done in Calc_F_GInitial_1() because AGe is not known
             // F_G0 is set at Formula 1

@@ -168,39 +168,38 @@ double EN13555Property::get_Qsmax(double designTemp) {
 }
 
 double EN13555Property::get_QsminL(double leakageRate, double QA,
-                                   double designPressure) {
+                                   double testPressure) {
     if (!mCurrentGasket) {
         RB_DEBUG->error("EN13555Property::get_QsminL() "
                         "mCurrentGasket NULL ERROR");
         return 0.0;
     }
 
-    double testPressure =
-            EN13555PROPERTY->closestInnerPressureBar(designPressure);
+    double testP =
+            EN13555PROPERTY->closestInnerPressureBar(testPressure);
     double QsminL = getBilInterpValue(
                 mCurrentGasket->getContainer("PCALC_EN13555QsminLList"),
                 "leakrate", "qa", "qsminl",
-                leakageRate, QA, "testpress", testPressure);
+                leakageRate, QA, "testpress", testP);
 
     return QsminL;
 }
 
-double EN13555Property::get_QminL(const RB_String& gasketIdx, double leakageRate,
-                                 double designPressure) {
-//    bool existing = false;
+double EN13555Property::get_QminL(double leakageRate, double testPressure) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_QminL() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
 
-//    for (std::vector<QminLQsminLProperty*>::iterator it = mList.begin();
-//                it != mList.end() && !existing; it++) {
-//        QminLQsminLProperty* tmpObj = (*it);
+    double testP =
+            EN13555PROPERTY->closestInnerPressureBar(testPressure);
+    double QminL = getLinInterpValue(
+                mCurrentGasket->getContainer("PCALC_EN13555QminLList"),
+                "leakrate", "qminl",
+                leakageRate, "testpress", testP);
 
-//        if (tmpObj->mLeakageRate == leakageRate
-//                && tmpObj->mMaterialCode == materialCode
-//                && tmpObj->mdesignPressure == designPressure) {
-//            return tmpObj->mQminL;
-//        }
-//    }
-
-    return -1.0;
+    return QminL;
 }
 
 bool EN13555Property::loadGasket(const QString& gasketId) {
@@ -212,10 +211,10 @@ bool EN13555Property::loadGasket(const QString& gasketId) {
 /**
  * Determine closest inner test pressure from EN13555 data. Test pressures
  * usually are 10 or 40 bar
- * @param designPressure the assembly design pressure [N/mm2]
+ * @param testPressure the assembly test pressure [N/mm2]
  * @return closest inner test pressure [N/mm2]
  */
-double EN13555Property::closestInnerPressureBar(double designPressure) {
+double EN13555Property::closestInnerPressureBar(double testPressure) {
     if (!mCurrentGasket) {
         RB_DEBUG->error("EN13555Property::closestInnerPressureBar() "
                         "mCurrentGasket NULL ERROR");
@@ -225,14 +224,14 @@ double EN13555Property::closestInnerPressureBar(double designPressure) {
     RB_ObjectContainer* objC =
             mCurrentGasket->getContainer("PCALC_EN13555QminLList");
     RB_ObjectIterator* iter = objC->createIterator();
-    double designPressureBar = PCALC2::MPaToBar(designPressure);
+    double testPressureBar = PCALC2::MPaToBar(testPressure);
     double closestPressureBar = 0.0;
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
         double pressureBar = obj->getValue("testpress").toDouble();
-        if (std::abs(designPressureBar - pressureBar)
-                < std::abs(designPressureBar - closestPressureBar)) {
+        if (std::abs(testPressureBar - pressureBar)
+                < std::abs(testPressureBar - closestPressureBar)) {
             closestPressureBar = pressureBar;
         }
     }
