@@ -16,29 +16,7 @@
 #include "rb_namespace.h"
 #include "rb_tablemath.h"
 #include "rb_utility.h"
-
 NAMESPACE_BILUNA_CALC_EN1591
-
-/**
- * @brief EN13555 properties QminL QsminL Qsmax Pqr deltaEgc EG eG
- */
-//class QminLQsminLProperty {
-
-//public:
-//    QminLQsminLProperty(double leakageRate,
-//                        const RB_String& materialCode,
-//                        double testPressure,
-//                        double QA,
-//                        double QminL,
-//                        double QsminL);
-//    double mLeakageRate;
-//    RB_String mMaterialCode;
-//    double mTestPressure;
-//    double mQA;
-//    double mQminL;
-//    double mQsminL;
-//};
-
 
 #define EN13555PROPERTY EN13555Property::getInstance()
 
@@ -54,6 +32,7 @@ public:
     static EN13555Property* getInstance();
 
     bool setCurrentGasket(const QString& gasketIdx);
+    bool isValid();
     void refresh() {}
 
     double get_deltaeGc(double gasketPressure, double designTemp);

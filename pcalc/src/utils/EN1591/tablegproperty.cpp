@@ -1,4 +1,5 @@
 ﻿#include "tablegproperty.h"
+#include "pcalc_utilityfactory.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
 Q0min_m_Property::Q0min_m_Property(Gasket::InsFilLayMatType insFillMat,
@@ -8,8 +9,12 @@ Q0min_m_Property::Q0min_m_Property(Gasket::InsFilLayMatType insFillMat,
     mM = m;
 }
 
-TableGProperty::TableGProperty() {
-    CreateList();
+TableGProperty* TableGProperty::mActiveUtility = 0;
+
+TableGProperty::TableGProperty() : RB_Utility() {
+    RB_DEBUG->print("TableGProperty::TableGProperty()");
+    createList();
+    PCALC_UTILITYFACTORY->addUtility(this);
 }
 
 TableGProperty::~TableGProperty() {
@@ -17,6 +22,16 @@ TableGProperty::~TableGProperty() {
                 it != mList.end(); it++) {
         delete (*it);
     }
+    RB_DEBUG->print("~TableGProperty::TableGProperty()");
+}
+
+TableGProperty* TableGProperty::getInstance() {
+    if (!mActiveUtility) {
+        mActiveUtility = new TableGProperty();
+        mActiveUtility->refresh();
+    }
+
+    return mActiveUtility;
 }
 
 double TableGProperty::getTableG_Q0min(Gasket::InsFilLayMatType insType) {
@@ -51,7 +66,7 @@ Q0min_m_Property* TableGProperty::getPropertyObject(Gasket::InsFilLayMatType ins
     return NULL;
 }
 
-void TableGProperty::CreateList() {
+void TableGProperty::createList() {
     // Gasket::NonMetalic
     mList.push_back(new Q0min_m_Property(Gasket::Rubber, 0.5, 0.9));
     mList.push_back(new Q0min_m_Property(Gasket::Ptfe, 10, 1.3));

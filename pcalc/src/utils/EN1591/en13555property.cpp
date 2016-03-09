@@ -35,7 +35,7 @@ EN13555Property::~EN13555Property() {
     mGasketList = nullptr;
 
     PCALC_UTILITYFACTORY->removeUtility(this);
-    mActiveUtility = NULL;
+    mActiveUtility = nullptr;
     RB_DEBUG->print("EN13555Property::~EN13555Property()");
 }
 
@@ -61,6 +61,14 @@ bool EN13555Property::setCurrentGasket(const QString& gasketIdx) {
     }
 
     return success;
+}
+
+/**
+ * @brief EN13555Property::isValid
+ * @return true if valid gasket object
+ */
+bool EN13555Property::isValid() {
+    return mCurrentGasket != nullptr;
 }
 
 /**
@@ -205,7 +213,19 @@ double EN13555Property::get_QminL(double leakageRate, double testPressure) {
 bool EN13555Property::loadGasket(const QString& gasketId) {
     QSqlDatabase db = PCALC_MODELFACTORY->getStandardDatabase();
     mCurrentGasket = mGasketList->newObject(gasketId);
-    return mCurrentGasket->dbRead(db, RB2::ResolveAll);
+    bool success = mCurrentGasket->dbRead(db, RB2::ResolveAll);
+
+    // check if reading data of gasket has been successfull
+    RB_ObjectContainer* objC =
+            mCurrentGasket->getContainer("PCALC_EN13555QsminLList");
+
+    if (success && objC && objC->objectCount() > 0) {
+        return true;
+    }
+
+    mGasketList->remove(mCurrentGasket);
+    mCurrentGasket = nullptr;
+    return false;
 }
 
 /**

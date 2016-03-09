@@ -708,14 +708,32 @@ void Assembly::Calc_F_B0nom() {
 
     if (mBolt->tType != Bolt::ManualStandardRing) {
         // Use required bolt as starting point
-        loadCase->F_Bmin = loadCase->F_Breq;
-        PR->addDetail("Formula 114", "F_Bmin", "F_Breq",
-                      loadCase->F_Bmin, "N", QN(loadCase->F_Breq), loadCaseNo);
-        loadCase->F_Bnom = loadCase->F_Breq / (1 - mBolt->etanminus);
-        PR->addDetail("Formula 115", "F_Bnom", "F_Breq / (1 - etanminus)",
-                      loadCase->F_Bnom, "N",
-                      QN(loadCase->F_Breq) + " / (1 - "
-                      + QN(mBolt->etanminus) + ")", loadCaseNo);
+        double F_Bcurrent = 0.0;
+
+        if (loadCase->F_Bspec > 0.0) {
+            // override setting of F_B0min in case of user specified F_Bspec
+            F_Bcurrent = loadCase->F_Bspec;
+            loadCase->F_Bmin = F_Bcurrent * (1 - mBolt->etanminus);
+            PR->addDetail("Formula 114 (alt)", "F_Bmin",
+                          "F_Bspec * (1 - etanminus)", loadCase->F_Bmin, "N",
+                          QN(loadCase->F_Bspec) + " / (1 - "
+                          + QN(mBolt->etanminus) + ")", loadCaseNo);
+            loadCase->F_Bnom = F_Bcurrent;
+            PR->addDetail("Formula 115 (alt)", "F_Bnom", "F_Bspec",
+                          loadCase->F_Bnom, "N", QN(loadCase->F_Bspec),
+                          loadCaseNo);
+        } else {
+            F_Bcurrent = loadCase->F_Breq;
+            loadCase->F_Bmin = F_Bcurrent;
+            PR->addDetail("Formula 114", "F_Bmin", "F_Breq",
+                          loadCase->F_Bmin, "N", QN(loadCase->F_Breq), loadCaseNo);
+            loadCase->F_Bnom = F_Bcurrent / (1 - mBolt->etanminus);
+            PR->addDetail("Formula 115", "F_Bnom", "F_Breq / (1 - etanminus)",
+                          loadCase->F_Bnom, "N",
+                          QN(loadCase->F_Breq) + " / (1 - "
+                          + QN(mBolt->etanminus) + ")", loadCaseNo);
+        }
+
     } else {
         // Use uncontrolled standard ring, F_Bav already calculated
         // Formula B.2, 116, 0.5 is fixed e1+ and e1-
@@ -724,7 +742,6 @@ void Assembly::Calc_F_B0nom() {
                       "etanminus", "0.5 *(1 + 3 / (nB ^ 0.5)) / 4",
                       etanplusminus, "-",
                       "0.5 *(1 + 3 / (" + QN(mFlange1->nB) + " ^ 0.5)) / 4");
-
 
         loadCase->F_Bnom = loadCase->F_Bav; // already calculated
         PR->addDetail("Formula 116",
@@ -846,7 +863,7 @@ void Assembly::Calc_F_G0d_2() {
     LoadCase* loadCase = mLoadCaseList->at(0);
     double tmpF_G = loadCase->F_Bmin;
     QString varStr = "F_Bmin";
-    QString forStr = "Formula 119 (2)";
+    QString forStr = "Formula 119 (=F.2)";
 
     if (loadCase->F_Bspec <= 0.0) {
         // refer also to Formula 1,2,54,119
@@ -865,6 +882,9 @@ void Assembly::Calc_F_G0d_2() {
                   + ") * " + QN(loadCase->F_Bmax) + " - "
                   + QN(loadCase->F_R) + ")",
                   0);
+    PR->addDetail(forStr, "F_GdCheck", "F_Gd > F_Gdelta",
+                  loadCase->F_Gd > loadCase->F_Gdelta ? 1 : 0, "-",
+                  QN(loadCase->F_Gd) + " > " + QN(loadCase->F_Gdelta), 0);
 }
 
 /**
@@ -894,6 +914,9 @@ void Assembly::Calc_F_G0d() {
                   + ") * " + QN(loadCase->F_Bmax) + " - "
                   + QN(loadCase->F_R) + ")",
                   0);
+    PR->addDetail(forStr, "F_GdCheck", "F_Gd > F_Gdelta",
+                  loadCase->F_Gd > loadCase->F_Gdelta ? 1 : 0, "-",
+                  QN(loadCase->F_Gd) + " > " + QN(loadCase->F_Gdelta), 0);
 }
 
 /**
@@ -1241,6 +1264,10 @@ void Assembly::Calc_F_GImaxmin(int loadCaseNo) {
                       loadCaseI->Q_GmaxA, "N",
                       QN(loadCaseI->F_GmaxA) + " / " + QN(mGasket->AGe),
                       loadCaseNo);
+        PR->addDetail("After_F. 151", "Q_GminCheck", "Q_GminA >= Q_minL",
+                      loadCaseI->Q_GminA >= loadCaseI->Q_minL ? 1 : 0, "-",
+                      QN(loadCaseI->Q_GminA) + " >= " + QN(loadCaseI->Q_minL),
+                      loadCaseNo);
     } else {
         double tmpF_G = loadCaseI->F_Q * loadCaseI->Y_Q +
                 (loadCaseI->F_R * loadCaseI->Y_R - loadCase0->F_R
@@ -1272,12 +1299,11 @@ void Assembly::Calc_F_GImaxmin(int loadCaseNo) {
                       loadCaseI->Q_GmaxA, "N",
                       QN(loadCaseI->F_GmaxA) + " / " + QN(mGasket->AGe),
                       loadCaseNo);
+        PR->addDetail("After_F. 151", "Q_GminCheck", "Q_GminA >= Q_sminL",
+                      loadCaseI->Q_GminA >= loadCaseI->Q_sminL ? 1 : 0, "-",
+                      QN(loadCaseI->Q_GminA) + " >= " + QN(loadCaseI->Q_sminL),
+                      loadCaseNo);
     }
-
-    PR->addDetail("After_F. 151", "Q_GminCheck", "Q_GminA >= Q_Gmin",
-                  loadCaseI->Q_GminA >= loadCaseI->Q_G ? 1 : 0, "-",
-                  QN(loadCaseI->Q_GminA) + " >= " + QN(loadCaseI->Q_G),
-                  loadCaseNo);
 }
 
 /**

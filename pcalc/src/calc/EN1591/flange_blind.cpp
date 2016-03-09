@@ -15,16 +15,17 @@ Flange_Blind::~Flange_Blind() {
  * @return
  */
 bool Flange_Blind::Is_flange_Valid() {
+    QString str = "0.2 &lt;= bF / eF AND bF / eF &lt;= 5.0";
     if (0.2 <= bF / eF && bF / eF <= 5.0) {
         PR->addDetail("Before_F. 1 Para 4.2", "result1(" + QN(mFlangeNumber) + ")",
-                      "Is flange valid?", 1, "-",
+                      str, 1, "-",
                       "0.2 &lt;= " + QN(bF) + " / " + QN(eF) + " AND "
                       + QN(bF) + " / " + QN(eF) + " &lt;= 5.0");
         return true;
     }
 
     PR->addDetail("Before_F. 1 Para 4.2", "result1(" + QN(mFlangeNumber) + ")",
-                  "Is flange valid?", 0, "-",
+                  str, 0, "-",
                   "0.2 &lt;= " + QN(bF) + " / " + QN(eF) + " AND "
                   + QN(bF) + " / " + QN(eF) + " &lt;= 5.0");
     return false;

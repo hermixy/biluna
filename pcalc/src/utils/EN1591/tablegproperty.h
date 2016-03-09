@@ -4,7 +4,7 @@
 #include <vector>
 #include "gasket.h"
 #include "rb_namespace.h"
-
+#include "rb_utility.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
 class Q0min_m_Property {
@@ -19,24 +19,31 @@ public:
     double mM;
 };
 
+#define TABLEGPROPERTY TableGProperty::getInstance()
+
 /**
  * The EN1591 table G.1 from Annex G with sealing parameters when
  * no leakage rate is specified.
  * - Q0min [MPa]
  * - m
  */
-class TableGProperty {
+class TableGProperty : public RB_Utility {
 
 public:
-    TableGProperty();
     virtual ~TableGProperty();
+    static TableGProperty* getInstance();
+
+    void refresh() {}
 
     double getTableG_Q0min(Gasket::InsFilLayMatType insType);
     double getTableG_m(Gasket::InsFilLayMatType insType);
 private:
-    void CreateList();
+    TableGProperty();
+
+    void createList();
     Q0min_m_Property* getPropertyObject(Gasket::InsFilLayMatType insType);
 
+    static TableGProperty* mActiveUtility;
     std::vector<Q0min_m_Property*> mList;
 };
 

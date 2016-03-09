@@ -18,6 +18,7 @@
 <tr><td>eff.diameter of flange ring</td><td>d<sub>F</sub></td><td id="{$dF(1)}">&nbsp;</td><td id="{$dF(2)}">&nbsp;</td><td>mm</td></tr>
 <tr><td>part of flange with radial pressure</td><td>e<sub>P</sub></td><td id="{$eP(1)}">&nbsp;</td><td id="{$eP(2)}">&nbsp;</td><td>mm</td></tr>
 <tr><td>equ.wall thickness for flexibility</td><td>e<sub>E</sub></td><td id="{$eE(1)}">&nbsp;</td><td id="{$eE(2)}">&nbsp;</td><td>mm</td></tr>
+<tr><td>validity flange dimensions</td><td>-</td><td id="{$result(1)}">&nbsp;</td><td id="{$result1(2)}">&nbsp;</td><td>-</td></tr>
 <tr><td>intermediate variable</td><td>&beta;</td><td id="{$beta(1)}">&nbsp;</td><td id="{$beta(2)}">&nbsp;</td><td>-</td></tr>
 <tr><td>mean diameter shell</td><td>d<sub>E</sub></td><td id="{$dE(1)}">&nbsp;</td><td id="{$dE(2)}">&nbsp;</td><td>mm</td></tr>
 <tr><td>lever arm correction</td><td>h<sub>P</sub></td><td id="{$hP(1)}">&nbsp;</td><td id="{$hP(2)}">&nbsp;</td><td>mm</td></tr>
@@ -78,7 +79,7 @@
 <tr><td>min.gasket force in sub.conditions</td><td>F<sub>GImin</sub></td><td>&nbsp;</td><td id="{$F_Gmin[1]}">&nbsp;</td><td id="{$F_Gmin[2]}">&nbsp;</td><td id="{$F_Gmin[3]}">&nbsp;</td><td>N</td></tr>
 
 <tr><td><h4>required force for assembly condition</h4></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-<tr><td>min. based on subsequent conditions</td><td>F<sub>Gdel</sub></td><td id="{$F_Gdelta[0]}">&nbsp;</td><td id="{$F_Gdelta[1]}">&nbsp;</td><td id="{$F_Gdelta[2]}">&nbsp;</td><td id="{$F_Gdelta[3]}">&nbsp;</td><td>N</td></tr>
+<tr><td>min. based on subsequent conditions</td><td>F<sub>Gdelta</sub></td><td id="{$F_Gdelta[0]}">&nbsp;</td><td id="{$F_Gdelta[1]}">&nbsp;</td><td id="{$F_Gdelta[2]}">&nbsp;</td><td id="{$F_Gdelta[3]}">&nbsp;</td><td>N</td></tr>
 <tr><td>min. gasket force for all conditions</td><td>F<sub>G0req</sub></td><td id="{$F_Greq[0]}">&nbsp;</td><td id="{$F_Greq[1]}"></td><td id="{$F_Greq[2]}"></td><td id="{$F_Greq[3]}"></td><td>N</td></tr>
 <tr><td>min. bolt force for all conditions</td><td>F<sub>B0req</sub></td><td id="{$F_Breq[0]}">&nbsp;</td><td id="{$F_Breq[1]}">&nbsp;</td><td id="{$F_Breq[2]}">&nbsp;</td><td id="{$F_Breq[3]}">&nbsp;</td><td>N</td></tr>
 <tr><td>scatter for global load above nom. value</td><td>e<sub>+</sub></td><td id="{$etanplus}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
@@ -87,22 +88,25 @@
 <tr><td>nominal bolt force</td><td>F<sub>B0nom</sub></td><td id="{$F_Bnom[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td>max. bolt force</td><td>F<sub>B0max</sub></td><td id="{$F_Bmax[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
 <tr><td>max. gasket force</td><td>F<sub>G0max</sub></td><td id="{$F_Gmax}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
-<tr><td>check of min.bolt force F<sub>B0req</sub></td><td>-</td><td id="{$result114}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>check of min.bolt force (Formula 114)</td><td>F<sub>B0min</sub>&gt;=F<sub>B0req</sub></td><td id="{$result114}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 
 <tr><td><h4>required forces in subsequent condition</h4></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td>max. gasket force</td><td>F<sub>G0d</sub></td><td id="{$F_Gd[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
-<tr><td>accumulation of plastic deformation</td><td></td><td>TODO:</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>accumulation of plastic deformation</td><td>F<sub>G0d</sub>&gt;F<sub>Gdelta</sub></td><td id="{$F_GdCheck[0]}">&nbsp;</td></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
 <tr><td>gasket force (Formula 120, 121)</td><td>F<sub>G</sub></td><td id="{$F_G[0]}">&nbsp;</td><td id="{$F_G[1]}">&nbsp;</td><td id="{$F_G[2]}">&nbsp;</td><td id="{$F_G[3]}">&nbsp;</td><td>N</td></tr>
 <tr><td>bolt force (Formula 122)</td><td>F<sub>B</sub></td><td id="{$F_B[0]}">&nbsp;</td><td id="{$F_B[1]}">&nbsp;</td><td id="{$F_B[2]}">&nbsp;</td><td id="{$F_B[3]}">&nbsp;</td><td>N</td></tr>
-<tr><td>gasket stress</td><td>Q<sub>G</sub></td><td id="{$Q_G[0]}">&nbsp;</td><td id="{$Q_G[1]}">&nbsp;</td><td id="{$Q_G[2]}">&nbsp;</td><td id="{$Q_G[3]}">&nbsp;</td><td>MPa</td></tr>
 </tbody></table>
 
 <h3>Check of thightness criteria</h3>
 <table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
-<tr><td>min. required gasket stress</td><td>Q<sub>minL</sub>/Q<sub>sminL</sub></td><td id="{$Q_minL[0]}">&nbsp;</td><td id="{$Q_sminL[1]}">&nbsp;</td><td id="{$Q_sminL[2]}">&nbsp;</td><td id="{$Q_sminL[3]}">&nbsp;</td><td>-</td></tr>
-<tr><td>compliance of min. required gasket stress</td><td>Qmin&gt;Qsmin</td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>gasket modulus of elasticity</td><td>E<sub>G</sub></td><td id="{$E_G[0]}">&nbsp;</td><td id="{$E_G[1]}">&nbsp;</td><td id="{$E_G[2]}">&nbsp;</td><td id="{$E_G[3]}">&nbsp;</td><td>MPa</td></tr>
+<tr><td>gasket compressed thickness</td><td>e<sub>G</sub></td><td id="{$eG[0]}">&nbsp;</td><td id="{$eG[1]}">&nbsp;</td><td id="{$eG[2]}">&nbsp;</td><td id="{$eG[3]}">&nbsp;</td><td>mm</td></tr>
+<tr><td>gasket stress</td><td>Q<sub>G</sub></td><td id="{$Q_G[0]}">&nbsp;</td><td id="{$Q_G[1]}">&nbsp;</td><td id="{$Q_G[2]}">&nbsp;</td><td id="{$Q_G[3]}">&nbsp;</td><td>MPa</td></tr>
+<tr><td>min. required gasket stress</td><td>Q<sub>minL</sub></td><td id="{$Q_minL[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>min. req. gasket stress subs. cond.</td><td>Q<sub>sminL</sub></td><td>&nbsp;</td><td id="{$Q_sminL[1]}">&nbsp;</td><td id="{$Q_sminL[2]}">&nbsp;</td><td id="{$Q_sminL[3]}">&nbsp;</td><td>MPa</td></tr>
+<tr><td>compliance of min. required gasket stress</td><td>Q<sub>min</sub>&gt;Q<sub>(s)minL</sub></td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[3]}">&nbsp;</td><td>-</td></tr>
 </tbody></table>
 
 <h3>Checking the admissibility of the load ratio</h3>
@@ -170,8 +174,8 @@
 <tr><td>&nbsp;</td><td>F<sub>Gmax</sub></td><td id="{$F_GmaxA[0]}">&nbsp;</td><td id="{$F_GmaxA[1]}">&nbsp;</td><td id="{$F_GmaxA[2]}">&nbsp;</td><td id="{$F_GmaxA[3]}">&nbsp;</td><td>N</td></tr>
 <tr><td>bolt force</td><td>F<sub>Bmin</sub></td><td id="{$F_BminA[0]}">&nbsp;</td><td id="{$F_BminA[1]}">&nbsp;</td><td id="{$F_BminA[2]}">&nbsp;</td><td id="{$F_BminA[3]}">&nbsp;</td><td>N</td></tr>
 <tr><td>&nbsp;</td><td>F<sub>Bmax</sub></td><td id="{$F_BmaxA[0]}">&nbsp;</td><td id="{$F_BmaxA[1]}">&nbsp;</td><td id="{$F_BmaxA[2]}">&nbsp;</td><td id="{$F_BmaxA[3]}">&nbsp;</td><td>N</td></tr>
-<tr><td>gasket stress</td><td>Q<sub>Gmin</sub></td><td id="{$Q_GminA[0]}">&nbsp;</td><td id="{$Q_GminA[1]}">&nbsp;</td><td id="{$Q_GminA[2]}">&nbsp;</td><td id="{$Q_GminA[3]}">&nbsp;</td><td>N/mm2</td></tr>
-<tr><td>&nbsp;</td><td>Q<sub>Gmax</sub></td><td id="{$Q_GmaxA[0]}">&nbsp;</td><td id="{$Q_GmaxA[1]}">&nbsp;</td><td id="{$Q_GmaxA[2]}">&nbsp;</td><td id="{$Q_GmaxA[3]}">&nbsp;</td><td>N/mm2</td></tr>
+<tr><td>gasket stress</td><td>Q<sub>Gmin</sub></td><td id="{$Q_GminA[0]}">&nbsp;</td><td id="{$Q_GminA[1]}">&nbsp;</td><td id="{$Q_GminA[2]}">&nbsp;</td><td id="{$Q_GminA[3]}">&nbsp;</td><td>N/mm<sup>2</sup></td></tr>
+<tr><td>&nbsp;</td><td>Q<sub>Gmax</sub></td><td id="{$Q_GmaxA[0]}">&nbsp;</td><td id="{$Q_GmaxA[1]}">&nbsp;</td><td id="{$Q_GmaxA[2]}">&nbsp;</td><td id="{$Q_GmaxA[3]}">&nbsp;</td><td>N/mm<sup>2</sup></td></tr>
 </tbody></table><br>
 
 </body></html>
