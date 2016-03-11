@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: pcalc_en13555manufacturer.h 0001 2016-01-25T21:20:35 rutger $
+ * $Id: std_en13555gasket.h 0001 2016-01-25T19:20:30 rutger $
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
  * This file is part of the Biluna PCALC project.
@@ -7,25 +7,25 @@
  * See http://www.biluna.com for further details.
  *****************************************************************/
 
-#ifndef PCALC_EN13555MANUFACTURER_H
-#define PCALC_EN13555MANUFACTURER_H
+#ifndef STD_EN13555GASKET_H
+#define STD_EN13555GASKET_H
 
 #include "rb_objectcontainer.h"
 
 /**
- * Gasket manufacturer
+ * Gasket type for EN13555 tests and EN1591 calculations
  */
-class PCALC_EN13555Manufacturer : public RB_ObjectContainer {
+class STD_EN13555Gasket : public RB_ObjectContainer {
 
 public:
-    PCALC_EN13555Manufacturer(const QString& id = "", RB_ObjectBase* p = NULL,
+    STD_EN13555Gasket(const QString& id = "", RB_ObjectBase* p = NULL,
                const QString& n = "", RB_ObjectFactory* f = NULL);
-    PCALC_EN13555Manufacturer(PCALC_EN13555Manufacturer* obj);
-    virtual ~PCALC_EN13555Manufacturer();
+    STD_EN13555Gasket(STD_EN13555Gasket* obj);
+    virtual ~STD_EN13555Gasket();
 
 private:
     void createMembers();
 
 };
 
-#endif /*PCALC_EN13555MANUFACTURER_H*/
+#endif /*STD_EN13555GASKET_H*/

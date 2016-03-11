@@ -2,12 +2,6 @@
 #include "en13445tableg.h"
 #include "en13555property.h"
 #include "pcalc_report.h"
-#include "table02_15property.h"
-#include "table16property.h"
-#include "table17_30property.h"
-#include "tableeproperty.h"
-#include "tablegproperty.h"
-#include "tablegsimple.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
 

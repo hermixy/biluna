@@ -1,6 +1,5 @@
 ﻿#include "assembly.h"
 #include "pcalc_report.h"
-#include "tableeproperty.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
 
@@ -540,12 +539,6 @@ void Assembly::Calc_F_Gmin(int loadCaseNo) {
         QString tmpVal2Str = "";
         double muG = mGasket->muG;
 
-//        if (muG <= 0) {
-//            TableEProperty* table = new TableEProperty(); // TODO: from database
-//            muG = table->getTableE_muG(mGasket->insType);
-//            delete table;
-//        }
-
         tmpVal2 = loadCase->mForce->F_LI / muG
                 + 2 * loadCase->mForce->M_Z / (muG * mGasket->dGt);
         tmpVal2Str = QN(loadCase->mForce->F_LI) + " / " + QN(muG) + " + 2 * "
@@ -861,8 +854,8 @@ void Assembly::Calc_F_G0max() {
  */
 void Assembly::Calc_F_G0d_2() {
     LoadCase* loadCase = mLoadCaseList->at(0);
-    double tmpF_G = loadCase->F_Bmin;
-    QString varStr = "F_Bmin";
+    double tmpF_G = loadCase->F_Bmin - loadCase->F_R;
+    QString varStr = "F_Bmin - F_R";
     QString forStr = "Formula 119 (=F.2)";
 
     if (loadCase->F_Bspec <= 0.0) {
@@ -883,8 +876,9 @@ void Assembly::Calc_F_G0d_2() {
                   + QN(loadCase->F_R) + ")",
                   0);
     PR->addDetail(forStr, "F_GdCheck", "F_Gd > F_Gdelta",
-                  loadCase->F_Gd > loadCase->F_Gdelta ? 1 : 0, "-",
-                  QN(loadCase->F_Gd) + " > " + QN(loadCase->F_Gdelta), 0);
+                  loadCase->F_Gd > loadCase->F_Bmin - loadCase->F_R ? 1 : 0,
+                  "-", QN(loadCase->F_Gd) + " > " + QN(loadCase->F_Bmin)
+                  + " - " + QN(loadCase->F_R), 0);
 }
 
 /**

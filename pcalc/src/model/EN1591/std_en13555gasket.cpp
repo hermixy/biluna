@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: pcalc_en13555gasket.cpp 0001 2016-01-25T19:20:30 rutger $
+ * $Id: std_en13555gasket.cpp 0001 2016-01-25T19:20:30 rutger $
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
  * This file is part of the Biluna PCALC project.
@@ -7,21 +7,21 @@
  * See http://www.biluna.com for further details.
  *****************************************************************/
 
-#include "pcalc_en13555gasket.h"
+#include "std_en13555gasket.h"
 
-PCALC_EN13555Gasket::PCALC_EN13555Gasket(const QString& id, RB_ObjectBase* p,
+STD_EN13555Gasket::STD_EN13555Gasket(const QString& id, RB_ObjectBase* p,
                     const QString& n, RB_ObjectFactory* f)
 					: RB_ObjectContainer (id, p, n, f) {
 	createMembers();
 }
 
-PCALC_EN13555Gasket::PCALC_EN13555Gasket(PCALC_EN13555Gasket* obj)
+STD_EN13555Gasket::STD_EN13555Gasket(STD_EN13555Gasket* obj)
                     : RB_ObjectContainer(obj) {
 	createMembers();
     *this = *obj;
 }
 
-PCALC_EN13555Gasket::~PCALC_EN13555Gasket() {
+STD_EN13555Gasket::~STD_EN13555Gasket() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
@@ -33,7 +33,7 @@ PCALC_EN13555Gasket::~PCALC_EN13555Gasket() {
  * \li testthickn test thickness [mm]
  * \li issue issue date or revision of datasheet
  */
-void PCALC_EN13555Gasket::createMembers() {
+void STD_EN13555Gasket::createMembers() {
     addMember("type", "-", "", RB2::MemberChar125);
     addMember("testoutdiam", "mm", 0.0, RB2::MemberDouble);
     addMember("testindiam", "mm", 0.0, RB2::MemberDouble);

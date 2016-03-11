@@ -20,7 +20,7 @@ EN13555Property* EN13555Property::mActiveUtility = 0;
 EN13555Property::EN13555Property() : RB_TableMath(), RB_Utility() {
     RB_DEBUG->print("EN13555Property::EN13555Property()");
     mGasketList = new RB_ObjectContainer("", nullptr,
-                                         "PCALC_EN13555GasketList",
+                                         "STD_EN13555GasketList",
                                          PCALC_OBJECTFACTORY);
     mCurrentGasket = nullptr;
 //    mTargetQA = 0.0;
@@ -86,7 +86,7 @@ double EN13555Property::get_deltaeGc(double gasketPressure,
     }
 
     double deltaeGc = getBilInterpValue(
-                mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
+                mCurrentGasket->getContainer("STD_EN13555PqrDeltaeGCList"),
                 "qg", "temp", "deltaegc",
                 gasketPressure, designTemp);
 
@@ -107,7 +107,7 @@ double EN13555Property::get_PQR(double gasketPressure, double designTemp) {
     }
 
     double P_QR = getBilInterpValue(
-                mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
+                mCurrentGasket->getContainer("STD_EN13555PqrDeltaeGCList"),
                 "qg", "temp", "pqr",
                 gasketPressure, designTemp);
 
@@ -128,7 +128,7 @@ double EN13555Property::get_eG(double gasketPressure, double designTemp) {
     }
 
     double eG = getBilInterpValue(
-                mCurrentGasket->getContainer("PCALC_EN13555EGeGList"),
+                mCurrentGasket->getContainer("STD_EN13555EGeGList"),
                 "qg", "temp", "eg",
                 gasketPressure, designTemp);
 
@@ -149,7 +149,7 @@ double EN13555Property::get_EG(double gasketPressure, double designTemp) {
     }
 
     double EG = getBilInterpValue(
-                mCurrentGasket->getContainer("PCALC_EN13555EGeGList"),
+                mCurrentGasket->getContainer("STD_EN13555EGeGList"),
                 "qg", "temp", "capitaleg",
                 gasketPressure, designTemp);
 
@@ -169,7 +169,7 @@ double EN13555Property::get_Qsmax(double designTemp) {
     }
 
     double Qsmax = getMaxLinInterpValue(
-                mCurrentGasket->getContainer("PCALC_EN13555PqrDeltaeGCList"),
+                mCurrentGasket->getContainer("STD_EN13555PqrDeltaeGCList"),
                 "temp", "qg", designTemp);
 
     return Qsmax;
@@ -186,7 +186,7 @@ double EN13555Property::get_QsminL(double leakageRate, double QA,
     double testP =
             EN13555PROPERTY->closestInnerPressureBar(testPressure);
     double QsminL = getBilInterpValue(
-                mCurrentGasket->getContainer("PCALC_EN13555QsminLList"),
+                mCurrentGasket->getContainer("STD_EN13555QsminLList"),
                 "leakrate", "qa", "qsminl",
                 leakageRate, QA, "testpress", testP);
 
@@ -203,7 +203,7 @@ double EN13555Property::get_QminL(double leakageRate, double testPressure) {
     double testP =
             EN13555PROPERTY->closestInnerPressureBar(testPressure);
     double QminL = getLinInterpValue(
-                mCurrentGasket->getContainer("PCALC_EN13555QminLList"),
+                mCurrentGasket->getContainer("STD_EN13555QminLList"),
                 "leakrate", "qminl",
                 leakageRate, "testpress", testP);
 
@@ -217,7 +217,7 @@ bool EN13555Property::loadGasket(const QString& gasketId) {
 
     // check if reading data of gasket has been successfull
     RB_ObjectContainer* objC =
-            mCurrentGasket->getContainer("PCALC_EN13555QsminLList");
+            mCurrentGasket->getContainer("STD_EN13555QsminLList");
 
     if (success && objC && objC->objectCount() > 0) {
         return true;
@@ -242,7 +242,7 @@ double EN13555Property::closestInnerPressureBar(double testPressure) {
     }
 
     RB_ObjectContainer* objC =
-            mCurrentGasket->getContainer("PCALC_EN13555QminLList");
+            mCurrentGasket->getContainer("STD_EN13555QminLList");
     RB_ObjectIterator* iter = objC->createIterator();
     double testPressureBar = PCALC2::MPaToBar(testPressure);
     double closestPressureBar = 0.0;

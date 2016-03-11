@@ -8,9 +8,6 @@
 
 NAMESPACE_BILUNA_CALC_EN1591
 
-class Table16Property;
-class TableGSimple;
-
 class Gasket_IN : public RB_Object {
 
 public:

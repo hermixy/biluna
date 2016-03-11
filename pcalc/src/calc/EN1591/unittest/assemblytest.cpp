@@ -754,8 +754,12 @@ void AssemblyTest::Calc_F_G0d_2Test() {
     target->mGasket->mNR = 300;
     target->mLoadCaseList->at(0)->F_R = -2.3;
     target->Calc_F_G0d_2();
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0d_2Test()", 453.4111111111111,
-             target->mLoadCaseList->at(0)->F_Gd);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0d_2Test()",
+             453.4111111111111, target->mLoadCaseList->at(0)->F_Gd);
+    target->mLoadCaseList->at(0)->F_Bmin = 503.7;
+    target->Calc_F_G0d_2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0d_2Test()",
+             506.0, target->mLoadCaseList->at(0)->F_Gd);
     deleteTarget();
 }
 
