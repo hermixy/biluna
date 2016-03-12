@@ -76,8 +76,6 @@ public:
     bool Is_F_B0nom_Valid();
 
     void Calc_F_G0max();
-//    void Calc_F_Bmax(int loadCaseNo);
-//    void Calc_F_Gmax(int loadCaseNo);
     void Calc_F_G0d_2();
     void Calc_F_G0d();
     void Calc_F_G(int loadCaseNo);

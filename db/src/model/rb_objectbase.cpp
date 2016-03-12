@@ -208,14 +208,15 @@ RB_ObjectContainer* RB_ObjectBase::getGrandParent() const {
 }
 
 /**
- * @return name the name of this object
+ * Overrides RB_Object::getName(), does not give the mName or object name
+ * @return name the member("name") of this object
  */
 RB_String RB_ObjectBase::getName() const {
     return getValue("name").toString();
 }
 
 /**
- * Set the name of this object
+ * Set the member("name") of this object, the object name mName is unchanged
  * @param n name
  */
 void RB_ObjectBase::setName(const RB_String& n) {
@@ -564,10 +565,17 @@ RB_Variant RB_ObjectBase::getValue(const RB_String& name) const {
  * @param var value
  */
 void RB_ObjectBase::setValue(int number, const RB_Variant& var) {
+    if (number == 0) {
+        mId = var.toString();
+    } else if (number == 2) {
+        mName = var.toString();
+    }
+
     RB_ObjectMember* member = getMember(number);
 
     if (!member) {
-        RB_String str = "RB_ObjectBase::setValue(int=" + RB_String::number(number) + ") ERROR";
+        RB_String str = "RB_ObjectBase::setValue(int="
+                + RB_String::number(number) + ") ERROR";
         RB_DEBUG->print(RB_Debug::D_ERROR, str.toStdString().c_str());
         return;
     }

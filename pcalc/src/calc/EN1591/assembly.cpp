@@ -824,31 +824,6 @@ void Assembly::Calc_F_G0max() {
 }
 
 /**
- * @brief After Formula 122: calculate F_Bmax for load limit calculation
- * @param loadCaseNo
- */
-//void Assembly::Calc_F_Bmax(int loadCaseNo) {
-//    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-//    loadCase->F_Bmax = loadCase->F_B * (1 + mBolt->etanplus);
-//    PR->addDetail("After_F. 122", "F_Bmax", "F_B * (1 + etanplus)",
-//                  loadCase->F_Bmax, "N",
-//                  QN(loadCase->F_B) + " * (1 + "
-//                  + QN(mBolt->etanplus) + ")", loadCaseNo);
-//}
-
-/**
- * @brief After Formula 122: Maximum gasket load for load limit calculation
- * @param loadCaseNo
- */
-//void Assembly::Calc_F_Gmax(int loadCaseNo) {
-//    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
-//    loadCase->F_Gmax = loadCase->F_Bmax - loadCase->F_R;
-//    PR->addDetail("After_F. 122", "F_Gmax", "F_Bmax - F_R",
-//                  loadCase->F_Gmax, "N",
-//                  QN(loadCase->F_Bmax) + " - " + QN(loadCase->F_R), loadCaseNo);
-//}
-
-/**
  * @brief Formula 2 (119): Increased gasket load due to more
  * than once assemblage (NR) and FBspecified > 0
  */
@@ -864,21 +839,36 @@ void Assembly::Calc_F_G0d_2() {
     }
 
     // TODO: the second argument does almost nothing
-    loadCase->F_Gd = std::fmax(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
+//    loadCase->F_Gd = std::fmax(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
+//                              * loadCase->F_Bmax - loadCase->F_R);
+//    PR->addDetail(forStr, "F_Gd",
+//                  "max(" + varStr + "; (2 / 3) "
+//                  "* (1 - 10 / NR) * F_Bmax - F_R)",
+//                  loadCase->F_Gd, "N",
+//                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / "
+//                  + QN(mGasket->mNR)
+//                  + ") * " + QN(loadCase->F_Bmax) + " - "
+//                  + QN(loadCase->F_R) + ")",
+//                  0);
+//    PR->addDetail(forStr, "F_GdCheck", "F_Gd > F_Gdelta",
+//                  loadCase->F_Gd > loadCase->F_Bmin - loadCase->F_R ? 1 : 0,
+//                  "-", QN(loadCase->F_Gd) + " > " + QN(loadCase->F_Bmin)
+//                  + " - " + QN(loadCase->F_R), 0);
+
+    // Alternative:
+    loadCase->F_Gd = std::fmax(tmpF_G, (1.0 - 1.0 / mGasket->mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",
-                  "max(" + varStr + "; (2 / 3) "
-                  "* (1 - 10 / NR) * F_Bmax - F_R)",
+                  "max(" + varStr + "; (1 - 1 / NR) * F_Bmax - F_R)",
                   loadCase->F_Gd, "N",
-                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / "
+                  "max(" + QN(tmpF_G) + "; (1 - 1 / "
                   + QN(mGasket->mNR)
                   + ") * " + QN(loadCase->F_Bmax) + " - "
                   + QN(loadCase->F_R) + ")",
                   0);
     PR->addDetail(forStr, "F_GdCheck", "F_Gd > F_Gdelta",
-                  loadCase->F_Gd > loadCase->F_Bmin - loadCase->F_R ? 1 : 0,
-                  "-", QN(loadCase->F_Gd) + " > " + QN(loadCase->F_Bmin)
-                  + " - " + QN(loadCase->F_R), 0);
+                  loadCase->F_Gd > loadCase->F_Gdelta ? 1 : 0, "-",
+                  QN(loadCase->F_Gd) + " > " + QN(loadCase->F_Gdelta), 0);
 }
 
 /**
@@ -889,7 +879,7 @@ void Assembly::Calc_F_G0d() {
     LoadCase* loadCase = mLoadCaseList->at(0);
     double tmpF_G = loadCase->F_Gdelta;
     QString varStr = "F_Gdelta";
-    QString forStr = "Formula 119";
+    QString forStr = "Formula 119 alt."; // alternative
 
     if (loadCase->F_Bspec > 0.0) {
         // refer also to Formula 1,2,54,119
@@ -897,13 +887,28 @@ void Assembly::Calc_F_G0d() {
     }
 
     // TODO: the second argument does almost nothing
-    loadCase->F_Gd = std::fmax(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
+//    loadCase->F_Gd = std::fmax(tmpF_G, (2.0 / 3.0) * (1.0 - 10.0 / mGasket->mNR)
+//                              * loadCase->F_Bmax - loadCase->F_R);
+//    PR->addDetail(forStr, "F_Gd",
+//                  "max(" + varStr + "; (2 / 3) "
+//                  "* (1 - 10 / NR) * F_Bmax - F_R)",
+//                  loadCase->F_Gd, "N",
+//                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / "
+//                  + QN(mGasket->mNR)
+//                  + ") * " + QN(loadCase->F_Bmax) + " - "
+//                  + QN(loadCase->F_R) + ")",
+//                  0);
+//    PR->addDetail(forStr, "F_GdCheck", "F_Gd > F_Gdelta",
+//                  loadCase->F_Gd > loadCase->F_Gdelta ? 1 : 0, "-",
+//                  QN(loadCase->F_Gd) + " > " + QN(loadCase->F_Gdelta), 0);
+
+    // Alternative:
+    loadCase->F_Gd = std::fmax(tmpF_G, (1.0 - 1.0 / mGasket->mNR)
                               * loadCase->F_Bmax - loadCase->F_R);
     PR->addDetail(forStr, "F_Gd",
-                  "max(" + varStr + "; (2 / 3) "
-                  "* (1 - 10 / NR) * F_Bmax - F_R)",
+                  "max(" + varStr + "; (1 - 1 / NR) * F_Bmax - F_R)",
                   loadCase->F_Gd, "N",
-                  "max(" + QN(tmpF_G) + "; (2 / 3.0) * (1 - 10 / "
+                  "max(" + QN(tmpF_G) + "; (1 - 1 / "
                   + QN(mGasket->mNR)
                   + ") * " + QN(loadCase->F_Bmax) + " - "
                   + QN(loadCase->F_R) + ")",
