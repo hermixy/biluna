@@ -114,6 +114,7 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     PhiCF2 = 0.0;
     PhiCB1 = 0.0;
     PhiCB2 = 0.0;
+    delta_lB = 0.0;
 
     // Gasket
     PhiG = 0.0;

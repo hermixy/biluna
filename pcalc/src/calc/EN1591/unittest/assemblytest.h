@@ -52,6 +52,7 @@ private:
     void Calc_cATest();
     void Calc_cBTest();
     void Calc_PhiBTest();
+    void Calc_delta_lBTest();
     void Calc_PhiGTest();
     void Is_PhiB_ValidTest();
     void Calc_fETest();

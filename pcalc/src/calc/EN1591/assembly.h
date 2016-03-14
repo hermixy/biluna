@@ -83,6 +83,7 @@ public:
     void Calc_Mtnom();
     void Calc_MtBnom();
     void Calc_PhiB(int loadCaseNo);
+    void Calc_delta_lB();
 
     bool Is_PhiB_Valid(int loadCaseNo);
 

@@ -1025,6 +1025,20 @@ void Assembly::Calc_PhiB(int loadCaseNo) {
 }
 
 /**
+ * @brief After Formula 127: elongation of bolt (at assembly)
+ * @param loadCaseNo
+ */
+void Assembly::Calc_delta_lB() {
+    LoadCase* loadCase = mLoadCaseList->at(0);
+    loadCase->delta_lB = loadCase->F_Bnom * mBolt->XB / loadCase->EB;
+    PR->addDetail("After_F. 127", "delta_lB",
+                  "F_Bnom * XB / EB",
+                  loadCase->delta_lB, "mm",
+                  QN(loadCase->F_Bnom) + " * " + QN(mBolt->XB)
+                  + " / " + QN(loadCase->EB));
+}
+
+/**
  * @brief With Formula 123: Load ratio of bolts acceptance
  * @param loadCaseNo
  * @returns true if OK

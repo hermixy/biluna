@@ -37,7 +37,6 @@ Bolt_OUT::Bolt_OUT() : Bolt_IN(){
     etanplus = 0.0;
     eta1minus = 0.0;
     etanminus = 0.0;
-
 }
 
 /**

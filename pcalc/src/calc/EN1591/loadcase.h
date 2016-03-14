@@ -115,6 +115,7 @@ public:
     double PhiCF2;
     double PhiCB1;
     double PhiCB2;
+    double delta_lB;
 
     // Gasket
     double PhiG;

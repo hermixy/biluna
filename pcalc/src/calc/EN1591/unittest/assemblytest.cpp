@@ -43,8 +43,6 @@ void AssemblyTest::exec() {
     Calc_F_B0nomTest();
     Is_F_B0nom_ValidTest();
     Calc_F_G0maxTest();
-//    Calc_F_BmaxTest();
-//    Calc_F_GmaxTest();
     Calc_F_G0d_2Test();
     Calc_F_G0dTest();
     Calc_F_GTest();
@@ -52,6 +50,7 @@ void AssemblyTest::exec() {
     Calc_cATest();
     Calc_cBTest();
     Calc_PhiBTest();
+    Calc_delta_lBTest();
     Calc_PhiGTest();
     Is_PhiB_ValidTest();
     Calc_fETest();
@@ -855,7 +854,7 @@ void AssemblyTest::Calc_PhiBTest() {
     target->mBolt->mut = 7.8;
     target->mBolt->etanplus = 0.7;
     target->Calc_PhiB(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_PhiBTest()",
              0.92017261349202768449, target->mLoadCaseList->at(i)->PhiB);
     i = 1;
     target->mLoadCaseList->at(i)->F_B = 12.3; // Note: not F_Bmax!
@@ -863,8 +862,21 @@ void AssemblyTest::Calc_PhiBTest() {
     target->mLoadCaseList->at(i)->fB = 12.3;
     target->mLoadCaseList->at(i)->cB = 1.0;
     target->Calc_PhiB(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_PhiBTest()",
              0.37037037037037037037, target->mLoadCaseList->at(i)->PhiB);
+    deleteTarget();
+}
+
+void AssemblyTest::Calc_delta_lBTest() {
+    SetupIntegralTarget();
+    int i = 0;
+    LoadCase* loadCase = target->mLoadCaseList->at(i);
+    loadCase->F_Bnom = 1.1;
+    target->mBolt->XB = 2.2;
+    loadCase->EB = 3.3;
+    target->Calc_delta_lB();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_lBTest()",
+             0.73333333333333333333, loadCase->delta_lB);
     deleteTarget();
 }
 
@@ -876,7 +888,7 @@ void AssemblyTest::Calc_PhiGTest() {
     target->mGasket->AGt = 2.2;
     loadCase->Q_smax = 3.3;
     target->Calc_PhiG(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiGTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_PhiGTest()",
              0.15151515151515152,
              target->mLoadCaseList->at(i)->PhiG);
     i = 1;
@@ -885,7 +897,7 @@ void AssemblyTest::Calc_PhiGTest() {
     target->mGasket->AGt = 2.2;
     loadCase->Q_smax = 3.3;
     target->Calc_PhiG(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiGTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_PhiGTest()",
              0.84022038567493112948,
              target->mLoadCaseList->at(i)->PhiG);
     deleteTarget();

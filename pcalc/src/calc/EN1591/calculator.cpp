@@ -164,6 +164,8 @@ void Calculator::exec() {
         F123_to_151(assembly, loadCaseNo);
         FC1_to_C10(assembly, loadCaseNo);
     }
+
+    finalCalculations(assembly);
 }
 
 void Calculator::Loop_F55_to_108(Assembly* assembly) {
@@ -529,6 +531,10 @@ void Calculator::FC1_to_C10(Assembly* assembly, int loadCaseNo) {
 
     assembly->Calc_ThetaFmaxmin(loadCaseNo);
     assembly->Calc_ThetaLmaxmin(loadCaseNo);
+}
+
+void Calculator::finalCalculations(Assembly* assembly) {
+    assembly->Calc_delta_lB();
 }
 
 END_NAMESPACE_BILUNA_CALC_EN1591
