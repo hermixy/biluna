@@ -610,7 +610,7 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
 
     switch (cbCalculationReportType->currentIndex()) {
     case 0:
-        // TODO: createSummaryReport();
+        createSummaryReport();
         break;
     case 1:
         createDetailReport();
@@ -931,7 +931,15 @@ void PCALC_EN1591Widget::setSettings() {
     inList->addObject(obj);
 }
 
+void PCALC_EN1591Widget::createSummaryReport() {
+    createReport(":/reports/EN1591_summary_report.html");
+}
+
 void PCALC_EN1591Widget::createDetailReport() {
+    createReport(":/reports/EN1591_detail_report.html");
+}
+
+void PCALC_EN1591Widget::createReport(const QString& reportTemplate) {
     QApplication::setOverrideCursor(Qt::WaitCursor);
     PR->clear();
     getTextEdit()->clear();
@@ -943,13 +951,13 @@ void PCALC_EN1591Widget::createDetailReport() {
     handler.exec();
 
     // get report template
-    QFile file(":/reports/EN1591_detail_report.html");
+    QFile file(reportTemplate);
     file.open(QIODevice::ReadOnly);
     QString report = file.readAll();
     file.flush();
 
     // parse html template and enter relevant values
-    //    <td id="{$flange1.pB}">&nbsp;</td><td id="{$flange2.pB}">&nbsp;</td>
+    //    <td id="{$pB(1)}">&nbsp;</td><td id="{$pB(2)}">&nbsp;</td>
     //    existObj->setValue("variablename", variableName);
     //    existObj->setValue("result", result);
 
@@ -959,6 +967,17 @@ void PCALC_EN1591Widget::createDetailReport() {
     RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
     insertReportInputData(report, in);
 
+    // loadcase
+    RB_ObjectContainer* loadCaseList;
+    loadCaseList = PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
+    RB_ObjectIterator* lcIter = loadCaseList->createIterator();
+
+    for (lcIter->first(); !lcIter->isDone(); lcIter->next()) {
+        RB_ObjectBase* lcObj = lcIter->currentObject();
+        insertReportLoadCaseData(report, lcObj);
+    }
+
+    delete lcIter;
 
     // output
     RB_ObjectContainer* outList
@@ -974,6 +993,7 @@ void PCALC_EN1591Widget::createDetailReport() {
 
     teCalculationReport->setHtml(report);
     QApplication::restoreOverrideCursor();
+
 }
 
 void PCALC_EN1591Widget::insertReportInputData(QString& report,
@@ -981,14 +1001,43 @@ void PCALC_EN1591Widget::insertReportInputData(QString& report,
     QString varName = "";
     QString varData = "";
     int memberCount = obj->memberCount();
-
+// TODO: RB2::HIDDENCOLUMNS inconsistent with insertReportLoadCaseData
     for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
         RB_ObjectMember* mem = obj->getMember(i);
         varName = mem->getName();
         varData = mem->getValue().toString();
         report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
-                       "<td id=\"{$" + varName + "}\"><div align=\"left\">"
+                       "<td id=\"{$" + varName + "}\"><div align=\"right\">"
                        + varData + "</div></td>");
+    }
+
+}
+
+void PCALC_EN1591Widget::insertReportLoadCaseData(QString& report,
+                                                  RB_ObjectBase* obj) {
+    QString varName = "";
+    double varData = 0.0;
+    int loadCaseNo = obj->getValue("loadcaseno").toInt();
+    int memberCount = obj->memberCount();
+
+    for (int i = 0; i < memberCount; ++i) {
+        RB_ObjectMember* mem = obj->getMember(i);
+        varName = mem->getName();
+        varData = mem->getValue().toDouble(); // TODO: except for text items such as material, use OK?
+
+        if (loadCaseNo < 0) {
+            report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
+                           "<td id=\"{$" + varName + "}\"><div align=\"right\">"
+                           + QString::number(varData) + "</div></td>");
+        } else {
+            report.replace("<td id=\"{$" + varName
+                           + "[" + QString::number(loadCaseNo) + "]"
+                           + "}\">&nbsp;</td>",
+                           "<td id=\"{$" + varName
+                           + "[" + QString::number(loadCaseNo) + "]"
+                           + "}\"><div align=\"right\">"
+                           + QString::number(varData) + "</div></td>");
+        }
     }
 
 }
