@@ -57,6 +57,7 @@ void PCALC_EN1591_LoadCase::createMembers() {
     addMember("mz", "Nmm", 0.0, RB2::MemberDouble);
     // stress expansion elasticity
     addMember("fb", "N/mm2", 0.0, RB2::MemberDouble);
+    addMember("relaxb", "percent", 100.0, RB2::MemberDouble);
     addMember("fn", "N/mm2", 0.0, RB2::MemberDouble);
 
     // flange 1

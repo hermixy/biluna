@@ -25,6 +25,7 @@ LoadCase_IN::LoadCase_IN() : RB_Object() {
 
     // input by user, bolt load specified by user
     F_Bspec = 0.0;
+    relaxB = 1.0;
 
     fB = 0;
     fF1 = 0;

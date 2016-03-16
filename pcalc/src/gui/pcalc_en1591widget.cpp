@@ -441,6 +441,7 @@ void PCALC_EN1591Widget::init() {
     mLoadCaseMapper->addMapping(leMz, mLoadCaseModel->fieldIndex("mz"));
     // stress expansion elasticity
     mLoadCaseMapper->addMapping(lefB, mLoadCaseModel->fieldIndex("fb"));
+    mLoadCaseMapper->addMapping(lerelaxB, mLoadCaseModel->fieldIndex("relaxb"));
     mLoadCaseMapper->addMapping(lefN, mLoadCaseModel->fieldIndex("fn"));
 
     // flange 1
@@ -880,6 +881,7 @@ void PCALC_EN1591Widget::setInput() {
         addLoadCaseVariable(loadCase, "mz", "-", mLoadCaseModel, row);
         // stress expansion elasticity
         addLoadCaseVariable(loadCase, "fb", "-", mLoadCaseModel, row);
+        addLoadCaseVariable(loadCase, "relaxb", "-", mLoadCaseModel, row);
         addLoadCaseVariable(loadCase, "fn", "-", mLoadCaseModel, row);
 
         // flange 1

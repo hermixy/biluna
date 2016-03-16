@@ -285,6 +285,7 @@ void EN1591Handler::setLoadCaseInput() {
         lc->mForce->M_Z = lcIn->getValue("mz").toDouble();
         // stress expansion elasticity
         lc->fB = lcIn->getValue("fb").toDouble();
+        lc->relaxB = lcIn->getValue("relaxb").toDouble() / 100.0;
         lc->fN = lcIn->getValue("fn").toDouble();
 
         lc->fF1 = lcIn->getValue("ff1").toDouble();
