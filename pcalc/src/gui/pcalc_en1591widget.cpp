@@ -703,8 +703,8 @@ void PCALC_EN1591Widget::slotHandleParentRowChanged() {
 }
 
 void PCALC_EN1591Widget::slotDisableFormulaWidgets(int index) {
-    sbFormulaFrom->setEnabled(index > 1);
-    sbFormulaTo->setEnabled(index > 1);
+    sbFormulaFrom->setEnabled(index > 1 && index < 4);
+    sbFormulaTo->setEnabled(index > 1 && index < 4);
 }
 
 void PCALC_EN1591Widget::setInput() {
@@ -999,15 +999,25 @@ void PCALC_EN1591Widget::createReport(const QString& reportTemplate) {
 void PCALC_EN1591Widget::insertReportInputData(QString& report,
                                                RB_ObjectBase* obj) {
     QString varName = "";
+    double varDouble = 0.0;
     QString varData = "";
     int memberCount = obj->memberCount();
-// TODO: RB2::HIDDENCOLUMNS inconsistent with insertReportLoadCaseData
+    // TODO: RB2::HIDDENCOLUMNS inconsistent with insertReportLoadCaseData
     for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
         RB_ObjectMember* mem = obj->getMember(i);
         varName = mem->getName();
-        varData = mem->getValue().toString();
-        report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
-                       "<td id=\"{$" + varName + "}\"><div align=\"right\">"
+        bool success = false;
+        varDouble = mem->getValue().toDouble(&success);
+
+        if (success) {
+            varData = QString::number(varDouble);
+        } else {
+            // variable value is a string such as a material name
+            varData = mem->getValue().toString();
+        }
+
+        report.replace("id=\"{$" + varName + "}\">&nbsp;</td>",
+                       "id=\"{$" + varName + "}\"><div align=\"right\">"
                        + varData + "</div></td>");
     }
 
@@ -1016,19 +1026,28 @@ void PCALC_EN1591Widget::insertReportInputData(QString& report,
 void PCALC_EN1591Widget::insertReportLoadCaseData(QString& report,
                                                   RB_ObjectBase* obj) {
     QString varName = "";
-    double varData = 0.0;
+    double varDouble = 0.0;
+    QString varData = "";
     int loadCaseNo = obj->getValue("loadcaseno").toInt();
     int memberCount = obj->memberCount();
 
     for (int i = 0; i < memberCount; ++i) {
         RB_ObjectMember* mem = obj->getMember(i);
         varName = mem->getName();
-        varData = mem->getValue().toDouble(); // TODO: except for text items such as material, use OK?
+        bool success = false;
+        varDouble = mem->getValue().toDouble(&success);
+
+        if (success) {
+            varData = QString::number(varDouble);
+        } else {
+            // variable value is a string such as a material name
+            varData = mem->getValue().toString();
+        }
 
         if (loadCaseNo < 0) {
             report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
                            "<td id=\"{$" + varName + "}\"><div align=\"right\">"
-                           + QString::number(varData) + "</div></td>");
+                           + varData + "</div></td>");
         } else {
             report.replace("<td id=\"{$" + varName
                            + "[" + QString::number(loadCaseNo) + "]"
@@ -1036,7 +1055,7 @@ void PCALC_EN1591Widget::insertReportLoadCaseData(QString& report,
                            "<td id=\"{$" + varName
                            + "[" + QString::number(loadCaseNo) + "]"
                            + "}\"><div align=\"right\">"
-                           + QString::number(varData) + "</div></td>");
+                           + varData + "</div></td>");
         }
     }
 

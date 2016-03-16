@@ -1,20 +1,33 @@
 <html><head></head><body>
-<h2>Flange calculation according to EN 1591-1:2014</h2>
+<h2>Flange Calculation According to EN 1591-1:2014</h2>
 <h3>Summary Report</h3>
 <table border="0" width="600" cellspacing="0" cellpadding="2">
 <tr><td><h4>assembly</h4></td><td id="{$number}">&nbsp;</td><td><h4>Date</h4></td><td id="{$date}">&nbsp;</td></tr>
 <tr><td><h4>description</h4></td><td id="{$description}">&nbsp;</td><td><h4>Revision</h4></td><td id="{$revision}">&nbsp;</td></tr>
-<tr><td><h4>engineer</h4></td><td id="{$nameengineer}">&nbsp;</td><td><h4>Application</h4></td><td>Biluna 0.9.15 (PCALC)</td></tr>
+<tr><td><h4>engineer</h4></td><td id="{$nameengineer}">&nbsp;</td><td><h4>Application</h4></td><td><div align="right">Biluna 0.9.15 (PCALC)</div></td></tr>
 </table>
-<h2>summary results</h2>
-<h3>calculation parameters</h3>
+<h2>Summary Results</h2>
+<h3>Input Parameters</h3>
 <table border="1" width="600" cellspacing="0" cellpadding="2">
-<tbody><tr><td><h4>flange parameters</h4></td><td>&nbsp;</td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td></tr>
-<tr><td>pitch between bolts</td><td>p<sub>B</sub></td><td id="{$pB}">&nbsp;</td><td id="{$pB}">&nbsp;</td><td>mm</td></tr>
-<tr><td>eff.diameter of bolt hole</td><td>d<sub>5e</sub></td><td id="{$d5e(1)}">&nbsp;</td><td id="{$d5e(2)}">&nbsp;</td><td>mm</td></tr>
+<tbody><tr><td><h4>flange</h4></td><td>&nbsp;</td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td></tr>
+<tr><td>flange type</td><td>-</td><td id="{$typeflange1_id}">&nbsp;</td><td id="{$typeflange2_id}">&nbsp;</td><td>-</td></tr>
+<tr><td>flange code</td><td>-</td><td id="{$TODO}">TODO</td><td id="{$TODO}">TODO</td><td>-</td></tr>
+<tr><td>flange size</td><td>d<sub>0</sub></td><td id="{$d01}">&nbsp;</td><td id="{$d02}">&nbsp;</td><td>mm</td></tr>
+<tr><td>flange material</td><td>-</td><td id="{$materialflange1_idx}">&nbsp;</td><td id="{$materialflange2_idx}">&nbsp;</td><td>-</td></tr>
+</tbody></table>
+<p>&nbsp;</p>
+<table border="1" width="600" cellspacing="0" cellpadding="2">
+<tbody><tr><td><h4>gasket/bolt/washer</h4></td><td>&nbsp;</td><td colspan=2>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>gasket type</td><td>-</td><td colspan=2 id="{$gaskettype_idx">&nbsp;</td><td>-</td></tr>
+<tr><td>gasket size</td><td>d<sub>Gin/out</sub></td><td id="{$dgin}">&nbsp;</td><td id="{$dgout}">&nbsp;</td><td>mm</td></tr>
+<tr><td>gasket thickness</td><td>e<sub>Gt</sub></td><td colspan=2 id="{$egt}">&nbsp;</td><td>mm</td></tr>
+<tr><td>bolt type</td><td>-</td><td colspan=2 id="{$bolttype_id}">&nbsp;</td><td>-</td></tr>
+<tr><td>bolt size</td><td>d<sub>B0</sub></td><td colspan=2 id="{$db0}">&nbsp;</td><td>mm</td></tr>
+<tr><td>bolt material</td><td>-</td><td colspan=2 id="{$materialbolt_idx}">&nbsp;</td><td>-</td></tr>
+<tr><td>washers material</td><td>-</td><td colspan=2 id="{$materialwasher_idx}">&nbsp;</td><td>-</td></tr>
 </tbody></table>
 
-<h3>design conditions</h3>
+<h3>Design Conditions</h3>
 <table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
@@ -23,7 +36,7 @@
 <tr><td>leak rate</td><td>L (x)</td><td id="{$leakagerate}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>10E-(X)</td></tr>
 </tbody></table>
 
-<h3>Assembly settings</h3>
+<h3>Assembly Settings</h3>
 <table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
@@ -34,7 +47,7 @@
 </tbody></table>
 
 
-<h3>Check of thightness criteria</h3>
+<h3>Check of Leakrate Criteria</h3>
 <table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
@@ -46,7 +59,7 @@
 <tr><td>compliance of min. required gasket stress</td><td>Q<sub>min</sub>&gt;Q<sub>(s)minL</sub></td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[3]}">&nbsp;</td><td>-</td></tr>
 </tbody></table>
 
-<h3>Checking the admissibility of the load ratio</h3>
+<h3>Check of Load Ratio</h3>
 <table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
@@ -58,7 +71,7 @@
 <tr><td>loose ring 2 load ratio</td><td>&Phi;<sub>L</sub></td><td id="{$PhiL(2)[0]}">&nbsp;</td><td id="{$PhiL(2)[1]}">&nbsp;</td><td id="{$PhiL(2)[2]}">&nbsp;</td><td id="{$PhiL(2)[3]}">&nbsp;</td><td>-</td></tr>
 </tbody></table>
 
-<h3>flange rotation</h3>
+<h3>Flange Rotation</h3>
 <table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>flange 1</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
