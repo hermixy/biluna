@@ -5,9 +5,7 @@
 NAMESPACE_BILUNA_CALC_EN1591
 
 
-Gasket_IN::Gasket_IN() : RB_Object(){
-    setName("PCALC EN1591 Gasket");
-
+Gasket_IN::Gasket_IN() : RB_Object("PCALC EN1591 Gasket"){
     gasketIdx = "";
     frmType = Flat;
     insType = SpiralGraphFillOuterInner;
@@ -500,23 +498,9 @@ double Gasket::gasketMaximumLoad(LoadCase* loadCase) {
         PR->addDetail("Before_F. 65 etc.", "Q_smax", "EN13555 Table value",
                       Qsmax, "N/mm2", "Table value", loadCase->number);
     } else {
-//        if (TABLE16PROPERTY->isGasketMaterialCodeExisting(gasketIdx)) {
-//            Qsmax = TABLE16PROPERTY->getTable16_Q_smax(gasketIdx, loadCase->TG);
-
-//            if (Qsmax > 0) {
-//                PR->addDetail("Before_F. 65 etc.", "Q_smax", "Table 16 value",
-//                              Qsmax, "N/mm2", "Table value", loadCase->number);
-//            } else {
-//                PR->addDetail("Before_F. 65 etc.", "Q_smax",
-//                              "Table 16 value out of range", Qsmax,
-//                              "N/mm2", "Table value", loadCase->number,
-//                              "Out of range");
-//            }
-//        } else if (loadCase->Q_smax < 0.001) {
-            Qsmax = EN13445TABLEG->getTableG_Qmax(insType, loadCase->TG);
-            PR->addDetail("Before_F. 65 etc.", "Q_smax", "EN13445 Table G",
-                          Qsmax, "N/mm2", "Table value", loadCase->number);
-//        }
+        Qsmax = EN13445TABLEG->getTableG_Qmax(insType, loadCase->TG);
+        PR->addDetail("Before_F. 65 etc.", "Q_smax", "EN13445 Table G",
+                      Qsmax, "N/mm2", "Table value", loadCase->number);
     }
 
     return Qsmax;

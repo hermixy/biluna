@@ -342,9 +342,16 @@ void AssemblyTest::Calc_YBTest() {
 
     target->mBolt->XB = 6.4;
     target->mLoadCaseList->at(i)->EB = 7.5;
+    target->mLoadCaseList->at(i)->relaxB = 1.0;
 
     target->Calc_YB(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YBTest()", 5.8447859193305112,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YBTest()",
+             5.8447859193305112,
+             target->mLoadCaseList->at(i)->Y_B);
+    target->mLoadCaseList->at(i)->relaxB = 0.85;
+    target->Calc_YB(i);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YBTest()",
+             5.99537415462462900793,
              target->mLoadCaseList->at(i)->Y_B);
     deleteTarget();
 }

@@ -3,9 +3,7 @@ NAMESPACE_BILUNA_CALC_EN1591
 
 
 Calculator::Calculator(FlangeType flange1Type, FlangeType flange2Type)
-            : RB_Object() {
-    setName("PCALC EN1591 Calculator");
-
+            : RB_Object("PCALC EN1591 Calculator") {
     mAssembly = new Assembly();
     mIterNo = 0;
     mIsFirstApproximation = false;

@@ -23,7 +23,7 @@ RB_UomLineEdit::RB_UomLineEdit(QWidget *parent) : QWidget(parent) {
     mSection = -1;
     mModel = nullptr;
     QDoubleValidator* validator = new QDoubleValidator(this);
-//    validator->setDecimals(4);
+    validator->setDecimals(6);
     uomLineEdit->setValidator(validator);
 }
 

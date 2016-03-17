@@ -9,7 +9,7 @@ NAMESPACE_BILUNA_CALC_EN1591
 double Flange_IN::ACCURACY = 0.000001; //1.0e-6 required for integral a.o.
 
 
-Flange_IN::Flange_IN(int flangeNo) : RB_Object() {
+Flange_IN::Flange_IN(int flangeNo) : RB_Object("PCALC EN1591 Flange") {
     // setName("PCALC EN1591 Flange"); in blind, integral and loose
 
     if (flangeNo != 1 && flangeNo != 2) {

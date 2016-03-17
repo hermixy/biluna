@@ -401,16 +401,16 @@ void RB_Debug::printObjectList() {
 
     while (iter != mObjectList.end()) {
         if (*iter != NULL) {
-            print(QString("  %1 %2").arg(pointerToString(*iter))
-                  .arg((*iter)->getName().toStdString().c_str()));
+            print(QString("  %1 %2").arg(pointerToString(*iter),
+                                         (*iter)->getName()));
         }
         ++iter;
     }
 }
 
 bool RB_Debug::isValidId(const QString& id) {
-    if (id.isEmpty() || id == "0" || id.size() < 38) {
-        warning("Not a valid ID = " + id + " WARNING");
+    if (/*id.isEmpty() || id == "0" ||*/ id.size() < 38) {
+        info("Not a valid ID = " + id + " INFO");
         return false;
     }
 

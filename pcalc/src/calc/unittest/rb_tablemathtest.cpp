@@ -100,7 +100,8 @@ void RB_TableMathTest::updateCornerObjectsTest() {
     double test = 1.0101;
 
     // Top left
-    RB_ObjectBase* obj1 = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* obj1 = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::updateCornerObjectsTest() 1");
     obj1->addMember("x", "-", -1.5);
     obj1->addMember("y", "-", 1.5);
     obj1->addMember("z", "-", test);
@@ -221,7 +222,8 @@ void RB_TableMathTest::updateCornerObjectsTest() {
     // Top left insert
     obj1->setValue("x", -1.5);
     obj1->setValue("y", 1.5);
-    RB_ObjectBase* obj2 = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* obj2 = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::updateCornerObjectsTest() 2");
     obj2->addMember("x", "-", -1.0);
     obj2->addMember("y", "-", 1.0);
     obj2->addMember("z", "-", test2);
@@ -414,19 +416,22 @@ void RB_TableMathTest::getThreeCornerValueTest() {
     target->mBottomRight = nullptr;
 
     // Top right
-    RB_ObjectBase* objTR = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* objTR = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::getThreeCornerValueTest() objTR");
     objTR->addMember("x", "-", 1.4);
     objTR->addMember("y", "-", 1.5);
     objTR->addMember("z", "-", 2.0);
     target->mTopRight = objTR;
     // Bottom left
-    RB_ObjectBase* objBL = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* objBL = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::getThreeCornerValueTest() objBL");
     objBL->addMember("x", "-", -1.6);
     objBL->addMember("y", "-", -1.7);
     objBL->addMember("z", "-", 2.0);
     target->mBottomLeft = objBL;
     // Bottom right
-    RB_ObjectBase* objBR = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* objBR = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::getThreeCornerValueTest() objBR");
     objBR->addMember("x", "-", 1.8);
     objBR->addMember("y", "-", -1.9);
     objBR->addMember("z", "-", 2.0);
@@ -454,13 +459,15 @@ void RB_TableMathTest::getTwoCornerValueTest() {
     target->mBottomRight = nullptr;
 
     // Top right
-    RB_ObjectBase* objTR = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* objTR = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::getTwoCornerValueTest() objTR");
     objTR->addMember("x", "-", 3.0);
     objTR->addMember("y", "-", 1.0);
     objTR->addMember("z", "-", 2.0);
     target->mTopRight = objTR;
     // Bottom Left
-    RB_ObjectBase* objBL = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* objBL = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::getTwoCornerValueTest() objBL");
     objBL->addMember("x", "-", 0.0);
     objBL->addMember("y", "-", 0.0);
     objBL->addMember("z", "-", 1.0);
@@ -486,7 +493,8 @@ void RB_TableMathTest::getOneCornerValueTest() {
     target->mBottomLeft = nullptr;
     target->mBottomRight = nullptr;
 
-    RB_ObjectBase* obj = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* obj = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::getOneCornerValueTest()");
     obj->addMember("x", "-", -3.3);
     obj->addMember("y", "-", 1.34);
     obj->addMember("z", "-", 2.13);
@@ -511,7 +519,8 @@ void RB_TableMathTest::updateLeftRightObjectsTest() {
     double test = 1.0101;
 
     // Top left
-    RB_ObjectBase* obj1 = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* obj1 = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::updateLeftRightObjectsTest() obj1");
     obj1->addMember("x", "-", -1.5);
     obj1->addMember("y", "-", test);
 
@@ -559,7 +568,8 @@ void RB_TableMathTest::updateLeftRightObjectsTest() {
     // Top left insert
     obj1->setValue("x", -1.5);
     obj1->setValue("y", 1.5);
-    RB_ObjectBase* obj2 = new RB_ObjectAtomic("", nullptr, "");
+    RB_ObjectBase* obj2 = new RB_ObjectAtomic(
+                "", nullptr, "RB_TableMathTest::updateLeftRightObjectsTest() obj2");
     obj2->addMember("x", "-", -1.0);
     obj2->addMember("y", "-", test2);
 
@@ -587,6 +597,8 @@ void RB_TableMathTest::updateLeftRightObjectsTest() {
     areEqual(PR->getLastOutput(),
              "RB_TableMathTest::updateLeftRightObjectsTest()", test2,
              target->mTopRight ? target->mTopRight->getValue("y").toDouble() : 0.0);
+    delete obj1;
+    delete obj2;
 }
 
 END_NAMESPACE_BILUNA_CALC

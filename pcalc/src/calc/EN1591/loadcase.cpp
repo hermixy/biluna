@@ -2,9 +2,7 @@
 NAMESPACE_BILUNA_CALC_EN1591
 
 
-LoadCase_IN::LoadCase_IN() : RB_Object() {
-    setName("PCALC EN1591 LoadCase");
-
+LoadCase_IN::LoadCase_IN() : RB_Object("PCALC EN1591 LoadCase") {
     number = -1;
     mForce = NULL; // created from outside
     alphaB = 0;

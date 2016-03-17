@@ -57,7 +57,7 @@ class DB_EXPORT DB_Calendar : public RB_ObjectContainer {
 
 public:
     DB_Calendar(const RB_String& id = "", RB_ObjectBase* p = NULL,
-                const RB_String& n = "", RB_ObjectFactory* f = NULL);
+                const RB_String& n = "DB_Calendar", RB_ObjectFactory* f = NULL);
     DB_Calendar(DB_Calendar* calendar);
     virtual ~DB_Calendar();
 

@@ -3,9 +3,7 @@
 NAMESPACE_BILUNA_CALC_EN1591
 
 
-Assembly_IN::Assembly_IN() : RB_Object() {
-    setName("PCALC EN1591 Assembly");
-
+Assembly_IN::Assembly_IN() : RB_Object("PCALC EN1591 Assembly") {
     mBolt = NULL;
     mGasket = NULL;
     mFlange1 = NULL;
@@ -414,7 +412,8 @@ void Assembly::Calc_YB(int loadCaseNo) {
                 / loadCase->EL2;
     }
 
-    loadCase->Y_B = tmpFlange1Val + tmpFlange2Val + mBolt->XB / loadCase->EB;
+    loadCase->Y_B = tmpFlange1Val + tmpFlange2Val
+            + mBolt->XB / (loadCase->EB * loadCase->relaxB);
 
     if (mFlange1->mWasher->XW > 0 && loadCase->EW1 > 0) {
         loadCase->Y_B += mFlange1->mWasher->XW / loadCase->EW1;
@@ -426,13 +425,14 @@ void Assembly::Calc_YB(int loadCaseNo) {
 
     PR->addDetail("Formula 99", "Y_B", "ZL1 * (hL1 ^ 2) "
               "/ EL1 + ZL2 * (hL2 ^ 2) / EL2 "
-              "+ XB / EB + XW1 / EW1 + XW2 / EW2",
+              "+ XB / (EB * relaxB) + XW1 / EW1 + XW2 / EW2",
               loadCase->Y_B, "mm/N",
               QN(mFlange1->ZL) + " * " + QN(mFlange1->hL) + "^2 / "
                   + QN(loadCase->EL1) + " + "
               + QN(mFlange2->ZL) + " * " + QN(mFlange2->hL) + "^2 / "
                   + QN(loadCase->EL2) + " + "
-              + QN(mBolt->XB) + " / " + QN(loadCase->EB) + " + "
+              + QN(mBolt->XB) + " / (" + QN(loadCase->EB)
+                  + " * " + QN(loadCase->relaxB) + ") + "
               + QN(mFlange1->mWasher->XW) + " / " + QN(loadCase->EW1) + " + "
               + QN(mFlange2->mWasher->XW) + " / " + QN(loadCase->EW2),
               loadCaseNo);

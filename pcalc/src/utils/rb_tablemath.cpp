@@ -346,9 +346,7 @@ double RB_TableMath::getThreeCornerValue() {
              RB_DEBUG->error("RB_TableMath::getThreeCornerValue() 1 ERROR");
              return 0.0;
         }
-    }
-
-    if (!mTopRight) {
+    } else if (!mTopRight) {
         if (mTopLeft && mBottomRight) {
             tempObj = mTopRight = mBottomRight->clone();
             mTopRight->setValue(mXfield, mBottomRight->getValue(mXfield));
@@ -360,9 +358,7 @@ double RB_TableMath::getThreeCornerValue() {
              RB_DEBUG->error("RB_TableMath::getThreeCornerValue() 2 ERROR");
              return 0.0;
         }
-    }
-
-    if (!mBottomLeft) {
+    } else if (!mBottomLeft) {
         if (mTopLeft && mBottomRight) {
             tempObj = mBottomLeft = mTopLeft->clone();
             mBottomLeft->setValue(mXfield, mTopLeft->getValue(mXfield));
@@ -374,9 +370,7 @@ double RB_TableMath::getThreeCornerValue() {
              RB_DEBUG->error("RB_TableMath::getThreeCornerValue() 3 ERROR");
              return 0.0;
         }
-    }
-
-    if (!mBottomRight) {
+    } else if (!mBottomRight) {
         if (mBottomLeft && mTopRight) {
             tempObj = mBottomRight = mTopRight->clone();
             mBottomRight->setValue(mXfield, mTopRight->getValue(mXfield));

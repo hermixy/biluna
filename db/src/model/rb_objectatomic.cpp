@@ -81,7 +81,7 @@ RB_ObjectBase* RB_ObjectAtomic::clone(RB2::ResolveLevel level) {
     RB_ObjectBase* obj = NULL;
 
     if (!mFactory) {
-        RB_DEBUG->warning("RB_ObjectBase::clone() factory NULL WARNING");
+        RB_DEBUG->warning("RB_ObjectAtomic::clone() factory NULL WARNING");
         obj = new RB_ObjectAtomic(getId(), getParent(), getName(), NULL, false);
         obj->setCloned(true);
         obj->setOriginal(this);
