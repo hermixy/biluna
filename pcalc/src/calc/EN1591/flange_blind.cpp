@@ -425,8 +425,9 @@ void Flange_Blind::Calc_PsiMin(int /*loadCaseNo*/) {
     // does nothing, integral, stub or collar only
 }
 
-void Flange_Blind::Calc_PsiZ(int /*loadCaseNo*/) {
-    // does nothing, integral, stub or collar only
+void Flange_Blind::Calc_PsiZ(int loadCaseNo) {
+    // only:
+    Calc_WF(loadCaseNo);
 }
 
 bool Flange_Blind::Is_PsiMaxMin_Valid(int /*loadCaseNo*/) {

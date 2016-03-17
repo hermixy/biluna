@@ -1113,7 +1113,8 @@ double Assembly::Calc_cB_helper(Flange* flange, int loadCaseNo) {
     double denom = 0.8 * mBolt->dB0 * loadCase->fB;
     double val = 0.0;
 
-    if (dynamic_cast<Flange_Blind*>(flange) != NULL) {
+    if (dynamic_cast<Flange_Blind*>(flange) != NULL && mBolt->l5t > 0) {
+        // threaded in blind flange
         val = std::min(1.0, std::min(mBolt->eN * loadCase->fN / denom,
                                       mBolt->l5t * tmp_fF / denom));
         PR->addDetail("With_F. 127",

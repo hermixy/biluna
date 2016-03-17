@@ -481,7 +481,7 @@ void Calculator::F123_to_151(Assembly* assembly, int loadCaseNo) {
     assembly->mFlange2->Calc_PsiMin(loadCaseNo);
     assembly->mFlange1->Calc_PsiZ(loadCaseNo);
     assembly->mFlange2->Calc_PsiZ(loadCaseNo);
-    //assembly.Flange1.Calc_WF(loadCaseNo) ' already in PsiZ or PhiF
+    //assembly.Flange1.Calc_WF(loadCaseNo) ' TODO: already in PsiZ or PhiF, bad programming, refer blind
     //assembly.Flange2.Calc_WF(loadCaseNo)
     assembly->mFlange1->Calc_WQ(loadCaseNo); // here denominator of formula 151, in alternative for PhiF
     assembly->mFlange2->Calc_WQ(loadCaseNo);
