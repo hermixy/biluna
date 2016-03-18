@@ -167,7 +167,7 @@ void Calculator::exec() {
 }
 
 void Calculator::Loop_F55_to_108(Assembly* assembly) {
-    for (this->mIterNo = 0; this->mIterNo <= 5; this->mIterNo++) {
+    for (this->mIterNo = 0; this->mIterNo <= 10; this->mIterNo++) {
         F55_to_62_table1(assembly);
         mIsFirstApproximation = false;
     }

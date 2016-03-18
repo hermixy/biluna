@@ -80,7 +80,6 @@ ACC_BankImportCheckDialog::ACC_BankImportCheckDialog(QWidget *parent)
 ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog() {
     // non-shared models are always deleted by the widgets,
     // can be MDI window or dialog, but also a dockWindow with table or tree
-    ACC_DIALOGFACTORY->requestInformationDialog("ACC_BankImportCheckDialog::~ACC_BankImportCheckDialog()\nSTART");
     // Delete model, deletes root (mTransDocListRoot) and object hierarchy
     delete mDocModel;
     delete mItemModel;

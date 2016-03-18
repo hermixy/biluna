@@ -23,7 +23,10 @@ RB_UomLineEdit::RB_UomLineEdit(QWidget *parent) : QWidget(parent) {
     mSection = -1;
     mModel = nullptr;
     QDoubleValidator* validator = new QDoubleValidator(this);
-    validator->setDecimals(6);
+    // validator->setDecimals(6);
+    // TODO: may be in setText or setData use QString::number()
+    // to format the presentation of the number
+
     uomLineEdit->setValidator(validator);
 }
 

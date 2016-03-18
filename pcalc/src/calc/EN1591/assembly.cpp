@@ -194,7 +194,7 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
     } else {
         double bGp = loadCase0->F_G / (M_PI * mGasket->dGe
                                        * loadCase0->Q_smax);
-        QString bGpStr = QN(loadCase0->F_G) + " / (PI *" + QN(mGasket->dGe)
+        QString bGpStr = QN(loadCase0->F_G) + " / (pi *" + QN(mGasket->dGe)
                          + " * " + QN(loadCase0->Q_smax) + ")";
         if (mGasket->frmType == Gasket::Flat) {
             if (!mGasket->isMetalic()) {
@@ -210,11 +210,11 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
                              + mFlange2->hG * mFlange2->ZF / loadCase0->EF2)
                             + pow(bGp, 2), 0.5);
             PR->addDetail("Formula 65", "bGi",
-                          "((eG / (PI * dGe * EGm)) / (hG1 * Flange1.ZF "
-                          "/ EF1 + hG2 * Flange2.ZF / EF2) + (F_G / (PI * dGe "
+                          "((eG / (pi * dGe * EGm)) / (hG1 * Flange1.ZF "
+                          "/ EF1 + hG2 * Flange2.ZF / EF2) + (F_G / (pi * dGe "
                           "* Q_smax)) ^ 2) ^ 0.5", mGasket->bGi, "mm",
                           "((" + QN(loadCase0->eG)
-                          + " / (PI * " + QN(mGasket->dGe)
+                          + " / (pi * " + QN(mGasket->dGe)
                           + " * " + QN(loadCase0->EGm) + ")) / ("
                           + QN(mFlange1->hG) + " * " + QN(mFlange1->ZF)
                           + " / " + QN(loadCase0->EF1) + " + "
@@ -232,7 +232,7 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
                         + pow(bGp, 2), 0.5);
             PR->addDetail("Formula 70", "bGi",
                           "((6 * r2 * Cos(phiG) * F_G) "
-                          "/ (PI * dGe * E_G) + (F_G / (PI * dGe * Q_smax)) "
+                          "/ (pi * dGe * E_G) + (F_G / (pi * dGe * Q_smax)) "
                           "^ 2) ^ 0.5", mGasket->bGi, "mm",
                           "(6 * " + QN(mGasket->r2) + " * cos("
                           + QN(mGasket->phiG) + ") * " + QN(loadCase0->F_G)
@@ -247,8 +247,8 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
                          / (M_PI * mGasket->dGe * loadCase0->E_G)
                          + pow(bGp, 2), 0.5);
             PR->addDetail("Formula 75", "bGi",
-                          "((12 * r2 * Cos(phiG) * F_G) / (PI * dGe * E_G) "
-                          "+ (F_G / (PI * dGe * Q_smax)) ^ 2) ^ 0.5",
+                          "((12 * r2 * Cos(phiG) * F_G) / (pi * dGe * E_G) "
+                          "+ (F_G / (pi * dGe * Q_smax)) ^ 2) ^ 0.5",
                           mGasket->bGi, "mm",
                           "(12 * " + QN(mGasket->r2) + " * cos("
                           + QN(mGasket->phiG) + ") * " + QN(loadCase0->F_G)
