@@ -13,6 +13,9 @@
 
 RB_Object::RB_Object(const RB_String& name) {
     RB_DEBUG->addObjectCreated(this);
+    if (name.isEmpty()) {
+        RB_DEBUG->error("RB_Object::RB_Object() name empty ERROR");
+    }
     mName = name;
     resetFlags();
 }

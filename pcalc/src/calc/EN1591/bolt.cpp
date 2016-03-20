@@ -2,9 +2,8 @@
 #include "pcalc_report.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
-Bolt_IN::Bolt_IN() : RB_Object(){
-    setName("PCALC EN1591 Bolt");
-
+Bolt_IN::Bolt_IN() : RB_Object("PCALC EN1591 Bolt"){
+    materialIdx = "";
     bType = Stud;
     tType = ManualStandardRing;
     dB0 = 0;
@@ -36,7 +35,6 @@ Bolt_OUT::Bolt_OUT() : Bolt_IN(){
     etanplus = 0.0;
     eta1minus = 0.0;
     etanminus = 0.0;
-
 }
 
 /**

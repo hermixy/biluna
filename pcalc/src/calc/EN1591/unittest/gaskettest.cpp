@@ -23,12 +23,15 @@ void GasketTest::exec() {
     Calc_AQTest();
     Calc_bGeTest();
     Calc_XGTest();
+    Calc_Q_A_QsminTest();
+    Calc_delta_eGcTest();
 }
 
 void GasketTest::setupTarget() {
     if (!target) {
         target = new Gasket();
         target->mLoadCaseList = new LoadCaseList();
+        target->mLoadCaseList->createLoadCase(); // includes force creation
         target->mLoadCaseList->createLoadCase(); // includes force creation
     }
     target->dG1 = 70.8;
@@ -96,6 +99,48 @@ void GasketTest::Calc_XGTest() {
     target->Calc_XG();
     areEqual(PR->getLastOutput(), "GasketTest::Calc_XGTest()", 0.970281124497992, target->XG);
 }
+
+void GasketTest::Calc_Q_A_QsminTest() {
+    // special case if F_Bspec > 0
+    setupTarget();
+    int i = 0;
+    LoadCase* loadCase = target->mLoadCaseList->at(i);
+    loadCase->F_Bspec = 0.3;
+    loadCase->F_G = 4.5;
+    target->AGe = 8.3;
+    target->Calc_Q_A_Qsmin(i);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_Q_A_QsminTest()",
+             0.54216867469879518072, loadCase->Q_A);
+}
+
+void GasketTest::Calc_delta_eGcTest() {
+    setupTarget();
+    LoadCase* loadCase0 = target->mLoadCaseList->at(0);
+    int i = 1;
+    LoadCase* loadCase = target->mLoadCaseList->at(i);
+    loadCase->delta_eGc_EN13555 = 7.3;
+    loadCase->Y_G = 3.8;
+    target->K = 500000.0;
+    target->Calc_delta_eGc(i);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_delta_eGcTest()",
+             13870000, loadCase->delta_eGc);
+    loadCase->delta_eGc_EN13555 = 0.0;
+    loadCase->Y_G = 1.3;
+    target->dG2_EN13555 = 2.4;
+    target->dG1_EN13555 = 9.1;
+    loadCase0->Q_A = 15.3;
+    loadCase->P_QR = 0.0456;
+    target->Calc_delta_eGc(i);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_delta_eGcTest()",
+             -1148.7558557602242, loadCase->delta_eGc);
+    target->dG2_EN13555 = 0.0;
+    target->dG1_EN13555 = 0.0;
+    loadCase->P_QR = 0.0;
+    target->Calc_delta_eGc(i);
+    areEqual(PR->getLastOutput(), "GasketTest::Calc_delta_eGcTest()", 0.0,
+             loadCase->delta_eGc);
+}
+
 
 
 END_NAMESPACE_BILUNA_CALC_EN1591

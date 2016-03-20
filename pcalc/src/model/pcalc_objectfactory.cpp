@@ -11,12 +11,6 @@
 #include "pcalc_objectfactory.h"
 
 #include "db_objectfactory.h"
-#include "pcalc_en13555egeg.h"
-#include "pcalc_en13555gasket.h"
-#include "pcalc_en13555manufacturer.h"
-#include "pcalc_en13555pqrdeltaegc.h"
-#include "pcalc_en13555qminl.h"
-#include "pcalc_en13555qsminl.h"
 #include "pcalc_en1591_assembly.h"
 #include "pcalc_en1591_boltnutwasher.h"
 #include "pcalc_en1591_flange.h"
@@ -26,6 +20,12 @@
 #include "peng_project.h"
 #include "rb_debug.h"
 #include "rb_uuid.h"
+#include "std_en13555egeg.h"
+#include "std_en13555gasket.h"
+#include "std_en13555manufacturer.h"
+#include "std_en13555pqrdeltaegc.h"
+#include "std_en13555qminl.h"
+#include "std_en13555qsminl.h"
 
 PCALC_ObjectFactory* PCALC_ObjectFactory::mActiveObjectFactory = 0;
 
@@ -96,8 +96,6 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new PCALC_EN1591_Assembly(uuid, parent, "PCALC_EN1591_Assembly", this);
 
         uuid = "";
-        list = new RB_ObjectContainer (uuid, obj, "PCALC_EN13555ManufacturerList", this);
-        obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "PCALC_EN1591_BoltNutWasherList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "PCALC_EN1591_FlangeList", this);
@@ -108,32 +106,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "PCALC_EN1591_ShellList", this);
         obj->addObject(list);
-    } else if (str == "PCALC_EN13555EGeGList") {
-        obj = new PCALC_EN13555EGeG(uuid, parent, "PCALC_EN13555EGeG", this);
-    } else if (str == "PCALC_EN13555GasketList") {
-        obj = new PCALC_EN13555Gasket(uuid, parent, "PCALC_EN13555Gasket", this);
-
-        uuid = "";
-        list = new RB_ObjectContainer (uuid, obj, "PCALC_EN13555EGeGList", this);
+        list = new RB_ObjectContainer (uuid, obj, "STD_EN13555ManufacturerList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "PCALC_EN13555PqrDeltaeGCList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "PCALC_EN13555QminLList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "PCALC_EN13555QsminLList", this);
-        obj->addObject(list);
-    } else if (str == "PCALC_EN13555ManufacturerList") {
-        obj = new PCALC_EN13555Manufacturer(uuid, parent, "PCALC_EN13555Manufacturer", this);
-
-        uuid = "";
-        list = new RB_ObjectContainer (uuid, obj, "PCALC_EN13555GasketList", this);
-        obj->addObject(list);
-    } else if (str == "PCALC_EN13555PqrDeltaeGCList") {
-        obj = new PCALC_EN13555PqrDeltaeGC(uuid, parent, "PCALC_EN13555PqrDeltaeGC", this);
-    } else if (str == "PCALC_EN13555QminLList") {
-        obj = new PCALC_EN13555QminL(uuid, parent, "PCALC_EN13555QminL", this);
-    } else if (str == "PCALC_EN13555QsminLList") {
-        obj = new PCALC_EN13555QsminL(uuid, parent, "PCALC_EN13555QsminL", this);
     } else if (str == "PCALC_EN1591_BoltNutWasherList") {
         obj = new PCALC_EN1591_BoltNutWasher(uuid, parent, "PCALC_EN1591_BoltNutWasher", this);
     } else if (str == "PCALC_EN1591_FlangeList") {
@@ -144,6 +118,32 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new PCALC_EN1591_LoadCase(uuid, parent, "PCALC_EN1591_LoadCase", this);
     } else if (str == "PCALC_EN1591_ShellList") {
         obj = new PCALC_EN1591_Shell(uuid, parent, "PCALC_EN1591_Shell", this);
+    } else if (str == "STD_EN13555EGeGList") {
+        obj = new STD_EN13555EGeG(uuid, parent, "STD_EN13555EGeG", this);
+    } else if (str == "STD_EN13555GasketList") {
+        obj = new STD_EN13555Gasket(uuid, parent, "STD_EN13555Gasket", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "STD_EN13555EGeGList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_EN13555PqrDeltaeGCList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_EN13555QminLList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_EN13555QsminLList", this);
+        obj->addObject(list);
+    } else if (str == "STD_EN13555ManufacturerList") {
+        obj = new STD_EN13555Manufacturer(uuid, parent, "STD_EN13555Manufacturer", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "STD_EN13555GasketList", this);
+        obj->addObject(list);
+    } else if (str == "STD_EN13555PqrDeltaeGCList") {
+        obj = new STD_EN13555PqrDeltaeGC(uuid, parent, "STD_EN13555PqrDeltaeGC", this);
+    } else if (str == "STD_EN13555QminLList") {
+        obj = new STD_EN13555QminL(uuid, parent, "STD_EN13555QminL", this);
+    } else if (str == "STD_EN13555QsminLList") {
+        obj = new STD_EN13555QsminL(uuid, parent, "STD_EN13555QsminL", this);
     }
 
     // Add object to parent and set object parent

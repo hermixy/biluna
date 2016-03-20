@@ -28,8 +28,13 @@ public:
         FlangeLoose,
     };
 
-
+    static double MPaToBar (double pressureMPa) {
+        return 10 * pressureMPa;
+    }
     
+    static double BarToMPa (double pressureBar) {
+        return 0.1 * pressureBar;
+    }
 };
 
 #endif /*PCALC_H*/

@@ -9,10 +9,14 @@
 
 NAMESPACE_BILUNA_CALC_EN1591
 
-class TableGSimpleProperty {
+/**
+ * @brief The EN13445 Table G class property
+ * EN13445 Table G, used instead of EN1591
+ */
+class EN13445TableGProperty {
 
 public:
-    TableGSimpleProperty(Gasket::InsFilLayMatType insFillMat,
+    EN13445TableGProperty(Gasket::InsFilLayMatType insFillMat,
                          double temperature,
                          double Q0min,
                          double Qmax,
@@ -31,17 +35,17 @@ public:
     double mgC;
 };
 
-#define TABLEGSIMPLE TableGSimple::getInstance()
+#define EN13445TABLEG EN13445TableG::getInstance()
 
 /**
  * The EN13445 appendix G tables 9 class for gaskets
  * without EN13555 measured data
  */
-class TableGSimple : public RB_TableMath, RB_Utility {
+class EN13445TableG : public RB_TableMath, RB_Utility {
 
 public:
-    virtual ~TableGSimple();
-    static TableGSimple* getInstance();
+    virtual ~EN13445TableG();
+    static EN13445TableG* getInstance();
 
     void refresh() {}
 
@@ -59,13 +63,13 @@ public:
                         double temperature);
 
 private:
-    TableGSimple();
+    EN13445TableG();
     bool getUpperLower(Gasket::InsFilLayMatType insType,
                        double temperature);
-    void updateUpperObject(TableGSimpleProperty *obj,
+    void updateUpperObject(EN13445TableGProperty *obj,
                            Gasket::InsFilLayMatType insType,
                            double temperature);
-    void updateLowerObject(TableGSimpleProperty *obj,
+    void updateLowerObject(EN13445TableGProperty *obj,
                            Gasket::InsFilLayMatType insType,
                            double temperature);
     void createList();
@@ -78,11 +82,11 @@ private:
             double mI,
             double gC);
 
-    static TableGSimple* mActiveUtility;
-    TableGSimpleProperty* mUpper;
-    TableGSimpleProperty* mLower;
+    static EN13445TableG* mActiveUtility;
+    EN13445TableGProperty* mUpper;
+    EN13445TableGProperty* mLower;
 
-    std::vector<TableGSimpleProperty*> mList;
+    std::vector<EN13445TableGProperty*> mList;
 };
 
 END_NAMESPACE_BILUNA_CALC_EN1591

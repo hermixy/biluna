@@ -187,7 +187,7 @@ void Flange_Loose::Calc_dE() {
     } else {
         // Tapered hub
         dE = 0.5 * (std::min(d1 - e1 + eE, d2 + e2 - eE)
-                    + std::max(d1 + e1 - eE, d2 - e2 + eE));
+                    + std::fmax(d1 + e1 - eE, d2 - e2 + eE));
         PR->addDetail("Formula 20", "dE(" + QN(mFlangeNumber) + ")",
                       "0.5 * (min(d1 - e1 + eE; d2 + e2 - eE) "
                       "+ max(d1 + e1 - eE; d2 - e2 + eE))", dE, "-",
@@ -413,7 +413,7 @@ void Flange_Loose::Calc_d70() {
  * @param loadCaseNo
  */
 void Flange_Loose::Calc_d7minMax() {
-    d7 = std::min(std::max(d7min, d7), d7max);
+    d7 = std::min(std::fmax(d7min, d7), d7max);
     PR->addDetail("Formula 84", "result84(" + QN(mFlangeNumber) + ")",
                   "min(max(d7min; d7); d7max)", d7, "mm",
                   "min(max(" + QN(d7min) + "; " + QN(d7) + "); "

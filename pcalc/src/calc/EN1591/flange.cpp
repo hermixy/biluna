@@ -9,12 +9,15 @@ NAMESPACE_BILUNA_CALC_EN1591
 double Flange_IN::ACCURACY = 0.000001; //1.0e-6 required for integral a.o.
 
 
-Flange_IN::Flange_IN(int flangeNo) : RB_Object() {
+Flange_IN::Flange_IN(int flangeNo) : RB_Object("PCALC EN1591 Flange") {
+    // setName("PCALC EN1591 Flange"); in blind, integral and loose
 
     if (flangeNo != 1 && flangeNo != 2) {
         qDebug("Flange constructor: flange Number ERROR.");
     }
 
+    materialIdx = "";
+    materialLooseIdx = "";
     mFlangeNumber = flangeNo;
     mShell = new Shell(); // also for blind!
     mWasher = new Washer();
@@ -217,7 +220,7 @@ void Flange::Calc_XB() {
  */
 void Flange::Calc_dK1() {
     if (mWasher->isPresent()) {
-        mWasher->dK1 = std::max(mBolt->mBoltHole->d5, mWasher->dW1);
+        mWasher->dK1 = std::fmax(mBolt->mBoltHole->d5, mWasher->dW1);
         PR->addDetail("Formula 46", "dK1(" + QN(mFlangeNumber) + ")",
                       "max(d5; dW1)", mWasher->dK1, "mm",
                       "max(" + QN(mBolt->mBoltHole->d5) + "; "
@@ -1113,7 +1116,7 @@ void Flange::Calc_kM_for_WFmax(int loadCaseNo) {
 
             // Stop for-loop if passed highest point by setting
             // xRunner larger than xMaxInterval
-            if (yMidMax == std::max(yMidMax, std::max(yBeforeMax, yAfterMax))) {
+            if (yMidMax == std::fmax(yMidMax, std::fmax(yBeforeMax, yAfterMax))) {
                 xRunner = xMaxInterval * 1.1;
             }
         }

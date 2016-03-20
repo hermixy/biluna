@@ -37,6 +37,7 @@ public:
     void F120_to_122(Assembly* assembly, int loadCaseNo);
     void F123_to_151(Assembly* assembly, int loadCaseNo);
     void FC1_to_C10(Assembly* assembly, int loadCaseNo);
+    void finalCalculations(Assembly* assembly);
 
     Assembly* mAssembly;
 

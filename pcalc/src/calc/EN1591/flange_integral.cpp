@@ -150,7 +150,7 @@ void Flange_Integral::Calc_dE() {
     } else {
         // Tapered hub
         dE = 0.5 * (std::min(d1 - e1 + eE, d2 + e2 - eE)
-                    + std::max(d1 + e1 - eE, d2 - e2 + eE));
+                    + std::fmax(d1 + e1 - eE, d2 - e2 + eE));
         PR->addDetail("Formula 20", "dE(" + QN(mFlangeNumber) + ")",
                       "0.5 * (min(d1 - e1 + eE; d2 + e2 - eE) "
                       "+ max(d1 + e1 - eE; d2 - e2 + eE))", dE, "-",

@@ -130,6 +130,10 @@ RB_Dialog* PCALC_DialogFactory::getDialog(int type) {
         dlg = new PCALC_ProjectEditDialog(mMainWindow);
         break;
     }
+    case WidgetEN1591SelectGasket: {
+        // TODO: getDialog() method to be removed in its entirety
+        break;
+    }
     default:
         RB_DEBUG->print(RB_Debug::D_ERROR,
                         "PCALC_DialogFactory::getDialog(type)"

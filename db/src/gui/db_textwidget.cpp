@@ -388,7 +388,6 @@ bool DB_TextWidget::saveFile(const RB_String &fn) {
         return false;
     }
 
-    QTextStream out(&file);
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     if (fn.endsWith(".htm", Qt::CaseInsensitive)
@@ -396,8 +395,15 @@ bool DB_TextWidget::saveFile(const RB_String &fn) {
             || fn.endsWith(".xhtml", Qt::CaseInsensitive)) {
         RB_String html = richTextEdit->toHtml();
         richTextEdit->saveHtmlEmbeddedImage(html);
+        QTextStream out(&file);
         out << html;
+    } else if (fn.endsWith(".odt", Qt::CaseInsensitive)) {
+        QTextDocumentWriter writer;
+        writer.setFileName(fn);
+        writer.setFormat("odf");
+        writer.write(richTextEdit->document());
     } else {
+        QTextStream out(&file);
         out << richTextEdit->toPlainText();
     }
 

@@ -231,19 +231,20 @@ RB_ObjectFactory* DB_ModelFactory::getObjectFactory(const RB_String& objName) {
     }
 
     RB_ObjectFactory* factory = NULL;
-    RB_StringList strL = objName.split("_");
-    RB_String perspective = strL.at(0);
+//    RB_StringList strL = objName.split("_");
+//    RB_String perspective = strL.at(0);
 
     // Check if relevant perspective is loaded
     std::vector<RB_ObjectFactory*> fl = DB_OBJECTFACTORY->getFactoryList();
     std::vector<RB_ObjectFactory*>::iterator iter;
     iter = fl.begin();
 
-    while (iter != fl.end()) {
+    while (iter != fl.end() && !factory) {
         RB_ObjectFactory* f = *iter;
-        strL = f->getName().split("_");
+//        strL = f->getName().split("_");
 
-        if (perspective.toLower() == strL.at(0).toLower()) {
+//        if (perspective.toLower() == strL.at(0).toLower()) {
+        if (f->isObject(objName)) {
             factory = f;
         }
         ++iter;

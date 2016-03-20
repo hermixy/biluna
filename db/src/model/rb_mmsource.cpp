@@ -39,10 +39,7 @@ RB_MmSource::RB_MmSource(QObject* parent, const QSqlDatabase& db, int hiddenColu
     mModified = false;
     mIsTreeModel = false;
     mIsInMemoryModel = false;
-    mDatabaseConnection = "";
-    if (db.isOpen()) {
-        mDatabaseConnection = db.connectionName();
-    }
+    mDatabaseConnection = db.connectionName();
     mNoColumns = 0;
     mPrimaryParent = "parent";
     mSecondParent = "";
@@ -455,7 +452,7 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
             RB_ObjectMember* mem = mObject->getMember(col);
 
             if (!mem) {
-                RB_DEBUG->error("RB_MmSource::getCurrentObject() member ERROR");
+                RB_DEBUG->error("RB_MmSource::getObject() member ERROR");
                 continue;
             }
 
@@ -477,6 +474,10 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
     }
 
 
+    return mObject;
+}
+
+RB_ObjectBase *RB_MmSource::getBaseObject() {
     return mObject;
 }
 
@@ -2774,4 +2775,3 @@ void RB_MmSource::setSortOrder(RB2::SortOrderType so,
     mSortColumnName2 = colName2;
     mSortColumnName3 = colName3;
 }
-

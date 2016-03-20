@@ -42,7 +42,6 @@ HEADERS += \
     ../src/calc/EN1591/unittest/flangetest.h \
     ../src/calc/EN1591/unittest/forcetest.h \
     ../src/calc/EN1591/unittest/gaskettest.h \
-    ../src/calc/EN1591/unittest/tablegsimpletest.h \
     ../src/calc/EN1591/unittest/washertest.h \
     ../src/calc/pcalc_inputoutput.h \
     ../src/calc/rb_allowanceservice.h \
@@ -62,12 +61,12 @@ HEADERS += \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditdialog.h \
     ../src/gui/rb_databasetablewidget.h \
-    ../src/model/EN1591/pcalc_en13555egeg.h \
-    ../src/model/EN1591/pcalc_en13555gasket.h \
-    ../src/model/EN1591/pcalc_en13555manufacturer.h \
-    ../src/model/EN1591/pcalc_en13555pqrdeltaegc.h \
-    ../src/model/EN1591/pcalc_en13555qminl.h \
-    ../src/model/EN1591/pcalc_en13555qsminl.h \
+    ../src/model/EN1591/std_en13555egeg.h \
+    ../src/model/EN1591/std_en13555gasket.h \
+    ../src/model/EN1591/std_en13555manufacturer.h \
+    ../src/model/EN1591/std_en13555pqrdeltaegc.h \
+    ../src/model/EN1591/std_en13555qminl.h \
+    ../src/model/EN1591/std_en13555qsminl.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
     ../src/model/EN1591/pcalc_en1591_flange.h \
@@ -77,13 +76,8 @@ HEADERS += \
     ../src/model/pcalc.h \
     ../src/model/pcalc_modelfactory.h \
     ../src/model/pcalc_objectfactory.h \
+    ../src/utils/EN1591/en13445tableg.h \
     ../src/utils/EN1591/en13555property.h \
-    ../src/utils/EN1591/table02_15property.h \
-    ../src/utils/EN1591/table16property.h \
-    ../src/utils/EN1591/table17_30property.h \
-    ../src/utils/EN1591/tableeproperty.h \
-    ../src/utils/EN1591/tablegproperty.h \
-    ../src/utils/EN1591/tablegsimple.h \
     ../src/utils/pcalc_report.h \
     ../src/utils/pcalc_sqlcommonfunctions.h \
     ../src/utils/pcalc_utilityfactory.h \
@@ -122,7 +116,6 @@ SOURCES += \
     ../src/calc/EN1591/unittest/flangetest.cpp \
     ../src/calc/EN1591/unittest/forcetest.cpp \
     ../src/calc/EN1591/unittest/gaskettest.cpp \
-    ../src/calc/EN1591/unittest/tablegsimpletest.cpp \
     ../src/calc/EN1591/unittest/washertest.cpp \
     ../src/calc/pcalc_inputoutput.cpp \
     ../src/calc/rb_allowanceservice.cpp \
@@ -140,12 +133,12 @@ SOURCES += \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditdialog.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
-    ../src/model/EN1591/pcalc_en13555egeg.cpp \
-    ../src/model/EN1591/pcalc_en13555gasket.cpp \
-    ../src/model/EN1591/pcalc_en13555manufacturer.cpp \
-    ../src/model/EN1591/pcalc_en13555pqrdeltaegc.cpp \
-    ../src/model/EN1591/pcalc_en13555qminl.cpp \
-    ../src/model/EN1591/pcalc_en13555qsminl.cpp \
+    ../src/model/EN1591/std_en13555egeg.cpp \
+    ../src/model/EN1591/std_en13555gasket.cpp \
+    ../src/model/EN1591/std_en13555manufacturer.cpp \
+    ../src/model/EN1591/std_en13555pqrdeltaegc.cpp \
+    ../src/model/EN1591/std_en13555qminl.cpp \
+    ../src/model/EN1591/std_en13555qsminl.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \
     ../src/model/EN1591/pcalc_en1591_flange.cpp \
@@ -154,13 +147,8 @@ SOURCES += \
     ../src/model/EN1591/pcalc_en1591_shell.cpp \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
+    ../src/utils/EN1591/en13445tableg.cpp \
     ../src/utils/EN1591/en13555property.cpp \
-    ../src/utils/EN1591/table02_15property.cpp \
-    ../src/utils/EN1591/table16property.cpp \
-    ../src/utils/EN1591/table17_30property.cpp \
-    ../src/utils/EN1591/tableeproperty.cpp \
-    ../src/utils/EN1591/tablegproperty.cpp \
-    ../src/utils/EN1591/tablegsimple.cpp \
     ../src/utils/pcalc_report.cpp \
     ../src/utils/pcalc_sqlcommonfunctions.cpp \
     ../src/utils/pcalc_utilityfactory.cpp \

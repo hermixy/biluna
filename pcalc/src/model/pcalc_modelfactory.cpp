@@ -70,27 +70,27 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
 
     switch (type) {
     case ModelEN13555EGeG:
-        model = getTableModel(stdDb, mObjectFactory, type, "PCALC_EN13555EGeGList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qa");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555EGeGList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qg");
         break;
     case ModelEN13555Gasket:
-        model = getTableModel(stdDb, mObjectFactory, type, "PCALC_EN13555GasketList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555GasketList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "type");
         break;
     case ModelEN13555Manuf:
-        model = getTableModel(stdDb, mObjectFactory, type, "PCALC_EN13555ManufacturerList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555ManufacturerList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "manufacturer");
         break;
     case ModelEN13555PQRdeltaeGC:
-        model = getTableModel(stdDb, mObjectFactory, type, "PCALC_EN13555PqrDeltaeGCList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qa");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555PqrDeltaeGCList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qg");
         break;
     case ModelEN13555QminL:
-        model = getTableModel(stdDb, mObjectFactory, type, "PCALC_EN13555QminLList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555QminLList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "leakrate");
         break;
     case ModelEN13555QsminL:
-        model = getTableModel(stdDb, mObjectFactory, type, "PCALC_EN13555QsminLList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555QsminLList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "qa", "leakrate");
         break;
     case ModelEN1591Assembly:

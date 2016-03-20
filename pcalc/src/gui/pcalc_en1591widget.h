@@ -58,8 +58,11 @@ protected:
 private:
     void setInput();
     void setSettings();
+    void createSummaryReport();
     void createDetailReport();
+    void createReport(const QString& reportTemplate);
     void insertReportInputData(QString& report, RB_ObjectBase* obj);
+    void insertReportLoadCaseData(QString& report, RB_ObjectBase* obj);
     void insertReportCalculationData(QString& report, RB_ObjectBase* obj);
     void createValidationReport();
     void createUnitTestSummary();

@@ -2,9 +2,8 @@
 NAMESPACE_BILUNA_CALC_EN1591
 
 
-LoadCase_IN::LoadCase_IN() : RB_Object() {
-    setName("PCALC EN1591 LoadCase");
-
+LoadCase_IN::LoadCase_IN() : RB_Object("PCALC EN1591 LoadCase") {
+    number = -1;
     mForce = NULL; // created from outside
     alphaB = 0;
     alphaG = 0;
@@ -24,6 +23,7 @@ LoadCase_IN::LoadCase_IN() : RB_Object() {
 
     // input by user, bolt load specified by user
     F_Bspec = 0.0;
+    relaxB = 1.0;
 
     fB = 0;
     fF1 = 0;
@@ -36,7 +36,6 @@ LoadCase_IN::LoadCase_IN() : RB_Object() {
     fW1 = 0;
     fW2 = 0;
 
-    muG = 0;
     P = 0;
 
     T0 = 0;
@@ -66,9 +65,8 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     F_Q = 0.0;
     dUI = 0.0;
 
+    // gasket creep, P_QR and delta ecG in Fomula 105, 106 and 120, 121 and C.8, C.9
     P_QR = 0.0;
-
-    // gasket creep delta ecG in Fomula 105, 106 and 120, 121 and C.8, C.9
     delta_eGc = 0.0;
     delta_eGc_EN13555 = 0.0;
 
@@ -114,6 +112,7 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     PhiCF2 = 0.0;
     PhiCB1 = 0.0;
     PhiCB2 = 0.0;
+    delta_lB = 0.0;
 
     // Gasket
     PhiG = 0.0;
@@ -167,13 +166,13 @@ LoadCase_OUT::LoadCase_OUT() : LoadCase_IN() {
     MtBnom = 0.0;
     Mtnom = 0.0;
     Q_G = 0.0;
-    Q_GmaxA = 0.0; // Annex C
-    Q_GminA = 0.0; // Annex C
-    Q_A = 0.0;
+    Q_GmaxA = 0.0;  // Annex C
+    Q_GminA = 0.0;  // Annex C
+    Q_A = 0.0;      // 'runner'
     Q_0min = 0.0;
-    Q_minL = 0.0;
-    Q_sminL = 0.0;
-    Q_smax = 0.0;
+    Q_minL = 0.0;   // EN13555 table values
+    Q_sminL = 0.0;  // EN13555 table values
+    Q_smax = 0.0;   // EN13555 table values
     ThetaF1min = 0.0;
     ThetaF1max = 0.0;
     ThetaF2min = 0.0;
@@ -232,7 +231,6 @@ void LoadCase::setInputData(LoadCase *loadCaseIn) {
     fW1 = loadCaseIn->fW1;
     fW2 = loadCaseIn->fW2;
 
-    muG = loadCaseIn->muG;
     P = loadCaseIn->P;
 
     // Temperatures

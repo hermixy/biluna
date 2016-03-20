@@ -28,10 +28,10 @@ public:
     void exec();
 
 protected:
-    void setDimensions();
+    void setDimMatInput();
     void setAllowances();
     void setQualityFactors();
-    void setLoadCases();
+    void setLoadCaseInput();
     void setMaterialProperties();
 
     Calculator* getCalculator() const;

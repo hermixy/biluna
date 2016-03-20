@@ -325,6 +325,10 @@ RB_ObjectBase* RB_MmProxy::getObject(const QModelIndex& index,
     return mSourceModel->getObject(mapToSource(index), level);
 }
 
+RB_ObjectBase *RB_MmProxy::getBaseObject() {
+    return mSourceModel->getBaseObject();
+}
+
 /**
  * Get curren selected object
  * @return object. In case of database an object

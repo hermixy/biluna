@@ -3,9 +3,7 @@
 NAMESPACE_BILUNA_CALC_EN1591
 
 
-BoltHole_IN::BoltHole_IN() : RB_Object() {
-    setName("PCALC EN1591 BoltHole");
-
+BoltHole_IN::BoltHole_IN() : RB_Object("PCALC EN1591 BoltHole") {
     d5 = 0;
     isBlindHole = false;
     d5t = 0;

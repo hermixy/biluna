@@ -11,6 +11,7 @@
 #ifndef RB_TABLEMATH_H
 #define RB_TABLEMATH_H
 
+#include "rb_objectcontainer.h"
 #include "rb_namespace.h"
 
 NAMESPACE_BILUNA_CALC
@@ -21,6 +22,7 @@ NAMESPACE_BILUNA_CALC
  */
 class RB_TableMath {
 
+friend class RB_TableMathTest;
 public:
     RB_TableMath();
     virtual ~RB_TableMath();
@@ -30,6 +32,40 @@ public:
                             double p12X, double p12Y, double p12val,
                             double p21X, double p21Y, double p21val,
                             double p22X, double p22Y, double p22val);
+    double getLinearValue(double valX,
+                          double p1X, double p1val,
+                          double p2X, double p2val);
+    double getBilInterpValue(RB_ObjectContainer* fromObjC,
+                             const QString& xField, const QString& yField,
+                             const QString& zField, double xValue,
+                             double yValue, const QString& extraField = "",
+                             double extraValue = 0.0);
+    double getLinInterpValue(RB_ObjectContainer* fromObjC,
+                             const QString& xField, const QString& yField,
+                             double xValue, const QString& extraField = "",
+                             double extraValue = 0.0);
+
+protected:
+    void updateCornerObjects(RB_ObjectBase* obj);
+    double getOutOfBoundValue();
+    double getThreeCornerValue();
+    double getTwoCornerValue();
+    double getOneCornerValue();
+    void updateLeftRightObjects(RB_ObjectBase* obj);
+
+
+    QString mXfield;
+    QString mYfield;
+    QString mZfield;
+    double mXvalue;
+    double mYvalue;
+    QString mExtraField;
+    double mExtraValue;
+    RB_ObjectBase* mTopLeft;
+    RB_ObjectBase* mTopRight;
+    RB_ObjectBase* mBottomLeft;
+    RB_ObjectBase* mBottomRight;
+
 };
 
 END_NAMESPACE_BILUNA_CALC

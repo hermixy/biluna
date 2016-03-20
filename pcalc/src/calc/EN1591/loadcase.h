@@ -11,6 +11,7 @@ public:
     LoadCase_IN();
     virtual ~LoadCase_IN();
 
+    int number; // loadcase number
     Force* mForce;
     double alphaB;
     double alphaG;
@@ -30,6 +31,8 @@ public:
 
     // bolt load specified by user
     double F_Bspec;
+    // bolt relaxation (not in EN1591), 1.0 = 100% in EN1591Handler
+    double relaxB;
 
     double fB;
     double fF1;
@@ -41,7 +44,6 @@ public:
     double fS2;
     double fW1;
     double fW2;
-    double muG;
     double P;
     double T0;
     double TB;
@@ -115,6 +117,7 @@ public:
     double PhiCF2;
     double PhiCB1;
     double PhiCB2;
+    double delta_lB;
 
     // Gasket
     double PhiG;

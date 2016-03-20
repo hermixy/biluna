@@ -57,7 +57,7 @@ class DB_EXPORT DB_Activity : public RB_ObjectAtomic {
 
 public:
     DB_Activity(const RB_String& id = "", RB_ObjectBase* p = NULL,
-                const RB_String& n = "", RB_ObjectFactory* f = NULL);
+                const RB_String& n = "DB_Activity", RB_ObjectFactory* f = NULL);
     DB_Activity(DB_Activity* activity);
     virtual ~DB_Activity();
 

@@ -25,8 +25,10 @@ private:
     void Calc_AQTest();
     void Calc_bGeTest();
     void Calc_XGTest();
+    void Calc_Q_A_QsminTest();
+    void Calc_delta_eGcTest();
 
-    Gasket *target;
+    Gasket* target;
 };
 
 END_NAMESPACE_BILUNA_CALC_EN1591

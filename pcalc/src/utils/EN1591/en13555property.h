@@ -16,31 +16,9 @@
 #include "rb_namespace.h"
 #include "rb_tablemath.h"
 #include "rb_utility.h"
-
 NAMESPACE_BILUNA_CALC_EN1591
 
-/**
- * @brief EN13555 properties QminL QsminL Qsmax Pqr deltaEgc EG eG
- */
-//class QminLQsminLProperty {
-
-//public:
-//    QminLQsminLProperty(double leakageRate,
-//                        const RB_String& materialCode,
-//                        double testPressure,
-//                        double QA,
-//                        double QminL,
-//                        double QsminL);
-//    double mLeakageRate;
-//    RB_String mMaterialCode;
-//    double mTestPressure;
-//    double mQA;
-//    double mQminL;
-//    double mQsminL;
-//};
-
-
-#define TABLE02_15PROPERTY EN13555Property::getInstance()
+#define EN13555PROPERTY EN13555Property::getInstance()
 
 /**
  * @brief EN13555 properties QminL QsminL Qsmax Pqr deltaEgc EG eG.
@@ -53,46 +31,34 @@ public:
     virtual ~EN13555Property();
     static EN13555Property* getInstance();
 
+    bool setCurrentGasket(const QString& gasketIdx);
+    bool isValid();
     void refresh() {}
 
-
-    double getTableQA(double leakageRate,
-                         const RB_String& gasketId,
-                         double testPressure = 40.0);
-    double getTableQminL(double leakageRate,
-                         const RB_String& gasketId,
-                         double testPressure = 40.0);
-    double getTableQsminL(double leakageRate,
-                          const RB_String& materialCode,
-                          double QA,
-                          double testPressure = 40.0);
-
-
-
-
-    // continue here ... how to allow for custom and tables 2-16 selection?
-//    RB_String gasketId(const RB_String& manufacturer,
-//                       const RB_String& gasketIdx);
-
+    double get_deltaeGc(double gasketPressure, double designTemp);
+    double get_PQR(double gasketPressure, double designTemp);
+    double get_eG(double gasketPressure, double designTemp);
+    double get_EG(double gasketPressure, double designTemp);
+    double get_Qsmax(double designTemp);
+    double get_QsminL(double leakageRate, double QA, double testPressure);
+    double get_QminL(double leakageRate, double testPressure);
 
 private:
     EN13555Property();
 
-//    void createList();
-//    void cl(double leakageRate, const RB_String& materialCode,
-//            double testPressure, double QA, double QminL, double QsminL);
+    bool loadGasket(const QString& gasketId);
+    double closestInnerPressureBar(double testPressure);
+    double getMaxLinInterpValue(RB_ObjectContainer* fromObjC,
+                                const QString& xField, const QString& yField,
+                                double xValue, const QString& extraField = "",
+                                double extraValue = 0.0);
+    void updateMaxLeftRightObjects(RB_ObjectBase* obj);
 
-//    void updateLeft(QminLQsminLProperty* obj);
-//    void updateRight(QminLQsminLProperty* obj);
 
     static EN13555Property* mActiveUtility;
+    RB_ObjectContainer* mGasketList;
+    RB_ObjectBase* mCurrentGasket;
 
-    RB_ObjectContainer* mList;
-
-//    std::vector<QminLQsminLProperty*> mList;
-//    double mTargetQA;
-//    QminLQsminLProperty* mLeft;
-//    QminLQsminLProperty* mRight;
 };
 
 END_NAMESPACE_BILUNA_CALC_EN1591

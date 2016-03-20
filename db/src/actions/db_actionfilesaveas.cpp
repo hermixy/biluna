@@ -85,9 +85,10 @@ void DB_ActionFileSaveAs::trigger() {
     fileName = strL.at(0);
     fileName.replace(QRegExp("[^a-zA-Z\\d\\s]"), "_");
     if (wdgt->getWidgetType() == DB_DialogFactory::WidgetHtmlEditor
-            || wdgt->getWidgetType() == DB_DialogFactory::WidgetInternet
-            || wdgt->getWidgetType() == DB_DialogFactory::WidgetTextDocument) {
+            || wdgt->getWidgetType() == DB_DialogFactory::WidgetInternet) {
         fileName += ".html";
+    } else if (wdgt->getWidgetType() == DB_DialogFactory::WidgetTextDocument) {
+        fileName += ".odt";
     } else if (wdgt->getWidgetType() == DB_DialogFactory::WidgetPlainTextDocument) {
         fileName += ".txt";
     } else if (strL.count() > 1) {
@@ -95,8 +96,9 @@ void DB_ActionFileSaveAs::trigger() {
     }
 
     RB_String filters = "All files (*.*);;Text files (*.txt);;"
-            "Hyper Text Markup Language files (*.html *.htm);;"
-            "eXtensible Markup Language files (*.xml)";
+                        "Open Document Format files (*.odt);;"
+                        "Hyper Text Markup Language files (*.html *.htm);;"
+                        "eXtensible Markup Language files (*.xml)";
 
     if (fn.contains(QDir::separator())) {
         // fn was path plus file name
@@ -147,6 +149,7 @@ void DB_ActionFileSaveAs::getSaveFileName(RB_String& fn,
         currentFilter = filters;
     } else {
         currentFilter = "All files (*.*);;Text files (*.txt);;"
+                "Open Document Format files (*.odt);;"
                 "Hyper Text Markup Language files (*.html *.htm);;"
                 "eXtensible Markup Language files (*.xml)";
     }
@@ -168,6 +171,8 @@ void DB_ActionFileSaveAs::getSaveFileName(RB_String& fn,
             currentFilter = currentFilter.remove(")");
             currentFilter = currentFilter.trimmed();
             fn.append(currentFilter);
+        } else if (currentFilter.contains(".odt", Qt::CaseInsensitive)) {
+            fn.append(".odt");
         } else if (currentFilter.contains(".htm", Qt::CaseInsensitive)
             && currentFilter.contains(".html", Qt::CaseInsensitive)) {
             fn.append(".html");

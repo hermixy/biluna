@@ -11,6 +11,10 @@ public:
     Washer_IN();
     virtual ~Washer_IN();
 
+    // materialIdx, material type  and id from database for material properties
+    // same purpose as gasketIdx for gaskets
+    RB_String materialIdx;
+
     double eW;
     double dW1;
     double dW2;

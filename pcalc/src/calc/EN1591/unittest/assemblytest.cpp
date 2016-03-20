@@ -20,6 +20,8 @@ AssemblyTest::~AssemblyTest() {
 }
 
 void AssemblyTest::exec() {
+    Calc_dG1Test();
+    Calc_dG2Test();
     Calc_dGeTest();
     Calc_F_GInitial_1Test();
     Calc_F_GInitialTest();
@@ -32,7 +34,6 @@ void AssemblyTest::exec() {
     Calc_YRTest();
     Calc_bGiTest();
     Calc_dUTTest();
-    Calc_Q_A_QsminTest();
     Calc_F_GminTest();
     Calc_F_G0deltaTest();
     Calc_F_G0reqTest();
@@ -42,8 +43,6 @@ void AssemblyTest::exec() {
     Calc_F_B0nomTest();
     Is_F_B0nom_ValidTest();
     Calc_F_G0maxTest();
-//    Calc_F_BmaxTest();
-//    Calc_F_GmaxTest();
     Calc_F_G0d_2Test();
     Calc_F_G0dTest();
     Calc_F_GTest();
@@ -51,6 +50,7 @@ void AssemblyTest::exec() {
     Calc_cATest();
     Calc_cBTest();
     Calc_PhiBTest();
+    Calc_delta_lBTest();
     Calc_PhiGTest();
     Is_PhiB_ValidTest();
     Calc_fETest();
@@ -62,7 +62,6 @@ void AssemblyTest::exec() {
     Calc_ThetaFmaxminTest();
     Calc_ThetaLmaxminTest();
     Calc_Q_GTest();
-    Calc_delta_eGcTest();
     Calc_F_B0avTest();
 }
 
@@ -147,6 +146,96 @@ void AssemblyTest::deleteTarget() {
     target = NULL;
 }
 
+void AssemblyTest::Calc_dG1Test() {
+    SetupIntegralTarget();
+    target->mFlange1->d0 = 1.0;
+    target->mFlange1->dREC = 2.0;
+    target->mFlange2->d0 = 3.0;
+    target->mFlange2->dREC = 4.0;
+    target->mGasket->dGin = 5.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 5.0,
+             target->mGasket->dG1);
+    target->mFlange1->d0 = 6.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 6.0,
+             target->mGasket->dG1);
+    target->mFlange1->dREC = 7.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 7.0,
+             target->mGasket->dG1);
+    target->mFlange2->d0 = 8.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 8.0,
+             target->mGasket->dG1);
+    target->mFlange2->dREC = 9.0;
+    target->Calc_dG1();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG1Test()", 9.0,
+             target->mGasket->dG1);
+    deleteTarget();
+}
+
+void AssemblyTest::Calc_dG2Test() {
+    SetupIntegralTarget();
+    target->mFlange1->d0 = 1.0;
+    target->mFlange1->dREC = 2.0;
+    target->mFlange2->d0 = 3.0;
+    target->mFlange2->dREC = 4.0;
+    // valid raised faces
+    target->mGasket->dGout = 10.0;
+    target->mFlange1->d4 = 11.0;
+    target->mFlange1->dRF = 12.0;
+    target->mFlange2->d4 = 13.0;
+    target->mFlange2->dRF = 14.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 10.0,
+             target->mGasket->dG2);
+    target->mGasket->dGout = 15.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 11.0,
+             target->mGasket->dG2);
+    target->mFlange1->d4 = 16.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 12.0,
+             target->mGasket->dG2);
+    target->mFlange1->dRF = 17.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 13.0,
+             target->mGasket->dG2);
+    target->mFlange2->d4 = 18.0;
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 14.0,
+             target->mGasket->dG2);
+    // flange 1 valid raised face
+    target->mGasket->dGout = 15.0;
+    target->mFlange1->d4 = 14.0;
+    target->mFlange1->dRF = 13.0;
+    target->mFlange2->d4 = 12.0;
+    target->mFlange2->dRF = 0.5; // one is invalid
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 12.0,
+             target->mGasket->dG2);
+    // flange 2 valid raised face
+    target->mGasket->dGout = 15.0;
+    target->mFlange1->d4 = 14.0;
+    target->mFlange1->dRF = 0.5;
+    target->mFlange2->d4 = 12.5;
+    target->mFlange2->dRF = 13.0; // one is invalid
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 12.5,
+             target->mGasket->dG2);
+    // no valid raised faces
+    target->mGasket->dGout = 15.0;
+    target->mFlange1->d4 = 17.0;
+    target->mFlange1->dRF = 0.5;
+    target->mFlange2->d4 = 15.5;
+    target->mFlange2->dRF = 0.3; // one is invalid
+    target->Calc_dG2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_dG2Test()", 15.0,
+             target->mGasket->dG2);
+    deleteTarget();
+}
+
 void AssemblyTest::Calc_dGeTest() {
     SetupIntegralTarget();
     target->mGasket->frmType = Gasket::Flat;
@@ -179,7 +268,7 @@ void AssemblyTest::Calc_F_GInitial_1Test() {
     SetupIntegralTarget();
     int loadCaseNo = 0;
     target->mLoadCaseList->at(loadCaseNo)->F_Bspec = 103.2;
-    target->mBolt->eta1minus = 1.3;
+    target->mBolt->etanminus = 1.3;
     target->mLoadCaseList->at(loadCaseNo)->F_R = 6.7;
     target->Calc_F_GInitial_1();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GInitialTest_1()",
@@ -253,9 +342,16 @@ void AssemblyTest::Calc_YBTest() {
 
     target->mBolt->XB = 6.4;
     target->mLoadCaseList->at(i)->EB = 7.5;
+    target->mLoadCaseList->at(i)->relaxB = 1.0;
 
     target->Calc_YB(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YBTest()", 5.8447859193305112,
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YBTest()",
+             5.8447859193305112,
+             target->mLoadCaseList->at(i)->Y_B);
+    target->mLoadCaseList->at(i)->relaxB = 0.85;
+    target->Calc_YB(i);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_YBTest()",
+             5.99537415462462900793,
              target->mLoadCaseList->at(i)->Y_B);
     deleteTarget();
 }
@@ -447,20 +543,6 @@ void AssemblyTest::Calc_dUTTest() {
     deleteTarget();
 }
 
-void AssemblyTest::Calc_Q_A_QsminTest() {
-    // special case if F_Bspec > 0
-    SetupIntegralTarget();
-    int i = 0;
-    LoadCase* loadCase = target->mLoadCaseList->at(i);
-    loadCase->F_Bspec = 0.3;
-    loadCase->F_G = 4.5;
-    target->mGasket->AGe = 8.3;
-    target->Calc_Q_A_Qsmin(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_A_QsminTest()",
-             0.54216867469879518072, loadCase->Q_A);
-    deleteTarget();
-}
-
 void AssemblyTest::Calc_F_GminTest() {
     SetupIntegralTarget();
     int i = 0;
@@ -476,7 +558,7 @@ void AssemblyTest::Calc_F_GminTest() {
     // tmpVal1 = 5.9082
     target->mLoadCaseList->at(i)->mForce->M_AI = 7.8;
     target->mGasket->dGt = 20.1;
-    target->mLoadCaseList->at(i)->muG = 0.1;
+    target->mGasket->muG = 0.1;
     target->mLoadCaseList->at(i)->mForce->F_LI = 4.1;
     target->mLoadCaseList->at(i)->mForce->M_AI = 13.2;
     target->mLoadCaseList->at(i)->mForce->M_Z = 3.9;
@@ -648,38 +730,20 @@ void AssemblyTest::Calc_F_G0maxTest() {
     deleteTarget();
 }
 
-//void AssemblyTest::Calc_F_BmaxTest() {
-//    SetupIntegralTarget();
-//    int loadCaseNo = 1;
-//    target->mLoadCaseList->at(loadCaseNo)->F_B = 8.7;
-//    target->mBolt->etanplus = 1.9;
-//    target->Calc_F_Bmax(loadCaseNo);
-//    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_BmaxTest()", 25.23,
-//             target->mLoadCaseList->at(loadCaseNo)->F_Bmax);
-//    deleteTarget();
-//}
-
-//void AssemblyTest::Calc_F_GmaxTest() {
-//    SetupIntegralTarget();
-//    int loadCaseNo = 1;
-//    target->mLoadCaseList->at(loadCaseNo)->F_Bmax = 8.2;
-//    target->mLoadCaseList->at(loadCaseNo)->F_R = 7.9;
-//    target->Calc_F_Gmax(loadCaseNo);
-//    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_GmaxTest()", 0.3,
-//             target->mLoadCaseList->at(loadCaseNo)->F_Gmax);
-//    deleteTarget();
-//}
-
 void AssemblyTest::Calc_F_G0d_2Test() {
     SetupIntegralTarget();
     target->mLoadCaseList->at(0)->F_Bspec = 7.6;
-    target->mLoadCaseList->at(0)->F_Bmin = 0.7;
-    target->mLoadCaseList->at(0)->F_Bmax = 700;
-    target->mNR = 300;
+    target->mLoadCaseList->at(0)->F_Bmin = 65.9;
+    target->mLoadCaseList->at(0)->F_Bmax = 70;
+    target->mGasket->mNR = 3;
     target->mLoadCaseList->at(0)->F_R = -2.3;
     target->Calc_F_G0d_2();
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0d_2Test()", 453.4111111111111,
-             target->mLoadCaseList->at(0)->F_Gd);
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0d_2Test()",
+             68.2, target->mLoadCaseList->at(0)->F_Gd);
+    target->mGasket->mNR = 300;
+    target->Calc_F_G0d_2();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0d_2Test()",
+             72.06666666666666666667, target->mLoadCaseList->at(0)->F_Gd);
     deleteTarget();
 }
 
@@ -688,10 +752,15 @@ void AssemblyTest::Calc_F_G0dTest() {
     target->mLoadCaseList->at(0)->F_Bspec = 0.0;
     target->mLoadCaseList->at(0)->F_Gdelta = 5.6;
     target->mLoadCaseList->at(0)->F_Bmax = 0.7;
-    target->mNR = 3;
+    target->mGasket->mNR = 3;
     target->mLoadCaseList->at(0)->F_R = 2.3;
     target->Calc_F_G0d();
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()", 5.6,
+             target->mLoadCaseList->at(0)->F_Gd);
+    target->mLoadCaseList->at(0)->F_Bmax = 18.5;
+    target->Calc_F_G0d();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_F_G0dTest()",
+             10.03333333333333333333,
              target->mLoadCaseList->at(0)->F_Gd);
     deleteTarget();
 }
@@ -792,7 +861,7 @@ void AssemblyTest::Calc_PhiBTest() {
     target->mBolt->mut = 7.8;
     target->mBolt->etanplus = 0.7;
     target->Calc_PhiB(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_PhiBTest()",
              0.92017261349202768449, target->mLoadCaseList->at(i)->PhiB);
     i = 1;
     target->mLoadCaseList->at(i)->F_B = 12.3; // Note: not F_Bmax!
@@ -800,8 +869,21 @@ void AssemblyTest::Calc_PhiBTest() {
     target->mLoadCaseList->at(i)->fB = 12.3;
     target->mLoadCaseList->at(i)->cB = 1.0;
     target->Calc_PhiB(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiBTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_PhiBTest()",
              0.37037037037037037037, target->mLoadCaseList->at(i)->PhiB);
+    deleteTarget();
+}
+
+void AssemblyTest::Calc_delta_lBTest() {
+    SetupIntegralTarget();
+    int i = 0;
+    LoadCase* loadCase = target->mLoadCaseList->at(i);
+    loadCase->F_Bnom = 1.1;
+    target->mBolt->XB = 2.2;
+    loadCase->EB = 3.3;
+    target->Calc_delta_lB();
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_lBTest()",
+             0.73333333333333333333, loadCase->delta_lB);
     deleteTarget();
 }
 
@@ -813,7 +895,7 @@ void AssemblyTest::Calc_PhiGTest() {
     target->mGasket->AGt = 2.2;
     loadCase->Q_smax = 3.3;
     target->Calc_PhiG(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiGTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_PhiGTest()",
              0.15151515151515152,
              target->mLoadCaseList->at(i)->PhiG);
     i = 1;
@@ -822,7 +904,7 @@ void AssemblyTest::Calc_PhiGTest() {
     target->mGasket->AGt = 2.2;
     loadCase->Q_smax = 3.3;
     target->Calc_PhiG(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Calc_PhiGTest()",
+    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_PhiGTest()",
              0.84022038567493112948,
              target->mLoadCaseList->at(i)->PhiG);
     deleteTarget();
@@ -1024,35 +1106,6 @@ void AssemblyTest::Calc_Q_GTest() {
     target->Calc_Q_G(i);
     areEqual(PR->getLastOutput(), "AssemblyTest::Calc_Q_GTest()", 0.5,
              loadCase0->Q_G);
-    deleteTarget();
-}
-
-void AssemblyTest::Calc_delta_eGcTest() {
-    SetupIntegralTarget();
-    LoadCase* loadCase0 = target->mLoadCaseList->at(0);
-    int i = 1;
-    LoadCase* loadCase = target->mLoadCaseList->at(i);
-    loadCase->delta_eGc_EN13555 = 7.3;
-    loadCase->Y_G = 3.8;
-    target->mGasket->K = 500000.0;
-    target->Calc_delta_eGc(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()",
-             13870000, loadCase->delta_eGc);
-    loadCase->delta_eGc_EN13555 = 0.0;
-    loadCase->Y_G = 1.3;
-    target->mGasket->dG2_EN13555 = 2.4;
-    target->mGasket->dG1_EN13555 = 9.1;
-    loadCase0->Q_A = 15.3;
-    loadCase->P_QR = 0.0456;
-    target->Calc_delta_eGc(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()",
-             -1148.7558557602242, loadCase->delta_eGc);
-    target->mGasket->dG2_EN13555 = 0.0;
-    target->mGasket->dG1_EN13555 = 0.0;
-    loadCase->P_QR = 0.0;
-    target->Calc_delta_eGc(i);
-    areEqual(PR->getLastOutput(), "AssemblyTest::Calc_delta_eGcTest()", 0.0,
-             loadCase->delta_eGc);
     deleteTarget();
 }
 

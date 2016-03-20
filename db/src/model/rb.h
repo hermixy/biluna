@@ -51,6 +51,16 @@ public:
                          "border-bottom-right-radius: 3px;}");
     }
 
+    static QString IdxId(const QString& idx) {
+        QString str = idx;
+        return str.remove(38, str.length()); // remove the part after the Uuid
+    }
+
+    static QString IdxContent(const QString& idx) {
+        QString str = idx;
+        return str.remove(0, 38); // remove the Uuid part
+    }
+
     /**
      * Action types used by complex actions to create working models,
      * naming is: "Action"_context_action e.g. Action_Ldt_FluidCheck (without

@@ -13,8 +13,6 @@
 #include "rb_namespace.h"
 #include "rb_object.h"
 #include "shell.h"
-#include "tableeproperty.h"
-#include "tablegproperty.h"
 #include "washer.h"
 
 NAMESPACE_BILUNA_CALC_EN1591
@@ -30,10 +28,6 @@ public:
     Flange* mFlange1;
     Flange* mFlange2;
     LoadCaseList* mLoadCaseList;
-    double mNR;
-    double mLeakageRate;
-    double mF_Bspec; // transferred to loadcase(0)
-    double mQ_Aspec; // transferred to loadcase(0)
 };
 
 
@@ -52,6 +46,8 @@ class Assembly : public Assembly_OUT {
 public:
     Assembly();
 
+    void Calc_dG1();
+    void Calc_dG2();
     void Calc_F_GInitial_1();
     void Calc_F_GInitial();
     void Calc_dGe();
@@ -65,9 +61,7 @@ public:
     void Calc_YG(int loadCaseNo);
     void Calc_YQ(int loadCaseNo);
     void Calc_YR(int loadCaseNo);
-    void Calc_Q_A_Qsmin(int loadCaseNo);
     void Calc_F_Gmin(int loadCaseNo);
-    void Calc_delta_eGc(int loadCaseNo);
     void Calc_F_Gdelta(int loadCaseNo);
     void Calc_F_G0req();
     void Calc_F_B0req();
@@ -82,8 +76,6 @@ public:
     bool Is_F_B0nom_Valid();
 
     void Calc_F_G0max();
-//    void Calc_F_Bmax(int loadCaseNo);
-//    void Calc_F_Gmax(int loadCaseNo);
     void Calc_F_G0d_2();
     void Calc_F_G0d();
     void Calc_F_G(int loadCaseNo);
@@ -91,6 +83,7 @@ public:
     void Calc_Mtnom();
     void Calc_MtBnom();
     void Calc_PhiB(int loadCaseNo);
+    void Calc_delta_lB();
 
     bool Is_PhiB_Valid(int loadCaseNo);
 

@@ -72,7 +72,7 @@ RB_ObjectBase* RB_ObjectFactory::newSingleObject(const RB_String& objectName) {
     RB_ObjectBase* obj = newObject(RB_Uuid::createUuid().toString(), mObjC, "", true);
     if (!obj) {
         RB_DEBUG->error(RB_String("RB_ObjectFactory::newSingleObject() "
-                                  "%s does not exist ERROR").arg(objectName));
+                                  "%1 does not exist ERROR").arg(objectName));
         return NULL;
     }
     mObjC->clear(); // otherwise obj part of mObjC container

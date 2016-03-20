@@ -1,4 +1,4 @@
-﻿#include "tablegsimple.h"
+﻿#include "en13445tableg.h"
 #include "pcalc_utilityfactory.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
@@ -14,7 +14,7 @@ NAMESPACE_BILUNA_CALC_EN1591
  * @param mI
  * @param gC
  */
-TableGSimpleProperty::TableGSimpleProperty(Gasket::InsFilLayMatType insFillMat,
+EN13445TableGProperty::EN13445TableGProperty(Gasket::InsFilLayMatType insFillMat,
                                            double temperature,
                                            double Q0min,
                                            double Qmax,
@@ -32,40 +32,40 @@ TableGSimpleProperty::TableGSimpleProperty(Gasket::InsFilLayMatType insFillMat,
     mgC = gC;
 }
 
-TableGSimple* TableGSimple::mActiveUtility = 0;
+EN13445TableG* EN13445TableG::mActiveUtility = 0;
 
 /**
  * Constructor
  */
-TableGSimple::TableGSimple() : RB_TableMath(), RB_Utility() {
-    RB_DEBUG->print("TableGSimple::TableGSimple()");
+EN13445TableG::EN13445TableG() : RB_TableMath(), RB_Utility() {
+    RB_DEBUG->print("EN13445TableG::EN13445TableG()");
     mUpper = NULL;
     mLower = NULL;
     createList();
     PCALC_UTILITYFACTORY->addUtility(this);
 }
 
-TableGSimple::~TableGSimple() {
-    for (std::vector<TableGSimpleProperty*>::iterator it = mList.begin();
+EN13445TableG::~EN13445TableG() {
+    for (std::vector<EN13445TableGProperty*>::iterator it = mList.begin();
                 it != mList.end(); it++) {
         delete (*it);
     }
 
     PCALC_UTILITYFACTORY->removeUtility(this);
     mActiveUtility = NULL;
-    RB_DEBUG->print("TableGSimple::~TableGSimple()");
+    RB_DEBUG->print("EN13445TableG::~EN13445TableG()");
 }
 
-TableGSimple* TableGSimple::getInstance() {
+EN13445TableG* EN13445TableG::getInstance() {
     if (!mActiveUtility) {
-        mActiveUtility = new TableGSimple();
+        mActiveUtility = new EN13445TableG();
         mActiveUtility->refresh();
     }
 
     return mActiveUtility;
 }
 
-double TableGSimple::getTableG_Q0min(Gasket::InsFilLayMatType insType,
+double EN13445TableG::getTableG_Q0min(Gasket::InsFilLayMatType insType,
                                      double temperature) {
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
@@ -84,7 +84,7 @@ double TableGSimple::getTableG_Q0min(Gasket::InsFilLayMatType insType,
     return value;
 }
 
-double TableGSimple::getTableG_Qmax(Gasket::InsFilLayMatType insType,
+double EN13445TableG::getTableG_Qmax(Gasket::InsFilLayMatType insType,
                                     double temperature) {
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
@@ -103,7 +103,7 @@ double TableGSimple::getTableG_Qmax(Gasket::InsFilLayMatType insType,
     return value;
 }
 
-double TableGSimple::getTableG_E0(Gasket::InsFilLayMatType insType,
+double EN13445TableG::getTableG_E0(Gasket::InsFilLayMatType insType,
                                   double temperature) {
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
@@ -122,7 +122,7 @@ double TableGSimple::getTableG_E0(Gasket::InsFilLayMatType insType,
     return value;
 }
 
-double TableGSimple::getTableG_K1(Gasket::InsFilLayMatType insType,
+double EN13445TableG::getTableG_K1(Gasket::InsFilLayMatType insType,
                                   double temperature) {
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
@@ -141,7 +141,7 @@ double TableGSimple::getTableG_K1(Gasket::InsFilLayMatType insType,
     return value;
 }
 
-double TableGSimple::getTableG_mI(Gasket::InsFilLayMatType insType,
+double EN13445TableG::getTableG_mI(Gasket::InsFilLayMatType insType,
                                   double temperature) {
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
@@ -160,7 +160,7 @@ double TableGSimple::getTableG_mI(Gasket::InsFilLayMatType insType,
     return value;
 }
 
-double TableGSimple::getTableG_gC(Gasket::InsFilLayMatType insType,
+double EN13445TableG::getTableG_gC(Gasket::InsFilLayMatType insType,
                                   double temperature) {
     double value = 0.0;
     if (!getUpperLower(insType, temperature)) {
@@ -179,14 +179,14 @@ double TableGSimple::getTableG_gC(Gasket::InsFilLayMatType insType,
     return value;
 }
 
-bool TableGSimple::getUpperLower(Gasket::InsFilLayMatType insType,
+bool EN13445TableG::getUpperLower(Gasket::InsFilLayMatType insType,
                                  double temperature) {
     mUpper = NULL;
     mLower = NULL;
 
-    for (std::vector<TableGSimpleProperty*>::iterator it = mList.begin();
+    for (std::vector<EN13445TableGProperty*>::iterator it = mList.begin();
                 it != mList.end(); it++) {
-        TableGSimpleProperty* obj = (*it);
+        EN13445TableGProperty* obj = (*it);
         updateUpperObject(obj, insType, temperature);
         updateLowerObject(obj, insType, temperature);
 
@@ -199,7 +199,7 @@ bool TableGSimple::getUpperLower(Gasket::InsFilLayMatType insType,
     return false;
 }
 
-void TableGSimple::updateUpperObject(TableGSimpleProperty* obj,
+void EN13445TableG::updateUpperObject(EN13445TableGProperty* obj,
                                      Gasket::InsFilLayMatType insType,
                                      double temperature) {
     if (obj->mInsertFillMaterial == insType
@@ -211,7 +211,7 @@ void TableGSimple::updateUpperObject(TableGSimpleProperty* obj,
     }
 }
 
-void TableGSimple::updateLowerObject(TableGSimpleProperty* obj,
+void EN13445TableG::updateLowerObject(EN13445TableGProperty* obj,
                                      Gasket::InsFilLayMatType insType,
                                      double temperature) {
     if (obj->mInsertFillMaterial == insType
@@ -223,7 +223,7 @@ void TableGSimple::updateLowerObject(TableGSimpleProperty* obj,
     }
 }
 
-void TableGSimple::createList() {
+void EN13445TableG::createList() {
     // Gasket::BasicMatType matType = Gasket::NonMetalic;
     Gasket::InsFilLayMatType insType = Gasket::Rubber;
     cl(insType, 0.0, 0.5, 28, 200, 10, 0.9, 0.9);
@@ -479,10 +479,10 @@ void TableGSimple::createList() {
  * @param mI
  * @param gC
  */
-void TableGSimple::cl(Gasket::InsFilLayMatType insFillMat,
+void EN13445TableG::cl(Gasket::InsFilLayMatType insFillMat,
                       double temperature, double Q0min, double Qmax,
                       double E0, double K1, double mI, double gC) {
-    mList.push_back(new TableGSimpleProperty(insFillMat, temperature,
+    mList.push_back(new EN13445TableGProperty(insFillMat, temperature,
                                              Q0min, Qmax, E0, K1, mI, gC));
 }
 

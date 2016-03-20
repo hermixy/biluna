@@ -22,6 +22,8 @@ private:
     void SetupRemainingTarget();
     void deleteTarget();
 
+    void Calc_dG1Test();
+    void Calc_dG2Test();
     void Calc_dGeTest();
     void Calc_F_GInitial_1Test();
     void Calc_F_GInitialTest();
@@ -34,7 +36,6 @@ private:
     void Calc_YRTest();
     void Calc_bGiTest();
     void Calc_dUTTest();
-    void Calc_Q_A_QsminTest();
     void Calc_F_GminTest();
     void Calc_F_G0deltaTest();
     void Calc_F_G0reqTest();
@@ -44,8 +45,6 @@ private:
     void Calc_F_B0nomTest();
     void Is_F_B0nom_ValidTest();
     void Calc_F_G0maxTest();
-//    void Calc_F_BmaxTest();
-//    void Calc_F_GmaxTest();
     void Calc_F_G0d_2Test();
     void Calc_F_G0dTest();
     void Calc_F_GTest();
@@ -53,6 +52,7 @@ private:
     void Calc_cATest();
     void Calc_cBTest();
     void Calc_PhiBTest();
+    void Calc_delta_lBTest();
     void Calc_PhiGTest();
     void Is_PhiB_ValidTest();
     void Calc_fETest();
@@ -64,7 +64,6 @@ private:
     void Calc_ThetaFmaxminTest();
     void Calc_ThetaLmaxminTest();
     void Calc_Q_GTest();
-    void Calc_delta_eGcTest();
     void Calc_F_B0avTest();
 
     Assembly* target;

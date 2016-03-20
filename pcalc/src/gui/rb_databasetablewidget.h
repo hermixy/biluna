@@ -52,6 +52,8 @@ public slots:
     virtual void on_pbClearManuf_clicked() = 0;
     virtual void on_pbSelectType_clicked() = 0;
     virtual void on_pbClearType_clicked() = 0;
+    virtual void slotSetXcoord(const QString& currentText);
+    virtual void slotSetYcoord(const QString& currentText);
 
 protected:
     QString mCodeManufId;
@@ -67,6 +69,11 @@ protected:
     QAbstractAxis* mAxisY;
     QChartView* mChartView;
     QGridLayout* mChartLayout;
+
+    RB_MmProxy* mModel;
+    ScaleType mScaleType;
+    QString mXfield;
+    QString mYfield;
 
 };
 #endif // RB_DATABASETABLEWIDGET_H

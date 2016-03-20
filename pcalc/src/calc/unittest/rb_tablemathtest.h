@@ -18,6 +18,12 @@ public:
 private:
     void setupTarget();
     void getBilinearValueTest();
+    void getLinearValueTest();
+    void updateCornerObjectsTest();
+    void getThreeCornerValueTest();
+    void getTwoCornerValueTest();
+    void getOneCornerValueTest();
+    void updateLeftRightObjectsTest();
 
     RB_TableMath* target;
 

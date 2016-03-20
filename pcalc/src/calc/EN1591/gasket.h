@@ -8,9 +8,6 @@
 
 NAMESPACE_BILUNA_CALC_EN1591
 
-class Table16Property;
-class TableGSimple;
-
 class Gasket_IN : public RB_Object {
 
 public:
@@ -26,16 +23,7 @@ public:
         OctagonalDoubleContact
     };
 
-//    enum BasicMatType { // Table G
-//        NonMetalic,
-//        GroovedSteel,
-//        SpiralWound,
-//        SolidMetal,
-//        CoveredMetalJacketed,
-//        MetalJacketed
-//    };
-
-    enum InsFilLayMatType { // Table G
+    enum InsFilLayMatType { // EN13445 Table G
         // Non metalic
         Rubber,
         Ptfe,
@@ -78,16 +66,23 @@ public:
         LowAlloyOrStainlessSteelGraphFill
     };
 
-    RB_String gasketIdx; // Gasket type and id from database
+    // gasketIdx, gasket type  and id from database for material properties
+    // same purpose as materialIdx for flanges and bolts
+    RB_String gasketIdx;
     FormType frmType;
     InsFilLayMatType insType;
+
+    double mNR;
+    double mLeakageRate;
+
     double dG0;
-    double dG1;
-    double dG2;
+    double dGin;
+    double dGout;
 
     double dG1_EN13555;
     double dG2_EN13555;
     double eGt;
+    double muG;
     double K; // stiffness of test rig, usually 500 kN/mm or 1500 kN/mm
 
     double phiG;
@@ -99,6 +94,9 @@ class Gasket_OUT : public Gasket_IN {
 
 public:
     Gasket_OUT();
+
+    double dG1;
+    double dG2;
 
     double bGi;
     double bGiOct;
@@ -132,11 +130,14 @@ public:
     void Calc_Q_smax(int loadCaseNo);
     void Calc_XG();
     void Calc_AQ();
-    void Calc_P_QR(int loadCaseNo);
-    double gasketCompressedElasticity(int loadCaseNo);
-    double gasketCompressedThickness(LoadCase* loadCase);
-    double gasketMaximumLoad(int loadCaseNo, LoadCase* loadCase);
-    double gasketCreepFactor(int loadCaseNo, LoadCase* loadCase);
+    void setLoadCaseValues(int loadCaseNo);
+    void Calc_Q_A_Qsmin(int loadCaseNo);
+    void Calc_delta_eGc(int loadCaseNo);
+    double gasketDeflection(LoadCase* loadCase);            // delta_eGc_EN13555
+    double gasketCreepFactor(LoadCase* loadCase);           // P_QR
+    double gasketCompressedElasticity(int loadCaseNo);      // E_G
+    double gasketCompressedThickness(LoadCase* loadCase);   // e_G
+    double gasketMaximumLoad(LoadCase* loadCase);           // Q_smax
 
     LoadCaseList* mLoadCaseList;
 

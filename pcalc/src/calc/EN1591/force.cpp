@@ -3,9 +3,7 @@
 NAMESPACE_BILUNA_CALC_EN1591
 
 
-Force_IN::Force_IN() : RB_Object() {
-    setName("PCALC EN1591 Force");
-
+Force_IN::Force_IN() : RB_Object("PCALC EN1591 Force") {
     F_X = 0;
     F_Y = 0;
     F_Z = 0;

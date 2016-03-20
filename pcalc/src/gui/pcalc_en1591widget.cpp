@@ -139,19 +139,9 @@ void PCALC_EN1591Widget::init() {
     // flange
     //
     mFlangeMapper = mFlangeModel->getMapper();
-    mFlangeMapper->addMapping(sbNoReassemblies,
-                              mFlangeModel->fieldIndex("nr"));
-    mFlangeMapper->addMapping(sbnB, mFlangeModel->fieldIndex("nb"));
-    RB_StringList items;
-    items << "10e0" << "10e-1" << "10e-2" << "10e-3" << "10e-4" << "10e-5"
-              << "10e-6" << "10e-7" << "10e-8";
-    cbLeakageRate->setModel(new QStringListModel(items, this));
-    mFlangeMapper->addMapping(cbLeakageRate,
-                              mFlangeModel->fieldIndex("leakagerate"),
-                              "currentIndex");
-    mFlangeMapper->addMapping(leQ_Aspec, mFlangeModel->fieldIndex("q_aspecified"));
     mFlangeMapper->addMapping(leF_Bspec, mFlangeModel->fieldIndex("f_bspecified"));
-    items.clear();
+    mFlangeMapper->addMapping(sbnB, mFlangeModel->fieldIndex("nb"));
+    QStringList items;
     items << "Blind" << "Integral" << "Loose";
     cbTypeFlange_1->setModel(new QStringListModel(items, this));
 //    mFlangeModel->setTextList(mFlangeModel->fieldIndex("typeflange1_id"),
@@ -295,12 +285,22 @@ void PCALC_EN1591Widget::init() {
     mGasketMapper->addMapping(cbInsType,
                               mGasketModel->fieldIndex("insertfilltype_id"),
                               "currentIndex");
+    mGasketMapper->addMapping(sbNoReassemblies,
+                              mGasketModel->fieldIndex("nr"));
+    items.clear();
+    items << "10e0" << "10e-1" << "10e-2" << "10e-3" << "10e-4" << "10e-5"
+              << "10e-6" << "10e-7" << "10e-8";
+    cbLeakageRate->setModel(new QStringListModel(items, this));
+    mGasketMapper->addMapping(cbLeakageRate,
+                              mGasketModel->fieldIndex("leakagerate"),
+                              "currentIndex");
     mGasketMapper->addMapping(ledG0, mGasketModel->fieldIndex("dg0"));
-    mGasketMapper->addMapping(ledG1, mGasketModel->fieldIndex("dg1"));
-    mGasketMapper->addMapping(ledG2, mGasketModel->fieldIndex("dg2"));
+    mGasketMapper->addMapping(ledGin, mGasketModel->fieldIndex("dgin"));
+    mGasketMapper->addMapping(ledGout, mGasketModel->fieldIndex("dgout"));
     mGasketMapper->addMapping(ledG1_EN13555, mGasketModel->fieldIndex("dg1en13555"));
     mGasketMapper->addMapping(ledG2_EN13555, mGasketModel->fieldIndex("dg2en13555"));
     mGasketMapper->addMapping(leeGt, mGasketModel->fieldIndex("egt"));
+    mGasketMapper->addMapping(lemuG, mGasketModel->fieldIndex("mug"));
     mGasketMapper->addMapping(leK, mGasketModel->fieldIndex("k"));
     mGasketMapper->addMapping(lephiG, mGasketModel->fieldIndex("phig"));
     mGasketMapper->addMapping(ler2, mGasketModel->fieldIndex("r2"));
@@ -441,6 +441,7 @@ void PCALC_EN1591Widget::init() {
     mLoadCaseMapper->addMapping(leMz, mLoadCaseModel->fieldIndex("mz"));
     // stress expansion elasticity
     mLoadCaseMapper->addMapping(lefB, mLoadCaseModel->fieldIndex("fb"));
+    mLoadCaseMapper->addMapping(lerelaxB, mLoadCaseModel->fieldIndex("relaxb"));
     mLoadCaseMapper->addMapping(lefN, mLoadCaseModel->fieldIndex("fn"));
 
     // flange 1
@@ -610,7 +611,7 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
 
     switch (cbCalculationReportType->currentIndex()) {
     case 0:
-        // TODO: createSummaryReport();
+        createSummaryReport();
         break;
     case 1:
         createDetailReport();
@@ -703,8 +704,8 @@ void PCALC_EN1591Widget::slotHandleParentRowChanged() {
 }
 
 void PCALC_EN1591Widget::slotDisableFormulaWidgets(int index) {
-    sbFormulaFrom->setEnabled(index > 1);
-    sbFormulaTo->setEnabled(index > 1);
+    sbFormulaFrom->setEnabled(index > 1 && index < 4);
+    sbFormulaTo->setEnabled(index > 1 && index < 4);
 }
 
 void PCALC_EN1591Widget::setInput() {
@@ -722,11 +723,8 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "nameengineer", "-", mAssemblyModel);
 
     // flanges
-    addObjectMemberVariable(objIn, "nr", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "nb", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "leakagerate", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "f_bspecified", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "q_aspecified", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "typeflange1_id", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d01", "-", mFlangeModel);
@@ -794,12 +792,15 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "gaskettype_idx", "-", mGasketModel);
     addObjectMemberVariable(objIn, "formtype_id", "-", mGasketModel);
     addObjectMemberVariable(objIn, "insertfilltype_id", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "nr", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "leakagerate", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg0", "-", mGasketModel);
-    addObjectMemberVariable(objIn, "dg1", "-", mGasketModel);
-    addObjectMemberVariable(objIn, "dg2", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "dgin", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "dgout", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg1en13555", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dg2en13555", "-", mGasketModel);
     addObjectMemberVariable(objIn, "egt", "-", mGasketModel);
+    addObjectMemberVariable(objIn, "mug", "-", mGasketModel);
     addObjectMemberVariable(objIn, "k", "-", mGasketModel);
     addObjectMemberVariable(objIn, "phig", "-", mGasketModel);
     addObjectMemberVariable(objIn, "r2", "-", mGasketModel);
@@ -880,6 +881,7 @@ void PCALC_EN1591Widget::setInput() {
         addLoadCaseVariable(loadCase, "mz", "-", mLoadCaseModel, row);
         // stress expansion elasticity
         addLoadCaseVariable(loadCase, "fb", "-", mLoadCaseModel, row);
+        addLoadCaseVariable(loadCase, "relaxb", "-", mLoadCaseModel, row);
         addLoadCaseVariable(loadCase, "fn", "-", mLoadCaseModel, row);
 
         // flange 1
@@ -931,7 +933,15 @@ void PCALC_EN1591Widget::setSettings() {
     inList->addObject(obj);
 }
 
+void PCALC_EN1591Widget::createSummaryReport() {
+    createReport(":/reports/EN1591_summary_report.html");
+}
+
 void PCALC_EN1591Widget::createDetailReport() {
+    createReport(":/reports/EN1591_detail_report.html");
+}
+
+void PCALC_EN1591Widget::createReport(const QString& reportTemplate) {
     QApplication::setOverrideCursor(Qt::WaitCursor);
     PR->clear();
     getTextEdit()->clear();
@@ -943,13 +953,13 @@ void PCALC_EN1591Widget::createDetailReport() {
     handler.exec();
 
     // get report template
-    QFile file(":/reports/EN1591_detail_report.html");
+    QFile file(reportTemplate);
     file.open(QIODevice::ReadOnly);
     QString report = file.readAll();
     file.flush();
 
     // parse html template and enter relevant values
-    //    <td id="{$flange1.pB}">&nbsp;</td><td id="{$flange2.pB}">&nbsp;</td>
+    //    <td id="{$pB(1)}">&nbsp;</td><td id="{$pB(2)}">&nbsp;</td>
     //    existObj->setValue("variablename", variableName);
     //    existObj->setValue("result", result);
 
@@ -959,6 +969,17 @@ void PCALC_EN1591Widget::createDetailReport() {
     RB_ObjectBase* in = inList->getObject("name", "PCALC_Input");
     insertReportInputData(report, in);
 
+    // loadcase
+    RB_ObjectContainer* loadCaseList;
+    loadCaseList = PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
+    RB_ObjectIterator* lcIter = loadCaseList->createIterator();
+
+    for (lcIter->first(); !lcIter->isDone(); lcIter->next()) {
+        RB_ObjectBase* lcObj = lcIter->currentObject();
+        insertReportLoadCaseData(report, lcObj);
+    }
+
+    delete lcIter;
 
     // output
     RB_ObjectContainer* outList
@@ -974,21 +995,70 @@ void PCALC_EN1591Widget::createDetailReport() {
 
     teCalculationReport->setHtml(report);
     QApplication::restoreOverrideCursor();
+
 }
 
 void PCALC_EN1591Widget::insertReportInputData(QString& report,
                                                RB_ObjectBase* obj) {
     QString varName = "";
+    double varDouble = 0.0;
     QString varData = "";
     int memberCount = obj->memberCount();
-
+    // TODO: RB2::HIDDENCOLUMNS inconsistent with insertReportLoadCaseData
     for (int i = RB2::HIDDENCOLUMNS; i < memberCount; ++i) {
         RB_ObjectMember* mem = obj->getMember(i);
         varName = mem->getName();
-        varData = mem->getValue().toString();
-        report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
-                       "<td id=\"{$" + varName + "}\"><div align=\"left\">"
+        bool success = false;
+        varDouble = mem->getValue().toDouble(&success);
+
+        if (success) {
+            varData = QString::number(varDouble);
+        } else {
+            // variable value is a string such as a material name
+            varData = mem->getValue().toString();
+        }
+
+        report.replace("id=\"{$" + varName + "}\">&nbsp;</td>",
+                       "id=\"{$" + varName + "}\"><div align=\"right\">"
                        + varData + "</div></td>");
+    }
+
+}
+
+void PCALC_EN1591Widget::insertReportLoadCaseData(QString& report,
+                                                  RB_ObjectBase* obj) {
+    QString varName = "";
+    double varDouble = 0.0;
+    QString varData = "";
+    int loadCaseNo = obj->getValue("loadcaseno").toInt();
+    int memberCount = obj->memberCount();
+
+    for (int i = 0; i < memberCount; ++i) {
+        RB_ObjectMember* mem = obj->getMember(i);
+        varName = mem->getName();
+        bool success = false;
+        varDouble = mem->getValue().toDouble(&success);
+
+        if (success) {
+            varData = QString::number(varDouble);
+        } else {
+            // variable value is a string such as a material name
+            varData = mem->getValue().toString();
+        }
+
+        if (loadCaseNo < 0) {
+            report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
+                           "<td id=\"{$" + varName + "}\"><div align=\"right\">"
+                           + varData + "</div></td>");
+        } else {
+            report.replace("<td id=\"{$" + varName
+                           + "[" + QString::number(loadCaseNo) + "]"
+                           + "}\">&nbsp;</td>",
+                           "<td id=\"{$" + varName
+                           + "[" + QString::number(loadCaseNo) + "]"
+                           + "}\"><div align=\"right\">"
+                           + varData + "</div></td>");
+        }
     }
 
 }
@@ -1258,7 +1328,7 @@ void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,
     QModelIndex idx = model->index(
                 model->getCurrentIndex().row(),
                 model->fieldIndex(variableName));
-    obj->addMember(variableName, unit, model->data(idx));
+    obj->addMember(variableName, unit, model->data(idx, RB2::RoleOrigData));
 }
 
 void PCALC_EN1591Widget::addLoadCaseVariable(RB_ObjectBase* loadCase,

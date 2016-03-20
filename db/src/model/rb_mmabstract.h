@@ -69,9 +69,9 @@ public:
     virtual bool setCloneModel(RB_ObjectBase* /*root*/, const RB_String& /*list*/) = 0;
     virtual bool saveCloneModel() = 0;
 
-//    virtual RB_ObjectBase* getCurrentObject() = 0;
     virtual RB_ObjectBase* getObject(const QModelIndex& /*current*/,
                                      RB2::ResolveLevel level = RB2::ResolveAll) = 0;
+    virtual RB_ObjectBase* getBaseObject() = 0;
     virtual RB_ObjectBase* getCurrentObject() = 0;
     virtual void updateCurrentObject(RB_ObjectBase* /*obj*/) { }
     virtual QModelIndex promote(const QModelIndex& index) = 0;
