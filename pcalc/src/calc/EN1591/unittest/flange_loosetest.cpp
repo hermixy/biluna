@@ -190,9 +190,19 @@ void Flange_LooseTest::Calc_dLTest() {
 
 void Flange_LooseTest::Calc_eETest() {
     setupTarget();
-    target->mShell->eS = 2.7;
+    target->e1 = 7.3;
+    target->lH = 12.2;
+    target->beta = 1.7;
+    target->d1 = 327.4; //or (D3+D1)/2 from PCC model
     target->Calc_eE();
-    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_eETest(", 2.7, target->eE);
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_eETest()",
+             8.86233459, target->eE);
+    target->e1 = 17.8;
+    target->e2 = 17.8;
+    target->mShell->eS = 21.17;
+    target->Calc_eE();
+    areEqual(PR->getLastOutput(), "Flange_LooseTest::Calc_eETest()",
+             21.17, target->eE);
 }
 
 void Flange_LooseTest::Calc_AFTest() {
