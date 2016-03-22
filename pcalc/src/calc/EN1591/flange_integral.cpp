@@ -130,7 +130,7 @@ void Flange_Integral::Calc_eE() {
         eE = e1 * (1 + ((beta - 1) * lH / ((beta / 3) * sqrt(e1 * d1) + lH)));
         PR->addDetail("Formula 17", "eE(" + QN(mFlangeNumber) + ")",
                       "e1 * (1 + ((beta - 1) * lH / ((beta / 3) "
-                      "* Math.Sqrt(e1 * d1) + lH)))", eE, "mm",
+                      "* Sqrt(e1 * d1) + lH)))", eE, "mm",
                       QN(e1) + " * (1 + ((" + QN(beta) + " - 1) * " + QN(lH)
                       + " / ((" + QN(beta) + " / 3) * (" + QN(e1) + " * "
                       + QN(d1) + ") ^ 0.5 + " + QN(lH) + ")))");

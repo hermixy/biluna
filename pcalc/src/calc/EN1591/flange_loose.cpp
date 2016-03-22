@@ -167,10 +167,13 @@ void Flange_Loose::Calc_eE() {
     } else {
         // Tapered hub
         eE = e1 * (1 + ((beta - 1) * lH / ((beta / 3) * sqrt(e1 * d1) + lH)));
-        PR->addDetail("Formula 17",
-                  "eE", "e1 * (1 + ((beta - 1) * lH "
-                  "/ ((beta / 3) * Math.Sqrt(e1 * d1) + lH)))",
-                  eE, "mm");
+        PR->addDetail("Formula 17", "eE(" + QN(mFlangeNumber) + ")",
+                      "e1 * (1 + ((beta - 1) * lH / ((beta / 3) "
+                      "* Sqrt(e1 * d1) + lH)))", eE, "mm",
+                      QN(e1) + " * (1 + ((" + QN(beta) + " - 1) * " + QN(lH)
+                      + " / ((" + QN(beta) + " / 3) * (" + QN(e1) + " * "
+                      + QN(d1) + ") ^ 0.5 + " + QN(lH) + ")))");
+
     }
 }
 

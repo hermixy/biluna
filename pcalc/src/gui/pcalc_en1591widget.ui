@@ -361,7 +361,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="tabFlangeDetail">
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="tabFlangeGeneral">
             <attribute name="title">
@@ -1054,7 +1054,7 @@
                 <item row="3" column="0" colspan="2">
                  <widget class="QLabel" name="lblIntegralOnly_1">
                   <property name="text">
-                   <string>Integral only:</string>
+                   <string>Integral, loose if hub only:</string>
                   </property>
                  </widget>
                 </item>
