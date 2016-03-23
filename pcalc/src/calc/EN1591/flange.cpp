@@ -387,11 +387,11 @@ void Flange::Calc_d7max() {
     // does nothing, for loose flange Formula 86
 }
 
-void Flange::Calc_d70(int /*loadCaseNo*/) {
+void Flange::Calc_d70() {
     // does nothing, for loose flange Formula 62
 }
 
-void Flange::Calc_d7minMax(int /*loadCaseNo*/) {
+void Flange::Calc_d7minMax() {
     // does nothing, for loose flange Formula 84
 }
 

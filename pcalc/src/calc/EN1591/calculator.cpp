@@ -174,7 +174,7 @@ void Calculator::Loop_F55_to_108(Assembly* assembly) {
 
     int loadCaseNo = 0;
     F63_to_63(assembly, loadCaseNo);
-    F77_to_89(assembly, loadCaseNo);
+    F77_to_89(assembly);
 
     for (loadCaseNo = 0; loadCaseNo < mLoadCaseCount; loadCaseNo++) {
         F90_to_102(assembly, loadCaseNo);
@@ -350,8 +350,8 @@ void Calculator::F55_to_62_table1(Assembly* assembly) {
     assembly->mFlange2->Calc_d7max(); // loose flange only
     assembly->mFlange1->Calc_chi(); // loose flange only
     assembly->mFlange2->Calc_chi(); // loose flange only
-    assembly->mFlange1->Calc_d70(loadCaseNo); // loose flange only
-    assembly->mFlange2->Calc_d70(loadCaseNo); // loose flange only
+    assembly->mFlange1->Calc_d70(); // loose flange only
+    assembly->mFlange2->Calc_d70(); // loose flange only
     assembly->mFlange1->Calc_hG();
     assembly->mFlange2->Calc_hG();
 }
@@ -361,13 +361,13 @@ void Calculator::F63_to_63(Assembly* assembly, int loadCaseNo) {
     assembly->mGasket->Calc_XG();
 }
 
-void Calculator::F77_to_89(Assembly* assembly, int loadCaseNo) {
+void Calculator::F77_to_89(Assembly* assembly) {
     assembly->mFlange1->Calc_hP();
     assembly->mFlange2->Calc_hP();
     assembly->mFlange1->Calc_hQ();
     assembly->mFlange2->Calc_hQ();
-    assembly->mFlange1->Calc_d7minMax(loadCaseNo);
-    assembly->mFlange2->Calc_d7minMax(loadCaseNo);
+    assembly->mFlange1->Calc_d7minMax();
+    assembly->mFlange2->Calc_d7minMax();
     assembly->mFlange1->Calc_hG();
     assembly->mFlange2->Calc_hG();
     assembly->mFlange1->Calc_hH();
