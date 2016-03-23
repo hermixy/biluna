@@ -189,6 +189,14 @@ void Flange::Calc_d3e() {
 }
 
 /**
+ * @brief Before formula 7: to correct the d0 of blank flange,
+ * refer figure 11
+ */
+void Flange::Calc_d0() {
+    // nothing
+}
+
+/**
  * @brief Formula 41: Effective cross-section area of bolts
  */
 void Flange::Calc_AB() {
@@ -417,7 +425,7 @@ bool Flange::Is_PhiF_valid(int loadCaseNo) {
         result = mLoadCaseList->at(loadCaseNo)->PhiF2 <= 1.0;
         PR->addDetail("Formula 129", "result129(" + QN(mFlangeNumber) + ")",
                       "PhiF2 <= 1.0", static_cast<int>(result), "-",
-                      QN(mLoadCaseList->at(loadCaseNo)->PhiF1)
+                      QN(mLoadCaseList->at(loadCaseNo)->PhiF2)
                       + " &lt;= 1.0", loadCaseNo);
     }
 
@@ -1264,10 +1272,6 @@ void Flange::Calc_WX(int /*loadCaseNo*/) {
 
 void Flange::Calc_kM(int /*loadCaseNo*/) {
     // does nothing, integral, stub or collar only
-}
-
-bool Flange::Is_d0_Valid() {
-    return false; // only for blind
 }
 
 void Flange::Calc_WL(int /*loadCaseNo*/) {

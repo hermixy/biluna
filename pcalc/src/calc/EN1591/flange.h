@@ -149,6 +149,7 @@ public:
     virtual void Calc_pB();
     virtual void Calc_d5e();
     virtual void Calc_d3e();
+    virtual void Calc_d0();
     virtual void Calc_AB();
     virtual void Calc_XB();
     virtual void Calc_dK1();
@@ -204,8 +205,6 @@ public:
     virtual void Calc_d7minMax();
     virtual void Calc_chi();
 
-    virtual bool Is_PhiF_valid(int loadCaseNo);
-
     virtual void Calc_deltaQ(int loadCaseNo);
     virtual void Calc_deltaR(int loadCaseNo);
 
@@ -234,13 +233,13 @@ public:
     virtual void Calc_kM_for_WFmax(int loadCaseNo);
     virtual void Calc_WF(int loadCaseNo);
     virtual void Calc_PhiF(int loadCaseNo);
+    virtual bool Is_PhiF_valid(int loadCaseNo);
     virtual void Calc_PhiX(int loadCaseNo);
     virtual bool Is_PhiX_Valid(int loadCaseNo);
     virtual void Calc_WX(int loadCaseNo);
     virtual void Calc_kM(int loadCaseNo);
 
     // loose only
-    virtual bool Is_d0_Valid();
     virtual void Calc_WL(int loadCaseNo);
     virtual void Calc_PhiL(int loadCaseNo);
     virtual bool Is_PhiL_valid(int loadCaseNo);

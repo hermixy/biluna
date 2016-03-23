@@ -199,6 +199,11 @@ void Calculator::F3_to_24(Assembly* assembly) {
     assembly->mFlange1->Calc_d3e();
     assembly->mFlange2->Calc_d3e();
 
+    assembly->Calc_dG1(); // moved here for loose flange d0 calculation
+    assembly->Calc_dG2();
+    assembly->mFlange1->Calc_d0();
+    assembly->mFlange2->Calc_d0();
+
     assembly->mFlange1->Calc_bF();
     assembly->mFlange2->Calc_bF();
     assembly->mFlange1->Calc_dF();
@@ -285,8 +290,6 @@ void Calculator::F41_to_53(Assembly* assembly) 	{
 
     // mIsFirstApproximation And loadCaseNo = 0
     // call this function only once in the beginning
-    assembly->Calc_dG1();
-    assembly->Calc_dG2();
     assembly->mGasket->Calc_bGt();
     assembly->mGasket->Calc_dGt();
     assembly->mGasket->Calc_AGt();

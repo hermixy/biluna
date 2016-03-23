@@ -19,6 +19,7 @@ public:
     virtual ~Flange_Blind();
 
     virtual bool Is_flange_Valid();
+    virtual void Calc_d0();
     virtual void Calc_bF();
     virtual void Calc_dF();
     virtual void Calc_bL();
