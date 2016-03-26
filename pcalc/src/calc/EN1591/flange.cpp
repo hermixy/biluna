@@ -163,12 +163,11 @@ void Flange::Calc_pB() {
  */
 void Flange::Calc_d5e() {
     if (mBolt->mBoltHole->isBlindHole) {
-        mBolt->mBoltHole->d5 = mBolt->mBoltHole->d5t * mBolt->l5t
-                / mBolt->mBoltHole->eFb;
+        mBolt->mBoltHole->d5 = mBolt->mBoltHole->d5t * mBolt->l5t / eFb;
         PR->addDetail("Formula 4 5", "d5(" + QN(mFlangeNumber) + ")",
                       "d5t * l5t / eFb", mBolt->mBoltHole->d5, "mm",
                       QN(mBolt->mBoltHole->d5t) + " * " + QN(mBolt->l5t)
-                      + " / " + QN(mBolt->mBoltHole->eFb));
+                      + " / " + QN(eFb));
     }
 
     d5e = mBolt->mBoltHole->d5 * sqrt(mBolt->mBoltHole->d5 / pB);

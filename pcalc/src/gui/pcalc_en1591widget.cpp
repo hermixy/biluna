@@ -372,8 +372,8 @@ void PCALC_EN1591Widget::init() {
                                      mBoltNutWasherModel->fieldIndex("d5"));
     mBoltNutWasherMapper->addMapping(led5t,
                                      mBoltNutWasherModel->fieldIndex("d5t"));
-    mBoltNutWasherMapper->addMapping(leeFb,
-                                     mBoltNutWasherModel->fieldIndex("efb"));
+//    mBoltNutWasherMapper->addMapping(leeFb,
+//                                     mBoltNutWasherModel->fieldIndex("efb"));
     mBoltNutWasherMapper->addMapping(chbBlindHole,
                                      mBoltNutWasherModel->fieldIndex(
                                          "blindhole"));
@@ -826,7 +826,7 @@ void PCALC_EN1591Widget::setInput() {
     // bolthole
     addObjectMemberVariable(objIn, "d5", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "d5t", "-", mBoltNutWasherModel);
-    addObjectMemberVariable(objIn, "efb", "-", mBoltNutWasherModel);
+//    addObjectMemberVariable(objIn, "efb", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "blindhole", "-", mBoltNutWasherModel);
     // washer
     addObjectMemberVariable(objIn, "ew", "-", mBoltNutWasherModel);

@@ -56,7 +56,7 @@ void PCALC_EN1591_BoltNutWasher::createMembers() {
     // bolthole
     addMember("d5", "mm", 0.0, RB2::MemberDouble);
     addMember("d5t", "mm", 0.0, RB2::MemberDouble);
-    addMember("efb", "mm", 0.0, RB2::MemberDouble);
+//    addMember("efb", "mm", 0.0, RB2::MemberDouble);
     addMember("blindhole", "-", 0, RB2::MemberInteger);
     // washer
     addMember("ew", "mm", 0.0, RB2::MemberDouble);

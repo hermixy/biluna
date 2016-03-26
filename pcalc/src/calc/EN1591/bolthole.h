@@ -14,7 +14,7 @@ public:
 
     double d5;
     double d5t;
-    double eFb;
+//    double eFb;
     bool isBlindHole;
 
 };
