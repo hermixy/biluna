@@ -32,6 +32,16 @@ bool Flange_Blind::Is_flange_Valid() {
 }
 
 /**
+ * @brief Before formula 7: to correct the d0 of blank flange,
+ * refer figure 11
+ */
+void Flange_Blind::Calc_d0() {
+    d0 = mGasket->dG1;
+    PR->addDetail("Before_F. 7", "d0", "dG1",
+                  d0, "mm", QN(mGasket->dG1));
+}
+
+/**
  * @brief Formula 7: Effective width of flange
  */
 void Flange_Blind::Calc_bF() {

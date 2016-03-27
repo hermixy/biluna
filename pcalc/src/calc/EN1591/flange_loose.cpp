@@ -62,7 +62,7 @@ void Flange_Loose::Calc_bF() {
  */
 void Flange_Loose::Calc_dF() {
     dF = (d8 + d0) / 2;
-    PR->addDetail("Formula 12", "bF(" + QN(mFlangeNumber) + ")",
+    PR->addDetail("Formula 12", "dF(" + QN(mFlangeNumber) + ")",
                   "(d8 + d0) / 2", dF, "mm",
                   "(" + QN(d8) + " + " + QN(d0) + ") / 2");
 }
@@ -159,19 +159,22 @@ void Flange_Loose::Calc_eD() {
  * for load limit and flexibility calculations
  */
 void Flange_Loose::Calc_eE() {
-//    if (fabs(e2 - e1) < ACCURACY)     {
+    if (fabs(e2 - e1) < ACCURACY) {
         // No hub because wallthickness hub is same as connecting pipe
         eE = mShell->eS;
         PR->addDetail("Formula 21", "eE(" + QN(mFlangeNumber) + ")",
                       "eS", eE, "mm", QN(mShell->eS));
-//    } else {
-//        // Tapered hub
-//        eE = e1 * (1 + ((beta - 1) * lH / ((beta / 3) * sqrt(e1 * d1) + lH)));
-//        PR->addDetail("Formula 17",
-//                  "eE", "e1 * (1 + ((beta - 1) * lH "
-//                  "/ ((beta / 3) * Math.Sqrt(e1 * d1) + lH)))",
-//                  eE, "mm");
-//    }
+    } else {
+        // Tapered hub
+        eE = e1 * (1 + ((beta - 1) * lH / ((beta / 3) * sqrt(e1 * d1) + lH)));
+        PR->addDetail("Formula 17", "eE(" + QN(mFlangeNumber) + ")",
+                      "e1 * (1 + ((beta - 1) * lH / ((beta / 3) "
+                      "* Sqrt(e1 * d1) + lH)))", eE, "mm",
+                      QN(e1) + " * (1 + ((" + QN(beta) + " - 1) * " + QN(lH)
+                      + " / ((" + QN(beta) + " / 3) * (" + QN(e1) + " * "
+                      + QN(d1) + ") ^ 0.5 + " + QN(lH) + ")))");
+
+    }
 }
 
 /**

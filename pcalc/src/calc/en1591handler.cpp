@@ -200,7 +200,7 @@ void EN1591Handler::setDimMatInput() {
     BoltHole* bhl = blt->mBoltHole;
     bhl->d5 = in->getValue("d5").toDouble();
     bhl->d5t = in->getValue("d5t").toDouble();
-    bhl->eFb = in->getValue("efb").toDouble();
+//    bhl->eFb = in->getValue("efb").toDouble();
     bhl->isBlindHole = (bool)in->getValue("blindhole").toInt();
     // washer
     Washer* wr = mCalc->mAssembly->mFlange1->mWasher;

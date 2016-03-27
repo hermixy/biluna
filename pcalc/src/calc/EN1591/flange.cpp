@@ -163,12 +163,11 @@ void Flange::Calc_pB() {
  */
 void Flange::Calc_d5e() {
     if (mBolt->mBoltHole->isBlindHole) {
-        mBolt->mBoltHole->d5 = mBolt->mBoltHole->d5t * mBolt->l5t
-                / mBolt->mBoltHole->eFb;
+        mBolt->mBoltHole->d5 = mBolt->mBoltHole->d5t * mBolt->l5t / eFb;
         PR->addDetail("Formula 4 5", "d5(" + QN(mFlangeNumber) + ")",
                       "d5t * l5t / eFb", mBolt->mBoltHole->d5, "mm",
                       QN(mBolt->mBoltHole->d5t) + " * " + QN(mBolt->l5t)
-                      + " / " + QN(mBolt->mBoltHole->eFb));
+                      + " / " + QN(eFb));
     }
 
     d5e = mBolt->mBoltHole->d5 * sqrt(mBolt->mBoltHole->d5 / pB);
@@ -186,6 +185,14 @@ void Flange::Calc_d3e() {
     PR->addDetail("Formula 6", "d3e", "d3 * (1 - 2 / (nB * nB))", d3e, "mm",
                   QN(d3) + " * (1.0 - 2.0 / (" + QN(nB)
                   + " * " + QN(nB) + "))");
+}
+
+/**
+ * @brief Before formula 7: to correct the d0 of blank flange,
+ * refer figure 11
+ */
+void Flange::Calc_d0() {
+    // nothing
 }
 
 /**
@@ -387,11 +394,11 @@ void Flange::Calc_d7max() {
     // does nothing, for loose flange Formula 86
 }
 
-void Flange::Calc_d70(int /*loadCaseNo*/) {
+void Flange::Calc_d70() {
     // does nothing, for loose flange Formula 62
 }
 
-void Flange::Calc_d7minMax(int /*loadCaseNo*/) {
+void Flange::Calc_d7minMax() {
     // does nothing, for loose flange Formula 84
 }
 
@@ -417,7 +424,7 @@ bool Flange::Is_PhiF_valid(int loadCaseNo) {
         result = mLoadCaseList->at(loadCaseNo)->PhiF2 <= 1.0;
         PR->addDetail("Formula 129", "result129(" + QN(mFlangeNumber) + ")",
                       "PhiF2 <= 1.0", static_cast<int>(result), "-",
-                      QN(mLoadCaseList->at(loadCaseNo)->PhiF1)
+                      QN(mLoadCaseList->at(loadCaseNo)->PhiF2)
                       + " &lt;= 1.0", loadCaseNo);
     }
 
@@ -1264,10 +1271,6 @@ void Flange::Calc_WX(int /*loadCaseNo*/) {
 
 void Flange::Calc_kM(int /*loadCaseNo*/) {
     // does nothing, integral, stub or collar only
-}
-
-bool Flange::Is_d0_Valid() {
-    return false; // only for blind
 }
 
 void Flange::Calc_WL(int /*loadCaseNo*/) {

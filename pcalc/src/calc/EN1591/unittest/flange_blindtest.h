@@ -18,6 +18,7 @@ public:
 private:
     void setupTarget();
 
+    void Calc_d0Test();
     void Calc_ZFTest();
     void Calc_ZLTest();
     void Calc_bFTest();

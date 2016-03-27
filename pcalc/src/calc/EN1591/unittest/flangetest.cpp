@@ -73,7 +73,7 @@ void FlangeTest::setupTarget() {
     target->mBolt->mBoltHole->isBlindHole = false; // threaded
     target->mBolt->mBoltHole->d5t = 24.33;
     target->mBolt->l5t = 42.7;
-    target->mBolt->mBoltHole->eFb = 0.31;
+    target->eFb = 0.31;
 }
 
 void FlangeTest::Calc_d3eTest() {

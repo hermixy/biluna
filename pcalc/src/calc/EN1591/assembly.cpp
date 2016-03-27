@@ -32,7 +32,7 @@ void Assembly::Calc_dG1() {
                                    mFlange1->dREC), mGasket->dGin);
     mGasket->dG1 = std::fmax(std::fmax(mFlange2->d0,
                             mFlange2->dREC), fl1);
-    PR->addDetail("Before_F. 51", "dG1", "max(d0(1,2); dREC(1,2)); dGin)",
+    PR->addDetail("Before_F. 24", "dG1", "max(d0(1,2); dREC(1,2)); dGin)",
                   mGasket->dG1, "mm", "max(" + QN(mFlange1->d0) + ";  "
                   + QN(mFlange2->d0) + "; " + QN(mFlange1->dREC) + "; "
                   + QN(mFlange2->dREC) + "; " + QN(mGasket->dGin) + ")");
@@ -52,7 +52,7 @@ void Assembly::Calc_dG2() {
                                        mFlange1->dRF), mGasket->dGout);
         mGasket->dG2 = std::min(std::min(mFlange2->d4,
                                 mFlange2->dRF), fl1);
-        PR->addDetail("Before_F. 51", "dG2", "min(d4(1,2); dRF(1,2)); dGout)",
+        PR->addDetail("Before_F. 24", "dG2", "min(d4(1,2); dRF(1,2)); dGout)",
                       mGasket->dG2, "mm", "min(" + QN(mFlange1->d4) + ";  "
                       + QN(mFlange2->d4) + "; " + QN(mFlange1->dRF) + "; "
                       + QN(mFlange2->dRF) + "; " + QN(mGasket->dGout) + ")");

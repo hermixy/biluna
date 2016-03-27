@@ -18,6 +18,7 @@ Flange_BlindTest::~Flange_BlindTest() {
 }
 
 void Flange_BlindTest::exec() {
+    Calc_d0Test();
     Calc_ZFTest();
     Calc_ZLTest();
     Calc_bFTest();
@@ -55,6 +56,14 @@ void Flange_BlindTest::setupTarget() {
     target->d4 = 383.2; //outside diameter
     target->eF = 21.7; //flange thickness
     target->AF = 3300.7; //cross section area
+}
+
+void Flange_BlindTest::Calc_d0Test() {
+    setupTarget();
+    target->mGasket->dG1 = 12.1;
+    target->Calc_d0();
+    areEqual(PR->getLastOutput(), "Flange_BlindTest::Calc_d0Test()",
+             12.1, target->d0);
 }
 
 void Flange_BlindTest::Calc_ZFTest() {

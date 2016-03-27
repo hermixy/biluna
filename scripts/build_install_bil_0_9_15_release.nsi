@@ -80,6 +80,7 @@ Section "LibraryAndPluginSection" SEC10
   File "C:\Qt\Qt5.5.1\5.5\msvc2013\qtwebengine_resources_100p.pak"
   File "C:\Qt\Qt5.5.1\5.5\msvc2013\qtwebengine_resources_200p.pak"
   
+  File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Charts.dll"
   File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Core.dll"
   File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Gui.dll"
   File "C:\Qt\Qt5.5.1\5.5\msvc2013\bin\Qt5Help.dll"
@@ -220,6 +221,7 @@ Section Uninstall
   Delete "$INSTDIR\qtwebengine_resources.pak"
   Delete "$INSTDIR\qtwebengine_resources_100p.pak"
   Delete "$INSTDIR\qtwebengine_resources_200p.pak"
+  Delete "$INSTDIR\Qt5Charts.dll"
   Delete "$INSTDIR\Qt5Core.dll"
   Delete "$INSTDIR\Qt5Gui.dll"
   Delete "$INSTDIR\Qt5Help.dll"
