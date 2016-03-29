@@ -1309,7 +1309,8 @@ bool ACC_SqlCommonFunctions::isAllocNotConsistent() {
                                           + query.value(0).toString()
                                           + " " + query.value(1).toString()
                                           + " " + query.value(2).toString()
-                                          + " " + query.value(3).toString());
+                                          + " " + query.value(3).toString()
+                                          + " " + query.value(4).toString());
     }
 
     return query.first();
