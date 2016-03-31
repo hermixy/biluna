@@ -37,8 +37,6 @@ RB_DatabaseTableWidget::RB_DatabaseTableWidget(QWidget *parent)
     mScaleType = ScaleLinear;
     mXfield = "";
     mYfield = "";
-
-    init();
 }
 
 RB_DatabaseTableWidget::~RB_DatabaseTableWidget() {
@@ -48,6 +46,7 @@ RB_DatabaseTableWidget::~RB_DatabaseTableWidget() {
 void RB_DatabaseTableWidget::init() {
     ui->tbbData->initSlimTable(true, false, true);
     ui->tableView->setToolButtonBar(ui->tbbData);
+    ui->tableView->setEditTriggers(QAbstractItemView::AllEditTriggers);
 
     connect(ui->cbProperty, SIGNAL(currentIndexChanged(int)),
             this, SLOT(slotSetPropertyTable(int)));
@@ -85,12 +84,13 @@ void RB_DatabaseTableWidget::setChartModel(RB_MmProxy* model,
                                            const QString& xField,
                                            const QString& yField,
                                            ScaleType scale) {
+return;
     if (!mChart) {
         mChart = new QChart();
         mChart->setAnimationOptions(QChart::AllAnimations);
     }
 
-    if (!model) {
+    if (!model || xField.isEmpty() || yField.isEmpty()) {
         return;
     } else {
         mModel = model;
