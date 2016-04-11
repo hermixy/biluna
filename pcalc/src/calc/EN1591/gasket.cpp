@@ -605,6 +605,15 @@ double Gasket::gasketFriction(LoadCase* loadCase) {
     return mu_G;
 }
 
+/**
+ * @brief Gasket::gasketThermalExpansion alphaG
+ * @param loadCase
+ * @return gasket thermal expansion factor
+ */
+double Gasket::gasketThermalExpansion(LoadCase* loadCase) {
+
+}
+
 
 
 END_NAMESPACE_BILUNA_CALC_EN1591
