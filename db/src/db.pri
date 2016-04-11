@@ -220,6 +220,7 @@ HEADERS = \
     ../src/gui/rb_dialogfactory.h \
     ../src/gui/rb_dialogwindow.h \
     ../src/gui/rb_dockwidget.h \
+    ../src/gui/rb_englineedit.h \
     ../src/gui/rb_flowlayout.h \
     ../src/gui/rb_idxlineedit.h \
     ../src/gui/rb_ledelegate.h \
@@ -473,6 +474,7 @@ SOURCES = \
     ../src/gui/rb_dialogfactory.cpp \
     ../src/gui/rb_dialogwindow.cpp \
     ../src/gui/rb_dockwidget.cpp \
+    ../src/gui/rb_englineedit.cpp \
     ../src/gui/rb_flowlayout.cpp \
     ../src/gui/rb_idxlineedit.cpp \
     ../src/gui/rb_mainwindow.cpp \

@@ -210,6 +210,17 @@ double EN13555Property::get_QminL(double leakageRate, double testPressure) {
     return QminL;
 }
 
+double EN13555Property::get_muG() {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_muG() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double muG = mCurrentGasket->getValue("mug").toDouble();
+    return muG;
+}
+
 bool EN13555Property::loadGasket(const QString& gasketId) {
     QSqlDatabase db = PCALC_MODELFACTORY->getStandardDatabase();
     mCurrentGasket = mGasketList->newObject(gasketId);

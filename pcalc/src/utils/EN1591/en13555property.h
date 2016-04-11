@@ -42,6 +42,7 @@ public:
     double get_Qsmax(double designTemp);
     double get_QsminL(double leakageRate, double QA, double testPressure);
     double get_QminL(double leakageRate, double testPressure);
+    double get_muG();
 
 private:
     EN13555Property();

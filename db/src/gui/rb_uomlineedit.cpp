@@ -12,6 +12,7 @@
 
 #include "rb_dialogfactory.h"
 #include "rb_dialogwindow.h"
+#include "rb_englineedit.h"
 #include "rb_mmproxy.h"
 
 /**
@@ -40,7 +41,7 @@ RB_UomLineEdit::~RB_UomLineEdit() {
 /**
  * @returns LineEdit
  */
-QLineEdit* RB_UomLineEdit::getLineEdit() {
+RB_EngLineEdit* RB_UomLineEdit::getLineEdit() {
     return uomLineEdit;
 }
 

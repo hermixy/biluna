@@ -35,7 +35,7 @@
       <number>3</number>
      </property>
      <item>
-      <widget class="QLineEdit" name="uomLineEdit">
+      <widget class="RB_EngLineEdit" name="uomLineEdit">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -82,6 +82,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RB_EngLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>rb_englineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

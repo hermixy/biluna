@@ -29,11 +29,12 @@ STD_EN13555PqrDeltaeGC::~STD_EN13555PqrDeltaeGC() {
 /**
  * Create members:
  * \li c test rig stifness [kN/mm], 'k' is used in calculations
- * \li qa gasket strees at assembly [N/mm2],
+ * \li qa gasket stress at assembly [N/mm2],
  * the highest one at temperature is Qsmax
  * \li temp temperature [Celsius]
  * \li pqr Pqr [-]
  * \li deltaegc delta eGC [mm]
+ * \li alphag thermal expansion of gasket [1/Kelvin], TODO: 1.0e-5?
  */
 void STD_EN13555PqrDeltaeGC::createMembers() {
     addMember("c", "kN/mm", 0.0, RB2::MemberDouble);
@@ -41,4 +42,5 @@ void STD_EN13555PqrDeltaeGC::createMembers() {
     addMember("qg", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("pqr", "-", 0.0, RB2::MemberDouble);
     addMember("deltaegc", "mm", 0.0, RB2::MemberDouble);
+    addMember("alphag", "1/Kelvin", 0.0, RB2::MemberDouble);
 }

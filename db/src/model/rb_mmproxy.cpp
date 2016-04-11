@@ -686,6 +686,7 @@ int RB_MmProxy::columnCount(const QModelIndex& parent) const {
  */
 RB_Variant RB_MmProxy::data(const QModelIndex& index, int role) const {
     QModelIndex sourceIndex = mapToSource(index);
+
     if (sourceIndex.isValid())
         return mSourceModel->data(sourceIndex, role);
     return RB_Variant();

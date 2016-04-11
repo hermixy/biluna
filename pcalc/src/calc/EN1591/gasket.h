@@ -23,7 +23,7 @@ public:
         OctagonalDoubleContact
     };
 
-    enum InsFilLayMatType { // EN13445 Table G
+    enum InsFilLayMatType { // EN1591 Table G
         // Non metalic
         Rubber,
         Ptfe,
@@ -133,11 +133,14 @@ public:
     void setLoadCaseValues(int loadCaseNo);
     void Calc_Q_A_Qsmin(int loadCaseNo);
     void Calc_delta_eGc(int loadCaseNo);
+    void Calc_muG(int loadCaseNo);
     double gasketDeflection(LoadCase* loadCase);            // delta_eGc_EN13555
     double gasketCreepFactor(LoadCase* loadCase);           // P_QR
     double gasketCompressedElasticity(int loadCaseNo);      // E_G
     double gasketCompressedThickness(LoadCase* loadCase);   // e_G
     double gasketMaximumLoad(LoadCase* loadCase);           // Q_smax
+    double gasketFriction(LoadCase* loadCase);              // muG
+    double gasketThermalExpansion(LoadCase* loadCase);      // alphaG
 
     LoadCaseList* mLoadCaseList;
 
