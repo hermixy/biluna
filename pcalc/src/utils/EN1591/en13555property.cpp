@@ -221,6 +221,16 @@ double EN13555Property::get_muG() {
     return muG;
 }
 
+double EN13555Property::get_alphaG(double designTemp) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_alphaG() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double alphaG;
+}
+
 bool EN13555Property::loadGasket(const QString& gasketId) {
     QSqlDatabase db = PCALC_MODELFACTORY->getStandardDatabase();
     mCurrentGasket = mGasketList->newObject(gasketId);

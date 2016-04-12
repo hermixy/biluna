@@ -61,18 +61,19 @@ HEADERS += \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditdialog.h \
     ../src/gui/rb_databasetablewidget.h \
-    ../src/model/EN1591/std_en13555egeg.h \
-    ../src/model/EN1591/std_en13555gasket.h \
-    ../src/model/EN1591/std_en13555manufacturer.h \
-    ../src/model/EN1591/std_en13555pqrdeltaegc.h \
-    ../src/model/EN1591/std_en13555qminl.h \
-    ../src/model/EN1591/std_en13555qsminl.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
     ../src/model/EN1591/pcalc_en1591_flange.h \
     ../src/model/EN1591/pcalc_en1591_gasket.h \
     ../src/model/EN1591/pcalc_en1591_loadcase.h \
     ../src/model/EN1591/pcalc_en1591_shell.h \
+    ../src/model/EN1591/std_en13555egeg.h \
+    ../src/model/EN1591/std_en13555gasket.h \
+    ../src/model/EN1591/std_en13555manufacturer.h \
+    ../src/model/EN1591/std_en13555pqrdeltaegc.h \
+    ../src/model/EN1591/std_en13555qsmaxalphag.h \
+    ../src/model/EN1591/std_en13555qminl.h \
+    ../src/model/EN1591/std_en13555qsminl.h \
     ../src/model/pcalc.h \
     ../src/model/pcalc_modelfactory.h \
     ../src/model/pcalc_objectfactory.h \
@@ -133,18 +134,19 @@ SOURCES += \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditdialog.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
-    ../src/model/EN1591/std_en13555egeg.cpp \
-    ../src/model/EN1591/std_en13555gasket.cpp \
-    ../src/model/EN1591/std_en13555manufacturer.cpp \
-    ../src/model/EN1591/std_en13555pqrdeltaegc.cpp \
-    ../src/model/EN1591/std_en13555qminl.cpp \
-    ../src/model/EN1591/std_en13555qsminl.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \
     ../src/model/EN1591/pcalc_en1591_flange.cpp \
     ../src/model/EN1591/pcalc_en1591_gasket.cpp \
     ../src/model/EN1591/pcalc_en1591_loadcase.cpp \
     ../src/model/EN1591/pcalc_en1591_shell.cpp \
+    ../src/model/EN1591/std_en13555egeg.cpp \
+    ../src/model/EN1591/std_en13555gasket.cpp \
+    ../src/model/EN1591/std_en13555manufacturer.cpp \
+    ../src/model/EN1591/std_en13555pqrdeltaegc.cpp \
+    ../src/model/EN1591/std_en13555qminl.cpp \
+    ../src/model/EN1591/std_en13555qsmaxalphag.cpp \
+    ../src/model/EN1591/std_en13555qsminl.cpp \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
     ../src/utils/EN1591/en13445tableg.cpp \

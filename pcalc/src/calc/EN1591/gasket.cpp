@@ -520,7 +520,7 @@ double Gasket::gasketMaximumLoad(LoadCase* loadCase) {
  * @param loadCase
  * @return gasket friction factor
  */
-double Gasket::gasketFriction(LoadCase* loadCase) {
+double Gasket::gasketFriction(LoadCase* /*loadCase*/) {
     double mu_G = 0.0;
 
     if (EN13555PROPERTY->isValid()) {
@@ -529,7 +529,7 @@ double Gasket::gasketFriction(LoadCase* loadCase) {
 
     if (mu_G > 0.0) {
         PR->addDetail("Before_F. 104", "muG", "Vendor table value",
-                      mu_G, "-", "Table value", loadCase->number);
+                      mu_G, "-", "Table value");
     } else {
         switch (insType) {
         // Non metalic
@@ -599,7 +599,7 @@ double Gasket::gasketFriction(LoadCase* loadCase) {
         }
 
         PR->addDetail("Before_F. 104", "muG", "EN1591 Table E.1",
-                      mu_G, "-", "Table value", loadCase->number);
+                      mu_G, "-", "Table value");
     }
 
     return mu_G;
@@ -611,7 +611,22 @@ double Gasket::gasketFriction(LoadCase* loadCase) {
  * @return gasket thermal expansion factor
  */
 double Gasket::gasketThermalExpansion(LoadCase* loadCase) {
+    double alpha_G = 0.0;
 
+    if (EN13555PROPERTY->isValid()) {
+        alpha_G = EN13555PROPERTY->get_alphaG(loadCase->TG);
+    }
+
+    if (alpha_G > 0.0) {
+        PR->addDetail("Before_F. 97", "alphaG", "Vendor table value",
+                      alpha_G, "-", "Table value");
+    } else {
+        alpha_G = 1.0e-5;
+        PR->addDetail("Before_F. 97", "alphaG", "Default value",
+                      alpha_G, "-", "Table value");
+    }
+
+    return alpha_G;
 }
 
 

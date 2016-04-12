@@ -225,6 +225,7 @@ HEADERS = \
     ../src/gui/rb_idxlineedit.h \
     ../src/gui/rb_ledelegate.h \
     ../src/gui/rb_mainwindow.h \
+    ../src/gui/rb_mapperdelegate.h \
     ../src/gui/rb_mdiwindow.h \
     ../src/gui/rb_memberdelegate.h \
     ../src/gui/rb_membereditdialog.h \
@@ -478,6 +479,7 @@ SOURCES = \
     ../src/gui/rb_flowlayout.cpp \
     ../src/gui/rb_idxlineedit.cpp \
     ../src/gui/rb_mainwindow.cpp \
+    ../src/gui/rb_mapperdelegate.cpp \
     ../src/gui/rb_mdiwindow.cpp \
     ../src/gui/rb_memberdelegate.cpp \
     ../src/gui/rb_membereditdialog.cpp \

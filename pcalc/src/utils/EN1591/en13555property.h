@@ -21,7 +21,7 @@ NAMESPACE_BILUNA_CALC_EN1591
 #define EN13555PROPERTY EN13555Property::getInstance()
 
 /**
- * @brief EN13555 properties QminL QsminL Qsmax Pqr deltaEgc EG eG.
+ * @brief EN13555 properties QminL QsminL Qsmax Pqr deltaEgc EG eG muG alphaG.
  * These values are from www.gasketdata.org.
  * Refer also www.europeansealing.com
  */
@@ -43,6 +43,7 @@ public:
     double get_QsminL(double leakageRate, double QA, double testPressure);
     double get_QminL(double leakageRate, double testPressure);
     double get_muG();
+    double get_alphaG(double designTemp);
 
 private:
     EN13555Property();
