@@ -243,44 +243,44 @@ void PCALC_EN1591Widget::init() {
     // TODO: limit items based on clicked cbMatType
     items // Non metalic
          << "Rubber"
-         << "Ptfe"
-         << "ExpPtfe"
-         << "ExpGraphWithoutIns"
-         << "ExpGraphPerfMetal"
-         << "ExpGraphAdhFlat"
-         << "ExpGraphMetSheet"
-         << "NonAsbetosSmaller1"
-         << "NonAsbetosLargerEqual1"
+         << "PTFE"
+         << "Expanded PTFE"
+         << "Exp. graphite without ins."
+         << "Exp. graph. perf. metal"
+         << "Exp. graph. adh. flat metal"
+         << "Exp. graph. metal sheet"
+         << "Non asbetos fiber < 1 mm"
+         << "Non asbetos fiber >= 1 mm"
          // Grooved steel gaskets with soft layers on both sides
-         << "PtfeSoftSteel"
-         << "PtfeStainless"
-         << "GraphSoftSteel"
-         << "GraphLowAlloy"
-         << "GraphStainless"
-         << "SilverLayer"
+         << "PTFE layers on soft steel"
+         << "PTFE layers on stainless steel"
+         << "Graphite layers on soft steel"
+         << "Graph. layers on low alloy steel"
+         << "Graph. layers on stainless steel"
+         << "Silver layers on heat resist. SS"
          // Spiral wound gaskets with soft filler
-         << "SpiralPtfeFillOuterOnly"
-         << "SpiralPtfeFillOuterInner"
-         << "SpiralGraphFillOuterOnly"
-         << "SpiralGraphFillOuterInner"
+         << "Spiral w. PTFE filler outer"
+         << "Spiral w. PTFE filler out/in"
+         << "Spiral w. graph. fill outer"
+         << "Spiral w. graph. fill out/in"
          // Solid metal gaskets
-         << "AluminumSoft"
-         << "CopperOrBrassSoft"
-         << "IronSoft"
-         << "SteelSoft"
-         << "SteelLowAlloyHeatRes"
-         << "StainlessSteel"
-         << "StainLessSteelHeatRes"
+         << "Aluminum soft"
+         << "Copper of brass soft"
+         << "Iron soft"
+         << "Steel soft"
+         << "Steel low alloy heat resist."
+         << "Stainless steel"
+         << "Stainless steel heat resist."
          // Covered metal jacketed gaskets
-         << "SoftIronOrSteelJackGraphFillCover"
-         << "LowAlloyOrStainlessSteelGraphFillCover"
-         << "StainlessSteelJacketPtfeFillCover"
-         << "NickelAlloyPtfeFillCover"
+         << "Soft iron or st. jack. graph. fill. cover."
+         << "Low alloy or SS graph. fill. cover."
+         << "SS jacket PTFE fill. cover."
+         << "Nickel alloy PTFE fill. cover."
          // Metal jacketed gaskets
-         << "AluminumSoftGraphFill"
-         << "CopperOrBrassSoftGraphFill"
-         << "SoftIronOrSteelGraphFill"
-         << "LowAlloyOrStainlessSteelGraphFill";
+         << "Aluminum soft. graph. fill."
+         << "Copper or brass soft graph. fill."
+         << "Soft iron or steel. graph. fill."
+         << "Low alloy or SS graph. fill.";
     cbInsType->setModel(new QStringListModel(items, this));
     mGasketMapper->addMapping(cbInsType,
                               mGasketModel->fieldIndex("insertfilltype_id"),
@@ -297,11 +297,7 @@ void PCALC_EN1591Widget::init() {
     mGasketMapper->addMapping(ledG0, mGasketModel->fieldIndex("dg0"));
     mGasketMapper->addMapping(ledGin, mGasketModel->fieldIndex("dgin"));
     mGasketMapper->addMapping(ledGout, mGasketModel->fieldIndex("dgout"));
-    mGasketMapper->addMapping(ledG1_EN13555, mGasketModel->fieldIndex("dg1en13555"));
-    mGasketMapper->addMapping(ledG2_EN13555, mGasketModel->fieldIndex("dg2en13555"));
     mGasketMapper->addMapping(leeGt, mGasketModel->fieldIndex("egt"));
-    mGasketMapper->addMapping(lemuG, mGasketModel->fieldIndex("mug"));
-    mGasketMapper->addMapping(leK, mGasketModel->fieldIndex("k"));
     mGasketMapper->addMapping(lephiG, mGasketModel->fieldIndex("phig"));
     mGasketMapper->addMapping(ler2, mGasketModel->fieldIndex("r2"));
 
@@ -456,7 +452,6 @@ void PCALC_EN1591Widget::init() {
     mLoadCaseMapper->addMapping(lefW_2, mLoadCaseModel->fieldIndex("fw2"));
 
     mLoadCaseMapper->addMapping(lealphaB, mLoadCaseModel->fieldIndex("alphab"));
-    mLoadCaseMapper->addMapping(lealphaG, mLoadCaseModel->fieldIndex("alphag"));
     // flange 1
     mLoadCaseMapper->addMapping(lealphaF_1, mLoadCaseModel->fieldIndex("alphaf1"));
     mLoadCaseMapper->addMapping(lealphaL_1, mLoadCaseModel->fieldIndex("alphal1"));
@@ -797,11 +792,7 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "dg0", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dgin", "-", mGasketModel);
     addObjectMemberVariable(objIn, "dgout", "-", mGasketModel);
-    addObjectMemberVariable(objIn, "dg1en13555", "-", mGasketModel);
-    addObjectMemberVariable(objIn, "dg2en13555", "-", mGasketModel);
     addObjectMemberVariable(objIn, "egt", "-", mGasketModel);
-    addObjectMemberVariable(objIn, "mug", "-", mGasketModel);
-    addObjectMemberVariable(objIn, "k", "-", mGasketModel);
     addObjectMemberVariable(objIn, "phig", "-", mGasketModel);
     addObjectMemberVariable(objIn, "r2", "-", mGasketModel);
 
@@ -826,7 +817,6 @@ void PCALC_EN1591Widget::setInput() {
     // bolthole
     addObjectMemberVariable(objIn, "d5", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "d5t", "-", mBoltNutWasherModel);
-//    addObjectMemberVariable(objIn, "efb", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "blindhole", "-", mBoltNutWasherModel);
     // washer
     addObjectMemberVariable(objIn, "ew", "-", mBoltNutWasherModel);
@@ -896,7 +886,6 @@ void PCALC_EN1591Widget::setInput() {
         addLoadCaseVariable(loadCase, "fw2", "-", mLoadCaseModel, row);
 
         addLoadCaseVariable(loadCase, "alphab", "-", mLoadCaseModel, row);
-        addLoadCaseVariable(loadCase, "alphag", "-", mLoadCaseModel, row);
         // flange 1
         addLoadCaseVariable(loadCase, "alphaf1", "-", mLoadCaseModel, row);
         addLoadCaseVariable(loadCase, "alphal1", "-", mLoadCaseModel, row);

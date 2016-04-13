@@ -44,6 +44,9 @@ public:
     double get_QminL(double leakageRate, double testPressure);
     double get_muG();
     double get_alphaG(double designTemp);
+    double get_K();
+    double get_testID();
+    double get_testOD();
 
 private:
     EN13555Property();

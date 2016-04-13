@@ -6,7 +6,7 @@ LoadCase_IN::LoadCase_IN() : RB_Object("PCALC EN1591 LoadCase") {
     number = -1;
     mForce = NULL;  // created from outside
     alphaB = 0;
-    alphaG = 0;     // from database properties, muG is a gasket property
+    alphaG = 0;     // here from database properties, however muG is a gasket property
     alphaF1 = 0;
     alphaF2 = 0;
     alphaL1 = 0;

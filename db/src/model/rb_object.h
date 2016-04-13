@@ -24,7 +24,7 @@
 class DB_EXPORT RB_Object : public RB_Flags {
 
 public:
-    RB_Object(const RB_String& name = "");
+    RB_Object(const RB_String& name = "RB_Object");
     RB_Object(RB_Object* obj);
     virtual ~RB_Object();
     virtual RB_Object& operator= (const RB_Object& obj);

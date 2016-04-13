@@ -170,11 +170,7 @@ void EN1591Handler::setDimMatInput() {
     gkt->dG0 = in->getValue("dg0").toDouble();
     gkt->dGin = in->getValue("dgin").toDouble();
     gkt->dGout = in->getValue("dgout").toDouble();
-    gkt->dG1_EN13555 = in->getValue("dg1en13555").toDouble(); // TODO: required?
-    gkt->dG2_EN13555 = in->getValue("dg2en13555").toDouble(); // TODO: required?
-    gkt->muG = in->getValue("mug").toDouble();
     gkt->eGt = in->getValue("egt").toDouble();
-    gkt->K = in->getValue("k").toDouble();
     gkt->phiG = in->getValue("phig").toDouble();
     gkt->r2 = in->getValue("r2").toDouble();
 
@@ -200,7 +196,6 @@ void EN1591Handler::setDimMatInput() {
     BoltHole* bhl = blt->mBoltHole;
     bhl->d5 = in->getValue("d5").toDouble();
     bhl->d5t = in->getValue("d5t").toDouble();
-//    bhl->eFb = in->getValue("efb").toDouble();
     bhl->isBlindHole = (bool)in->getValue("blindhole").toInt();
     // washer
     Washer* wr = mCalc->mAssembly->mFlange1->mWasher;
@@ -294,7 +289,7 @@ void EN1591Handler::setLoadCaseInput() {
         lc->fW1 = lcIn->getValue("fw1").toDouble();
 
         lc->alphaB = lcIn->getValue("alphab").toDouble();
-        lc->alphaG = lcIn->getValue("alphag").toDouble();
+//        lc->alphaG = lcIn->getValue("alphag").toDouble();
 
         lc->alphaF1 = lcIn->getValue("alphaf1").toDouble();
         lc->alphaL1 = lcIn->getValue("alphal1").toDouble();

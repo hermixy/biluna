@@ -28,7 +28,6 @@ STD_EN13555PqrDeltaeGC::~STD_EN13555PqrDeltaeGC() {
 
 /**
  * Create members:
- * \li c test rig stifness [kN/mm], 'k' is used in calculations
  * \li qa gasket stress at assembly [N/mm2],
  * the highest one at temperature is Qsmax
  * \li temp temperature [Celsius]
@@ -36,7 +35,6 @@ STD_EN13555PqrDeltaeGC::~STD_EN13555PqrDeltaeGC() {
  * \li deltaegc delta eGC [mm]
  */
 void STD_EN13555PqrDeltaeGC::createMembers() {
-    addMember("c", "kN/mm", 0.0, RB2::MemberDouble);
     addMember("temp", "Celsius", 0.0, RB2::MemberDouble);
     addMember("qg", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("pqr", "-", 0.0, RB2::MemberDouble);

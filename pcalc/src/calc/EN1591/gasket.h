@@ -79,8 +79,6 @@ public:
     double dGin;
     double dGout;
 
-    double dG1_EN13555;
-    double dG2_EN13555;
     double eGt;
     double muG;
     double K; // stiffness of test rig, usually 500 kN/mm or 1500 kN/mm
@@ -94,6 +92,9 @@ class Gasket_OUT : public Gasket_IN {
 
 public:
     Gasket_OUT();
+
+    double dG1_EN13555;
+    double dG2_EN13555;
 
     double dG1;
     double dG2;
@@ -134,6 +135,10 @@ public:
     void Calc_Q_A_Qsmin(int loadCaseNo);
     void Calc_delta_eGc(int loadCaseNo);
     void Calc_muG(int loadCaseNo);
+    void Calc_alphaG(int loadCaseNo);
+    void Calc_K();
+    void Calc_dG1_EN13555();
+    void Calc_dG2_EN13555();
     double gasketDeflection(LoadCase* loadCase);            // delta_eGc_EN13555
     double gasketCreepFactor(LoadCase* loadCase);           // P_QR
     double gasketCompressedElasticity(int loadCaseNo);      // E_G
@@ -141,6 +146,9 @@ public:
     double gasketMaximumLoad(LoadCase* loadCase);           // Q_smax
     double gasketFriction(LoadCase* loadCase);              // muG
     double gasketThermalExpansion(LoadCase* loadCase);      // alphaG
+    double gasketTestRigStiffness();                        // K (or C) value
+    double gasketTestID();                                  // dG1_EN13555
+    double gasketTestOD();
 
     LoadCaseList* mLoadCaseList;
 

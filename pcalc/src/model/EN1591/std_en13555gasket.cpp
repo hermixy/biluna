@@ -41,6 +41,7 @@ STD_EN13555Gasket::~STD_EN13555Gasket() {
  * \li testoutdiam test outside diameter [mm]
  * \li testindiam test instide diameter [mm]
  * \li testthickn test thickness [mm]
+ * \li c test rig stifness [kN/mm], 'k' is used in calculations
  * \li issue issue date or revision of datasheet
  */
 void STD_EN13555Gasket::createMembers() {
@@ -52,5 +53,6 @@ void STD_EN13555Gasket::createMembers() {
     addMember("testoutdiam", "mm", 0.0, RB2::MemberDouble);
     addMember("testindiam", "mm", 0.0, RB2::MemberDouble);
     addMember("testthickn", "mm", 0.0, RB2::MemberDouble);
+    addMember("k", "kN/mm", 0.0, RB2::MemberDouble);
     addMember("issue", "-", "1970-01-01", RB2::MemberChar10);
 }

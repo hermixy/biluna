@@ -293,6 +293,11 @@ void Calculator::F41_to_53(Assembly* assembly) 	{
     assembly->mGasket->Calc_bGt();
     assembly->mGasket->Calc_dGt();
     assembly->mGasket->Calc_AGt();
+
+    // set unchanging (test) gasket properties
+    assembly->mGasket->Calc_K();
+    assembly->mGasket->Calc_dG1_EN13555();
+    assembly->mGasket->Calc_dG2_EN13555();
 }
 
 void Calculator::F54_to_54(Assembly* assembly) 	{
@@ -386,6 +391,7 @@ void Calculator::F90_to_102(Assembly* assembly, int loadCaseNo) {
     assembly->mLoadCaseList->at(loadCaseNo)->mForce->Calc_M_AI();
     assembly->Calc_F_R(loadCaseNo);
 //    assembly->Calc_lB(); already before Formula 42
+    assembly->mGasket->Calc_alphaG(loadCaseNo);
     assembly->Calc_dUI(loadCaseNo);
     assembly->Calc_Q_G(loadCaseNo); // extra for determining EG Formula 100
     assembly->mGasket->Calc_E_G(loadCaseNo);
@@ -397,7 +403,7 @@ void Calculator::F90_to_102(Assembly* assembly, int loadCaseNo) {
 
 void Calculator::F103_to_104(Assembly* assembly, int loadCaseNo) {
     assembly->mGasket->Calc_Q_A_Qsmin(loadCaseNo);
-    assembly->mGasket->Calc_muG(loadCaseNo);
+    assembly->mGasket->Calc_muG(loadCaseNo); // only once required, can be moved to earlier part
     assembly->Calc_F_Gmin(loadCaseNo);
 }
 

@@ -89,6 +89,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555QminLList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "leakrate");
         break;
+    case ModelEN13555QsmaxAlphaG:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555QsmaxAlphaGList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temp");
+        break;
     case ModelEN13555QsminL:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555QsminLList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "qa", "leakrate");
@@ -159,6 +163,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         iter = mModelList.find(ModelNone);
         break;
     case ModelEN13555QminL:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelEN13555QsmaxAlphaG:
         iter = mModelList.find(ModelNone);
         break;
     case ModelEN13555QsminL:
