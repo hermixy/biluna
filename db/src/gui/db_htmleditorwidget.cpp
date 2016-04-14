@@ -74,7 +74,7 @@ DB_HtmlEditorWidget::DB_HtmlEditorWidget(QWidget *parent) : RB_Widget(parent)
     mCodeHighlighter = new DB_HtmlHighlighter(plainTextEdit->document());
     mVerticalScrollbarPerunage = 0.0;
 
-    QtWebEngine::initialize();
+//    QtWebEngine::initialize();
 
 /*    QWidget *spacer = new QWidget(this);
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
