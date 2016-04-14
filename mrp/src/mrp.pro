@@ -9,6 +9,8 @@ TEMPLATE    = lib
 LANGUAGE    = C++
 TARGET      = mrp_actionplugin
 
+CONFIG      += plugin
+
 # compiler settings for release, debug and some paths
 exists( ../../mkspecs/defs.pro ) {
     include( ../../mkspecs/defs.pro )
