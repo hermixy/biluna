@@ -62,7 +62,7 @@ void RB_DatabaseTableWidget::setCodeManufacturer(RB_ObjectBase *obj) {
         ui->leManuf->clear();
     } else {
         mCodeManufId = obj->getId();
-        ui->leManuf->setText(obj->getValue("manufacturer").toString());
+        ui->leManuf->setText(obj->getValue("mname").toString());
     }
 
     mModel = nullptr;
@@ -74,7 +74,7 @@ void RB_DatabaseTableWidget::setType(RB_ObjectBase *obj) {
         ui->leType->clear();
     } else {
         mTypeId = obj->getId();
-        ui->leType->setText(obj->getValue("type").toString());
+        ui->leType->setText(obj->getValue("mname").toString());
     }
 
     mModel = nullptr;

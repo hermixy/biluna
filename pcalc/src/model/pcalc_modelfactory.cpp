@@ -75,11 +75,11 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelEN13555Gasket:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555GasketList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelEN13555Manuf:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555ManufacturerList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "manufacturer");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelEN13555PQRdeltaeGC:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555PqrDeltaeGCList");

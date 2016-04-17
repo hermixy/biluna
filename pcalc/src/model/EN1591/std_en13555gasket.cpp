@@ -27,6 +27,7 @@ STD_EN13555Gasket::~STD_EN13555Gasket() {
 
 /**
  * Create members
+ * \li mname type name of the gasket
  * \li material material of the gasket
  * \li type type of gasket
  * \li pmax maximum pressure [MPa]
@@ -42,9 +43,11 @@ STD_EN13555Gasket::~STD_EN13555Gasket() {
  * \li testindiam test instide diameter [mm]
  * \li testthickn test thickness [mm]
  * \li c test rig stifness [kN/mm], 'k' is used in calculations
+ * \li datasource source of this test data
  * \li issue issue date or revision of datasheet
  */
 void STD_EN13555Gasket::createMembers() {
+    addMember("mname", "-", "", RB2::MemberChar125);
     addMember("material", "-", "", RB2::MemberChar125);
     addMember("type", "-", "", RB2::MemberChar125);
     addMember("pmax", "MPa", 0.0, RB2::MemberDouble);
@@ -54,5 +57,6 @@ void STD_EN13555Gasket::createMembers() {
     addMember("testindiam", "mm", 0.0, RB2::MemberDouble);
     addMember("testthickn", "mm", 0.0, RB2::MemberDouble);
     addMember("k", "kN/mm", 0.0, RB2::MemberDouble);
+    addMember("datasource", "-", "", RB2::MemberChar125);
     addMember("issue", "-", "1970-01-01", RB2::MemberChar10);
 }
