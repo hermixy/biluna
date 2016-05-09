@@ -11,12 +11,14 @@
 #include "pcalc_objectfactory.h"
 
 #include "db_objectfactory.h"
+#include "pcalc_classgenerator.h"
 #include "pcalc_en1591_assembly.h"
 #include "pcalc_en1591_boltnutwasher.h"
 #include "pcalc_en1591_flange.h"
 #include "pcalc_en1591_gasket.h"
 #include "pcalc_en1591_loadcase.h"
 #include "pcalc_en1591_shell.h"
+#include "pcalc_generatorformula.h"
 #include "peng_project.h"
 #include "rb_debug.h"
 #include "rb_uuid.h"
@@ -93,6 +95,13 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
 
         list = new RB_ObjectContainer (uuid, obj, "PCALC_EN1591_AssemblyList", this);
         obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "PCALC_ClassGeneratorList", this);
+        obj->addObject(list);
+    } else if (str == "PCALC_ClassGeneratorList") {
+        obj = new PCALC_ClassGenerator(uuid, parent, "PCALC_ClassGenerator", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "PCALC_GeneratorFormulaList", this);
     } else if (str == "PCALC_EN1591_AssemblyList") {
         obj = new PCALC_EN1591_Assembly(uuid, parent, "PCALC_EN1591_Assembly", this);
 
@@ -119,6 +128,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new PCALC_EN1591_LoadCase(uuid, parent, "PCALC_EN1591_LoadCase", this);
     } else if (str == "PCALC_EN1591_ShellList") {
         obj = new PCALC_EN1591_Shell(uuid, parent, "PCALC_EN1591_Shell", this);
+    } else if (str == "PCALC_GeneratorFormulaList") {
+        obj = new PCALC_GeneratorFormula(uuid, parent, "PCALC_GeneratorFormula", this);
     } else if (str == "STD_EN13555EGeGList") {
         obj = new STD_EN13555EGeG(uuid, parent, "STD_EN13555EGeG", this);
     } else if (str == "STD_EN13555GasketList") {

@@ -69,6 +69,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
     QSqlDatabase stdDb = getStandardDatabase();
 
     switch (type) {
+    case ModelClassGenerator:
+        model = getTableModel(db, mObjectFactory, type, "PCALC_ClassGeneratorList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "codename", "subname");
+        break;
     case ModelEN13555EGeG:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555EGeGList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qg");
@@ -121,6 +125,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN1591_ShellList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
         break;
+    case ModelGeneratorFormula:
+        model = getTableModel(db, mObjectFactory, type, "PCALC_GeneratorFormulaList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "number");
+        break;
     case ModelProject:
         model = getTableModel(db, mObjectFactory, type, "PENG_ProjectList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
@@ -150,6 +158,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
     std::map<int, RB_MmProxy*>::iterator iter;
 
     switch (type) {
+    case ModelClassGenerator:
+        iter = mModelList.find(ModelGeneratorFormula);
+        break;
     case ModelEN13555EGeG:
         iter = mModelList.find(ModelNone);
         break;
@@ -188,6 +199,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         break;
     case ModelEN1591Shell:
         iter = mModelList.find(ModelEN1591Assembly);
+        break;
+    case ModelGeneratorFormula:
+        iter = mModelList.find(ModelNone);
         break;
     case ModelProject:
         iter = mModelList.find(ModelNone);
