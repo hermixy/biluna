@@ -42,6 +42,7 @@ public:
     enum ModelType {
         // start numbering from 191100
         ModelNone = 191100,             /**< Invalid model */
+        ModelClassGenerator,            /**< Calculation class generator model */
         ModelEN13555EGeG,               /**< EN13555 EG and eG model */
         ModelEN13555Gasket,             /**< EN13555 Type of gasket */
         ModelEN13555Manuf,              /**< EN13555 Manufacturer of gasket model */
@@ -54,6 +55,7 @@ public:
         ModelEN1591Gasket,              /**< EN1591 Gasket model */
         ModelEN1591LoadCase,            /**< EN1591 Load Case model */
         ModelEN1591Shell,               /**< EN1591 Shell model */
+        ModelGeneratorFormula,          /**< Calculation generator formula model */
         ModelProject,                   /**< Project model */
         ModelProjectEdit,               /**< Edit project model */
         ModelDefault                    /**< Default- or all models */

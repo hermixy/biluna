@@ -6,6 +6,7 @@
 # ----------------------------------------------------------
 
 FORMS += \
+    ../src/gui/pcalc_classgeneratorwidget.ui \
     ../src/gui/pcalc_en1591selectgasketwidget.ui \
     ../src/gui/pcalc_en1591widget.ui \
     ../src/gui/rb_databasetablewidget.ui
@@ -52,6 +53,7 @@ HEADERS += \
     ../src/calc/unittest/rb_unittest.h \
     ../src/calc/unittest/rb_unittestfactory.h \
     ../src/calc/unittest/en1591_unittestfactory.h \
+    ../src/gui/pcalc_classgeneratorwidget.h \
     ../src/gui/pcalc_dialogfactory.h \
     ../src/gui/pcalc_en13555gasketwidget.h \
     ../src/gui/pcalc_en13555manufwidget.h \
@@ -74,6 +76,8 @@ HEADERS += \
     ../src/model/EN1591/pcalc_en1591_loadcase.h \
     ../src/model/EN1591/pcalc_en1591_shell.h \
     ../src/model/pcalc.h \
+    ../src/model/pcalc_classgenerator.h \
+    ../src/model/pcalc_generatorformula.h \
     ../src/model/pcalc_modelfactory.h \
     ../src/model/pcalc_objectfactory.h \
     ../src/utils/EN1591/en13445tableg.h \
@@ -125,6 +129,7 @@ SOURCES += \
     ../src/calc/unittest/rb_unittest.cpp \
     ../src/calc/unittest/rb_unittestfactory.cpp \
     ../src/calc/unittest/en1591_unittestfactory.cpp \
+    ../src/gui/pcalc_classgeneratorwidget.cpp \
     ../src/gui/pcalc_dialogfactory.cpp \
     ../src/gui/pcalc_en13555gasketwidget.cpp \
     ../src/gui/pcalc_en13555manufwidget.cpp \
@@ -145,6 +150,8 @@ SOURCES += \
     ../src/model/EN1591/pcalc_en1591_gasket.cpp \
     ../src/model/EN1591/pcalc_en1591_loadcase.cpp \
     ../src/model/EN1591/pcalc_en1591_shell.cpp \
+    ../src/model/pcalc_classgenerator.cpp \
+    ../src/model/pcalc_generatorformula.cpp \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
     ../src/utils/EN1591/en13445tableg.cpp \
