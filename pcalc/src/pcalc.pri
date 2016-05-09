@@ -145,10 +145,6 @@ SOURCES += \
     ../src/model/EN1591/pcalc_en1591_gasket.cpp \
     ../src/model/EN1591/pcalc_en1591_loadcase.cpp \
     ../src/model/EN1591/pcalc_en1591_shell.cpp \
-<<<<<<< HEAD
-    ../src/model/pcalc_classgenerator.cpp \
-    ../src/model/pcalc_generatorformula.cpp \
-=======
     ../src/model/EN1591/std_en13555egeg.cpp \
     ../src/model/EN1591/std_en13555gasket.cpp \
     ../src/model/EN1591/std_en13555manufacturer.cpp \
@@ -156,7 +152,8 @@ SOURCES += \
     ../src/model/EN1591/std_en13555qminl.cpp \
     ../src/model/EN1591/std_en13555qsmaxalphag.cpp \
     ../src/model/EN1591/std_en13555qsminl.cpp \
->>>>>>> master
+    ../src/model/pcalc_classgenerator.cpp \
+    ../src/model/pcalc_generatorformula.cpp \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
     ../src/utils/EN1591/en13445tableg.cpp \

@@ -17,7 +17,7 @@ PCALC_ClassGenerator::PCALC_ClassGenerator(
 }
 
 PCALC_ClassGenerator::PCALC_ClassGenerator(PCALC_ClassGenerator* obj) : 
-                   RB_ObjectAtomic(obj) {
+                   RB_ObjectContainer(obj) {
 	createMembers();
 	*this = *obj;
 }

@@ -15,7 +15,7 @@
 /**
  * Formula for calculation generator class
  */
-class DB_EXPORT PCALC_GeneratorFormula : public RB_ObjectAtomic {
+class PCALC_GeneratorFormula : public RB_ObjectAtomic {
 
 public:
     PCALC_GeneratorFormula(const QString& id = "", RB_ObjectBase* p = NULL,

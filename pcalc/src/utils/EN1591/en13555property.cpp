@@ -304,11 +304,15 @@ double EN13555Property::closestInnerPressureBar(double testPressure) {
     RB_ObjectIterator* iter = objC->createIterator();
     double testPressureBar = PCALC2::MPaToBar(testPressure);
     double closestPressureBar = 0.0;
+    bool firstTime = true;
 
     for (iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
         double pressureBar = obj->getValue("testpress").toDouble();
-        if (std::abs(testPressureBar - pressureBar)
+        if (firstTime) {
+            closestPressureBar = pressureBar;
+            firstTime = false;
+        } else if (std::abs(testPressureBar - pressureBar)
                 < std::abs(testPressureBar - closestPressureBar)) {
             closestPressureBar = pressureBar;
         }

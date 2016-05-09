@@ -15,7 +15,7 @@
 /**
  * Data class for code calculation generator and parent of code formulae
  */
-class DB_EXPORT PCALC_ClassGenerator : public RB_ObjectContainer {
+class PCALC_ClassGenerator : public RB_ObjectContainer {
 
 public:
     PCALC_ClassGenerator(const QString& id = "", RB_ObjectBase* p = NULL,
