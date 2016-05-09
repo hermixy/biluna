@@ -28,6 +28,6 @@ STD_EN13555Manufacturer::~STD_EN13555Manufacturer() {
 }
 
 void STD_EN13555Manufacturer::createMembers() {
-    addMember("manufacturer", "-", "<NEW>", RB2::MemberChar125);
+    addMember("mname", "-", "<NEW>", RB2::MemberChar125);
     addMember("website", "-", "", RB2::MemberChar125);
 }

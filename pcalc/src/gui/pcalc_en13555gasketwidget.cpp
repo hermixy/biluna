@@ -36,7 +36,8 @@ void PCALC_EN13555GasketWidget::init() {
     setObjectName("PCALC_EN13555GasketWidget"); // ui is RB_DatabaseTableWidget
 
     QStringList items;
-    items << tr("None") << "QminL" << "QsminL" << "PQR delta_eGC" << "EG eG";
+    items << tr("None") << "QminL" << "QsminL" << "PQR delta_eGC"
+          << "EG eG" << "Qsmax alphaG";
     ui->cbProperty->addItems(items);
     ui->cbProperty->setCurrentIndex(0);
     readSettings();
@@ -185,14 +186,14 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         setModelTableView(mModel);
 
         items.clear();
-        items << tr("None") << "c" << "temp" << "qg" << "pqr" << "deltaegc";
+        items << tr("None") << "temp" << "qg" << "pqr" << "deltaegc";
 
         ui->cbXcoord->clear();
         ui->cbXcoord->addItems(items);
-        ui->cbXcoord->setCurrentIndex(3);
+        ui->cbXcoord->setCurrentIndex(2);
         ui->cbYcoord->clear();
         ui->cbYcoord->addItems(items);
-        ui->cbYcoord->setCurrentIndex(4);
+        ui->cbYcoord->setCurrentIndex(3);
         setChartModel(mModel, ui->cbXcoord->currentText(),
                       ui->cbYcoord->currentText(), ScaleLinear);
         break;
@@ -213,6 +214,26 @@ void PCALC_EN13555GasketWidget::slotSetPropertyTable(int index) {
         ui->cbYcoord->clear();
         ui->cbYcoord->addItems(items);
         ui->cbYcoord->setCurrentIndex(4);
+        setChartModel(mModel, ui->cbXcoord->currentText(),
+                      ui->cbYcoord->currentText(), ScaleLinear);
+        break;
+    }
+    case 5: { // Qsmax alphaG
+        fileSave(false);
+        if (mModel) delete mModel;
+        mModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelEN13555QsmaxAlphaG, false);
+        setModelTableView(mModel);
+
+        items.clear();
+        items << tr("None") << "temp" << "qsmax" << "alphaG";
+
+        ui->cbXcoord->clear();
+        ui->cbXcoord->addItems(items);
+        ui->cbXcoord->setCurrentIndex(1);
+        ui->cbYcoord->clear();
+        ui->cbYcoord->addItems(items);
+        ui->cbYcoord->setCurrentIndex(2);
         setChartModel(mModel, ui->cbXcoord->currentText(),
                       ui->cbYcoord->currentText(), ScaleLinear);
         break;

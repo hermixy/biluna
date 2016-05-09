@@ -27,6 +27,7 @@
 #include "std_en13555manufacturer.h"
 #include "std_en13555pqrdeltaegc.h"
 #include "std_en13555qminl.h"
+#include "std_en13555qsmaxalphag.h"
 #include "std_en13555qsminl.h"
 
 PCALC_ObjectFactory* PCALC_ObjectFactory::mActiveObjectFactory = 0;
@@ -141,6 +142,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_EN13555QminLList", this);
         obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_EN13555QsmaxAlphaGList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_EN13555QsminLList", this);
         obj->addObject(list);
     } else if (str == "STD_EN13555ManufacturerList") {
@@ -153,6 +156,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new STD_EN13555PqrDeltaeGC(uuid, parent, "STD_EN13555PqrDeltaeGC", this);
     } else if (str == "STD_EN13555QminLList") {
         obj = new STD_EN13555QminL(uuid, parent, "STD_EN13555QminL", this);
+    } else if (str == "STD_EN13555QsmaxAlphaGList") {
+        obj = new STD_EN13555QsmaxAlphaG(uuid, parent, "STD_EN13555QsmaxAlphaG", this);
     } else if (str == "STD_EN13555QsminLList") {
         obj = new STD_EN13555QsminL(uuid, parent, "STD_EN13555QsminL", this);
     }

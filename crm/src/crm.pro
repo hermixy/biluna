@@ -8,7 +8,7 @@ TEMPLATE    = lib
 LANGUAGE    = C++
 TARGET      = crm_actionplugin
 
-CONFIG      += qt plugin warn_on
+CONFIG      += plugin
 #QT          +=
 
 # compiler settings for release, debug and some paths

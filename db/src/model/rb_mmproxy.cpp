@@ -10,6 +10,7 @@
 
 #include "rb_mmproxy.h"
 
+#include "rb_mapperdelegate.h"
 #include "rb_modelfactory.h"
 
 /**
@@ -686,6 +687,7 @@ int RB_MmProxy::columnCount(const QModelIndex& parent) const {
  */
 RB_Variant RB_MmProxy::data(const QModelIndex& index, int role) const {
     QModelIndex sourceIndex = mapToSource(index);
+
     if (sourceIndex.isValid())
         return mSourceModel->data(sourceIndex, role);
     return RB_Variant();
@@ -1103,6 +1105,7 @@ RB_DataWidgetMapper* RB_MmProxy::getMapper(const RB_String& mapperId) {
     } else {
         mapper = new RB_DataWidgetMapper(this);
         mapper->setModel(this);
+        mapper->setItemDelegate(new RB_MapperDelegate(mapper));
         // model changed currentIndex, change row/index of mMapper next
         connect(this, SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
                 mapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -1114,20 +1117,6 @@ RB_DataWidgetMapper* RB_MmProxy::getMapper(const RB_String& mapperId) {
 
     return mapper;
 }
-//RB_DataWidgetMapper* RB_MmProxy::getMapper() {
-//    if (!mMapper) {
-//        mMapper = new RB_DataWidgetMapper(this);
-//        mMapper->setModel(this);
-//        // model changed currentIndex, change row/index of mMapper next
-//        connect(this, SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-//                mMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-//        // root of model changed, clean mapped widgets
-//        connect(this, SIGNAL(rootChanged()),
-//                mMapper, SLOT(slotClearWidgets()));
-//    }
-
-//    return mMapper;
-//}
 
 void RB_MmProxy::deleteMapper(const RB_String& mapperId) {
     RB_DataWidgetMapper* mapper;

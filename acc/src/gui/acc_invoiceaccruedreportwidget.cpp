@@ -129,7 +129,8 @@ void ACC_InvoiceAccruedReportWidget::setColumnWidthsAndTitle() {
     setColumnWidth(30);
     setColumnWidth(9);
     setColumnWidth(9);
-    setColumnWidth(15);
+    setColumnWidth(9);
+    setColumnWidth(9);
     setColumnWidth(9);
     setColumnWidth(9);
 
@@ -200,7 +201,7 @@ void ACC_InvoiceAccruedReportWidget::setDataRow(QString& html,
     for (int col = 0; col < mMemCount; ++col) {
         if (sameAsPreviousNo && col < 5) {
             str = "";
-        } else if (col == 3 || col == 4 || col == 7){
+        } else if (col == 3 || col == 4 || col == 7 || col == 8){
             amount = obj->getValue((int)RB2::HIDDENCOLUMNS + col).toDouble();
 
             if (col == 3) {
@@ -222,7 +223,7 @@ void ACC_InvoiceAccruedReportWidget::setDataRow(QString& html,
             str = "<p style=\"text-align: right;\">";
             str += QString::number(ACC2::roundMoney(amount), 'f', 2);
             str += "</p>";
-        } else if (col == 5 || col ==6) {
+        } else if (col == 5 || col == 6) {
             str = "<p style=\"text-align: right;\">";
             str += obj->getValue((int)RB2::HIDDENCOLUMNS + col).toString();
             str += "</p>";

@@ -8,7 +8,7 @@ TEMPLATE    = lib
 LANGUAGE    = C++
 TARGET      = pcalc_actionplugin
 
-CONFIG      += qt plugin warn_on
+CONFIG      += plugin
 QT          += charts
 
 # compiler settings for release, debug and some paths

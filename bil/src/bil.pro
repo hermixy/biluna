@@ -8,9 +8,6 @@ TEMPLATE    = app
 LANGUAGE    = C++
 TARGET      = Biluna
 
-#CONFIG      += qt warn_on
-QT          += widgets
-
 # icon
 RC_FILE     = ../../db/src/gui/images/app_ico.rc
 

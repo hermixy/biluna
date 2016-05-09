@@ -167,11 +167,13 @@ double EN13555Property::get_Qsmax(double designTemp) {
                         "mCurrentGasket NULL ERROR");
         return 0.0;
     }
-
-    double Qsmax = getMaxLinInterpValue(
-                mCurrentGasket->getContainer("STD_EN13555PqrDeltaeGCList"),
-                "temp", "qg", designTemp);
-
+    // Qsmax also available from Pqr delta_eGC table, not used anymore
+    // double Qsmax = getMaxLinInterpValue(
+    //             mCurrentGasket->getContainer("STD_EN13555PqrDeltaeGCList"),
+    //             "temp", "qg", designTemp);
+    double Qsmax = getLinInterpValue(
+                mCurrentGasket->getContainer("STD_EN13555QsmaxAlphaGList"),
+                "temp", "qsmax", designTemp);
     return Qsmax;
 }
 
@@ -183,8 +185,7 @@ double EN13555Property::get_QsminL(double leakageRate, double QA,
         return 0.0;
     }
 
-    double testP =
-            EN13555PROPERTY->closestInnerPressureBar(testPressure);
+    double testP = closestInnerPressureBar(testPressure);
     double QsminL = getBilInterpValue(
                 mCurrentGasket->getContainer("STD_EN13555QsminLList"),
                 "leakrate", "qa", "qsminl",
@@ -200,14 +201,71 @@ double EN13555Property::get_QminL(double leakageRate, double testPressure) {
         return 0.0;
     }
 
-    double testP =
-            EN13555PROPERTY->closestInnerPressureBar(testPressure);
+    double testP = closestInnerPressureBar(testPressure);
     double QminL = getLinInterpValue(
                 mCurrentGasket->getContainer("STD_EN13555QminLList"),
                 "leakrate", "qminl",
                 leakageRate, "testpress", testP);
 
     return QminL;
+}
+
+double EN13555Property::get_muG() {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_muG() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double muG = mCurrentGasket->getValue("mug").toDouble();
+    return muG;
+}
+
+double EN13555Property::get_alphaG(double designTemp) {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_alphaG() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double alphaG = getLinInterpValue(
+                mCurrentGasket->getContainer("STD_EN13555QsmaxAlphaGList"),
+                "temp", "alphag", designTemp);
+
+    return alphaG;
+}
+
+double EN13555Property::get_K() {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_K() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double K = mCurrentGasket->getValue("k").toDouble();
+    return K;
+}
+
+double EN13555Property::get_testID() {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_testID() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double testID = mCurrentGasket->getValue("testindiam").toDouble();
+    return testID;
+}
+
+double EN13555Property::get_testOD() {
+    if (!mCurrentGasket) {
+        RB_DEBUG->error("EN13555Property::get_testOD() "
+                        "mCurrentGasket NULL ERROR");
+        return 0.0;
+    }
+
+    double testOD = mCurrentGasket->getValue("testoutdiam").toDouble();
+    return testOD;
 }
 
 bool EN13555Property::loadGasket(const QString& gasketId) {

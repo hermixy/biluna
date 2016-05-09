@@ -38,7 +38,8 @@ class DB_EXPORT RB_ObjectBase : public RB_Object {
 
 public:
     RB_ObjectBase(const RB_String& id = "", RB_ObjectBase* p = NULL,
-                  const RB_String& n = "", RB_ObjectFactory* f = NULL,
+                  const RB_String& n = "RB_ObjectBase",
+                  RB_ObjectFactory* f = NULL,
                   bool woMembers = false);
     RB_ObjectBase(RB_ObjectBase* obj);
     virtual ~RB_ObjectBase();

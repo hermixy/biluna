@@ -127,11 +127,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
-  </customwidget>
-  <customwidget>
    <class>RB_WebView</class>
    <extends>QWebView</extends>
    <header location="global">rb_webview.h</header>

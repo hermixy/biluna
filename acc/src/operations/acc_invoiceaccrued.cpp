@@ -70,6 +70,7 @@ bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
     RB_String dateallocdoc = "";
     RB_String transnoallocdoc = "";
     RB_String allocatedAmount = "";
+    RB_String nextPeriodAmount = "";
 
     while (query.next()) {
         transDocDate = query.value(0).toString();
@@ -80,6 +81,7 @@ bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
         dateallocdoc = query.value(5).toString();
         transnoallocdoc = query.value(6).toString();
         allocatedAmount = query.value(7).toString();
+        nextPeriodAmount = query.value(8).toString();
 
         RB_ObjectBase* obj = new RB_ObjectAtomic("", invoiceAccruedList, "ACC_InvoiceAccrued");
         invoiceAccruedList->addObject(obj);
@@ -91,6 +93,7 @@ bool ACC_InvoiceAccrued::execute(RB_ObjectContainer* invoiceAccruedList) {
         obj->addMember("dateallocdoc", "-", dateallocdoc, RB2::MemberChar125);
         obj->addMember("transnoallocdoc", "-", transnoallocdoc, RB2::MemberChar125);
         obj->addMember("allocatedamount", "-", allocatedAmount, RB2::MemberChar125);
+        obj->addMember("nextperiodamount", "-", nextPeriodAmount, RB2::MemberChar125);
     }
 
     return true;

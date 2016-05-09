@@ -25,7 +25,8 @@ class DB_EXPORT RB_ObjectAtomic : public RB_ObjectBase {
 public:
 
     RB_ObjectAtomic(const RB_String& id = "", RB_ObjectBase* p = 0,
-                    const RB_String& n = "", RB_ObjectFactory* f = NULL,
+                    const RB_String& n = "RB_ObjectAtomic",
+                    RB_ObjectFactory* f = NULL,
                     bool woMembers = false);
     RB_ObjectAtomic(RB_ObjectBase* obj);
     virtual ~RB_ObjectAtomic();

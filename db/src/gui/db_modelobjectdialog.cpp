@@ -91,43 +91,52 @@ void DB_ModelObjectDialog::on_pbHelp_clicked() {
 }
 
 void DB_ModelObjectDialog::on_pbSave_clicked() {
-    RB_SETTINGS->beginGroup("paths");
-    QString savePath = RB_SETTINGS->value("savePath", "").toString();
-    RB_SETTINGS->endGroup();
+    try {
 
-    QString filter = "All files (*.*);;Text files (*.txt);;";
-    QString fn = QFileDialog::getSaveFileName(
-                DB_DIALOGFACTORY->getMainWindow(),
-                tr("Save file"),
-                savePath + "/" + ui->lePerspective->text().toLower() + "_"
-                + ui->leObjectName->text().toLower() + ".h "
-                + ui->lePerspective->text().toLower() + "_"
-                + ui->leObjectName->text().toLower() + ".cpp",
-                filter);
+        RB_SETTINGS->beginGroup("paths");
+        QString savePath = RB_SETTINGS->value("savePath", "").toString();
+        RB_SETTINGS->endGroup();
 
-    if (fn.isEmpty()) {
-        DB_DIALOGFACTORY->requestInformationDialog(tr("Files not saved"));
-        return;
+        QString filter = "All files (*.*);;Text files (*.txt);;";
+        QString fn = QFileDialog::getSaveFileName(
+                    DB_DIALOGFACTORY->getMainWindow(),
+                    tr("Save file"),
+                    savePath + "/" + ui->lePerspective->text().toLower() + "_"
+                    + ui->leObjectName->text().toLower() + ".h "
+                    + ui->lePerspective->text().toLower() + "_"
+                    + ui->leObjectName->text().toLower() + ".cpp",
+                    filter);
+
+        if (fn.isEmpty()) {
+            DB_DIALOGFACTORY->requestInformationDialog(tr("Files not saved"));
+            return;
+        }
+
+        DB_CreateModelObject oper;
+        oper.setBaseObject(ui->cbBaseObject->currentText());
+        oper.setPerspective(ui->lePerspective->text());
+        oper.setObjectName(ui->leObjectName->text());
+        oper.setDescription(ui->leDescription->text());
+        oper.setFilePath(QFileInfo(fn).path());
+
+        RB_ObjectContainer* memberList = new RB_ObjectContainer();
+        createMemberList(memberList);
+        oper.execute(memberList);
+        delete memberList;
+
+        savePath = QFileInfo(fn).absolutePath();
+        RB_SETTINGS->beginGroup("paths");
+        RB_SETTINGS->setValue("savePath", savePath);
+        RB_SETTINGS->endGroup();
+
+        writeSettings();
+    } catch(std::exception& e) {
+        DB_DIALOGFACTORY->requestWarningDialog(e.what());
+    } catch(...) {
+        DB_DIALOGFACTORY->requestWarningDialog(
+                    "Error <unkown> in DB_ModelObjectDial0g::on_pbSave_clicked()");
     }
 
-    DB_CreateModelObject oper;
-    oper.setBaseObject(ui->cbBaseObject->currentText());
-    oper.setPerspective(ui->lePerspective->text());
-    oper.setObjectName(ui->leObjectName->text());
-    oper.setDescription(ui->leDescription->text());
-    oper.setFilePath(QFileInfo(fn).path());
-
-    RB_ObjectContainer* memberList = new RB_ObjectContainer();
-    createMemberList(memberList);
-    oper.execute(memberList);
-    delete memberList;
-
-    savePath = QFileInfo(fn).absolutePath();
-    RB_SETTINGS->beginGroup("paths");
-    RB_SETTINGS->setValue("savePath", savePath);
-    RB_SETTINGS->endGroup();
-
-    writeSettings();
     accept();
 }
 
@@ -148,7 +157,8 @@ void DB_ModelObjectDialog::createMemberList(RB_ObjectContainer* memberList) {
     int rowCount = ui->twMemberList->rowCount();
 
     for (int row = 0; row < rowCount; ++row) {
-        memberObj = new RB_ObjectAtomic("", memberList, "", nullptr, woMembers);
+        memberObj = new RB_ObjectAtomic("", memberList, "RB_ModelObjectMember",
+                                        nullptr, woMembers);
         memberObj->addMember("member", "-",
                              ui->twMemberList->item(row, memberCol)->text());
         memberObj->addMember("unit", "-",

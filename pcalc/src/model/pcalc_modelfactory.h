@@ -48,6 +48,7 @@ public:
         ModelEN13555Manuf,              /**< EN13555 Manufacturer of gasket model */
         ModelEN13555PQRdeltaeGC,        /**< EN13555 PQR and deltaeGC model */
         ModelEN13555QminL,              /**< EN13555 QminL model */
+        ModelEN13555QsmaxAlphaG,        /**< EN13555 Qsmax alphaG model */
         ModelEN13555QsminL,             /**< EN13555 QsminL model */
         ModelEN1591Assembly,            /**< EN1591 Assembly model */
         ModelEN1591BoltNutWasher,       /**< EN1591 Bolt Nut Washer model */

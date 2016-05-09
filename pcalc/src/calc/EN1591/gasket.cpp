@@ -17,8 +17,6 @@ Gasket_IN::Gasket_IN() : RB_Object("PCALC EN1591 Gasket"){
     dGin = 0;
     dGout = 0;
 
-    dG1_EN13555 = 0;
-    dG2_EN13555 = 0;
     eGt = 0;
     muG = 0;
 
@@ -120,6 +118,12 @@ bool Gasket_IN::isMetalic() {
 }
 
 Gasket_OUT::Gasket_OUT() : Gasket_IN() {
+    dG1_EN13555 = 0;
+    dG2_EN13555 = 0;
+
+    dG1 = 0.0;
+    dG2 = 0.0;
+
     bGi = 0.0;
     bGiOct = 0.0;
     bGp = 0.0;
@@ -388,6 +392,44 @@ void Gasket::Calc_delta_eGc(int loadCaseNo) {
                       "No data available", loadCaseNo);
     }
 }
+/**
+ * @brief With Formula 104 gasket friction factor
+ * @param loadCaseNo
+ */
+void Gasket::Calc_muG(int loadCaseNo) {
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    muG = gasketFriction(loadCase);
+}
+
+/**
+ * @brief With Formula 97 gasket thermal expansion alphaG
+ * @param loadCaseNo
+ */
+void Gasket::Calc_alphaG(int loadCaseNo) {
+    LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
+    loadCase->alphaG = gasketThermalExpansion(loadCase);
+}
+
+/**
+ * @brief With Formula 105, annex F test rig stiffness K
+ */
+void Gasket::Calc_K() {
+    K = gasketTestRigStiffness();
+}
+
+/**
+ * @brief With Formula 105, annex F set test gasket inside diameter
+ */
+void Gasket::Calc_dG1_EN13555() {
+    dG1_EN13555 = gasketTestID();
+}
+
+/**
+ * @brief With Formula 105, annex F set test gasket outside diameter
+ */
+void Gasket::Calc_dG2_EN13555() {
+    dG2_EN13555 = gasketTestOD();
+}
 
 double Gasket::gasketDeflection(LoadCase* loadCase) {
     double value = 0.0;
@@ -506,6 +548,187 @@ double Gasket::gasketMaximumLoad(LoadCase* loadCase) {
     return Qsmax;
 }
 
+/**
+ * @brief Gasket::gasketFriction load factor from database
+ * or a low fixed value of 0.1 for Graphite
+ * @param loadCase
+ * @return gasket friction factor
+ */
+double Gasket::gasketFriction(LoadCase* /*loadCase*/) {
+    double mu_G = 0.0;
+
+    if (EN13555PROPERTY->isValid()) {
+        mu_G = EN13555PROPERTY->get_muG();
+    }
+
+    if (mu_G > 0.0) {
+        PR->addDetail("Before_F. 104", "muG", "Vendor table value",
+                      mu_G, "-", "Table value");
+    } else {
+        switch (insType) {
+        // Non metalic
+        case Rubber :
+            mu_G = 0.25;
+            break;
+        case Ptfe :
+        case ExpPtfe :
+            mu_G = 0.05;
+            break;
+        case ExpGraphWithoutIns :
+        case ExpGraphPerfMetal :
+        case ExpGraphAdhFlat :
+        case ExpGraphMetSheet :
+            mu_G = 0.1;
+            break;
+        case NonAsbetosSmaller1 :
+        case NonAsbetosLargerEqual1 :
+            mu_G = 0.25;
+            break;
+
+        // Grooved steel gaskets with soft layers on both sides
+        case PtfeSoftSteel :
+        case PtfeStainless :
+            mu_G = 0.05;
+            break;
+        case GraphSoftSteel :
+        case GraphLowAlloy :
+        case GraphStainless :
+            mu_G = 0.1;
+            break;
+        case SilverLayer :
+            mu_G = 0.15;
+            break;
+
+        // Spiral wound gaskets with soft filler
+        case SpiralPtfeFillOuterOnly :
+        case SpiralPtfeFillOuterInner :
+        case SpiralGraphFillOuterOnly :
+        case SpiralGraphFillOuterInner :
+
+        // Solid metal gaskets
+        case AluminumSoft :
+        case CopperOrBrassSoft :
+        case IronSoft :
+        case SteelSoft :
+        case SteelLowAlloyHeatRes :
+        case StainlessSteel :
+        case StainLessSteelHeatRes :
+            mu_G = 0.15;
+            break;
+
+        // Covered metal jacketed gaskets
+        case SoftIronOrSteelJackGraphFillCover :
+        case LowAlloyOrStainlessSteelGraphFillCover :
+            mu_G = 0.1;
+            break;
+        case StainlessSteelJacketPtfeFillCover :
+        case NickelAlloyPtfeFillCover :
+            mu_G = 0.05;
+            break;
+
+        // Metal jacketed gaskets
+        case AluminumSoftGraphFill :
+        case CopperOrBrassSoftGraphFill :
+        case SoftIronOrSteelGraphFill :
+        case LowAlloyOrStainlessSteelGraphFill :
+            mu_G = 0.15;
+            break;
+        default :
+            mu_G = 0.1;
+            break;
+        }
+
+        PR->addDetail("Before_F. 104", "muG", "EN1591 Table E.1",
+                      mu_G, "-", "Table value");
+    }
+
+    return mu_G;
+}
+
+/**
+ * @brief Gasket::gasketThermalExpansion alphaG
+ * @param loadCase
+ * @return gasket thermal expansion factor
+ */
+double Gasket::gasketThermalExpansion(LoadCase* loadCase) {
+    double alpha_G = 0.0;
+
+    if (EN13555PROPERTY->isValid()) {
+        alpha_G = EN13555PROPERTY->get_alphaG(loadCase->TG);
+    }
+
+    if (alpha_G > 0.0) {
+        PR->addDetail("Before_F. 97", "alphaG", "Vendor table value",
+                      alpha_G, "-", "Table value");
+    } else {
+        alpha_G = 1.0e-5;
+        PR->addDetail("Before_F. 97", "alphaG", "Default value",
+                      alpha_G, "-", "Table value");
+    }
+
+    return alpha_G;
+}
+
+/**
+ * @brief Gasket::gasketTestRigStiffness K in N/mm
+ * @return
+ */
+double Gasket::gasketTestRigStiffness() {
+    double tmpK = 0.0;
+
+    if (EN13555PROPERTY->isValid()) {
+        tmpK = EN13555PROPERTY->get_K() * 1000.0;
+    }
+
+    if (tmpK > 0.0) {
+        PR->addDetail("Before_F. 105", "K", "Vendor table value",
+                      tmpK, "-", "Table value");
+    } else {
+        tmpK = 500000.0;
+        PR->addDetail("Before_F. 105", "K", "Default value",
+                      tmpK, "-", "Table value");
+    }
+
+    return tmpK;
+}
+
+double Gasket::gasketTestID() {
+    double tmpID = 0.0;
+
+    if (EN13555PROPERTY->isValid()) {
+        tmpID = EN13555PROPERTY->get_testID();
+    }
+
+    if (tmpID > 0.0) {
+        PR->addDetail("Before_F. 105", "dG1_EN13555", "Vendor table value",
+                      tmpID, "-", "Table value");
+    } else {
+        tmpID = 49.0;
+        PR->addDetail("Before_F. 105", "dG1_EN13555", "Default value",
+                      tmpID, "-", "Table value");
+    }
+
+    return tmpID;
+}
+
+double Gasket::gasketTestOD() {
+    double tmpOD = 0.0;
+
+    if (EN13555PROPERTY->isValid()) {
+        tmpOD = EN13555PROPERTY->get_testOD();
+    }
+
+    if (tmpOD > 0.0) {
+        PR->addDetail("Before_F. 105", "dG2_EN13555", "Vendor table value",
+                      tmpOD, "-", "Table value");
+    } else {
+        tmpOD = 92.0;
+        PR->addDetail("Before_F. 105", "dG2_EN13555", "Default value",
+                      tmpOD, "-", "Table value");
+    }
+
+    return tmpOD;
+}
 
 
 END_NAMESPACE_BILUNA_CALC_EN1591

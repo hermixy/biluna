@@ -1154,23 +1154,73 @@ void ACC_SqlCommonFunctions::getInvoicesAccrued(QSqlQuery& query,
 
     // 'Z' in SQL are for including the date even if there is time behind date
 
-    RB_String qStr = "SELECT SUBSTR(acc_transdoc.transdate,1,10) as transdocdate, "
-                     "acc_transdoc.transno, acc_transdoc.description, "
-                     "acc_transdoc.totalamountrec, acc_transdoc.totalamountpay, "
-                     "SUBSTR(t2.transdate,1,10) AS dateallocdoc, t2.transno AS transnoallocdoc, "
-                     "acc_transallocn.amount as allocamount "
-                     "FROM acc_transdoc "
-                     "LEFT OUTER JOIN acc_transallocn ON acc_transallocn.docallocto_id = acc_transdoc.id "
-                     "INNER JOIN acc_chartmaster ON acc_chartmaster.id=acc_transdoc.parent "
-                     "INNER JOIN acc_project ON acc_project.id=acc_chartmaster.parent "
-                     "LEFT OUTER JOIN acc_transdoc as t2 ON t2.id=acc_transallocn.docfrom_id "
-                     "WHERE (acc_transdoc.settled=0 OR t2.transdate>'" + end
-            + "Z' OR t2.transdate<'0') AND acc_transdoc.transdate>='" + start
+//    RB_String qStr = "SELECT SUBSTR(acc_transdoc.transdate,1,10) as transdocdate, "
+//                     "acc_transdoc.transno, acc_transdoc.description, "
+//                     "acc_transdoc.totalamountrec, acc_transdoc.totalamountpay, "
+//                     "SUBSTR(t2.transdate,1,10) AS dateallocdoc, t2.transno AS transnoallocdoc, "
+//                     "acc_transallocn.amount as allocamount "
+//                     "FROM acc_transdoc "
+//                     "LEFT OUTER JOIN acc_transallocn ON acc_transallocn.docallocto_id = acc_transdoc.id "
+//                     "INNER JOIN acc_chartmaster ON acc_chartmaster.id=acc_transdoc.parent "
+//                     "INNER JOIN acc_project ON acc_project.id=acc_chartmaster.parent "
+//                     "LEFT OUTER JOIN acc_transdoc as t2 ON t2.id=acc_transallocn.docfrom_id "
+//                     "WHERE (acc_transdoc.settled=0 OR t2.transdate>'" + end
+//            + "Z' OR t2.transdate<'0') AND acc_transdoc.transdate>='" + start
+//            + "' AND acc_transdoc.transdate<='" + end
+//            + "Z' AND (acc_transdoc.doctype=" + docType1
+//            + " OR acc_transdoc.doctype=" + docType2
+//            + ") AND acc_project.id='" + rootId
+//            + "' ORDER BY acc_transdoc.transno;";
+    /*
+SELECT SUBSTR(acc_transdoc.transdate,1,10) as transdocdate, acc_transdoc.transno, acc_transdoc.description, acc_transdoc.totalamountrec, acc_transdoc.totalamountpay,
+(CASE WHEN td3.transdate<='{$valueto}Z' THEN SUBSTR(td3.transdate,1,10) ELSE 0 END) AS dateallocdoc,
+(CASE WHEN td3.transdate<='{$valueto}Z' THEN td3.transno ELSE 0 END) AS transnoallocdoc,
+(CASE WHEN td3.transdate<='{$valueto}Z' THEN ta3.amount ELSE 0 END) AS allocamount
+FROM acc_transdoc
+LEFT OUTER JOIN acc_transallocn as ta3 ON ta3.docallocto_id = acc_transdoc.id
+LEFT OUTER JOIN acc_transdoc as td3 ON td3.id=ta3.docfrom_id
+WHERE acc_transdoc.id IN
+(
+SELECT DISTINCT acc_transdoc.id
+FROM acc_transdoc
+LEFT OUTER JOIN acc_transallocn as ta2 ON ta2.docallocto_id = acc_transdoc.id
+INNER JOIN acc_chartmaster ON acc_chartmaster.id=acc_transdoc.parent
+INNER JOIN acc_project ON acc_project.id=acc_chartmaster.parent
+LEFT OUTER JOIN acc_transdoc as td2 ON td2.id=ta2.docfrom_id
+WHERE (acc_transdoc.settled=0 OR td2.transdate>'{$valueto}Z' OR td2.transdate<'0') AND acc_transdoc.transdate>='{$valuefrom}' AND acc_transdoc.transdate<='{$valueto}Z' AND (acc_transdoc.doctype=10 OR acc_transdoc.doctype=30) AND
+acc_project.company='InIPED'
+)
+ORDER BY acc_transdoc.transno;
+-- set {$valuefrom} to date for example 2013-01-01, set {$valueto} to date for example 2013-12-31. Note: if part payments the original invoice amount is duplicated, doctype=30 Sales Invoice, 10 Sales Order, Z after {$valueto} to include possibly added time
+    */
+
+    RB_String qStr =
+            "SELECT SUBSTR(acc_transdoc.transdate,1,10) as transdocdate, "
+            "acc_transdoc.transno, acc_transdoc.description, "
+            "acc_transdoc.totalamountrec, acc_transdoc.totalamountpay, "
+            "SUBSTR(td3.transdate,1,10) AS dateallocdoc, "
+            "td3.transno AS transnoallocdoc, "
+            "(CASE WHEN td3.transdate<='" + end + "Z' THEN ta3.amount ELSE 0 END) AS allocamount, "
+            "(CASE WHEN td3.transdate<='" + end + "Z' THEN 0 ELSE ta3.amount END) AS nextperiod "
+            "FROM acc_transdoc "
+            "LEFT OUTER JOIN acc_transallocn as ta3 ON ta3.docallocto_id = acc_transdoc.id "
+            "LEFT OUTER JOIN acc_transdoc as td3 ON td3.id=ta3.docfrom_id "
+            "WHERE acc_transdoc.id IN "
+            "("
+            "SELECT DISTINCT acc_transdoc.id "
+            "FROM acc_transdoc "
+            "LEFT OUTER JOIN acc_transallocn as ta2 ON ta2.docallocto_id = acc_transdoc.id "
+            "INNER JOIN acc_chartmaster ON acc_chartmaster.id=acc_transdoc.parent "
+            "INNER JOIN acc_project ON acc_project.id=acc_chartmaster.parent "
+            "LEFT OUTER JOIN acc_transdoc as td2 ON td2.id=ta2.docfrom_id "
+            "WHERE (acc_transdoc.settled=0 OR td2.transdate>'" + end
+            + "Z' OR td2.transdate<'0') AND acc_transdoc.transdate>='" + start
             + "' AND acc_transdoc.transdate<='" + end
             + "Z' AND (acc_transdoc.doctype=" + docType1
             + " OR acc_transdoc.doctype=" + docType2
             + ") AND acc_project.id='" + rootId
-            + "' ORDER BY acc_transdoc.transno;";
+            + "') "
+            + "ORDER BY acc_transdoc.transno;";
 
 // RB_DEBUG->print(qStr);
 
@@ -1259,7 +1309,8 @@ bool ACC_SqlCommonFunctions::isAllocNotConsistent() {
                                           + query.value(0).toString()
                                           + " " + query.value(1).toString()
                                           + " " + query.value(2).toString()
-                                          + " " + query.value(3).toString());
+                                          + " " + query.value(3).toString()
+                                          + " " + query.value(4).toString());
     }
 
     return query.first();

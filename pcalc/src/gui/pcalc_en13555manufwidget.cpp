@@ -76,12 +76,12 @@ void PCALC_EN13555ManufWidget::on_pbAdd_clicked() {
 
     // NOTE: do not forget to set the default column values, specially for the
     //       relational table otherwise new row will not show!
-    QModelIndex idx = mModel->index(row, mModel->fieldIndex("manufacturer"), QModelIndex());
+    QModelIndex idx = mModel->index(row, mModel->fieldIndex("mname"), QModelIndex());
     mModel->setData(idx, tr("<NEW>"), Qt::EditRole);
     // end NOTE
 
-    tableView->setCurrentIndex(mModel->index(row, mModel->fieldIndex("manufacturer"), QModelIndex()));
-    tableView->scrollTo(mModel->index(row, mModel->fieldIndex("manufacturer")));
+    tableView->setCurrentIndex(mModel->index(row, mModel->fieldIndex("mname"), QModelIndex()));
+    tableView->scrollTo(mModel->index(row, mModel->fieldIndex("mname")));
 }
 
 

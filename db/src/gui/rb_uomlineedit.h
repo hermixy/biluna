@@ -20,6 +20,7 @@
 #include "rb_string.h"
 
 class RB_DialogFactory;
+class RB_EngLineEdit;
 class RB_MmProxy;
 
 /**
@@ -36,7 +37,7 @@ public:
     explicit RB_UomLineEdit(QWidget *parent = 0);
     ~RB_UomLineEdit();
 
-    QLineEdit* getLineEdit();
+    RB_EngLineEdit *getLineEdit();
     QString text() const;
     void setText(const QString& txt);
 

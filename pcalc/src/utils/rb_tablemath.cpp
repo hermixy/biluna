@@ -216,13 +216,15 @@ double RB_TableMath::getLinInterpValue(RB_ObjectContainer *fromObjC,
 
     for(iter->first(); !iter->isDone(); iter->next()) {
         RB_ObjectBase* obj = iter->currentObject();
-        updateLeftRightObjects(obj);
+        updateLeftRightObjects(obj); // only xField/xValue
     }
 
     delete iter;
     double value = 0.0;
 
     if (!mTopLeft || !mTopRight) {
+        // out of bound value uses zField for result out of XYZ area
+        mZfield = yField;
         value = getOutOfBoundValue();
     } else {
         value = getLinearValue(

@@ -419,11 +419,20 @@ void DB_MappingDialog::initMappingTable() {
         // comma separated CSV
         mSeparator = ",";
     } else {
-        // TODO: give error, first line does not contain \t, or ; or ,
-        return;
+        DB_DIALOGFACTORY->commandMessage(
+                    "First line does not contain \\t or ; or , WARNING");
+        DB_DIALOGFACTORY->requestWarningDialog(
+                    "First line does not contain \\t or ; or , WARNING");
     }
 
-    columnStrings = lineData.split(mSeparator, QString::KeepEmptyParts);
+    if (!mSeparator.isEmpty()) {
+        columnStrings = lineData.split(mSeparator, QString::KeepEmptyParts);
+    } else {
+        // one column
+        columnStrings.clear();
+        columnStrings.append(lineData);
+    }
+
     int rows = columnStrings.count();
     tableWidget->setRowCount(rows);
 
@@ -441,7 +450,13 @@ void DB_MappingDialog::initMappingTable() {
 
         if (!lineData.isEmpty()) {
             // Read the column data from the rest of the line.
-            columnStrings = lineData.split(mSeparator, QString::KeepEmptyParts);
+            if (!mSeparator.isEmpty()) {
+                columnStrings = lineData.split(mSeparator, QString::KeepEmptyParts);
+            } else {
+                // one column
+                columnStrings.clear();
+                columnStrings.append(lineData);
+            }
             
             // check number of columns with original count
             if (rows != columnStrings.count()) {
@@ -630,8 +645,16 @@ void DB_MappingDialog::importCsvFile() {
 
         if (!lineData.isEmpty()) {
             // Read the column data from the rest of the line.
-            QStringList columnStrings = lineData.split(mSeparator, QString::KeepEmptyParts);
-            
+            QStringList columnStrings;
+
+            if (!mSeparator.isEmpty()) {
+                columnStrings = lineData.split(mSeparator, QString::KeepEmptyParts);
+            } else {
+                // one column
+                columnStrings.clear();
+                columnStrings.append(lineData);
+            }
+
             // check number of columns (rows in tabelWidget) with original count
             if (rows != columnStrings.count()) {
                 RB_String str = "error in CSV file on line: "

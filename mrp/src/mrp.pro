@@ -9,8 +9,7 @@ TEMPLATE    = lib
 LANGUAGE    = C++
 TARGET      = mrp_actionplugin
 
-CONFIG      += qt plugin warn_on
-QT          += core network sql webkit xml
+CONFIG      += plugin
 
 # compiler settings for release, debug and some paths
 exists( ../../mkspecs/defs.pro ) {

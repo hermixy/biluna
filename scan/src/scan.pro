@@ -9,8 +9,7 @@ LANGUAGE    = C++
 TARGET      = scan_actionplugin
 DESTDIR     = ../lib
 
-CONFIG      += qt plugin warn_on
-QT          += network sql webkit xml svg
+CONFIG      += plugin
 
 # compiler settings for release, debug and some paths
 exists( ../../mkspecs/defs.pro ) {

@@ -79,11 +79,11 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelEN13555Gasket:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555GasketList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelEN13555Manuf:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555ManufacturerList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "manufacturer");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelEN13555PQRdeltaeGC:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555PqrDeltaeGCList");
@@ -92,6 +92,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
     case ModelEN13555QminL:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555QminLList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "testpress", "leakrate");
+        break;
+    case ModelEN13555QsmaxAlphaG:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555QsmaxAlphaGList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temp");
         break;
     case ModelEN13555QsminL:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555QsminLList");
@@ -170,6 +174,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         iter = mModelList.find(ModelNone);
         break;
     case ModelEN13555QminL:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelEN13555QsmaxAlphaG:
         iter = mModelList.find(ModelNone);
         break;
     case ModelEN13555QsminL:

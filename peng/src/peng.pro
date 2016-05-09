@@ -8,8 +8,8 @@ TEMPLATE    = lib
 LANGUAGE    = C++
 TARGET      = peng_actionplugin
 
-CONFIG      += qt plugin warn_on
-QT          += core network sql svg webkit xml
+CONFIG      += plugin
+QT          += charts
 
 # compiler settings for release, debug and some paths
 exists( ../../mkspecs/defs.pro ) {
