@@ -66,9 +66,6 @@ RB_String PCALC_EN1591Widget::getSaveAsFileName() {
 }
 
 void PCALC_EN1591Widget::init() {
-    ileTypeGasket->setDefaultDialog(PCALC_DIALOGFACTORY,
-                                    PCALC_DialogFactory::WidgetEN1591SelectGasket,
-                                    "gaskettype_idx", "type");
     //
     // 0. Set button toolbar
     //
@@ -94,21 +91,6 @@ void PCALC_EN1591Widget::init() {
                 PCALC_ModelFactory::ModelEN1591LoadCase);
     mShellModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelEN1591Shell);
-
-    // Required because not formatTableView() for these models
-    connect(mBoltNutWasherModel,
-            SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-    connect(mBoltNutWasherModel, SIGNAL(modelBeforeSubmitted()),
-            this, SLOT(slotDataIsSaved()));
-    connect(mFlangeModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-    connect(mGasketModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-    connect(mLoadCaseModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-    connect(mShellModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
 
     //
     // 2. Set relations and mapper for line edits etc.
@@ -224,6 +206,10 @@ void PCALC_EN1591Widget::init() {
     mGasketMapper = mGasketModel->getMapper();
     mGasketMapper->addMapping(ileTypeGasket,
                               mGasketModel->fieldIndex("gaskettype_idx"));
+    ileTypeGasket->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetEN1591SelectGasket,
+                                    "gaskettype_idx", "mname");
+
     items.clear();
     items << "Flat" << "Curved Simple Contact" << "Curved Double Contact"
           << "Octagonal Double Contact";
@@ -504,6 +490,8 @@ void PCALC_EN1591Widget::init() {
             this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
     connect(mShellModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
             this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mLoadCaseModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
 
     teCalculationReport->setHtml(
                 "<p>" + tr("Select report type and click "
@@ -627,12 +615,6 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
         teCalculationReport->setHtml("<p>Invalid report type</p>");
         break;
     }
-}
-
-void PCALC_EN1591Widget::slotTypeGasketSelectClicked() {
-    RB_DialogWindow* dlg = PCALC_DIALOGFACTORY->getDialogWindow(
-                PCALC_DialogFactory::WidgetEN1591SelectGasket);
-    dlg->exec();
 }
 
 void PCALC_EN1591Widget::slotParentRowChanged(const QModelIndex& /*curr*/,
@@ -1005,6 +987,10 @@ void PCALC_EN1591Widget::insertReportInputData(QString& report,
         } else {
             // variable value is a string such as a material name
             varData = mem->getValue().toString();
+
+            if (varName.endsWith("_idx")) {
+                varData = mem->getDisplayValue().toString();
+            }
         }
 
         report.replace("id=\"{$" + varName + "}\">&nbsp;</td>",
@@ -1036,14 +1022,14 @@ void PCALC_EN1591Widget::insertReportLoadCaseData(QString& report,
         }
 
         if (loadCaseNo < 0) {
-            report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
-                           "<td id=\"{$" + varName + "}\"><div align=\"right\">"
+            report.replace("id=\"{$" + varName + "}\">&nbsp;</td>",
+                           "id=\"{$" + varName + "}\"><div align=\"right\">"
                            + varData + "</div></td>");
         } else {
-            report.replace("<td id=\"{$" + varName
+            report.replace("id=\"{$" + varName
                            + "[" + QString::number(loadCaseNo) + "]"
                            + "}\">&nbsp;</td>",
-                           "<td id=\"{$" + varName
+                           "id=\"{$" + varName
                            + "[" + QString::number(loadCaseNo) + "]"
                            + "}\"><div align=\"right\">"
                            + varData + "</div></td>");
@@ -1059,14 +1045,14 @@ void PCALC_EN1591Widget::insertReportCalculationData(QString& report,
     int loadCaseNo = obj->getValue("loadcaseno").toInt();
 
     if (loadCaseNo < 0) {
-        report.replace("<td id=\"{$" + varName + "}\">&nbsp;</td>",
-                       "<td id=\"{$" + varName + "}\"><div align=\"right\">"
+        report.replace("id=\"{$" + varName + "}\">&nbsp;</td>",
+                       "id=\"{$" + varName + "}\"><div align=\"right\">"
                        + QString::number(result) + "</div></td>");
     } else {
-        report.replace("<td id=\"{$" + varName
+        report.replace("id=\"{$" + varName
                        + "[" + QString::number(loadCaseNo) + "]"
                        + "}\">&nbsp;</td>",
-                       "<td id=\"{$" + varName
+                       "id=\"{$" + varName
                        + "[" + QString::number(loadCaseNo) + "]"
                        + "}\"><div align=\"right\">"
                        + QString::number(result) + "</div></td>");
@@ -1317,7 +1303,13 @@ void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,
     QModelIndex idx = model->index(
                 model->getCurrentIndex().row(),
                 model->fieldIndex(variableName));
-    obj->addMember(variableName, unit, model->data(idx, RB2::RoleOrigData));
+    if (variableName.endsWith("_idx")) {
+        obj->addMember(variableName, unit,
+                       model->data(idx, RB2::RoleOrigData).toString()
+                       + model->data(idx, Qt::DisplayRole).toString());
+    } else {
+        obj->addMember(variableName, unit, model->data(idx, RB2::RoleOrigData));
+    }
 }
 
 void PCALC_EN1591Widget::addLoadCaseVariable(RB_ObjectBase* loadCase,

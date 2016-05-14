@@ -28,8 +28,8 @@ STD_EN13555Gasket::~STD_EN13555Gasket() {
 /**
  * Create members
  * \li mname type name of the gasket
- * \li material material of the gasket
- * \li type type of gasket
+ * \li material base material of the gasket
+ * \li type EN type of gasket
  * \li pmax maximum pressure [MPa]
  * \li tmax maximum temperature [Celsius]
  * \li mug friction coefficient of gasket with flange [-],

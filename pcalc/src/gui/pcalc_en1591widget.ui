@@ -2377,7 +2377,7 @@
             <item row="5" column="0">
              <widget class="QLabel" name="label_35">
               <property name="text">
-               <string>Minor thread diameter</string>
+               <string>Outs. contact diam. nut</string>
               </property>
              </widget>
             </item>
@@ -3073,7 +3073,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="twLoadCase">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabDesignCondition">
             <attribute name="title">

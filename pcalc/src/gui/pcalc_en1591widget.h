@@ -44,7 +44,6 @@ public:
 public slots:
     virtual void slotAssemblyAdded();
     virtual void on_pbCalculate_clicked();
-    virtual void slotTypeGasketSelectClicked();
 
 protected slots:
     void slotParentRowChanged(const QModelIndex& curr,
