@@ -11,6 +11,7 @@ Bolt_IN::Bolt_IN() : RB_Object("PCALC EN1591 Bolt"){
     dB4 = 0;
     dBe = 0;
     dBS = 0;
+    dn = 0;
     eN = 0;
     l5t = 0;
     lS = 0;
@@ -42,6 +43,30 @@ Bolt_OUT::Bolt_OUT() : Bolt_IN(){
  */
 Bolt::Bolt() : Bolt_OUT(){
     // nothing
+}
+
+void Bolt::setValid_dBS() {
+    if (dBS <= 0.0) {
+        dBS = dBe;
+        // PR() TODO
+    }
+}
+
+void Bolt::setValid_dn() {
+    if (dn <= 0.0) {
+        dn = (dB0 + dB4) / 2;
+        // PR() TODO
+    }
+}
+
+void Bolt::setValid_pt() {
+    if (pt <= 0.0) {
+        // from table B EN1591-2001 for ISO bolts/thread and Table A
+        pt = (dB0 - dBe) / 0.9382;
+        PR->addDetail("Before_F. 123 B.7/9", "pt", "(dB0 - dBe) / 0.9382",
+                  pt, "Nmm", "(" + QN(dB0) + " - " + QN(dBe)
+                      + ") / 0.9382");
+    }
 }
 
 void Bolt::Calc_eta1plus() {
@@ -148,14 +173,6 @@ void Bolt::Calc_IB() {
  * @brief Annex B, B.7 calculation of friction factor kB
  */
 void Bolt::Calc_kB() {
-    if (pt <= 0.0) {
-        // from table B EN1591-2001 for ISO bolts/thread and Table A
-        pt = (dB0 - dBe) / 0.9382;
-        PR->addDetail("Before_F. 123 B.7", "pt", "(dB0 - dBe) / 0.9382",
-                  pt, "Nmm", "(" + QN(dB0) + " - " + QN(dBe)
-                      + ") / 0.9382");
-    }
-
     kB = 0.159 * pt + 0.577 * mut * dB2 + 0.5 * mun * dn;
     PR->addDetail("Before_F. 123 B.7", "kB",
                   "0.159 * pt + 0.577 * mut * dB2 + 0.5 * mun * dn", kB, "-",
@@ -168,14 +185,6 @@ void Bolt::Calc_kB() {
  * kB9 is kB excluding 0.5 * mun * dn
  */
 void Bolt::Calc_kB9() {
-    if (pt <= 0.0) {
-        // from table B EN1591-2001 for ISO bolts/thread and Table A
-        pt = (dB0 - dBe) / 0.9382;
-        PR->addDetail("Before_F. 123 B.9", "pt", "(dB0 - dBe) / 0.9382",
-                  pt, "Nmm", "(" + QN(dB0) + " - " + QN(dBe)
-                      + ") / 0.9382");
-    }
-
     kB9 = 0.159 * pt + 0.577 * mut * dB2;
     PR->addDetail("Before_F. 123 B.9", "kB",
                   "0.159 * pt + 0.577 * mut * dB2", kB, "-",

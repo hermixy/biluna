@@ -1182,7 +1182,7 @@ bool Assembly::Is_PhiG_Valid(int loadCaseNo) {
  * @param flange
  * @param loadCaseNo
  */
-void Assembly::Calc_fE(Flange *flange, int loadCaseNo) {
+void Assembly::Calc_fE(Flange* flange, int loadCaseNo) {
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
 
     if (flange->getFlangeNumber() == 1)     {

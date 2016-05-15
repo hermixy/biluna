@@ -107,6 +107,7 @@ void Calculator::exec() {
     mLoadCaseCount = assembly->mLoadCaseList->size();
     LoadCase* loadCase0 = assembly->mLoadCaseList->at(0);
 
+    setValidValues();
     F3_to_24(assembly);
     F25_to_40(assembly);
     F41_to_53(assembly);
@@ -164,6 +165,12 @@ void Calculator::exec() {
     }
 
     finalCalculations(assembly);
+}
+
+void Calculator::setValidValues() {
+    mAssembly->mBolt->setValid_dBS();
+    mAssembly->mBolt->setValid_dn();
+    mAssembly->mBolt->setValid_pt();
 }
 
 void Calculator::Loop_F55_to_108(Assembly* assembly) {

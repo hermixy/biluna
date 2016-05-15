@@ -77,6 +77,10 @@ class Bolt : public Bolt_OUT {
 public:
     Bolt();
 
+    void setValid_dBS();
+    void setValid_dn();
+    void setValid_pt();
+
     void Calc_eta1plus();
     void Calc_eta1minus();
     void Calc_IB();
