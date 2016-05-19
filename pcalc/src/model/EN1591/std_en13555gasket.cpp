@@ -59,4 +59,8 @@ void STD_EN13555Gasket::createMembers() {
     addMember("k", "kN/mm", 0.0, RB2::MemberDouble);
     addMember("datasource", "-", "", RB2::MemberChar125);
     addMember("issue", "-", "1970-01-01", RB2::MemberChar10);
+
+    // temporary for importing of external data only
+    addMember("tmp_id", "-", "0", RB2::MemberChar125);
+    addMember("tmp_parent", "-", "0", RB2::MemberChar125);
 }
