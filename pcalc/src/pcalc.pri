@@ -81,6 +81,21 @@ HEADERS += \
     ../src/model/pcalc_generatorformula.h \
     ../src/model/pcalc_modelfactory.h \
     ../src/model/pcalc_objectfactory.h \
+    ../src/model/std_creeptable.h \
+    ../src/model/std_elasmodul.h \
+    ../src/model/std_elasmodultable.h \
+    ../src/model/std_extpresstable.h \
+    ../src/model/std_material.h \
+    ../src/model/std_rmmin.h \
+    ../src/model/std_rp02.h \
+    ../src/model/std_rp10.h \
+    ../src/model/std_rp10t10kh.h \
+    ../src/model/std_rp10t100kh.h \
+    ../src/model/std_rpt10kh.h \
+    ../src/model/std_rpt100kh.h \
+    ../src/model/std_rpt200kh.h \
+    ../src/model/std_thermexp.h \
+    ../src/model/std_thermexptable.h \
     ../src/utils/EN1591/en13445tableg.h \
     ../src/utils/EN1591/en13555property.h \
     ../src/utils/pcalc_report.h \
@@ -156,6 +171,21 @@ SOURCES += \
     ../src/model/pcalc_generatorformula.cpp \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
+    ../src/model/std_creeptable.cpp \
+    ../src/model/std_elasmodul.cpp \
+    ../src/model/std_elasmodultable.cpp \
+    ../src/model/std_extpresstable.cpp \
+    ../src/model/std_material.cpp \
+    ../src/model/std_rmmin.cpp \
+    ../src/model/std_rp02.cpp \
+    ../src/model/std_rp10.cpp \
+    ../src/model/std_rp10t10kh.cpp \
+    ../src/model/std_rp10t100kh.cpp \
+    ../src/model/std_rpt10kh.cpp \
+    ../src/model/std_rpt100kh.cpp \
+    ../src/model/std_rpt200kh.cpp \
+    ../src/model/std_thermexp.cpp \
+    ../src/model/std_thermexptable.cpp \
     ../src/utils/EN1591/en13445tableg.cpp \
     ../src/utils/EN1591/en13555property.cpp \
     ../src/utils/pcalc_report.cpp \

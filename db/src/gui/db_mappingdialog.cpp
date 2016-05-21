@@ -500,7 +500,7 @@ void DB_MappingDialog::initMappingTable() {
         for (iter->first(); !iter->isDone() && !found; iter->next()) {
             obj = iter->currentObject();
             if (obj->getValue("columnnumber").toInt() == i) {
-                tableWidget->item(i, 0)->setText(obj->getValue(1).toString());
+                tableWidget->item(i, 0)->setText(obj->getValue("tofield").toString());
                 found = true;
             }
         }
