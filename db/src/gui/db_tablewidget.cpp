@@ -89,15 +89,6 @@ void DB_TableWidget::setHelpSubject(const RB_String& subject) {
     mHelpSubject = subject;
 }
 
-///**
-// * Get current selected model index. This is the actual index mapped to the
-// * source model.
-// * @return selected source model index
-// */
-//QModelIndex DB_TableWidget::getCurrentModelIndex() const {
-//    return mCurrentModelIndex;
-//}
-
 /**
  * Get current object based on selected model index.
  * @return object with data from model
@@ -106,112 +97,35 @@ RB_ObjectBase* DB_TableWidget::getCurrentObject() {
     return mCurrentObject;
 }
 
-
-void DB_TableWidget::on_pbAdd_clicked() {
-    if (!mModel) return;
-    mModel->undoFilterSort();
-
-    // always insert at the end
-    int row = mModel->rowCount();
-    mModel->insertRows(row, 1, QModelIndex());
-
-    tableView->setCurrentIndex(mModel->index(row, RB2::HIDDENCOLUMNS, QModelIndex()));
-    tableView->scrollTo(mModel->index(row, RB2::HIDDENCOLUMNS, QModelIndex()));
-}
-
-void DB_TableWidget::on_pbDelete_clicked() {
-    if (!mModel) return;
-
-    int res = DB_DIALOGFACTORY->requestYesNoDialog(
-                tr("Delete item"), tr("Deletion cannot be undone.\n"
-                                      "Do you want to delete the item?"));
-    if (res != QMessageBox::Yes) return;
-
-    QModelIndex index = tableView->currentIndex();
-
-    if (index.isValid()) {
-        int row = index.row();
-        mModel->removeRows(index.row(), 1, QModelIndex());
-        mModel->submitAllAndSelect();
-        setWindowModified(false);
-
-        if (row > 0) {
-            tableView->setCurrentIndex(mModel->index(row-1, RB2::HIDDENCOLUMNS, QModelIndex()));
-            tableView->scrollTo(mModel->index(row-1, RB2::HIDDENCOLUMNS, QModelIndex()));
-        }
-    }
-}
-
-void DB_TableWidget::on_pbUp_clicked() {
-    if (!mModel) return;
-
-    QModelIndex index = tableView->currentIndex();
-    if (index.isValid() && index.row() > 0) {
-        QModelIndex idxTo = mModel->index(index.row()-1, 0, QModelIndex());
-        QModelIndex idxFrom = mModel->index(index.row(), 0, QModelIndex());
-        mModel->swapObject(idxFrom, idxTo);
-        tableView->selectRow(index.row() - 1);
-    }
-}
-
-void DB_TableWidget::on_pbDown_clicked() {
-    if (!mModel) return;
-
-    QModelIndex index = tableView->currentIndex();
-    if (index.isValid() && index.row() < mModel->rowCount(QModelIndex()) - 1) {
-        QModelIndex idxTo = mModel->index(index.row()+1, 0, QModelIndex());
-        QModelIndex idxFrom = mModel->index(index.row(), 0, QModelIndex());
-        mModel->swapObject(idxFrom, idxTo);
-        tableView->selectRow(index.row() + 1);
-    }
-}
-
-void DB_TableWidget::on_pbFind_clicked() {
-    QString searchStr = leFind->text();
-    findInTable(searchStr, tableView);
-}
-
-void DB_TableWidget::on_pbFilter_clicked() {
-    filterTable(tableView);
-}
-
-void DB_TableWidget::on_pbFilterClear_clicked() {
-    mModel->removeUserFilter();
-}
-
 void DB_TableWidget::initEditSort() {
-    setFormatTableView(tableView, mModel);
-    pbUp->hide();
-    pbDown->hide();
+    formatTableView(tableView, mModel);
+    tbb->initEdit(false, true, true, false);
+    tableView->setToolButtonBar(tbb);
     leRoot->setReadOnly(true);
     cbSourceModelFilter->hide();
 }
 
 void DB_TableWidget::initEditUpDown() {
-    setFormatTableView(tableView, mModel);
+    formatTableView(tableView, mModel);
+    tbb->initEdit(false, false, true, false);
+    tableView->setToolButtonBar(tbb);
     tableView->setSortingEnabled(false);
     leRoot->setReadOnly(true);
     cbSourceModelFilter->hide();
 }
 
 void DB_TableWidget::initEditOnly() {
-    setFormatTableView(tableView, mModel);
-    // tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    pbAdd->hide();
-    pbDelete->hide();
-    pbUp->hide();
-    pbDown->hide();
+    formatTableView(tableView, mModel);
+    tbb->initDetailEdit(true);
+    tableView->setToolButtonBar(tbb);
     leRoot->setReadOnly(true);
     cbSourceModelFilter->hide();
 }
 
 void DB_TableWidget::initSelectionOnly() {
-    setFormatTableView(tableView, mModel);
+    formatTableView(tableView, mModel);
+    tbb->initSelect(true, false);
     tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    pbAdd->hide();
-    pbDelete->hide();
-    pbUp->hide();
-    pbDown->hide();
     leRoot->setReadOnly(true);
     cbSourceModelFilter->hide();
 }
@@ -221,7 +135,9 @@ void DB_TableWidget::initSelectionOnly() {
  * @param model table view model
  */
 void DB_TableWidget::initTest() {
-    setFormatTableView(tableView, mModel);
+    formatTableView(tableView, mModel);
+    tbb->initEdit(false, true, true, true);
+    tableView->setToolButtonBar(tbb);
     leRoot->setReadOnly(true);
 }
 

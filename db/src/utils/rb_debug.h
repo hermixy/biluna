@@ -94,12 +94,12 @@ public:
     void printObjectList();
 
     bool isValidId(const QString& id);
+    QString pointerToString(void* ptr) const;
 
 private:
     RB_Debug();
     void printObjectBase(RB_ObjectBase* obj,
                          RB2::ResolveLevel level = RB2::ResolveNone);
-    QString pointerToString(void* ptr) const;
 
     static RB_Debug* uniqueInstance;
 

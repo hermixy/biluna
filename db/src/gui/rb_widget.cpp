@@ -17,6 +17,7 @@
 #include "db_seltreesiblingdialog.h"
 #include "rb_dialogfactory.h"
 #include "rb_dialogwindow.h"
+#include "rb_dockwidget.h"
 #include "rb_mainwindow.h"
 #include "rb_mdiwindow.h"
 #include "rb_settings.h"
@@ -1475,7 +1476,9 @@ void RB_Widget::writeSettings() {
     }
 
     RB_SETTINGS->beginGroup(objectName());
+    RB_DEBUG->print(objectName() + " - " + parentWidget()->objectName());
     // RB_DialogWindow* dlgW = dynamic_cast<RB_DialogWindow*>(parentWidget());
+    // QDockWidget* dckW = dynamic_cast<QDockWidget*>(parentWidget());
 
     // HACK: above cast does not work, therefor objectname comparison
     if (parentWidget()->objectName() == "RB_DialogWindow") {

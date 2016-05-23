@@ -92,10 +92,14 @@ void RB_ToolButtonBar::initSelect(bool isFindFilter, bool isShowAll) {
     pbAddChild->setVisible(false);
     pbDelete->setVisible(false);
 
+    hsAddDelete->setGeometry(QRect(0,0,0,0));
+
     pbEdit->setVisible(false);
     pbCopy->setVisible(false);
     pbSave->setVisible(false);
     pbRevert->setVisible(false);
+
+    hsEditSaveRevert->setGeometry(QRect(0,0,0,0));
 
     pbPrevious->setVisible(false);
     pbNext->setVisible(false);

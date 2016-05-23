@@ -84,8 +84,11 @@ public:
     virtual RB_StringList getTextList(int col) const;
     virtual void setTextList(int col, const RB_StringList& strL);
 
-    virtual bool setData(const QModelIndex& index, const RB_Variant &value,
+    virtual bool setData(const QModelIndex& index, const RB_Variant& value,
                          int role = Qt::EditRole);
+    virtual void printErrorSetData(const QModelIndex& index,
+                                   const RB_Variant& value,
+                                   int role = Qt::EditRole);
     virtual bool setHiddenData(const QModelIndex& index, const RB_Variant &value,
                                int role = Qt::EditRole);
     virtual RB_Variant headerData(int section, Qt::Orientation orientation,

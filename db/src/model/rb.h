@@ -32,7 +32,7 @@ public:
     // software version change also in help doxygen_help.cfg file
     static const int VERSION_MAJOR = 0;
     static const int VERSION_MEDIOR = 9;
-    static const int VERSION_MINOR = 15;
+    static const int VERSION_MINOR = 16;
     static const int VERSION_BUILD = 0;
 
     const static int HIDDENCOLUMNS = 7;

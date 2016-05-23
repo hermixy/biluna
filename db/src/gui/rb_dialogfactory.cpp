@@ -231,7 +231,6 @@ bool RB_DialogFactory::isWidgetActive(int type) {
  * @return RB_DialogWindow
  */
 RB_DialogWindow *RB_DialogFactory::getDialogWindow(int type,
-                                                   const RB_String& docName,
                                                    bool isNewWidget) {
     if (!mMainWindow) {
         RB_DEBUG->error("RB_DialogFactory::getDialogWindow() ERROR");
@@ -242,9 +241,10 @@ RB_DialogWindow *RB_DialogFactory::getDialogWindow(int type,
     RB_Widget* wgt = getWidget(type, NULL);
 
     if (wgt) {
-        wgt->setName(docName);
         wgt->setIsNewWidget(isNewWidget);
         dlgWindow = new RB_DialogWindow(mMainWindow, wgt);
+        dlgWindow->setWindowTitle(wgt->getName());
+        dlgWindow->setObjectName("RB_DialogWindow");
         wgt->setParent(dlgWindow);
         wgt->init(); // here because widget->init() will set size of dialog
     }
@@ -259,20 +259,15 @@ RB_DialogWindow *RB_DialogFactory::getDialogWindow(int type,
  * @param tbArea top, left, bottom or right dockarea in mainwindow
  */
 RB_ToolBar* RB_DialogFactory::getToolBar(int widgetType,
-                                            const RB_String& tbName,
-                                            int tbArea) {
+                                         int tbArea) {
     RB_ToolBar* tb = NULL;
     RB_Widget* wgt = findWidget(widgetType);
     if (!wgt) {
         tb = new RB_ToolBar(getMainWindow(), NULL);
         wgt = getWidget(widgetType, tb);
-        // wgt->init();
-        // tb->setAttribute(Qt::WA_DeleteOnClose);
         tb->setWidget(wgt);
-        // connect(this, SIGNAL(windowsChanged(bool)), wgt, SLOT(setEnabled(bool)));
-        // tb->setMinimumHeight(30);
         tb->setWindowTitle(wgt->getName());
-        tb->setObjectName(tbName);
+        tb->setObjectName("RB_ToolBar");
         getMainWindow()->addToolBar(static_cast<Qt::ToolBarArea>(tbArea), tb);
         wgt->init(); // after creation is complete
     } else {
@@ -288,20 +283,14 @@ RB_ToolBar* RB_DialogFactory::getToolBar(int widgetType,
  * @param dockArea top left bottom or right dockarea in mainwindow
  */
 RB_DockWidget* RB_DialogFactory::getDockWidget(int widgetType,
-                                              const RB_String& dockName,
-                                              int dockArea) {
+                                               int dockArea) {
     RB_DockWidget* dw = NULL;
     RB_Widget* wgt = findWidget(widgetType);
     if (!wgt) {
-        dw = new RB_DockWidget(getMainWindow(), NULL);
-        wgt = getWidget(widgetType, dw);
-        // wgt->init();
-        // dw->setAttribute(Qt::WA_DeleteOnClose);
-        dw->setWidget(wgt);
-        // connect(this, SIGNAL(windowsChanged(bool)), wgt, SLOT(setEnabled(bool)));
-        // dw->setMinimumHeight(30);
+        wgt = getWidget(widgetType, getMainWindow());
+        dw = new RB_DockWidget(getMainWindow(), wgt);
         dw->setWindowTitle(wgt->getName());
-        dw->setObjectName(dockName);
+        dw->setObjectName("RB_DockWidget");
         getMainWindow()->addDockWidget(static_cast<Qt::DockWidgetArea>(dockArea), dw);
         wgt->init(); // after creation is complete
     } else {
@@ -513,9 +502,12 @@ void RB_DialogFactory::closeAllDockWidgets() {
     if (!mw) return;
 
     foreach (QObject* object, mw->children()) {
-        RB_DockWidget* dw = qobject_cast<RB_DockWidget*>(object);
-        if (dw) {
-            if (dw->getPerspectiveType() == mPerspective) {
+        // HACK: cast does not work
+        RB_DEBUG->debug(object->objectName());
+
+        if (object->objectName() == "RB_DockWidget") {
+            RB_DockWidget* dw = dynamic_cast<RB_DockWidget*>(object);
+            if (dw && dw->getPerspectiveType() == mPerspective) {
                 dw->close();
             }
         }
@@ -531,9 +523,12 @@ void RB_DialogFactory::deleteAllDockWidgets() {
     if (!mw) return;
 
     foreach (QObject* object, mw->children()) {
-        RB_DockWidget* dw = dynamic_cast<RB_DockWidget*>(object);
-        if (dw) {
-            if (dw->getPerspectiveType() == mPerspective) {
+        // HACK: cast does not work
+        RB_DEBUG->debug(object->objectName());
+
+        if (object->objectName() == "RB_DockWidget") {
+            RB_DockWidget* dw = dynamic_cast<RB_DockWidget*>(object);
+            if (dw && dw->getPerspectiveType() == mPerspective) {
                 delete dw;
             }
         }

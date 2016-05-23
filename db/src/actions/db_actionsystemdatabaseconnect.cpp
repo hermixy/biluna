@@ -60,7 +60,6 @@ RB_Action* DB_ActionSystemDatabaseConnect::factory() {
 
         if (dlg->exec() == QDialog::Accepted) {
             mf = DB_DIALOGFACTORY->getModelFactory();
-//            mf->setDatabase(RB_DATABASE->database());
             DB_DIALOGFACTORY->getMainWindow()->setWindowTitle(
                         "Biluna - " + RB_DATABASE->database().databaseName());
         } else {

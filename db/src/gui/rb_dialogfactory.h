@@ -45,9 +45,9 @@ public:
     virtual RB_Widget* getActiveMdiCentralWidget();
     virtual RB_MdiWindow* getMdiWindow(int type, const RB_String& docName = "",
                                        bool isNewWidget = false);
-    virtual RB_ToolBar* getToolBar(int widgetType, const RB_String& tbName,
+    virtual RB_ToolBar* getToolBar(int widgetType,
                                    int tbArea);
-    virtual RB_DockWidget* getDockWidget(int widgetType, const RB_String& dockName,
+    virtual RB_DockWidget* getDockWidget(int widgetType,
                                          int dockArea);
     virtual RB_MainWindow* getMainWindow();
 
@@ -58,7 +58,6 @@ public:
     //! To be overridden by implementation, not a slot because of return value
     virtual RB_Dialog* getDialog(int type) = 0;
     virtual RB_DialogWindow* getDialogWindow(int type,
-                                             const QString& docName = "",
                                              bool isNewWidget = false);
 
     virtual void requestInformationDialog(const RB_String& info);

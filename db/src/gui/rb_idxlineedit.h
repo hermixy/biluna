@@ -45,6 +45,7 @@ public:
     QString text() const;
     void setText(const QString& txt);
 
+    void setReadOnly(bool readOnly);
     void setSection(int section);
     void setModel(RB_MmProxy* model);
     void setDefaultDialog(RB_DialogFactory* dialogFactory,

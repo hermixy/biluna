@@ -21,6 +21,10 @@
 #include "db_systemuser.h"
 #include "db_systemusergroup.h"
 #include "db_systemuserpermission.h"
+#include "db_test.h"
+#include "db_testchild.h"
+#include "db_testdlg.h"
+#include "db_testrelation.h"
 #include "db_version.h"
 #include "rb_debug.h"
 #include "rb_uuid.h"
@@ -110,6 +114,12 @@ RB_ObjectBase* DB_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer(uuid, obj, "DB_VersionList", this);
         obj->addObject(list);
+#ifdef DB_TEST
+        list = new RB_ObjectContainer(uuid, obj, "DB_TestList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer(uuid, obj, "DB_TestRelationList", this);
+        obj->addObject(list);
+#endif
     } else if (str == "DB_ActivityList") {
         // only place holder for database creation and DB_Project as parent
         // the parent DB_Calendar will be made in the view only
@@ -149,9 +159,36 @@ RB_ObjectBase* DB_ObjectFactory::newObject(const RB_String& id,
         // Only place holder for database creation and DB_Project as parent
         // The actual parent is NULL and will be made in the view only
         obj = new DB_Version(uuid, parent, "DB_Version", this);
-    } else {
+    }
+#ifdef DB_TEST
+    else if (str == "DB_TestList") {
+        obj = new DB_Test(uuid, parent, "DB_Test", this);
+        uuid = "";
+
+        // For tree model only
+        list = new RB_ObjectContainer(uuid, obj, "DB_TestList", this);
+        obj->addObject(list);
+
+        list = new RB_ObjectContainer(uuid, obj, "DB_TestChildList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer(uuid, obj, "DB_TestDlgList", this);
+        obj->addObject(list);
+    } else if (str == "DB_TestRelationList") {
+        obj = new DB_TestRelation(uuid, parent, "DB_TestRelation", this);
+    } else if (str == "DB_TestChildList") {
+        obj = new DB_TestChild(uuid, parent, "DB_TestChild", this);
+        // For tree model only
+        uuid = "";
+        list = new RB_ObjectContainer(uuid, obj, "DB_TestChildList", this);
+        obj->addObject(list);
+    } else if (str == "DB_TestDlgList") {
+        obj = new DB_TestDlg(uuid, parent, "DB_TestDlg", this);
+    }
+#endif
+    else {
         RB_DEBUG->error("DB_ObjectFactory::newObject() " + parent->getName() + " ERROR");
     }
+
 
     // Add object to parent and set object parent 2009-08-16
     if (parent && addToParent) parent->addObject(obj);

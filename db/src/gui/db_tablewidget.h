@@ -27,7 +27,7 @@ public:
     DB_TableWidget(QWidget* parent);
     virtual ~DB_TableWidget();
 
-    virtual void init() { }
+    virtual void init() {/* refer to protected initXxx methods */}
     virtual bool fileSave(bool withSelect);
     virtual void fileRevert();
 
@@ -35,16 +35,6 @@ public:
 
     virtual RB_ObjectBase* getCurrentObject();
     virtual void setCurrentObject();
-
-
-public slots:
-    virtual void on_pbAdd_clicked();
-    virtual void on_pbDelete_clicked();
-    virtual void on_pbUp_clicked();
-    virtual void on_pbDown_clicked();
-    virtual void on_pbFind_clicked();
-    virtual void on_pbFilter_clicked();
-    virtual void on_pbFilterClear_clicked();
 
 protected:
     virtual void initEditSort();

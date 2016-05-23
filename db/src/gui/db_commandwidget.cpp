@@ -46,6 +46,7 @@ DB_CommandWidget::DB_CommandWidget(QWidget* parent) : RB_Widget(parent) {
  */
 DB_CommandWidget::~DB_CommandWidget() {
     // nothing yet
+    RB_DEBUG->debug("DB_CommandWidget::~DB_CommandWidget()");
 }
 
 

@@ -42,7 +42,7 @@ public:
     virtual void setParentWidgetType(int type);
     virtual RB2::PerspectiveType getPerspectiveType() const;
     virtual RB_Widget* getWidget();
-    virtual void setWidget(RB_Widget* wdgt);
+//    virtual void setWidget(RB_Widget* wdgt);
 
     // to be overriden by drawing type windows
     virtual void commandEvent(DB_CommandEvent* /* e */) { }

@@ -452,7 +452,8 @@ RB_ObjectBase* RB_MmSource::getObject(const QModelIndex& currentIndex,
             RB_ObjectMember* mem = mObject->getMember(col);
 
             if (!mem) {
-                RB_DEBUG->error("RB_MmSource::getObject() member ERROR");
+                RB_DEBUG->error("RB_MmSource::getObject() member col = "
+                                + QString::number(col) + " ERROR");
                 continue;
             }
 
@@ -1216,27 +1217,37 @@ bool RB_MmSource::setData(const QModelIndex &index,
 
     if (!isTreeModel() && database().isOpen()) {
         success = QSqlRelationalTableModel::setData(index, value, Qt::EditRole);
-
         if (!success) {
-            RB_DEBUG->error("RB_MmSource::setData() ERROR :");
-            RB_DEBUG->print("  " + this->lastError().text());
+            printErrorSetData(index, value, role);
+            return success;
         }
 
         RB_String dt = QDateTime::currentDateTime().toString(Qt::ISODate);
         idx = createIndex(index.row(), 5);
-        QSqlRelationalTableModel::setData(idx, dt, Qt::EditRole);
+        success = QSqlRelationalTableModel::setData(idx, dt, Qt::EditRole);
+        if (!success) { printErrorSetData(index, value, role); }
+
         idx = createIndex(index.row(), 6);
-        QSqlRelationalTableModel::setData(idx, username, Qt::EditRole);
+        success = QSqlRelationalTableModel::setData(idx, username, Qt::EditRole);
+        if (!success) { printErrorSetData(index, value, role); }
     } else {
         void* obj = index.internalPointer();
         idx = createIndex(index.row(), index.column() + mHiddenColumns, obj);
         success = setHiddenData(idx, value, role);
 
+        if (!success) {
+            printErrorSetData(index, value, role);
+            return success;
+        }
+
         RB_String dt = QDateTime::currentDateTime().toString(Qt::ISODate);
         idx = createIndex(index.row(), 5, obj);
-        setHiddenData(idx, dt, role);
+        success = setHiddenData(idx, dt, role);
+        if (!success) { printErrorSetData(index, value, role); }
+
         idx = createIndex(index.row(), 6, obj);
-        setHiddenData(idx, username, role);
+        success = setHiddenData(idx, username, role);
+        if (!success) { printErrorSetData(index, value, role); }
 
         emit dataChanged(index, index);
     }
@@ -1246,6 +1257,24 @@ bool RB_MmSource::setData(const QModelIndex &index,
     }
 
     return success;
+}
+
+void RB_MmSource::printErrorSetData(const QModelIndex& index,
+                                    const QVariant& value,
+                                    int role) {
+    RB_DEBUG->print("RB_MmSource::printSetDataError() row, col = "
+                    + QString::number(index.row()) + ", "
+                    + QString::number(index.column()));
+    RB_DEBUG->print("RB_MmSource::printSetDataError() data(displayRole) = "
+                    + index.data(Qt::DisplayRole).toString());
+    RB_DEBUG->print("RB_MmSource::printSetDataError() data(editRole) = "
+                    + index.data(Qt::EditRole).toString());
+    RB_DEBUG->print("RB_MmSource::printSetDataError() value = "
+                    + value.toString());
+    RB_DEBUG->print("RB_MmSource::printSetDataError() role = "
+                    + QString::number(role));
+    RB_DEBUG->error("RB_MmSource::printSetDataError() ERROR :  "
+                    + this->lastError().text());
 }
 
 /**
@@ -1273,9 +1302,9 @@ bool RB_MmSource::setHiddenData(const QModelIndex &index,
         success = setObjectData(index, value, role);
     }
 
-    if (success) {
-        setModelIsModified(true); // still required? 2011-08-02
-    }
+//    if (success) {
+//        setModelIsModified(true); // still required? 2011-08-02
+//    }
 
     return success;
 }

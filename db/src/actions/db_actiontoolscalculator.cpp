@@ -49,7 +49,7 @@ void DB_ActionToolsCalculator::trigger() {
 
     // Get active dockwidget
     RB_DockWidget* dw = DB_DIALOGFACTORY->getDockWidget(
-                DB_DialogFactory::WidgetCalculator, "dockwidget_calculator",
+                DB_DialogFactory::WidgetCalculator,
                 Qt::RightDockWidgetArea);
     dw->setAttribute(Qt::WA_DeleteOnClose, false); // otherwise perhaps true
     dw->show();

@@ -97,12 +97,16 @@ public:
      */
     enum WidgetType {
         // start numbering from 102000
-//        WidgetTestDialog = 102000,      /**< Dialog widget */
-//        WidgetTestTable,                /**< Table widget */
-//        WidgetTestTableChild,           /**< Child table widget with table parent */
-//        WidgetTestText,                 /**< Text widget */
-//        WidgetTestTree,                 /**< Tree widget */
-//        WidgetTestTreeChild,            /**< Child table widget with tree parent */
+        WidgetTestDbObject = 102000,    /**< DB versus object widget */
+        WidgetTestDialog,               /**< Dialog widget */
+        WidgetTestTable,                /**< Table widget */
+        WidgetTestTableTree,            /**< Table with treechild widget */
+        WidgetTestText,                 /**< Text widget */
+        WidgetTestTree,                 /**< Tree widget */
+        DialogTest,                     /**< Test Dialog */
+        WidgetTestSelectProject,        /**< Test project selection dialog */
+        DialogTestRelation,             /**< Test relation table dialog */
+        DialogBaseTest,                 /**< Test of base dialogs */
         // start numbering from 102100
         WidgetNone = 102100,            /**< Invalid widget */
         WidgetCalculator,               /**< Calculator dockwidget */

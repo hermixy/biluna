@@ -67,6 +67,14 @@ void RB_IdxLineEdit::setText(const QString& txt) {
 }
 
 /**
+ * @brief RB_IdxLineEdit::setReadOnly
+ * does nothing
+ */
+void RB_IdxLineEdit::setReadOnly(bool) {
+
+}
+
+/**
  * Set section (column sequence number)
  * @param section
  */

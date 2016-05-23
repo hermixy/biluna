@@ -603,8 +603,8 @@ void RB_MainWindow::readSettings() {
 
     // Prevent opening position on second screen,
     // otherwise not visible via (single) desktop sharing
-    int x = 0 <= pos.x() < 800 ? pos.x() : 100;
-    int y = 0 <= pos.y() < 640 ? pos.y() : 100;
+    int x = 0 <= pos.x() && pos.x() < 800 ? pos.x() : 100;
+    int y = 0 <= pos.y() && pos.y() < 640 ? pos.y() : 100;
     pos.setX(x);
     pos.setY(y);
 

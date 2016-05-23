@@ -37,6 +37,9 @@
 #include "db_selectmappingdialog.h"
 #include "db_simplereportwidget.h"
 #include "db_systemgroupdialog.h"
+#ifdef DB_TEST
+#include "db_testselectprojectwidget.h"
+#endif
 #include "db_textwidget.h"
 #include "db_versiondialog.h"
 #include "db_xmlviewvalidatorwidget.h"
@@ -206,7 +209,51 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new DB_XmlViewValidatorWidget(parent);
         break;
     }
+#ifdef DB_TEST
+    case WidgetTestDbObject:
+    {
+//        wgt = new DB_TestDbObjectWidget(parent);
+        break;
 
+    }
+    case WidgetTestTable:
+    {
+//        wgt = new DB_TestTableWidget(parent);
+        break;
+    }
+    case WidgetTestTableTree:
+    {
+//        wgt = new DB_TestTableTreeWidget(parent);
+        break;
+    }
+    case WidgetTestText:
+    {
+//        wgt = new DB_TestTextWidget(parent);
+        break;
+    }
+    case WidgetTestTree:
+    {
+//        wgt = new DB_TestTreeWidget(parent);
+        break;
+    }
+    case WidgetTestSelectProject :
+    {
+        wgt = new DB_TestSelectProjectWidget(parent);
+        break;
+    }
+    case DialogTestRelation :
+    {
+//        DB_TestRelationDialog* dlg = new DB_TestRelationDialog(parent);
+//        dlg->init();
+//        return dlg;
+    }
+    case WidgetTestDialog: // DlgTest:
+    {
+//        DB_TestDlgDialog* dlg = new DB_TestDlgDialog(parent);
+//        dlg->init();
+//        return dlg;
+    }
+#endif
     default:
         RB_DEBUG->print(RB_Debug::D_ERROR,
                         "DB_DialogFactory::getWidget() "

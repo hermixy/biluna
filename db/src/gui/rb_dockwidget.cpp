@@ -29,11 +29,11 @@ RB_DockWidget::RB_DockWidget(RB_MainWindow* mw, RB_Widget* mwgt) : QDockWidget(m
     if (!mw || !mwgt) return;
     mMainWindow = mw;
     mCentralWidget = mwgt;
-//    ++mUntitledNumber;
 
-    setAttribute(Qt::WA_DeleteOnClose, false);
     setWidget(mCentralWidget);
+    setObjectName("RB_DockWidget");
     setWindowIcon(QIcon(":/images/biluna16.png"));
+    setAttribute(Qt::WA_DeleteOnClose, false);
 
     connect(this, SIGNAL(windowStateChanged(Qt::WindowStates, Qt::WindowStates)),
             this, SLOT(slotWindowStateHasChanged(Qt::WindowStates, Qt::WindowStates)));
@@ -121,13 +121,13 @@ RB_Widget* RB_DockWidget::getWidget() {
     return mCentralWidget;
 }
 
-/**
- * Set central widget
- */
-void RB_DockWidget::setWidget(RB_Widget* wdgt) {
-    mCentralWidget = wdgt;
-    QDockWidget::setWidget(wdgt);
-}
+///**
+// * Set central widget
+// */
+//void RB_DockWidget::setWidget(RB_Widget* wdgt) {
+//    mCentralWidget = wdgt;
+//    QDockWidget::setWidget(wdgt);
+//}
 
 /**
  * Show window. Does nothing, only QDockWidget::show();
