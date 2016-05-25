@@ -78,7 +78,6 @@ public:
         DialogPermissionPerspectiveProject,    /**< Permission perspective project selection dialog */
         DialogPluginTester,                    /**< Available plugins dialog */
         DialogProject,                         /**< Select project from database dialog */
-        DialogProjectEdit,                     /**< Edit projects dialog */
         DialogRegExp,                          /**< Regular expression test dialog */
         DialogScreenshot,                      /**< Screenshot dialog */
         DialogSelectMapping,                   /**< Select mapping dialog */
@@ -98,14 +97,14 @@ public:
     enum WidgetType {
         // start numbering from 102000
         WidgetTestDbObject = 102000,    /**< DB versus object widget */
+        WidgetTest,                     /**< Test Dialog NOT USED? */
         WidgetTestDialog,               /**< Dialog widget */
+        WidgetTestRelation,             /**< Test relation table dialog */
+        WidgetTestSelectProject,        /**< Test project selection dialog */
         WidgetTestTable,                /**< Table widget */
         WidgetTestTableTree,            /**< Table with treechild widget */
         WidgetTestText,                 /**< Text widget */
         WidgetTestTree,                 /**< Tree widget */
-        DialogTest,                     /**< Test Dialog */
-        WidgetTestSelectProject,        /**< Test project selection dialog */
-        DialogTestRelation,             /**< Test relation table dialog */
         DialogBaseTest,                 /**< Test of base dialogs */
         // start numbering from 102100
         WidgetNone = 102100,            /**< Invalid widget */
@@ -119,6 +118,7 @@ public:
         WidgetPermission,               /**< Permission widget */
         WidgetPermissionReport,         /**< Permission report widget */
         WidgetPlainTextDocument,        /**< Plain text document widget */
+        WidgetProjectEdit,              /**< Edit projects widget */
         WidgetSimpleChart,              /**< Simple chart types review widget */
         WidgetSimpleReport,             /**< Simple report from database widget */
         WidgetTextDocument,             /**< Rich text document widget */

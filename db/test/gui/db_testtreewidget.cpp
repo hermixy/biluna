@@ -104,7 +104,7 @@ void DB_TestTreeWidget::init() {
     }
 */
     addComboBoxMapping(mModel, "combobox2", "DB_TestRelation", "id",
-                       "selectrel_idx", treeCbComboBox2, mMapper);
+                       "relation", treeCbComboBox2, mMapper);
 
     mMapper->addMapping(leTrvCombo2, mModel->fieldIndex("combobox2"));
     mMapper->addMapping(treeSpSpinBox, mModel->fieldIndex("spinbox"));

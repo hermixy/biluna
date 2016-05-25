@@ -28,5 +28,5 @@ void DB_TestSelectProjectWidget::init() {
 //    this->initTest();
 
     this->setHelpSubject("DB_TestSelectProjectDialog");
-
+    readSettings();
 }

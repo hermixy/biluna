@@ -7,28 +7,23 @@
  *
  * See http://www.red-bag.com for further details.
  *****************************************************************/
-#ifndef DB_PROJECTEDITDIALOG_H
-#define DB_PROJECTEDITDIALOG_H
 
-#include "rb_projecteditdialog.h"
+#ifndef DB_PROJECTEDITWIDGET_H
+#define DB_PROJECTEDITWIDGET_H
 
+#include "rb_projecteditwidget.h"
 
-/**
- * Edit DB project dialog
- */
-class DB_EXPORT DB_ProjectEditDialog : public RB_ProjectEditDialog {
+class DB_EXPORT DB_ProjectEditWidget : public RB_ProjectEditWidget {
 
     Q_OBJECT
 
 public:
-    DB_ProjectEditDialog(QWidget* parent);
-    virtual ~DB_ProjectEditDialog();
+    DB_ProjectEditWidget(QWidget* parent);
 
+    virtual RB_String getName() const;
+    virtual RB2::PerspectiveType getPerspectiveType() const;
     virtual void init();
-
-public slots:
-    virtual void on_pbAdd_clicked();
 
 };
 
-#endif // DB_PROJECTEDITDIALOG_H
+#endif // DB_PROJECTEDITWIDGET_H

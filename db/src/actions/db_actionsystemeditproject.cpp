@@ -14,6 +14,7 @@
 #include "db_modelfactory.h"
 #include "db_projectdialog.h"
 #include "rb_database.h"
+#include "rb_dialogwindow.h"
 #include "rb_mainwindow.h"
 
 
@@ -58,7 +59,8 @@ void DB_ActionSystemEditProject::trigger() {
     }
 
     // Create dialog
-    RB_Dialog* dlg = DB_DIALOGFACTORY->getDialog(DB_DialogFactory::DialogProjectEdit);
+    RB_DialogWindow* dlg = DB_DIALOGFACTORY->getDialogWindow(
+                DB_DialogFactory::WidgetProjectEdit);
     dlg->exec();
     dlg->deleteLater();
 }

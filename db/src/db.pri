@@ -48,7 +48,8 @@ FORMS = \
     ../src/gui/db_xmlviewvalidatorwidget.ui \
     ../src/gui/rb_dialogbase.ui \
     ../src/gui/rb_idxlineedit.ui \
-    ../src/gui/rb_projecteditdialog.ui \
+#    ../src/gui/rb_projecteditdialog.ui \
+    ../src/gui/rb_projecteditwidget.ui \
     ../src/gui/rb_toolbuttonbar.ui \
     ../src/gui/rb_uomlineedit.ui
 
@@ -198,7 +199,8 @@ HEADERS = \
     ../src/gui/db_plugintesterdialog.h \
     ../src/gui/db_prepostfixtextdialog.h \
     ../src/gui/db_projectdialog.h \
-    ../src/gui/db_projecteditdialog.h \
+#    ../src/gui/db_projecteditdialog.h \
+    ../src/gui/db_projecteditwidget.h \
     ../src/gui/db_regexpdialog.h \
     ../src/gui/db_screenshotdialog.h \
     ../src/gui/db_selectmappingdialog.h \
@@ -231,7 +233,8 @@ HEADERS = \
     ../src/gui/rb_membereditdialog.h \
     ../src/gui/rb_plaintextedit.h \
     ../src/gui/rb_plotterwidget.h \
-    ../src/gui/rb_projecteditdialog.h \
+#    ../src/gui/rb_projecteditdialog.h \
+    ../src/gui/rb_projecteditwidget.h \
     ../src/gui/rb_simplereportwidget.h \
     ../src/gui/rb_sqlrelationaldelegate.h \
     ../src/gui/rb_tableview.h \
@@ -455,7 +458,8 @@ SOURCES = \
     ../src/gui/db_plaintextwidget.cpp \
     ../src/gui/db_plugintesterdialog.cpp \
     ../src/gui/db_prepostfixtextdialog.cpp \
-    ../src/gui/db_projecteditdialog.cpp \
+#    ../src/gui/db_projecteditdialog.cpp \
+    ../src/gui/db_projecteditwidget.cpp \
     ../src/gui/db_regexpdialog.cpp \
     ../src/gui/db_screenshotdialog.cpp \
     ../src/gui/db_seltreesiblingdialog.cpp \
@@ -486,7 +490,8 @@ SOURCES = \
     ../src/gui/rb_ledelegate.cpp \
     ../src/gui/rb_plaintextedit.cpp \
     ../src/gui/rb_plotterwidget.cpp \
-    ../src/gui/rb_projecteditdialog.cpp \
+#    ../src/gui/rb_projecteditdialog.cpp \
+    ../src/gui/rb_projecteditwidget.cpp \
     ../src/gui/rb_simplereportwidget.cpp \
     ../src/gui/rb_sqlrelationaldelegate.cpp \
     ../src/gui/rb_tableview.cpp \

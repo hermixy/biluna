@@ -62,39 +62,32 @@ RB_Action* DB_ActionTestSystemSelectProject::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionTestSystemSelectProject::trigger() {
-    if (RB_DATABASE->database().isOpen()) {
-
-        RB_DialogWindow* dlg = DB_DIALOGFACTORY->getDialogWindow(
-                    DB_DialogFactory::WidgetTestSelectProject);
-
-        if (dlg->exec() == QDialog::Accepted) {
-//            QModelIndex index = dlg->getCurrentModelIndex();
-//            if (!index.isValid()) return;
-
-//            const RB_MmProxy* m = dynamic_cast<const RB_MmProxy*>(index.model());
-//            RB_String id = m->hiddenData(m->index(index.row(), 0, index.parent()),
-//                                         Qt::DisplayRole).toString();
-
-
-            RB_ObjectBase* obj = dlg->getCurrentObject();
-            if (!obj) {
-                delete dlg;
-                return;
-            }
-
-            RB_String id = obj->getId();
-
-            // Set root id
-            DB_MODELFACTORY->setRootId(id);
-            // Get the main project root object for this application
-            RB_ObjectBase* root = DB_MODELFACTORY->getRoot();
-            // Read the object from the database for further use
-            root->dbRead(DB_MODELFACTORY->getDatabase(), RB2::ResolveNone);
-        } else  {
-            DB_MODELFACTORY->setRootId("");
-        }
-        delete dlg;
-    } else {
+    if (!RB_DATABASE->database().isOpen()) {
         DB_DIALOGFACTORY->requestWarningDialog(tr("Not connected to database."));
+        return;
     }
+
+    RB_DialogWindow* dlg = DB_DIALOGFACTORY->getDialogWindow(
+                DB_DialogFactory::WidgetTestSelectProject);
+
+    if (dlg->exec() == QDialog::Accepted) {
+        RB_ObjectBase* obj = dlg->getCurrentObject();
+
+        if (!obj) {
+            delete dlg;
+            return;
+        }
+
+        RB_String id = obj->getId();
+        // Set root id
+        DB_MODELFACTORY->setRootId(id);
+        // Get the main project root object for this application
+        RB_ObjectBase* root = DB_MODELFACTORY->getRoot();
+        // Read the object from the database for further use
+        root->dbRead(DB_MODELFACTORY->getDatabase(), RB2::ResolveNone);
+    } else  {
+        DB_MODELFACTORY->setRootId("");
+    }
+
+    delete dlg;
 }

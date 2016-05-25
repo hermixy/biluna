@@ -1,5 +1,5 @@
-/*! \page db_projecteditdialog Project (root) Edit Dialog - DB
-\section sec_db_projecteditdialog Project (root) Edit Dialog
+/*! \page db_projecteditwidget Project (root) Edit Dialog - DB
+\section sec_db_projecteditwidget Project (root) Edit Dialog
 
 The root project in DB can be a holding company or entity. Usualy there will
 be only one root project, for example the company you work for. The purpose for

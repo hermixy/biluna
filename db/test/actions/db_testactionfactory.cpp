@@ -51,6 +51,7 @@ DB_TestActionFactory::DB_TestActionFactory(RB_MainWindow* mw)
 DB_TestActionFactory::~DB_TestActionFactory() {
     DB_ACTIONFACTORY->unregisterFactory(this);
     mActiveFactory = NULL;
+    RB_DEBUG->print("DB_TestActionFactory::~DB_TestActionFactory()");
 }
 
 /**
@@ -82,21 +83,23 @@ void DB_TestActionFactory::getTestMenu(QMenu* menu, QToolBar* tb = NULL) {
     menu->addAction(ga);
     tb->addAction(ga);
 
-    ga = DB_ActionTestRelation::createGuiAction();
-    menu->addAction(ga);
-    tb->addAction(ga);
-
     ga = DB_ActionTestInMemoryModel::createGuiAction();
     menu->addAction(ga);
     tb->addAction(ga);
 
-    ga = DB_ActionTestDatabaseModel::createGuiAction();
+    ga = DB_ActionTestInMemoryTreeModel::createGuiAction();
     menu->addAction(ga);
     tb->addAction(ga);
 
     menu->addSeparator();
 
-    ga = DB_ActionTestInMemoryTreeModel::createGuiAction();
+    ga = DB_ActionTestRelation::createGuiAction();
+    menu->addAction(ga);
+    tb->addAction(ga);
+
+    menu->addSeparator();
+
+    ga = DB_ActionTestDatabaseModel::createGuiAction();
     menu->addAction(ga);
     tb->addAction(ga);
 

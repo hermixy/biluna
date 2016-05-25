@@ -12,10 +12,9 @@
 
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
-#include "db_testrelationdialog.h"
-#include "db_modelfactory.h"
 #include "db_objectfactory.h"
 #include "rb_datawidgetmapper.h"
+#include "rb_dialogwindow.h"
 #include "rb_sqlrelationaldelegate.h"
 #include "rb_tedelegate.h"
 
@@ -73,12 +72,16 @@ void DB_TestTableWidget::init() {
 
     // use propertyName from QComboBox as "currentText" user properties
     // also possible, however currentIndex only is working correctly
-    mMapper->addMapping(cbComboBox1, mModel->fieldIndex("combobox1"), "currentIndex");
+    mMapper->addMapping(cbComboBox1,
+                        mModel->fieldIndex("combobox1"),
+                        "currentIndex");
     // create and attach fixed comboBox model
     RB_StringList items;
     items << tr("Home") << tr("Work") << tr("Other");
     mComboBoxModel = new QStringListModel(items, this);
     cbComboBox1->setModel(mComboBoxModel);
+    mModel->setTextList(mModel->fieldIndex("combobox1"), items);
+
 /*
     // Relational mapping, relation table should have a default row with id = "0"!
     int relationColumn = mModel->fieldIndex("combobox2");
@@ -113,11 +116,9 @@ void DB_TestTableWidget::init() {
         mMapper->addMapping(cbComboBox2, relationColumn);
     }
 */
-    addComboBoxMapping(mModel, "combobox2", "DB_TestRelation", "id",
+    addComboBoxMapping(mModel, "combobox2",
+                       "DB_TestRelation", "id",
                        "relation", cbComboBox2, mMapper);
-    RB_String cbStyle = "QComboBox::drop-down {border-top-right-radius: 5px;"
-                        "border-bottom-right-radius: 5px;}";
-    cbComboBox2->setStyleSheet(cbStyle);
 
     // In case of no combobox mapping as above use:
 //    int relationColumn = mModel->fieldIndex("combobox2");
@@ -153,7 +154,7 @@ void DB_TestTableWidget::init() {
     setFormatTableView(tvChild, mChildModel);
 
     // TEST ONLY
-    new ModelTest(mChildModel, this);
+//    new ModelTest(mChildModel, this);
 
 }
 
@@ -290,19 +291,13 @@ void DB_TestTableWidget::on_pbSelectRel_clicked() {
     if (!tvParent->currentIndex().isValid()) return;
 
     // open selection dialog
-    DB_TestRelationDialog* dlg = new DB_TestRelationDialog(this);
-    dlg->init();
+    RB_DialogWindow* dlg = DB_DIALOGFACTORY->getDialogWindow(
+                DB_DialogFactory::WidgetTestRelation);
+    dlg->exec();
 
 
     // set data if item is selected
     if (dlg->exec() == QDialog::Accepted) {
-//            QModelIndex idIdx = idx.model()->index(idx.row(), 0);
-//            // RB_String str = idIdx.data().toString();
-//            QModelIndex strIdx =  idx.model()->index(idx.row(), 3);
-//            RB_String str = idIdx.data().toString() + strIdx.data().toString();
-
-
-
         RB_ObjectBase* obj = dlg->getCurrentObject();
         if (!obj) {
             delete dlg;

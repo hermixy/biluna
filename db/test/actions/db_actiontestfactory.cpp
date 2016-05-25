@@ -124,14 +124,10 @@ void DB_ActionTestFactory::trigger() {
     delete clone;
     clone = NULL;
 
-    delete DB_OBJECTFACTORY;
-
     str = "MainWindow::testFactory() (7) DB_TESTOBJECTFACTORY:";
     root = DB_OBJECTFACTORY->getModelStructure("DB_TestProject");
     writeModel(str, root, writeMembers);
     mTextWidget->appendText(str);
-
-    delete DB_OBJECTFACTORY;
 }
 
 /**
@@ -140,7 +136,8 @@ void DB_ActionTestFactory::trigger() {
  * @param obj object
  * @param writeMembers write members if true
  */
-void DB_ActionTestFactory::writeModel(RB_String& str, RB_ObjectBase* obj, bool writeMembers) {
+void DB_ActionTestFactory::writeModel(RB_String& str, RB_ObjectBase* obj,
+                                      bool writeMembers) {
     RB_DEBUG->print("DB_ActionTestObject::writeModel()" + obj->getName());
 
     str += "\n" + obj->getId();

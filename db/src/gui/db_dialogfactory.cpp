@@ -31,21 +31,23 @@
 #include "db_plaintextwidget.h"
 #include "db_plugintesterdialog.h"
 #include "db_projectdialog.h"
-#include "db_projecteditdialog.h"
+#include "db_projecteditwidget.h"
 #include "db_regexpdialog.h"
 #include "db_screenshotdialog.h"
 #include "db_selectmappingdialog.h"
 #include "db_simplereportwidget.h"
 #include "db_systemgroupdialog.h"
+
 #ifdef DB_TEST
 #include "db_testdbobjectwidget.h"
-#include "db_testrelationdialog.h"
+#include "db_testrelationwidget.h"
 #include "db_testselectprojectwidget.h"
 #include "db_testtabletreewidget.h"
 #include "db_testtablewidget.h"
 #include "db_testtextwidget.h"
 #include "db_testtreewidget.h"
 #endif
+
 #include "db_textwidget.h"
 #include "db_versiondialog.h"
 #include "db_xmlviewvalidatorwidget.h"
@@ -187,6 +189,10 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new DB_PlainTextWidget(parent);
         break;
     }
+    case WidgetProjectEdit: {
+        wgt = new DB_ProjectEditWidget(parent);
+        break;
+    }
     case WidgetSimpleChart: {
         // Unique widget
         wgt = RB_DialogFactory::findWidget(type);
@@ -222,6 +228,11 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
         break;
 
     }
+    case WidgetTestRelation :
+    {
+        wgt = new DB_TestRelationWidget(parent);
+        break;
+    }
     case WidgetTestTable:
     {
         wgt = new DB_TestTableWidget(parent);
@@ -246,12 +257,6 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
     {
         wgt = new DB_TestSelectProjectWidget(parent);
         break;
-    }
-    case DialogTestRelation :
-    {
-//        DB_TestRelationDialog* dlg = new DB_TestRelationDialog(parent);
-//        dlg->init();
-//        return dlg;
     }
     case WidgetTestDialog: // DlgTest:
     {
@@ -345,12 +350,6 @@ RB_Dialog* DB_DialogFactory::getDialog(int type) {
         case DialogProject:
         {
             dlg = new DB_ProjectDialog(mMainWindow);
-            dlg->init();
-            break;
-        }
-        case DialogProjectEdit:
-        {
-            dlg = new DB_ProjectEditDialog(mMainWindow);
             dlg->init();
             break;
         }

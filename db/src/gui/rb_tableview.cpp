@@ -45,7 +45,7 @@ void RB_TableView::setToolButtonBar(RB_ToolButtonBar* tbb) {
     connect(mToolButtonBar, SIGNAL(addClicked()),
             this, SLOT(slotAdd()));
     connect(mToolButtonBar, SIGNAL(addChildClicked()),
-            this, SLOT(slotAdd()));
+            this, SLOT(slotAddChild()));
     connect(mToolButtonBar, SIGNAL(deleteClicked()),
             this, SLOT(slotDelete()));
 

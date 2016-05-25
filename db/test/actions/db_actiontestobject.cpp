@@ -65,7 +65,8 @@ void DB_ActionTestObject::trigger() {
     tw->slotClearText();
     bool writeMembers = true;
 
-    RB_ObjectBase* origObj = new RB_ObjectContainer("origObjId", NULL, "objName", NULL);
+    RB_ObjectBase* origObj = new RB_ObjectContainer("origObjId", NULL,
+                                                    "objName", NULL);
     origObj->addMember("mem1Name", "N/mm2", 0.01, RB2::MemberDouble);
     origObj->addMember("mem2Name", "-", "content", RB2::MemberChar125);
     QString dtStr = QDateTime::currentDateTime().toString(Qt::ISODate);
@@ -77,7 +78,8 @@ void DB_ActionTestObject::trigger() {
     tw->appendText("\nOriginal object");
     tw->appendText(str);
 
-    RB_ObjectBase* copyObj = new RB_ObjectContainer("copyObjId", NULL, "objName", NULL);
+    RB_ObjectBase* copyObj = new RB_ObjectContainer("copyObjId", NULL,
+                                                    "objName", NULL);
     *copyObj = *origObj;
 
     writeModel(str, copyObj, writeMembers);
@@ -98,7 +100,8 @@ void DB_ActionTestObject::trigger() {
  * @param obj object
  * @param writeMembers write members if true
  */
-void DB_ActionTestObject::writeModel(RB_String& str, RB_ObjectBase* obj, bool writeMembers) {
+void DB_ActionTestObject::writeModel(RB_String& str, RB_ObjectBase* obj,
+                                     bool writeMembers) {
     RB_DEBUG->print("DB_ActionTestObject::writeModel() "
                     + obj->getName());
 

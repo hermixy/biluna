@@ -12,6 +12,7 @@
 #include "db_modelfactory.h"
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
+#include "rb_database.h"
 #include "rb_mdiwindow.h"
 #include "rb_objectcontainer.h"
 
@@ -60,17 +61,13 @@ RB_Action* DB_ActionTestDbObject::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionTestDbObject::trigger() {
-    // No preliminary checks required
+    if (!RB_DATABASE->database().isOpen()) {
+        DB_DIALOGFACTORY->requestWarningDialog(tr("Not connected to database."));
+        return;
+    }
 
-    // Prepare model(s)
-//    RB_MmObjectInterface* model = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTest);
-//    model->setRoot(DB_MODELFACTORY->getRootId());
-
-    // Create widget
     RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
-            DB_DialogFactory::WidgetTestDbObject);
-//    DB_TestDbObjectWidget* tw = dynamic_cast<DB_TestDbObjectWidget*>(mdiWin->getWidget());
-//    tw->init(DB_ModelFactory::ModelTest, DB_ModelFactory::ModelTestChild);
+                DB_DialogFactory::WidgetTestDbObject);
     mdiWin->show();
 }
 

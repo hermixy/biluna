@@ -1217,6 +1217,7 @@ bool RB_MmSource::setData(const QModelIndex &index,
 
     if (!isTreeModel() && database().isOpen()) {
         success = QSqlRelationalTableModel::setData(index, value, Qt::EditRole);
+
         if (!success) {
             printErrorSetData(index, value, role);
             return success;
@@ -1273,6 +1274,9 @@ void RB_MmSource::printErrorSetData(const QModelIndex& index,
                     + value.toString());
     RB_DEBUG->print("RB_MmSource::printSetDataError() role = "
                     + QString::number(role));
+
+
+
     RB_DEBUG->error("RB_MmSource::printSetDataError() ERROR :  "
                     + this->lastError().text());
 }
@@ -1301,10 +1305,6 @@ bool RB_MmSource::setHiddenData(const QModelIndex &index,
     } else  {
         success = setObjectData(index, value, role);
     }
-
-//    if (success) {
-//        setModelIsModified(true); // still required? 2011-08-02
-//    }
 
     return success;
 }
@@ -2002,11 +2002,12 @@ RB_Variant RB_MmSource::objectData(const QModelIndex& index, int role) const {
 bool RB_MmSource::setObjectData(const QModelIndex& index,
                                 const RB_Variant& value, int role) {
     if (!index.isValid() || (!isTreeModel() && database().isOpen())) {
-        RB_DEBUG->print("RB_MmSource::setObjectData() ERROR");
+        RB_DEBUG->error("RB_MmSource::setObjectData() ERROR");
         return false;
     }
     if (role != Qt::EditRole && role != RB2::RoleOrigData) {
-        return true;
+        RB_DEBUG->error("RB_MmSource::setObjectData() role ERROR");
+        return false;
     }
 
     RB_ObjectBase* obj = static_cast<RB_ObjectBase*>(index.internalPointer());
