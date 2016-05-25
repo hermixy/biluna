@@ -11,10 +11,12 @@
 #include "db_testdbobjectwidget.h"
 
 #include "db_test.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
-#include "db_testobjectfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
+#include "db_objectfactory.h"
+#include "db_testtextwidget.h"
 #include "rb_datawidgetmapper.h"
+#include "rb_mdiwindow.h"
 #include "rb_sqlrelationaldelegate.h"
 
 
@@ -41,17 +43,17 @@ void DB_TestDbObjectWidget::init() {
     // Get ID of parent model
     //
     RB_MmProxy* parentModel =
-            DB_TESTMODELFACTORY->getParentModel(DB_TestModelFactory::ModelTestDialog);
+            DB_MODELFACTORY->getParentModel(DB_ModelFactory::ModelTestDialog);
     QModelIndex parentIndex = parentModel->getCurrentIndex();
     if (!parentIndex.isValid()) {
-        DB_TESTDIALOGFACTORY->requestWarningDialog(tr("No item selected, \n"
+        DB_DIALOGFACTORY->requestWarningDialog(tr("No item selected, \n"
                                                       "could not open dialog."));
     }
 
     //
     // Set model and connect to table view
     //
-    mModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestDialog);
+    mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestDialog);
     mModel->setRoot(parentIndex);
 
     // attach model to main view
@@ -78,7 +80,7 @@ void DB_TestDbObjectWidget::init() {
     // Set child model and connect to child (table view),
     // root will be set by selecting row in parent model
     //
-    mChildModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestChild);
+    mChildModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestChild);
 
     tvChild->setModel(mChildModel);
     tvChild->setAlternatingRowColors(true);
@@ -103,13 +105,13 @@ void DB_TestDbObjectWidget::on_pbRead_clicked() {
 //                                        Qt::DisplayRole).toString();
     RB_String id = mModel->getCurrentId();
 
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-            DB_TestDialogFactory::WidgetTestText);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+            DB_DialogFactory::WidgetTestText);
     DB_TestTextWidget* tw = dynamic_cast<DB_TestTextWidget*>(mdiWin->getWidget());
 
     RB_String str = "ID: " + id + "\n";
     if (!mObject) {
-        mObject = DB_TESTOBJECTFACTORY->newSingleObject("DB_Test");
+        mObject = DB_OBJECTFACTORY->newSingleObject("DB_Test");
     }
     mObject->setId(id);
 

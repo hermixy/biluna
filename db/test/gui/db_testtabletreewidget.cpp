@@ -12,7 +12,7 @@
 
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
-#include "db_testmodelfactory.h"
+#include "db_modelfactory.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_sqlrelationaldelegate.h"
 #include "rb_tedelegate.h"
@@ -46,8 +46,8 @@ void DB_TestTableTreeWidget::init() {
     //
     // 1. Set model with ID (sets root object) and/or query
     //
-    mModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTvTrv);
-    RB_String id = DB_TESTMODELFACTORY->getRootId();
+    mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTvTrv);
+    RB_String id = DB_MODELFACTORY->getRootId();
     mModel->setRoot(id);
 
     //
@@ -70,7 +70,7 @@ void DB_TestTableTreeWidget::init() {
 
     //
     // 1. Set child model
-    mChildModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTvTrvChild);
+    mChildModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTvTrvChild);
 
     // 2. Mapping
     mMapper = mChildModel->getMapper();

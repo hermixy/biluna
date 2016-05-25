@@ -10,8 +10,8 @@
 
 #include "db_actiontestdbobject.h"
 #include "db_modelfactory.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_mdiwindow.h"
 #include "rb_objectcontainer.h"
 
@@ -63,14 +63,14 @@ void DB_ActionTestDbObject::trigger() {
     // No preliminary checks required
 
     // Prepare model(s)
-//    RB_MmObjectInterface* model = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTest);
+//    RB_MmObjectInterface* model = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTest);
 //    model->setRoot(DB_MODELFACTORY->getRootId());
 
     // Create widget
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-            DB_TestDialogFactory::WidgetTestDbObject);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+            DB_DialogFactory::WidgetTestDbObject);
 //    DB_TestDbObjectWidget* tw = dynamic_cast<DB_TestDbObjectWidget*>(mdiWin->getWidget());
-//    tw->init(DB_TestModelFactory::ModelTest, DB_TestModelFactory::ModelTestChild);
+//    tw->init(DB_ModelFactory::ModelTest, DB_ModelFactory::ModelTestChild);
     mdiWin->show();
 }
 

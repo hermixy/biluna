@@ -10,8 +10,8 @@
 
 #include "db_actiontestdialogmodel.h"
 
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_mdiwindow.h"
 
 
@@ -61,25 +61,25 @@ RB_Action* DB_ActionTestDialogModel::factory() {
  */
 void DB_ActionTestDialogModel::trigger() {
     // Check if parent MDI window is active
-    if (!DB_TESTDIALOGFACTORY->isWidgetActive(DB_TestDialogFactory::WidgetTestTable)) {
-        DB_TESTDIALOGFACTORY->requestWarningDialog(tr("Could not open dialog,\n"
+    if (!DB_DIALOGFACTORY->isWidgetActive(DB_DialogFactory::WidgetTestTable)) {
+        DB_DIALOGFACTORY->requestWarningDialog(tr("Could not open dialog,\n"
                                                       "table Window not active."));
         return;
     }
 
 //    // Prepare model(s)
-//    RB_MmObjectInterface* parentModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTest);
+//    RB_MmObjectInterface* parentModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTest);
 //    QModelIndex parentIndex = parentModel->getCurrentIndex();
 //    if (!parentIndex.isValid()) {
-//        DB_TESTDIALOGFACTORY->requestWarningDialog(tr("No item selected, \n"
+//        DB_DIALOGFACTORY->requestWarningDialog(tr("No item selected, \n"
 //                                                      "could not open dialog."));
 //        return;
 //    }
-//    RB_MmObjectInterface* model = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestDialog);
+//    RB_MmObjectInterface* model = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestDialog);
 //    model->setRoot(parentIndex);
 
     // Create dialog
-    RB_Dialog* dlg = DB_TESTDIALOGFACTORY->getDialog(DB_TestDialogFactory::WidgetTestDialog);
+    RB_Dialog* dlg = DB_DIALOGFACTORY->getDialog(DB_DialogFactory::WidgetTestDialog);
     dlg->exec();
     delete dlg;
 }

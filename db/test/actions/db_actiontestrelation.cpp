@@ -11,9 +11,9 @@
 #include "db_actiontestrelation.h"
 
 #include "db_modelfactory.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
-#include "db_testobjectfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
+#include "db_objectfactory.h"
 #include "db_testtablewidget.h"
 #include "rb_mdiwindow.h"
 
@@ -55,7 +55,7 @@ void DB_ActionTestRelation::trigger() {
     // No model(s) to prepare
 
     // Create dialog
-    RB_Dialog* dlg = DB_TESTDIALOGFACTORY->getDialog(DB_TestDialogFactory::DialogTestRelation);
+    RB_Dialog* dlg = DB_DIALOGFACTORY->getDialog(DB_DialogFactory::DialogTestRelation);
     dlg->exec();
     delete dlg;
 }

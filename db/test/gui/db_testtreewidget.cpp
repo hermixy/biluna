@@ -13,7 +13,7 @@
 #include "db_actionfactory.h"
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
-#include "db_testmodelfactory.h"
+#include "db_modelfactory.h"
 #include "rb_datawidgetmapper.h"
 #include "rb_sqlrelationaldelegate.h"
 #include "rb_tedelegate.h"
@@ -47,8 +47,8 @@ void DB_TestTreeWidget::init() {
     //
     // 1. Set model with ID (sets root object) and/or query
     //
-    mModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestTree);
-    RB_String id = DB_TESTMODELFACTORY->getRootId();
+    mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestTree);
+    RB_String id = DB_MODELFACTORY->getRootId();
     mModel->setRoot(id);
 
     //
@@ -133,7 +133,7 @@ void DB_TestTreeWidget::init() {
     // (3. Root will be set by selecting row in parent model)
     // 4. connect to child (table) view
     //
-    mChildModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestTreeChild);
+    mChildModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestTreeChild);
     setFormatTableView(tvTableChild, mChildModel);
 
 

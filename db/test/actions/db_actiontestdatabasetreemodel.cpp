@@ -10,9 +10,9 @@
 
 #include "db_actiontestdatabasetreemodel.h"
 #include "db_modelfactory.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
-#include "db_testobjectfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
+#include "db_objectfactory.h"
 #include "db_testtreewidget.h"
 #include "rb_mdiwindow.h"
 
@@ -64,12 +64,12 @@ void DB_ActionTestDatabaseTreeModel::trigger() {
     // No preliminary checks rquired
 
     // Prepare model(s)
-//    RB_MmObjectInterface* model = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestTree);
+//    RB_MmObjectInterface* model = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestTree);
 //    model->setRoot(DB_MODELFACTORY->getRootId());
 
     // Create widget
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(DB_TestDialogFactory::WidgetTestTree);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(DB_DialogFactory::WidgetTestTree);
 //    DB_TestTreeWidget* tw = dynamic_cast<DB_TestTreeWidget*>(mdiWin->getWidget());
-//    tw->init(DB_TestModelFactory::ModelTestTree, DB_TestModelFactory::ModelTestTreeChild);
+//    tw->init(DB_ModelFactory::ModelTestTree, DB_ModelFactory::ModelTestTreeChild);
     mdiWin->show();
 }

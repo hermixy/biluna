@@ -9,9 +9,9 @@
  *****************************************************************/
 
 #include "db_actiontestinmemorytreemodel.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
-#include "db_testobjectfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
+#include "db_objectfactory.h"
 #include "rb_mdiwindow.h"
 
 
@@ -47,8 +47,8 @@ RB_GuiAction* DB_ActionTestInMemoryTreeModel::createGuiAction() {
 }
 
 RB_Action* DB_ActionTestInMemoryTreeModel::factory() {
-//    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-//            DB_TestDialogFactory::WidgetTestTree);
+//    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+//            DB_DialogFactory::WidgetTestTree);
 //    DB_TestTreeWidget* tw = dynamic_cast<DB_TestTreeWidget*>(mdiWin->getWidget());
 //
 //    if (mdiWin && tw) {
@@ -68,8 +68,8 @@ RB_Action* DB_ActionTestInMemoryTreeModel::factory() {
  */
 void DB_ActionTestInMemoryTreeModel::trigger() {
     // Prepare model(s) if required
-//    RB_MmObjectInterface* model = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestTree);
-//    model->setRoot(DB_TESTMODELFACTORY->getRoot()); // only for main models
+//    RB_MmObjectInterface* model = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestTree);
+//    model->setRoot(DB_MODELFACTORY->getRoot()); // only for main models
 
     // fill model with some rows
 //    model->insertRows(0, 1, QModelIndex());
@@ -82,9 +82,9 @@ void DB_ActionTestInMemoryTreeModel::trigger() {
 //    model->insertRows(0, 1, child);
 
     // Set and activate models
-//    mTreeWidget->init(DB_TestModelFactory::ModelTestTree, DB_TestModelFactory::ModelTestTreeChild);
+//    mTreeWidget->init(DB_ModelFactory::ModelTestTree, DB_ModelFactory::ModelTestTreeChild);
 
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-            DB_TestDialogFactory::WidgetTestTree);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+            DB_DialogFactory::WidgetTestTree);
     mdiWin->show();
 }

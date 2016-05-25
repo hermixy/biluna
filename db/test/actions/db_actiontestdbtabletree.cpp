@@ -10,9 +10,9 @@
 
 #include "db_actiontestdbtabletree.h"
 #include "db_modelfactory.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
-#include "db_testobjectfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
+#include "db_objectfactory.h"
 #include "db_testtreewidget.h"
 #include "rb_mdiwindow.h"
 
@@ -64,6 +64,6 @@ void DB_ActionTestDbTableTree::trigger() {
     // No preliminary checks rquired
 
     // Create widget
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(DB_TestDialogFactory::WidgetTestTableTree);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(DB_DialogFactory::WidgetTestTableTree);
     mdiWin->show();
 }

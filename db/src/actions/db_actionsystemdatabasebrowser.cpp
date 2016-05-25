@@ -67,7 +67,7 @@ RB_Action* DB_ActionSystemDatabaseBrowser::factory() {
 //    //
 //    // Prepare models
 //    //
-//    RB_MmObjectInterface* model = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTest);
+//    RB_MmObjectInterface* model = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTest);
 //    model->setMainModel(true);
 //    model->setRoot(); // equal to mModel->setRoot("");
 //
@@ -77,7 +77,7 @@ RB_Action* DB_ActionSystemDatabaseBrowser::factory() {
 //
 //    // Child model and connect to child (table view),
 ////    RB_MmObjectInterface* childModel = DB_MmTestChild::getInstance();
-//    RB_MmObjectInterface* childModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestChild);
+//    RB_MmObjectInterface* childModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestChild);
 //    childModel->setModel("DB_TestChildList", model);
 //
 //    // Activate models

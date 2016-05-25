@@ -56,7 +56,7 @@ void DB_ActionFileNewHtmlView::trigger() {
             DB_DialogFactory::WidgetInternet);
     if (!mdiWin) return;
 //    DB_HtmlViewWidget* wdgt = dynamic_cast<DB_HtmlViewWidget*>(mdiWin->getWidget());
-//    tw->init(DB_TestModelFactory::ModelTest, DB_TestModelFactory::ModelTestChild);
+//    tw->init(DB_ModelFactory::ModelTest, DB_ModelFactory::ModelTestChild);
 
     DB_InternetBrowserWidget* wdgt = dynamic_cast<DB_InternetBrowserWidget*>(mdiWin->getWidget());
 

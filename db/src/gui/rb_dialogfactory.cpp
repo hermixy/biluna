@@ -105,14 +105,16 @@ RB_MdiWindow* RB_DialogFactory::getMdiWindow(int type, const RB_String& docName,
         // parent can be NULL because RB_MdiWindow will be parent
         // when widget is set as centralWidget
         RB_Widget* wgt = getWidget(type, NULL);
-        wgt->setName(docName);
-        wgt->setIsNewWidget(isNewWidget);
 
         if (wgt) {
+            wgt->setName(docName);
+            wgt->setIsNewWidget(isNewWidget);
             mdiWindow = new RB_MdiWindow(mMainWindow, wgt);
             mMainWindow->getMdiArea()->addSubWindow(mdiWindow);
             wgt->setParent(mdiWindow);
             wgt->init(); // here because widget->init() will set size of MDI window
+        } else {
+            RB_DEBUG->error("RB_DialogFactory::getMdiWindow() wgt NULL ERROR");
         }
     }
 

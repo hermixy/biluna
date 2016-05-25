@@ -62,12 +62,18 @@ public:
      * Refer also WidgetType and DialogType
      */
     enum ModelType {
+#ifdef DB_TEST
         // start numbering from 101000
-//        ModelTest = 101000,             /**< Table model */
-//        ModelTestChild,                 /**< Child table model */
-//        ModelTestDialog,                /**< Dialog model */
-//        ModelTestTree,                  /**< Tree model */
-//        ModelTestTreeChild,             /**< Child Tree model */
+        ModelTest = 101000,                 /**< Table model */
+        ModelTestChild,                     /**< Child table model */
+        ModelTestDialog,                    /**< Dialog model */
+        ModelTestProject,                   /**< Test project model */
+        ModelTestRelation,                  /**< Test relation table model */
+        ModelTestTree,                      /**< Tree model */
+        ModelTestTreeChild,                 /**< Child Tree model */
+        ModelTvTrv,                         /**< Tableparent (treechild) model */
+        ModelTvTrvChild,                    /**< (Tableparent) treechild model */
+#endif
         // start numbering from 101100
         ModelNone = 101100,                 /**< Invalid model */
         ModelActivity,                      /**< (Calendar) activity model */

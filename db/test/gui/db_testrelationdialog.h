@@ -14,7 +14,7 @@
 #include <QtGui>
 #include "db_modelfactory.h"
 #include "db_tabledialog.h"
-#include "db_testmodelfactory.h"
+#include "db_modelfactory.h"
 
 
 class DB_TestRelationDialog : public DB_TableDialog {
@@ -34,12 +34,12 @@ public:
     }
 
     void init() {
-        RB_ObjectBase* root = DB_TESTMODELFACTORY->getRoot();
+        RB_ObjectBase* root = DB_MODELFACTORY->getRoot();
         leRoot->setText(root->getValue("number").toString());
 
         // set model
-        mModel = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTestRelation);
-        mModel->setRoot(DB_TESTMODELFACTORY->getRootId());
+        mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestRelation);
+        mModel->setRoot(DB_MODELFACTORY->getRootId());
         mModel->select();
 
         setWindowTitle(tr("Select test project"));

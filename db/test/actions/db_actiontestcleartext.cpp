@@ -9,7 +9,7 @@
  *****************************************************************/
 
 #include "db_actiontestcleartext.h"
-#include "db_testdialogfactory.h"
+#include "db_dialogfactory.h"
 #include "db_testtextwidget.h"
 #include "rb_mdiwindow.h"
 
@@ -72,8 +72,8 @@ RB_Action* DB_ActionTestClearText::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionTestClearText::trigger() {
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-            DB_TestDialogFactory::WidgetTestText);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+            DB_DialogFactory::WidgetTestText);
     DB_TestTextWidget* tw = dynamic_cast<DB_TestTextWidget*>(mdiWin->getWidget());
 
     tw->slotClearText();

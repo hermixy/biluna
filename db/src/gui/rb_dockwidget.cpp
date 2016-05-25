@@ -34,9 +34,9 @@ RB_DockWidget::RB_DockWidget(RB_MainWindow* mw, RB_Widget* mwgt) : QDockWidget(m
     setObjectName("RB_DockWidget");
     setWindowIcon(QIcon(":/images/biluna16.png"));
     setAttribute(Qt::WA_DeleteOnClose, false);
-
-    connect(this, SIGNAL(windowStateChanged(Qt::WindowStates, Qt::WindowStates)),
-            this, SLOT(slotWindowStateHasChanged(Qt::WindowStates, Qt::WindowStates)));
+// windowStateChanged does not exist anymore
+//    connect(this, SIGNAL(windowStateChanged(Qt::WindowStates, Qt::WindowStates)),
+//            this, SLOT(slotWindowStateHasChanged(Qt::WindowStates, Qt::WindowStates)));
 //    connect(mCentralWidget, SIGNAL(modificationChanged(bool)),
 //            this, SLOT(slotChangedModification(bool)));
     connect(mCentralWidget, SIGNAL(widgetClose()), this, SLOT(close()));
@@ -142,15 +142,15 @@ void RB_DockWidget::show() {
  * @param oldState
  * @param newState
  */
-void RB_DockWidget::slotWindowStateHasChanged(Qt::WindowStates /* oldState */,
-                                         Qt::WindowStates newState) {
-    if (newState & Qt::WindowActive) {
-        emit refreshToggledActions(mCentralWidget->getPerspectiveType());
-        mCentralWidget->setEnabled(true);
-    } else {
-        mCentralWidget->setEnabled(false);
-    }
-}
+//void RB_DockWidget::slotWindowStateHasChanged(Qt::WindowStates /* oldState */,
+//                                         Qt::WindowStates newState) {
+//    if (newState & Qt::WindowActive) {
+//        emit refreshToggledActions(mCentralWidget->getPerspectiveType());
+//        mCentralWidget->setEnabled(true);
+//    } else {
+//        mCentralWidget->setEnabled(false);
+//    }
+//}
 
 /**
  * Set window is modified state when model/document is changed or saved

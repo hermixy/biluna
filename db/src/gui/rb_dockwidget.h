@@ -53,8 +53,8 @@ signals:
 
 public slots:
     virtual void show(); // QMdiSubWindow::show() is not virtual
-    virtual void slotWindowStateHasChanged(Qt::WindowStates oldState,
-                                           Qt::WindowStates newState);
+//    virtual void slotWindowStateHasChanged(Qt::WindowStates oldState,
+//                                           Qt::WindowStates newState);
 //    virtual void slotChangedModification(bool changed);
 
 protected:

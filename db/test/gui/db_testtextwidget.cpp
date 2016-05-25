@@ -13,21 +13,26 @@
 DB_TestTextWidget::DB_TestTextWidget(QWidget* parent) : RB_Widget(parent){
     setupUi(this);
 
-    connect(textEdit, SIGNAL(textChanged()), this, SLOT(slotTextIsChanged()));
+    connect(textEdit, SIGNAL(textChanged()),
+            this, SLOT(slotTextIsChanged()));
+}
+
+void DB_TestTextWidget::init() {
+    readSettings();
 }
 
 /**
  * Slot: clear text widget
  */
 void DB_TestTextWidget::slotClearText() {
-    this->textEdit->clear();
+    textEdit->clear();
 }
 
 /**
  * Slot: text has changed, to transmit signal to MDI window
  */
 void DB_TestTextWidget::slotTextIsChanged() {
-    this->slotDataIsChanged(QModelIndex(), QModelIndex());
+    slotDataIsChanged(QModelIndex(), QModelIndex());
 }
 
 void DB_TestTextWidget::appendText(const RB_String& str) {

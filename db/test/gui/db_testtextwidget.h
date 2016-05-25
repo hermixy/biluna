@@ -28,11 +28,7 @@ public:
     virtual RB_String getName() const { return "Test Text"; }
     virtual RB2::PerspectiveType getPerspectiveType() const { return RB2::PerspectiveTEST; }
 
-    virtual void init(int, int, int) {
-        // catch close() signal from MDI window,
-        // not in constructor because parent is not yet set
-        RB_Widget::init();
-    }
+    void init();
 
     virtual void appendText(const RB_String& str);
     virtual bool closeWidget() { return true; }

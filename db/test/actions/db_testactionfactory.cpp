@@ -29,7 +29,8 @@
 #include "db_actiontestobject.h"
 #include "db_actiontestrelation.h"
 #include "db_actiontestsystemselectproject.h"
-#include "db_testdialogfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 
 
 DB_TestActionFactory* DB_TestActionFactory::mActiveFactory = 0;
@@ -116,7 +117,7 @@ void DB_TestActionFactory::getTestMenu(QMenu* menu, QToolBar* tb = NULL) {
     menu->addAction(ga);
     tb->addAction(ga);
     ga->setEnabled(false);
-    ga->addEnabledType(DB_TestDialogFactory::WidgetTestText);
+    ga->addEnabledType(DB_DialogFactory::WidgetTestText);
     connect(mMainWindow, SIGNAL(subWindowChanged(int)),
             ga, SLOT(slotSetEnabled(int)));
 
@@ -126,8 +127,8 @@ void DB_TestActionFactory::getTestMenu(QMenu* menu, QToolBar* tb = NULL) {
     menu->addAction(ga);
     tb->addAction(ga);
     ga->setEnabled(false);
-    ga->addEnabledType(DB_TestDialogFactory::WidgetTestTable);
-    ga->addEnabledType(DB_TestDialogFactory::WidgetTestTree);
+    ga->addEnabledType(DB_DialogFactory::WidgetTestTable);
+    ga->addEnabledType(DB_DialogFactory::WidgetTestTree);
     connect(mMainWindow, SIGNAL(subWindowChanged(int)),
             ga, SLOT(slotSetEnabled(int)));
 }

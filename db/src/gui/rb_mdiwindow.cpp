@@ -30,6 +30,7 @@ RB_MdiWindow::RB_MdiWindow(RB_MainWindow* mw, RB_Widget* mwgt)
     mCentralWidget = mwgt;
 
     setWidget(mCentralWidget);
+    setObjectName("RB_MdiWindow");
     setWindowIcon(QIcon(":/images/biluna16.png"));
     setAttribute(Qt::WA_DeleteOnClose);
 

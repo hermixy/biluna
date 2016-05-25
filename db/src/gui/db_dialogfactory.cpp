@@ -38,7 +38,13 @@
 #include "db_simplereportwidget.h"
 #include "db_systemgroupdialog.h"
 #ifdef DB_TEST
+#include "db_testdbobjectwidget.h"
+#include "db_testrelationdialog.h"
 #include "db_testselectprojectwidget.h"
+#include "db_testtabletreewidget.h"
+#include "db_testtablewidget.h"
+#include "db_testtextwidget.h"
+#include "db_testtreewidget.h"
 #endif
 #include "db_textwidget.h"
 #include "db_versiondialog.h"
@@ -212,28 +218,28 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
 #ifdef DB_TEST
     case WidgetTestDbObject:
     {
-//        wgt = new DB_TestDbObjectWidget(parent);
+        wgt = new DB_TestDbObjectWidget(parent);
         break;
 
     }
     case WidgetTestTable:
     {
-//        wgt = new DB_TestTableWidget(parent);
+        wgt = new DB_TestTableWidget(parent);
         break;
     }
     case WidgetTestTableTree:
     {
-//        wgt = new DB_TestTableTreeWidget(parent);
+        wgt = new DB_TestTableTreeWidget(parent);
         break;
     }
     case WidgetTestText:
     {
-//        wgt = new DB_TestTextWidget(parent);
+        wgt = new DB_TestTextWidget(parent);
         break;
     }
     case WidgetTestTree:
     {
-//        wgt = new DB_TestTreeWidget(parent);
+        wgt = new DB_TestTreeWidget(parent);
         break;
     }
     case WidgetTestSelectProject :

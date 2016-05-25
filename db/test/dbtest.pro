@@ -123,7 +123,7 @@ HEADERS += \
     ../../db/test/actions/db_testactionfactory.h \
     ../../db/test/gui/db_testdbobjectwidget.h \
     ../../db/test/gui/db_testdlgdialog.h \
-    ../../db/test/gui/db_testdialogfactory.h \
+#    ../../db/test/gui/db_testdialogfactory.h \
     ../../db/test/gui/db_testmainwindow.h \
     ../../db/test/gui/db_testrelationdialog.h \
     ../../db/test/gui/db_testselectprojectwidget.h \
@@ -135,8 +135,8 @@ HEADERS += \
     ../../db/test/model/db_test.h \
     ../../db/test/model/db_testchild.h \
     ../../db/test/model/db_testdlg.h \
-    ../../db/test/model/db_testmodelfactory.h \
-    ../../db/test/model/db_testobjectfactory.h \
+#    ../../db/test/model/db_testmodelfactory.h \
+#    ../../db/test/model/db_testobjectfactory.h \
     ../../db/test/model/db_testproject.h \
     ../../db/test/model/db_testrelation.h
 
@@ -161,7 +161,7 @@ SOURCES += \
     ../../db/test/actions/db_actiontoolssignalspy.cpp \
     ../../db/test/actions/db_testactionfactory.cpp \
     ../../db/test/gui/db_testdbobjectwidget.cpp \
-    ../../db/test/gui/db_testdialogfactory.cpp \
+#    ../../db/test/gui/db_testdialogfactory.cpp \
     ../../db/test/gui/db_testmainwindow.cpp \
     ../../db/test/gui/db_testselectprojectwidget.cpp \
     ../../db/test/gui/db_testtablewidget.cpp \
@@ -172,7 +172,7 @@ SOURCES += \
     ../../db/test/model/db_test.cpp \
     ../../db/test/model/db_testdlg.cpp \
     ../../db/test/model/db_testchild.cpp \
-    ../../db/test/model/db_testmodelfactory.cpp \
-    ../../db/test/model/db_testobjectfactory.cpp \
+#    ../../db/test/model/db_testmodelfactory.cpp \
+#    ../../db/test/model/db_testobjectfactory.cpp \
     ../../db/test/model/db_testproject.cpp \
     ../../db/test/model/db_testrelation.cpp

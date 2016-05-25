@@ -9,9 +9,9 @@
  *****************************************************************/
 
 #include "db_actiontestinmemorymodel.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
-#include "db_testobjectfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
+#include "db_objectfactory.h"
 #include "rb_mdiwindow.h"
 
 
@@ -47,8 +47,8 @@ RB_GuiAction* DB_ActionTestInMemoryModel::createGuiAction() {
 }
 
 RB_Action* DB_ActionTestInMemoryModel::factory() {
-//    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-//            DB_TestDialogFactory::WidgetTestTable);
+//    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+//            DB_DialogFactory::WidgetTestTable);
 //    DB_TestTableWidget* tw = dynamic_cast<DB_TestTableWidget*>(mdiWin->getWidget());
 //
 //    if (mdiWin && tw) {
@@ -68,13 +68,13 @@ RB_Action* DB_ActionTestInMemoryModel::factory() {
  */
 void DB_ActionTestInMemoryModel::trigger() {
     // Prepare model(s) if required
-//    RB_MmObjectInterface* model = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTest);
-//    model->setRoot(DB_TESTMODELFACTORY->getRoot()); // only for main models
+//    RB_MmObjectInterface* model = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTest);
+//    model->setRoot(DB_MODELFACTORY->getRoot()); // only for main models
 //
 //    // Activate models
-//    mTableWidget->init(DB_TestModelFactory::ModelTest, DB_TestModelFactory::ModelTestChild);
+//    mTableWidget->init(DB_ModelFactory::ModelTest, DB_ModelFactory::ModelTestChild);
 
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-            DB_TestDialogFactory::WidgetTestTable);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+            DB_DialogFactory::WidgetTestTable);
     mdiWin->show();
 }

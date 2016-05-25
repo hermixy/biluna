@@ -141,6 +141,37 @@ RB_MmProxy* DB_ModelFactory::getModel(int type, bool shared) {
     case ModelSystemUserGroup:
         model = getTableModel(db, mObjectFactory, type, "DB_SystemUserGroupList", shared);
         break;
+#ifdef DB_TEST
+    case ModelTest:
+        model = getTableModel(db, mObjectFactory, type, "DB_TestList", shared);
+        break;
+    case ModelTestChild:
+        model = getTableModel(db, mObjectFactory, type, "DB_TestChildList", shared);
+        break;
+    case ModelTestDialog:
+        model = getTableModel(db, mObjectFactory, type, "DB_TestDlgList", shared);
+        break;
+    case ModelTestProject:
+        model = getTableModel(db, mObjectFactory, type, "DB_TestProjectList", shared);
+        break;
+    case ModelTestRelation:
+        model = getTableModel(db, mObjectFactory, type, "DB_TestRelationList", shared);
+        break;
+    case ModelTestTree:
+        model = getTreeModel(db, mObjectFactory, type, "DB_TestList", shared);
+        break;
+    case ModelTestTreeChild:
+        model = getTableModel(db, mObjectFactory, type, "DB_TestChildList", shared);
+        break;
+    case ModelTvTrv:
+        model = getTableModel(db, mObjectFactory, type, "DB_TestList", shared);
+        model->setSourceSortOrder(RB2::SortOrderDescending, "value1");
+        break;
+    case ModelTvTrvChild:
+        model = getTreeModel(db, mObjectFactory, type, "DB_TestChildList", shared);
+        model->setSourceSortOrder(RB2::SortOrderDescending, "number");
+        break;
+#endif
     case ModelVersion:
         model = getTableModel(db, mObjectFactory, type, "DB_VersionList", shared);
         model->setSourceSortOrder(RB2::SortOrderDescending, "perspectivecode");
@@ -198,6 +229,36 @@ RB_MmProxy* DB_ModelFactory::getParentModel(int type) {
     case ModelSystemUserGroup:
         iter = mModelList.find(ModelSystemUser);
         break;
+    case ModelTest:
+        // mModelList is a std::map<int, RB_MmObjectInterface*>
+        iter = mModelList.find(ModelNone);
+        break;
+#ifdef DB_TEST
+    case ModelTestChild:
+        iter = mModelList.find(ModelTest);
+        break;
+    case ModelTestDialog:
+        iter = mModelList.find(ModelTest);
+        break;
+    case ModelTestProject:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelTestRelation:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelTestTree:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelTestTreeChild:
+        iter = mModelList.find(ModelTestTree);
+        break;
+    case ModelTvTrv:
+        iter = mModelList.find(ModelTestTree);
+        break;
+    case ModelTvTrvChild:
+        iter = mModelList.find(ModelTvTrv);
+        break;
+#endif
     case ModelVersion:
         iter = mModelList.find(ModelNone);
         break;

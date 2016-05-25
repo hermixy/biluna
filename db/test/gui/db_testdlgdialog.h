@@ -13,7 +13,7 @@
 
 #include <QtGui>
 #include "db_modelfactory.h"
-#include "db_testmodelfactory.h"
+#include "db_modelfactory.h"
 #include "rb_dialogbase.h"
 
 class DB_TestDlgDialog : public RB_DialogBase {
@@ -36,7 +36,7 @@ public:
         RB_ModelFactory* mf = DB_MODELFACTORY;
 
         // Get parent object data
-        RB_MmProxy* pMm = mf->getParentModel(DB_TestModelFactory::ModelTestDialog);
+        RB_MmProxy* pMm = mf->getParentModel(DB_ModelFactory::ModelTestDialog);
         if (!pMm) {
             RB_DEBUG->print(RB_Debug::D_ERROR,
                             "Dialog::init() no parent model ERROR");
@@ -54,7 +54,7 @@ public:
                                            Qt::DisplayRole).toString());
 
         // set model
-        mModel = mf->getModel(DB_TestModelFactory::ModelTestDialog, false);
+        mModel = mf->getModel(DB_ModelFactory::ModelTestDialog, false);
 
         setWindowTitle(tr("Dialog"));
         lblRoot->setText(tr("Root"));

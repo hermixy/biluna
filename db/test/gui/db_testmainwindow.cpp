@@ -14,9 +14,9 @@
 #include "db_dialogfactory.h"
 #include "db_internetbrowserfactory.h"
 #include "db_testactionfactory.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
-#include "db_testobjectfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
+#include "db_objectfactory.h"
 #include "rb_dockwidget.h"
 #include "rb_mdiwindow.h"
 
@@ -27,14 +27,13 @@ DB_TestMainWindow::DB_TestMainWindow(QWidget* parent, Qt::WindowFlags flags)
             : RB_MainWindow(parent, flags) {
     RB_DEBUG->print("DB_TestMainWindow::DB_TestMainWindow()");
 
-//    DB_ModelFactory::getInstance(this);
-//    DB_DialogFactory::getInstance(this);
-//    DB_ActionFactory::getInstance(this);
-//    DB_UtilityFactory::getInstance();
-//    DB_TestModelFactory::getInstance(this);
-//    DB_TestDialogFactory::getInstance(this);
-//    DB_TestActionFactory::getInstance(this);
+    // In RB_MainWindow
+    // DB_ModelFactory::getInstance(this);
+    // DB_DialogFactory::getInstance(this);
+    // DB_ActionFactory::getInstance(this);
+    // DB_UtilityFactory::getInstance();
 
+    DB_TestActionFactory::getInstance(this);
     initActions();
     initViews();
 
@@ -45,6 +44,8 @@ DB_TestMainWindow::DB_TestMainWindow(QWidget* parent, Qt::WindowFlags flags)
  * Destructor
  */
 DB_TestMainWindow::~DB_TestMainWindow() {
+    // Delete of DB_TestActionFactory not required
+    // because factory is registered with DB_ActionFactory
     RB_DEBUG->print("DB_TestMainWindow::~DB_TestMainWindow() OK");
 }
 
@@ -61,9 +62,9 @@ void DB_TestMainWindow::slotFileNew() {
     mMdiArea->closeAllSubWindows();
     QList<QMdiSubWindow*> list = mMdiArea->subWindowList();
     list.clear();
-    DB_TESTMODELFACTORY->setRoot();
+    DB_MODELFACTORY->setRoot();
     // Get subwindow, for example from db_actiontestinmemorymodel.h
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(DB_TestDialogFactory::WidgetTestTable);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(DB_DialogFactory::WidgetTestTable);
     mdiWin->show();
 }
 
@@ -199,7 +200,7 @@ void DB_TestMainWindow::initViews() {
     RB_DEBUG->print("  command widget..");
 
     dw = DB_DIALOGFACTORY->getDockWidget(DB_DialogFactory::WidgetCommand,
-                                         "RB_DockWidget", Qt::BottomDockWidgetArea);
+                                         Qt::BottomDockWidgetArea);
     dw->setMinimumHeight(30);
     dw->hide();
 }

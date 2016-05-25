@@ -1382,28 +1382,37 @@ void RB_Widget::formatTreeView(RB_TreeView* trv, RB_MmProxy* m) {
  * of widget implementation
  */
 void RB_Widget::readSettings() {
-    if (!mDialogFactory) {
-        RB_DEBUG->error(
-                    "RB_Widget::readSettings() mDialogFactory not set ERROR");
+    if (!mDialogFactory || !parentWidget()) {
+        RB_DEBUG->error("RB_Widget::readSettings() "
+                        "mDialogFactory or parentWidget() NULL ERROR");
         return;
     }
 
+    // Widget object name
     RB_SETTINGS->beginGroup(objectName());
-    RB_DialogWindow* dlgW = dynamic_cast<RB_DialogWindow*>(parentWidget());
+    RB_DEBUG->print(objectName() + " - " + parentWidget()->objectName());
 
-    if (dlgW) {
-        // parent is RB_DialogWindow
-        QSize dlgSize = RB_SETTINGS->value("size", dlgW->sizeHint()).toSize();
-        dlgW->resize(dlgSize);
-    } else {
-        // parent is RB_MdiWindow
+    if (parentWidget()->objectName() == "RB_DialogWindow") {
+        QSize dlgSize = RB_SETTINGS->value(
+                    "size", parentWidget()->sizeHint()).toSize();
+        parentWidget()->resize(dlgSize);
+    } else if (parentWidget()->objectName() == "RB_MdiWindow") {
         QMdiArea* mdiArea = mDialogFactory->getMainWindow()->getMdiArea();
-        if (parentWidget() && mdiArea->viewMode() != QMdiArea::TabbedView) {
+
+        if (mdiArea && mdiArea->viewMode() != QMdiArea::TabbedView) {
             QPoint point = RB_SETTINGS->value("parentpos",
                                               QPoint(10, 10)).toPoint();
-            parentWidget()->move(point);
             QSize size = RB_SETTINGS->value("parentsize",
                                             parentWidget()->sizeHint()).toSize();
+
+            if (point.x() < 0 || mdiArea->size().width() - 10 < point.x()
+                    || point.y() < 0 || mdiArea->size().height() - 10 < point.y()) {
+                // ensure visibility
+                point.setX(10);
+                point.setY(10);
+            }
+
+            parentWidget()->move(point);
             parentWidget()->resize(size);
         }
 
@@ -1438,7 +1447,8 @@ void RB_Widget::readChildrenSettings(QWidget* wObj) {
             int colCount = 20;
 
             for (int col = 0; col < colCount; ++col) {
-                int width = RB_SETTINGS->value(tv->objectName() + "_col" + RB_String::number(col), -1).toInt();
+                int width = RB_SETTINGS->value(tv->objectName() + "_col"
+                                               + RB_String::number(col), -1).toInt();
 
                 if (width > 0) {
                     tv->horizontalHeader()->resizeSection(col, width);
@@ -1449,7 +1459,8 @@ void RB_Widget::readChildrenSettings(QWidget* wObj) {
             int colCount = 20;
 
             for (int col = 0; col < colCount; ++col) {
-                int width = RB_SETTINGS->value(trv->objectName() + "_col" + RB_String::number(col), -1).toInt();
+                int width = RB_SETTINGS->value(trv->objectName() + "_col"
+                                               + RB_String::number(col), -1).toInt();
 
                 if (width > 0) {
                     trv->header()->resizeSection(col, width);
@@ -1469,32 +1480,28 @@ void RB_Widget::readChildrenSettings(QWidget* wObj) {
  * Write widget size settings
  */
 void RB_Widget::writeSettings() {
-    if (!mDialogFactory) {
-        RB_DEBUG->error(
-                    "RB_Widget::writeSettings() mDialogFactory not set ERROR");
+    if (!mDialogFactory || !parentWidget()) {
+        RB_DEBUG->error("RB_Widget::writeSettings() "
+                        "mDialogFactory or parentWidget() NULL ERROR");
         return;
     }
 
+    // Widget object name
     RB_SETTINGS->beginGroup(objectName());
     RB_DEBUG->print(objectName() + " - " + parentWidget()->objectName());
-    // RB_DialogWindow* dlgW = dynamic_cast<RB_DialogWindow*>(parentWidget());
-    // QDockWidget* dckW = dynamic_cast<QDockWidget*>(parentWidget());
 
-    // HACK: above cast does not work, therefor objectname comparison
+    // HACK: cast comparison did not work, therefor objectname comparison
     if (parentWidget()->objectName() == "RB_DialogWindow") {
-        // parent is RB_DialogWindow
         RB_SETTINGS->setValue("size", parentWidget()->size());
-    } else {
-        // parent is RB_MdiWindow
+    } else if (parentWidget()->objectName() == "RB_MdiWindow") {
         QMdiArea* mdiArea = mDialogFactory->getMainWindow()->getMdiArea();
 
-        if (parentWidget()
-                && mdiArea->viewMode() != QMdiArea::TabbedView
+        if (mdiArea && mdiArea->viewMode() != QMdiArea::TabbedView
                 && !parentWidget()->isMinimized()) {
             RB_SETTINGS->setValue("parentpos", parentWidget()->pos());
             RB_SETTINGS->setValue("parentsize", parentWidget()->size());
         }
-    }
+    } // Nothing yet on RB_DockWindow
 
     writeChildrenSettings(this);
     RB_SETTINGS->endGroup();

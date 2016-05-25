@@ -9,8 +9,8 @@
  *****************************************************************/
 
 #include "db_actiontestobject.h"
-#include "db_testdialogfactory.h"
-#include "db_testmodelfactory.h"
+#include "db_dialogfactory.h"
+#include "db_modelfactory.h"
 #include "rb_mdiwindow.h"
 #include "rb_objectcontainer.h"
 
@@ -58,8 +58,8 @@ RB_Action* DB_ActionTestObject::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionTestObject::trigger() {
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-            DB_TestDialogFactory::WidgetTestText);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+            DB_DialogFactory::WidgetTestText);
     DB_TestTextWidget* tw = dynamic_cast<DB_TestTextWidget*>(mdiWin->getWidget());
 
     tw->slotClearText();
@@ -126,7 +126,7 @@ void DB_ActionTestObject::writeModel(RB_String& str, RB_ObjectBase* obj, bool wr
 }
 
 void DB_ActionTestObject::writeModelFunctionTest(DB_TestTextWidget* tw) {
-    RB_MmProxy* m = DB_TESTMODELFACTORY->getModel(DB_TestModelFactory::ModelTest);
+    RB_MmProxy* m = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTest);
     m->setRoot("");
     RB_String str = "\n\nTODO: For ID = 111 value2 = " + m->getValue("111", "value2").toString();
     tw->appendText(str);

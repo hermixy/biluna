@@ -187,20 +187,17 @@ void BIL_MainWindow::initActions() {
 }
 
 void BIL_MainWindow::initViews() {
+    RB_DockWidget* dw = NULL;
 
     // ...
 
     RB_DEBUG->print("  command widget..");
-    RB_DockWidget* dw = new RB_DockWidget(this, NULL);
-    RB_Widget* wgt = DB_DIALOGFACTORY->getWidget(DB_DialogFactory::WidgetCommand, dw);
-    dw->setWidget(wgt);
-    dw->setAttribute(Qt::WA_DeleteOnClose, false); // otherwise perhaps true
-//    connect(this, SIGNAL(windowsChanged(bool)), wgt, SLOT(setEnabled(bool)));
+
+    dw = DB_DIALOGFACTORY->getDockWidget(DB_DialogFactory::WidgetCommand, 
+                                         Qt::BottomDockWidgetArea);
     dw->setMinimumHeight(30);
-    dw->setWindowTitle(wgt->getName());
-    dw->setObjectName("dockwidget_commandline");
-    addDockWidget(Qt::BottomDockWidgetArea, dw);
     dw->hide();
+
 }
 
 /**

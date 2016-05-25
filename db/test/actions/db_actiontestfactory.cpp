@@ -10,8 +10,8 @@
 
 #include "db_actiontestfactory.h"
 #include "db_objectfactory.h"
-#include "db_testdialogfactory.h"
-#include "db_testobjectfactory.h"
+#include "db_dialogfactory.h"
+#include "db_objectfactory.h"
 #include "rb_mdiwindow.h"
 #include "rb_objectcontainer.h"
 
@@ -49,8 +49,8 @@ RB_GuiAction* DB_ActionTestFactory::createGuiAction() {
 }
 
 RB_Action* DB_ActionTestFactory::factory() {
-    RB_MdiWindow* mdiWin = DB_TESTDIALOGFACTORY->getMdiWindow(
-            DB_TestDialogFactory::WidgetTestText);
+    RB_MdiWindow* mdiWin = DB_DIALOGFACTORY->getMdiWindow(
+            DB_DialogFactory::WidgetTestText);
     DB_TestTextWidget* tw = dynamic_cast<DB_TestTextWidget*>(mdiWin->getWidget());
 
     if (mdiWin && tw) {
@@ -127,11 +127,11 @@ void DB_ActionTestFactory::trigger() {
     delete DB_OBJECTFACTORY;
 
     str = "MainWindow::testFactory() (7) DB_TESTOBJECTFACTORY:";
-    root = DB_TESTOBJECTFACTORY->getModelStructure("DB_TestProject");
+    root = DB_OBJECTFACTORY->getModelStructure("DB_TestProject");
     writeModel(str, root, writeMembers);
     mTextWidget->appendText(str);
 
-    delete DB_TESTOBJECTFACTORY;
+    delete DB_OBJECTFACTORY;
 }
 
 /**
