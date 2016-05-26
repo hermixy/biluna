@@ -47,7 +47,7 @@ void DB_TestTableWidget::init() {
     // 1. Set model with ID (sets root object) and/or query
     //
     mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTest);
-    RB_String id = DB_MODELFACTORY->getRootId();
+    RB_String id = DB_MODELFACTORY->getTestRootId();
     mModel->setRoot(id);
 
 //    RB_ObjectBase* root = mModel->getRoot();
@@ -69,6 +69,7 @@ void DB_TestTableWidget::init() {
     mMapper->addMapping(leName, mModel->fieldIndex("name"));
     mMapper->addMapping(leValue1, mModel->fieldIndex("value1"));
     mMapper->addMapping(leValue2, mModel->fieldIndex("value2"));
+    mMapper->addMapping(uleValue3, mModel->fieldIndex("value3"));
 
     // use propertyName from QComboBox as "currentText" user properties
     // also possible, however currentIndex only is working correctly
@@ -140,9 +141,11 @@ void DB_TestTableWidget::init() {
     //
     // 4. Connect model to main view
     //
-    setFormatTableView(tvParent, mModel);
+    formatTableView(tvParent, mModel);
     tvParent->setItemDelegateForColumn(mModel->fieldIndex("text"),
                                        new RB_TeDelegate(this));
+    tbbParent->initTest();
+    tvParent->setToolButtonBar(tbbParent);
 
     //
     // 1. Set child model
@@ -151,7 +154,13 @@ void DB_TestTableWidget::init() {
     // 4. connect to child (table) view
     //
     mChildModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestChild);
-    setFormatTableView(tvChild, mChildModel);
+    formatTableView(tvChild, mChildModel);
+    tbbChild->initTest();
+    tvChild->setToolButtonBar(tbbChild);
+
+    readSettings();
+
+    // hide database columns
 
     // TEST ONLY
 //    new ModelTest(mChildModel, this);
@@ -213,80 +222,6 @@ bool DB_TestTableWidget::closeWidget() {
     return false;
 }
 
-void DB_TestTableWidget::on_pbAdd_clicked() {
-    if (!mModel) return;
-
-    mModel->undoFilterSort();
-
-    // insert at the end (or begining)
-    int row = mModel->rowCount();
-    mModel->insertRows(row, 1, QModelIndex());
-
-    // NOTE: do not forget to set the default column values, specially for the
-    //       relational table otherwise new row will not show!
-    QModelIndex index = mModel->index(row, mModel->fieldIndex("selectrel_idx"), QModelIndex());
-    mModel->setData(index, "0", Qt::EditRole);
-//    index = mModel->index(row, mModel->fieldIndex("value2"), QModelIndex());
-//    mModel->setData(index, 0, Qt::EditRole);
-    // end NOTE
-
-    // mModel->submitAll();
-    tvParent->setCurrentIndex(mModel->index(row, 0, QModelIndex()));
-    tvParent->scrollTo(tvParent->currentIndex());
-}
-
-void DB_TestTableWidget::on_pbDelete_clicked() {
-    if (!mModel) return;
-
-    int res = DB_DIALOGFACTORY->requestYesNoDialog(tr("Delete item"),
-                                          tr("Deletion cannot be undone.\n"
-                                             "Do you want to delete the item?"));
-    if (res != QMessageBox::Yes) return;
-
-    QModelIndex index = tvParent->currentIndex();
-    if (index.isValid()) {
-        mModel->removeRows(index.row(), 1, QModelIndex());
-        mModel->submitAll();
-    }
-}
-
-void DB_TestTableWidget::on_pbUp_clicked() {
-    if (!mModel) return;
-
-    QModelIndex index = tvParent->currentIndex();
-    if (index.isValid() && index.row() > 0) {
-        QModelIndex idxTo = mModel->index(index.row()-1, 0, QModelIndex());
-        QModelIndex idxFrom = mModel->index(index.row(), 0, QModelIndex());
-        mModel->swapObject(idxFrom, idxTo);
-        tvParent->selectRow(index.row() - 1);
-    }
-}
-
-void DB_TestTableWidget::on_pbDown_clicked() {
-    if (!mModel) return;
-
-    QModelIndex index = tvParent->currentIndex();
-    if (index.isValid() && index.row() < mModel->rowCount(QModelIndex()) - 1) {
-        QModelIndex idxTo = mModel->index(index.row()+1, 0, QModelIndex());
-        QModelIndex idxFrom = mModel->index(index.row(), 0, QModelIndex());
-        mModel->swapObject(idxFrom, idxTo);
-        tvParent->selectRow(index.row() + 1);
-    }
-}
-
-void DB_TestTableWidget::on_pbFind_clicked() {
-    QString searchStr = leFind->text();
-    findInTable(searchStr, tvParent);
-}
-
-void DB_TestTableWidget::on_pbFilter_clicked() {
-    filterTable(tvParent);
-}
-
-void DB_TestTableWidget::on_pbFilterClear_clicked() {
-    mModel->removeUserFilter();
-}
-
 void DB_TestTableWidget::on_pbSelectRel_clicked() {
     if (!tvParent->currentIndex().isValid()) return;
 
@@ -323,62 +258,6 @@ void DB_TestTableWidget::on_pbPrevious_clicked() {
 
 void DB_TestTableWidget::on_pbNext_clicked() {
     if (mMapper) mMapper->toNext();
-}
-
-void DB_TestTableWidget::on_pbAddChild_clicked() {
-    if (!mChildModel) return;
-
-    mChildModel->undoFilterSort();
-
-    QModelIndex index = tvParent->currentIndex();
-    if (!index.isValid()) {
-        return;
-    }
-
-    // always insert at the end
-    int row = mChildModel->rowCount();
-    mChildModel->insertRows(row, 1, QModelIndex());
-
-    tvChild->setCurrentIndex(mChildModel->index(row, 0, QModelIndex()));
-    tvChild->scrollTo(tvChild->currentIndex());
-}
-
-void DB_TestTableWidget::on_pbDeleteChild_clicked() {
-    if (!mChildModel) return;
-
-    int res = DB_DIALOGFACTORY->requestYesNoDialog(tr("Delete item"),
-                                          tr("Deletion cannot be undone.\n"
-                                             "Do you want to delete the item?"));
-    if (res != QMessageBox::Yes) return;
-
-    QModelIndex index = tvChild->currentIndex();
-    if (index.isValid()) {
-        mChildModel->removeRows(index.row(), 1, QModelIndex());
-    }
-}
-
-void DB_TestTableWidget::on_pbUpChild_clicked() {
-    if (!mChildModel) return;
-
-    QModelIndex index = tvChild->currentIndex();
-    if (index.isValid() && index.row() > 0) {
-        QModelIndex idxTo = mChildModel->index(index.row()-1, 0, QModelIndex());
-        QModelIndex idxFrom = mChildModel->index(index.row(), 0, QModelIndex());
-        mChildModel->swapObject(idxFrom, idxTo);
-        tvChild->selectRow(index.row() - 1);
-    }
-}
-
-void DB_TestTableWidget::on_pbDownChild_clicked() {
-    if (!mChildModel) return;
-
-    QModelIndex index = tvChild->currentIndex();
-    if (index.isValid() && index.row() < mChildModel->rowCount(QModelIndex()) - 1) {
-        QModelIndex idxTo = mChildModel->index(index.row()+1, 0, QModelIndex());
-        QModelIndex idxFrom = mChildModel->index(index.row(), 0, QModelIndex());
-        mChildModel->swapObject(idxFrom, idxTo);
-        tvChild->selectRow(index.row() + 1);
-    }
 }
 
 void DB_TestTableWidget::on_pbTest_clicked() {

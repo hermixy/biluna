@@ -13,7 +13,7 @@
 #include "db_modelfactory.h"
 
 DB_TestRelationWidget::DB_TestRelationWidget(QWidget *parent)
-        : DB_TableWidget(parent) {
+        : RB_TableWidget(parent) {
     // nothing
 }
 

@@ -13,10 +13,10 @@
 #include "db_actionfactory.h"
 #include "db_dialogfactory.h"
 #include "db_internetbrowserfactory.h"
-#include "db_testactionfactory.h"
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
 #include "db_objectfactory.h"
+#include "db_testactionfactory.h"
 #include "rb_dockwidget.h"
 #include "rb_mdiwindow.h"
 
@@ -33,7 +33,6 @@ DB_TestMainWindow::DB_TestMainWindow(QWidget* parent, Qt::WindowFlags flags)
     // DB_ActionFactory::getInstance(this);
     // DB_UtilityFactory::getInstance();
 
-    DB_TestActionFactory::getInstance(this);
     initActions();
     initViews();
 
@@ -44,8 +43,6 @@ DB_TestMainWindow::DB_TestMainWindow(QWidget* parent, Qt::WindowFlags flags)
  * Destructor
  */
 DB_TestMainWindow::~DB_TestMainWindow() {
-    // Delete of DB_TestActionFactory not required
-    // because factory is registered with DB_ActionFactory
     RB_DEBUG->print("DB_TestMainWindow::~DB_TestMainWindow() OK");
 }
 

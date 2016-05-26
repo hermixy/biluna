@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DB_TableWidget</class>
- <widget class="QWidget" name="DB_TableWidget">
+ <class>RB_TableWidget</class>
+ <widget class="QWidget" name="RB_TableWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

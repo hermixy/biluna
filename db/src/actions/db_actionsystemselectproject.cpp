@@ -13,8 +13,8 @@
 #include "db_dialogfactory.h"
 #include "db_modelfactory.h"
 #include "db_permissionhandler.h"
-#include "db_projectdialog.h"
 #include "rb_database.h"
+#include "rb_dialogwindow.h"
 #include "rb_mainwindow.h"
 
 
@@ -64,7 +64,8 @@ RB_Action* DB_ActionSystemSelectProject::factory() {
 void DB_ActionSystemSelectProject::trigger() {
     if (RB_DATABASE->database().isOpen()) {
         // Open project selection dialog
-        RB_Dialog* dlg = DB_DIALOGFACTORY->getDialog(DB_DialogFactory::DialogProject);
+        RB_DialogWindow* dlg = DB_DIALOGFACTORY->getDialogWindow(
+                    DB_DialogFactory::WidgetProjectSelect);
 
         if (dlg->exec() == QDialog::Accepted) {
             RB_ObjectBase* obj = dlg->getCurrentObject();

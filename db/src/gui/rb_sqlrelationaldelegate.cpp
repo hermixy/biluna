@@ -9,6 +9,7 @@
  *****************************************************************/
 
 #include "rb_sqlrelationaldelegate.h"
+#include "rb_englineedit.h"
 
 /**
  * Constructor. Set parameter sfpm to NULL if not
@@ -60,31 +61,41 @@ void RB_SqlRelationalDelegate::setEditorData(QWidget* editor,
         return;
     }
 
+    // QLineEdit and related widgets
+    RB_EngLineEdit* ele = qobject_cast<RB_EngLineEdit*>(editor);
+
+    if (ele) {
+        bool success = false;
+        double value = index.data(Qt::DisplayRole).toDouble(&success);
+
+        if (success) {
+            // engineering/scientific notation of doubles
+            ele->setText(QString::number(value));
+            return;
+        }
+    }
+
     QLineEdit* le = dynamic_cast<QLineEdit*>(editor);
 
     if (le) {
-        QVariant value = index.model()->data(index, Qt::DisplayRole);
-        le->setText(value.toString());
-        return;
-    }
-
-    // idxLineEdit is the lineEdit in RB_IdxLineEdit
-    if (editor->objectName() == "idxLineEdit" /*iter != mColumnList.end()*/) {
-        QLineEdit* le = dynamic_cast<QLineEdit*>(editor);
-
-        if (le) {
+        if (editor->objectName() == "idxLineEdit") {
             // remove the Uuid part including the curly braces
             RB_String str = index.data(Qt::DisplayRole).toString();
             le->setText(str);
             return;
         }
+
+        // regular lineEdit
+        QVariant value = index.model()->data(index, Qt::DisplayRole);
+        le->setText(value.toString());
+        return;
     }
 
     // Relational QComboBox
     QModelIndex sourceIndex = mProxyModel->mapToSource(index);
-
     const RB_MmSource* sqlModel = qobject_cast<const RB_MmSource*>(sourceIndex.model());
-    QComboBox *combo = qobject_cast<QComboBox*>(editor);
+    QComboBox* combo = qobject_cast<QComboBox*>(editor);
+
     if (sqlModel && combo) {
         // HACK: for Mac OS X
         QVariant v = index.data(Qt::DisplayRole);
@@ -95,7 +106,7 @@ void RB_SqlRelationalDelegate::setEditorData(QWidget* editor,
                 v = QVariant(combo->property(n).userType(), (const void *)0);
             combo->setProperty(n, v);
         }
-        // Was originally only next line:
+        // Before hack was originally only next line:
         // combo->setCurrentIndex(combo->findText(sqlModel->data(sourceIndex).toString()));
 
         return;
@@ -103,6 +114,7 @@ void RB_SqlRelationalDelegate::setEditorData(QWidget* editor,
 
     // Image QLabel
     QLabel* label = qobject_cast<QLabel*>(editor);
+
     if (label) {
         QByteArray imageData = index.data(Qt::EditRole).toByteArray();
         QPixmap pixmap;

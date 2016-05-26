@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: db_tabledialog.cpp 2201 2015-01-08 14:30:23Z rutger $
+ * $Id: rb_tabledialog.cpp 2201 2015-01-08 14:30:23Z rutger $
  * Created: Jan 31, 2016 8:34:42 PM - rutger
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
@@ -8,7 +8,7 @@
  * See http://www.red-bag.com for further details.
  *****************************************************************/
 
-#include "db_tablewidget.h"
+#include "rb_tablewidget.h"
 
 #include <QtWidgets>
 #include "db_dialogfactory.h"
@@ -19,7 +19,7 @@
  * Constructor
  * @param parent parent widget such as a mainwindow
  */
-DB_TableWidget::DB_TableWidget(QWidget *parent)
+RB_TableWidget::RB_TableWidget(QWidget *parent)
         : RB_Widget(parent) {
 
     setupUi(this);
@@ -33,14 +33,14 @@ DB_TableWidget::DB_TableWidget(QWidget *parent)
 /**
  * Destructor
  */
-DB_TableWidget::~DB_TableWidget() {
-    RB_DEBUG->print("DB_TableWidget::~DB_TableWidget() OK");
+RB_TableWidget::~RB_TableWidget() {
+    RB_DEBUG->print("RB_TableWidget::~RB_TableWidget() OK");
 }
 
 /**
  * File Save, save model changes
  */
-bool DB_TableWidget::fileSave(bool withSelect) {
+bool RB_TableWidget::fileSave(bool withSelect) {
     if (!mModel) return false;
     beforeFileSave();
 
@@ -66,14 +66,14 @@ bool DB_TableWidget::fileSave(bool withSelect) {
         }
     }
 
-    RB_DEBUG->print("DB_TableWidget::fileSave() ERROR");
+    RB_DEBUG->print("RB_TableWidget::fileSave() ERROR");
     return false;
 }
 
 /**
  * File Revert, reverse modelchanges
  */
-void DB_TableWidget::fileRevert() {
+void RB_TableWidget::fileRevert() {
     if (mModel) {
         mModel->revertAll();
         setWindowModified(false);
@@ -85,7 +85,7 @@ void DB_TableWidget::fileRevert() {
  * the dialog class name
  * @param subject help subject
  */
-void DB_TableWidget::setHelpSubject(const RB_String& subject) {
+void RB_TableWidget::setHelpSubject(const RB_String& subject) {
     mHelpSubject = subject;
 }
 
@@ -93,19 +93,19 @@ void DB_TableWidget::setHelpSubject(const RB_String& subject) {
  * Get current object based on selected model index.
  * @return object with data from model
  */
-RB_ObjectBase* DB_TableWidget::getCurrentObject() {
+RB_ObjectBase* RB_TableWidget::getCurrentObject() {
     return mCurrentObject;
 }
 
-void DB_TableWidget::initEditSort() {
+void RB_TableWidget::initEditSort(bool isFindFilter) {
     formatTableView(tableView, mModel);
-    tbb->initEdit(false, true, true, false);
+    tbb->initEdit(false, true, isFindFilter, false);
     tableView->setToolButtonBar(tbb);
     leRoot->setReadOnly(true);
     cbSourceModelFilter->hide();
 }
 
-void DB_TableWidget::initEditUpDown() {
+void RB_TableWidget::initEditUpDown() {
     formatTableView(tableView, mModel);
     tbb->initEdit(false, false, true, false);
     tableView->setToolButtonBar(tbb);
@@ -114,7 +114,7 @@ void DB_TableWidget::initEditUpDown() {
     cbSourceModelFilter->hide();
 }
 
-void DB_TableWidget::initEditOnly() {
+void RB_TableWidget::initEditOnly() {
     formatTableView(tableView, mModel);
     tbb->initDetailEdit(true);
     tableView->setToolButtonBar(tbb);
@@ -122,7 +122,7 @@ void DB_TableWidget::initEditOnly() {
     cbSourceModelFilter->hide();
 }
 
-void DB_TableWidget::initSelectionOnly() {
+void RB_TableWidget::initSelectionOnly() {
     formatTableView(tableView, mModel);
     tbb->initSelect(true, false);
     tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -134,7 +134,7 @@ void DB_TableWidget::initSelectionOnly() {
  * Initialize base dialog for testing only (both sorting and up/down buttons)
  * @param model table view model
  */
-void DB_TableWidget::initTest() {
+void RB_TableWidget::initTest() {
     formatTableView(tableView, mModel);
     tbb->initEdit(false, true, true, true);
     tableView->setToolButtonBar(tbb);
@@ -144,7 +144,7 @@ void DB_TableWidget::initTest() {
 /**
  * Set current object with data from current selected index
  */
-void DB_TableWidget::setCurrentObject() {
+void RB_TableWidget::setCurrentObject() {
     if (tableView->currentIndex().isValid()) {
         mCurrentObject = mModel->getCurrentObject();
     } else {
@@ -156,7 +156,7 @@ void DB_TableWidget::setCurrentObject() {
  * Event handler to handle state changes, such as language change
  * @param e event
  */
-void DB_TableWidget::changeEvent(QEvent* e) {
+void RB_TableWidget::changeEvent(QEvent* e) {
     QWidget::changeEvent(e);
     switch (e->type()) {
     case QEvent::LanguageChange:

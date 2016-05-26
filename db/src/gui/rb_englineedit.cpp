@@ -11,7 +11,7 @@
 #include "rb_englineedit.h"
 
 RB_EngLineEdit::RB_EngLineEdit(QWidget* parent) : QLineEdit(parent) {
-    // nothing
+    this->setAlignment(Qt::AlignRight);
 }
 
 void RB_EngLineEdit::setText(const QString& txt) {

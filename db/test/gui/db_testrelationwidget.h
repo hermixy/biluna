@@ -12,10 +12,10 @@
 #define DB_TESTRELATIONWIDGET_H
 
 #include <QtGui>
-#include "db_tablewidget.h"
+#include "rb_tablewidget.h"
 
 
-class DB_TestRelationWidget : public DB_TableWidget {
+class DB_TestRelationWidget : public RB_TableWidget {
 
     Q_OBJECT
 

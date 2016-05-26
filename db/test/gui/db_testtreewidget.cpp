@@ -48,7 +48,7 @@ void DB_TestTreeWidget::init() {
     // 1. Set model with ID (sets root object) and/or query
     //
     mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestTree);
-    RB_String id = DB_MODELFACTORY->getRootId();
+    RB_String id = DB_MODELFACTORY->getTestRootId();
     mModel->setRoot(id);
 
     //

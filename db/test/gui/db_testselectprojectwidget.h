@@ -1,9 +1,9 @@
 #ifndef DB_TESTSELECTPROJECTWIDGET_H
 #define DB_TESTSELECTPROJECTWIDGET_H
 
-#include "db_tablewidget.h"
+#include "rb_tablewidget.h"
 
-class DB_TestSelectProjectWidget : public DB_TableWidget {
+class DB_TestSelectProjectWidget : public RB_TableWidget {
 
     Q_OBJECT
 

@@ -38,6 +38,7 @@ public:
                           bool isShowAll = false);
     virtual void initDetailEdit(bool isSaveRevert = true);
     virtual void initSelect(bool isFindFilter = true, bool isShowAll = false);
+    virtual void initTest(bool isTreeModel = false);
     virtual void setText(const RB_String& txt);
     virtual RB_String getFindFilterText();
     virtual void setFilterOffEnabled(bool enabled);

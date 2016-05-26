@@ -31,7 +31,6 @@ DB_TestProject::~DB_TestProject() {
 
 void DB_TestProject::createMembers() {
     addMember("number", "-", "New Project", RB2::MemberChar125);
-    addMember("revision", "-", 0, RB2::MemberInteger);
     addMember("description", "-", "", RB2::MemberChar125);
     addMember("company", "-", "", RB2::MemberChar125);
     addMember("location", "-", "", RB2::MemberChar125);

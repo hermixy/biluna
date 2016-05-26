@@ -31,7 +31,9 @@ public:
 
     virtual RB_String getId() const { return RB_String(); }
     virtual RB_String getName() const { return "Test Table View"; }
-    virtual RB2::PerspectiveType getPerspectiveType() const { return RB2::PerspectiveTEST; }
+    virtual RB2::PerspectiveType getPerspectiveType() const {
+        return RB2::PerspectiveDB;
+    }
 
     virtual void init();
     virtual bool fileSave(bool withSelect);
@@ -41,22 +43,9 @@ public:
 
 protected slots:
     // Push buttons
-    virtual void on_pbAdd_clicked();
-    virtual void on_pbDelete_clicked();
-    virtual void on_pbUp_clicked();
-    virtual void on_pbDown_clicked();
-    virtual void on_pbFind_clicked();
-    virtual void on_pbFilter_clicked();
-    virtual void on_pbFilterClear_clicked();
-
     virtual void on_pbSelectRel_clicked();
     virtual void on_pbPrevious_clicked();
     virtual void on_pbNext_clicked();
-
-    virtual void on_pbAddChild_clicked();
-    virtual void on_pbDeleteChild_clicked();
-    virtual void on_pbUpChild_clicked();
-    virtual void on_pbDownChild_clicked();
 
     virtual void on_pbTest_clicked();
     void reject();

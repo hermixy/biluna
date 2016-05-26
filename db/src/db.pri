@@ -28,7 +28,6 @@ FORMS = \
     ../src/gui/db_inserthtmldialog.ui \
     ../src/gui/db_internetbrowserwidget.ui \
     ../src/gui/db_mappingdialog.ui \
-    ../src/gui/rb_membereditdialog.ui \
     ../src/gui/db_modelobjectdialog.ui \
     ../src/gui/db_palettecolorpickerwidget.ui \
     ../src/gui/db_permissionperspectiveprojectdialog.ui \
@@ -42,14 +41,15 @@ FORMS = \
     ../src/gui/db_simplereportwidget.ui \
     ../src/gui/db_systemgroupdialog.ui \
     ../src/gui/db_tabledialog.ui \
-    ../src/gui/db_tablewidget.ui \
     ../src/gui/db_textwidget.ui \
     ../src/gui/db_treedialog.ui \
     ../src/gui/db_xmlviewvalidatorwidget.ui \
     ../src/gui/rb_dialogbase.ui \
     ../src/gui/rb_idxlineedit.ui \
+    ../src/gui/rb_membereditdialog.ui \
 #    ../src/gui/rb_projecteditdialog.ui \
     ../src/gui/rb_projecteditwidget.ui \
+    ../src/gui/rb_tablewidget.ui \
     ../src/gui/rb_toolbuttonbar.ui \
     ../src/gui/rb_uomlineedit.ui
 
@@ -201,6 +201,7 @@ HEADERS = \
     ../src/gui/db_projectdialog.h \
 #    ../src/gui/db_projecteditdialog.h \
     ../src/gui/db_projecteditwidget.h \
+    ../src/gui/db_projectselectwidget.h \
     ../src/gui/db_regexpdialog.h \
     ../src/gui/db_screenshotdialog.h \
     ../src/gui/db_selectmappingdialog.h \
@@ -209,7 +210,6 @@ HEADERS = \
     ../src/gui/db_sqlhighlighter.h \
     ../src/gui/db_systemgroupdialog.h \
     ../src/gui/db_tabledialog.h \
-    ../src/gui/db_tablewidget.h \
     ../src/gui/db_treedialog.h \
     ../src/gui/db_textwidget.h \
     ../src/gui/db_versiondialog.h \
@@ -237,6 +237,7 @@ HEADERS = \
     ../src/gui/rb_projecteditwidget.h \
     ../src/gui/rb_simplereportwidget.h \
     ../src/gui/rb_sqlrelationaldelegate.h \
+    ../src/gui/rb_tablewidget.h \
     ../src/gui/rb_tableview.h \
     ../src/gui/rb_tedelegate.h \
     ../src/gui/rb_toolbar.h \
@@ -460,6 +461,7 @@ SOURCES = \
     ../src/gui/db_prepostfixtextdialog.cpp \
 #    ../src/gui/db_projecteditdialog.cpp \
     ../src/gui/db_projecteditwidget.cpp \
+    ../src/gui/db_projectselectwidget.cpp \
     ../src/gui/db_regexpdialog.cpp \
     ../src/gui/db_screenshotdialog.cpp \
     ../src/gui/db_seltreesiblingdialog.cpp \
@@ -467,7 +469,6 @@ SOURCES = \
     ../src/gui/db_sqlhighlighter.cpp \
     ../src/gui/db_systemgroupdialog.cpp \
     ../src/gui/db_tabledialog.cpp \
-    ../src/gui/db_tablewidget.cpp \
     ../src/gui/db_treedialog.cpp \
     ../src/gui/db_textwidget.cpp \
     ../src/gui/db_xmlviewvalidatorwidget.cpp \
@@ -495,6 +496,7 @@ SOURCES = \
     ../src/gui/rb_simplereportwidget.cpp \
     ../src/gui/rb_sqlrelationaldelegate.cpp \
     ../src/gui/rb_tableview.cpp \
+    ../src/gui/rb_tablewidget.cpp \
     ../src/gui/rb_tedelegate.cpp \
     ../src/gui/rb_textedit.cpp \
     ../src/gui/rb_textpreview.cpp \

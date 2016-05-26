@@ -1274,9 +1274,6 @@ void RB_MmSource::printErrorSetData(const QModelIndex& index,
                     + value.toString());
     RB_DEBUG->print("RB_MmSource::printSetDataError() role = "
                     + QString::number(role));
-
-
-
     RB_DEBUG->error("RB_MmSource::printSetDataError() ERROR :  "
                     + this->lastError().text());
 }

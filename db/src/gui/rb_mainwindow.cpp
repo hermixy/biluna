@@ -17,6 +17,7 @@
 //#include "db_filterxml.h"
 #include "db_modelfactory.h"
 #include "db_plugintesterdialog.h"
+#include "db_testactionfactory.h"
 #include "db_utilityfactory.h"
 #include "rb_actiondebugexportmodel.h"
 #include "rb_actiondebugplugin.h"
@@ -51,6 +52,10 @@ RB_MainWindow::RB_MainWindow(QWidget* parent, Qt::WindowFlags flags)
     DB_DialogFactory::getInstance(this);
     DB_ActionFactory::getInstance(this);
     DB_UtilityFactory::getInstance();
+#ifdef DB_TEST
+    DB_TestActionFactory::getInstance(this);
+#endif
+
 
     mWindowMenu = NULL;
     mEdition = "";
@@ -83,6 +88,9 @@ RB_MainWindow::RB_MainWindow(QWidget* parent, Qt::WindowFlags flags)
  * Destructor
  */
 RB_MainWindow::~RB_MainWindow() {
+#ifdef DB_TEST
+    delete DB_TESTACTIONFACTORY;
+#endif
     // These factories are always created and are part of the data model DB
     delete DB_UTILITYFACTORY;
     delete DB_ACTIONFACTORY;

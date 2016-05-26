@@ -23,6 +23,9 @@ DB_ModelFactory* DB_ModelFactory::mActiveFactory = NULL;
 DB_ModelFactory::DB_ModelFactory(RB_MainWindow* mw) : RB_ModelFactory(mw) {
     RB_DEBUG->print("DB_ModelFactory::DB_ModelFactory()");
     this->setObjectFactory(DB_OBJECTFACTORY);
+#ifdef DB_TEST
+    mTestRootId = "";
+#endif
 }
 
 /**
@@ -49,11 +52,15 @@ DB_ModelFactory* DB_ModelFactory::getInstance(RB_MainWindow* mw) {
 /**
  * Set this object root id and of all models factories,
  * currently at first connection and when disconnected from database
- * refer db_actionsystemdatabasedisconnect.cpp
+ * set to empty string, refer db_actionsystemdatabasedisconnect.cpp
  * @param id
  */
 void DB_ModelFactory::setAllRootId(const RB_String& id) {
     setRootId(id);
+
+#ifdef DB_TEST
+    setTestRootId(id);
+#endif
 
     std::vector<RB_ModelFactory*>::iterator iter;
     iter = mFactoryList.begin();
@@ -65,6 +72,16 @@ void DB_ModelFactory::setAllRootId(const RB_String& id) {
         ++iter;
     }
 }
+
+#ifdef DB_TEST
+void DB_ModelFactory::setTestRootId(const RB_String& id) {
+    mTestRootId = id;
+}
+
+RB_String DB_ModelFactory::getTestRootId() {
+   return mTestRootId;
+}
+#endif
 
 /**
  * @param type model type

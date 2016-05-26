@@ -3,7 +3,7 @@
 #include "db_modelfactory.h"
 
 DB_TestSelectProjectWidget::DB_TestSelectProjectWidget(QWidget *parent) :
-    DB_TableWidget(parent) {
+    RB_TableWidget(parent) {
 }
 
 DB_TestSelectProjectWidget::~DB_TestSelectProjectWidget() {
@@ -12,8 +12,8 @@ DB_TestSelectProjectWidget::~DB_TestSelectProjectWidget() {
 
 void DB_TestSelectProjectWidget::init() {
     // set model
-    mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelProject);
-    mModel->setRoot("");
+    mModel = DB_MODELFACTORY->getModel(DB_ModelFactory::ModelTestProject);
+    mModel->setRoot(DB_MODELFACTORY->getRootId());
     mModel->select();
 
     setWindowTitle(tr("Select test project"));
@@ -22,9 +22,9 @@ void DB_TestSelectProjectWidget::init() {
     leRoot->hide();
     gbTable->setTitle(tr("GroupBox Blah Blah"));
 
-//    this->initEditSort();
+    this->initEditSort();
 //    this->initEditUpDown();
-    initSelectionOnly();
+//    initSelectionOnly();
 //    this->initTest();
 
     this->setHelpSubject("DB_TestSelectProjectDialog");

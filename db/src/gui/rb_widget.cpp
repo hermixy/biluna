@@ -181,45 +181,33 @@ void RB_Widget::addComboBoxMapping(RB_MmProxy* model,
                                    const RB_String& relationField,
                                    QComboBox* comboBox,
                                    RB_DataWidgetMapper* mapper) {
+    // http://doc.qt.io/qt-5/qtsql-sqlwidgetmapper-example.html
     // Relational mapping, relation table should have a default row with id = "0"!
+
     int relationColumn = model->fieldIndex(field);
     model->setRelation(relationColumn,
                        RB_SqlRelation(relationTable, relationId, relationField));
+
+    // Table or tree view combobox
+    mapper->setItemDelegate(new RB_SqlRelationalDelegate(model, this));
 
     // Map combobox
     QSqlTableModel* relModel = model->relationModel(relationColumn);
     if (!relModel) return;
 
-    /*
-    // Set data for in-memory relational mapping, testing only
-    if (!model->database().isOpen()) {
-        relModel->insertRows(0, 1, QModelIndex());
-        relModel->insertRows(1, 1, QModelIndex());
-        relModel->insertRows(2, 1, QModelIndex());
-        QModelIndex index = relModel->index(0, 3, QModelIndex());
-        relModel->setData(index, "Home3",Qt::EditRole);
-        index = relModel->index(1, 3, QModelIndex());
-        relModel->setData(index, "Work3",Qt::EditRole);
-        index = relModel->index(2, 3, QModelIndex());
-        relModel->setData(index, "Other3",Qt::EditRole);
-    }
-    */
     comboBox->setModel(relModel);
-    int cbRelationColumn = relModel->fieldIndex(relationField);
+    int cbRelationField = relModel->fieldIndex(relationField);
 
     if (!model->database().isOpen()) {
         // alternatively use a column number
         RB_MmAbstract* tmpRelModel = dynamic_cast<RB_MmAbstract*>(
                 model->relationModel(relationColumn));
-        cbRelationColumn = tmpRelModel->fieldIndex(relationField);
+        cbRelationField = tmpRelModel->fieldIndex(relationField);
     }
-    comboBox->setModelColumn(cbRelationColumn);
 
-    // Table or tree view combobox
-    if (!mapper->itemDelegate()) {
-        mapper->setItemDelegate(new RB_SqlRelationalDelegate(model, this));
-    }
+    comboBox->setModelColumn(cbRelationField);
     mapper->addMapping(comboBox, relationColumn);
+
 }
 
 /**

@@ -29,6 +29,11 @@ public:
 
     virtual void setAllRootId(const RB_String& id);
 
+#ifdef DB_TEST
+    void setTestRootId(const RB_String& id);
+    RB_String getTestRootId();
+#endif
+
     virtual RB_MmProxy* getModel(int type, bool shared = true);
     virtual RB_MmProxy* getParentModel(int type);
 //    virtual void setDatabase(const QSqlDatabase& db);
@@ -123,6 +128,10 @@ private:
      * the function isTableExisting. This class needs complete refactoring
      */
     QStringList mTableList;
+
+#ifdef DB_TEST
+    RB_String mTestRootId;
+#endif
 };
 
 #endif // DB_MODELFACTORY_H

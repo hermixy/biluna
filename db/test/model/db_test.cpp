@@ -32,6 +32,7 @@ void DB_Test::createMembers() {
     // RB_String uuid = "";
     addMember("value1", "-", "New Test", RB2::MemberChar125);
     addMember("value2", "mm", 0.0, RB2::MemberDouble);
+    addMember("value3", "mm", 0.0, RB2::MemberDouble);
     // Number in combobox (or text of combobox)
     addMember("combobox1", "-", 0, RB2::MemberInteger);
     // Dynamic model, only holds the reference (Uuid) of the relational table

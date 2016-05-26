@@ -119,6 +119,7 @@ public:
         WidgetPermissionReport,         /**< Permission report widget */
         WidgetPlainTextDocument,        /**< Plain text document widget */
         WidgetProjectEdit,              /**< Edit projects widget */
+        WidgetProjectSelect,            /**< Select project widget */
         WidgetSimpleChart,              /**< Simple chart types review widget */
         WidgetSimpleReport,             /**< Simple report from database widget */
         WidgetTextDocument,             /**< Rich text document widget */

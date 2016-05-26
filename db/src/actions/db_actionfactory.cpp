@@ -133,7 +133,7 @@ DB_ActionFactory::DB_ActionFactory(RB_MainWindow* mw)
  */
 DB_ActionFactory::~DB_ActionFactory() {
     delete mPrinter;
-    // closeAllFactories();
+    // closeAllFactories(); for future if more action factories per plugin
     removeAllPlugins();
     mActiveFactory = NULL;
     RB_DEBUG->print("DB_ActionFactory::~DB_ActionFactory() OK");

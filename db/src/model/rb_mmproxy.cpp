@@ -12,6 +12,7 @@
 
 #include "rb_mapperdelegate.h"
 #include "rb_modelfactory.h"
+#include "rb_sqlrelationaldelegate.h"
 
 /**
  * Constructor
@@ -1105,7 +1106,7 @@ RB_DataWidgetMapper* RB_MmProxy::getMapper(const RB_String& mapperId) {
     } else {
         mapper = new RB_DataWidgetMapper(this);
         mapper->setModel(this);
-        mapper->setItemDelegate(new RB_MapperDelegate(mapper));
+//        mapper->setItemDelegate(new RB_MapperDelegate(mapper));
         // model changed currentIndex, change row/index of mMapper next
         connect(this, SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
                 mapper, SLOT(setCurrentModelIndex(QModelIndex)));

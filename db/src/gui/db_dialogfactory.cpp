@@ -30,8 +30,8 @@
 #include "db_permissionreportwidget.h"
 #include "db_plaintextwidget.h"
 #include "db_plugintesterdialog.h"
-#include "db_projectdialog.h"
 #include "db_projecteditwidget.h"
+#include "db_projectselectwidget.h"
 #include "db_regexpdialog.h"
 #include "db_screenshotdialog.h"
 #include "db_selectmappingdialog.h"
@@ -193,6 +193,10 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new DB_ProjectEditWidget(parent);
         break;
     }
+    case WidgetProjectSelect: {
+        wgt = new DB_ProjectSelectWidget(parent);
+        break;
+    }
     case WidgetSimpleChart: {
         // Unique widget
         wgt = RB_DialogFactory::findWidget(type);
@@ -347,12 +351,12 @@ RB_Dialog* DB_DialogFactory::getDialog(int type) {
             dlg->init();
             break;
         }
-        case DialogProject:
-        {
-            dlg = new DB_ProjectDialog(mMainWindow);
-            dlg->init();
-            break;
-        }
+//        case DialogProject:
+//        {
+//            dlg = new DB_ProjectDialog(mMainWindow);
+//            dlg->init();
+//            break;
+//        }
         case DialogRegExp:
         {
             dlg = new DB_RegExpDialog(mMainWindow);

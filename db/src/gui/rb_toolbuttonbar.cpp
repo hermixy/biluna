@@ -118,6 +118,35 @@ void RB_ToolButtonBar::initSelect(bool isFindFilter, bool isShowAll) {
     pbDown->setVisible(false);
 }
 
+void RB_ToolButtonBar::initTest(bool isTreeModel) {
+    setupUi(this);
+
+    pbAdd->setVisible(true);
+    pbAddChild->setVisible(isTreeModel);
+    pbDelete->setVisible(true);
+
+    pbEdit->setVisible(true);
+    pbCopy->setVisible(true);
+    pbSave->setVisible(true);
+    pbRevert->setVisible(true);
+
+    pbPrevious->setVisible(true);
+    pbNext->setVisible(true);
+
+    pbFind->setVisible(true);
+    leFilter->setVisible(true);
+    pbFilterOn->setVisible(true);
+    pbFilterOff->setVisible(true);
+    pbFilterOff->setEnabled(false);
+    pbAll->setVisible(true);
+
+    pbDemote->setVisible(isTreeModel);
+    pbPromote->setVisible(isTreeModel);
+
+    pbUp->setVisible(true);
+    pbDown->setVisible(true);
+}
+
 /**
 * Required by retranslate during .ui to .h file generation
 * @brief RB_ToolButtonBar::setText

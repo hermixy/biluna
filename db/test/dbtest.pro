@@ -134,7 +134,6 @@ HEADERS += \
     ../../db/test/gui/main.h \
     ../../db/test/model/db_test.h \
     ../../db/test/model/db_testchild.h \
-    ../../db/test/model/db_testdlg.h \
     ../../db/test/model/db_testproject.h \
     ../../db/test/model/db_testrelation.h
 
@@ -169,7 +168,6 @@ SOURCES += \
     ../../db/test/gui/db_testtreewidget.cpp \
     ../../db/test/gui/main.cpp \
     ../../db/test/model/db_test.cpp \
-    ../../db/test/model/db_testdlg.cpp \
     ../../db/test/model/db_testchild.cpp \
     ../../db/test/model/db_testproject.cpp \
     ../../db/test/model/db_testrelation.cpp

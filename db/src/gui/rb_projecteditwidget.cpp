@@ -110,7 +110,7 @@ bool RB_ProjectEditWidget::fileSave(bool withSelect) {
         }
     }
 
-    RB_DEBUG->print("DB_TableWidget::fileSave() ERROR");
+    RB_DEBUG->print("RB_TableWidget::fileSave() ERROR");
     return false;
 }
 

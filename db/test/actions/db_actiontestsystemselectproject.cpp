@@ -62,6 +62,8 @@ RB_Action* DB_ActionTestSystemSelectProject::factory() {
  * Trigger this action, which is done after all data and objects are set
  */
 void DB_ActionTestSystemSelectProject::trigger() {
+    // TODO:Permission
+
     if (!RB_DATABASE->database().isOpen()) {
         DB_DIALOGFACTORY->requestWarningDialog(tr("Not connected to database."));
         return;
@@ -79,14 +81,13 @@ void DB_ActionTestSystemSelectProject::trigger() {
         }
 
         RB_String id = obj->getId();
-        // Set root id
-        DB_MODELFACTORY->setRootId(id);
+        // Set root id of the plugin
+        // here DB_MODELFACTORY->setTestRootId()
+        DB_MODELFACTORY->setTestRootId(id);
         // Get the main project root object for this application
-        RB_ObjectBase* root = DB_MODELFACTORY->getRoot();
+//        RB_ObjectBase* root = DB_MODELFACTORY->getRoot();
         // Read the object from the database for further use
-        root->dbRead(DB_MODELFACTORY->getDatabase(), RB2::ResolveNone);
-    } else  {
-        DB_MODELFACTORY->setRootId("");
+//        root->dbRead(DB_MODELFACTORY->getDatabase(), RB2::ResolveNone);
     }
 
     delete dlg;
