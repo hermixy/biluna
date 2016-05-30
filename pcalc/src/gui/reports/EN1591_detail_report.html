@@ -1,14 +1,13 @@
 <html><head></head><body>
-<h2>Flange calculation according to EN 1591-1:2014</h2>
+<h2>Flange calculation EN 1591-1:2014</h2>
 <h3>Detail Report</h3>
-<table border="0" width="600" cellspacing="0" cellpadding="2">
-<tr><td><h4>assembly</h4></td><td id="{$number}">&nbsp;</td><td><h4>Date</h4></td><td id="{$date}">&nbsp;</td></tr>
-<tr><td><h4>description</h4></td><td id="{$description}">&nbsp;</td><td><h4>Revision</h4></td><td id="{$revision}">&nbsp;</td></tr>
-<tr><td><h4>engineer</h4></td><td id="{$nameengineer}">&nbsp;</td><td><h4>Application</h4></td><td>Biluna 0.9.15 (PCALC)</td></tr>
+<table border="0" width="650" cellspacing="0" cellpadding="2">
+<tr><td><h4>Assembly</h4></td><td id="{$number}">&nbsp;</td><td>&nbsp;</td><td><h4>Date</h4></td><td id="{$date}">&nbsp;</td></tr>
+<tr><td><h4>Description</h4></td><td id="{$description}">&nbsp;</td><td>&nbsp;</td><td><h4>Revision</h4></td><td id="{$revision}">&nbsp;</td></tr>
+<tr><td><h4>Engineer</h4></td><td id="{$nameengineer}">&nbsp;</td><td>&nbsp;</td><td><h4>Application</h4></td><td><div align="right">Biluna 0.9.16 (PCALC)</div></td></tr>
 </table>
-<h2>detailed calculation results</h2>
 <h3>calculation parameters</h3>
-<table border="1" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="650" cellspacing="0" cellpadding="2">
 <tbody><tr><td><h4>flange parameters</h4></td><td>&nbsp;</td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td></tr>
 <tr><td>pitch between bolts</td><td>p<sub>B</sub></td><td id="{$pB}">&nbsp;</td><td id="{$pB}">&nbsp;</td><td>mm</td></tr>
 <tr><td>eff.diameter of bolt hole</td><td>d<sub>5e</sub></td><td id="{$d5e(1)}">&nbsp;</td><td id="{$d5e(2)}">&nbsp;</td><td>mm</td></tr>
@@ -64,7 +63,7 @@
 </tbody></table>
 
 <h3>Internal forces</h3>
-<table border="1" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="650" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>loads</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>axial fluid-pressure force</td><td>F<sub>Q</sub></td><td id="{$F_Q[0]}">&nbsp;</td><td id="{$F_Q[1]}">&nbsp;</td><td id="{$F_Q[2]}">&nbsp;</td><td id="{$F_Q[3]}">&nbsp;</td><td>N</td></tr>
@@ -102,7 +101,7 @@
 </tbody></table>
 
 <h3>Check of thightness criteria</h3>
-<table border="1" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="650" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>gasket modulus of elasticity</td><td>E<sub>G</sub></td><td id="{$E_G[0]}">&nbsp;</td><td id="{$E_G[1]}">&nbsp;</td><td id="{$E_G[2]}">&nbsp;</td><td id="{$E_G[3]}">&nbsp;</td><td>MPa</td></tr>
@@ -114,7 +113,7 @@
 </tbody></table>
 
 <h3>Check of the load ratio</h3>
-<table border="1" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="650" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>bolts</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>twisting moment applied to bolt shank</td><td>M<sub>t,B</sub></td><td id="{$MtBnom}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nmm</td></tr>
@@ -161,7 +160,7 @@
 </tbody></table>
 
 <h3>flange rotation</h3>
-<table border="1" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="650" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td><h4>flange 1</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>min. flange rotation</td><td>&Theta;<sub>Fmin</sub></td><td id="{$ThetaF1min[0]}">&nbsp;</td><td id="{$ThetaF1min[1]}">&nbsp;</td><td id="{$ThetaF1min[2]}">&nbsp;</td><td id="{$ThetaF1min[3]}">&nbsp;</td><td>degree</td></tr>
@@ -176,7 +175,7 @@
 </tbody></table>
 
 <h3>internal forces from FB0nom</h3>
-<table border="1" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="650" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>gasket force</td><td>F<sub>Gmin</sub></td><td id="{$F_GminA[0]}">&nbsp;</td><td id="{$F_GminA[1]}">&nbsp;</td><td id="{$F_GminA[2]}">&nbsp;</td><td id="{$F_GminA[3]}">&nbsp;</td><td>N</td></tr>
@@ -188,7 +187,7 @@
 </tbody></table>
 
 <h3>Assembly settings</h3>
-<table border="1" width="600" cellspacing="0" cellpadding="2">
+<table border="1" width="650" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>nominal torque</td><td>M<sub>t,nom</sub></td><td id="{$Mtnom}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nmm</td></tr>

@@ -77,12 +77,10 @@ public:
         DialogModelObject,                     /**< Create a model object dialog */
         DialogPermissionPerspectiveProject,    /**< Permission perspective project selection dialog */
         DialogPluginTester,                    /**< Available plugins dialog */
-        DialogProject,                         /**< Select project from database dialog */
         DialogRegExp,                          /**< Regular expression test dialog */
         DialogScreenshot,                      /**< Screenshot dialog */
         DialogSelectMapping,                   /**< Select mapping dialog */
         DialogSystemGroup,                     /**< Edit and select system group dialog */
-        DialogVersion,                         /**< View database version dialog */
         DialogDefault                          /**< Default- or all dialogs */
     };
 
@@ -96,9 +94,8 @@ public:
      */
     enum WidgetType {
         // start numbering from 102000
-        WidgetTestDbObject = 102000,    /**< DB versus object widget */
-        WidgetTest,                     /**< Test Dialog NOT USED? */
-        WidgetTestDialog,               /**< Dialog widget */
+        WidgetTest = 102000,            /**< Test Dialog */
+        WidgetTestDbObject,             /**< Test database object */
         WidgetTestRelation,             /**< Test relation table dialog */
         WidgetTestSelectProject,        /**< Test project selection dialog */
         WidgetTestTable,                /**< Table widget */
@@ -123,6 +120,7 @@ public:
         WidgetSimpleChart,              /**< Simple chart types review widget */
         WidgetSimpleReport,             /**< Simple report from database widget */
         WidgetTextDocument,             /**< Rich text document widget */
+        WidgetVersion,                  /**< View database version dialog */
         WidgetXmlViewValidator,         /**< XML view and validator widget */
         WidgetDefault                   /**< Default- or all widgets */
     };

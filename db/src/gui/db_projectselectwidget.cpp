@@ -17,6 +17,10 @@ DB_ProjectSelectWidget::DB_ProjectSelectWidget(QWidget* parent)
 
 }
 
+DB_ProjectSelectWidget::~DB_ProjectSelectWidget() {
+    delete mModel;
+}
+
 RB_String DB_ProjectSelectWidget::getName() const {
     return "DB_ProjectSelectWidget";
 }

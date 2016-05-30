@@ -18,7 +18,7 @@
 #include "pcalc_en1591selectgasketwidget.h"
 #include "pcalc_modelfactory.h"
 #include "pcalc_projectdialog.h"
-#include "pcalc_projecteditdialog.h"
+#include "pcalc_projecteditwidget.h"
 #include "rb_dockwidget.h"
 #include "rb_mainwindow.h"
 #include "rb_mdiwindow.h"
@@ -94,6 +94,10 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new PCALC_EN1591SelectGasketWidget(parent);
         break;
     }
+    case WidgetProjectEdit: {
+        wgt = new PCALC_ProjectEditWidget(parent);
+        break;
+    }
     default:
         RB_DEBUG->error("PCALC_DialogFactory::getWidget() "
                         "non-existing widget requested ERROR");
@@ -124,10 +128,6 @@ RB_Dialog* PCALC_DialogFactory::getDialog(int type) {
     switch (type) {
     case DialogProject: {
         dlg = new PCALC_ProjectDialog(mMainWindow);
-        break;
-    }
-    case DialogProjectEdit: {
-        dlg = new PCALC_ProjectEditDialog(mMainWindow);
         break;
     }
     case WidgetEN1591SelectGasket: {

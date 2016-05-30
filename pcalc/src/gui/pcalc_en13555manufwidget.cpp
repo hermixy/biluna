@@ -11,7 +11,7 @@
 #include "pcalc_en13555manufwidget.h"
 
 PCALC_EN13555ManufWidget::PCALC_EN13555ManufWidget(QWidget* parent)
-                : DB_TableWidget(parent) {
+                : RB_TableWidget(parent) {
     // HACK: for write settings otherwise RB_DialogBase
     // this->setObjectName("PCALC_EN13555ManufWidget");
 }
@@ -46,7 +46,6 @@ void PCALC_EN13555ManufWidget::init() {
     leRoot->hide();
 
     gbTable->setTitle(tr("List of manufacturers"));
-    lblTvInfo->setText(tr("Click item to select or [F2] to edit"));
 
     this->initEditSort();
 //        this->initEditUpDown();

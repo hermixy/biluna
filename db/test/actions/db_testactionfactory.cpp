@@ -22,7 +22,6 @@
 #include "db_actiontestdatabasemodel.h"
 #include "db_actiontestdbobject.h"
 #include "db_actiontestdbtabletree.h"
-#include "db_actiontestdialogmodel.h"
 #include "db_actiontestfactory.h"
 #include "db_actiontestinmemorymodel.h"
 #include "db_actiontestinmemorytreemodel.h"
@@ -121,17 +120,6 @@ void DB_TestActionFactory::getTestMenu(QMenu* menu, QToolBar* tb = NULL) {
     tb->addAction(ga);
     ga->setEnabled(false);
     ga->addEnabledType(DB_DialogFactory::WidgetTestText);
-    connect(mMainWindow, SIGNAL(subWindowChanged(int)),
-            ga, SLOT(slotSetEnabled(int)));
-
-    menu->addSeparator();
-
-    ga = DB_ActionTestDialogModel::createGuiAction();
-    menu->addAction(ga);
-    tb->addAction(ga);
-    ga->setEnabled(false);
-    ga->addEnabledType(DB_DialogFactory::WidgetTestTable);
-    ga->addEnabledType(DB_DialogFactory::WidgetTestTree);
     connect(mMainWindow, SIGNAL(subWindowChanged(int)),
             ga, SLOT(slotSetEnabled(int)));
 }

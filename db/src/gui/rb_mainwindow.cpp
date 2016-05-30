@@ -17,7 +17,6 @@
 //#include "db_filterxml.h"
 #include "db_modelfactory.h"
 #include "db_plugintesterdialog.h"
-#include "db_testactionfactory.h"
 #include "db_utilityfactory.h"
 #include "rb_actiondebugexportmodel.h"
 #include "rb_actiondebugplugin.h"
@@ -34,6 +33,10 @@
 #include "rb_system.h"
 #include "rb_xmlreader.h"
 #include "rb_xmlwriter.h"
+
+#ifdef DB_TEST
+#include "db_testactionfactory.h"
+#endif
 
 #ifdef debug
 #include "rb_signalspydialog.h"

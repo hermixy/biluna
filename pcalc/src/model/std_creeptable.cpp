@@ -32,4 +32,8 @@ STD_CreepTable::~STD_CreepTable() {
  */
 void STD_CreepTable::createMembers() {
     addMember("mname", "-", "", RB2::MemberChar125);
+
+    // temporary for importing of external data only
+    addMember("tmp_id", "-", "0", RB2::MemberChar125);
+    addMember("tmp_parent", "-", "0", RB2::MemberChar125);
 }

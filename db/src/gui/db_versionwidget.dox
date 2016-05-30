@@ -1,5 +1,5 @@
-/*! \page db_versiondialog Version Dialog - Database/System DB
-\section sec_db_versiondialog Version Dialog
+/*! \page db_versionwidget Version Dialog - Database/System DB
+\section sec_db_versionwidget Version Dialog
 
 The purpose of this dialog is to check the versions of the database
 tables. The support team might ask you to check the relevant versions
@@ -9,7 +9,7 @@ Select from the main menu System > Administrator > Version
 
 The following dialog will be shown:
 
-\image html db_versiondialog.png "Database version dialog"
+\image html db_versionwidget.png "Database version dialog"
 
 You can- or the system can add comments next to the version for
 future reference.

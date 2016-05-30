@@ -61,7 +61,7 @@ HEADERS += \
     ../src/gui/pcalc_en1591selectgasketwidget.h \
     ../src/gui/pcalc_en1591widget.h \
     ../src/gui/pcalc_projectdialog.h \
-    ../src/gui/pcalc_projecteditdialog.h \
+    ../src/gui/pcalc_projecteditwidget.h \
     ../src/gui/rb_databasetablewidget.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
@@ -152,7 +152,7 @@ SOURCES += \
     ../src/gui/pcalc_en13555typewidget.cpp \
     ../src/gui/pcalc_en1591selectgasketwidget.cpp \
     ../src/gui/pcalc_en1591widget.cpp \
-    ../src/gui/pcalc_projecteditdialog.cpp \
+    ../src/gui/pcalc_projecteditwidget.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \

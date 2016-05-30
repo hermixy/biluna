@@ -1,19 +1,23 @@
 <html><head></head><body>
-<h2>Flange Calculation EN 1591-1:2014</h2>
+<h2>Flange Calculation According to EN 1591-1:2014</h2>
 <h3>Summary Report</h3>
-<table border="0" width="650" cellspacing="0" cellpadding="2">
-<tr><td><h4>Assembly</h4></td><td id="{$number}">&nbsp;</td><td>&nbsp;</td><td><h4>Date</h4></td><td id="{$date}">&nbsp;</td></tr>
-<tr><td><h4>Description</h4></td><td id="{$description}">&nbsp;</td><td>&nbsp;</td><td><h4>Revision</h4></td><td id="{$revision}">&nbsp;</td></tr>
-<tr><td><h4>Engineer</h4></td><td id="{$nameengineer}">&nbsp;</td><td>&nbsp;</td><td><h4>Application</h4></td><td><div align="right">Biluna 0.9.16 (PCALC)</div></td></tr>
+<table border="0" width="600" cellspacing="0" cellpadding="2">
+<tr><td><h4>assembly</h4></td><td id="{$number}">&nbsp;</td><td><h4>Date</h4></td><td id="{$date}">&nbsp;</td></tr>
+<tr><td><h4>description</h4></td><td id="{$description}">&nbsp;</td><td><h4>Revision</h4></td><td id="{$revision}">&nbsp;</td></tr>
+<tr><td><h4>engineer</h4></td><td id="{$nameengineer}">&nbsp;</td><td><h4>Application</h4></td><td><div align="right">Biluna 0.9.15 (PCALC)</div></td></tr>
 </table>
+<h2>Summary Results</h2>
 <h3>Input Parameters</h3>
-<table border="1" width="650" cellspacing="0" cellpadding="2">
-<tbody><tr><td><h4>Flange</h4></td><td>&nbsp;</td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td></tr>
+<table border="1" width="600" cellspacing="0" cellpadding="2">
+<tbody><tr><td><h4>flange</h4></td><td>&nbsp;</td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td></tr>
 <tr><td>flange type</td><td>-</td><td id="{$typeflange1_id}">&nbsp;</td><td id="{$typeflange2_id}">&nbsp;</td><td>-</td></tr>
 <tr><td>flange code</td><td>-</td><td id="{$TODO}">TODO</td><td id="{$TODO}">TODO</td><td>-</td></tr>
 <tr><td>flange size</td><td>d<sub>0</sub></td><td id="{$d01}">&nbsp;</td><td id="{$d02}">&nbsp;</td><td>mm</td></tr>
 <tr><td>flange material</td><td>-</td><td id="{$materialflange1_idx}">&nbsp;</td><td id="{$materialflange2_idx}">&nbsp;</td><td>-</td></tr>
-<tr><td colspan="5"><h4>Gasket/Bolt/Washer</h4></tr>
+</tbody></table>
+<p>&nbsp;</p>
+<table border="1" width="600" cellspacing="0" cellpadding="2">
+<tbody><tr><td><h4>gasket/bolt/washer</h4></td><td>&nbsp;</td><td colspan=2>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td>gasket type</td><td>-</td><td colspan=2 id="{$gaskettype_idx}">&nbsp;</td><td>-</td></tr>
 <tr><td>gasket size</td><td>d<sub>Gin/out</sub></td><td id="{$dgin}">&nbsp;</td><td id="{$dgout}">&nbsp;</td><td>mm</td></tr>
 <tr><td>gasket thickness</td><td>e<sub>Gt</sub></td><td colspan=2 id="{$egt}">&nbsp;</td><td>mm</td></tr>
@@ -24,7 +28,7 @@
 </tbody></table>
 
 <h3>Design Conditions</h3>
-<table border="1" width="650" cellspacing="0" cellpadding="2">
+<table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>design pressure</td><td>P</td><td id="{$p[0]}">&nbsp;</td><td id="{$p[1]}">&nbsp;</td><td id="{$p[2]}">&nbsp;</td><td id="{$p[3]}">&nbsp;</td><td>MPa</td></tr>
@@ -32,38 +36,50 @@
 <tr><td>leak rate</td><td>L (x)</td><td id="{$leakagerate}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>10E-(X)</td></tr>
 </tbody></table>
 
-<h3>Output</h3>
-<table border="1" width="650" cellspacing="0" cellpadding="2">
+<h3>Assembly Settings</h3>
+<table border="1" width="600" cellspacing="0" cellpadding="2">
 <tbody>
-<tr><td colspan="2"><h4>Assembly Settings</h4></td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>nominal torque</td><td>M<sub>t,nom</sub></td><td id="{$Mtnom}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nmm</td></tr>
 <tr><td>bolt elongation</td><td>&Delta;l<sub>B</sub></td><td id="{$delta_lB}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
 <tr><td>nominal bolt force</td><td>F<sub>B0nom</sub></td><td id="{$F_Bnom[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
-<tr><td colspan="2">check of min.bolt force: F<sub>B0min</sub>&gt;=F<sub>B0req</sub></td><td id="{$result114}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+<tr><td>check of min.bolt force (Formula 114)</td><td>F<sub>B0min</sub>&gt;=F<sub>B0req</sub></td><td id="{$result114}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>-</td></tr>
+</tbody></table>
 
-<tr><td colspan="7"><h4>Check of Leakrate</h4></tr>
-<tr><td>gasket mod, of elast.</td><td>E<sub>G</sub></td><td id="{$E_G[0]}">&nbsp;</td><td id="{$E_G[1]}">&nbsp;</td><td id="{$E_G[2]}">&nbsp;</td><td id="{$E_G[3]}">&nbsp;</td><td>MPa</td></tr>
-<tr><td>gasket compr. thickn.</td><td>e<sub>G</sub></td><td id="{$eG[0]}">&nbsp;</td><td id="{$eG[1]}">&nbsp;</td><td id="{$eG[2]}">&nbsp;</td><td id="{$eG[3]}">&nbsp;</td><td>mm</td></tr>
+
+<h3>Check of Leakrate Criteria</h3>
+<table border="1" width="600" cellspacing="0" cellpadding="2">
+<tbody>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
+<tr><td>gasket modulus of elasticity</td><td>E<sub>G</sub></td><td id="{$E_G[0]}">&nbsp;</td><td id="{$E_G[1]}">&nbsp;</td><td id="{$E_G[2]}">&nbsp;</td><td id="{$E_G[3]}">&nbsp;</td><td>MPa</td></tr>
+<tr><td>gasket compressed thickness</td><td>e<sub>G</sub></td><td id="{$eG[0]}">&nbsp;</td><td id="{$eG[1]}">&nbsp;</td><td id="{$eG[2]}">&nbsp;</td><td id="{$eG[3]}">&nbsp;</td><td>mm</td></tr>
 <tr><td>gasket stress</td><td>Q<sub>G</sub></td><td id="{$Q_G[0]}">&nbsp;</td><td id="{$Q_G[1]}">&nbsp;</td><td id="{$Q_G[2]}">&nbsp;</td><td id="{$Q_G[3]}">&nbsp;</td><td>MPa</td></tr>
-<tr><td>min. req. gasket stress</td><td>Q<sub>minL</sub></td><td id="{$Q_minL[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>MPa</td></tr>
-<tr><td>min. req. stress subs. cond.</td><td>Q<sub>sminL</sub></td><td>&nbsp;</td><td id="{$Q_sminL[1]}">&nbsp;</td><td id="{$Q_sminL[2]}">&nbsp;</td><td id="{$Q_sminL[3]}">&nbsp;</td><td>MPa</td></tr>
-<tr><td colspan="2">check min. req. g. stress: Q<sub>min</sub>&gt;Q<sub>(s)minL</sub></td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[3]}">&nbsp;</td><td>-</td></tr>
+<tr><td>min. required gasket stress</td><td>Q<sub>minL</sub></td><td id="{$Q_minL[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>MPa</td></tr>
+<tr><td>min. req. gasket stress subs. cond.</td><td>Q<sub>sminL</sub></td><td>&nbsp;</td><td id="{$Q_sminL[1]}">&nbsp;</td><td id="{$Q_sminL[2]}">&nbsp;</td><td id="{$Q_sminL[3]}">&nbsp;</td><td>MPa</td></tr>
+<tr><td>compliance of min. required gasket stress</td><td>Q<sub>min</sub>&gt;Q<sub>(s)minL</sub></td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[3]}">&nbsp;</td><td>-</td></tr>
+</tbody></table>
 
-<tr><td colspan="7"><h4>Check of Load Ratio</h4></tr>
+<h3>Check of Load Ratio</h3>
+<table border="1" width="600" cellspacing="0" cellpadding="2">
+<tbody>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>bolt load ratio</td><td>&Phi;<sub>B</sub></td><td id="{$PhiB[0]}">&nbsp;</td><td id="{$PhiB[1]}">&nbsp;</td><td id="{$PhiB[2]}">&nbsp;</td><td id="{$PhiB[3]}">&nbsp;</td><td>-</td></tr>
 <tr><td>gasket load ratio</td><td>&Phi;<sub>G</sub></td><td id="{$PhiG[0]}">&nbsp;</td><td id="{$PhiG[1]}">&nbsp;</td><td id="{$PhiG[2]}">&nbsp;</td><td id="{$PhiG[3]}">&nbsp;</td><td>-</td></tr>
 <tr><td>flange 1 load ratio</td><td>&Phi;<sub>F</sub></td><td id="{$PhiF(1)[0]}">&nbsp;</td><td id="{$PhiF(1)[1]}">&nbsp;</td><td id="{$PhiF(1)[2]}">&nbsp;</td><td id="{$PhiF(1)[3]}">&nbsp;</td><td>-</td></tr>
 <tr><td>flange 2 load ratio</td><td>&Phi;<sub>F</sub></td><td id="{$PhiF(2)[0]}">&nbsp;</td><td id="{$PhiF(2)[1]}">&nbsp;</td><td id="{$PhiF(2)[2]}">&nbsp;</td><td id="{$PhiF(2)[3]}">&nbsp;</td><td>-</td></tr>
 <tr><td>loose ring 1 load ratio</td><td>&Phi;<sub>L</sub></td><td id="{$PhiL(1)[0]}">&nbsp;</td><td id="{$PhiL(1)[1]}">&nbsp;</td><td id="{$PhiL(1)[2]}">&nbsp;</td><td id="{$PhiL(1)[3]}">&nbsp;</td><td>-</td></tr>
 <tr><td>loose ring 2 load ratio</td><td>&Phi;<sub>L</sub></td><td id="{$PhiL(2)[0]}">&nbsp;</td><td id="{$PhiL(2)[1]}">&nbsp;</td><td id="{$PhiL(2)[2]}">&nbsp;</td><td id="{$PhiL(2)[3]}">&nbsp;</td><td>-</td></tr>
+</tbody></table>
 
-<tr><td colspan="7"><h4>Flange 1 Rotation</h4></tr>
+<h3>flange rotation</h3>
+<table border="1" width="600" cellspacing="0" cellpadding="2">
+<tbody>
+<tr><td><h4>flange 1</h4></td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
 <tr><td>min. flange rotation</td><td>&Theta;<sub>Fmin</sub></td><td id="{$ThetaF1min[0]}">&nbsp;</td><td id="{$ThetaF1min[1]}">&nbsp;</td><td id="{$ThetaF1min[2]}">&nbsp;</td><td id="{$ThetaF1min[3]}">&nbsp;</td><td>degree</td></tr>
 <tr><td>max. flange rotation</td><td>&Theta;<sub>Fmax</sub></td><td id="{$ThetaF1max[0]}">&nbsp;</td><td id="{$ThetaF1max[1]}">&nbsp;</td><td id="{$ThetaF1max[2]}">&nbsp;</td><td id="{$ThetaF1max[3]}">&nbsp;</td><td>degree</td></tr>
 <tr><td>min. loose ring rotation</td><td>&Theta;<sub>Lmin</sub></td><td id="{$ThetaL1min[0]}">&nbsp;</td><td id="{$ThetaL1min[1]}">&nbsp;</td><td id="{$ThetaL1min[2]}">&nbsp;</td><td id="{$ThetaL1min[3]}">&nbsp;</td><td>degree</td></tr>
 <tr><td>max. loose ring rotation</td><td>&Theta;<sub>Lmax</sub></td><td id="{$ThetaL1max[0]}">&nbsp;</td><td id="{$ThetaL1max[1]}">&nbsp;</td><td id="{$ThetaL1max[2]}">&nbsp;</td><td id="{$ThetaL1max[3]}">&nbsp;</td><td>degree</td></tr>
-
-<tr><td colspan=7><h4>Flange 2 Rotation</h4></td></tr>
+<tr><td colspan=7><h4>flange 2</h4></td></tr>
 <tr><td>min. flange rotation</td><td>&Theta;<sub>Fmin</sub></td><td id="{$ThetaF2min[0]}">&nbsp;</td><td id="{$ThetaF2min[1]}">&nbsp;</td><td id="{$ThetaF2min[2]}">&nbsp;</td><td id="{$ThetaF2min[3]}">&nbsp;</td><td>degree</td></tr>
 <tr><td>max. flange rotation</td><td>&Theta;<sub>Fmax</sub></td><td id="{$ThetaF2max[0]}">&nbsp;</td><td id="{$ThetaF2max[1]}">&nbsp;</td><td id="{$ThetaF2max[2]}">&nbsp;</td><td id="{$ThetaF2max[3]}">&nbsp;</td><td>degree</td></tr>
 <tr><td>min. loose ring rotation</td><td>&Theta;<sub>Lmin</sub></td><td id="{$ThetaL2min[0]}">&nbsp;</td><td id="{$ThetaL2min[1]}">&nbsp;</td><td id="{$ThetaL2min[2]}">&nbsp;</td><td id="{$ThetaL2min[3]}">&nbsp;</td><td>degree</td></tr>

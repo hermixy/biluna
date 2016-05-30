@@ -13,15 +13,15 @@
 
 #include <QtWidgets>
 #include "pcalc_modelfactory.h"
-#include "db_tablewidget.h"
 #include "db_modelfactory.h"
+#include "rb_tablewidget.h"
 
 
 /**
  * @brief Widget to select and edit a manufacturer of EN13555 gasket.
  * Currently used as a dialog
  */
-class PCALC_EN13555ManufWidget : public DB_TableWidget {
+class PCALC_EN13555ManufWidget : public RB_TableWidget {
 
     Q_OBJECT
 

@@ -49,7 +49,7 @@
 #endif
 
 #include "db_textwidget.h"
-#include "db_versiondialog.h"
+#include "db_versionwidget.h"
 #include "db_xmlviewvalidatorwidget.h"
 #include "rb_debug.h"
 #include "rb_mainwindow.h"
@@ -218,6 +218,10 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new DB_TextWidget(parent);
         break;
     }
+    case WidgetVersion: {
+        wgt = new DB_VersionWidget(parent);
+        break;
+    }
     case WidgetXmlViewValidator: {
         // Unique widget
         wgt = RB_DialogFactory::findWidget(type);
@@ -226,11 +230,10 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
         break;
     }
 #ifdef DB_TEST
-    case WidgetTestDbObject:
+    case WidgetTestDbObject :
     {
         wgt = new DB_TestDbObjectWidget(parent);
         break;
-
     }
     case WidgetTestRelation :
     {
@@ -261,12 +264,6 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
     {
         wgt = new DB_TestSelectProjectWidget(parent);
         break;
-    }
-    case WidgetTestDialog: // DlgTest:
-    {
-//        DB_TestDlgDialog* dlg = new DB_TestDlgDialog(parent);
-//        dlg->init();
-//        return dlg;
     }
 #endif
     default:
@@ -351,12 +348,6 @@ RB_Dialog* DB_DialogFactory::getDialog(int type) {
             dlg->init();
             break;
         }
-//        case DialogProject:
-//        {
-//            dlg = new DB_ProjectDialog(mMainWindow);
-//            dlg->init();
-//            break;
-//        }
         case DialogRegExp:
         {
             dlg = new DB_RegExpDialog(mMainWindow);
@@ -378,12 +369,6 @@ RB_Dialog* DB_DialogFactory::getDialog(int type) {
         case DialogSystemGroup:
         {
             dlg = new DB_SystemGroupDialog(mMainWindow);
-            dlg->init();
-            break;
-        }
-        case DialogVersion:
-        {
-            dlg = new DB_VersionDialog(mMainWindow);
             dlg->init();
             break;
         }

@@ -16,6 +16,10 @@ DB_ProjectEditWidget::DB_ProjectEditWidget(QWidget* parent)
 
 }
 
+DB_ProjectEditWidget::~DB_ProjectEditWidget() {
+    delete mModel;
+}
+
 RB_String DB_ProjectEditWidget::getName() const {
     return "DB_ProjectEditWidget";
 }

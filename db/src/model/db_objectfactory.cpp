@@ -21,10 +21,12 @@
 #include "db_systemuser.h"
 #include "db_systemusergroup.h"
 #include "db_systemuserpermission.h"
+#ifdef DB_TEST
 #include "db_test.h"
 #include "db_testchild.h"
 #include "db_testproject.h"
 #include "db_testrelation.h"
+#endif
 #include "db_version.h"
 #include "rb_debug.h"
 #include "rb_uuid.h"

@@ -62,7 +62,16 @@ PCALC_EN1591Widget::~PCALC_EN1591Widget() {
 }
 
 RB_String PCALC_EN1591Widget::getSaveAsFileName() {
-    return "pcalc_EN1591_" + mAssemblyModel->getCurrentValue("number").toString();
+    QString name = mAssemblyModel->getCurrentValue("number").toString();
+    name.replace(" ", "_");
+    name += "_rev";
+    int revision = mAssemblyModel->getCurrentValue("revision").toInt();
+    name += QString::number(revision);
+
+    QString type = this->cbCalculationReportType->currentText().toLower();
+    type.replace(" ", "_");
+
+    return "pcalc_EN1591_" + name + "_" + type;
 }
 
 void PCALC_EN1591Widget::init() {

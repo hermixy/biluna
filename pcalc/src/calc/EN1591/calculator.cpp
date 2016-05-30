@@ -1,4 +1,6 @@
 ﻿#include "calculator.h"
+#include "pcalc_report.h"
+
 NAMESPACE_BILUNA_CALC_EN1591
 
 
@@ -165,6 +167,18 @@ void Calculator::exec() {
     }
 
     finalCalculations(assembly);
+}
+
+bool Calculator::inputCheck() {
+    // first quick check otherwise calculation crashes on missing object
+    if (mAssembly->mLoadCaseList->size() <=1) {
+        PR->addDetail("Assembly input ERROR", "list size",
+                      "Load case list size &lt= 1",
+                      mAssembly->mLoadCaseList->size(), "-", 0, -1, "ERROR");
+        return false;
+    }
+
+    return true;
 }
 
 void Calculator::setValidValues() {

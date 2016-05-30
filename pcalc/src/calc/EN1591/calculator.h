@@ -20,6 +20,7 @@ public:
     virtual ~Calculator();
 
     void exec();
+    bool inputCheck();
     void setValidValues();
     void Loop_F55_to_108(Assembly* assembly);
     void F3_to_24(Assembly* assembly);

@@ -21,6 +21,7 @@
  */
 RB_TableWidget::RB_TableWidget(QWidget *parent)
         : RB_Widget(parent) {
+    RB_DEBUG->debug("RB_TableWidget::RB_TableWidget()");
 
     setupUi(this);
 
@@ -34,7 +35,7 @@ RB_TableWidget::RB_TableWidget(QWidget *parent)
  * Destructor
  */
 RB_TableWidget::~RB_TableWidget() {
-    RB_DEBUG->print("RB_TableWidget::~RB_TableWidget() OK");
+    RB_DEBUG->debug("RB_TableWidget::~RB_TableWidget()");
 }
 
 /**

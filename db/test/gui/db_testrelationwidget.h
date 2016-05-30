@@ -21,7 +21,6 @@ class DB_TestRelationWidget : public RB_TableWidget {
 
 public:
     DB_TestRelationWidget(QWidget* parent);
-
     virtual ~DB_TestRelationWidget();
 
     RB_String getName() const { return "DB_TestReleationWidget"; }

@@ -110,7 +110,6 @@ HEADERS += \
     ../../db/test/actions/db_actiontestdatabasetreemodel.h \
     ../../db/test/actions/db_actiontestdbobject.h \
     ../../db/test/actions/db_actiontestdbtabletree.h \
-    ../../db/test/actions/db_actiontestdialogmodel.h \
     ../../db/test/actions/db_actiontestfactory.h \
     ../../db/test/actions/db_actiontestinmemorymodel.h \
     ../../db/test/actions/db_actiontestinmemorytreemodel.h \
@@ -122,7 +121,6 @@ HEADERS += \
     ../../db/test/actions/db_actiontoolssignalspy.h \
     ../../db/test/actions/db_testactionfactory.h \
     ../../db/test/gui/db_testdbobjectwidget.h \
-    ../../db/test/gui/db_testdlgdialog.h \
 #    ../../db/test/gui/db_testdialogfactory.h \
     ../../db/test/gui/db_testmainwindow.h \
     ../../db/test/gui/db_testrelationwidget.h \
@@ -146,7 +144,6 @@ SOURCES += \
     ../../db/test/actions/db_actiontestdatabasetreemodel.cpp \
     ../../db/test/actions/db_actiontestdbtabletree.cpp \
     ../../db/test/actions/db_actiontestdbobject.cpp \
-    ../../db/test/actions/db_actiontestdialogmodel.cpp \
     ../../db/test/actions/db_actiontestfactory.cpp \
     ../../db/test/actions/db_actiontestinmemorymodel.cpp \
     ../../db/test/actions/db_actiontestinmemorytreemodel.cpp \

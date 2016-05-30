@@ -212,7 +212,7 @@ HEADERS = \
     ../src/gui/db_tabledialog.h \
     ../src/gui/db_treedialog.h \
     ../src/gui/db_textwidget.h \
-    ../src/gui/db_versiondialog.h \
+    ../src/gui/db_versionwidget.h \
     ../src/gui/db_xmlviewvalidatorwidget.h \
     ../src/gui/rb_cmbdelegate.h \
     ../src/gui/rb_codetextedit.h \
@@ -471,6 +471,7 @@ SOURCES = \
     ../src/gui/db_tabledialog.cpp \
     ../src/gui/db_treedialog.cpp \
     ../src/gui/db_textwidget.cpp \
+    ../src/gui/db_versionwidget.cpp \
     ../src/gui/db_xmlviewvalidatorwidget.cpp \
     ../src/gui/rb_cmbdelegate.cpp \
     ../src/gui/rb_codetextedit.cpp \

@@ -11,7 +11,7 @@
 #include "pcalc_en13555typewidget.h"
 
 PCALC_EN13555TypeWidget::PCALC_EN13555TypeWidget(QWidget* parent)
-                : DB_TableWidget(parent) {
+                : RB_TableWidget(parent) {
     // HACK: for write settings otherwise RB_DialogBase
     this->setObjectName("PCALC_EN13555TypeWidget");
 }
@@ -45,7 +45,6 @@ void PCALC_EN13555TypeWidget::init() {
     leRoot->hide();
 
     gbTable->setTitle(tr("List of gaskets"));
-    lblTvInfo->setText(tr("Click item to select or [F2] to edit"));
 
     this->initEditSort();
 //        this->initEditUpDown();

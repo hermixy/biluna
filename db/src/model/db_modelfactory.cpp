@@ -116,9 +116,11 @@ RB_MmProxy* DB_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelPermissionPerspectiveProject: {
         // Custom in-memory model, mObjectFactory not used, root set later in dialog
-        RB_ObjectContainer* root = new RB_ObjectContainer("", NULL, "DB_PermissionPerspectiveProjectRoot");
-        RB_ObjectContainer* list = new RB_ObjectContainer("", root, "DB_PermissionPerspectiveProjectList",
-                                                          DB_OBJECTFACTORY);
+        RB_ObjectContainer* root
+                = new RB_ObjectContainer("", NULL, "DB_PermissionPerspectiveProjectRoot");
+        RB_ObjectContainer* list
+                = new RB_ObjectContainer("", root, "DB_PermissionPerspectiveProjectList",
+                                         DB_OBJECTFACTORY);
         root->addObject(list);
 
         DB_SqlCommonFunctions oper;
@@ -246,11 +248,11 @@ RB_MmProxy* DB_ModelFactory::getParentModel(int type) {
     case ModelSystemUserGroup:
         iter = mModelList.find(ModelSystemUser);
         break;
+#ifdef DB_TEST
     case ModelTest:
         // mModelList is a std::map<int, RB_MmObjectInterface*>
         iter = mModelList.find(ModelNone);
         break;
-#ifdef DB_TEST
     case ModelTestChild:
         iter = mModelList.find(ModelTest);
         break;

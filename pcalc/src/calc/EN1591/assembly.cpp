@@ -770,6 +770,7 @@ bool Assembly::Is_F_B0nom_Valid() {
     QString strF_Bnom = loadCase->F_Bspec > 0.0 ? "F_Bspec" : "F_Bnom";
 
     bool result = false;
+    bool result2 = false;
     result = loadCase->F_Bmin <= tmpF_Bnom
             && tmpF_Bnom <= loadCase->F_Bmax; // 111
     PR->addDetail("Formula 111", "result111",
@@ -780,33 +781,33 @@ bool Assembly::Is_F_B0nom_Valid() {
 
     if (loadCase->F_Bspec > 0.0
             || ! (mBolt->tType == Bolt::ManualStandardRing)) {
-        result = result
+        result2 = result
                 && loadCase->F_Bnom >= loadCase->F_Breq
-                / (1 - mBolt->etanminus); // 115
+                / (1 - mBolt->etanminus) / 1.000001; // 115
         PR->addDetail("Formula 115", "result115",
                       "result(111) AND F_Bnom &gt;= F_Breq / (1 - etanminus)",
-                      static_cast<int>(result), "-",
+                      static_cast<int>(result2), "-",
                       QN((int)result) + " AND " + QN(loadCase->F_Bnom) + " &gt;= "
                       + QN(loadCase->F_Breq) + " / (1 - "
                       + QN(mBolt->etanminus) + ")");
     } else {
         double etanplusminus = 0.5 *(1 + 3 / (pow(mFlange1->nB, 0.5))) / 4;
-        result = result && loadCase->F_Bnom >= loadCase->F_Breq
-                / (1 - etanplusminus); // 116
+        result2 = result && loadCase->F_Bnom >= loadCase->F_Breq
+                / (1 - etanplusminus) / 1.000001; // 116
         PR->addDetail("Formula 116", "result116",
                       "result(111) AND F_Bnom &gt;= F_Breq / (1 - 0.5 * (1 + 3 "
                       "/ (nB ^ 0.5)) / 4)",
-                      static_cast<int>(result), "-",
+                      static_cast<int>(result2), "-",
                       QN((int)result) + " AND " + QN(loadCase->F_Bnom) + " &gt;= "
                       + QN(loadCase->F_Breq) + " / (1 - 0.5 * (1 + 3 / ("
                       + QN(mFlange1->nB) + " ^ 0.5)) / 4)");
     }
 
-    result = result && loadCase->F_Bmin >= loadCase->F_Breq; // 114
+    bool result3 = result2 && loadCase->F_Bmin >= loadCase->F_Breq / 1.000001; // 114
     PR->addDetail("Formula 114", "result114",
                   "111 AND (115 OR 116) And F_Bmin &lt;= F_Breq",
-                  static_cast<int>(result), "-",
-                  QN((int)result) + " AND " + QN(loadCase->F_Bmin) + " &lt;= "
+                  static_cast<int>(result3), "-",
+                  QN((int)result2) + " AND " + QN(loadCase->F_Bmin) + " &lt;= "
                   + QN(loadCase->F_Breq));
 
     return result;

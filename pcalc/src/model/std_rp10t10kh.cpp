@@ -34,4 +34,8 @@ STD_Rp10T10kh::~STD_Rp10T10kh() {
 void STD_Rp10T10kh::createMembers() {
     addMember("temperature", "Celsius", 0.0, RB2::MemberDouble);
     addMember("rp10t10kh", "MPa", 0.0, RB2::MemberDouble);
+
+    // temporary for importing of external data only
+    addMember("tmp_id", "-", "0", RB2::MemberChar125);
+    addMember("tmp_parent", "-", "0", RB2::MemberChar125);
 }

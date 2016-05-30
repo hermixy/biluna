@@ -13,6 +13,7 @@
 #include "pcalc_dialogfactory.h"
 #include "pcalc_modelfactory.h"
 #include "rb_database.h"
+#include "rb_dialogwindow.h"
 #include "rb_mainwindow.h"
 
 
@@ -58,7 +59,8 @@ void PCALC_ActionEditProject::trigger() {
     }
 
     // Create dialog
-    RB_Dialog* dlg = PCALC_DIALOGFACTORY->getDialog(PCALC_DialogFactory::DialogProjectEdit);
+    RB_DialogWindow* dlg = PCALC_DIALOGFACTORY->getDialogWindow(
+                PCALC_DialogFactory::WidgetProjectEdit);
     dlg->exec();
     dlg->deleteLater();
 }

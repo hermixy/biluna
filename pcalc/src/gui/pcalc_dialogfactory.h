@@ -54,7 +54,6 @@ public:
         // start numbering from 193100
         DialogNone = 193100,            /**< Invalid dialog */
         DialogProject,                  /**< Select project from database dialog */
-        DialogProjectEdit,              /**< Edit project dialog */
         DialogDefault                   /**< Default- or all dialogs */
     };
 
@@ -81,6 +80,7 @@ public:
         WidgetEN13555Type,              /**< EN13555 gasket type edit and selection */
         WidgetEN1591Flange,             /**< EN1591 flange calculation */
         WidgetEN1591SelectGasket,       /**< EN1591 select gasket dialog */
+        WidgetProjectEdit,              /**< Edit project dialog */
         WidgetDefault                   /**< Default- or all widgets */
     };
 

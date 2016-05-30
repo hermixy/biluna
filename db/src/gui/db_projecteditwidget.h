@@ -19,6 +19,7 @@ class DB_EXPORT DB_ProjectEditWidget : public RB_ProjectEditWidget {
 
 public:
     DB_ProjectEditWidget(QWidget* parent);
+    virtual ~DB_ProjectEditWidget();
 
     virtual RB_String getName() const;
     virtual RB2::PerspectiveType getPerspectiveType() const;

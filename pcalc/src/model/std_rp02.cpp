@@ -34,4 +34,8 @@ STD_Rp02::~STD_Rp02() {
 void STD_Rp02::createMembers() {
     addMember("temperature", "Celsius", 0.0, RB2::MemberDouble);
     addMember("rp02", "MPa", 0.0, RB2::MemberDouble);
+
+    // temporary for importing of external data only
+    addMember("tmp_id", "-", "0", RB2::MemberChar125);
+    addMember("tmp_parent", "-", "0", RB2::MemberChar125);
 }

@@ -1,6 +1,7 @@
 ﻿#include "en1591handler.h"
 
 #include "calculator.h"
+#include "db_dialogfactory.h"
 #include "pcalc_report.h"
 #include "rb_allowanceservice.h"
 #include "rb_materialservice.h"
@@ -53,7 +54,25 @@ void EN1591Handler::exec() {
     setMaterialProperties();
     // No setGasketProperties()! because of iterations
 
-    mCalc->exec();
+    try {
+        if (mCalc->inputCheck()) {
+            mCalc->exec();
+        }
+        QApplication::restoreOverrideCursor();
+    } catch(std::exception& e) {
+        QApplication::restoreOverrideCursor();
+        QString msg = "EN1591Handler::exec() exception: "
+                + QString(e.what()) + " ERROR";
+        RB_DEBUG->error(msg);
+        DB_DIALOGFACTORY->commandMessage(msg);
+        DB_DIALOGFACTORY->requestWarningDialog(msg);
+    } catch(...) {
+        QApplication::restoreOverrideCursor();
+        QString msg = "EN1591Handler::exec() exception: <unknown> ERROR";
+        RB_DEBUG->error(msg);
+        DB_DIALOGFACTORY->commandMessage(msg);
+        DB_DIALOGFACTORY->requestWarningDialog(msg);
+    }
 }
 
 void EN1591Handler::setDimMatInput() {

@@ -32,4 +32,8 @@ STD_ExtPressTable::~STD_ExtPressTable() {
  */
 void STD_ExtPressTable::createMembers() {
     addMember("mname", "-", "", RB2::MemberChar125);
+
+    // temporary for importing of external data only
+    addMember("tmp_id", "-", "0", RB2::MemberChar125);
+    addMember("tmp_parent", "-", "0", RB2::MemberChar125);
 }

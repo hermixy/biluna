@@ -35,6 +35,8 @@
 #include "std_extpresstable.h"
 #include "std_material.h"
 #include "std_rmmin.h"
+#include "std_rp02.h"
+#include "std_rp10.h"
 #include "std_rp10t10kh.h"
 #include "std_rp10t100kh.h"
 #include "std_rpt10kh.h"
@@ -212,7 +214,7 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
 
     // TODO: external pressure tables and values
 //        uuid = "";
-//        list = new RB_ObjectContainer (uuid, obj, "STD_Rp02List", this);
+//        list = new RB_ObjectContainer (uuid, obj, "STD_ExtPressList", this);
 //        obj->addObject(list);
     } else if (str == "STD_MaterialList") {
         obj = new STD_Material(uuid, parent, "STD_Material", this);
@@ -222,6 +224,14 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_Rp10List", this);
         obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_RmMinList", this);
+        obj->addObject(list);
+    } else if (str == "STD_RmMinList") {
+        obj = new STD_RmMin(uuid, parent, "STD_RmMin", this);
+    } else if (str == "STD_Rp02List") {
+        obj = new STD_Rp02(uuid, parent, "STD_Rp02", this);
+    } else if (str == "STD_Rp10List") {
+        obj = new STD_Rp10(uuid, parent, "STD_Rp10", this);
     } else if (str == "STD_Rp10T10khList") {
         obj = new STD_Rp10T10kh(uuid, parent, "STD_Rp10T10kh", this);
     } else if (str == "STD_Rp10T100khList") {
