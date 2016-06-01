@@ -40,7 +40,8 @@ void STD_MaterialWidget::init() {
     mModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelMaterial, false);
     mModel->setRoot("");
-    mModel->setWhere("id <> '0'");
+//    mModel->setWhere("id <> '0'");
+    initModelMapping();
     mModel->select();
 
     formatTableView(ui->tvMaterial, mModel);
@@ -86,7 +87,6 @@ void STD_MaterialWidget::init() {
         ui->tvRmMin->hideColumn(i);
     }
 
-    initModelMapping();
     readSettings();
 }
 
@@ -150,6 +150,10 @@ void STD_MaterialWidget::initModelMapping() {
     mapper->addMapping(ui->leDocument, mModel->fieldIndex("document"));
     mapper->addMapping(ui->leIssue, mModel->fieldIndex("issue"));
 
+    // Test only
+    //    int relationColumn = mModel->fieldIndex("elasmodultable_id");
+    //    mModel->setRelation(relationColumn,
+    //           RB_SqlRelation("std_elasmodultable", "id", "mname"));
     addComboBoxMapping(mModel, "elasmodultable_id",
                        "std_elasmodultable", "id",
                        "mname", ui->cbElasModulTable, mapper);
@@ -163,33 +167,12 @@ void STD_MaterialWidget::initModelMapping() {
                        "std_extpresstable", "id",
                        "mname", ui->cbExtPressTable, mapper);
 
-//    int relationColumn = mModel->fieldIndex("elasmodultable_id");
-//    mModel->setRelation(relationColumn,
-//           RB_SqlRelation("std_elasmodultable", "id", "mname"));
-
-
-/*
-    addMember("mname", "-", "", RB2::MemberChar125);
-    addMember("number", "-", "", RB2::MemberChar125);
-    addMember("type_id", "-", "", RB2::MemberInteger);
-    addMember("class_id", "-", "", RB2::MemberInteger);
-    addMember("structure_id", "-", 0, RB2::MemberInteger);
-    addMember("composition", "-", "", RB2::MemberChar125);
-    addMember("document", "-", "", RB2::MemberChar125);
-    addMember("issue", "-", "", RB2::MemberChar40);
-
-    addMember("elasmodultable_id", "-", "", RB2::MemberChar40);
-    addMember("thermexptable_id", "-", "", RB2::MemberChar40);
-    addMember("creeptable_id", "-", "", RB2::MemberChar40);
-    addMember("extpresstable_id", "-", "", RB2::MemberChar40);
-
-    addMember("yield20c", "MPa", 0.0, RB2::MemberDouble);
-    addMember("yield1p20c", "MPa", 0.0, RB2::MemberDouble);
-    addMember("tensile20c", "MPa", 0.0, RB2::MemberDouble);
-    addMember("specificgravity", "kg/dm3", 0.0, RB2::MemberDouble);
-    addMember("elongafterrupt", "percent", 0.0, RB2::MemberDouble);
-    addMember("comment", "-", "", RB2::MemberChar255);
-    addMember("wstgruppe", "-", "", RB2::MemberChar125);
-    addMember("form_en", "-", "", RB2::MemberChar125);
-*/
+    mapper->addMapping(ui->leYield20C, mModel->fieldIndex("yield20c"));
+    mapper->addMapping(ui->leYield1p20C, mModel->fieldIndex("yield1p20c"));
+    mapper->addMapping(ui->leTensile20C, mModel->fieldIndex("tensile20c"));
+    mapper->addMapping(ui->leSpecGravity, mModel->fieldIndex("specificgravity"));
+    mapper->addMapping(ui->leElongRupt, mModel->fieldIndex("elongafterrupt"));
+    mapper->addMapping(ui->leComment, mModel->fieldIndex("comment"));
+    mapper->addMapping(ui->leWstGruppe, mModel->fieldIndex("wstgruppe"));
+    mapper->addMapping(ui->leFormEn, mModel->fieldIndex("form_en"));
 }

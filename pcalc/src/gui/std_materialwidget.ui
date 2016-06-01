@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>813</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -83,282 +83,296 @@
        <attribute name="title">
         <string>Details</string>
        </attribute>
-       <widget class="QLabel" name="lblName">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>20</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <property name="leftMargin">
+         <number>3</number>
         </property>
-        <property name="text">
-         <string>Name</string>
+        <property name="topMargin">
+         <number>3</number>
         </property>
-       </widget>
-       <widget class="QLineEdit" name="leName">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>20</y>
-          <width>113</width>
-          <height>20</height>
-         </rect>
+        <property name="rightMargin">
+         <number>3</number>
         </property>
-       </widget>
-       <widget class="QLabel" name="lblNumber">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>60</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
+        <property name="bottomMargin">
+         <number>3</number>
         </property>
-        <property name="text">
-         <string>Number</string>
+        <property name="spacing">
+         <number>3</number>
         </property>
-       </widget>
-       <widget class="QLineEdit" name="leNumber">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>50</y>
-          <width>113</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblType">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>90</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Type</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="cbType">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>80</y>
-          <width>111</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblClass">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>130</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Class</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="cbClass">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>120</y>
-          <width>111</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="cbStructure">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>150</y>
-          <width>111</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblStructure">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>160</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Structure</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblComposition">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>190</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Composition</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="leComposition">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>190</y>
-          <width>113</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblDocument">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>20</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Document</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="leDocument">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>20</y>
-          <width>113</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblIssue">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>50</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Issue</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="leIssue">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>50</y>
-          <width>113</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblElasModulTable">
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>80</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Elasticity Modulus Table</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="cbElasModulTable">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>80</y>
-          <width>131</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblThermExpTable">
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>120</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Thermal Expansion Table</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="cbThermExpTable">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>110</y>
-          <width>131</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblCreepTable">
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>150</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Creep Table</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="cbCreepTable">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>150</y>
-          <width>131</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblExtPress">
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>190</y>
-          <width>47</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>External Pressure Table</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="cbExtPressTable">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>180</y>
-          <width>131</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
+        <item row="4" column="1">
+         <widget class="QComboBox" name="cbStructure"/>
+        </item>
+        <item row="4" column="2">
+         <widget class="QLabel" name="lblWstGruppe">
+          <property name="text">
+           <string>Wst Gruppe</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="5">
+         <widget class="RB_UomLineEdit" name="leElongRupt"/>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="lblComment">
+          <property name="text">
+           <string>Comment</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QLineEdit" name="leWstGruppe"/>
+        </item>
+        <item row="4" column="4">
+         <widget class="QLabel" name="lblElongRupt">
+          <property name="text">
+           <string>Elong. Rupture</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLineEdit" name="leIssue"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="lblName">
+          <property name="text">
+           <string>Name</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="lblDocument">
+          <property name="text">
+           <string>Document</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="leDocument"/>
+        </item>
+        <item row="0" column="5">
+         <widget class="RB_UomLineEdit" name="leYield20C"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="leName"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="leNumber"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="lblNumber">
+          <property name="text">
+           <string>Number</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="lblIssue">
+          <property name="text">
+           <string>Issue</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QLabel" name="lblYield20C">
+          <property name="text">
+           <string>Yield 20 Celsius</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="lblComposition">
+          <property name="text">
+           <string>Composition</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QLabel" name="lblSpecGravity">
+          <property name="text">
+           <string>Spec. Gravity</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="cbType"/>
+        </item>
+        <item row="3" column="5">
+         <widget class="RB_UomLineEdit" name="leSpecGravity"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="lblStructure">
+          <property name="text">
+           <string>Structure</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLineEdit" name="leFormEn"/>
+        </item>
+        <item row="1" column="4">
+         <widget class="QLabel" name="lblYield1p20C">
+          <property name="text">
+           <string>Yield 1% 20 Celsius</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="lblFormEn">
+          <property name="text">
+           <string>Form English</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="RB_UomLineEdit" name="leTensile20C"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="lblType">
+          <property name="text">
+           <string>Type</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="lblClass">
+          <property name="text">
+           <string>Class</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QComboBox" name="cbClass"/>
+        </item>
+        <item row="2" column="4">
+         <widget class="QLabel" name="lblTensile20C">
+          <property name="text">
+           <string>Tensile 20 Celsius</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="RB_UomLineEdit" name="leYield1p20C"/>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLineEdit" name="leComposition"/>
+        </item>
+        <item row="5" column="1" colspan="5">
+         <widget class="QLineEdit" name="leComment"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="lblElasModulTable">
+          <property name="text">
+           <string>Elasticity Modulus Table</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1" colspan="5">
+         <widget class="QComboBox" name="cbElasModulTable"/>
+        </item>
+        <item row="8" column="1" colspan="5">
+         <widget class="QComboBox" name="cbCreepTable"/>
+        </item>
+        <item row="9" column="0">
+         <widget class="QLabel" name="lblExtPress">
+          <property name="text">
+           <string>External Pressure Table</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1" colspan="5">
+         <widget class="QComboBox" name="cbThermExpTable"/>
+        </item>
+        <item row="9" column="1" colspan="5">
+         <widget class="QComboBox" name="cbExtPressTable"/>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLabel" name="lblCreepTable">
+          <property name="text">
+           <string>Creep Table</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="lblThermExpTable">
+          <property name="text">
+           <string>Thermal Expansion Table</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -527,6 +541,11 @@
    <class>RB_TableView</class>
    <extends>QTableView</extends>
    <header>rb_tableview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RB_UomLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>rb_uomlineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

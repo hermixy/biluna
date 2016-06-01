@@ -115,7 +115,7 @@ void PCALC_ActionFactory::getPlantCalculationMenu(QMenu* menu,
 
     ga = PCALC_ActionMaterial::createGuiAction();
     subMenu->addAction(ga);
-//    tb->addAction(ga);
+    tb->addAction(ga);
     ga->setEnabled(false);
     connect(PCALC_MODELFACTORY, SIGNAL(rootIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));
