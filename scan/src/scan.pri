@@ -22,7 +22,7 @@ HEADERS += \
     ../src/gui/scan_dialogfactory.h \
     ../src/gui/scan_ledelegate.h \
     ../src/gui/scan_projectdialog.h \
-    ../src/gui/scan_projecteditdialog.h \
+    ../src/gui/scan_projecteditwidget.h \
     ../src/gui/scan_scaneditdialog.h \
     ../src/gui/scan_scanselectdialog.h \
     ../src/gui/scan_scanresultwidget.h \
@@ -56,7 +56,7 @@ SOURCES += \
     ../src/gui/scan_chartwidget.cpp \
     ../src/gui/scan_dialogfactory.cpp \
     ../src/gui/scan_ledelegate.cpp \
-    ../src/gui/scan_projecteditdialog.cpp \
+    ../src/gui/scan_projecteditwidget.cpp \
     ../src/gui/scan_scaneditdialog.cpp \
     ../src/gui/scan_scanresultwidget.cpp \
     ../src/model/scan_answer.cpp \
@@ -83,6 +83,6 @@ RESOURCES += \
 OTHER_FILES += \
     ../src/actions/scan_actionplugin.json \
     ../src/gui/scan_index.dox \
-    ../src/gui/scan_projecteditdialog.dox \
+    ../src/gui/scan_projecteditwidget.dox \
     ../src/gui/scan_scaneditdialog.dox \
     ../src/gui/scan_scanresultwidget.dox

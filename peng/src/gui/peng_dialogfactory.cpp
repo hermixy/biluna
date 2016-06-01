@@ -24,7 +24,7 @@
 #include "peng_pedwidget.h"
 #include "peng_pipeclassdialog.h"
 #include "peng_projectdialog.h"
-#include "peng_projecteditdialog.h"
+#include "peng_projecteditwidget.h"
 #include "peng_settingsdialog.h"
 #include "peng_typeeditdialog.h"
 #include "peng_typeselectdialog.h"
@@ -91,7 +91,6 @@ RB_Widget* PENG_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetEquipmentDetail: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(PENG_DialogFactory::WidgetNavigation,
-                                        "dockwidget_pengnavigation",
                                         Qt::LeftDockWidgetArea);
         PENG_NavigationWidget* wdgt = dynamic_cast<PENG_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(PENG_NavigationWidget::TabEquipment);
@@ -103,7 +102,6 @@ RB_Widget* PENG_DialogFactory::getWidget(int type, QWidget* parent) {
     }
     case WidgetLineDetail: {
         RB_DockWidget* dw = getDockWidget(PENG_DialogFactory::WidgetNavigation,
-                                        "dockwidget_pengnavigation",
                                         Qt::LeftDockWidgetArea);
         PENG_NavigationWidget* wdgt = dynamic_cast<PENG_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(PENG_NavigationWidget::TabPipeLine);
@@ -122,7 +120,6 @@ RB_Widget* PENG_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetPedClassification: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(PENG_DialogFactory::WidgetNavigation,
-                                        "dockwidget_pengnavigation",
                                         Qt::LeftDockWidgetArea);
         PENG_NavigationWidget* wdgt = dynamic_cast<PENG_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(PENG_NavigationWidget::TabEquipment);
@@ -137,7 +134,6 @@ RB_Widget* PENG_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetPedEqSummary: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(PENG_DialogFactory::WidgetNavigation,
-                                        "dockwidget_pengnavigation",
                                         Qt::LeftDockWidgetArea);
         PENG_NavigationWidget* wdgt = dynamic_cast<PENG_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(PENG_NavigationWidget::TabEquipment);
@@ -147,6 +143,10 @@ RB_Widget* PENG_DialogFactory::getWidget(int type, QWidget* parent) {
         if (!wgt) {
             wgt = new PENG_PedEqSummaryWidget(parent);
         }
+        break;
+    }
+    case WidgetProjectEdit: {
+        wgt = new PENG_ProjectEditWidget(parent);
         break;
     }
     case WidgetWeldoletWeldVolume: {
@@ -216,10 +216,6 @@ RB_Dialog* PENG_DialogFactory::getDialog(int type) {
     }
     case DialogProject: {
         dlg = new PENG_ProjectDialog(mMainWindow);
-        break;
-    }
-    case DialogProjectEdit: {
-        dlg = new PENG_ProjectEditDialog(mMainWindow);
         break;
     }
     case DialogSettings: {

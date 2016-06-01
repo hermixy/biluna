@@ -54,7 +54,6 @@ public:
         DialogNone = 293100,            /**< Invalid dialog */
         DialogLeadSourceType,           /**< View/edit lead source types dialog */
         DialogProject,                  /**< Select project (account) from database dialog */
-        DialogProjectEdit,              /**< Edit project (account) dialog */
         DialogSelectContact,            /**< Select contact dialog */
         DialogSelectGroup,              /**< Select group of contacts dialog */
         DialogSelectStockMaster,        /**< Select a stock item dialog */
@@ -91,6 +90,7 @@ public:
         WidgetContactReport,            /**< Contact report widget */
         WidgetDocument,                 /**< Document edit/view widget */
         WidgetGroupContact,             /**< Group of contacts edit/view widget */
+        WidgetProjectEdit,              /**< Edit project (company) dialog */
         WidgetSupplier,                 /**< Supplier edit/view widget */
         WidgetSupplierReport,           /**< Supplier report widget */
         WidgetTemplate,                 /**< Template edit/view widget */

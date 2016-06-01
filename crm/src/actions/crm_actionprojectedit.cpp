@@ -12,7 +12,7 @@
 
 #include "crm_dialogfactory.h"
 #include "crm_modelfactory.h"
-#include "rb_mdiwindow.h"
+#include "rb_dialogwindow.h"
 
 
 CRM_ActionProjectEdit::CRM_ActionProjectEdit()
@@ -57,7 +57,8 @@ void CRM_ActionProjectEdit::trigger() {
     }
 
     // Create dialog, reuse Project dialog for selecting the root account
-    RB_Dialog* dlg = CRM_DIALOGFACTORY->getDialog(CRM_DialogFactory::DialogProjectEdit);
+    RB_DialogWindow* dlg = CRM_DIALOGFACTORY->getDialogWindow(
+                CRM_DialogFactory::WidgetProjectEdit);
     dlg->exec();
     dlg->deleteLater();
 

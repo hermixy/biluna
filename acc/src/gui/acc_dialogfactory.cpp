@@ -147,7 +147,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetAsset: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabAsset);
@@ -161,7 +160,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetAssetValuation: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabAsset);
@@ -175,7 +173,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetBankPaymentReport: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabCustomer);
@@ -189,7 +186,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetContactCustomerEdit: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabCustomer);
@@ -202,7 +198,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetContactSupplierEdit: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabSupplier);
@@ -226,7 +221,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetCustBranch: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabCustomer);
@@ -240,7 +234,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetCustCostPart: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabCustomer);
@@ -281,7 +274,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetPrice: {
         // activate parent dockwidget product categories and product items
         QDockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabStockItem);
@@ -297,7 +289,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetPurchaseOrder: {
         // activate parent dockwidget supplier list
         QDockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabSupplier);
@@ -313,7 +304,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetSalesOrder: {
         // activate parent dockwidget customer main location and branches
         QDockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabCustomer);
@@ -339,7 +329,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetStockCategory: {
         // activate parent dockwidget product categories and product items
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabStockItem);
@@ -351,7 +340,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetStockItem: {
         // activate parent dockwidget product categories and product items
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabStockItem);
@@ -363,7 +351,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetSupplCostPart: {
         // activate parent dockwidget, will findWidget() (dockWidget) first
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                        "dockwidget_navigation",
                                         Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabSupplier);
@@ -377,7 +364,6 @@ RB_Widget* ACC_DialogFactory::getWidget(int type, QWidget* parent) {
     case WidgetSupplierDetail: {
         // activate parent dockwidget product categories and product items
         RB_DockWidget* dw = getDockWidget(ACC_DialogFactory::WidgetNavigation,
-                                    "dockwidget_navigation",
                                     Qt::LeftDockWidgetArea);
         ACC_NavigationWidget* wdgt = dynamic_cast<ACC_NavigationWidget*>(dw->widget());
         wdgt->slotShowTab(ACC_NavigationWidget::TabSupplier);

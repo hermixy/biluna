@@ -13,7 +13,7 @@
 #include "peng_dialogfactory.h"
 #include "peng_modelfactory.h"
 #include "rb_database.h"
-#include "rb_mainwindow.h"
+#include "rb_dialogwindow.h"
 
 
 PENG_ActionEditProject::PENG_ActionEditProject()
@@ -58,7 +58,8 @@ void PENG_ActionEditProject::trigger() {
     }
 
     // Create dialog
-    RB_Dialog* dlg = PENG_DIALOGFACTORY->getDialog(PENG_DialogFactory::DialogProjectEdit);
+    RB_DialogWindow* dlg = PENG_DIALOGFACTORY->getDialogWindow(
+                PENG_DialogFactory::WidgetProjectEdit);
     dlg->exec();
     dlg->deleteLater();
 }

@@ -54,7 +54,6 @@ public:
         DialogNone = 273100,            /**< Invalid dialog */
         DialogLeadSourceType,           /**< View/edit lead source types dialog */
         DialogProject,                  /**< Select project (account) from database dialog */
-        DialogProjectEdit,              /**< Edit project (account) dialog */
         DialogSelectContact,            /**< Select contact dialog */
         DialogSelectCustomer,           /**< Select customer dialog */
         DialogSelectGroup,              /**< Select group of contacts dialog */
@@ -92,6 +91,7 @@ public:
         WidgetCustomerReport,           /**< Customer report widget */
         WidgetDocument,                 /**< Document edit/view widget */
         WidgetGroupContact,             /**< Group of contacts edit/view widget */
+        WidgetProjectEdit,              /**< Edit project (account) dialog */
         WidgetTemplate,                 /**< Template edit/view widget */
         WidgetDefault                   /**< Default- or all widgets */
     };

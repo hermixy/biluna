@@ -60,7 +60,6 @@ public:
         DialogPaint,                    /**< Edit and/or select paint systems dialog */
         DialogPipeClass,                /**< Edit and/or select pipe class dialog */
         DialogProject,                  /**< Select project (company) from database dialog */
-        DialogProjectEdit,              /**< Edit project (company) dialog */
         DialogSettings,                 /**< Edit main settings dialog */
         DialogDefault                   /**< Default- or all dialogs */
     };
@@ -91,6 +90,7 @@ public:
         WidgetNavigation,               /**< Navigation widget for P&ID, Equipment etc. */
         WidgetPedClassification,        /**< PED classification widget */
         WidgetPedEqSummary,             /**< PED equipment summary widget */
+        WidgetProjectEdit,              /**< Edit project (company) dialog */
         WidgetWeldoletWeldVolume,       /**< Calculate weldolet weld volume widget */
         WidgetDefault                   /**< Default- or all models */
     };

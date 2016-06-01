@@ -43,7 +43,7 @@ HEADERS += \
     ../src/gui/crm_leadsourcetypedialog.h \
     ../src/gui/crm_groupcontactwidget.h \
     ../src/gui/crm_projectdialog.h \
-    ../src/gui/crm_projecteditdialog.h \
+    ../src/gui/crm_projecteditwidget.h \
     ../src/gui/crm_reportwidget.h \
     ../src/gui/crm_selectcontactdialog.h \
     ../src/gui/crm_selectcustomerdialog.h \
@@ -106,7 +106,7 @@ SOURCES += \
     ../src/gui/crm_dialogfactory.cpp \
     ../src/gui/crm_documentwidget.cpp \
     ../src/gui/crm_groupcontactwidget.cpp \
-    ../src/gui/crm_projecteditdialog.cpp \
+    ../src/gui/crm_projecteditwidget.cpp \
     ../src/gui/crm_reportwidget.cpp \
     ../src/gui/crm_templatewidget.cpp \
     ../src/model/crm_activity.cpp \
@@ -159,6 +159,6 @@ OTHER_FILES += \
     ../src/gui/crm_index.dox \
     ../src/gui/crm_leadsourcetypedialog.dox \
     ../src/gui/crm_projectdialog.dox \
-    ../src/gui/crm_projecteditdialog.dox \
+    ../src/gui/crm_projecteditwidget.dox \
     ../src/gui/crm_sysseqnodialog.dox \
     ../src/gui/crm_templatewidget.dox

@@ -41,7 +41,7 @@ HEADERS += \
     ../src/gui/srm_leadsourcetypedialog.h \
     ../src/gui/srm_groupcontactwidget.h \
     ../src/gui/srm_projectdialog.h \
-    ../src/gui/srm_projecteditdialog.h \
+    ../src/gui/srm_projecteditwidget.h \
     ../src/gui/srm_reportwidget.h \
     ../src/gui/srm_selectcontactdialog.h \
     ../src/gui/srm_selectsupplierdialog.h \
@@ -105,7 +105,7 @@ SOURCES += \
     ../src/gui/srm_dialogfactory.cpp \
     ../src/gui/srm_documentwidget.cpp \
     ../src/gui/srm_groupcontactwidget.cpp \
-    ../src/gui/srm_projecteditdialog.cpp \
+    ../src/gui/srm_projecteditwidget.cpp \
     ../src/gui/srm_reportwidget.cpp \
     ../src/gui/srm_supplierreportwidget.cpp \
     ../src/gui/srm_supplierwidget.cpp \
@@ -159,7 +159,7 @@ OTHER_FILES += \
     ../src/gui/srm_index.dox \
     ../src/gui/srm_leadsourcetypedialog.dox \
     ../src/gui/srm_projectdialog.dox \
-    ../src/gui/srm_projecteditdialog.dox \
+    ../src/gui/srm_projecteditwidget.dox \
     ../src/gui/srm_supplierreportwidget.dox \
     ../src/gui/srm_supplierwidget.dox \
     ../src/gui/srm_sysseqnodialog.dox \

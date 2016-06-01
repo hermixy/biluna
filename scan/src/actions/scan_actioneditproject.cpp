@@ -13,7 +13,7 @@
 #include "scan_dialogfactory.h"
 #include "scan_modelfactory.h"
 #include "rb_database.h"
-//#include "rb_mainwindow.h"
+#include "rb_dialogwindow.h"
 
 
 SCAN_ActionEditProject::SCAN_ActionEditProject()
@@ -57,7 +57,8 @@ void SCAN_ActionEditProject::trigger() {
     }
 
     // Create dialog
-    RB_Dialog* dlg = SCAN_DIALOGFACTORY->getDialog(SCAN_DialogFactory::DialogProjectEdit);
+    RB_DialogWindow* dlg = SCAN_DIALOGFACTORY->getDialogWindow(
+                SCAN_DialogFactory::WidgetProjectEdit);
     dlg->exec();
     dlg->deleteLater();
 }

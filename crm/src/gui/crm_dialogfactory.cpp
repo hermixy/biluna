@@ -22,7 +22,7 @@
 #include "crm_groupcontactwidget.h"
 #include "crm_leadsourcetypedialog.h"
 #include "crm_projectdialog.h"
-#include "crm_projecteditdialog.h"
+#include "crm_projecteditwidget.h"
 #include "crm_selectcontactdialog.h"
 #include "crm_selectcustomerdialog.h"
 #include "crm_selectgroupdialog.h"
@@ -128,6 +128,11 @@ RB_Widget* CRM_DialogFactory::getWidget(int type, QWidget* parent) {
         break;
 
     }
+    case WidgetProjectEdit: {
+        wgt = new CRM_ProjectEditWidget(parent);
+        break;
+
+    }
     case WidgetTemplate: {
         wgt = new CRM_TemplateWidget(parent);
         break;
@@ -167,10 +172,6 @@ RB_Dialog* CRM_DialogFactory::getDialog(int type) {
     }
     case DialogProject: {
         dlg = new CRM_ProjectDialog(mMainWindow);
-        break;
-    }
-    case DialogProjectEdit: {
-        dlg = new CRM_ProjectEditDialog(mMainWindow);
         break;
     }
     case DialogSelectContact: {

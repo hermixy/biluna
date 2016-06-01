@@ -12,7 +12,7 @@
 
 #include "sail_dialogfactory.h"
 #include "sail_modelfactory.h"
-#include "rb_mdiwindow.h"
+#include "rb_dialogwindow.h"
 
 
 SAIL_ActionProjectEdit::SAIL_ActionProjectEdit()
@@ -57,7 +57,8 @@ void SAIL_ActionProjectEdit::trigger() {
     }
 
     // Create dialog, reuse Project dialog for selecting the root account
-    RB_Dialog* dlg = SAIL_DIALOGFACTORY->getDialog(SAIL_DialogFactory::DialogProject);
+    RB_DialogWindow* dlg = SAIL_DIALOGFACTORY->getDialogWindow(
+                SAIL_DialogFactory::WidgetProjectEdit);
     dlg->exec();
     dlg->deleteLater();
 

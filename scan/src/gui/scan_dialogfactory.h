@@ -51,7 +51,6 @@ public:
         // start numbering from 263100
         DialogNone = 263100,            /**< Invalid dialog */
         DialogProject,                  /**< Select project (company) from database dialog */
-        DialogProjectEdit,              /**< Project edit dialog */
         DialogScanEdit,                 /**< Scan edit dialog */
         DialogScanSelect,               /**< Scan selection dialog */
         DialogDefault                   /**< Default- or all dialogs */
@@ -71,6 +70,7 @@ public:
 
         // start numbering from 262100
         WidgetNone = 262100,            /**< Invalid widget */
+        WidgetProjectEdit,              /**< Project edit dialog */
         WidgetReviewChart,              /**< Review scan chart widget */
         WidgetScanResult,               /**< Scan result and report widget */
         // ...

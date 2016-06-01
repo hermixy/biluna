@@ -56,7 +56,7 @@ HEADERS += \
     ../src/gui/peng_pedwidget.h \
     ../src/gui/peng_pipeclassdialog.h \
     ../src/gui/peng_projectdialog.h \
-    ../src/gui/peng_projecteditdialog.h \
+    ../src/gui/peng_projecteditwidget.h \
     ../src/gui/peng_settingsdialog.h \
     ../src/gui/peng_typeeditdialog.h \
     ../src/gui/peng_typeselectdialog.h \
@@ -127,7 +127,7 @@ SOURCES += \
     ../src/gui/peng_pedtable.cpp \
     ../src/gui/peng_pedwidget.cpp \
     ../src/gui/peng_pipeclassdialog.cpp \
-    ../src/gui/peng_projecteditdialog.cpp \
+    ../src/gui/peng_projecteditwidget.cpp \
     ../src/gui/peng_settingsdialog.cpp \
     ../src/gui/peng_weldoletweldvolumewidget.cpp \
     ../src/math/peng_vector.cpp \
@@ -181,6 +181,6 @@ OTHER_FILES += \
     ../src/gui/peng_pedeqsummarywidget.dox \
     ../src/gui/peng_pedwidget.dox \
     ../src/gui/peng_pipeclassdialog.dox \
-    ../src/gui/peng_projecteditdialog.dox \
+    ../src/gui/peng_projecteditwidget.dox \
     ../src/gui/peng_settingsdialog.dox \
     ../src/gui/peng_weldoletweldvolumewidget.dox

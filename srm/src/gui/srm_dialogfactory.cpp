@@ -20,7 +20,7 @@
 #include "srm_groupcontactwidget.h"
 #include "srm_leadsourcetypedialog.h"
 #include "srm_projectdialog.h"
-#include "srm_projecteditdialog.h"
+#include "srm_projecteditwidget.h"
 #include "srm_selectcontactdialog.h"
 #include "srm_selectsupplierdialog.h"
 //#include "srm_selectdocumentdialog.h"
@@ -119,6 +119,10 @@ RB_Widget* SRM_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new SRM_GroupContactWidget(parent);
         break;
     }
+    case WidgetProjectEdit: {
+        wgt = new SRM_ProjectEditWidget(parent);
+        break;
+    }
     case WidgetSupplier: {
         wgt = new SRM_SupplierWidget(parent);
         break;
@@ -166,10 +170,6 @@ RB_Dialog* SRM_DialogFactory::getDialog(int type) {
     }
     case DialogProject: {
         dlg = new SRM_ProjectDialog(mMainWindow);
-        break;
-    }
-    case DialogProjectEdit: {
-        dlg = new SRM_ProjectEditDialog(mMainWindow);
         break;
     }
     case DialogSelectContact: {

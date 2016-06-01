@@ -17,7 +17,7 @@
 #include "scan_chartwidget.h"
 #include "scan_modelfactory.h"
 #include "scan_projectdialog.h"
-#include "scan_projecteditdialog.h"
+#include "scan_projecteditwidget.h"
 #include "scan_scaneditdialog.h"
 #include "scan_scanselectdialog.h"
 #include "scan_scanresultwidget.h"
@@ -72,17 +72,19 @@ RB_ModelFactory* SCAN_DialogFactory::getModelFactory() {
 RB_Widget* SCAN_DialogFactory::getWidget(int type, QWidget* parent) {
     RB_Widget* wgt = findWidget(type);
 
+    if (wgt) return wgt;
+
     switch (type) {
+    case WidgetProjectEdit: {
+        wgt = new SCAN_ProjectEditWidget(parent);
+        break;
+    }
     case WidgetReviewChart: {
-        if (!wgt) {
-            wgt = new SCAN_ChartWidget(parent);
-        }
+        wgt = new SCAN_ChartWidget(parent);
         break;
     }
     case WidgetScanResult: {
-        if (!wgt) {
-            wgt = new SCAN_ScanResultWidget(parent);
-        }
+        wgt = new SCAN_ScanResultWidget(parent);
         break;
     }
     default:
@@ -116,10 +118,6 @@ RB_Dialog* SCAN_DialogFactory::getDialog(int type) {
     switch (type) {
     case DialogProject: {
         dlg = new SCAN_ProjectDialog(mMainWindow);
-        break;
-    }
-    case DialogProjectEdit: {
-        dlg = new SCAN_ProjectEditDialog(mMainWindow);
         break;
     }
     case DialogScanEdit: {

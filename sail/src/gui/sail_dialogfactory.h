@@ -53,7 +53,6 @@ public:
         // start numbering from 283100
         DialogNone = 283100,            /**< Invalid dialog */
         DialogProject,                  /**< Project selection dialog */
-        DialogProjectEdit,              /**< Project edit dialog */
         DialogSelectCoordinate,         /**< Select coordinate dialog */
         DialogSelectMap,                /**< Select map dialog */
         DialogSelectSymbol,             /**< Select symbol dialog */
@@ -80,6 +79,7 @@ public:
         WidgetNone = 282100,            /**< Invalid widget */
         WidgetMapNavigation,            /**< Map navigation widget */
         WidgetPolarDiagram,             /**< Polar speed diagram widget */
+        WidgetProjectEdit,              /**< Project edit dialog */
         WidgetTrackDistanceReport,      /**< Track distance report widget */
         WidgetDefault                   /**< Default- or all widgets */
     };

@@ -12,7 +12,7 @@
 
 #include "srm_dialogfactory.h"
 #include "srm_modelfactory.h"
-#include "rb_mdiwindow.h"
+#include "rb_dialogwindow.h"
 
 
 SRM_ActionProjectEdit::SRM_ActionProjectEdit()
@@ -57,7 +57,8 @@ void SRM_ActionProjectEdit::trigger() {
     }
 
     // Create dialog, reuse Project dialog for selecting the root account
-    RB_Dialog* dlg = SRM_DIALOGFACTORY->getDialog(SRM_DialogFactory::DialogProjectEdit);
+    RB_DialogWindow* dlg = SRM_DIALOGFACTORY->getDialogWindow(
+                SRM_DialogFactory::WidgetProjectEdit);
     dlg->exec();
     dlg->deleteLater();
 

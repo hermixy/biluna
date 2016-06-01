@@ -18,7 +18,7 @@ HEADERS += \
     ../src/gui/sail_mapnavigationwidget.h \
     ../src/gui/sail_polardiagramwidget.h \
     ../src/gui/sail_projectdialog.h \
-    ../src/gui/sail_projecteditdialog.h \
+    ../src/gui/sail_projecteditwidget.h \
     ../src/gui/sail_selectcoordinatedialog.h \
     ../src/gui/sail_selectmapdialog.h \
     ../src/gui/sail_selectsymboldialog.h \
@@ -50,7 +50,7 @@ SOURCES += \
     ../src/gui/sail_dialogfactory.cpp \
     ../src/gui/sail_mapnavigationwidget.cpp \
     ../src/gui/sail_polardiagramwidget.cpp \
-    ../src/gui/sail_projecteditdialog.cpp \
+    ../src/gui/sail_projecteditwidget.cpp \
     ../src/gui/sail_trackdistancereportwidget.cpp \
     ../src/model/sail_coordinate.cpp \
     ../src/model/sail_map.cpp \
@@ -82,6 +82,6 @@ OTHER_FILES += \
     ../src/gui/sail_mapnavigationwidget.dox \
     ../src/gui/sail_polardiagramwidget.dox \
     ../src/gui/sail_projectdialog.dox \
-    ../src/gui/sail_projecteditdialog.dox \
+    ../src/gui/sail_projecteditwidget.dox \
     ../src/gui/sail_trackdistancereportwidget.dox
 

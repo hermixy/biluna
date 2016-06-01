@@ -13,7 +13,7 @@
 #include "sail_mapnavigationwidget.h"
 #include "sail_polardiagramwidget.h"
 #include "sail_projectdialog.h"
-#include "sail_projecteditdialog.h"
+#include "sail_projecteditwidget.h"
 #include "sail_selectcoordinatedialog.h"
 #include "sail_selectmapdialog.h"
 #include "sail_selectsymboldialog.h"
@@ -82,6 +82,10 @@ RB_Widget* SAIL_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new SAIL_PolarDiagramWidget(parent);
         break;
     }
+    case WidgetProjectEdit : {
+        wgt = new SAIL_ProjectEditWidget(parent);
+        break;
+    }
     case WidgetTrackDistanceReport: {
         wgt = new SAIL_TrackDistanceReportWidget(parent);
         break;
@@ -117,10 +121,6 @@ RB_Dialog* SAIL_DialogFactory::getDialog(int type) {
     switch (type) {
     case DialogProject : {
         dlg = new SAIL_ProjectDialog(mMainWindow);
-        break;
-    }
-    case DialogProjectEdit : {
-        dlg = new SAIL_ProjectEditDialog(mMainWindow);
         break;
     }
     case DialogSelectCoordinate: {
