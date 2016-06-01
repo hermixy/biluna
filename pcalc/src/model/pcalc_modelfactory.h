@@ -57,8 +57,22 @@ public:
         ModelEN1591LoadCase,            /**< EN1591 Load Case model */
         ModelEN1591Shell,               /**< EN1591 Shell model */
         ModelGeneratorFormula,          /**< Calculation generator formula model */
+        ModelMatCreepTable,             /**< Material creep table */
+        ModelMatElasModulTable,         /**< Material elasticity modulus table */
+        ModelMatElasModulValue,         /**< Material elasticity modulus values */
+        ModelMaterial,                  /**< Material model */
+        ModelMatThermExpTable,          /**< Material thermal expansion table */
+        ModelMatThermExpValue,          /**< Material thermal expansion values */
         ModelProject,                   /**< Project model */
         ModelProjectEdit,               /**< Edit project model */
+        ModelRmMin,                     /**< Minimum tensile strength model */
+        ModelRp02,                      /**< 0.2% yield or proof strength model */
+        ModelRp10,                      /**< 1% yield or proof strength model */
+        ModelRp10T100kh,                /**< 1% strain creep strength at 100 000 hrs model */
+        ModelRp10T10kh,                 /**< 1% strain creep strength at 10 000 hrs model */
+        ModelRpT100kh,                  /**< creep rupture strength at 100 000 hrs model */
+        ModelRpT10kh,                   /**< creep rupture strength at 10 000 hrs model */
+        ModelRpT200kh,                  /**< creep rupture strength at 200 000 hrs model */
         ModelDefault                    /**< Default- or all models */
     };
 

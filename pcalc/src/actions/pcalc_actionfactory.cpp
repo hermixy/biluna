@@ -16,6 +16,10 @@
 #include "pcalc_actioneditproject.h"
 #include "pcalc_actionen1591flange.h"
 #include "pcalc_actionengasket.h"
+#include "pcalc_actionmaterial.h"
+#include "pcalc_actionmatcreep.h"
+#include "pcalc_actionmatelasmodul.h"
+#include "pcalc_actionmatthermexp.h"
 #include "pcalc_actionselectproject.h"
 #include "pcalc_dialogfactory.h"
 #include "pcalc_modelfactory.h"
@@ -101,13 +105,44 @@ void PCALC_ActionFactory::getPlantCalculationMenu(QMenu* menu,
 
 
     ga = PCALC_ActionENGasket::createGuiAction();
-    menu->addAction(ga);
+    subMenu->addAction(ga);
     tb->addAction(ga);
     ga->setEnabled(false);
     connect(PCALC_MODELFACTORY, SIGNAL(rootIsSet(int)),
             ga, SLOT(slotSetEnabled(int)));
 
     // menu->addSeparator();
+
+    ga = PCALC_ActionMaterial::createGuiAction();
+    subMenu->addAction(ga);
+//    tb->addAction(ga);
+    ga->setEnabled(false);
+    connect(PCALC_MODELFACTORY, SIGNAL(rootIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
+
+    ga = PCALC_ActionMatCreep::createGuiAction();
+    subMenu->addAction(ga);
+//    tb->addAction(ga);
+    ga->setEnabled(false);
+    connect(PCALC_MODELFACTORY, SIGNAL(rootIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
+
+    ga = PCALC_ActionMatElasModul::createGuiAction();
+    subMenu->addAction(ga);
+//    tb->addAction(ga);
+    ga->setEnabled(false);
+    connect(PCALC_MODELFACTORY, SIGNAL(rootIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
+
+
+    ga = PCALC_ActionMatThermExp::createGuiAction();
+    subMenu->addAction(ga);
+//    tb->addAction(ga);
+    ga->setEnabled(false);
+    connect(PCALC_MODELFACTORY, SIGNAL(rootIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
+
+    //
 
     ga = PCALC_ActionClose::createGuiAction();
     menu->addAction(ga);

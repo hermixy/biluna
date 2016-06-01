@@ -73,6 +73,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "PCALC_ClassGeneratorList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "codename", "subname");
         break;
+    case ModelMatCreepTable:
+        model = getTableModel(db, mObjectFactory, type, "STD_CreepTableList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
+        break;
     case ModelEN13555EGeG:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555EGeGList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temp", "qg");
@@ -129,6 +133,26 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "PCALC_GeneratorFormulaList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "number");
         break;
+    case ModelMaterial:
+        model = getTableModel(db, mObjectFactory, type, "STD_MaterialList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
+        break;
+    case ModelMatElasModulTable:
+        model = getTableModel(db, mObjectFactory, type, "STD_ElasModulTableList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
+        break;
+    case ModelMatElasModulValue:
+        model = getTableModel(db, mObjectFactory, type, "STD_ElasModulList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelMatThermExpTable:
+        model = getTableModel(db, mObjectFactory, type, "STD_ThermExpTableList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
+        break;
+    case ModelMatThermExpValue:
+        model = getTableModel(db, mObjectFactory, type, "STD_ThermExpList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
     case ModelProject:
         model = getTableModel(db, mObjectFactory, type, "PENG_ProjectList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
@@ -136,6 +160,38 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
     case ModelProjectEdit:
         model = getTableModel(db, mObjectFactory, type, "PENG_ProjectList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
+        break;
+    case ModelRmMin:
+        model = getTableModel(db, mObjectFactory, type, "STD_RmMinList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelRp02:
+        model = getTableModel(db, mObjectFactory, type, "STD_Rp02List");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelRp10:
+        model = getTableModel(db, mObjectFactory, type, "STD_Rp10List");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelRp10T100kh:
+        model = getTableModel(db, mObjectFactory, type, "STD_Rp10T100khList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelRp10T10kh:
+        model = getTableModel(db, mObjectFactory, type, "STD_Rp10T10khList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelRpT100kh:
+        model = getTableModel(db, mObjectFactory, type, "STD_RpT100khList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelRpT10kh:
+        model = getTableModel(db, mObjectFactory, type, "STD_RpT10khList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelRpT200kh:
+        model = getTableModel(db, mObjectFactory, type, "STD_RpT200khList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     default:
         RB_DEBUG->print(RB_Debug::D_ERROR,
@@ -203,11 +259,53 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
     case ModelGeneratorFormula:
         iter = mModelList.find(ModelNone);
         break;
+    case ModelMatCreepTable:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelMatElasModulTable:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelMatElasModulValue:
+        iter = mModelList.find(ModelMatElasModulTable);
+        break;
+    case ModelMaterial:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelMatThermExpTable:
+        iter = mModelList.find(ModelNone);
+        break;
+    case ModelMatThermExpValue:
+        iter = mModelList.find(ModelMatThermExpTable);
+        break;
     case ModelProject:
         iter = mModelList.find(ModelNone);
         break;
     case ModelProjectEdit:
         iter = mModelList.find(ModelNone);
+        break;
+    case ModelRmMin:
+        iter = mModelList.find(ModelMaterial);
+        break;
+    case ModelRp02:
+        iter = mModelList.find(ModelMaterial);
+        break;
+    case ModelRp10:
+        iter = mModelList.find(ModelMaterial);
+        break;
+    case ModelRp10T100kh:
+        iter = mModelList.find(ModelMatCreepTable);
+        break;
+    case ModelRp10T10kh:
+        iter = mModelList.find(ModelMatCreepTable);
+        break;
+    case ModelRpT100kh:
+        iter = mModelList.find(ModelMatCreepTable);
+        break;
+    case ModelRpT10kh:
+        iter = mModelList.find(ModelMatCreepTable);
+        break;
+    case ModelRpT200kh:
+        iter = mModelList.find(ModelMatCreepTable);
         break;
     default:
         iter = mModelList.find(ModelNone);

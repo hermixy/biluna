@@ -9,7 +9,11 @@ FORMS += \
     ../src/gui/pcalc_classgeneratorwidget.ui \
     ../src/gui/pcalc_en1591selectgasketwidget.ui \
     ../src/gui/pcalc_en1591widget.ui \
-    ../src/gui/rb_databasetablewidget.ui
+    ../src/gui/rb_databasetablewidget.ui \
+    ../src/gui/std_matcreepwidget.ui \
+    ../src/gui/std_matelasmodulwidget.ui \
+    ../src/gui/std_materialwidget.ui \
+    ../src/gui/std_matthermexpwidget.ui
 
 HEADERS += \
     ../../peng/src/model/peng_project.h \
@@ -18,6 +22,10 @@ HEADERS += \
     ../src/actions/pcalc_actionen1591flange.h \
     ../src/actions/pcalc_actionengasket.h \
     ../src/actions/pcalc_actionfactory.h \
+    ../src/actions/pcalc_actionmatcreep.h \
+    ../src/actions/pcalc_actionmaterial.h \
+    ../src/actions/pcalc_actionmatelasmodul.h \
+    ../src/actions/pcalc_actionmatthermexp.h \
     ../src/actions/pcalc_actionplugin.h \
     ../src/actions/pcalc_actionselectproject.h \
     ../src/calc/en1591handler.h \
@@ -63,6 +71,10 @@ HEADERS += \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditwidget.h \
     ../src/gui/rb_databasetablewidget.h \
+    ../src/gui/std_matcreepwidget.h \
+    ../src/gui/std_matelasmodulwidget.h \
+    ../src/gui/std_materialwidget.h \
+    ../src/gui/std_matthermexpwidget.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
     ../src/model/EN1591/pcalc_en1591_flange.h \
@@ -111,6 +123,10 @@ SOURCES += \
     ../src/actions/pcalc_actionen1591flange.cpp \
     ../src/actions/pcalc_actionengasket.cpp \
     ../src/actions/pcalc_actionfactory.cpp \
+    ../src/actions/pcalc_actionmatcreep.cpp \
+    ../src/actions/pcalc_actionmaterial.cpp \
+    ../src/actions/pcalc_actionmatelasmodul.cpp \
+    ../src/actions/pcalc_actionmatthermexp.cpp \
     ../src/actions/pcalc_actionplugin.cpp \
     ../src/actions/pcalc_actionselectproject.cpp \
     ../src/calc/en1591handler.cpp \
@@ -154,6 +170,10 @@ SOURCES += \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditwidget.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
+    ../src/gui/std_matcreepwidget.cpp \
+    ../src/gui/std_matelasmodulwidget.cpp \
+    ../src/gui/std_materialwidget.cpp \
+    ../src/gui/std_matthermexpwidget.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \
     ../src/model/EN1591/pcalc_en1591_flange.cpp \

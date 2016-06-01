@@ -80,6 +80,10 @@ public:
         WidgetEN13555Type,              /**< EN13555 gasket type edit and selection */
         WidgetEN1591Flange,             /**< EN1591 flange calculation */
         WidgetEN1591SelectGasket,       /**< EN1591 select gasket dialog */
+        WidgetMatCreep,                 /**< Material creep values Dialog */
+        WidgetMatElasModul,             /**< Material elasticity modulus Dialog */
+        WidgetMaterial,                 /**< Material Dialog */
+        WidgetMatThermExp,              /**< Material thermal expansion Dialog */
         WidgetProjectEdit,              /**< Edit project dialog */
         WidgetDefault                   /**< Default- or all widgets */
     };

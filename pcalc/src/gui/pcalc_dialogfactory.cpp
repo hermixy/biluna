@@ -22,6 +22,10 @@
 #include "rb_dockwidget.h"
 #include "rb_mainwindow.h"
 #include "rb_mdiwindow.h"
+#include "std_matcreepwidget.h"
+#include "std_matelasmodulwidget.h"
+#include "std_materialwidget.h"
+#include "std_matthermexpwidget.h"
 
 
 PCALC_DialogFactory* PCALC_DialogFactory::mActiveFactory = 0;
@@ -92,6 +96,22 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
     }
     case WidgetEN1591SelectGasket: {
         wgt = new PCALC_EN1591SelectGasketWidget(parent);
+        break;
+    }
+    case WidgetMatCreep: {
+        wgt = new STD_MatCreepWidget(parent);
+        break;
+    }
+    case WidgetMatElasModul: {
+        wgt = new STD_MatElasModulWidget(parent);
+        break;
+    }
+    case WidgetMaterial: {
+        wgt = new STD_MaterialWidget(parent);
+        break;
+    }
+    case WidgetMatThermExp: {
+        wgt = new STD_MatThermExpWidget(parent);
         break;
     }
     case WidgetProjectEdit: {
