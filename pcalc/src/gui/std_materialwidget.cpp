@@ -12,6 +12,7 @@
 #include "ui_std_materialwidget.h"
 
 #include "pcalc_modelfactory.h"
+#include "rb_cmbdelegate.h"
 
 STD_MaterialWidget::STD_MaterialWidget(QWidget *parent)
         : RB_Widget(parent), ui(new Ui::STD_MaterialWidget) {
@@ -133,19 +134,28 @@ void STD_MaterialWidget::initModelMapping() {
           << "FORGING" << "NUT" << "PIPE" << "PLATE" << "ROD" << "TUBE";
     ui->cbType->setModel(new QStringListModel(items, this));
     mapper->addMapping(ui->cbType, mModel->fieldIndex("type_id"), "currentIndex");
-
+    ui->tvMaterial->setItemDelegateForColumn(
+                mModel->fieldIndex("type_id"),
+                new RB_CmbDelegate(this, items, mModel, false));
+    mModel->setTextList(mModel->fieldIndex("type_id"), items); // delegate not yet complete
     items.clear();
     items << "NONE" << "CARBON STEEL" << "HIGH ALLOY" << "LOW ALLOY"
           << "STAINLESS STEEL" << "NON-FERROUS";
     ui->cbClass->setModel(new QStringListModel(items, this));
     mapper->addMapping(ui->cbClass, mModel->fieldIndex("class_id"), "currentIndex");
-
+    ui->tvMaterial->setItemDelegateForColumn(
+                mModel->fieldIndex("class_id"),
+                new RB_CmbDelegate(this, items, mModel, false));
+    mModel->setTextList(mModel->fieldIndex("class_id"), items);
     items.clear();
     items << "None" << "Ferritic" << "Austenitic" << "Martensitic"
           << "Austenitic-Ferritic" << "Non-Ferrous" << "other";
     ui->cbStructure->setModel(new QStringListModel(items, this));
     mapper->addMapping(ui->cbStructure, mModel->fieldIndex("structure_id"), "currentIndex");
-
+    ui->tvMaterial->setItemDelegateForColumn(
+                mModel->fieldIndex("structure_id"),
+                new RB_CmbDelegate(this, items, mModel, false));
+    mModel->setTextList(mModel->fieldIndex("structure_id"), items);
     mapper->addMapping(ui->leComposition, mModel->fieldIndex("composition"));
     mapper->addMapping(ui->leDocument, mModel->fieldIndex("document"));
     mapper->addMapping(ui->leIssue, mModel->fieldIndex("issue"));

@@ -23,13 +23,12 @@ RB_CmbDelegate::RB_CmbDelegate(QObject* parent, const QStringList& strL,
     mProxyModel = proxyModel;
     mStrL = strL;
     mIsSetText = isSetText;
-//    mLabel = new QLabel();
-//    mLabel->setTextFormat(Qt::RichText); // accept richtext
-//    mLabel->setWordWrap(false);
+    mLabel = new QLabel();
 }
 
 RB_CmbDelegate::~RB_CmbDelegate() {
-//    delete mLabel;
+    delete mLabel;
+    mLabel = nullptr;
 }
 
 QWidget* RB_CmbDelegate::createEditor(QWidget* parent,
@@ -49,6 +48,12 @@ QWidget* RB_CmbDelegate::createEditor(QWidget* parent,
  */
 void RB_CmbDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
                           const QModelIndex& index) const {
+    if (mIsSetText) {
+        // no relation required
+        QStyledItemDelegate::paint(painter, option, index);
+        return;
+    }
+
     QVariant value = index.data(Qt::DisplayRole);
 
     if (value.isValid() && !value.isNull()) {
