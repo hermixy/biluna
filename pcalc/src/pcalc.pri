@@ -93,6 +93,7 @@ HEADERS += \
     ../src/model/pcalc_generatorformula.h \
     ../src/model/pcalc_modelfactory.h \
     ../src/model/pcalc_objectfactory.h \
+    ../src/model/std.h \
     ../src/model/std_creeptable.h \
     ../src/model/std_elasmodul.h \
     ../src/model/std_elasmodultable.h \
@@ -113,7 +114,8 @@ HEADERS += \
     ../src/utils/pcalc_report.h \
     ../src/utils/pcalc_sqlcommonfunctions.h \
     ../src/utils/pcalc_utilityfactory.h \
-    ../src/utils/rb_tablemath.h
+    ../src/utils/rb_tablemath.h \
+    ../src/utils/std_materialutility.h
 
 
 SOURCES += \
@@ -211,7 +213,8 @@ SOURCES += \
     ../src/utils/pcalc_report.cpp \
     ../src/utils/pcalc_sqlcommonfunctions.cpp \
     ../src/utils/pcalc_utilityfactory.cpp \
-    ../src/utils/rb_tablemath.cpp
+    ../src/utils/rb_tablemath.cpp \
+    ../src/utils/std_materialutility.cpp
 
 RESOURCES += \
     ../../db/src/gui/db.qrc \

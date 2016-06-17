@@ -35,7 +35,7 @@ void EN1591_UnitTestFactory::exec() {
     UNITTESTCLASS(GasketTest);
     UNITTESTCLASS(RB_TableMathTest);
     UNITTESTCLASS(WasherTest);
-    ut = NULL;
+    ut = nullptr;
 
 }
 

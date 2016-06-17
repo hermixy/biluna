@@ -19,7 +19,7 @@
 /**
  * Constructor
  */
-RB_SqlCommonFunctions::RB_SqlCommonFunctions() {
+RB_SqlCommonFunctions::RB_SqlCommonFunctions() : RB_Utility() {
     // nothing
 }
 

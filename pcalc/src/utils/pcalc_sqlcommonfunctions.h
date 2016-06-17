@@ -15,8 +15,9 @@
 #include "rb_stringlist.h"
 #include "rb_variant.h"
 
-class QSqlQuery;
+#define PCALC_SQLCOMMONFUNCTIONS PCALC_SqlCommonFunctions::getInstance()
 
+class QSqlQuery;
 
 /**
  * Class with common sql functions for getting and setting frequently used data
@@ -25,12 +26,18 @@ class QSqlQuery;
 class PCALC_SqlCommonFunctions : public RB_SqlCommonFunctions {
 
 public:
-    PCALC_SqlCommonFunctions();
     virtual ~PCALC_SqlCommonFunctions();
+    static PCALC_SqlCommonFunctions* getInstance();
 
     virtual RB_Variant selectFromWhere(const RB_String& field,
                                        const RB_String& table,
                                        const RB_String& whereStr);
+
+private:
+    PCALC_SqlCommonFunctions();
+
+    //! Unique utility instance
+    static PCALC_SqlCommonFunctions* mActiveUtility;
 
 
 };

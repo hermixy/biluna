@@ -20,9 +20,10 @@
 #include <stdio.h>
 #include <list>
 
+#include <QString>
+
 #include "db_global.h"
 #include "rb.h"
-#include "QString.h"
 
 class RB_Object;
 class RB_ObjectBase;

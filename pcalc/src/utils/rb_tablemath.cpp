@@ -196,6 +196,16 @@ double RB_TableMath::getBilInterpValue(
     return value;
 }
 
+/**
+ * @brief RB_TableMath::getLinInterpValue get linear interpolated value
+ * @param fromObjC
+ * @param xField
+ * @param yField
+ * @param xValue
+ * @param extraField
+ * @param extraValue
+ * @return interpolated value
+ */
 double RB_TableMath::getLinInterpValue(RB_ObjectContainer *fromObjC,
                                        const QString &xField,
                                        const QString &yField,

@@ -26,44 +26,6 @@ public:
         FlangeLoose
     };
 
-    /** Material class */
-    enum MatClass {
-        MatClassNone,
-        MatClassCarbonSteel,
-        MatClassHighAlloy,
-        MatClassLowAlloy,
-        MatClassStainlessSteel,
-        MatClassNonFerrous,
-        MatClassDefault
-    };
-
-    /** Material type */
-    enum MatType {
-        MatTypeNone,
-        MatTypeBar,
-        MatTypeBolting,
-        MatTypeCasting,
-        MatTypeFitting,
-        MatTypeForging,
-        MatTypeNut,
-        MatTypePipe,
-        MatTypePlate,
-        MatTypeRod,
-        MatTypeTube,
-        MatTypeDefault
-    };
-
-    /** Material main structure */
-    enum MatStructure {
-        MatStructureNone,
-        MatStructureFerritic,
-        MatStructureAustenitic,
-        MatStructureMartensitic,
-        MatStructureAusteniticFerritic,
-        MatStructureNonFerrous,
-        MatStructureOther
-    };
-
     static double MPaToBar (double pressureMPa) {
         return 10.0 * pressureMPa;
     }

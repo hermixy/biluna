@@ -1,6 +1,11 @@
 #ifndef RB_NAMESPACE_H
 #define RB_NAMESPACE_H
 
+#define NAMESPACE_BILUNA \
+    namespace Biluna { \
+    namespace Calc {
+#define END_NAMESPACE_BILUNA }}
+
 #define NAMESPACE_BILUNA_CALC \
     namespace Biluna { \
     namespace Calc {

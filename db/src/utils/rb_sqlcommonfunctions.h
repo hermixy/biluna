@@ -15,16 +15,19 @@
 #include "db_global.h"
 #include "rb_string.h"
 #include "rb_variant.h"
+#include "rb_utility.h"
 
 
 /**
  * Base class with common sql statements
  */
-class DB_EXPORT RB_SqlCommonFunctions  {
+class DB_EXPORT RB_SqlCommonFunctions : public RB_Utility  {
 
 public:
     RB_SqlCommonFunctions();
     virtual ~RB_SqlCommonFunctions();
+
+    void refresh() {}
 
     virtual void substrIdxId(const RB_String& field, RB_String& sql);
     virtual void substrIdxContent(const RB_String& field, RB_String& sql);

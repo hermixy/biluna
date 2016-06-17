@@ -35,7 +35,6 @@
 // #include "rb_datetime.h"
 #include "rb_object.h"
 #include "rb_objectcontainer.h"
-#include "QString.h"
 #include "rb_system.h"
 
 

@@ -13,7 +13,7 @@
 
 #include <map>
 #include <QPointF>
-#include <Qprinter>
+#include <QPrinter>
 #include <QRectF>
 #include <QScopedPointer>
 #include "db_global.h"

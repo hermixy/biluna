@@ -269,9 +269,9 @@ double EN13555Property::get_testOD() {
 }
 
 bool EN13555Property::loadGasket(const QString& gasketId) {
-    QSqlDatabase db = PCALC_MODELFACTORY->getStandardDatabase();
+    QSqlDatabase stdDb = PCALC_MODELFACTORY->getStandardDatabase();
     mCurrentGasket = mGasketList->newObject(gasketId);
-    bool success = mCurrentGasket->dbRead(db, RB2::ResolveAll);
+    bool success = mCurrentGasket->dbRead(stdDb, RB2::ResolveAll);
 
     // check if reading data of gasket has been successfull
     RB_ObjectContainer* objC =

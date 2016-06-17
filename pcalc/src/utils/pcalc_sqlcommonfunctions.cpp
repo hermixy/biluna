@@ -13,20 +13,26 @@
 #include "pcalc_dialogfactory.h"
 #include "pcalc_modelfactory.h"
 #include "pcalc_objectfactory.h"
+#include "pcalc_utilityfactory.h"
 #include "rb_settings.h"
+
+PCALC_SqlCommonFunctions* PCALC_SqlCommonFunctions::mActiveUtility = 0;
 
 /**
  * Constructor
  */
 PCALC_SqlCommonFunctions::PCALC_SqlCommonFunctions() {
-
+    RB_DEBUG->print("PCALC_SqlCommonFunctions::PCALC_SqlCommonFunctions()");
+    PCALC_UTILITYFACTORY->addUtility(this);
 }
 
 /**
  * Destructor
  */
 PCALC_SqlCommonFunctions::~PCALC_SqlCommonFunctions() {
-
+    PCALC_UTILITYFACTORY->removeUtility(this);
+    mActiveUtility = NULL;
+    RB_DEBUG->print("PCALC_SqlCommonFunctions::~PCALC_SqlCommonFunctions() OK");
 }
 
 /**

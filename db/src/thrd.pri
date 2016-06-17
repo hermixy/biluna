@@ -208,7 +208,7 @@ SOURCES += \
 
 !macx {
     !win32 {
-        SOURCES += 3rdparty/binreloc/binreloc.c
+#        SOURCES += 3rdparty/binreloc/binreloc.c
     }
 }
 

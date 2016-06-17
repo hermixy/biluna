@@ -160,7 +160,7 @@ void STD_MaterialWidget::initModelMapping() {
     mapper->addMapping(ui->leDocument, mModel->fieldIndex("document"));
     mapper->addMapping(ui->leIssue, mModel->fieldIndex("issue"));
 
-    // Test only
+    // For testing only
     //    int relationColumn = mModel->fieldIndex("elasmodultable_id");
     //    mModel->setRelation(relationColumn,
     //           RB_SqlRelation("std_elasmodultable", "id", "mname"));

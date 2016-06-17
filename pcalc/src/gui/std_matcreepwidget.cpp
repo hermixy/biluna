@@ -30,7 +30,7 @@ STD_MatCreepWidget::~STD_MatCreepWidget() {
 }
 
 QString STD_MatCreepWidget::getName() const {
-    return "Material Elasticity Modulus Tables";
+    return "Material Creep Tables";
 }
 
 RB2::PerspectiveType STD_MatCreepWidget::getPerspectiveType() const {
