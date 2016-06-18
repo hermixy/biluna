@@ -15,6 +15,10 @@
 #include "rb_namespace.h"
 #include "rb_tablemath.h"
 #include "rb_utility.h"
+#include "std.h"
+
+// For unit tests only
+class STD_MaterialUtilityTest;
 
 #define STD_MATERIALUTILITY STD_MaterialUtility::getInstance()
 
@@ -32,8 +36,20 @@ public:
     bool isValid();
     void refresh() {}
 
-    double get_Rp02(double designTemp);
+    double allowableDesignStress(double designTemp,
+                                 STD2::CompType compType = STD2::CompDefault);
+    double allowableTestStress(double testTemp,
+                               STD2::CompType compType = STD2::CompDefault);
 
+    STD2::MatStruct getMaterialStructure();
+    double getElongationPercent();
+
+    double get_Rp02(double designTemp);
+    double get_Rp10(double designTemp);
+    double get_RmMin(double designTemp);
+
+    // For unit tests only
+    friend class STD_MaterialUtilityTest;
 
 private:
     STD_MaterialUtility();

@@ -8,9 +8,8 @@
 #include "flangetest.h"
 #include "forcetest.h"
 #include "gaskettest.h"
-#include "rb_tablemathtest.h"
-
 #include "washertest.h"
+#include "rb_tablemathtest.h"
 NAMESPACE_BILUNA_CALC_EN1591
 
 
@@ -33,8 +32,8 @@ void EN1591_UnitTestFactory::exec() {
     UNITTESTCLASS(FlangeTest);
     UNITTESTCLASS(ForceTest);
     UNITTESTCLASS(GasketTest);
-    UNITTESTCLASS(RB_TableMathTest);
     UNITTESTCLASS(WasherTest);
+    UNITTESTCLASS(RB_TableMathTest);
     ut = nullptr;
 
 }

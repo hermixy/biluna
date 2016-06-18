@@ -149,7 +149,7 @@ void STD_MaterialWidget::initModelMapping() {
     mModel->setTextList(mModel->fieldIndex("class_id"), items);
     items.clear();
     items << "None" << "Ferritic" << "Austenitic" << "Martensitic"
-          << "Austenitic-Ferritic" << "Non-Ferrous" << "other";
+          << "Austenitic-Ferritic" << "Casting" << "Non-Ferrous" << "other";
     ui->cbStructure->setModel(new QStringListModel(items, this));
     mapper->addMapping(ui->cbStructure, mModel->fieldIndex("structure_id"), "currentIndex");
     ui->tvMaterial->setItemDelegateForColumn(

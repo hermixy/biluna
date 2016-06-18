@@ -13,7 +13,8 @@ FORMS += \
     ../src/gui/std_matcreepwidget.ui \
     ../src/gui/std_matelasmodulwidget.ui \
     ../src/gui/std_materialwidget.ui \
-    ../src/gui/std_matthermexpwidget.ui
+    ../src/gui/std_matthermexpwidget.ui \
+    ../src/gui/std_selectmaterialwidget.ui
 
 HEADERS += \
     ../../peng/src/model/peng_project.h \
@@ -75,6 +76,7 @@ HEADERS += \
     ../src/gui/std_matelasmodulwidget.h \
     ../src/gui/std_materialwidget.h \
     ../src/gui/std_matthermexpwidget.h \
+    ../src/gui/std_selectmaterialwidget.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
     ../src/model/EN1591/pcalc_en1591_flange.h \
@@ -111,6 +113,8 @@ HEADERS += \
     ../src/model/std_thermexptable.h \
     ../src/utils/EN1591/en13445tableg.h \
     ../src/utils/EN1591/en13555property.h \
+    ../src/utils/unittest/std_materialutilitytest.h \
+    ../src/utils/unittest/std_unittestfactory.h \
     ../src/utils/pcalc_report.h \
     ../src/utils/pcalc_sqlcommonfunctions.h \
     ../src/utils/pcalc_utilityfactory.h \
@@ -176,6 +180,7 @@ SOURCES += \
     ../src/gui/std_matelasmodulwidget.cpp \
     ../src/gui/std_materialwidget.cpp \
     ../src/gui/std_matthermexpwidget.cpp \
+    ../src/gui/std_selectmaterialwidget.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \
     ../src/model/EN1591/pcalc_en1591_flange.cpp \
@@ -210,6 +215,8 @@ SOURCES += \
     ../src/model/std_thermexptable.cpp \
     ../src/utils/EN1591/en13445tableg.cpp \
     ../src/utils/EN1591/en13555property.cpp \
+    ../src/utils/unittest/std_materialutilitytest.cpp \
+    ../src/utils/unittest/std_unittestfactory.cpp \
     ../src/utils/pcalc_report.cpp \
     ../src/utils/pcalc_sqlcommonfunctions.cpp \
     ../src/utils/pcalc_utilityfactory.cpp \
@@ -223,3 +230,4 @@ RESOURCES += \
 OTHER_FILES += \
     ../src/actions/pcalc_actionplugin.json \
     ../src/gui/pcalc_en1591widget.dox
+#    ../src/gui/std_selectmaterialwidget.dox

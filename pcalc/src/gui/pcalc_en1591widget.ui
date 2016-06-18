@@ -724,7 +724,7 @@
                  </widget>
                 </item>
                 <item row="14" column="1" colspan="3">
-                 <widget class="QLineEdit" name="ileMaterialFlange_1"/>
+                 <widget class="RB_IdxLineEdit" name="ileMaterialFlange_1"/>
                 </item>
                </layout>
               </widget>
@@ -987,7 +987,7 @@
                  </widget>
                 </item>
                 <item row="13" column="1" colspan="2">
-                 <widget class="QLineEdit" name="ileMaterialFlange_2"/>
+                 <widget class="RB_IdxLineEdit" name="ileMaterialFlange_2"/>
                 </item>
                 <item row="3" column="2">
                  <spacer name="horizontalSpacer_17">
@@ -1088,7 +1088,7 @@
                  </spacer>
                 </item>
                 <item row="21" column="2">
-                 <widget class="QLineEdit" name="ileMaterialLooseRing_1"/>
+                 <widget class="RB_IdxLineEdit" name="ileMaterialLooseRing_1"/>
                 </item>
                 <item row="1" column="1">
                  <widget class="QLabel" name="lbld9_1">
@@ -1507,7 +1507,7 @@
                  </widget>
                 </item>
                 <item row="21" column="1">
-                 <widget class="QLineEdit" name="ileMaterialLooseRing_2"/>
+                 <widget class="RB_IdxLineEdit" name="ileMaterialLooseRing_2"/>
                 </item>
                 <item row="21" column="0">
                  <widget class="QLabel" name="lblMaterialLooseRing_2">
@@ -2455,7 +2455,7 @@
              </widget>
             </item>
             <item row="16" column="1" colspan="3">
-             <widget class="QLineEdit" name="ileMaterialBolt"/>
+             <widget class="RB_IdxLineEdit" name="ileMaterialBolt"/>
             </item>
            </layout>
           </widget>
@@ -2707,7 +2707,7 @@
              </widget>
             </item>
             <item row="3" column="1" colspan="3">
-             <widget class="QLineEdit" name="ileMaterialWasher"/>
+             <widget class="RB_IdxLineEdit" name="ileMaterialWasher"/>
             </item>
            </layout>
           </widget>
@@ -2885,7 +2885,7 @@
              </widget>
             </item>
             <item row="4" column="1" colspan="3">
-             <widget class="QLineEdit" name="ileMaterialShell_1"/>
+             <widget class="RB_IdxLineEdit" name="ileMaterialShell_1"/>
             </item>
            </layout>
           </widget>
@@ -3000,7 +3000,7 @@
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QLineEdit" name="ileMaterialShell_2"/>
+             <widget class="RB_IdxLineEdit" name="ileMaterialShell_2"/>
             </item>
            </layout>
           </widget>
@@ -4443,6 +4443,11 @@
    <header>rb_tableview.h</header>
   </customwidget>
   <customwidget>
+   <class>RB_UomLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>rb_uomlineedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>RB_TextEdit</class>
    <extends>QTextEdit</extends>
    <header>rb_textedit.h</header>
@@ -4451,11 +4456,6 @@
    <class>RB_IdxLineEdit</class>
    <extends>QLineEdit</extends>
    <header>rb_idxlineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>RB_UomLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>rb_uomlineedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

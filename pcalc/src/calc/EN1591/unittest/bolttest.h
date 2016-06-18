@@ -7,7 +7,7 @@
 
 NAMESPACE_BILUNA_CALC_EN1591
 
-class BoltTest : public RB_UnitTest{
+class BoltTest : public RB_UnitTest {
 
 public:
     BoltTest();

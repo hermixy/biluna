@@ -145,7 +145,7 @@ RB_ObjectContainer* PCALC_Report::getInOutContainer() {
     return mInOutContainer;
 }
 
-RB_ObjectBase *PCALC_Report::getLastOutput() {
+RB_ObjectBase* PCALC_Report::getLastOutput() {
     if (!mLastOutput) {
         // Add new output object for unit test of functions without output
         bool withoutMembers = true;

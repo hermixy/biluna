@@ -22,6 +22,7 @@
 #include "pcalc_report.h"
 #include "rb_dialogwindow.h"
 #include "rb_idxlineedit.h"
+#include "std_unittestfactory.h"
 // #include "peng_graphicsview.h"
 
 
@@ -166,6 +167,13 @@ void PCALC_EN1591Widget::init() {
     mFlangeMapper->addMapping(led6_1, mFlangeModel->fieldIndex("d61"));
     mFlangeMapper->addMapping(led8_1, mFlangeModel->fieldIndex("d81"));
     mFlangeMapper->addMapping(leeL_1, mFlangeModel->fieldIndex("el1"));
+
+    ileMaterialFlange_1->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectMaterial,
+                                    "materialflange1_idx", "mname");
+    ileMaterialLooseRing_1->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectMaterial,
+                                    "materialloosering1_idx", "mname");
     mFlangeMapper->addMapping(ileMaterialFlange_1,
                               mFlangeModel->fieldIndex("materialflange1_idx"));
     mFlangeMapper->addMapping(ileMaterialLooseRing_1,
@@ -205,6 +213,12 @@ void PCALC_EN1591Widget::init() {
     mFlangeMapper->addMapping(led6_2, mFlangeModel->fieldIndex("d62"));
     mFlangeMapper->addMapping(led8_2, mFlangeModel->fieldIndex("d82"));
     mFlangeMapper->addMapping(leeL_2, mFlangeModel->fieldIndex("el2"));
+    ileMaterialFlange_2->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectMaterial,
+                                    "materialflange2_idx", "mname");
+    ileMaterialLooseRing_2->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectMaterial,
+                                    "materialloosering2_idx", "mname");
     mFlangeMapper->addMapping(ileMaterialFlange_2,
                               mFlangeModel->fieldIndex("materialflange2_idx"));
     mFlangeMapper->addMapping(ileMaterialLooseRing_2,
@@ -355,6 +369,9 @@ void PCALC_EN1591Widget::init() {
     mBoltNutWasherMapper->addMapping(leRuptureElongationA,
                                      mBoltNutWasherModel->fieldIndex(
                                          "ruptureelongationa"));
+    ileMaterialBolt->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectMaterial,
+                                    "materialbolt_idx", "mname");
     mBoltNutWasherMapper->addMapping(ileMaterialBolt,
                                      mBoltNutWasherModel->fieldIndex(
                                          "materialbolt_idx"));
@@ -390,6 +407,9 @@ void PCALC_EN1591Widget::init() {
     mShellMapper->addMapping(ledS_1, mShellModel->fieldIndex("ds1"));
     mShellMapper->addMapping(leeS_1, mShellModel->fieldIndex("es1"));
     mShellMapper->addMapping(lephiS_1, mShellModel->fieldIndex("phis1"));
+    ileMaterialShell_1->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectMaterial,
+                                    "materialshell1_idx", "mname");
     mShellMapper->addMapping(ileMaterialShell_1,
                              mShellModel->fieldIndex("materialshell1_idx"));
 
@@ -403,6 +423,9 @@ void PCALC_EN1591Widget::init() {
     mShellMapper->addMapping(ledS_2, mShellModel->fieldIndex("ds2"));
     mShellMapper->addMapping(leeS_2, mShellModel->fieldIndex("es2"));
     mShellMapper->addMapping(lephiS_2, mShellModel->fieldIndex("phis2"));
+    ileMaterialShell_2->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectMaterial,
+                                    "materialshell2_idx", "mname");
     mShellMapper->addMapping(ileMaterialShell_2,
                              mShellModel->fieldIndex("materialshell2_idx"));
 
@@ -1189,8 +1212,10 @@ void PCALC_EN1591Widget::createUnitTestSummary() {
     getTextEdit()->clear();
     setSettings();
 
-    Biluna::Calc::EN1591::EN1591_UnitTestFactory testFactory;
-    testFactory.exec();
+    Biluna::Calc::EN1591::EN1591_UnitTestFactory en1591TestFactory;
+    en1591TestFactory.exec();
+    STD_UnitTestFactory stdTestFactory;
+    stdTestFactory.exec();
 
     RB_ObjectContainer* outList =
             PR->getInOutContainer()->getContainer("PCALC_OutputList");
@@ -1243,6 +1268,8 @@ void PCALC_EN1591Widget::createUnitTestDetail() {
 
     Biluna::Calc::EN1591::EN1591_UnitTestFactory testFactory;
     testFactory.exec();
+    STD_UnitTestFactory stdTestFactory;
+    stdTestFactory.exec();
 
     QString dateTimeStr = QDateTime::currentDateTime().toString(Qt::ISODate);
     QString outputStr;

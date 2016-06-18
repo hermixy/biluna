@@ -85,6 +85,7 @@ public:
         WidgetMaterial,                 /**< Material Dialog */
         WidgetMatThermExp,              /**< Material thermal expansion Dialog */
         WidgetProjectEdit,              /**< Edit project dialog */
+        WidgetSelectMaterial,           /**< Select material dialog */
         WidgetDefault                   /**< Default- or all widgets */
     };
 

@@ -26,6 +26,7 @@
 #include "std_matelasmodulwidget.h"
 #include "std_materialwidget.h"
 #include "std_matthermexpwidget.h"
+#include "std_selectmaterialwidget.h"
 
 
 PCALC_DialogFactory* PCALC_DialogFactory::mActiveFactory = 0;
@@ -118,6 +119,10 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new PCALC_ProjectEditWidget(parent);
         break;
     }
+    case WidgetSelectMaterial: {
+        wgt = new STD_SelectMaterialWidget(parent);
+        break;
+    }
     default:
         RB_DEBUG->error("PCALC_DialogFactory::getWidget() "
                         "non-existing widget requested ERROR");
@@ -151,6 +156,10 @@ RB_Dialog* PCALC_DialogFactory::getDialog(int type) {
         break;
     }
     case WidgetEN1591SelectGasket: {
+        // TODO: getDialog() method to be removed in its entirety
+        break;
+    }
+    case WidgetSelectMaterial: {
         // TODO: getDialog() method to be removed in its entirety
         break;
     }

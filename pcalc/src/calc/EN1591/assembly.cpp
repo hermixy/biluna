@@ -810,7 +810,7 @@ bool Assembly::Is_F_B0nom_Valid() {
                   QN((int)result2) + " AND " + QN(loadCase->F_Bmin) + " &lt;= "
                   + QN(loadCase->F_Breq));
 
-    return result;
+    return result3;
 }
 
 /**
