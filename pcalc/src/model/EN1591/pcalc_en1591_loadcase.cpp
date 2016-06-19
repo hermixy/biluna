@@ -55,6 +55,7 @@ void PCALC_EN1591_LoadCase::createMembers() {
     addMember("mx", "Nmm", 0.0, RB2::MemberDouble);
     addMember("my", "Nmm", 0.0, RB2::MemberDouble);
     addMember("mz", "Nmm", 0.0, RB2::MemberDouble);
+
     // stress expansion elasticity
     addMember("fb", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("relaxb", "perunage", 1.0, RB2::MemberDouble);
@@ -73,6 +74,7 @@ void PCALC_EN1591_LoadCase::createMembers() {
 
     addMember("alphab", "1/Kelvin", 0.0, RB2::MemberDouble);
     addMember("alphag", "1/Kelvin", 0.0, RB2::MemberDouble);
+
     // flange 1
     addMember("alphaf1", "1/Kelvin", 0.0, RB2::MemberDouble);
     addMember("alphal1", "1/Kelvin", 0.0, RB2::MemberDouble);
@@ -83,6 +85,7 @@ void PCALC_EN1591_LoadCase::createMembers() {
     addMember("alphaw2", "1/Kelvin", 0.0, RB2::MemberDouble);
 
     addMember("eb", "N/mm2", 0.0, RB2::MemberDouble);
+
     // flange 1
     addMember("ef1", "N/mm2", 0.0, RB2::MemberDouble);
     addMember("el1", "N/mm2", 0.0, RB2::MemberDouble);

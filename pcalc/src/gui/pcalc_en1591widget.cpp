@@ -22,6 +22,7 @@
 #include "pcalc_report.h"
 #include "rb_dialogwindow.h"
 #include "rb_idxlineedit.h"
+#include "std_materialutility.h"
 #include "std_unittestfactory.h"
 // #include "peng_graphicsview.h"
 
@@ -76,6 +77,34 @@ RB_String PCALC_EN1591Widget::getSaveAsFileName() {
 }
 
 void PCALC_EN1591Widget::init() {
+    initMapping();
+    initConnections();
+    readSettings();
+}
+
+void PCALC_EN1591Widget::initConnections() {
+    // Set date and set focus
+    connect(tbbAssembly, SIGNAL(addClicked()), this, SLOT(slotAssemblyAdded()));
+
+    // Show detail row or add row if not exists
+    connect(mAssemblyModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+            this, SLOT(slotParentRowChanged(QModelIndex,QModelIndex)));
+
+    // Connections for models not formated via setFormatListView
+    // and catch bolt, (loose)flange, shell or washer material changed
+    connect(mBoltNutWasherModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mFlangeModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mGasketModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mShellModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+    connect(mLoadCaseModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+}
+
+void PCALC_EN1591Widget::initMapping() {
     //
     // 0. Set button toolbar
     //
@@ -392,6 +421,9 @@ void PCALC_EN1591Widget::init() {
                                      mBoltNutWasherModel->fieldIndex("dw1"));
     mBoltNutWasherMapper->addMapping(ledW2,
                                      mBoltNutWasherModel->fieldIndex("dw2"));
+    ileMaterialWasher->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectMaterial,
+                                    "materialwasher_idx", "mname");
     mBoltNutWasherMapper->addMapping(ileMaterialWasher,
                                      mBoltNutWasherModel->fieldIndex(
                                          "materialwasher_idx"));
@@ -506,25 +538,6 @@ void PCALC_EN1591Widget::init() {
         }
     }
 
-    readSettings();
-
-    connect(tbbAssembly, SIGNAL(addClicked()), this, SLOT(slotAssemblyAdded()));
-
-    // Show detail row or add row if not exists
-    connect(mAssemblyModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-            this, SLOT(slotParentRowChanged(QModelIndex,QModelIndex)));
-    // Connections for models not formated via setFormatListView
-    connect(mBoltNutWasherModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-    connect(mFlangeModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-    connect(mGasketModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-    connect(mShellModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-    connect(mLoadCaseModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-            this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
-
     teCalculationReport->setHtml(
                 "<p>" + tr("Select report type and click "
                            "calculate to generate report") + "</p>");
@@ -605,6 +618,56 @@ RB_String PCALC_EN1591Widget::getHelpSubject() const {
 
 QTextEdit *PCALC_EN1591Widget::getTextEdit() {
     return this->teCalculationReport;
+}
+
+void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
+                                           const QModelIndex& bottomRight) {
+    RB_Widget::slotDataIsChanged(topLeft, bottomRight);
+
+    if (topLeft.model() == mFlangeModel) {
+        if (topLeft.column() == mFlangeModel->fieldIndex("materialflange1_idx")) {
+            // name PCALC_DIALOGFACTORY->requestInformationDialog(topLeft.data(Qt::DisplayRole).toString());
+            // id + name PCALC_DIALOGFACTORY->requestInformationDialog(topLeft.data(Qt::EditRole).toString());
+            // id PCALC_DIALOGFACTORY->requestInformationDialog(topLeft.data(RB2::RoleOrigData).toString());
+
+            QString materialId = topLeft.data(RB2::RoleOrigData).toString();
+            STD_MATERIALUTILITY->setCurrentMaterial(materialId);
+
+            if (!STD_MATERIALUTILITY->isValid()) {
+                PCALC_DIALOGFACTORY->requestWarningDialog("Material not valid");
+                return;
+            }
+// continue here with rows from mLoadCaseModel
+            int row = 0;
+            int column = mLoadCaseModel->fieldIndex("tf1");
+            QModelIndex index = mLoadCaseModel->index(row, column);
+            double designTemp = mLoadCaseModel->data(index).toDouble();
+            double allowStress = STD_MATERIALUTILITY->allowableDesignStress(designTemp, STD2::CompFlange);
+
+            column = mLoadCaseModel->fieldIndex("ff1");
+            index = mLoadCaseModel->index(row, column);
+            mLoadCaseModel->setData(index, allowStress);
+
+        } else if (topLeft.column() == mFlangeModel->fieldIndex("materialloosering1_idx")) {
+            PCALC_DIALOGFACTORY->requestInformationDialog("Update loose 1 property values?");
+        } else if (topLeft.column() == mFlangeModel->fieldIndex("materialflange2_idx")) {
+            PCALC_DIALOGFACTORY->requestInformationDialog("Update flange 2 property values?");
+        } else if (topLeft.column() == mFlangeModel->fieldIndex("materialloosering2_idx")) {
+            PCALC_DIALOGFACTORY->requestInformationDialog("Update loose 2 property values?");
+        }
+    } else if (topLeft.model() == mBoltNutWasherModel) {
+        if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialbolt_idx")){
+            PCALC_DIALOGFACTORY->requestInformationDialog("Update bolt property values?");
+        } else if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialwasher_idx")) {
+            PCALC_DIALOGFACTORY->requestInformationDialog("Update washer property values?");
+        }
+    } else if (topLeft.model() == mShellModel) {
+        if (topLeft.column() == mShellModel->fieldIndex("materialshell1_idx")){
+            PCALC_DIALOGFACTORY->requestInformationDialog("Update shell 1 property values?");
+        } else if (topLeft.column() == mShellModel->fieldIndex("materialshell2_idx")) {
+            PCALC_DIALOGFACTORY->requestInformationDialog("Update shell 2 property values?");
+        }
+    }
 }
 
 void PCALC_EN1591Widget::slotAssemblyAdded() {

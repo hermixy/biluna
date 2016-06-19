@@ -959,6 +959,10 @@ RB_Variant RB_MmSource::data(const QModelIndex& index, int role) const {
  * Nederland
  * Belgie
  *
+ * Qt::DisplayRole:     Nederland
+ * Qt::EditRole:        {7c6d6bb5-9308-4440-930a-86ff36d90e21}Nederland
+ * RB2::RoleOrigData:   {7c6d6bb5-9308-4440-930a-86ff36d90e21}
+ *
  * @param index
  * @param role, display role, edit role, etc.
  * @return data

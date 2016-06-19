@@ -29,6 +29,7 @@ public:
     RB2::PerspectiveType getPerspectiveType() const;
     void init();
 
+    bool fileSave(bool) { return true; }
     RB_ObjectBase* getCurrentObject();
 
 private:

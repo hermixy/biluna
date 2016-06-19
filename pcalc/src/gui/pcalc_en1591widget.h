@@ -42,6 +42,8 @@ public:
     QTextEdit* getTextEdit();
 
 public slots:
+    virtual void slotDataIsChanged(const QModelIndex& topLeft,
+                                   const QModelIndex& bottomRight);
     virtual void slotAssemblyAdded();
     virtual void on_pbCalculate_clicked();
 
@@ -55,6 +57,8 @@ protected:
     void changeEvent(QEvent *e);
 
 private:
+    void initMapping();
+    void initConnections();
     void setInput();
     void setSettings();
     void createSummaryReport();
