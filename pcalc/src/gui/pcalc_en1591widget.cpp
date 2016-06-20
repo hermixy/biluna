@@ -626,46 +626,41 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
 
     if (topLeft.model() == mFlangeModel) {
         if (topLeft.column() == mFlangeModel->fieldIndex("materialflange1_idx")) {
-            // name PCALC_DIALOGFACTORY->requestInformationDialog(topLeft.data(Qt::DisplayRole).toString());
-            // id + name PCALC_DIALOGFACTORY->requestInformationDialog(topLeft.data(Qt::EditRole).toString());
-            // id PCALC_DIALOGFACTORY->requestInformationDialog(topLeft.data(RB2::RoleOrigData).toString());
+            // name PCALC_DIALOGFACTORY->requestInformationDialog(
+            //              topLeft.data(Qt::DisplayRole).toString());
+            // id + name PCALC_DIALOGFACTORY->requestInformationDialog(
+            //              topLeft.data(Qt::EditRole).toString());
+            // id PCALC_DIALOGFACTORY->requestInformationDialog(
+            //              topLeft.data(RB2::RoleOrigData).toString());
 
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            STD_MATERIALUTILITY->setCurrentMaterial(materialId);
-
-            if (!STD_MATERIALUTILITY->isValid()) {
-                PCALC_DIALOGFACTORY->requestWarningDialog("Material not valid");
-                return;
-            }
-// continue here with rows from mLoadCaseModel
-            int row = 0;
-            int column = mLoadCaseModel->fieldIndex("tf1");
-            QModelIndex index = mLoadCaseModel->index(row, column);
-            double designTemp = mLoadCaseModel->data(index).toDouble();
-            double allowStress = STD_MATERIALUTILITY->allowableDesignStress(designTemp, STD2::CompFlange);
-
-            column = mLoadCaseModel->fieldIndex("ff1");
-            index = mLoadCaseModel->index(row, column);
-            mLoadCaseModel->setData(index, allowStress);
-
+            updateAllowStress(materialId, "tf1", "ff1");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialloosering1_idx")) {
-            PCALC_DIALOGFACTORY->requestInformationDialog("Update loose 1 property values?");
+            QString materialId = topLeft.data(RB2::RoleOrigData).toString();
+            updateAllowStress(materialId, "tl1", "fl1");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialflange2_idx")) {
-            PCALC_DIALOGFACTORY->requestInformationDialog("Update flange 2 property values?");
+            QString materialId = topLeft.data(RB2::RoleOrigData).toString();
+            updateAllowStress(materialId, "tf2", "ff2");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialloosering2_idx")) {
-            PCALC_DIALOGFACTORY->requestInformationDialog("Update loose 2 property values?");
+            QString materialId = topLeft.data(RB2::RoleOrigData).toString();
+            updateAllowStress(materialId, "tl2", "fl2");
         }
     } else if (topLeft.model() == mBoltNutWasherModel) {
         if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialbolt_idx")){
-            PCALC_DIALOGFACTORY->requestInformationDialog("Update bolt property values?");
+            QString materialId = topLeft.data(RB2::RoleOrigData).toString();
+            updateAllowStress(materialId, "tb", "fb");
         } else if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialwasher_idx")) {
-            PCALC_DIALOGFACTORY->requestInformationDialog("Update washer property values?");
+            QString materialId = topLeft.data(RB2::RoleOrigData).toString();
+            updateAllowStress(materialId, "tw1", "fw1");
+            updateAllowStress(materialId, "tw2", "fw2");
         }
     } else if (topLeft.model() == mShellModel) {
         if (topLeft.column() == mShellModel->fieldIndex("materialshell1_idx")){
-            PCALC_DIALOGFACTORY->requestInformationDialog("Update shell 1 property values?");
+            QString materialId = topLeft.data(RB2::RoleOrigData).toString();
+            updateAllowStress(materialId, "tf1", "fs1");
         } else if (topLeft.column() == mShellModel->fieldIndex("materialshell2_idx")) {
-            PCALC_DIALOGFACTORY->requestInformationDialog("Update shell 2 property values?");
+            QString materialId = topLeft.data(RB2::RoleOrigData).toString();
+            updateAllowStress(materialId, "tf2", "fs2");
         }
     }
 }
@@ -1420,5 +1415,36 @@ void PCALC_EN1591Widget::addLoadCaseVariable(RB_ObjectBase* loadCase,
                 currentRow,
                 model->fieldIndex(variableName));
     loadCase->addMember(variableName, unit, model->data(idx));
+}
+
+void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
+                                           const QString& temperatureField,
+                                           const QString& allowStressField) {
+    STD_MATERIALUTILITY->setCurrentMaterial(materialId);
+
+    if (!STD_MATERIALUTILITY->isValid()) {
+        PCALC_DIALOGFACTORY->requestWarningDialog("Material not valid");
+        return;
+    }
+
+    int row = 0;
+    int rowCount = mLoadCaseModel->rowCount();
+    int colTemperature = mLoadCaseModel->fieldIndex(temperatureField);
+    int colAllowStress = mLoadCaseModel->fieldIndex(allowStressField);
+    QModelIndex index;
+    double designTemp = 0.0;
+    double allowStress = 0.0;
+
+    for (row = 0; row < rowCount; row++) {
+        // get design temperature and corresponding allowable stress
+        index = mLoadCaseModel->index(row, colTemperature);
+        designTemp = mLoadCaseModel->data(index).toDouble();
+        allowStress = STD_MATERIALUTILITY->allowableDesignStress(
+                    designTemp, STD2::CompFlange);
+
+        // set allowable stress
+        index = mLoadCaseModel->index(row, colAllowStress);
+        mLoadCaseModel->setData(index, allowStress);
+    }
 }
 

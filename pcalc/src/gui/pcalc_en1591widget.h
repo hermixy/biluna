@@ -78,6 +78,12 @@ private:
                              const QString& unit,
                              RB_MmProxy* model,
                              int currentRow);
+    void updateAllowStress(const QString& materialId,
+                           const QString& temperatureField,
+                           const QString& allowStressField);
+// continue here
+//    void updateElastModulus();
+//    void updateThermExp();
 
     RB_MmProxy* mAssemblyModel;
     RB_DataWidgetMapper* mAssemblyMapper;

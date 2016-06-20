@@ -271,7 +271,7 @@ bool STD_MaterialUtility::loadMaterial(const QString& materialId) {
 
     // check if reading data of material has been successfull
     RB_ObjectContainer* objC =
-            mCurrentMaterial->getContainer("STD_EN13555QsminLList");
+            mCurrentMaterial->getContainer("STD_Rp02List");
 
     if (success && objC && objC->objectCount() > 0) {
         return true;

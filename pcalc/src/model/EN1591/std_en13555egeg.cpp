@@ -32,6 +32,6 @@ void STD_EN13555EGeG::createMembers() {
     addMember("eg", "mm", 0.0, RB2::MemberDouble);
 
     // temporary for importing of external data only
-    addMember("tmp_id", "-", "0", RB2::MemberChar125);
-    addMember("tmp_parent", "-", "0", RB2::MemberChar125);
+//    addMember("tmp_id", "-", "0", RB2::MemberChar125);
+//    addMember("tmp_parent", "-", "0", RB2::MemberChar125);
 }
