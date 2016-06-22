@@ -18,16 +18,28 @@ STD_MaterialUtility* STD_MaterialUtility::mActiveUtility = 0;
 STD_MaterialUtility::STD_MaterialUtility()
             : Biluna::Calc::RB_TableMath(), RB_Utility() {
     RB_DEBUG->print("STD_MaterialUtility::STD_MaterialUtility()");
-    mMaterialList = new RB_ObjectContainer("", nullptr,
-                                         "STD_MaterialList",
-                                         PCALC_OBJECTFACTORY);
+    mMaterialList = new RB_ObjectContainer(
+                "", nullptr, "STD_MaterialList", PCALC_OBJECTFACTORY);
     mCurrentMaterial = nullptr;
+    mElasModulTableList = new RB_ObjectContainer(
+                "", nullptr, "STD_ElasModulTableList", PCALC_OBJECTFACTORY);
+    mCurrentElasModulTable = nullptr;
+    mThermExpTableList = new RB_ObjectContainer(
+                "", nullptr, "STD_ThermExpTableList", PCALC_OBJECTFACTORY);
+    mCurrentThermExpTable = nullptr;
+    // external pressure
+
     PCALC_UTILITYFACTORY->addUtility(this);
 }
 
 STD_MaterialUtility::~STD_MaterialUtility() {
     delete mMaterialList;
     mMaterialList = nullptr;
+    delete mElasModulTableList;
+    mElasModulTableList = nullptr;
+    delete mThermExpTableList;
+    mThermExpTableList = nullptr;
+    // external pressure
 
     PCALC_UTILITYFACTORY->removeUtility(this);
     mActiveUtility = nullptr;
@@ -53,6 +65,14 @@ bool STD_MaterialUtility::setCurrentMaterial(const QString& materialIdx) {
     } else {
         // will also set mCurrentMaterial
         success = loadMaterial(materialId);
+
+        if (success) {
+            QString id = mCurrentMaterial->getValue("elasmodultable_id").toString();
+            loadElasModulTable(id);
+            id = mCurrentMaterial->getValue("thermexptable_id").toString();
+            loadThemExpTable(id);
+            // external pressure chart
+        }
     }
 
     return success;
@@ -86,6 +106,7 @@ double STD_MaterialUtility::allowableDesignStress(double designTemp,
         RmMin = get_RmMin(20); // 20 Celsius
 
         if (compType == STD2::CompBolt) {
+            // EN 13445 clause 11.4.3
             allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
         } else {
             allowStress = std::min(Rp02 / 1.5, RmMin / 2.4);
@@ -98,6 +119,7 @@ double STD_MaterialUtility::allowableDesignStress(double designTemp,
         RmMin = get_RmMin(20); // 20 Celsius
 
         if (compType == STD2::CompBolt) {
+            // EN 13445 clause 11.4.3
             allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
         } else {
             allowStress = std::min(Rp02 / 1.5, RmMin / 1.875);
@@ -106,6 +128,7 @@ double STD_MaterialUtility::allowableDesignStress(double designTemp,
                && 30.0 <= elongPercent
                && elongPercent < 35.0) {
         if (compType == STD2::CompBolt) {
+            // EN 13445 clause 11.4.3
             RmMin = get_RmMin(designTemp);
             allowStress = RmMin / 4.0;
         } else {
@@ -117,8 +140,10 @@ double STD_MaterialUtility::allowableDesignStress(double designTemp,
         RmMin = get_RmMin(designTemp);
 
         if (compType == STD2::CompBolt) {
+            // EN 13445 clause 11.4.3
             allowStress = RmMin / 4.0;
         } else if (compType == STD2::CompFlange) {
+            // // EN 13445 clause 11.5.4.2
             Rp10 = get_Rp10(designTemp);
             allowStress = Rp10 / 1.5;
         } else {
@@ -154,6 +179,7 @@ double STD_MaterialUtility::allowableTestStress(double testTemp,
         RmMin = get_RmMin(testTemp); // 20 Celsius
 
         if (compType == STD2::CompBolt) {
+            // EN 13445 clause 11.4.3
             allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
         } else {
             allowStress = Rp02 / 1.05;
@@ -166,6 +192,7 @@ double STD_MaterialUtility::allowableTestStress(double testTemp,
         RmMin = get_RmMin(testTemp); // 20 Celsius
 
         if (compType == STD2::CompBolt) {
+            // EN 13445 clause 11.4.3
             allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
         } else {
             allowStress = Rp02 / 1.05;
@@ -174,6 +201,7 @@ double STD_MaterialUtility::allowableTestStress(double testTemp,
                && 30.0 <= elongPercent
                && elongPercent < 35.0) {
         if (compType == STD2::CompBolt) {
+            // EN 13445 clause 11.4.3
             RmMin = get_RmMin(testTemp);
             allowStress = RmMin / 2.67;
         } else {
@@ -185,6 +213,7 @@ double STD_MaterialUtility::allowableTestStress(double testTemp,
         RmMin = get_RmMin(testTemp);
 
         if (compType == STD2::CompBolt) {
+            // EN 13445 clause 11.4.3
             allowStress = RmMin / 2.67;
         } else {
             Rp10 = get_Rp10(testTemp);
@@ -196,6 +225,32 @@ double STD_MaterialUtility::allowableTestStress(double testTemp,
     }
 
     return allowStress;
+}
+
+double STD_MaterialUtility::elasticityModulus(double designTemp) {
+    if (!mCurrentElasModulTable) {
+        RB_DEBUG->error("STD_MaterialUtility::getElasModul() "
+                        "mCurrentElasModulTable NULL ERROR");
+        return 0.0;
+    }
+
+    double elasModul = getLinInterpValue(
+                mCurrentElasModulTable->getContainer("STD_ElasModulList"),
+                "temperature", "elasmodul", designTemp);
+    return elasModul;
+}
+
+double STD_MaterialUtility::thermalExpansion(double designTemp) {
+    if (!mCurrentThermExpTable) {
+        RB_DEBUG->error("STD_MaterialUtility::getThermExp() "
+                        "mCurrentThermExpTable NULL ERROR");
+        return 0.0;
+    }
+
+    double thermExp = getLinInterpValue(
+                mCurrentThermExpTable->getContainer("STD_ThermExpList"),
+                "temperature", "thermexp", designTemp);
+    return thermExp;
 }
 
 STD2::MatStruct STD_MaterialUtility::getMaterialStructure() {
@@ -270,14 +325,49 @@ bool STD_MaterialUtility::loadMaterial(const QString& materialId) {
     bool success = mCurrentMaterial->dbRead(stdDb, RB2::ResolveAll);
 
     // check if reading data of material has been successfull
-    RB_ObjectContainer* objC =
+    RB_ObjectContainer* objRp02List =
             mCurrentMaterial->getContainer("STD_Rp02List");
 
-    if (success && objC && objC->objectCount() > 0) {
+    if (success && objRp02List && (objRp02List->objectCount() > 0
+            /* || ASME allowstress*/)) {
         return true;
     }
 
     mMaterialList->remove(mCurrentMaterial);
     mCurrentMaterial = nullptr;
+    return false;
+}
+
+bool STD_MaterialUtility::loadElasModulTable(const QString& elasModulTableId) {
+    QSqlDatabase stdDb = PCALC_MODELFACTORY->getStandardDatabase();
+    mCurrentElasModulTable =  mElasModulTableList->newObject(elasModulTableId);
+    bool success = mCurrentElasModulTable->dbRead(stdDb, RB2::ResolveAll);
+
+    RB_ObjectContainer* objElasModulList =
+            mCurrentElasModulTable->getContainer("STD_ElasModulList");
+
+    if (success && objElasModulList && objElasModulList->objectCount() > 0) {
+        return true;
+    }
+
+    mElasModulTableList->remove(mCurrentElasModulTable);
+    mCurrentElasModulTable = nullptr;
+    return false;
+}
+
+bool STD_MaterialUtility::loadThemExpTable(const QString& thermExpTableId) {
+    QSqlDatabase stdDb = PCALC_MODELFACTORY->getStandardDatabase();
+    mCurrentThermExpTable =  mThermExpTableList->newObject(thermExpTableId);
+    bool success = mCurrentThermExpTable->dbRead(stdDb, RB2::ResolveAll);
+
+    RB_ObjectContainer* objThermExpList =
+            mCurrentThermExpTable->getContainer("STD_ThermExpList");
+
+    if (success && objThermExpList && objThermExpList->objectCount() > 0) {
+        return true;
+    }
+
+    mThermExpTableList->remove(mCurrentThermExpTable);
+    mCurrentThermExpTable = nullptr;
     return false;
 }

@@ -12,6 +12,7 @@
 #define PCALC_EN1591WIDGET_H
 
 #include "rb_widget.h"
+#include "std.h"
 #include "ui_pcalc_en1591widget.h"
 
 
@@ -46,6 +47,7 @@ public slots:
                                    const QModelIndex& bottomRight);
     virtual void slotAssemblyAdded();
     virtual void on_pbCalculate_clicked();
+    virtual void on_pbRefreshProperty_clicked();
 
 protected slots:
     void slotParentRowChanged(const QModelIndex& curr,
@@ -80,10 +82,15 @@ private:
                              int currentRow);
     void updateAllowStress(const QString& materialId,
                            const QString& temperatureField,
-                           const QString& allowStressField);
-// continue here
-//    void updateElastModulus();
-//    void updateThermExp();
+                           const QString& allowStressField,
+                           STD2::CompType compType);
+    void updateElasModul(const QString& materialId,
+                         const QString& temperatureField,
+                         const QString& elasModulField);
+    void updateThermExp(const QString& materialId,
+                        const QString& temperatureField,
+                        const QString& thermExpField);
+    void refreshAllProperties();
 
     RB_MmProxy* mAssemblyModel;
     RB_DataWidgetMapper* mAssemblyMapper;

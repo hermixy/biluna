@@ -634,33 +634,47 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
             //              topLeft.data(RB2::RoleOrigData).toString());
 
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tf1", "ff1");
+            updateAllowStress(materialId, "tf1", "ff1", STD2::CompFlange);
+            updateElasModul(materialId, "tf1", "ef1");
+            updateThermExp(materialId, "tf1", "alphaf1");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialloosering1_idx")) {
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tl1", "fl1");
+            updateAllowStress(materialId, "tl1", "fl1", STD2::CompFlange);
+            updateElasModul(materialId, "tf1", "el1");
+            updateThermExp(materialId, "tf1", "alphal1");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialflange2_idx")) {
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tf2", "ff2");
+            updateAllowStress(materialId, "tf2", "ff2", STD2::CompFlange);
+            updateElasModul(materialId, "tf2", "ef2");
+            updateThermExp(materialId, "tf2", "alphaf2");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialloosering2_idx")) {
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tl2", "fl2");
+            updateAllowStress(materialId, "tl2", "fl2", STD2::CompFlange);
+            updateElasModul(materialId, "tf2", "el2");
+            updateThermExp(materialId, "tf2", "alphal2");
         }
     } else if (topLeft.model() == mBoltNutWasherModel) {
         if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialbolt_idx")){
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tb", "fb");
+            updateAllowStress(materialId, "tb", "fb", STD2::CompBolt);
+            updateElasModul(materialId, "tb", "eb");
+            updateThermExp(materialId, "tb", "alphab");
         } else if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialwasher_idx")) {
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tw1", "fw1");
-            updateAllowStress(materialId, "tw2", "fw2");
+            updateAllowStress(materialId, "tw1", "fw1", STD2::CompWasher);
+            updateElasModul(materialId, "tw1", "ew1");
+            updateThermExp(materialId, "tw1", "alphaw1");
+            updateAllowStress(materialId, "tw2", "fw2", STD2::CompWasher);
+            updateElasModul(materialId, "tw2", "ew2");
+            updateThermExp(materialId, "tw2", "alphaw2");
         }
     } else if (topLeft.model() == mShellModel) {
         if (topLeft.column() == mShellModel->fieldIndex("materialshell1_idx")){
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tf1", "fs1");
+            updateAllowStress(materialId, "tf1", "fs1", STD2::CompCylinder);
         } else if (topLeft.column() == mShellModel->fieldIndex("materialshell2_idx")) {
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tf2", "fs2");
+            updateAllowStress(materialId, "tf2", "fs2", STD2::CompCylinder);
         }
     }
 }
@@ -705,6 +719,10 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
         teCalculationReport->setHtml("<p>Invalid report type</p>");
         break;
     }
+}
+
+void PCALC_EN1591Widget::on_pbRefreshProperty_clicked() {
+    refreshAllProperties();
 }
 
 void PCALC_EN1591Widget::slotParentRowChanged(const QModelIndex& /*curr*/,
@@ -1419,7 +1437,8 @@ void PCALC_EN1591Widget::addLoadCaseVariable(RB_ObjectBase* loadCase,
 
 void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
                                            const QString& temperatureField,
-                                           const QString& allowStressField) {
+                                           const QString& allowStressField,
+                                           STD2::CompType compType) {
     STD_MATERIALUTILITY->setCurrentMaterial(materialId);
 
     if (!STD_MATERIALUTILITY->isValid()) {
@@ -1434,17 +1453,161 @@ void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
     QModelIndex index;
     double designTemp = 0.0;
     double allowStress = 0.0;
+    int loadCaseNo = -1;
+
+    for (row = 0; row < rowCount; row++) {
+        index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("loadcaseno"));
+        loadCaseNo = mLoadCaseModel->data(index).toInt();
+        // get design temperature and corresponding allowable stress
+        index = mLoadCaseModel->index(row, colTemperature);
+        designTemp = mLoadCaseModel->data(index).toDouble();
+
+        if (loadCaseNo == 1) {
+            // Test loadcase
+            allowStress = STD_MATERIALUTILITY->allowableTestStress(
+                        designTemp, compType);
+        } else {
+            allowStress = STD_MATERIALUTILITY->allowableDesignStress(
+                        designTemp, compType);
+        }
+
+        // set allowable stress
+        index = mLoadCaseModel->index(row, colAllowStress);
+        mLoadCaseModel->setData(index, allowStress);
+    }
+}
+
+void PCALC_EN1591Widget::updateElasModul(const QString& materialId,
+                                         const QString& temperatureField,
+                                         const QString& elasModulField) {
+    STD_MATERIALUTILITY->setCurrentMaterial(materialId);
+
+    if (!STD_MATERIALUTILITY->isValid()) {
+        PCALC_DIALOGFACTORY->requestWarningDialog("Material not valid");
+        return;
+    }
+
+    int row = 0;
+    int rowCount = mLoadCaseModel->rowCount();
+    int colTemperature = mLoadCaseModel->fieldIndex(temperatureField);
+    int colElasModul = mLoadCaseModel->fieldIndex(elasModulField);
+    QModelIndex index;
+    double designTemp = 0.0;
+    double elasModul = 0.0;
 
     for (row = 0; row < rowCount; row++) {
         // get design temperature and corresponding allowable stress
         index = mLoadCaseModel->index(row, colTemperature);
         designTemp = mLoadCaseModel->data(index).toDouble();
-        allowStress = STD_MATERIALUTILITY->allowableDesignStress(
-                    designTemp, STD2::CompFlange);
+        elasModul = STD_MATERIALUTILITY->elasticityModulus(designTemp);
 
         // set allowable stress
-        index = mLoadCaseModel->index(row, colAllowStress);
-        mLoadCaseModel->setData(index, allowStress);
+        index = mLoadCaseModel->index(row, colElasModul);
+        mLoadCaseModel->setData(index, elasModul);
+    }
+}
+
+void PCALC_EN1591Widget::updateThermExp(const QString& materialId,
+                                        const QString& temperatureField,
+                                        const QString& thermExpField) {
+    STD_MATERIALUTILITY->setCurrentMaterial(materialId);
+
+    if (!STD_MATERIALUTILITY->isValid()) {
+        PCALC_DIALOGFACTORY->requestWarningDialog("Material not valid");
+        return;
+    }
+
+    int row = 0;
+    int rowCount = mLoadCaseModel->rowCount();
+    int colTemperature = mLoadCaseModel->fieldIndex(temperatureField);
+    int colThermExp = mLoadCaseModel->fieldIndex(thermExpField);
+    QModelIndex index;
+    double designTemp = 0.0;
+    double thermExp = 0.0;
+
+    for (row = 0; row < rowCount; row++) {
+        // get design temperature and corresponding allowable stress
+        index = mLoadCaseModel->index(row, colTemperature);
+        designTemp = mLoadCaseModel->data(index).toDouble();
+        thermExp = STD_MATERIALUTILITY->thermalExpansion(designTemp);
+
+        // set allowable stress
+        index = mLoadCaseModel->index(row, colThermExp);
+        mLoadCaseModel->setData(index, thermExp);
+    }
+}
+
+void PCALC_EN1591Widget::refreshAllProperties() {
+    QModelIndex index = mFlangeModel->getCurrentIndex();
+
+    if (!index.isValid()) {
+        RB_DEBUG->debug("PCALC_EN1591Widget::refreshAllProperties() "
+                        "index not valid");
+        return;
+    }
+
+    int row = index.row();
+    index = mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("materialflange1_idx"));
+    QString materialId = index.data(RB2::RoleOrigData).toString();
+    updateAllowStress(materialId, "tf1", "ff1", STD2::CompFlange);
+    updateElasModul(materialId, "tf1", "ef1");
+    updateThermExp(materialId, "tf1", "alphaf1");
+    index = mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("materialloosering1_idx"));
+    materialId = index.data(RB2::RoleOrigData).toString();
+    updateAllowStress(materialId, "tl1", "fl1", STD2::CompFlange);
+    updateElasModul(materialId, "tf1", "el1");
+    updateThermExp(materialId, "tf1", "alphal1");
+
+    index = mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("flange2equal"));
+    bool flange2equal = 1 == index.data().toInt();
+
+    if (!flange2equal) {
+        index = mFlangeModel->index(
+                    row, mFlangeModel->fieldIndex("materialflange2_idx"));
+        materialId = index.data(RB2::RoleOrigData).toString();
+        updateAllowStress(materialId, "tf2", "ff2", STD2::CompFlange);
+        updateElasModul(materialId, "tf2", "ef2");
+        updateThermExp(materialId, "tf2", "alphaf2");
+        index = mFlangeModel->index(
+                    row, mFlangeModel->fieldIndex("materialloosering2_idx"));
+        materialId = index.data(RB2::RoleOrigData).toString();
+        updateAllowStress(materialId, "tl2", "fl2", STD2::CompFlange);
+        updateElasModul(materialId, "tf2", "el2");
+        updateThermExp(materialId, "tf2", "alphal2");
+    }
+
+    index = mBoltNutWasherModel->index(
+                row, mBoltNutWasherModel->fieldIndex("materialbolt_idx"));
+    materialId = index.data(RB2::RoleOrigData).toString();
+    updateAllowStress(materialId, "tb", "fb", STD2::CompBolt);
+    updateElasModul(materialId, "tb", "eb");
+    updateThermExp(materialId, "tb", "alphab");
+    index = mBoltNutWasherModel->index(
+                row, mBoltNutWasherModel->fieldIndex("materialwasher_idx"));
+    materialId = index.data(RB2::RoleOrigData).toString();
+    updateAllowStress(materialId, "tw1", "fw1", STD2::CompWasher);
+    updateElasModul(materialId, "tw1", "ew1");
+    updateThermExp(materialId, "tw1", "alphaw1");
+    updateAllowStress(materialId, "tw2", "fw2", STD2::CompWasher);
+    updateElasModul(materialId, "tw2", "ew2");
+    updateThermExp(materialId, "tw2", "alphaw2");
+    index = mShellModel->index(
+                row, mShellModel->fieldIndex("materialshell1_idx"));
+    materialId = index.data(RB2::RoleOrigData).toString();
+    updateAllowStress(materialId, "tf1", "fs1", STD2::CompCylinder);
+
+    index = mShellModel->index(
+                row, mShellModel->fieldIndex("shell2equal"));
+    bool shell2equal = 1 == index.data().toInt();
+
+    if (!shell2equal) {
+        index = mShellModel->index(
+                    row, mShellModel->fieldIndex("materialshell2_idx"));
+        materialId = index.data(RB2::RoleOrigData).toString();
+        updateAllowStress(materialId, "tf2", "fs2", STD2::CompCylinder);
     }
 }
 

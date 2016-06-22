@@ -3487,6 +3487,13 @@
                </item>
               </layout>
              </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="pbRefreshProperty">
+               <property name="text">
+                <string>Refresh all allow. stress etc.</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="tabForce">

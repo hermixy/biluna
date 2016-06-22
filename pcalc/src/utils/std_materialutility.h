@@ -40,6 +40,8 @@ public:
                                  STD2::CompType compType = STD2::CompDefault);
     double allowableTestStress(double testTemp,
                                STD2::CompType compType = STD2::CompDefault);
+    double elasticityModulus(double designTemp);
+    double thermalExpansion(double designTemp);
 
     STD2::MatStruct getMaterialStructure();
     double getElongationPercent();
@@ -55,10 +57,18 @@ private:
     STD_MaterialUtility();
 
     bool loadMaterial(const QString& materialId);
+    bool loadElasModulTable(const QString& elasModulTableId);
+    bool loadThemExpTable(const QString& thermExpTableId);
 
     static STD_MaterialUtility* mActiveUtility;
     RB_ObjectContainer* mMaterialList;
     RB_ObjectBase* mCurrentMaterial;
+    RB_ObjectContainer* mElasModulTableList;
+    RB_ObjectBase* mCurrentElasModulTable;
+    RB_ObjectContainer* mThermExpTableList;
+    RB_ObjectBase* mCurrentThermExpTable;
+    // TODO: External Pressure
+
 
 };
 

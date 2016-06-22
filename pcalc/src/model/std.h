@@ -30,9 +30,11 @@ public:
         CompFlange,
         CompHalfSphere,
         CompHead,
+        CompNut,
         CompOlet,
         CompTee,
         CompValve,
+        CompWasher,
         CompDefault
     };
 
