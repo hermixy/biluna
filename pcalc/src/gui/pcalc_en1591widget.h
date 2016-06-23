@@ -91,6 +91,7 @@ private:
                         const QString& temperatureField,
                         const QString& thermExpField);
     void refreshAllProperties();
+    void syncTemperatures(int row);
 
     RB_MmProxy* mAssemblyModel;
     RB_DataWidgetMapper* mAssemblyMapper;

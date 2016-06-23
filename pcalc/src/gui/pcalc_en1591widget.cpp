@@ -624,6 +624,19 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
                                            const QModelIndex& bottomRight) {
     RB_Widget::slotDataIsChanged(topLeft, bottomRight);
 
+    QModelIndex index = mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("flange2equal"));
+    bool flange2equal = 1 == index.data().toInt();
+    mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("typeflange1_id"));
+    bool flange1loose = 2 == index.data().toInt();
+    mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("typeflange2_id"));
+    bool flange2loose = 2 == index.data().toInt();
+    index = mShellModel->index(
+                row, mShellModel->fieldIndex("shell2equal"));
+    bool shell2equal = 1 == index.data().toInt();
+
     if (topLeft.model() == mFlangeModel) {
         if (topLeft.column() == mFlangeModel->fieldIndex("materialflange1_idx")) {
             // name PCALC_DIALOGFACTORY->requestInformationDialog(
@@ -638,16 +651,25 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
             updateElasModul(materialId, "tf1", "ef1");
             updateThermExp(materialId, "tf1", "alphaf1");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialloosering1_idx")) {
+            if (!flange1loose) {
+                return;
+            }
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
             updateAllowStress(materialId, "tl1", "fl1", STD2::CompFlange);
             updateElasModul(materialId, "tf1", "el1");
             updateThermExp(materialId, "tf1", "alphal1");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialflange2_idx")) {
+            if (flange2equal) {
+                return;
+            }
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
             updateAllowStress(materialId, "tf2", "ff2", STD2::CompFlange);
             updateElasModul(materialId, "tf2", "ef2");
             updateThermExp(materialId, "tf2", "alphaf2");
         } else if (topLeft.column() == mFlangeModel->fieldIndex("materialloosering2_idx")) {
+            if (flange2equal || !flange2loose) {
+                return;
+            }
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
             updateAllowStress(materialId, "tl2", "fl2", STD2::CompFlange);
             updateElasModul(materialId, "tf2", "el2");
@@ -657,6 +679,7 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
         if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialbolt_idx")){
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
             updateAllowStress(materialId, "tb", "fb", STD2::CompBolt);
+            updateAllowStress(materialId, "tb", "fn", STD2::CompBolt); // no separate material yet
             updateElasModul(materialId, "tb", "eb");
             updateThermExp(materialId, "tb", "alphab");
         } else if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialwasher_idx")) {
@@ -673,12 +696,15 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
             updateAllowStress(materialId, "tf1", "fs1", STD2::CompCylinder);
         } else if (topLeft.column() == mShellModel->fieldIndex("materialshell2_idx")) {
+            if (shell2equal) {
+                return;
+            }
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
             updateAllowStress(materialId, "tf2", "fs2", STD2::CompCylinder);
         }
     } else if (topLeft.model() == mLoadCaseModel) {
         if (topLeft.column() == mLoadCaseModel->fieldIndex("t0")){
-            //
+            syncTemperatures(topLeft.row());
         }
     }
 }
@@ -1550,6 +1576,19 @@ void PCALC_EN1591Widget::refreshAllProperties() {
         return;
     }
 
+    QModelIndex index = mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("flange2equal"));
+    bool flange2equal = 1 == index.data().toInt();
+    mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("typeflange1_id"));
+    bool flange1loose = 2 == index.data().toInt();
+    mFlangeModel->index(
+                row, mFlangeModel->fieldIndex("typeflange2_id"));
+    bool flange2loose = 2 == index.data().toInt();
+    index = mShellModel->index(
+                row, mShellModel->fieldIndex("shell2equal"));
+    bool shell2equal = 1 == index.data().toInt();
+
     int row = index.row();
     index = mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("materialflange1_idx"));
@@ -1557,16 +1596,15 @@ void PCALC_EN1591Widget::refreshAllProperties() {
     updateAllowStress(materialId, "tf1", "ff1", STD2::CompFlange);
     updateElasModul(materialId, "tf1", "ef1");
     updateThermExp(materialId, "tf1", "alphaf1");
-    index = mFlangeModel->index(
-                row, mFlangeModel->fieldIndex("materialloosering1_idx"));
-    materialId = index.data(RB2::RoleOrigData).toString();
-    updateAllowStress(materialId, "tl1", "fl1", STD2::CompFlange);
-    updateElasModul(materialId, "tf1", "el1");
-    updateThermExp(materialId, "tf1", "alphal1");
 
-    index = mFlangeModel->index(
-                row, mFlangeModel->fieldIndex("flange2equal"));
-    bool flange2equal = 1 == index.data().toInt();
+    if (flange1loose) {
+        index = mFlangeModel->index(
+                    row, mFlangeModel->fieldIndex("materialloosering1_idx"));
+        materialId = index.data(RB2::RoleOrigData).toString();
+        updateAllowStress(materialId, "tl1", "fl1", STD2::CompFlange);
+        updateElasModul(materialId, "tf1", "el1");
+        updateThermExp(materialId, "tf1", "alphal1");
+    }
 
     if (!flange2equal) {
         index = mFlangeModel->index(
@@ -1575,37 +1613,41 @@ void PCALC_EN1591Widget::refreshAllProperties() {
         updateAllowStress(materialId, "tf2", "ff2", STD2::CompFlange);
         updateElasModul(materialId, "tf2", "ef2");
         updateThermExp(materialId, "tf2", "alphaf2");
-        index = mFlangeModel->index(
-                    row, mFlangeModel->fieldIndex("materialloosering2_idx"));
-        materialId = index.data(RB2::RoleOrigData).toString();
-        updateAllowStress(materialId, "tl2", "fl2", STD2::CompFlange);
-        updateElasModul(materialId, "tf2", "el2");
-        updateThermExp(materialId, "tf2", "alphal2");
+
+        if (flange2loose) {
+            index = mFlangeModel->index(
+                        row, mFlangeModel->fieldIndex("materialloosering2_idx"));
+            materialId = index.data(RB2::RoleOrigData).toString();
+            updateAllowStress(materialId, "tl2", "fl2", STD2::CompFlange);
+            updateElasModul(materialId, "tf2", "el2");
+            updateThermExp(materialId, "tf2", "alphal2");
+        }
     }
 
     index = mBoltNutWasherModel->index(
                 row, mBoltNutWasherModel->fieldIndex("materialbolt_idx"));
     materialId = index.data(RB2::RoleOrigData).toString();
     updateAllowStress(materialId, "tb", "fb", STD2::CompBolt);
+    updateAllowStress(materialId, "tb", "fn", STD2::CompBolt); // no separate material yet
     updateElasModul(materialId, "tb", "eb");
     updateThermExp(materialId, "tb", "alphab");
     index = mBoltNutWasherModel->index(
                 row, mBoltNutWasherModel->fieldIndex("materialwasher_idx"));
     materialId = index.data(RB2::RoleOrigData).toString();
-    updateAllowStress(materialId, "tw1", "fw1", STD2::CompWasher);
-    updateElasModul(materialId, "tw1", "ew1");
-    updateThermExp(materialId, "tw1", "alphaw1");
-    updateAllowStress(materialId, "tw2", "fw2", STD2::CompWasher);
-    updateElasModul(materialId, "tw2", "ew2");
-    updateThermExp(materialId, "tw2", "alphaw2");
+
+    if (materialId) {
+        updateAllowStress(materialId, "tw1", "fw1", STD2::CompWasher);
+        updateElasModul(materialId, "tw1", "ew1");
+        updateThermExp(materialId, "tw1", "alphaw1");
+        updateAllowStress(materialId, "tw2", "fw2", STD2::CompWasher);
+        updateElasModul(materialId, "tw2", "ew2");
+        updateThermExp(materialId, "tw2", "alphaw2");
+    }
+    RB2::ActionDefault
     index = mShellModel->index(
                 row, mShellModel->fieldIndex("materialshell1_idx"));
     materialId = index.data(RB2::RoleOrigData).toString();
     updateAllowStress(materialId, "tf1", "fs1", STD2::CompCylinder);
-
-    index = mShellModel->index(
-                row, mShellModel->fieldIndex("shell2equal"));
-    bool shell2equal = 1 == index.data().toInt();
 
     if (!shell2equal) {
         index = mShellModel->index(
@@ -1613,5 +1655,27 @@ void PCALC_EN1591Widget::refreshAllProperties() {
         materialId = index.data(RB2::RoleOrigData).toString();
         updateAllowStress(materialId, "tf2", "fs2", STD2::CompCylinder);
     }
+}
+
+void PCALC_EN1591Widget::syncTemperatures(int row) {
+    QModelIndex index = mLoadCaseModel->index(
+                row, mLoadCaseModel->fieldIndex("t0"));
+    double designTemp = mLoadCaseModel->data(index).toDouble();
+    index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("tb"));
+    mLoadCaseModel->setData(index, designTemp);
+    index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("tg"));
+    mLoadCaseModel->setData(index, designTemp);
+    index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("tf1"));
+    mLoadCaseModel->setData(index, designTemp);
+    index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("tl1"));
+    mLoadCaseModel->setData(index, designTemp);
+    index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("tw1"));
+    mLoadCaseModel->setData(index, designTemp);
+    index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("tf2"));
+    mLoadCaseModel->setData(index, designTemp);
+    index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("tl2"));
+    mLoadCaseModel->setData(index, designTemp);
+    index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("tw2"));
+    mLoadCaseModel->setData(index, designTemp);
 }
 

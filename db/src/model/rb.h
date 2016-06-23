@@ -61,6 +61,15 @@ public:
         return str.remove(0, 38); // remove the Uuid part
     }
 
+    static bool isValidId(const QString& id) { //is valid Uuid with brackets
+        bool result = 38 == id.size();
+        result = result && id.startsWith("{");
+        result = result && id.endsWith("}");
+        // not checked for hyphens and alphanumeric character,
+        // which is valid Uuid with brackets
+        return result;
+    }
+
     /**
      * Action types used by complex actions to create working models,
      * naming is: "Action"_context_action e.g. Action_Ldt_FluidCheck (without
