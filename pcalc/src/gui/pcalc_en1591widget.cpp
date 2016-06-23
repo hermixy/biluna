@@ -676,6 +676,10 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
             updateAllowStress(materialId, "tf2", "fs2", STD2::CompCylinder);
         }
+    } else if (topLeft.model() == mLoadCaseModel) {
+        if (topLeft.column() == mLoadCaseModel->fieldIndex("t0")){
+            //
+        }
     }
 }
 
