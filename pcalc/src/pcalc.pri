@@ -119,6 +119,7 @@ HEADERS += \
     ../src/utils/pcalc_sqlcommonfunctions.h \
     ../src/utils/pcalc_utilityfactory.h \
     ../src/utils/rb_tablemath.h \
+    ../src/utils/std_enmaterialhandler.h \
     ../src/utils/std_materialutility.h
 
 
@@ -221,6 +222,7 @@ SOURCES += \
     ../src/utils/pcalc_sqlcommonfunctions.cpp \
     ../src/utils/pcalc_utilityfactory.cpp \
     ../src/utils/rb_tablemath.cpp \
+    ../src/utils/std_enmaterialhandler.cpp \
     ../src/utils/std_materialutility.cpp
 
 RESOURCES += \

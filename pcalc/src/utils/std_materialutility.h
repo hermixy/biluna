@@ -16,6 +16,7 @@
 #include "rb_tablemath.h"
 #include "rb_utility.h"
 #include "std.h"
+#include "std_enmaterialhandler.h"
 
 // For unit tests only
 class STD_MaterialUtilityTest;
@@ -37,11 +38,19 @@ public:
     void refresh() {}
 
     double allowableDesignStress(double designTemp,
-                                 STD2::CompType compType = STD2::CompDefault);
+                                 STD2::CompType compType = STD2::CompDefault,
+                                 int loadCaseNo = -1,
+                                 const QString& variableName = "");
     double allowableTestStress(double testTemp,
-                               STD2::CompType compType = STD2::CompDefault);
-    double elasticityModulus(double designTemp);
-    double thermalExpansion(double designTemp);
+                               STD2::CompType compType = STD2::CompDefault,
+                               int loadCaseNo = -1,
+                               const QString& variableName = "");
+    double elasticityModulus(double designTemp,
+                             int loadCaseNo = -1,
+                             const QString& variableName = "");
+    double thermalExpansion(double designTemp,
+                            int loadCaseNo = -1,
+                            const QString& variableName = "");
 
     STD2::MatStruct getMaterialStructure();
     double getElongationPercent();
@@ -69,6 +78,7 @@ private:
     RB_ObjectBase* mCurrentThermExpTable;
     // TODO: External Pressure
 
+    STD_EnMaterialHandler mEnMatHandler;
 
 };
 

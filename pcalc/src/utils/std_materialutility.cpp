@@ -11,6 +11,7 @@
 #include "pcalc.h"
 #include "pcalc_modelfactory.h"
 #include "pcalc_objectfactory.h"
+#include "pcalc_report.h"
 #include "pcalc_utilityfactory.h"
 
 STD_MaterialUtility* STD_MaterialUtility::mActiveUtility = 0;
@@ -88,7 +89,13 @@ bool STD_MaterialUtility::isValid() {
 
 
 double STD_MaterialUtility::allowableDesignStress(double designTemp,
-                                                  STD2::CompType compType) {
+                                                  STD2::CompType compType,
+                                                  int loadCaseNo,
+                                                  const QString& variableName) {
+    double result = mEnMatHandler.allowableDesignStress(
+                designTemp, compType, loadCaseNo, variableName);
+    return result;
+/*
     STD2::MatStruct matStruct = getMaterialStructure();
     double elongPercent = getElongationPercent();
     bool alternativeRoute = false; // clause 6.3
@@ -158,10 +165,18 @@ double STD_MaterialUtility::allowableDesignStress(double designTemp,
     }
 
     return allowStress;
+*/
 }
 
 double STD_MaterialUtility::allowableTestStress(double testTemp,
-                                                STD2::CompType compType) {
+                                                STD2::CompType compType,
+                                                int loadCaseNo,
+                                                const QString& variableName) {
+    double result = mEnMatHandler.allowableTestStress(
+                testTemp, compType, loadCaseNo, variableName);
+    return result;
+
+/*
     STD2::MatStruct matStruct = getMaterialStructure();
     double elongPercent = getElongationPercent();
     bool alternativeRoute = false; // clause 6.3
@@ -225,9 +240,12 @@ double STD_MaterialUtility::allowableTestStress(double testTemp,
     }
 
     return allowStress;
+*/
 }
 
-double STD_MaterialUtility::elasticityModulus(double designTemp) {
+double STD_MaterialUtility::elasticityModulus(double designTemp,
+                                              int loadCaseNo,
+                                              const QString& variableName) {
     if (!mCurrentElasModulTable) {
         RB_DEBUG->error("STD_MaterialUtility::getElasModul() "
                         "mCurrentElasModulTable NULL ERROR");
@@ -240,7 +258,9 @@ double STD_MaterialUtility::elasticityModulus(double designTemp) {
     return elasModul;
 }
 
-double STD_MaterialUtility::thermalExpansion(double designTemp) {
+double STD_MaterialUtility::thermalExpansion(double designTemp,
+                                             int loadCaseNo,
+                                             const QString &variableName) {
     if (!mCurrentThermExpTable) {
         RB_DEBUG->error("STD_MaterialUtility::getThermExp() "
                         "mCurrentThermExpTable NULL ERROR");

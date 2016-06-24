@@ -624,6 +624,7 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
                                            const QModelIndex& bottomRight) {
     RB_Widget::slotDataIsChanged(topLeft, bottomRight);
 
+    int row = mFlangeModel->getCurrentIndex().row();
     QModelIndex index = mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("flange2equal"));
     bool flange2equal = 1 == index.data().toInt();
@@ -1576,7 +1577,8 @@ void PCALC_EN1591Widget::refreshAllProperties() {
         return;
     }
 
-    QModelIndex index = mFlangeModel->index(
+    int row = index.row();
+    index = mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("flange2equal"));
     bool flange2equal = 1 == index.data().toInt();
     mFlangeModel->index(
@@ -1589,7 +1591,6 @@ void PCALC_EN1591Widget::refreshAllProperties() {
                 row, mShellModel->fieldIndex("shell2equal"));
     bool shell2equal = 1 == index.data().toInt();
 
-    int row = index.row();
     index = mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("materialflange1_idx"));
     QString materialId = index.data(RB2::RoleOrigData).toString();
@@ -1624,6 +1625,8 @@ void PCALC_EN1591Widget::refreshAllProperties() {
         }
     }
 
+    index = mBoltNutWasherModel->getCurrentIndex();
+    row = index.row();
     index = mBoltNutWasherModel->index(
                 row, mBoltNutWasherModel->fieldIndex("materialbolt_idx"));
     materialId = index.data(RB2::RoleOrigData).toString();
@@ -1635,7 +1638,7 @@ void PCALC_EN1591Widget::refreshAllProperties() {
                 row, mBoltNutWasherModel->fieldIndex("materialwasher_idx"));
     materialId = index.data(RB2::RoleOrigData).toString();
 
-    if (materialId) {
+    if (RB2::isValidId(materialId)) {
         updateAllowStress(materialId, "tw1", "fw1", STD2::CompWasher);
         updateElasModul(materialId, "tw1", "ew1");
         updateThermExp(materialId, "tw1", "alphaw1");
@@ -1643,7 +1646,9 @@ void PCALC_EN1591Widget::refreshAllProperties() {
         updateElasModul(materialId, "tw2", "ew2");
         updateThermExp(materialId, "tw2", "alphaw2");
     }
-    RB2::ActionDefault
+
+    index = mShellModel->getCurrentIndex();
+    row = index.row();
     index = mShellModel->index(
                 row, mShellModel->fieldIndex("materialshell1_idx"));
     materialId = index.data(RB2::RoleOrigData).toString();
