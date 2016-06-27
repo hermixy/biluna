@@ -10,13 +10,8 @@
 
 NAMESPACE_BILUNA_CALC_EN1591
 
-EN1591Handler::EN1591Handler(RB_AllowanceService* allowService,
-                             RB_MaterialService* matService,
-                             RB_QualityService* qualService) {
+EN1591Handler::EN1591Handler() {
     mCalc = NULL;
-    mAllowService = allowService;
-    mMatService = matService;
-    mQualService = qualService;
 }
 
 EN1591Handler::~EN1591Handler() {
@@ -48,10 +43,7 @@ void EN1591Handler::exec() {
                            (Calculator::FlangeType)flange2Type);
 
     setDimMatInput();
-    setAllowances();
-    setQualityFactors();
     setLoadCaseInput();
-    setMaterialProperties();
     // No setGasketProperties()! because of iterations
 
     try {
@@ -253,14 +245,6 @@ void EN1591Handler::setDimMatInput() {
     }
 }
 
-void EN1591Handler::setAllowances() {
-    // nothing
-}
-
-void EN1591Handler::setQualityFactors() {
-    // nothing
-}
-
 void EN1591Handler::setLoadCaseInput() {
     RB_ObjectContainer* loadList
             = PR->getInOutContainer()->getContainer("PCALC_LoadCaseList");
@@ -356,10 +340,6 @@ void EN1591Handler::setLoadCaseInput() {
             lc->EW2 = lcIn->getValue("ew2").toDouble();
         }
     }
-}
-
-void EN1591Handler::setMaterialProperties() {
-    // nothing yet, to be set in loadcases
 }
 
 Calculator* EN1591Handler::getCalculator() const {

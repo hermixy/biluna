@@ -113,13 +113,14 @@ HEADERS += \
     ../src/model/std_thermexptable.h \
     ../src/utils/EN1591/en13445tableg.h \
     ../src/utils/EN1591/en13555property.h \
-    ../src/utils/unittest/std_materialutilitytest.h \
+    ../src/utils/unittest/std_enmaterialhandlertest.h \
     ../src/utils/unittest/std_unittestfactory.h \
     ../src/utils/pcalc_report.h \
     ../src/utils/pcalc_sqlcommonfunctions.h \
     ../src/utils/pcalc_utilityfactory.h \
     ../src/utils/rb_tablemath.h \
     ../src/utils/std_enmaterialhandler.h \
+    ../src/utils/std_materialhandler.h \
     ../src/utils/std_materialutility.h
 
 
@@ -216,7 +217,7 @@ SOURCES += \
     ../src/model/std_thermexptable.cpp \
     ../src/utils/EN1591/en13445tableg.cpp \
     ../src/utils/EN1591/en13555property.cpp \
-    ../src/utils/unittest/std_materialutilitytest.cpp \
+    ../src/utils/unittest/std_enmaterialhandlertest.cpp \
     ../src/utils/unittest/std_unittestfactory.cpp \
     ../src/utils/pcalc_report.cpp \
     ../src/utils/pcalc_sqlcommonfunctions.cpp \

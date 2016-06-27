@@ -19,6 +19,9 @@ public:
 
     void refresh() {}
 
+    virtual void setReportSettings(int reportType,
+                                   int formulaFrom,
+                                   int formulaTo);
     virtual void addDetail(const QString& formulaNumber,
                            const QString& variableName,
                            const QString& formula,
@@ -53,7 +56,7 @@ private:
     RB_ObjectContainer* mInContainer;
     RB_ObjectContainer* mOutContainer;
     RB_ObjectBase* mLastOutput;
-    bool mIsSettingsDone;
+
     int mReportType;
     int mFormulaFrom;
     int mFormulaTo;

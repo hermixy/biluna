@@ -12,7 +12,6 @@ PCALC_Report::PCALC_Report() : RB_Utility() {
     mInContainer = NULL;
     mOutContainer = NULL;
     mLastOutput = NULL;
-    mIsSettingsDone = false;
     mReportType = -1;
     mFormulaFrom = 0;
     mFormulaTo = 999;
@@ -28,7 +27,6 @@ void PCALC_Report::createInputOutputObject() {
     mInContainer = mInOutContainer->getContainer("PCALC_InputList");
     mOutContainer = mInOutContainer->getContainer("PCALC_OutputList");
     mLastOutput = NULL;
-    mIsSettingsDone = false;
     mReportType = -1;
     mFormulaFrom = 0;
     mFormulaTo = 999;
@@ -54,6 +52,14 @@ PCALC_Report* PCALC_Report::getInstance() {
     return mActiveUtility;
 }
 
+void PCALC_Report::setReportSettings(int reportType, int formulaFrom,
+                                     int formulaTo) {
+    mReportType = reportType;
+    mFormulaFrom = formulaFrom;
+    mFormulaTo = formulaTo;
+}
+
+
 void PCALC_Report::addDetail(const QString& formulaNumber,
                        const QString& variableName,
                        const QString& formula,
@@ -68,23 +74,9 @@ void PCALC_Report::addDetail(const QString& formulaNumber,
         return;
     }
 
-    if (!mIsSettingsDone) {
-        RB_ObjectBase* settingObj = mInContainer->getObject("name", "PCALC_Setting");
-
-        if (!settingObj) {
-            RB_DEBUG->error("PCALC_Report::addDetail() setting object ERROR");
-            return;
-        }
-
-        mReportType = settingObj->getValue("reporttype").toInt();
-        mFormulaFrom = settingObj->getValue("formulafrom").toInt();
-        mFormulaTo = settingObj->getValue("formulato").toInt();
-
-    }
-
     // Report filter settings, based on index of cbCalculationReportType
-    // in pcalc_en1591widget.cpp
-    if (mReportType < 3) {
+    // in pcalc_en1591widget.cpp, summary-, detail-, last iteration report
+    if (mReportType == 0 || mReportType == 1 || mReportType == 3) {
         // only last iteration result
         RB_ObjectBase* existObj = getObject(mOutContainer, formulaNumber,
                                             variableName, loadCaseNo);

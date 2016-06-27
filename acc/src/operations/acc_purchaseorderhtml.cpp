@@ -211,7 +211,9 @@ void ACC_PurchaseOrderHtml::setOrderData() {
         mHtml.replace("{$ACC_TransDoc.freightcost}", "P.M.");
         mHtml.replace("{$ACC_TransDoc.tax}", "P.M.");
     }
-    mHtml.replace("{$ACC_TransDoc.totalgrossprice}", RB_String::number(totalGrossAmt, 'f', 2));
+    mHtml.replace("{$ACC_TransDoc.totalgrossprice}",
+                  /* RB_String::number(totalGrossAmt, 'f', 2)); */
+                  RB_String::number(totalGrossAmt - totalTax /*- netFreight*/, 'f', 2));
     mHtml.replace("{$ACC_TransDoc.invoicecomment}", comment);
 }
 

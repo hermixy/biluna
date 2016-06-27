@@ -40,6 +40,8 @@ PCALC_EN1591Widget::PCALC_EN1591Widget(QWidget *parent)
     mGasketModel = NULL;
     mLoadCaseModel = NULL;
     mShellModel = NULL;
+
+    mIsUpdateMaterial = true;
 }
 
 /**
@@ -362,7 +364,7 @@ void PCALC_EN1591Widget::initMapping() {
                 mBoltNutWasherModel->fieldIndex("tensionertype_id"),
                 "currentIndex");
     items.clear();
-    items << "Summary Report" << "Detail Report"
+    items << "Summary Report" << "Detail Report" << "Material Report"
           << "Last Iteration Validation" << "All Iteration Validation"
           << "Unit Test Summary Report" << "Unit Test Detail Report";
     cbCalculationReportType->setModel(new QStringListModel(items, this));
@@ -630,9 +632,11 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
     bool flange2equal = 1 == index.data().toInt();
     mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("typeflange1_id"));
+    bool flange1blind = 0 == index.data().toInt();
     bool flange1loose = 2 == index.data().toInt();
     mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("typeflange2_id"));
+    bool flange2blind = 0 == index.data().toInt();
     bool flange2loose = 2 == index.data().toInt();
     index = mShellModel->index(
                 row, mShellModel->fieldIndex("shell2equal"));
@@ -694,10 +698,13 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
         }
     } else if (topLeft.model() == mShellModel) {
         if (topLeft.column() == mShellModel->fieldIndex("materialshell1_idx")){
+            if (flange1blind) {
+                return;
+            }
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
             updateAllowStress(materialId, "tf1", "fs1", STD2::CompCylinder);
         } else if (topLeft.column() == mShellModel->fieldIndex("materialshell2_idx")) {
-            if (shell2equal) {
+            if (shell2equal || flange2blind) {
                 return;
             }
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
@@ -727,6 +734,7 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
         return;
     }
 
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     switch (cbCalculationReportType->currentIndex()) {
     case 0:
         createSummaryReport();
@@ -735,24 +743,29 @@ void PCALC_EN1591Widget::on_pbCalculate_clicked() {
         createDetailReport();
         break;
     case 2:
-        createValidationReport();
+        createMaterialReport();
         break;
     case 3:
         createValidationReport();
         break;
     case 4:
-        createUnitTestSummary();
+        createValidationReport();
         break;
     case 5:
+        createUnitTestSummary();
+        break;
+    case 6:
         createUnitTestDetail();
         break;
     default:
         teCalculationReport->setHtml("<p>Invalid report type</p>");
         break;
     }
+    QApplication::restoreOverrideCursor();
 }
 
 void PCALC_EN1591Widget::on_pbRefreshProperty_clicked() {
+    mIsUpdateMaterial = true;
     refreshAllProperties();
 }
 
@@ -820,13 +833,11 @@ void PCALC_EN1591Widget::slotHandleParentRowChanged() {
 }
 
 void PCALC_EN1591Widget::slotDisableFormulaWidgets(int index) {
-    sbFormulaFrom->setEnabled(index > 1 && index < 4);
-    sbFormulaTo->setEnabled(index > 1 && index < 4);
+    sbFormulaFrom->setEnabled(index > 2 && index < 5);
+    sbFormulaTo->setEnabled(index > 2 && index < 5);
 }
 
 void PCALC_EN1591Widget::setInput() {
-    setSettings();
-
     RB_ObjectContainer* inList
             = PR->getInOutContainer()->getContainer("PCALC_InputList");
     RB_ObjectAtomic* objIn = new RB_ObjectAtomic("", inList, "PCALC_Input");
@@ -1028,19 +1039,9 @@ void PCALC_EN1591Widget::setInput() {
     }
 }
 
-void PCALC_EN1591Widget::setSettings() {
-    RB_ObjectContainer* inList
-            = PR->getInOutContainer()->getContainer("PCALC_InputList");
-
-    // Add setting object to input list
-    RB_ObjectAtomic* obj = new RB_ObjectAtomic("", inList, "PCALC_Setting");
-    obj->addMember("reporttype", "-", cbCalculationReportType->currentIndex(),
-                   RB2::MemberInteger);
-    obj->addMember("formulafrom", "-", sbFormulaFrom->value(),
-                   RB2::MemberInteger);
-    obj->addMember("formulato", "-", sbFormulaTo->value(),
-                   RB2::MemberInteger);
-    inList->addObject(obj);
+void PCALC_EN1591Widget::setReportSettings() {
+    PR->setReportSettings(cbCalculationReportType->currentIndex(),
+                          sbFormulaFrom->value(), sbFormulaTo->value());
 }
 
 void PCALC_EN1591Widget::createSummaryReport() {
@@ -1052,15 +1053,13 @@ void PCALC_EN1591Widget::createDetailReport() {
 }
 
 void PCALC_EN1591Widget::createReport(const QString& reportTemplate) {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     PR->clear();
     getTextEdit()->clear();
+    setReportSettings();
     setInput();
-
-    // continue here with first calculation
-    // second the material, allow=>1, qual service=>1
-    Biluna::Calc::EN1591::EN1591Handler handler(NULL, NULL, NULL);
+    Biluna::Calc::EN1591::EN1591Handler handler;
     handler.exec();
+
 
     // get report template
     QFile file(reportTemplate);
@@ -1104,8 +1103,6 @@ void PCALC_EN1591Widget::createReport(const QString& reportTemplate) {
     delete iter;
 
     teCalculationReport->setHtml(report);
-    QApplication::restoreOverrideCursor();
-
 }
 
 void PCALC_EN1591Widget::insertReportInputData(QString& report,
@@ -1198,11 +1195,37 @@ void PCALC_EN1591Widget::insertReportCalculationData(QString& report,
     }
 }
 
+void PCALC_EN1591Widget::createMaterialReport() {
+    // Prevent updated of materials in refreshAllProperties
+    mIsUpdateMaterial = false;
+    PR->clear();
+    getTextEdit()->clear();
+    setReportSettings();
+    refreshAllProperties();
+    writeValidationReport();
+    mIsUpdateMaterial = true;
+}
+
 /**
  * @brief PCALC_EN1591Widget::createValidationReport,
  * last and all validation report
  */
 void PCALC_EN1591Widget::createValidationReport() {
+    PR->clear();
+    getTextEdit()->clear();
+    setReportSettings();
+    setInput();
+    Biluna::Calc::EN1591::EN1591Handler handler;
+    handler.exec();
+    writeValidationReport();
+}
+
+/**
+ * @brief PCALC_EN1591Widget::writeValidationReport, write report based
+ * on input output object.
+ */
+void PCALC_EN1591Widget::writeValidationReport() {
+
     QString po = "<p>";
     QString pc = "</p>";
     QString tbo = "<table border='0'>";
@@ -1212,18 +1235,7 @@ void PCALC_EN1591Widget::createValidationReport() {
     QString tdo = "<td>";
     QString tdc = "</td>";
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    PR->clear();
-    getTextEdit()->clear();
-    setInput();
-
     QString dateTimeStr = QDateTime::currentDateTime().toString(Qt::ISODate);
-
-    // continue here with first calculation
-    // second the material, allow=>1, qual service=>1
-
-    Biluna::Calc::EN1591::EN1591Handler handler(NULL, NULL, NULL);
-    handler.exec();
 
     // Create output report
 
@@ -1235,7 +1247,7 @@ void PCALC_EN1591Widget::createValidationReport() {
                            "<td width='8%'>&nbsp;</td>"
                            "<td width='75%'>&nbsp;</td>"
                      + trc);
-    if (cbCalculationReportType->currentIndex() == 3) { // all iterations
+    if (cbCalculationReportType->currentIndex() == 4) { // all iterations + input
         outputStr.append(tro + tdo + tdc
                          + tdo + "<strong>INPUT</strong>" + tdc
                          + tdo + tdc+ tdo + tdc + trc);
@@ -1310,14 +1322,12 @@ void PCALC_EN1591Widget::createValidationReport() {
     outputStr.append(po + "-- End calculation:"
                      + QDateTime::currentDateTime().toString(Qt::ISODate) + pc);
     getTextEdit()->setHtml(outputStr);
-    QApplication::restoreOverrideCursor();
 }
 
 void PCALC_EN1591Widget::createUnitTestSummary() {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     PR->clear();
     getTextEdit()->clear();
-    setSettings();
+    setReportSettings();
 
     Biluna::Calc::EN1591::EN1591_UnitTestFactory en1591TestFactory;
     en1591TestFactory.exec();
@@ -1353,7 +1363,6 @@ void PCALC_EN1591Widget::createUnitTestSummary() {
     getTextEdit()->append("Tests Failed: " + QString::number(failedCount));
     getTextEdit()->append("-- End UnitTest:"
                           + QDateTime::currentDateTime().toString(Qt::ISODate));
-    QApplication::restoreOverrideCursor();
 }
 
 void PCALC_EN1591Widget::createUnitTestDetail() {
@@ -1368,10 +1377,9 @@ void PCALC_EN1591Widget::createUnitTestDetail() {
     int passedCount = 0;
     int failedCount = 0;
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     PR->clear();
     getTextEdit()->clear();
-    setSettings();
+    setReportSettings();
 
     Biluna::Calc::EN1591::EN1591_UnitTestFactory testFactory;
     testFactory.exec();
@@ -1435,8 +1443,6 @@ void PCALC_EN1591Widget::createUnitTestDetail() {
     outputStr.append(po + "-- End UnitTest:"
                      + QDateTime::currentDateTime().toString(Qt::ISODate) + pc);
     getTextEdit()->setHtml(outputStr);
-    QApplication::restoreOverrideCursor();
-
 }
 
 void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,
@@ -1496,15 +1502,17 @@ void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
         if (loadCaseNo == 1) {
             // Test loadcase
             allowStress = STD_MATERIALUTILITY->allowableTestStress(
-                        designTemp, compType);
+                        designTemp, compType, loadCaseNo, allowStressField);
         } else {
             allowStress = STD_MATERIALUTILITY->allowableDesignStress(
-                        designTemp, compType);
+                        designTemp, compType, loadCaseNo, allowStressField);
         }
 
-        // set allowable stress
-        index = mLoadCaseModel->index(row, colAllowStress);
-        mLoadCaseModel->setData(index, allowStress);
+        if (mIsUpdateMaterial) {
+            // set allowable stress
+            index = mLoadCaseModel->index(row, colAllowStress);
+            mLoadCaseModel->setData(index, allowStress);
+        }
     }
 }
 
@@ -1525,16 +1533,22 @@ void PCALC_EN1591Widget::updateElasModul(const QString& materialId,
     QModelIndex index;
     double designTemp = 0.0;
     double elasModul = 0.0;
+    int loadCaseNo = -1;
 
     for (row = 0; row < rowCount; row++) {
-        // get design temperature and corresponding allowable stress
+        index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("loadcaseno"));
+        loadCaseNo = mLoadCaseModel->data(index).toInt();
+        // get design temperature and corresponding elasticity modulus
         index = mLoadCaseModel->index(row, colTemperature);
         designTemp = mLoadCaseModel->data(index).toDouble();
-        elasModul = STD_MATERIALUTILITY->elasticityModulus(designTemp);
+        elasModul = STD_MATERIALUTILITY->elasticityModulus(
+                    designTemp, loadCaseNo, elasModulField);
 
-        // set allowable stress
-        index = mLoadCaseModel->index(row, colElasModul);
-        mLoadCaseModel->setData(index, elasModul);
+        if (mIsUpdateMaterial) {
+            // set elasticity modulus
+            index = mLoadCaseModel->index(row, colElasModul);
+            mLoadCaseModel->setData(index, elasModul);
+        }
     }
 }
 
@@ -1555,16 +1569,22 @@ void PCALC_EN1591Widget::updateThermExp(const QString& materialId,
     QModelIndex index;
     double designTemp = 0.0;
     double thermExp = 0.0;
+    int loadCaseNo = -1;
 
     for (row = 0; row < rowCount; row++) {
+        index = mLoadCaseModel->index(row, mLoadCaseModel->fieldIndex("loadcaseno"));
+        loadCaseNo = mLoadCaseModel->data(index).toInt();
         // get design temperature and corresponding allowable stress
         index = mLoadCaseModel->index(row, colTemperature);
         designTemp = mLoadCaseModel->data(index).toDouble();
-        thermExp = STD_MATERIALUTILITY->thermalExpansion(designTemp);
+        thermExp = STD_MATERIALUTILITY->thermalExpansion(
+                    designTemp, loadCaseNo, thermExpField);
 
-        // set allowable stress
-        index = mLoadCaseModel->index(row, colThermExp);
-        mLoadCaseModel->setData(index, thermExp);
+        if (mIsUpdateMaterial) {
+            // set thermal expansion
+            index = mLoadCaseModel->index(row, colThermExp);
+            mLoadCaseModel->setData(index, thermExp);
+        }
     }
 }
 
@@ -1583,9 +1603,11 @@ void PCALC_EN1591Widget::refreshAllProperties() {
     bool flange2equal = 1 == index.data().toInt();
     mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("typeflange1_id"));
+    bool flange1blind = 0 == index.data().toInt();
     bool flange1loose = 2 == index.data().toInt();
     mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("typeflange2_id"));
+    bool flange2blind = 0 == index.data().toInt();
     bool flange2loose = 2 == index.data().toInt();
     index = mShellModel->index(
                 row, mShellModel->fieldIndex("shell2equal"));
@@ -1649,12 +1671,15 @@ void PCALC_EN1591Widget::refreshAllProperties() {
 
     index = mShellModel->getCurrentIndex();
     row = index.row();
-    index = mShellModel->index(
-                row, mShellModel->fieldIndex("materialshell1_idx"));
-    materialId = index.data(RB2::RoleOrigData).toString();
-    updateAllowStress(materialId, "tf1", "fs1", STD2::CompCylinder);
 
-    if (!shell2equal) {
+    if (!flange1blind) {
+        index = mShellModel->index(
+                    row, mShellModel->fieldIndex("materialshell1_idx"));
+        materialId = index.data(RB2::RoleOrigData).toString();
+        updateAllowStress(materialId, "tf1", "fs1", STD2::CompCylinder);
+    }
+
+    if (!shell2equal && !flange2blind) {
         index = mShellModel->index(
                     row, mShellModel->fieldIndex("materialshell2_idx"));
         materialId = index.data(RB2::RoleOrigData).toString();

@@ -62,14 +62,16 @@ private:
     void initMapping();
     void initConnections();
     void setInput();
-    void setSettings();
+    void setReportSettings();
     void createSummaryReport();
     void createDetailReport();
     void createReport(const QString& reportTemplate);
     void insertReportInputData(QString& report, RB_ObjectBase* obj);
     void insertReportLoadCaseData(QString& report, RB_ObjectBase* obj);
     void insertReportCalculationData(QString& report, RB_ObjectBase* obj);
+    void createMaterialReport();
     void createValidationReport();
+    void writeValidationReport();
     void createUnitTestSummary();
     void createUnitTestDetail();
     void addObjectMemberVariable(RB_ObjectBase* obj,
@@ -108,6 +110,8 @@ private:
 
     //! Last selected assembly ID
     RB_String mCurrentId;
+
+    bool mIsUpdateMaterial;
 
 };
 

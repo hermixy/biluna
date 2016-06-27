@@ -147,7 +147,7 @@ void STD_MaterialWidget::initModelMapping() {
                 mModel->fieldIndex("class_id"),
                 new RB_CmbDelegate(this, items, mModel, false));
     mModel->setTextList(mModel->fieldIndex("class_id"), items);
-    items.clear();
+    items.clear(); // refer STD_EnMaterialHandler::getMaterialStructure() TODO: move to central place
     items << "None" << "Ferritic" << "Austenitic" << "Martensitic"
           << "Austenitic-Ferritic" << "Casting" << "Non-Ferrous" << "other";
     ui->cbStructure->setModel(new QStringListModel(items, this));

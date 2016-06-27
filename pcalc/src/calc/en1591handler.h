@@ -8,9 +8,6 @@ class RB_ObjectContainer;
 NAMESPACE_BILUNA_CALC_EN1591
 
 class Calculator;
-class RB_AllowanceService;
-class RB_MaterialService;
-class RB_QualityService;
 
 
 /**
@@ -20,28 +17,20 @@ class RB_QualityService;
 class EN1591Handler {
 
 public:
-    EN1591Handler(RB_AllowanceService* allowService = NULL,
-                  RB_MaterialService* matService = NULL,
-                  RB_QualityService* qualService = NULL);
+    EN1591Handler();
     virtual ~EN1591Handler();
 
     void exec();
 
 protected:
     void setDimMatInput();
-    void setAllowances();
-    void setQualityFactors();
     void setLoadCaseInput();
-    void setMaterialProperties();
 
     Calculator* getCalculator() const;
 
 private:
     void setFlangeType(int& flange1Type, int& flange2Type);
     Calculator* mCalc;
-    RB_AllowanceService* mAllowService;
-    RB_MaterialService* mMatService;
-    RB_QualityService* mQualService;
 };
 
 END_NAMESPACE_BILUNA_CALC_EN1591

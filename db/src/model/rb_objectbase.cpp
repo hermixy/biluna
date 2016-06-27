@@ -56,7 +56,6 @@ RB_ObjectBase::RB_ObjectBase(const RB_String& id, RB_ObjectBase* p,
 
 /**
  * Copy constructor, does not create or set members only id, parent and name
- * TODO: after extensive testing remove debug functions
  * @param obj object to be copied
  */
 RB_ObjectBase::RB_ObjectBase(RB_ObjectBase* obj) : RB_Object(obj) {
@@ -97,7 +96,6 @@ RB_ObjectBase::RB_ObjectBase(RB_ObjectBase* obj) : RB_Object(obj) {
 
 /**
  * Destructor
- * TODO: after extensive testing remove debug functions
  */
 RB_ObjectBase::~RB_ObjectBase() {
     removeMembers();

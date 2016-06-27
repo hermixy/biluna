@@ -12,14 +12,12 @@
 
 #include <string>
 #include <vector>
-#include "rb_namespace.h"
-#include "rb_tablemath.h"
 #include "rb_utility.h"
 #include "std.h"
-#include "std_enmaterialhandler.h"
+#include "std_materialhandler.h"
 
 // For unit tests only
-class STD_MaterialUtilityTest;
+//class STD_MaterialUtilityTest;
 
 #define STD_MATERIALUTILITY STD_MaterialUtility::getInstance()
 
@@ -27,7 +25,7 @@ class STD_MaterialUtilityTest;
  * @brief Standard material utility providing properties for reports,
  * calculations, etc.
  */
-class STD_MaterialUtility : public Biluna::Calc::RB_TableMath, RB_Utility {
+class STD_MaterialUtility : public RB_Utility {
 
 public:
     virtual ~STD_MaterialUtility();
@@ -55,30 +53,30 @@ public:
     STD2::MatStruct getMaterialStructure();
     double getElongationPercent();
 
-    double get_Rp02(double designTemp);
-    double get_Rp10(double designTemp);
-    double get_RmMin(double designTemp);
+//    double get_Rp02(double designTemp);
+//    double get_Rp10(double designTemp);
+//    double get_RmMin(double designTemp);
 
-    // For unit tests only
-    friend class STD_MaterialUtilityTest;
+//    // For unit tests only
+//    friend class STD_MaterialUtilityTest;
 
 private:
     STD_MaterialUtility();
 
-    bool loadMaterial(const QString& materialId);
-    bool loadElasModulTable(const QString& elasModulTableId);
-    bool loadThemExpTable(const QString& thermExpTableId);
+//    bool loadMaterial(const QString& materialId);
+//    bool loadElasModulTable(const QString& elasModulTableId);
+//    bool loadThemExpTable(const QString& thermExpTableId);
 
     static STD_MaterialUtility* mActiveUtility;
-    RB_ObjectContainer* mMaterialList;
-    RB_ObjectBase* mCurrentMaterial;
-    RB_ObjectContainer* mElasModulTableList;
-    RB_ObjectBase* mCurrentElasModulTable;
-    RB_ObjectContainer* mThermExpTableList;
-    RB_ObjectBase* mCurrentThermExpTable;
-    // TODO: External Pressure
+//    RB_ObjectContainer* mMaterialList;
+//    RB_ObjectBase* mCurrentMaterial;
+//    RB_ObjectContainer* mElasModulTableList;
+//    RB_ObjectBase* mCurrentElasModulTable;
+//    RB_ObjectContainer* mThermExpTableList;
+//    RB_ObjectBase* mCurrentThermExpTable;
+//    // TODO: External Pressure
 
-    STD_EnMaterialHandler mEnMatHandler;
+    STD_MaterialHandler* mMatHandler;
 
 };
 
