@@ -93,8 +93,8 @@ double STD_EnMaterialHandler::allowableDesignStress(
             && matStruct != STD2::MatStructCasting
             && elongPercent < 30.0
             && !alternativeRoute) {
-        Rp02 = get_Rp02(designTemp);
-        RmMin = get_RmMin(20); // 20 Celsius
+        Rp02 = get_Rp02(designTemp, loadCaseNo);
+        RmMin = get_RmMin(20, loadCaseNo); // 20 Celsius
 
         if (compType == STD2::CompBolt) {
             // EN 13445 clause 11.4.3
@@ -118,8 +118,8 @@ double STD_EnMaterialHandler::allowableDesignStress(
                && matStruct != STD2::MatStructCasting
                && elongPercent < 30.0
                && alternativeRoute) {
-        Rp02 = get_Rp02(designTemp);
-        RmMin = get_RmMin(20); // 20 Celsius
+        Rp02 = get_Rp02(designTemp, loadCaseNo);
+        RmMin = get_RmMin(20, loadCaseNo); // 20 Celsius
 
         if (compType == STD2::CompBolt) {
             // EN 13445 clause 11.4.3
@@ -144,7 +144,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
                && elongPercent < 35.0) {
         if (compType == STD2::CompBolt) {
             // EN 13445 clause 11.4.3
-            RmMin = get_RmMin(designTemp);
+            RmMin = get_RmMin(designTemp, loadCaseNo);
             allowStress = RmMin / 4.0;
 
             PR->addDetail("EN13445-3 11.4.3", variableName,
@@ -152,7 +152,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
                           allowStress, "MPa",
                           QN(RmMin) + "/4.0)", loadCaseNo);
         } else {
-            Rp10 = get_Rp10(designTemp);
+            Rp10 = get_Rp10(designTemp, loadCaseNo);
             allowStress = Rp10 / 1.5;
 
             PR->addDetail("EN13445-3 6", variableName,
@@ -162,7 +162,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
         }
     } else if (matStruct == STD2::MatStructAustenitic
                && 35.0 <= elongPercent) {
-        RmMin = get_RmMin(designTemp);
+        RmMin = get_RmMin(designTemp, loadCaseNo);
 
         if (compType == STD2::CompBolt) {
             // EN 13445 clause 11.4.3
@@ -182,7 +182,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
                           allowStress, "MPa",
                           QN(Rp02) + "/1.5)", loadCaseNo);
         } else {
-            Rp10 = get_Rp10(designTemp);
+            Rp10 = get_Rp10(designTemp, loadCaseNo);
             allowStress = std::max(Rp10 / 1.5,
                                    std::min(Rp10 / 1.2, RmMin / 3.0));
 
@@ -193,8 +193,8 @@ double STD_EnMaterialHandler::allowableDesignStress(
                           + QN(RmMin) + "/3.0))", loadCaseNo);
         }
     } else if (matStruct == STD2::MatStructCasting) {
-        Rp02 = get_Rp02(designTemp);
-        RmMin = get_RmMin(20); // 20 Celsius
+        Rp02 = get_Rp02(designTemp, loadCaseNo);
+        RmMin = get_RmMin(20, loadCaseNo); // 20 Celsius
         allowStress = std::min(Rp02 / 1.9, RmMin / 3.0);
 
         PR->addDetail("EN13445-3 6", variableName,
@@ -223,8 +223,8 @@ double STD_EnMaterialHandler::allowableTestStress(
             && matStruct != STD2::MatStructCasting
             && elongPercent < 30.0
             && !alternativeRoute) {
-        Rp02 = get_Rp02(testTemp);
-        RmMin = get_RmMin(testTemp); // 20 Celsius
+        Rp02 = get_Rp02(testTemp, loadCaseNo);
+        RmMin = get_RmMin(testTemp, loadCaseNo); // 20 Celsius
 
         if (compType == STD2::CompBolt) {
             // EN 13445 clause 11.4.3
@@ -247,8 +247,8 @@ double STD_EnMaterialHandler::allowableTestStress(
                && matStruct != STD2::MatStructCasting
                && elongPercent < 30.0
                && alternativeRoute) {
-        Rp02 = get_Rp02(testTemp);
-        RmMin = get_RmMin(testTemp); // 20 Celsius
+        Rp02 = get_Rp02(testTemp, loadCaseNo);
+        RmMin = get_RmMin(testTemp, loadCaseNo); // 20 Celsius
 
         if (compType == STD2::CompBolt) {
             // EN 13445 clause 11.4.3
@@ -272,7 +272,7 @@ double STD_EnMaterialHandler::allowableTestStress(
                && elongPercent < 35.0) {
         if (compType == STD2::CompBolt) {
             // EN 13445 clause 11.4.3
-            RmMin = get_RmMin(testTemp);
+            RmMin = get_RmMin(testTemp, loadCaseNo);
             allowStress = RmMin / 2.67;
 
             PR->addDetail("EN13445-3 11.4.3", variableName,
@@ -280,7 +280,7 @@ double STD_EnMaterialHandler::allowableTestStress(
                           allowStress, "MPa",
                           QN(RmMin) + "/2.67)", loadCaseNo);
         } else {
-            Rp10 = get_Rp10(testTemp);
+            Rp10 = get_Rp10(testTemp, loadCaseNo);
             allowStress = Rp10 / 1.05;
 
             PR->addDetail("EN13445-3 6", variableName,
@@ -290,7 +290,7 @@ double STD_EnMaterialHandler::allowableTestStress(
         }
     } else if (matStruct == STD2::MatStructAustenitic
                && 35.0 <= elongPercent) {
-        RmMin = get_RmMin(testTemp);
+        RmMin = get_RmMin(testTemp, loadCaseNo);
 
         if (compType == STD2::CompBolt) {
             // EN 13445 clause 11.4.3
@@ -301,7 +301,7 @@ double STD_EnMaterialHandler::allowableTestStress(
                           allowStress, "MPa",
                           QN(RmMin) + "/2.67)", loadCaseNo);
         } else {
-            Rp10 = get_Rp10(testTemp);
+            Rp10 = get_Rp10(testTemp, loadCaseNo);
             allowStress = std::max(Rp10 / 1.05, RmMin / 2.0);
 
             PR->addDetail("EN13445-3 6", variableName,
@@ -311,7 +311,7 @@ double STD_EnMaterialHandler::allowableTestStress(
                           + QN(RmMin) + "/2.0)", loadCaseNo);
         }
     } else if (matStruct = STD2::MatStructCasting) {
-        Rp02 = get_Rp02(testTemp);
+        Rp02 = get_Rp02(testTemp, loadCaseNo);
         allowStress = Rp02 / 1.33;
 
         PR->addDetail("EN13445-3 6", variableName,
