@@ -1601,11 +1601,11 @@ void PCALC_EN1591Widget::refreshAllProperties() {
     index = mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("flange2equal"));
     bool flange2equal = 1 == index.data().toInt();
-    mFlangeModel->index(
+    index = mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("typeflange1_id"));
     bool flange1blind = 0 == index.data().toInt();
     bool flange1loose = 2 == index.data().toInt();
-    mFlangeModel->index(
+    index = mFlangeModel->index(
                 row, mFlangeModel->fieldIndex("typeflange2_id"));
     bool flange2blind = 0 == index.data().toInt();
     bool flange2loose = 2 == index.data().toInt();
