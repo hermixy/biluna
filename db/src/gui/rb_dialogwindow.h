@@ -53,6 +53,8 @@ public:
     virtual void commandEvent(DB_CommandEvent* /* e */) { }
     virtual RB_Action* getCurrentAction() { return NULL; }
 
+    virtual void initHelpClose();
+
 signals:
 
 

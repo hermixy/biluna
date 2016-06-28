@@ -77,6 +77,17 @@ bool STD_EnMaterialHandler::isValid() {
     return mCurrentMaterial != nullptr;
 }
 
+void STD_EnMaterialHandler::refresh() {
+    mMaterialList->erase();
+    mCurrentMaterial = nullptr;
+    mCurrentMatName = "";
+    mElasModulTableList->erase();
+    mCurrentElasModulTable = nullptr;
+    mThermExpTableList->erase();
+    mCurrentThermExpTable = nullptr;
+    // TODO: external pressure
+}
+
 double STD_EnMaterialHandler::allowableDesignStress(
                     double designTemp, STD2::CompType compType,
                     int loadCaseNo, const QString& variableName) {
@@ -100,7 +111,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
             // EN 13445 clause 11.4.3
             allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
 
-            PR->addDetail("EN13445-3 11.4.3", variableName,
+            PR->addDetail("EN13445-3 11 4.3", variableName,
                           "min(Rp02 / 3.0, RmMin / 4.0)",
                           allowStress, "MPa",
                           "min(" + QN(Rp02) + "/3.0; "
@@ -125,7 +136,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
             // EN 13445 clause 11.4.3
             allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
 
-            PR->addDetail("EN13445-3 11.4.3", variableName,
+            PR->addDetail("EN13445-3 11 4.3", variableName,
                           "min(Rp02 / 3.0, RmMin / 4.0)",
                           allowStress, "MPa",
                           "min(" + QN(Rp02) + "/3.0; "
@@ -147,7 +158,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
             RmMin = get_RmMin(designTemp, loadCaseNo);
             allowStress = RmMin / 4.0;
 
-            PR->addDetail("EN13445-3 11.4.3", variableName,
+            PR->addDetail("EN13445-3 11 4.3", variableName,
                           "RmMin / 4.0",
                           allowStress, "MPa",
                           QN(RmMin) + "/4.0)", loadCaseNo);
@@ -168,7 +179,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
             // EN 13445 clause 11.4.3
             allowStress = RmMin / 4.0;
 
-            PR->addDetail("EN13445-3 11.4.3", variableName,
+            PR->addDetail("EN13445-3 11 4.3", variableName,
                           "RmMin / 4.0",
                           allowStress, "MPa",
                           QN(RmMin) + "/4.0)", loadCaseNo);
@@ -230,7 +241,7 @@ double STD_EnMaterialHandler::allowableTestStress(
             // EN 13445 clause 11.4.3
             allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
 
-            PR->addDetail("EN13445-3 11.4.3", variableName,
+            PR->addDetail("EN13445-3 11 4.3", variableName,
                           "min(Rp02 / 2.0, RmMin / 2.67)",
                           allowStress, "MPa",
                           "min(" + QN(Rp02) + "/2.0; "
@@ -241,7 +252,7 @@ double STD_EnMaterialHandler::allowableTestStress(
             PR->addDetail("EN13445-3 6", variableName,
                           "Rp02 / 1.05",
                           allowStress, "MPa",
-                          QN(Rp02) + "/1.5", loadCaseNo);
+                          QN(Rp02) + "/1.05", loadCaseNo);
         }
     } else if (matStruct != STD2::MatStructAustenitic
                && matStruct != STD2::MatStructCasting
@@ -254,7 +265,7 @@ double STD_EnMaterialHandler::allowableTestStress(
             // EN 13445 clause 11.4.3
             allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
 
-            PR->addDetail("EN13445-3 11.4.3", variableName,
+            PR->addDetail("EN13445-3 11 4.3", variableName,
                           "min(Rp02 / 2.0, RmMin / 2.67)",
                           allowStress, "MPa",
                           "min(" + QN(Rp02) + "/2.0; "
@@ -275,7 +286,7 @@ double STD_EnMaterialHandler::allowableTestStress(
             RmMin = get_RmMin(testTemp, loadCaseNo);
             allowStress = RmMin / 2.67;
 
-            PR->addDetail("EN13445-3 11.4.3", variableName,
+            PR->addDetail("EN13445-3 11 4.3", variableName,
                           "RmMin / 2.67",
                           allowStress, "MPa",
                           QN(RmMin) + "/2.67)", loadCaseNo);
@@ -296,7 +307,7 @@ double STD_EnMaterialHandler::allowableTestStress(
             // EN 13445 clause 11.4.3
             allowStress = RmMin / 2.67;
 
-            PR->addDetail("EN13445-3 11.4.3", variableName,
+            PR->addDetail("EN13445-3 11 4.3", variableName,
                           "RmMin / 2.67",
                           allowStress, "MPa",
                           QN(RmMin) + "/2.67)", loadCaseNo);
@@ -336,7 +347,7 @@ double STD_EnMaterialHandler::elasticityModulus(double designTemp,
                 mCurrentElasModulTable->getContainer("STD_ElasModulList"),
                 "temperature", "elasmodul", designTemp);
 
-    PR->addDetail("Material 0", variableName, "EN value at " + QN(designTemp),
+    PR->addDetail("Material 5", variableName, "EN value at " + QN(designTemp),
                   elasModul, "N/mm2", mCurrentMatName + " table value", loadCaseNo);
     return elasModul;
 }
@@ -354,7 +365,7 @@ double STD_EnMaterialHandler::thermalExpansion(double designTemp,
                 mCurrentThermExpTable->getContainer("STD_ThermExpList"),
                 "temperature", "thermexp", designTemp);
 
-    PR->addDetail("Material 0", variableName, "EN value at " + QN(designTemp),
+    PR->addDetail("Material 4", variableName, "EN value at " + QN(designTemp),
                   thermExp, "1/K", mCurrentMatName + " table value", loadCaseNo);
     return thermExp;
 }
@@ -404,7 +415,7 @@ double STD_EnMaterialHandler::get_Rp02(double designTemp, int loadCaseNo) {
     double Rp02 = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_Rp02List"),
                 "temperature", "rp02", designTemp);
-    PR->addDetail("Material 0", "Rp02", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 1", "Rp02", "EN value at " + QN(designTemp),
                   Rp02, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return Rp02;
 }
@@ -419,7 +430,7 @@ double STD_EnMaterialHandler::get_Rp10(double designTemp, int loadCaseNo) {
     double Rp10 = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_Rp10List"),
                 "temperature", "rp10", designTemp);
-    PR->addDetail("Material 0", "Rp10", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 1", "Rp10", "EN value at " + QN(designTemp),
                   Rp10, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return Rp10;
 }
@@ -434,7 +445,7 @@ double STD_EnMaterialHandler::get_RmMin(double designTemp, int loadCaseNo) {
     double RmMin = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_RmMinList"),
                 "temperature", "rmmin", designTemp);
-    PR->addDetail("Material 0", "RmMin", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 1", "RmMin", "EN value at " + QN(designTemp),
                   RmMin, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return RmMin;
 }

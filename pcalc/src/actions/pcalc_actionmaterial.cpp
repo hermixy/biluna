@@ -59,6 +59,7 @@ void PCALC_ActionMaterial::trigger() {
     // Create widget and corresponding dockwidget if applicable
     RB_DialogWindow* dlg = PCALC_DIALOGFACTORY->getDialogWindow(
             PCALC_DialogFactory::WidgetMaterial);
+    dlg->initHelpClose();
     dlg->exec();
     dlg->deleteLater();
 }

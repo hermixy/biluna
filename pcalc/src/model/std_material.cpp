@@ -59,16 +59,16 @@ STD_Material::~STD_Material() {
 void STD_Material::createMembers() {
     addMember("mname", "-", "", RB2::MemberChar125);
     addMember("number", "-", "", RB2::MemberChar125);
-    addMember("type_id", "-", "", RB2::MemberInteger);
-    addMember("class_id", "-", "", RB2::MemberInteger);
+    addMember("type_id", "-", 0, RB2::MemberInteger);
+    addMember("class_id", "-", 0, RB2::MemberInteger);
     addMember("structure_id", "-", 0, RB2::MemberInteger);
     addMember("composition", "-", "", RB2::MemberChar125);
     addMember("document", "-", "", RB2::MemberChar125);
     addMember("issue", "-", "", RB2::MemberChar40);
-    addMember("elasmodultable_id", "-", "", RB2::MemberChar40);
-    addMember("thermexptable_id", "-", "", RB2::MemberChar40);
-    addMember("creeptable_id", "-", "", RB2::MemberChar40);
-    addMember("extpresstable_id", "-", "", RB2::MemberChar40);
+    addMember("elasmodultable_id", "-", "0", RB2::MemberChar40);
+    addMember("thermexptable_id", "-", "0", RB2::MemberChar40);
+    addMember("creeptable_id", "-", "0", RB2::MemberChar40);
+    addMember("extpresstable_id", "-", "0", RB2::MemberChar40);
     addMember("yield20c", "MPa", 0.0, RB2::MemberDouble);
     addMember("yield1p20c", "MPa", 0.0, RB2::MemberDouble);
     addMember("tensile20c", "MPa", 0.0, RB2::MemberDouble);

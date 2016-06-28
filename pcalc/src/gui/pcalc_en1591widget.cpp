@@ -463,6 +463,11 @@ void PCALC_EN1591Widget::initMapping() {
     mShellMapper->addMapping(ileMaterialShell_2,
                              mShellModel->fieldIndex("materialshell2_idx"));
 
+    // Update properties with or without EN13445-3 11.4.3 bolt requirement
+    items.clear();
+    items << "Yes (default)" << "No";
+    cbDisregardBoltRequirement->setModel(new QStringListModel(items, this));
+
     // loadcase
     mLoadCaseMapper = mLoadCaseModel->getMapper();
     mLoadCaseMapper->addMapping(sbLoadCaseNo,
@@ -682,9 +687,15 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
         }
     } else if (topLeft.model() == mBoltNutWasherModel) {
         if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialbolt_idx")){
+            STD2::CompType compType = STD2::CompBolt;
+
+            if (cbDisregardBoltRequirement->currentIndex() == 1) {
+                compType = STD2::CompDefault;
+            }
+
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tb", "fb", STD2::CompBolt);
-            updateAllowStress(materialId, "tb", "fn", STD2::CompBolt); // no separate material yet
+            updateAllowStress(materialId, "tb", "fb", compType);
+            updateAllowStress(materialId, "tb", "fn", compType); // no separate material yet
             updateElasModul(materialId, "tb", "eb");
             updateThermExp(materialId, "tb", "alphab");
         } else if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialwasher_idx")) {
@@ -833,8 +844,8 @@ void PCALC_EN1591Widget::slotHandleParentRowChanged() {
 }
 
 void PCALC_EN1591Widget::slotDisableFormulaWidgets(int index) {
-    sbFormulaFrom->setEnabled(index > 2 && index < 5);
-    sbFormulaTo->setEnabled(index > 2 && index < 5);
+    sbFormulaFrom->setEnabled(index > 1 && index < 5);
+    sbFormulaTo->setEnabled(index > 1 && index < 5);
 }
 
 void PCALC_EN1591Widget::setInput() {
@@ -1647,13 +1658,19 @@ void PCALC_EN1591Widget::refreshAllProperties() {
         }
     }
 
+    STD2::CompType compType = STD2::CompBolt;
+
+    if (cbDisregardBoltRequirement->currentIndex() == 1) {
+        compType = STD2::CompDefault;
+    }
+
     index = mBoltNutWasherModel->getCurrentIndex();
     row = index.row();
     index = mBoltNutWasherModel->index(
                 row, mBoltNutWasherModel->fieldIndex("materialbolt_idx"));
     materialId = index.data(RB2::RoleOrigData).toString();
-    updateAllowStress(materialId, "tb", "fb", STD2::CompBolt);
-    updateAllowStress(materialId, "tb", "fn", STD2::CompBolt); // no separate material yet
+    updateAllowStress(materialId, "tb", "fb", compType);
+    updateAllowStress(materialId, "tb", "fn", compType); // no separate material yet
     updateElasModul(materialId, "tb", "eb");
     updateThermExp(materialId, "tb", "alphab");
     index = mBoltNutWasherModel->index(

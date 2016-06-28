@@ -190,6 +190,11 @@ RB_ObjectBase* RB_DialogWindow::getCurrentChild2Object() {
     return mCentralWidget->getCurrentChild2Object();
 }
 
+void RB_DialogWindow::initHelpClose() {
+    pbOk->hide();
+    pbCancel->setText(tr("Close"));
+}
+
 /**
  * Show window, overriding non-virtual base function to set correct
  * window title based on widget name first.
