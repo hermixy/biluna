@@ -137,7 +137,32 @@ RB_ObjectContainer* PCALC_Report::getInOutContainer() {
     return mInOutContainer;
 }
 
-RB_ObjectBase* PCALC_Report::getLastOutput() {
+/**
+ * @brief PCALC_Report::getLastOutput
+ * Some methods produce more than one output. The output enables to step
+ * back in the list of outputs and test the result.
+ * @param position number of position back in formula output
+ * @return last output object
+ */
+RB_ObjectBase* PCALC_Report::getLastOutput(int position) {
+    if (position > 0) {
+        RB_DEBUG->error("PCALC_Report::getLastOutput() 1 position ERROR");
+        return nullptr;
+    }
+
+    if (postion < 0) {
+        int count = mOutContainer->objectCount();
+        int row = count + position - 1;
+
+        if (row < count && row >= 0) {
+            RB_ObjectBase* output = mOutContainer->getObject(position);
+            return output;
+        } else {
+            RB_DEBUG->error("PCALC_Report::getLastOutput() 2 position ERROR");
+            return nullptr;
+        }
+    }
+
     if (!mLastOutput) {
         // Add new output object for unit test of functions without output
         bool withoutMembers = true;

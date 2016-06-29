@@ -40,7 +40,7 @@ public:
      * @brief Used for unittest
      * @return last calculation output object
      */
-    RB_ObjectBase* getLastOutput();
+    RB_ObjectBase* getLastOutput(int position = 0);
     virtual void clear();
 
 private:
