@@ -64,10 +64,11 @@ void FlangeTest::setupTarget() {
         target->mGasket = new Gasket();
     }
 
+    target->bF = 3.1;
+    target->d3 = 410.45;
     target->eQ = 0.8;
     target->eF = 15.6;
     target->nB = 16;
-    target->d3 = 410.45;
 
     target->mBolt->mBoltHole->d5 = 43.7;
     target->mBolt->mBoltHole->isBlindHole = false; // threaded
@@ -330,6 +331,8 @@ void FlangeTest::Calc_PsiOptTest() {
 void FlangeTest::Calc_Psi0Test() {
     setupTarget();
     int loadCaseNo = 0;
+    LoadCase* loadCase = target->mLoadCaseList->at(loadCaseNo);
+    loadCase->fF1 = 3.2;
     target->Calc_Psi0(loadCaseNo);
     areEqual(PR->getLastOutput(), "FlangeTest::Calc_Psi0Test()", 0,
              target->mLoadCaseList->at(loadCaseNo)->jS);
@@ -337,6 +340,9 @@ void FlangeTest::Calc_Psi0Test() {
              target->mLoadCaseList->at(loadCaseNo)->kM1);
     areEqual(PR->getLastOutput(), "FlangeTest::Calc_Psi0Test()", 0,
              target->mLoadCaseList->at(loadCaseNo)->kS);
+    areEqual(PR->getLastOutput(2), "FlangeTest::Calc_Psi0Test()",
+             0.72671500913478856268,
+             target->mLoadCaseList->at(loadCaseNo)->Psi_jkk1);
 }
 
 void FlangeTest::Calc_PsiMaxTest() {

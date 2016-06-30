@@ -57,6 +57,12 @@ public:
     friend class STD_EnMaterialHandlerTest;
 
 protected:
+    virtual double allowableDesignStressBolt(double designTemp,
+                                 int loadCaseNo = -1,
+                                 const QString& variableName = "");
+    virtual double allowableTestStressBolt(double testTemp,
+                               int loadCaseNo = -1,
+                               const QString& variableName = "");
 
     double get_Rp02(double designTemp, int loadCaseNo = -1);
     double get_Rp10(double designTemp, int loadCaseNo = -1);

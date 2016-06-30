@@ -573,9 +573,8 @@ bool PCALC_EN1591Widget::fileSave(bool withSelect) {
  * Menu file save as, not applicable for this widget
  */
 bool PCALC_EN1591Widget::fileSaveAs() {
-//    PCALC_DIALOGFACTORY->requestWarningDialog(tr("Menu File Save As is\n"
-//                                               "not applicable for this window"));
-    return false;
+    teCalculationReport->sprint(pr);
+    return true;
 }
 
 void PCALC_EN1591Widget::fileRevert() {

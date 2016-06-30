@@ -13,6 +13,7 @@
 
 #include "pcalc_modelfactory.h"
 #include "rb_cmbdelegate.h"
+#include "std_materialutility.h"
 
 STD_MaterialWidget::STD_MaterialWidget(QWidget *parent)
         : RB_Widget(parent), ui(new Ui::STD_MaterialWidget) {
@@ -100,6 +101,7 @@ bool STD_MaterialWidget::fileSave(bool withSelect) {
                 && mRmMinModel->submitAllAndSelect()
                 && mModel->submitAllAndSelect()) {
             setWindowModified(false);
+            STD_MATERIALUTILITY->refresh();
             return true;
         }
     } else {
@@ -108,6 +110,7 @@ bool STD_MaterialWidget::fileSave(bool withSelect) {
                 && mRmMinModel->submitAll()
                 && mModel->submitAll()) {
             setWindowModified(false);
+            STD_MATERIALUTILITY->refresh();
             return true;
         }
     }

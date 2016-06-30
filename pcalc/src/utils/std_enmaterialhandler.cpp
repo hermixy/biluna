@@ -91,6 +91,11 @@ void STD_EnMaterialHandler::refresh() {
 double STD_EnMaterialHandler::allowableDesignStress(
                     double designTemp, STD2::CompType compType,
                     int loadCaseNo, const QString& variableName) {
+    if (compType == STD2::CompBolt) {
+        // EN13445 11.4.3
+        return allowableDesignStressBolt(designTemp, loadCaseNo, variableName);
+    }
+
     STD2::MatStruct matStruct = getMaterialStructure();
     double elongPercent = getElongationPercent();
     bool alternativeRoute = false; // clause 6.3
@@ -107,16 +112,16 @@ double STD_EnMaterialHandler::allowableDesignStress(
         Rp02 = get_Rp02(designTemp, loadCaseNo);
         RmMin = get_RmMin(20, loadCaseNo); // 20 Celsius
 
-        if (compType == STD2::CompBolt) {
-            // EN 13445 clause 11.4.3
-            allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
+//        if (compType == STD2::CompBolt) {
+//            // EN 13445 clause 11.4.3
+//            allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
 
-            PR->addDetail("EN13445-3 11 4.3", variableName,
-                          "min(Rp02 / 3.0, RmMin / 4.0)",
-                          allowStress, "MPa",
-                          "min(" + QN(Rp02) + "/3.0; "
-                          + QN(RmMin) + "/4.0)", loadCaseNo);
-        } else {
+//            PR->addDetail("EN13445-3 11 4.3", variableName,
+//                          "min(Rp02 / 3.0, RmMin / 4.0)",
+//                          allowStress, "MPa",
+//                          "min(" + QN(Rp02) + "/3.0; "
+//                          + QN(RmMin) + "/4.0)", loadCaseNo);
+//        } else {
             allowStress = std::min(Rp02 / 1.5, RmMin / 2.4);
 
             PR->addDetail("EN13445-3 6", variableName,
@@ -124,7 +129,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
                           allowStress, "MPa",
                           "min(" + QN(Rp02) + "/1.5; "
                           + QN(RmMin) + "/2.4)", loadCaseNo);
-        }
+//        }
     } else if (matStruct != STD2::MatStructAustenitic
                && matStruct != STD2::MatStructCasting
                && elongPercent < 30.0
@@ -132,16 +137,16 @@ double STD_EnMaterialHandler::allowableDesignStress(
         Rp02 = get_Rp02(designTemp, loadCaseNo);
         RmMin = get_RmMin(20, loadCaseNo); // 20 Celsius
 
-        if (compType == STD2::CompBolt) {
-            // EN 13445 clause 11.4.3
-            allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
+//        if (compType == STD2::CompBolt) {
+//            // EN 13445 clause 11.4.3
+//            allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
 
-            PR->addDetail("EN13445-3 11 4.3", variableName,
-                          "min(Rp02 / 3.0, RmMin / 4.0)",
-                          allowStress, "MPa",
-                          "min(" + QN(Rp02) + "/3.0; "
-                          + QN(RmMin) + "/4.0)", loadCaseNo);
-        } else {
+//            PR->addDetail("EN13445-3 11 4.3", variableName,
+//                          "min(Rp02 / 3.0, RmMin / 4.0)",
+//                          allowStress, "MPa",
+//                          "min(" + QN(Rp02) + "/3.0; "
+//                          + QN(RmMin) + "/4.0)", loadCaseNo);
+//        } else {
             allowStress = std::min(Rp02 / 1.5, RmMin / 1.875);
 
             PR->addDetail("EN13445-3 6", variableName,
@@ -149,20 +154,20 @@ double STD_EnMaterialHandler::allowableDesignStress(
                           allowStress, "MPa",
                           "min(" + QN(Rp02) + "/1.5; "
                           + QN(RmMin) + "/1.875)", loadCaseNo);
-        }
+//        }
     } else if (matStruct == STD2::MatStructAustenitic
                && 30.0 <= elongPercent
                && elongPercent < 35.0) {
-        if (compType == STD2::CompBolt) {
-            // EN 13445 clause 11.4.3
-            RmMin = get_RmMin(designTemp, loadCaseNo);
-            allowStress = RmMin / 4.0;
+//        if (compType == STD2::CompBolt) {
+//            // EN 13445 clause 11.4.3
+//            RmMin = get_RmMin(designTemp, loadCaseNo);
+//            allowStress = RmMin / 4.0;
 
-            PR->addDetail("EN13445-3 11 4.3", variableName,
-                          "RmMin / 4.0",
-                          allowStress, "MPa",
-                          QN(RmMin) + "/4.0)", loadCaseNo);
-        } else {
+//            PR->addDetail("EN13445-3 11 4.3", variableName,
+//                          "RmMin / 4.0",
+//                          allowStress, "MPa",
+//                          QN(RmMin) + "/4.0)", loadCaseNo);
+//        } else {
             Rp10 = get_Rp10(designTemp, loadCaseNo);
             allowStress = Rp10 / 1.5;
 
@@ -170,20 +175,21 @@ double STD_EnMaterialHandler::allowableDesignStress(
                           "Rp10 / 1.5",
                           allowStress, "MPa",
                           QN(Rp02) + "/1.5)", loadCaseNo);
-        }
+//        }
     } else if (matStruct == STD2::MatStructAustenitic
                && 35.0 <= elongPercent) {
         RmMin = get_RmMin(designTemp, loadCaseNo);
 
-        if (compType == STD2::CompBolt) {
-            // EN 13445 clause 11.4.3
-            allowStress = RmMin / 4.0;
+//        if (compType == STD2::CompBolt) {
+//            // EN 13445 clause 11.4.3
+//            allowStress = RmMin / 4.0;
 
-            PR->addDetail("EN13445-3 11 4.3", variableName,
-                          "RmMin / 4.0",
-                          allowStress, "MPa",
-                          QN(RmMin) + "/4.0)", loadCaseNo);
-        } else if (compType == STD2::CompFlange) {
+//            PR->addDetail("EN13445-3 11 4.3", variableName,
+//                          "RmMin / 4.0",
+//                          allowStress, "MPa",
+//                          QN(RmMin) + "/4.0)", loadCaseNo);
+//        } else
+        if (compType == STD2::CompFlange) {
             // // EN 13445 clause 11.5.4.2
             Rp10 = get_Rp10(designTemp);
             allowStress = Rp10 / 1.5;
@@ -221,6 +227,11 @@ double STD_EnMaterialHandler::allowableDesignStress(
 double STD_EnMaterialHandler::allowableTestStress(
                     double testTemp, STD2::CompType compType,
                     int loadCaseNo, const QString& variableName) {
+    if (compType == STD2::CompBolt) {
+        // EN13445 11.4.3
+        return allowableTestStressBolt(testTemp, loadCaseNo, variableName);
+    }
+
     STD2::MatStruct matStruct = getMaterialStructure();
     double elongPercent = getElongationPercent();
     bool alternativeRoute = false; // clause 6.3
@@ -237,23 +248,23 @@ double STD_EnMaterialHandler::allowableTestStress(
         Rp02 = get_Rp02(testTemp, loadCaseNo);
         RmMin = get_RmMin(testTemp, loadCaseNo); // 20 Celsius
 
-        if (compType == STD2::CompBolt) {
-            // EN 13445 clause 11.4.3
-            allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
+//        if (compType == STD2::CompBolt) {
+//            // EN 13445 clause 11.4.3
+//            allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
 
-            PR->addDetail("EN13445-3 11 4.3", variableName,
-                          "min(Rp02 / 2.0, RmMin / 2.67)",
-                          allowStress, "MPa",
-                          "min(" + QN(Rp02) + "/2.0; "
-                          + QN(RmMin) + "/2.67)", loadCaseNo);
-        } else {
+//            PR->addDetail("EN13445-3 11 4.3", variableName,
+//                          "min(Rp02 / 2.0, RmMin / 2.67)",
+//                          allowStress, "MPa",
+//                          "min(" + QN(Rp02) + "/2.0; "
+//                          + QN(RmMin) + "/2.67)", loadCaseNo);
+//        } else {
             allowStress = Rp02 / 1.05;
 
             PR->addDetail("EN13445-3 6", variableName,
                           "Rp02 / 1.05",
                           allowStress, "MPa",
                           QN(Rp02) + "/1.05", loadCaseNo);
-        }
+//        }
     } else if (matStruct != STD2::MatStructAustenitic
                && matStruct != STD2::MatStructCasting
                && elongPercent < 30.0
@@ -261,36 +272,36 @@ double STD_EnMaterialHandler::allowableTestStress(
         Rp02 = get_Rp02(testTemp, loadCaseNo);
         RmMin = get_RmMin(testTemp, loadCaseNo); // 20 Celsius
 
-        if (compType == STD2::CompBolt) {
-            // EN 13445 clause 11.4.3
-            allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
+//        if (compType == STD2::CompBolt) {
+//            // EN 13445 clause 11.4.3
+//            allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
 
-            PR->addDetail("EN13445-3 11 4.3", variableName,
-                          "min(Rp02 / 2.0, RmMin / 2.67)",
-                          allowStress, "MPa",
-                          "min(" + QN(Rp02) + "/2.0; "
-                          + QN(RmMin) + "/2.67)", loadCaseNo);
-        } else {
+//            PR->addDetail("EN13445-3 11 4.3", variableName,
+//                          "min(Rp02 / 2.0, RmMin / 2.67)",
+//                          allowStress, "MPa",
+//                          "min(" + QN(Rp02) + "/2.0; "
+//                          + QN(RmMin) + "/2.67)", loadCaseNo);
+//        } else {
             allowStress = Rp02 / 1.05;
 
             PR->addDetail("EN13445-3 6", variableName,
                           "Rp02 / 1.05",
                           allowStress, "MPa",
                           QN(Rp02) + "/1.05", loadCaseNo);
-        }
+//        }
     } else if (matStruct == STD2::MatStructAustenitic
                && 30.0 <= elongPercent
                && elongPercent < 35.0) {
-        if (compType == STD2::CompBolt) {
-            // EN 13445 clause 11.4.3
-            RmMin = get_RmMin(testTemp, loadCaseNo);
-            allowStress = RmMin / 2.67;
+//        if (compType == STD2::CompBolt) {
+//            // EN 13445 clause 11.4.3
+//            RmMin = get_RmMin(testTemp, loadCaseNo);
+//            allowStress = RmMin / 2.67;
 
-            PR->addDetail("EN13445-3 11 4.3", variableName,
-                          "RmMin / 2.67",
-                          allowStress, "MPa",
-                          QN(RmMin) + "/2.67)", loadCaseNo);
-        } else {
+//            PR->addDetail("EN13445-3 11 4.3", variableName,
+//                          "RmMin / 2.67",
+//                          allowStress, "MPa",
+//                          QN(RmMin) + "/2.67)", loadCaseNo);
+//        } else {
             Rp10 = get_Rp10(testTemp, loadCaseNo);
             allowStress = Rp10 / 1.05;
 
@@ -298,20 +309,20 @@ double STD_EnMaterialHandler::allowableTestStress(
                           "Rp10 / 1.05",
                           allowStress, "MPa",
                           QN(Rp02) + "/1.05)", loadCaseNo);
-        }
+//        }
     } else if (matStruct == STD2::MatStructAustenitic
                && 35.0 <= elongPercent) {
         RmMin = get_RmMin(testTemp, loadCaseNo);
 
-        if (compType == STD2::CompBolt) {
-            // EN 13445 clause 11.4.3
-            allowStress = RmMin / 2.67;
+//        if (compType == STD2::CompBolt) {
+//            // EN 13445 clause 11.4.3
+//            allowStress = RmMin / 2.67;
 
-            PR->addDetail("EN13445-3 11 4.3", variableName,
-                          "RmMin / 2.67",
-                          allowStress, "MPa",
-                          QN(RmMin) + "/2.67)", loadCaseNo);
-        } else {
+//            PR->addDetail("EN13445-3 11 4.3", variableName,
+//                          "RmMin / 2.67",
+//                          allowStress, "MPa",
+//                          QN(RmMin) + "/2.67)", loadCaseNo);
+//        } else {
             Rp10 = get_Rp10(testTemp, loadCaseNo);
             allowStress = std::max(Rp10 / 1.05, RmMin / 2.0);
 
@@ -320,8 +331,8 @@ double STD_EnMaterialHandler::allowableTestStress(
                           allowStress, "MPa",
                           "max(" + QN(Rp10) + "/1.05;"
                           + QN(RmMin) + "/2.0)", loadCaseNo);
-        }
-    } else if (matStruct = STD2::MatStructCasting) {
+//        }
+    } else if (matStruct == STD2::MatStructCasting) {
         Rp02 = get_Rp02(testTemp, loadCaseNo);
         allowStress = Rp02 / 1.33;
 
@@ -382,7 +393,7 @@ STD2::MatStruct STD_EnMaterialHandler::getMaterialStructure() {
     QStringList matStructList; // refer PCALC_EN1591Widget.initModelMapping()
     matStructList << "None" << "Ferritic" << "Austenitic" << "Martensitic"
                   << "Austenitic-Ferritic" << "Casting" << "Non-Ferrous" << "other";
-    PR->addDetail("Material 0", "Mat.struct.", matStructList.at(matStruct),
+    PR->addDetail("Material 1", "Mat.struct.", matStructList.at(matStruct),
                   matStruct, "-", mCurrentMatName + " table value");
     return (STD2::MatStruct)matStruct;
 }
@@ -395,9 +406,78 @@ double STD_EnMaterialHandler::getElongationPercent() {
     }
 
     double elongPerc = mCurrentMaterial->getValue("elongafterrupt").toDouble();
-    PR->addDetail("Material 0", "A (elong.)", "EN value",
+    PR->addDetail("Material 2", "A (elong.)", "EN value",
                   elongPerc, "Percent", mCurrentMatName + " table value");
     return elongPerc;
+}
+
+double STD_EnMaterialHandler::allowableDesignStressBolt(
+        double designTemp, int loadCaseNo, const QString &variableName) {
+    STD2::MatStruct matStruct = getMaterialStructure();
+    double allowStress = 0.0;
+
+    double Rp02 = 0.0;
+    double RmMin = 0.0;
+
+    if (matStruct != STD2::MatStructAustenitic) {
+        Rp02 = get_Rp02(designTemp, loadCaseNo);
+        RmMin = get_RmMin(20, loadCaseNo); // 20 Celsius
+
+        // EN 13445 clause 11.4.3
+        allowStress = std::min(Rp02 / 3.0, RmMin / 4.0);
+
+        PR->addDetail("EN13445-3 11 4.3", variableName,
+                      "min(Rp02 / 3.0, RmMin20 / 4.0)",
+                      allowStress, "MPa",
+                      "min(" + QN(Rp02) + "/3.0; "
+                      + QN(RmMin) + "/4.0)", loadCaseNo);
+    } else {
+        // EN 13445 clause 11.4.3
+        RmMin = get_RmMin(designTemp, loadCaseNo);
+        allowStress = RmMin / 4.0;
+
+        PR->addDetail("EN13445-3 11 4.3", variableName,
+                      "RmMin / 4.0",
+                      allowStress, "MPa",
+                      QN(RmMin) + "/4.0)", loadCaseNo);
+
+    }
+
+    return allowStress;
+}
+
+double STD_EnMaterialHandler::allowableTestStressBolt(
+        double testTemp, int loadCaseNo, const QString &variableName) {
+    STD2::MatStruct matStruct = getMaterialStructure();
+    double allowStress = 0.0;
+
+    double Rp02 = 0.0;
+    double RmMin = 0.0;
+
+    if (matStruct != STD2::MatStructAustenitic) {
+        Rp02 = get_Rp02(testTemp, loadCaseNo);
+        RmMin = get_RmMin(20, loadCaseNo); // 20 Celsius
+
+        // EN 13445 clause 11.4.3
+        allowStress = std::min(Rp02 / 2.0, RmMin / 2.67);
+
+        PR->addDetail("EN13445-3 11 4.3", variableName,
+                      "min(Rp02 / 2.0, RmMin20 / 2.67)",
+                      allowStress, "MPa",
+                      "min(" + QN(Rp02) + "/2.0; "
+                      + QN(RmMin) + "/2.67)", loadCaseNo);
+    } else {
+        // EN 13445 clause 11.4.3
+        RmMin = get_RmMin(20, loadCaseNo); // 20 Celsius
+        allowStress = RmMin / 2.67;
+
+        PR->addDetail("EN13445-3 11 4.3", variableName,
+                      "RmMin20 / 2.67",
+                      allowStress, "MPa",
+                      QN(RmMin) + "/2.67)", loadCaseNo);
+    }
+
+    return allowStress;
 }
 
 /**
@@ -415,7 +495,7 @@ double STD_EnMaterialHandler::get_Rp02(double designTemp, int loadCaseNo) {
     double Rp02 = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_Rp02List"),
                 "temperature", "rp02", designTemp);
-    PR->addDetail("Material 1", "Rp02", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 21", "Rp02", "EN value at " + QN(designTemp),
                   Rp02, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return Rp02;
 }
@@ -430,7 +510,7 @@ double STD_EnMaterialHandler::get_Rp10(double designTemp, int loadCaseNo) {
     double Rp10 = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_Rp10List"),
                 "temperature", "rp10", designTemp);
-    PR->addDetail("Material 1", "Rp10", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 22", "Rp10", "EN value at " + QN(designTemp),
                   Rp10, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return Rp10;
 }
@@ -445,7 +525,7 @@ double STD_EnMaterialHandler::get_RmMin(double designTemp, int loadCaseNo) {
     double RmMin = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_RmMinList"),
                 "temperature", "rmmin", designTemp);
-    PR->addDetail("Material 1", "RmMin", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 23", "RmMin", "EN value at " + QN(designTemp),
                   RmMin, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return RmMin;
 }

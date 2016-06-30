@@ -141,24 +141,25 @@ RB_ObjectContainer* PCALC_Report::getInOutContainer() {
  * @brief PCALC_Report::getLastOutput
  * Some methods produce more than one output. The output enables to step
  * back in the list of outputs and test the result.
- * @param position number of position back in formula output
- * @return last output object
+ * Used for unit test and calculation output.
+ * @param reversePosition number of position back in formula output
+ * @return last or number before last output object
  */
-RB_ObjectBase* PCALC_Report::getLastOutput(int position) {
-    if (position > 0) {
-        RB_DEBUG->error("PCALC_Report::getLastOutput() 1 position ERROR");
+RB_ObjectBase* PCALC_Report::getLastOutput(int reversePosition) {
+    if (reversePosition < 0) {
+        RB_DEBUG->error("PCALC_Report::getLastOutput() 1 reversePosition ERROR");
         return nullptr;
     }
 
-    if (postion < 0) {
+    if (reversePosition > 0) {
         int count = mOutContainer->objectCount();
-        int row = count + position - 1;
+        int row = count - reversePosition - 1;
 
         if (row < count && row >= 0) {
-            RB_ObjectBase* output = mOutContainer->getObject(position);
+            RB_ObjectBase* output = mOutContainer->getObject(row);
             return output;
         } else {
-            RB_DEBUG->error("PCALC_Report::getLastOutput() 2 position ERROR");
+            RB_DEBUG->error("PCALC_Report::getLastOutput() 2 reversePosition ERROR");
             return nullptr;
         }
     }
