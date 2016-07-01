@@ -464,9 +464,12 @@ void PCALC_EN1591Widget::initMapping() {
     mShellMapper->addMapping(ileMaterialShell_2,
                              mShellModel->fieldIndex("materialshell2_idx"));
 
-    // Update properties with or without EN13445-3 11.4.3 bolt requirement
+    // Update properties:
+    // all requirements
+    // exclude very stringent requirement EN13445-3 11.4.3 for bolts
+    // use minimum safety factors, use test safety factors for assembly condition
     items.clear();
-    items << "Yes (default)" << "No";
+    items << "Yes (default)" << "Exclude 11.4.3" << "Min. safety factors";
     cbDisregardBoltRequirement->setModel(new QStringListModel(items, this));
 
     // loadcase
@@ -569,15 +572,6 @@ bool PCALC_EN1591Widget::fileSave(bool withSelect) {
     return true;
 }
 
-/**
- * Menu file save as, not applicable for this widget
- */
-bool PCALC_EN1591Widget::fileSaveAs() {
-//    PCALC_DIALOGFACTORY->requestWarningDialog(tr("Menu File Save As is\n"
-//                                               "not applicable for this window"));
-    return false;
-}
-
 void PCALC_EN1591Widget::fileRevert() {
     mLoadCaseModel->revertAll();
     mAssemblyModel->revertAll();
@@ -626,6 +620,46 @@ RB_String PCALC_EN1591Widget::getHelpSubject() const {
 
 QTextEdit *PCALC_EN1591Widget::getTextEdit() {
     return this->teCalculationReport;
+}
+
+bool PCALC_EN1591Widget::saveFile(const QString& fn) {
+    // copied from DB_TextWidget, make part of RB_TextWidget
+    QFile file(fn);
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        PCALC_DIALOGFACTORY->requestWarningDialog(
+            tr("Cannot write file %1:\n%2.").arg(fn).arg(file.errorString()));
+        PCALC_DIALOGFACTORY->statusBarMessage(tr("File save ERROR"), 2000);
+        return false;
+    }
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
+    if (fn.endsWith(".htm", Qt::CaseInsensitive)
+            || fn.endsWith(".html", Qt::CaseInsensitive)
+            || fn.endsWith(".xhtml", Qt::CaseInsensitive)) {
+        RB_String html = teCalculationReport->toHtml();
+        // teCalculationReport->saveHtmlEmbeddedImage(html);
+        QTextStream out(&file);
+        out << html;
+    } else if (fn.endsWith(".odt", Qt::CaseInsensitive)) {
+        QTextDocumentWriter writer;
+        writer.setFileName(fn);
+        writer.setFormat("odf");
+        writer.write(teCalculationReport->document());
+    } else {
+        QTextStream out(&file);
+        out << teCalculationReport->toPlainText();
+    }
+
+    QApplication::restoreOverrideCursor();
+
+    //    setCurrentFileName(fn);
+    //    setIsNewWidget(false);
+    //    richTextEdit->document()->setModified(false);
+    //    emit modificationChanged(false);
+    PCALC_DIALOGFACTORY->statusBarMessage(tr("File saved"), 2000);
+    return true;
+
 }
 
 void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
@@ -688,15 +722,9 @@ void PCALC_EN1591Widget::slotDataIsChanged(const QModelIndex& topLeft,
         }
     } else if (topLeft.model() == mBoltNutWasherModel) {
         if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialbolt_idx")){
-            STD2::CompType compType = STD2::CompBolt;
-
-            if (cbDisregardBoltRequirement->currentIndex() == 1) {
-                compType = STD2::CompDefault;
-            }
-
             QString materialId = topLeft.data(RB2::RoleOrigData).toString();
-            updateAllowStress(materialId, "tb", "fb", compType);
-            updateAllowStress(materialId, "tb", "fn", compType); // no separate material yet
+            updateAllowStress(materialId, "tb", "fb", STD2::CompBolt);
+            updateAllowStress(materialId, "tb", "fn", STD2::CompBolt); // no separate material yet
             updateElasModul(materialId, "tb", "eb");
             updateThermExp(materialId, "tb", "alphab");
         } else if (topLeft.column() == mBoltNutWasherModel->fieldIndex("materialwasher_idx")) {
@@ -1514,6 +1542,21 @@ void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
         return;
     }
 
+    STD2::CompType useCompType = compType;
+    bool useTestForAssemblyCondition = false;
+
+    if (cbDisregardBoltRequirement->currentIndex() == 1
+            && useCompType == STD2::CompBolt) {
+        // disregards EN13445 11.4.3
+        useCompType = STD2::CompDefault;
+    } else if (cbDisregardBoltRequirement->currentIndex() == 2) {
+        useTestForAssemblyCondition = true;
+
+        if (useCompType == STD2::CompBolt) {
+            useCompType = STD2::CompDefault;
+        }
+    }
+
     int row = 0;
     int rowCount = mLoadCaseModel->rowCount();
     int colTemperature = mLoadCaseModel->fieldIndex(temperatureField);
@@ -1531,12 +1574,16 @@ void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
         designTemp = mLoadCaseModel->data(index).toDouble();
 
         if (loadCaseNo == 1) {
-            // Test loadcase
+            // Regular test loadcase conditions
             allowStress = STD_MATERIALUTILITY->allowableTestStress(
-                        designTemp, compType, loadCaseNo, allowStressField);
+                        designTemp, useCompType, loadCaseNo, allowStressField);
+        } else if (loadCaseNo == 0 && useTestForAssemblyCondition) {
+            // Use test loadcase conditions for assembly
+            allowStress = STD_MATERIALUTILITY->allowableTestStress(
+                        designTemp, useCompType, loadCaseNo, allowStressField);
         } else {
             allowStress = STD_MATERIALUTILITY->allowableDesignStress(
-                        designTemp, compType, loadCaseNo, allowStressField);
+                        designTemp, useCompType, loadCaseNo, allowStressField);
         }
 
         if (mIsUpdateMaterial) {
@@ -1678,19 +1725,13 @@ void PCALC_EN1591Widget::refreshAllProperties() {
         }
     }
 
-    STD2::CompType compType = STD2::CompBolt;
-
-    if (cbDisregardBoltRequirement->currentIndex() == 1) {
-        compType = STD2::CompDefault;
-    }
-
     index = mBoltNutWasherModel->getCurrentIndex();
     row = index.row();
     index = mBoltNutWasherModel->index(
                 row, mBoltNutWasherModel->fieldIndex("materialbolt_idx"));
     materialId = index.data(RB2::RoleOrigData).toString();
-    updateAllowStress(materialId, "tb", "fb", compType);
-    updateAllowStress(materialId, "tb", "fn", compType); // no separate material yet
+    updateAllowStress(materialId, "tb", "fb", STD2::CompBolt);
+    updateAllowStress(materialId, "tb", "fn", STD2::CompBolt); // no separate material yet
     updateElasModul(materialId, "tb", "eb");
     updateThermExp(materialId, "tb", "alphab");
     index = mBoltNutWasherModel->index(

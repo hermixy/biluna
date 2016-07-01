@@ -148,10 +148,36 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lblDescription">
+            <item row="2" column="2" colspan="2">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>206</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="3">
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>158</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="lblNameEngineer">
               <property name="text">
-               <string>Description</string>
+               <string>Name Engineer</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -168,67 +194,15 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="2" colspan="2">
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>206</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="lblNameEngineer">
+            <item row="1" column="0">
+             <widget class="QLabel" name="lblDescription">
               <property name="text">
-               <string>Name Engineer</string>
+               <string>Description</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
-            </item>
-            <item row="3" column="3">
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>158</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="4" column="1" colspan="3">
-             <widget class="QLineEdit" name="leNameEngineer"/>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="lblNumber">
-              <property name="text">
-               <string>Number</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QSpinBox" name="sbRevision">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="maximum">
-               <number>999</number>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1" colspan="2">
-             <widget class="QLineEdit" name="leNumber"/>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="lblDate">
@@ -240,8 +214,31 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1" colspan="3">
-             <widget class="QLineEdit" name="leDescription"/>
+            <item row="0" column="0">
+             <widget class="QLabel" name="lblNumber">
+              <property name="text">
+               <string>Number</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QLineEdit" name="leNumber"/>
+            </item>
+            <item row="4" column="1" colspan="3">
+             <widget class="QLineEdit" name="leNameEngineer"/>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="sbRevision">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="3">
              <spacer name="horizontalSpacer">
@@ -255,6 +252,9 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="1" column="1" colspan="3">
+             <widget class="QLineEdit" name="leDescription"/>
             </item>
            </layout>
           </widget>
@@ -3511,9 +3511,8 @@
                 <item row="0" column="0">
                  <widget class="QLabel" name="lblBoltRequirement">
                   <property name="text">
-                   <string>Include EN13445-3
- clause 11.4.3
- bolt requirement:</string>
+                   <string>Include all EN13445-3
+material requirements:</string>
                   </property>
                  </widget>
                 </item>

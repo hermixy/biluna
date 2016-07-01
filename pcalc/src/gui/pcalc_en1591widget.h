@@ -33,7 +33,7 @@ public:
 
     virtual void init();
     virtual bool fileSave(bool withSelect);
-    virtual bool fileSaveAs();
+//    virtual bool fileSaveAs();
     virtual void fileRevert();
     virtual void filePdf(QPrinter* pr);
     virtual void filePrint(QPrinter* pr);
@@ -41,6 +41,8 @@ public:
 
     virtual RB_String getHelpSubject() const;
     QTextEdit* getTextEdit();
+
+    virtual bool saveFile(const RB_String &fn);
 
 public slots:
     virtual void slotDataIsChanged(const QModelIndex& topLeft,

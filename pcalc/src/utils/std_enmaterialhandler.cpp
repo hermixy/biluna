@@ -47,24 +47,25 @@ bool STD_EnMaterialHandler::setCurrentMaterial(const QString& materialIdx) {
 
     if (mCurrentMaterial) {
         success = true;
-        mCurrentMatName = mCurrentMaterial->getDValue("mname").toString();
     } else {
         // will also set mCurrentMaterial
         success = loadMaterial(materialId);
 
-        if (success) {
-            mCurrentMatName = mCurrentMaterial->getDValue("mname").toString();
-            QString id = mCurrentMaterial->getValue("elasmodultable_id").toString();
-            loadElasModulTable(id);
-            id = mCurrentMaterial->getValue("thermexptable_id").toString();
-            loadThemExpTable(id);
-            // external pressure chart
-        } else {
+        if (!success) {
             mCurrentMatName = "";
             RB_DEBUG->warning("STD_EnMaterialHandler::setCurrentMaterial() "
                               "material load WARNING");
+            return success;
         }
     }
+
+    mCurrentMatName = mCurrentMaterial->getDValue("mname").toString();
+
+    QString id = mCurrentMaterial->getValue("elasmodultable_id").toString();
+    loadElasModulTable(id);
+    id = mCurrentMaterial->getValue("thermexptable_id").toString();
+    loadThemExpTable(id);
+    // external pressure chart
 
     return success;
 }
