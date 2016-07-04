@@ -496,7 +496,7 @@ double STD_EnMaterialHandler::get_Rp02(double designTemp, int loadCaseNo) {
     double Rp02 = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_Rp02List"),
                 "temperature", "rp02", designTemp);
-    PR->addDetail("Material 21", "Rp02", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 61", "Rp02", "EN value at " + QN(designTemp),
                   Rp02, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return Rp02;
 }
@@ -511,7 +511,7 @@ double STD_EnMaterialHandler::get_Rp10(double designTemp, int loadCaseNo) {
     double Rp10 = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_Rp10List"),
                 "temperature", "rp10", designTemp);
-    PR->addDetail("Material 22", "Rp10", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 62", "Rp10", "EN value at " + QN(designTemp),
                   Rp10, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return Rp10;
 }
@@ -526,7 +526,7 @@ double STD_EnMaterialHandler::get_RmMin(double designTemp, int loadCaseNo) {
     double RmMin = getLinInterpValue(
                 mCurrentMaterial->getContainer("STD_RmMinList"),
                 "temperature", "rmmin", designTemp);
-    PR->addDetail("Material 23", "RmMin", "EN value at " + QN(designTemp),
+    PR->addDetail("Material 63", "RmMin", "EN value at " + QN(designTemp),
                   RmMin, "MPa", mCurrentMatName + " table value", loadCaseNo);
     return RmMin;
 }

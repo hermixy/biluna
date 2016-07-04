@@ -99,7 +99,7 @@ void PCALC_Report::addDetail(const QString& formulaNumber,
         formulaStr = formulaStr.remove(","); // remove comma if any
         int formulaNo = formulaStr.toInt();
 
-        if ((mReportType == 2 || mReportType == 3)
+        if ((mReportType == 2 || mReportType == 3 || mReportType == 4)
                 && ((formulaNo < mFormulaFrom && mFormulaFrom > 0)
                     || (mFormulaTo < formulaNo && mFormulaTo < 999))) {
             return;

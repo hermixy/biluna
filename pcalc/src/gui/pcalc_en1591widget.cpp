@@ -76,7 +76,7 @@ RB_String PCALC_EN1591Widget::getSaveAsFileName() {
     QString type = this->cbCalculationReportType->currentText().toLower();
     type.replace(" ", "_");
 
-    return "pcalc_EN1591_" + name + "_" + type;
+    return "pcalc_EN1591_" + name + "_" + type + ".odt";
 }
 
 void PCALC_EN1591Widget::init() {
@@ -1301,10 +1301,10 @@ void PCALC_EN1591Widget::writeValidationReport() {
     QString outputStr;
     outputStr.append(po + "-- Start calculation: " + dateTimeStr + pc);
     outputStr.append(tbo);
-    outputStr.append(tro + "<td width='10%'>&nbsp;</td>"
+    outputStr.append(tro + "<td width='12%'>&nbsp;</td>"
                            "<td width='7%'><strong>CALCULATION</strong></td>"
                            "<td width='8%'>&nbsp;</td>"
-                           "<td width='75%'>&nbsp;</td>"
+                           "<td width='*'>&nbsp;</td>"
                      + trc);
     if (cbCalculationReportType->currentIndex() == 4) { // all iterations + input
         outputStr.append(tro + tdo + tdc
@@ -1339,7 +1339,8 @@ void PCALC_EN1591Widget::writeValidationReport() {
 
             for (int i = 0; i < memberCount; ++i) {
                 RB_ObjectMember* mem = in->getMember(i);
-                outputStr.append(tro + tdo + "Input:" + tdc
+                outputStr.append(tro + tdo + "Input:"
+                                 + " [" + in->getValue("loadcaseno").toString() + "]" + tdc
                             + tdo + mem->getName() + " = " + tdc
                             + tdo + mem->getValue().toString()) + tdc + trc;
             }
@@ -1449,10 +1450,10 @@ void PCALC_EN1591Widget::createUnitTestDetail() {
     QString outputStr;
     outputStr.append(po + "-- Start UnitTest: " + dateTimeStr + pc);
     outputStr.append(tbo);
-    outputStr.append(tro + "<td width='10%'>&nbsp;</td>"
+    outputStr.append(tro + "<td width='12%'>&nbsp;</td>"
                            "<td width='7%'><strong>UNIT TEST</strong></td>"
                            "<td width='8%'>&nbsp;</td>"
-                           "<td width='75%'>&nbsp;</td>"
+                           "<td width='*'>&nbsp;</td>"
                      + trc);
     outputStr.append(tro + tdo + tdc + tdo + tdc + tdo + tdc + tdo + tdc + trc);
     outputStr.append(tro + tdo + tdc + tdo + "<strong>OUTPUT</strong>"
@@ -1550,6 +1551,7 @@ void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
         // disregards EN13445 11.4.3
         useCompType = STD2::CompDefault;
     } else if (cbDisregardBoltRequirement->currentIndex() == 2) {
+        // disregards EN13445 11.4.3 and use test values for assembly condition
         useTestForAssemblyCondition = true;
 
         if (useCompType == STD2::CompBolt) {

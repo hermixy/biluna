@@ -1,41 +1,40 @@
 <html><head></head><body>
 <h2>Flange Calculation EN 1591-1:2014</h2>
 <h3>Summary Report</h3>
-<table border="0" width="650" cellspacing="0" cellpadding="2">
+<table border="0" width="650" cellspacing="2" cellpadding="0">
 <tr><td><h4>Assembly</h4></td><td id="{$number}">&nbsp;</td><td>&nbsp;</td><td><h4>Date</h4></td><td id="{$date}">&nbsp;</td></tr>
 <tr><td><h4>Description</h4></td><td id="{$description}">&nbsp;</td><td>&nbsp;</td><td><h4>Revision</h4></td><td id="{$revision}">&nbsp;</td></tr>
 <tr><td><h4>Engineer</h4></td><td id="{$nameengineer}">&nbsp;</td><td>&nbsp;</td><td><h4>Application</h4></td><td><div align="right">Biluna 0.9.16 (PCALC)</div></td></tr>
 </table>
 <h3>Input Parameters</h3>
-<table border="1" width="650" cellspacing="0" cellpadding="2">
-<tbody><tr><td><h4>Flange</h4></td><td>&nbsp;</td><td>flange 1</td><td>flange 2</td><td>&nbsp;</td></tr>
+<table border="0" width="650" cellspacing="2" cellpadding="0">
+<tbody><tr><td width="20%"><h4>Flange</h4></td><td width="8%">&nbsp;</td><td width="32%" bgcolor="#cccccc">flange 1</td><td width="32%" bgcolor="#cccccc">flange 2</td><td width="8%">&nbsp;</td></tr>
 <tr><td>flange type</td><td>-</td><td id="{$typeflange1_id}">&nbsp;</td><td id="{$typeflange2_id}">&nbsp;</td><td>-</td></tr>
-<tr><td>flange code</td><td>-</td><td id="{$TODO}">Custom</td><td id="{$TODO}">Custom</td><td>-</td></tr>
+<tr><td>flange code</td><td>-</td><td id="{$TODO}"><p align="right">Custom</p></td><td id="{$TODO}"><p align="right">Custom</p></td><td>-</td></tr>
 <tr><td>flange size</td><td>d<sub>0</sub></td><td id="{$d01}">&nbsp;</td><td id="{$d02}">&nbsp;</td><td>mm</td></tr>
 <tr><td>flange material</td><td>-</td><td id="{$materialflange1_idx}">&nbsp;</td><td id="{$materialflange2_idx}">&nbsp;</td><td>-</td></tr>
 <tr><td colspan="5"><h4>Gasket/Bolt/Washer</h4></tr>
 <tr><td>gasket type</td><td>-</td><td colspan=2 id="{$gaskettype_idx}">&nbsp;</td><td>-</td></tr>
 <tr><td>gasket size</td><td>d<sub>Gin/out</sub></td><td id="{$dgin}">&nbsp;</td><td id="{$dgout}">&nbsp;</td><td>mm</td></tr>
 <tr><td>gasket thickness</td><td>e<sub>Gt</sub></td><td colspan=2 id="{$egt}">&nbsp;</td><td>mm</td></tr>
-<tr><td>bolt type</td><td>-</td><td colspan=2 id="{$bolttype_id}">&nbsp;</td><td>-</td></tr>
 <tr><td>bolt size</td><td>d<sub>B0</sub></td><td colspan=2 id="{$db0}">&nbsp;</td><td>mm</td></tr>
 <tr><td>bolt material</td><td>-</td><td colspan=2 id="{$materialbolt_idx}">&nbsp;</td><td>-</td></tr>
 <tr><td>washers material</td><td>-</td><td colspan=2 id="{$materialwasher_idx}">&nbsp;</td><td>-</td></tr>
 </tbody></table>
 
 <h3>Design Conditions</h3>
-<table border="1" width="650" cellspacing="0" cellpadding="2">
+<table border="0" width="650" cellspacing="2" cellpadding="0">
 <tbody>
-<tr><td>&nbsp;</td><td>&nbsp;</td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
+<tr><td width="20%"><h4>Load Conditions</h4></td><td width="8%">&nbsp;</td><td width="16%" bgcolor="#cccccc">assembly</td><td width="16%" bgcolor="#cccccc">test cond.</td><td width="16%" bgcolor="#cccccc">load cond. 1</td><td width="16%" bgcolor="#cccccc">load cond. 2</td><td width="8%">&nbsp;</td></tr>
 <tr><td>design pressure</td><td>P</td><td id="{$p[0]}">&nbsp;</td><td id="{$p[1]}">&nbsp;</td><td id="{$p[2]}">&nbsp;</td><td id="{$p[3]}">&nbsp;</td><td>MPa</td></tr>
 <tr><td>design temperature</td><td>T<sub>F</sub></td><td id="{$tf1[0]}">&nbsp;</td><td id="{$tf1[1]}">&nbsp;</td><td id="{$tf1[2]}">&nbsp;</td><td id="{$tf1[3]}">&nbsp;</td><td>Celsius</td></tr>
 <tr><td>leak rate</td><td>L (x)</td><td id="{$leakagerate}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>10E-(X)</td></tr>
 </tbody></table>
 
 <h3>Output</h3>
-<table border="1" width="650" cellspacing="0" cellpadding="2">
+<table border="0" width="650" cellspacing="2" cellpadding="0">
 <tbody>
-<tr><td colspan="2"><h4>Assembly Settings</h4></td><td>assembly</td><td>test cond.</td><td>load cond. 1</td><td>load cond. 2</td><td>&nbsp;</td></tr>
+<tr><td width="20%"><h4>Assembly Settings</h4></td><td width="8%">&nbsp;</td><td width="16%" bgcolor="#cccccc">assembly</td><td width="16%" bgcolor="#cccccc">test cond.</td><td width="16%" bgcolor="#cccccc">load cond. 1</td><td width="16%" bgcolor="#cccccc">load cond. 2</td><td width="8%">&nbsp;</td></tr>
 <tr><td>nominal torque</td><td>M<sub>t,nom</sub></td><td id="{$Mtnom}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Nmm</td></tr>
 <tr><td>bolt elongation</td><td>&Delta;l<sub>B</sub></td><td id="{$delta_lB}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>mm</td></tr>
 <tr><td>nominal bolt force</td><td>F<sub>B0nom</sub></td><td id="{$F_Bnom[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>N</td></tr>
@@ -46,7 +45,7 @@
 <tr><td>gasket compr. thickn.</td><td>e<sub>G</sub></td><td id="{$eG[0]}">&nbsp;</td><td id="{$eG[1]}">&nbsp;</td><td id="{$eG[2]}">&nbsp;</td><td id="{$eG[3]}">&nbsp;</td><td>mm</td></tr>
 <tr><td>gasket stress</td><td>Q<sub>G</sub></td><td id="{$Q_G[0]}">&nbsp;</td><td id="{$Q_G[1]}">&nbsp;</td><td id="{$Q_G[2]}">&nbsp;</td><td id="{$Q_G[3]}">&nbsp;</td><td>MPa</td></tr>
 <tr><td>min. req. gasket stress</td><td>Q<sub>minL</sub></td><td id="{$Q_minL[0]}">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>MPa</td></tr>
-<tr><td>min. req. stress subs. cond.</td><td>Q<sub>sminL</sub></td><td>&nbsp;</td><td id="{$Q_sminL[1]}">&nbsp;</td><td id="{$Q_sminL[2]}">&nbsp;</td><td id="{$Q_sminL[3]}">&nbsp;</td><td>MPa</td></tr>
+<tr><td>min. req. str. subs. cond.</td><td>Q<sub>sminL</sub></td><td>&nbsp;</td><td id="{$Q_sminL[1]}">&nbsp;</td><td id="{$Q_sminL[2]}">&nbsp;</td><td id="{$Q_sminL[3]}">&nbsp;</td><td>MPa</td></tr>
 <tr><td colspan="2">check min. req. g. stress: Q<sub>min</sub>&gt;Q<sub>(s)minL</sub></td><td id="{$Q_GminCheck[0]}">&nbsp;</td><td id="{$Q_GminCheck[1]}">&nbsp;</td><td id="{$Q_GminCheck[2]}">&nbsp;</td><td id="{$Q_GminCheck[3]}">&nbsp;</td><td>-</td></tr>
 
 <tr><td colspan="7"><h4>Check of Load Ratio</h4></tr>
