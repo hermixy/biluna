@@ -111,7 +111,8 @@ void AssemblyTest::SetupRemainingTarget() {
 
     target->mBolt = new Bolt();  // includes BoltHole creation
     target->mBolt->bType = Bolt::Stud;
-    target->mBolt->mBoltHole->isBlindHole = false;
+    target->mFlange1->isBlindHole = false;
+    target->mFlange2->isBlindHole = false;
 
     // Share object
     target->mFlange1->mBolt = target->mBolt;
@@ -839,7 +840,7 @@ void AssemblyTest::Calc_cBTest() {
     target->mLoadCaseList->at(i)->fN = 200000;
     target->mBolt->dB0 = 700.3;
     target->mLoadCaseList->at(i)->fB = 203000;
-    target->mBolt->l5t = 13.5;
+    target->mFlange1->l5t = 13.5;
     target->mLoadCaseList->at(i)->fF1 = 207000;
     target->mLoadCaseList->at(i)->fF2 = 207000; // takes minimum of both flanges
     target->Calc_cB(i);

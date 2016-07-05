@@ -57,6 +57,12 @@ Flange_IN::Flange_IN(int flangeNo) : RB_Object("PCALC EN1591 Flange") {
     b0 = 0;
     d6 = 0;
     eL = 0;
+
+    // Bolt hole
+    d5 = 0;
+    isBlindHole = false;
+    d5t = 0;
+    l5t = 0;
 }
 
 Flange_IN::~Flange_IN() {
@@ -162,18 +168,18 @@ void Flange::Calc_pB() {
  * @brief Formula 4 and 5: Effective diameter of the bolt hole
  */
 void Flange::Calc_d5e() {
-    if (mBolt->mBoltHole->isBlindHole) {
-        mBolt->mBoltHole->d5 = mBolt->mBoltHole->d5t * mBolt->l5t / eFb;
+    if (isBlindHole) {
+        d5 = d5t * l5t / eFb;
         PR->addDetail("Formula 4 5", "d5(" + QN(mFlangeNumber) + ")",
-                      "d5t * l5t / eFb", mBolt->mBoltHole->d5, "mm",
-                      QN(mBolt->mBoltHole->d5t) + " * " + QN(mBolt->l5t)
+                      "d5t * l5t / eFb", d5, "mm",
+                      QN(d5t) + " * " + QN(l5t)
                       + " / " + QN(eFb));
     }
 
-    d5e = mBolt->mBoltHole->d5 * sqrt(mBolt->mBoltHole->d5 / pB);
+    d5e = d5 * sqrt(d5 / pB);
     PR->addDetail("Formula 4 5", "d5e(" + QN(mFlangeNumber) + ")",
                   "d5 * (d5 / pB) ^ 0.5", d5e, "mm",
-                  QN(mBolt->mBoltHole->d5) + " * (" + QN(mBolt->mBoltHole->d5)
+                  QN(d5) + " * (" + QN(d5)
                   + " / " + QN(pB) + ") ^ 0.5");
 }
 
@@ -227,10 +233,10 @@ void Flange::Calc_XB() {
  */
 void Flange::Calc_dK1() {
     if (mWasher->isPresent()) {
-        mWasher->dK1 = std::fmax(mBolt->mBoltHole->d5, mWasher->dW1);
+        mWasher->dK1 = std::fmax(d5, mWasher->dW1);
         PR->addDetail("Formula 46", "dK1(" + QN(mFlangeNumber) + ")",
                       "max(d5; dW1)", mWasher->dK1, "mm",
-                      "max(" + QN(mBolt->mBoltHole->d5) + "; "
+                      "max(" + QN(d5) + "; "
                       + QN(mWasher->dW1) + ")");
     }
 }

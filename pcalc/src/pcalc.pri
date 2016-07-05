@@ -32,7 +32,6 @@ HEADERS += \
     ../src/calc/en1591handler.h \
     ../src/calc/EN1591/assembly.h \
     ../src/calc/EN1591/bolt.h \
-    ../src/calc/EN1591/bolthole.h \
     ../src/calc/EN1591/calculator.h \
     ../src/calc/EN1591/flange.h \
     ../src/calc/EN1591/flange_blind.h \
@@ -140,7 +139,6 @@ SOURCES += \
     ../src/calc/en1591handler.cpp \
     ../src/calc/EN1591/assembly.cpp \
     ../src/calc/EN1591/bolt.cpp \
-    ../src/calc/EN1591/bolthole.cpp \
     ../src/calc/EN1591/calculator.cpp \
     ../src/calc/EN1591/flange.cpp \
     ../src/calc/EN1591/flange_blind.cpp \

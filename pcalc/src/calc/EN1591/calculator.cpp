@@ -67,7 +67,8 @@ void Calculator::createAssemblyHelper(Assembly* assembly) {
 
     assembly->mBolt = new Bolt();  // includes BoltHole creation
     assembly->mBolt->bType = Bolt::Stud;
-    assembly->mBolt->mBoltHole->isBlindHole = false;
+    assembly->mFlange1->isBlindHole = false;
+    assembly->mFlange2->isBlindHole = false;
 
     // Share object
     assembly->mFlange1->mBolt = assembly->mBolt;

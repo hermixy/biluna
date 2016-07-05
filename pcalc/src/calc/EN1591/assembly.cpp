@@ -343,31 +343,46 @@ void Assembly::Calc_F_R(int loadCaseNo) {
  * @param loadCaseNo
  */
 void Assembly::Calc_dUI(int loadCaseNo) {
+    double tmpeFt1 = mFlange1->eFt;
+    QString eFtStr1 = "eFt1";
+    double tmpeFt2 = mFlange2->eFt;
+    QString eFtStr2 = "eFt2";
+
+    if (mFlange1->isBlindHole) {
+        tmpeFt1 = 0.0;
+        eFtStr1 = "0";
+    }
+
+    if (mFlange2->isBlindHole) {
+        tmpeFt2 = 0.0;
+        eFtStr2 = "0";
+    }
+
     double tmp_T0 = mLoadCaseList->at(0)->T0;
     double tmp_eG = mLoadCaseList->at(0)->eG;
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
 
     loadCase->dUI = mBolt->lB * loadCase->alphaB * (loadCase->TB - tmp_T0)
         - tmp_eG * loadCase->alphaG * (loadCase->TG - tmp_T0)
-        - mFlange1->eFt * loadCase->alphaF1 * (loadCase->TF1 - tmp_T0)
+        - tmpeFt1 * loadCase->alphaF1 * (loadCase->TF1 - tmp_T0)
         - mFlange1->eL * loadCase->alphaL1 * (loadCase->TL1 - tmp_T0)
         - mFlange1->mWasher->eW * loadCase->alphaW1 * (loadCase->TW1 - tmp_T0)
-        - mFlange2->eFt * loadCase->alphaF2 * (loadCase->TF2 - tmp_T0)
+        - tmpeFt2 * loadCase->alphaF2 * (loadCase->TF2 - tmp_T0)
         - mFlange2->eL * loadCase->alphaL2 * (loadCase->TL2 - tmp_T0)
         - mFlange2->mWasher->eW * loadCase->alphaW2 * (loadCase->TW2 - tmp_T0);
     PR->addDetail("Formula 97",
               "dUI", "lB * alphaB * (TB - T0) - eG * alphaG * (TG - T0) "
-              "- Flange1.eFt * alphaF1 * (TF1 - T0) - Flange1.eL * alphaL1 "
+              "- " + eFtStr1 + " * alphaF1 * (TF1 - T0) - Flange1.eL * alphaL1 "
               "* (TL1 - T0) - Flange1.Washer.eW * alphaW1 * (TW1 - T0) "
-              "- Flange2.eFt * alphaF2 * (TF2 - T0) - Flange2.eL * alphaL2 "
+              "- " + eFtStr2 + " * alphaF2 * (TF2 - T0) - Flange2.eL * alphaL2 "
               "* (TL2 - T0) - Flange2.Washer.eW * alphaW2 * (TW2 - T0)",
               loadCase->dUI, "N",
               QN(mBolt->lB) + " * " + QN(loadCase->alphaB) + " * (" + QN(loadCase->TB) + " - " + QN(tmp_T0)
               + ") - " + QN(tmp_eG) + " * " + QN(loadCase->alphaG) + " * (" + QN(loadCase->TG) + " - " + QN(tmp_T0)
-              + ") - " + QN(mFlange1->eFt) + " * " + QN(loadCase->alphaF1) + " * (" + QN(loadCase->TF1) + " - " + QN(tmp_T0)
+              + ") - " + QN(tmpeFt1) + " * " + QN(loadCase->alphaF1) + " * (" + QN(loadCase->TF1) + " - " + QN(tmp_T0)
               + ") - " + QN(mFlange1->eL) + " * " + QN(loadCase->alphaL1) + " * (" + QN(loadCase->TL1) + " - " + QN(tmp_T0)
               + ") - " + QN(mFlange1->mWasher->eW) + " * " + QN(loadCase->alphaW1) + " * (" + QN(loadCase->TW1) + " - " + QN(tmp_T0)
-              + ") - " + QN(mFlange2->eFt) + " * " + QN(loadCase->alphaF2) + " * (" + QN(loadCase->TF2) + " - " + QN(tmp_T0)
+              + ") - " + QN(tmpeFt2) + " * " + QN(loadCase->alphaF2) + " * (" + QN(loadCase->TF2) + " - " + QN(tmp_T0)
               + ") - " + QN(mFlange2->eL) + " * " + QN(loadCase->alphaL2) + " * (" + QN(loadCase->TL2) + " - " + QN(tmp_T0)
               + ") - " + QN(mFlange2->mWasher->eW) + " * " + QN(loadCase->alphaW2) + " * (" + QN(loadCase->TW2) + " - " + QN(tmp_T0)
               + ")",
@@ -378,15 +393,31 @@ void Assembly::Calc_dUI(int loadCaseNo) {
  * @brief Formula 98: Axial bolt length
  */
 void Assembly::Calc_lB() {
+    double tmpeFt1 = mFlange1->eFt;
+    QString eFtStr1 = "eFt1";
+    double tmpeFt2 = mFlange2->eFt;
+    QString eFtStr2 = "eFt2";
+
+    if (mFlange1->isBlindHole) {
+        tmpeFt1 = 0.0;
+        eFtStr1 = "0";
+    }
+
+    if (mFlange2->isBlindHole) {
+        tmpeFt2 = 0.0;
+        eFtStr2 = "0";
+    }
+
     mBolt->lB = mGasket->eGt
-            + mFlange1->eFt + mFlange2->eFt
+            + tmpeFt1 + tmpeFt2
             + mFlange1->eL + mFlange2->eL
             + mFlange1->mWasher->eW + mFlange2->mWasher->eW;
     PR->addDetail("Formula 98",
-              "lB", "eGt + eFt1 + eFt2 + eL1 + eL2 + eW1 + eW2",
+              "lB",
+              "eGt + " + eFtStr1 + " + " + eFtStr2 + " + eL1 + eL2 + eW1 + eW2",
               mBolt->lB, "mm",
               QN(mGasket->eGt)
-              + " + " + QN(mFlange1->eFt) + " + " + QN(mFlange2->eFt)
+              + " + " + QN(tmpeFt1) + " + " + QN(tmpeFt2)
               + " + " + QN(mFlange1->eL) + " + " + QN(mFlange2->eL)
               + " + " + QN(mFlange1->mWasher->eW) + " + "
               + QN(mFlange2->mWasher->eW));
@@ -1114,10 +1145,10 @@ double Assembly::Calc_cB_helper(Flange* flange, int loadCaseNo) {
     double denom = 0.8 * mBolt->dB0 * loadCase->fB;
     double val = 0.0;
 
-    if (dynamic_cast<Flange_Blind*>(flange) != NULL && mBolt->l5t > 0) {
+    if (dynamic_cast<Flange_Blind*>(flange) != NULL && flange->l5t > 0) {
         // threaded in blind flange
         val = std::min(1.0, std::min(mBolt->eN * loadCase->fN / denom,
-                                      mBolt->l5t * tmp_fF / denom));
+                                      flange->l5t * tmp_fF / denom));
         PR->addDetail("With_F. 127",
                       "cB" + QN(flange->getFlangeNumber()),
                       "min(1.0; eN * fN / (0.8 * dB0 * fB); "
@@ -1126,7 +1157,7 @@ double Assembly::Calc_cB_helper(Flange* flange, int loadCaseNo) {
                       val, "-",
                       "min(1.0; min(" + QN(mBolt->eN) + " * " + QN(loadCase->fN)
                       + " / (0.8 * " + QN(mBolt->dB0) + " * " + QN(loadCase->fB)
-                      + "); " + QN(mBolt->l5t) + " * " + QN(tmp_fF)
+                      + "); " + QN(flange->l5t) + " * " + QN(tmp_fF)
                       + " / (0.8 * " + QN(mBolt->dB0) + " * " + QN(loadCase->fB)
                       + ")))", loadCaseNo);
     } else {

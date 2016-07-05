@@ -1,7 +1,6 @@
 ﻿#ifndef BOLT_H
 #define BOLT_H
 
-#include "bolthole.h"
 #include "rb_namespace.h"
 #include "rb_object.h"
 
@@ -43,14 +42,11 @@ public:
     double dBS;
     double dn; // B.7 calculation
     double eN;
-    double l5t;
     double lS;
     double mun;
     double mut;
     double pt;
     double ruptureElongationA;
-
-    BoltHole* mBoltHole;
 };
 
 

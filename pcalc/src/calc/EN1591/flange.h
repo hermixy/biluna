@@ -70,6 +70,13 @@ public:
     double d8;
     double eL;
 
+    // Bolt hole
+    double d5;
+    bool isBlindHole;
+    double d5t;
+    double l5t;
+
+
     Shell* mShell;
     Washer* mWasher;
 

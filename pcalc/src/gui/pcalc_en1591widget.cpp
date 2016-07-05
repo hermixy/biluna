@@ -211,6 +211,12 @@ void PCALC_EN1591Widget::initMapping() {
     mFlangeMapper->addMapping(ileMaterialLooseRing_1,
                               mFlangeModel->fieldIndex(
                                   "materialloosering1_idx"));
+    // bolthole
+    mFlangeMapper->addMapping(led5_1, mFlangeModel->fieldIndex("d51"));
+    mFlangeMapper->addMapping(chbBlindHole_1,
+                              mFlangeModel->fieldIndex("blindhole1"));
+    mFlangeMapper->addMapping(led5t_1, mFlangeModel->fieldIndex("d5t1"));
+    mFlangeMapper->addMapping(lel5t_1, mFlangeModel->fieldIndex("l5t1"));
 
     mFlangeMapper->addMapping(chbFlange2Equal,
                               mFlangeModel->fieldIndex("flange2equal"));
@@ -256,6 +262,12 @@ void PCALC_EN1591Widget::initMapping() {
     mFlangeMapper->addMapping(ileMaterialLooseRing_2,
                               mFlangeModel->fieldIndex(
                                   "materialloosering2_idx"));
+    // bolthole
+    mFlangeMapper->addMapping(led5_2, mFlangeModel->fieldIndex("d52"));
+    mFlangeMapper->addMapping(chbBlindHole_2,
+                              mFlangeModel->fieldIndex("blindhole2"));
+    mFlangeMapper->addMapping(led5t_2, mFlangeModel->fieldIndex("d5t2"));
+    mFlangeMapper->addMapping(lel5t_2, mFlangeModel->fieldIndex("l5t2"));
 
     // gasket
     mGasketMapper = mGasketModel->getMapper();
@@ -388,8 +400,6 @@ void PCALC_EN1591Widget::initMapping() {
                                      mBoltNutWasherModel->fieldIndex("dn"));
     mBoltNutWasherMapper->addMapping(leeN,
                                      mBoltNutWasherModel->fieldIndex("en"));
-    mBoltNutWasherMapper->addMapping(lel5t,
-                                     mBoltNutWasherModel->fieldIndex("l5t"));
     mBoltNutWasherMapper->addMapping(lelS,
                                      mBoltNutWasherModel->fieldIndex("ls"));
     mBoltNutWasherMapper->addMapping(lemun,
@@ -407,16 +417,6 @@ void PCALC_EN1591Widget::initMapping() {
     mBoltNutWasherMapper->addMapping(ileMaterialBolt,
                                      mBoltNutWasherModel->fieldIndex(
                                          "materialbolt_idx"));
-    // bolthole
-    mBoltNutWasherMapper->addMapping(led5,
-                                     mBoltNutWasherModel->fieldIndex("d5"));
-    mBoltNutWasherMapper->addMapping(led5t,
-                                     mBoltNutWasherModel->fieldIndex("d5t"));
-//    mBoltNutWasherMapper->addMapping(leeFb,
-//                                     mBoltNutWasherModel->fieldIndex("efb"));
-    mBoltNutWasherMapper->addMapping(chbBlindHole,
-                                     mBoltNutWasherModel->fieldIndex(
-                                         "blindhole"));
     // washer
     mBoltNutWasherMapper->addMapping(leeW,
                                      mBoltNutWasherModel->fieldIndex("ew"));
@@ -922,6 +922,11 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "el1", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "materialflange1_idx", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "materialloosering1_idx", "-", mFlangeModel);
+    // bolthole
+    addObjectMemberVariable(objIn, "d51", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "blindhole1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "d5t1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "l5t1", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "flange2equal", "-", mFlangeModel);
 
@@ -954,6 +959,11 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "el2", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "materialflange2_idx", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "materialloosering2_idx", "-", mFlangeModel);
+    // bolthole
+    addObjectMemberVariable(objIn, "d52", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "blindhole2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "d5t2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "l5t2", "-", mFlangeModel);
 
     // gasket
     addObjectMemberVariable(objIn, "gaskettype_idx", "-", mGasketModel);
@@ -979,17 +989,12 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "dbs", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "dn", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "en", "-", mBoltNutWasherModel);
-    addObjectMemberVariable(objIn, "l5t", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "ls", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "mun", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "mut", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "pt", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "ruptureelongationa", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "materialbolt_idx", "-", mBoltNutWasherModel);
-    // bolthole
-    addObjectMemberVariable(objIn, "d5", "-", mBoltNutWasherModel);
-    addObjectMemberVariable(objIn, "d5t", "-", mBoltNutWasherModel);
-    addObjectMemberVariable(objIn, "blindhole", "-", mBoltNutWasherModel);
     // washer
     addObjectMemberVariable(objIn, "ew", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "dw1", "-", mBoltNutWasherModel);

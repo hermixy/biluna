@@ -70,10 +70,10 @@ void FlangeTest::setupTarget() {
     target->eF = 15.6;
     target->nB = 16;
 
-    target->mBolt->mBoltHole->d5 = 43.7;
-    target->mBolt->mBoltHole->isBlindHole = false; // threaded
-    target->mBolt->mBoltHole->d5t = 24.33;
-    target->mBolt->l5t = 42.7;
+    target->d5 = 43.7;
+    target->isBlindHole = false; // threaded
+    target->d5t = 24.33;
+    target->l5t = 42.7;
     target->eFb = 0.31;
 }
 
@@ -89,7 +89,7 @@ void FlangeTest::Calc_d5eTest() {
     target->Calc_d5e();
     areEqual(PR->getLastOutput(), "FlangeTest::Calc_d5eTest()",
              30.918259, target->d5e);
-    target->mBolt->mBoltHole->isBlindHole = true;
+    target->isBlindHole = true;
     target->Calc_d5e();
     areEqual(PR->getLastOutput(), "FlangeTest::Calc_d5eTest()",
              20763.727150987565, target->d5e);
@@ -521,7 +521,7 @@ void FlangeTest::Calc_dK1Test() {
     target->mWasher->eW = 2;
     target->mWasher->dW1 = 3;
     target->mWasher->dW2 = 52.5;
-    target->mBolt->mBoltHole->d5 = 2.1;
+    target->d5 = 2.1;
     target->mWasher->dW1 = 2.3;
     target->Calc_dK1();
     areEqual(PR->getLastOutput(), "FlangeTest::Calc_dK1Test()", 2.3, target->mWasher->dK1);

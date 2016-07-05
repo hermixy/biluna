@@ -104,6 +104,12 @@ void EN1591Handler::setDimMatInput() {
     fl1->materialIdx = in->getValue("materialflange1_idx").toString();
     fl1->materialLooseIdx = in->getValue("materialloosering1_idx").toString();
 
+    // bolthole
+    fl1->d5 = in->getValue("d51").toDouble();
+    fl1->isBlindHole = (bool)in->getValue("blindhole1").toInt();
+    fl1->d5t = in->getValue("d5t1").toDouble();
+    fl1->l5t = in->getValue("l5t1").toDouble();
+
     Flange* fl2 = mCalc->mAssembly->mFlange2;
     fl2->nB = fl1->nB; // always same number of bolts
 
@@ -138,6 +144,13 @@ void EN1591Handler::setDimMatInput() {
 
         fl2->materialIdx = fl1->materialIdx;
         fl2->materialLooseIdx = fl1->materialLooseIdx;
+
+        // bolthole
+        fl2->d5 = fl1->d5;
+        fl2->isBlindHole = fl1->isBlindHole;
+        fl2->d5t = fl1->d5t;
+        fl2->l5t = fl1->l5t;
+
     } else {
         fl2->d0 = in->getValue("d02").toDouble();
         fl2->d3 = in->getValue("d32").toDouble();
@@ -168,6 +181,12 @@ void EN1591Handler::setDimMatInput() {
 
         fl2->materialIdx = in->getValue("materialflange2_idx").toString();
         fl2->materialLooseIdx = in->getValue("materialloosering2_idx").toString();
+
+        // bolthole
+        fl2->d5 = in->getValue("d52").toDouble();
+        fl2->isBlindHole = (bool)in->getValue("blindhole2").toInt();
+        fl2->d5t = in->getValue("d5t2").toDouble();
+        fl2->l5t = in->getValue("l5t2").toDouble();
     }
 
     // gasket
@@ -197,17 +216,11 @@ void EN1591Handler::setDimMatInput() {
     blt->dBS = in->getValue("dbs").toDouble();
     blt->dn = in->getValue("dn").toDouble();
     blt->eN = in->getValue("en").toDouble();
-    blt->l5t = in->getValue("l5t").toDouble();
     blt->lS = in->getValue("ls").toDouble();
     blt->mun = in->getValue("mun").toDouble();
     blt->mut = in->getValue("mut").toDouble();
     blt->ruptureElongationA = in->getValue("ruptureelongationa").toDouble();
     blt->materialIdx = in->getValue("materialbolt_idx").toString();
-    // bolthole
-    BoltHole* bhl = blt->mBoltHole;
-    bhl->d5 = in->getValue("d5").toDouble();
-    bhl->d5t = in->getValue("d5t").toDouble();
-    bhl->isBlindHole = (bool)in->getValue("blindhole").toInt();
     // washer
     Washer* wr = mCalc->mAssembly->mFlange1->mWasher;
     wr->eW = in->getValue("ew").toDouble();

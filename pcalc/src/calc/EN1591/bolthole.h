@@ -12,10 +12,9 @@ public:
     BoltHole_IN();
     virtual ~BoltHole_IN();
 
-    double d5;
-    double d5t;
-//    double eFb;
-    bool isBlindHole;
+//    double d5;
+//    double d5t;
+//    bool isBlindHole;
 
 };
 

@@ -13,17 +13,13 @@ Bolt_IN::Bolt_IN() : RB_Object("PCALC EN1591 Bolt"){
     dBS = 0;
     dn = 0;
     eN = 0;
-    l5t = 0;
     lS = 0;
     mut = 0;
     ruptureElongationA = 0;
-
-    mBoltHole = new BoltHole();
 }
 
 Bolt_IN::~Bolt_IN() {
-    delete mBoltHole;
-    mBoltHole = NULL;
+    // nothing
 }
 
 Bolt_OUT::Bolt_OUT() : Bolt_IN(){

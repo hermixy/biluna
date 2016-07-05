@@ -67,6 +67,11 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("el1", "mm", 0.0, RB2::MemberDouble);
     addMember("materialflange1_idx", "-", "0", RB2::MemberChar165);
     addMember("materialloosering1_idx", "-", "0", RB2::MemberChar165);
+    // bolthole
+    addMember("d51", "mm", 0.0, RB2::MemberDouble);
+    addMember("blindhole1", "-", 0, RB2::MemberInteger);
+    addMember("d5t1", "mm", 0.0, RB2::MemberDouble);
+    addMember("l5t1", "mm", 0.0, RB2::MemberDouble);
 
     // flange 2
     addMember("flange2equal", "-", 0, RB2::MemberInteger);
@@ -100,4 +105,9 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("el2", "mm", 0.0, RB2::MemberDouble);
     addMember("materialflange2_idx", "-", "0", RB2::MemberChar165);
     addMember("materialloosering2_idx", "-", "0", RB2::MemberChar165);
+    // bolthole
+    addMember("d52", "mm", 0.0, RB2::MemberDouble);
+    addMember("blindhole2", "-", 0, RB2::MemberInteger);
+    addMember("d5t2", "mm", 0.0, RB2::MemberDouble);
+    addMember("l5t2", "mm", 0.0, RB2::MemberDouble);
 }
