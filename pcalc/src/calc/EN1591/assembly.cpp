@@ -264,11 +264,12 @@ void Assembly::Calc_bGi(bool isFirstApproximation) {
 }
 
 /**
- * @brief Formula 57: Initial gasket stress at assembly
- * and the gasket stress in case of other loadcases
+ * @brief Formula 57: Initial gasket stress at assembly and loadCaseNo is
+ * zero. (Note: do not use subsequent loadCaseNo for determining E_GI in
+ * formula 100 because E_GI is based on Q_G0 and temperature at loadcase)
+ * @param loadCaseNo loadcase number
  */
 void Assembly::Calc_Q_G(int loadCaseNo) {
-//    int loadCaseNo = 0;
     mLoadCaseList->at(loadCaseNo)->Q_G =
             mLoadCaseList->at(loadCaseNo)->F_G / mGasket->AGe;
     PR->addDetail("Formula 57", "Q_G", "F_G / AGe",

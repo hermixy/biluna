@@ -203,7 +203,8 @@ void Gasket::Calc_AGe() {
 }
 
 /**
- * @brief Formula 58: Gasket compressed elasticity at initial loading
+ * @brief Formula 58: Gasket compressed elasticity based on initial loading
+ * and loadCase temperature
  * @param loadCaseNo
  */
 void Gasket::Calc_E_G(int loadCaseNo) {
@@ -308,7 +309,9 @@ void Gasket::Calc_Q_A_Qsmin(int loadCaseNo) {
                           QN(loadCase0->F_G) + " / " + QN(AGe),
                           loadCaseNo, "User specified bolt force");
         } else {
-            loadCase0->Q_A = loadCase0->Q_minL;
+            // Does not always converge: loadCase0->Q_A = loadCase0->Q_minL;
+            // Slowly move to required solution:
+            loadCase0->Q_A = (loadCase0->Q_A + loadCase0->F_G / AGe) / 2;
 
             if (loadCase0->Q_A > 0) {
                 PR->addDetail("Before_F. 103", "Q_A", "Q_minL",

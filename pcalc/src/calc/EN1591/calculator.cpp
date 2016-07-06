@@ -415,7 +415,7 @@ void Calculator::F90_to_102(Assembly* assembly, int loadCaseNo) {
 //    assembly->Calc_lB(); already before Formula 42
     assembly->mGasket->Calc_alphaG(loadCaseNo);
     assembly->Calc_dUI(loadCaseNo);
-    assembly->Calc_Q_G(loadCaseNo); // extra for determining EG Formula 100
+//    assembly->Calc_Q_G(loadCaseNo); not required for determining EGI Formula 100, because Q_G0 always used
     assembly->mGasket->Calc_E_G(loadCaseNo);
     assembly->Calc_YB(loadCaseNo);
     assembly->Calc_YG(loadCaseNo);
