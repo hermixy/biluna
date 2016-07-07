@@ -36,6 +36,7 @@ SCAN_ActionPlugin::~SCAN_ActionPlugin() {
     delete SCAN_ACTIONFACTORY;
     delete SCAN_DIALOGFACTORY; // before modelfactory otherwise models invalid
     delete SCAN_MODELFACTORY;
+    // TODO: create utility factory
     delete mMenuAction;
     delete mToolBar;
 }

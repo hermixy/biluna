@@ -36,6 +36,7 @@ PENG_ActionPlugin::~PENG_ActionPlugin() {
     delete PENG_ACTIONFACTORY;
     delete PENG_DIALOGFACTORY; // before modelfactory otherwise models invalid
     delete PENG_MODELFACTORY;
+    // TODO: create utility factory
     delete mMenuAction;
     delete mToolBar;
 }

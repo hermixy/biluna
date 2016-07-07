@@ -26,7 +26,7 @@ STD_SelectMaterialWidget::~STD_SelectMaterialWidget() {
 }
 
 QString STD_SelectMaterialWidget::getName() const {
-    return "Material Elasticity Modulus Tables";
+    return "Select Material";
 }
 
 RB2::PerspectiveType STD_SelectMaterialWidget::getPerspectiveType() const {

@@ -36,6 +36,7 @@ SRM_ActionPlugin::~SRM_ActionPlugin() {
     delete SRM_ACTIONFACTORY;
     delete SRM_DIALOGFACTORY; // before modelfactory otherwise models invalid
     delete SRM_MODELFACTORY;
+    // TODO: create utility factory
     delete mMenuAction;
     delete mToolBar;
 }

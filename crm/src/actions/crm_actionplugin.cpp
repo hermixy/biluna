@@ -36,6 +36,7 @@ CRM_ActionPlugin::~CRM_ActionPlugin() {
     delete CRM_ACTIONFACTORY;
     delete CRM_DIALOGFACTORY; // before modelfactory otherwise models invalid
     delete CRM_MODELFACTORY;
+    // TODO: create utility factory
     delete mMenuAction;
     delete mToolBar;
 }

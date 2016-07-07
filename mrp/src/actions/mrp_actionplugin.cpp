@@ -36,6 +36,7 @@ MRP_ActionPlugin::~MRP_ActionPlugin() {
     delete MRP_ACTIONFACTORY;
     delete MRP_DIALOGFACTORY; // before modelfactory otherwise models invalid
     delete MRP_MODELFACTORY;
+    // TODO: create utility factory
     delete mMenuAction;
     delete mToolBar;
 }

@@ -36,6 +36,7 @@ SAIL_ActionPlugin::~SAIL_ActionPlugin() {
     delete SAIL_ACTIONFACTORY;
     delete SAIL_DIALOGFACTORY; // before modelfactory otherwise models invalid
     delete SAIL_MODELFACTORY;
+    // TODO: create utility factory
     delete mMenuAction;
     delete mToolBar;
 }
