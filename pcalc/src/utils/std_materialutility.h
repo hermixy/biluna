@@ -53,29 +53,13 @@ public:
     STD2::MatStruct getMaterialStructure();
     double getElongationPercent();
 
-//    double get_Rp02(double designTemp);
-//    double get_Rp10(double designTemp);
-//    double get_RmMin(double designTemp);
-
 //    // For unit tests only
 //    friend class STD_MaterialUtilityTest;
 
 private:
     STD_MaterialUtility();
 
-//    bool loadMaterial(const QString& materialId);
-//    bool loadElasModulTable(const QString& elasModulTableId);
-//    bool loadThemExpTable(const QString& thermExpTableId);
-
     static STD_MaterialUtility* mActiveUtility;
-//    RB_ObjectContainer* mMaterialList;
-//    RB_ObjectBase* mCurrentMaterial;
-//    RB_ObjectContainer* mElasModulTableList;
-//    RB_ObjectBase* mCurrentElasModulTable;
-//    RB_ObjectContainer* mThermExpTableList;
-//    RB_ObjectBase* mCurrentThermExpTable;
-//    // TODO: External Pressure
-
     STD_MaterialHandler* mMatHandler;
 
 };

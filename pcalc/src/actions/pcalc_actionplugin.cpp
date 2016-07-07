@@ -17,6 +17,7 @@
 #include "pcalc_actionselectproject.h"
 #include "pcalc_dialogfactory.h"
 #include "pcalc_modelfactory.h"
+#include "pcalc_utilityfactory.h"
 
 /**
  * Constructor
@@ -35,7 +36,8 @@ PCALC_ActionPlugin::~PCALC_ActionPlugin() {
 
     delete PCALC_ACTIONFACTORY;
     delete PCALC_DIALOGFACTORY; // before modelfactory otherwise models invalid
-    delete PCALC_MODELFACTORY;
+    delete PCALC_MODELFACTORY;  // includes object factory
+    delete PCALC_UTILITYFACTORY;
     delete mMenuAction;
     delete mToolBar;
 }

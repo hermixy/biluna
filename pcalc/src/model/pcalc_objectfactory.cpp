@@ -62,7 +62,7 @@ PCALC_ObjectFactory::PCALC_ObjectFactory() {
  */
 PCALC_ObjectFactory::~PCALC_ObjectFactory() {
     DB_OBJECTFACTORY->unregisterFactory(this);
-    mActiveObjectFactory = NULL;
+    mActiveObjectFactory = nullptr;
     RB_DEBUG->print("PCALC_ObjectFactory::~PCALC_ObjectFactory() OK");
 }
 

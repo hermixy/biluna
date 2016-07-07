@@ -154,8 +154,6 @@ protected:
     RB_String mId;
     //! pointer to parent object
     RB_ObjectBase* mParent;
-    //! name of the object (instead of typeid() for example LDT_Line)
-//    RB_String mName;
     //! model object factory
     RB_ObjectFactory* mFactory;
     //! pointer to original object in case this object is the clone

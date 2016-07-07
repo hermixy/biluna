@@ -99,6 +99,9 @@ RB_ObjectBase::RB_ObjectBase(RB_ObjectBase* obj) : RB_Object(obj) {
  */
 RB_ObjectBase::~RB_ObjectBase() {
     removeMembers();
+    mParent = nullptr;
+    mFactory = nullptr;
+    mOriginal = nullptr;
 }
 
 

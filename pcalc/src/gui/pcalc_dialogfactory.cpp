@@ -146,8 +146,6 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
  * @return Dialog
  */
 RB_Dialog* PCALC_DialogFactory::getDialog(int type) {
-    RB_DEBUG->print("PCALC_TestDialogFactory::getDialog()");
-
     RB_Dialog* dlg = NULL;
 
     switch (type) {

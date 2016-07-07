@@ -10,14 +10,22 @@
 
 #include "rb_tablemath.h"
 #include "rb_objectiterator.h"
+#include "pcalc_dialogfactory.h"
+#include "pcalc_objectfactory.h"
 NAMESPACE_BILUNA_CALC
 
 RB_TableMath::RB_TableMath() {
-    // nothing
+    mTopLeft = nullptr;
+    mTopRight = nullptr;
+    mBottomLeft = nullptr;
+    mBottomRight = nullptr;
 }
 
 RB_TableMath::~RB_TableMath() {
-    // nothing
+    mTopLeft = nullptr;
+    mTopRight = nullptr;
+    mBottomLeft = nullptr;
+    mBottomRight = nullptr;
 }
 
 /**
