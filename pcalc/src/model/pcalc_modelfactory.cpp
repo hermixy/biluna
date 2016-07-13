@@ -73,9 +73,9 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "PCALC_ClassGeneratorList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "codename", "subname");
         break;
-    case ModelMatCreepTable:
-        model = getTableModel(db, mObjectFactory, type, "STD_CreepTableList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
+    case ModelDimension:
+        model = getTableModel(db, mObjectFactory, type, "STD_DimensionList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "code");
         break;
     case ModelEN13555EGeG:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_EN13555EGeGList");
@@ -129,9 +129,25 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN1591_ShellList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
         break;
+    case ModelFlange:
+        model = getTableModel(db, mObjectFactory, type, "STD_FlangeList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "pressureclass", "nominaldiameter");
+        break;
+    case ModelFlangeFacing:
+        model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
+        break;
+    case ModelFlangeType:
+        model = getTableModel(db, mObjectFactory, type, "STD_FlangeTypeList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
+        break;
     case ModelGeneratorFormula:
         model = getTableModel(db, mObjectFactory, type, "PCALC_GeneratorFormulaList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "number");
+        break;
+    case ModelMatCreepTable:
+        model = getTableModel(db, mObjectFactory, type, "STD_CreepTableList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelMaterial:
         model = getTableModel(db, mObjectFactory, type, "STD_MaterialList");
@@ -217,6 +233,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
     case ModelClassGenerator:
         iter = mModelList.find(ModelGeneratorFormula);
         break;
+    case ModelDimension:
+        iter = mModelList.find(ModelNone);
+        break;
     case ModelEN13555EGeG:
         iter = mModelList.find(ModelNone);
         break;
@@ -255,6 +274,15 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         break;
     case ModelEN1591Shell:
         iter = mModelList.find(ModelEN1591Assembly);
+        break;
+    case ModelFlange:
+        iter = mModelList.find(ModelDimension);
+        break;
+    case ModelFlangeFacing:
+        iter = mModelList.find(ModelDimension);
+        break;
+    case ModelFlangeType:
+        iter = mModelList.find(ModelDimension);
         break;
     case ModelGeneratorFormula:
         iter = mModelList.find(ModelNone);

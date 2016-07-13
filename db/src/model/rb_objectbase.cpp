@@ -472,8 +472,7 @@ int RB_ObjectBase::getMemberNo(const RB_String& name) const {
 }
 
 /**
- * Creation, addition and initialization of members. No action if member
- * member name already exists.
+ * Creation, addition and initialization of members.
  * NOTE: does not check whether member already exists
  * @param id unique identification of member, used to interface with database
  * @param parent parent (base) object of member
@@ -487,13 +486,15 @@ RB_ObjectMember* RB_ObjectBase::addMember(
         const RB_String& name, const RB_String& unit,
         const RB_Variant& value, RB2::MemberType type,
         const RB_Variant& prevValue) {
+//    RB_ObjectMember* member = getMember(name);
 
-    RB_ObjectMember* newMember = new RB_ObjectMember(this,
-                                                     name, unit,
-                                                     value, type,
-                                                     prevValue);
-    mMemberVector.push_back(newMember);
-    return newMember;
+//    if (!member) {
+      RB_ObjectMember* member = new RB_ObjectMember(this, name, unit, value,
+                                                    type, prevValue);
+//    }
+
+    mMemberVector.push_back(member);
+    return member;
 }
 
 /**

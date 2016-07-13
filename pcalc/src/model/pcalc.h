@@ -19,6 +19,23 @@
 class PCALC2 {
 public:
 
+    /**
+     * Component type which has a relation to the PCC2 pipe class component type
+     */
+    enum CompType {
+        CompNone = 0,       	/** Invalid component type. */
+
+        CompCap = 1,			/** Cap or head */
+        CompCylinder = 2,		/** Cylinder or cone, pipe or shell */
+        CompElbow = 3,          /** Elbow */
+        CompFlange = 4,			/** Flange */
+        CompHalfSphere = 5,		/** Half sphere or sphere head */
+        CompOlet = 6,			/** Weldolet, threadolet, nipolet, sockolet */
+        CompTee = 7,			/** Tee */
+
+        CompDefault             /** All or default component type */
+    };
+
     /** Type of flange for GUI */
     enum FlangeType {
         FlangeBlind,

@@ -165,6 +165,14 @@ void PCALC_EN1591Widget::initMapping() {
     mFlangeMapper = mFlangeModel->getMapper();
     mFlangeMapper->addMapping(leF_Bspec, mFlangeModel->fieldIndex("f_bspecified"));
     mFlangeMapper->addMapping(sbnB, mFlangeModel->fieldIndex("nb"));
+
+    mFlangeMapper->addMapping(ileStandardFlange_1,
+                              mFlangeModel->fieldIndex("standardflange1_idx"));
+    // Note: mname will be added by dialog to provide pretty text,
+    // standard name, pressure class and nominal size
+    ileStandardFlange_1->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectFlange,
+                                    "standardflange1_idx", "mname");
     QStringList items;
     items << "Blind" << "Integral" << "Loose";
     cbTypeFlange_1->setModel(new QStringListModel(items, this));
@@ -221,6 +229,13 @@ void PCALC_EN1591Widget::initMapping() {
     mFlangeMapper->addMapping(chbFlange2Equal,
                               mFlangeModel->fieldIndex("flange2equal"));
 
+    mFlangeMapper->addMapping(ileStandardFlange_2,
+                              mFlangeModel->fieldIndex("standardflange2_idx"));
+    // Note: mname will be added by dialog to provide pretty text,
+    // standard name, pressure class and nominal size
+    ileStandardFlange_2->setDefaultDialog(PCALC_DIALOGFACTORY,
+                                    PCALC_DialogFactory::WidgetSelectFlange,
+                                    "standardflange1_idx", "mname");
     cbTypeFlange_2->setModel(new QStringListModel(items, this));
     mFlangeMapper->addMapping(cbTypeFlange_2,
                               mFlangeModel->fieldIndex("typeflange2_id"),

@@ -14,6 +14,7 @@ FORMS += \
     ../src/gui/std_matelasmodulwidget.ui \
     ../src/gui/std_materialwidget.ui \
     ../src/gui/std_matthermexpwidget.ui \
+    ../src/gui/std_selectcomponentwidget.ui \
     ../src/gui/std_selectmaterialwidget.ui
 
 HEADERS += \
@@ -75,6 +76,8 @@ HEADERS += \
     ../src/gui/std_matelasmodulwidget.h \
     ../src/gui/std_materialwidget.h \
     ../src/gui/std_matthermexpwidget.h \
+    ../src/gui/std_selectcomponentwidget.h \
+    ../src/gui/std_selectflangewidget.h \
     ../src/gui/std_selectmaterialwidget.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
@@ -96,9 +99,13 @@ HEADERS += \
     ../src/model/pcalc_objectfactory.h \
     ../src/model/std.h \
     ../src/model/std_creeptable.h \
+    ../src/model/std_dimension.h \
     ../src/model/std_elasmodul.h \
     ../src/model/std_elasmodultable.h \
     ../src/model/std_extpresstable.h \
+    ../src/model/std_flange.h \
+    ../src/model/std_flangefacing.h \
+    ../src/model/std_flangetype.h \
     ../src/model/std_material.h \
     ../src/model/std_rmmin.h \
     ../src/model/std_rp02.h \
@@ -180,6 +187,8 @@ SOURCES += \
     ../src/gui/std_matelasmodulwidget.cpp \
     ../src/gui/std_materialwidget.cpp \
     ../src/gui/std_matthermexpwidget.cpp \
+    ../src/gui/std_selectcomponentwidget.cpp \
+    ../src/gui/std_selectflangewidget.cpp \
     ../src/gui/std_selectmaterialwidget.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \
@@ -199,9 +208,13 @@ SOURCES += \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
     ../src/model/std_creeptable.cpp \
+    ../src/model/std_dimension.cpp \
     ../src/model/std_elasmodul.cpp \
     ../src/model/std_elasmodultable.cpp \
     ../src/model/std_extpresstable.cpp \
+    ../src/model/std_flange.cpp \
+    ../src/model/std_flangefacing.cpp \
+    ../src/model/std_flangetype.cpp \
     ../src/model/std_material.cpp \
     ../src/model/std_rmmin.cpp \
     ../src/model/std_rp02.cpp \

@@ -22,6 +22,10 @@
 #include "peng_project.h"
 #include "rb_debug.h"
 #include "rb_uuid.h"
+#include "std_creeptable.h"
+#include "std_dimension.h"
+#include "std_elasmodul.h"
+#include "std_elasmodultable.h"
 #include "std_en13555egeg.h"
 #include "std_en13555gasket.h"
 #include "std_en13555manufacturer.h"
@@ -29,10 +33,10 @@
 #include "std_en13555qminl.h"
 #include "std_en13555qsmaxalphag.h"
 #include "std_en13555qsminl.h"
-#include "std_creeptable.h"
-#include "std_elasmodul.h"
-#include "std_elasmodultable.h"
 #include "std_extpresstable.h"
+#include "std_flange.h"
+#include "std_flangefacing.h"
+#include "std_flangetype.h"
 #include "std_material.h"
 #include "std_rmmin.h"
 #include "std_rp02.h"
@@ -116,6 +120,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_CreepTableList", this);
         obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_DimensionList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_ElasModulTableList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_EN13555ManufacturerList", this);
@@ -171,6 +177,16 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_RpT200khList", this);
         obj->addObject(list);
+    } else if (str == "STD_DimensionList") {
+        obj = new STD_Dimension(uuid, parent, "STD_Dimension", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeTypeList", this);
+        obj->addObject(list);
     } else if (str == "STD_ElasModulList") {
         obj = new STD_ElasModul(uuid, parent, "STD_ElasModul", this);
     } else if (str == "STD_ElasModulTableList") {
@@ -216,6 +232,12 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
 //        uuid = "";
 //        list = new RB_ObjectContainer (uuid, obj, "STD_ExtPressList", this);
 //        obj->addObject(list);
+    } else if (str == "STD_FlangeFacingList") {
+        obj = new STD_FlangeFacing(uuid, parent, "STD_FlangeFacing", this);
+    } else if (str == "STD_FlangeList") {
+        obj = new STD_Flange(uuid, parent, "STD_Flange", this);
+    } else if (str == "STD_FlangeTypeList") {
+        obj = new STD_FlangeType(uuid, parent, "STD_FlangeType", this);
     } else if (str == "STD_MaterialList") {
         obj = new STD_Material(uuid, parent, "STD_Material", this);
 

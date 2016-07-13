@@ -636,6 +636,7 @@ void DB_MappingDialog::importCsvFile() {
     RB_String strIns = "";
     RB_String strVal = "";
     int colRunner = 0;
+    RB_String timeStr = QDateTime::currentDateTime().toString(Qt::ISODate);
 
 	
     while (number < mLines.count()) {
@@ -682,13 +683,16 @@ void DB_MappingDialog::importCsvFile() {
                 // Skip combination of id and generated Uuid's
                 // and parent id when is set by user
                 if (strIns != tr("(none)") && strIns != "id"
-                        && strIns != "parent" && strIns != "name") {
+                        && strIns != "parent" && strIns != "name"
+                        && strIns != "created" && strIns != "changed"
+                        && strIns != "muser") {
                     if (!firstRow) {
                         qStrInsert += ", ";
                         qStrValues += ", ";
                     } else {
-                        qStrInsert += "id, parent, name, ";
-                        qStrValues += "?, ?, ?, ";
+                        qStrInsert += "id, parent, name, created, changed, muser,";
+                        qStrValues += "?, ?, ?, '" + timeStr + "', '"
+                                + timeStr + "', 'import', ";
                     }
 
                     qStrInsert += strIns;

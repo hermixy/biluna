@@ -70,30 +70,6 @@ void DB_ActionSystemToolsImportModel::trigger() {
         return;
     }
 
-//    RB_ObjectContainer* root = new RB_ObjectContainer("", NULL, "XXX_Project"); //fact->newSingleObject("XXX_Project");
-//    RB_XmlReader* xr = new RB_XmlReader(root);
-//    RB_String perspectiveName = xr->readRootElement(&f);
-//    RB_ObjectFactory* fact = DB_OBJECTFACTORY->getFactory(perspectiveName);
-
-//    if (!fact) {
-//        DB_DIALOGFACTORY->requestWarningDialog(
-//                    tr("Perspective %1 not loaded \nor not existing.")
-//                    .arg(perspectiveName));
-//        delete xr;
-//        f.close();
-//        return;
-//    }
-
-//    QApplication::setOverrideCursor(Qt::WaitCursor);
-
-//    root->setFactory(fact);
-//    root->setName(perspectiveName.toUpper() + "_Project");
-
-//    RB_ObjectFactory* fact = DB_OBJECTFACTORY->getFactory("ACC");
-//    RB_ObjectBase* root = fact->newSingleObject("XXX_Project");
-//    DB_XmlReader* xr = new DB_XmlReader(root);
-//    xr->setNewId(true);
-
     bool useNewId = false;
     int result = DB_DIALOGFACTORY->requestYesNoDialog(
                 tr("New ID"), tr("Do you want to use new ID's?"));
@@ -177,73 +153,5 @@ void DB_ActionSystemToolsImportModel::trigger() {
         QApplication::restoreOverrideCursor();
         mdiWin->show();
     }
-
-
-
-
-    /*
-    // Get model
-    RB_ObjectFactory* f = NULL;
-    QStringList items;
-    items << tr("None");
-
-    std::vector<RB_ObjectFactory*> fl = DB_OBJECTFACTORY->getFactoryList();
-    std::vector<RB_ObjectFactory*>::iterator iter;
-    iter = fl.begin();
-    while (iter != fl.end()) {
-        items.append((*iter)->getName());
-        ++iter;
-    }
-
-    bool ok = false;
-
-    QString factoryName = QInputDialog::getItem(DB_DIALOGFACTORY->getMainWindow(),
-                                      tr("Select model ..."),
-                                      tr("Model"), items, 0, false, &ok);
-    if (ok && !factoryName.isEmpty()) {
-        iter = fl.begin();
-        while (iter != fl.end()) {
-            if (factoryName == (*iter)->getName()) {
-                f = (*iter);
-            }
-            ++iter;
-        }
-    }
-
-    if (!f) {
-        DB_DIALOGFACTORY->requestWarningDialog(tr("Model not found."));
-        return;
-    }
-
-
-    RB_String fileName = factoryName.toLower() + ".xml";
-    DB_ActionFileSaveAs a;
-    a.getSaveFileName(fileName);
-
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-
-    // Create filename from const char* to char*
-    char* fn = new char[strlen(fileName.toStdString().c_str())+1];
-    strcpy(fn, fileName.toStdString().c_str());
-
-    RB_XmlFileWriter* xfw = new RB_XmlFileWriter(fn);
-
-    if (xfw->openFailed()) {
-        delete xfw;
-        QApplication::restoreOverrideCursor();
-
-        DB_DIALOGFACTORY->requestWarningDialog(tr("Cannot write file"));
-        return;
-    }
-
-
-    RB_ObjectBase* root = f->getModelStructure("XX_Project");
-    root->acceptVisitor(*xfw);
-    xfw->close();
-    delete xfw;
-
-    QApplication::restoreOverrideCursor();
-    */
-
 }
 

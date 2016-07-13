@@ -26,6 +26,7 @@
 #include "std_matelasmodulwidget.h"
 #include "std_materialwidget.h"
 #include "std_matthermexpwidget.h"
+#include "std_selectflangewidget.h"
 #include "std_selectmaterialwidget.h"
 
 
@@ -119,6 +120,10 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new PCALC_ProjectEditWidget(parent);
         break;
     }
+    case WidgetSelectFlange: {
+        wgt = new STD_SelectFlangeWidget(parent);
+        break;
+    }
     case WidgetSelectMaterial: {
         wgt = new STD_SelectMaterialWidget(parent);
         break;
@@ -151,6 +156,10 @@ RB_Dialog* PCALC_DialogFactory::getDialog(int type) {
     switch (type) {
     case DialogProject: {
         dlg = new PCALC_ProjectDialog(mMainWindow);
+        break;
+    }
+    case WidgetSelectFlange: {
+        // TODO: getDialog() method to be removed in its entirety
         break;
     }
     case WidgetEN1591SelectGasket: {

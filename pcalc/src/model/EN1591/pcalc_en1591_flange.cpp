@@ -38,6 +38,7 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("f_bspecified", "N", 0.0, RB2::MemberDouble);
 
     // flange 1
+    addMember("standardflange1_idx", "-", "0", RB2::MemberChar165);
     addMember("typeflange1_id", "-", 0, RB2::MemberInteger);
     addMember("d01", "mm", 0.0, RB2::MemberDouble);
     addMember("d31", "mm", 0.0, RB2::MemberDouble);
@@ -76,6 +77,7 @@ void PCALC_EN1591_Flange::createMembers() {
     // flange 2
     addMember("flange2equal", "-", 0, RB2::MemberInteger);
 
+    addMember("standardflange2_idx", "-", "0", RB2::MemberChar165);
     addMember("typeflange2_id", "-", 0, RB2::MemberInteger);
     addMember("d02", "mm", 0.0, RB2::MemberDouble);
     addMember("d32", "mm", 0.0, RB2::MemberDouble);

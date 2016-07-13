@@ -174,16 +174,16 @@ public:
 
     enum SettingType {
         SettingNone = 0,                    /** Invalid setting type */
-        SettingCustomLabel1 = 1,            /** Custom field lable 1 */
-        SettingCustomLabel2 = 2,            /** Custom field lable 2 */
-        SettingCustomLabel3 = 3,            /** Custom field lable 3 */
-        SettingCustomLabel4 = 4,            /** Custom field lable 4 */
-        SettingCustomLabel5 = 5,            /** Custom field lable 5 */
-        SettingCustomLabel6 = 6,            /** Custom field lable 6 */
-        SettingCustomLabel7 = 7,            /** Custom field lable 7 */
-        SettingCustomLabel8 = 8,            /** Custom field lable 8 */
-        SettingCustomLabel9 = 9,            /** Custom field lable 9 */
-        SettingCustomLabel10 = 10,          /** Custom field lable 10 */
+        SettingCustomLabel1 = 1,            /** Custom field label 1 */
+        SettingCustomLabel2 = 2,            /** Custom field label 2 */
+        SettingCustomLabel3 = 3,            /** Custom field label 3 */
+        SettingCustomLabel4 = 4,            /** Custom field label 4 */
+        SettingCustomLabel5 = 5,            /** Custom field label 5 */
+        SettingCustomLabel6 = 6,            /** Custom field label 6 */
+        SettingCustomLabel7 = 7,            /** Custom field label 7 */
+        SettingCustomLabel8 = 8,            /** Custom field label 8 */
+        SettingCustomLabel9 = 9,            /** Custom field label 9 */
+        SettingCustomLabel10 = 10,          /** Custom field label 10 */
         SettingDefault                      /** Default setting type */
     };
 
