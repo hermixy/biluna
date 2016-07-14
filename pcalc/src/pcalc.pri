@@ -105,6 +105,7 @@ HEADERS += \
     ../src/model/std_extpresstable.h \
     ../src/model/std_flange.h \
     ../src/model/std_flangefacing.h \
+    ../src/model/std_flangerating.h \
     ../src/model/std_flangetype.h \
     ../src/model/std_material.h \
     ../src/model/std_rmmin.h \
@@ -214,6 +215,7 @@ SOURCES += \
     ../src/model/std_extpresstable.cpp \
     ../src/model/std_flange.cpp \
     ../src/model/std_flangefacing.cpp \
+    ../src/model/std_flangerating.cpp \
     ../src/model/std_flangetype.cpp \
     ../src/model/std_material.cpp \
     ../src/model/std_rmmin.cpp \

@@ -58,11 +58,15 @@ void STD_SelectFlangeWidget::init() {
     //            mTypeModel, SLOT(slotParentCurrentRowChanged(QModelIndex,QModelIndex)));
 
     // Continue here ...
+    mRatingModel;
+
+
 
     mSerieModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlangeFacing, false);
     ui->cbSerie->setModel(mSerieModel);
     ui->cbSerie->setModelColumn(mSerieModel->fieldIndex("type"));
+    ui->lblSerie->setText("Facing");
 
 
 
@@ -73,4 +77,5 @@ void STD_SelectFlangeWidget::init() {
 void STD_SelectFlangeWidget::slotDimensionRowChanged(int row) {
     QModelIndex index = mDimensionModel->index(row, 0);
     mTypeModel->slotParentCurrentRowChanged(index, QModelIndex());
+    mSerieModel->slotParentCurrentRowChanged(index, QModelIndex());
 }

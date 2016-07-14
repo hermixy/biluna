@@ -10,12 +10,12 @@
 #ifndef STD_FLANGETYPE_H
 #define STD_FLANGETYPE_H
 
-#include "rb_objectatomic.h"
+#include "rb_objectcontainer.h"
 
 /**
  * Flange type as defined in the parent dimension standard
  */
-class STD_FlangeType : public RB_ObjectAtomic {
+class STD_FlangeType : public RB_ObjectContainer {
 
 public:
     STD_FlangeType(const QString& id = "", RB_ObjectBase* p = NULL,

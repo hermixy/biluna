@@ -36,6 +36,7 @@
 #include "std_extpresstable.h"
 #include "std_flange.h"
 #include "std_flangefacing.h"
+#include "std_flangerating.h"
 #include "std_flangetype.h"
 #include "std_material.h"
 #include "std_rmmin.h"
@@ -183,8 +184,6 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         uuid = "";
         list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeList", this);
-        obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_FlangeTypeList", this);
         obj->addObject(list);
     } else if (str == "STD_ElasModulList") {
@@ -236,8 +235,18 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new STD_FlangeFacing(uuid, parent, "STD_FlangeFacing", this);
     } else if (str == "STD_FlangeList") {
         obj = new STD_Flange(uuid, parent, "STD_Flange", this);
+    } else if (str == "STD_FlangeRatingList") {
+        obj = new STD_FlangeRating(uuid, parent, "STD_FlangeRating", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeList", this);
+        obj->addObject(list);
     } else if (str == "STD_FlangeTypeList") {
         obj = new STD_FlangeType(uuid, parent, "STD_FlangeType", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeRatingList", this);
+        obj->addObject(list);
     } else if (str == "STD_MaterialList") {
         obj = new STD_Material(uuid, parent, "STD_Material", this);
 

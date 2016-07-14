@@ -28,8 +28,7 @@ STD_Flange::~STD_Flange() {
 
 /**
  * Create members:
- * \li rating PN or Class pressure class for flange
- * \li nominaldiameter DN or Inch nominal diameter
+ * \li nomdiam DN or NPS nominal diameter
  * \li d outside diameter
  * \li k diameter of bolt circle
  * \li l diameter of bolt hole
@@ -61,8 +60,7 @@ STD_Flange::~STD_Flange() {
  * \li s wall thickness
  */
 void STD_Flange::createMembers() {
-    addMember("rating", "-", 0, RB2::MemberInteger);
-    addMember("nominaldiameter", "-", 0, RB2::MemberDouble);
+    addMember("nomdiam", "-", 0, RB2::MemberDouble);
     addMember("d", "mm", 0, RB2::MemberDouble);
     addMember("k", "mm", 0, RB2::MemberDouble);
     addMember("l", "mm", 0, RB2::MemberDouble);

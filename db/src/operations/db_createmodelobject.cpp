@@ -89,7 +89,7 @@ void DB_CreateModelObject::createSourceContent(RB_ObjectBase* memberList) {
     mSourceContent += objCamelCase + "::" + objCamelCase + "(\n"
             "                   const QString& id, RB_ObjectBase* p,\n"
             "                   const QString& n, RB_ObjectFactory* f)\n"
-            "					: " + mBaseObjectName + " (id, p, n, f) {\n"
+            "					: " + mBaseObjectName + "(id, p, n, f) {\n"
             "	createMembers();\n"
             "}\n";
     mSourceContent += "\n";
