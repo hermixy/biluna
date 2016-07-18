@@ -39,6 +39,7 @@ public:
 
 protected slots:
     void slotDimensionRowChanged(int row);
+    void slotTypeRowChanged(int row);
 
 };
 

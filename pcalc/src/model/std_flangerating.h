@@ -10,12 +10,12 @@
 #ifndef STD_FLANGERATING_H
 #define STD_FLANGERATING_H
 
-#include "rb_objectatomic.h"
+#include "rb_objectcontainer.h"
 
 /**
  * Flange rating based on parent model flange type
  */
-class STD_FlangeRating : public RB_ObjectAtomic {
+class STD_FlangeRating : public RB_ObjectContainer {
 
 public:
     STD_FlangeRating(const QString& id = "", RB_ObjectBase* p = NULL,

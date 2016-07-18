@@ -46,7 +46,6 @@ void STD_SelectFlangeWidget::init() {
     //    items << "Blind" << "Integral" << "Loose";
     //    ui->cbType->setModel(new QStringListModel(items, this));
 
-    // Continue here: create type model in database, not a string list
     mTypeModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlangeType, false);
     ui->cbType->setModel(mTypeModel);
@@ -57,16 +56,21 @@ void STD_SelectFlangeWidget::init() {
     //    connect(mDimensionModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
     //            mTypeModel, SLOT(slotParentCurrentRowChanged(QModelIndex,QModelIndex)));
 
-    // Continue here ...
-    mRatingModel;
-
-
-
     mSerieModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlangeFacing, false);
     ui->cbSerie->setModel(mSerieModel);
     ui->cbSerie->setModelColumn(mSerieModel->fieldIndex("type"));
     ui->lblSerie->setText("Facing");
+
+    mRatingModel = PCALC_MODELFACTORY->getModel(
+                PCALC_ModelFactory::ModelFlangeRating, false);
+    ui->cbRating->setModel(mRatingModel);
+    ui->cbRating->setModelColumn(mRatingModel->fieldIndex("rating"));
+    connect(ui->cbType, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(slotTypeRowChanged(int)));
+
+    // Continue here: fill flange model in database and create tableView
+
 
 
 
@@ -78,4 +82,9 @@ void STD_SelectFlangeWidget::slotDimensionRowChanged(int row) {
     QModelIndex index = mDimensionModel->index(row, 0);
     mTypeModel->slotParentCurrentRowChanged(index, QModelIndex());
     mSerieModel->slotParentCurrentRowChanged(index, QModelIndex());
+}
+
+void STD_SelectFlangeWidget::slotTypeRowChanged(int row) {
+    QModelIndex index = mTypeModel->index(row, 0);
+    mRatingModel->slotParentCurrentRowChanged(index, QModelIndex());
 }

@@ -138,6 +138,7 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
 
         uuid = "";
         list = new RB_ObjectContainer (uuid, obj, "PCALC_GeneratorFormulaList", this);
+        obj->addObject(list);
     } else if (str == "PCALC_EN1591_AssemblyList") {
         obj = new PCALC_EN1591_Assembly(uuid, parent, "PCALC_EN1591_Assembly", this);
 

@@ -59,6 +59,7 @@ public:
         ModelEN1591Shell,               /**< EN1591 Shell model */
         ModelFlange,                    /**< Flange model */
         ModelFlangeFacing,              /**< Flange facing model */
+        ModelFlangeRating,              /**< Flange rating model */
         ModelFlangeType,                /**< Flange type model */
         ModelGeneratorFormula,          /**< Calculation generator formula model */
         ModelMatCreepTable,             /**< Material creep table */

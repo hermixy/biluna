@@ -12,12 +12,12 @@
 STD_FlangeRating::STD_FlangeRating(
                    const QString& id, RB_ObjectBase* p,
                    const QString& n, RB_ObjectFactory* f)
-					: RB_ObjectAtomic (id, p, n, f) {
+                    : RB_ObjectContainer (id, p, n, f) {
 	createMembers();
 }
 
 STD_FlangeRating::STD_FlangeRating(STD_FlangeRating* obj) : 
-                   RB_ObjectAtomic(obj) {
+                   RB_ObjectContainer(obj) {
 	createMembers();
 	*this = *obj;
 }
