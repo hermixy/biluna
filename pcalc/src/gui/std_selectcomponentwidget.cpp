@@ -15,6 +15,9 @@ STD_SelectComponentWidget::STD_SelectComponentWidget(QWidget *parent) :
     ui->setupUi(this);
     mComponentModel = nullptr;
     mDimensionModel = nullptr;
+    mRatingModel = nullptr;
+    mSerieModel = nullptr;
+    mTypeModel = nullptr;
 }
 
 STD_SelectComponentWidget::~STD_SelectComponentWidget() {
@@ -22,6 +25,12 @@ STD_SelectComponentWidget::~STD_SelectComponentWidget() {
     mComponentModel = nullptr;
     delete mDimensionModel;
     mDimensionModel = nullptr;
+    delete mRatingModel;
+    mRatingModel = nullptr;
+    delete mSerieModel;
+    mSerieModel = nullptr;
+    delete mTypeModel;
+    mTypeModel = nullptr;
     delete ui;
 }
 

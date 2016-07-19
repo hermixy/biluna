@@ -131,7 +131,7 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelFlange:
         model = getTableModel(db, mObjectFactory, type, "STD_FlangeList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "pressureclass", "nominaldiameter");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "nomdiam");
         break;
     case ModelFlangeFacing:
         model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingList");

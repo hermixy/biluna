@@ -23,16 +23,6 @@ STD_SelectFlangeWidget::~STD_SelectFlangeWidget() {
 }
 
 void STD_SelectFlangeWidget::init() {
-    // From ACC_GlTransactionWidget
-    //    mChartMasterModel = ACC_MODELFACTORY->getModel(ACC_ModelFactory::ModelChartMaster);
-    //    mChartMasterModel->setRoot(ACC_MODELFACTORY->getRootId());
-    //    RB_String filter = mChartMasterModel->getSourceFilter();
-    //    filter += " AND `acc_chartmaster`.`accountcontrol`>=1000";
-    //    mChartMasterModel->setSourceFilter(filter);
-    //    cbLedgerAccount->setModel(mChartMasterModel);
-    //    cbLedgerAccount->setModelColumn(mChartMasterModel->fieldIndex("accountname"));
-    //    mChartMasterModel->select();
-
     mDimensionModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelDimension, false);
     mDimensionModel->setRoot("");
@@ -42,19 +32,12 @@ void STD_SelectFlangeWidget::init() {
     ui->cbStandard->setModelColumn(mDimensionModel->fieldIndex("code"));
     mDimensionModel->select();
 
-    //    QStringList items;
-    //    items << "Blind" << "Integral" << "Loose";
-    //    ui->cbType->setModel(new QStringListModel(items, this));
-
     mTypeModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlangeType, false);
     ui->cbType->setModel(mTypeModel);
     ui->cbType->setModelColumn(mTypeModel->fieldIndex("type"));
     connect(ui->cbStandard, SIGNAL(currentIndexChanged(int)),
             this, SLOT(slotDimensionRowChanged(int)));
-    // Does not work with combobox only
-    //    connect(mDimensionModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-    //            mTypeModel, SLOT(slotParentCurrentRowChanged(QModelIndex,QModelIndex)));
 
     mSerieModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlangeFacing, false);
@@ -70,21 +53,47 @@ void STD_SelectFlangeWidget::init() {
             this, SLOT(slotTypeRowChanged(int)));
 
     // Continue here: fill flange model in database and create tableView
+    mComponentModel = PCALC_MODELFACTORY->getModel(
+                PCALC_ModelFactory::ModelFlange, false);
+    formatTableView(ui->tvComponent, mComponentModel);
 
+    // Hide columns
+    int colCount = mComponentModel->columnCount();
 
+    for (int i = 0; i < colCount; ++i) {
+        if (i < RB2::HIDDENCOLUMNS || i > RB2::HIDDENCOLUMNS + 4) {
+            ui->tvComponent->hideColumn(i);
+        } else {
+            ui->tvComponent->showColumn(i);
 
+            if (ui->tvComponent->columnWidth(i) < 5) {
+                ui->tvComponent->setColumnWidth(i, 100);
+            }
+        }
+    }
+
+    connect(ui->cbRating, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(slotRatingRowChanged(int)));
 
     initWidgets();
     readSettings();
 }
 
 void STD_SelectFlangeWidget::slotDimensionRowChanged(int row) {
+    if (!mDimensionModel || !mTypeModel || !mSerieModel) return;
     QModelIndex index = mDimensionModel->index(row, 0);
     mTypeModel->slotParentCurrentRowChanged(index, QModelIndex());
     mSerieModel->slotParentCurrentRowChanged(index, QModelIndex());
 }
 
 void STD_SelectFlangeWidget::slotTypeRowChanged(int row) {
+    if (!mTypeModel || !mRatingModel) return;
     QModelIndex index = mTypeModel->index(row, 0);
     mRatingModel->slotParentCurrentRowChanged(index, QModelIndex());
+}
+
+void STD_SelectFlangeWidget::slotRatingRowChanged(int row) {
+    if (!mRatingModel || !mComponentModel) return;
+    QModelIndex index = mRatingModel->index(row, 0);
+    mComponentModel->slotParentCurrentRowChanged(index, QModelIndex());
 }

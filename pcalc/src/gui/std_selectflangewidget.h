@@ -40,6 +40,7 @@ public:
 protected slots:
     void slotDimensionRowChanged(int row);
     void slotTypeRowChanged(int row);
+    void slotRatingRowChanged(int row);
 
 };
 
