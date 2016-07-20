@@ -22,6 +22,7 @@
 #include "rb_dockwidget.h"
 #include "rb_mainwindow.h"
 #include "rb_mdiwindow.h"
+#include "std_dimensionwidget.h"
 #include "std_matcreepwidget.h"
 #include "std_matelasmodulwidget.h"
 #include "std_materialwidget.h"
@@ -80,6 +81,10 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
     if (wgt) return wgt; // widget already found
 
     switch (type) {
+    case WidgetDimension: {
+        wgt = new STD_DimensionWidget(parent);
+        break;
+    }
     case WidgetEN13555Gasket: {
         wgt = new PCALC_EN13555GasketWidget(parent);
         break;

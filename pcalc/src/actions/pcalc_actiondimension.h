@@ -1,6 +1,6 @@
 /*****************************************************************
- * $Id: pcalc_actionmaterial.h 0 2016-06-01 15:43:20Z rutger $
- * Created: June 1, 2016 15:43:42 AM - rutger
+ * $Id: pcalc_actiondimension.h 0 2016-07-20 15:43:20Z rutger $
+ * Created: July 20, 2016 10:43:42 AM - rutger
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
  * This file is part of the Biluna PCALC project.
@@ -8,29 +8,29 @@
  * See http://www.red-bag.com for further details.
  *****************************************************************/
 
-#ifndef PCALC_ACTIONMATERIAL_H
-#define PCALC_ACTIONMATERIAL_H
+#ifndef PCALC_ACTIONDIMENSION_H
+#define PCALC_ACTIONDIMENSION_H
 
 #include "rb_action.h"
 
 
 /**
- * Action opens material property window
+ * Action opens dimension property window
  */
-class PCALC_ActionMaterial : public RB_Action {
+class PCALC_ActionDimension : public RB_Action {
 
     Q_OBJECT
 
 public:
-    PCALC_ActionMaterial();
-    virtual ~PCALC_ActionMaterial() {}
+    PCALC_ActionDimension();
+    virtual ~PCALC_ActionDimension() {}
 
     static RB_String getName() {
-        return "Material";
+        return "Dimension";
     }
 
     virtual RB_String name() {
-        return PCALC_ActionMaterial::getName();
+        return PCALC_ActionDimension::getName();
     }
 
     static RB_GuiAction* createGuiAction();
@@ -39,4 +39,4 @@ public:
 
 };
 
-#endif // PCALC_ACTIONMATERIAL_H
+#endif // PCALC_ACTIONDIMENSION_H

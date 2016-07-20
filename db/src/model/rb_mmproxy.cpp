@@ -249,12 +249,6 @@ bool RB_MmProxy::setTableModel(const RB_String& list,
     connect(mSourceModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(slotDataChanged(QModelIndex,QModelIndex)));
     setParentManager(pMm);
-//    mParentManager = pMm;
-//    // Connect parent model row change to child model
-//    if (mParentManager) {
-//        connect(mParentManager, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-//                this, SLOT(slotParentCurrentRowChanged(QModelIndex,QModelIndex)));
-//    }
     return mSourceModel->setTableModel(list);
 }
 
@@ -276,12 +270,6 @@ bool RB_MmProxy::setTreeModel(const RB_String& list,
     connect(mSourceModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(slotDataChanged(QModelIndex,QModelIndex)));
     setParentManager(pMm);
-//    mParentManager = pMm;
-//    // Connect parent model row change to child model
-//    if (mParentManager) {
-//        connect(mParentManager, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-//                this, SLOT(slotParentCurrentRowChanged(QModelIndex,QModelIndex)));
-//    }
     return mSourceModel->setTreeModel(list, db);
 }
 

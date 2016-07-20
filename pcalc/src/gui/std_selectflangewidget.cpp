@@ -40,7 +40,7 @@ void STD_SelectFlangeWidget::init() {
             this, SLOT(slotDimensionRowChanged(int)));
 
     mSerieModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeFacing, false);
+                PCALC_ModelFactory::ModelFlangeFacingType, false);
     ui->cbSerie->setModel(mSerieModel);
     ui->cbSerie->setModelColumn(mSerieModel->fieldIndex("type"));
     ui->lblSerie->setText("Facing");

@@ -28,6 +28,7 @@ STD_Flange::~STD_Flange() {
 
 /**
  * Create members:
+ * \li rating PN or Class pressure class
  * \li nomdiam DN or NPS nominal diameter
  * \li d outside diameter
  * \li k diameter of bolt circle
@@ -51,16 +52,19 @@ STD_Flange::~STD_Flange() {
  * \li h1 length 1
  * \li h2 length 2
  * \li h3 length 3
- * \li h4 length 4
+ * \li h41 length 4 type 35
+ * \li h42 length 4 type 36
  * \li h5 length 5
  * \li n1 neck diameter 1
  * \li n2 neck diameter 2
  * \li n3 neck diameter 3
- * \li r1 corner radius
+ * \li r11 corner radius type 11
+ * \li r12 corner radius type 21
  * \li s wall thickness
  */
 void STD_Flange::createMembers() {
-    addMember("nomdiam", "-", 0, RB2::MemberDouble);
+    addMember("rating", "PN", 0, RB2::MemberDouble);
+    addMember("nomdiam", "DN", 0, RB2::MemberDouble);
     addMember("d", "mm", 0, RB2::MemberDouble);
     addMember("k", "mm", 0, RB2::MemberDouble);
     addMember("l", "mm", 0, RB2::MemberDouble);
@@ -83,11 +87,13 @@ void STD_Flange::createMembers() {
     addMember("h1", "mm", 0, RB2::MemberDouble);
     addMember("h2", "mm", 0, RB2::MemberDouble);
     addMember("h3", "mm", 0, RB2::MemberDouble);
-    addMember("h4", "mm", 0, RB2::MemberDouble);
+    addMember("h41", "mm", 0, RB2::MemberDouble);
+    addMember("h42", "mm", 0, RB2::MemberDouble);
     addMember("h5", "mm", 0, RB2::MemberDouble);
     addMember("n1", "mm", 0, RB2::MemberDouble);
     addMember("n2", "mm", 0, RB2::MemberDouble);
     addMember("n3", "mm", 0, RB2::MemberDouble);
-    addMember("r1", "mm", 0, RB2::MemberDouble);
+    addMember("r11", "mm", 0, RB2::MemberDouble);
+    addMember("r12", "mm", 0, RB2::MemberDouble);
     addMember("s", "mm", 0, RB2::MemberDouble);
 }

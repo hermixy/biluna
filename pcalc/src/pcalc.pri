@@ -10,6 +10,7 @@ FORMS += \
     ../src/gui/pcalc_en1591selectgasketwidget.ui \
     ../src/gui/pcalc_en1591widget.ui \
     ../src/gui/rb_databasetablewidget.ui \
+    ../src/gui/std_dimensionwidget.ui \
     ../src/gui/std_matcreepwidget.ui \
     ../src/gui/std_matelasmodulwidget.ui \
     ../src/gui/std_materialwidget.ui \
@@ -20,6 +21,7 @@ FORMS += \
 HEADERS += \
     ../../peng/src/model/peng_project.h \
     ../src/actions/pcalc_actionclose.h \
+    ../src/actions/pcalc_actiondimension.h \
     ../src/actions/pcalc_actioneditproject.h \
     ../src/actions/pcalc_actionen1591flange.h \
     ../src/actions/pcalc_actionengasket.h \
@@ -72,6 +74,7 @@ HEADERS += \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditwidget.h \
     ../src/gui/rb_databasetablewidget.h \
+    ../src/gui/std_dimensionwidget.h \
     ../src/gui/std_matcreepwidget.h \
     ../src/gui/std_matelasmodulwidget.h \
     ../src/gui/std_materialwidget.h \
@@ -104,10 +107,12 @@ HEADERS += \
     ../src/model/std_elasmodultable.h \
     ../src/model/std_extpresstable.h \
     ../src/model/std_flange.h \
-    ../src/model/std_flangefacing.h \
+    ../src/model/std_flangefacingdim.h \
+    ../src/model/std_flangefacingtype.h \
     ../src/model/std_flangerating.h \
     ../src/model/std_flangetype.h \
     ../src/model/std_material.h \
+    ../src/model/std_rating.h \
     ../src/model/std_rmmin.h \
     ../src/model/std_rp02.h \
     ../src/model/std_rp10.h \
@@ -134,6 +139,7 @@ HEADERS += \
 SOURCES += \
     ../../peng/src/model/peng_project.cpp \
     ../src/actions/pcalc_actionclose.cpp \
+    ../src/actions/pcalc_actiondimension.cpp \
     ../src/actions/pcalc_actioneditproject.cpp \
     ../src/actions/pcalc_actionen1591flange.cpp \
     ../src/actions/pcalc_actionengasket.cpp \
@@ -184,6 +190,7 @@ SOURCES += \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditwidget.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
+    ../src/gui/std_dimensionwidget.cpp \
     ../src/gui/std_matcreepwidget.cpp \
     ../src/gui/std_matelasmodulwidget.cpp \
     ../src/gui/std_materialwidget.cpp \
@@ -214,10 +221,12 @@ SOURCES += \
     ../src/model/std_elasmodultable.cpp \
     ../src/model/std_extpresstable.cpp \
     ../src/model/std_flange.cpp \
-    ../src/model/std_flangefacing.cpp \
+    ../src/model/std_flangefacingdim.cpp \
+    ../src/model/std_flangefacingtype.cpp \
     ../src/model/std_flangerating.cpp \
     ../src/model/std_flangetype.cpp \
     ../src/model/std_material.cpp \
+    ../src/model/std_rating.cpp \
     ../src/model/std_rmmin.cpp \
     ../src/model/std_rp02.cpp \
     ../src/model/std_rp10.cpp \

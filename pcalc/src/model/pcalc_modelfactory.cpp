@@ -131,10 +131,14 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelFlange:
         model = getTableModel(db, mObjectFactory, type, "STD_FlangeList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "nomdiam");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomdiam");
         break;
-    case ModelFlangeFacing:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingList");
+    case ModelFlangeFacingDim:
+        model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingDimList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomdiam");
+        break;
+    case ModelFlangeFacingType:
+        model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingTypeList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "type");
         break;
     case ModelFlangeRating:
@@ -180,6 +184,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
     case ModelProjectEdit:
         model = getTableModel(db, mObjectFactory, type, "PENG_ProjectList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
+        break;
+    case ModelRating:
+        model = getTableModel(db, mObjectFactory, type, "STD_RatingList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
         break;
     case ModelRmMin:
         model = getTableModel(db, mObjectFactory, type, "STD_RmMinList");
@@ -280,9 +288,12 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         iter = mModelList.find(ModelEN1591Assembly);
         break;
     case ModelFlange:
-        iter = mModelList.find(ModelFlangeRating);
+        iter = mModelList.find(ModelRating);
         break;
-    case ModelFlangeFacing:
+    case ModelFlangeFacingDim:
+        iter = mModelList.find(ModelRating);
+        break;
+    case ModelFlangeFacingType:
         iter = mModelList.find(ModelDimension);
         break;
     case ModelFlangeRating:
@@ -317,6 +328,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         break;
     case ModelProjectEdit:
         iter = mModelList.find(ModelNone);
+        break;
+    case ModelRating:
+        iter = mModelList.find(ModelDimension);
         break;
     case ModelRmMin:
         iter = mModelList.find(ModelMaterial);

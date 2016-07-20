@@ -13,6 +13,7 @@
 #include "db_actionfactory.h"
 #include "db_modelfactory.h"
 #include "pcalc_actionclose.h"
+#include "pcalc_actiondimension.h"
 #include "pcalc_actioneditproject.h"
 #include "pcalc_actionen1591flange.h"
 #include "pcalc_actionengasket.h"
@@ -112,6 +113,13 @@ void PCALC_ActionFactory::getPlantCalculationMenu(QMenu* menu,
             ga, SLOT(slotSetEnabled(int)));
 
     // menu->addSeparator();
+
+    ga = PCALC_ActionDimension::createGuiAction();
+    subMenu->addAction(ga);
+    tb->addAction(ga);
+    ga->setEnabled(false);
+    connect(PCALC_MODELFACTORY, SIGNAL(rootIsSet(int)),
+            ga, SLOT(slotSetEnabled(int)));
 
     ga = PCALC_ActionMaterial::createGuiAction();
     subMenu->addAction(ga);

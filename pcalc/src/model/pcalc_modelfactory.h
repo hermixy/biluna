@@ -58,7 +58,8 @@ public:
         ModelEN1591LoadCase,            /**< EN1591 Load Case model */
         ModelEN1591Shell,               /**< EN1591 Shell model */
         ModelFlange,                    /**< Flange model */
-        ModelFlangeFacing,              /**< Flange facing model */
+        ModelFlangeFacingDim,           /**< Flange facing dimension model */
+        ModelFlangeFacingType,          /**< Flange facing type model */
         ModelFlangeRating,              /**< Flange rating model */
         ModelFlangeType,                /**< Flange type model */
         ModelGeneratorFormula,          /**< Calculation generator formula model */
@@ -70,6 +71,7 @@ public:
         ModelMatThermExpValue,          /**< Material thermal expansion values */
         ModelProject,                   /**< Project model */
         ModelProjectEdit,               /**< Edit project model */
+        ModelRating,                    /**< Base rating/schedule model */
         ModelRmMin,                     /**< Minimum tensile strength model */
         ModelRp02,                      /**< 0.2% yield or proof strength model */
         ModelRp10,                      /**< 1% yield or proof strength model */

@@ -75,6 +75,7 @@ public:
 //        WidgetTestTreeChild,            /**< Child table widget with tree parent */
         // start numbering from 192100
         WidgetNone = 192100,            /**< Invalid model */
+        WidgetDimension,                /**< Component dimension properties */
         WidgetEN13555Gasket,            /**< EN13555 gasket properties */
         WidgetEN13555Manuf,             /**< EN13555 gasket manufacturer edit and selection */
         WidgetEN13555Type,              /**< EN13555 gasket type edit and selection */
