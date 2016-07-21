@@ -28,12 +28,23 @@ STD_FlangeFacingDim::~STD_FlangeFacingDim() {
 
 /**
  * Create members:
- * \li type facing type number or name
- * \li description description of the facing type
+ * \li rating
+ * \li nomsize nominal diameter
+ * \li d1
+ * \li f1
+ * \li f2
+ * \li f3
+ * \li f4
+ * \li w
+ * \li x
+ * \li y
+ * \li z
+ * \li alpha
+ * \li r
  */
 void STD_FlangeFacingDim::createMembers() {
     addMember("rating", "NPS", 0.0, RB2::MemberDouble);
-    addMember("nomdiam", "DN", 0.0, RB2::MemberDouble);
+    addMember("nomsize", "DN", 0.0, RB2::MemberDouble);
     addMember("d1", "mm", 0.0, RB2::MemberDouble);
     addMember("f1", "mm", 0.0, RB2::MemberDouble);
     addMember("f2", "mm", 0.0, RB2::MemberDouble);

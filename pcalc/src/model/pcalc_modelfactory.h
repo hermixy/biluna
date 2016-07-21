@@ -57,8 +57,10 @@ public:
         ModelEN1591Gasket,              /**< EN1591 Gasket model */
         ModelEN1591LoadCase,            /**< EN1591 Load Case model */
         ModelEN1591Shell,               /**< EN1591 Shell model */
-        ModelFlange,                    /**< Flange model */
-        ModelFlangeFacingDim,           /**< Flange facing dimension model */
+        ModelFlange,                    /**< EN flange model */
+        ModelFlangeAsme,                /**< ASME flange model */
+        ModelFlangeFacingDim,           /**< EN flange facing dimension model */
+        ModelFlangeFacingDimAsme,       /**< ASME flange facing dimension model */
         ModelFlangeFacingType,          /**< Flange facing type model */
         ModelFlangeRating,              /**< Flange rating model */
         ModelFlangeType,                /**< Flange type model */

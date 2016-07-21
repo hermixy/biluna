@@ -107,7 +107,9 @@ HEADERS += \
     ../src/model/std_elasmodultable.h \
     ../src/model/std_extpresstable.h \
     ../src/model/std_flange.h \
+    ../src/model/std_flangeasme.h \
     ../src/model/std_flangefacingdim.h \
+    ../src/model/std_flangefacingdimasme.h \
     ../src/model/std_flangefacingtype.h \
     ../src/model/std_flangerating.h \
     ../src/model/std_flangetype.h \
@@ -221,7 +223,9 @@ SOURCES += \
     ../src/model/std_elasmodultable.cpp \
     ../src/model/std_extpresstable.cpp \
     ../src/model/std_flange.cpp \
+    ../src/model/std_flangeasme.cpp \
     ../src/model/std_flangefacingdim.cpp \
+    ../src/model/std_flangefacingdimasme.cpp \
     ../src/model/std_flangefacingtype.cpp \
     ../src/model/std_flangerating.cpp \
     ../src/model/std_flangetype.cpp \

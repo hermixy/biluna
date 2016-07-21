@@ -35,7 +35,9 @@
 #include "std_en13555qsminl.h"
 #include "std_extpresstable.h"
 #include "std_flange.h"
+#include "std_flangeasme.h"
 #include "std_flangefacingdim.h"
+#include "std_flangefacingdimasme.h"
 #include "std_flangefacingtype.h"
 #include "std_flangerating.h"
 #include "std_flangetype.h"
@@ -236,10 +238,14 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
 //        uuid = "";
 //        list = new RB_ObjectContainer (uuid, obj, "STD_ExtPressList", this);
 //        obj->addObject(list);
+    } else if (str == "STD_FlangeFacingDimAsmeList") {
+        obj = new STD_FlangeFacingDimAsme(uuid, parent, "STD_FlangeFacingDimAsme", this);
     } else if (str == "STD_FlangeFacingDimList") {
         obj = new STD_FlangeFacingDim(uuid, parent, "STD_FlangeFacingDim", this);
     } else if (str == "STD_FlangeFacingTypeList") {
         obj = new STD_FlangeFacingType(uuid, parent, "STD_FlangeFacingType", this);
+    } else if (str == "STD_FlangeAsmeList") {
+        obj = new STD_FlangeAsme(uuid, parent, "STD_FlangeAsme", this);
     } else if (str == "STD_FlangeList") {
         obj = new STD_Flange(uuid, parent, "STD_Flange", this);
     } else if (str == "STD_FlangeRatingList") {
@@ -264,6 +270,10 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new STD_Rating(uuid, parent, "STD_Rating", this);
 
         uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeAsmeList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimAsmeList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimList", this);
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_FlangeList", this);

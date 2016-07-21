@@ -10,6 +10,7 @@
 #include "std_dimensionwidget.h"
 #include "ui_std_dimensionwidget.h"
 
+#include "pcalc.h"
 #include "pcalc_modelfactory.h"
 
 STD_DimensionWidget::STD_DimensionWidget(QWidget *parent) :
@@ -43,7 +44,7 @@ STD_DimensionWidget::~STD_DimensionWidget() {
 }
 
 void STD_DimensionWidget::init() {
-    // Standardacturer list
+    // Dimension or Standard list
     mStandardModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelDimension, false);
     mStandardModel->setRoot("");
@@ -58,6 +59,10 @@ void STD_DimensionWidget::init() {
     for (int i = 0; i < hiddenCount; ++i) {
         ui->tvStandard->hideColumn(i);
     }
+
+    // switch between EN and ASME tables
+    connect(mStandardModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+            this, SLOT(slotUpdateDetailTableNames(QModelIndex,QModelIndex)));
 
     // parent is Dimension Standard
     mRatingModel = PCALC_MODELFACTORY->getModel(
@@ -125,9 +130,6 @@ void STD_DimensionWidget::init() {
         ui->tvLimit->hideColumn(i);
     }
 
-    // continue here
-    // mSerieModel->setTableModel() for change of database table?
-
     readSettings();
 }
 
@@ -171,5 +173,39 @@ void STD_DimensionWidget::fileRevert() {
     mTypeModel->revertAll();
     mStandardModel->revertAll()  ;
     setWindowModified(false);
+}
+
+void STD_DimensionWidget::slotUpdateDetailTableNames(const QModelIndex& current,
+                                                     const QModelIndex& /*previous*/) {
+    if (current.model() != mStandardModel) {
+        RB_DEBUG->error("STD_DimensionWidget::slotUpdateDetailTableNames() "
+                        "model ERROR");
+        return;
+    }
+
+    int row = current.row();
+    int colCompType = mStandardModel->fieldIndex("comptype_id");
+    int componentType = mStandardModel->data(mStandardModel->index(row, colCompType)).toInt();
+    int colCode = mStandardModel->fieldIndex("code");
+    QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
+
+    if (componentType == (int)PCALC2::CompFlange && code.startsWith("ASME")) {
+        delete mEndModel;
+        mEndModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelFlangeFacingDimAsme, false);
+        formatTableView(ui->tvEnd, mEndModel);
+        mComponentModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelFlangeAsme, false);
+        formatTableView(ui->tvComponent, mComponentModel);
+
+    } else if (componentType == (int)PCALC2::CompFlange && code.startsWith("EN")) {
+        delete mEndModel;
+        mEndModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelFlangeFacingDim, false);
+        formatTableView(ui->tvEnd, mEndModel);
+        mComponentModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelFlange, false);
+        formatTableView(ui->tvComponent, mComponentModel);
+    }
 }
 

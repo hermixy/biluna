@@ -35,7 +35,9 @@ public:
     // Catch signals from RB_DialogWindow
     bool fileSave(bool withSelect);
     void fileRevert();
-
+protected slots:
+    void slotUpdateDetailTableNames(const QModelIndex& current,
+                                    const QModelIndex& previous);
 
 private:
     RB_MmProxy* mComponentModel;    // flange dimensions

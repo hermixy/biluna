@@ -28,8 +28,8 @@ STD_Flange::~STD_Flange() {
 
 /**
  * Create members:
- * \li rating PN or Class pressure class
- * \li nomdiam DN or NPS nominal diameter
+ * \li rating PN or Pound pressure class
+ * \li nomsize DN or NPS nominal size
  * \li d outside diameter
  * \li k diameter of bolt circle
  * \li l diameter of bolt hole
@@ -64,7 +64,7 @@ STD_Flange::~STD_Flange() {
  */
 void STD_Flange::createMembers() {
     addMember("rating", "PN", 0, RB2::MemberDouble);
-    addMember("nomdiam", "DN", 0, RB2::MemberDouble);
+    addMember("nomsize", "DN", 0, RB2::MemberDouble);
     addMember("d", "mm", 0, RB2::MemberDouble);
     addMember("k", "mm", 0, RB2::MemberDouble);
     addMember("l", "mm", 0, RB2::MemberDouble);

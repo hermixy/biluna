@@ -131,11 +131,19 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelFlange:
         model = getTableModel(db, mObjectFactory, type, "STD_FlangeList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomdiam");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
+        break;
+    case ModelFlangeAsme:
+        model = getTableModel(db, mObjectFactory, type, "STD_FlangeAsmeList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
         break;
     case ModelFlangeFacingDim:
         model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingDimList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomdiam");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
+        break;
+    case ModelFlangeFacingDimAsme:
+        model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingDimAsmeList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
         break;
     case ModelFlangeFacingType:
         model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingTypeList");
@@ -290,7 +298,13 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
     case ModelFlange:
         iter = mModelList.find(ModelRating);
         break;
+    case ModelFlangeAsme:
+        iter = mModelList.find(ModelRating);
+        break;
     case ModelFlangeFacingDim:
+        iter = mModelList.find(ModelRating);
+        break;
+    case ModelFlangeFacingDimAsme:
         iter = mModelList.find(ModelRating);
         break;
     case ModelFlangeFacingType:
