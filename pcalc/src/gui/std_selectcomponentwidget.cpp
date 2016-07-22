@@ -11,26 +11,12 @@
 #include "ui_std_selectcomponentwidget.h"
 
 STD_SelectComponentWidget::STD_SelectComponentWidget(QWidget *parent) :
-            RB_Widget(parent), ui(new Ui::STD_SelectComponentWidget) {
+            RB_Widget(parent), ui(new Ui::STD_SelectComponentWidget),
+            STD_DimensionTableHelper() {
     ui->setupUi(this);
-    mComponentModel = nullptr;
-    mDimensionModel = nullptr;
-    mRatingModel = nullptr;
-    mSerieModel = nullptr;
-    mTypeModel = nullptr;
 }
 
 STD_SelectComponentWidget::~STD_SelectComponentWidget() {
-    delete mComponentModel;
-    mComponentModel = nullptr;
-    delete mDimensionModel;
-    mDimensionModel = nullptr;
-    delete mRatingModel;
-    mRatingModel = nullptr;
-    delete mSerieModel;
-    mSerieModel = nullptr;
-    delete mTypeModel;
-    mTypeModel = nullptr;
     delete ui;
 }
 
@@ -43,7 +29,7 @@ RB_ObjectBase* STD_SelectComponentWidget::getCurrentObject() {
 }
 
 void STD_SelectComponentWidget::initWidgets() {
-    if (!mDimensionModel) {
+    if (!mStandardModel) {
         RB_DEBUG->error("STD_SelectComponentWidget::initWidgets() "
                         "dimension model NULL ERROR");
         return;

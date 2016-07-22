@@ -149,13 +149,13 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingTypeList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "type");
         break;
-    case ModelFlangeRating:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeRatingList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
-        break;
     case ModelFlangeType:
         model = getTableModel(db, mObjectFactory, type, "STD_FlangeTypeList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "type");
+        break;
+    case ModelFlangeTypeLimit:
+        model = getTableModel(db, mObjectFactory, type, "STD_FlangeTypeLimitList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
         break;
     case ModelGeneratorFormula:
         model = getTableModel(db, mObjectFactory, type, "PCALC_GeneratorFormulaList");
@@ -310,11 +310,11 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
     case ModelFlangeFacingType:
         iter = mModelList.find(ModelDimension);
         break;
-    case ModelFlangeRating:
-        iter = mModelList.find(ModelFlangeType);
-        break;
     case ModelFlangeType:
         iter = mModelList.find(ModelDimension);
+        break;
+    case ModelFlangeTypeLimit:
+        iter = mModelList.find(ModelFlangeType);
         break;
     case ModelGeneratorFormula:
         iter = mModelList.find(ModelNone);

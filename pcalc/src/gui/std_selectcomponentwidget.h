@@ -11,29 +11,24 @@
 #define STD_SELECTCOMPONENTWIDGET_H
 
 #include "rb_widget.h"
+#include "std_dimensiontablehelper.h"
 
 namespace Ui {
 class STD_SelectComponentWidget;
 }
 
-class STD_SelectComponentWidget : public RB_Widget {
+class STD_SelectComponentWidget : public RB_Widget, public STD_DimensionTableHelper {
 
     Q_OBJECT
 
 public:
     explicit STD_SelectComponentWidget(QWidget *parent = 0);
-    ~STD_SelectComponentWidget();
+    virtual ~STD_SelectComponentWidget();
 
-    RB_ObjectBase* getCurrentObject();
-    void initWidgets();
+    virtual RB_ObjectBase* getCurrentObject();
+    virtual void initWidgets();
 
 protected:
-    RB_MmProxy* mComponentModel;
-    RB_MmProxy* mDimensionModel;
-    RB_MmProxy* mRatingModel;
-    RB_MmProxy* mSerieModel;
-    RB_MmProxy* mTypeModel;
-
     Ui::STD_SelectComponentWidget* ui;
 };
 

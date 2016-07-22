@@ -39,8 +39,8 @@
 #include "std_flangefacingdim.h"
 #include "std_flangefacingdimasme.h"
 #include "std_flangefacingtype.h"
-#include "std_flangerating.h"
 #include "std_flangetype.h"
+#include "std_flangetypelimit.h"
 #include "std_material.h"
 #include "std_rating.h"
 #include "std_rmmin.h"
@@ -248,13 +248,13 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new STD_FlangeAsme(uuid, parent, "STD_FlangeAsme", this);
     } else if (str == "STD_FlangeList") {
         obj = new STD_Flange(uuid, parent, "STD_Flange", this);
-    } else if (str == "STD_FlangeRatingList") {
-        obj = new STD_FlangeRating(uuid, parent, "STD_FlangeRating", this);
+    } else if (str == "STD_FlangeTypeLimitList") {
+        obj = new STD_FlangeTypeLimit(uuid, parent, "STD_FlangeTypeLimit", this);
     } else if (str == "STD_FlangeTypeList") {
         obj = new STD_FlangeType(uuid, parent, "STD_FlangeType", this);
 
         uuid = "";
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeRatingList", this);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeTypeLimitList", this);
         obj->addObject(list);
     } else if (str == "STD_MaterialList") {
         obj = new STD_Material(uuid, parent, "STD_Material", this);

@@ -74,6 +74,7 @@ HEADERS += \
     ../src/gui/pcalc_projectdialog.h \
     ../src/gui/pcalc_projecteditwidget.h \
     ../src/gui/rb_databasetablewidget.h \
+    ../src/gui/std_dimensiontablehelper.h \
     ../src/gui/std_dimensionwidget.h \
     ../src/gui/std_matcreepwidget.h \
     ../src/gui/std_matelasmodulwidget.h \
@@ -111,8 +112,8 @@ HEADERS += \
     ../src/model/std_flangefacingdim.h \
     ../src/model/std_flangefacingdimasme.h \
     ../src/model/std_flangefacingtype.h \
-    ../src/model/std_flangerating.h \
     ../src/model/std_flangetype.h \
+    ../src/model/std_flangetypelimit.h \
     ../src/model/std_material.h \
     ../src/model/std_rating.h \
     ../src/model/std_rmmin.h \
@@ -192,6 +193,7 @@ SOURCES += \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditwidget.cpp \
     ../src/gui/rb_databasetablewidget.cpp \
+    ../src/gui/std_dimensiontablehelper.cpp \
     ../src/gui/std_dimensionwidget.cpp \
     ../src/gui/std_matcreepwidget.cpp \
     ../src/gui/std_matelasmodulwidget.cpp \
@@ -227,8 +229,8 @@ SOURCES += \
     ../src/model/std_flangefacingdim.cpp \
     ../src/model/std_flangefacingdimasme.cpp \
     ../src/model/std_flangefacingtype.cpp \
-    ../src/model/std_flangerating.cpp \
     ../src/model/std_flangetype.cpp \
+    ../src/model/std_flangetypelimit.cpp \
     ../src/model/std_material.cpp \
     ../src/model/std_rating.cpp \
     ../src/model/std_rmmin.cpp \

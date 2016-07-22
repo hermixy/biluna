@@ -15,29 +15,60 @@
 
 STD_SelectFlangeWidget::STD_SelectFlangeWidget(QWidget *parent)
         : STD_SelectComponentWidget(parent) {
-    // nothing
+    setObjectName("STD_SelectFlangeWidget");
+    mCurrentObject = nullptr;
 }
 
 STD_SelectFlangeWidget::~STD_SelectFlangeWidget() {
-    // nothing
+    if (mCurrentObject) {
+        delete mCurrentObject;
+        mCurrentObject = nullptr;
+    }
+}
+
+RB_ObjectBase* STD_SelectFlangeWidget::getCurrentObject() {
+    if (!ui->tvComponent->currentIndex().isValid()) {
+        return nullptr;
+    }
+
+    if (!mCurrentObject) {
+        mCurrentObject = new RB_ObjectAtomic(mComponentModel->getCurrentObject());
+        mCurrentObject->addMember("displayname", "-", ui->cbStandard->currentText() + " "
+                                 + ui->cbType->currentText() + " "
+                                 + ui->cbRating->currentText() + " "
+                                 + ui->cbSerie->currentText());
+        // continue here other relevant dim data of facing
+
+    } else {
+        // Required? set only once
+        mCurrentObject = mComponentModel->getCurrentObject();
+        // continue here: set displayname
+        // continue here other relevant dim data of facing
+    }
+
+    return mCurrentObject;
 }
 
 void STD_SelectFlangeWidget::init() {
-    mDimensionModel = PCALC_MODELFACTORY->getModel(
+    mStandardModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelDimension, false);
-    mDimensionModel->setRoot("");
-    mDimensionModel->setWhere("id <> '0' AND comptype_id = "
+    mStandardModel->setRoot("");
+    mStandardModel->setWhere("id <> '0' AND comptype_id = "
                               + QString::number((int)PCALC2::CompFlange));
-    ui->cbStandard->setModel(mDimensionModel);
-    ui->cbStandard->setModelColumn(mDimensionModel->fieldIndex("code"));
-    mDimensionModel->select();
+    ui->cbStandard->setModel(mStandardModel);
+    ui->cbStandard->setModelColumn(mStandardModel->fieldIndex("code"));
+    mStandardModel->select();
+
+    connect(ui->cbStandard, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(slotStandardRowChanged(int)));
 
     mTypeModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlangeType, false);
     ui->cbType->setModel(mTypeModel);
     ui->cbType->setModelColumn(mTypeModel->fieldIndex("type"));
-    connect(ui->cbStandard, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(slotDimensionRowChanged(int)));
+
+    connect(ui->cbType, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(slotTypeRowChanged(int)));
 
     mSerieModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlangeFacingType, false);
@@ -46,50 +77,70 @@ void STD_SelectFlangeWidget::init() {
     ui->lblSerie->setText("Facing");
 
     mRatingModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeRating, false);
+                PCALC_ModelFactory::ModelRating, false);
     ui->cbRating->setModel(mRatingModel);
     ui->cbRating->setModelColumn(mRatingModel->fieldIndex("rating"));
-    connect(ui->cbType, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(slotTypeRowChanged(int)));
 
-    // Continue here: fill flange model in database and create tableView
+    connect(ui->cbRating, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(slotRatingRowChanged(int)));
+
+    // flange model
     mComponentModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlange, false);
     formatTableView(ui->tvComponent, mComponentModel);
 
-    // Hide columns
-    int colCount = mComponentModel->columnCount();
+    // TODO: Hide columns, EN has the largest number of columns
+//    int colCount = mComponentModel->columnCount();
 
-    for (int i = 0; i < colCount; ++i) {
-        if (i < RB2::HIDDENCOLUMNS || i > RB2::HIDDENCOLUMNS + 4) {
-            ui->tvComponent->hideColumn(i);
-        } else {
-            ui->tvComponent->showColumn(i);
+//    for (int i = 0; i < colCount; ++i) {
+//        if (i < RB2::HIDDENCOLUMNS || i > RB2::HIDDENCOLUMNS + 4) {
+//            ui->tvComponent->hideColumn(i);
+//        } else {
+//            ui->tvComponent->showColumn(i);
 
-            if (ui->tvComponent->columnWidth(i) < 5) {
-                ui->tvComponent->setColumnWidth(i, 100);
-            }
-        }
+//            if (ui->tvComponent->columnWidth(i) < 5) {
+//                ui->tvComponent->setColumnWidth(i, 100);
+//            }
+//        }
+//    }
+
+    for (int i = 0; i < RB2::HIDDENCOLUMNS; ++i) {
+        ui->tvComponent->hideColumn(i);
     }
-
-    connect(ui->cbRating, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(slotRatingRowChanged(int)));
 
     initWidgets();
     readSettings();
 }
 
-void STD_SelectFlangeWidget::slotDimensionRowChanged(int row) {
-    if (!mDimensionModel || !mTypeModel || !mSerieModel) return;
-    QModelIndex index = mDimensionModel->index(row, 0);
+void STD_SelectFlangeWidget::slotStandardRowChanged(int row) {
+    if (!mStandardModel || !mTypeModel || !mSerieModel) return;
+    QModelIndex index = mStandardModel->index(row, 0);
+    STD_DimensionTableHelper::setFlangeDetailTableNames(index, QModelIndex());
+    mRatingModel->slotParentCurrentRowChanged(index, QModelIndex());
     mTypeModel->slotParentCurrentRowChanged(index, QModelIndex());
     mSerieModel->slotParentCurrentRowChanged(index, QModelIndex());
+    formatTableView(ui->tvComponent, mComponentModel);
+
+    // TODO: Hide columns
+//    int colCount = mComponentModel->columnCount();
+
+//    for (int i = 0; i < colCount; ++i) {
+//        if (i < RB2::HIDDENCOLUMNS || i > RB2::HIDDENCOLUMNS + 4) {
+//            ui->tvComponent->hideColumn(i);
+//        } else {
+//            ui->tvComponent->showColumn(i);
+
+//            if (ui->tvComponent->columnWidth(i) < 5) {
+//                ui->tvComponent->setColumnWidth(i, 100);
+//            }
+//        }
+//    }
 }
 
 void STD_SelectFlangeWidget::slotTypeRowChanged(int row) {
     if (!mTypeModel || !mRatingModel) return;
     QModelIndex index = mTypeModel->index(row, 0);
-    mRatingModel->slotParentCurrentRowChanged(index, QModelIndex());
+    // limits
 }
 
 void STD_SelectFlangeWidget::slotRatingRowChanged(int row) {

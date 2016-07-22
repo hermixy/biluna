@@ -62,8 +62,8 @@ public:
         ModelFlangeFacingDim,           /**< EN flange facing dimension model */
         ModelFlangeFacingDimAsme,       /**< ASME flange facing dimension model */
         ModelFlangeFacingType,          /**< Flange facing type model */
-        ModelFlangeRating,              /**< Flange rating model */
         ModelFlangeType,                /**< Flange type model */
+        ModelFlangeTypeLimit,           /**< Flange type limit model */
         ModelGeneratorFormula,          /**< Calculation generator formula model */
         ModelMatCreepTable,             /**< Material creep table */
         ModelMatElasModulTable,         /**< Material elasticity modulus table */

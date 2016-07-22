@@ -31,6 +31,7 @@ public:
             return RB2::PerspectivePCALC;
     }
 
+    virtual RB_ObjectBase* getCurrentObject();
     void init();
 
     // Catch signals from RB_DialogWindow
@@ -38,9 +39,12 @@ public:
     void fileRevert() { }
 
 protected slots:
-    void slotDimensionRowChanged(int row);
+    void slotStandardRowChanged(int row);
     void slotTypeRowChanged(int row);
     void slotRatingRowChanged(int row);
+
+private:
+    RB_ObjectBase* mCurrentObject;
 
 };
 

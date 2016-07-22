@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: std_dimensionwidget.cpp 0001 2016-07-29T10:39:19 rutger $
+ * $Id: std_dimensionwidget.cpp 0001 2016-06-29T10:39:19 rutger $
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
  * This file is part of the Biluna STD project.
@@ -14,32 +14,12 @@
 #include "pcalc_modelfactory.h"
 
 STD_DimensionWidget::STD_DimensionWidget(QWidget *parent) :
-            RB_Widget(parent), ui(new Ui::STD_DimensionWidget) {
+            RB_Widget(parent), ui(new Ui::STD_DimensionWidget),
+            STD_DimensionTableHelper() {
     ui->setupUi(this);
-    mComponentModel = nullptr;
-    mEndModel = nullptr;
-    mLimitModel = nullptr;
-    mRatingModel = nullptr;
-    mSerieModel = nullptr;
-    mStandardModel = nullptr;
-    mTypeModel = nullptr;
 }
 
 STD_DimensionWidget::~STD_DimensionWidget() {
-    delete mComponentModel;
-    mComponentModel = nullptr;
-    delete mEndModel;
-    mEndModel = nullptr;
-    delete mRatingModel;
-    mRatingModel = nullptr;
-    delete mSerieModel;
-    mSerieModel = nullptr;
-    delete mLimitModel;
-    mLimitModel = nullptr;
-    delete mTypeModel;
-    mTypeModel = nullptr;
-    delete mStandardModel;
-    mStandardModel = nullptr;
     delete ui;
 }
 
@@ -62,7 +42,7 @@ void STD_DimensionWidget::init() {
 
     // switch between EN and ASME tables
     connect(mStandardModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-            this, SLOT(slotUpdateDetailTableNames(QModelIndex,QModelIndex)));
+            this, SLOT(slotFlangeDetailTableNames(QModelIndex,QModelIndex)));
 
     // parent is Dimension Standard
     mRatingModel = PCALC_MODELFACTORY->getModel(
@@ -121,7 +101,7 @@ void STD_DimensionWidget::init() {
 
     // parent is Type
     mLimitModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeRating, false);
+                PCALC_ModelFactory::ModelFlangeTypeLimit, false);
     formatTableView(ui->tvLimit, mLimitModel);
     ui->tbbLimit->initSlimTable();
     ui->tvLimit->setToolButtonBar(ui->tbbLimit);
@@ -171,41 +151,14 @@ void STD_DimensionWidget::fileRevert() {
     mRatingModel->revertAll();
     mSerieModel->revertAll();
     mTypeModel->revertAll();
-    mStandardModel->revertAll()  ;
+    mStandardModel->revertAll();
     setWindowModified(false);
 }
 
-void STD_DimensionWidget::slotUpdateDetailTableNames(const QModelIndex& current,
-                                                     const QModelIndex& /*previous*/) {
-    if (current.model() != mStandardModel) {
-        RB_DEBUG->error("STD_DimensionWidget::slotUpdateDetailTableNames() "
-                        "model ERROR");
-        return;
-    }
-
-    int row = current.row();
-    int colCompType = mStandardModel->fieldIndex("comptype_id");
-    int componentType = mStandardModel->data(mStandardModel->index(row, colCompType)).toInt();
-    int colCode = mStandardModel->fieldIndex("code");
-    QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
-
-    if (componentType == (int)PCALC2::CompFlange && code.startsWith("ASME")) {
-        delete mEndModel;
-        mEndModel = PCALC_MODELFACTORY->getModel(
-                    PCALC_ModelFactory::ModelFlangeFacingDimAsme, false);
-        formatTableView(ui->tvEnd, mEndModel);
-        mComponentModel = PCALC_MODELFACTORY->getModel(
-                    PCALC_ModelFactory::ModelFlangeAsme, false);
-        formatTableView(ui->tvComponent, mComponentModel);
-
-    } else if (componentType == (int)PCALC2::CompFlange && code.startsWith("EN")) {
-        delete mEndModel;
-        mEndModel = PCALC_MODELFACTORY->getModel(
-                    PCALC_ModelFactory::ModelFlangeFacingDim, false);
-        formatTableView(ui->tvEnd, mEndModel);
-        mComponentModel = PCALC_MODELFACTORY->getModel(
-                    PCALC_ModelFactory::ModelFlange, false);
-        formatTableView(ui->tvComponent, mComponentModel);
-    }
+void STD_DimensionWidget::slotFlangeDetailTableNames(const QModelIndex& current,
+                                                     const QModelIndex& previous) {
+    STD_DimensionTableHelper::setFlangeDetailTableNames(current, previous);
+    formatTableView(ui->tvEnd, mEndModel);
+    formatTableView(ui->tvComponent, mComponentModel);
 }
 

@@ -172,7 +172,13 @@ void PCALC_EN1591Widget::initMapping() {
     // standard name, pressure class and nominal size
     ileStandardFlange_1->setDefaultDialog(PCALC_DIALOGFACTORY,
                                     PCALC_DialogFactory::WidgetSelectFlange,
-                                    "standardflange1_idx", "mname");
+                                    "standardflange1_idx", "displayname");
+    // catch signal for setting of details
+
+
+
+
+
     QStringList items;
     items << "Blind" << "Integral" << "Loose";
     cbTypeFlange_1->setModel(new QStringListModel(items, this));
