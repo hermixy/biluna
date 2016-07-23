@@ -168,16 +168,15 @@ void PCALC_EN1591Widget::initMapping() {
 
     mFlangeMapper->addMapping(ileStandardFlange_1,
                               mFlangeModel->fieldIndex("standardflange1_idx"));
-    // Note: mname will be added by dialog to provide pretty text,
+    // Note: diplayname will be added by dialog to provide pretty text,
     // standard name, pressure class and nominal size
-    ileStandardFlange_1->setDefaultDialog(PCALC_DIALOGFACTORY,
-                                    PCALC_DialogFactory::WidgetSelectFlange,
-                                    "standardflange1_idx", "displayname");
+    // TODO: solve additional setting of data with function pointer or lambda function
+//    ileStandardFlange_1->setDefaultDialog(PCALC_DIALOGFACTORY,
+//                                    PCALC_DialogFactory::WidgetSelectFlange,
+//                                    "standardflange1_idx", "displayname");
     // catch signal for setting of details
-
-
-
-
+    connect(ileStandardFlange_1, SIGNAL(clicked(bool)),
+            this, SLOT(slotIleStandardFlange_1Clicked()));
 
     QStringList items;
     items << "Blind" << "Integral" << "Loose";
@@ -237,11 +236,14 @@ void PCALC_EN1591Widget::initMapping() {
 
     mFlangeMapper->addMapping(ileStandardFlange_2,
                               mFlangeModel->fieldIndex("standardflange2_idx"));
-    // Note: mname will be added by dialog to provide pretty text,
+    // Note: displayname will be added by dialog to provide pretty text,
     // standard name, pressure class and nominal size
-    ileStandardFlange_2->setDefaultDialog(PCALC_DIALOGFACTORY,
-                                    PCALC_DialogFactory::WidgetSelectFlange,
-                                    "standardflange1_idx", "mname");
+//    ileStandardFlange_2->setDefaultDialog(PCALC_DIALOGFACTORY,
+//                                    PCALC_DialogFactory::WidgetSelectFlange,
+//                                    "standardflange2_idx", "displayname");
+    connect(ileStandardFlange_2, SIGNAL(clicked(bool)),
+            this, SLOT(slotIleStandardFlange_2Clicked()));
+
     cbTypeFlange_2->setModel(new QStringListModel(items, this));
     mFlangeMapper->addMapping(cbTypeFlange_2,
                               mFlangeModel->fieldIndex("typeflange2_id"),
@@ -898,6 +900,57 @@ void PCALC_EN1591Widget::slotDisableFormulaWidgets(int index) {
     sbFormulaTo->setEnabled(index > 1 && index < 5);
 }
 
+void PCALC_EN1591Widget::slotIleStandardFlange_1Clicked() {
+    //    ileStandardFlange_1->setDefaultDialog(PCALC_DIALOGFACTORY,
+    //                                    PCALC_DialogFactory::WidgetSelectFlange,
+    //                                    "standardflange1_idx", "displayname");
+    RB_DialogWindow* dlgW = PCALC_DIALOGFACTORY->getDialogWindow(
+                PCALC_DialogFactory::WidgetSelectFlange);
+
+    if (dlgW->exec() != QDialog::Accepted) {
+        dlgW->deleteLater();
+        return;
+    }
+
+    RB_ObjectBase* obj = dlgW->getCurrentObject();
+
+    if (!obj) {
+        PCALC_DIALOGFACTORY->requestWarningDialog(tr("No item selected,\n"
+                                                "data unchanged."));
+        dlgW->deleteLater();
+        return;
+    } else {
+        int result = PCALC_DIALOGFACTORY->requestYesNoDialog(
+                    tr("Flange dimensions"),
+                    tr("Do you want to replace\nthe current flange data?"));
+        if (result != QDialog::Accepted) {
+            return;
+        }
+    }
+
+    QString displayName = obj->getValue("displayname").toString();
+    QString str = obj->getId() + displayName;
+    QModelIndex idx = mFlangeModel->index(mFlangeModel->getCurrentIndex().row(),
+                                    mFlangeModel->fieldIndex("standardflange1_idx"));
+    mFlangeModel->setData(idx, str);
+
+    if (displayName.startsWith("EN")) {
+
+    } else if (displayName.startsWith("ASME")) {
+        setIntegralFlange1AsmeData(obj, nullptr);
+
+
+
+    }
+
+
+    dlgW->deleteLater();
+}
+
+void PCALC_EN1591Widget::slotIleStandardFlange_2Clicked() {
+
+}
+
 void PCALC_EN1591Widget::setInput() {
     RB_ObjectContainer* inList
             = PR->getInOutContainer()->getContainer("PCALC_InputList");
@@ -915,7 +968,6 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "f_bspecified", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "typeflange1_id", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "d01", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d31", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d41", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "dx1", "-", mFlangeModel);
@@ -926,33 +978,33 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "erec1", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "eq1", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "ex1", "-", mFlangeModel);
-
+    // bolthole
+    addObjectMemberVariable(objIn, "d51", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "blindhole1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "d5t1", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "l5t1", "-", mFlangeModel);
+    // blind only
     addObjectMemberVariable(objIn, "d91", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "e01", "-", mFlangeModel);
-
+    // integral, loose only
+    addObjectMemberVariable(objIn, "d01", "-", mFlangeModel);
+    // integral, loose if hub only
     addObjectMemberVariable(objIn, "d11", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d21", "-", mFlangeModel);
-
     addObjectMemberVariable(objIn, "e11", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "e21", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "lh1", "-", mFlangeModel);
-
+    // loose onlye
     addObjectMemberVariable(objIn, "b01", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d61", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d81", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "el1", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "materialflange1_idx", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "materialloosering1_idx", "-", mFlangeModel);
-    // bolthole
-    addObjectMemberVariable(objIn, "d51", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "blindhole1", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "d5t1", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "l5t1", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "flange2equal", "-", mFlangeModel);
 
     addObjectMemberVariable(objIn, "typeflange2_id", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "d02", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d32", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d42", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "dx2", "-", mFlangeModel);
@@ -963,28 +1015,29 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "erec2", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "eq2", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "ex2", "-", mFlangeModel);
-
+    // bolthole
+    addObjectMemberVariable(objIn, "d52", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "blindhole2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "d5t2", "-", mFlangeModel);
+    addObjectMemberVariable(objIn, "l5t2", "-", mFlangeModel);
+    // blind only
     addObjectMemberVariable(objIn, "d92", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "e02", "-", mFlangeModel);
-
+    // integral, loose only
+    addObjectMemberVariable(objIn, "d02", "-", mFlangeModel);
+    // integral, loose if hub only
     addObjectMemberVariable(objIn, "d12", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d22", "-", mFlangeModel);
-
     addObjectMemberVariable(objIn, "e12", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "e22", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "lh2", "-", mFlangeModel);
-
+    // loose only
     addObjectMemberVariable(objIn, "b02", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d62", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d82", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "el2", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "materialflange2_idx", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "materialloosering2_idx", "-", mFlangeModel);
-    // bolthole
-    addObjectMemberVariable(objIn, "d52", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "blindhole2", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "d5t2", "-", mFlangeModel);
-    addObjectMemberVariable(objIn, "l5t2", "-", mFlangeModel);
 
     // gasket
     addObjectMemberVariable(objIn, "gaskettype_idx", "-", mGasketModel);
@@ -1016,6 +1069,7 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "pt", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "ruptureelongationa", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "materialbolt_idx", "-", mBoltNutWasherModel);
+
     // washer
     addObjectMemberVariable(objIn, "ew", "-", mBoltNutWasherModel);
     addObjectMemberVariable(objIn, "dw1", "-", mBoltNutWasherModel);
@@ -1529,6 +1583,148 @@ void PCALC_EN1591Widget::createUnitTestDetail() {
     outputStr.append(po + "-- End UnitTest:"
                      + QDateTime::currentDateTime().toString(Qt::ISODate) + pc);
     getTextEdit()->setHtml(outputStr);
+}
+
+void PCALC_EN1591Widget::setBlindFlange1EnData(RB_ObjectBase* compObj,
+                                             RB_ObjectBase* facingObj) {
+
+
+}
+
+void PCALC_EN1591Widget::setBlindFlange2EnData(RB_ObjectBase* compObj,
+                                             RB_ObjectBase* facingObj) {
+
+}
+
+void PCALC_EN1591Widget::setIntegralFlange1EnData(RB_ObjectBase* compObj,
+                                                  RB_ObjectBase* facingObj) {
+
+}
+
+void PCALC_EN1591Widget::setIntegralFlange2EnData(RB_ObjectBase* compObj,
+                                                  RB_ObjectBase* facingObj) {
+
+}
+
+void PCALC_EN1591Widget::setLooseFlange1EnData(RB_ObjectBase* compObj,
+                                               RB_ObjectBase* facingObj) {
+
+}
+
+void PCALC_EN1591Widget::setLooseFlange2EnData(RB_ObjectBase* compObj,
+                                             RB_ObjectBase* facingObj) {
+
+}
+
+void PCALC_EN1591Widget::setBlindFlange1AsmeData(RB_ObjectBase* compObj,
+                                                 RB_ObjectBase* facingObj)
+{
+
+}
+
+void PCALC_EN1591Widget::setBlindFlange2AsmeData(RB_ObjectBase* compObj,
+                                                 RB_ObjectBase* facingObj)
+{
+
+}
+
+void PCALC_EN1591Widget::setIntegralFlange1AsmeData(RB_ObjectBase* compObj,
+                                                    RB_ObjectBase* facingObj) {
+    setModelVariable(mFlangeModel, "typeflange1_id", 1);
+    setModelVariable(mFlangeModel, "d31", compObj->getValue("k").toDouble());
+    setModelVariable(mFlangeModel, "d41", compObj->getValue("d").toDouble());
+//    setModelVariable(mFlangeModel, "dx1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "drf1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "drec1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "efb1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "erf1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "erec1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "eq1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "ex1", compObj->getValue("").toDouble());
+//    // bolthole
+//    setModelVariable(mFlangeModel, "d51", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "blindhole1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "d5t1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "l5t1", compObj->getValue("").toDouble());
+//    // blind only
+//    setModelVariable(mFlangeModel, "d91", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "e01", compObj->getValue("").toDouble());
+//    // integral, loose only
+//    setModelVariable(mFlangeModel, "d01", compObj->getValue("").toDouble());
+//    // integral, loose (if hub) only
+//    setModelVariable(mFlangeModel, "d11", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "d21", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "e11", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "e21", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "lh1", compObj->getValue("").toDouble());
+//    // loose only
+//    setModelVariable(mFlangeModel, "b01", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "d61", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "d81", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "el1", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "materialflange1_idx", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "materialloosering1_idx", compObj->getValue("").toDouble());
+
+}
+
+void PCALC_EN1591Widget::setIntegralFlange2AsmeData(RB_ObjectBase* compObj,
+                                                    RB_ObjectBase* facingObj) {
+    setModelVariable(mFlangeModel, "typeflange2_id", 1);
+    setModelVariable(mFlangeModel, "d32", compObj->getValue("k").toDouble());
+    setModelVariable(mFlangeModel, "d42", compObj->getValue("d").toDouble());
+//    setModelVariable(mFlangeModel, "dx2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "drf2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "drec2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "efb2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "erf2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "erec2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "eq2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "ex2", compObj->getValue("").toDouble());
+//    // bolthole
+//    setModelVariable(mFlangeModel, "d52", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "blindhole2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "d5t2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "l5t2", compObj->getValue("").toDouble());
+//    // blind only
+//    setModelVariable(mFlangeModel, "d92", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "e02", compObj->getValue("").toDouble());
+//    // integral, loose only
+//    setModelVariable(mFlangeModel, "d02", compObj->getValue("").toDouble());
+//    // integral, loose (if hub) only
+//    setModelVariable(mFlangeModel, "d12", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "d22", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "e12", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "e22", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "lh2", compObj->getValue("").toDouble());
+//    // loose only
+//    setModelVariable(mFlangeModel, "b02", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "d62", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "d82", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "el2", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "materialflange2_idx", compObj->getValue("").toDouble());
+//    setModelVariable(mFlangeModel, "materialloosering2_idx", compObj->getValue("").toDouble());
+
+}
+
+void PCALC_EN1591Widget::setLooseFlange1AsmeData(RB_ObjectBase* compObj,
+                                                 RB_ObjectBase* facingObj)
+{
+
+}
+
+void PCALC_EN1591Widget::setLooseFlange2AsmeData(RB_ObjectBase* compObj,
+                                                 RB_ObjectBase* facingObj)
+{
+
+}
+
+void PCALC_EN1591Widget::setModelVariable(RB_MmProxy* model,
+                                          const QString& fieldName,
+                                          double value) {
+    QModelIndex idx = model->index(
+                model->getCurrentIndex().row(),
+                model->fieldIndex(fieldName));
+    model->setData(idx, value);
 }
 
 void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,

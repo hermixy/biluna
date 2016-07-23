@@ -17,7 +17,6 @@
 
 /**
  * Constructor
- * TODO: after extensive testing remove debug functions
  * @param id identification
  * @param p parent container
  * @param n name of object such as PENG_Line
@@ -55,7 +54,7 @@ RB_ObjectBase::RB_ObjectBase(const RB_String& id, RB_ObjectBase* p,
 }
 
 /**
- * Copy constructor, does not create or set members only id, parent and name
+ * Copy constructor, does create or set members including id, parent and name
  * @param obj object to be copied
  */
 RB_ObjectBase::RB_ObjectBase(RB_ObjectBase* obj) : RB_Object(obj) {
@@ -106,8 +105,8 @@ RB_ObjectBase::~RB_ObjectBase() {
 
 
 /**
- * operator = implementation
- * TODO: after extensive testing remove debug functions
+ * operator = implementation. If missing does create or set members
+ * excluding id, parent and name
  * @return *this
  */
 RB_ObjectBase& RB_ObjectBase::operator= (const RB_ObjectBase& obj) {

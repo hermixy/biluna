@@ -57,6 +57,9 @@ protected slots:
     void slotHandleParentRowChanged();
     void slotDisableFormulaWidgets(int index);
 
+    void slotIleStandardFlange_1Clicked();
+    void slotIleStandardFlange_2Clicked();
+
 protected:
     void changeEvent(QEvent *e);
 
@@ -76,6 +79,32 @@ private:
     void writeValidationReport();
     void createUnitTestSummary();
     void createUnitTestDetail();
+    void setBlindFlange1EnData(RB_ObjectBase* compObj,
+                               RB_ObjectBase* facingObj = nullptr);
+    void setBlindFlange2EnData(RB_ObjectBase* compObj,
+                               RB_ObjectBase* facingObj = nullptr);
+    void setIntegralFlange1EnData(RB_ObjectBase* compObj,
+                                  RB_ObjectBase* facingObj = nullptr);
+    void setIntegralFlange2EnData(RB_ObjectBase* compObj,
+                                  RB_ObjectBase* facingObj = nullptr);
+    void setLooseFlange1EnData(RB_ObjectBase* compObj,
+                               RB_ObjectBase* facingObj = nullptr);
+    void setLooseFlange2EnData(RB_ObjectBase* compObj,
+                               RB_ObjectBase* facingObj = nullptr);
+    void setBlindFlange1AsmeData(RB_ObjectBase* compObj,
+                               RB_ObjectBase* facingObj = nullptr);
+    void setBlindFlange2AsmeData(RB_ObjectBase* compObj,
+                               RB_ObjectBase* facingObj = nullptr);
+    void setIntegralFlange1AsmeData(RB_ObjectBase* compObj,
+                                  RB_ObjectBase* facingObj = nullptr);
+    void setIntegralFlange2AsmeData(RB_ObjectBase* compObj,
+                                  RB_ObjectBase* facingObj = nullptr);
+    void setLooseFlange1AsmeData(RB_ObjectBase* compObj,
+                               RB_ObjectBase* facingObj = nullptr);
+    void setLooseFlange2AsmeData(RB_ObjectBase* compObj,
+                               RB_ObjectBase* facingObj = nullptr);
+    void setModelVariable(RB_MmProxy* model, const QString& fieldName,
+                          double value);
     void addObjectMemberVariable(RB_ObjectBase* obj,
                                  const QString& variableName,
                                  const QString& unit, RB_MmProxy* model);

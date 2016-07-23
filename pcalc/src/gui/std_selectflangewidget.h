@@ -32,6 +32,7 @@ public:
     }
 
     virtual RB_ObjectBase* getCurrentObject();
+    virtual RB_ObjectBase* getCurrentChild1Object();
     void init();
 
     // Catch signals from RB_DialogWindow
@@ -44,7 +45,7 @@ protected slots:
     void slotRatingRowChanged(int row);
 
 private:
-    RB_ObjectBase* mCurrentObject;
+    RB_ObjectBase* mFlangeObject;
 
 };
 

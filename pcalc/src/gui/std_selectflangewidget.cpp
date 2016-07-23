@@ -16,37 +16,72 @@
 STD_SelectFlangeWidget::STD_SelectFlangeWidget(QWidget *parent)
         : STD_SelectComponentWidget(parent) {
     setObjectName("STD_SelectFlangeWidget");
-    mCurrentObject = nullptr;
+    mFlangeObject = nullptr;
 }
 
 STD_SelectFlangeWidget::~STD_SelectFlangeWidget() {
-    if (mCurrentObject) {
-        delete mCurrentObject;
-        mCurrentObject = nullptr;
+    if (mFlangeObject) {
+        delete mFlangeObject;
+        mFlangeObject = nullptr;
     }
 }
 
+/**
+ * @brief STD_SelectFlangeWidget::getCurrentObject
+ * @return Flange object with additional displayname
+ */
 RB_ObjectBase* STD_SelectFlangeWidget::getCurrentObject() {
     if (!ui->tvComponent->currentIndex().isValid()) {
         return nullptr;
     }
 
-    if (!mCurrentObject) {
-        mCurrentObject = new RB_ObjectAtomic(mComponentModel->getCurrentObject());
-        mCurrentObject->addMember("displayname", "-", ui->cbStandard->currentText() + " "
-                                 + ui->cbType->currentText() + " "
-                                 + ui->cbRating->currentText() + " "
-                                 + ui->cbSerie->currentText());
-        // continue here other relevant dim data of facing
+    RB_ObjectBase* obj = mComponentModel->getCurrentObject();
+    QString displayName = ui->cbStandard->currentText() + " "
+            + obj->getValue("nomsize").toString() + " "
+            + ui->cbType->currentText() + " "
+            + ui->cbRating->currentText() + " "
+            + ui->cbSerie->currentText();
+
+    if (!mFlangeObject) {
+        mFlangeObject = new RB_ObjectAtomic(obj);
+        mFlangeObject->addMember("displayname", "-", displayName);
 
     } else {
         // Required? set only once
-        mCurrentObject = mComponentModel->getCurrentObject();
-        // continue here: set displayname
-        // continue here other relevant dim data of facing
+        *mFlangeObject = *obj;
+        mFlangeObject->setValue("displayname", displayName);
     }
 
-    return mCurrentObject;
+    return mFlangeObject;
+}
+
+/**
+ * @brief STD_SelectFlangeWidget::getCurrentChild1Object
+ * @return facing object
+ */
+RB_ObjectBase* STD_SelectFlangeWidget::getCurrentChild1Object() {
+    // continue here other relevant dim data of facing
+    if (!ui->tvComponent->currentIndex().isValid()) {
+        return nullptr;
+    }
+
+    int row = ui->tvComponent->currentIndex().row();
+    int col = mComponentModel->fieldIndex("nomsize");
+    QModelIndex index = mComponentModel->index(row, col);
+    double nomSize = index.data().toDouble();
+
+    col = mEndModel->fieldIndex("nomsize");
+    int rowCount = mEndModel->rowCount();
+
+    for (row = 0; row < rowCount; row++) {
+        index = mEndModel->index(row,col);
+
+        if (index.data().toDouble() == nomSize) {
+            return mEndModel->getObject(index, RB2::ResolveNone);
+        }
+    }
+
+    return nullptr;
 }
 
 void STD_SelectFlangeWidget::init() {
@@ -104,6 +139,11 @@ void STD_SelectFlangeWidget::init() {
 //        }
 //    }
 
+    // facing model not shown but for data only
+    mEndModel = PCALC_MODELFACTORY->getModel(
+                PCALC_ModelFactory::ModelFlangeFacingDim, false);
+
+
     for (int i = 0; i < RB2::HIDDENCOLUMNS; ++i) {
         ui->tvComponent->hideColumn(i);
     }
@@ -147,4 +187,5 @@ void STD_SelectFlangeWidget::slotRatingRowChanged(int row) {
     if (!mRatingModel || !mComponentModel) return;
     QModelIndex index = mRatingModel->index(row, 0);
     mComponentModel->slotParentCurrentRowChanged(index, QModelIndex());
+    mEndModel->slotParentCurrentRowChanged(index, QModelIndex());
 }
