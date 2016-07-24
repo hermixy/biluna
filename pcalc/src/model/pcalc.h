@@ -18,7 +18,6 @@
  */
 class PCALC2 {
 public:
-
     /**
      * Component type which has a relation to the PCC2 pipe class component type
      */
@@ -36,7 +35,7 @@ public:
         CompDefault             /** All or default component type */
     };
 
-    /** Type of flange for GUI */
+    /** EN1591 flange types for GUI */
     enum FlangeType {
         FlangeBlind,
         FlangeIntegral,

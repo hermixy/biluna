@@ -84,6 +84,18 @@ RB_ObjectBase* STD_SelectFlangeWidget::getCurrentChild1Object() {
     return nullptr;
 }
 
+/**
+ * @brief STD_SelectFlangeWidget::getCurrentChild2Object
+ * @return flange type object
+ */
+RB_ObjectBase *STD_SelectFlangeWidget::getCurrentChild2Object() {
+    if (!ui->tvComponent->currentIndex().isValid()) {
+        return nullptr;
+    }
+
+    return mTypeModel->getCurrentObject();
+}
+
 void STD_SelectFlangeWidget::init() {
     mStandardModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelDimension, false);
@@ -180,7 +192,8 @@ void STD_SelectFlangeWidget::slotStandardRowChanged(int row) {
 void STD_SelectFlangeWidget::slotTypeRowChanged(int row) {
     if (!mTypeModel || !mRatingModel) return;
     QModelIndex index = mTypeModel->index(row, 0);
-    // limits
+    mTypeModel->slotChangeCurrentRow(index, QModelIndex());
+    // TODO: set limits in tvComponent
 }
 
 void STD_SelectFlangeWidget::slotRatingRowChanged(int row) {

@@ -33,6 +33,7 @@ public:
 
     virtual RB_ObjectBase* getCurrentObject();
     virtual RB_ObjectBase* getCurrentChild1Object();
+    virtual RB_ObjectBase* getCurrentChild2Object();
     void init();
 
     // Catch signals from RB_DialogWindow

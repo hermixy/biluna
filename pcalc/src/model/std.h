@@ -16,6 +16,28 @@
  */
 class STD2 {
 public:
+    /** ASME B16.5 flange facing types */
+    enum AsmeFlangeFacingType {
+        AsmeFlangeFacingFFS,	/** Small Female Face (small Spigot and Recess)	*/
+        AsmeFlangeFacingFMS,	/** Small Male Face (on end of pipe, small Spigot and Recess) */
+        AsmeFlangeFacingRF,     /** Raised Face 2 or 7 mm */
+        AsmeFlangeFacingRTJ,	/**	Ring (Type) Joint */
+        AsmeFlangeFacingSRF,	/**	Spigot and Recess Female (large face) */
+        AsmeFlangeFacingSRM,	/**	Spigot and Recess Male (large face) */
+        AsmeFlangeFacingTGF,	/**	Tongue and Groove Female */
+        AsmeFlangeFacingTGM     /**	Tongue and Groove Male */
+    };
+
+    /** ASME B16.5 flange types */
+    enum AsmeFlangeType {
+        AsmeFlangeBLD,          /** Blind */
+        AsmeFlangeLPD,          /** Lapped */
+        AsmeFlangeSOW,          /** Slip-On Welding */
+        AsmeFlangeSW,           /** Socket Welding (NPS 1/2 to 3 Only) */
+        AsmeFlangeTHRD,         /** Threaded */
+        AsmeFlangeWN            /** Welding Neck */
+    };
+
 
     /**
      * Component type which has a relation to material allowable stress
@@ -36,6 +58,34 @@ public:
         CompValve,
         CompWasher,
         CompDefault
+    };
+
+    /** EN 1092-1 flange facing types */
+    enum EnFlangeFacingType {
+        EnFlangeFacingA,        /** Flat face */
+        EnFlangeFacingB,        /** Raised face */
+        EnFlangeFacingC,        /** Tongue */
+        EnFlangeFacingD,        /** Groove */
+        EnFlangeFacingE,        /** Spigot */
+        EnFlangeFacingF,        /** Recess */
+        EnFlangeFacingG,        /** O-ring spigot */
+        EnFlangeFacingH         /** O-ring groove */
+    };
+
+    /** EN 1092-1 flange types */
+    enum EnFlangeType {
+        EnFlange01,             /** Plate flange for welding */
+        EnFlange0232,           /** Loose plate flange with weld-on collar */
+        EnFlange0233,           /** Loose plate flange with lapped pipe end */
+        EnFlange0235,           /** Loose plate flange with weld ring neck */
+        EnFlange0236,           /** Loose plate flange with pressed collar with long neck */
+        EnFlange0237,           /** Loose plate flange with pressed collar */
+        EnFlange0434,           /** Loose plate flange with weld-neck collar */
+        EnFlange05,             /** Blind flange */
+        EnFlange11,             /** Weld-neck flange */
+        EnFlange12,             /** Hubbed slip-on flange for welding */
+        EnFlange13,             /** Hubbed threaded flange */
+        EnFlange21              /** Integral flange */
     };
 
     /** Material class */
@@ -76,6 +126,10 @@ public:
         MatStructNonFerrous,
         MatStructDefault
     };
+
+    static double inchToMm (double value) {
+        return 25.4 * value;
+    }
 
     /**
      * Convert pipe sizes from NPS Nominal Pipe Size to DN Nominal Diameter

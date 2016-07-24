@@ -96,7 +96,9 @@ private:
     void setBlindFlange2AsmeData(RB_ObjectBase* compObj,
                                RB_ObjectBase* facingObj = nullptr);
     void setIntegralFlange1AsmeData(RB_ObjectBase* compObj,
-                                  RB_ObjectBase* facingObj = nullptr);
+                                    RB_ObjectBase* facingObj,
+                                    STD2::AsmeFlangeType flangeType = STD2::AsmeFlangeWN,
+                                    STD2::AsmeFlangeFacingType facingType = STD2::AsmeFlangeFacingRF);
     void setIntegralFlange2AsmeData(RB_ObjectBase* compObj,
                                   RB_ObjectBase* facingObj = nullptr);
     void setLooseFlange1AsmeData(RB_ObjectBase* compObj,
