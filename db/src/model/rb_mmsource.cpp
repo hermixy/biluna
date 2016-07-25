@@ -1454,7 +1454,14 @@ bool RB_MmSource::copyCurrentRow() {
 
     for (int i = RB2::HIDDENCOLUMNS; i < count; i++) {
         idx = index(0, i, parentIdx);
-        setData(idx, obj->getValue(i));
+        QString fieldName = obj->getMember(i)->getName();
+
+        if (!fieldName.endsWith("_idx")) {
+            setData(idx, obj->getValue(i));
+        } else {
+            setData(idx, obj->getIdValue(1).toString()
+                    + obj->getDValue(1).toString());
+        }
     }
 
     QModelIndex copyIdx = index(0, 0, parentIdx);
@@ -1798,7 +1805,7 @@ void RB_MmSource::slotCopyRows(const QString& parentId) {
         for (int col = RB2::HIDDENCOLUMNS; col < cCount; col++) {
             // copy other values
             idx = index(row, col);
-            value = idx.data();
+            value = idx.data(Qt::EditRole);
             idx = index(rCount + row, col);
             setData(idx, value);
         }

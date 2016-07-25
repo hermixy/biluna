@@ -43,6 +43,7 @@ STD_FlangeAsme::~STD_FlangeAsme() {
  * \li b2 bore minimum lapped
  * \li b3 bore welding neck/socket welding (note 6)
  * \li r corner radius of bore of lapped flange and pipe
+ * \li r1 minimum filet radius, only ASME B16.47
  * \li q minimum counter-bore threaded flange
  * \li d depth of socket
  * \li w diameter of bolt circle
@@ -69,6 +70,7 @@ void STD_FlangeAsme::createMembers() {
     addMember("b2", "mm", 0, RB2::MemberDouble);
     addMember("b3", "mm", 0, RB2::MemberDouble);
     addMember("r", "mm", 0, RB2::MemberDouble);
+    addMember("r1", "mm", 0, RB2::MemberDouble);
     addMember("q", "mm", 0, RB2::MemberDouble);
     addMember("d", "mm", 0, RB2::MemberDouble);
     addMember("w", "mm", 0, RB2::MemberDouble);

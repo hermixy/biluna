@@ -1653,7 +1653,7 @@ void PCALC_EN1591Widget::setIntegralFlange1AsmeData(RB_ObjectBase* flangeObj,
         setModelVariable(mFlangeModel, "dx1", 0.0);
     }
 
-    setModelVariable(mFlangeModel, "drf1", flangeObj->getValue("r").toDouble());
+    setModelVariable(mFlangeModel, "drf1", facingObj->getValue("r").toDouble());
 
     if (facingType == STD2::AsmeFlangeFacingSRF || facingType == STD2::AsmeFlangeFacingTGF) {
         // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
