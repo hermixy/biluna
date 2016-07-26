@@ -942,6 +942,10 @@ void PCALC_EN1591Widget::slotIleStandardFlange_1Clicked() {
     } else if (displayName.startsWith("ASME")) {
         if (flangeTypeObj->getValue("type").toString() == "WN") { // TODO: change to type_id!
             setIntegralFlange1AsmeData(flangeObj, facingObj);
+
+            // update bolt with UNC thread and nut dimensions
+
+
         }
 
         // TODO: other types
@@ -1845,7 +1849,8 @@ void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
     STD_MATERIALUTILITY->setCurrentMaterial(materialId);
 
     if (!STD_MATERIALUTILITY->isValid()) {
-        PCALC_DIALOGFACTORY->requestWarningDialog("Material not valid");
+        PCALC_DIALOGFACTORY->commandMessage("Update allowable stress: "
+                                            "material not valid");
         return;
     }
 
@@ -1908,7 +1913,8 @@ void PCALC_EN1591Widget::updateElasModul(const QString& materialId,
     STD_MATERIALUTILITY->setCurrentMaterial(materialId);
 
     if (!STD_MATERIALUTILITY->isValid()) {
-        PCALC_DIALOGFACTORY->requestWarningDialog("Material not valid");
+        PCALC_DIALOGFACTORY->commandMessage("Update elasticity modulus: "
+                                            "material not valid");
         return;
     }
 
@@ -1944,7 +1950,8 @@ void PCALC_EN1591Widget::updateThermExp(const QString& materialId,
     STD_MATERIALUTILITY->setCurrentMaterial(materialId);
 
     if (!STD_MATERIALUTILITY->isValid()) {
-        PCALC_DIALOGFACTORY->requestWarningDialog("Material not valid");
+        PCALC_DIALOGFACTORY->commandMessage("Update thermal expansion: "
+                                            "material not valid");
         return;
     }
 

@@ -133,7 +133,7 @@ void STD_SelectFlangeWidget::init() {
 
     // flange model
     mComponentModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlange, false);
+                PCALC_ModelFactory::ModelFlangeEn, false);
     formatTableView(ui->tvComponent, mComponentModel);
 
     // TODO: Hide columns, EN has the largest number of columns
@@ -153,7 +153,7 @@ void STD_SelectFlangeWidget::init() {
 
     // facing model not shown but for data only
     mEndModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeFacingDim, false);
+                PCALC_ModelFactory::ModelFlangeFacingDimEn, false);
 
 
     for (int i = 0; i < RB2::HIDDENCOLUMNS; ++i) {

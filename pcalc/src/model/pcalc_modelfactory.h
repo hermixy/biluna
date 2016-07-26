@@ -42,6 +42,8 @@ public:
     enum ModelType {
         // start numbering from 191100
         ModelNone = 191100,             /**< Invalid model */
+        ModelBoltAsme,                  /**< ASME bolt dimension model */
+        ModelBoltEn,                    /**< EN bolt dimension model */
         ModelClassGenerator,            /**< Calculation class generator model */
         ModelDimension,                 /**< Dimension model */
         ModelEN13555EGeG,               /**< EN13555 EG and eG model */
@@ -57,10 +59,10 @@ public:
         ModelEN1591Gasket,              /**< EN1591 Gasket model */
         ModelEN1591LoadCase,            /**< EN1591 Load Case model */
         ModelEN1591Shell,               /**< EN1591 Shell model */
-        ModelFlange,                    /**< EN flange model */
         ModelFlangeAsme,                /**< ASME flange model */
-        ModelFlangeFacingDim,           /**< EN flange facing dimension model */
+        ModelFlangeEn,                  /**< EN flange model */
         ModelFlangeFacingDimAsme,       /**< ASME flange facing dimension model */
+        ModelFlangeFacingDimEn,         /**< EN flange facing dimension model */
         ModelFlangeFacingType,          /**< Flange facing type model */
         ModelFlangeType,                /**< Flange type model */
         ModelFlangeTypeLimit,           /**< Flange type limit model */
@@ -71,6 +73,8 @@ public:
         ModelMaterial,                  /**< Material model */
         ModelMatThermExpTable,          /**< Material thermal expansion table */
         ModelMatThermExpValue,          /**< Material thermal expansion values */
+        ModelNutAsme,                   /**< ASME nut dimension model */
+        ModelNutEn,                     /**< EN nut dimension model */
         ModelProject,                   /**< Project model */
         ModelProjectEdit,               /**< Edit project model */
         ModelRating,                    /**< Base rating/schedule model */

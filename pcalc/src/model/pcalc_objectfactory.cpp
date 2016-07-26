@@ -22,6 +22,7 @@
 #include "peng_project.h"
 #include "rb_debug.h"
 #include "rb_uuid.h"
+#include "std_boltasme.h"
 #include "std_creeptable.h"
 #include "std_dimension.h"
 #include "std_elasmodul.h"
@@ -34,14 +35,15 @@
 #include "std_en13555qsmaxalphag.h"
 #include "std_en13555qsminl.h"
 #include "std_extpresstable.h"
-#include "std_flange.h"
 #include "std_flangeasme.h"
-#include "std_flangefacingdim.h"
+#include "std_flangeen.h"
 #include "std_flangefacingdimasme.h"
+#include "std_flangefacingdimen.h"
 #include "std_flangefacingtype.h"
 #include "std_flangetype.h"
 #include "std_flangetypelimit.h"
 #include "std_material.h"
+#include "std_nutasme.h"
 #include "std_rating.h"
 #include "std_rmmin.h"
 #include "std_rp02.h"
@@ -169,6 +171,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new PCALC_EN1591_Shell(uuid, parent, "PCALC_EN1591_Shell", this);
     } else if (str == "PCALC_GeneratorFormulaList") {
         obj = new PCALC_GeneratorFormula(uuid, parent, "PCALC_GeneratorFormula", this);
+    } else if (str == "STD_BoltAsmeList") {
+        obj = new STD_BoltAsme(uuid, parent, "STD_BoltAsme", this);
     } else if (str == "STD_CreepTableList") {
         obj = new STD_CreepTable(uuid, parent, "STD_CreepTable", this);
 
@@ -240,21 +244,25 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
 //        obj->addObject(list);
     } else if (str == "STD_FlangeFacingDimAsmeList") {
         obj = new STD_FlangeFacingDimAsme(uuid, parent, "STD_FlangeFacingDimAsme", this);
-    } else if (str == "STD_FlangeFacingDimList") {
-        obj = new STD_FlangeFacingDim(uuid, parent, "STD_FlangeFacingDim", this);
+    } else if (str == "STD_FlangeFacingDimEnList") {
+        obj = new STD_FlangeFacingDimEn(uuid, parent, "STD_FlangeFacingDimEn", this);
     } else if (str == "STD_FlangeFacingTypeList") {
         obj = new STD_FlangeFacingType(uuid, parent, "STD_FlangeFacingType", this);
     } else if (str == "STD_FlangeAsmeList") {
         obj = new STD_FlangeAsme(uuid, parent, "STD_FlangeAsme", this);
-    } else if (str == "STD_FlangeList") {
-        obj = new STD_Flange(uuid, parent, "STD_Flange", this);
+    } else if (str == "STD_FlangeEnList") {
+        obj = new STD_FlangeEn(uuid, parent, "STD_FlangeEn", this);
     } else if (str == "STD_FlangeTypeLimitList") {
         obj = new STD_FlangeTypeLimit(uuid, parent, "STD_FlangeTypeLimit", this);
     } else if (str == "STD_FlangeTypeList") {
         obj = new STD_FlangeType(uuid, parent, "STD_FlangeType", this);
 
         uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "STD_BoltAsmeList", this);
+        obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_FlangeTypeLimitList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_NutAsmeList", this);
         obj->addObject(list);
     } else if (str == "STD_MaterialList") {
         obj = new STD_Material(uuid, parent, "STD_Material", this);
@@ -266,6 +274,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_RmMinList", this);
         obj->addObject(list);
+    } else if (str == "STD_NutAsmeList") {
+        obj = new STD_NutAsme(uuid, parent, "STD_NutAsme", this);
     } else if (str == "STD_RatingList") {
         obj = new STD_Rating(uuid, parent, "STD_Rating", this);
 
@@ -274,9 +284,9 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimAsmeList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimList", this);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimEnList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeList", this);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeEnList", this);
         obj->addObject(list);
     } else if (str == "STD_RmMinList") {
         obj = new STD_RmMin(uuid, parent, "STD_RmMin", this);

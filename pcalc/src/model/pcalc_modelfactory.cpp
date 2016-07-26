@@ -69,12 +69,16 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
     QSqlDatabase stdDb = getStandardDatabase();
 
     switch (type) {
+    case ModelBoltAsme:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_BoltAsmeList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "nomsize");
+        break;
     case ModelClassGenerator:
         model = getTableModel(db, mObjectFactory, type, "PCALC_ClassGeneratorList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "codename", "subname");
         break;
     case ModelDimension:
-        model = getTableModel(db, mObjectFactory, type, "STD_DimensionList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_DimensionList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "code");
         break;
     case ModelEN13555EGeG:
@@ -129,32 +133,32 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "PCALC_EN1591_ShellList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
         break;
-    case ModelFlange:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
-        break;
     case ModelFlangeAsme:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeAsmeList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeAsmeList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
         break;
-    case ModelFlangeFacingDim:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingDimList");
+    case ModelFlangeEn:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeEnList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
         break;
     case ModelFlangeFacingDimAsme:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingDimAsmeList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeFacingDimAsmeList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
+        break;
+    case ModelFlangeFacingDimEn:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeFacingDimEnList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
         break;
     case ModelFlangeFacingType:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeFacingTypeList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeFacingTypeList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "type");
         break;
     case ModelFlangeType:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeTypeList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeTypeList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "type");
         break;
     case ModelFlangeTypeLimit:
-        model = getTableModel(db, mObjectFactory, type, "STD_FlangeTypeLimitList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeTypeLimitList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
         break;
     case ModelGeneratorFormula:
@@ -162,28 +166,32 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model->setSourceSortOrder(RB2::SortOrderAscending, "number");
         break;
     case ModelMatCreepTable:
-        model = getTableModel(db, mObjectFactory, type, "STD_CreepTableList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_CreepTableList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelMaterial:
-        model = getTableModel(db, mObjectFactory, type, "STD_MaterialList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_MaterialList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelMatElasModulTable:
-        model = getTableModel(db, mObjectFactory, type, "STD_ElasModulTableList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_ElasModulTableList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelMatElasModulValue:
-        model = getTableModel(db, mObjectFactory, type, "STD_ElasModulList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_ElasModulList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     case ModelMatThermExpTable:
-        model = getTableModel(db, mObjectFactory, type, "STD_ThermExpTableList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_ThermExpTableList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "mname");
         break;
     case ModelMatThermExpValue:
-        model = getTableModel(db, mObjectFactory, type, "STD_ThermExpList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_ThermExpList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
+        break;
+    case ModelNutAsme:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_NutAsmeList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "nomsize");
         break;
     case ModelProject:
         model = getTableModel(db, mObjectFactory, type, "PENG_ProjectList");
@@ -194,39 +202,39 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
         break;
     case ModelRating:
-        model = getTableModel(db, mObjectFactory, type, "STD_RatingList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_RatingList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
         break;
     case ModelRmMin:
-        model = getTableModel(db, mObjectFactory, type, "STD_RmMinList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_RmMinList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     case ModelRp02:
-        model = getTableModel(db, mObjectFactory, type, "STD_Rp02List");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_Rp02List");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     case ModelRp10:
-        model = getTableModel(db, mObjectFactory, type, "STD_Rp10List");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_Rp10List");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     case ModelRp10T100kh:
-        model = getTableModel(db, mObjectFactory, type, "STD_Rp10T100khList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_Rp10T100khList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     case ModelRp10T10kh:
-        model = getTableModel(db, mObjectFactory, type, "STD_Rp10T10khList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_Rp10T10khList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     case ModelRpT100kh:
-        model = getTableModel(db, mObjectFactory, type, "STD_RpT100khList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_RpT100khList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     case ModelRpT10kh:
-        model = getTableModel(db, mObjectFactory, type, "STD_RpT10khList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_RpT10khList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     case ModelRpT200kh:
-        model = getTableModel(db, mObjectFactory, type, "STD_RpT200khList");
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_RpT200khList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "temperature");
         break;
     default:
@@ -295,16 +303,16 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
     case ModelEN1591Shell:
         iter = mModelList.find(ModelEN1591Assembly);
         break;
-    case ModelFlange:
-        iter = mModelList.find(ModelRating);
-        break;
     case ModelFlangeAsme:
         iter = mModelList.find(ModelRating);
         break;
-    case ModelFlangeFacingDim:
+    case ModelFlangeEn:
         iter = mModelList.find(ModelRating);
         break;
     case ModelFlangeFacingDimAsme:
+        iter = mModelList.find(ModelRating);
+        break;
+    case ModelFlangeFacingDimEn:
         iter = mModelList.find(ModelRating);
         break;
     case ModelFlangeFacingType:

@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: std_flangefacingdim.cpp 0001 2016-07-13T15:43:00 rutger $
+ * $Id: std_flangefacingdimen.cpp 0001 2016-07-13T15:43:00 rutger $
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
  * This file is part of the Biluna STD project.
@@ -7,22 +7,22 @@
  * See http://www.biluna.com for further details.
  *****************************************************************/
 
-#include "std_flangefacingdim.h"
+#include "std_flangefacingdimen.h"
 
-STD_FlangeFacingDim::STD_FlangeFacingDim(
+STD_FlangeFacingDimEn::STD_FlangeFacingDimEn(
                    const QString& id, RB_ObjectBase* p,
                    const QString& n, RB_ObjectFactory* f)
 					: RB_ObjectAtomic (id, p, n, f) {
 	createMembers();
 }
 
-STD_FlangeFacingDim::STD_FlangeFacingDim(STD_FlangeFacingDim* obj) :
+STD_FlangeFacingDimEn::STD_FlangeFacingDimEn(STD_FlangeFacingDimEn* obj) :
                    RB_ObjectAtomic(obj) {
 	createMembers();
 	*this = *obj;
 }
 
-STD_FlangeFacingDim::~STD_FlangeFacingDim() {
+STD_FlangeFacingDimEn::~STD_FlangeFacingDimEn() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
@@ -42,7 +42,7 @@ STD_FlangeFacingDim::~STD_FlangeFacingDim() {
  * \li alpha
  * \li r
  */
-void STD_FlangeFacingDim::createMembers() {
+void STD_FlangeFacingDimEn::createMembers() {
     addMember("rating", "NPS", 0.0, RB2::MemberDouble);
     addMember("nomsize", "DN", 0.0, RB2::MemberDouble);
     addMember("d1", "mm", 0.0, RB2::MemberDouble);

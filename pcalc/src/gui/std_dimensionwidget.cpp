@@ -79,7 +79,7 @@ void STD_DimensionWidget::init() {
 
     // parent is Rating
     mEndModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeFacingDim, false);
+                PCALC_ModelFactory::ModelFlangeFacingDimEn, false);
     formatTableView(ui->tvEnd, mEndModel);
     ui->tbbEnd->initSlimTable();
     ui->tvEnd->setToolButtonBar(ui->tbbEnd);
@@ -90,7 +90,7 @@ void STD_DimensionWidget::init() {
 
     // parent is Rating
     mComponentModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlange, false);
+                PCALC_ModelFactory::ModelFlangeEn, false);
     formatTableView(ui->tvComponent, mComponentModel);
     ui->tbbComponent->initSlimTable();
     ui->tvComponent->setToolButtonBar(ui->tbbComponent);

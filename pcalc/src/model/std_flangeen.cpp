@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: std_flange.cpp 0001 2016-07-07T17:39:51 rutger $
+ * $Id: std_flangeen.cpp 0001 2016-07-07T17:39:51 rutger $
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
  * This file is part of the Biluna STD project.
@@ -7,22 +7,22 @@
  * See http://www.biluna.com for further details.
  *****************************************************************/
 
-#include "std_flange.h"
+#include "std_flangeen.h"
 
-STD_Flange::STD_Flange(
+STD_FlangeEn::STD_FlangeEn(
                    const QString& id, RB_ObjectBase* p,
                    const QString& n, RB_ObjectFactory* f)
 					: RB_ObjectAtomic (id, p, n, f) {
 	createMembers();
 }
 
-STD_Flange::STD_Flange(STD_Flange* obj) : 
+STD_FlangeEn::STD_FlangeEn(STD_FlangeEn* obj) :
                    RB_ObjectAtomic(obj) {
 	createMembers();
 	*this = *obj;
 }
 
-STD_Flange::~STD_Flange() {
+STD_FlangeEn::~STD_FlangeEn() {
 	// clean up children done in RB_ObjectBase and RB_ObjectContainer
 }
 
@@ -62,7 +62,7 @@ STD_Flange::~STD_Flange() {
  * \li r12 corner radius type 21
  * \li s wall thickness
  */
-void STD_Flange::createMembers() {
+void STD_FlangeEn::createMembers() {
     addMember("rating", "PN", 0, RB2::MemberDouble);
     addMember("nomsize", "DN", 0, RB2::MemberDouble);
     addMember("d", "mm", 0, RB2::MemberDouble);

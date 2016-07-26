@@ -9,8 +9,8 @@
 
 #include "std_dimensiontablehelper.h"
 
-#include "pcalc.h"
 #include "pcalc_modelfactory.h"
+#include "std.h"
 
 STD_DimensionTableHelper::STD_DimensionTableHelper() {
     mComponentModel = nullptr;
@@ -39,6 +39,33 @@ STD_DimensionTableHelper::~STD_DimensionTableHelper() {
     mStandardModel = nullptr;
 }
 
+void STD_DimensionTableHelper::setBoltDetailTableNames(
+        const QModelIndex& current, const QModelIndex& /*previous*/) {
+    if (!current.isValid()) {
+        return;
+    } else if (current.model() != mStandardModel) {
+        RB_DEBUG->error("STD_DimensionTableHelper::setBoltDetailTableNames() "
+                        "model ERROR");
+        return;
+    }
+
+    int row = current.row();
+    int colCompType = mStandardModel->fieldIndex("comptype_id");
+    int componentType = mStandardModel->data(mStandardModel->index(row, colCompType)).toInt();
+    int colCode = mStandardModel->fieldIndex("code");
+    QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
+
+    if (componentType == (int)STD2::CompBolt && code.startsWith("ASME")) {
+        delete mEndModel;
+        mEndModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelBoltAsme, false);
+    } else if (componentType == (int)STD2::CompBolt && code.startsWith("EN")) {
+//        delete mEndModel;
+//        mEndModel = PCALC_MODELFACTORY->getModel(
+//                    PCALC_ModelFactory::ModelBolt, false);
+    }
+}
+
 void STD_DimensionTableHelper::setFlangeDetailTableNames(
                 const QModelIndex& current, const QModelIndex& /*previous*/) {
     if (!current.isValid()) {
@@ -55,7 +82,7 @@ void STD_DimensionTableHelper::setFlangeDetailTableNames(
     int colCode = mStandardModel->fieldIndex("code");
     QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
 
-    if (componentType == (int)PCALC2::CompFlange && code.startsWith("ASME")) {
+    if (componentType == (int)STD2::CompFlange && code.startsWith("ASME")) {
         delete mEndModel;
         mEndModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelFlangeFacingDimAsme, false);
@@ -63,12 +90,12 @@ void STD_DimensionTableHelper::setFlangeDetailTableNames(
         mComponentModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelFlangeAsme, false);
 
-    } else if (componentType == (int)PCALC2::CompFlange && code.startsWith("EN")) {
+    } else if (componentType == (int)STD2::CompFlange && code.startsWith("EN")) {
         delete mEndModel;
         mEndModel = PCALC_MODELFACTORY->getModel(
-                    PCALC_ModelFactory::ModelFlangeFacingDim, false);
+                    PCALC_ModelFactory::ModelFlangeFacingDimEn, false);
         delete mComponentModel;
         mComponentModel = PCALC_MODELFACTORY->getModel(
-                    PCALC_ModelFactory::ModelFlange, false);
+                    PCALC_ModelFactory::ModelFlangeEn, false);
     }
 }
