@@ -39,63 +39,70 @@ STD_DimensionTableHelper::~STD_DimensionTableHelper() {
     mStandardModel = nullptr;
 }
 
-void STD_DimensionTableHelper::setBoltDetailTableNames(
+void STD_DimensionTableHelper::setBoltDetailTables(
         const QModelIndex& current, const QModelIndex& /*previous*/) {
     if (!current.isValid()) {
         return;
     } else if (current.model() != mStandardModel) {
-        RB_DEBUG->error("STD_DimensionTableHelper::setBoltDetailTableNames() "
+        RB_DEBUG->error("STD_DimensionTableHelper::setBoltDetailTables() "
                         "model ERROR");
         return;
     }
 
     int row = current.row();
-    int colCompType = mStandardModel->fieldIndex("comptype_id");
-    int componentType = mStandardModel->data(mStandardModel->index(row, colCompType)).toInt();
     int colCode = mStandardModel->fieldIndex("code");
     QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
 
-    if (componentType == (int)STD2::CompBolt && code.startsWith("ASME")) {
+    if (code.startsWith("ASME")) {
         delete mEndModel;
-        mEndModel = PCALC_MODELFACTORY->getModel(
+        mEndModel = nullptr;
+        delete mComponentModel;
+        mComponentModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelBoltAsme, false);
-    } else if (componentType == (int)STD2::CompBolt && code.startsWith("EN")) {
+        delete mEndModel;
+        mEndModel = nullptr;
+        delete mLimitModel;
+        mLimitModel = nullptr;
+    } else if (code.startsWith("EN")) {
 //        delete mEndModel;
 //        mEndModel = PCALC_MODELFACTORY->getModel(
 //                    PCALC_ModelFactory::ModelBolt, false);
     }
 }
 
-void STD_DimensionTableHelper::setFlangeDetailTableNames(
+void STD_DimensionTableHelper::setFlangeDetailTables(
                 const QModelIndex& current, const QModelIndex& /*previous*/) {
     if (!current.isValid()) {
         return;
     } else if (current.model() != mStandardModel) {
-        RB_DEBUG->error("STD_DimensionTableHelper::setFlangeDetailTableNames() "
+        RB_DEBUG->error("STD_DimensionTableHelper::setFlangeDetailTables() "
                         "model ERROR");
         return;
     }
 
     int row = current.row();
-    int colCompType = mStandardModel->fieldIndex("comptype_id");
-    int componentType = mStandardModel->data(mStandardModel->index(row, colCompType)).toInt();
     int colCode = mStandardModel->fieldIndex("code");
     QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
 
-    if (componentType == (int)STD2::CompFlange && code.startsWith("ASME")) {
-        delete mEndModel;
-        mEndModel = PCALC_MODELFACTORY->getModel(
-                    PCALC_ModelFactory::ModelFlangeFacingDimAsme, false);
+    if (code.startsWith("ASME")) {
         delete mComponentModel;
         mComponentModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelFlangeAsme, false);
-
-    } else if (componentType == (int)STD2::CompFlange && code.startsWith("EN")) {
         delete mEndModel;
         mEndModel = PCALC_MODELFACTORY->getModel(
-                    PCALC_ModelFactory::ModelFlangeFacingDimEn, false);
+                    PCALC_ModelFactory::ModelFlangeFacingDimAsme, false);
+        delete mLimitModel;
+        mLimitModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelFlangeTypeLimit, false);
+    } else if (code.startsWith("EN")) {
         delete mComponentModel;
         mComponentModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelFlangeEn, false);
+        delete mEndModel;
+        mEndModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelFlangeFacingDimEn, false);
+        delete mLimitModel;
+        mLimitModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelFlangeTypeLimit, false);
     }
 }

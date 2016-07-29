@@ -45,6 +45,8 @@ public:
         ModelBoltAsme,                  /**< ASME bolt dimension model */
         ModelBoltEn,                    /**< EN bolt dimension model */
         ModelClassGenerator,            /**< Calculation class generator model */
+        ModelCompRating,                /**< Base component rating/schedule model */
+        ModelCompType,                  /**< Component type model such as flange*/
         ModelDimension,                 /**< Dimension model */
         ModelEN13555EGeG,               /**< EN13555 EG and eG model */
         ModelEN13555Gasket,             /**< EN13555 Type of gasket */
@@ -63,8 +65,7 @@ public:
         ModelFlangeEn,                  /**< EN flange model */
         ModelFlangeFacingDimAsme,       /**< ASME flange facing dimension model */
         ModelFlangeFacingDimEn,         /**< EN flange facing dimension model */
-        ModelFlangeFacingType,          /**< Flange facing type model */
-        ModelFlangeType,                /**< Flange type model */
+        ModelCompSerie,          /**< Flange facing type model */
         ModelFlangeTypeLimit,           /**< Flange type limit model */
         ModelGeneratorFormula,          /**< Calculation generator formula model */
         ModelMatCreepTable,             /**< Material creep table */
@@ -77,7 +78,6 @@ public:
         ModelNutEn,                     /**< EN nut dimension model */
         ModelProject,                   /**< Project model */
         ModelProjectEdit,               /**< Edit project model */
-        ModelRating,                    /**< Base rating/schedule model */
         ModelRmMin,                     /**< Minimum tensile strength model */
         ModelRp02,                      /**< 0.2% yield or proof strength model */
         ModelRp10,                      /**< 1% yield or proof strength model */

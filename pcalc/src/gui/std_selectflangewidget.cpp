@@ -110,7 +110,7 @@ void STD_SelectFlangeWidget::init() {
             this, SLOT(slotStandardRowChanged(int)));
 
     mTypeModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeType, false);
+                PCALC_ModelFactory::ModelCompType, false);
     ui->cbType->setModel(mTypeModel);
     ui->cbType->setModelColumn(mTypeModel->fieldIndex("type"));
 
@@ -118,13 +118,13 @@ void STD_SelectFlangeWidget::init() {
             this, SLOT(slotTypeRowChanged(int)));
 
     mSerieModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeFacingType, false);
+                PCALC_ModelFactory::ModelCompSerie, false);
     ui->cbSerie->setModel(mSerieModel);
     ui->cbSerie->setModelColumn(mSerieModel->fieldIndex("type"));
     ui->lblSerie->setText("Facing");
 
     mRatingModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelRating, false);
+                PCALC_ModelFactory::ModelCompRating, false);
     ui->cbRating->setModel(mRatingModel);
     ui->cbRating->setModelColumn(mRatingModel->fieldIndex("rating"));
 
@@ -167,7 +167,7 @@ void STD_SelectFlangeWidget::init() {
 void STD_SelectFlangeWidget::slotStandardRowChanged(int row) {
     if (!mStandardModel || !mTypeModel || !mSerieModel) return;
     QModelIndex index = mStandardModel->index(row, 0);
-    STD_DimensionTableHelper::setFlangeDetailTableNames(index, QModelIndex());
+    STD_DimensionTableHelper::setFlangeDetailTables(index, QModelIndex());
     mRatingModel->slotParentCurrentRowChanged(index, QModelIndex());
     mTypeModel->slotParentCurrentRowChanged(index, QModelIndex());
     mSerieModel->slotParentCurrentRowChanged(index, QModelIndex());

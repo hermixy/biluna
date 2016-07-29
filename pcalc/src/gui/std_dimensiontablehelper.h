@@ -18,10 +18,10 @@ public:
     explicit STD_DimensionTableHelper();
     virtual ~STD_DimensionTableHelper();
 
-    void setBoltDetailTableNames(const QModelIndex& current,
-                                 const QModelIndex& /*previous*/);
-    void setFlangeDetailTableNames(const QModelIndex& current,
-                                   const QModelIndex& /*previous*/);
+    void setBoltDetailTables(const QModelIndex& current,
+                             const QModelIndex& /*previous*/);
+    void setFlangeDetailTables(const QModelIndex& current,
+                               const QModelIndex& /*previous*/);
 
 
 protected:

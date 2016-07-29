@@ -12,6 +12,7 @@
 
 #include "pcalc.h"
 #include "pcalc_modelfactory.h"
+#include "std.h"
 
 STD_DimensionWidget::STD_DimensionWidget(QWidget *parent) :
             RB_Widget(parent), ui(new Ui::STD_DimensionWidget),
@@ -42,11 +43,11 @@ void STD_DimensionWidget::init() {
 
     // switch between EN and ASME tables
     connect(mStandardModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-            this, SLOT(slotFlangeDetailTableNames(QModelIndex,QModelIndex)));
+            this, SLOT(slotDetailTables(QModelIndex,QModelIndex)));
 
-    // parent is Dimension Standard
+    // parent is Dimension Standard, flange rating
     mRatingModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelRating, false);
+                PCALC_ModelFactory::ModelCompRating, false);
     formatTableView(ui->tvRating, mRatingModel);
     ui->tbbRating->initSlimTable();
     ui->tvRating->setToolButtonBar(ui->tbbRating);
@@ -55,9 +56,9 @@ void STD_DimensionWidget::init() {
         ui->tvRating->hideColumn(i);
     }
 
-    // parent is Dimension Standard
+    // parent is Dimension Standard, flange types
     mTypeModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeType, false);
+                PCALC_ModelFactory::ModelCompType, false);
     formatTableView(ui->tvType, mTypeModel);
     ui->tbbType->initSlimTable();
     ui->tvType->setToolButtonBar(ui->tbbType);
@@ -66,9 +67,9 @@ void STD_DimensionWidget::init() {
         ui->tvType->hideColumn(i);
     }
 
-    // parent is Dimension Standard
+    // parent is Dimension Standard, flange facing type
     mSerieModel = PCALC_MODELFACTORY->getModel(
-                PCALC_ModelFactory::ModelFlangeFacingType, false);
+                PCALC_ModelFactory::ModelCompSerie, false);
     formatTableView(ui->tvSerie, mSerieModel);
     ui->tbbSerie->initSlimTable();
     ui->tvSerie->setToolButtonBar(ui->tbbSerie);
@@ -155,10 +156,26 @@ void STD_DimensionWidget::fileRevert() {
     setWindowModified(false);
 }
 
-void STD_DimensionWidget::slotFlangeDetailTableNames(const QModelIndex& current,
-                                                     const QModelIndex& previous) {
-    STD_DimensionTableHelper::setFlangeDetailTableNames(current, previous);
-    formatTableView(ui->tvEnd, mEndModel);
+void STD_DimensionWidget::slotDetailTables(const QModelIndex& current,
+                                           const QModelIndex& previous) {
+    int row = current.row();
+    int colCompType = mStandardModel->fieldIndex("comptype_id");
+    int componentType = mStandardModel->data(
+                mStandardModel->index(row, colCompType)).toInt();
+
+    switch(componentType) {
+    case (int)STD2::CompBolt:
+        STD_DimensionTableHelper::setBoltDetailTables(current, previous);
+        break;
+    case (int)STD2::CompFlange:
+        STD_DimensionTableHelper::setFlangeDetailTables(current, previous);
+        break;
+    default:
+        break;
+    }
+
     formatTableView(ui->tvComponent, mComponentModel);
+    formatTableView(ui->tvLimit, mLimitModel);
+    formatTableView(ui->tvEnd, mEndModel);
 }
 

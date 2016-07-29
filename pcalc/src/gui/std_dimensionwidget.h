@@ -38,8 +38,8 @@ public:
     void fileRevert();
 
 protected slots:
-    void slotFlangeDetailTableNames(const QModelIndex& current,
-                                    const QModelIndex& previous);
+    void slotDetailTables(const QModelIndex& current,
+                          const QModelIndex& previous);
 
 private:
     Ui::STD_DimensionWidget* ui;

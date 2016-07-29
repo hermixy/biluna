@@ -103,6 +103,9 @@ HEADERS += \
     ../src/model/pcalc_objectfactory.h \
     ../src/model/std.h \
     ../src/model/std_boltasme.h \
+    ../src/model/std_comprating.h \
+    ../src/model/std_compserie.h \
+    ../src/model/std_comptype.h \
     ../src/model/std_creeptable.h \
     ../src/model/std_dimension.h \
     ../src/model/std_elasmodul.h \
@@ -112,12 +115,9 @@ HEADERS += \
     ../src/model/std_flangeen.h \
     ../src/model/std_flangefacingdimasme.h \
     ../src/model/std_flangefacingdimen.h \
-    ../src/model/std_flangefacingtype.h \
-    ../src/model/std_flangetype.h \
     ../src/model/std_flangetypelimit.h \
     ../src/model/std_material.h \
     ../src/model/std_nutasme.h \
-    ../src/model/std_rating.h \
     ../src/model/std_rmmin.h \
     ../src/model/std_rp02.h \
     ../src/model/std_rp10.h \
@@ -222,6 +222,9 @@ SOURCES += \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
     ../src/model/std_boltasme.cpp \
+    ../src/model/std_comprating.cpp \
+    ../src/model/std_compserie.cpp \
+    ../src/model/std_comptype.cpp \
     ../src/model/std_creeptable.cpp \
     ../src/model/std_dimension.cpp \
     ../src/model/std_elasmodul.cpp \
@@ -231,12 +234,9 @@ SOURCES += \
     ../src/model/std_flangeen.cpp \
     ../src/model/std_flangefacingdimasme.cpp \
     ../src/model/std_flangefacingdimen.cpp \
-    ../src/model/std_flangefacingtype.cpp \
-    ../src/model/std_flangetype.cpp \
     ../src/model/std_flangetypelimit.cpp \
     ../src/model/std_material.cpp \
     ../src/model/std_nutasme.cpp \
-    ../src/model/std_rating.cpp \
     ../src/model/std_rmmin.cpp \
     ../src/model/std_rp02.cpp \
     ../src/model/std_rp10.cpp \

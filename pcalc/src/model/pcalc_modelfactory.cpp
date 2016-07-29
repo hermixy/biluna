@@ -77,6 +77,18 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(db, mObjectFactory, type, "PCALC_ClassGeneratorList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "codename", "subname");
         break;
+    case ModelCompRating:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_CompRatingList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
+        break;
+    case ModelCompSerie:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_CompSerieList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
+        break;
+    case ModelCompType:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_CompTypeList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
+        break;
     case ModelDimension:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_DimensionList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "code");
@@ -149,14 +161,6 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeFacingDimEnList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
         break;
-    case ModelFlangeFacingType:
-        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeFacingTypeList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
-        break;
-    case ModelFlangeType:
-        model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeTypeList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "type");
-        break;
     case ModelFlangeTypeLimit:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeTypeLimitList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
@@ -200,10 +204,6 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
     case ModelProjectEdit:
         model = getTableModel(db, mObjectFactory, type, "PENG_ProjectList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
-        break;
-    case ModelRating:
-        model = getTableModel(stdDb, mObjectFactory, type, "STD_RatingList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
         break;
     case ModelRmMin:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_RmMinList");
@@ -258,8 +258,20 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
     std::map<int, RB_MmProxy*>::iterator iter;
 
     switch (type) {
+    case ModelBoltAsme:
+        iter = mModelList.find(ModelCompType);
+        break;
     case ModelClassGenerator:
         iter = mModelList.find(ModelGeneratorFormula);
+        break;
+    case ModelCompRating:
+        iter = mModelList.find(ModelDimension);
+        break;
+    case ModelCompSerie:
+        iter = mModelList.find(ModelDimension);
+        break;
+    case ModelCompType:
+        iter = mModelList.find(ModelDimension);
         break;
     case ModelDimension:
         iter = mModelList.find(ModelNone);
@@ -304,25 +316,19 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         iter = mModelList.find(ModelEN1591Assembly);
         break;
     case ModelFlangeAsme:
-        iter = mModelList.find(ModelRating);
+        iter = mModelList.find(ModelCompRating);
         break;
     case ModelFlangeEn:
-        iter = mModelList.find(ModelRating);
+        iter = mModelList.find(ModelCompRating);
         break;
     case ModelFlangeFacingDimAsme:
-        iter = mModelList.find(ModelRating);
+        iter = mModelList.find(ModelCompRating);
         break;
     case ModelFlangeFacingDimEn:
-        iter = mModelList.find(ModelRating);
-        break;
-    case ModelFlangeFacingType:
-        iter = mModelList.find(ModelDimension);
-        break;
-    case ModelFlangeType:
-        iter = mModelList.find(ModelDimension);
+        iter = mModelList.find(ModelCompRating);
         break;
     case ModelFlangeTypeLimit:
-        iter = mModelList.find(ModelFlangeType);
+        iter = mModelList.find(ModelCompType);
         break;
     case ModelGeneratorFormula:
         iter = mModelList.find(ModelNone);
@@ -350,9 +356,6 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         break;
     case ModelProjectEdit:
         iter = mModelList.find(ModelNone);
-        break;
-    case ModelRating:
-        iter = mModelList.find(ModelDimension);
         break;
     case ModelRmMin:
         iter = mModelList.find(ModelMaterial);

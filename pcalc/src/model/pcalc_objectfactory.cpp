@@ -23,6 +23,9 @@
 #include "rb_debug.h"
 #include "rb_uuid.h"
 #include "std_boltasme.h"
+#include "std_comprating.h"
+#include "std_comptype.h"
+#include "std_compserie.h"
 #include "std_creeptable.h"
 #include "std_dimension.h"
 #include "std_elasmodul.h"
@@ -39,12 +42,9 @@
 #include "std_flangeen.h"
 #include "std_flangefacingdimasme.h"
 #include "std_flangefacingdimen.h"
-#include "std_flangefacingtype.h"
-#include "std_flangetype.h"
 #include "std_flangetypelimit.h"
 #include "std_material.h"
 #include "std_nutasme.h"
-#include "std_rating.h"
 #include "std_rmmin.h"
 #include "std_rp02.h"
 #include "std_rp10.h"
@@ -191,11 +191,11 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new STD_Dimension(uuid, parent, "STD_Dimension", this);
 
         uuid = "";
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingTypeList", this);
+        list = new RB_ObjectContainer (uuid, obj, "STD_CompRatingList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeTypeList", this);
+        list = new RB_ObjectContainer (uuid, obj, "STD_CompSerieList", this);
         obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "STD_RatingList", this);
+        list = new RB_ObjectContainer (uuid, obj, "STD_CompTypeList", this);
         obj->addObject(list);
     } else if (str == "STD_ElasModulList") {
         obj = new STD_ElasModul(uuid, parent, "STD_ElasModul", this);
@@ -246,16 +246,22 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new STD_FlangeFacingDimAsme(uuid, parent, "STD_FlangeFacingDimAsme", this);
     } else if (str == "STD_FlangeFacingDimEnList") {
         obj = new STD_FlangeFacingDimEn(uuid, parent, "STD_FlangeFacingDimEn", this);
-    } else if (str == "STD_FlangeFacingTypeList") {
-        obj = new STD_FlangeFacingType(uuid, parent, "STD_FlangeFacingType", this);
-    } else if (str == "STD_FlangeAsmeList") {
-        obj = new STD_FlangeAsme(uuid, parent, "STD_FlangeAsme", this);
-    } else if (str == "STD_FlangeEnList") {
-        obj = new STD_FlangeEn(uuid, parent, "STD_FlangeEn", this);
-    } else if (str == "STD_FlangeTypeLimitList") {
-        obj = new STD_FlangeTypeLimit(uuid, parent, "STD_FlangeTypeLimit", this);
-    } else if (str == "STD_FlangeTypeList") {
-        obj = new STD_FlangeType(uuid, parent, "STD_FlangeType", this);
+    } else if (str == "STD_CompRatingList") {
+        obj = new STD_CompRating(uuid, parent, "STD_CompRating", this);
+
+        uuid = "";
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeAsmeList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimAsmeList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimEnList", this);
+        obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeEnList", this);
+        obj->addObject(list);
+    } else if (str == "STD_CompSerieList") {
+        obj = new STD_CompSerie(uuid, parent, "STD_CompSerie", this);
+    } else if (str == "STD_CompTypeList") {
+        obj = new STD_CompType(uuid, parent, "STD_CompType", this);
 
         uuid = "";
         list = new RB_ObjectContainer (uuid, obj, "STD_BoltAsmeList", this);
@@ -264,6 +270,12 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_NutAsmeList", this);
         obj->addObject(list);
+    } else if (str == "STD_FlangeAsmeList") {
+        obj = new STD_FlangeAsme(uuid, parent, "STD_FlangeAsme", this);
+    } else if (str == "STD_FlangeEnList") {
+        obj = new STD_FlangeEn(uuid, parent, "STD_FlangeEn", this);
+    } else if (str == "STD_FlangeTypeLimitList") {
+        obj = new STD_FlangeTypeLimit(uuid, parent, "STD_FlangeTypeLimit", this);
     } else if (str == "STD_MaterialList") {
         obj = new STD_Material(uuid, parent, "STD_Material", this);
 
@@ -276,18 +288,6 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
     } else if (str == "STD_NutAsmeList") {
         obj = new STD_NutAsme(uuid, parent, "STD_NutAsme", this);
-    } else if (str == "STD_RatingList") {
-        obj = new STD_Rating(uuid, parent, "STD_Rating", this);
-
-        uuid = "";
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeAsmeList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimAsmeList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeFacingDimEnList", this);
-        obj->addObject(list);
-        list = new RB_ObjectContainer (uuid, obj, "STD_FlangeEnList", this);
-        obj->addObject(list);
     } else if (str == "STD_RmMinList") {
         obj = new STD_RmMin(uuid, parent, "STD_RmMin", this);
     } else if (str == "STD_Rp02List") {

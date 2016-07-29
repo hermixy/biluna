@@ -348,7 +348,7 @@
          </widget>
          <widget class="QGroupBox" name="gbComponent">
           <property name="title">
-           <string>Component - based on Rating</string>
+           <string>Component - based on Rating or Type</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
            <property name="leftMargin">
