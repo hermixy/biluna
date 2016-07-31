@@ -30,7 +30,17 @@ RB_TreeView::RB_TreeView(QWidget* parent) : QTreeView(parent) {
 void RB_TreeView::setModel(RB_MmProxy* model) {
     QTreeView::setModel(model);
     mModel = model;
-    mParentModel = mModel->getParentManager();
+
+    if (mModel) {
+        if (mToolButtonBar) {
+            mToolButtonBar->setEnabled(true);
+        }
+        mParentModel = mModel->getParentManager();
+    } else {
+        if (mToolButtonBar) {
+            mToolButtonBar->setEnabled(false);
+        }
+    }
 }
 
 void RB_TreeView::setToolButtonBar(RB_ToolButtonBar* tbb) {

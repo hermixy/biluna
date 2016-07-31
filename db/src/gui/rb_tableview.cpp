@@ -31,7 +31,14 @@ void RB_TableView::setModel(RB_MmProxy* model) {
     mModel = model;
 
     if (mModel) {
+        if (mToolButtonBar) {
+            mToolButtonBar->setEnabled(true);
+        }
         mParentModel = mModel->getParentManager();
+    } else {
+        if (mToolButtonBar) {
+            mToolButtonBar->setEnabled(false);
+        }
     }
 }
 

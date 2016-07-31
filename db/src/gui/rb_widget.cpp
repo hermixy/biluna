@@ -1260,9 +1260,12 @@ void RB_Widget::setFormatTableView(QTableView* tv, RB_MmProxy* m) {
  * @param m sortFilterProxyModel
  */
 void RB_Widget::formatTableView(RB_TableView* tv, RB_MmProxy* m) {
-    if (!tv || !m) return;
+    if (!tv) return;
 
     tv->setModel(m); // will create selection model
+
+    if (!m) return;
+
     m->setSelectionModel(tv->selectionModel());
 
     tv->setAlternatingRowColors(true);
@@ -1334,9 +1337,12 @@ void RB_Widget::setFormatTreeView(QTreeView* trv, RB_MmProxy* m) {
  * @param m sortFilterProxyModel
  */
 void RB_Widget::formatTreeView(RB_TreeView* trv, RB_MmProxy* m) {
-    if (!trv || !m) return;
+    if (!trv) return;
 
     trv->setModel(m); // will create selection model
+
+    if (!m) return;
+
     m->setSelectionModel(trv->selectionModel());
 
     trv->setAlternatingRowColors(true);

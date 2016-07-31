@@ -27,6 +27,7 @@
 #include "std_matelasmodulwidget.h"
 #include "std_materialwidget.h"
 #include "std_matthermexpwidget.h"
+#include "std_selectboltwidget.h"
 #include "std_selectflangewidget.h"
 #include "std_selectmaterialwidget.h"
 
@@ -123,6 +124,10 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
     }
     case WidgetProjectEdit: {
         wgt = new PCALC_ProjectEditWidget(parent);
+        break;
+    }
+    case WidgetSelectBolt: {
+        wgt = new STD_SelectBoltWidget(parent);
         break;
     }
     case WidgetSelectFlange: {

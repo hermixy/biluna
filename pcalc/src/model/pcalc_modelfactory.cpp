@@ -73,6 +73,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(stdDb, mObjectFactory, type, "STD_BoltAsmeList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "nomsize");
         break;
+    case ModelBoltEn:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_BoltEnList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "nomsize");
+        break;
     case ModelClassGenerator:
         model = getTableModel(db, mObjectFactory, type, "PCALC_ClassGeneratorList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "codename", "subname");
@@ -197,6 +201,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(stdDb, mObjectFactory, type, "STD_NutAsmeList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "nomsize");
         break;
+    case ModelNutEn:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_NutEnList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "nomsize");
+        break;
     case ModelProject:
         model = getTableModel(db, mObjectFactory, type, "PENG_ProjectList");
         model->setSourceSortOrder(RB2::SortOrderDescending, "created");
@@ -259,6 +267,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
 
     switch (type) {
     case ModelBoltAsme:
+        iter = mModelList.find(ModelCompType);
+        break;
+    case ModelBoltEn:
         iter = mModelList.find(ModelCompType);
         break;
     case ModelClassGenerator:
@@ -350,6 +361,12 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         break;
     case ModelMatThermExpValue:
         iter = mModelList.find(ModelMatThermExpTable);
+        break;
+    case ModelNutAsme:
+        iter = mModelList.find(ModelCompType);
+        break;
+    case ModelNutEn:
+        iter = mModelList.find(ModelCompType);
         break;
     case ModelProject:
         iter = mModelList.find(ModelNone);

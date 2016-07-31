@@ -22,9 +22,13 @@ public:
                              const QModelIndex& /*previous*/);
     void setFlangeDetailTables(const QModelIndex& current,
                                const QModelIndex& /*previous*/);
-
+    void setNutDetailTables(const QModelIndex& current,
+                            const QModelIndex& /*previous*/);
 
 protected:
+    bool isCodeStartWith(const QString& startString, const QModelIndex& current);
+    bool isCurrentStandardIndexValid(const QModelIndex& current);
+
     RB_MmProxy* mComponentModel;    // flange dimensions
     RB_MmProxy* mEndModel;          // flange facing or ends
     RB_MmProxy* mLimitModel;        // flange rating and size limits for selected type

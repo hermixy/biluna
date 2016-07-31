@@ -35,8 +35,11 @@ STD_BoltAsme::~STD_BoltAsme() {
  * \li d1 Basic minor diameter internal
  * \li lambda1 Lead angle at basic pitch degree
  * \li lambda2 Lead angle at basic pitch minutes
- * \li d2hb Section at minor diamter at D - 2hb
+ * \li d2hb Section at minor diameter at D - 2hb
  * \li area Tensile stress area
+ * \li fbasic nut width across flats F basic
+ * \li gmin nut width across corners G minimum
+ * \li hbasic nut thickness nut basic
  */
 void STD_BoltAsme::createMembers() {
     addMember("nomsize", "inch", 0.0, RB2::MemberDouble);
@@ -48,4 +51,8 @@ void STD_BoltAsme::createMembers() {
     addMember("lambda2", "minutes", 0.0, RB2::MemberDouble);
     addMember("d2hb", "inch2", 0.0, RB2::MemberDouble);
     addMember("area", "inch2", 0.0, RB2::MemberDouble);
+    // TODO: actually nut values
+    addMember("fbasic", "inch", 0.0, RB2::MemberDouble);
+    addMember("gmin", "inch", 0.0, RB2::MemberDouble);
+    addMember("hbasic", "inch", 0.0, RB2::MemberDouble);
 }

@@ -382,6 +382,8 @@ void PCALC_EN1591Widget::initMapping() {
     mBoltNutWasherMapper->addMapping(ileBoltSize,
                                      mBoltNutWasherModel->fieldIndex(
                                          "size_idx"));
+    connect(ileBoltSize, SIGNAL(clicked(bool)),
+            this, SLOT(slotIleBoltSizeClicked()));
     items.clear();
     items << "Hexagon Headed" << "Stud" << "Waisted Stud";
     cbBoltType->setModel(new QStringListModel(items, this));
@@ -956,6 +958,57 @@ void PCALC_EN1591Widget::slotIleStandardFlange_1Clicked() {
 }
 
 void PCALC_EN1591Widget::slotIleStandardFlange_2Clicked() {
+
+}
+
+void PCALC_EN1591Widget::slotIleBoltSizeClicked() {
+    // This function instead of standard dialog which sets the idx field only
+    RB_DialogWindow* dlgW = PCALC_DIALOGFACTORY->getDialogWindow(
+                PCALC_DialogFactory::WidgetSelectBolt);
+
+    if (dlgW->exec() != QDialog::Accepted) {
+        dlgW->deleteLater();
+        return;
+    }
+
+    RB_ObjectBase* boltObj = dlgW->getCurrentObject();
+    RB_ObjectBase* boltTypeObj = dlgW->getCurrentChild1Object();
+//    RB_ObjectBase* nutObj = dlgW->getCurrentChild2Object();
+
+    if (!boltObj || !boltTypeObj /*|| !nutObj*/) {
+        PCALC_DIALOGFACTORY->requestWarningDialog(tr("No valid item selected,\n"
+                                                     "data unchanged."));
+        dlgW->deleteLater();
+        return;
+    } else {
+        int result = PCALC_DIALOGFACTORY->requestYesNoDialog(
+                    tr("Bolt/nut dimensions"),
+                    tr("Do you want to replace\nthe current bolt/nut data?"));
+        if (result != QMessageBox::Yes) {
+            return;
+        }
+    }
+
+    QString displayName = boltObj->getValue("displayname").toString();
+    QString str = boltObj->getId() + displayName;
+    QModelIndex idx = mBoltNutWasherModel->index(
+                mBoltNutWasherModel->getCurrentIndex().row(),
+                mBoltNutWasherModel->fieldIndex("size_idx"));
+    mBoltNutWasherModel->setData(idx, str);
+
+    if (displayName.startsWith("EN")) {
+        // TODO: implement
+
+    } else if (displayName.startsWith("ASME")) {
+        if (boltTypeObj->getValue("type").toString() == "HHD") { // TODO: change to type id!
+            setHeavyHexBoltAsmeData(boltObj/*, nutObj*/);
+        }
+
+        // TODO: other types
+    }
+
+
+    dlgW->deleteLater();
 
 }
 
@@ -1803,6 +1856,26 @@ void PCALC_EN1591Widget::setLooseFlange1AsmeData(RB_ObjectBase* compObj,
 void PCALC_EN1591Widget::setLooseFlange2AsmeData(RB_ObjectBase* compObj,
                                                  RB_ObjectBase* facingObj)
 {
+
+}
+
+void PCALC_EN1591Widget::setHeavyHexBoltAsmeData(RB_ObjectBase* boltObj,
+                                                 RB_ObjectBase* nutObj) {
+    RB_DEBUG->printObject(boltObj);
+    //    RB_DEBUG->printObject(nutObj);
+//    setModelVariable(mBoltNutWasherModel, "nb", boltObj->getValue("nob").toInt());
+
+//    setModelVariable(mBoltNutWasherModel, "typebolt1_id", 1);
+//    setModelVariable(mBoltNutWasherModel, "d31", boltObj->getValue("w").toDouble());
+//    setModelVariable(mBoltNutWasherModel, "d41", boltObj->getValue("o").toDouble());
+
+//    if (facingType == STD2::AsmeBoltNutWasherFacingRTJ) {
+//        setModelVariable(mBoltNutWasherModel, "dx1",
+//                         facingObj->getValue("p").toDouble()
+//                         + facingObj->getValue("f").toDouble());
+//    } else {
+//        setModelVariable(mBoltNutWasherModel, "dx1", 0.0);
+//    }
 
 }
 

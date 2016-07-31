@@ -40,22 +40,9 @@ STD_DimensionTableHelper::~STD_DimensionTableHelper() {
 }
 
 void STD_DimensionTableHelper::setBoltDetailTables(
-        const QModelIndex& current, const QModelIndex& /*previous*/) {
-    if (!current.isValid()) {
-        return;
-    } else if (current.model() != mStandardModel) {
-        RB_DEBUG->error("STD_DimensionTableHelper::setBoltDetailTables() "
-                        "model ERROR");
-        return;
-    }
+                const QModelIndex& current, const QModelIndex& /*previous*/) {
 
-    int row = current.row();
-    int colCode = mStandardModel->fieldIndex("code");
-    QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
-
-    if (code.startsWith("ASME")) {
-        delete mEndModel;
-        mEndModel = nullptr;
+    if (isCodeStartWith("ASME", current)) {
         delete mComponentModel;
         mComponentModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelBoltAsme, false);
@@ -63,7 +50,7 @@ void STD_DimensionTableHelper::setBoltDetailTables(
         mEndModel = nullptr;
         delete mLimitModel;
         mLimitModel = nullptr;
-    } else if (code.startsWith("EN")) {
+    } else if (isCodeStartWith("EN", current)) {
 //        delete mEndModel;
 //        mEndModel = PCALC_MODELFACTORY->getModel(
 //                    PCALC_ModelFactory::ModelBolt, false);
@@ -72,19 +59,8 @@ void STD_DimensionTableHelper::setBoltDetailTables(
 
 void STD_DimensionTableHelper::setFlangeDetailTables(
                 const QModelIndex& current, const QModelIndex& /*previous*/) {
-    if (!current.isValid()) {
-        return;
-    } else if (current.model() != mStandardModel) {
-        RB_DEBUG->error("STD_DimensionTableHelper::setFlangeDetailTables() "
-                        "model ERROR");
-        return;
-    }
 
-    int row = current.row();
-    int colCode = mStandardModel->fieldIndex("code");
-    QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
-
-    if (code.startsWith("ASME")) {
+    if (isCodeStartWith("ASME", current)) {
         delete mComponentModel;
         mComponentModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelFlangeAsme, false);
@@ -94,7 +70,7 @@ void STD_DimensionTableHelper::setFlangeDetailTables(
         delete mLimitModel;
         mLimitModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelFlangeTypeLimit, false);
-    } else if (code.startsWith("EN")) {
+    } else if (isCodeStartWith("EN", current)) {
         delete mComponentModel;
         mComponentModel = PCALC_MODELFACTORY->getModel(
                     PCALC_ModelFactory::ModelFlangeEn, false);
@@ -106,3 +82,52 @@ void STD_DimensionTableHelper::setFlangeDetailTables(
                     PCALC_ModelFactory::ModelFlangeTypeLimit, false);
     }
 }
+
+void STD_DimensionTableHelper::setNutDetailTables(
+                const QModelIndex& current, const QModelIndex& /*previous*/) {
+
+    if (isCodeStartWith("ASME", current)) {
+        delete mComponentModel;
+        mComponentModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelNutAsme, false);
+        delete mEndModel;
+        mEndModel = nullptr;
+        delete mLimitModel;
+        mLimitModel = nullptr;
+    } else if (isCodeStartWith("EN", current)) {
+//        delete mComponentModel;
+//        mComponentModel = PCALC_MODELFACTORY->getModel(
+//                    PCALC_ModelFactory::ModelFlangeEn, false);
+//        delete mEndModel;
+//        mEndModel = PCALC_MODELFACTORY->getModel(
+//                    PCALC_ModelFactory::ModelFlangeFacingDimEn, false);
+//        delete mLimitModel;
+//        mLimitModel = PCALC_MODELFACTORY->getModel(
+//                    PCALC_ModelFactory::ModelFlangeTypeLimit, false);
+    }
+}
+
+bool STD_DimensionTableHelper::isCodeStartWith(const QString& startString,
+                                               const QModelIndex& current) {
+    if (!isCurrentStandardIndexValid(current)) {
+        return false;
+    }
+
+    int row = current.row();
+    int colCode = mStandardModel->fieldIndex("code");
+    QString code = mStandardModel->data(mStandardModel->index(row, colCode)).toString();
+    return code.startsWith(startString);
+}
+
+bool STD_DimensionTableHelper::isCurrentStandardIndexValid(const QModelIndex& current) {
+    if (!current.isValid()) {
+        return false;
+    } else if (current.model() != mStandardModel) {
+        RB_DEBUG->error("STD_DimensionTableHelper::isCurrentStandardIndexValid() "
+                        "model ERROR");
+        return false;
+    }
+
+    return true;
+}
+

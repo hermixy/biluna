@@ -1886,27 +1886,34 @@
             <property name="spacing">
              <number>3</number>
             </property>
-            <item row="1" column="2">
-             <widget class="QComboBox" name="cbFormType"/>
-            </item>
-            <item row="2" column="1" alignment="Qt::AlignRight">
-             <widget class="QLabel" name="lblInsType">
+            <item row="11" column="0">
+             <widget class="QLabel" name="label_23">
               <property name="text">
-               <string>Insertion Type</string>
+               <string>Oval gasket real contact diameter</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="lblTypeGasket">
+            <item row="11" column="2">
+             <widget class="RB_UomLineEdit" name="ledG0">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="1">
+             <widget class="QLabel" name="lbldG0">
               <property name="text">
-               <string>Type</string>
+               <string>dG0</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="0" column="3" rowspan="11">
+            <item row="0" column="3" rowspan="14">
              <spacer name="horizontalSpacer_5">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1918,6 +1925,26 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="9" column="0" colspan="3">
+             <widget class="Line" name="line_13">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" alignment="Qt::AlignRight">
+             <widget class="QLabel" name="lblInsType">
+              <property name="text">
+               <string>Insertion Type</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="cbFormType"/>
+            </item>
+            <item row="2" column="2">
+             <widget class="QComboBox" name="cbInsType"/>
             </item>
             <item row="0" column="2">
              <widget class="RB_IdxLineEdit" name="ileTypeGasket"/>
@@ -1932,8 +1959,15 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="2">
-             <widget class="QComboBox" name="cbInsType"/>
+            <item row="0" column="1">
+             <widget class="QLabel" name="lblTypeGasket">
+              <property name="text">
+               <string>Type</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item row="6" column="1">
              <widget class="QLabel" name="lbldGin">
@@ -1942,6 +1976,16 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="2">
+             <widget class="RB_UomLineEdit" name="ledGin">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
              </widget>
             </item>
@@ -1973,16 +2017,6 @@
               </property>
              </widget>
             </item>
-            <item row="6" column="2">
-             <widget class="RB_UomLineEdit" name="ledGin">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
             <item row="7" column="1">
              <widget class="QLabel" name="lbldGout">
               <property name="text">
@@ -2003,6 +2037,16 @@
               </property>
              </widget>
             </item>
+            <item row="7" column="2">
+             <widget class="RB_UomLineEdit" name="ledGout">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
             <item row="4" column="2">
              <widget class="QComboBox" name="cbLeakageRate">
               <property name="minimumSize">
@@ -2019,37 +2063,7 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="2">
-             <widget class="RB_UomLineEdit" name="ledG0">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="2">
-             <widget class="RB_UomLineEdit" name="ledGout">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QLabel" name="lbldG0">
-              <property name="text">
-               <string>dG0</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="1">
+            <item row="12" column="1">
              <widget class="QLabel" name="lblphiG">
               <property name="text">
                <string>phiG</string>
@@ -2059,8 +2073,8 @@
               </property>
              </widget>
             </item>
-            <item row="10" column="2">
-             <widget class="RB_UomLineEdit" name="ler2">
+            <item row="8" column="2">
+             <widget class="RB_UomLineEdit" name="leeGt">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -2079,7 +2093,27 @@
               </property>
              </widget>
             </item>
-            <item row="11" column="1" colspan="3">
+            <item row="13" column="2">
+             <widget class="RB_UomLineEdit" name="ler2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="1">
+             <widget class="QLabel" name="lblr2">
+              <property name="text">
+               <string>r2</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="1" colspan="3">
              <spacer name="verticalSpacer_4">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -2091,36 +2125,6 @@
                </size>
               </property>
              </spacer>
-            </item>
-            <item row="8" column="2">
-             <widget class="RB_UomLineEdit" name="leeGt">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="1">
-             <widget class="QLabel" name="lblr2">
-              <property name="text">
-               <string>r2</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="2">
-             <widget class="RB_UomLineEdit" name="lephiG">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
             </item>
             <item row="3" column="0" colspan="2">
              <widget class="QLabel" name="lblNoReassemblies">
@@ -2139,17 +2143,34 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="label_23">
-              <property name="text">
-               <string>Oval gasket real contact diameter</string>
-              </property>
-             </widget>
-            </item>
             <item row="7" column="0">
              <widget class="QLabel" name="label_25">
               <property name="text">
                <string>Outside diameter</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="2">
+             <widget class="RB_UomLineEdit" name="lephiG">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="0">
+             <widget class="QLabel" name="label_31">
+              <property name="text">
+               <string>Angle of sealing face</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="0">
+             <widget class="QLabel" name="label_32">
+              <property name="text">
+               <string>Radius of oval/round gasket</string>
               </property>
              </widget>
             </item>
@@ -2160,17 +2181,10 @@
               </property>
              </widget>
             </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="label_31">
-              <property name="text">
-               <string>Angle of sealing face</string>
-              </property>
-             </widget>
-            </item>
             <item row="10" column="0">
-             <widget class="QLabel" name="label_32">
+             <widget class="QLabel" name="lblOvalRtj">
               <property name="text">
-               <string>Radius of oval/round gasket</string>
+               <string>Oval and RTJ gaskets only:</string>
               </property>
              </widget>
             </item>
@@ -2359,7 +2373,7 @@
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QLineEdit" name="ileBoltSize"/>
+             <widget class="RB_IdxLineEdit" name="ileBoltSize"/>
             </item>
             <item row="9" column="2">
              <widget class="RB_UomLineEdit" name="leeN">
@@ -4638,7 +4652,6 @@ material requirements:</string>
   <tabstop>cbInsType</tabstop>
   <tabstop>sbNoReassemblies</tabstop>
   <tabstop>cbLeakageRate</tabstop>
-  <tabstop>ledG0</tabstop>
   <tabstop>ledGin</tabstop>
   <tabstop>ledGout</tabstop>
   <tabstop>leeGt</tabstop>

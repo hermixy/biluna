@@ -9,8 +9,8 @@
 
 #include "std_selectflangewidget.h"
 
-#include "pcalc.h"
 #include "pcalc_modelfactory.h"
+#include "std.h"
 #include "ui_std_selectcomponentwidget.h"
 
 STD_SelectFlangeWidget::STD_SelectFlangeWidget(QWidget *parent)
@@ -101,7 +101,7 @@ void STD_SelectFlangeWidget::init() {
                 PCALC_ModelFactory::ModelDimension, false);
     mStandardModel->setRoot("");
     mStandardModel->setWhere("id <> '0' AND comptype_id = "
-                              + QString::number((int)PCALC2::CompFlange));
+                              + QString::number((int)STD2::CompFlange));
     ui->cbStandard->setModel(mStandardModel);
     ui->cbStandard->setModelColumn(mStandardModel->fieldIndex("code"));
     mStandardModel->select();

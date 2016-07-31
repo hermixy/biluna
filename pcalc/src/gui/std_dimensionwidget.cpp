@@ -118,27 +118,55 @@ bool STD_DimensionWidget::fileSave(bool withSelect) {
     beforeFileSave();
 
     if (withSelect) {
-        if (mComponentModel->submitAllAndSelect()
-                && mEndModel->submitAllAndSelect()
-                && mLimitModel->submitAllAndSelect()
-                && mRatingModel->submitAllAndSelect()
-                && mSerieModel->submitAllAndSelect()
-                && mTypeModel->submitAllAndSelect()
-                && mStandardModel->submitAllAndSelect()) {
-            setWindowModified(false);
-            return true;
+        if (mComponentModel) {
+            mComponentModel->submitAllAndSelect();
         }
+        if (mEndModel) {
+            mEndModel->submitAllAndSelect();
+        }
+        if (mLimitModel) {
+            mLimitModel->submitAllAndSelect();
+        }
+        if  (mRatingModel) {
+            mRatingModel->submitAllAndSelect();
+        }
+        if (mSerieModel) {
+            mSerieModel->submitAllAndSelect();
+        }
+        if (mTypeModel) {
+            mTypeModel->submitAllAndSelect();
+        }
+        if (mStandardModel) {
+            mStandardModel->submitAllAndSelect();
+        }
+
+        setWindowModified(false);
+        return true;
     } else {
-        if (mComponentModel->submitAll()
-                && mEndModel->submitAll()
-                && mLimitModel->submitAll()
-                && mRatingModel->submitAll()
-                && mSerieModel->submitAll()
-                && mTypeModel->submitAll()
-                && mStandardModel->submitAll()) {
-            setWindowModified(false);
-            return true;
+        if (mComponentModel) {
+            mComponentModel->submitAll();
         }
+        if (mEndModel) {
+            mEndModel->submitAll();
+        }
+        if (mLimitModel) {
+            mLimitModel->submitAll();
+        }
+        if  (mRatingModel) {
+            mRatingModel->submitAll();
+        }
+        if (mSerieModel) {
+            mSerieModel->submitAll();
+        }
+        if (mTypeModel) {
+            mTypeModel->submitAll();
+        }
+        if (mStandardModel) {
+            mStandardModel->submitAll();
+        }
+
+        setWindowModified(false);
+        return true;
     }
 
     RB_DEBUG->error("STD_DimensionWidget fileSave() ERROR");
@@ -146,13 +174,27 @@ bool STD_DimensionWidget::fileSave(bool withSelect) {
 }
 
 void STD_DimensionWidget::fileRevert() {
-    mComponentModel->revertAll();
-    mEndModel->revertAll();
-    mLimitModel->revertAll();
-    mRatingModel->revertAll();
-    mSerieModel->revertAll();
-    mTypeModel->revertAll();
-    mStandardModel->revertAll();
+    if (mComponentModel) {
+        mComponentModel->revertAll();
+    }
+    if (mEndModel) {
+        mEndModel->revertAll();
+    }
+    if (mLimitModel) {
+        mLimitModel->revertAll();
+    }
+    if  (mRatingModel) {
+        mRatingModel->revertAll();
+    }
+    if (mSerieModel) {
+        mSerieModel->revertAll();
+    }
+    if (mTypeModel) {
+        mTypeModel->revertAll();
+    }
+    if (mStandardModel) {
+        mStandardModel->revertAll();
+    }
     setWindowModified(false);
 }
 
@@ -170,12 +212,30 @@ void STD_DimensionWidget::slotDetailTables(const QModelIndex& current,
     case (int)STD2::CompFlange:
         STD_DimensionTableHelper::setFlangeDetailTables(current, previous);
         break;
+    case (int)STD2::CompNut:
+        STD_DimensionTableHelper::setNutDetailTables(current, previous);
+        break;
     default:
         break;
     }
 
     formatTableView(ui->tvComponent, mComponentModel);
+    int hiddenCount = PCALC_MODELFACTORY->hiddenColumnCount();
+
+    for (int i = 0; i < hiddenCount; ++i) {
+        ui->tvComponent->hideColumn(i);
+    }
+
     formatTableView(ui->tvLimit, mLimitModel);
+
+    for (int i = 0; i < hiddenCount; ++i) {
+        ui->tvLimit->hideColumn(i);
+    }
+
     formatTableView(ui->tvEnd, mEndModel);
+
+    for (int i = 0; i < hiddenCount; ++i) {
+        ui->tvEnd->hideColumn(i);
+    }
 }
 

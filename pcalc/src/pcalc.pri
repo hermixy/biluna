@@ -80,6 +80,7 @@ HEADERS += \
     ../src/gui/std_matelasmodulwidget.h \
     ../src/gui/std_materialwidget.h \
     ../src/gui/std_matthermexpwidget.h \
+    ../src/gui/std_selectboltwidget.h \
     ../src/gui/std_selectcomponentwidget.h \
     ../src/gui/std_selectflangewidget.h \
     ../src/gui/std_selectmaterialwidget.h \
@@ -103,6 +104,7 @@ HEADERS += \
     ../src/model/pcalc_objectfactory.h \
     ../src/model/std.h \
     ../src/model/std_boltasme.h \
+    ../src/model/std_bolten.h \
     ../src/model/std_comprating.h \
     ../src/model/std_compserie.h \
     ../src/model/std_comptype.h \
@@ -118,6 +120,7 @@ HEADERS += \
     ../src/model/std_flangetypelimit.h \
     ../src/model/std_material.h \
     ../src/model/std_nutasme.h \
+    ../src/model/std_nuten.h \
     ../src/model/std_rmmin.h \
     ../src/model/std_rp02.h \
     ../src/model/std_rp10.h \
@@ -202,6 +205,7 @@ SOURCES += \
     ../src/gui/std_materialwidget.cpp \
     ../src/gui/std_matthermexpwidget.cpp \
     ../src/gui/std_selectcomponentwidget.cpp \
+    ../src/gui/std_selectboltwidget.cpp \
     ../src/gui/std_selectflangewidget.cpp \
     ../src/gui/std_selectmaterialwidget.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
@@ -222,6 +226,7 @@ SOURCES += \
     ../src/model/pcalc_modelfactory.cpp \
     ../src/model/pcalc_objectfactory.cpp \
     ../src/model/std_boltasme.cpp \
+    ../src/model/std_bolten.cpp \
     ../src/model/std_comprating.cpp \
     ../src/model/std_compserie.cpp \
     ../src/model/std_comptype.cpp \
@@ -237,6 +242,7 @@ SOURCES += \
     ../src/model/std_flangetypelimit.cpp \
     ../src/model/std_material.cpp \
     ../src/model/std_nutasme.cpp \
+    ../src/model/std_nuten.cpp \
     ../src/model/std_rmmin.cpp \
     ../src/model/std_rp02.cpp \
     ../src/model/std_rp10.cpp \
