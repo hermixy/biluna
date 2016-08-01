@@ -29,18 +29,59 @@ STD_BoltEn::~STD_BoltEn() {
 /**
  * Create members:
  * \li nomsize nominal bolt size, e.g.: M8 M10 M30
- * \li pitch thread pitch
- * \li d basic diameter
- * \li e nut width accross corners
- * \li m nut thickness
- * \li s nut thickness accros flats
+ * \li pa thread pitch
+ * \li brefb
+ * \li brefc
+ * \li brefd
+ * \li cmax
+ * \li cmin
+ * \li damax
+ * \li dsnom nominal diameter
+ * \li dsa
+ * \li dsb
+ * \li dwa
+ * \li dwb
+ * \li ea
+ * \li eb
+ * \li lfmax
+ * \li knom
+ * \li kamax
+ * \li kamin
+ * \li kbmax
+ * \li kbmin
+ * \li kwa
+ * \li kwb
+ * \li rmin
+ * \li snom
+ * \li samin
+ * \li sbmin
  */
 void STD_BoltEn::createMembers() {
-    addMember("nomsize", "-", "", RB2::MemberChar10);
-    addMember("pitch", "mm", 0, RB2::MemberDouble);
-    addMember("d", "mm", 0, RB2::MemberDouble);
-    // TODO: actually nut values
-    addMember("e", "mm", 0, RB2::MemberDouble);
-    addMember("m", "mm", 0, RB2::MemberDouble);
-    addMember("s", "mm", 0, RB2::MemberDouble);
+    addMember("nomsize", "-", "<NEW>", RB2::MemberChar10);
+    addMember("pa", "mm", 0, RB2::MemberDouble);
+    addMember("brefb", "mm", 0, RB2::MemberDouble);
+    addMember("brefc", "mm", 0, RB2::MemberDouble);
+    addMember("brefd", "mm", 0, RB2::MemberDouble);
+    addMember("cmax", "mm", 0, RB2::MemberDouble);
+    addMember("cmin", "mm", 0, RB2::MemberDouble);
+    addMember("damax", "mm", 0, RB2::MemberDouble);
+    addMember("dsnom", "mm", 0, RB2::MemberDouble);
+    addMember("dsa", "mm", 0, RB2::MemberDouble);
+    addMember("dsb", "mm", 0, RB2::MemberDouble);
+    addMember("dwa", "mm", 0, RB2::MemberDouble);
+    addMember("dwb", "mm", 0, RB2::MemberDouble);
+    addMember("ea", "mm", 0, RB2::MemberDouble);
+    addMember("eb", "mm", 0, RB2::MemberDouble);
+    addMember("lfmax", "mm", 0, RB2::MemberDouble);
+    addMember("knom", "mm", 0, RB2::MemberDouble);
+    addMember("kamax", "mm", 0, RB2::MemberDouble);
+    addMember("kamin", "mm", 0, RB2::MemberDouble);
+    addMember("kbmax", "mm", 0, RB2::MemberDouble);
+    addMember("kbmin", "mm", 0, RB2::MemberDouble);
+    addMember("kwa", "mm", 0, RB2::MemberDouble);
+    addMember("kwb", "mm", 0, RB2::MemberDouble);
+    addMember("rmin", "mm", 0, RB2::MemberDouble);
+    addMember("snom", "mm", 0, RB2::MemberDouble);
+    addMember("samin", "mm", 0, RB2::MemberDouble);
+    addMember("sbmin", "mm", 0, RB2::MemberDouble);
 }

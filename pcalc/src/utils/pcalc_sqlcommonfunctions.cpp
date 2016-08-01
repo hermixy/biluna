@@ -35,6 +35,14 @@ PCALC_SqlCommonFunctions::~PCALC_SqlCommonFunctions() {
     RB_DEBUG->print("PCALC_SqlCommonFunctions::~PCALC_SqlCommonFunctions() OK");
 }
 
+PCALC_SqlCommonFunctions *PCALC_SqlCommonFunctions::getInstance() {
+    if (!mActiveUtility) {
+        mActiveUtility = new PCALC_SqlCommonFunctions();
+    }
+
+    return mActiveUtility;
+}
+
 /**
  * Simple query execution SELECT 'field' FROM 'table' WHERE 'whereStr'
  * @param field field name

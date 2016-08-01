@@ -10,6 +10,7 @@
 #include "std_selectboltwidget.h"
 
 #include "pcalc_modelfactory.h"
+#include "pcalc_sqlcommonfunctions.h"
 #include "std.h"
 #include "ui_std_selectcomponentwidget.h"
 
@@ -36,14 +37,27 @@ RB_ObjectBase* STD_SelectBoltWidget::getCurrentObject() {
     }
 
     RB_ObjectBase* obj = mComponentModel->getCurrentObject();
+    QString nomSize = obj->getValue("nomsize").toString();
+
+    QVariant var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
+                "hbasic", "std_nutasme",
+                "parent='{b9354340-290f-4d40-a53a-13f7b88861ea}' "
+                "AND nomsize=" + nomSize);
+    double hBasic = var.toDouble();
+    var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
+                "fbasic", "std_nutasme",
+                "parent='{b9354340-290f-4d40-a53a-13f7b88861ea}' "
+                "AND nomsize=" + nomSize);
+    double fBasic = var.toDouble();
     QString displayName = ui->cbStandard->currentText() + " "
-            + obj->getValue("nomsize").toString() + " "
+            + nomSize + " "
             + ui->cbType->currentText();
 
     if (!mBoltObject) {
         mBoltObject = new RB_ObjectAtomic(obj);
         mBoltObject->addMember("displayname", "-", displayName);
-
+        mBoltObject->addMember("hbasic", "mm", hBasic);
+        mBoltObject->addMember("fbasic", "mm", fBasic);
     } else {
         // Required? set only once
         *mBoltObject = *obj;
@@ -83,7 +97,9 @@ void STD_SelectBoltWidget::init() {
         ui->tvComponent->hideColumn(i);
     }
 
-    initWidgets();
+    ui->cbRating->setEnabled(false);
+    ui->cbSerie->setEnabled(false);
+
     readSettings();
 }
 
@@ -99,6 +115,10 @@ void STD_SelectBoltWidget::slotTypeRowChanged(int row) {
     QModelIndex index = mTypeModel->index(row, 0);
     mComponentModel->slotParentCurrentRowChanged(index, QModelIndex());
     formatTableView(ui->tvComponent, mComponentModel);
+
+    for (int i = 0; i < RB2::HIDDENCOLUMNS; ++i) {
+        ui->tvComponent->hideColumn(i);
+    }
 
     // TODO: Hide columns
 //    int colCount = mComponentModel->columnCount();

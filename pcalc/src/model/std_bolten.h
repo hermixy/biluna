@@ -13,7 +13,7 @@
 #include "rb_objectatomic.h"
 
 /**
- * Bolt dimensions as per EN standards
+ * Bolt dimensions as per EN standards, based on EN ISO 4014 2011-06
  */
 class STD_BoltEn : public RB_ObjectAtomic {
 

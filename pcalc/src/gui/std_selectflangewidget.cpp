@@ -155,12 +155,10 @@ void STD_SelectFlangeWidget::init() {
     mEndModel = PCALC_MODELFACTORY->getModel(
                 PCALC_ModelFactory::ModelFlangeFacingDimEn, false);
 
-
     for (int i = 0; i < RB2::HIDDENCOLUMNS; ++i) {
         ui->tvComponent->hideColumn(i);
     }
 
-    initWidgets();
     readSettings();
 }
 
@@ -172,6 +170,10 @@ void STD_SelectFlangeWidget::slotStandardRowChanged(int row) {
     mTypeModel->slotParentCurrentRowChanged(index, QModelIndex());
     mSerieModel->slotParentCurrentRowChanged(index, QModelIndex());
     formatTableView(ui->tvComponent, mComponentModel);
+
+    for (int i = 0; i < RB2::HIDDENCOLUMNS; ++i) {
+        ui->tvComponent->hideColumn(i);
+    }
 
     // TODO: Hide columns
 //    int colCount = mComponentModel->columnCount();

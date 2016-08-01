@@ -106,8 +106,10 @@ private:
                                RB_ObjectBase* facingObj = nullptr);
     void setLooseFlange2AsmeData(RB_ObjectBase* compObj,
                                RB_ObjectBase* facingObj = nullptr);
-    void setHeavyHexBoltAsmeData(RB_ObjectBase* boltObj,
-                                 RB_ObjectBase*  nutObj = nullptr);
+    void setBoltAsmeData(RB_ObjectBase* boltObj,
+                         RB_ObjectBase*  nutObj = nullptr);
+    void setBoltEnData(RB_ObjectBase* boltObj,
+                       RB_ObjectBase*  nutObj = nullptr);
     void setModelVariable(RB_MmProxy* model, const QString& fieldName,
                           double value);
     void addObjectMemberVariable(RB_ObjectBase* obj,

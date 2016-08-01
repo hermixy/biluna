@@ -75,7 +75,7 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelBoltEn:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_BoltEnList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "nomsize");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "dsnom");
         break;
     case ModelClassGenerator:
         model = getTableModel(db, mObjectFactory, type, "PCALC_ClassGeneratorList");
@@ -203,7 +203,7 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         break;
     case ModelNutEn:
         model = getTableModel(stdDb, mObjectFactory, type, "STD_NutEnList");
-        model->setSourceSortOrder(RB2::SortOrderAscending, "nomsize");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "damin");
         break;
     case ModelProject:
         model = getTableModel(db, mObjectFactory, type, "PENG_ProjectList");

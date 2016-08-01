@@ -27,13 +27,3 @@ RB_ObjectBase* STD_SelectComponentWidget::getCurrentObject() {
 
     return nullptr;
 }
-
-void STD_SelectComponentWidget::initWidgets() {
-    if (!mStandardModel) {
-        RB_DEBUG->error("STD_SelectComponentWidget::initWidgets() "
-                        "dimension model NULL ERROR");
-        return;
-    }
-
-
-}

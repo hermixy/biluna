@@ -13,7 +13,7 @@
 #include "rb_objectatomic.h"
 
 /**
- * Dimensions of nuts according EN
+ * Dimensions of nuts according EN, based on EN ISO 4032-1999
  */
 class STD_NutEn : public RB_ObjectAtomic {
 

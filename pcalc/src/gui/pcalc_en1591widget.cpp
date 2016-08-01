@@ -972,10 +972,10 @@ void PCALC_EN1591Widget::slotIleBoltSizeClicked() {
     }
 
     RB_ObjectBase* boltObj = dlgW->getCurrentObject();
-    RB_ObjectBase* boltTypeObj = dlgW->getCurrentChild1Object();
+//    RB_ObjectBase* boltTypeObj = dlgW->getCurrentChild1Object();
 //    RB_ObjectBase* nutObj = dlgW->getCurrentChild2Object();
 
-    if (!boltObj || !boltTypeObj /*|| !nutObj*/) {
+    if (!boltObj /*|| !boltTypeObj || !nutObj*/) {
         PCALC_DIALOGFACTORY->requestWarningDialog(tr("No valid item selected,\n"
                                                      "data unchanged."));
         dlgW->deleteLater();
@@ -997,12 +997,12 @@ void PCALC_EN1591Widget::slotIleBoltSizeClicked() {
     mBoltNutWasherModel->setData(idx, str);
 
     if (displayName.startsWith("EN")) {
-        // TODO: implement
+        setBoltEnData(boltObj/*, nutObj*/);
 
     } else if (displayName.startsWith("ASME")) {
-        if (boltTypeObj->getValue("type").toString() == "HHD") { // TODO: change to type id!
-            setHeavyHexBoltAsmeData(boltObj/*, nutObj*/);
-        }
+//        if (boltTypeObj->getValue("type").toString() == "HHD") { // TODO: change to type id!
+        setBoltAsmeData(boltObj/*, nutObj*/);
+//        }
 
         // TODO: other types
     }
@@ -1756,9 +1756,19 @@ void PCALC_EN1591Widget::setIntegralFlange1AsmeData(RB_ObjectBase* flangeObj,
         setModelVariable(mFlangeModel, "e01", 0.0);
     }
 
+    double b3 = flangeObj->getValue("b3").toDouble();
+
+    if (b3 <= 0.0) {
+        QString value = PCALC_DIALOGFACTORY->requestTextInputDialog(
+                    "Internal bore not standard",
+                    "Specify internal bore B3 [mm]",
+                    "0.0");
+        b3 = value.toDouble();
+    }
+
     // integral, loose only
     if (flangeType != STD2::AsmeFlangeBLD) {
-        setModelVariable(mFlangeModel, "d01", flangeObj->getValue("b3").toDouble());
+        setModelVariable(mFlangeModel, "d01", b3);
         // Threaded is actually depending the inside diameter of the pipe
     } else {
         setModelVariable(mFlangeModel, "d01", 0.0);
@@ -1766,18 +1776,23 @@ void PCALC_EN1591Widget::setIntegralFlange1AsmeData(RB_ObjectBase* flangeObj,
 
     // integral, loose (if hub) only
     if (flangeType != STD2::AsmeFlangeBLD) {
-        setModelVariable(mFlangeModel, "d11",
-                         (flangeObj->getValue("ah").toDouble()
-                          + flangeObj->getValue("b3").toDouble()) / 2);
-        setModelVariable(mFlangeModel, "d21",
-                         (flangeObj->getValue("x").toDouble()
-                          + flangeObj->getValue("b3").toDouble()) / 2);
-        setModelVariable(mFlangeModel, "e11",
-                         (flangeObj->getValue("ah").toDouble()
-                          - flangeObj->getValue("b3").toDouble()) / 2);
-        setModelVariable(mFlangeModel, "e21",
-                         (flangeObj->getValue("x").toDouble()
-                          - flangeObj->getValue("b3").toDouble()) / 2);
+
+        if (b3 > 0.0) {
+            setModelVariable(mFlangeModel, "d11",
+                             (flangeObj->getValue("ah").toDouble() + b3) / 2);
+            setModelVariable(mFlangeModel, "d21",
+                             (flangeObj->getValue("x").toDouble() + b3) / 2);
+            setModelVariable(mFlangeModel, "e11",
+                             (flangeObj->getValue("ah").toDouble() - b3) / 2);
+            setModelVariable(mFlangeModel, "e21",
+                             (flangeObj->getValue("x").toDouble() - b3) / 2);
+        } else {
+            setModelVariable(mFlangeModel, "d11", 0.0);
+            setModelVariable(mFlangeModel, "d21", 0.0);
+            setModelVariable(mFlangeModel, "e11", 0.0);
+            setModelVariable(mFlangeModel, "e21", 0.0);
+        }
+
         setModelVariable(mFlangeModel, "lh1",
                          flangeObj->getValue("y3").toDouble()
                          - flangeObj->getValue("tf1").toDouble());
@@ -1859,23 +1874,36 @@ void PCALC_EN1591Widget::setLooseFlange2AsmeData(RB_ObjectBase* compObj,
 
 }
 
-void PCALC_EN1591Widget::setHeavyHexBoltAsmeData(RB_ObjectBase* boltObj,
-                                                 RB_ObjectBase* nutObj) {
+void PCALC_EN1591Widget::setBoltAsmeData(RB_ObjectBase* boltObj,
+                                         RB_ObjectBase* /*nutObj*/) {
     RB_DEBUG->printObject(boltObj);
     //    RB_DEBUG->printObject(nutObj);
-//    setModelVariable(mBoltNutWasherModel, "nb", boltObj->getValue("nob").toInt());
+    setModelVariable(mBoltNutWasherModel, "bolttype_id", 1); // Stud bolt
+    setModelVariable(mBoltNutWasherModel, "tensionertype_id", 3); // Torque wrench
+    double dB0 = STD2::inchToMm(boltObj->getValue("nomsize").toDouble());
+    setModelVariable(mBoltNutWasherModel, "db0", dB0);
+    double dB2 = STD2::inchToMm(boltObj->getValue("d2").toDouble());
+    setModelVariable(mBoltNutWasherModel, "db2", dB2);
+    // nut width accross flats
+    double fBasic = STD2::inchToMm(boltObj->getValue("fbasic").toDouble());
+    setModelVariable(mBoltNutWasherModel, "db4", fBasic);
+    double pt = STD2::inchToMm(1.0) / boltObj->getValue("thr").toDouble();
+    double dBe = dB0 - 0.9743 * pt;
+    setModelVariable(mBoltNutWasherModel, "dbe", dBe); //
+    setModelVariable(mBoltNutWasherModel, "dbs", 0.0);
+    setModelVariable(mBoltNutWasherModel, "dn", 0.0);
+    // nut thickness
+    double hBasic = STD2::inchToMm(boltObj->getValue("hbasic").toDouble());
+    setModelVariable(mBoltNutWasherModel, "en", hBasic);
+    setModelVariable(mBoltNutWasherModel, "ls", 0.0);
+    setModelVariable(mBoltNutWasherModel, "mun", 0.14);
+    setModelVariable(mBoltNutWasherModel, "mut", 0.12);
+    setModelVariable(mBoltNutWasherModel, "pt", pt);
+}
 
-//    setModelVariable(mBoltNutWasherModel, "typebolt1_id", 1);
-//    setModelVariable(mBoltNutWasherModel, "d31", boltObj->getValue("w").toDouble());
-//    setModelVariable(mBoltNutWasherModel, "d41", boltObj->getValue("o").toDouble());
-
-//    if (facingType == STD2::AsmeBoltNutWasherFacingRTJ) {
-//        setModelVariable(mBoltNutWasherModel, "dx1",
-//                         facingObj->getValue("p").toDouble()
-//                         + facingObj->getValue("f").toDouble());
-//    } else {
-//        setModelVariable(mBoltNutWasherModel, "dx1", 0.0);
-//    }
+void PCALC_EN1591Widget::setBoltEnData(RB_ObjectBase* boltObj,
+                                       RB_ObjectBase* nutObj) {
+    RB_DEBUG->printObject(boltObj);
 
 }
 

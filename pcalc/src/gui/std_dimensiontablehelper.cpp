@@ -51,9 +51,13 @@ void STD_DimensionTableHelper::setBoltDetailTables(
         delete mLimitModel;
         mLimitModel = nullptr;
     } else if (isCodeStartWith("EN", current)) {
-//        delete mEndModel;
-//        mEndModel = PCALC_MODELFACTORY->getModel(
-//                    PCALC_ModelFactory::ModelBolt, false);
+        delete mComponentModel;
+        mComponentModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelBoltEn, false);
+        delete mEndModel;
+        mEndModel = nullptr;
+        delete mLimitModel;
+        mLimitModel = nullptr;
     }
 }
 
@@ -95,15 +99,13 @@ void STD_DimensionTableHelper::setNutDetailTables(
         delete mLimitModel;
         mLimitModel = nullptr;
     } else if (isCodeStartWith("EN", current)) {
-//        delete mComponentModel;
-//        mComponentModel = PCALC_MODELFACTORY->getModel(
-//                    PCALC_ModelFactory::ModelFlangeEn, false);
-//        delete mEndModel;
-//        mEndModel = PCALC_MODELFACTORY->getModel(
-//                    PCALC_ModelFactory::ModelFlangeFacingDimEn, false);
-//        delete mLimitModel;
-//        mLimitModel = PCALC_MODELFACTORY->getModel(
-//                    PCALC_ModelFactory::ModelFlangeTypeLimit, false);
+        delete mComponentModel;
+        mComponentModel = PCALC_MODELFACTORY->getModel(
+                    PCALC_ModelFactory::ModelNutEn, false);
+        delete mEndModel;
+        mEndModel = nullptr;
+        delete mLimitModel;
+        mLimitModel = nullptr;
     }
 }
 

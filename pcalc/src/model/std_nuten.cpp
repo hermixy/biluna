@@ -29,21 +29,31 @@ STD_NutEn::~STD_NutEn() {
 /**
  * Create members:
  * \li nomsize nominal size, e.g.: M8 M10 M30
- * \li pitch pitch of thread
- * \li smax maximum width accross flats
- * \li smin minimum width accross flats
+ * \li pa pitch of thread
+ * \li cmax
+ * \li cmin
+ * \li damax
+ * \li damin
+ * \li dwmin
  * \li emin minimum width accross corners
- * \li mmax maximum thickness
+ * \li mnom nominal and maximum thickness
  * \li mmin minimum thickness
- * \li tol tolerance on squareness
+ * \li mwmin minimum wrench thickness
+ * \li snom nominal and maximum width accross flats
+ * \li smin minimum width accross flats
  */
 void STD_NutEn::createMembers() {
-    addMember("nomsize", "-", "", RB2::MemberChar10);
-    addMember("pitch", "mm", 0, RB2::MemberDouble);
-    addMember("smax", "mm", 0, RB2::MemberDouble);
-    addMember("smin", "mm", 0, RB2::MemberDouble);
+    addMember("nomsize", "-", "<NEW>", RB2::MemberChar10);
+    addMember("pa", "mm", 0, RB2::MemberDouble);
+    addMember("cmax", "mm", 0, RB2::MemberDouble);
+    addMember("cmin", "mm", 0, RB2::MemberDouble);
+    addMember("damax", "mm", 0, RB2::MemberDouble);
+    addMember("damin", "mm", 0, RB2::MemberDouble);
+    addMember("dwmin", "mm", 0, RB2::MemberDouble);
     addMember("emin", "mm", 0, RB2::MemberDouble);
-    addMember("mmax", "mm", 0, RB2::MemberDouble);
+    addMember("mnom", "mm", 0, RB2::MemberDouble);
     addMember("mmin", "mm", 0, RB2::MemberDouble);
-    addMember("tol", "mm", 0, RB2::MemberDouble);
+    addMember("mwmin", "mm", 0, RB2::MemberDouble);
+    addMember("snom", "mm", 0, RB2::MemberDouble);
+    addMember("smin", "mm", 0, RB2::MemberDouble);
 }

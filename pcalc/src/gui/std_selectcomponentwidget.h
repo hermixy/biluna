@@ -26,7 +26,6 @@ public:
     virtual ~STD_SelectComponentWidget();
 
     virtual RB_ObjectBase* getCurrentObject();
-    virtual void initWidgets();
 
 protected:
     Ui::STD_SelectComponentWidget* ui;
