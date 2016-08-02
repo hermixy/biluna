@@ -44,6 +44,7 @@
 #include "std_flangefacingdimasme.h"
 #include "std_flangefacingdimen.h"
 #include "std_flangetypelimit.h"
+#include "std_gasket.h"
 #include "std_material.h"
 #include "std_nutasme.h"
 #include "std_nuten.h"
@@ -189,6 +190,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj->addObject(list);
         list = new RB_ObjectContainer (uuid, obj, "STD_FlangeEnList", this);
         obj->addObject(list);
+        list = new RB_ObjectContainer (uuid, obj, "STD_GasketList", this);
+        obj->addObject(list);
     } else if (str == "STD_CompSerieList") {
         obj = new STD_CompSerie(uuid, parent, "STD_CompSerie", this);
     } else if (str == "STD_CompTypeList") {
@@ -284,6 +287,8 @@ RB_ObjectBase* PCALC_ObjectFactory::newObject(const RB_String& id,
         obj = new STD_FlangeEn(uuid, parent, "STD_FlangeEn", this);
     } else if (str == "STD_FlangeTypeLimitList") {
         obj = new STD_FlangeTypeLimit(uuid, parent, "STD_FlangeTypeLimit", this);
+    } else if (str == "STD_GasketList") {
+        obj = new STD_Gasket(uuid, parent, "STD_Gasket", this);
     } else if (str == "STD_MaterialList") {
         obj = new STD_Material(uuid, parent, "STD_Material", this);
 

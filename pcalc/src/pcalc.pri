@@ -118,6 +118,7 @@ HEADERS += \
     ../src/model/std_flangefacingdimasme.h \
     ../src/model/std_flangefacingdimen.h \
     ../src/model/std_flangetypelimit.h \
+    ../src/model/std_gasket.h \
     ../src/model/std_material.h \
     ../src/model/std_nutasme.h \
     ../src/model/std_nuten.h \
@@ -240,6 +241,7 @@ SOURCES += \
     ../src/model/std_flangefacingdimasme.cpp \
     ../src/model/std_flangefacingdimen.cpp \
     ../src/model/std_flangetypelimit.cpp \
+    ../src/model/std_gasket.cpp \
     ../src/model/std_material.cpp \
     ../src/model/std_nutasme.cpp \
     ../src/model/std_nuten.cpp \

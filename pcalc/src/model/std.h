@@ -50,6 +50,7 @@ public:
         CompCylinder,
         CompElbow,
         CompFlange,
+        CompGasket,
         CompHalfSphere,
         CompHead,
         CompNut,

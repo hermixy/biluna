@@ -31,7 +31,8 @@ PCALC_EN1591_Gasket::~PCALC_EN1591_Gasket() {
 
 /**
  * Create members:
- * \li gaskettype_idx id plus gasket type
+ * \li gaskettype_idx id plus gasket vendor type
+ * \li gasketstandard_idx id plus gasket dimension standard
  * \li formtype_id id of gasket form type
  * \li manufacturetype type of manufacturing
  * \li insertfilltype_id id of gasket filler
@@ -50,6 +51,7 @@ PCALC_EN1591_Gasket::~PCALC_EN1591_Gasket() {
  */
 void PCALC_EN1591_Gasket::createMembers() {
     addMember("gaskettype_idx", "-", "0", RB2::MemberChar165);
+    addMember("gasketstandard_idx", "-", "0", RB2::MemberChar165);
     addMember("formtype_id", "-", 0, RB2::MemberInteger);
     addMember("manufacturetype", "-", 0, RB2::MemberChar125);
     addMember("insertfilltype_id", "-", 0, RB2::MemberInteger);
