@@ -22,6 +22,8 @@ public:
                              const QModelIndex& /*previous*/);
     void setFlangeDetailTables(const QModelIndex& current,
                                const QModelIndex& /*previous*/);
+    void setGasketDetailTables(const QModelIndex& current,
+                               const QModelIndex& /*previous*/);
     void setNutDetailTables(const QModelIndex& current,
                             const QModelIndex& /*previous*/);
 

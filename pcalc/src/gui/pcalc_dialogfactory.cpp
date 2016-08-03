@@ -29,6 +29,7 @@
 #include "std_matthermexpwidget.h"
 #include "std_selectboltwidget.h"
 #include "std_selectflangewidget.h"
+#include "std_selectgasketwidget.h"
 #include "std_selectmaterialwidget.h"
 
 
@@ -134,6 +135,10 @@ RB_Widget* PCALC_DialogFactory::getWidget(int type, QWidget* parent) {
         wgt = new STD_SelectFlangeWidget(parent);
         break;
     }
+    case WidgetSelectGasket: {
+        wgt = new STD_SelectGasketWidget(parent);
+        break;
+    }
     case WidgetSelectMaterial: {
         wgt = new STD_SelectMaterialWidget(parent);
         break;
@@ -169,6 +174,10 @@ RB_Dialog* PCALC_DialogFactory::getDialog(int type) {
         break;
     }
     case WidgetSelectFlange: {
+        // TODO: getDialog() method to be removed in its entirety
+        break;
+    }
+    case WidgetSelectGasket: {
         // TODO: getDialog() method to be removed in its entirety
         break;
     }

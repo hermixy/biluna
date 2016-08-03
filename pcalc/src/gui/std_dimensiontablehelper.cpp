@@ -87,6 +87,17 @@ void STD_DimensionTableHelper::setFlangeDetailTables(
     }
 }
 
+void STD_DimensionTableHelper::setGasketDetailTables(
+        const QModelIndex& /*current*/, const QModelIndex& /*previous*/) {
+    delete mComponentModel;
+    mComponentModel = PCALC_MODELFACTORY->getModel(
+                PCALC_ModelFactory::ModelGasket, false);
+    delete mEndModel;
+    mEndModel = nullptr;
+    delete mLimitModel;
+    mLimitModel = nullptr;
+}
+
 void STD_DimensionTableHelper::setNutDetailTables(
                 const QModelIndex& current, const QModelIndex& /*previous*/) {
 

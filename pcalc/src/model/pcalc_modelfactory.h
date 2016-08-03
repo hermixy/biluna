@@ -46,6 +46,7 @@ public:
         ModelBoltEn,                    /**< EN bolt dimension model */
         ModelClassGenerator,            /**< Calculation class generator model */
         ModelCompRating,                /**< Base component rating/schedule model */
+        ModelCompSerie,                 /**< Serie model such as flange facing type */
         ModelCompType,                  /**< Component type model such as flange*/
         ModelDimension,                 /**< Dimension model */
         ModelEN13555EGeG,               /**< EN13555 EG and eG model */
@@ -65,8 +66,8 @@ public:
         ModelFlangeEn,                  /**< EN flange model */
         ModelFlangeFacingDimAsme,       /**< ASME flange facing dimension model */
         ModelFlangeFacingDimEn,         /**< EN flange facing dimension model */
-        ModelCompSerie,          /**< Flange facing type model */
         ModelFlangeTypeLimit,           /**< Flange type limit model */
+        ModelGasket,                    /**< ASME and EN gasket dimension model */
         ModelGeneratorFormula,          /**< Calculation generator formula model */
         ModelMatCreepTable,             /**< Material creep table */
         ModelMatElasModulTable,         /**< Material elasticity modulus table */

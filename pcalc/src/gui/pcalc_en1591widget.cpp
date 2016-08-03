@@ -76,7 +76,7 @@ RB_String PCALC_EN1591Widget::getSaveAsFileName() {
     QString type = this->cbCalculationReportType->currentText().toLower();
     type.replace(" ", "_");
 
-    return "pcalc_EN1591_" + name + "_" + type + ".odt";
+    return "PCALC_EN1591_" + name + "_" + type + ".odt";
 }
 
 void PCALC_EN1591Widget::init() {
@@ -294,12 +294,20 @@ void PCALC_EN1591Widget::initMapping() {
 
     // gasket
     mGasketMapper = mGasketModel->getMapper();
+    mGasketMapper->addMapping(ileStandardGasket,
+                              mGasketModel->fieldIndex("gasketstandard_idx"));
+//    ileStandardGasket->setDefaultDialog(PCALC_DIALOGFACTORY,
+//                                        PCALC_DialogFactory::WidgetSelectGasket,
+//                                        "gasketstandard_idx", "displayname");
+    // catch signal for setting of details
+    connect(ileStandardGasket, SIGNAL(clicked(bool)),
+            this, SLOT(slotIleStandardGasketClicked()));
+
     mGasketMapper->addMapping(ileTypeGasket,
                               mGasketModel->fieldIndex("gaskettype_idx"));
     ileTypeGasket->setDefaultDialog(PCALC_DIALOGFACTORY,
                                     PCALC_DialogFactory::WidgetEN1591SelectGasket,
                                     "gaskettype_idx", "mname");
-
     items.clear();
     items << "Flat" << "Curved Simple Contact" << "Curved Double Contact"
           << "Octagonal Double Contact";
@@ -1009,7 +1017,43 @@ void PCALC_EN1591Widget::slotIleBoltSizeClicked() {
 
 
     dlgW->deleteLater();
+}
 
+void PCALC_EN1591Widget::slotIleStandardGasketClicked() {
+    // This function instead of standard dialog which sets the idx field only
+    RB_DialogWindow* dlgW = PCALC_DIALOGFACTORY->getDialogWindow(
+                PCALC_DialogFactory::WidgetSelectGasket);
+
+    if (dlgW->exec() != QDialog::Accepted) {
+        dlgW->deleteLater();
+        return;
+    }
+
+    RB_ObjectBase* gasketObj = dlgW->getCurrentObject();
+
+    if (!gasketObj) {
+        PCALC_DIALOGFACTORY->requestWarningDialog(tr("No valid item selected,\n"
+                                                     "data unchanged."));
+        dlgW->deleteLater();
+        return;
+    } else {
+        int result = PCALC_DIALOGFACTORY->requestYesNoDialog(
+                    tr("Gasket dimensions"),
+                    tr("Do you want to replace\nthe current gasket data?"));
+        if (result != QMessageBox::Yes) {
+            return;
+        }
+    }
+
+    QString displayName = gasketObj->getValue("displayname").toString();
+    QString str = gasketObj->getId() + displayName;
+    mGasketModel->setCurrentValue("gasketstandard_idx", str, Qt::EditRole);
+
+    // set additional data
+    mGasketModel->setCurrentValue("dgout", gasketObj->getValue("d0"), Qt::EditRole);
+    mGasketModel->setCurrentValue("dgin", gasketObj->getValue("d1"), Qt::EditRole);
+
+    dlgW->deleteLater();
 }
 
 void PCALC_EN1591Widget::setInput() {

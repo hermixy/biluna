@@ -83,6 +83,7 @@ HEADERS += \
     ../src/gui/std_selectboltwidget.h \
     ../src/gui/std_selectcomponentwidget.h \
     ../src/gui/std_selectflangewidget.h \
+    ../src/gui/std_selectgasketwidget.h \
     ../src/gui/std_selectmaterialwidget.h \
     ../src/model/EN1591/pcalc_en1591_assembly.h \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.h \
@@ -208,6 +209,7 @@ SOURCES += \
     ../src/gui/std_selectcomponentwidget.cpp \
     ../src/gui/std_selectboltwidget.cpp \
     ../src/gui/std_selectflangewidget.cpp \
+    ../src/gui/std_selectgasketwidget.cpp \
     ../src/gui/std_selectmaterialwidget.cpp \
     ../src/model/EN1591/pcalc_en1591_assembly.cpp \
     ../src/model/EN1591/pcalc_en1591_boltnutwasher.cpp \

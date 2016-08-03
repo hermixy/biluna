@@ -256,6 +256,9 @@
             <item row="1" column="1" colspan="3">
              <widget class="QLineEdit" name="leDescription"/>
             </item>
+            <item row="5" column="2">
+             <widget class="QWidget" name="widget" native="true"/>
+            </item>
            </layout>
           </widget>
          </item>
@@ -1889,7 +1892,7 @@
             <item row="3" column="0" colspan="2">
              <widget class="QLabel" name="lblInsType">
               <property name="text">
-               <string>Insertion Type (in case EN1591-2</string>
+               <string>Insertion Type (in case EN1591-2)</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

@@ -88,6 +88,7 @@ public:
         WidgetProjectEdit,              /**< Edit project dialog */
         WidgetSelectBolt,               /**< Select bolt dialog */
         WidgetSelectFlange,             /**< Select flange dialog */
+        WidgetSelectGasket,             /**< Select gasket dimension dialog */
         WidgetSelectMaterial,           /**< Select material dialog */
         WidgetDefault                   /**< Default- or all widgets */
     };

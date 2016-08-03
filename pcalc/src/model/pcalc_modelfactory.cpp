@@ -169,6 +169,10 @@ RB_MmProxy* PCALC_ModelFactory::getModel(int type, bool shared) {
         model = getTableModel(stdDb, mObjectFactory, type, "STD_FlangeTypeLimitList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "rating");
         break;
+    case ModelGasket:
+        model = getTableModel(stdDb, mObjectFactory, type, "STD_GasketList");
+        model->setSourceSortOrder(RB2::SortOrderAscending, "rating", "nomsize");
+        break;
     case ModelGeneratorFormula:
         model = getTableModel(db, mObjectFactory, type, "PCALC_GeneratorFormulaList");
         model->setSourceSortOrder(RB2::SortOrderAscending, "number");
@@ -340,6 +344,9 @@ RB_MmProxy* PCALC_ModelFactory::getParentModel(int type) {
         break;
     case ModelFlangeTypeLimit:
         iter = mModelList.find(ModelCompType);
+        break;
+    case ModelGasket:
+        iter = mModelList.find(ModelCompRating);
         break;
     case ModelGeneratorFormula:
         iter = mModelList.find(ModelNone);

@@ -175,7 +175,7 @@ public:
     virtual RB_Variant getCurrentValue(const RB_String& fieldName,
                                        int role = Qt::DisplayRole) const;
     virtual bool setCurrentValue(const RB_String& fieldName, const RB_Variant& val,
-                                 int role);
+                                 int role = Qt::EditRole);
     virtual RB_Variant getValue(const RB_String& id, const RB_String& fieldName,
                                 const RB_String& keyFieldName = "",
                                 const RB_Variant& keyValue = RB_Variant()) const;

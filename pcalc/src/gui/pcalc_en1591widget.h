@@ -60,6 +60,7 @@ protected slots:
     void slotIleStandardFlange_1Clicked();
     void slotIleStandardFlange_2Clicked();
     void slotIleBoltSizeClicked();
+    void slotIleStandardGasketClicked();
 
 protected:
     void changeEvent(QEvent *e);

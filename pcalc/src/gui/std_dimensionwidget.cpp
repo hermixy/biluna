@@ -212,6 +212,9 @@ void STD_DimensionWidget::slotDetailTables(const QModelIndex& current,
     case (int)STD2::CompFlange:
         STD_DimensionTableHelper::setFlangeDetailTables(current, previous);
         break;
+    case (int)STD2::CompGasket:
+        STD_DimensionTableHelper::setGasketDetailTables(current, previous);
+        break;
     case (int)STD2::CompNut:
         STD_DimensionTableHelper::setNutDetailTables(current, previous);
         break;
