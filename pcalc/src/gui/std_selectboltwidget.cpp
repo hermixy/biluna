@@ -38,30 +38,62 @@ RB_ObjectBase* STD_SelectBoltWidget::getCurrentObject() {
 
     RB_ObjectBase* obj = mComponentModel->getCurrentObject();
     QString nomSize = obj->getValue("nomsize").toString();
+    QString standardName = ui->cbStandard->currentText();
 
-    QVariant var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
-                "hbasic", "std_nutasme",
-                "parent='{b9354340-290f-4d40-a53a-13f7b88861ea}' "
-                "AND nomsize=" + nomSize);
-    double hBasic = var.toDouble();
-    var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
-                "fbasic", "std_nutasme",
-                "parent='{b9354340-290f-4d40-a53a-13f7b88861ea}' "
-                "AND nomsize=" + nomSize);
-    double fBasic = var.toDouble();
-    QString displayName = ui->cbStandard->currentText() + " "
-            + nomSize + " "
-            + ui->cbType->currentText();
+    if (standardName.startsWith("ASME")) {
+        // nut thickness
+        QVariant var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
+                    "hbasic", "std_nutasme",
+                    "parent='{b9354340-290f-4d40-a53a-13f7b88861ea}' "
+                    "AND nomsize=" + nomSize);
+        double hBasic = var.toDouble();
 
-    if (!mBoltObject) {
-        mBoltObject = new RB_ObjectAtomic(obj);
-        mBoltObject->addMember("displayname", "-", displayName);
-        mBoltObject->addMember("hbasic", "mm", hBasic);
-        mBoltObject->addMember("fbasic", "mm", fBasic);
-    } else {
-        // Required? set only once
-        *mBoltObject = *obj;
-        mBoltObject->setValue("displayname", displayName);
+        // nut width accross flats
+        var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
+                    "fbasic", "std_nutasme",
+                    "parent='{b9354340-290f-4d40-a53a-13f7b88861ea}' "
+                    "AND nomsize=" + nomSize);
+        double fBasic = var.toDouble();
+        QString displayName = standardName + " " + nomSize
+                    + " " + ui->cbType->currentText();
+
+        if (!mBoltObject) {
+            mBoltObject = new RB_ObjectAtomic(obj);
+            mBoltObject->addMember("displayname", "-", displayName);
+            mBoltObject->addMember("hbasic", "mm", hBasic);
+            mBoltObject->addMember("fbasic", "mm", fBasic);
+        } else {
+            // Required? set only once
+            *mBoltObject = *obj;
+            mBoltObject->setValue("displayname", displayName);
+        }
+    } else { // EN ISO or DIN bolt nut
+        // nut thickness
+        QVariant var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
+                    "mnom", "std_nuten",
+                    "parent='{d746c237-edb5-4f84-961a-b25e3bf23b6b}' "
+                    "AND nomsize='" + nomSize + "'");
+        double mnom = var.toDouble();
+
+        // nut width accross flats
+        //        var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
+        //                    "snom", "std_nuten",
+        //                    "parent='{d746c237-edb5-4f84-961a-b25e3bf23b6b}' "
+        //                    "AND nomsize='" + nomSize + "'");
+        //        double snom = var.toDouble();
+        //        QString displayName = standardName + " " + nomSize
+        //                    + " " + ui->cbType->currentText();
+
+        if (!mBoltObject) {
+            mBoltObject = new RB_ObjectAtomic(obj);
+            mBoltObject->addMember("displayname", "-", displayName);
+            mBoltObject->addMember("mnom", "mm", mnom);
+            // mBoltObject->addMember("snom", "mm", snom); already with bolt
+        } else {
+            // Required? set only once
+            *mBoltObject = *obj;
+            mBoltObject->setValue("displayname", displayName);
+        }
     }
 
     return mBoltObject;
@@ -119,19 +151,4 @@ void STD_SelectBoltWidget::slotTypeRowChanged(int row) {
     for (int i = 0; i < RB2::HIDDENCOLUMNS; ++i) {
         ui->tvComponent->hideColumn(i);
     }
-
-    // TODO: Hide columns
-//    int colCount = mComponentModel->columnCount();
-
-//    for (int i = 0; i < colCount; ++i) {
-//        if (i < RB2::HIDDENCOLUMNS || i > RB2::HIDDENCOLUMNS + 4) {
-//            ui->tvComponent->hideColumn(i);
-//        } else {
-//            ui->tvComponent->showColumn(i);
-
-//            if (ui->tvComponent->columnWidth(i) < 5) {
-//                ui->tvComponent->setColumnWidth(i, 100);
-//            }
-//        }
-//    }
 }

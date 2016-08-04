@@ -57,8 +57,7 @@ protected slots:
     void slotHandleParentRowChanged();
     void slotDisableFormulaWidgets(int index);
 
-    void slotIleStandardFlange_1Clicked();
-    void slotIleStandardFlange_2Clicked();
+    void slotIleStandardFlange_NrClicked();
     void slotIleBoltSizeClicked();
     void slotIleStandardGasketClicked();
 
@@ -97,12 +96,11 @@ private:
                                RB_ObjectBase* facingObj = nullptr);
     void setBlindFlange2AsmeData(RB_ObjectBase* compObj,
                                RB_ObjectBase* facingObj = nullptr);
-    void setIntegralFlange1AsmeData(RB_ObjectBase* compObj,
-                                    RB_ObjectBase* facingObj,
-                                    STD2::AsmeFlangeType flangeType = STD2::AsmeFlangeWN,
-                                    STD2::AsmeFlangeFacingType facingType = STD2::AsmeFlangeFacingRF);
-    void setIntegralFlange2AsmeData(RB_ObjectBase* compObj,
-                                  RB_ObjectBase* facingObj = nullptr);
+    void setIntegralFlangeAsmeData(RB_ObjectBase* compObj,
+                                   RB_ObjectBase* facingObj,
+                                   const QString& flNrStr, // flange number "1" or "2"
+                                   STD2::AsmeFlangeType flangeType = STD2::AsmeFlangeWN,
+                                   STD2::AsmeFlangeFacingType facingType = STD2::AsmeFlangeFacingRF);
     void setLooseFlange1AsmeData(RB_ObjectBase* compObj,
                                RB_ObjectBase* facingObj = nullptr);
     void setLooseFlange2AsmeData(RB_ObjectBase* compObj,
@@ -111,8 +109,8 @@ private:
                          RB_ObjectBase*  nutObj = nullptr);
     void setBoltEnData(RB_ObjectBase* boltObj,
                        RB_ObjectBase*  nutObj = nullptr);
-    void setModelVariable(RB_MmProxy* model, const QString& fieldName,
-                          double value);
+//    void setModelVariable(RB_MmProxy* model, const QString& fieldName,
+//                          double value);
     void addObjectMemberVariable(RB_ObjectBase* obj,
                                  const QString& variableName,
                                  const QString& unit, RB_MmProxy* model);

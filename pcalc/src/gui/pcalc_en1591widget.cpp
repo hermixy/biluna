@@ -176,7 +176,7 @@ void PCALC_EN1591Widget::initMapping() {
 //                                    "standardflange1_idx", "displayname");
     // catch signal for setting of details
     connect(ileStandardFlange_1, SIGNAL(clicked(bool)),
-            this, SLOT(slotIleStandardFlange_1Clicked()));
+            this, SLOT(slotIleStandardFlange_NrClicked()));
 
     QStringList items;
     items << "Blind" << "Integral" << "Loose";
@@ -242,7 +242,7 @@ void PCALC_EN1591Widget::initMapping() {
 //                                    PCALC_DialogFactory::WidgetSelectFlange,
 //                                    "standardflange2_idx", "displayname");
     connect(ileStandardFlange_2, SIGNAL(clicked(bool)),
-            this, SLOT(slotIleStandardFlange_2Clicked()));
+            this, SLOT(slotIleStandardFlange_NrClicked()));
 
     cbTypeFlange_2->setModel(new QStringListModel(items, this));
     mFlangeMapper->addMapping(cbTypeFlange_2,
@@ -910,7 +910,7 @@ void PCALC_EN1591Widget::slotDisableFormulaWidgets(int index) {
     sbFormulaTo->setEnabled(index > 1 && index < 5);
 }
 
-void PCALC_EN1591Widget::slotIleStandardFlange_1Clicked() {
+void PCALC_EN1591Widget::slotIleStandardFlange_NrClicked() {
     // This function instead of:
     //    ileStandardFlange_1->setDefaultDialog(PCALC_DIALOGFACTORY,
     //                                    PCALC_DialogFactory::WidgetSelectFlange,
@@ -941,21 +941,24 @@ void PCALC_EN1591Widget::slotIleStandardFlange_1Clicked() {
         }
     }
 
+    QString flangeNr = "1";
+
+    if (sender() == ileStandardFlange_2) {
+        flangeNr = "2";
+    }
+
     QString displayName = flangeObj->getValue("displayname").toString();
     QString str = flangeObj->getId() + displayName;
-    QModelIndex idx = mFlangeModel->index(mFlangeModel->getCurrentIndex().row(),
-                                    mFlangeModel->fieldIndex("standardflange1_idx"));
-    mFlangeModel->setData(idx, str);
+    mFlangeModel->setCurrentValue("standardflange" + flangeNr + "_idx", str);
 
     if (displayName.startsWith("EN")) {
         // TODO: implement
     } else if (displayName.startsWith("ASME")) {
         if (flangeTypeObj->getValue("type").toString() == "WN") { // TODO: change to type_id!
-            setIntegralFlange1AsmeData(flangeObj, facingObj);
-
-            // update bolt with UNC thread and nut dimensions
-
-
+            setIntegralFlangeAsmeData(flangeObj, facingObj, flangeNr,
+                                      STD2::AsmeFlangeWN,
+                                      STD2::AsmeFlangeFacingRF);
+            // TODO: request update bolt with relevant UNC thread and nut dimensions
         }
 
         // TODO: other types
@@ -963,10 +966,6 @@ void PCALC_EN1591Widget::slotIleStandardFlange_1Clicked() {
 
 
     dlgW->deleteLater();
-}
-
-void PCALC_EN1591Widget::slotIleStandardFlange_2Clicked() {
-
 }
 
 void PCALC_EN1591Widget::slotIleBoltSizeClicked() {
@@ -980,8 +979,8 @@ void PCALC_EN1591Widget::slotIleBoltSizeClicked() {
     }
 
     RB_ObjectBase* boltObj = dlgW->getCurrentObject();
-//    RB_ObjectBase* boltTypeObj = dlgW->getCurrentChild1Object();
-//    RB_ObjectBase* nutObj = dlgW->getCurrentChild2Object();
+    //    RB_ObjectBase* boltTypeObj = dlgW->getCurrentChild1Object();
+    //    RB_ObjectBase* nutObj = dlgW->getCurrentChild2Object();
 
     if (!boltObj /*|| !boltTypeObj || !nutObj*/) {
         PCALC_DIALOGFACTORY->requestWarningDialog(tr("No valid item selected,\n"
@@ -999,18 +998,14 @@ void PCALC_EN1591Widget::slotIleBoltSizeClicked() {
 
     QString displayName = boltObj->getValue("displayname").toString();
     QString str = boltObj->getId() + displayName;
-    QModelIndex idx = mBoltNutWasherModel->index(
-                mBoltNutWasherModel->getCurrentIndex().row(),
-                mBoltNutWasherModel->fieldIndex("size_idx"));
-    mBoltNutWasherModel->setData(idx, str);
+    mBoltNutWasherModel->setCurrentValue("size_idx", str);
 
     if (displayName.startsWith("EN")) {
         setBoltEnData(boltObj/*, nutObj*/);
-
     } else if (displayName.startsWith("ASME")) {
-//        if (boltTypeObj->getValue("type").toString() == "HHD") { // TODO: change to type id!
+        // if (boltTypeObj->getValue("type").toString() == "HHD") { // TODO: change to type id!
         setBoltAsmeData(boltObj/*, nutObj*/);
-//        }
+        // }
 
         // TODO: other types
     }
@@ -1733,71 +1728,72 @@ void PCALC_EN1591Widget::setBlindFlange2AsmeData(RB_ObjectBase* compObj,
 
 }
 
-void PCALC_EN1591Widget::setIntegralFlange1AsmeData(RB_ObjectBase* flangeObj,
+void PCALC_EN1591Widget::setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
                                                     RB_ObjectBase* facingObj,
+                                                    const QString& flNrStr,
                                                     STD2::AsmeFlangeType flangeType,
                                                     STD2::AsmeFlangeFacingType facingType) {
 //    RB_DEBUG->printObject(flangeObj);
 //    RB_DEBUG->printObject(facingObj);
 
-    setModelVariable(mFlangeModel, "nb", flangeObj->getValue("nob").toInt());
+    mFlangeModel->setCurrentValue("nb", flangeObj->getValue("nob").toInt());
 
-    setModelVariable(mFlangeModel, "typeflange1_id", 1);
-    setModelVariable(mFlangeModel, "d31", flangeObj->getValue("w").toDouble());
-    setModelVariable(mFlangeModel, "d41", flangeObj->getValue("o").toDouble());
+    mFlangeModel->setCurrentValue("typeflange" + flNrStr + "_id", 1);
+    mFlangeModel->setCurrentValue("d3" + flNrStr, flangeObj->getValue("w").toDouble());
+    mFlangeModel->setCurrentValue("d4" + flNrStr, flangeObj->getValue("o").toDouble());
 
     if (facingType == STD2::AsmeFlangeFacingRTJ) {
-        setModelVariable(mFlangeModel, "dx1",
+        mFlangeModel->setCurrentValue("dx" + flNrStr,
                          facingObj->getValue("p").toDouble()
                          + facingObj->getValue("f").toDouble());
     } else {
-        setModelVariable(mFlangeModel, "dx1", 0.0);
+        mFlangeModel->setCurrentValue("dx" + flNrStr, 0.0);
     }
 
-    setModelVariable(mFlangeModel, "drf1", facingObj->getValue("r").toDouble());
+    mFlangeModel->setCurrentValue("drf" + flNrStr, facingObj->getValue("r").toDouble());
 
     if (facingType == STD2::AsmeFlangeFacingSRF || facingType == STD2::AsmeFlangeFacingTGF) {
         // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
-        setModelVariable(mFlangeModel, "drec1", 0.0);
+        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
     } else {
-        setModelVariable(mFlangeModel, "drec1", 0.0);
+        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
     }
 
-    setModelVariable(mFlangeModel, "efb1", flangeObj->getValue("tf1").toDouble());
-    setModelVariable(mFlangeModel, "erf1", facingObj->getValue("hrf").toDouble());
+    mFlangeModel->setCurrentValue("efb" + flNrStr, flangeObj->getValue("tf" + flNrStr).toDouble());
+    mFlangeModel->setCurrentValue("erf" + flNrStr, facingObj->getValue("hrf").toDouble());
 
     if (facingType == STD2::AsmeFlangeFacingSRF || facingType == STD2::AsmeFlangeFacingTGF) {
         // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
-        setModelVariable(mFlangeModel, "erec1", 0.0);
+        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
     } else {
-        setModelVariable(mFlangeModel, "erec1", 0.0);
+        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
     }
 
-    setModelVariable(mFlangeModel, "eq1", 0.0);
+    mFlangeModel->setCurrentValue("eq" + flNrStr, 0.0);
 
     if (facingType == STD2::AsmeFlangeFacingRTJ) {
-        setModelVariable(mFlangeModel, "ex1",
-                         flangeObj->getValue("tf1").toDouble()
+        mFlangeModel->setCurrentValue("ex" + flNrStr,
+                         flangeObj->getValue("tf" + flNrStr).toDouble()
                          - facingObj->getValue("e").toDouble());
     } else {
-        setModelVariable(mFlangeModel, "ex1", 0.0);
+        mFlangeModel->setCurrentValue("ex" + flNrStr, 0.0);
     }
 
     // bolthole
-    setModelVariable(mFlangeModel, "d51", STD2::inchToMm(flangeObj->getValue("diambh").toDouble()));
-    setModelVariable(mFlangeModel, "blindhole1", 0);
-    setModelVariable(mFlangeModel, "d5t1", 0.0);
-    setModelVariable(mFlangeModel, "l5t1", 0.0);
+    mFlangeModel->setCurrentValue("d5" + flNrStr, STD2::inchToMm(flangeObj->getValue("diambh").toDouble()));
+    mFlangeModel->setCurrentValue("blindhole" + flNrStr, 0);
+    mFlangeModel->setCurrentValue("d5t" + flNrStr, 0.0);
+    mFlangeModel->setCurrentValue("l5t" + flNrStr, 0.0);
 
     // blind only
     if (flangeType == STD2::AsmeFlangeBLD) {
-        setModelVariable(mFlangeModel, "d91", 0.0);
-        setModelVariable(mFlangeModel, "e01",
-                         flangeObj->getValue("tf1").toDouble()
+        mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("e0" + flNrStr,
+                         flangeObj->getValue("tf" + flNrStr).toDouble()
                          + facingObj->getValue("hrf").toDouble());
     } else {
-        setModelVariable(mFlangeModel, "d91", 0.0);
-        setModelVariable(mFlangeModel, "e01", 0.0);
+        mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("e0" + flNrStr, 0.0);
     }
 
     double b3 = flangeObj->getValue("b3").toDouble();
@@ -1812,97 +1808,58 @@ void PCALC_EN1591Widget::setIntegralFlange1AsmeData(RB_ObjectBase* flangeObj,
 
     // integral, loose only
     if (flangeType != STD2::AsmeFlangeBLD) {
-        setModelVariable(mFlangeModel, "d01", b3);
+        mFlangeModel->setCurrentValue("d0" + flNrStr, b3);
         // Threaded is actually depending the inside diameter of the pipe
     } else {
-        setModelVariable(mFlangeModel, "d01", 0.0);
+        mFlangeModel->setCurrentValue("d0" + flNrStr, 0.0);
     }
 
     // integral, loose (if hub) only
     if (flangeType != STD2::AsmeFlangeBLD) {
 
         if (b3 > 0.0) {
-            setModelVariable(mFlangeModel, "d11",
+            mFlangeModel->setCurrentValue("d1" + flNrStr,
                              (flangeObj->getValue("ah").toDouble() + b3) / 2);
-            setModelVariable(mFlangeModel, "d21",
+            mFlangeModel->setCurrentValue("d2" + flNrStr,
                              (flangeObj->getValue("x").toDouble() + b3) / 2);
-            setModelVariable(mFlangeModel, "e11",
+            mFlangeModel->setCurrentValue("e1" + flNrStr,
                              (flangeObj->getValue("ah").toDouble() - b3) / 2);
-            setModelVariable(mFlangeModel, "e21",
+            mFlangeModel->setCurrentValue("e2" + flNrStr,
                              (flangeObj->getValue("x").toDouble() - b3) / 2);
         } else {
-            setModelVariable(mFlangeModel, "d11", 0.0);
-            setModelVariable(mFlangeModel, "d21", 0.0);
-            setModelVariable(mFlangeModel, "e11", 0.0);
-            setModelVariable(mFlangeModel, "e21", 0.0);
+            mFlangeModel->setCurrentValue("d1" + flNrStr, 0.0);
+            mFlangeModel->setCurrentValue("d2" + flNrStr, 0.0);
+            mFlangeModel->setCurrentValue("e1" + flNrStr, 0.0);
+            mFlangeModel->setCurrentValue("e2" + flNrStr, 0.0);
         }
 
-        setModelVariable(mFlangeModel, "lh1",
+        mFlangeModel->setCurrentValue("lh" + flNrStr,
                          flangeObj->getValue("y3").toDouble()
-                         - flangeObj->getValue("tf1").toDouble());
+                         - flangeObj->getValue("tf" + flNrStr).toDouble());
     } else {
-        setModelVariable(mFlangeModel, "d11", 0.0);
-        setModelVariable(mFlangeModel, "d21", 0.0);
-        setModelVariable(mFlangeModel, "e11", 0.0);
-        setModelVariable(mFlangeModel, "e21", 0.0);
-        setModelVariable(mFlangeModel, "lh1", 0.0);
+        mFlangeModel->setCurrentValue("d1" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("d2" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("e1" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("e2" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("lh" + flNrStr, 0.0);
     }
 
     // loose only
-    if (flangeType == STD2::AsmeFlangeLPD) {
+    if (flangeType == STD2::AsmeFlangeLPD) { // Lapped
         // TODO:
-        setModelVariable(mFlangeModel, "b01", flangeObj->getValue("").toDouble());
-        setModelVariable(mFlangeModel, "d61", flangeObj->getValue("").toDouble());
-        setModelVariable(mFlangeModel, "d81", flangeObj->getValue("").toDouble());
-        setModelVariable(mFlangeModel, "el1", flangeObj->getValue("").toDouble());
+        mFlangeModel->setCurrentValue("b0" + flNrStr, flangeObj->getValue("").toDouble());
+        mFlangeModel->setCurrentValue("d6" + flNrStr, flangeObj->getValue("").toDouble());
+        mFlangeModel->setCurrentValue("d8" + flNrStr, flangeObj->getValue("").toDouble());
+        mFlangeModel->setCurrentValue("el" + flNrStr, flangeObj->getValue("").toDouble());
     } else {
-        setModelVariable(mFlangeModel, "b01", 0.0);
-        setModelVariable(mFlangeModel, "d61", 0.0);
-        setModelVariable(mFlangeModel, "d81", 0.0);
-        setModelVariable(mFlangeModel, "el1", 0.0);
+        mFlangeModel->setCurrentValue("b0" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("d6" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("d8" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("el" + flNrStr, 0.0);
     }
 
-//    setModelVariable(mFlangeModel, "materialflange1_idx", flangeObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "materialloosering1_idx", flangeObj->getValue("").toDouble());
-
-}
-
-void PCALC_EN1591Widget::setIntegralFlange2AsmeData(RB_ObjectBase* compObj,
-                                                    RB_ObjectBase* facingObj) {
-    setModelVariable(mFlangeModel, "typeflange2_id", 1);
-    setModelVariable(mFlangeModel, "d32", compObj->getValue("w").toDouble());
-    setModelVariable(mFlangeModel, "d42", compObj->getValue("o").toDouble());
-//    setModelVariable(mFlangeModel, "dx2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "drf2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "drec2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "efb2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "erf2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "erec2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "eq2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "ex2", compObj->getValue("").toDouble());
-//    // bolthole
-//    setModelVariable(mFlangeModel, "d52", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "blindhole2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "d5t2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "l5t2", compObj->getValue("").toDouble());
-//    // blind only
-//    setModelVariable(mFlangeModel, "d92", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "e02", compObj->getValue("").toDouble());
-//    // integral, loose only
-//    setModelVariable(mFlangeModel, "d02", compObj->getValue("").toDouble());
-//    // integral, loose (if hub) only
-//    setModelVariable(mFlangeModel, "d12", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "d22", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "e12", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "e22", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "lh2", compObj->getValue("").toDouble());
-//    // loose only
-//    setModelVariable(mFlangeModel, "b02", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "d62", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "d82", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "el2", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "materialflange2_idx", compObj->getValue("").toDouble());
-//    setModelVariable(mFlangeModel, "materialloosering2_idx", compObj->getValue("").toDouble());
+//    mFlangeModel->setCurrentValue("materialflange" + flNrStr + "_idx", flangeObj->getValue("").toDouble());
+//    mFlangeModel->setCurrentValue("materialloosering" + flNrStr + "_idx", flangeObj->getValue("").toDouble());
 
 }
 
@@ -1920,45 +1877,66 @@ void PCALC_EN1591Widget::setLooseFlange2AsmeData(RB_ObjectBase* compObj,
 
 void PCALC_EN1591Widget::setBoltAsmeData(RB_ObjectBase* boltObj,
                                          RB_ObjectBase* /*nutObj*/) {
-    RB_DEBUG->printObject(boltObj);
+    //    RB_DEBUG->printObject(boltObj);
     //    RB_DEBUG->printObject(nutObj);
-    setModelVariable(mBoltNutWasherModel, "bolttype_id", 1); // Stud bolt
-    setModelVariable(mBoltNutWasherModel, "tensionertype_id", 3); // Torque wrench
+    mBoltNutWasherModel->setCurrentValue("bolttype_id", 1); // Stud bolt
+    mBoltNutWasherModel->setCurrentValue("tensionertype_id", 3); // Torque wrench
     double dB0 = STD2::inchToMm(boltObj->getValue("nomsize").toDouble());
-    setModelVariable(mBoltNutWasherModel, "db0", dB0);
+    mBoltNutWasherModel->setCurrentValue("db0", dB0);
     double dB2 = STD2::inchToMm(boltObj->getValue("d2").toDouble());
-    setModelVariable(mBoltNutWasherModel, "db2", dB2);
+    mBoltNutWasherModel->setCurrentValue("db2", dB2);
     // nut width accross flats
     double fBasic = STD2::inchToMm(boltObj->getValue("fbasic").toDouble());
-    setModelVariable(mBoltNutWasherModel, "db4", fBasic);
+    mBoltNutWasherModel->setCurrentValue("db4", fBasic);
     double pt = STD2::inchToMm(1.0) / boltObj->getValue("thr").toDouble();
     double dBe = dB0 - 0.9743 * pt;
-    setModelVariable(mBoltNutWasherModel, "dbe", dBe); //
-    setModelVariable(mBoltNutWasherModel, "dbs", 0.0);
-    setModelVariable(mBoltNutWasherModel, "dn", 0.0);
+    mBoltNutWasherModel->setCurrentValue("dbe", dBe); //
+    mBoltNutWasherModel->setCurrentValue("dbs", 0.0);
+    mBoltNutWasherModel->setCurrentValue("dn", 0.0);
     // nut thickness
     double hBasic = STD2::inchToMm(boltObj->getValue("hbasic").toDouble());
-    setModelVariable(mBoltNutWasherModel, "en", hBasic);
-    setModelVariable(mBoltNutWasherModel, "ls", 0.0);
-    setModelVariable(mBoltNutWasherModel, "mun", 0.14);
-    setModelVariable(mBoltNutWasherModel, "mut", 0.12);
-    setModelVariable(mBoltNutWasherModel, "pt", pt);
+    mBoltNutWasherModel->setCurrentValue("en", hBasic);
+    mBoltNutWasherModel->setCurrentValue("ls", 0.0);
+    mBoltNutWasherModel->setCurrentValue("mun", 0.14);
+    mBoltNutWasherModel->setCurrentValue("mut", 0.12);
+    mBoltNutWasherModel->setCurrentValue("pt", pt);
 }
 
 void PCALC_EN1591Widget::setBoltEnData(RB_ObjectBase* boltObj,
-                                       RB_ObjectBase* nutObj) {
+                                       RB_ObjectBase* /*nutObj*/) {
     RB_DEBUG->printObject(boltObj);
-
+    mBoltNutWasherModel->setCurrentValue("bolttype_id", 1); // Stud bolt
+    mBoltNutWasherModel->setCurrentValue("tensionertype_id", 3); // Torque wrench
+    double dB0 = boltObj->getValue("dsnom").toDouble();
+    mBoltNutWasherModel->setCurrentValue("db0", dB0);
+    double pt = boltObj->getValue("pa").toDouble();
+    double isoThreadValue = 0.6495;
+    double dB2 = boltObj->getValue("d2").toDouble() - isoThreadValue * pt;
+    mBoltNutWasherModel->setCurrentValue("db2", dB2);
+    // nut width accross flats
+    double dB4 = boltObj->getValue("snom").toDouble();
+    mBoltNutWasherModel->setCurrentValue("db4", dB4);
+    double dBe = dB0 - 0.9743 * pt;
+    mBoltNutWasherModel->setCurrentValue("dbe", dBe); //
+    mBoltNutWasherModel->setCurrentValue("dbs", 0.0);
+    mBoltNutWasherModel->setCurrentValue("dn", 0.0);
+    // nut thickness
+    double en = boltObj->getValue("mnom").toDouble();
+    mBoltNutWasherModel->setCurrentValue("en", en);
+    mBoltNutWasherModel->setCurrentValue("ls", 0.0);
+    mBoltNutWasherModel->setCurrentValue("mun", 0.14);
+    mBoltNutWasherModel->setCurrentValue("mut", 0.12);
+    mBoltNutWasherModel->setCurrentValue("pt", pt);
 }
 
-void PCALC_EN1591Widget::setModelVariable(RB_MmProxy* model,
-                                          const QString& fieldName,
-                                          double value) {
-    QModelIndex idx = model->index(
-                model->getCurrentIndex().row(),
-                model->fieldIndex(fieldName));
-    model->setData(idx, value);
-}
+//void PCALC_EN1591Widget::setModelVariable(RB_MmProxy* model,
+//                                          const QString& fieldName,
+//                                          double value) {
+//    QModelIndex idx = model->index(
+//                model->getCurrentIndex().row(),
+//                model->fieldIndex(fieldName));
+//    model->setData(idx, value);
+//}
 
 void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,
                                             const QString& variableName,
