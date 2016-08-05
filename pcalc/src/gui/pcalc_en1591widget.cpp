@@ -956,8 +956,8 @@ void PCALC_EN1591Widget::slotIleStandardFlange_NrClicked() {
     } else if (displayName.startsWith("ASME")) {
         if (flangeTypeObj->getValue("type").toString() == "WN") { // TODO: change to type_id!
             setIntegralFlangeAsmeData(flangeObj, facingObj, flangeNr,
-                                      STD2::AsmeFlangeWN,
-                                      STD2::AsmeFlangeFacingRF);
+                                      STD2::FlangeAsmeWN,
+                                      STD2::FlangeFacingAsmeRF);
             // TODO: request update bolt with relevant UNC thread and nut dimensions
         }
 
@@ -1696,64 +1696,64 @@ void PCALC_EN1591Widget::setBlindFlange2EnData(RB_ObjectBase* compObj,
 
 }
 
-void PCALC_EN1591Widget::setIntegralFlange1EnData(RB_ObjectBase* compObj,
-                                                  RB_ObjectBase* facingObj) {
-
-}
-
-void PCALC_EN1591Widget::setIntegralFlange2EnData(RB_ObjectBase* compObj,
-                                                  RB_ObjectBase* facingObj) {
-
-}
-
-void PCALC_EN1591Widget::setLooseFlange1EnData(RB_ObjectBase* compObj,
-                                               RB_ObjectBase* facingObj) {
-
-}
-
-void PCALC_EN1591Widget::setLooseFlange2EnData(RB_ObjectBase* compObj,
-                                             RB_ObjectBase* facingObj) {
-
-}
-
-void PCALC_EN1591Widget::setBlindFlange1AsmeData(RB_ObjectBase* compObj,
-                                                 RB_ObjectBase* facingObj)
-{
-
-}
-
-void PCALC_EN1591Widget::setBlindFlange2AsmeData(RB_ObjectBase* compObj,
-                                                 RB_ObjectBase* facingObj)
-{
-
-}
-
-void PCALC_EN1591Widget::setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
-                                                    RB_ObjectBase* facingObj,
-                                                    const QString& flNrStr,
-                                                    STD2::AsmeFlangeType flangeType,
-                                                    STD2::AsmeFlangeFacingType facingType) {
+void PCALC_EN1591Widget::setIntegralFlange1EnData(
+        RB_ObjectBase* flangeObj, RB_ObjectBase* facingObj, const QString &flNrStr,
+        STD2::FlangeEnType flangeType, STD2::FlangeFacingEnType facingType) {
 //    RB_DEBUG->printObject(flangeObj);
 //    RB_DEBUG->printObject(facingObj);
 
-    mFlangeModel->setCurrentValue("nb", flangeObj->getValue("nob").toInt());
+    mFlangeModel->setCurrentValue("nb", flangeObj->getValue("number").toInt());
 
-    mFlangeModel->setCurrentValue("typeflange" + flNrStr + "_id", 1);
-    mFlangeModel->setCurrentValue("d3" + flNrStr, flangeObj->getValue("w").toDouble());
-    mFlangeModel->setCurrentValue("d4" + flNrStr, flangeObj->getValue("o").toDouble());
+    int fType = 1;
+    switch (facingType) {
+    case STD2::FlangeEn01:
+        fType = 0;
+        break;
+    case STD2::FlangeEn0232:
+    case STD2::FlangeEn0233:
+    case STD2::FlangeEn0235:
+    case STD2::FlangeEn0236:
+    case STD2::FlangeEn0237:
+    case STD2::FlangeEn0434:
+        fType = 2;
+        break;
+    case STD2::FlangeEn05:
+        fType = 0;
+        break;
+    case STD2::FlangeEn11:
+    case STD2::FlangeEn12:
+    case STD2::FlangeEn13:
+    case STD2::FlangeEn21:
+        fType = 1;
+        break;
+    default:
+        fType = 1;
+        break;
+    }
 
-    if (facingType == STD2::AsmeFlangeFacingRTJ) {
-        mFlangeModel->setCurrentValue("dx" + flNrStr,
-                         facingObj->getValue("p").toDouble()
-                         + facingObj->getValue("f").toDouble());
+    mFlangeModel->setCurrentValue("typeflange" + flNrStr + "_id", fType);
+    mFlangeModel->setCurrentValue("d3" + flNrStr, flangeObj->getValue("k").toDouble());
+    mFlangeModel->setCurrentValue("d4" + flNrStr, flangeObj->getValue("d").toDouble());
+
+    if (false /* facingType == STD2::FlangeFacingEnRTJ does not exist */) {
+        mFlangeModel->setCurrentValue("dx" + flNrStr, 0.0);
     } else {
         mFlangeModel->setCurrentValue("dx" + flNrStr, 0.0);
     }
 
-    mFlangeModel->setCurrentValue("drf" + flNrStr, facingObj->getValue("r").toDouble());
+    // Continue here ... insert 3rd diameter for TG SR type facings
 
-    if (facingType == STD2::AsmeFlangeFacingSRF || facingType == STD2::AsmeFlangeFacingTGF) {
+
+
+
+    mFlangeModel->setCurrentValue("drf" + flNrStr, facingObj->getValue("d1").toDouble());
+
+    if (facingType == STD2::FlangeFacingAsmeSRF || facingType == STD2::FlangeFacingAsmeTGF) {
         // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
+        // female groove requires one more diameter
+        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
+    } else if (facingType == STD2::FlangeFacingAsmeSRM || facingType == STD2::FlangeFacingAsmeTGM) {
+        // TODO
         mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
     } else {
         mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
@@ -1762,8 +1762,11 @@ void PCALC_EN1591Widget::setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
     mFlangeModel->setCurrentValue("efb" + flNrStr, flangeObj->getValue("tf" + flNrStr).toDouble());
     mFlangeModel->setCurrentValue("erf" + flNrStr, facingObj->getValue("hrf").toDouble());
 
-    if (facingType == STD2::AsmeFlangeFacingSRF || facingType == STD2::AsmeFlangeFacingTGF) {
+    if (facingType == STD2::FlangeFacingAsmeSRF || facingType == STD2::FlangeFacingAsmeTGF) {
         // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
+        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
+    } else if (facingType == STD2::FlangeFacingAsmeSRM || facingType == STD2::FlangeFacingAsmeTGM) {
+        // TODO
         mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
     } else {
         mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
@@ -1771,7 +1774,7 @@ void PCALC_EN1591Widget::setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
 
     mFlangeModel->setCurrentValue("eq" + flNrStr, 0.0);
 
-    if (facingType == STD2::AsmeFlangeFacingRTJ) {
+    if (facingType == STD2::FlangeFacingAsmeRTJ) {
         mFlangeModel->setCurrentValue("ex" + flNrStr,
                          flangeObj->getValue("tf" + flNrStr).toDouble()
                          - facingObj->getValue("e").toDouble());
@@ -1786,7 +1789,7 @@ void PCALC_EN1591Widget::setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
     mFlangeModel->setCurrentValue("l5t" + flNrStr, 0.0);
 
     // blind only
-    if (flangeType == STD2::AsmeFlangeBLD) {
+    if (flangeType == STD2::FlangeAsmeBLD) {
         mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
         mFlangeModel->setCurrentValue("e0" + flNrStr,
                          flangeObj->getValue("tf" + flNrStr).toDouble()
@@ -1807,7 +1810,7 @@ void PCALC_EN1591Widget::setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
     }
 
     // integral, loose only
-    if (flangeType != STD2::AsmeFlangeBLD) {
+    if (flangeType != STD2::FlangeAsmeBLD) {
         mFlangeModel->setCurrentValue("d0" + flNrStr, b3);
         // Threaded is actually depending the inside diameter of the pipe
     } else {
@@ -1815,7 +1818,7 @@ void PCALC_EN1591Widget::setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
     }
 
     // integral, loose (if hub) only
-    if (flangeType != STD2::AsmeFlangeBLD) {
+    if (flangeType != STD2::FlangeAsmeBLD) {
 
         if (b3 > 0.0) {
             mFlangeModel->setCurrentValue("d1" + flNrStr,
@@ -1845,7 +1848,171 @@ void PCALC_EN1591Widget::setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
     }
 
     // loose only
-    if (flangeType == STD2::AsmeFlangeLPD) { // Lapped
+    if (flangeType == STD2::FlangeAsmeLPD) { // Lapped
+        // TODO:
+        mFlangeModel->setCurrentValue("b0" + flNrStr, flangeObj->getValue("").toDouble());
+        mFlangeModel->setCurrentValue("d6" + flNrStr, flangeObj->getValue("").toDouble());
+        mFlangeModel->setCurrentValue("d8" + flNrStr, flangeObj->getValue("").toDouble());
+        mFlangeModel->setCurrentValue("el" + flNrStr, flangeObj->getValue("").toDouble());
+    } else {
+        mFlangeModel->setCurrentValue("b0" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("d6" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("d8" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("el" + flNrStr, 0.0);
+    }
+
+}
+
+void PCALC_EN1591Widget::setIntegralFlange2EnData(RB_ObjectBase* compObj,
+                                                  RB_ObjectBase* facingObj) {
+
+}
+
+void PCALC_EN1591Widget::setLooseFlange1EnData(RB_ObjectBase* flangeObj,
+                                               RB_ObjectBase* facingObj) {
+
+}
+
+void PCALC_EN1591Widget::setLooseFlange2EnData(RB_ObjectBase* compObj,
+                                             RB_ObjectBase* facingObj) {
+
+}
+
+void PCALC_EN1591Widget::setBlindFlange1AsmeData(RB_ObjectBase* compObj,
+                                                 RB_ObjectBase* facingObj)
+{
+
+}
+
+void PCALC_EN1591Widget::setBlindFlange2AsmeData(RB_ObjectBase* compObj,
+                                                 RB_ObjectBase* facingObj)
+{
+
+}
+
+void PCALC_EN1591Widget::setIntegralFlangeAsmeData(
+        RB_ObjectBase* flangeObj, RB_ObjectBase* facingObj, const QString& flNrStr,
+        STD2::FlangeAsmeType flangeType, STD2::FlangeFacingAsmeType facingType) {
+//    RB_DEBUG->printObject(flangeObj);
+//    RB_DEBUG->printObject(facingObj);
+
+    mFlangeModel->setCurrentValue("nb", flangeObj->getValue("nob").toInt());
+
+    mFlangeModel->setCurrentValue("typeflange" + flNrStr + "_id", 1);
+    mFlangeModel->setCurrentValue("d3" + flNrStr, flangeObj->getValue("w").toDouble());
+    mFlangeModel->setCurrentValue("d4" + flNrStr, flangeObj->getValue("o").toDouble());
+
+    if (facingType == STD2::FlangeFacingAsmeRTJ) {
+        mFlangeModel->setCurrentValue("dx" + flNrStr,
+                         facingObj->getValue("p").toDouble()
+                         + facingObj->getValue("f").toDouble());
+    } else {
+        mFlangeModel->setCurrentValue("dx" + flNrStr, 0.0);
+    }
+
+    mFlangeModel->setCurrentValue("drf" + flNrStr, facingObj->getValue("r").toDouble());
+
+    if (facingType == STD2::FlangeFacingAsmeSRF || facingType == STD2::FlangeFacingAsmeTGF) {
+        // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
+        // female groove requires one more diameter
+        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
+    } else if (facingType == STD2::FlangeFacingAsmeSRM || facingType == STD2::FlangeFacingAsmeTGM) {
+        // TODO
+        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
+    } else {
+        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
+    }
+
+    mFlangeModel->setCurrentValue("efb" + flNrStr, flangeObj->getValue("tf" + flNrStr).toDouble());
+    mFlangeModel->setCurrentValue("erf" + flNrStr, facingObj->getValue("hrf").toDouble());
+
+    if (facingType == STD2::FlangeFacingAsmeSRF || facingType == STD2::FlangeFacingAsmeTGF) {
+        // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
+        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
+    } else if (facingType == STD2::FlangeFacingAsmeSRM || facingType == STD2::FlangeFacingAsmeTGM) {
+        // TODO
+        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
+    } else {
+        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
+    }
+
+    mFlangeModel->setCurrentValue("eq" + flNrStr, 0.0);
+
+    if (facingType == STD2::FlangeFacingAsmeRTJ) {
+        mFlangeModel->setCurrentValue("ex" + flNrStr,
+                         flangeObj->getValue("tf" + flNrStr).toDouble()
+                         - facingObj->getValue("e").toDouble());
+    } else {
+        mFlangeModel->setCurrentValue("ex" + flNrStr, 0.0);
+    }
+
+    // bolthole
+    mFlangeModel->setCurrentValue("d5" + flNrStr, STD2::inchToMm(flangeObj->getValue("diambh").toDouble()));
+    mFlangeModel->setCurrentValue("blindhole" + flNrStr, 0);
+    mFlangeModel->setCurrentValue("d5t" + flNrStr, 0.0);
+    mFlangeModel->setCurrentValue("l5t" + flNrStr, 0.0);
+
+    // blind only
+    if (flangeType == STD2::FlangeAsmeBLD) {
+        mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("e0" + flNrStr,
+                         flangeObj->getValue("tf" + flNrStr).toDouble()
+                         + facingObj->getValue("hrf").toDouble());
+    } else {
+        mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("e0" + flNrStr, 0.0);
+    }
+
+    double b3 = flangeObj->getValue("b3").toDouble();
+
+    if (b3 <= 0.0) {
+        QString value = PCALC_DIALOGFACTORY->requestTextInputDialog(
+                    "Internal bore not standard",
+                    "Specify internal bore B3 [mm]",
+                    "0.0");
+        b3 = value.toDouble();
+    }
+
+    // integral, loose only
+    if (flangeType != STD2::FlangeAsmeBLD) {
+        mFlangeModel->setCurrentValue("d0" + flNrStr, b3);
+        // Threaded is actually depending the inside diameter of the pipe
+    } else {
+        mFlangeModel->setCurrentValue("d0" + flNrStr, 0.0);
+    }
+
+    // integral, loose (if hub) only
+    if (flangeType != STD2::FlangeAsmeBLD) {
+
+        if (b3 > 0.0) {
+            mFlangeModel->setCurrentValue("d1" + flNrStr,
+                             (flangeObj->getValue("ah").toDouble() + b3) / 2);
+            mFlangeModel->setCurrentValue("d2" + flNrStr,
+                             (flangeObj->getValue("x").toDouble() + b3) / 2);
+            mFlangeModel->setCurrentValue("e1" + flNrStr,
+                             (flangeObj->getValue("ah").toDouble() - b3) / 2);
+            mFlangeModel->setCurrentValue("e2" + flNrStr,
+                             (flangeObj->getValue("x").toDouble() - b3) / 2);
+        } else {
+            mFlangeModel->setCurrentValue("d1" + flNrStr, 0.0);
+            mFlangeModel->setCurrentValue("d2" + flNrStr, 0.0);
+            mFlangeModel->setCurrentValue("e1" + flNrStr, 0.0);
+            mFlangeModel->setCurrentValue("e2" + flNrStr, 0.0);
+        }
+
+        mFlangeModel->setCurrentValue("lh" + flNrStr,
+                         flangeObj->getValue("y3").toDouble()
+                         - flangeObj->getValue("tf" + flNrStr).toDouble());
+    } else {
+        mFlangeModel->setCurrentValue("d1" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("d2" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("e1" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("e2" + flNrStr, 0.0);
+        mFlangeModel->setCurrentValue("lh" + flNrStr, 0.0);
+    }
+
+    // loose only
+    if (flangeType == STD2::FlangeAsmeLPD) { // Lapped
         // TODO:
         mFlangeModel->setCurrentValue("b0" + flNrStr, flangeObj->getValue("").toDouble());
         mFlangeModel->setCurrentValue("d6" + flNrStr, flangeObj->getValue("").toDouble());

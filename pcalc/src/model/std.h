@@ -16,29 +16,6 @@
  */
 class STD2 {
 public:
-    /** ASME B16.5 flange facing types */
-    enum AsmeFlangeFacingType {
-        AsmeFlangeFacingFFS,	/** Small Female Face (small Spigot and Recess)	*/
-        AsmeFlangeFacingFMS,	/** Small Male Face (on end of pipe, small Spigot and Recess) */
-        AsmeFlangeFacingRF,     /** Raised Face 2 or 7 mm */
-        AsmeFlangeFacingRTJ,	/**	Ring (Type) Joint */
-        AsmeFlangeFacingSRF,	/**	Spigot and Recess Female (large face) */
-        AsmeFlangeFacingSRM,	/**	Spigot and Recess Male (large face) */
-        AsmeFlangeFacingTGF,	/**	Tongue and Groove Female */
-        AsmeFlangeFacingTGM     /**	Tongue and Groove Male */
-    };
-
-    /** ASME B16.5 flange types */
-    enum AsmeFlangeType {
-        AsmeFlangeBLD,          /** Blind */
-        AsmeFlangeLPD,          /** Lapped */
-        AsmeFlangeSOW,          /** Slip-On Welding */
-        AsmeFlangeSW,           /** Socket Welding (NPS 1/2 to 3 Only) */
-        AsmeFlangeTHRD,         /** Threaded */
-        AsmeFlangeWN            /** Welding Neck */
-    };
-
-
     /**
      * Component type which has a relation to material allowable stress
      */
@@ -61,32 +38,54 @@ public:
         CompDefault
     };
 
-    /** EN 1092-1 flange facing types */
-    enum EnFlangeFacingType {
-        EnFlangeFacingA,        /** Flat face */
-        EnFlangeFacingB,        /** Raised face */
-        EnFlangeFacingC,        /** Tongue */
-        EnFlangeFacingD,        /** Groove */
-        EnFlangeFacingE,        /** Spigot */
-        EnFlangeFacingF,        /** Recess */
-        EnFlangeFacingG,        /** O-ring spigot */
-        EnFlangeFacingH         /** O-ring groove */
+    /** ASME B16.5 flange types */
+    enum FlangeAsmeType {
+        FlangeAsmeBLD,          /** Blind */
+        FlangeAsmeLPD,          /** Lapped */
+        FlangeAsmeSOW,          /** Slip-On Welding */
+        FlangeAsmeSW,           /** Socket Welding (NPS 1/2 to 3 Only) */
+        FlangeAsmeTHRD,         /** Threaded */
+        FlangeAsmeWN            /** Welding Neck */
     };
 
     /** EN 1092-1 flange types */
-    enum EnFlangeType {
-        EnFlange01,             /** Plate flange for welding */
-        EnFlange0232,           /** Loose plate flange with weld-on collar */
-        EnFlange0233,           /** Loose plate flange with lapped pipe end */
-        EnFlange0235,           /** Loose plate flange with weld ring neck */
-        EnFlange0236,           /** Loose plate flange with pressed collar with long neck */
-        EnFlange0237,           /** Loose plate flange with pressed collar */
-        EnFlange0434,           /** Loose plate flange with weld-neck collar */
-        EnFlange05,             /** Blind flange */
-        EnFlange11,             /** Weld-neck flange */
-        EnFlange12,             /** Hubbed slip-on flange for welding */
-        EnFlange13,             /** Hubbed threaded flange */
-        EnFlange21              /** Integral flange */
+    enum FlangeEnType {
+        FlangeEn01,             /** Plate flange for welding */
+        FlangeEn0232,           /** Loose plate flange with weld-on collar */
+        FlangeEn0233,           /** Loose plate flange with lapped pipe end */
+        FlangeEn0235,           /** Loose plate flange with weld ring neck */
+        FlangeEn0236,           /** Loose plate flange with pressed collar with long neck */
+        FlangeEn0237,           /** Loose plate flange with pressed collar */
+        FlangeEn0434,           /** Loose plate flange with weld-neck collar */
+        FlangeEn05,             /** Blind flange */
+        FlangeEn11,             /** Weld-neck flange */
+        FlangeEn12,             /** Hubbed slip-on flange for welding */
+        FlangeEn13,             /** Hubbed threaded flange */
+        FlangeEn21              /** Integral flange */
+    };
+
+    /** ASME B16.5 flange facing types */
+    enum FlangeFacingAsmeType {
+        FlangeFacingAsmeFFS,	/** Small Female Face (small Spigot and Recess)	*/
+        FlangeFacingAsmeFMS,	/** Small Male Face (on end of pipe, small Spigot and Recess) */
+        FlangeFacingAsmeRF,     /** Raised Face 2 or 7 mm */
+        FlangeFacingAsmeRTJ,	/**	Ring (Type) Joint */
+        FlangeFacingAsmeSRF,	/**	Spigot and Recess Female (large face) */
+        FlangeFacingAsmeSRM,	/**	Spigot and Recess Male (large face) */
+        FlangeFacingAsmeTGF,	/**	Tongue and Groove Female */
+        FlangeFacingAsmeTGM     /**	Tongue and Groove Male */
+    };
+
+    /** EN 1092-1 flange facing types */
+    enum FlangeFacingEnType {
+        FlangeFacingEnA,        /** Flat face */
+        FlangeFacingEnB,        /** Raised face */
+        FlangeFacingEnC,        /** Tongue */
+        FlangeFacingEnD,        /** Groove */
+        FlangeFacingEnE,        /** Spigot */
+        FlangeFacingEnF,        /** Recess */
+        FlangeFacingEnG,        /** O-ring spigot */
+        FlangeFacingEnH         /** O-ring groove */
     };
 
     /** Material class */

@@ -84,11 +84,14 @@ private:
                                RB_ObjectBase* facingObj = nullptr);
     void setBlindFlange2EnData(RB_ObjectBase* compObj,
                                RB_ObjectBase* facingObj = nullptr);
-    void setIntegralFlange1EnData(RB_ObjectBase* compObj,
-                                  RB_ObjectBase* facingObj = nullptr);
+    void setIntegralFlange1EnData(RB_ObjectBase* flangeObj,
+                                  RB_ObjectBase* facingObj,
+                                  const QString& flNrStr, // flange number "1" or "2"
+                                  STD2::FlangeEnType flangeType = STD2::FlangeEn11,
+                                  STD2::FlangeFacingEnType facingType = STD2::FlangeFacingEnB);
     void setIntegralFlange2EnData(RB_ObjectBase* compObj,
                                   RB_ObjectBase* facingObj = nullptr);
-    void setLooseFlange1EnData(RB_ObjectBase* compObj,
+    void setLooseFlange1EnData(RB_ObjectBase* flangeObj,
                                RB_ObjectBase* facingObj = nullptr);
     void setLooseFlange2EnData(RB_ObjectBase* compObj,
                                RB_ObjectBase* facingObj = nullptr);
@@ -96,11 +99,11 @@ private:
                                RB_ObjectBase* facingObj = nullptr);
     void setBlindFlange2AsmeData(RB_ObjectBase* compObj,
                                RB_ObjectBase* facingObj = nullptr);
-    void setIntegralFlangeAsmeData(RB_ObjectBase* compObj,
+    void setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
                                    RB_ObjectBase* facingObj,
                                    const QString& flNrStr, // flange number "1" or "2"
-                                   STD2::AsmeFlangeType flangeType = STD2::AsmeFlangeWN,
-                                   STD2::AsmeFlangeFacingType facingType = STD2::AsmeFlangeFacingRF);
+                                   STD2::FlangeAsmeType flangeType = STD2::FlangeAsmeWN,
+                                   STD2::FlangeFacingAsmeType facingType = STD2::FlangeFacingAsmeRF);
     void setLooseFlange1AsmeData(RB_ObjectBase* compObj,
                                RB_ObjectBase* facingObj = nullptr);
     void setLooseFlange2AsmeData(RB_ObjectBase* compObj,

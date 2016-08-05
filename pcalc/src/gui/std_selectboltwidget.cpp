@@ -39,6 +39,7 @@ RB_ObjectBase* STD_SelectBoltWidget::getCurrentObject() {
     RB_ObjectBase* obj = mComponentModel->getCurrentObject();
     QString nomSize = obj->getValue("nomsize").toString();
     QString standardName = ui->cbStandard->currentText();
+    QString displayName = "";
 
     if (standardName.startsWith("ASME")) {
         // nut thickness
@@ -54,7 +55,7 @@ RB_ObjectBase* STD_SelectBoltWidget::getCurrentObject() {
                     "parent='{b9354340-290f-4d40-a53a-13f7b88861ea}' "
                     "AND nomsize=" + nomSize);
         double fBasic = var.toDouble();
-        QString displayName = standardName + " " + nomSize
+        displayName = standardName + " " + nomSize
                     + " " + ui->cbType->currentText();
 
         if (!mBoltObject) {
