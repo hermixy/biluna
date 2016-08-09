@@ -43,7 +43,7 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("d01", "mm", 0.0, RB2::MemberDouble);
     addMember("d31", "mm", 0.0, RB2::MemberDouble);
     addMember("d41", "mm", 0.0, RB2::MemberDouble);
-    addMember("dx1", "mm", 0.0, RB2::MemberDouble);
+    addMember("dx1", "mm", 0.0, RB2::MemberDouble); // or ID recess
     addMember("drf1", "mm", 0.0, RB2::MemberDouble);
     addMember("drec1", "mm", 0.0, RB2::MemberDouble);
     addMember("efb1", "mm", 0.0, RB2::MemberDouble);
@@ -82,7 +82,7 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("d02", "mm", 0.0, RB2::MemberDouble);
     addMember("d32", "mm", 0.0, RB2::MemberDouble);
     addMember("d42", "mm", 0.0, RB2::MemberDouble);
-    addMember("dx2", "mm", 0.0, RB2::MemberDouble);
+    addMember("dx2", "mm", 0.0, RB2::MemberDouble); // or ID recess
     addMember("drf2", "mm", 0.0, RB2::MemberDouble);
     addMember("drec2", "mm", 0.0, RB2::MemberDouble);
     addMember("efb2", "mm", 0.0, RB2::MemberDouble);

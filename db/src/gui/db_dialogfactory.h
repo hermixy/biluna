@@ -119,6 +119,7 @@ public:
         WidgetProjectSelect,            /**< Select project widget */
         WidgetSimpleChart,              /**< Simple chart types review widget */
         WidgetSimpleReport,             /**< Simple report from database widget */
+        WidgetSpreadSheet,              /**< Spreadsheet table widget */
         WidgetTextDocument,             /**< Rich text document widget */
         WidgetVersion,                  /**< View database version dialog */
         WidgetXmlViewValidator,         /**< XML view and validator widget */

@@ -36,6 +36,7 @@
 #include "db_screenshotdialog.h"
 #include "db_selectmappingdialog.h"
 #include "db_simplereportwidget.h"
+#include "db_spreadsheetwidget.h"
 #include "db_systemgroupdialog.h"
 
 #ifdef DB_TEST
@@ -211,6 +212,11 @@ RB_Widget* DB_DialogFactory::getWidget(int type, QWidget* parent) {
         if (wgt) return wgt;
         wgt = new DB_SimpleReportWidget(parent);
         mWidgetList[type] = wgt;
+        break;
+    }
+    case WidgetSpreadSheet: {
+        // Non-unique widget
+        wgt = new DB_SpreadSheetWidget(parent);
         break;
     }
     case WidgetTextDocument: {

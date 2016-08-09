@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1069</width>
-    <height>757</height>
+    <height>608</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -480,7 +480,7 @@
                 <item row="4" column="0">
                  <widget class="QLabel" name="label_3">
                   <property name="text">
-                   <string>OD of groove</string>
+                   <string>Diam. of groove or ID recess *)</string>
                   </property>
                  </widget>
                 </item>
@@ -507,7 +507,7 @@
                 <item row="5" column="0" colspan="2">
                  <widget class="QLabel" name="label_4">
                   <property name="text">
-                   <string>OD of raised face (optional)</string>
+                   <string>OD of raised face *)</string>
                   </property>
                  </widget>
                 </item>
@@ -544,7 +544,7 @@
                 <item row="6" column="0" colspan="2">
                  <widget class="QLabel" name="label_5">
                   <property name="text">
-                   <string>OD of recess (optional)</string>
+                   <string>OD of recess *)</string>
                   </property>
                  </widget>
                 </item>
@@ -598,14 +598,14 @@
                 <item row="9" column="0" colspan="2">
                  <widget class="QLabel" name="label_8">
                   <property name="text">
-                   <string>Thickness of recess</string>
+                   <string>Thickness of recess *)</string>
                   </property>
                  </widget>
                 </item>
                 <item row="8" column="0" colspan="2">
                  <widget class="QLabel" name="label_7">
                   <property name="text">
-                   <string>Thickness of raised face</string>
+                   <string>Thickness of raised face *)</string>
                   </property>
                  </widget>
                 </item>
@@ -652,7 +652,7 @@
                 <item row="11" column="0" colspan="2">
                  <widget class="QLabel" name="label_10">
                   <property name="text">
-                   <string>Min. thickness at groove (opt.)</string>
+                   <string>Minimum thickness at groove *)</string>
                   </property>
                  </widget>
                 </item>
@@ -669,7 +669,7 @@
                 <item row="10" column="0" colspan="2">
                  <widget class="QLabel" name="label_9">
                   <property name="text">
-                   <string>Thickness without radial pressure</string>
+                   <string>Thickness without radial pressure *)</string>
                   </property>
                  </widget>
                 </item>
@@ -760,7 +760,7 @@
                 <item row="16" column="0" colspan="2">
                  <widget class="QLabel" name="label_83">
                   <property name="text">
-                   <string>Thread length bl. hole (opt.)</string>
+                   <string>Thread length blind hole *)</string>
                   </property>
                  </widget>
                 </item>
@@ -777,7 +777,7 @@
                 <item row="15" column="0" colspan="2">
                  <widget class="QLabel" name="label_82">
                   <property name="text">
-                   <string>Diameter blind hole (opt.)</string>
+                   <string>Diameter blind hole *)</string>
                   </property>
                  </widget>
                 </item>

@@ -30,6 +30,7 @@
 #include "db_actionfilenewplaintexteditor.h"
 #include "db_actionfilenewhtmleditor.h"
 #include "db_actionfilenewhtmlview.h"
+#include "db_actionfilenewspreadsheet.h"
 #include "db_actionfileopen.h"
 #include "db_actionfilepdf.h"
 #include "db_actionfileprint.h"
@@ -159,6 +160,7 @@ void DB_ActionFactory::getFileNewMenu(QMenu* menu, QToolBar* tb) {
     RB_GuiAction* ga = NULL;
     // QMenu* subMenu = NULL;
 
+    // TODO: rename to DB_ActionFileNewRichTextEditor
     ga = DB_ActionFileNew::createGuiAction();
     menu->addAction(ga);
     tb->addAction(ga);
@@ -173,6 +175,10 @@ void DB_ActionFactory::getFileNewMenu(QMenu* menu, QToolBar* tb) {
 
     // Internet browser TODO: rename
     ga = DB_ActionFileNewHtmlView::createGuiAction();
+    menu->addAction(ga);
+    tb->addAction(ga);
+
+    ga = DB_ActionFileNewSpreadSheet::createGuiAction();
     menu->addAction(ga);
     tb->addAction(ga);
 }

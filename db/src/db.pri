@@ -39,6 +39,7 @@ FORMS = \
     ../src/gui/db_screenshotdialog.ui \
     ../src/gui/db_seltreesiblingdialog.ui \
     ../src/gui/db_simplereportwidget.ui \
+    ../src/gui/db_spreadsheetwidget.ui \
     ../src/gui/db_systemgroupdialog.ui \
     ../src/gui/db_tabledialog.ui \
     ../src/gui/db_textwidget.ui \
@@ -60,6 +61,7 @@ HEADERS = \
     ../src/actions/db_actionfilenewhtmleditor.h \
     ../src/actions/db_actionfilenewhtmlview.h \
     ../src/actions/db_actionfilenewplaintexteditor.h \
+    ../src/actions/db_actionfilenewspreadsheet.h \
     ../src/actions/db_actionfileopen.h \
     ../src/actions/db_actionfileopenmultiple.h \
     ../src/actions/db_actionfilepdf.h \
@@ -207,6 +209,7 @@ HEADERS = \
     ../src/gui/db_selectmappingdialog.h \
     ../src/gui/db_seltreesiblingdialog.h \
     ../src/gui/db_simplereportwidget.h \
+    ../src/gui/db_spreadsheetwidget.h \
     ../src/gui/db_sqlhighlighter.h \
     ../src/gui/db_systemgroupdialog.h \
     ../src/gui/db_tabledialog.h \
@@ -236,6 +239,8 @@ HEADERS = \
 #    ../src/gui/rb_projecteditdialog.h \
     ../src/gui/rb_projecteditwidget.h \
     ../src/gui/rb_simplereportwidget.h \
+    ../src/gui/rb_spreadsheetcell.h \
+    ../src/gui/rb_spreadsheettable.h \
     ../src/gui/rb_sqlrelationaldelegate.h \
     ../src/gui/rb_tablewidget.h \
     ../src/gui/rb_tableview.h \
@@ -324,6 +329,7 @@ SOURCES = \
     ../src/actions/db_actionfilenewhtmleditor.cpp \
     ../src/actions/db_actionfilenewhtmlview.cpp \
     ../src/actions/db_actionfilenewplaintexteditor.cpp \
+    ../src/actions/db_actionfilenewspreadsheet.cpp \
     ../src/actions/db_actionfileopen.cpp \
     ../src/actions/db_actionfileopenmultiple.cpp \
     ../src/actions/db_actionfilepdf.cpp \
@@ -466,6 +472,7 @@ SOURCES = \
     ../src/gui/db_screenshotdialog.cpp \
     ../src/gui/db_seltreesiblingdialog.cpp \
     ../src/gui/db_simplereportwidget.cpp \
+    ../src/gui/db_spreadsheetwidget.cpp \
     ../src/gui/db_sqlhighlighter.cpp \
     ../src/gui/db_systemgroupdialog.cpp \
     ../src/gui/db_tabledialog.cpp \
@@ -495,6 +502,8 @@ SOURCES = \
 #    ../src/gui/rb_projecteditdialog.cpp \
     ../src/gui/rb_projecteditwidget.cpp \
     ../src/gui/rb_simplereportwidget.cpp \
+    ../src/gui/rb_spreadsheetcell.cpp \
+    ../src/gui/rb_spreadsheettable.cpp \
     ../src/gui/rb_sqlrelationaldelegate.cpp \
     ../src/gui/rb_tableview.cpp \
     ../src/gui/rb_tablewidget.cpp \

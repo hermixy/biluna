@@ -1705,25 +1705,103 @@ void PCALC_EN1591Widget::setIntegralFlange1EnData(
     mFlangeModel->setCurrentValue("nb", flangeObj->getValue("number").toInt());
 
     int fType = 1;
+    double dx = 0.0; // depth groove or female part of TG
+    double drf = 0.0;
+    double drec = 0.0;
+    double erf = 0.0; // thickness raised face
+    double c = 0.0; // thickness flange including raised face
+    double efb = 0.0;
+
     switch (facingType) {
+    case STD2::FlangeFacingEnA:
+        erf = 0.0;
+        break;
+    case STD2::FlangeFacingEnB:
+        drf = facingObj->getValue("d1").toDouble();
+        erf = facingObj->getValue("f1").toDouble();
+        break;
+    case STD2::FlangeFacingEnC:
+        drec = facingObj->getValue("w").toDouble();
+        erf = facingObj->getValue("f2").toDouble();
+        break;
+    case STD2::FlangeFacingEnD:
+        dx = facingObj->getValue("z").toDouble();
+        drf = facingObj->getValue("d1").toDouble();
+        drec = facingObj->getValue("y").toDouble();
+        erf = facingObj->getValue("f1").toDouble();
+        break;
+    case STD2::FlangeFacingEnE:
+        erf = facingObj->getValue("f2").toDouble();
+        break;
+    case STD2::FlangeFacingEnF:
+        drf = facingObj->getValue("d1").toDouble();
+        drec = facingObj->getValue("y").toDouble();
+        erf = facingObj->getValue("f1").toDouble();
+        break;
+    case STD2::FlangeFacingEnG:
+        drf = facingObj->getValue("d1").toDouble();
+        drec = facingObj->getValue("w").toDouble();
+        erf = facingObj->getValue("f1").toDouble();
+        break;
+    case STD2::FlangeFacingEnH:
+        dx = facingObj->getValue("z").toDouble();
+        drec = facingObj->getValue("y").toDouble();
+        erf = facingObj->getValue("f4").toDouble();
+        break;
+    default:
+        erf = 0.0;
+        break;
+    }
+
+    switch (flangeType) {
     case STD2::FlangeEn01:
         fType = 0;
+        c = flangeObj->getValue("c1").toDouble();
+        efb = c - erf;
         break;
     case STD2::FlangeEn0232:
+        fType = 2;
+        c = flangeObj->getValue("c1").toDouble();
+//        efb continue here
+        break;
     case STD2::FlangeEn0233:
+        fType = 2;
+        c = flangeObj->getValue("c1").toDouble();
+        break;
     case STD2::FlangeEn0235:
+        fType = 2;
+        c = flangeObj->getValue("c1").toDouble();
+        break;
     case STD2::FlangeEn0236:
+        fType = 2;
+        c = flangeObj->getValue("c1").toDouble();
+        break;
     case STD2::FlangeEn0237:
+        fType = 2;
+        c = flangeObj->getValue("c1").toDouble();
+        break;
     case STD2::FlangeEn0434:
         fType = 2;
+        c = flangeObj->getValue("c1").toDouble();
         break;
     case STD2::FlangeEn05:
         fType = 0;
+        c = flangeObj->getValue("c4").toDouble();
         break;
     case STD2::FlangeEn11:
+        c = flangeObj->getValue("c2").toDouble();
+        fType = 1;
+        break;
     case STD2::FlangeEn12:
+        c = flangeObj->getValue("c2").toDouble();
+        fType = 1;
+        break;
     case STD2::FlangeEn13:
+        c = flangeObj->getValue("c2").toDouble();
+        fType = 1;
+        break;
     case STD2::FlangeEn21:
+        c = flangeObj->getValue("c3").toDouble();
         fType = 1;
         break;
     default:
@@ -1734,30 +1812,16 @@ void PCALC_EN1591Widget::setIntegralFlange1EnData(
     mFlangeModel->setCurrentValue("typeflange" + flNrStr + "_id", fType);
     mFlangeModel->setCurrentValue("d3" + flNrStr, flangeObj->getValue("k").toDouble());
     mFlangeModel->setCurrentValue("d4" + flNrStr, flangeObj->getValue("d").toDouble());
-
-    if (false /* facingType == STD2::FlangeFacingEnRTJ does not exist */) {
-        mFlangeModel->setCurrentValue("dx" + flNrStr, 0.0);
-    } else {
-        mFlangeModel->setCurrentValue("dx" + flNrStr, 0.0);
-    }
-
-    // Continue here ... insert 3rd diameter for TG SR type facings
+    mFlangeModel->setCurrentValue("dx" + flNrStr, dx);
+    mFlangeModel->setCurrentValue("drf" + flNrStr, drf);
+    mFlangeModel->setCurrentValue("drec" + flNrStr, drec);
 
 
 
 
-    mFlangeModel->setCurrentValue("drf" + flNrStr, facingObj->getValue("d1").toDouble());
 
-    if (facingType == STD2::FlangeFacingAsmeSRF || facingType == STD2::FlangeFacingAsmeTGF) {
-        // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
-        // female groove requires one more diameter
-        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
-    } else if (facingType == STD2::FlangeFacingAsmeSRM || facingType == STD2::FlangeFacingAsmeTGM) {
-        // TODO
-        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
-    } else {
-        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
-    }
+
+
 
     mFlangeModel->setCurrentValue("efb" + flNrStr, flangeObj->getValue("tf" + flNrStr).toDouble());
     mFlangeModel->setCurrentValue("erf" + flNrStr, facingObj->getValue("hrf").toDouble());
