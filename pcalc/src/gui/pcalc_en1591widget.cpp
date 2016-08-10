@@ -1685,32 +1685,32 @@ void PCALC_EN1591Widget::createUnitTestDetail() {
     getTextEdit()->setHtml(outputStr);
 }
 
-void PCALC_EN1591Widget::setBlindFlange1EnData(RB_ObjectBase* compObj,
-                                             RB_ObjectBase* facingObj) {
-
-
-}
-
-void PCALC_EN1591Widget::setBlindFlange2EnData(RB_ObjectBase* compObj,
-                                             RB_ObjectBase* facingObj) {
-
-}
-
-void PCALC_EN1591Widget::setIntegralFlange1EnData(
+void PCALC_EN1591Widget::setFlangeEnData(
         RB_ObjectBase* flangeObj, RB_ObjectBase* facingObj, const QString &flNrStr,
         STD2::FlangeEnType flangeType, STD2::FlangeFacingEnType facingType) {
 //    RB_DEBUG->printObject(flangeObj);
 //    RB_DEBUG->printObject(facingObj);
 
-    mFlangeModel->setCurrentValue("nb", flangeObj->getValue("number").toInt());
-
-    int fType = 1;
+    int fType = 1; // EN1591 flange type, blind, integral or loose
     double dx = 0.0; // depth groove or female part of TG
     double drf = 0.0;
     double drec = 0.0;
     double erf = 0.0; // thickness raised face
     double c = 0.0; // thickness flange including raised face
     double efb = 0.0;
+    double erec = 0.0;
+    double ex = 0.0; // also used for inside height of D and H
+    double e0 = 0.0;
+    double d0 = 0.0; // inside bore
+    double odThin = 0.0; // outside thin end hub
+    double odThick = 0.0; // outside thick end hub
+    double e1 = 0.0; // thickness thin end hub
+    double e2 = 0.0; // thickness thick end hub
+    double lh = 0.0; // length hub
+    double b0 = 0.0; // chamfer loose flange
+    double d6 = 0.0; // inside diameter loose flange
+    double d8 = 0.0; // outside diameter collar
+    double el = 0.0; // thickness loose flange
 
     switch (facingType) {
     case STD2::FlangeFacingEnA:
@@ -1723,12 +1723,15 @@ void PCALC_EN1591Widget::setIntegralFlange1EnData(
     case STD2::FlangeFacingEnC:
         drec = facingObj->getValue("w").toDouble();
         erf = facingObj->getValue("f2").toDouble();
+        erec = facingObj->getValue("f2").toDouble();
         break;
     case STD2::FlangeFacingEnD:
         dx = facingObj->getValue("z").toDouble();
         drf = facingObj->getValue("d1").toDouble();
         drec = facingObj->getValue("y").toDouble();
         erf = facingObj->getValue("f1").toDouble();
+        erec = facingObj->getValue("f3").toDouble();
+        ex = facingObj->getValue("f1").toDouble();
         break;
     case STD2::FlangeFacingEnE:
         erf = facingObj->getValue("f2").toDouble();
@@ -1737,16 +1740,19 @@ void PCALC_EN1591Widget::setIntegralFlange1EnData(
         drf = facingObj->getValue("d1").toDouble();
         drec = facingObj->getValue("y").toDouble();
         erf = facingObj->getValue("f1").toDouble();
+        erec = facingObj->getValue("f3").toDouble();
         break;
     case STD2::FlangeFacingEnG:
         drf = facingObj->getValue("d1").toDouble();
         drec = facingObj->getValue("w").toDouble();
         erf = facingObj->getValue("f1").toDouble();
+        erec = facingObj->getValue("f2").toDouble();
         break;
     case STD2::FlangeFacingEnH:
         dx = facingObj->getValue("z").toDouble();
         drec = facingObj->getValue("y").toDouble();
-        erf = facingObj->getValue("f4").toDouble();
+        erec = facingObj->getValue("f3").toDouble();
+        ex = facingObj->getValue("f4").toDouble();
         break;
     default:
         erf = 0.0;
@@ -1758,200 +1764,205 @@ void PCALC_EN1591Widget::setIntegralFlange1EnData(
         fType = 0;
         c = flangeObj->getValue("c1").toDouble();
         efb = c - erf;
+        // b1 is only inside ring
+        odThin = 0.0;
+        // undefined
+        e1 = 0.0;
+        // undefined
+        d0 = 0.0;
+        el = flangeObj->getValue("c1").toDouble();
         break;
     case STD2::FlangeEn0232:
         fType = 2;
-        c = flangeObj->getValue("c1").toDouble();
-//        efb continue here
+        c = flangeObj->getValue("f1").toDouble();
+        efb = c;
+        // b1 is only inside ring
+        odThin = 0.0;
+        // undefined
+        e1 = 0.0;
+        // undefined
+        d0 = 0.0;
+        b0 = flangeObj->getValue("e").toDouble();
+        d6 = flangeObj->getValue("b2").toDouble();
+        d8 = facingObj->getValue("d1").toDouble();
+        el = flangeObj->getValue("c1").toDouble();
         break;
     case STD2::FlangeEn0233:
         fType = 2;
-        c = flangeObj->getValue("c1").toDouble();
+        // undefined
+        c = 0.0;
+        efb = c;
+        // b2 is only inside ring
+        odThin = 0.0;
+        // undefined
+        e1 = 0.0;
+        // undefined
+        d0 = 0.0;
+        b0 = flangeObj->getValue("e").toDouble();
+        d6 = flangeObj->getValue("b2").toDouble();
+        d8 = facingObj->getValue("d1").toDouble();
+        el = flangeObj->getValue("c1").toDouble();
         break;
     case STD2::FlangeEn0235:
         fType = 2;
-        c = flangeObj->getValue("c1").toDouble();
+        c = flangeObj->getValue("f2").toDouble();
+        efb = c;
+        odThin = flangeObj->getValue("a").toDouble();
+        // TODO: create s3 for EN1092-1 table A.2
+        e1 = flangeObj->getValue("s2").toDouble();
+        d0 = odThin - 2 * e1;
+        b0 = flangeObj->getValue("e").toDouble();
+        d6 = flangeObj->getValue("b2").toDouble();
+        d8 = facingObj->getValue("d1").toDouble();
+        el = flangeObj->getValue("c1").toDouble();
         break;
     case STD2::FlangeEn0236:
         fType = 2;
-        c = flangeObj->getValue("c1").toDouble();
+        c = flangeObj->getValue("f3").toDouble();
+        efb = c;
+        odThin = flangeObj->getValue("a").toDouble();
+        // TODO: create s4 for EN1092-1 table A.3
+        e1 = flangeObj->getValue("s2").toDouble();
+        d0 = odThin - 2 * e1;
+        b0 = flangeObj->getValue("e").toDouble();
+        d6 = flangeObj->getValue("b2").toDouble();
+        d8 = facingObj->getValue("d1").toDouble();
+        el = flangeObj->getValue("c1").toDouble();
         break;
     case STD2::FlangeEn0237:
         fType = 2;
-        c = flangeObj->getValue("c1").toDouble();
+        c = flangeObj->getValue("f3").toDouble();
+        efb = c;
+        odThin = flangeObj->getValue("a").toDouble();
+        // TODO: create s4 for EN1092-1 table A.3
+        e1 = flangeObj->getValue("s2").toDouble();
+        d0 = odThin - 2 * e1;
+        b0 = flangeObj->getValue("e").toDouble();
+        d6 = flangeObj->getValue("b2").toDouble();
+        d8 = facingObj->getValue("d1").toDouble();
+        el = flangeObj->getValue("c1").toDouble();
         break;
     case STD2::FlangeEn0434:
         fType = 2;
-        c = flangeObj->getValue("c1").toDouble();
+        c = flangeObj->getValue("f1").toDouble();
+        efb = c;
+        odThin = flangeObj->getValue("a").toDouble();
+        e1 = flangeObj->getValue("s1").toDouble();
+        d0 = odThin - 2 * e1;
+        odThick = flangeObj->getValue("n1").toDouble();
+        e2 = (odThick - d0) / 2;
+        lh = flangeObj->getValue("h2").toDouble()
+                - flangeObj->getValue("f1").toDouble() - c;
+        b0 = flangeObj->getValue("e").toDouble();
+        d6 = flangeObj->getValue("b3").toDouble();
+        d8 = facingObj->getValue("d1").toDouble();
+        el = flangeObj->getValue("c1").toDouble();
         break;
     case STD2::FlangeEn05:
         fType = 0;
         c = flangeObj->getValue("c4").toDouble();
+        efb = c - erf;
+        e0 = flangeObj->getValue("c4").toDouble();
+        odThin = 0.0;
+        e1 = 0.0;
+        d0 = 0.0;
         break;
     case STD2::FlangeEn11:
-        c = flangeObj->getValue("c2").toDouble();
         fType = 1;
+        c = flangeObj->getValue("c2").toDouble();
+        efb = c - erf;
+        odThin = flangeObj->getValue("a").toDouble();
+        // s2 should be Annex A but is only type 11 in database
+        e1 = flangeObj->getValue("s2").toDouble();
+        d0 = odThin - 2 * e1;
+        odThick = flangeObj->getValue("n1").toDouble();
+        e2 = (odThick - d0) / 2;
+        lh = flangeObj->getValue("h2").toDouble()
+                - flangeObj->getValue("h3").toDouble() - c;
         break;
     case STD2::FlangeEn12:
-        c = flangeObj->getValue("c2").toDouble();
         fType = 1;
+        c = flangeObj->getValue("c2").toDouble();
+        efb = c - erf;
+        // b1 is only inside ring
+        odThin = 0.0;
+        // undefined
+        e1 = 0.0;
+        // undefined
+        d0 = 0.0;
+
         break;
     case STD2::FlangeEn13:
-        c = flangeObj->getValue("c2").toDouble();
         fType = 1;
+        c = flangeObj->getValue("c2").toDouble();
+        efb = c - erf;
+        // b2 is only inside ring
+        odThin = 0.0;
+        // undefined
+        e1 = 0.0;
+        // undefined
+        d0 = 0.0;
+
         break;
     case STD2::FlangeEn21:
-        c = flangeObj->getValue("c3").toDouble();
         fType = 1;
+        c = flangeObj->getValue("c3").toDouble();
+        efb = c - erf;
+        odThin = flangeObj->getValue("n3").toDouble();
+        // undefined
+        e1 = 0.0;
+        d0 = 0.0;
         break;
     default:
+        // as per STD2::FlangeEn11
         fType = 1;
+        c = flangeObj->getValue("c2").toDouble();
+        efb = c - erf;
+        odThin = flangeObj->getValue("a").toDouble();
+        // s2 should be Annex A but is only type 11 in database
+        e1 = flangeObj->getValue("s2").toDouble();
+        d0 = odThin - 2 * e1;
+        odThick = flangeObj->getValue("n1").toDouble();
+        e2 = (odThick - d0) / 2;
         break;
     }
 
+    mFlangeModel->setCurrentValue("nb", flangeObj->getValue("number").toInt());
     mFlangeModel->setCurrentValue("typeflange" + flNrStr + "_id", fType);
     mFlangeModel->setCurrentValue("d3" + flNrStr, flangeObj->getValue("k").toDouble());
     mFlangeModel->setCurrentValue("d4" + flNrStr, flangeObj->getValue("d").toDouble());
     mFlangeModel->setCurrentValue("dx" + flNrStr, dx);
     mFlangeModel->setCurrentValue("drf" + flNrStr, drf);
     mFlangeModel->setCurrentValue("drec" + flNrStr, drec);
-
-
-
-
-
-
-
-
-    mFlangeModel->setCurrentValue("efb" + flNrStr, flangeObj->getValue("tf" + flNrStr).toDouble());
-    mFlangeModel->setCurrentValue("erf" + flNrStr, facingObj->getValue("hrf").toDouble());
-
-    if (facingType == STD2::FlangeFacingAsmeSRF || facingType == STD2::FlangeFacingAsmeTGF) {
-        // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
-        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
-    } else if (facingType == STD2::FlangeFacingAsmeSRM || facingType == STD2::FlangeFacingAsmeTGM) {
-        // TODO
-        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
-    } else {
-        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
-    }
-
-    mFlangeModel->setCurrentValue("eq" + flNrStr, 0.0);
-
-    if (facingType == STD2::FlangeFacingAsmeRTJ) {
-        mFlangeModel->setCurrentValue("ex" + flNrStr,
-                         flangeObj->getValue("tf" + flNrStr).toDouble()
-                         - facingObj->getValue("e").toDouble());
-    } else {
-        mFlangeModel->setCurrentValue("ex" + flNrStr, 0.0);
-    }
+    mFlangeModel->setCurrentValue("efb" + flNrStr, efb);
+    mFlangeModel->setCurrentValue("erf" + flNrStr, erf);
+    mFlangeModel->setCurrentValue("erec" + flNrStr, erec);
+    mFlangeModel->setCurrentValue("eq" + flNrStr, 0.0); // part without internal pressure
+    mFlangeModel->setCurrentValue("ex" + flNrStr, ex);
 
     // bolthole
-    mFlangeModel->setCurrentValue("d5" + flNrStr, STD2::inchToMm(flangeObj->getValue("diambh").toDouble()));
+    mFlangeModel->setCurrentValue("d5" + flNrStr, flangeObj->getValue("l").toDouble());
     mFlangeModel->setCurrentValue("blindhole" + flNrStr, 0);
     mFlangeModel->setCurrentValue("d5t" + flNrStr, 0.0);
     mFlangeModel->setCurrentValue("l5t" + flNrStr, 0.0);
 
     // blind only
-    if (flangeType == STD2::FlangeAsmeBLD) {
-        mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("e0" + flNrStr,
-                         flangeObj->getValue("tf" + flNrStr).toDouble()
-                         + facingObj->getValue("hrf").toDouble());
-    } else {
-        mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("e0" + flNrStr, 0.0);
-    }
+    mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
+    mFlangeModel->setCurrentValue("e0" + flNrStr, e0);
 
-    double b3 = flangeObj->getValue("b3").toDouble();
-
-    if (b3 <= 0.0) {
-        QString value = PCALC_DIALOGFACTORY->requestTextInputDialog(
-                    "Internal bore not standard",
-                    "Specify internal bore B3 [mm]",
-                    "0.0");
-        b3 = value.toDouble();
-    }
-
-    // integral, loose only
-    if (flangeType != STD2::FlangeAsmeBLD) {
-        mFlangeModel->setCurrentValue("d0" + flNrStr, b3);
-        // Threaded is actually depending the inside diameter of the pipe
-    } else {
-        mFlangeModel->setCurrentValue("d0" + flNrStr, 0.0);
-    }
-
-    // integral, loose (if hub) only
-    if (flangeType != STD2::FlangeAsmeBLD) {
-
-        if (b3 > 0.0) {
-            mFlangeModel->setCurrentValue("d1" + flNrStr,
-                             (flangeObj->getValue("ah").toDouble() + b3) / 2);
-            mFlangeModel->setCurrentValue("d2" + flNrStr,
-                             (flangeObj->getValue("x").toDouble() + b3) / 2);
-            mFlangeModel->setCurrentValue("e1" + flNrStr,
-                             (flangeObj->getValue("ah").toDouble() - b3) / 2);
-            mFlangeModel->setCurrentValue("e2" + flNrStr,
-                             (flangeObj->getValue("x").toDouble() - b3) / 2);
-        } else {
-            mFlangeModel->setCurrentValue("d1" + flNrStr, 0.0);
-            mFlangeModel->setCurrentValue("d2" + flNrStr, 0.0);
-            mFlangeModel->setCurrentValue("e1" + flNrStr, 0.0);
-            mFlangeModel->setCurrentValue("e2" + flNrStr, 0.0);
-        }
-
-        mFlangeModel->setCurrentValue("lh" + flNrStr,
-                         flangeObj->getValue("y3").toDouble()
-                         - flangeObj->getValue("tf" + flNrStr).toDouble());
-    } else {
-        mFlangeModel->setCurrentValue("d1" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("d2" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("e1" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("e2" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("lh" + flNrStr, 0.0);
-    }
+    // integral and loose if hub
+    mFlangeModel->setCurrentValue("d0" + flNrStr, d0);
+    mFlangeModel->setCurrentValue("d1" + flNrStr, d0 + e1);
+    mFlangeModel->setCurrentValue("d2" + flNrStr, d0 + e2);
+    mFlangeModel->setCurrentValue("e1" + flNrStr, e1);
+    mFlangeModel->setCurrentValue("e2" + flNrStr, e2);
+    mFlangeModel->setCurrentValue("lh" + flNrStr, lh);
 
     // loose only
-    if (flangeType == STD2::FlangeAsmeLPD) { // Lapped
-        // TODO:
-        mFlangeModel->setCurrentValue("b0" + flNrStr, flangeObj->getValue("").toDouble());
-        mFlangeModel->setCurrentValue("d6" + flNrStr, flangeObj->getValue("").toDouble());
-        mFlangeModel->setCurrentValue("d8" + flNrStr, flangeObj->getValue("").toDouble());
-        mFlangeModel->setCurrentValue("el" + flNrStr, flangeObj->getValue("").toDouble());
-    } else {
-        mFlangeModel->setCurrentValue("b0" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("d6" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("d8" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("el" + flNrStr, 0.0);
-    }
-
-}
-
-void PCALC_EN1591Widget::setIntegralFlange2EnData(RB_ObjectBase* compObj,
-                                                  RB_ObjectBase* facingObj) {
-
-}
-
-void PCALC_EN1591Widget::setLooseFlange1EnData(RB_ObjectBase* flangeObj,
-                                               RB_ObjectBase* facingObj) {
-
-}
-
-void PCALC_EN1591Widget::setLooseFlange2EnData(RB_ObjectBase* compObj,
-                                             RB_ObjectBase* facingObj) {
-
-}
-
-void PCALC_EN1591Widget::setBlindFlange1AsmeData(RB_ObjectBase* compObj,
-                                                 RB_ObjectBase* facingObj)
-{
-
-}
-
-void PCALC_EN1591Widget::setBlindFlange2AsmeData(RB_ObjectBase* compObj,
-                                                 RB_ObjectBase* facingObj)
-{
-
+    mFlangeModel->setCurrentValue("b0" + flNrStr, b0);
+    mFlangeModel->setCurrentValue("d6" + flNrStr, d6);
+    mFlangeModel->setCurrentValue("d8" + flNrStr, d8);
+    mFlangeModel->setCurrentValue("el" + flNrStr, el);
 }
 
 void PCALC_EN1591Widget::setIntegralFlangeAsmeData(
@@ -2091,18 +2102,6 @@ void PCALC_EN1591Widget::setIntegralFlangeAsmeData(
 
 //    mFlangeModel->setCurrentValue("materialflange" + flNrStr + "_idx", flangeObj->getValue("").toDouble());
 //    mFlangeModel->setCurrentValue("materialloosering" + flNrStr + "_idx", flangeObj->getValue("").toDouble());
-
-}
-
-void PCALC_EN1591Widget::setLooseFlange1AsmeData(RB_ObjectBase* compObj,
-                                                 RB_ObjectBase* facingObj)
-{
-
-}
-
-void PCALC_EN1591Widget::setLooseFlange2AsmeData(RB_ObjectBase* compObj,
-                                                 RB_ObjectBase* facingObj)
-{
 
 }
 

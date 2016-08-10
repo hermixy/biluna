@@ -30,7 +30,7 @@ STD_FlangeFacingDimEn::~STD_FlangeFacingDimEn() {
  * Create members:
  * \li rating
  * \li nomsize nominal diameter
- * \li d1 outside diameter raised face, and (female) groove and recess
+ * \li d1 outside diameter raised face, and (female) groove and recess, collar loose flange
  * \li f1 height raised face type B, and (female) groove and recess
  * \li f2 height tongue and depth O-ring spigot type C (male) and G (female)
  * \li f3 depth of groove, recess and O-ring groove type D, F and H (ex in EN1591)

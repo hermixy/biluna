@@ -80,34 +80,16 @@ private:
     void writeValidationReport();
     void createUnitTestSummary();
     void createUnitTestDetail();
-    void setBlindFlange1EnData(RB_ObjectBase* compObj,
-                               RB_ObjectBase* facingObj = nullptr);
-    void setBlindFlange2EnData(RB_ObjectBase* compObj,
-                               RB_ObjectBase* facingObj = nullptr);
-    void setIntegralFlange1EnData(RB_ObjectBase* flangeObj,
-                                  RB_ObjectBase* facingObj,
-                                  const QString& flNrStr, // flange number "1" or "2"
-                                  STD2::FlangeEnType flangeType = STD2::FlangeEn11,
-                                  STD2::FlangeFacingEnType facingType = STD2::FlangeFacingEnB);
-    void setIntegralFlange2EnData(RB_ObjectBase* compObj,
-                                  RB_ObjectBase* facingObj = nullptr);
-    void setLooseFlange1EnData(RB_ObjectBase* flangeObj,
-                               RB_ObjectBase* facingObj = nullptr);
-    void setLooseFlange2EnData(RB_ObjectBase* compObj,
-                               RB_ObjectBase* facingObj = nullptr);
-    void setBlindFlange1AsmeData(RB_ObjectBase* compObj,
-                               RB_ObjectBase* facingObj = nullptr);
-    void setBlindFlange2AsmeData(RB_ObjectBase* compObj,
-                               RB_ObjectBase* facingObj = nullptr);
+    void setFlangeEnData(RB_ObjectBase* flangeObj,
+                         RB_ObjectBase* facingObj,
+                         const QString& flNrStr, // flange number "1" or "2"
+                         STD2::FlangeEnType flangeType = STD2::FlangeEn11,
+                         STD2::FlangeFacingEnType facingType = STD2::FlangeFacingEnB);
     void setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
                                    RB_ObjectBase* facingObj,
                                    const QString& flNrStr, // flange number "1" or "2"
                                    STD2::FlangeAsmeType flangeType = STD2::FlangeAsmeWN,
                                    STD2::FlangeFacingAsmeType facingType = STD2::FlangeFacingAsmeRF);
-    void setLooseFlange1AsmeData(RB_ObjectBase* compObj,
-                               RB_ObjectBase* facingObj = nullptr);
-    void setLooseFlange2AsmeData(RB_ObjectBase* compObj,
-                               RB_ObjectBase* facingObj = nullptr);
     void setBoltAsmeData(RB_ObjectBase* boltObj,
                          RB_ObjectBase*  nutObj = nullptr);
     void setBoltEnData(RB_ObjectBase* boltObj,

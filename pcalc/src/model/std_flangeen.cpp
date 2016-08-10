@@ -60,7 +60,8 @@ STD_FlangeEn::~STD_FlangeEn() {
  * \li n3 neck diameter 3
  * \li r11 corner radius type 11
  * \li r12 corner radius type 21
- * \li s wall thickness
+ * \li s1 wall thickness, only type 34 flange
+ * \li s2 wall thickness, should be as per EN1092-1 annex A but here only type 11 flange
  */
 void STD_FlangeEn::createMembers() {
     addMember("rating", "PN", 0, RB2::MemberDouble);
@@ -95,5 +96,6 @@ void STD_FlangeEn::createMembers() {
     addMember("n3", "mm", 0, RB2::MemberDouble);
     addMember("r11", "mm", 0, RB2::MemberDouble);
     addMember("r12", "mm", 0, RB2::MemberDouble);
-    addMember("s", "mm", 0, RB2::MemberDouble);
+    addMember("s1", "mm", 0, RB2::MemberDouble);
+    addMember("s2", "mm", 0, RB2::MemberDouble);
 }

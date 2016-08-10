@@ -31,7 +31,11 @@ PCALC_EN1591_Flange::~PCALC_EN1591_Flange() {
 
 /**
  * Create members:
- * \li -
+ * \li nb number of bolts
+ * \li f_bspecified specified bolt force
+ * \li standardflange1_idx flange standard for dimensions
+ * \li typeflange1_id type of flange, i.e.: blind, integral, loose
+ * \li
  */
 void PCALC_EN1591_Flange::createMembers() {
     addMember("nb", "-", 0, RB2::MemberInteger);
@@ -46,7 +50,7 @@ void PCALC_EN1591_Flange::createMembers() {
     addMember("dx1", "mm", 0.0, RB2::MemberDouble); // or ID recess
     addMember("drf1", "mm", 0.0, RB2::MemberDouble);
     addMember("drec1", "mm", 0.0, RB2::MemberDouble);
-    addMember("efb1", "mm", 0.0, RB2::MemberDouble);
+    addMember("efb1", "mm", 0.0, RB2::MemberDouble); // flange thickness at bolthole
     addMember("erf1", "mm", 0.0, RB2::MemberDouble);
     addMember("erec1", "mm", 0.0, RB2::MemberDouble);
     addMember("eq1", "mm", 0.0, RB2::MemberDouble);
