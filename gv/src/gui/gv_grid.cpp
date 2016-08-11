@@ -1,38 +1,46 @@
-/*****************************************************************
- * $Id: gv_grid.cpp 1452 2011-09-10 08:19:50Z rutger $
- * Created: Oct 20, 2008 7:00:11 PM - rutger
- *
- * Copyright (C) 2008 Red-Bag. All rights reserved.
- * This file is part of the Biluna gv project.
- * Based on rs_grid.cpp 9109
- *
- * See http://www.red-bag.com for further details.
- *****************************************************************/
+/****************************************************************************
+** $Id: rs_grid.cpp 9109 2008-02-20 13:42:24Z andrew $
+**
+** Copyright (C) 2001-2003 RibbonSoft. All rights reserved.
+**
+** This file is part of the qcadlib Library project.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** Licensees holding valid qcadlib Professional Edition licenses may use 
+** this file in accordance with the qcadlib Commercial License
+** Agreement provided with the Software.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+** See http://www.ribbonsoft.com for further details.
+**
+** Contact info@ribbonsoft.com if any conditions of this licensing are
+** not clear to you. Updated for Biluna 2016-08-11
+**
+**********************************************************************/
+
 
 #include "gv_grid.h"
 
-//#include "rs_units.h"
-//#include "rs_graphic.h"
-#include "gv_drawing.h"
-// #include "gv_gvmdi_old.h"
-#include "gv.h"
-#include "rb_debug.h"
-#include "RMath.h"
-#include "rb_settings.h"
+#include "gv_units.h"
+#include "gv_graphic.h"
+#include "gv_settings.h"
 
 /**
  * Constructor.
  */
-GV_Grid::GV_Grid(GV_Drawing* dwg) {
-	RB_DEBUG->print("GV_Grid::GV_Grid()");
-    mDrawing = dwg;
-    
+GV_Grid::GV_Grid(GV_GraphicView* graphicView) {
+    this->graphicView = graphicView;
     pt = NULL;
     number = 0;
     metaX = NULL;
     numMetaX = 0;
     metaY = NULL;
-    metaYIso = NULL;
     numMetaY = 0;
     spacing = 1.0;
     metaSpacing = 10.0;
@@ -46,7 +54,7 @@ GV_Grid::GV_Grid(GV_Drawing* dwg) {
  * Destructor.
  */
 GV_Grid::~GV_Grid() {
-	RB_DEBUG->print("GV_Grid::~GV_Grid()");
+    RB_DEBUG->print("GV_Grid::~GV_Grid");
     if (pt!=NULL) {
         delete[] pt;
     }
@@ -55,26 +63,34 @@ GV_Grid::~GV_Grid() {
     }
     if (metaY!=NULL) {
         delete[] metaY;
-	}
-	RB_DEBUG->print("GV_Grid::~GV_Grid() OK");
+    }
 }
 
 
 /**
  * Updates the grid point array.
- * @param rect rectangle of visible scene in scene coordinates
- * @param scaleFactor overall scale factor
  */
-void GV_Grid::update(const QRectF& rect, double scaleFactor) {
-    RB_DEBUG->print("GV_Grid::update() scaleFactor = %f %f, %f", 
-    		scaleFactor, rect.x(), rect.y());
+void GV_Grid::update() {
+    RB_DEBUG->print("GV_Grid::update");
+
+    GV_Graphic* graphic = graphicView->getGraphic();
     
     // auto scale grid?
-    RB_SETTINGS->beginGroup("/Appearance");
-    bool scaleGrid = (bool)RB_SETTINGS->readNumEntry("/ScaleGrid", 1);
-    int minGridSpacing = RB_SETTINGS->readNumEntry("/MinGridSpacing", 10);
-    RB_SETTINGS->endGroup();
+    GV_SETTINGS->beginGroup("/Appearance");
+    bool scaleGrid = (bool)GV_SETTINGS->readNumEntry("/ScaleGrid", 1);
+    int minGridSpacing = GV_SETTINGS->readNumEntry("/MinGridSpacing", 10);
+    GV_SETTINGS->endGroup();
     
+    // get grid setting
+    GV_Vector userGrid;
+    if (graphic!=NULL) {
+        userGrid = graphic->getVariableVector("$GRIDUNIT", 
+            GV_Vector(-1.0, -1.0));
+    }
+    else{
+        userGrid = GV_Vector(1.0,1.0);
+    }
+        
     // delete old grid:
     if (pt!=NULL) {
         delete[] pt;
@@ -88,102 +104,213 @@ void GV_Grid::update(const QRectF& rect, double scaleFactor) {
         delete[] metaY;
         metaY = NULL;
     }
-    if (metaYIso!=NULL) {
-        delete[] metaYIso;
-        metaYIso = NULL;
-    }
     number = 0;
     numMetaX = 0;
     numMetaY = 0;
     
-    RVector gridWidth;
-    RVector metaGridWidth;
-    
-	bool gridIsStandard = true; // false is isometric grid
-    const double isoFactor = 2 * pow(3, 0.5);
-
-    gridWidth.x = 0.000001;
-    gridWidth.y = 0.000001;
-    
-    // auto scale grid
-	if (scaleGrid) {
-        // +0.0001 is correction for logFactor
-		int logFactor = floor(log10(scaleFactor+0.0001));
-		gridWidth.x = pow(10.0, (double)-logFactor + 1.0);
-        gridWidth.y = gridWidth.x;
-        gridWidth.x *= gridIsStandard ? 1.0 : isoFactor;
+    // find out unit:
+    GV2::Unit unit = GV2::None;
+    GV2::LinearFormat format = GV2::Decimal;
+    if (graphic!=NULL) {
+        unit = graphic->getUnit();
+        format = graphic->getLinearFormat();
     }
     
-    metaGridWidth.x = gridWidth.x*10;
-    metaGridWidth.y = gridWidth.y*10;
+    GV_Vector gridWidth;
+    GV_Vector metaGridWidth;
+    
+    // init grid spacing:
+    // metric grid:
+    if (GV_Units::isMetric(unit) || unit==GV2::None ||
+            format==GV2::Decimal || format==GV2::Engineering) {
 
+        if (userGrid.x>0.0) {
+            gridWidth.x = userGrid.x;
+        }
+        else {
+            gridWidth.x = 0.000001;
+        }
+        
+        if (userGrid.y>0.0) {
+            gridWidth.y = userGrid.y;
+        }
+        else {
+            gridWidth.y = 0.000001;
+        }
+        
+        // auto scale grid
+        if (scaleGrid) {
+            while (graphicView->toGuiDX(gridWidth.x)<minGridSpacing) {
+                gridWidth.x*=10;
+            }
+            while (graphicView->toGuiDY(gridWidth.y)<minGridSpacing) {
+                gridWidth.y*=10;
+            }
+        }
+        metaGridWidth.x = gridWidth.x*10;
+        metaGridWidth.y = gridWidth.y*10;
+    }
+
+    // imperial grid:
+    else {
+        if (userGrid.x>0.0) {
+            gridWidth.x = userGrid.x;
+        }
+        else {
+            gridWidth.x = 1.0/1024.0;
+        }
+        
+        if (userGrid.y>0.0) {
+            gridWidth.y = userGrid.y;
+        }
+        else {
+            gridWidth.y = 1.0/1024.0;
+        }
+
+        if (unit==GV2::Inch) {
+            
+            // auto scale grid
+            if (scaleGrid) {
+                while (graphicView->toGuiDX(gridWidth.x)<minGridSpacing) {
+                    if (GV_Math::mround(gridWidth.x)>=36) {
+                        gridWidth.x*=2;
+                    } else if (GV_Math::mround(gridWidth.x)>=12) {
+                        gridWidth.x*=3;
+                    } else if (GV_Math::mround(gridWidth.x)>=4) {
+                        gridWidth.x*=3;
+                    } else if (GV_Math::mround(gridWidth.x)>=1) {
+                        gridWidth.x*=2;
+                    } else {
+                        gridWidth.x*=2;
+                    }
+                }
+                while (graphicView->toGuiDY(gridWidth.y)<minGridSpacing) {
+                    if (GV_Math::mround(gridWidth.y)>=36) {
+                        gridWidth.y*=2;
+                    } else if (GV_Math::mround(gridWidth.y)>=12) {
+                        gridWidth.y*=3;
+                    } else if (GV_Math::mround(gridWidth.y)>=4) {
+                        gridWidth.y*=3;
+                    } else if (GV_Math::mround(gridWidth.y)>=1) {
+                        gridWidth.y*=2;
+                    } else {
+                        gridWidth.y*=2;
+                    }
+                }
+            }
+
+            // metagrid X shows inches..
+            metaGridWidth.x = 1.0;
+            metaFactorX = 1;
+
+            if (graphicView->toGuiDX(metaGridWidth.x)<minGridSpacing*2) {
+                // .. or feet
+                metaGridWidth.x = 12.0;
+                metaFactorX *= 12;
+
+                // .. or yards
+                if (graphicView->toGuiDX(metaGridWidth.x)<minGridSpacing*2) {
+                    metaGridWidth.x = 36.0;
+                    metaFactorX *= 36;
+
+                    // .. or miles (not really..)
+                    //if (graphicView->toGuiDX(metaGridWidth.x)<20) {
+                    //    metaGridWidth.x = 63360.0;
+                    //}
+
+                    // .. or nothing
+                    if (graphicView->toGuiDX(metaGridWidth.x)<minGridSpacing*2) {
+                        metaGridWidth.x = -1.0;
+                    }
+
+                }
+            }
+            
+            // metagrid Y shows inches..
+            metaGridWidth.y = 1.0;
+            metaFactorY = 1;
+
+            if (graphicView->toGuiDY(metaGridWidth.y)<minGridSpacing*2) {
+                // .. or feet
+                metaGridWidth.y = 12.0;
+                metaFactorY *= 12;
+
+                // .. or yards
+                if (graphicView->toGuiDY(metaGridWidth.y)<minGridSpacing*2) {
+                    metaGridWidth.y = 36.0;
+                    metaFactorY *= 36;
+
+                    // .. or miles (not really..)
+                    //if (graphicView->toGuiDY(metaGridWidth.y)<20) {
+                    //    metaGridWidth.y = 63360.0;
+                    //}
+
+                    // .. or nothing
+                    if (graphicView->toGuiDY(metaGridWidth.y)<minGridSpacing*2) {
+                        metaGridWidth.y = -1.0;
+                    }
+
+                }
+            }
+        } else {
+            if (scaleGrid) {
+                while (graphicView->toGuiDX(gridWidth.x)<minGridSpacing) {
+                    gridWidth.x*=2;
+                }
+                metaGridWidth.x = -1.0;
+                
+                while (graphicView->toGuiDY(gridWidth.y)<minGridSpacing) {
+                    gridWidth.y*=2;
+                }
+                metaGridWidth.y = -1.0;
+            }
+        }
+    }
+    
     // for grid info:
     spacing = gridWidth.x;
     metaSpacing = metaGridWidth.x;
-    
-	double left = 0.0;
-	double right = 0.0;
-	double top = 0.0;
-	double bottom = 0.0;
 
-    if (gridWidth.x>1.0e-6 && gridWidth.y>1.0e-6) {
+    if (gridWidth.x>1.0e-6 && gridWidth.y>1.0e-6 && 
+        graphicView->toGuiDX(gridWidth.x)>2 && 
+        graphicView->toGuiDY(gridWidth.y)>2) {
+
         // find grid boundaries
-    	left = (int)(rect.x() / gridWidth.x) * gridWidth.x;
-    	right = (int)((left + rect.width()) / gridWidth.x) * gridWidth.x;
-    	top = (int)(rect.y() / gridWidth.y) * gridWidth.y;
-    	bottom = (int)((top + rect.height()) / gridWidth.y) * gridWidth.y;
-    	
+        double left = (int)(graphicView->toGraphX(0) / gridWidth.x)
+                      * gridWidth.x;
+        double right = (int)(graphicView->toGraphX(graphicView->getWidth()) /
+                             gridWidth.x) * gridWidth.x;
+        double top = (int)(graphicView->toGraphY(0) /
+                           gridWidth.y) * gridWidth.y;
+        double bottom =
+            (int)(graphicView->toGraphY(graphicView->getHeight()) /
+                  gridWidth.y) * gridWidth.y;
+
+
         left -= gridWidth.x;
         right += gridWidth.x;
-        top -= gridWidth.y;
-        bottom += gridWidth.y;
+        top += gridWidth.y;
+        bottom -= gridWidth.y;
 
-        RB_DEBUG->print("GV_Grid::update: left: %f", left);
-        RB_DEBUG->print("GV_Grid::update: right: %f", right);
-        RB_DEBUG->print("GV_Grid::update: top: %f", top);
-        RB_DEBUG->print("GV_Grid::update: bottom: %f", bottom);
-        RB_DEBUG->print("GV_Grid::update: spacing: %f", spacing);
-        RB_DEBUG->print("GV_Grid::update: metaSpacing: %f", metaSpacing);
-        
+
         // calculate number of visible grid points
-        const int numberX = (RMath::mround((right-left) / gridWidth.x) + 1);
-        const int numberY = (RMath::mround((bottom-top) / gridWidth.y) + 1);
+        const int numberX = (GV_Math::mround((right-left) / gridWidth.x) + 1);
+        const int numberY = (GV_Math::mround((top-bottom) / gridWidth.y) + 1);
         number = numberX*numberY;
 
         // create grid array:
-        if (number > 0 && number < 1000000) {
+        if (number>0 && number<1000000) {
 
-            pt = new RVector[number];
-            bool numberIsEven = true;
-            
-            if (gridIsStandard) {
-	            // standard grid
-	            int i=0;
-	            const double gwx = gridWidth.x;
-	            const double gwy = gridWidth.y;
-	            for (int y=0; y<numberY; ++y) {
-	                const double top_gwy = top+y*gwy;
-	                for (int x=0; x<numberX; ++x) {
-	                    pt[i++].set(left+x*gwx, top_gwy);
-	                }
-	            }
-            } else {
-            	// isometric grid test
-	            int i=0;
-	            const double gwx = gridWidth.x;
-	            const double gwy = gridWidth.y;
-	            const double leftIso = left + 0.5 * gwx;
-	            for (int y=0; y<numberY; ++y) {
-	                const double top_gwy = top+y*gwy;
-	                for (int x=0; x<numberX; ++x) {
-	                	if (numberIsEven) {
-	                		pt[i++].set(left+x*gwx, top_gwy);
-	                	} else {
-	                		pt[i++].set(leftIso+x*gwx, top_gwy);
-	                	}
-	                }
-	            	numberIsEven = numberIsEven ? false : true;
-	            }
+            pt = new GV_Vector[number];
+
+            int i=0;
+            const double gwx = gridWidth.x;
+            const double gwy = gridWidth.y;
+            for (int y=0; y<numberY; ++y) {
+                const double bottom_gwy = bottom+y*gwy;
+                for (int x=0; x<numberX; ++x) {
+                    pt[i++].set(left+x*gwx, bottom_gwy);
+                }
             }
         } else {
             number = 0;
@@ -192,25 +319,34 @@ void GV_Grid::update(const QRectF& rect, double scaleFactor) {
     }
     
     // find meta grid boundaries
-    if (metaGridWidth.x>1.0e-6 && metaGridWidth.y>1.0e-6) {
-    	metaXMin = (int)(left / metaGridWidth.x) * metaGridWidth.x;
-    	metaXMax = (int)(right / metaGridWidth.x) * metaGridWidth.x;
-    	metaYMin = (int)(top / metaGridWidth.y) * metaGridWidth.y;
-    	metaYMax = (int)(bottom / metaGridWidth.y) * metaGridWidth.y;
-    	
+    if (metaGridWidth.x>1.0e-6 && metaGridWidth.y>1.0e-6 && 
+        graphicView->toGuiDX(metaGridWidth.x)>2 && 
+        graphicView->toGuiDY(metaGridWidth.y)>2) {
+        
+        metaXMin = (int)(graphicView->toGraphX(0) /
+                      metaGridWidth.x) * metaGridWidth.x;
+        metaXMax = (int)(graphicView->toGraphX(graphicView->getWidth()) /
+                       metaGridWidth.x) * metaGridWidth.x;
+        metaYMax = (int)(graphicView->toGraphY(0) /
+                     metaGridWidth.y) * metaGridWidth.y;
+        metaYMin = (int)(graphicView->toGraphY(graphicView->getHeight()) /
+                        metaGridWidth.y) * metaGridWidth.y;
+
         metaXMin -= metaGridWidth.x;
         metaXMax += metaGridWidth.x;
         metaYMax += metaGridWidth.y;
         metaYMin -= metaGridWidth.y;
 
-        RB_DEBUG->print("GV_Grid::update: metaXMin: %f", metaXMin);
-        RB_DEBUG->print("GV_Grid::update: metaXMax: %f", metaXMax);
-        RB_DEBUG->print("GV_Grid::update: metaYMin: %f", metaYMin);
-        RB_DEBUG->print("GV_Grid::update: metaYMax: %f", metaYMax);
+//        RB_DEBUG->print("GV_Grid::update: "
+//            "metaXMin: %f", metaXMin);
+//        RB_DEBUG->print("GV_Grid::update: "
+//            "metaXMax: %f", metaXMax);
+//        RB_DEBUG->print("GV_Grid::update: "
+//            "metaYMin: %f", metaYMin);
 
         // calculate number of visible meta grid lines:
-        numMetaX = (RMath::mround((metaXMax-metaXMin) / metaGridWidth.x) + 1);
-        numMetaY = (RMath::mround((metaYMax-metaYMin) / metaGridWidth.y) + 1);
+        numMetaX = (GV_Math::mround((metaXMax-metaXMin) / metaGridWidth.x) + 1);
+        numMetaY = (GV_Math::mround((metaYMax-metaYMin) / metaGridWidth.y) + 1);
 
         if (numMetaX>0 && numMetaY>0) {
             // create meta grid arrays:
@@ -225,18 +361,8 @@ void GV_Grid::update(const QRectF& rect, double scaleFactor) {
             for (int y=0; y<numMetaY; ++y) {
                 metaY[i++] = metaYMin+y*metaGridWidth.y;
             }
-            
-			if (!gridIsStandard) {
-				// isometric grid
-				metaYIso = new double[numMetaY];
-				const int numberX = (RMath::mround((right-left) / gridWidth.x) + 1);
-				i = 0;
-				for (int y = 0; y < numMetaY; ++y) {
-					metaYIso[i++] = metaYMin + y * metaGridWidth.y
-									+ (pt[numberX-1].x - pt[0].x) * 0.5;
-				}
-			}
-        } else {
+        }
+        else {
             numMetaX = 0;
             metaX = NULL;
             numMetaY = 0;

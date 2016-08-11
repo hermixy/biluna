@@ -11,7 +11,7 @@
 # qmake project file to include in project files of biluna
 # provides settings for release, debug, demo etc.
 
-# UI_DIR overrides both UI_HEADERS_DIR and UI_SOURCES_DIR
+# UI_DIR overrides both UI_HEADEGV_DIR and UI_SOURCES_DIR
 UI_DIR	    = ../src/gui/ui
 INCLUDEPATH += ../mkspecs
 

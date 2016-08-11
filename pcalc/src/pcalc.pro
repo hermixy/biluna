@@ -29,6 +29,10 @@ INCLUDEPATH += \
     ../../db/src/operations \
     ../../db/src/utils \
     ../../db/src/visitors \
+    ../../gv/src/entity \
+    ../../gv/src/gui \
+    ../../gv/src/model \
+    ../../gv/src/tools \
     ../../peng/src/gui \
     ../../peng/src/gui/ui \
     ../../peng/src/model \
@@ -65,6 +69,13 @@ exists( ../src/pcalc.pri ) {
 } else {
     # message and exit
     error( "An error has occurred, ../src/pcalc.pri is missing." )
+}
+
+exists( ../../gv/src/gv.pri ) {
+    include( ../../gv/src/gv.pri )
+} else {
+    # message and exit
+    error( "An error has occurred, ../../gv/src/gv.pri is missing." )
 }
 
 #FORMS += \

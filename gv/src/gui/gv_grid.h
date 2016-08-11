@@ -1,39 +1,53 @@
-/*****************************************************************
- * $Id: gv_grid.h 1965 2013-08-08 16:33:15Z rutger $
- * Created: Oct 20, 2008 6:57:55 PM - rutger
- *
- * Copyright (C) 2008 Red-Bag. All rights reserved.
- * This file is part of the Biluna gv project.
- * Based on rs_grid.h 7863
- *
- * See http://www.red-bag.com for further details.
- *****************************************************************/
+/****************************************************************************
+** $Id: rs_grid.h 7863 2008-01-12 22:24:42Z andrew $
+**
+** Copyright (C) 2001-2003 RibbonSoft. All rights reserved.
+**
+** This file is part of the qcadlib Library project.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** Licensees holding valid qcadlib Professional Edition licenses may use 
+** this file in accordance with the qcadlib Commercial License
+** Agreement provided with the Software.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+** See http://www.ribbonsoft.com for further details.
+**
+** Contact info@ribbonsoft.com if any conditions of this licensing are
+** not clear to you. Updated for Biluna 2016-08-11
+**
+**********************************************************************/
+
 
 #ifndef GV_GRID_H
 #define GV_GRID_H
 
-#include <QtWidgets>
-#include "rb_string.h"
-#include "RVector.h"
-
-class GV_Drawing;
+#include "gv_graphicview.h"
+#include "gv_vector.h"
 
 /**
  * This class represents a grid. Grids can be drawn on graphic
  * views and snappers can snap to the grid points.
+ *
+ * @author Andrew Mustun
  */
 class GV_Grid {
-
 public:
-    GV_Grid(GV_Drawing* dwg);
+    GV_Grid(GV_GraphicView* graphicView);
     ~GV_Grid();
 
-    void update(const QRectF& rect, double scaleFactor);
+    void update();
     
     /**
      * @return Array of all visible grid points.
      */
-    RVector* getPoints() {
+    GV_Vector* getPoints() {
         return pt;
     }
     
@@ -61,8 +75,8 @@ public:
     /**
      * @return Grid info for status widget.
      */
-    RB_String getInfo() {
-        return RB_String("%1 / %2").arg(spacing).arg(metaSpacing);
+    QString getInfo() {
+        return QString("%1 / %2").arg(spacing).arg(metaSpacing);
     }
 
     /**
@@ -86,13 +100,6 @@ public:
         return metaY;
     }
     
-    /**
-     * @return Meta grid positions in Y.
-     */
-    double* getMetaYIso() {
-        return metaYIso;
-    }
-
     /**
      * @return Number of visible meta grid lines in Y.
      */
@@ -129,8 +136,8 @@ public:
     }
 
 protected:
-	//! Drawing this grid is connected to
-	GV_Drawing* mDrawing;
+    //! Graphic view this grid is connected to.
+    GV_GraphicView* graphicView;
     
     //! Current grid spacing
     double spacing;
@@ -138,7 +145,7 @@ protected:
     double metaSpacing;
     
     //! Pointer to array of grid points
-    RVector* pt;
+    GV_Vector* pt;
     //! Number of points in the array
     int number;
     //! Meta grid positions in X
@@ -147,7 +154,6 @@ protected:
     int numMetaX;
     //! Meta grid positions in Y
     double* metaY;
-    double* metaYIso;
     //! Number of meta grid lines in Y
     int numMetaY;
     double metaXMin;
@@ -157,7 +163,6 @@ protected:
 
     int metaFactorX;
     int metaFactorY;
-
 };
 
 #endif
