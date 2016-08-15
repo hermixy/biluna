@@ -75,6 +75,8 @@ RB_ObjectBase* STD_SelectBoltWidget::getCurrentObject() {
                     "parent='{d746c237-edb5-4f84-961a-b25e3bf23b6b}' "
                     "AND nomsize='" + nomSize + "'");
         double mnom = var.toDouble();
+        displayName = standardName + " " + nomSize
+                    + " " + ui->cbType->currentText();
 
         // nut width accross flats
         //        var = PCALC_SQLCOMMONFUNCTIONS->selectFromWhere(
@@ -94,6 +96,7 @@ RB_ObjectBase* STD_SelectBoltWidget::getCurrentObject() {
             // Required? set only once
             *mBoltObject = *obj;
             mBoltObject->setValue("displayname", displayName);
+            mBoltObject->setValue("mnom", mnom);
         }
     }
 

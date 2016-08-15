@@ -1008,6 +1008,9 @@ void PCALC_EN1591Widget::slotIleBoltSizeClicked() {
         // }
 
         // TODO: other types
+    } else {
+        PCALC_DIALOGFACTORY->requestInformationDialog("Not a valid standard\n"
+                                                      "data not changed.");
     }
 
 
@@ -2140,13 +2143,14 @@ void PCALC_EN1591Widget::setBoltEnData(RB_ObjectBase* boltObj,
     double dB0 = boltObj->getValue("dsnom").toDouble();
     mBoltNutWasherModel->setCurrentValue("db0", dB0);
     double pt = boltObj->getValue("pa").toDouble();
-    double isoThreadValue = 0.6495;
-    double dB2 = boltObj->getValue("d2").toDouble() - isoThreadValue * pt;
+    double isoThreadFactor = 0.6495;
+    double dB2 = dB0 - isoThreadFactor * pt;
     mBoltNutWasherModel->setCurrentValue("db2", dB2);
     // nut width accross flats
     double dB4 = boltObj->getValue("snom").toDouble();
     mBoltNutWasherModel->setCurrentValue("db4", dB4);
-    double dBe = dB0 - 0.9743 * pt;
+    double enEffDiamFactor = 0.9743;
+    double dBe = dB0 - enEffDiamFactor * pt;
     mBoltNutWasherModel->setCurrentValue("dbe", dBe); //
     mBoltNutWasherModel->setCurrentValue("dbs", 0.0);
     mBoltNutWasherModel->setCurrentValue("dn", 0.0);

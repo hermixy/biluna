@@ -170,6 +170,7 @@ QVariant RB_SpreadSheetCell::evalFactor(const QString &str, int &pos) const {
         ++pos;
     } else {
         QRegExp regExp("[A-Za-z][1-9][0-9]{0,2}");
+        // [\$]{0,1}[A-Za-z]{1,3}[\$]{0,1}[1-9][0-9]{1,5} for $ZZZ$999999 and zzz999999
         QString token;
 
         while (str[pos].isLetterOrNumber() || str[pos] == '.') {
