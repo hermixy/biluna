@@ -46,6 +46,10 @@ public:
     void setValidator(const QValidator* validator);
     void setUom();
 
+    // QLineEdit essentials
+    void setPlaceholderText(const QString& str);
+    void setAlignment(Qt::Alignment flag);
+
 public slots:
     void setEnabled(bool enable);
 

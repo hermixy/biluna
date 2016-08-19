@@ -10,6 +10,7 @@
 #ifndef STD_H
 #define STD_H
 
+#include <QStringList>
 
 /**
  * Class namespace for various enums of material types, properties etc.
@@ -17,7 +18,8 @@
 class STD2 {
 public:
     /**
-     * Component type which has a relation to material allowable stress
+     * Component type which has a relation to dimension standards
+     * and material allowable stress
      */
     enum CompType {
         CompNone,
@@ -37,6 +39,15 @@ public:
         CompWasher,
         CompDefault
     };
+
+    static const QStringList getCompTypeStringList() {
+        QStringList strL;
+        strL << "None" << "Bend" << "Bolt" << "Cone" << "Cylinder"
+             << "Elbow" << "Flange" << "Gasket" << "Half Sphere"
+             << "Head" << "Nut" << "Olet" << "Tee" << "Valve"
+             << "Washer";
+        return strL;
+    }
 
     /** ASME B16.5 flange types */
     enum FlangeAsmeType {

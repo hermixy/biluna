@@ -12,6 +12,7 @@
 
 #include "pcalc.h"
 #include "pcalc_modelfactory.h"
+#include "rb_cmbdelegate.h"
 #include "std.h"
 
 STD_DimensionWidget::STD_DimensionWidget(QWidget *parent) :
@@ -32,8 +33,15 @@ void STD_DimensionWidget::init() {
     mStandardModel->setWhere("id <> '0'");
     mStandardModel->select();
     formatTableView(ui->tvStandard, mStandardModel);
+    ui->tvStandard->setModel(mStandardModel);
     ui->tbbStandard->initEdit(false, true, true, false);
     ui->tvStandard->setToolButtonBar(ui->tbbStandard);
+
+    int col = mStandardModel->fieldIndex("comptype_id");
+    QStringList strL = STD2::getCompTypeStringList();
+    mStandardModel->setTextList(col, strL);
+    RB_CmbDelegate* delegate = new RB_CmbDelegate(this, strL);
+    ui->tvStandard->setItemDelegateForColumn(col, delegate);
 
     int hiddenCount = PCALC_MODELFACTORY->hiddenColumnCount();
 

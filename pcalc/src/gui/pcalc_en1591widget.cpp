@@ -498,12 +498,12 @@ void PCALC_EN1591Widget::initMapping() {
                              mShellModel->fieldIndex("materialshell2_idx"));
 
     // Update properties:
-    // all requirements
-    // exclude very stringent requirement EN13445-3 11.4.3 for bolts
     // use minimum safety factors, use test safety factors for assembly condition
+    // exclude very stringent requirement EN13445-3 11.4.3 for bolts
+    // all requirements
     items.clear();
-    items << "Yes (default)" << "Exclude 11.4.3" << "Min. safety factors";
-    cbDisregardBoltRequirement->setModel(new QStringListModel(items, this));
+    items << "No, use minimum factors (default)" << "Exclude 11.4.3" << "Yes";
+    cbMaterialSafetyFactor->setModel(new QStringListModel(items, this));
 
     // loadcase
     mLoadCaseMapper = mLoadCaseModel->getMapper();
@@ -2163,15 +2163,6 @@ void PCALC_EN1591Widget::setBoltEnData(RB_ObjectBase* boltObj,
     mBoltNutWasherModel->setCurrentValue("pt", pt);
 }
 
-//void PCALC_EN1591Widget::setModelVariable(RB_MmProxy* model,
-//                                          const QString& fieldName,
-//                                          double value) {
-//    QModelIndex idx = model->index(
-//                model->getCurrentIndex().row(),
-//                model->fieldIndex(fieldName));
-//    model->setData(idx, value);
-//}
-
 void PCALC_EN1591Widget::addObjectMemberVariable(RB_ObjectBase* obj,
                                             const QString& variableName,
                                             const QString& unit,
@@ -2214,17 +2205,17 @@ void PCALC_EN1591Widget::updateAllowStress(const QString& materialId,
     STD2::CompType useCompType = compType;
     bool useTestForAssemblyCondition = false;
 
-    if (cbDisregardBoltRequirement->currentIndex() == 1
-            && useCompType == STD2::CompBolt) {
-        // disregards EN13445 11.4.3
-        useCompType = STD2::CompDefault;
-    } else if (cbDisregardBoltRequirement->currentIndex() == 2) {
+    if (cbMaterialSafetyFactor->currentIndex() == 0) {
         // disregards EN13445 11.4.3 and use test values for assembly condition
         useTestForAssemblyCondition = true;
 
         if (useCompType == STD2::CompBolt) {
             useCompType = STD2::CompDefault;
         }
+    } else if (cbMaterialSafetyFactor->currentIndex() == 1
+            && useCompType == STD2::CompBolt) {
+        // disregards EN13445 11.4.3
+        useCompType = STD2::CompDefault;
     }
 
     int row = 0;

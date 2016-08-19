@@ -285,83 +285,6 @@
           <number>3</number>
          </property>
          <item row="0" column="0">
-          <widget class="QGroupBox" name="groupBox">
-           <property name="title">
-            <string>Assembly</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_5">
-            <property name="leftMargin">
-             <number>3</number>
-            </property>
-            <property name="topMargin">
-             <number>3</number>
-            </property>
-            <property name="rightMargin">
-             <number>3</number>
-            </property>
-            <property name="bottomMargin">
-             <number>3</number>
-            </property>
-            <property name="spacing">
-             <number>3</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="lblF_Bspec">
-              <property name="text">
-               <string>FB specified</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="RB_UomLineEdit" name="leF_Bspec"/>
-            </item>
-            <item row="0" column="2">
-             <spacer name="horizontalSpacer_14">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lblnB">
-              <property name="text">
-               <string>Number of bolts</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QSpinBox" name="sbnB">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="maximum">
-               <number>999</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="chbFlange2Equal">
-              <property name="text">
-               <string>Flange 2 is equal to flange 1</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="1" column="0">
           <widget class="QTabWidget" name="tabFlangeDetail">
            <property name="currentIndex">
             <number>0</number>
@@ -386,7 +309,373 @@
              <property name="spacing">
               <number>3</number>
              </property>
-             <item row="0" column="0">
+             <item row="1" column="2">
+              <widget class="QGroupBox" name="gbFlange_2">
+               <property name="title">
+                <string>Flange 2</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_7">
+                <property name="leftMargin">
+                 <number>3</number>
+                </property>
+                <property name="topMargin">
+                 <number>3</number>
+                </property>
+                <property name="rightMargin">
+                 <number>3</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>3</number>
+                </property>
+                <property name="spacing">
+                 <number>3</number>
+                </property>
+                <item row="1" column="0" colspan="3">
+                 <widget class="QLabel" name="lblTypeFlange_2">
+                  <property name="text">
+                   <string>Type</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0" colspan="3">
+                 <widget class="QLabel" name="lbld3_2">
+                  <property name="text">
+                   <string>d3</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="3">
+                 <widget class="QComboBox" name="cbTypeFlange_2"/>
+                </item>
+                <item row="3" column="3">
+                 <widget class="RB_UomLineEdit" name="led4_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="RB_UomLineEdit" name="led3_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="3">
+                 <widget class="RB_UomLineEdit" name="ledX_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="3">
+                 <widget class="RB_UomLineEdit" name="ledRF_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="4">
+                 <spacer name="horizontalSpacer_17">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="6" column="0" colspan="3">
+                 <widget class="QLabel" name="lbldREC_2">
+                  <property name="text">
+                   <string>dREC</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="3">
+                 <widget class="RB_UomLineEdit" name="ledREC_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="3">
+                 <widget class="RB_UomLineEdit" name="leeRF_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="3">
+                 <widget class="RB_UomLineEdit" name="leeFb_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="0" colspan="3">
+                 <widget class="QLabel" name="lbleREC_2">
+                  <property name="text">
+                   <string>eREC</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="12" column="3" colspan="2">
+                 <widget class="RB_IdxLineEdit" name="ileMaterialFlange_2"/>
+                </item>
+                <item row="10" column="3">
+                 <widget class="RB_UomLineEdit" name="leeQ_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="12" column="0" colspan="3">
+                 <widget class="QLabel" name="lblMaterialFlange_2">
+                  <property name="text">
+                   <string>Material</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="11" column="3">
+                 <widget class="RB_UomLineEdit" name="leeX_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="3">
+                 <widget class="RB_UomLineEdit" name="leeREC_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="13" column="2">
+                 <widget class="QLabel" name="lbld5_2">
+                  <property name="text">
+                   <string>d5</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="13" column="3">
+                 <widget class="RB_UomLineEdit" name="led5_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="15" column="2">
+                 <widget class="QLabel" name="lbld5t_2">
+                  <property name="text">
+                   <string>d5t</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="15" column="3">
+                 <widget class="RB_UomLineEdit" name="led5t_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="14" column="0" colspan="3">
+                 <widget class="QLabel" name="lblBlindHole_2">
+                  <property name="text">
+                   <string>Blind Hole</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="14" column="3">
+                 <widget class="QCheckBox" name="chbBlindHole_2">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="17" column="3">
+                 <spacer name="verticalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="16" column="1" colspan="2">
+                 <widget class="QLabel" name="lbll5t_2">
+                  <property name="text">
+                   <string>l5t</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="11" column="0" colspan="3">
+                 <widget class="QLabel" name="lbleX_2">
+                  <property name="text">
+                   <string>eX</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="16" column="3">
+                 <widget class="RB_UomLineEdit" name="lel5t_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="10" column="0" colspan="3">
+                 <widget class="QLabel" name="lbleQ_2">
+                  <property name="text">
+                   <string>eQ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="0" colspan="3">
+                 <widget class="QLabel" name="lbleFb_2">
+                  <property name="text">
+                   <string>eFb</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0" colspan="3">
+                 <widget class="QLabel" name="lbleRF_2">
+                  <property name="text">
+                   <string>eRF</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0" colspan="3">
+                 <widget class="QLabel" name="lbldRF_2">
+                  <property name="text">
+                   <string>dRF</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0" colspan="3">
+                 <widget class="QLabel" name="lbld4_2">
+                  <property name="text">
+                   <string>d4</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0" colspan="3">
+                 <widget class="QLabel" name="lbldX_2">
+                  <property name="text">
+                   <string>dX</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0" colspan="3">
+                 <widget class="QLabel" name="lblStandard_2">
+                  <property name="text">
+                   <string>Standard</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3" colspan="2">
+                 <widget class="RB_IdxLineEdit" name="ileStandardFlange_2"/>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="0">
               <widget class="QGroupBox" name="gbFlange_1">
                <property name="title">
                 <string>Flange 1</string>
@@ -841,369 +1130,10 @@
               </widget>
              </item>
              <item row="0" column="2">
-              <widget class="QGroupBox" name="gbFlange_2">
-               <property name="title">
-                <string>Flange 2</string>
+              <widget class="QCheckBox" name="chbFlange2Equal">
+               <property name="text">
+                <string>Flange 2 is equal to flange 1</string>
                </property>
-               <layout class="QGridLayout" name="gridLayout_7">
-                <property name="leftMargin">
-                 <number>3</number>
-                </property>
-                <property name="topMargin">
-                 <number>3</number>
-                </property>
-                <property name="rightMargin">
-                 <number>3</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>3</number>
-                </property>
-                <property name="spacing">
-                 <number>3</number>
-                </property>
-                <item row="1" column="0" colspan="3">
-                 <widget class="QLabel" name="lblTypeFlange_2">
-                  <property name="text">
-                   <string>Type</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0" colspan="3">
-                 <widget class="QLabel" name="lbld3_2">
-                  <property name="text">
-                   <string>d3</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="3">
-                 <widget class="QComboBox" name="cbTypeFlange_2"/>
-                </item>
-                <item row="3" column="3">
-                 <widget class="RB_UomLineEdit" name="led4_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="3">
-                 <widget class="RB_UomLineEdit" name="led3_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="3">
-                 <widget class="RB_UomLineEdit" name="ledX_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="3">
-                 <widget class="RB_UomLineEdit" name="ledRF_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="4">
-                 <spacer name="horizontalSpacer_17">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item row="6" column="0" colspan="3">
-                 <widget class="QLabel" name="lbldREC_2">
-                  <property name="text">
-                   <string>dREC</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="6" column="3">
-                 <widget class="RB_UomLineEdit" name="ledREC_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="3">
-                 <widget class="RB_UomLineEdit" name="leeRF_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="7" column="3">
-                 <widget class="RB_UomLineEdit" name="leeFb_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="9" column="0" colspan="3">
-                 <widget class="QLabel" name="lbleREC_2">
-                  <property name="text">
-                   <string>eREC</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="12" column="3" colspan="2">
-                 <widget class="RB_IdxLineEdit" name="ileMaterialFlange_2"/>
-                </item>
-                <item row="10" column="3">
-                 <widget class="RB_UomLineEdit" name="leeQ_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="12" column="0" colspan="3">
-                 <widget class="QLabel" name="lblMaterialFlange_2">
-                  <property name="text">
-                   <string>Material</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="11" column="3">
-                 <widget class="RB_UomLineEdit" name="leeX_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="9" column="3">
-                 <widget class="RB_UomLineEdit" name="leeREC_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="13" column="2">
-                 <widget class="QLabel" name="lbld5_2">
-                  <property name="text">
-                   <string>d5</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="13" column="3">
-                 <widget class="RB_UomLineEdit" name="led5_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="15" column="2">
-                 <widget class="QLabel" name="lbld5t_2">
-                  <property name="text">
-                   <string>d5t</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="15" column="3">
-                 <widget class="RB_UomLineEdit" name="led5t_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="14" column="0" colspan="3">
-                 <widget class="QLabel" name="lblBlindHole_2">
-                  <property name="text">
-                   <string>Blind Hole</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="14" column="3">
-                 <widget class="QCheckBox" name="chbBlindHole_2">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-                <item row="17" column="3">
-                 <spacer name="verticalSpacer_3">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item row="16" column="1" colspan="2">
-                 <widget class="QLabel" name="lbll5t_2">
-                  <property name="text">
-                   <string>l5t</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="11" column="0" colspan="3">
-                 <widget class="QLabel" name="lbleX_2">
-                  <property name="text">
-                   <string>eX</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="16" column="3">
-                 <widget class="RB_UomLineEdit" name="lel5t_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="10" column="0" colspan="3">
-                 <widget class="QLabel" name="lbleQ_2">
-                  <property name="text">
-                   <string>eQ</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="7" column="0" colspan="3">
-                 <widget class="QLabel" name="lbleFb_2">
-                  <property name="text">
-                   <string>eFb</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="0" colspan="3">
-                 <widget class="QLabel" name="lbleRF_2">
-                  <property name="text">
-                   <string>eRF</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0" colspan="3">
-                 <widget class="QLabel" name="lbldRF_2">
-                  <property name="text">
-                   <string>dRF</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0" colspan="3">
-                 <widget class="QLabel" name="lbld4_2">
-                  <property name="text">
-                   <string>d4</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0" colspan="3">
-                 <widget class="QLabel" name="lbldX_2">
-                  <property name="text">
-                   <string>dX</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0" colspan="3">
-                 <widget class="QLabel" name="lblStandard_2">
-                  <property name="text">
-                   <string>Standard</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3" colspan="2">
-                 <widget class="RB_IdxLineEdit" name="ileStandardFlange_2"/>
-                </item>
-               </layout>
               </widget>
              </item>
             </layout>
@@ -2232,7 +2162,7 @@
          <item row="0" column="0" rowspan="2">
           <widget class="QGroupBox" name="gbBolt">
            <property name="title">
-            <string>Bolt</string>
+            <string>Bolt/Nut</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_10">
             <property name="leftMargin">
@@ -2250,10 +2180,114 @@
             <property name="spacing">
              <number>3</number>
             </property>
-            <item row="15" column="1" colspan="3">
-             <widget class="RB_IdxLineEdit" name="ileMaterialBolt"/>
+            <item row="15" column="0" colspan="2">
+             <widget class="QLabel" name="lblRuptElongA">
+              <property name="text">
+               <string>Rupture Elongation A</string>
+              </property>
+             </widget>
             </item>
-            <item row="15" column="0">
+            <item row="14" column="2">
+             <widget class="RB_UomLineEdit" name="lept">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_34">
+              <property name="text">
+               <string>Pitch diameter</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QLabel" name="lblBoltSize">
+              <property name="text">
+               <string>Size</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QLabel" name="lblBoltType">
+              <property name="text">
+               <string>Bolt Type</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="label_35">
+              <property name="text">
+               <string>Outer contact diam. nut</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="0">
+             <widget class="QLabel" name="label_39">
+              <property name="text">
+               <string>Thickness nut</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_36">
+              <property name="text">
+               <string>Effective diameter</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="label_37">
+              <property name="text">
+               <string>Shank diameter (optional)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="label_38">
+              <property name="text">
+               <string>Mean contact diam. nut (opt.)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="0">
+             <widget class="QLabel" name="label_44">
+              <property name="text">
+               <string>Thread pitch (optional)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="0">
+             <widget class="QLabel" name="label_41">
+              <property name="text">
+               <string>Shank length (optional)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="0">
+             <widget class="QLabel" name="label_43">
+              <property name="text">
+               <string>Friction factor thread</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="0">
+             <widget class="QLabel" name="label_42">
+              <property name="text">
+               <string>Friction factor nut</string>
+              </property>
+             </widget>
+            </item>
+            <item row="16" column="0">
              <widget class="QLabel" name="lblMaterialBolt">
               <property name="text">
                <string>Material</string>
@@ -2263,7 +2297,7 @@
               </property>
              </widget>
             </item>
-            <item row="14" column="2">
+            <item row="15" column="2">
              <widget class="RB_UomLineEdit" name="leRuptureElongationA">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2273,7 +2307,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="2">
+            <item row="4" column="2">
              <widget class="RB_UomLineEdit" name="ledB0">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2283,7 +2317,10 @@
               </property>
              </widget>
             </item>
-            <item row="12" column="1">
+            <item row="16" column="1" colspan="3">
+             <widget class="RB_IdxLineEdit" name="ileMaterialBolt"/>
+            </item>
+            <item row="13" column="1">
              <widget class="QLabel" name="lblmut">
               <property name="text">
                <string>mut</string>
@@ -2293,7 +2330,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="3" rowspan="12">
+            <item row="4" column="3" rowspan="12">
              <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -2309,10 +2346,7 @@
               </property>
              </spacer>
             </item>
-            <item row="2" column="2" colspan="2">
-             <widget class="QComboBox" name="cbTensionerType"/>
-            </item>
-            <item row="12" column="2">
+            <item row="13" column="2">
              <widget class="RB_UomLineEdit" name="lemut">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2322,10 +2356,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="2" colspan="2">
-             <widget class="QComboBox" name="cbBoltType"/>
-            </item>
-            <item row="4" column="1">
+            <item row="5" column="1">
              <widget class="QLabel" name="lbldB2">
               <property name="text">
                <string>dB2</string>
@@ -2335,7 +2366,13 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
+            <item row="2" column="2" colspan="2">
+             <widget class="QComboBox" name="cbBoltType"/>
+            </item>
+            <item row="3" column="2" colspan="2">
+             <widget class="QComboBox" name="cbTensionerType"/>
+            </item>
+            <item row="1" column="3">
              <spacer name="horizontalSpacer_8">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -2348,7 +2385,7 @@
               </property>
              </spacer>
             </item>
-            <item row="3" column="1">
+            <item row="4" column="1">
              <widget class="QLabel" name="lbldB0">
               <property name="text">
                <string>dB0</string>
@@ -2358,17 +2395,7 @@
               </property>
              </widget>
             </item>
-            <item row="6" column="1">
-             <widget class="QLabel" name="lbldBe">
-              <property name="text">
-               <string>dBe</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
+            <item row="6" column="2">
              <widget class="RB_UomLineEdit" name="ledB4">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2378,20 +2405,17 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
-             <widget class="RB_UomLineEdit" name="ledB2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+            <item row="7" column="1">
+             <widget class="QLabel" name="lbldBe">
+              <property name="text">
+               <string>dBe</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="RB_IdxLineEdit" name="ileBoltSize"/>
-            </item>
-            <item row="9" column="2">
+            <item row="10" column="2">
              <widget class="RB_UomLineEdit" name="leeN">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2401,7 +2425,20 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="5" column="2">
+             <widget class="RB_UomLineEdit" name="ledB2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="RB_IdxLineEdit" name="ileBoltSize"/>
+            </item>
+            <item row="6" column="1">
              <widget class="QLabel" name="lbldB4">
               <property name="text">
                <string>dB4</string>
@@ -2411,17 +2448,7 @@
               </property>
              </widget>
             </item>
-            <item row="6" column="2">
-             <widget class="RB_UomLineEdit" name="ledBe">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="2">
+            <item row="8" column="2">
              <widget class="RB_UomLineEdit" name="ledBS">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2431,17 +2458,7 @@
               </property>
              </widget>
             </item>
-            <item row="7" column="1">
-             <widget class="QLabel" name="lbldBS">
-              <property name="text">
-               <string>dBS</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="2">
+            <item row="11" column="2">
              <widget class="RB_UomLineEdit" name="lelS">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2451,27 +2468,27 @@
               </property>
              </widget>
             </item>
-            <item row="10" column="1">
-             <widget class="QLabel" name="lbllS">
+            <item row="7" column="2">
+             <widget class="RB_UomLineEdit" name="ledBe">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QLabel" name="lbldBS">
               <property name="text">
-               <string>lS</string>
+               <string>dBS</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="9" column="1">
-             <widget class="QLabel" name="lbleN">
-              <property name="text">
-               <string>eN</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="1">
+            <item row="12" column="1">
              <widget class="QLabel" name="lblmun">
               <property name="text">
                <string>mun</string>
@@ -2481,7 +2498,27 @@
               </property>
              </widget>
             </item>
-            <item row="8" column="2">
+            <item row="11" column="1">
+             <widget class="QLabel" name="lbllS">
+              <property name="text">
+               <string>lS</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="1">
+             <widget class="QLabel" name="lbleN">
+              <property name="text">
+               <string>eN</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="2">
              <widget class="RB_UomLineEdit" name="ledn">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2491,7 +2528,7 @@
               </property>
              </widget>
             </item>
-            <item row="17" column="1">
+            <item row="18" column="1">
              <spacer name="verticalSpacer_13">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -2504,27 +2541,7 @@
               </property>
              </spacer>
             </item>
-            <item row="11" column="2">
-             <widget class="RB_UomLineEdit" name="lemun">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="1">
-             <widget class="QLabel" name="lbldn">
-              <property name="text">
-               <string>dn</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="1">
+            <item row="14" column="1">
              <widget class="QLabel" name="lblpt">
               <property name="text">
                <string>pt</string>
@@ -2534,7 +2551,7 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0" colspan="2">
+            <item row="3" column="0" colspan="2">
              <widget class="QLabel" name="lblTensionerType">
               <property name="text">
                <string>Tensioner Type</string>
@@ -2544,22 +2561,8 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_33">
-              <property name="text">
-               <string>Nominal diameter bolt</string>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="0" colspan="2">
-             <widget class="QLabel" name="lblRuptElongA">
-              <property name="text">
-               <string>Rupture Elongation A</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="2">
-             <widget class="RB_UomLineEdit" name="lept">
+            <item row="12" column="2">
+             <widget class="RB_UomLineEdit" name="lemun">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -2569,94 +2572,34 @@
              </widget>
             </item>
             <item row="4" column="0">
-             <widget class="QLabel" name="label_34">
+             <widget class="QLabel" name="label_33">
               <property name="text">
-               <string>Pitch diameter</string>
+               <string>Nominal diameter bolt</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1">
+             <widget class="QLabel" name="lbldn">
+              <property name="text">
+               <string>dn</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
             <item row="0" column="0" colspan="2">
-             <widget class="QLabel" name="lblBoltSize">
+             <widget class="QLabel" name="lblnB">
               <property name="text">
-               <string>Size</string>
+               <string>Number of bolts</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="1" column="0" colspan="2">
-             <widget class="QLabel" name="lblBoltType">
-              <property name="text">
-               <string>Bolt Type</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QLabel" name="label_36">
-              <property name="text">
-               <string>Effective diameter</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="label_35">
-              <property name="text">
-               <string>Outer contact diam. nut</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="label_37">
-              <property name="text">
-               <string>Shank diameter (optional)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="label_39">
-              <property name="text">
-               <string>Thickness nut</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="0">
-             <widget class="QLabel" name="label_41">
-              <property name="text">
-               <string>Shank length (optional)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="0">
-             <widget class="QLabel" name="label_38">
-              <property name="text">
-               <string>Mean contact diam. nut (opt.)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="0">
-             <widget class="QLabel" name="label_43">
-              <property name="text">
-               <string>Friction factor thread</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="0">
-             <widget class="QLabel" name="label_44">
-              <property name="text">
-               <string>Thread pitch (optional)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="0">
-             <widget class="QLabel" name="label_42">
-              <property name="text">
-               <string>Friction factor nut</string>
-              </property>
-             </widget>
+            <item row="0" column="2">
+             <widget class="QSpinBox" name="sbnB"/>
             </item>
            </layout>
           </widget>
@@ -3163,7 +3106,7 @@
            </layout>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="2" column="0">
           <widget class="QTabWidget" name="twLoadCase">
            <property name="currentIndex">
             <number>0</number>
@@ -3252,18 +3195,15 @@
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="1" colspan="2">
-                 <spacer name="verticalSpacer_8">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="lblTL_1">
+                  <property name="text">
+                   <string>TL</string>
                   </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>158</width>
-                    <height>72</height>
-                   </size>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
-                 </spacer>
+                 </widget>
                 </item>
                 <item row="2" column="2">
                  <widget class="RB_UomLineEdit" name="leTW_1">
@@ -3275,13 +3215,17 @@
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="1">
-                 <widget class="QLabel" name="lblTL_1">
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_58">
                   <property name="text">
-                   <string>TL</string>
+                   <string>Temperature loose ring</string>
                   </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_59">
+                  <property name="text">
+                   <string>Temperature washer</string>
                   </property>
                  </widget>
                 </item>
@@ -3302,19 +3246,18 @@
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="label_58">
-                  <property name="text">
-                   <string>Temperature loose ring</string>
+                <item row="3" column="1" colspan="2">
+                 <spacer name="verticalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
                   </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_59">
-                  <property name="text">
-                   <string>Temperature washer</string>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>158</width>
+                    <height>72</height>
+                   </size>
                   </property>
-                 </widget>
+                 </spacer>
                 </item>
                </layout>
               </widget>
@@ -3340,6 +3283,16 @@
                 <property name="spacing">
                  <number>3</number>
                 </property>
+                <item row="2" column="1">
+                 <widget class="RB_UomLineEdit" name="leTW_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="lblTF_2">
                   <property name="text">
@@ -3347,6 +3300,16 @@
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="RB_UomLineEdit" name="leTL_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
                  </widget>
                 </item>
@@ -3369,39 +3332,6 @@
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="RB_UomLineEdit" name="leTW_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="RB_UomLineEdit" name="leTL_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0" colspan="2">
-                 <spacer name="verticalSpacer_9">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>158</width>
-                    <height>55</height>
-                   </size>
-                  </property>
-                 </spacer>
                 </item>
                 <item row="2" column="0">
                  <widget class="QLabel" name="lblTW_2">
@@ -3426,6 +3356,19 @@
                   </property>
                  </spacer>
                 </item>
+                <item row="3" column="0" colspan="2">
+                 <spacer name="verticalSpacer_9">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>158</width>
+                    <height>55</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                </layout>
               </widget>
              </item>
@@ -3434,7 +3377,7 @@
                <property name="verticalSpacing">
                 <number>3</number>
                </property>
-               <item row="0" column="1">
+               <item row="1" column="1">
                 <widget class="QLabel" name="lblP">
                  <property name="text">
                   <string>P</string>
@@ -3444,7 +3387,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
+               <item row="2" column="1">
                 <widget class="QLabel" name="lblT0">
                  <property name="text">
                   <string>T0</string>
@@ -3454,27 +3397,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
-                <widget class="RB_UomLineEdit" name="leT0">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="RB_UomLineEdit" name="leTB">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
+               <item row="4" column="2">
                 <widget class="RB_UomLineEdit" name="leTG">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -3484,7 +3407,27 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
+               <item row="3" column="2">
+                <widget class="RB_UomLineEdit" name="leTB">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="RB_UomLineEdit" name="leT0">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
                 <widget class="RB_UomLineEdit" name="leP">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -3494,7 +3437,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
+               <item row="3" column="1">
                 <widget class="QLabel" name="lblTB">
                  <property name="text">
                   <string>TB</string>
@@ -3504,7 +3447,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_55">
+                 <property name="text">
+                  <string>Temperature bolts</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
                 <widget class="QLabel" name="lblTG">
                  <property name="text">
                   <string>TG</string>
@@ -3514,67 +3464,53 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_53">
-                 <property name="text">
-                  <string>Pressure of fluid</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_54">
                  <property name="text">
                   <string>Temperature of joint</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_55">
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_53">
                  <property name="text">
-                  <string>Temperature bolts</string>
+                  <string>Pressure of fluid</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
+               <item row="4" column="0">
                 <widget class="QLabel" name="label_56">
                  <property name="text">
                   <string>Temperature gasket</string>
                  </property>
                 </widget>
                </item>
-              </layout>
-             </item>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout">
-               <property name="leftMargin">
-                <number>6</number>
-               </property>
-               <property name="topMargin">
-                <number>6</number>
-               </property>
-               <property name="rightMargin">
-                <number>6</number>
-               </property>
-               <property name="bottomMargin">
-                <number>6</number>
-               </property>
-               <item>
+               <item row="0" column="1">
                 <widget class="QLabel" name="lblLoadCaseNo">
                  <property name="text">
-                  <string>LoadCase Number</string>
+                  <string>Load Case Number</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
-               <item>
+               <item row="0" column="2">
                 <widget class="QSpinBox" name="sbLoadCaseNo">
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="maximum">
                   <number>9</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblInfo">
+                 <property name="text">
+                  <string>0: Assembly
+1: Test
+2 etc.: Design</string>
                  </property>
                 </widget>
                </item>
@@ -3601,15 +3537,7 @@
                 <property name="spacing">
                  <number>3</number>
                 </property>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="lblBoltRequirement">
-                  <property name="text">
-                   <string>Include all EN13445-3
-material requirements:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
+                <item row="5" column="0">
                  <spacer name="verticalSpacer_15">
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -3622,15 +3550,35 @@ material requirements:</string>
                   </property>
                  </spacer>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QComboBox" name="cbDisregardBoltRequirement"/>
-                </item>
                 <item row="2" column="0" colspan="2">
-                 <widget class="QPushButton" name="pbRefreshProperty">
+                 <widget class="QComboBox" name="cbMaterialSafetyFactor"/>
+                </item>
+                <item row="0" column="0" colspan="2">
+                 <widget class="QLabel" name="lblMaterialSafetyFactor">
                   <property name="text">
-                   <string>Refresh all allow. stress etc.</string>
+                   <string>Include all EN13445-3 material requirements:</string>
                   </property>
                  </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QPushButton" name="pbRefreshProperty">
+                  <property name="text">
+                   <string>Refresh material properties</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <spacer name="horizontalSpacer_14">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </widget>
@@ -4466,6 +4414,70 @@ material requirements:</string>
            </widget>
           </widget>
          </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <property name="spacing">
+            <number>3</number>
+           </property>
+           <property name="leftMargin">
+            <number>6</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lblF_Bspec">
+             <property name="text">
+              <string>FB Specified (optional)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="RB_UomLineEdit" name="leF_Bspec">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <property name="placeholderText">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_9">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
         </layout>
        </widget>
        <widget class="QWidget" name="tabCalculation">
@@ -4503,7 +4515,14 @@ material requirements:</string>
             <number>0</number>
            </property>
            <item>
-            <widget class="QComboBox" name="cbCalculationReportType"/>
+            <widget class="QComboBox" name="cbCalculationReportType">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>0</height>
+              </size>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="lblFormulaFrom">
@@ -4615,9 +4634,6 @@ material requirements:</string>
   <tabstop>deDate</tabstop>
   <tabstop>leNameEngineer</tabstop>
   <tabstop>graphicsView</tabstop>
-  <tabstop>leF_Bspec</tabstop>
-  <tabstop>sbnB</tabstop>
-  <tabstop>chbFlange2Equal</tabstop>
   <tabstop>tabFlangeDetail</tabstop>
   <tabstop>cbTypeFlange_1</tabstop>
   <tabstop>led3_1</tabstop>
@@ -4706,7 +4722,6 @@ material requirements:</string>
   <tabstop>ileMaterialShell_2</tabstop>
   <tabstop>tvLoadCase</tabstop>
   <tabstop>twLoadCase</tabstop>
-  <tabstop>sbLoadCaseNo</tabstop>
   <tabstop>leP</tabstop>
   <tabstop>leT0</tabstop>
   <tabstop>leTB</tabstop>
@@ -4755,6 +4770,7 @@ material requirements:</string>
   <tabstop>teCalculationReport</tabstop>
  </tabstops>
  <resources>
+  <include location="../../../db/src/gui/db.qrc"/>
   <include location="../../../db/src/gui/db.qrc"/>
  </resources>
  <connections/>

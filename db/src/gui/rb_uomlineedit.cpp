@@ -97,6 +97,14 @@ void RB_UomLineEdit::setUom() {
     }
 }
 
+void RB_UomLineEdit::setPlaceholderText(const QString &str) {
+    uomLineEdit->setPlaceholderText(str);
+}
+
+void RB_UomLineEdit::setAlignment(Qt::Alignment flag) {
+    uomLineEdit->setAlignment(flag);
+}
+
 void RB_UomLineEdit::setEnabled(bool enable) {
     QWidget::setEnabled(enable);
     uomLineEdit->setEnabled(enable);
