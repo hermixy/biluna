@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/qcad2/!svn/ver/7067/qcadlib/trunk/tests/old
+END
+test.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/qcad2/!svn/ver/2463/qcadlib/trunk/tests/old/test.cpp
+END
+demo.dxf
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/qcad2/!svn/ver/2463/qcadlib/trunk/tests/old/demo.dxf
+END
+test.pro
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/qcad2/!svn/ver/7067/qcadlib/trunk/tests/old/test.pro
+END

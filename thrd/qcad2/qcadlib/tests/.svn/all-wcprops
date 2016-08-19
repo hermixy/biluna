@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/qcad2/!svn/ver/9428/qcadlib/trunk/tests
+END
+rs_dimensiontest.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/7809/qcadlib/trunk/tests/rs_dimensiontest.h
+END
+rs_blocklisttest.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/2720/qcadlib/trunk/tests/rs_blocklisttest.h
+END
+rs_hatchtest.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/qcad2/!svn/ver/8339/qcadlib/trunk/tests/rs_hatchtest.h
+END
+rs_linetest.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/qcad2/!svn/ver/4763/qcadlib/trunk/tests/rs_linetest.h
+END
+rs_mathtest.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/qcad2/!svn/ver/7802/qcadlib/trunk/tests/rs_mathtest.h
+END
+rs_leadertest.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/3512/qcadlib/trunk/tests/rs_leadertest.h
+END
+rs_ellipsetest.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/qcad2/!svn/ver/3521/qcadlib/trunk/tests/rs_ellipsetest.h
+END
+rs_vectorlisttest.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/4386/qcadlib/trunk/tests/rs_vectorlisttest.h
+END
+test.sh
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/qcad2/!svn/ver/9417/qcadlib/trunk/tests/test.sh
+END
+rs_ptrlisttest.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/qcad2/!svn/ver/3615/qcadlib/trunk/tests/rs_ptrlisttest.h
+END
+rs_unitstest.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/qcad2/!svn/ver/7805/qcadlib/trunk/tests/rs_unitstest.h
+END
+rs_vectortest.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/7805/qcadlib/trunk/tests/rs_vectortest.h
+END
+rs_creationtest.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/2865/qcadlib/trunk/tests/rs_creationtest.h
+END
+rs_inserttest.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/2773/qcadlib/trunk/tests/rs_inserttest.h
+END
+rs_matrixtest.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/6805/qcadlib/trunk/tests/rs_matrixtest.h
+END
+rs_arctest.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/qcad2/!svn/ver/2720/qcadlib/trunk/tests/rs_arctest.h
+END
+rs_undotest.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/qcad2/!svn/ver/2538/qcadlib/trunk/tests/rs_undotest.h
+END
+rs_fonttest.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/qcad2/!svn/ver/8339/qcadlib/trunk/tests/rs_fonttest.h
+END
+main.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/qcad2/!svn/ver/8339/qcadlib/trunk/tests/main.cpp
+END
+rs_modificationdivide2test.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/5739/qcadlib/trunk/tests/rs_modificationdivide2test.h
+END
+rs_entitycontainertest.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/qcad2/!svn/ver/8339/qcadlib/trunk/tests/rs_entitycontainertest.h
+END
+rs_creationequidistanttest.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/8339/qcadlib/trunk/tests/rs_creationequidistanttest.h
+END
+rs_test.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/qcad2/!svn/ver/8339/qcadlib/trunk/tests/rs_test.h
+END
+rs_extptrlisttest.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/2468/qcadlib/trunk/tests/rs_extptrlisttest.h
+END
+rs_infoareatest.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/2628/qcadlib/trunk/tests/rs_infoareatest.h
+END
+rs_texttest.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/qcad2/!svn/ver/3512/qcadlib/trunk/tests/rs_texttest.h
+END
+test.pro
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/qcad2/!svn/ver/8339/qcadlib/trunk/tests/test.pro
+END

@@ -1,0 +1,15 @@
+<!DOCTYPE RCC>
+<RCC>
+    <qresource prefix="/qcad" >
+        <file>images/contents.png</file>
+        <file>images/editclear.png</file>
+        <file>images/intro_camexpert.png</file>
+        <file>images/intro_qcad.png</file>
+        <file>images/qcad.png</file>
+        <file>images/qcad128.png</file>
+        <file>images/qcad16.png</file>
+        <file>images/qcad64.png</file>
+        <file>images/splash_camexpert.png</file>
+        <file>images/splash_qcad.png</file>
+    </qresource>
+</RCC>

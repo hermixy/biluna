@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/view
+END
+rs_actionviewdraft.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/view/rs_actionviewdraft.h
+END
+rs_actionviewgrid.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/view/rs_actionviewgrid.cpp
+END
+rs_actionviewstatusbar.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/qcad2/!svn/ver/8386/qcadactions/trunk/src/view/rs_actionviewstatusbar.cpp
+END
+rs_actionviewgrid.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/view/rs_actionviewgrid.h
+END
+rs_actionviewstatusbar.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/view/rs_actionviewstatusbar.h
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/7068/qcadactions/trunk/src/view/Makefile
+END
+rs_actionviewdraft.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/view/rs_actionviewdraft.cpp
+END

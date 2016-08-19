@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/info
+END
+rs_actioninfoinside.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/info/rs_actioninfoinside.h
+END
+rs_actioninfodist.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/10309/qcadactions/trunk/src/info/rs_actioninfodist.cpp
+END
+rs_actioninfodist2.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/10309/qcadactions/trunk/src/info/rs_actioninfodist2.cpp
+END
+rs_actioninfototallength.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/info/rs_actioninfototallength.cpp
+END
+rs_actioninfoangle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/info/rs_actioninfoangle.cpp
+END
+rs_actioninfoarea.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/10309/qcadactions/trunk/src/info/rs_actioninfoarea.cpp
+END
+rs_actioninfodist.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/info/rs_actioninfodist.h
+END
+rs_actioninfodist2.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/info/rs_actioninfodist2.h
+END
+rs_actioninfototallength.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/info/rs_actioninfototallength.h
+END
+rs_actioninfoangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/info/rs_actioninfoangle.h
+END
+rs_actioninfoinside.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/qcad2/!svn/ver/10309/qcadactions/trunk/src/info/rs_actioninfoinside.cpp
+END
+rs_actioninfoarea.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/info/rs_actioninfoarea.h
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/7127/qcadactions/trunk/src/info/Makefile
+END

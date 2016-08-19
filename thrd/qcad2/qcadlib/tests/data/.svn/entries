@@ -1,0 +1,37 @@
+8
+
+dir
+10918
+https://www.ribbonsoft.com/svn/qcad2/qcadlib/trunk/tests/data
+https://www.ribbonsoft.com/svn/qcad2
+
+
+
+2008-03-19T08:30:36.716087Z
+9428
+andrew
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7c36f10e-1ef2-0310-b19f-d6e5410d4b9b
+
+input
+dir
+
+output
+dir
+
+expected
+dir
+

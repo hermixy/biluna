@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/options
+END
+rs_actionoptionsdrawing.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/options/rs_actionoptionsdrawing.h
+END
+rs_actionoptionsgeneral.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/options/rs_actionoptionsgeneral.h
+END
+rs_actionoptionsdrawing.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/8386/qcadactions/trunk/src/options/rs_actionoptionsdrawing.cpp
+END
+rs_actionoptionsgeneral.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/8386/qcadactions/trunk/src/options/rs_actionoptionsgeneral.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/7068/qcadactions/trunk/src/options/Makefile
+END

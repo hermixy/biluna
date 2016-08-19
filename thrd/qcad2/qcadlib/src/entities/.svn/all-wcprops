@@ -1,0 +1,347 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/qcad2/!svn/ver/9471/qcadlib/trunk/src/entities
+END
+rs_dimension.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/qcad2/!svn/ver/8945/qcadlib/trunk/src/entities/rs_dimension.h
+END
+rs_block.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_block.cpp
+END
+rs_spline.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/9379/qcadlib/trunk/src/entities/rs_spline.cpp
+END
+rs_dimdiametric.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_dimdiametric.cpp
+END
+rs_polyline.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_polyline.cpp
+END
+rs_hatch.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/8935/qcadlib/trunk/src/entities/rs_hatch.h
+END
+rs_leader.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_leader.cpp
+END
+rs_ellipse.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/qcad2/!svn/ver/7925/qcadlib/trunk/src/entities/rs_ellipse.cpp
+END
+rs_dimaligned.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_dimaligned.cpp
+END
+rs_point.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/7898/qcadlib/trunk/src/entities/rs_point.h
+END
+rs_constructionline.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/7925/qcadlib/trunk/src/entities/rs_constructionline.cpp
+END
+rs_dimordinate.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/qcad2/!svn/ver/7816/qcadlib/trunk/src/entities/rs_dimordinate.h
+END
+rs_dimlinear.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_dimlinear.cpp
+END
+rs_arc.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/7925/qcadlib/trunk/src/entities/rs_arc.cpp
+END
+rs_circle.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/7898/qcadlib/trunk/src/entities/rs_circle.h
+END
+rs_fontchar.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_fontchar.h
+END
+rs_insert.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/9471/qcadlib/trunk/src/entities/rs_insert.h
+END
+rs_entity.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/7935/qcadlib/trunk/src/entities/rs_entity.cpp
+END
+rs_graphic.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_graphic.cpp
+END
+rs_atomicentity.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/qcad2/!svn/ver/8339/qcadlib/trunk/src/entities/rs_atomicentity.h
+END
+rs_entitycontainer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/9471/qcadlib/trunk/src/entities/rs_entitycontainer.cpp
+END
+rs_solid.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/8991/qcadlib/trunk/src/entities/rs_solid.h
+END
+rs_image.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/7925/qcadlib/trunk/src/entities/rs_image.cpp
+END
+rs_pattern.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/8330/qcadlib/trunk/src/entities/rs_pattern.h
+END
+rs_document.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/7877/qcadlib/trunk/src/entities/rs_document.h
+END
+rs_dimangular.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/qcad2/!svn/ver/9428/qcadlib/trunk/src/entities/rs_dimangular.cpp
+END
+rs_text.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_text.cpp
+END
+rs_dimension.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/qcad2/!svn/ver/8945/qcadlib/trunk/src/entities/rs_dimension.cpp
+END
+rs_hatch.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/9008/qcadlib/trunk/src/entities/rs_hatch.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/4868/qcadlib/trunk/src/entities/Makefile
+END
+rs_point.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/7925/qcadlib/trunk/src/entities/rs_point.cpp
+END
+rs_dimradial.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/qcad2/!svn/ver/7802/qcadlib/trunk/src/entities/rs_dimradial.h
+END
+rs_line.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/qcad2/!svn/ver/8878/qcadlib/trunk/src/entities/rs_line.h
+END
+rs_dimordinate.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/qcad2/!svn/ver/9084/qcadlib/trunk/src/entities/rs_dimordinate.cpp
+END
+rs_block.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/6363/qcadlib/trunk/src/entities/rs_block.h
+END
+rs_spline.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/9362/qcadlib/trunk/src/entities/rs_spline.h
+END
+rs_dimdiametric.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/qcad2/!svn/ver/7802/qcadlib/trunk/src/entities/rs_dimdiametric.h
+END
+rs_polyline.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/6826/qcadlib/trunk/src/entities/rs_polyline.h
+END
+rs_circle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/7925/qcadlib/trunk/src/entities/rs_circle.cpp
+END
+rs_leader.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/6089/qcadlib/trunk/src/entities/rs_leader.h
+END
+rs_ellipse.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/7898/qcadlib/trunk/src/entities/rs_ellipse.h
+END
+rs_dimaligned.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/qcad2/!svn/ver/7816/qcadlib/trunk/src/entities/rs_dimaligned.h
+END
+rs_insert.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/9471/qcadlib/trunk/src/entities/rs_insert.cpp
+END
+rs_constructionline.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/7898/qcadlib/trunk/src/entities/rs_constructionline.h
+END
+rs_dimlinear.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/qcad2/!svn/ver/7802/qcadlib/trunk/src/entities/rs_dimlinear.h
+END
+rs_arc.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/7898/qcadlib/trunk/src/entities/rs_arc.h
+END
+rs_solid.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/8991/qcadlib/trunk/src/entities/rs_solid.cpp
+END
+rs_pattern.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/qcad2/!svn/ver/8330/qcadlib/trunk/src/entities/rs_pattern.cpp
+END
+rs_document.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/qcad2/!svn/ver/7930/qcadlib/trunk/src/entities/rs_document.cpp
+END
+rs_entity.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/9301/qcadlib/trunk/src/entities/rs_entity.h
+END
+rs_graphic.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/8803/qcadlib/trunk/src/entities/rs_graphic.h
+END
+rs_entitycontainer.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/9301/qcadlib/trunk/src/entities/rs_entitycontainer.h
+END
+rs_dimradial.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/qcad2/!svn/ver/8945/qcadlib/trunk/src/entities/rs_dimradial.cpp
+END
+rs_image.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/7898/qcadlib/trunk/src/entities/rs_image.h
+END
+rs_line.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/qcad2/!svn/ver/9188/qcadlib/trunk/src/entities/rs_line.cpp
+END
+rs_dimangular.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/qcad2/!svn/ver/7802/qcadlib/trunk/src/entities/rs_dimangular.h
+END
+rs_text.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/qcad2/!svn/ver/7857/qcadlib/trunk/src/entities/rs_text.h
+END

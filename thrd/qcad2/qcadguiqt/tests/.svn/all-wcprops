@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/qcad2/!svn/ver/7073/qcadguiqt/trunk/tests
+END
+qg_colorboxtest.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/qcad2/!svn/ver/2496/qcadguiqt/trunk/tests/qg_colorboxtest.h
+END
+main.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/qcad2/!svn/ver/2510/qcadguiqt/trunk/tests/main.cpp
+END
+qg_graphicviewtest.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/qcad2/!svn/ver/2510/qcadguiqt/trunk/tests/qg_graphicviewtest.h
+END
+test.sh
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/qcad2/!svn/ver/2722/qcadguiqt/trunk/tests/test.sh
+END
+qg_mainwindowinterfacetest.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/2722/qcadguiqt/trunk/tests/qg_mainwindowinterfacetest.h
+END
+qg_blockwidgettest.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/qcad2/!svn/ver/2722/qcadguiqt/trunk/tests/qg_blockwidgettest.h
+END
+qg_layerwidgettest.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/qcad2/!svn/ver/2722/qcadguiqt/trunk/tests/qg_layerwidgettest.h
+END
+test.pro
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/qcad2/!svn/ver/7073/qcadguiqt/trunk/tests/test.pro
+END

@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file
+END
+rs_actionfileprint.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/file/rs_actionfileprint.cpp
+END
+rs_actionfileprintpreview.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/file/rs_actionfileprintpreview.cpp
+END
+rs_actionfilenew.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfilenew.h
+END
+rs_actionfilesave.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/file/rs_actionfilesave.cpp
+END
+rs_actionfilesvg.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/file/rs_actionfilesvg.cpp
+END
+rs_actionfileprint.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfileprint.h
+END
+rs_actionfileopen.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/file/rs_actionfileopen.cpp
+END
+rs_actionfileprintpreview.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfileprintpreview.h
+END
+rs_actionfilesave.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfilesave.h
+END
+rs_actionfilesvg.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfilesvg.h
+END
+rs_actionfileclose.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/9415/qcadactions/trunk/src/file/rs_actionfileclose.cpp
+END
+rs_actionfileopen.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfileopen.h
+END
+rs_actionfilepdf.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/file/rs_actionfilepdf.cpp
+END
+rs_actionfileclose.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfileclose.h
+END
+rs_actionfilepdf.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfilepdf.h
+END
+rs_actionfileexport.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/8386/qcadactions/trunk/src/file/rs_actionfileexport.cpp
+END
+rs_actionfilequit.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/8386/qcadactions/trunk/src/file/rs_actionfilequit.cpp
+END
+rs_actionfilesaveas.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/8981/qcadactions/trunk/src/file/rs_actionfilesaveas.cpp
+END
+rs_actionfileexport.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfileexport.h
+END
+rs_actionfilequit.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfilequit.h
+END
+rs_actionfilesaveas.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/file/rs_actionfilesaveas.h
+END
+rs_actionfilenew.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/file/rs_actionfilenew.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/7068/qcadactions/trunk/src/file/Makefile
+END

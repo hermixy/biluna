@@ -1,0 +1,10 @@
+<!DOCTYPE RCC>
+<RCC>
+    <qresource prefix="/qcad" >
+        <file>images/qcad_oopl_2008_splash.png</file>
+        <file>images/qcad_oopl128.png</file>
+        <file>images/qcad_oopl16.png</file>
+        <file>images/qcad_oopl.png</file>
+        <file>images/openoffice_logo.png</file>
+    </qresource>
+</RCC>

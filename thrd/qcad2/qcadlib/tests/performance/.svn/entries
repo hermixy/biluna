@@ -1,0 +1,52 @@
+8
+
+dir
+10918
+https://www.ribbonsoft.com/svn/qcad2/qcadlib/trunk/tests/performance
+https://www.ribbonsoft.com/svn/qcad2
+
+
+
+2006-05-10T23:56:06.180055Z
+3248
+andrew
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7c36f10e-1ef2-0310-b19f-d6e5410d4b9b
+
+main.cpp
+file
+
+
+
+
+2008-01-10T16:35:29.000000Z
+38a49ad16f78f9217e902d28fea21be0
+2006-05-10T23:56:06.180055Z
+3248
+andrew
+
+test.pro
+file
+
+
+
+
+2008-01-10T16:35:29.000000Z
+91cd6981790edb1f2e6644798dfe93c2
+2006-05-10T23:56:06.180055Z
+3248
+andrew
+

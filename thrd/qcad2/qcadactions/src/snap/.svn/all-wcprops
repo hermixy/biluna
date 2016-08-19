@@ -1,0 +1,263 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/qcad2/!svn/ver/10604/qcadactions/trunk/src/snap
+END
+rs_actionsetrelativezero.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetrelativezero.h
+END
+rs_actionsetsnapmodegrid.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodegrid.h
+END
+rs_actionsetsnapmodecoordinatepolar.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodecoordinatepolar.h
+END
+rs_actionsetsnapmodecoordinate.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodecoordinate.h
+END
+rs_actionsetsnaprestrictionnothing.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnaprestrictionnothing.h
+END
+rs_actionsetsnaprestrictionorthogonal.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnaprestrictionorthogonal.cpp
+END
+rs_actionsetsnapmodemiddle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodemiddle.cpp
+END
+rs_actionsetsnapmodereference.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodereference.cpp
+END
+rs_actionsetsnaprestrictionvertical.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnaprestrictionvertical.h
+END
+rs_actionsetsnaprestriction.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/qcad2/!svn/ver/10309/qcadactions/trunk/src/snap/rs_actionsetsnaprestriction.cpp
+END
+rs_actionsetsnapmodedist.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodedist.cpp
+END
+rs_actionsetsnapmodeauto.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodeauto.cpp
+END
+rs_actionsetsnapmodeintersection.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodeintersection.h
+END
+rs_actionsetsnapmodeonentity.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodeonentity.h
+END
+rs_actionsetsnaprestrictionhorizontal.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnaprestrictionhorizontal.h
+END
+rs_actionsetsnapmodeendpoint.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodeendpoint.cpp
+END
+rs_actionsetrelativezero.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/10309/qcadactions/trunk/src/snap/rs_actionsetrelativezero.cpp
+END
+rs_actionsetsnapmode.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmode.h
+END
+rs_actionsetsnapmodecoordinatepolar.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/qcad2/!svn/ver/9354/qcadactions/trunk/src/snap/rs_actionsetsnapmodecoordinatepolar.cpp
+END
+rs_actionsetsnapmodecenter.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodecenter.h
+END
+rs_actionsetsnapmodegrid.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodegrid.cpp
+END
+rs_actionsetsnapmodefree.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodefree.h
+END
+rs_actionlockrelativezero.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionlockrelativezero.h
+END
+rs_actionsetsnaprestrictionnothing.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnaprestrictionnothing.cpp
+END
+rs_actionsetsnapmodecoordinate.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/qcad2/!svn/ver/9454/qcadactions/trunk/src/snap/rs_actionsetsnapmodecoordinate.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/6828/qcadactions/trunk/src/snap/Makefile
+END
+rs_actionsnapintersectionmanual.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsnapintersectionmanual.h
+END
+rs_actionsetsnaprestrictionvertical.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnaprestrictionvertical.cpp
+END
+rs_actionsetsnaprestrictionorthogonal.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnaprestrictionorthogonal.h
+END
+rs_actionsetsnapmodereference.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodereference.h
+END
+rs_actionsetsnapmodemiddle.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodemiddle.h
+END
+rs_actionsetsnaprestriction.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnaprestriction.h
+END
+rs_actionsetsnapmodeintersection.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodeintersection.cpp
+END
+rs_actionsetsnapmodedist.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodedist.h
+END
+rs_actionsetsnapmodeonentity.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodeonentity.cpp
+END
+rs_actionsetsnaprestrictionhorizontal.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnaprestrictionhorizontal.cpp
+END
+rs_actionsetsnapmodeauto.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodeauto.h
+END
+rs_actionsetsnapmode.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/10604/qcadactions/trunk/src/snap/rs_actionsetsnapmode.cpp
+END
+rs_actionsetsnapmodecenter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsetsnapmodecenter.cpp
+END
+rs_actionlockrelativezero.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionlockrelativezero.cpp
+END
+rs_actionsetsnapmodefree.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8974/qcadactions/trunk/src/snap/rs_actionsetsnapmodefree.cpp
+END
+rs_actionsnapintersectionmanual.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/snap/rs_actionsnapintersectionmanual.cpp
+END
+rs_actionsetsnapmodeendpoint.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/snap/rs_actionsetsnapmodeendpoint.h
+END

@@ -1,0 +1,395 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/qcad2/!svn/ver/10896/qcadguiqt/trunk/src/tooloptions
+END
+qg_divide2options.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/qcad2/!svn/ver/6842/qcadguiqt/trunk/src/tooloptions/qg_divide2options.h
+END
+qg_trimamountoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_trimamountoptions.cpp
+END
+qg_insertoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_insertoptions.cpp
+END
+qg_lineparalleloptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_lineparalleloptions.cpp
+END
+qg_polylineequidistantoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_polylineequidistantoptions.cpp
+END
+qg_circleoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_circleoptions.h
+END
+qg_snapcoordinatepolaroptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_snapcoordinatepolaroptions.h
+END
+qg_linepolygon2options.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_linepolygon2options.cpp
+END
+qg_arctangentialoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_arctangentialoptions.h
+END
+qg_imageoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_imageoptions.cpp
+END
+qg_linebisectoroptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_linebisectoroptions.cpp
+END
+qg_snapdistoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_snapdistoptions.cpp
+END
+qg_divide2options.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_divide2options.cpp
+END
+qg_editpasteoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/qcad2/!svn/ver/5115/qcadguiqt/trunk/src/tooloptions/qg_editpasteoptions.h
+END
+qg_libraryinsertoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_libraryinsertoptions.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/5094/qcadguiqt/trunk/src/tooloptions/Makefile
+END
+qg_moverotateoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_moverotateoptions.h
+END
+qg_snapoptionsbase.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_snapoptionsbase.h
+END
+qg_lineangleoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/qcad2/!svn/ver/8354/qcadguiqt/trunk/src/tooloptions/qg_lineangleoptions.h
+END
+qg_trimamountoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_trimamountoptions.h
+END
+qg_lineparallelthroughoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_lineparallelthroughoptions.cpp
+END
+qg_arcoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_arcoptions.cpp
+END
+qg_snapcoordinateoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_snapcoordinateoptions.cpp
+END
+qg_dimlinearoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_dimlinearoptions.h
+END
+qg_arctangentialoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_arctangentialoptions.cpp
+END
+qg_isoprojectoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_isoprojectoptions.cpp
+END
+qg_editpasteoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/9300/qcadguiqt/trunk/src/tooloptions/qg_editpasteoptions.cpp
+END
+qg_linepolygon2options.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_linepolygon2options.h
+END
+qg_roundoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_roundoptions.cpp
+END
+qg_lineoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_lineoptions.cpp
+END
+qg_snapdistoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_snapdistoptions.h
+END
+qg_polylineoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/9378/qcadguiqt/trunk/src/tooloptions/qg_polylineoptions.cpp
+END
+qg_beveloptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_beveloptions.cpp
+END
+qg_libraryinsertoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_libraryinsertoptions.h
+END
+qg_lineangleoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8356/qcadguiqt/trunk/src/tooloptions/qg_lineangleoptions.cpp
+END
+qg_splineoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_splineoptions.h
+END
+qg_linepolygonoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_linepolygonoptions.cpp
+END
+qg_linerelangleoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/9284/qcadguiqt/trunk/src/tooloptions/qg_linerelangleoptions.cpp
+END
+qg_printpreviewoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/7073/qcadguiqt/trunk/src/tooloptions/qg_printpreviewoptions.h
+END
+qg_dimlinearoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_dimlinearoptions.cpp
+END
+qg_dimoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/10896/qcadguiqt/trunk/src/tooloptions/qg_dimoptions.cpp
+END
+qg_lineparallelthroughoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_lineparallelthroughoptions.h
+END
+qg_arcoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_arcoptions.h
+END
+qg_snapcoordinateoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_snapcoordinateoptions.h
+END
+qg_isoprojectoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/6829/qcadguiqt/trunk/src/tooloptions/qg_isoprojectoptions.h
+END
+qg_textoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_textoptions.h
+END
+qg_splineoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/9173/qcadguiqt/trunk/src/tooloptions/qg_splineoptions.cpp
+END
+qg_roundoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_roundoptions.h
+END
+qg_lineoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_lineoptions.h
+END
+qg_printpreviewoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/qcad2/!svn/ver/10605/qcadguiqt/trunk/src/tooloptions/qg_printpreviewoptions.cpp
+END
+qg_polylineoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/6334/qcadguiqt/trunk/src/tooloptions/qg_polylineoptions.h
+END
+qg_circleoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_circleoptions.cpp
+END
+qg_beveloptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_beveloptions.h
+END
+qg_linepolygonoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_linepolygonoptions.h
+END
+qg_linerelangleoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_linerelangleoptions.h
+END
+qg_snapcoordinatepolaroptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_snapcoordinatepolaroptions.cpp
+END
+qg_lineparalleloptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_lineparalleloptions.h
+END
+qg_insertoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_insertoptions.h
+END
+qg_polylineequidistantoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/qcad2/!svn/ver/6334/qcadguiqt/trunk/src/tooloptions/qg_polylineequidistantoptions.h
+END
+qg_dimoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_dimoptions.h
+END
+qg_optionsbase.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_optionsbase.h
+END
+qg_textoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_textoptions.cpp
+END
+qg_moverotateoptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/8363/qcadguiqt/trunk/src/tooloptions/qg_moverotateoptions.cpp
+END
+qg_imageoptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_imageoptions.h
+END
+qg_linebisectoroptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/5084/qcadguiqt/trunk/src/tooloptions/qg_linebisectoroptions.h
+END

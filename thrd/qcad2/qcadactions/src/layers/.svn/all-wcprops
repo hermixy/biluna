@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers
+END
+rs_actionlayerstoggleview.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/layers/rs_actionlayerstoggleview.cpp
+END
+rs_actionlayersshowall.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers/rs_actionlayersshowall.h
+END
+rs_actionlayersduplicate.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers/rs_actionlayersduplicate.h
+END
+rs_actionlayerstoggleview.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers/rs_actionlayerstoggleview.h
+END
+rs_actionlayersedit.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/layers/rs_actionlayersedit.cpp
+END
+rs_actionlayersadd.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/layers/rs_actionlayersadd.cpp
+END
+rs_actionlayerstogglelock.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/layers/rs_actionlayerstogglelock.cpp
+END
+rs_actionlayersedit.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers/rs_actionlayersedit.h
+END
+rs_actionlayersremove.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/layers/rs_actionlayersremove.cpp
+END
+rs_actionlayersadd.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers/rs_actionlayersadd.h
+END
+rs_actionlayerstogglelock.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers/rs_actionlayerstogglelock.h
+END
+rs_actionlayersremove.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers/rs_actionlayersremove.h
+END
+rs_actionlayershideall.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/layers/rs_actionlayershideall.cpp
+END
+rs_actionlayershideall.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/qcad2/!svn/ver/10343/qcadactions/trunk/src/layers/rs_actionlayershideall.h
+END
+rs_actionlayersshowall.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/qcad2/!svn/ver/8821/qcadactions/trunk/src/layers/rs_actionlayersshowall.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/qcad2/!svn/ver/5627/qcadactions/trunk/src/layers/Makefile
+END
+rs_actionlayersduplicate.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/qcad2/!svn/ver/9398/qcadactions/trunk/src/layers/rs_actionlayersduplicate.cpp
+END

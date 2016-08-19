@@ -1,0 +1,211 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource prefix="/qcad">
+    <file>images/align_bc.png</file>
+
+    <file>images/align_bl.png</file>
+
+    <file>images/align_br.png</file>
+
+    <file>images/align_mc.png</file>
+
+    <file>images/align_ml.png</file>
+
+    <file>images/align_mr.png</file>
+
+    <file>images/align_tc.png</file>
+
+    <file>images/align_tl.png</file>
+
+    <file>images/align_tr.png</file>
+
+    <file>images/back.png</file>
+
+    <file>images/char_degrees.png</file>
+
+    <file>images/char_diameter.png</file>
+
+    <file>images/char_pm.png</file>
+
+    <file>images/color00.png</file>
+
+    <file>images/color01.png</file>
+
+    <file>images/color02.png</file>
+
+    <file>images/color03.png</file>
+
+    <file>images/color04.png</file>
+
+    <file>images/color05.png</file>
+
+    <file>images/color06.png</file>
+
+    <file>images/color07.png</file>
+
+    <file>images/color08.png</file>
+
+    <file>images/color09.png</file>
+
+    <file>images/color11.png</file>
+
+    <file>images/color14.png</file>
+
+    <file>images/colorbox.png</file>
+
+    <file>images/colorxx.png</file>
+
+    <file>images/cur_cad_bmp.png</file>
+
+    <file>images/cur_cad_mask.png</file>
+
+    <file>images/cur_del_bmp.png</file>
+
+    <file>images/cur_del_mask.png</file>
+
+    <file>images/cur_glass_bmp.png</file>
+
+    <file>images/cur_glass_mask.png</file>
+
+    <file>images/cur_hand_bmp.png</file>
+
+    <file>images/cur_hand_mask.png</file>
+
+    <file>images/cur_select_bmp.png</file>
+
+    <file>images/cur_select_mask.png</file>
+
+    <file>images/dirneg.png</file>
+
+    <file>images/dirpos.png</file>
+
+    <file>images/dlgmodifymirror.png</file>
+
+    <file>images/dlgmodifymove.png</file>
+
+    <file>images/dlgmodifymoverotate.png</file>
+
+    <file>images/dlgmodifyrotate.png</file>
+
+    <file>images/dlgmodifyrotate2.png</file>
+
+    <file>images/dlgmodifyscale.png</file>
+        
+    <file>images/document.png</file>
+
+    <file>images/fliphorizontal.png</file>
+    
+    <file>images/flipvertical.png</file>
+
+    <file>images/folderclosed.png</file>
+
+    <file>images/folderopen.png</file>
+
+    <file>images/hiddenblock.png</file>
+
+    <file>images/hiddenlayer.png</file>
+
+    <file>images/intro.png</file>
+
+    <file>images/layerstatus_00.png</file>
+
+    <file>images/layerstatus_01.png</file>
+
+    <file>images/layerstatus_10.png</file>
+
+    <file>images/layerstatus_11.png</file>
+
+    <file>images/linetype00.png</file>
+
+    <file>images/linetype01.png</file>
+
+    <file>images/linetype02.png</file>
+
+    <file>images/linetype03.png</file>
+
+    <file>images/linetype04.png</file>
+
+    <file>images/linetype05.png</file>
+
+    <file>images/linetype06.png</file>
+
+    <file>images/linetype07.png</file>
+
+    <file>images/menuarc.png</file>
+
+    <file>images/menucircle.png</file>
+
+    <file>images/menudim.png</file>
+
+    <file>images/menuedit.png</file>
+
+    <file>images/menuellipse.png</file>
+
+    <file>images/menuhatch.png</file>
+
+    <file>images/menuimage.png</file>
+
+    <file>images/menuline.png</file>
+
+    <file>images/menumeasure.png</file>
+
+    <file>images/menupoint.png</file>
+
+    <file>images/menupolyline.png</file>
+
+    <file>images/menuselect.png</file>
+
+    <file>images/menuspline.png</file>
+
+    <file>images/menutext.png</file>
+
+    <file>images/mouse.png</file>
+
+    <file>images/points.png</file>
+
+    <file>images/printbw.png</file>
+
+    <file>images/printcenter.png</file>
+
+    <file>images/printfit.png</file>
+
+    <file>images/printscale.png</file>
+
+    <file>images/splinesnurbs.png</file>
+
+    <file>images/tolerance1.png</file>
+
+    <file>images/tolerance2.png</file>
+
+    <file>images/visibleblock.png</file>
+
+    <file>images/visiblelayer.png</file>
+
+    <file>images/width00.png</file>
+
+    <file>images/width01.png</file>
+
+    <file>images/width02.png</file>
+
+    <file>images/width03.png</file>
+
+    <file>images/width04.png</file>
+
+    <file>images/width05.png</file>
+
+    <file>images/width06.png</file>
+
+    <file>images/width07.png</file>
+
+    <file>images/width08.png</file>
+
+    <file>images/width09.png</file>
+
+    <file>images/width10.png</file>
+
+    <file>images/width11.png</file>
+
+    <file>images/width12.png</file>
+  </qresource>
+</RCC>
+

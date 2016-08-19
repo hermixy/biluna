@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/qcad2/!svn/ver/9417/qcadlib/trunk/src/creation
+END
+rs_creation.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/qcad2/!svn/ver/9417/qcadlib/trunk/src/creation/rs_creation.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/qcad2/!svn/ver/4868/qcadlib/trunk/src/creation/Makefile
+END
+rs_creation.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/qcad2/!svn/ver/8427/qcadlib/trunk/src/creation/rs_creation.h
+END

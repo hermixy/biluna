@@ -1,0 +1,106 @@
+8
+
+dir
+10918
+https://www.ribbonsoft.com/svn/qcad2/qcadactions/trunk/src
+https://www.ribbonsoft.com/svn/qcad2
+
+
+
+2008-05-05T15:58:03.511239Z
+10619
+andrew
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7c36f10e-1ef2-0310-b19f-d6e5410d4b9b
+
+select
+dir
+
+file
+dir
+
+zoom
+dir
+
+edit
+dir
+
+dimension
+dir
+
+ts
+dir
+
+modify
+dir
+
+options
+dir
+
+misc
+dir
+
+info
+dir
+
+debugging
+dir
+
+draw
+dir
+
+layers
+dir
+
+snap
+dir
+
+script
+dir
+
+images
+dir
+
+view
+dir
+
+blocks
+dir
+
+qcadactions.qrc
+file
+
+
+
+
+2008-08-07T21:09:17.000000Z
+d1f4f2105d05b6e61f58d76e1228296c
+2008-02-20T13:41:57.350933Z
+9107
+andrew
+
+Makefile
+file
+
+
+
+
+2008-01-10T16:32:30.000000Z
+437618587d8465f4761275389fae5888
+2007-11-13T09:37:53.676758Z
+7068
+andrew
+

@@ -1,0 +1,52 @@
+8
+
+dir
+10918
+https://www.ribbonsoft.com/svn/qcad2/qcadactions/trunk/src/script
+https://www.ribbonsoft.com/svn/qcad2
+
+
+
+2008-04-06T17:43:02.019774Z
+10343
+andrew
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7c36f10e-1ef2-0310-b19f-d6e5410d4b9b
+
+rs_actionscriptopenide.h
+file
+
+
+
+
+2008-08-07T21:09:16.000000Z
+352789d3bd2d1ef2868ed31098232b96
+2008-04-06T17:43:02.019774Z
+10343
+andrew
+
+rs_actionscriptopenide.cpp
+file
+
+
+
+
+2008-08-07T21:09:16.000000Z
+ad103ce35cbbc130bf3c1f297c06049b
+2008-01-23T23:53:22.822833Z
+8386
+andrew
+

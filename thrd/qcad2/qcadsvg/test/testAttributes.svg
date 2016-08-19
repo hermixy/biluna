@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN" "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
+<!-- ************************************************************ -->
+<!--   SVG file generated with QCad 2.1.4.6                       -->
+<!-- ************************************************************ -->
+<svg baseProfile="tiny" height="325mm" id="/home/rutger/qcad2/qcadsvg/test/testAttributes.svg" version="1.2" viewBox="-12.5 12.5 425 325" width="425mm" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0">
+  <style type="text/css">
+    <![CDATA[
+    g.LAYER-0 {opacity:1.0;
+    fill:none;
+    font-family:helvetica;
+    font-stretch:extra-condensed;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke:rgb(0,0,0);
+    stroke-opacity:1.0;
+    stroke-width:0.2;
+    stroke-dasharray:none;}
+    g.LAYER-FRAME025 {opacity:1.0;
+    fill:none;
+    font-family:helvetica;
+    font-stretch:extra-condensed;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke:rgb(0,0,0);
+    stroke-opacity:1.0;
+    stroke-width:0.25;
+    stroke-dasharray:none;}
+    g.LAYER-FRAME035 {opacity:1.0;
+    fill:none;
+    font-family:helvetica;
+    font-stretch:extra-condensed;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke:rgb(255,255,0);
+    stroke-opacity:1.0;
+    stroke-width:0.35;
+    stroke-dasharray:none;}
+    g.LAYER-FRAME050 {opacity:1.0;
+    fill:none;
+    font-family:helvetica;
+    font-stretch:extra-condensed;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke:rgb(255,0,255);
+    stroke-opacity:1.0;
+    stroke-width:0.5;
+    stroke-dasharray:0.6,0.6,0.6,0.6;}]]>
+  </style>
+  <defs>
+    <marker id="TriangleStart" markerHeight="27" markerUnits="strokeWidth" markerWidth="33" orient="auto" refX="12.5" refY="13.5" stroke="rgb(0,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit" viewBox="0 0 33 27">
+      <path d="M 12.5 13.5 l 8 -1 l 0 2 z" />
+    </marker>
+    <marker id="TriangleEnd" markerHeight="27" markerUnits="strokeWidth" markerWidth="33" orient="auto" refX="20.5" refY="13.5" stroke="rgb(0,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit" viewBox="0 0 33 27">
+      <path d="M 20.5 13.5 l -8 -1 l 0 2 z" />
+    </marker>
+    <g id="Rectangle">
+      <g id="LAYER-FRAME025">
+        <line x1="0" x2="0" y1="-20" y2="0" />
+        <line x1="10" x2="0" y1="-20" y2="-20" />
+        <line x1="10" x2="10" y1="0" y2="-20" />
+        <line x1="0" x2="10" y1="0" y2="0" />
+      </g>
+    </g>
+  </defs>
+  <g class="LAYER-0">
+    <line x1="0" x2="400" y1="325" y2="325" />
+    <line x1="400" x2="400" y1="325" y2="25" />
+    <line x1="400" x2="0" y1="25" y2="25" />
+    <line x1="0" x2="0" y1="25" y2="325" />
+  </g>
+  <g class="LAYER-FRAME025">
+    <line x1="10" x2="10" y1="45" y2="65" />
+    <text fill="rgb(0,0,0)" font-family="helvetica" font-size="3" stroke="none" stroke-dasharray="none" transform="translate(10,35) rotate(0)">
+      <tspan text-anchor="start" x="0" y="2">Lines by Layer</tspan>
+    </text>
+    <use transform="translate(50,65) scale(1,1) rotate(0)" xlink:href="#Rectangle" />
+  </g>
+  <g class="LAYER-FRAME035">
+    <line x1="20" x2="20" y1="45" y2="65" />
+    <use stroke="rgb(255,255,0)" transform="translate(70,65) scale(1,1) rotate(0)" xlink:href="#Rectangle" />
+    <text fill="rgb(255,255,0)" font-family="helvetica" font-size="3" stroke="none" stroke-dasharray="none" transform="translate(33.678,41.3959) rotate(-45)">
+      <tspan text-anchor="start" x="0" y="2">Text by layer</tspan>
+    </text>
+  </g>
+  <g class="LAYER-FRAME050">
+    <line x1="30" x2="30" y1="45" y2="65" />
+    <use transform="translate(90,65) scale(1,1) rotate(0)" xlink:href="#Rectangle" />
+    <text fill="rgb(255,0,255)" font-family="helvetica" font-size="3" stroke-dasharray="1.8,1.8,1.8,1.8" stroke-width="0.15" transform="translate(50,35) rotate(0)">
+      <tspan text-anchor="start" x="0" y="2">Rectangle blocks by Layer</tspan>
+    </text>
+  </g>
+</svg>
