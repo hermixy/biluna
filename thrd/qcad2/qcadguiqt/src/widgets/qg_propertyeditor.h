@@ -23,8 +23,6 @@
 **
 **********************************************************************/
 
-#ifdef RS_PROPERTYEDITOR
-
 #ifndef QG_PROPERTYEDITOR_H
 #define QG_PROPERTYEDITOR_H
 
@@ -35,7 +33,14 @@
 #include <QHash>
 #include <QString>
 
-#include <QtTreePropertyBrowser>
+#include "qtbuttonpropertybrowser.h"
+#include "qteditorfactory.h"
+#include "qtgroupboxpropertybrowser.h"
+#include "qtpropertybrowser.h"
+#include "qtpropertybrowserutils_p.h"
+#include "qtpropertymanager.h"
+#include "qttreepropertybrowser.h"
+#include "qtvariantproperty.h"
 
 #include "rs.h"
 #include "rs_propertyowner.h"
@@ -52,16 +57,6 @@ class QtEnumPropertyManager;
 class RS_PropertyOwnerContainerInterface;
     
     
-    
-/*
-class QG_UniquePropertyHash : public QHash<QString, QVariant> {
-public:
-    RS_PropertyAttributes atts;
-};
-*/
-
-
-
 class QG_Variant {
 public:
     QVariant value;
@@ -129,8 +124,6 @@ private:
     
     static char separator;
 };
-
-#endif
 
 #endif
 

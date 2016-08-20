@@ -97,9 +97,7 @@ QG_CadToolBarMain::QG_CadToolBarMain(QG_CadToolBar* parent)
     connect(bMenuSelect, SIGNAL(clicked()),
             cadToolBar, SLOT(showToolBarSelect()));
 
-#ifndef RS_PROF
     bMenuPolyline->hide();
-#endif
     
 }
 

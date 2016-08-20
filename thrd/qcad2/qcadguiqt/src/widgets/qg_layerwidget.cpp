@@ -59,7 +59,7 @@
  * Constructor.
  */
 QG_LayerWidget::QG_LayerWidget(/*RS_ActionHandler* ah,*/ QWidget* parent,
-                               Qt::WFlags f)
+                               Qt::WindowFlags f)
         : QWidget(parent, f) {
 
     //actionHandler = ah;

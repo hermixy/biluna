@@ -371,28 +371,19 @@ void QG_MainWindow::slotMessage(const QString& text) {
 
     statusBar()->showMessage(text, 2000);
     
-#ifdef RS_PROF
     if (QG_DIALOGFACTORY->getCommandWidget()!=NULL) {
         QG_DIALOGFACTORY->getCommandWidget()->appendHistory(text);
     }
-#endif
 }
 
 /**
  * Shows the given error on the command line.
  */
 void QG_MainWindow::slotError(const QString& msg) {
-#ifdef RS_PROF
     if (QG_DIALOGFACTORY->getCommandWidget()!=NULL) {
         QG_DIALOGFACTORY->getCommandWidget()->appendHistory(msg);
     }
-#else
-    RS_DEBUG->print(RS_Debug::D_WARNING, (const char*)msg.toLatin1());
-#endif
 }
-
-
-
 
 
 /**
@@ -1514,12 +1505,10 @@ void QG_MainWindow::slotWindowActivated(QWidget* widget) {
         }
 #endif
 
-#ifdef RS_PROPERTYEDITOR
         if (QG_DIALOGFACTORY->getPropertyEditor()!=NULL) {
             QG_DIALOGFACTORY->getPropertyEditor()->update(
                 m->getDocument());
         }
-#endif
 
         if (QG_DIALOGFACTORY->getBlockWidget()!=NULL) {
             // Only graphics show blocks. (blocks don't)
@@ -1729,10 +1718,9 @@ void QG_MainWindow::slotBack() {
  */
 void QG_MainWindow::slotEnter() {
 
-#ifdef RS_PROF
     if (QG_DIALOGFACTORY->getCommandWidget()==NULL || 
         !QG_DIALOGFACTORY->getCommandWidget()->checkFocus()) {
-#endif
+
         if (QG_DIALOGFACTORY->getCadToolBar()!=NULL) {
             QG_DIALOGFACTORY->getCadToolBar()->forceNext();
         } else {
@@ -1741,9 +1729,7 @@ void QG_MainWindow::slotEnter() {
                 graphicView->enter();
             }
         }
-#ifdef RS_PROF
     }
-#endif
 }
 
 
@@ -1752,12 +1738,10 @@ void QG_MainWindow::slotEnter() {
  * Sets the keyboard focus on the command line.
  */
 void QG_MainWindow::slotFocusCommandLine() {
-#ifdef RS_PROF
     if (QG_DIALOGFACTORY->getCommandWidget()!=NULL && 
         QG_DIALOGFACTORY->getCommandWidget()->isVisible()) {
         QG_DIALOGFACTORY->getCommandWidget()->setFocus();
     }
-#endif
 }
     
 

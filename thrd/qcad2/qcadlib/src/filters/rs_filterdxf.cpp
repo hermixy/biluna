@@ -206,7 +206,7 @@ void RS_FilterDxf::addBlock(const DL_BlockData& data) {
             RS_String(data.name.c_str()).toLower()!="$paper_space" &&
             RS_String(data.name.c_str()).toLower()!="$model_space") {
 
-#ifndef RS_NO_COMPLEX_ENTITIES
+// #ifndef RS_NO_COMPLEX_ENTITIES
         if (RS_String(data.name.c_str()).startsWith("__CE")) {
             RS_EntityContainer* ec = new RS_EntityContainer();
             ec->setLayer("0");
@@ -214,7 +214,7 @@ void RS_FilterDxf::addBlock(const DL_BlockData& data) {
             graphic->addEntity(ec);
         }
         else {
-#endif
+// #endif
             RS_Vector bp(data.bpx, data.bpy);
             RS_Block* block =
                 new RS_Block(graphic,
@@ -223,10 +223,10 @@ void RS_FilterDxf::addBlock(const DL_BlockData& data) {
             if (graphic->addBlock(block)) {
                 currentContainer = block;
             }
-#ifndef RS_NO_COMPLEX_ENTITIES
+// #ifndef RS_NO_COMPLEX_ENTITIES
 
         }
-#endif
+// #endif
 
     }
 }

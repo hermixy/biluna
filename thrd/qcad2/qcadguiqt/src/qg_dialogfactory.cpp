@@ -74,15 +74,14 @@
 #include "rs_actionmodifyround.h"
 #include "rs_actionmodifytrimamount.h"
 
-#ifdef RS_PROF
+// prof
 #include "qg_commandwidget.h"
 #include "qg_polylineoptions.h"
 #include "qg_polylineequidistantoptions.h"
-#endif
 
-#ifdef RS_PROPERTYEDITOR
+// property editor
 #include "qg_propertyeditor.h"
-#endif
+
 
 #ifdef RS_CAM
 #include "rs_camdialog.h"
@@ -178,12 +177,8 @@ QG_DialogFactory::QG_DialogFactory(QWidget* parent)
     layerWidget = NULL;
     blockWidget = NULL;
     libraryWidget = NULL;
-#ifdef RS_PROF
     commandWidget = NULL;
-#endif
-#ifdef RS_PROPERTYEDITOR
     propertyEditor = NULL;
-#endif
 #ifdef RS_CAM
     simulationControls = NULL;
 #endif
@@ -273,7 +268,6 @@ QG_CadToolBar* QG_DialogFactory::createCadToolBar(/*RS_ActionHandler* ah,*/ QWid
 /**
  * Links this dialog factory to a command widget.
  */
-#ifdef RS_PROF
 QG_CommandWidget* QG_DialogFactory::createCommandWidget(
     /*RS_ActionHandler* ah,*/ QWidget* parent) {
 
@@ -282,7 +276,6 @@ QG_CommandWidget* QG_DialogFactory::createCommandWidget(
             qgMainWindow, SLOT(slotFocus()));
     return commandWidget;
 }
-#endif
 
 /**
  * Links this dialog factory to a layer widget.
@@ -332,7 +325,6 @@ QG_LibraryWidget* QG_DialogFactory::createLibraryWidget(/*RS_ActionHandler* ah,*
 /**
  * Links this dialog factory to a property editor.
  */
-#ifdef RS_PROPERTYEDITOR
 QG_PropertyEditor* QG_DialogFactory::createPropertyEditor(
     /*RS_ActionHandler* ah,*/ QWidget* parent) {
     
@@ -344,27 +336,22 @@ QG_PropertyEditor* QG_DialogFactory::createPropertyEditor(
             propertyEditor, SLOT(setEnabled(bool)));
     return propertyEditor;
 }
-#endif
-
     
 
 /**
  * Enables / disables (gray out) the property editor widget.
  **/
-#ifdef RS_PROPERTYEDITOR
 void QG_DialogFactory::enablePropertyEditor(bool on) {
     if (propertyEditor!=NULL) {
         propertyEditor->setEnabled(on);
     }
 }
-#endif
 
 
 
 /**
  * Updates the property editor (if available) to reflect the given entity.
  */
-#ifdef RS_PROPERTYEDITOR
 void QG_DialogFactory::updatePropertyEditor(RS_PropertyOwner* e, bool includeGeometry) {
     RS_DEBUG->print("QG_DialogFactory::updatePropertyEditor");
     if (propertyEditor!=NULL) {
@@ -375,9 +362,8 @@ void QG_DialogFactory::updatePropertyEditor(RS_PropertyOwner* e, bool includeGeo
         RS_DEBUG->print("QG_DialogFactory::updatePropertyEditor: propertyEditor==NULL");
     }
 }
-#endif
     
-#ifdef RS_PROPERTYEDITOR
+
 void QG_DialogFactory::updatePropertyEditor(RS_PropertyOwnerContainerInterface* doc, bool includeGeometry) {
     RS_DEBUG->print("QG_DialogFactory::updatePropertyEditor");
     if (propertyEditor!=NULL) {
@@ -387,10 +373,8 @@ void QG_DialogFactory::updatePropertyEditor(RS_PropertyOwnerContainerInterface* 
         RS_DEBUG->print("QG_DialogFactory::updatePropertyEditor: propertyEditor==NULL");
     }
 }
-#endif
 
 
-#ifdef RS_PROPERTYEDITOR
 void QG_DialogFactory::updatePropertyEditorGui() {
     RS_DEBUG->print("QG_DialogFactory::updatePropertyEditorGui");
     if (propertyEditor!=NULL) {
@@ -400,7 +384,6 @@ void QG_DialogFactory::updatePropertyEditorGui() {
         RS_DEBUG->print("QG_DialogFactory::updatePropertyEditorGui: propertyEditor==NULL");
     }
 }
-#endif
     
     
 #ifdef RS_CAM
@@ -1599,11 +1582,10 @@ void QG_DialogFactory::updateMouseWidget(const RS_String& left,
     if (mouseWidget!=NULL) {
         mouseWidget->setHelp(left, right);
     }
-#ifdef RS_PROF
+
     if (commandWidget!=NULL) {
         commandWidget->setCommand(left);
     }
-#endif
 }
 
 
@@ -1619,11 +1601,9 @@ void QG_DialogFactory::updateSelectionWidget(int num) {
     // update property editor to reflect selection
     updatePropertyEditor((RS_PropertyOwnerContainerInterface*)qgMainWindow->getDocument());
 /*
-#ifdef RS_PROPERTYEDITOR
     if (propertyEditor!=NULL && qgMainWindow!=NULL) {
         propertyEditor->update(qgMainWindow->getDocument());
     }
-#endif
 */
 }
 
@@ -1633,11 +1613,9 @@ void QG_DialogFactory::updateSelectionWidget(int num) {
  */
 void QG_DialogFactory::commandMessage(const RS_String& message) {
     RS_DEBUG->print("QG_DialogFactory::commandMessage");
-#ifdef RS_PROF
     if (commandWidget!=NULL) {
         commandWidget->appendHistory(message);
     }
-#endif
     RS_DEBUG->print("QG_DialogFactory::commandMessage: OK");
 }
 
@@ -1742,7 +1720,6 @@ void QG_DialogFactory::updateUiConnections() {
             QG_DIALOGFACTORY->getLayerWidget(), SLOT(slotLayerToggled(RS_Layer*)));
     }
 
-#ifdef RS_PROPERTYEDITOR
     if (QG_DIALOGFACTORY->getPropertyEditor()!=NULL) {
         disconnect(QG_DIALOGFACTORY->getPropertyEditor(), 0, 0, 0);
         connect(QG_DIALOGFACTORY->getPropertyEditor(), 
@@ -1756,7 +1733,6 @@ void QG_DialogFactory::updateUiConnections() {
             this, SLOT(slotPropertyChanged(RS_PropertyOwnerContainerInterface*,
                 const QString&, const QVariant&)));
     }
-#endif
     
     RS_DEBUG->print("QG_DialogFactory::updateUiConnections: OK");
 }
@@ -1775,8 +1751,6 @@ void QG_DialogFactory::slotPropertyChanged(RS_PropertyOwner* /*propertyOwner*/,
 void QG_DialogFactory::slotPropertyChanged(
     RS_PropertyOwnerContainerInterface* propertyOwnerContainer, 
     const QString& propertyName, const QVariant& propertyValue) {
-#ifdef RS_PROPERTYEDITOR
-
     RS_DEBUG->print("QG_DialogFactory::slotPropertyChanged (for container)");
         
     RS_PropertyAttributes propertyAttributes =
@@ -1819,7 +1793,6 @@ void QG_DialogFactory::slotPropertyChanged(
             }
         }
     }
-#endif
 
     RS_DEBUG->print("QG_DialogFactory::slotPropertyChanged: OK");
 }

@@ -63,7 +63,7 @@
 /**
  * Constructor.
  */
-QG_GraphicView::QG_GraphicView(QWidget* parent, Qt::WFlags f)
+QG_GraphicView::QG_GraphicView(QWidget* parent, Qt::WindowFlags f)
         : QWidget(parent, f), RS_GraphicView() {
 
     setBackground(background);

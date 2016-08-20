@@ -24,33 +24,34 @@
 **
 **********************************************************************/
 
-#ifndef RS_NO_COMPLEX_ENTITIES
 
-#ifndef RS_ACTIONPARISDEBUGCREATECONTAINER_H
-#define RS_ACTIONPARISDEBUGCREATECONTAINER_H
+//#ifndef RS_NO_COMPLEX_ENTITIES
 
-#include "rs_actioninterface.h"
+//#ifndef RS_ACTIONPARISDEBUGCREATECONTAINER_H
+//#define RS_ACTIONPARISDEBUGCREATECONTAINER_H
 
-/**
- * Creates an entity group without using blocks.
- *
- * @author Tobias Schulze, shhinfo.de
- */
-class RS_ActionPARISDebugCreateContainer : public RS_ActionInterface {
-    Q_OBJECT
-public:
-    RS_ActionPARISDebugCreateContainer(RS_EntityContainer& container,
-                         RS_GraphicView& graphicView);
-    virtual ~RS_ActionPARISDebugCreateContainer();
+//#include "rs_actioninterface.h"
 
-    static RS_String getName() {
-        return "P A R I S Debug Create Container";
-    }
+///**
+// * Creates an entity group without using blocks.
+// *
+// * @author Tobias Schulze, shhinfo.de
+// */
+//class RS_ActionPARISDebugCreateContainer : public RS_ActionInterface {
+//    Q_OBJECT
+//public:
+//    RS_ActionPARISDebugCreateContainer(RS_EntityContainer& container,
+//                         RS_GraphicView& graphicView);
+//    virtual ~RS_ActionPARISDebugCreateContainer();
 
-    virtual RS_String name() {
-        return RS_ActionPARISDebugCreateContainer::getName();
-    }
-}
+//    static RS_String getName() {
+//        return "P A R I S Debug Create Container";
+//    }
 
-#endif
-#endif
+//    virtual RS_String name() {
+//        return RS_ActionPARISDebugCreateContainer::getName();
+//    }
+//}
+
+//#endif
+//#endif

@@ -81,10 +81,8 @@ public:
     
     virtual void finish() {
         RS_ActionBase::finish();
-#ifdef RS_PROPERTYEDITOR
         RS_DIALOGFACTORY->updatePropertyEditor((RS_PropertyOwner*)NULL, false);
         RS_DIALOGFACTORY->updatePropertyEditorGui();
-#endif
     }
 
     virtual void trigger();

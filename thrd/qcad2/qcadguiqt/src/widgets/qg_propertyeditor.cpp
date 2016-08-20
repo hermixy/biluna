@@ -23,20 +23,12 @@
 **
 **********************************************************************/
 
-#ifdef RS_PROPERTYEDITOR
-
 #include "qg_propertyeditor.h"
 
 #include <QHeaderView>
 #include <QLayout>
 #include <QMetaProperty>
 #include <QTableWidget>
-
-#include <QtBrowserItem>
-#include <QtProperty>
-#include <QtVariantPropertyManager>
-#include <QtEnumPropertyManager>
-#include <QtEnumEditorFactory>
 
 #include "rs_propertyownercontainerinterface.h"
 #include "rs.h"
@@ -673,5 +665,3 @@ void QG_PropertyEditor::keyPressEvent(QKeyEvent* e) {
         break;
     }
 }
-
-#endif

@@ -43,13 +43,9 @@
 #include "qg_mousewidget.h"
 #include "qg_selectionwidget.h"
 
-#ifdef RS_PROF
 #include "qg_commandwidget.h"
-#endif
 
-#ifdef RS_PROPERTYEDITOR
 #include "qg_propertyeditor.h"
-#endif
 
 class RS_Document;
 #ifdef RS_CAM
@@ -60,9 +56,7 @@ class QG_LayerWidget;
 class QG_BlockWidget;
 class QG_LibraryWidget;
 class QG_PenToolBar;
-#ifndef RS_PROPERTYEDITOR
 class QG_PropertyEditor;
-#endif
 
 
 #define QG_DIALOGFACTORY (RS_DialogFactory::instance()->getFactoryObject()->isAdapter()==false ? ((QG_DialogFactory*)RS_DialogFactory::instance()->getFactoryObject()) : NULL)
@@ -173,53 +167,30 @@ public:
         return libraryWidget;
     }
 
-#ifdef RS_PROF
     virtual QG_CommandWidget* createCommandWidget(/*RS_ActionHandler* ah, */
         QWidget* parent);
-#endif
 
     /**
      * @return Command widget or NULL.
      */
-#ifdef RS_PROF
     QG_CommandWidget* getCommandWidget() {
         return commandWidget;
     }
-#endif
 
-#ifdef RS_PROPERTYEDITOR
     virtual QG_PropertyEditor* createPropertyEditor(/*RS_ActionHandler* ah, */
         QWidget* parent);
-#else
-    virtual QG_PropertyEditor* createPropertyEditor(/*RS_ActionHandler* , */
-        QWidget* ) { return NULL; }
-#endif
 
     /**
      * @return Property editor or NULL.
      */
-#ifdef RS_PROPERTYEDITOR
     virtual QG_PropertyEditor* getPropertyEditor() {
         return propertyEditor;
     }
-#else
-    virtual QG_PropertyEditor* getPropertyEditor() {
-        return NULL;
-    }
-#endif
         
-#ifdef RS_PROPERTYEDITOR
     virtual void enablePropertyEditor(bool on);
     virtual void updatePropertyEditor(RS_PropertyOwner* e, bool includeGeometry=true);
     virtual void updatePropertyEditor(RS_PropertyOwnerContainerInterface* doc, bool includeGeometry=true);
     virtual void updatePropertyEditorGui();
-#else
-    virtual void enablePropertyEditor(bool ) {}
-    virtual void updatePropertyEditor(RS_PropertyOwner* , bool =true) {}
-    virtual void updatePropertyEditor(RS_PropertyOwnerContainerInterface* , bool =true) {}
-    virtual void updatePropertyEditorGui() {}
-#endif
-        
     
 #ifdef RS_CAM
     virtual RS_SimulationControls* createSimulationControls(QWidget* parent);
@@ -354,14 +325,10 @@ protected:
     QG_BlockWidget* blockWidget;
     //! Library browser widget
     QG_LibraryWidget* libraryWidget;
-#ifdef RS_PROF
     //! Pointer to the command line widget
     QG_CommandWidget* commandWidget;
-#endif
-#ifdef RS_PROPERTYEDITOR
     //! Property editor widget
     QG_PropertyEditor* propertyEditor;
-#endif
 #ifdef RS_CAM
     //! CAM Simulation panel
     RS_SimulationControls* simulationControls;

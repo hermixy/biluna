@@ -28,10 +28,7 @@
 
 #include <QWidget>
 
-#ifdef RS_PROF
 #include "qg_cadtoolbarpolylines.h"
-#endif
-
 #include "rs_actioninterface.h"
 #include "ui_qg_cadtoolbar.h"
 
@@ -77,9 +74,7 @@ public slots:
     void showToolBarCircles();
     void showToolBarEllipses();
     void showToolBarSplines();
-#ifdef RS_PROF
     void showToolBarPolylines();
-#endif
     void showToolBarInfo();
     void showToolBarModify();
     void showToolBarSnap();
@@ -98,21 +93,15 @@ private:
     //RS_ActionHandler* actionHandler;
 
     QG_CadToolBarMain* tbMain;
-    
     QG_CadToolBarPoints* tbPoints;
     QG_CadToolBarLines* tbLines;
     QG_CadToolBarArcs* tbArcs;
     QG_CadToolBarCircles* tbCircles;
     QG_CadToolBarEllipses* tbEllipses;
     QG_CadToolBarSplines* tbSplines;
-#ifdef RS_PROF
     QG_CadToolBarPolylines* tbPolylines;
-#endif
-
     QG_CadToolBarDim* tbDim;
-
     QG_CadToolBarSnap* tbSnap;
-
     QG_CadToolBarInfo* tbInfo;
     QG_CadToolBarModify* tbModify;
     QG_CadToolBarSelect* tbSelect;

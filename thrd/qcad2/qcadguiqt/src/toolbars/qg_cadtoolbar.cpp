@@ -59,9 +59,7 @@ QG_CadToolBar::QG_CadToolBar(QWidget* parent)
     tbCircles = NULL;
     tbEllipses = NULL;
     tbSplines = NULL;
-#ifdef RS_PROF
     tbPolylines = NULL;
-#endif
 
     tbDim = NULL;
 
@@ -141,10 +139,8 @@ void QG_CadToolBar::createSubToolBars(/*RS_ActionHandler* ah*/) {
     tbSplines = new QG_CadToolBarSplines(this);
     tbSplines->hide();
 
-#ifdef RS_PROF
     tbPolylines = new QG_CadToolBarPolylines(this);
     tbPolylines->hide();
-#endif
 
     tbDim = new QG_CadToolBarDim(this);
     tbDim->hide();
@@ -190,16 +186,12 @@ void QG_CadToolBar::showToolBar(int id) {
     case RS2::ToolBarSplines:
         newTb = tbSplines;
         break;
-#ifdef RS_PROF
     case RS2::ToolBarPolylines:
         newTb = tbPolylines;
         break;
-#endif
-
     case RS2::ToolBarDim:
         newTb = tbDim;
         break;
-
     case RS2::ToolBarInfo:
         newTb = tbInfo;
         break;
@@ -257,11 +249,9 @@ void QG_CadToolBar::showToolBarSplines() {
     showToolBar(RS2::ToolBarSplines);
 }
 
-#ifdef RS_PROF
 void QG_CadToolBar::showToolBarPolylines() {
     showToolBar(RS2::ToolBarPolylines);
 }
-#endif
 
 void QG_CadToolBar::showToolBarInfo() {
     showToolBar(RS2::ToolBarInfo);

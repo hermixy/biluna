@@ -24,49 +24,47 @@
 **
 **********************************************************************/
 
-#ifndef RS_NO_COMPLEX_ENTITIES
+//#ifndef RS_NO_COMPLEX_ENTITIES
 
-#include "rs_actionparisdebugcreatecontainer.h"
+//#include "rs_actionparisdebugcreatecontainer.h"
 
-#include "rs_ptrlist.h"
+//#include "rs_ptrlist.h"
 
-/**
- * Constructor.
- */
-RS_ActionPARISDebugCreateContainer::RS_ActionPARISDebugCreateContainer(
-    RS_EntityContainer& container,
-    RS_GraphicView& graphicView)
-        : RS_ActionInterface(
-                     container, graphicView) {
+///**
+// * Constructor.
+// */
+//RS_ActionPARISDebugCreateContainer::RS_ActionPARISDebugCreateContainer(
+//    RS_EntityContainer& container,
+//    RS_GraphicView& graphicView)
+//        : RS_ActionInterface(
+//                     container, graphicView) {
 
-    //QMessageBox::about(NULL, "info", "check container");
-    RS_Document* theDoc = (RS_Document*) &container;
+//    //QMessageBox::about(NULL, "info", "check container");
+//    RS_Document* theDoc = (RS_Document*) &container;
 
-    if (theDoc->countSelected() < 2) {
-        return;
-    }
+//    if (theDoc->countSelected() < 2) {
+//        return;
+//    }
 
-    RS_EntityContainer* con = new RS_EntityContainer(theDoc, true);
-    RS_MutableListIterator<RS_Entity> it = theDoc->createIterator();
-    RS_Entity* e;
+//    RS_EntityContainer* con = new RS_EntityContainer(theDoc, true);
+//    RS_MutableListIterator<RS_Entity> it = theDoc->createIterator();
+//    RS_Entity* e;
 
-    while ( (e = it.current()) != 0) {
-        ++it;
-        if (e->isSelected()) {
-            con->addEntity(e);
-            e->setParent(con);
-        }
-    }
+//    while ( (e = it.current()) != 0) {
+//        ++it;
+//        if (e->isSelected()) {
+//            con->addEntity(e);
+//            e->setParent(con);
+//        }
+//    }
 
-    theDoc -> addEntity(con);
-}
-
-
-
-RS_ActionPARISDebugCreateContainer::~RS_ActionPARISDebugCreateContainer() {
-}
-
-#endif
+//    theDoc -> addEntity(con);
+//}
 
 
+
+//RS_ActionPARISDebugCreateContainer::~RS_ActionPARISDebugCreateContainer() {
+//}
+
+//#endif
 // EOF

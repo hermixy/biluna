@@ -1,7 +1,14 @@
 # ----------------------------------------------------------
-# $Id: db.pro 2248 2015-06-21 09:13:00Z rutger $
-# src.pro is renamed db.pro for Windows only
-# - for building db lib
+# $Id: cad.pro 0001 2016-08-19  rutger $
+# Created: Aug 19, 2016 - rutger
+#
+# Copyright (C) 2016 Red-Bag. All rights reserved.
+# This file is part of the Biluna CAD project.
+#
+# See http://www.red-bag.com for further details.
+#
+# Comments:
+# - for building cad lib
 # ----------------------------------------------------------
 
 # Type of binary, name and destination
@@ -38,6 +45,7 @@ INCLUDEPATH += \
     ../../thrd/qcad2/qcadactions/src/info \
     ../../thrd/qcad2/qcadactions/src/layers \
     ../../thrd/qcad2/qcadactions/src/misc \
+    ../../thrd/qcad2/qcadactions/src/modify \
     ../../thrd/qcad2/qcadactions/src/options \
     ../../thrd/qcad2/qcadactions/src/script \
     ../../thrd/qcad2/qcadactions/src/select \
@@ -46,7 +54,6 @@ INCLUDEPATH += \
     ../../thrd/qcad2/qcadactions/src/zoom \
     ../../thrd/qcad2/qcadguiqt/src \
     ../../thrd/qcad2/qcadguiqt/src/dialogs \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui \
     ../../thrd/qcad2/qcadguiqt/src/toolbars \
     ../../thrd/qcad2/qcadguiqt/src/tooloptions \
     ../../thrd/qcad2/qcadguiqt/src/widgets \
@@ -62,6 +69,7 @@ INCLUDEPATH += \
     ../../thrd/qcad2/qcadlib/src/modification \
     ../../thrd/qcad2/qcadlib/src/scripting \
     ../../thrd/qcad2/qcadlib/src/tools \
+    ../../thrd/qcad2/qcadprop \
     ../../thrd/qcad2/qcadsvg/src
 
 # LIBS		+=  -lmysqlclient -L/usr/lib/mysql/

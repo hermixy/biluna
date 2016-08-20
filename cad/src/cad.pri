@@ -1,9 +1,9 @@
 # ----------------------------------------------------------
-# $Id: db.pri 2248 2015-06-21 09:13:00Z rutger $
-# Created: Nov 22, 2009 11:34:42 AM - rutger
+# $Id: cad.pri 0001 2016-08-19 rutger $
+# Created: Aug 19, 2016 - rutger
 #
-# Copyright (C) 2009 Red-Bag. All rights reserved.
-# This file is part of the Biluna DB project.
+# Copyright (C) 2016 Red-Bag. All rights reserved.
+# This file is part of the Biluna CAD project.
 #
 # See http://www.red-bag.com for further details.
 #
@@ -13,11 +13,11 @@
 # ----------------------------------------------------------
 
 # Biluna db_global.h for dynamic library
-HEADERS = \
-    ../src/utils/db_global.h \
+HEADERS += \
+    ../../db/src/utils/db_global.h \
 
 # dxflib
-HEADERS = \
+HEADERS += \
     ../../thrd/qcad2/dxflib/src/dl_attributes.h\
     ../../thrd/qcad2/dxflib/src/dl_codes.h\
     ../../thrd/qcad2/dxflib/src/dl_creationadapter.h\
@@ -29,19 +29,19 @@ HEADERS = \
     ../../thrd/qcad2/dxflib/src/dl_writer.h\
     ../../thrd/qcad2/dxflib/src/dl_writer_ascii.h
 
-SOURCES = \
+SOURCES += \
     ../../thrd/qcad2/dxflib/src/dl_dxf.cpp\
     ../../thrd/qcad2/dxflib/src/dl_writer_ascii.cpp
 
 # fparser
-HEADERS = \
+HEADERS += \
     ../../thrd/qcad2/fparser/src/fparser.h
 	
-SOURCES = \
+SOURCES += \
     ../../thrd/qcad2/fparser/src/fparser.cpp
 
 # qcadactions
-HEADERS = \
+HEADERS += \
     ../../thrd/qcad2/qcadactions//src/blocks/rs_actionblocksadd.h \
     ../../thrd/qcad2/qcadactions/src/blocks/rs_actionblocksattributes.h \
     ../../thrd/qcad2/qcadactions/src/blocks/rs_actionblockscreate.h \
@@ -221,7 +221,7 @@ HEADERS = \
     ../../thrd/qcad2/qcadactions/src/zoom/rs_actionzoomscroll.h \
     ../../thrd/qcad2/qcadactions/src/zoom/rs_actionzoomwindow.h
 
-SOURCES = \
+SOURCES += \
     ../../thrd/qcad2/qcadactions/src/blocks/rs_actionblocksadd.cpp \
     ../../thrd/qcad2/qcadactions/src/blocks/rs_actionblocksattributes.cpp \
     ../../thrd/qcad2/qcadactions/src/blocks/rs_actionblockscreate.cpp \
@@ -401,88 +401,88 @@ SOURCES = \
     ../../thrd/qcad2/qcadactions/src/zoom/rs_actionzoomwindow.cpp
 
 # qcadguiqt
-FORMS = \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_aboutdialog.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_blockdialog.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgarc.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgattributes.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgcircle.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgdimension.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgdimlinear.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgellipse.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlghatch.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgimageoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlginitial.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlginsert.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgline.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgmirror.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgmoverotate.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgmove.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgonetime.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgoptionsdrawing.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgoptionsgeneral.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgpoint.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgrotate2.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgrotate.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgscale.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgspline.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_dlgtext.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_exitdialog.ui \
-    ../../thrd/qcad2/qcadguiqt/src/dialogs/ui/qg_layerdialog.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbararcs.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarcircles.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbardim.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarellipses.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarinfo.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarlines.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarmain.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarmodify.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarpoints.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarselect.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarsnap.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarsplines.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbar.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_arcoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_arctangentialoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_beveloptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_circleoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_divide2options.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_dimlinearoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_dimoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_editpasteoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_imageoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_insertoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_isoprojectoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_libraryinsertoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_lineangleoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_linebisectoroptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_lineoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_lineparalleloptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_lineparallelthroughoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_linepolygon2options.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_linepolygonoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_linerelangleoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_moverotateoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_printpreviewoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_roundoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_snapcoordinateoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_snapcoordinatepolaroptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_snapdistoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_splineoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_textoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_trimamountoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/widgets/ui/qg_coordinatewidget.ui \
-    ../../thrd/qcad2/qcadguiqt/src/widgets/ui/qg_librarywidget.ui \
-    ../../thrd/qcad2/qcadguiqt/src/widgets/ui/qg_mousewidget.ui \
-    ../../thrd/qcad2/qcadguiqt/src/widgets/ui/qg_selectionwidget.ui \
-    ../../thrd/qcad2/qcadguiqt/src/widgets/ui/qg_widgetdimensionlabel.ui \
-    ../../thrd/qcad2/qcadguiqt/src/widgets/ui/qg_widgetpen.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_polylineoptions.ui \
-    ../../thrd/qcad2/qcadguiqt/src/toolbars/ui/qg_cadtoolbarpolylines.ui \
-    ../../thrd/qcad2/qcadguiqt/src/widgets/ui/qg_commandwidget.ui \
-    ../../thrd/qcad2/qcadguiqt/src/tooloptions/ui/qg_polylineequidistantoptions.ui
+FORMS += \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_aboutdialog.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_blockdialog.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgarc.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgattributes.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgcircle.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgdimension.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgdimlinear.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgellipse.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlghatch.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgimageoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlginitial.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlginsert.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgline.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgmirror.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgmoverotate.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgmove.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgonetime.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgoptionsdrawing.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgoptionsgeneral.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgpoint.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgrotate2.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgrotate.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgscale.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgspline.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_dlgtext.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_exitdialog.ui \
+    ../../thrd/qcad2/qcadguiqt/src/dialogs/qg_layerdialog.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbararcs.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarcircles.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbardim.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarellipses.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarinfo.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarlines.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarmain.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarmodify.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarpoints.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarpolylines.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarselect.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarsnap.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbarsplines.ui \
+    ../../thrd/qcad2/qcadguiqt/src/toolbars/qg_cadtoolbar.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_arcoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_arctangentialoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_beveloptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_circleoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_divide2options.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_dimlinearoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_dimoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_editpasteoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_imageoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_insertoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_isoprojectoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_libraryinsertoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_lineangleoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_linebisectoroptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_lineoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_lineparalleloptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_lineparallelthroughoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_linepolygon2options.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_linepolygonoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_linerelangleoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_moverotateoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_polylineoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_polylineequidistantoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_printpreviewoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_roundoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_snapcoordinateoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_snapcoordinatepolaroptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_snapdistoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_splineoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_textoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_trimamountoptions.ui \
+    ../../thrd/qcad2/qcadguiqt/src/widgets/qg_commandwidget.ui \
+    ../../thrd/qcad2/qcadguiqt/src/widgets/qg_coordinatewidget.ui \
+    ../../thrd/qcad2/qcadguiqt/src/widgets/qg_librarywidget.ui \
+    ../../thrd/qcad2/qcadguiqt/src/widgets/qg_mousewidget.ui \
+    ../../thrd/qcad2/qcadguiqt/src/widgets/qg_selectionwidget.ui \
+    ../../thrd/qcad2/qcadguiqt/src/widgets/qg_widgetdimensionlabel.ui \
+    ../../thrd/qcad2/qcadguiqt/src/widgets/qg_widgetpen.ui
 	
-HEADERS = \
+HEADERS += \
     ../../thrd/qcad2/qcadguiqt/src/qg_dialogfactory.h \
     ../../thrd/qcad2/qcadguiqt/src/qg_graphicview.h \
     ../../thrd/qcad2/qcadguiqt/src/qg_mainwindow.h \
@@ -587,7 +587,7 @@ HEADERS = \
     ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_polylineoptions.h \
     ../../thrd/qcad2/qcadguiqt/src/widgets/qg_propertyeditor.h
 	
-SOURCES = \
+SOURCES += \
     ../../thrd/qcad2/qcadguiqt/src/qg_mdiwindow.cpp \
     ../../thrd/qcad2/qcadguiqt/src/qg_dialogfactory.cpp \
     ../../thrd/qcad2/qcadguiqt/src/qg_graphicview.cpp \
@@ -689,18 +689,243 @@ SOURCES = \
     ../../thrd/qcad2/qcadguiqt/src/tooloptions/qg_polylineoptions.cpp \
     ../../thrd/qcad2/qcadguiqt/src/widgets/qg_propertyeditor.cpp
 
-
-
-
-
-
+# qcadlib
+HEADERS += \
+    ../../thrd/qcad2/qcadlib/src/actions/rs_actioninterface.h \
+    ../../thrd/qcad2/qcadlib/src/actions/rs_guiaction.h \
+    ../../thrd/qcad2/qcadlib/src/actions/rs_preview.h \
+    ../../thrd/qcad2/qcadlib/src/actions/rs_snapper.h \
+    ../../thrd/qcad2/qcadlib/src/creation/rs_creation.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_arc.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_atomicentity.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_block.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_circle.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_constructionline.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimaligned.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimangular.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimdiametric.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimension.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimlinear.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimradial.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimordinate.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_document.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_ellipse.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_entitycontainer.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_entity.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_fontchar.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_graphic.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_hatch.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_image.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_insert.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_leader.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_line.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_pattern.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_point.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_polyline.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_solid.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_spline.h \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_text.h \
+    ../../thrd/qcad2/qcadlib/src/fileio/rs_fileio.h \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filtercxf.h \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filterdxf1.h \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filterdxf.h \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filterinterface.h \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filtersvg.h \
+    ../../thrd/qcad2/qcadlib/src/global/rs.h \
+    ../../thrd/qcad2/qcadlib/src/global/rs_version.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_bitmapgraphicview.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_commandevent.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_coordinateevent.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_dialogfactoryadapter.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_dialogfactory.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_dialogfactoryinterface.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_event.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_eventhandler.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_graphicview.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_grid.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_keyevent.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_linetypepattern.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_mainwindowinterface.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_mouseevent.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_painteradapter.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_painter.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_painterqt.h \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_staticgraphicview.h \
+    ../../thrd/qcad2/qcadlib/src/information/rs_infoarea.h \
+    ../../thrd/qcad2/qcadlib/src/information/rs_information.h \
+    ../../thrd/qcad2/qcadlib/src/math/rs_math.h \
+    ../../thrd/qcad2/qcadlib/src/math/rs_matrix.h \
+    ../../thrd/qcad2/qcadlib/src/modification/rs_modification.h \
+    ../../thrd/qcad2/qcadlib/src/modification/rs_selection.h \
+    ../../thrd/qcad2/qcadlib/src/scripting/rs_python.h \
+    ../../thrd/qcad2/qcadlib/src/scripting/rs_python_wrappers.h \
+    ../../thrd/qcad2/qcadlib/src/scripting/rs_script.h \
+    ../../thrd/qcad2/qcadlib/src/scripting/rs_scriptlist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_application.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_blocklist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_blocklistlistener.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_clipboard.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_color.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_datetime.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_debug.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_dir.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_extptrlist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_file.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_fileinfo.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_flags.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_font.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_fontlist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_hash.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_img.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_layer.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_layerlist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_list.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_patternlist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_pen.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_pixmap.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_pointarray.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_propertyowner.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_ptrlist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_ptrqueue.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_regexp.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_settings.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_string.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_stringlist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_system.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_textstream.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_translator.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_undoable.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_undocycle.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_undo.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_units.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_utility.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_valuelist.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_valuevector.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_variabledict.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_variable.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_variant.h \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_vector.h
 	
+SOURCES += \
+    ../../thrd/qcad2/qcadlib/src/actions/rs_actioninterface.cpp \
+    ../../thrd/qcad2/qcadlib/src/actions/rs_guiaction.cpp \
+    ../../thrd/qcad2/qcadlib/src/actions/rs_preview.cpp \
+    ../../thrd/qcad2/qcadlib/src/actions/rs_snapper.cpp \
+    ../../thrd/qcad2/qcadlib/src/creation/rs_creation.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_arc.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_block.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_circle.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_constructionline.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimaligned.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimangular.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimdiametric.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimension.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimlinear.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimradial.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_dimordinate.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_document.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_ellipse.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_entitycontainer.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_entity.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_graphic.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_hatch.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_image.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_insert.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_leader.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_line.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_pattern.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_point.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_polyline.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_solid.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_spline.cpp \
+    ../../thrd/qcad2/qcadlib/src/entities/rs_text.cpp \
+    ../../thrd/qcad2/qcadlib/src/fileio/rs_fileio.cpp \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filtercxf.cpp \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filterdxf1.cpp \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filterdxf.cpp \
+    ../../thrd/qcad2/qcadlib/src/filters/rs_filtersvg.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_bitmapgraphicview.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_dialogfactory.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_eventhandler.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_graphicview.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_grid.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_linetypepattern.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_painter.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_painterqt.cpp \
+    ../../thrd/qcad2/qcadlib/src/gui/rs_staticgraphicview.cpp \
+    ../../thrd/qcad2/qcadlib/src/information/rs_infoarea.cpp \
+    ../../thrd/qcad2/qcadlib/src/information/rs_information.cpp \
+    ../../thrd/qcad2/qcadlib/src/math/rs_math.cpp \
+    ../../thrd/qcad2/qcadlib/src/math/rs_matrix.cpp \
+    ../../thrd/qcad2/qcadlib/src/modification/rs_modification.cpp \
+    ../../thrd/qcad2/qcadlib/src/modification/rs_selection.cpp \
+    ../../thrd/qcad2/qcadlib/src/scripting/rs_python.cpp \
+    ../../thrd/qcad2/qcadlib/src/scripting/rs_python_wrappers.cpp \
+    ../../thrd/qcad2/qcadlib/src/scripting/rs_script.cpp \
+    ../../thrd/qcad2/qcadlib/src/scripting/rs_scriptlist.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_blocklist.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_clipboard.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_debug.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_font.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_fontlist.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_layer.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_layerlist.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_patternlist.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_propertyowner.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_settings.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_string.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_system.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_undoable.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_undo.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_units.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_utility.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_variabledict.cpp \
+    ../../thrd/qcad2/qcadlib/src/tools/rs_vector.cpp
+
+# qcadprop
+HEADERS += \
+    ../../thrd/qcad2/qcadprop/qtpropertybrowser.h \
+    ../../thrd/qcad2/qcadprop/qtpropertymanager.h \
+    ../../thrd/qcad2/qcadprop/qteditorfactory.h \
+    ../../thrd/qcad2/qcadprop/qtvariantproperty.h \
+    ../../thrd/qcad2/qcadprop/qttreepropertybrowser.h \
+    ../../thrd/qcad2/qcadprop/qtbuttonpropertybrowser.h \
+    ../../thrd/qcad2/qcadprop/qtgroupboxpropertybrowser.h \
+    ../../thrd/qcad2/qcadprop/qtpropertybrowserutils_p.h
+			
+SOURCES += \
+    ../../thrd/qcad2/qcadprop/qtpropertybrowser.cpp \
+    ../../thrd/qcad2/qcadprop/qtpropertymanager.cpp \
+    ../../thrd/qcad2/qcadprop/qteditorfactory.cpp \
+    ../../thrd/qcad2/qcadprop/qtvariantproperty.cpp \
+    ../../thrd/qcad2/qcadprop/qttreepropertybrowser.cpp \
+    ../../thrd/qcad2/qcadprop/qtbuttonpropertybrowser.cpp \
+    ../../thrd/qcad2/qcadprop/qtgroupboxpropertybrowser.cpp \
+    ../../thrd/qcad2/qcadprop/qtpropertybrowserutils.cpp
 	
-RESOURCES = \
+# qcadsvg
+HEADERS	+= \
+    ../../thrd/qcad2/qcadsvg/src/rb_cadattributes.h \
+    ../../thrd/qcad2/qcadsvg/src/rb_filtersvg.h \
+    ../../thrd/qcad2/qcadsvg/src/rb_svgcodes.h \
+    ../../thrd/qcad2/qcadsvg/src/rb_xmlcodes.h \
+    ../../thrd/qcad2/qcadsvg/src/rb_xmlreader.h \
+    ../../thrd/qcad2/qcadsvg/src/rb_xmlsvg.h \
+    ../../thrd/qcad2/qcadsvg/src/rb_xmlwriter.h 
+	
+SOURCES	+= \
+    ../../thrd/qcad2/qcadsvg/src/rb_cadattributes.cpp \
+    ../../thrd/qcad2/qcadsvg/src/rb_filtersvg.cpp \
+    ../../thrd/qcad2/qcadsvg/src/rb_svgcodes.cpp \
+    ../../thrd/qcad2/qcadsvg/src/rb_xmlcodes.cpp \
+    ../../thrd/qcad2/qcadsvg/src/rb_xmlsvg.cpp \
+    ../../thrd/qcad2/qcadsvg/src/rb_xmlwriter.cpp 
+
+# other files	
+RESOURCES += \
     ../../thrd/qcad2/qcadactions/src/qcadactions.qrc \
-    ../../thrd/qcad2/qcadguiqt/src/qcadguiqt.qrc
+    ../../thrd/qcad2/qcadguiqt/src/qcadguiqt.qrc \
+    ../../thrd/qcad2/qcadprop/qtpropertybrowser.qrc
 
-
-OTHER_FILES = \
-
+OTHER_FILES += \
 #    ../src/gui/db_browserdialog.dox \

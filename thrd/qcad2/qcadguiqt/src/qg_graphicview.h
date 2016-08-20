@@ -69,7 +69,7 @@ class QG_GraphicView: public QWidget,
     Q_OBJECT
 
 public:
-    QG_GraphicView(QWidget* parent=0, Qt::WFlags f=0);
+    QG_GraphicView(QWidget* parent=0, Qt::WindowFlags f=0);
     virtual ~QG_GraphicView();
 
     virtual int getWidth();

@@ -48,7 +48,7 @@ class QG_LayerWidget: public QWidget {
 
 public:
     QG_LayerWidget(/*RS_ActionHandler* ah,*/ QWidget* parent,
-                   Qt::WFlags f = 0);
+                   Qt::WindowFlags f = 0);
     ~QG_LayerWidget();
 
     void setLayerList(RS_LayerList* layerList);

@@ -116,10 +116,8 @@ void RS_ActionEditPaste::init(int status) {
 #endif
 
 #ifdef RS_ARCH
-#ifdef RS_PROPERTYEDITOR
         RS_DIALOGFACTORY->updatePropertyEditor(this, false);
         RS_DIALOGFACTORY->updatePropertyEditorGui();
-#endif
 #endif
     }
 }
@@ -130,10 +128,8 @@ void RS_ActionEditPaste::resume() {
 
     if (getStatus()>=0) {
 #ifdef RS_ARCH
-#ifdef RS_PROPERTYEDITOR
         RS_DIALOGFACTORY->updatePropertyEditor(this, false);
         RS_DIALOGFACTORY->updatePropertyEditorGui();
-#endif
 #endif
     }
 }
