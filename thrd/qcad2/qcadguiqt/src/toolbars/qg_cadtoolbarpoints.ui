@@ -1,0 +1,77 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>QG_CadToolBarPoints</class>
+ <widget class="QWidget" name="QG_CadToolBarPoints" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>120</width>
+    <height>336</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>56</width>
+    <height>336</height>
+   </size>
+  </property>
+  <widget class="QToolButton" name="bBack" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Back to main menu</string>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="icon" >
+    <iconset resource="../qcadguiqt.qrc" >:/qcad/images/back.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bPoint" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>20</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Single points</string>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="icon" >
+    <iconset resource="../qcadguiqt.qrc" >:/qcad/images/points.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+ </widget>
+ <pixmapfunction></pixmapfunction>
+ <resources>
+  <include location="../qcadguiqt.qrc" />
+ </resources>
+ <connections/>
+</ui>

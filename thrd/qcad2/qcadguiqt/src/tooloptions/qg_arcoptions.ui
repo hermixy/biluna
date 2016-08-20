@@ -1,0 +1,75 @@
+<ui version="4.0" >
+ <class>QG_ArcOptions</class>
+ <widget class="QWidget" name="QG_ArcOptions" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>100</width>
+    <height>22</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy>
+    <hsizetype>4</hsizetype>
+    <vsizetype>5</vsizetype>
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>80</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>100</width>
+    <height>22</height>
+   </size>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <widget class="QRadioButton" name="rbPos" >
+     <property name="toolTip" >
+      <string>Counter Clockwise</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/dirpos.png</iconset>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="rbNeg" >
+     <property name="toolTip" >
+      <string>Clockwise</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/dirneg.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../qcadguiqt.qrc" />
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,89 @@
+<ui version="4.0" >
+ <class>QG_LinePolygon2Options</class>
+ <widget class="QWidget" name="QG_LinePolygon2Options" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>150</width>
+    <height>22</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>150</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>200</width>
+    <height>22</height>
+   </size>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lNumber" >
+     <property name="text" >
+      <string>Number:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSpinBox" name="sbNumber" >
+     <property name="toolTip" >
+      <string>Number of edges</string>
+     </property>
+     <property name="minimum" >
+      <number>3</number>
+     </property>
+     <property name="maximum" >
+      <number>1000</number>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="sep1" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Fixed" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,105 @@
+<ui version="4.0" >
+ <class>QG_IsoProjectOptions</class>
+ <widget class="QWidget" name="QG_IsoProjectOptions" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>330</width>
+    <height>22</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>200</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>500</width>
+    <height>22</height>
+   </size>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lViewDirection" >
+     <property name="text" >
+      <string>View Direction:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="cbViewDirection" >
+     <property name="toolTip" >
+      <string>Reference point for positioning</string>
+     </property>
+     <item>
+      <property name="text" >
+       <string>Top</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Front</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Side</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lSegmentLength" >
+     <property name="text" >
+      <string>Segment Length:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="leSegmentLength" />
+   </item>
+   <item>
+    <widget class="Line" name="sep1" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Fixed" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

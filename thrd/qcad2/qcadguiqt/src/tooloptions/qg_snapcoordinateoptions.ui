@@ -1,0 +1,161 @@
+<ui version="4.0" >
+ <class>QG_SnapCoordinateOptions</class>
+ <widget class="QWidget" name="QG_SnapCoordinateOptions" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>22</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy>
+    <hsizetype>4</hsizetype>
+    <vsizetype>5</vsizetype>
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>200</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>300</width>
+    <height>22</height>
+   </size>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lX" >
+     <property name="sizePolicy" >
+      <sizepolicy>
+       <hsizetype>1</hsizetype>
+       <vsizetype>5</vsizetype>
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>x:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="leX" >
+     <property name="toolTip" >
+      <string>X Coordinate</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lY" >
+     <property name="sizePolicy" >
+      <sizepolicy>
+       <hsizetype>1</hsizetype>
+       <vsizetype>5</vsizetype>
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>y:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="leY" >
+     <property name="toolTip" >
+      <string>Y Coordinate</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="cbRel" >
+     <property name="toolTip" >
+      <string>Tick if coordinates refer to relative zero point</string>
+     </property>
+     <property name="text" >
+      <string>Relative</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="bSet" >
+     <property name="toolTip" >
+      <string>Set the coordinate</string>
+     </property>
+     <property name="text" >
+      <string>Set</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="sep1" >
+     <property name="sizePolicy" >
+      <sizepolicy>
+       <hsizetype>0</hsizetype>
+       <vsizetype>1</vsizetype>
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>leY</sender>
+   <signal>returnPressed()</signal>
+   <receiver>bSet</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>148</x>
+     <y>12</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>271</x>
+     <y>15</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>leX</sender>
+   <signal>returnPressed()</signal>
+   <receiver>bSet</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>51</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>272</x>
+     <y>2</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

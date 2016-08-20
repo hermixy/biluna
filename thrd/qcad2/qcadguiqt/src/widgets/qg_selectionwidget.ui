@@ -1,0 +1,61 @@
+<ui version="4.0" >
+ <class>QG_SelectionWidget</class>
+ <widget class="QWidget" name="QG_SelectionWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>160</width>
+    <height>32</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>100</width>
+    <height>32</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>160</width>
+    <height>32</height>
+   </size>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
+    <number>0</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lLabel" >
+     <property name="text" >
+      <string>Selected Entities:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lEntities" >
+     <property name="toolTip" >
+      <string>Number of entities that are currently selected</string>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

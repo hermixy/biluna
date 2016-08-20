@@ -1,0 +1,98 @@
+<ui version="4.0" >
+ <class>QG_LibraryWidget</class>
+ <widget class="QWidget" name="QG_LibraryWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>157</width>
+    <height>433</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
+    <number>2</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QSplitter" name="splitter" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QTreeWidget" name="twDirectory" >
+      <property name="uniformRowHeights" >
+       <bool>true</bool>
+      </property>
+      <property name="columnCount" >
+       <number>1</number>
+      </property>
+      <column>
+       <property name="text" >
+        <string/>
+       </property>
+      </column>
+     </widget>
+     <widget class="QListWidget" name="lwPreview" >
+      <property name="showDropIndicator" stdset="0" >
+       <bool>false</bool>
+      </property>
+      <property name="dragEnabled" >
+       <bool>false</bool>
+      </property>
+      <property name="iconSize" >
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+      <property name="movement" >
+       <enum>QListView::Static</enum>
+      </property>
+      <property name="gridSize" >
+       <size>
+        <width>0</width>
+        <height>-1</height>
+       </size>
+      </property>
+      <property name="viewMode" >
+       <enum>QListView::IconMode</enum>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="bInsert" >
+     <property name="text" >
+      <string>Insert</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+  <widget class="QSplitter" name="splitter_2" >
+   <property name="geometry" >
+    <rect>
+     <x>1</x>
+     <y>1</y>
+     <width>139</width>
+     <height>400</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

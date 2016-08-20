@@ -1,0 +1,153 @@
+<ui version="4.0" >
+ <class>QG_EditPasteOptions</class>
+ <widget class="QWidget" name="QG_EditPasteOptions" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>451</width>
+    <height>22</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>400</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>500</width>
+    <height>50</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Paste Options</string>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lRotation" >
+     <property name="text" >
+      <string>Rotation:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="leRotation" >
+     <property name="toolTip" >
+      <string>Rotation Angle</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lFactor" >
+     <property name="text" >
+      <string>Factor:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="leFactor" >
+     <property name="toolTip" >
+      <string>Scale Factor</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="bFlipHorizontal" >
+     <property name="maximumSize" >
+      <size>
+       <width>16777215</width>
+       <height>22</height>
+      </size>
+     </property>
+     <property name="toolTip" >
+      <string>Flip Horizontal</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/fliphorizontal.png</iconset>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="bFlipVertical" >
+     <property name="maximumSize" >
+      <size>
+       <width>16777215</width>
+       <height>22</height>
+      </size>
+     </property>
+     <property name="toolTip" >
+      <string>Flip Vertical</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/flipvertical.png</iconset>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="cbUseCurrentLayer" >
+     <property name="text" >
+      <string>To current Layer</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="sep1" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <includes>
+  <include location="local" >rs_settings.h</include>
+  <include location="local" >rs_modification.h</include>
+  <include location="local" >rs_actioneditpaste.h</include>
+ </includes>
+ <resources>
+  <include location="../../qcadguiqt.qrc" />
+ </resources>
+ <connections/>
+</ui>

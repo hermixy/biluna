@@ -1,0 +1,464 @@
+<ui version="4.0" >
+ <class>QG_CadToolBarMain</class>
+ <widget class="QWidget" name="QG_CadToolBarMain" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>56</width>
+    <height>406</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="MinimumExpanding" hsizetype="Minimum" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>56</width>
+    <height>336</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>56</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <widget class="QToolButton" name="bMenuSpline" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>56</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="sizePolicy" >
+    <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuPoint" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuText" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>116</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuHatch" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>144</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuImage" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>144</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuBlock" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>204</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Create Block</string>
+   </property>
+   <property name="icon" >
+    <iconset/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuArc" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>28</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="toolTip" >
+    <string>Show arc tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menuarc.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuEllipse" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>56</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="toolTip" >
+    <string>Show ellipse tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menuellipse.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuPolyline" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>84</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="toolTip" >
+    <string>Show polyline tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menupolyline.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuDim" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>116</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Show dimensioning tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menudim.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuModify" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>176</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Show edit tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menuedit.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuInfo" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>176</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Show measuring tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menumeasure.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuSelect" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>204</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Show selection tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menuselect.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuLine" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>0</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="toolTip" >
+    <string>Show line tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menuline.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuCircle" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>28</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>28</width>
+     <height>28</height>
+    </size>
+   </property>
+   <property name="toolTip" >
+    <string>Show circle tools</string>
+   </property>
+   <property name="icon" >
+    <iconset resource="../../qcadguiqt.qrc" >:/qcad/images/menucircle.png</iconset>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bMenuIsoProject" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>236</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Create Block</string>
+   </property>
+   <property name="icon" >
+    <iconset/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>bMenuPoint</tabstop>
+  <tabstop>bMenuLine</tabstop>
+  <tabstop>bMenuArc</tabstop>
+  <tabstop>bMenuCircle</tabstop>
+  <tabstop>bMenuEllipse</tabstop>
+  <tabstop>bMenuSpline</tabstop>
+  <tabstop>bMenuPolyline</tabstop>
+  <tabstop>bMenuText</tabstop>
+  <tabstop>bMenuDim</tabstop>
+  <tabstop>bMenuHatch</tabstop>
+  <tabstop>bMenuImage</tabstop>
+  <tabstop>bMenuModify</tabstop>
+  <tabstop>bMenuInfo</tabstop>
+  <tabstop>bMenuBlock</tabstop>
+  <tabstop>bMenuSelect</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../qcadguiqt.qrc" />
+ </resources>
+ <connections/>
+</ui>

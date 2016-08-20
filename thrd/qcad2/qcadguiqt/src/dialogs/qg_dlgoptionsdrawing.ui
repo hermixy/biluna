@@ -1,0 +1,1137 @@
+<ui version="4.0" >
+ <class>QG_DlgOptionsDrawing</class>
+ <widget class="QDialog" name="QG_DlgOptionsDrawing" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>477</width>
+    <height>596</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Drawing Preferences</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>8</number>
+   </property>
+   <property name="topMargin" >
+    <number>8</number>
+   </property>
+   <property name="rightMargin" >
+    <number>8</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>8</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>&amp;Paper</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <property name="leftMargin" >
+        <number>8</number>
+       </property>
+       <property name="topMargin" >
+        <number>8</number>
+       </property>
+       <property name="rightMargin" >
+        <number>8</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="gbPaper" >
+         <property name="title" >
+          <string>Paper Format</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <property name="leftMargin" >
+           <number>8</number>
+          </property>
+          <property name="topMargin" >
+           <number>8</number>
+          </property>
+          <property name="rightMargin" >
+           <number>8</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>8</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QComboBox" name="cbPaperFormat" />
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>311</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QRadioButton" name="rbLandscape" >
+              <property name="text" >
+               <string>&amp;Landscape</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbPortrait" >
+              <property name="text" >
+               <string>P&amp;ortrait</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout" >
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <property name="horizontalSpacing" >
+             <number>6</number>
+            </property>
+            <property name="verticalSpacing" >
+             <number>6</number>
+            </property>
+            <item row="1" column="2" >
+             <widget class="QLabel" name="label_2" >
+              <property name="text" >
+               <string>mm</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2" >
+             <widget class="QLabel" name="label" >
+              <property name="text" >
+               <string>mm</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3" >
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1" >
+             <widget class="QLineEdit" name="lePaperHeight" />
+            </item>
+            <item row="0" column="0" >
+             <widget class="QLabel" name="lPageWidth" >
+              <property name="text" >
+               <string>Paper &amp;width:</string>
+              </property>
+              <property name="buddy" >
+               <cstring>lePaperWidth</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" >
+             <widget class="QLabel" name="lPageHeight" >
+              <property name="text" >
+               <string>Paper &amp;height:</string>
+              </property>
+              <property name="buddy" >
+               <cstring>lePaperHeight</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" >
+             <widget class="QLineEdit" name="lePaperWidth" />
+            </item>
+            <item row="1" column="3" >
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>&amp;Units</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QGroupBox" name="gbUnit" >
+         <property name="title" >
+          <string>Main Unit</string>
+         </property>
+         <layout class="QHBoxLayout" >
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <property name="leftMargin" >
+           <number>8</number>
+          </property>
+          <property name="topMargin" >
+           <number>8</number>
+          </property>
+          <property name="rightMargin" >
+           <number>8</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>8</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lUnit" >
+            <property name="text" >
+             <string>&amp;Main drawing unit:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>cbUnit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cbUnit" />
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType" >
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>71</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>&amp;Grid</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <property name="leftMargin" >
+        <number>8</number>
+       </property>
+       <property name="topMargin" >
+        <number>8</number>
+       </property>
+       <property name="rightMargin" >
+        <number>8</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>8</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" >
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <property name="leftMargin" >
+          <number>0</number>
+         </property>
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="cbGridOn" >
+           <property name="text" >
+            <string>Show grid</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>221</width>
+             <height>21</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" >
+         <property name="leftMargin" >
+          <number>0</number>
+         </property>
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
+         </property>
+         <property name="horizontalSpacing" >
+          <number>6</number>
+         </property>
+         <property name="verticalSpacing" >
+          <number>6</number>
+         </property>
+         <item row="1" column="2" >
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>111</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="2" >
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>111</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="0" >
+          <widget class="QLabel" name="lXSpacing" >
+           <property name="text" >
+            <string>X spacing:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="QComboBox" name="cbYSpacing" >
+           <property name="editable" >
+            <bool>true</bool>
+           </property>
+           <property name="autoCompletion" >
+            <bool>false</bool>
+           </property>
+           <item>
+            <property name="text" >
+             <string>auto</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="lYSpacing" >
+           <property name="text" >
+            <string>Y spacing:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="QComboBox" name="cbXSpacing" >
+           <property name="editable" >
+            <bool>true</bool>
+           </property>
+           <property name="autoCompletion" >
+            <bool>false</bool>
+           </property>
+           <item>
+            <property name="text" >
+             <string>auto</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>&amp;Dimensions</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QGroupBox" name="gbDimensionSizes" >
+         <property name="title" >
+          <string>Sizes</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="topMargin" >
+           <number>5</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="cbProportions" >
+            <property name="text" >
+             <string>Keep proportions</string>
+            </property>
+            <property name="checked" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" >
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <property name="horizontalSpacing" >
+             <number>6</number>
+            </property>
+            <property name="verticalSpacing" >
+             <number>6</number>
+            </property>
+            <item row="4" column="1" >
+             <widget class="QComboBox" name="cbDimAsz" >
+              <property name="enabled" >
+               <bool>false</bool>
+              </property>
+              <property name="editable" >
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" >
+             <widget class="QLabel" name="lDimTextHeight" >
+              <property name="text" >
+               <string>Text height:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2" >
+             <widget class="QLabel" name="lDimUnit3" >
+              <property name="text" >
+               <string>units</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" >
+             <widget class="QLabel" name="lDimExo" >
+              <property name="text" >
+               <string>Extension line offset:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" >
+             <widget class="QComboBox" name="cbDimTextHeight" >
+              <property name="editable" >
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" >
+             <widget class="QComboBox" name="cbDimExo" >
+              <property name="enabled" >
+               <bool>false</bool>
+              </property>
+              <property name="editable" >
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2" >
+             <widget class="QLabel" name="lDimUnit2" >
+              <property name="text" >
+               <string>units</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" >
+             <widget class="QLabel" name="lDimExe" >
+              <property name="text" >
+               <string>Extension line extension:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2" >
+             <widget class="QLabel" name="lDimUnit1" >
+              <property name="text" >
+               <string>units</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" >
+             <widget class="QLabel" name="lDimGap" >
+              <property name="text" >
+               <string>Dimension line gap:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2" >
+             <widget class="QLabel" name="lDimUnit5" >
+              <property name="text" >
+               <string>units</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2" >
+             <widget class="QLabel" name="lDimUnit4" >
+              <property name="text" >
+               <string>units</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" >
+             <widget class="QLabel" name="lDimAsz" >
+              <property name="text" >
+               <string>Arrow size:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1" >
+             <widget class="QComboBox" name="cbDimGap" >
+              <property name="enabled" >
+               <bool>false</bool>
+              </property>
+              <property name="editable" >
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" >
+             <widget class="QComboBox" name="cbDimExe" >
+              <property name="enabled" >
+               <bool>false</bool>
+              </property>
+              <property name="editable" >
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbStyle" >
+         <property name="title" >
+          <string>Style</string>
+         </property>
+         <layout class="QHBoxLayout" >
+          <property name="topMargin" >
+           <number>5</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>5</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lDimensionArrowStyle" >
+            <property name="text" >
+             <string>Arrow style:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rbDimensionArrowArrow" >
+            <property name="text" >
+             <string>Arrow</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rbDimensionArrowArchTick" >
+            <property name="text" >
+             <string>Architectural Tick</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbDimensionFormat" >
+         <property name="title" >
+          <string>Format</string>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <widget class="QGroupBox" name="gbLength" >
+            <property name="title" >
+             <string>Linear</string>
+            </property>
+            <layout class="QVBoxLayout" >
+             <item>
+              <layout class="QGridLayout" >
+               <item row="0" column="0" >
+                <widget class="QLabel" name="lLengthFormat" >
+                 <property name="text" >
+                  <string>&amp;Format:</string>
+                 </property>
+                 <property name="buddy" >
+                  <cstring>cbLengthFormat</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1" >
+                <widget class="QComboBox" name="cbLengthFormat" />
+               </item>
+               <item row="1" column="0" >
+                <widget class="QLabel" name="lLengthPrecision" >
+                 <property name="text" >
+                  <string>P&amp;recision:</string>
+                 </property>
+                 <property name="buddy" >
+                  <cstring>cbLengthPrecision</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" >
+                <widget class="QComboBox" name="cbLengthPrecision" />
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cbShowTrailingZerosLength" >
+               <property name="text" >
+                <string>Show trailing zeros</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType" >
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>51</width>
+                 <height>16</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QGroupBox" name="gbAngle" >
+            <property name="title" >
+             <string>Angular</string>
+            </property>
+            <layout class="QVBoxLayout" >
+             <item>
+              <layout class="QGridLayout" >
+               <item row="0" column="0" >
+                <widget class="QLabel" name="lAngleFormat" >
+                 <property name="text" >
+                  <string>F&amp;ormat:</string>
+                 </property>
+                 <property name="buddy" >
+                  <cstring>cbAngleFormat</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1" >
+                <widget class="QComboBox" name="cbAngleFormat" />
+               </item>
+               <item row="1" column="0" >
+                <widget class="QLabel" name="lAnglePrecision" >
+                 <property name="text" >
+                  <string>Pre&amp;cision:</string>
+                 </property>
+                 <property name="buddy" >
+                  <cstring>cbAnglePrecision</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" >
+                <widget class="QComboBox" name="cbAnglePrecision" />
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cbShowTrailingZerosAngle" >
+               <property name="text" >
+                <string>Show trailing zeros</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType" >
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>51</width>
+                 <height>16</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QGroupBox" name="gbLengthPreview" >
+            <property name="title" >
+             <string>Preview</string>
+            </property>
+            <layout class="QVBoxLayout" >
+             <property name="topMargin" >
+              <number>5</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lLinear" >
+               <property name="text" >
+                <string>linear</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QGroupBox" name="gbAnglePreview" >
+            <property name="title" >
+             <string>Preview</string>
+            </property>
+            <layout class="QVBoxLayout" >
+             <property name="topMargin" >
+              <number>5</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lAngular" >
+               <property name="text" >
+                <string>angular</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>439</width>
+           <height>16</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>&amp;Splines</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <property name="leftMargin" >
+        <number>8</number>
+       </property>
+       <property name="topMargin" >
+        <number>8</number>
+       </property>
+       <property name="rightMargin" >
+        <number>8</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>8</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" >
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <property name="leftMargin" >
+          <number>0</number>
+         </property>
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="lSplineSegs" >
+           <property name="text" >
+            <string>Number of line segments per spline patch:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbSplineSegs" >
+           <property name="editable" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>131</width>
+         <height>31</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okButton" >
+       <property name="text" >
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton" >
+       <property name="text" >
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>cbPaperFormat</tabstop>
+  <tabstop>rbLandscape</tabstop>
+  <tabstop>rbPortrait</tabstop>
+  <tabstop>lePaperWidth</tabstop>
+  <tabstop>lePaperHeight</tabstop>
+  <tabstop>okButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>cbUnit</tabstop>
+  <tabstop>cbGridOn</tabstop>
+  <tabstop>cbXSpacing</tabstop>
+  <tabstop>cbYSpacing</tabstop>
+  <tabstop>cbDimTextHeight</tabstop>
+  <tabstop>cbDimExe</tabstop>
+  <tabstop>cbDimExo</tabstop>
+  <tabstop>cbDimGap</tabstop>
+  <tabstop>cbDimAsz</tabstop>
+  <tabstop>cbSplineSegs</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>okButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QG_DlgOptionsDrawing</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>386</x>
+     <y>583</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>96</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QG_DlgOptionsDrawing</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>467</x>
+     <y>583</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>179</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbProportions</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cbDimExe</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>258</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>306</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbProportions</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cbDimExo</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>260</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>306</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbProportions</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cbDimGap</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>260</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>306</x>
+     <y>195</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbProportions</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cbDimAsz</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>260</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>306</x>
+     <y>223</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

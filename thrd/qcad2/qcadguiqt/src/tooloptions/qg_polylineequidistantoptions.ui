@@ -1,0 +1,129 @@
+<ui version="4.0" >
+ <class>QG_PolylineEquidistantOptions</class>
+ <widget class="QWidget" name="QG_PolylineEquidistantOptions" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>372</width>
+    <height>22</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>350</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>500</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Polyline Equidistant Options</string>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="leftMargin" >
+    <number>1</number>
+   </property>
+   <property name="topMargin" >
+    <number>1</number>
+   </property>
+   <property name="rightMargin" >
+    <number>1</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>1</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lDist" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Distance:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="leDist" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip" >
+      <string>Distance to original entity</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lNumber" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Number:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSpinBox" name="sbNumber" >
+     <property name="toolTip" >
+      <string>Number of parallels to create</string>
+     </property>
+     <property name="minimum" >
+      <number>1</number>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="cbUseArcs" >
+     <property name="text" >
+      <string>Rounded corners</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="sep1" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Fixed" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <includes>
+  <include location="local" >rs_polyline.h</include>
+  <include location="local" >rs_settings.h</include>
+  <include location="local" >rs_actionpolylineequidistant.h</include>
+ </includes>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,325 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>QG_CadToolBarLines</class>
+ <widget class="QWidget" name="QG_CadToolBarLines" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>120</width>
+    <height>336</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>56</width>
+    <height>336</height>
+   </size>
+  </property>
+  <widget class="QToolButton" name="bTangent2" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>132</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bRelAngle" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>160</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bVertical" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>48</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bRectangle" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>76</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bPolygon" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>188</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bPolygon2" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>188</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bFree" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>216</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bParallelThrough" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>104</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bParallel" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>104</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bBisector" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>76</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bOrthogonal" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>160</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bTangent1" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>132</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bAngle" >
+   <property name="geometry" >
+    <rect>
+     <x>28</x>
+     <y>20</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bHorizontal" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>48</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bNormal" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>20</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="bBack" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+ </widget>
+ <pixmapfunction></pixmapfunction>
+ <resources>
+  <include location="../qcadguiqt.qrc" />
+ </resources>
+ <connections/>
+</ui>

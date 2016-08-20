@@ -1,0 +1,93 @@
+<ui version="4.0" >
+ <class>QG_Divide2Options</class>
+ <widget class="QWidget" name="QG_Divide2Options" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>131</width>
+    <height>22</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>0</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>200</width>
+    <height>22</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Bevel Options</string>
+  </property>
+  <property name="toolTip" >
+   <string/>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QCheckBox" name="cbRemove" >
+     <property name="toolTip" >
+      <string>Check to remove segments, uncheck to keep them</string>
+     </property>
+     <property name="text" >
+      <string>Remove Segment</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="sep1" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Fixed" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <includes>
+  <include location="local" >rs_line.h</include>
+  <include location="local" >rs_settings.h</include>
+  <include location="local" >rs_modification.h</include>
+  <include location="local" >rs_actionmodifybevel.h</include>
+ </includes>
+ <resources/>
+ <connections/>
+</ui>
