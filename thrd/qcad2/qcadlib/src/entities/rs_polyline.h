@@ -36,7 +36,7 @@
 /**
  * Holds the data that defines a polyline.
  */
-class RS_PolylineData {
+class CAD_EXPORT RS_PolylineData {
 public:
     RS_PolylineData() {
         startpoint = endpoint = RS_Vector(false);
@@ -66,7 +66,7 @@ private:
  *
  * @author Andrew Mustun
  */
-class RS_Polyline : public RS_EntityContainer {
+class CAD_EXPORT RS_Polyline : public RS_EntityContainer {
 public:
     RS_Polyline(RS_EntityContainer* parentContainer=NULL);
     RS_Polyline(RS_EntityContainer* parentContainer,

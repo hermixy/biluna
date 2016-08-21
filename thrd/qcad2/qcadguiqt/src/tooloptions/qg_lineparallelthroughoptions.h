@@ -35,7 +35,7 @@ class RS_ActionDrawLineParallelThrough;
 /**
  *
  */
-class QG_LineParallelThroughOptions: public QG_OptionsBase, 
+class CAD_EXPORT QG_LineParallelThroughOptions: public QG_OptionsBase, 
                               private Ui::QG_LineParallelThroughOptions {
     Q_OBJECT
 

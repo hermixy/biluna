@@ -27,6 +27,7 @@
 #define QG_DLGOPTIONSDRAWING_H
 
 #include <QDialog>
+#include "cad_global.h"
 
 #include "ui_qg_dlgoptionsdrawing.h"
 
@@ -35,7 +36,7 @@ class RS_Graphic;
 /**
  *
  */
-class QG_DlgOptionsDrawing: public QDialog, private Ui::QG_DlgOptionsDrawing {
+class CAD_EXPORT QG_DlgOptionsDrawing: public QDialog, private Ui::QG_DlgOptionsDrawing {
     Q_OBJECT
 
 public:

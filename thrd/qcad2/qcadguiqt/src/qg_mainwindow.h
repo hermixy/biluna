@@ -48,7 +48,7 @@ class RS_Document;
 /**
  * Interface for main application windows.
  */
-class QG_MainWindow : public QMainWindow, public RS_MainWindowInterface {
+class CAD_EXPORT QG_MainWindow : public QMainWindow, public RS_MainWindowInterface {
     Q_OBJECT
 
 public:
@@ -117,7 +117,7 @@ public:
     }
     virtual QG_MdiWindow* getMdiWindow() {
         if (getWorkspace()!=NULL) {
-            return (QG_MdiWindow*)getWorkspace()->activeWindow();
+            return (QG_MdiWindow*)getWorkspace()->activeSubWindow();
         }
         else {
             return NULL;
@@ -217,7 +217,7 @@ public slots:
     virtual void updateRecentFileActions();
     virtual void slotFileOpenRecent();
 
-    virtual void slotWindowActivated(QWidget* w=NULL);
+    virtual void slotWindowActivated(QMdiSubWindow *w=NULL);
     virtual void slotWindowsMenuAboutToShow();
     virtual void slotWindowsMenuActivated(int);
     virtual void slotTileHorizontal();

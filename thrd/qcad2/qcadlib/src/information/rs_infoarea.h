@@ -38,7 +38,7 @@
  * @author Guenter Szolderits
  * @author Andrew Mustun
  */
-class RS_InfoArea {
+class CAD_EXPORT RS_InfoArea {
 public: 
     RS_InfoArea();
     ~RS_InfoArea();

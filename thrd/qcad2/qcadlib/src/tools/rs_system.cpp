@@ -1487,16 +1487,16 @@ QString RS_System::localeToISO(const QString& locale) {
  * function returns the input string.
  */
 QString RS_System::fixCrippledWindowsPath(const QString& crippled) {
-#if defined(GetLongPathName)
-    if (QFileInfo(crippled).isAbsolute()) {
-        char buffer[MAX_PATH];
-        GetLongPathName((const char*)crippled.toLatin1(), buffer, MAX_PATH);
-        return QString(buffer);
-    }
-    else {
-        return crippled;
-    }
-#else
+//#if defined(GetLongPathName)
+//    if (QFileInfo(crippled).isAbsolute()) {
+//        char buffer[MAX_PATH];
+//        GetLongPathName((const char*)crippled.toLatin1(), buffer, MAX_PATH);
+//        return QString(buffer);
+//    }
+//    else {
+//        return crippled;
+//    }
+//#else
     return crippled;
-#endif
+//#endif
 }

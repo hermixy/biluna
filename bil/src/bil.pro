@@ -42,10 +42,12 @@ INCLUDEPATH += \
 CONFIG(debug, debug|release) {
     message("Debug libraries used for bil")
     LIBS	+= \
+        -L../../bil/debug -lcadd \
         -L../../bil/debug -ldbd
 } else {
     message("Release libraries used for bil")
     LIBS	+= \
+        -L../../bil/release -lcad \
         -L../../bil/release -ldb
 }
 

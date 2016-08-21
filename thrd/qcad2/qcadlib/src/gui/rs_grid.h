@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Grid {
+class CAD_EXPORT RS_Grid {
 public:
     RS_Grid(RS_GraphicView* graphicView);
     ~RS_Grid();

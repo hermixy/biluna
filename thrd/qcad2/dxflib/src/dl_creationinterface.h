@@ -29,6 +29,7 @@
 
 #include <string.h>
 
+#include "cad_global.h"
 #include "dl_attributes.h"
 #include "dl_codes.h"
 #include "dl_entities.h"
@@ -44,7 +45,7 @@
  *
  * @author Andrew Mustun
  */
-class DL_CreationInterface {
+class CAD_EXPORT DL_CreationInterface {
 public:
     DL_CreationInterface() {
         extrusion = new DL_Extrusion;

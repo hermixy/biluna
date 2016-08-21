@@ -15,12 +15,13 @@
 #endif // _MSC_VER > 1000
 
 #include <QString>
+#include "cad_global.h"
 
 
 /**
  * Defines common XML codes and constants.
  */
-class RB_XmlCodes {
+class CAD_EXPORT RB_XmlCodes {
 	
 public:
     RB_XmlCodes();

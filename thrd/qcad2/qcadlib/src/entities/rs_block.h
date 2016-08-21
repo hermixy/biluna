@@ -33,7 +33,7 @@
 /**
  * Holds the data that defines a block.
  */
-class RS_BlockData {
+class CAD_EXPORT RS_BlockData {
 public:
     RS_BlockData() {}
 
@@ -80,7 +80,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Block : public RS_Document {
+class CAD_EXPORT RS_Block : public RS_Document {
 
     friend class RS_BlockList;
 

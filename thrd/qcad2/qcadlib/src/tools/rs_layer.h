@@ -44,7 +44,7 @@
 /**
  * Holds the data that defines a layer.
  */
-class RS_LayerData {
+class CAD_EXPORT RS_LayerData {
 public:
     RS_LayerData() {}
 
@@ -81,7 +81,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Layer : public RS_PropertyOwner {
+class CAD_EXPORT RS_Layer : public RS_PropertyOwner {
 public:
     explicit RS_Layer(const RS_String& name);
     explicit RS_Layer(const RS_LayerData& data);

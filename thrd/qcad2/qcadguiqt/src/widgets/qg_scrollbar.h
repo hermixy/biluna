@@ -29,12 +29,13 @@
 
 #include <QScrollBar>
 #include <QWheelEvent>
+#include "cad_global.h"
 
 /**
  * A small wrapper for the Qt scrollbar. This class offers a slot
  * for scroll events.
  */
-class QG_ScrollBar: public QScrollBar {
+class CAD_EXPORT QG_ScrollBar: public QScrollBar {
     Q_OBJECT
 
 public:

@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_FontChar : public RS_Block {
+class CAD_EXPORT RS_FontChar : public RS_Block {
 public:
     /**
      * @param parentContainer The font this block belongs to.

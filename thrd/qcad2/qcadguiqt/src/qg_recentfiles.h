@@ -29,13 +29,14 @@
 
 #include <qstring.h>
 #include <qstringlist.h>
+#include "cad_global.h"
 
 /**
  * This class can store recent files in a list.
  *
  * OBSOLETE
  */
-class QG_RecentFiles {
+class CAD_EXPORT QG_RecentFiles {
 
 public:
     QG_RecentFiles(int number);

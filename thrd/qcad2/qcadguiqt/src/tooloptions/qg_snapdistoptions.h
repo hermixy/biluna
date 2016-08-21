@@ -32,7 +32,7 @@
 /**
  *
  */
-class QG_SnapDistOptions: public QG_SnapOptionsBase, private Ui::QG_SnapDistOptions {
+class CAD_EXPORT QG_SnapDistOptions: public QG_SnapOptionsBase, private Ui::QG_SnapDistOptions {
     Q_OBJECT
 
 public:

@@ -34,7 +34,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionFilePrintPreview : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionFilePrintPreview : public RS_ActionInterface {
     Q_OBJECT
 public:
     /**

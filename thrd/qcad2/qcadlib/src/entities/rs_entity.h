@@ -28,6 +28,7 @@
 #ifndef RS_ENTITY_H
 #define RS_ENTITY_H
 
+#include "cad_global.h"
 #include "rs.h"
 #include "rs_application.h"
 #include "rs_hash.h"
@@ -70,7 +71,7 @@ class RS_Painter;
  *
  * @author Andrew Mustun
  */
-class RS_Entity : public RS_Undoable, public RS_PropertyOwner {
+class CAD_EXPORT RS_Entity : public RS_Undoable, public RS_PropertyOwner {
 
 public:
     RS_Entity(RS_EntityContainer* parentContainer);

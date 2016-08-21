@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyEntity : public RS_ActionBase {
+class CAD_EXPORT RS_ActionModifyEntity : public RS_ActionBase {
     Q_OBJECT
 public:
     RS_ActionModifyEntity(RS_EntityContainer& container,

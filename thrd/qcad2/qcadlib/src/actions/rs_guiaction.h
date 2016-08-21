@@ -27,6 +27,7 @@
 
 #include <qaction.h>
 
+#include "cad_global.h"
 #include "rs_dialogfactory.h"
 
 
@@ -39,7 +40,7 @@
  * to store user defined related information for the action (for example
  * user defined keycodes and commands that trigger the action).
  */
-class RS_GuiAction : public QAction {
+class CAD_EXPORT RS_GuiAction : public QAction {
     Q_OBJECT
 
 public:

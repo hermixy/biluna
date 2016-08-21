@@ -27,11 +27,12 @@
 #define QG_TABLEWIDGET_H
 
 #include <qtablewidget.h>
+#include "cad_global.h"
 
 /**
  * A table widget that signals mouse click events.
  */
-class QG_TableWidget: public QTableWidget {
+class CAD_EXPORT QG_TableWidget: public QTableWidget {
     Q_OBJECT
 
 public:

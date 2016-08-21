@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionEditUndo : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionEditUndo : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionEditUndo(RS_EntityContainer& container,

@@ -33,7 +33,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionViewDraft : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionViewDraft : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionViewDraft(RS_EntityContainer& container,

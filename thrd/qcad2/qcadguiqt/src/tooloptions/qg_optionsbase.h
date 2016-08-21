@@ -34,7 +34,7 @@ class RS_ActionInterface;
 /**
  * Base class for action option widgets.
  */
-class QG_OptionsBase: public QWidget {
+class CAD_EXPORT QG_OptionsBase: public QWidget {
     Q_OBJECT
     
 public:

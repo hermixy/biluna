@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSelectCurrentLayer : public RS_ActionSelectBase {
+class CAD_EXPORT RS_ActionSelectCurrentLayer : public RS_ActionSelectBase {
     Q_OBJECT
 public:
     RS_ActionSelectCurrentLayer(RS_EntityContainer& container,

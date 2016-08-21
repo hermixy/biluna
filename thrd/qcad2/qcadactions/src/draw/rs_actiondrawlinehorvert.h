@@ -38,7 +38,7 @@
  *
  * @author Ulf Lehnert
  */
-class RS_ActionDrawLineHorVert : public RS_ActionBase {
+class CAD_EXPORT RS_ActionDrawLineHorVert : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

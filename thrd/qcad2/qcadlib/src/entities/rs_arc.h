@@ -41,7 +41,7 @@ class RS_Polyline;
 /**
  * Holds the data that defines an arc.
  */
-class RS_ArcData {
+class CAD_EXPORT RS_ArcData {
 public:
     RS_ArcData() {}
 
@@ -85,7 +85,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Arc : public RS_AtomicEntity {
+class CAD_EXPORT RS_Arc : public RS_AtomicEntity {
 public:
     RS_Arc(RS_EntityContainer* parentContainer,
            const RS_ArcData& d);

@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionEditCopyAutoRef : public RS_ActionEditCopy {
+class CAD_EXPORT RS_ActionEditCopyAutoRef : public RS_ActionEditCopy {
     Q_OBJECT
     
 public:

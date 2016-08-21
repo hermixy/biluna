@@ -56,7 +56,7 @@ class DL_WriterA;
  *
  * @author Andrew Mustun
  */
-class RS_FilterDxf : public RS_FilterInterface, public DL_CreationInterface {
+class CAD_EXPORT RS_FilterDxf : public RS_FilterInterface, public DL_CreationInterface {
 public:
     RS_FilterDxf();
     ~RS_FilterDxf();

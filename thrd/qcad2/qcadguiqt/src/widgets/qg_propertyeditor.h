@@ -45,19 +45,19 @@
 #include "rs.h"
 #include "rs_propertyowner.h"
 
-class QTableWidget;
-class QtAbstractPropertyBrowser;
-class QtBrowserItem;
-class QtProperty;
-class QtVariantEditorFactory;
-class QtEnumEditorFactory;
-class QtVariantPropertyManager;
-class QtEnumPropertyManager;
+class CAD_EXPORT QTableWidget;
+class CAD_EXPORT QtAbstractPropertyBrowser;
+class CAD_EXPORT QtBrowserItem;
+class CAD_EXPORT QtProperty;
+class CAD_EXPORT QtVariantEditorFactory;
+class CAD_EXPORT QtEnumEditorFactory;
+class CAD_EXPORT QtVariantPropertyManager;
+class CAD_EXPORT QtEnumPropertyManager;
 
-class RS_PropertyOwnerContainerInterface;
+class CAD_EXPORT RS_PropertyOwnerContainerInterface;
     
     
-class QG_Variant {
+class CAD_EXPORT QG_Variant {
 public:
     QVariant value;
     //QStringList choices;
@@ -67,7 +67,7 @@ public:
 /**
  * A property editor.
  */
-class QG_PropertyEditor : public QtTreePropertyBrowser {
+class CAD_EXPORT QG_PropertyEditor : public QtTreePropertyBrowser {
     Q_OBJECT
 
 public:

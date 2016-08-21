@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSelectSingle : public RS_ActionSelectBase {
+class CAD_EXPORT RS_ActionSelectSingle : public RS_ActionSelectBase {
     Q_OBJECT
 public:
     RS_ActionSelectSingle(RS_EntityContainer& container,

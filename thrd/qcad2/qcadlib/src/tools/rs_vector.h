@@ -41,7 +41,7 @@ class RS_Matrix;
  *
  * @author Andrew Mustun
  */
-class RS_Vector {
+class CAD_EXPORT RS_Vector {
 public:
     inline RS_Vector();
     inline RS_Vector(double vx, double vy, double vz=0.0, bool valid=true);
@@ -121,7 +121,7 @@ public:
  * Represents a list of vectors. Typically used to return multiple
  * solutions from a function. Previously known as RS_VectorSolutions.
  */
-class RS_VectorList : public RS_List<RS_Vector> {
+class /* CAD_EXPORT did not work */ RS_VectorList : public RS_List<RS_Vector> {
 public:
     RS_VectorList();
     //RS_VectorList(const RS_VectorList& s);

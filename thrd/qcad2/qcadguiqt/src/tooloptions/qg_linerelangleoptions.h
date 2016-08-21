@@ -35,7 +35,7 @@ class RS_ActionDrawLineRelAngle;
 /**
  *
  */
-class QG_LineRelAngleOptions: public QG_OptionsBase, 
+class CAD_EXPORT QG_LineRelAngleOptions: public QG_OptionsBase, 
                               private Ui::QG_LineRelAngleOptions {
     Q_OBJECT
 

@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_FileIO {
+class CAD_EXPORT RS_FileIO {
 protected:
     RS_FileIO();
     

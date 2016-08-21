@@ -36,7 +36,7 @@
 /**
  *
  */
-class QG_CadToolBarSelect: public QG_CadToolBarBase, 
+class CAD_EXPORT QG_CadToolBarSelect: public QG_CadToolBarBase, 
                           private Ui::QG_CadToolBarSelect {
     Q_OBJECT
 

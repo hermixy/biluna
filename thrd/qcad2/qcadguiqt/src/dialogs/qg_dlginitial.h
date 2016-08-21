@@ -33,7 +33,7 @@
 /**
  * Initial dialog for choosing language and default unit.
  */
-class QG_DlgInitial: public QDialog, private Ui::QG_DlgInitial {
+class CAD_EXPORT QG_DlgInitial: public QDialog, private Ui::QG_DlgInitial {
     Q_OBJECT
 
 public:

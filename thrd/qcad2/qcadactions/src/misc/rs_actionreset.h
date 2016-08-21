@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionReset : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionReset : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionReset(RS_EntityContainer& container,

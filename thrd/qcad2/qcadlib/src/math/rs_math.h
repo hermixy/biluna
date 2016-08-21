@@ -63,7 +63,7 @@ typedef unsigned int uint;
 /**
  * Math functions.
  */
-class RS_Math {
+class CAD_EXPORT RS_Math {
 public:
     /**
      * Rounds the given double to the next int. 

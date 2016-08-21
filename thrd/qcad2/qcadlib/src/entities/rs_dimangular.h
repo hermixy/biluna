@@ -44,7 +44,7 @@
 /**
  * Holds the data that defines a angular dimension entity.
  */
-class RS_DimAngularData {
+class CAD_EXPORT RS_DimAngularData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -85,7 +85,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_DimAngular : public RS_Dimension {
+class CAD_EXPORT RS_DimAngular : public RS_Dimension {
 public:
     RS_DimAngular(RS_EntityContainer* parentContainer,
                  const RS_DimensionData& d,

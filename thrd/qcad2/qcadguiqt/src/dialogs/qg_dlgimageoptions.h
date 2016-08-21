@@ -35,7 +35,7 @@
 /**
  *
  */
-class QG_DlgImageOptions: public QDialog, private Ui::QG_DlgImageOptions {
+class CAD_EXPORT QG_DlgImageOptions: public QDialog, private Ui::QG_DlgImageOptions {
     Q_OBJECT
 
 public:

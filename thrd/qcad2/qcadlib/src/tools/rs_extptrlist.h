@@ -38,7 +38,7 @@
  * or none active item.
  */
 template <typename T>
-class RS_ExtPtrList : public RS_PtrList<T> {
+class CAD_EXPORT RS_ExtPtrList : public RS_PtrList<T> {
 public:
     RS_ExtPtrList() {
         activeItem = NULL;

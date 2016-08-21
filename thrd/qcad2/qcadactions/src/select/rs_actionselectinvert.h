@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSelectInvert : public RS_ActionSelectBase {
+class CAD_EXPORT RS_ActionSelectInvert : public RS_ActionSelectBase {
     Q_OBJECT
 public:
     RS_ActionSelectInvert(RS_EntityContainer& container,

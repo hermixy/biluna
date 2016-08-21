@@ -38,7 +38,7 @@ class RS_Point;
 /**
  *
  */
-class QG_DlgPoint: public QDialog, private Ui::QG_DlgPoint {
+class CAD_EXPORT QG_DlgPoint: public QDialog, private Ui::QG_DlgPoint {
     Q_OBJECT
 
 public:

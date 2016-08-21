@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Units {
+class CAD_EXPORT RS_Units {
 public:
     static RS2::Unit dxfint2unit(int dxfint);
 

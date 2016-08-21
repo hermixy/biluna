@@ -257,7 +257,7 @@ void RB_XmlSvg::writeLayerStyles(RB_XmlWriter& xw) {
     QVector<RB_SvgCodes>::iterator it = vectorLayerStyles.begin();
 
     while (it != vectorLayerStyles.end()) {
-        if (atof(it->strokeWidth.toAscii()) > 0.0) {
+        if (it->strokeWidth.toDouble() > 0.0) {
             sWidth = it->strokeWidth;
         } else {
             sWidth = "0.2";
@@ -1194,7 +1194,7 @@ void RB_XmlSvg::writeDimAligned(RB_XmlWriter& xw,
                          1,
                          data.lineSpacingStyle,
                          data.lineSpacingFactor,
-                         string(dataText.toAscii()),
+                         dataText.toStdString(),
                          "Standard",
                          dataAngle),
              attrib);
@@ -1353,7 +1353,7 @@ void RB_XmlSvg::writeDimLinear(RB_XmlWriter& xw,
                          1,
                          data.lineSpacingStyle,
                          data.lineSpacingFactor,
-                         string(dataText.toAscii()),
+                         dataText.toStdString(),
                          "Standard",
                          dataAngle),
              attrib);
@@ -1468,7 +1468,7 @@ void RB_XmlSvg::writeDimRadial(RB_XmlWriter& xw,
                          1,
                          data.lineSpacingStyle,
                          data.lineSpacingFactor,
-                         string(dataText.toAscii()),
+                         dataText.toStdString(),
                          "Standard",
                          dataAngle),
              attrib);
@@ -1584,7 +1584,7 @@ void RB_XmlSvg::writeDimDiametric(RB_XmlWriter& xw,
                          1,
                          data.lineSpacingStyle,
                          data.lineSpacingFactor,
-                         string(dataText.toAscii()),
+                         dataText.toStdString(),
                          "Standard",
                          dataAngle),
              attrib);
@@ -1891,7 +1891,7 @@ void RB_XmlSvg::writeDimAngular(RB_XmlWriter& xw,
                          1,
                          data.lineSpacingStyle,
                          data.lineSpacingFactor,
-                         string(dataText.toAscii()),
+                         dataText.toStdString(),
                          "Standard",
                          dataAngle),
              attrib);

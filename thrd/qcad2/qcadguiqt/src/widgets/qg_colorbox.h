@@ -34,7 +34,7 @@
 /**
  * A combobox for choosing a color.
  */
-class QG_ColorBox: public QComboBox {
+class CAD_EXPORT QG_ColorBox: public QComboBox {
     Q_OBJECT
 
 public:

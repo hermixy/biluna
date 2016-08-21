@@ -38,7 +38,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Color: public QColor, public RS_Flags {
+class CAD_EXPORT RS_Color: public QColor, public RS_Flags {
 public:
     RS_Color() : QColor(), RS_Flags() {}
     explicit RS_Color(Qt::GlobalColor gc) : QColor(gc), RS_Flags() {}

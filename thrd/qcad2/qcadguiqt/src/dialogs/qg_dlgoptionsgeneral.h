@@ -27,13 +27,14 @@
 #define QG_DLGOPTIONSGENERAL_H
 
 #include <QDialog>
+#include "cad_global.h"
 
 #include "ui_qg_dlgoptionsgeneral.h"
     
 /**
  *
  */
-class QG_DlgOptionsGeneral: public QDialog, private Ui::QG_DlgOptionsGeneral {
+class CAD_EXPORT QG_DlgOptionsGeneral: public QDialog, private Ui::QG_DlgOptionsGeneral {
     Q_OBJECT
 
 public:

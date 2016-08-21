@@ -35,7 +35,7 @@ class RS_ActionModifyIsoProject;
 /**
  *
  */
-class QG_IsoProjectOptions: public QG_OptionsBase, private Ui::QG_IsoProjectOptions {
+class CAD_EXPORT QG_IsoProjectOptions: public QG_OptionsBase, private Ui::QG_IsoProjectOptions {
     Q_OBJECT
 
 public:

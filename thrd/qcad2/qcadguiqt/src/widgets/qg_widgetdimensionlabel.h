@@ -35,7 +35,7 @@
 /**
  *
  */
-class QG_WidgetDimensionLabel: public QWidget, private Ui::QG_WidgetDimensionLabel {
+class CAD_EXPORT QG_WidgetDimensionLabel: public QWidget, private Ui::QG_WidgetDimensionLabel {
     Q_OBJECT
 
 public:

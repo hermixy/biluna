@@ -34,7 +34,7 @@
 /**
  * Base class for writing XML to a file.
  */
-class RB_XmlWriter {
+class CAD_EXPORT RB_XmlWriter {
 
 public:
     RB_XmlWriter(char* fname, RB_XmlCodes::TypeML typeML = RB_XmlCodes::TypeXML);

@@ -35,7 +35,7 @@ class RS_ActionDrawLineParallel;
 /**
  *
  */
-class QG_LineParallelOptions: public QG_OptionsBase, 
+class CAD_EXPORT QG_LineParallelOptions: public QG_OptionsBase, 
                               private Ui::QG_LineParallelOptions {
     Q_OBJECT
 

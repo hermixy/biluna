@@ -49,7 +49,7 @@
  * most of the default behaviour.
  * 
  */
-class RS_Settings {
+class CAD_EXPORT RS_Settings {
 public:
     RS_Settings();
 

@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSetSnapRestrictionNothing : public RS_ActionSetSnapRestriction {
+class CAD_EXPORT RS_ActionSetSnapRestrictionNothing : public RS_ActionSetSnapRestriction {
     Q_OBJECT
 public:
     RS_ActionSetSnapRestrictionNothing(RS_EntityContainer& container,

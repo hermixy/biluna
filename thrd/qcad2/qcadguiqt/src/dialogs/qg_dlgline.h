@@ -36,7 +36,7 @@
 /**
  *
  */
-class QG_DlgLine: public QDialog, private Ui::QG_DlgLine {
+class CAD_EXPORT QG_DlgLine: public QDialog, private Ui::QG_DlgLine {
     Q_OBJECT
 
 public:

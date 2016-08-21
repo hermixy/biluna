@@ -31,7 +31,7 @@
 /**
  * Command Events.
  */
-class RS_CommandEvent {
+class CAD_EXPORT RS_CommandEvent {
 public:
     /**
      * Creates a new command event that is not yet accepted.

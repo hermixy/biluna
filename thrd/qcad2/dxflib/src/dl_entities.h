@@ -29,6 +29,7 @@
 
 
 #include <string>
+#include "cad_global.h"
 using std::string;
 
 /**

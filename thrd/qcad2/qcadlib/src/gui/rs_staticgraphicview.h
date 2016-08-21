@@ -27,7 +27,7 @@
  * This is an implementation of a graphic viewer with a fixed size
  * for drawing onto fixed devices (such as bitmaps).
  */
-class RS_StaticGraphicView: public RS_GraphicView {
+class CAD_EXPORT RS_StaticGraphicView: public RS_GraphicView {
 public:
     RS_StaticGraphicView(int w, int h, RS_Painter* p);
     virtual ~RS_StaticGraphicView();

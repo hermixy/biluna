@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionBlocksToggleView : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionBlocksToggleView : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionBlocksToggleView(RS_EntityContainer& container,

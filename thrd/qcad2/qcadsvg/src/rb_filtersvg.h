@@ -33,7 +33,7 @@
 /**
  * This filter class exports QCad RS_Graphic to an SVG file.
  */
-class RB_FilterSvg : public RS_FilterInterface, public QXmlDefaultHandler {
+class CAD_EXPORT RB_FilterSvg : public RS_FilterInterface, public QXmlDefaultHandler {
 
 public:
     RB_FilterSvg();

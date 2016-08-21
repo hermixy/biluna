@@ -35,7 +35,7 @@ class RS_ActionDrawText;
 /**
  *
  */
-class QG_TextOptions: public QG_OptionsBase, private Ui::QG_TextOptions {
+class CAD_EXPORT QG_TextOptions: public QG_OptionsBase, private Ui::QG_TextOptions {
     Q_OBJECT
 
 public:

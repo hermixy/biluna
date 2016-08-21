@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDeselectIntersected : public RS_ActionSelectIntersected {
+class CAD_EXPORT RS_ActionDeselectIntersected : public RS_ActionSelectIntersected {
     Q_OBJECT
 
 public:

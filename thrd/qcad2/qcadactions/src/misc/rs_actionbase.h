@@ -28,6 +28,7 @@
 #ifndef RS_ACTIONBASE_H
 #define RS_ACTIONBASE_H
 
+#include "cad_global.h"
 #include "rs_actioninterface.h"
 #include "rs_actionsetsnapmodeauto.h"
 #include "rs_actionsetsnaprestrictionnothing.h"
@@ -41,7 +42,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionBase : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionBase : public RS_ActionInterface {
     Q_OBJECT
 
 public:

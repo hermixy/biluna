@@ -19,7 +19,7 @@
  * Storing and passing around CAD attributes. Attributes
  * are the layer name, color, width and line type.
  */
-class RB_CadAttributes {
+class CAD_EXPORT RB_CadAttributes {
 
 public:
     RB_CadAttributes();

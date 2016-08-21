@@ -34,7 +34,7 @@
 /**
  * A combobox for choosing a line width.
  */
-class QG_WidthBox: public QComboBox {
+class CAD_EXPORT QG_WidthBox: public QComboBox {
     Q_OBJECT
 
 public:

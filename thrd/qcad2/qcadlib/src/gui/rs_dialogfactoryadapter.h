@@ -40,7 +40,7 @@ class RS_LayerList;
  * Adapter for dialog factory interface.
  * Used when no factory object was set.
  */
-class RS_DialogFactoryAdapter : public RS_DialogFactoryInterface {
+class CAD_EXPORT RS_DialogFactoryAdapter : public RS_DialogFactoryInterface {
 public:
     RS_DialogFactoryAdapter() {}
     virtual ~RS_DialogFactoryAdapter() {}

@@ -38,7 +38,7 @@
  * A property ID. Convenience wrapper for |-separated strings
  * that are used as property IDs.
  */
-class RS_PropertyId {
+class CAD_EXPORT RS_PropertyId {
 public:
     RS_PropertyId(const RS_String& str) {
         RS_StringList nameList = str.split('|');
@@ -63,7 +63,7 @@ public:
  * For example a property 'Side' might have the two choices
  * 'Left' and 'Right'.
  */
-class RS_PropertyAttributes {
+class CAD_EXPORT RS_PropertyAttributes {
 public:
     RS_PropertyAttributes() {
         affectsOtherProperties = false;
@@ -105,7 +105,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_PropertyOwner {
+class CAD_EXPORT RS_PropertyOwner {
 public:
     RS_PropertyOwner() {}
     virtual ~RS_PropertyOwner() {}

@@ -37,7 +37,7 @@
 /**
  *
  */
-class QG_WidgetPen: public QWidget, private Ui::QG_WidgetPen {
+class CAD_EXPORT QG_WidgetPen: public QWidget, private Ui::QG_WidgetPen {
     Q_OBJECT
 
 public:

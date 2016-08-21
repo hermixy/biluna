@@ -35,7 +35,7 @@ class RS_ActionDimLinear;
 /**
  *
  */
-class QG_DimLinearOptions: public QG_OptionsBase, private Ui::QG_DimLinearOptions {
+class CAD_EXPORT QG_DimLinearOptions: public QG_OptionsBase, private Ui::QG_DimLinearOptions {
     Q_OBJECT
 
 public:

@@ -44,7 +44,7 @@ class RS_ActionInterface;
  * active. All events going from the view to the actions come over
  * this class.
  */
-class RS_EventHandler {
+class CAD_EXPORT RS_EventHandler {
 public:
     RS_EventHandler(RS_GraphicView* graphicView);
     ~RS_EventHandler();

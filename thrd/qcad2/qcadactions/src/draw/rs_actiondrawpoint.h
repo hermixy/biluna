@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawPoint : public RS_ActionBase {
+class CAD_EXPORT RS_ActionDrawPoint : public RS_ActionBase {
     Q_OBJECT
 public:
     RS_ActionDrawPoint(RS_EntityContainer& container,

@@ -36,7 +36,7 @@
  * An abstract adapter class for painter object. The methods in this class are empty. 
  * This class exists as convenience for creating painter objects.
  */
-class RS_PainterAdapter: public RS_Painter {
+class CAD_EXPORT RS_PainterAdapter: public RS_Painter {
 public:
     RS_PainterAdapter() : RS_Painter() {}
     virtual ~RS_PainterAdapter() {}

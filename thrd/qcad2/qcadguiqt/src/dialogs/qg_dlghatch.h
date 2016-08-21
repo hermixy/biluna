@@ -37,7 +37,7 @@ class RS_EntityContainer;
 /**
  *
  */
-class QG_DlgHatch: public QDialog, private Ui::QG_DlgHatch {
+class CAD_EXPORT QG_DlgHatch: public QDialog, private Ui::QG_DlgHatch {
     Q_OBJECT
 
 public:

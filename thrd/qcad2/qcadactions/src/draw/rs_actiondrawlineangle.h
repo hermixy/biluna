@@ -38,7 +38,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawLineAngle : public RS_ActionBase {
+class CAD_EXPORT RS_ActionDrawLineAngle : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

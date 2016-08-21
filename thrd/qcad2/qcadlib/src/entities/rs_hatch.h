@@ -39,7 +39,7 @@
 /**
  * Holds the data that defines a hatch entity.
  */
-class RS_HatchData {
+class CAD_EXPORT RS_HatchData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -77,7 +77,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Hatch : public virtual RS_EntityContainer {
+class CAD_EXPORT RS_Hatch : public virtual RS_EntityContainer {
 public:
     RS_Hatch(RS_EntityContainer* parentContainer,
             const RS_HatchData& d);

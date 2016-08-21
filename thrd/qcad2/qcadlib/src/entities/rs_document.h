@@ -33,7 +33,7 @@
 #include "rs_undo.h"
 #include "rs_string.h"
 
-class RS_BlockList;
+class CAD_EXPORT RS_BlockList;
 
 /**
  * Base class for documents. Documents can be either graphics or 
@@ -43,7 +43,7 @@ class RS_BlockList;
  *
  * @author Andrew Mustun
  */
-class RS_Document : public RS_EntityContainer, public RS_Undo {
+class CAD_EXPORT RS_Document : public RS_EntityContainer, public RS_Undo {
 
 public:
     RS_Document(RS_EntityContainer* parentContainer=NULL);

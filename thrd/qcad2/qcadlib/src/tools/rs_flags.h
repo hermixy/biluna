@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Flags {
+class CAD_EXPORT RS_Flags {
 public:
     /** Default constructor. Resets all flags to 0. */
     RS_Flags() {

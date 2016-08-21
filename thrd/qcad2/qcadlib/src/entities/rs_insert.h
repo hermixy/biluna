@@ -49,7 +49,7 @@
 /**
  * Holds the data that defines an insert.
  */
-class RS_InsertData {
+class CAD_EXPORT RS_InsertData {
 public:
     /**
      * Default constructor.
@@ -116,7 +116,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Insert : public RS_EntityContainer {
+class CAD_EXPORT RS_Insert : public RS_EntityContainer {
 public:
     RS_Insert(RS_EntityContainer* parentContainer,
               const RS_InsertData& d);

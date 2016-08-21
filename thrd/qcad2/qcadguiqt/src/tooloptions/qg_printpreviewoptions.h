@@ -35,7 +35,7 @@ class RS_ActionFilePrintPreview;
 /**
  *
  */
-class QG_PrintPreviewOptions: public QG_OptionsBase, 
+class CAD_EXPORT QG_PrintPreviewOptions: public QG_OptionsBase, 
                               private Ui::QG_PrintPreviewOptions {
     Q_OBJECT
 

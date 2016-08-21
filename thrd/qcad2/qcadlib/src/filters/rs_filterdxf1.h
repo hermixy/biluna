@@ -41,7 +41,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_FilterDxf1 : public RS_FilterInterface {
+class CAD_EXPORT RS_FilterDxf1 : public RS_FilterInterface {
 public:
     RS_FilterDxf1();
     ~RS_FilterDxf1();
@@ -137,7 +137,7 @@ protected:
     RS_File file;
 };
 
-class RS_FilterDxf1Silent : public RS_FilterDxf1 {
+class CAD_EXPORT RS_FilterDxf1Silent : public RS_FilterDxf1 {
     virtual RS_String getFilterString(RS2::FormatType /*t*/, bool /*openMode*/) {
         return "";
     }

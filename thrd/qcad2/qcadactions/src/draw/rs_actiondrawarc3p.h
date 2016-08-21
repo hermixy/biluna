@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawArc3P : public RS_ActionBase {
+class CAD_EXPORT RS_ActionDrawArc3P : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

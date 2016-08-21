@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSetRelativeZero : public RS_ActionBase {
+class CAD_EXPORT RS_ActionSetRelativeZero : public RS_ActionBase {
     Q_OBJECT
 public:
     RS_ActionSetRelativeZero(RS_EntityContainer& container,

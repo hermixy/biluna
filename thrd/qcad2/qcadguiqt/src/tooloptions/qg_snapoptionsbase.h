@@ -35,7 +35,7 @@ class RS_Snapper;
 /**
  * Base class for action option widgets.
  */
-class QG_SnapOptionsBase: public QWidget {
+class CAD_EXPORT QG_SnapOptionsBase: public QWidget {
     Q_OBJECT
     
 public:

@@ -41,7 +41,7 @@
 /**
  * Holds the data that defines a linear dimension entity.
  */
-class RS_DimLinearData {
+class CAD_EXPORT RS_DimLinearData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -86,7 +86,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_DimLinear : public RS_Dimension {
+class CAD_EXPORT RS_DimLinear : public RS_Dimension {
 public:
     RS_DimLinear(RS_EntityContainer* parentContainer,
                  const RS_DimensionData& d,

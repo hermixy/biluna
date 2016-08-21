@@ -35,7 +35,7 @@ class RS_ActionModifyTrimAmount;
 /**
  *
  */
-class QG_TrimAmountOptions: public QG_OptionsBase, private Ui::QG_TrimAmountOptions {
+class CAD_EXPORT QG_TrimAmountOptions: public QG_OptionsBase, private Ui::QG_TrimAmountOptions {
     Q_OBJECT
 
 public:

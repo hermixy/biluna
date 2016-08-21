@@ -36,7 +36,7 @@ class RS_Text;
 /**
  * Holds the data needed for move modifications.
  */
-class RS_MoveData {
+class CAD_EXPORT RS_MoveData {
 public:
     int number;
     bool useCurrentAttributes;
@@ -49,7 +49,7 @@ public:
 /**
  * Holds the data needed for rotation modifications.
  */
-class RS_RotateData {
+class CAD_EXPORT RS_RotateData {
 public:
     int number;
     bool useCurrentAttributes;
@@ -63,7 +63,7 @@ public:
 /**
  * Holds the data needed for scale modifications.
  */
-class RS_ScaleData {
+class CAD_EXPORT RS_ScaleData {
 public:
     int number;
     bool useCurrentAttributes;
@@ -76,7 +76,7 @@ public:
 /**
  * Holds the data needed for mirror modifications.
  */
-class RS_MirrorData {
+class CAD_EXPORT RS_MirrorData {
 public:
     bool copy;
     bool useCurrentAttributes;
@@ -89,7 +89,7 @@ public:
 /**
  * Holds the data needed for move/rotate modifications.
  */
-class RS_MoveRotateData {
+class CAD_EXPORT RS_MoveRotateData {
 public:
     int number;
     bool useCurrentAttributes;
@@ -104,7 +104,7 @@ public:
 /**
  * Holds the data needed for rotation around two centers modifications.
  */
-class RS_Rotate2Data {
+class CAD_EXPORT RS_Rotate2Data {
 public:
     int number;
     bool useCurrentAttributes;
@@ -120,7 +120,7 @@ public:
 /**
  * Holds the data needed for beveling modifications.
  */
-class RS_BevelData {
+class CAD_EXPORT RS_BevelData {
 public:
     double length1;
     double length2;
@@ -133,7 +133,7 @@ public:
 /**
  * Holds the data needed for rounding modifications.
  */
-class RS_RoundData {
+class CAD_EXPORT RS_RoundData {
 public:
     double radius;
     bool trim;
@@ -143,7 +143,7 @@ public:
 /**
  * Holds the data needed for moving reference points.
  */
-class RS_MoveRefData {
+class CAD_EXPORT RS_MoveRefData {
 public:
     RS_Vector ref;
     RS_Vector offset;
@@ -154,7 +154,7 @@ public:
 /**
  * Holds the data needed for changing attributes.
  */
-class RS_AttributesData {
+class CAD_EXPORT RS_AttributesData {
 public:
     RS_String layer;
     RS_Pen pen;
@@ -168,7 +168,7 @@ public:
 /**
  * Holds the data needed for pasting.
  */
-class RS_PasteData {
+class CAD_EXPORT RS_PasteData {
 public:
     RS_PasteData() {
         insertionPoint = RS_Vector(0.0,0.0);
@@ -222,7 +222,7 @@ public:
 /**
  * Holds the data needed for isometric projections.
  */
-class RS_IsoProjectData {
+class CAD_EXPORT RS_IsoProjectData {
 public:
     bool copy;
     bool useCurrentAttributes;
@@ -247,7 +247,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Modification {
+class CAD_EXPORT RS_Modification {
 public:
     enum BooleanOperation {
         BoolOr,

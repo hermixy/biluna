@@ -38,7 +38,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_AtomicEntity : public virtual RS_Entity {
+class CAD_EXPORT RS_AtomicEntity : public virtual RS_Entity {
 
 public:
     /**

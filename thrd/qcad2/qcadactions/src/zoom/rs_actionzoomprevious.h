@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionZoomPrevious : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionZoomPrevious : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionZoomPrevious(RS_EntityContainer& container,

@@ -35,7 +35,7 @@ class RS_ActionLibraryInsert;
 /**
  *
  */
-class QG_LibraryInsertOptions: public QG_OptionsBase, private Ui::QG_LibraryInsertOptions {
+class CAD_EXPORT QG_LibraryInsertOptions: public QG_OptionsBase, private Ui::QG_LibraryInsertOptions {
     Q_OBJECT
 
 public:

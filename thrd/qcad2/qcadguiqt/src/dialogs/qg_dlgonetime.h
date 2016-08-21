@@ -36,7 +36,7 @@
  * Warning dialog that offers the user a check box to never show 
  * the warning again.
  */
-class QG_DlgOneTime: public QDialog, private Ui::QG_DlgOneTime {
+class CAD_EXPORT QG_DlgOneTime: public QDialog, private Ui::QG_DlgOneTime {
     Q_OBJECT
 
 public:

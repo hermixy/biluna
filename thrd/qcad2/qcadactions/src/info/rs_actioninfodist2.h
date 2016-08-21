@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionInfoDist2 : public RS_ActionBase {
+class CAD_EXPORT RS_ActionInfoDist2 : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

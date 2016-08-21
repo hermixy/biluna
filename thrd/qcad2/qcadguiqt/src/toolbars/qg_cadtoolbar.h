@@ -51,7 +51,7 @@ class QG_CadToolBarSplines;
 /**
  *
  */
-class QG_CadToolBar: public QWidget, private Ui::QG_CadToolBar {
+class CAD_EXPORT QG_CadToolBar: public QWidget, private Ui::QG_CadToolBar {
     Q_OBJECT
 
 public:

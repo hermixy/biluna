@@ -40,7 +40,7 @@
 /**
  * A toolbar that offers all widgets for choosing a pen.
  */
-class QG_PenToolBar: public QToolBar /*,
+class CAD_EXPORT QG_PenToolBar: public QToolBar /*,
     public RS_LayerListListener*/ {
     Q_OBJECT
 

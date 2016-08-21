@@ -33,7 +33,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionPolylineAdd : public RS_ActionBase {
+class CAD_EXPORT RS_ActionPolylineAdd : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

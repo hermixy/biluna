@@ -28,6 +28,7 @@
 
 #include <QWidget>
 #include <QMouseEvent>
+#include "cad_global.h"
 
 //#include "rs_actionhandler.h"
 
@@ -36,7 +37,7 @@ class QG_CadToolBar;
 /**
  * Base class for all cad toolbars.
  */
-class QG_CadToolBarBase : public QWidget {
+class CAD_EXPORT QG_CadToolBarBase : public QWidget {
     Q_OBJECT
 
 public:

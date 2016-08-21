@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyExplodeText : public RS_ActionBase {
+class CAD_EXPORT RS_ActionModifyExplodeText : public RS_ActionBase {
     Q_OBJECT
 public:
     RS_ActionModifyExplodeText(RS_EntityContainer& container,

@@ -28,7 +28,7 @@
  * This is an implementation of a graphic viewer for drawing 
  * into bitmaps.
  */
-class RS_BitmapGraphicView: public RS_StaticGraphicView {
+class CAD_EXPORT RS_BitmapGraphicView: public RS_StaticGraphicView {
 public:
     RS_BitmapGraphicView(int w, int h);
     virtual ~RS_BitmapGraphicView();

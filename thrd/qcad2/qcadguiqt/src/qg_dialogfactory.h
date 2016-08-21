@@ -65,7 +65,7 @@ class QG_PropertyEditor;
  * This is the Qt implementation of a widget which can create and
  * show dialogs and tool option widgets.
  */
-class QG_DialogFactory: public QObject, public RS_DialogFactoryInterface {
+class CAD_EXPORT QG_DialogFactory: public QObject, public RS_DialogFactoryInterface {
     Q_OBJECT
 
 protected:

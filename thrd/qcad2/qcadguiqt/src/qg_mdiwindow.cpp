@@ -52,7 +52,7 @@ int QG_MdiWindow::idCounter = 0;
  */
 QG_MdiWindow::QG_MdiWindow(RS_Document* doc, QWidget* parent, 
     QG_MainWindow* appWin) 
-    : QWidget(parent) {
+    : QMdiSubWindow(parent) {
 
     setAttribute(Qt::WA_DeleteOnClose);
 

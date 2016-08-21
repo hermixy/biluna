@@ -34,7 +34,7 @@
 /**
  *
  */
-class QG_CadToolBarDim: public QG_CadToolBarBase, 
+class CAD_EXPORT QG_CadToolBarDim: public QG_CadToolBarBase, 
                           private Ui::QG_CadToolBarDim {
     Q_OBJECT
 

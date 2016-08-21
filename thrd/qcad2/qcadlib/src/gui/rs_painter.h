@@ -46,7 +46,7 @@
  * communicate with the qcadlib from a GUI level. This 
  * does not contain any Qt or platform specific code.
  */
-class RS_Painter {
+class CAD_EXPORT RS_Painter {
 public:
     RS_Painter() {
         drawingMode = RS2::ModeFull;

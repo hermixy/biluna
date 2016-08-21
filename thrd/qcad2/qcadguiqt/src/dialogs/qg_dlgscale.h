@@ -35,7 +35,7 @@
 /**
  *
  */
-class QG_DlgScale: public QDialog, private Ui::QG_DlgScale {
+class CAD_EXPORT QG_DlgScale: public QDialog, private Ui::QG_DlgScale {
     Q_OBJECT
 
 public:

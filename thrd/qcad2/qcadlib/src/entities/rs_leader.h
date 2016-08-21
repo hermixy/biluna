@@ -36,7 +36,7 @@
 /**
  * Holds the data that defines a leader.
  */
-class RS_LeaderData {
+class CAD_EXPORT RS_LeaderData {
 public:
     RS_LeaderData() {}
     RS_LeaderData(bool arrowHeadFlag) {
@@ -54,7 +54,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Leader : public RS_EntityContainer {
+class CAD_EXPORT RS_Leader : public RS_EntityContainer {
 public:
     RS_Leader(RS_EntityContainer* parentContainer=NULL);
     RS_Leader(RS_EntityContainer* parentContainer,

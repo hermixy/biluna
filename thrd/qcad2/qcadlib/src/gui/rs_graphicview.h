@@ -57,7 +57,7 @@ class RS_Preview;
  * Note that this is just an interface used as a slot to 
  * communicate with the qcadlib from a GUI level. 
  */
-class RS_GraphicView {
+class CAD_EXPORT RS_GraphicView {
 public:
     RS_GraphicView();
     virtual ~RS_GraphicView();

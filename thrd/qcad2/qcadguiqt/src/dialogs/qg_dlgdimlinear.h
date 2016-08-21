@@ -37,7 +37,7 @@ class RS_DimLinear;
 /**
  *
  */
-class QG_DlgDimLinear: public QDialog, private Ui::QG_DlgDimLinear {
+class CAD_EXPORT QG_DlgDimLinear: public QDialog, private Ui::QG_DlgDimLinear {
     Q_OBJECT
 
 public:

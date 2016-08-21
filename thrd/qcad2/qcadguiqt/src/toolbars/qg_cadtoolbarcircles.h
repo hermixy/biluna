@@ -34,7 +34,7 @@
 /**
  *
  */
-class QG_CadToolBarCircles: public QG_CadToolBarBase, 
+class CAD_EXPORT QG_CadToolBarCircles: public QG_CadToolBarBase, 
                           private Ui::QG_CadToolBarCircles {
     Q_OBJECT
 

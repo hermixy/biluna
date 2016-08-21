@@ -1232,7 +1232,7 @@ void FunctionParser::PrintByteCode(std::ostream& dest) const
 #define CONSTANT_DR    (180.0 / M_PI)          // 180/pi
 #define CONSTANT_RD    (M_PI / 180.0)          // pi/180
 
-class compres
+class CAD_EXPORT compres
 {
     // states: 0=false, 1=true, 2=unknown
 public:
@@ -1252,7 +1252,7 @@ namespace {
 const compres maybe = (char)2;
 }
 
-class SubTree
+class CAD_EXPORT SubTree
 {
     struct CodeTree *tree;
     bool sign;  // Only possible when parent is cAdd or cMul
@@ -1374,7 +1374,7 @@ protected:
     void operator=(const CodeTreeData &b);
 };
 
-class CodeTreeDataPtr
+class CAD_EXPORT CodeTreeDataPtr
 {
     typedef pair<CodeTreeData, unsigned> p_t;
     typedef p_t* pp;
@@ -2385,8 +2385,8 @@ CodeTree::ConstList CodeTree::BuildConstList()
     if(GetOp() == cMul)
     {
         /*
-          Jos joku niistä arvoista on -1 eikä se ole ainoa arvo,
-          niin joku muu niistä arvoista negatoidaan.
+          Jos joku niistï¿½ arvoista on -1 eikï¿½ se ole ainoa arvo,
+          niin joku muu niistï¿½ arvoista negatoidaan.
         */
         for(bool done=false; cp.size() > 1 && !done; )
         {
@@ -2595,16 +2595,16 @@ void CodeTree::Optimize()
                conflict= * redundant
                addmulflat=
                constantmath1= addmulflat * conflict
-               linearcombine= conflict * addmulflat¹ redundant¹
+               linearcombine= conflict * addmulflatï¿½ redundantï¿½
                powmuladd=
-               exponents= linearcombine * powmuladd conflict¹
+               exponents= linearcombine * powmuladd conflictï¿½
                logarithm= exponents *
                functioncalls= IDLE
                linearexplode= IDLE
                pascal= IDLE
 
                * = actions here
-               ¹ = only if made changes
+               ï¿½ = only if made changes
             */
         }
     }

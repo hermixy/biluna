@@ -42,7 +42,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Python {
+class CAD_EXPORT RS_Python {
 private:
     RS_Python();
 

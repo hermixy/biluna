@@ -36,7 +36,7 @@
  * Holds the data that defines a construction line (a line
  * which is not limited to both directions).
  */
-class RS_ConstructionLineData {
+class CAD_EXPORT RS_ConstructionLineData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -63,7 +63,7 @@ private:
  *
  * @author Andrew Mustun
  */
-class RS_ConstructionLine : public RS_AtomicEntity {
+class CAD_EXPORT RS_ConstructionLine : public RS_AtomicEntity {
 public:
     RS_ConstructionLine(RS_EntityContainer* parentContainer,
                         const RS_ConstructionLineData& d);

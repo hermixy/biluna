@@ -61,7 +61,7 @@
  * Instances of this class can be linked to layer lists using
  * addLayerListListener().
  */
-class QG_GraphicView: public QWidget,
+class CAD_EXPORT QG_GraphicView: public QWidget,
             public RS_GraphicView,
             /*public QFilePreview,*/
             /*public RS_LayerListListener,*/

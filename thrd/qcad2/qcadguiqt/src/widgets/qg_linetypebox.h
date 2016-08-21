@@ -34,7 +34,7 @@
 /**
  * A combobox for choosing a line type.
  */
-class QG_LineTypeBox: public QComboBox {
+class CAD_EXPORT QG_LineTypeBox: public QComboBox {
     Q_OBJECT
 
 public:

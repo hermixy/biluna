@@ -33,7 +33,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionViewGrid : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionViewGrid : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionViewGrid(RS_EntityContainer& container,

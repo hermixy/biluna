@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDimVertical : public RS_ActionDimLinear {
+class CAD_EXPORT RS_ActionDimVertical : public RS_ActionDimLinear {
     Q_OBJECT
 public:
     RS_ActionDimVertical(RS_EntityContainer& container,

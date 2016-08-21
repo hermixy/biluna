@@ -44,7 +44,7 @@
 /**
  * Holds the data that defines a text entity.
  */
-class RS_TextData {
+class CAD_EXPORT RS_TextData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -136,7 +136,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Text : public RS_EntityContainer {
+class CAD_EXPORT RS_Text : public RS_EntityContainer {
 public:
     RS_Text(RS_EntityContainer* parentContainer,
             const RS_TextData& d);

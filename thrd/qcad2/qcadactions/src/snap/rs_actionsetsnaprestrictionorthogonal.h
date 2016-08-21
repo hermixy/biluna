@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSetSnapRestrictionOrthogonal : public RS_ActionSetSnapRestriction {
+class CAD_EXPORT RS_ActionSetSnapRestrictionOrthogonal : public RS_ActionSetSnapRestriction {
     Q_OBJECT
 public:
     RS_ActionSetSnapRestrictionOrthogonal(RS_EntityContainer& container,

@@ -39,7 +39,7 @@
 /**
  * Holds the data that defines a circle.
  */
-class RS_CircleData {
+class CAD_EXPORT RS_CircleData {
 public:
     RS_CircleData() {}
 
@@ -71,7 +71,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Circle : public RS_AtomicEntity {
+class CAD_EXPORT RS_Circle : public RS_AtomicEntity {
 public:
     RS_Circle (RS_EntityContainer* parentContainer,
                const RS_CircleData& d);

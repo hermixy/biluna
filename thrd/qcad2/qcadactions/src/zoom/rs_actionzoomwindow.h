@@ -34,7 +34,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionZoomWindow : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionZoomWindow : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionZoomWindow(RS_EntityContainer& container,

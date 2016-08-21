@@ -41,7 +41,7 @@ class RS_UndoCycle;
  * @see RS_Undo
  * @author Andrew Mustun
  */
-class RS_Undoable : public RS_Flags {
+class CAD_EXPORT RS_Undoable : public RS_Flags {
 public:
     RS_Undoable();
     virtual ~RS_Undoable();

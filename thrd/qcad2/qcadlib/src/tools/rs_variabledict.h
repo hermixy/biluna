@@ -41,7 +41,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_VariableDict {
+class CAD_EXPORT RS_VariableDict {
 public:
     RS_VariableDict();
     virtual ~RS_VariableDict() {}

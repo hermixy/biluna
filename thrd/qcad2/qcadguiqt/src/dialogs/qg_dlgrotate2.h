@@ -35,7 +35,7 @@
 /**
  *
  */
-class QG_DlgRotate2: public QDialog, private Ui::QG_DlgRotate2 {
+class CAD_EXPORT QG_DlgRotate2: public QDialog, private Ui::QG_DlgRotate2 {
     Q_OBJECT
 
 public:

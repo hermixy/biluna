@@ -34,7 +34,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionForward : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionForward : public RS_ActionInterface {
   Q_OBJECT
 public:
     RS_ActionForward(RS_EntityContainer& container, RS_GraphicView& graphicView);

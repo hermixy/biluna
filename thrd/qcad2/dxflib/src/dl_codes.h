@@ -61,10 +61,12 @@
 // used to mark invalid vectors:
 //#define DL_DXF_MAXDOUBLE 1.0E+10
 
+#include "cad_global.h"
+
 /**
  * Codes for colors and DXF versions.
  */
-class DL_Codes {
+class CAD_EXPORT DL_Codes {
 public:
     /**
      * Standard DXF colors.

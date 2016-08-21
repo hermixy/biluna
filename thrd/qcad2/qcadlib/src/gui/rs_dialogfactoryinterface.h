@@ -70,10 +70,12 @@ class RS_Vector;
 /**
  * Interface for objects that can create and show dialogs.
  */
-class RS_DialogFactoryInterface {
+class CAD_EXPORT RS_DialogFactoryInterface {
 public:
-    RS_DialogFactoryInterface() {};
-    virtual ~RS_DialogFactoryInterface() {};
+    RS_DialogFactoryInterface() {
+        mainWindow = nullptr;
+    }
+    virtual ~RS_DialogFactoryInterface() {}
 
     /**
      * This virtual method must be overwritten and must show the previously

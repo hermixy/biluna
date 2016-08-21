@@ -28,11 +28,12 @@
 #define QG_LISTWIDGET_H
 
 #include <qlistwidget.h>
+#include "cad_global.h"
 
 /**
  * A list widget that signals mouse click events.
  */
-class QG_ListWidget: public QListWidget {
+class CAD_EXPORT QG_ListWidget: public QListWidget {
     Q_OBJECT
 
 public:

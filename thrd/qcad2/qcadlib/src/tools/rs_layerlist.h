@@ -39,7 +39,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_LayerList : public QObject {
+class CAD_EXPORT RS_LayerList : public QObject {
     Q_OBJECT
 public:
     RS_LayerList();

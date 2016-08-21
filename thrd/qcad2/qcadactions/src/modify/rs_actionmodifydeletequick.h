@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyDeleteQuick : public RS_ActionBase {
+class CAD_EXPORT RS_ActionModifyDeleteQuick : public RS_ActionBase {
     Q_OBJECT
 public:
     RS_ActionModifyDeleteQuick(RS_EntityContainer& container,

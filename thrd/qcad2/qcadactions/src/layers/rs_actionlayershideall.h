@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionLayersHideAll : public RS_ActionLayersShowAll {
+class CAD_EXPORT RS_ActionLayersHideAll : public RS_ActionLayersShowAll {
     Q_OBJECT
 public:
     RS_ActionLayersHideAll(RS_EntityContainer& container,

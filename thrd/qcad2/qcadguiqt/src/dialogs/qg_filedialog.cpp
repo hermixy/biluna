@@ -68,7 +68,7 @@ RS_String QG_FileDialog::getSaveFileName(QWidget* parent,
     QStringList filters = RS_FILEIO->getAllExportFilterStrings();
 
     fileDlg->setAcceptMode(QFileDialog::AcceptSave);
-    fileDlg->setFilters(filters);
+    fileDlg->setNameFilters(filters);
     fileDlg->setFileMode(QFileDialog::AnyFile);
     if (!suggestion.isEmpty()) {
         fileDlg->selectFile(QFileInfo(suggestion).fileName());
@@ -86,7 +86,7 @@ RS_String QG_FileDialog::getSaveFileName(QWidget* parent,
     else {
         fileDlg->setDirectory(defDir);
     }
-    fileDlg->selectFilter(defFilter);
+    fileDlg->selectNameFilter(defFilter);
     fileDlg->setConfirmOverwrite(true);
 #ifdef RS_ARCH
     fileDlg->setDefaultSuffix("rdxf");
@@ -111,11 +111,11 @@ RS_String QG_FileDialog::getSaveFileName(QWidget* parent,
         RS_StringList fns = fileDlg->selectedFiles();
         if (fns.count()==1) {
             fn = fns.at(0);
-            fn = QDir::convertSeparators(QFileInfo(fn).absoluteFilePath());
+            fn = QDir::toNativeSeparators(QFileInfo(fn).absoluteFilePath());
             cancel = false;
     
             // find out extension:
-            QString filter = fileDlg->selectedFilter();
+            QString filter = fileDlg->selectedNameFilter();
             QString format = "";
             int i = filter.indexOf("(*.");
             if (i!=-1) {
@@ -133,7 +133,7 @@ RS_String QG_FileDialog::getSaveFileName(QWidget* parent,
 
             // set format:
             if (type!=NULL) {
-                *type = RS_FILEIO->getType(fileDlg->selectedFilter());
+                *type = RS_FILEIO->getType(fileDlg->selectedNameFilter());
             }
         }
     } else {
@@ -205,7 +205,7 @@ QStringList QG_FileDialog::getOpenFileNames(QWidget* parent,
     QStringList filters = RS_FILEIO->getAllImportFilterStrings();
 
     fileDlg->setAcceptMode(QFileDialog::AcceptOpen);
-    fileDlg->setFilters(filters);
+    fileDlg->setNameFilters(filters);
     fileDlg->setFileMode(QFileDialog::ExistingFiles);
     if (caption.isEmpty()) {
         fileDlg->setWindowTitle(QObject::tr("Open Drawing"));
@@ -214,7 +214,7 @@ QStringList QG_FileDialog::getOpenFileNames(QWidget* parent,
         fileDlg->setWindowTitle(caption);
     }
     fileDlg->setDirectory(defDir);
-    fileDlg->selectFilter(defFilter);
+    fileDlg->selectNameFilter(defFilter);
     
     if (fileDlg->exec()==QDialog::Accepted) {
         fns = fileDlg->selectedFiles();
@@ -224,7 +224,7 @@ QStringList QG_FileDialog::getOpenFileNames(QWidget* parent,
             fn = QDir::convertSeparators(QFileInfo(fn).absoluteFilePath());
             */
             if (type!=NULL) {
-                *type = RS_FILEIO->getType(fileDlg->selectedFilter());
+                *type = RS_FILEIO->getType(fileDlg->selectedNameFilter());
             }
             cancel = false;
         }
@@ -236,7 +236,7 @@ QStringList QG_FileDialog::getOpenFileNames(QWidget* parent,
     if (!cancel) {
         RS_SETTINGS->beginGroup("/Paths");
         RS_SETTINGS->writeEntry("/Open", fileDlg->directory().path());
-        RS_SETTINGS->writeEntry("/OpenFilter", fileDlg->selectedFilter());
+        RS_SETTINGS->writeEntry("/OpenFilter", fileDlg->selectedNameFilter());
         RS_SETTINGS->endGroup();
     }
 

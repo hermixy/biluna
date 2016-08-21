@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyTrimBoth : public RS_ActionModifyTrim {
+class CAD_EXPORT RS_ActionModifyTrimBoth : public RS_ActionModifyTrim {
     Q_OBJECT
 public:
     RS_ActionModifyTrimBoth(RS_EntityContainer& container,

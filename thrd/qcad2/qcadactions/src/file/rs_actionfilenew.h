@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionFileNew : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionFileNew : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionFileNew(RS_EntityContainer& container,

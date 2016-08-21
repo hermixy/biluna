@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyTrim : public RS_ActionBase {
+class CAD_EXPORT RS_ActionModifyTrim : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

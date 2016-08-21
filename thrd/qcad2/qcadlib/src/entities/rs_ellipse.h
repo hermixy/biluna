@@ -44,7 +44,7 @@ class RS_Polyline;
 /**
  * Holds the data that defines an ellipse.
  */
-class RS_EllipseData {
+class CAD_EXPORT RS_EllipseData {
 public:
     RS_EllipseData(const RS_Vector& center,
                    const RS_Vector& majorP,
@@ -85,7 +85,7 @@ private:
  *
  * @author Andrew Mustun
  */
-class RS_Ellipse : public RS_AtomicEntity {
+class CAD_EXPORT RS_Ellipse : public RS_AtomicEntity {
 public:
     RS_Ellipse(RS_EntityContainer* parentContainer,
                const RS_EllipseData& d);

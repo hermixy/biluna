@@ -27,13 +27,14 @@
 #define QG_ABOUTDIALOG_H
 
 #include <QDialog>
+#include "cad_global.h"
 
 #include "ui_qg_aboutdialog.h"
 
 /**
  *
  */
-class QG_AboutDialog: public QDialog, private Ui::QG_AboutDialog {
+class CAD_EXPORT QG_AboutDialog: public QDialog, private Ui::QG_AboutDialog {
     Q_OBJECT
 
 public:

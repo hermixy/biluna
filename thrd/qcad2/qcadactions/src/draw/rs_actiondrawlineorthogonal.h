@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawLineOrthogonal : public RS_ActionDrawLineRelAngle {
+class CAD_EXPORT RS_ActionDrawLineOrthogonal : public RS_ActionDrawLineRelAngle {
     Q_OBJECT
 
 public:

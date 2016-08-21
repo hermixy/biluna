@@ -34,7 +34,7 @@
 /**
  * Interface for main application windows.
  */
-class RS_MainWindowInterface {
+class CAD_EXPORT RS_MainWindowInterface {
 
 public:
     RS_MainWindowInterface() {}

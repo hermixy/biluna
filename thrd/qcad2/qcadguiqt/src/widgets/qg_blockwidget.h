@@ -42,7 +42,7 @@
  * This is the Qt implementation of a widget which can view a 
  * block list.
  */
-class QG_BlockWidget: public QWidget, public RS_BlockListListener {
+class CAD_EXPORT QG_BlockWidget: public QWidget, public RS_BlockListListener {
     Q_OBJECT
 
 public:

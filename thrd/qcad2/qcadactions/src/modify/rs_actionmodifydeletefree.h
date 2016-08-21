@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyDeleteFree : public RS_ActionBase {
+class CAD_EXPORT RS_ActionModifyDeleteFree : public RS_ActionBase {
     Q_OBJECT
 public:
     RS_ActionModifyDeleteFree(RS_EntityContainer& container,

@@ -39,7 +39,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Pen : public RS_Flags {
+class CAD_EXPORT RS_Pen : public RS_Flags {
 public:
     /**
      * Creates a default pen (black, solid, width 0).

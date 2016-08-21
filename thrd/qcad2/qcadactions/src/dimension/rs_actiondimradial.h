@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDimRadial : public RS_ActionDimension {
+class CAD_EXPORT RS_ActionDimRadial : public RS_ActionDimension {
     Q_OBJECT
 private:
     enum Status {

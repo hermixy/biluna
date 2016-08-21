@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawLineHorizontal : public RS_ActionDrawLineAngle {
+class CAD_EXPORT RS_ActionDrawLineHorizontal : public RS_ActionDrawLineAngle {
     Q_OBJECT
 public:
     RS_ActionDrawLineHorizontal(RS_EntityContainer& container,

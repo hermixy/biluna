@@ -35,7 +35,7 @@ class RS_ActionDrawPolylineEquidistant;
 /**
  *
  */
-class QG_PolylineEquidistantOptions: public QG_OptionsBase, private Ui::QG_PolylineEquidistantOptions {
+class CAD_EXPORT QG_PolylineEquidistantOptions: public QG_OptionsBase, private Ui::QG_PolylineEquidistantOptions {
     Q_OBJECT
 
 public:

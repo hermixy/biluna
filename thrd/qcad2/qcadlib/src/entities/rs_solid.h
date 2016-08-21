@@ -49,7 +49,7 @@
 /**
  * Holds the data that defines a solid.
  */
-class RS_SolidData {
+class CAD_EXPORT RS_SolidData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -107,7 +107,7 @@ private:
  *
  * @author Andrew Mustun
  */
-class RS_Solid : public RS_AtomicEntity {
+class CAD_EXPORT RS_Solid : public RS_AtomicEntity {
 public:
     RS_Solid(RS_EntityContainer* parentContainer,
              const RS_SolidData& d);

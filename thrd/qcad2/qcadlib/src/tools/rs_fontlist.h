@@ -41,7 +41,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_FontList {
+class CAD_EXPORT RS_FontList {
 protected:
     RS_FontList();
 

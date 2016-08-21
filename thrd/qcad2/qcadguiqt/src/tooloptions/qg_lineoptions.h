@@ -35,7 +35,7 @@ class RS_ActionDrawLine;
 /**
  *
  */
-class QG_LineOptions: public QG_OptionsBase, private Ui::QG_LineOptions {
+class CAD_EXPORT QG_LineOptions: public QG_OptionsBase, private Ui::QG_LineOptions {
     Q_OBJECT
 
 public:

@@ -34,7 +34,7 @@
 /**
  * Simple matrix class.
  */
-class RS_Matrix {
+class CAD_EXPORT RS_Matrix {
 public:
     RS_Matrix();
     RS_Matrix(int r, int c);

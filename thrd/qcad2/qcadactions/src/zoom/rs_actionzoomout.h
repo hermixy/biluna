@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionZoomOut : public RS_ActionZoomIn {
+class CAD_EXPORT RS_ActionZoomOut : public RS_ActionZoomIn {
     Q_OBJECT
 public:
     RS_ActionZoomOut(RS_EntityContainer& container,

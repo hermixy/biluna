@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionBlocksCreate : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionBlocksCreate : public RS_ActionInterface {
     Q_OBJECT
 public:
     /**

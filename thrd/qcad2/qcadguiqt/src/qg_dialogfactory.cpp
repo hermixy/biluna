@@ -589,7 +589,7 @@ RS_Layer* QG_DialogFactory::requestEditLayerDialog(RS_LayerList* layerList) {
         QG_LayerDialog dlg(parent);
         dlg.setLayer(layer);
         dlg.setLayerList(layerList);
-        dlg.setEditLayer(TRUE);
+        dlg.setEditLayer(true);
         if (dlg.exec()) {
             dlg.updateLayer();
         } else {
@@ -762,11 +762,11 @@ RS_String QG_DialogFactory::requestImageOpenDialog() {
     //filters.append("Drawing Exchange (*.)");
     //filters.append("Font (*.cxf)");
 
-    fileDlg.setFilters(filters);
+    fileDlg.setNameFilters(filters);
     fileDlg.setFileMode(QFileDialog::ExistingFile);
     fileDlg.setWindowTitle(tr("Open Image"));
     fileDlg.setDirectory(defDir);
-    fileDlg.selectFilter(defFilter);
+    fileDlg.selectNameFilter(defFilter);
 
     if (fileDlg.exec()==QDialog::Accepted) {
         QStringList fns = fileDlg.selectedFiles();
@@ -782,7 +782,7 @@ RS_String QG_DialogFactory::requestImageOpenDialog() {
     if (!cancel) {
         RS_SETTINGS->beginGroup("/Paths");
         RS_SETTINGS->writeEntry("/OpenImage", QFileInfo(fn).absolutePath());
-        RS_SETTINGS->writeEntry("/ImageFilter", fileDlg.selectedFilter());
+        RS_SETTINGS->writeEntry("/ImageFilter", fileDlg.selectedNameFilter());
         RS_SETTINGS->endGroup();
     }
 
@@ -1527,7 +1527,7 @@ void QG_DialogFactory::closeEditBlockWindow(RS_Block* block) {
         RS_DEBUG->print("QG_DialogFactory::closeEditBlockWindow: "
             "workspace found");
         
-        QWidgetList windows = workspace->windowList();
+        QList<QMdiSubWindow*> windows = workspace->subWindowList();
         for (int i = 0; i < int(windows.count()); ++i) {
             RS_DEBUG->print("QG_DialogFactory::closeEditBlockWindow: "
                 "window: %d", i);

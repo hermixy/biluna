@@ -34,7 +34,7 @@
 /**
  *
  */
-class QG_CadToolBarEllipses: public QG_CadToolBarBase, 
+class CAD_EXPORT QG_CadToolBarEllipses: public QG_CadToolBarBase, 
                           private Ui::QG_CadToolBarEllipses {
     Q_OBJECT
 

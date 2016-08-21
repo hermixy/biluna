@@ -40,7 +40,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawLine : public RS_ActionBase {
+class CAD_EXPORT RS_ActionDrawLine : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

@@ -28,6 +28,7 @@
 #define QG_LIBRARYWIDGET_H
 
 #include <QWidget>
+#include "cad_global.h"
 
 #include "ui_qg_librarywidget.h"
 
@@ -40,7 +41,7 @@ class QTreeWidgetItem;
  * This widget displays a browser for inserting parts and symbols
  * from a library of drawings.
  */
-class QG_LibraryWidget: public QWidget, private Ui::QG_LibraryWidget {
+class CAD_EXPORT QG_LibraryWidget: public QWidget, private Ui::QG_LibraryWidget {
     Q_OBJECT
 
 public:

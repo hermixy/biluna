@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Utility {
+class CAD_EXPORT RS_Utility {
 public:
     static RS_String doubleToString(double value, int precision=6);
 };

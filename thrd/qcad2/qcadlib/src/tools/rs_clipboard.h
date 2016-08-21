@@ -44,7 +44,7 @@ class RS_Entity;
  *
  * @author Andrew Mustun
  */
-class RS_Clipboard {
+class CAD_EXPORT RS_Clipboard {
 protected:
     RS_Clipboard() {
         graphic.setUndoEnabled(false);

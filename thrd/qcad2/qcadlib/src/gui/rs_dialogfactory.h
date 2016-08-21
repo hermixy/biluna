@@ -39,7 +39,7 @@
  * Interface for objects that can create and show dialogs.
  * This is merely a small wrapper for the actual dialog factory.
  */
-class RS_DialogFactory {
+class CAD_EXPORT RS_DialogFactory {
 
 private:
     RS_DialogFactory();

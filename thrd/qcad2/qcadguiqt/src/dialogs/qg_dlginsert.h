@@ -38,7 +38,7 @@ class RS_Insert;
 /**
  *
  */
-class QG_DlgInsert: public QDialog, private Ui::QG_DlgInsert {
+class CAD_EXPORT QG_DlgInsert: public QDialog, private Ui::QG_DlgInsert {
     Q_OBJECT
 
 public:

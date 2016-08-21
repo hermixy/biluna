@@ -30,6 +30,7 @@
 
 #include <qobject.h>
 
+#include "cad_global.h"
 #include "rs_entitycontainer.h"
 #include "rs_commandevent.h"
 #include "rs_event.h"
@@ -56,7 +57,7 @@ class RS_Widget;
  *
  * @author Andrew Mustun
  */
-class RS_ActionInterface : public QObject, public RS_Snapper, public RS_PropertyOwner {
+class CAD_EXPORT RS_ActionInterface : public QObject, public RS_Snapper, public RS_PropertyOwner {
     Q_OBJECT
 
 public:

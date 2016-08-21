@@ -40,7 +40,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Selection {
+class CAD_EXPORT RS_Selection {
 public:
     RS_Selection(RS_EntityContainer& entityContainer,
                  RS_GraphicView* graphicView=NULL);

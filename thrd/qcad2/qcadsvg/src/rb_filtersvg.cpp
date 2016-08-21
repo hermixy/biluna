@@ -82,7 +82,7 @@ bool RB_FilterSvg::fileImport(RS_Graphic& g, const RS_String& file,
 	reader.setErrorHandler(this);
 	reader.setLexicalHandler(this);
 
-	if (!reader.parse(&fn)) {
+    if (!reader.parse(QXmlInputSource(&fn))) {
 		return false;	
 	}
 
@@ -563,7 +563,7 @@ void RB_FilterSvg::writeLayer(RB_XmlWriter& xw, RS_Layer* l) {
         return;
     }
 
-    svg.writeLayer(xw, DL_LayerData(string(l->getName().toAscii()), 
+    svg.writeLayer(xw, DL_LayerData(string(l->getName().toStdString()),
     								(int)l->isFrozen()) );
 }
 
@@ -626,7 +626,7 @@ void RB_FilterSvg::writeBlock(RB_XmlWriter& xw, RS_Block* blk) {
             if (l->getName() == e->getLayer()->getName()) {
                 if (0 == counter) {
                     svg.writeGroupLayerId(xw, 
-                            DL_LayerData(string(l->getName().toAscii()),
+                            DL_LayerData(string(l->getName().toStdString()),
                             (int)l->isFrozen()));
                 }
                 writeEntity(xw, e);
@@ -888,7 +888,7 @@ void RB_FilterSvg::writeInsert(RB_XmlWriter& xw, RS_Insert* i,
 
     svg.writeUse(
         xw,
-        DL_InsertData(string(i->getName().toAscii()),
+        DL_InsertData(string(i->getName().toStdString()),
                       i->getInsertionPoint().x,
                       i->getInsertionPoint().y,
                       0.0,
@@ -899,7 +899,7 @@ void RB_FilterSvg::writeInsert(RB_XmlWriter& xw, RS_Insert* i,
                       i->getCols(), i->getRows(),
                       i->getSpacing().x,
                       i->getSpacing().y),
-		DL_BlockData(string(blk->getName().toAscii()), 0,
+        DL_BlockData(string(blk->getName().toStdString()), 0,
                       blk->getBasePoint().x,
                       blk->getBasePoint().y,
                       blk->getBasePoint().z),

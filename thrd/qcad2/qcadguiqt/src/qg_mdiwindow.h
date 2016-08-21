@@ -28,7 +28,7 @@
 #define QG_MDIWINDOW_H
 
 #include <QCloseEvent>
-#include <QWidget>
+#include <QMdiSubWindow>
 
 #include "rs.h"
 #include "rs_document.h"
@@ -49,7 +49,7 @@ class QG_MainWindow;
  *
  * @author Andrew Mustun
  */
-class QG_MdiWindow: public QWidget {
+class CAD_EXPORT QG_MdiWindow: public QMdiSubWindow {
     Q_OBJECT
 
 public:

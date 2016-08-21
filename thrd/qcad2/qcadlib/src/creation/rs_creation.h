@@ -39,7 +39,7 @@
 /**
  * Data needed to insert library items.
  */
-class RS_LibraryInsertData {
+class CAD_EXPORT RS_LibraryInsertData {
 public:
     RS_LibraryInsertData() {}
 
@@ -70,7 +70,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Creation {
+class CAD_EXPORT RS_Creation {
 public:
     RS_Creation(RS_EntityContainer* container,
                 RS_GraphicView* graphicView=NULL,

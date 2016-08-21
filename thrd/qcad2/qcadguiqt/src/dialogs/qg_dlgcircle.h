@@ -38,7 +38,7 @@
 /**
  *
  */
-class QG_DlgCircle: public QDialog, private Ui::QG_DlgCircle {
+class CAD_EXPORT QG_DlgCircle: public QDialog, private Ui::QG_DlgCircle {
     Q_OBJECT
 
 public:

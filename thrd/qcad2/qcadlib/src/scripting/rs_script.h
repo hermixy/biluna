@@ -40,7 +40,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Script {
+class CAD_EXPORT RS_Script {
 public:
     RS_Script(const RS_String& name, const RS_String& path);
     //RS_Script(const char* name);

@@ -41,7 +41,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_PatternList {
+class CAD_EXPORT RS_PatternList {
 protected:
     RS_PatternList();
 

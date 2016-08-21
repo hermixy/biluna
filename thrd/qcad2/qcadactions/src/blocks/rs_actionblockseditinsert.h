@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionBlocksEditInsert : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionBlocksEditInsert : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionBlocksEditInsert(RS_EntityContainer& container,

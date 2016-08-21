@@ -33,7 +33,7 @@
 /**
  * Coordinate Events.
  */
-class RS_CoordinateEvent {
+class CAD_EXPORT RS_CoordinateEvent {
 public:
     /**
      * @param pos coordinate

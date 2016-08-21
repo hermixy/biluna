@@ -33,12 +33,13 @@
 #include <QFocusEvent>
 #include <QKeyEvent>
 #include <QEvent>
+#include "cad_global.h"
 
 /**
  * A command line edit with some typical console features 
  * (uparrow for the history, tab, ..).
  */
-class QG_CommandEdit: public QLineEdit {
+class CAD_EXPORT QG_CommandEdit: public QLineEdit {
     Q_OBJECT
 
 public:

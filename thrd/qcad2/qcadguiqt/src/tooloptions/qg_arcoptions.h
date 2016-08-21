@@ -35,7 +35,7 @@ class RS_ActionDrawArc;
 /**
  *
  */
-class QG_ArcOptions: public QG_OptionsBase, private Ui::QG_ArcOptions {
+class CAD_EXPORT QG_ArcOptions: public QG_OptionsBase, private Ui::QG_ArcOptions {
     Q_OBJECT
 
 public:

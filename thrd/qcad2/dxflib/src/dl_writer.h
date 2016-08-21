@@ -43,6 +43,7 @@
 #include <iostream>
 #include <string.h>
 
+#include "cad_global.h"
 #include "dl_attributes.h"
 #include "dl_codes.h"
 
@@ -58,7 +59,7 @@
  *
  * @todo Add error checking for string/entry length.
  */
-class DL_Writer {
+class CAD_EXPORT DL_Writer {
 public:
     /**
      * @para version DXF version. Defaults to VER_2002.

@@ -35,7 +35,7 @@ class RS_ActionEditPaste;
 /**
  *
  */
-class QG_EditPasteOptions: public QG_OptionsBase, private Ui::QG_EditPasteOptions {
+class CAD_EXPORT QG_EditPasteOptions: public QG_OptionsBase, private Ui::QG_EditPasteOptions {
     Q_OBJECT
 
 public:

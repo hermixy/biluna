@@ -27,6 +27,7 @@
 #define QG_DLGATTRIBUTES_H
 
 #include <QDialog>
+#include "cad_global.h"
 
 #include "ui_qg_dlgattributes.h"
 
@@ -40,7 +41,7 @@ class RS_AttributesData;
 /**
  *
  */
-class QG_DlgAttributes: public QDialog, private Ui::QG_DlgAttributes {
+class CAD_EXPORT QG_DlgAttributes: public QDialog, private Ui::QG_DlgAttributes {
     Q_OBJECT
 
 public:

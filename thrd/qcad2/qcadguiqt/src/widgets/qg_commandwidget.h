@@ -33,7 +33,7 @@
 /**
  *
  */
-class QG_CommandWidget: public QWidget, private Ui::QG_CommandWidget {
+class CAD_EXPORT QG_CommandWidget: public QWidget, private Ui::QG_CommandWidget {
     Q_OBJECT
 
 public:

@@ -30,6 +30,7 @@
 #include <string>
 using std::string;
 
+#include "cad_global.h"
 #include "dl_codes.h"
 
 /**
@@ -38,7 +39,7 @@ using std::string;
  *
  * @author Andrew Mustun
  */
-class DL_Attributes {
+class CAD_EXPORT DL_Attributes {
 
 public:
 

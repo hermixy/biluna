@@ -29,6 +29,7 @@
 
 #include <qnamespace.h>
 #include <QPrinter>
+#include "cad_global.h"
 
 // Windoze XP can't handle the original MAX/MINDOUBLE's
 #define RS_MAXDOUBLE 1.0E+10
@@ -42,7 +43,7 @@
  *
  * @author Andrew Mustun
  */
-class RS2 {
+class CAD_EXPORT RS2 {
 public:
 
     /**

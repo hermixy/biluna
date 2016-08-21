@@ -37,7 +37,7 @@
 /**
  * Holds the data that defines a line.
  */
-class RS_SplineData {
+class CAD_EXPORT RS_SplineData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -64,7 +64,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Spline : public RS_EntityContainer {
+class CAD_EXPORT RS_Spline : public RS_EntityContainer {
 public:
     RS_Spline(RS_EntityContainer* parentContainer,
             const RS_SplineData& d);

@@ -38,7 +38,7 @@
 /**
  * Holds the data that defines a point.
  */
-class RS_PointData {
+class CAD_EXPORT RS_PointData {
 public:
     RS_PointData() : pos(false) {
     }
@@ -57,7 +57,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Point : public virtual RS_AtomicEntity {
+class CAD_EXPORT RS_Point : public virtual RS_AtomicEntity {
 public:
     RS_Point(RS_EntityContainer* parentContainer,
              const RS_PointData& d);

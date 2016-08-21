@@ -39,7 +39,7 @@
  * lines or arcs in a widget. All coordinates are screen coordinates
  * and have nothing to do with the graphic view.
  */
-class RS_PainterQt: public QPainter, public RS_Painter {
+class CAD_EXPORT RS_PainterQt: public QPainter, public RS_Painter {
 
 public:
     RS_PainterQt(QPaintDevice* pd);

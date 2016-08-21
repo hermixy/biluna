@@ -35,7 +35,7 @@ class RS_ActionModifyMoveRotate;
 /**
  *
  */
-class QG_MoveRotateOptions: public QG_OptionsBase, private Ui::QG_MoveRotateOptions {
+class CAD_EXPORT QG_MoveRotateOptions: public QG_OptionsBase, private Ui::QG_MoveRotateOptions {
     Q_OBJECT
 
 public:

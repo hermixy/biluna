@@ -35,7 +35,7 @@
 /**
  *
  */
-class QG_DlgMirror: public QDialog, private Ui::QG_DlgMirror {
+class CAD_EXPORT QG_DlgMirror: public QDialog, private Ui::QG_DlgMirror {
     Q_OBJECT
 
 public:

@@ -35,7 +35,7 @@ class RS_ActionModifyBevel;
 /**
  *
  */
-class QG_BevelOptions: public QG_OptionsBase, private Ui::QG_BevelOptions {
+class CAD_EXPORT QG_BevelOptions: public QG_OptionsBase, private Ui::QG_BevelOptions {
     Q_OBJECT
 
 public:

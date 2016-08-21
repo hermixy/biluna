@@ -26,7 +26,7 @@
 /**
  * Codes for colors, line types, etc.
  */
-class RB_SvgCodes : public RB_XmlCodes {
+class CAD_EXPORT RB_SvgCodes : public RB_XmlCodes {
 
 public:
     RB_SvgCodes();

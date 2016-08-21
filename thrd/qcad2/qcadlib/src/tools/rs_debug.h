@@ -35,6 +35,7 @@
 #include <iostream>
 #include <stdio.h>
 
+#include "cad_global.h"
 #include "rs_string.h"
 #include "rs_stringlist.h"
 
@@ -47,7 +48,7 @@ class RS_Entity;
  *
  * @author Andrew Mustun
  */
-class RS_Debug {
+class CAD_EXPORT RS_Debug {
 
 public:
     /**

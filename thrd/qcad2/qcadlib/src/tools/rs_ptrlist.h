@@ -39,7 +39,7 @@
  * 
  */
 template <typename T>
-class RS_PtrList : public QList<T*> {
+class /*CAD_EXPORT*/ RS_PtrList : public QList<T*> {
 public:
     RS_PtrList() {
         autoDel = false;

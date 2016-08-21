@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawCircleParallel : public RS_ActionDrawLineParallel {
+class CAD_EXPORT RS_ActionDrawCircleParallel : public RS_ActionDrawLineParallel {
     Q_OBJECT
 
 public:

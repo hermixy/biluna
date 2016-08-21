@@ -40,7 +40,7 @@
 /**
  * Holds the data that is common to all dimension entities.
  */
-class RS_DimensionData /*: public RS_Flags*/ {
+class CAD_EXPORT RS_DimensionData /*: public RS_Flags*/ {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -115,7 +115,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Dimension : public RS_EntityContainer {
+class CAD_EXPORT RS_Dimension : public RS_EntityContainer {
 public:
     RS_Dimension(RS_EntityContainer* parentContainer,
                  const RS_DimensionData& d);

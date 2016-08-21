@@ -33,7 +33,7 @@
 /**
  *
  */
-class QG_SnapCoordinateOptions: public QG_SnapOptionsBase, private Ui::QG_SnapCoordinateOptions {
+class CAD_EXPORT QG_SnapCoordinateOptions: public QG_SnapOptionsBase, private Ui::QG_SnapCoordinateOptions {
     Q_OBJECT
 
 public:

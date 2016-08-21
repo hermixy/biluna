@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1069</width>
-    <height>608</height>
+    <width>930</width>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_8">
+  <layout class="QGridLayout" name="gridLayout_5">
    <property name="leftMargin">
     <number>3</number>
    </property>
@@ -4584,13 +4584,12 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QGraphicsView" name="graphicsView">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <layout class="QVBoxLayout" name="cadLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+       </layout>
       </widget>
      </widget>
     </widget>
@@ -4633,7 +4632,6 @@
   <tabstop>sbRevision</tabstop>
   <tabstop>deDate</tabstop>
   <tabstop>leNameEngineer</tabstop>
-  <tabstop>graphicsView</tabstop>
   <tabstop>tabFlangeDetail</tabstop>
   <tabstop>cbTypeFlange_1</tabstop>
   <tabstop>led3_1</tabstop>
@@ -4770,7 +4768,6 @@
   <tabstop>teCalculationReport</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../db/src/gui/db.qrc"/>
   <include location="../../../db/src/gui/db.qrc"/>
  </resources>
  <connections/>

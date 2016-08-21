@@ -42,7 +42,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Information {
+class CAD_EXPORT RS_Information {
 public:
     RS_Information(RS_EntityContainer& entityContainer);
 

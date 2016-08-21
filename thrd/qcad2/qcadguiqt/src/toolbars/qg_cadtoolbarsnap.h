@@ -34,7 +34,7 @@
 /**
  *
  */
-class QG_CadToolBarSnap: public QG_CadToolBarBase,
+class CAD_EXPORT QG_CadToolBarSnap: public QG_CadToolBarBase,
     private Ui::QG_CadToolBarSnap {
     Q_OBJECT
 

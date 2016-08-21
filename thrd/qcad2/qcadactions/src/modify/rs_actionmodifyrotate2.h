@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyRotate2 : public RS_ActionBase {
+class CAD_EXPORT RS_ActionModifyRotate2 : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

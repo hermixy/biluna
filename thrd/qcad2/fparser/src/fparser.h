@@ -12,8 +12,9 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include "cad_global.h"
 
-class FunctionParser
+class CAD_EXPORT FunctionParser
 {
 public:
     int Parse(const std::string& Function, const std::string& Vars,

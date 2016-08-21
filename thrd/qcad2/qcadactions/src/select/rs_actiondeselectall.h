@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDeselectAll : public RS_ActionSelectAll {
+class CAD_EXPORT RS_ActionDeselectAll : public RS_ActionSelectAll {
     Q_OBJECT
 public:
     RS_ActionDeselectAll(RS_EntityContainer& container,

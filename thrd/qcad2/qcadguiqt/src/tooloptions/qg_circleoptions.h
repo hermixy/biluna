@@ -35,7 +35,7 @@ class RS_ActionDrawCircleCR;
 /**
  *
  */
-class QG_CircleOptions: public QG_OptionsBase, private Ui::QG_CircleOptions {
+class CAD_EXPORT QG_CircleOptions: public QG_OptionsBase, private Ui::QG_CircleOptions {
     Q_OBJECT
 
 public:

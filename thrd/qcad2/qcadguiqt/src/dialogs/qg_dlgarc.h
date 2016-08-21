@@ -27,6 +27,7 @@
 #define QG_DLGARC_H
 
 #include <QDialog>
+#include "cad_global.h"
 
 #include "ui_qg_dlgarc.h"
     
@@ -38,7 +39,7 @@
 /**
  *
  */
-class QG_DlgArc: public QDialog, private Ui::QG_DlgArc {
+class CAD_EXPORT QG_DlgArc: public QDialog, private Ui::QG_DlgArc {
     Q_OBJECT
 
 public:

@@ -38,7 +38,7 @@ class RS_Ellipse;
 /**
  *
  */
-class QG_DlgEllipse: public QDialog, private Ui::QG_DlgEllipse {
+class CAD_EXPORT QG_DlgEllipse: public QDialog, private Ui::QG_DlgEllipse {
     Q_OBJECT
 
 public:

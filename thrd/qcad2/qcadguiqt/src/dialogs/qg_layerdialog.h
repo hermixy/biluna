@@ -35,7 +35,7 @@
 /**
  *
  */
-class QG_LayerDialog: public QDialog, private Ui::QG_LayerDialog {
+class CAD_EXPORT QG_LayerDialog: public QDialog, private Ui::QG_LayerDialog {
     Q_OBJECT
 
 public:

@@ -31,7 +31,7 @@
 /**
  * Events base class.
  */
-class RS_Event {}
+class CAD_EXPORT RS_Event {}
 ;
 
 #endif

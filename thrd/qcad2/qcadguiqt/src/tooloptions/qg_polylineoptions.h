@@ -35,7 +35,7 @@ class RS_ActionDrawPolyline;
 /**
  *
  */
-class QG_PolylineOptions: public QG_OptionsBase, private Ui::QG_PolylineOptions {
+class CAD_EXPORT QG_PolylineOptions: public QG_OptionsBase, private Ui::QG_PolylineOptions {
     Q_OBJECT
 
 public:

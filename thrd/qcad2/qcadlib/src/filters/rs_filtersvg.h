@@ -39,7 +39,7 @@ class SvgPainter;
  *
  * @author Andrew Mustun
  */
-class RS_FilterSvg : public RS_FilterInterface {
+class CAD_EXPORT RS_FilterSvg : public RS_FilterInterface {
 public:
     RS_FilterSvg();
     ~RS_FilterSvg();
@@ -117,7 +117,7 @@ protected:
  * to a file rather than actually painting them. It's an abuse, but
  * a very effective one.
  */
-class SvgPainter: public RS_PainterAdapter {
+class CAD_EXPORT SvgPainter: public RS_PainterAdapter {
 public:
     SvgPainter(const char* svg, int w, int h, double lf, bool np);
     virtual ~SvgPainter();

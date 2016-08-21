@@ -35,7 +35,7 @@ class RS_ActionModifyRound;
 /**
  *
  */
-class QG_RoundOptions: public QG_OptionsBase, private Ui::QG_RoundOptions {
+class CAD_EXPORT QG_RoundOptions: public QG_OptionsBase, private Ui::QG_RoundOptions {
     Q_OBJECT
 
 public:

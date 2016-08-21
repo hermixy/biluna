@@ -32,6 +32,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include "cad_global.h"
 #include "dl_writer.h"
 #include <fstream>
 #include <string>
@@ -47,7 +48,7 @@ using std::string;
  * @todo What if \c fname is NULL?  Or \c fname can't be opened for
  * another reason?
  */
-class DL_WriterA : public DL_Writer {
+class CAD_EXPORT DL_WriterA : public DL_Writer {
 public:
     DL_WriterA(const char* fname, DL_Codes::version version=VER_2000)
             : DL_Writer(version), m_ofile(fname) {}

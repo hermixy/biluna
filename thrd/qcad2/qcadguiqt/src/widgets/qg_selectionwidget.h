@@ -27,13 +27,14 @@
 #define QG_SELECTIONWIDGET_H
 
 #include <QWidget>
+#include "cad_global.h"
 
 #include "ui_qg_selectionwidget.h"
 
 /**
  *
  */
-class QG_SelectionWidget: public QWidget, private Ui::QG_SelectionWidget {
+class CAD_EXPORT QG_SelectionWidget: public QWidget, private Ui::QG_SelectionWidget {
     Q_OBJECT
 
 public:

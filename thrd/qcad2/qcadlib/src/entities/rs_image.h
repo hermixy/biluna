@@ -48,7 +48,7 @@
 /**
  * Holds the data that defines an image.
  */
-class RS_ImageData {
+class CAD_EXPORT RS_ImageData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -104,7 +104,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Image : public RS_AtomicEntity {
+class CAD_EXPORT RS_Image : public RS_AtomicEntity {
 public:
     RS_Image(RS_EntityContainer* parentContainer,
             const RS_ImageData& d);

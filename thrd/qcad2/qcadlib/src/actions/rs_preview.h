@@ -28,6 +28,7 @@
 #ifndef RS_PREVIEW_H
 #define RS_PREVIEW_H
 
+#include "cad_global.h"
 #include "rs_entitycontainer.h"
 
 class RS_Entity;
@@ -42,7 +43,7 @@ class RS_InfoArea;
  *
  * @author Andrew Mustun
  */
-class RS_Preview : public RS_EntityContainer {
+class CAD_EXPORT RS_Preview : public RS_EntityContainer {
 public:
     RS_Preview(RS_EntityContainer* parent=NULL);
     ~RS_Preview();

@@ -38,7 +38,7 @@ class RS_Spline;
 /**
  *
  */
-class QG_DlgSpline: public QDialog, private Ui::QG_DlgSpline {
+class CAD_EXPORT QG_DlgSpline: public QDialog, private Ui::QG_DlgSpline {
     Q_OBJECT
 
 public:

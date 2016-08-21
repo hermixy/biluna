@@ -49,7 +49,7 @@ class RS_Preview;
  *
  * @author Andrew Mustun
  */
-class RS_Snapper {
+class CAD_EXPORT RS_Snapper {
 public:
     RS_Snapper(RS_EntityContainer& container, RS_GraphicView& graphicView);
     virtual ~RS_Snapper();

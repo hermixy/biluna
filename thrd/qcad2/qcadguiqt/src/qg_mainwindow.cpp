@@ -103,7 +103,7 @@ void QG_MainWindow::initMdi() {
     RS_DEBUG->print("QG_MainWindow::initMdi");
 
     workspace = new QMdiArea;
-    workspace->setScrollBarsEnabled(true);
+//    workspace->setScrollBarsEnabled(true);
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget*)),
             workspace, SLOT(setActiveWindow(QWidget*)));
@@ -399,7 +399,7 @@ QG_MdiWindow* QG_MainWindow::slotFileNew(RS_Document* doc) {
     slotMessage(tr("Creating new file..."));
 
     QG_MdiWindow* w = new QG_MdiWindow(doc, workspace, this);
-    workspace->addWindow(w);
+    workspace->addSubWindow(w);
     connect(w, SIGNAL(signalClosing()),
             this, SLOT(slotFileClosing()));
 
@@ -444,7 +444,7 @@ QG_MdiWindow* QG_MainWindow::slotFileNew(RS_Document* doc) {
         RS_DEBUG->print("QG_MainWindow::slotFileNew: handle block list listener: OK");
     }
 
-    if (workspace->windowList().count()<=1) {
+    if (workspace->subWindowList().count()<=1) {
         w->showMaximized();
     } else {
         w->show();
@@ -875,13 +875,13 @@ void QG_MainWindow::slotFileExport() {
             filters.append(st);
         }
 
-        fileDlg.setFilters(filters);
+        fileDlg.setNameFilters(filters);
         fileDlg.setAcceptMode(QFileDialog::AcceptSave);
         fileDlg.setFileMode(QFileDialog::AnyFile);
         //fileDlg.setViewMode(QFileDialog::Detail);
         fileDlg.setWindowTitle(QObject::tr("Export Image"));
         fileDlg.setDirectory(defDir);
-        fileDlg.selectFilter(defFilter);
+        fileDlg.selectNameFilter(defFilter);
 
         if (fileDlg.exec()==QDialog::Accepted) {
             QStringList fns = fileDlg.selectedFiles();
@@ -898,11 +898,11 @@ void QG_MainWindow::slotFileExport() {
             RS_SETTINGS->beginGroup("/Paths");
             RS_SETTINGS->writeEntry("/ExportImage", QFileInfo(fn).absolutePath());
             RS_SETTINGS->writeEntry("/ExportImageFilter",
-                                    fileDlg.selectedFilter());
+                                    fileDlg.selectedNameFilter());
             RS_SETTINGS->endGroup();
 
             // find out extension:
-            QString filter = fileDlg.selectedFilter();
+            QString filter = fileDlg.selectedNameFilter();
             QString format = "";
             int i = filter.indexOf("(*.");
             if (i!=-1) {
@@ -1245,7 +1245,7 @@ void QG_MainWindow::slotFilePrintPreview(bool on) {
                 RS_DEBUG->print("QG_MainWindow::slotFilePrintPreview(): create");
 
                 QG_MdiWindow* w = new QG_MdiWindow(parent->getDocument(), workspace, this);
-                workspace->addWindow(w);
+                workspace->addSubWindow(w);
                 parent->addChildWindow(w);
 
                 w->setWindowTitle(tr("Print preview for %1").arg(parent->windowTitle()));
@@ -1287,7 +1287,7 @@ void QG_MainWindow::slotFilePrintPreview(bool on) {
 
                 RS_DEBUG->print("  showing MDI window");
 
-                if (workspace->windowList().isEmpty()) {
+                if (workspace->subWindowList().isEmpty()) {
                     w->showMaximized();
                 } else {
                     w->show();
@@ -1429,7 +1429,7 @@ bool QG_MainWindow::queryExit(bool force) {
             QMessageBox::Ok);
     }
 
-    QWidgetList list = workspace->windowList();
+    QList<QMdiSubWindow*> list = workspace->subWindowList();
     for (int i=0; i<list.size(); ++i) {
         QG_MdiWindow* mdiWindow = (QG_MdiWindow*)list.at(i);
         
@@ -1454,7 +1454,7 @@ bool QG_MainWindow::queryExit(bool force) {
 /**
  * Called when a document window was activated.
  */
-void QG_MainWindow::slotWindowActivated(QWidget* widget) {
+void QG_MainWindow::slotWindowActivated(QMdiSubWindow* widget) {
     RS_DEBUG->print("QG_MainWindow::slotWindowActivated");
     
     if (widget==NULL) {
@@ -1464,8 +1464,8 @@ void QG_MainWindow::slotWindowActivated(QWidget* widget) {
         //return;
     }
 
-    if (widget!=NULL && workspace!=NULL && workspace->activeWindow()!=widget) {
-        workspace->setActiveWindow(widget);
+    if (widget!=NULL && workspace!=NULL && workspace->activeSubWindow()!=widget) {
+        workspace->setActiveSubWindow(widget);
     }
 
     QG_MdiWindow* m = getMdiWindow();
@@ -1586,10 +1586,10 @@ void QG_MainWindow::slotWindowsMenuAboutToShow() {
     windowsMenu->addAction(previousAct);
     windowsMenu->addAction(separatorActWin);
 
-    QList<QWidget*> windows = workspace->windowList();
+    QList<QMdiSubWindow*> windows = workspace->subWindowList();
     separatorActWin->setVisible(!windows.isEmpty());
     for (int i=0; i<windows.size(); ++i) {
-        QG_MdiWindow* child = qobject_cast<QG_MdiWindow*>(windows.at(i));
+        QG_MdiWindow* child = dynamic_cast<QG_MdiWindow*>(windows.at(i));
 
         QString text;
         if (i < 9) {
@@ -1627,7 +1627,7 @@ void QG_MainWindow::slotWindowsMenuAboutToShow() {
 void QG_MainWindow::slotWindowsMenuActivated(int id) {
     RS_DEBUG->print("QG_MainWindow::slotWindowsMenuActivated");
 
-    QWidget* w = workspace->windowList().at(id);
+    QMdiSubWindow* w = workspace->subWindowList().at(id);
     if (w!=NULL) {
         w->showNormal();
     }
@@ -1643,7 +1643,7 @@ void QG_MainWindow::slotWindowsMenuActivated(int id) {
 void QG_MainWindow::slotTileHorizontal() {
     RS_DEBUG->print("QG_MainWindow::slotTileHorizontal");
 
-    QWidgetList windows = workspace->windowList();
+    QList<QMdiSubWindow*> windows = workspace->subWindowList();
     if (windows.count()==0) {
         return;
     }
@@ -1651,7 +1651,7 @@ void QG_MainWindow::slotTileHorizontal() {
     int heightForEach = workspace->height() / windows.count();
     int y = 0;
     for (int i=0; i<int(windows.count()); ++i) {
-        QWidget *window = windows.at(i);
+        QMdiSubWindow* window = windows.at(i);
         if (window->windowState()==Qt::WindowMaximized) {
             // prevent flicker
             window->hide();
@@ -1675,7 +1675,7 @@ void QG_MainWindow::slotTileHorizontal() {
  * Tiles MDI windows vertically.
  */
 void QG_MainWindow::slotTileVertical() {
-    workspace->tile();
+    workspace->tileSubWindows();
 }
 
 
@@ -1784,7 +1784,7 @@ void QG_MainWindow::insertRecentFileActions(QMenu* menu) {
  */
 void QG_MainWindow::redrawAll() {
     if (workspace!=NULL) {
-        QWidgetList windows = workspace->windowList();
+        QList<QMdiSubWindow*> windows = workspace->subWindowList();
         for (int i = 0; i < int(windows.count()); ++i) {
             QG_MdiWindow* m = (QG_MdiWindow*)windows.at(i);
             if (m!=NULL) {
@@ -1805,7 +1805,7 @@ void QG_MainWindow::redrawAll() {
  */
 void QG_MainWindow::updateGrids() {
     if (workspace!=NULL) {
-        QWidgetList windows = workspace->windowList();
+        QList<QMdiSubWindow*> windows = workspace->subWindowList();
         for (int i = 0; i < int(windows.count()); ++i) {
             QG_MdiWindow* m = (QG_MdiWindow*)windows.at(i);
             if (m!=NULL) {

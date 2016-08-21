@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionOptionsDrawing : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionOptionsDrawing : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionOptionsDrawing(RS_EntityContainer& container,

@@ -35,7 +35,7 @@ class RS_ActionDrawLinePolygon;
 /**
  *
  */
-class QG_LinePolygonOptions: public QG_OptionsBase, 
+class CAD_EXPORT QG_LinePolygonOptions: public QG_OptionsBase, 
                              private Ui::QG_LinePolygonOptions {
     Q_OBJECT
 

@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDimLinear : public RS_ActionDimension {
+class CAD_EXPORT RS_ActionDimLinear : public RS_ActionDimension {
     Q_OBJECT
 public:
     /**

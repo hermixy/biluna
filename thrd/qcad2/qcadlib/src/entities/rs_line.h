@@ -38,7 +38,7 @@
 /**
  * Holds the data that defines a line.
  */
-class RS_LineData {
+class CAD_EXPORT RS_LineData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -62,7 +62,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_Line : public virtual RS_AtomicEntity {
+class CAD_EXPORT RS_Line : public virtual RS_AtomicEntity {
 public:
     RS_Line(RS_EntityContainer* parentContainer,
             const RS_LineData& d);

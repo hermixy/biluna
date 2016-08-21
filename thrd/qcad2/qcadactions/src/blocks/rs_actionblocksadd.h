@@ -34,7 +34,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionBlocksAdd : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionBlocksAdd : public RS_ActionInterface {
   Q_OBJECT
 public:
     RS_ActionBlocksAdd(RS_EntityContainer& container,

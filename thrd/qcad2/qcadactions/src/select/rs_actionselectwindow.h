@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSelectWindow : public RS_ActionSelectBase {
+class CAD_EXPORT RS_ActionSelectWindow : public RS_ActionSelectBase {
     Q_OBJECT
 public:
     /**

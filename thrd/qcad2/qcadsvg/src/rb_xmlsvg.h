@@ -40,7 +40,7 @@
  * SVG does not know 'engineering' lines with zero thickness. The default
  * value for line thickness is 0.2. Refer to writeLayerStyles() method. 
  */
-class RB_XmlSvg {
+class CAD_EXPORT RB_XmlSvg {
 public:
     RB_XmlSvg();
     virtual ~RB_XmlSvg();

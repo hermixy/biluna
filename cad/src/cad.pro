@@ -21,7 +21,7 @@ CONFIG += shared
 
 # Biluna specific
 CONFIG += RB_DYNLIB
-DEFINES += DB_DLL
+DEFINES += CAD_DLL
 
 # Compiler settings for release, debug and path for ui, moc, binary files
 exists( ../../mkspecs/defs.pro ) {
@@ -33,7 +33,7 @@ else {
 }
 
 INCLUDEPATH += \
-    ../../db/src/utils \
+    ../../cad/src/core \
     ../../thrd/qcad2/dxflib/src \
     ../../thrd/qcad2/fparser/src \
     ../../thrd/qcad2/qcadactions/src/blocks \

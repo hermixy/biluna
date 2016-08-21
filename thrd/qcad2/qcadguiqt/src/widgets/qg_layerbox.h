@@ -34,7 +34,7 @@
 /**
  * A combobox for choosing a layer.
  */
-class QG_LayerBox: public QComboBox {
+class CAD_EXPORT QG_LayerBox: public QComboBox {
     Q_OBJECT
 
 public:

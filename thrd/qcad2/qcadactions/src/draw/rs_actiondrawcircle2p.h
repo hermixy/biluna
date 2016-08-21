@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawCircle2P : public RS_ActionBase {
+class CAD_EXPORT RS_ActionDrawCircle2P : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

@@ -35,7 +35,7 @@ class RS_ActionDrawSpline;
 /**
  *
  */
-class QG_SplineOptions: public QG_OptionsBase, private Ui::QG_SplineOptions {
+class CAD_EXPORT QG_SplineOptions: public QG_OptionsBase, private Ui::QG_SplineOptions {
     Q_OBJECT
 
 public:

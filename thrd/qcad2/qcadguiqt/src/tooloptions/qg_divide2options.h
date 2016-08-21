@@ -35,7 +35,7 @@ class RS_ActionModifyDivide2;
 /**
  *
  */
-class QG_Divide2Options: public QG_OptionsBase, private Ui::QG_Divide2Options {
+class CAD_EXPORT QG_Divide2Options: public QG_OptionsBase, private Ui::QG_Divide2Options {
     Q_OBJECT
 
 public:

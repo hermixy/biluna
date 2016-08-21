@@ -41,7 +41,7 @@
  * Mouse Events.
  */
 /*
-class RS_MouseEvent {
+class CAD_EXPORT RS_MouseEvent {
 public:
     RS_MouseEvent(int x, int y, RS_MouseButton button) {
         this->x = x;

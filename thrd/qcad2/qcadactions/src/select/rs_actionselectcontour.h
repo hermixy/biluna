@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSelectContour : public RS_ActionSelectBase {
+class CAD_EXPORT RS_ActionSelectContour : public RS_ActionSelectBase {
     Q_OBJECT
 public:
     RS_ActionSelectContour(RS_EntityContainer& container,

@@ -39,7 +39,7 @@
 /**
  * Holds the data that defines an aligned dimension entity.
  */
-class RS_DimAlignedData {
+class CAD_EXPORT RS_DimAlignedData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -74,7 +74,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_DimAligned : public RS_Dimension {
+class CAD_EXPORT RS_DimAligned : public RS_Dimension {
 public:
     RS_DimAligned(RS_EntityContainer* parentContainer,
                   const RS_DimensionData& d,

@@ -34,7 +34,7 @@
 /**
  *
  */
-class QG_CadToolBarLines: public QG_CadToolBarBase, 
+class CAD_EXPORT QG_CadToolBarLines: public QG_CadToolBarBase, 
                           private Ui::QG_CadToolBarLines {
     Q_OBJECT
 

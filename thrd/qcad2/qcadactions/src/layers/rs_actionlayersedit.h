@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionLayersEdit : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionLayersEdit : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionLayersEdit(RS_EntityContainer& container,

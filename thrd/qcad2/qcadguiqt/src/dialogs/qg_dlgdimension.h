@@ -37,7 +37,7 @@ class RS_Dimension;
 /**
  *
  */
-class QG_DlgDimension: public QDialog, private Ui::QG_DlgDimension {
+class CAD_EXPORT QG_DlgDimension: public QDialog, private Ui::QG_DlgDimension {
     Q_OBJECT
 
 public:

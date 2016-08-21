@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDeselectWindow : public RS_ActionSelectWindow {
+class CAD_EXPORT RS_ActionDeselectWindow : public RS_ActionSelectWindow {
     Q_OBJECT
 public:
     RS_ActionDeselectWindow(RS_EntityContainer& container,

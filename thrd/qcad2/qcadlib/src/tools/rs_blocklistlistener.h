@@ -34,7 +34,7 @@
  * This class is an interface for classes that are interested in
  * knowing about changes in the block list. 
  */
-class RS_BlockListListener {
+class CAD_EXPORT RS_BlockListListener {
 public:
     RS_BlockListListener() {}
     virtual ~RS_BlockListListener() {}

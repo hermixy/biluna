@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawLinePolygon : public RS_ActionBase {
+class CAD_EXPORT RS_ActionDrawLinePolygon : public RS_ActionBase {
     Q_OBJECT
 private:
     enum Status {

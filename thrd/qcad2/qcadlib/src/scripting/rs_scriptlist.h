@@ -42,7 +42,7 @@
  * @author Andrew Mustun
  */
 /*
-class RS_ScriptList {
+class CAD_EXPORT RS_ScriptList {
 protected:
     RS_ScriptList();
 

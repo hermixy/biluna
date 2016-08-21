@@ -36,7 +36,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyToFront : public RS_ActionModifyToBack {
+class CAD_EXPORT RS_ActionModifyToFront : public RS_ActionModifyToBack {
     Q_OBJECT
 public:
     RS_ActionModifyToFront(RS_EntityContainer& container,

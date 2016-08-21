@@ -35,7 +35,7 @@ class RS_ActionDrawImage;
 /**
  *
  */
-class QG_ImageOptions: public QG_OptionsBase, private Ui::QG_ImageOptions {
+class CAD_EXPORT QG_ImageOptions: public QG_OptionsBase, private Ui::QG_ImageOptions {
     Q_OBJECT
 
 public:

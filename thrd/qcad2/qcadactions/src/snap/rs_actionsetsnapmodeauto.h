@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionSetSnapModeAuto : public RS_ActionSetSnapMode {
+class CAD_EXPORT RS_ActionSetSnapModeAuto : public RS_ActionSetSnapMode {
     Q_OBJECT
 
 public:

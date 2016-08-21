@@ -41,7 +41,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Variable {
+class CAD_EXPORT RS_Variable {
 public:
     typedef struct {
         RS_String s;

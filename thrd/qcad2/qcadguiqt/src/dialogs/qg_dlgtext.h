@@ -35,7 +35,7 @@
 /**
  *
  */
-class QG_DlgText: public QDialog, private Ui::QG_DlgText {
+class CAD_EXPORT QG_DlgText: public QDialog, private Ui::QG_DlgText {
     Q_OBJECT
 
 public:

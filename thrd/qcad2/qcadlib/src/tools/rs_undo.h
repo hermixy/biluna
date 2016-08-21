@@ -38,7 +38,7 @@
  * @see RS_UndoCycle
  * @author Andrew Mustun
  */
-class RS_Undo {
+class CAD_EXPORT RS_Undo {
 public:
     RS_Undo();
     virtual ~RS_Undo();

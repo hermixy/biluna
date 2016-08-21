@@ -27,6 +27,9 @@
 #include "std_unittestfactory.h"
 // #include "peng_graphicsview.h"
 
+#include "rs_graphic.h"
+#include "qg_graphicview.h"
+
 
 /**
  * Constructor
@@ -80,6 +83,21 @@ RB_String PCALC_EN1591Widget::getSaveAsFileName() {
 }
 
 void PCALC_EN1591Widget::init() {
+    // from QG_MdiWindow::initDoc()
+    RS_Document* document = new RS_Graphic();
+    document->newDoc();
+    // from QG_MdiWindow::initView()
+    QG_GraphicView* gv = new QG_GraphicView(this);
+    gv->setContainer(document);
+    double defaultZoom = 4.0;
+    gv->setFactor(defaultZoom);
+    gv->setOffset(50, 50);
+    //gv->setDefaultAction(new RS_ActionDefault(*document, *gv));
+    cadLayout->addWidget(gv);
+
+    document->addEntity(new RS_Line(document, RS_LineData(RS_Vector(0,0),
+                                                          RS_Vector(50,100))));
+
     initMapping();
     initConnections();
     readSettings();

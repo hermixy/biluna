@@ -14,7 +14,7 @@
 
 # Biluna db_global.h for dynamic library
 HEADERS += \
-    ../../db/src/utils/db_global.h \
+    ../../cad/src/core/cad_global.h
 
 # dxflib
 HEADERS += \

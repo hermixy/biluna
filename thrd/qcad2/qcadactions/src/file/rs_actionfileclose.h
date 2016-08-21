@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionFileClose : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionFileClose : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionFileClose(RS_EntityContainer& container,

@@ -35,7 +35,7 @@ class RS_ActionDimension;
 /**
  *
  */
-class QG_DimOptions: public QG_OptionsBase, private Ui::QG_DimOptions {
+class CAD_EXPORT QG_DimOptions: public QG_OptionsBase, private Ui::QG_DimOptions {
     Q_OBJECT
 
 public:

@@ -32,7 +32,7 @@
 /**
  * File Open / Save dialogs.
  */
-class QG_FileDialog {
+class CAD_EXPORT QG_FileDialog {
 public:
     //QG_FileDialog(QWidget* parent=0, const char* name=0, WFlags f=0);
     //virtual ~QG_FileDialog();

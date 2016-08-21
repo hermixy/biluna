@@ -35,7 +35,7 @@ class RS_ActionDrawLineBisector;
 /**
  *
  */
-class QG_LineBisectorOptions: public QG_OptionsBase, private Ui::QG_LineBisectorOptions {
+class CAD_EXPORT QG_LineBisectorOptions: public QG_OptionsBase, private Ui::QG_LineBisectorOptions {
     Q_OBJECT
 
 public:

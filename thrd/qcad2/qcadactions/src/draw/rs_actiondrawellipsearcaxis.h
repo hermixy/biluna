@@ -38,7 +38,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawEllipseArcAxis : public RS_ActionDrawEllipseAxis {
+class CAD_EXPORT RS_ActionDrawEllipseArcAxis : public RS_ActionDrawEllipseAxis {
     Q_OBJECT
 public:
     RS_ActionDrawEllipseArcAxis(RS_EntityContainer& container,

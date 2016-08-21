@@ -43,7 +43,7 @@
  * This is the Qt implementation of a widget which can view a 
  * layer list and provides a user interface for basic layer actions.
  */
-class QG_LayerWidget: public QWidget {
+class CAD_EXPORT QG_LayerWidget: public QWidget {
     Q_OBJECT
 
 public:

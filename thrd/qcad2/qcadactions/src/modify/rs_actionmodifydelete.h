@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionModifyDelete : public RS_ActionBase {
+class CAD_EXPORT RS_ActionModifyDelete : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

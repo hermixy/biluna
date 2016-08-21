@@ -40,7 +40,7 @@
 /**
  * Holds the data that defines a radial dimension entity.
  */
-class RS_DimRadialData {
+class CAD_EXPORT RS_DimRadialData {
 public:
     /**
      * Default constructor. Leaves the data object uninitialized.
@@ -75,7 +75,7 @@ public:
  *
  * @author Andrew Mustun
  */
-class RS_DimRadial : public RS_Dimension {
+class CAD_EXPORT RS_DimRadial : public RS_Dimension {
 public:
     RS_DimRadial(RS_EntityContainer* parentContainer,
                  const RS_DimensionData& d,

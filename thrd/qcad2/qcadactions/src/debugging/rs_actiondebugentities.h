@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDebugEntities : public RS_ActionInterface {
+class CAD_EXPORT RS_ActionDebugEntities : public RS_ActionInterface {
     Q_OBJECT
 public:
     RS_ActionDebugEntities(RS_EntityContainer& container,

@@ -42,7 +42,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Font {
+class CAD_EXPORT RS_Font {
 public:
     RS_Font(const RS_String& name, bool owner=true);
     //RS_Font(const char* name);

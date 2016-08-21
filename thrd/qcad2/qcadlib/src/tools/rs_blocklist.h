@@ -41,7 +41,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_BlockList {
+class CAD_EXPORT RS_BlockList {
 public:
     RS_BlockList(bool owner=false);
     virtual ~RS_BlockList() {

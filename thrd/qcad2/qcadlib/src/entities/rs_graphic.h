@@ -45,7 +45,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_Graphic : public RS_Document {
+class CAD_EXPORT RS_Graphic : public RS_Document {
 public:
     RS_Graphic(RS_EntityContainer* parentContainer=NULL);
     virtual ~RS_Graphic();

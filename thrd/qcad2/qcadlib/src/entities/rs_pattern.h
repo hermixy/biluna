@@ -39,7 +39,7 @@ class RS_PatternList;
  *
  * @author Andrew Mustun
  */
-class RS_Pattern : public RS_EntityContainer {
+class CAD_EXPORT RS_Pattern : public RS_EntityContainer {
 public:
     RS_Pattern(const RS_String& fileName);
     virtual ~RS_Pattern();

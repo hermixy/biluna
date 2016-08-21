@@ -48,7 +48,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_UndoCycle {
+class CAD_EXPORT RS_UndoCycle {
 public:
     /**
      * @param type Type of undo item.

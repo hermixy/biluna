@@ -43,7 +43,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_EntityContainer : public virtual RS_Entity, public RS_PropertyOwnerContainerInterface {
+class CAD_EXPORT RS_EntityContainer : public virtual RS_Entity, public RS_PropertyOwnerContainerInterface {
 
 public:
 

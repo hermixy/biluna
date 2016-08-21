@@ -35,7 +35,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionDrawLineBisector : public RS_ActionBase {
+class CAD_EXPORT RS_ActionDrawLineBisector : public RS_ActionBase {
     Q_OBJECT
 private:
     enum Status {

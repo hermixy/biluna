@@ -29,11 +29,12 @@
 #define RS_LINETYPEPATTERN_H
 
 #include <stdarg.h>
+#include "cad_global.h"
 
 /**
  * Stores a line type pattern.
  */
-class RS_LineTypePattern {
+class CAD_EXPORT RS_LineTypePattern {
 public:
     RS_LineTypePattern(int count ...) {
         va_list ap;

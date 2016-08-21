@@ -46,7 +46,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_System {
+class CAD_EXPORT RS_System {
 protected:
     RS_System() {
         initialized = false;

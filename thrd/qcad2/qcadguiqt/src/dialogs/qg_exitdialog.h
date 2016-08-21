@@ -27,13 +27,14 @@
 #define QG_EXITDIALOG_H
 
 #include <QDialog>
+#include "cad_global.h"
 
 #include "ui_qg_exitdialog.h"
     
 /**
  *
  */
-class QG_ExitDialog: public QDialog, private Ui::QG_ExitDialog {
+class CAD_EXPORT QG_ExitDialog: public QDialog, private Ui::QG_ExitDialog {
     Q_OBJECT
 
 public:

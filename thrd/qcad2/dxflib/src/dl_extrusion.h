@@ -28,6 +28,7 @@
 #define DL_EXTRUSION_H
 
 #include <math.h>
+#include "cad_global.h"
 
 
 /**
@@ -36,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class DL_Extrusion {
+class CAD_EXPORT DL_Extrusion {
 
 public:
 

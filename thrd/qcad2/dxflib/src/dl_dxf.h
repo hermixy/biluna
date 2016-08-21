@@ -34,6 +34,7 @@
 #include <sstream>
 #endif
 
+#include "cad_global.h"
 #include "dl_attributes.h"
 #include "dl_codes.h"
 #include "dl_entities.h"
@@ -104,7 +105,7 @@ class DL_WriterA;
  *
  * @author Andrew Mustun
  */
-class DL_Dxf {
+class CAD_EXPORT DL_Dxf {
 public:
     DL_Dxf();
     ~DL_Dxf();

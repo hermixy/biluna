@@ -43,7 +43,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_FilterInterface {
+class CAD_EXPORT RS_FilterInterface {
 public:
     /**
      * Constructor.

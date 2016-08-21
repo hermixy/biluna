@@ -40,7 +40,7 @@ class RS_Vector;
  * Widget that displays the current mouse position.
  * Usually shown in the status bar of an application.
  */
-class QG_CoordinateWidget: public QWidget, private Ui::QG_CoordinateWidget {
+class CAD_EXPORT QG_CoordinateWidget: public QWidget, private Ui::QG_CoordinateWidget {
     Q_OBJECT
 
 public:

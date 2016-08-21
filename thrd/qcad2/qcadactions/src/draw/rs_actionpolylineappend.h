@@ -34,7 +34,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_ActionPolylineAppend : public RS_ActionBase {
+class CAD_EXPORT RS_ActionPolylineAppend : public RS_ActionBase {
     Q_OBJECT
 public:
     /**

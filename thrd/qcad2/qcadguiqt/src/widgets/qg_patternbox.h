@@ -36,7 +36,7 @@
 /**
  * A combobox for choosing a pattern name.
  */
-class QG_PatternBox: public QComboBox {
+class CAD_EXPORT QG_PatternBox: public QComboBox {
     Q_OBJECT
 
 public:

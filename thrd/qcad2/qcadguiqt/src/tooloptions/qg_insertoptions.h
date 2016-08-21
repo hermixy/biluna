@@ -35,7 +35,7 @@ class RS_ActionBlocksInsert;
 /**
  *
  */
-class QG_InsertOptions: public QG_OptionsBase, private Ui::QG_InsertOptions {
+class CAD_EXPORT QG_InsertOptions: public QG_OptionsBase, private Ui::QG_InsertOptions {
     Q_OBJECT
 
 public:

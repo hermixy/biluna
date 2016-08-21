@@ -36,7 +36,7 @@ class RS_GraphicView;
  * Widget that displays the current mouse position.
  * Usually shown in the status bar of an application.
  */
-class QG_Ruler: public QFrame {
+class CAD_EXPORT QG_Ruler: public QFrame {
     Q_OBJECT
 
 public:

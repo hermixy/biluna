@@ -36,7 +36,7 @@
 /**
  * A combobox for choosing a font name.
  */
-class QG_FontBox: public QComboBox {
+class CAD_EXPORT QG_FontBox: public QComboBox {
     Q_OBJECT
 
 public:

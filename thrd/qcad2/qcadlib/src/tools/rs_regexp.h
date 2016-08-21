@@ -36,7 +36,7 @@
 
 #else
 
-class RS_RegExp : public QRegExp {
+class CAD_EXPORT RS_RegExp : public QRegExp {
 public:
     RS_RegExp(const RS_String& pattern, bool caseSensitive = TRUE,
               bool wildcard = FALSE ) :

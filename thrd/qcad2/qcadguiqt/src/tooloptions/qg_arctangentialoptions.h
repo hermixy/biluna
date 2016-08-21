@@ -35,7 +35,7 @@ class RS_ActionDrawArcTangential;
 /**
  *
  */
-class QG_ArcTangentialOptions: public QG_OptionsBase, 
+class CAD_EXPORT QG_ArcTangentialOptions: public QG_OptionsBase, 
                                private Ui::QG_ArcTangentialOptions {
     Q_OBJECT
 

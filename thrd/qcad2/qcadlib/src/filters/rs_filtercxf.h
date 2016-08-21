@@ -37,7 +37,7 @@
  *
  * @author Andrew Mustun
  */
-class RS_FilterCxf : public RS_FilterInterface {
+class CAD_EXPORT RS_FilterCxf : public RS_FilterInterface {
 public:
     RS_FilterCxf();
     ~RS_FilterCxf() {}
@@ -79,7 +79,7 @@ public:
 
 
 
-class RS_FilterCxfSilent : public RS_FilterCxf {
+class CAD_EXPORT RS_FilterCxfSilent : public RS_FilterCxf {
     virtual RS_String getFilterString(RS2::FormatType /*t*/, bool /*openMode*/) {
         return "";
     }
