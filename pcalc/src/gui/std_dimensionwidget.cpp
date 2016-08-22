@@ -211,7 +211,7 @@ void STD_DimensionWidget::slotDetailTables(const QModelIndex& current,
     int row = current.row();
     int colCompType = mStandardModel->fieldIndex("comptype_id");
     int componentType = mStandardModel->data(
-                mStandardModel->index(row, colCompType)).toInt();
+                mStandardModel->index(row, colCompType), Qt::EditRole).toInt();
 
     switch(componentType) {
     case (int)STD2::CompBolt:

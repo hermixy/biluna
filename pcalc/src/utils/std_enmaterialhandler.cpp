@@ -175,7 +175,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
             PR->addDetail("EN13445-3 6", variableName,
                           "Rp10 / 1.5",
                           allowStress, "MPa",
-                          QN(Rp02) + "/1.5)", loadCaseNo);
+                          QN(Rp10) + "/1.5)", loadCaseNo);
 //        }
     } else if (matStruct == STD2::MatStructAustenitic
                && 35.0 <= elongPercent) {
@@ -198,7 +198,7 @@ double STD_EnMaterialHandler::allowableDesignStress(
             PR->addDetail("EN13445-3 11.5.4.2", variableName,
                           "Rp10 / 1.5",
                           allowStress, "MPa",
-                          QN(Rp02) + "/1.5)", loadCaseNo);
+                          QN(Rp10) + "/1.5)", loadCaseNo);
         } else {
             Rp10 = get_Rp10(designTemp, loadCaseNo);
             allowStress = std::max(Rp10 / 1.5,

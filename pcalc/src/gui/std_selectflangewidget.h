@@ -47,6 +47,7 @@ protected slots:
 
 private:
     RB_ObjectBase* mFlangeObject;
+    RB_ObjectBase* mFacingObject;
 
 };
 

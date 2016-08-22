@@ -17,12 +17,17 @@ STD_SelectFlangeWidget::STD_SelectFlangeWidget(QWidget *parent)
         : STD_SelectComponentWidget(parent) {
     setObjectName("STD_SelectFlangeWidget");
     mFlangeObject = nullptr;
+    mFacingObject = nullptr;
 }
 
 STD_SelectFlangeWidget::~STD_SelectFlangeWidget() {
     if (mFlangeObject) {
         delete mFlangeObject;
         mFlangeObject = nullptr;
+    }
+    if (mFacingObject) {
+        delete mFacingObject;
+        mFacingObject = nullptr;
     }
 }
 
@@ -77,7 +82,18 @@ RB_ObjectBase* STD_SelectFlangeWidget::getCurrentChild1Object() {
         index = mEndModel->index(row,col);
 
         if (index.data().toDouble() == nomSize) {
-            return mEndModel->getObject(index, RB2::ResolveNone);
+            RB_ObjectBase* obj = mEndModel->getObject(index, RB2::ResolveNone);
+
+            if (!mFacingObject) {
+                mFacingObject = new RB_ObjectAtomic(obj);
+                mFacingObject->addMember("type", "-", ui->cbSerie->currentText());
+            } else {
+                // Required? set only once
+                *mFacingObject = *obj;
+                mFacingObject->setValue("type", ui->cbSerie->currentText());
+            }
+
+            return mFacingObject;
         }
     }
 

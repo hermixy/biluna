@@ -85,11 +85,11 @@ private:
                          const QString& flNrStr, // flange number "1" or "2"
                          STD2::FlangeEnType flangeType = STD2::FlangeEn11,
                          STD2::FlangeFacingEnType facingType = STD2::FlangeFacingEnB);
-    void setIntegralFlangeAsmeData(RB_ObjectBase* flangeObj,
-                                   RB_ObjectBase* facingObj,
-                                   const QString& flNrStr, // flange number "1" or "2"
-                                   STD2::FlangeAsmeType flangeType = STD2::FlangeAsmeWN,
-                                   STD2::FlangeFacingAsmeType facingType = STD2::FlangeFacingAsmeRF);
+    void setFlangeAsmeData(RB_ObjectBase* flangeObj,
+                           RB_ObjectBase* facingObj,
+                           const QString& flNrStr, // flange number "1" or "2"
+                           STD2::FlangeAsmeType flangeType = STD2::FlangeAsmeWN,
+                           STD2::FlangeFacingAsmeType facingType = STD2::FlangeFacingAsmeRF);
     void setBoltAsmeData(RB_ObjectBase* boltObj,
                          RB_ObjectBase*  nutObj = nullptr);
     void setBoltEnData(RB_ObjectBase* boltObj,
