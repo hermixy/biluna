@@ -93,10 +93,16 @@ void PCALC_EN1591Widget::init() {
     gv->setFactor(defaultZoom);
     gv->setOffset(50, 50);
     //gv->setDefaultAction(new RS_ActionDefault(*document, *gv));
+    gv->setBackground(RS_Color(Qt::white));
+    gv->showRulers(false);
     cadLayout->addWidget(gv);
 
-    document->addEntity(new RS_Line(document, RS_LineData(RS_Vector(0,0),
-                                                          RS_Vector(50,100))));
+//    document->addEntity(new RS_Line(document, RS_LineData(RS_Vector(0,0),
+//                                                          RS_Vector(50,100))));
+//    document->addEntity(new RS_Text(document, RS_LineData(RS_Vector(0,0),
+//                                                          RS_Vector(50,100))));
+
+
 
     initMapping();
     initConnections();
@@ -1050,7 +1056,9 @@ void PCALC_EN1591Widget::slotIleStandardFlange_NrClicked() {
 
         strType = facingObj->getValue("type").toString();
 
-        if (strType == "FFS") {
+        if (strType == "FF") {
+            facingType = STD2::FlangeFacingAsmeFF;
+        } else if (strType == "FMS") {
             facingType = STD2::FlangeFacingAsmeFFS;
         } else if (strType == "FMS") {
             facingType = STD2::FlangeFacingAsmeFMS;
@@ -2093,46 +2101,75 @@ void PCALC_EN1591Widget::setFlangeAsmeData(
     double drf = 0.0;
     double drec = 0.0;
     double erf = 0.0; // thickness raised face
-    double c = 0.0; // thickness flange including raised face
-    double efb = 0.0;
+//    double efb = 0.0; // flange thickness at bolt hole
     double erec = 0.0;
     double ex = 0.0; // also used for inside height of D and H
     double e0 = 0.0;
-    double d0 = 0.0; // inside bore
-    double odThin = 0.0; // outside thin end hub
-    double odThick = 0.0; // outside thick end hub
-    double e1 = 0.0; // thickness thin end hub
-    double e2 = 0.0; // thickness thick end hub
-    double lh = 0.0; // length hub
+//    double d0 = 0.0; // inside bore
+//    double odThin = 0.0; // outside thin end hub
+//    double odThick = 0.0; // outside thick end hub
+//    double e1 = 0.0; // thickness thin end hub
+//    double e2 = 0.0; // thickness thick end hub
+//    double lh = 0.0; // length hub
     double b0 = 0.0; // chamfer loose flange
-    double d6 = 0.0; // inside diameter loose flange
-    double d8 = 0.0; // outside diameter collar
-    double el = 0.0; // thickness loose flange
+//    double d6 = 0.0; // inside diameter loose flange
+//    double d8 = 0.0; // outside diameter collar
+//    double el = 0.0; // thickness loose flange
 
     switch (facingType) {
+    case STD2::FlangeFacingAsmeFF:      /** Flat Face */
+        break;
     case STD2::FlangeFacingAsmeFFS:     /** Small Female Face (small Spigot and Recess)	*/
+        dx = facingObj->getValue("k").toDouble();
+        drec = facingObj->getValue("x").toDouble();
+        erec = 5.0;
         break;
     case STD2::FlangeFacingAsmeFMS:     /** Small Male Face (on end of pipe, small Spigot and Recess) */
-        drf = facingObj->getValue("s").toDouble();
+        drec = facingObj->getValue("s").toDouble();
+        erec = 7.0;
         break;
     case STD2::FlangeFacingAsmeRF:      /** Raised Face 2 or 7 mm */
         drf = facingObj->getValue("r").toDouble();
+        erf = facingObj->getValue("hrf").toDouble();
         break;
     case STD2::FlangeFacingAsmeRTJ:     /**	Ring (Type) Joint */
         dx = facingObj->getValue("p").toDouble()
                 + facingObj->getValue("f").toDouble();
+        drf = facingObj->getValue("r").toDouble();
         break;
     case STD2::FlangeFacingAsmeSRF:     /**	Spigot and Recess Female (large face) */
+        dx = facingObj->getValue("l").toDouble();
+        drec = facingObj->getValue("w").toDouble();
+        erec = 5.0;
+        ex = 5.0;
         break;
     case STD2::FlangeFacingAsmeSRM:     /**	Spigot and Recess Male (large face) */
+        drec = facingObj->getValue("r").toDouble();
+        erec = 7.0;
         break;
     case STD2::FlangeFacingAsmeTGGL:    /**	Tongue and Groove, Groove - Large */
+        dx = facingObj->getValue("w").toDouble();
+        drf = facingObj->getValue("l").toDouble();
+        drec = facingObj->getValue("z").toDouble();
+        erf = 5.0;
+        erec = 5.0;
         break;
     case STD2::FlangeFacingAsmeTGGS:    /**	Tongue and Groove, Groove - Small */
+        dx = facingObj->getValue("y").toDouble();
+        drf = facingObj->getValue("k").toDouble();
+        drec = facingObj->getValue("z").toDouble();
+        erf = 5.0;
+        erec = 5.0;
         break;
     case STD2::FlangeFacingAsmeTGTL:    /**	Tongue and Groove, Tongue - Large */
+        dx = facingObj->getValue("r").toDouble();
+        drec = facingObj->getValue("u").toDouble();
+        ex = 7.0;
         break;
     case STD2::FlangeFacingAsmeTGTS:    /**	Tongue and Groove, Tongue - Small */
+        dx = facingObj->getValue("t").toDouble();
+        drec = facingObj->getValue("u").toDouble();
+        ex = 7.0;
         break;
     default:
         erf = 0.0;
@@ -2142,6 +2179,7 @@ void PCALC_EN1591Widget::setFlangeAsmeData(
     switch (flangeType) {
     case STD2::FlangeAsmeBLD:          /** Blind */
         fType = 0;
+        e0 = flangeObj->getValue("tf" + flNrStr).toDouble() + erf;
         break;
     case STD2::FlangeAsmeLPD:          /** Lapped */
         fType = 2;
@@ -2159,20 +2197,9 @@ void PCALC_EN1591Widget::setFlangeAsmeData(
         fType = 1;
         break;
     default:
-        // as per STD2::FlangeAsmeWN
         fType = 1;
-        c = flangeObj->getValue("c2").toDouble();
-        efb = c - erf;
-        odThin = flangeObj->getValue("a").toDouble();
-        // s2 should be Annex A but is only type 11 in database
-        e1 = flangeObj->getValue("s2").toDouble();
-        d0 = odThin - 2 * e1;
-        odThick = flangeObj->getValue("n1").toDouble();
-        e2 = (odThick - d0) / 2;
         break;
     }
-
-
 
     mFlangeModel->setCurrentValue("nb", flangeObj->getValue("nob").toInt());
     mFlangeModel->setCurrentValue("typeflange" + flNrStr + "_id", fType);
@@ -2181,39 +2208,11 @@ void PCALC_EN1591Widget::setFlangeAsmeData(
     mFlangeModel->setCurrentValue("dx" + flNrStr, dx);
     mFlangeModel->setCurrentValue("drf" + flNrStr, drf);
     mFlangeModel->setCurrentValue("drec" + flNrStr, drec);
-
-    if (facingType == STD2::FlangeFacingAsmeSRF || facingType == STD2::FlangeFacingAsmeTGGS) {
-        // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
-        // female groove requires one more diameter
-    } else if (facingType == STD2::FlangeFacingAsmeSRM || facingType == STD2::FlangeFacingAsmeTGTS) {
-        // TODO
-        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
-    } else {
-        mFlangeModel->setCurrentValue("drec" + flNrStr, 0.0);
-    }
-
     mFlangeModel->setCurrentValue("efb" + flNrStr, flangeObj->getValue("tf1").toDouble());
-    mFlangeModel->setCurrentValue("erf" + flNrStr, facingObj->getValue("hrf").toDouble());
-
-    if (facingType == STD2::FlangeFacingAsmeSRF || facingType == STD2::FlangeFacingAsmeTGGS) {
-        // TODO: Biluna model for tongue-groove spigot-recess not complete and clear for diameters
-        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
-    } else if (facingType == STD2::FlangeFacingAsmeSRM || facingType == STD2::FlangeFacingAsmeTGTS) {
-        // TODO
-        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
-    } else {
-        mFlangeModel->setCurrentValue("erec" + flNrStr, 0.0);
-    }
-
+    mFlangeModel->setCurrentValue("erf" + flNrStr, erf);
+    mFlangeModel->setCurrentValue("erec" + flNrStr, erec);
     mFlangeModel->setCurrentValue("eq" + flNrStr, 0.0);
-
-    if (facingType == STD2::FlangeFacingAsmeRTJ) {
-        mFlangeModel->setCurrentValue("ex" + flNrStr,
-                         flangeObj->getValue("tf1").toDouble()
-                         - facingObj->getValue("e").toDouble());
-    } else {
-        mFlangeModel->setCurrentValue("ex" + flNrStr, 0.0);
-    }
+    mFlangeModel->setCurrentValue("ex" + flNrStr, ex);
 
     // bolthole
     mFlangeModel->setCurrentValue("d5" + flNrStr, STD2::inchToMm(flangeObj->getValue("diambh").toDouble()));
@@ -2222,15 +2221,8 @@ void PCALC_EN1591Widget::setFlangeAsmeData(
     mFlangeModel->setCurrentValue("l5t" + flNrStr, 0.0);
 
     // blind only
-    if (flangeType == STD2::FlangeAsmeBLD) {
-        mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("e0" + flNrStr,
-                         flangeObj->getValue("tf" + flNrStr).toDouble()
-                         + facingObj->getValue("hrf").toDouble());
-    } else {
-        mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
-        mFlangeModel->setCurrentValue("e0" + flNrStr, 0.0);
-    }
+    mFlangeModel->setCurrentValue("d9" + flNrStr, 0.0);
+    mFlangeModel->setCurrentValue("e0" + flNrStr, e0);
 
     double b3 = flangeObj->getValue("b3").toDouble();
 
@@ -2282,11 +2274,14 @@ void PCALC_EN1591Widget::setFlangeAsmeData(
 
     // loose only
     if (flangeType == STD2::FlangeAsmeLPD) { // Lapped
-        // TODO:
-        mFlangeModel->setCurrentValue("b0" + flNrStr, flangeObj->getValue("").toDouble());
-        mFlangeModel->setCurrentValue("d6" + flNrStr, flangeObj->getValue("").toDouble());
-        mFlangeModel->setCurrentValue("d8" + flNrStr, flangeObj->getValue("").toDouble());
-        mFlangeModel->setCurrentValue("el" + flNrStr, flangeObj->getValue("").toDouble());
+        b0 = 2.0;
+        mFlangeModel->setCurrentValue("b0" + flNrStr, b0);
+        mFlangeModel->setCurrentValue("d6" + flNrStr, flangeObj->getValue("b2").toDouble());
+        mFlangeModel->setCurrentValue("d8" + flNrStr, flangeObj->getValue("r").toDouble());
+        mFlangeModel->setCurrentValue("el" + flNrStr, flangeObj->getValue("tf1").toDouble());
+
+        PCALC_DIALOGFACTORY->requestWarningDialog("Only some default values have been set.\n"
+                                                  "Update the lap and ring dimensions.");
     } else {
         mFlangeModel->setCurrentValue("b0" + flNrStr, 0.0);
         mFlangeModel->setCurrentValue("d6" + flNrStr, 0.0);

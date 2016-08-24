@@ -316,6 +316,10 @@ void Flange_Blind::Calc_PhiF(int loadCaseNo) {
  * @param loadCaseNo
  */
 void Flange_Blind::Calc_PhiX(int loadCaseNo) {
+    if (dX <= 0.0 || eX <= 0.0) {
+        return;
+    }
+
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
     QString strF_B = "F_B";
     double valF_B = loadCase->F_B;
@@ -371,6 +375,10 @@ bool Flange_Blind::Is_PhiX_Valid(int loadCaseNo) {
  * @param loadCaseNo
  */
 void Flange_Blind::Calc_WX(int loadCaseNo) {
+    if (dX <= 0.0 || eX <= 0.0) {
+        return;
+    }
+
     LoadCase* loadCase = mLoadCaseList->at(loadCaseNo);
     double tmp_fF = loadCase->fF1;
 

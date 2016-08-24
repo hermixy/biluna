@@ -82,6 +82,7 @@ public:
     /** ASME B16.5 flange facing types */
     enum FlangeFacingAsmeType {
         FlangeFacingAsmeNone,
+        FlangeFacingAsmeFF,     /** Flat Face */
         FlangeFacingAsmeFFS,	/** Small Female Face (small Spigot and Recess)	*/
         FlangeFacingAsmeFMS,	/** Small Male Face (on end of pipe, small Spigot and Recess) */
         FlangeFacingAsmeRF,     /** Raised Face 2 or 7 mm */
