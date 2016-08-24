@@ -104,6 +104,7 @@ void PCALC_EN1591Widget::init() {
 
 
 
+
     initMapping();
     initConnections();
     readSettings();
