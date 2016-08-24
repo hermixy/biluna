@@ -11,6 +11,7 @@
 #ifndef PCALC_EN1591WIDGET_H
 #define PCALC_EN1591WIDGET_H
 
+#include "pcalc_cadview.h"
 #include "rb_widget.h"
 #include "std.h"
 #include "ui_pcalc_en1591widget.h"
@@ -60,11 +61,13 @@ protected slots:
     void slotIleStandardFlange_NrClicked();
     void slotIleBoltSizeClicked();
     void slotIleStandardGasketClicked();
+    void slotUpdateDrawing(int tab);
 
 protected:
     void changeEvent(QEvent *e);
 
 private:
+    void initCadView();
     void initMapping();
     void initConnections();
     void setInput();
@@ -132,6 +135,8 @@ private:
     RB_String mCurrentId;
 
     bool mIsUpdateMaterial;
+
+    PCALC_CadView* mCadView;
 
 };
 

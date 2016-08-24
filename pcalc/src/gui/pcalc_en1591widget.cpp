@@ -27,9 +27,6 @@
 #include "std_unittestfactory.h"
 // #include "peng_graphicsview.h"
 
-#include "rs_graphic.h"
-#include "qg_graphicview.h"
-
 
 /**
  * Constructor
@@ -66,6 +63,9 @@ PCALC_EN1591Widget::~PCALC_EN1591Widget() {
     delete mLoadCaseModel;
     delete mShellModel;
 
+    RS_FileIO::deleteInstance();
+    RS_FONTLIST->clearFonts();
+
     RB_DEBUG->print("PCALC_EN1591Widget::~PCALC_EN1591Widget() OK");
 }
 
@@ -83,31 +83,27 @@ RB_String PCALC_EN1591Widget::getSaveAsFileName() {
 }
 
 void PCALC_EN1591Widget::init() {
-    // from QG_MdiWindow::initDoc()
-    RS_Document* document = new RS_Graphic();
-    document->newDoc();
-    // from QG_MdiWindow::initView()
-    QG_GraphicView* gv = new QG_GraphicView(this);
-    gv->setContainer(document);
-    double defaultZoom = 4.0;
-    gv->setFactor(defaultZoom);
-    gv->setOffset(50, 50);
-    //gv->setDefaultAction(new RS_ActionDefault(*document, *gv));
-    gv->setBackground(RS_Color(Qt::white));
-    gv->showRulers(false);
-    cadLayout->addWidget(gv);
-
-//    document->addEntity(new RS_Line(document, RS_LineData(RS_Vector(0,0),
-//                                                          RS_Vector(50,100))));
-//    document->addEntity(new RS_Text(document, RS_LineData(RS_Vector(0,0),
-//                                                          RS_Vector(50,100))));
-
-
-
-
+    initCadView();
     initMapping();
     initConnections();
     readSettings();
+}
+
+void PCALC_EN1591Widget::initCadView() {
+    mCadView = new PCALC_CadView(this);
+    cadLayout->addWidget(mCadView);
+    RS_Graphic* graphic = mCadView->getGraphic();
+    graphic->addEntity(new RS_Text(graphic,
+                                    RS_TextData(RS_Vector(10,10), 5, 100,
+                                                RS2::VAlignBottom,
+                                                RS2::HAlignLeft,
+                                                RS2::LeftToRight,
+                                                RS2::AtLeast,
+                                                1.0,
+                                                "Click tabs for drawing",
+                                                "standard",
+                                                0.0,
+                                                RS2::Update)));
 }
 
 void PCALC_EN1591Widget::initConnections() {
@@ -130,6 +126,10 @@ void PCALC_EN1591Widget::initConnections() {
             this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
     connect(mLoadCaseModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
             this, SLOT(slotDataIsChanged(const QModelIndex&, const QModelIndex&)));
+
+    // drawing connections
+    connect(this->twAssembly, SIGNAL(currentChanged(int)),
+            this, SLOT(slotUpdateDrawing(int)));
 }
 
 void PCALC_EN1591Widget::initMapping() {
@@ -1175,6 +1175,17 @@ void PCALC_EN1591Widget::slotIleStandardGasketClicked() {
     mGasketModel->setCurrentValue("dgin", gasketObj->getValue("d1"), Qt::EditRole);
 
     dlgW->deleteLater();
+}
+
+void PCALC_EN1591Widget::slotUpdateDrawing(int tab) {
+    RS_Graphic* graphic = mCadView->getGraphic();
+    graphic->clear();
+
+    // draw relevant view
+    mCadView->addLine(0, 0, 100, 50);
+
+
+    mCadView->zoomAuto(true, true);
 }
 
 void PCALC_EN1591Widget::setInput() {

@@ -64,6 +64,7 @@ HEADERS += \
     ../src/calc/unittest/rb_unittest.h \
     ../src/calc/unittest/rb_unittestfactory.h \
     ../src/calc/unittest/en1591_unittestfactory.h \
+    ../src/gui/pcalc_cadview.h \
     ../src/gui/pcalc_classgeneratorwidget.h \
     ../src/gui/pcalc_dialogfactory.h \
     ../src/gui/pcalc_en13555gasketwidget.h \
@@ -191,6 +192,7 @@ SOURCES += \
     ../src/calc/unittest/rb_unittest.cpp \
     ../src/calc/unittest/rb_unittestfactory.cpp \
     ../src/calc/unittest/en1591_unittestfactory.cpp \
+    ../src/gui/pcalc_cadview.cpp \
     ../src/gui/pcalc_classgeneratorwidget.cpp \
     ../src/gui/pcalc_dialogfactory.cpp \
     ../src/gui/pcalc_en13555gasketwidget.cpp \
