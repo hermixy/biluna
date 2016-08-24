@@ -51,7 +51,7 @@ Section "BilunaMainSection" SEC01
   CreateShortCut "$SMPROGRAMS\Biluna\Biluna.lnk" "$INSTDIR\Biluna.exe"
   CreateShortCut "$DESKTOP\Biluna.lnk" "$INSTDIR\Biluna.exe"
   File "..\bil\release\db.dll"
-;  File "..\bil\release\gv.dll"
+  File "..\bil\release\cad.dll"
 SectionEnd
 
 Section "LibraryAndPluginSection" SEC10
@@ -196,7 +196,7 @@ FunctionEnd
 Section Uninstall
   Delete "$INSTDIR\Biluna.exe"
   Delete "$INSTDIR\db.dll"
-  ; Delete "$INSTDIR\gv.dll"
+  Delete "$INSTDIR\cad.dll"
   ; Visual Studio VC 2013
   Delete "$INSTDIR\msvcp120.dll"
   Delete "$INSTDIR\msvcr120.dll"
