@@ -93,6 +93,7 @@ public:
         WidgetDefault                   /**< Default- or all widgets */
     };
 
+
 private:
     //! Private constructor
     PCALC_DialogFactory(RB_MainWindow* mw);

@@ -37,6 +37,7 @@ public:
     bool fileSave(bool withSelect);
     void fileRevert();
 
+
 protected slots:
     void slotDetailTables(const QModelIndex& current,
                           const QModelIndex& previous);

@@ -1184,6 +1184,13 @@ void PCALC_EN1591Widget::slotUpdateDrawing(int tab) {
     // draw relevant view
     mCadView->addLine(0, 0, 100, 50);
 
+    // tab = 0 draw all without dimension
+    // tab = 1 draw flanges with dimension
+    // tab = 2 draw gasket with dimension
+    // tab = 3 draw bolt nut washer with dimension
+    // tab = 4 draw shells with dimension
+    // tab = 5 load cases, do not change drawing
+    // tab = 6 calculation do not change drawing
 
     mCadView->zoomAuto(true, true);
 }
@@ -1204,6 +1211,7 @@ void PCALC_EN1591Widget::setInput() {
     addObjectMemberVariable(objIn, "nb", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "f_bspecified", "-", mFlangeModel);
 
+    addObjectMemberVariable(objIn, "standardflange1_idx", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "typeflange1_id", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d31", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d41", "-", mFlangeModel);
@@ -1241,6 +1249,7 @@ void PCALC_EN1591Widget::setInput() {
 
     addObjectMemberVariable(objIn, "flange2equal", "-", mFlangeModel);
 
+    addObjectMemberVariable(objIn, "standardflange2_idx", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "typeflange2_id", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d32", "-", mFlangeModel);
     addObjectMemberVariable(objIn, "d42", "-", mFlangeModel);

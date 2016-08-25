@@ -48,6 +48,10 @@ bool STD_MaterialUtility::isValid() {
     return mMatHandler->isValid();
 }
 
+void STD_MaterialUtility::refresh() {
+    mMatHandler->refresh();
+}
+
 
 double STD_MaterialUtility::allowableDesignStress(double designTemp,
                                                   STD2::CompType compType,

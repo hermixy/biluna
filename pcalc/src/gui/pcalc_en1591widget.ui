@@ -228,7 +228,14 @@
              <widget class="QLineEdit" name="leNumber"/>
             </item>
             <item row="4" column="1" colspan="3">
-             <widget class="QLineEdit" name="leNameEngineer"/>
+             <widget class="QLineEdit" name="leNameEngineer">
+              <property name="maximumSize">
+               <size>
+                <width>250</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item row="2" column="1">
              <widget class="QSpinBox" name="sbRevision">
@@ -3109,7 +3116,7 @@
          <item row="2" column="0">
           <widget class="QTabWidget" name="twLoadCase">
            <property name="currentIndex">
-            <number>0</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tabDesignCondition">
             <attribute name="title">
@@ -4456,10 +4463,10 @@
               </size>
              </property>
              <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
              <property name="placeholderText">
-              <string/>
+              <string>0.00</string>
              </property>
             </widget>
            </item>
@@ -4633,6 +4640,7 @@
   <tabstop>deDate</tabstop>
   <tabstop>leNameEngineer</tabstop>
   <tabstop>tabFlangeDetail</tabstop>
+  <tabstop>ileStandardFlange_1</tabstop>
   <tabstop>cbTypeFlange_1</tabstop>
   <tabstop>led3_1</tabstop>
   <tabstop>led4_1</tabstop>
@@ -4645,6 +4653,12 @@
   <tabstop>leeQ_1</tabstop>
   <tabstop>leeX_1</tabstop>
   <tabstop>ileMaterialFlange_1</tabstop>
+  <tabstop>led5_1</tabstop>
+  <tabstop>chbBlindHole_1</tabstop>
+  <tabstop>led5t_1</tabstop>
+  <tabstop>lel5t_1</tabstop>
+  <tabstop>chbFlange2Equal</tabstop>
+  <tabstop>ileStandardFlange_2</tabstop>
   <tabstop>cbTypeFlange_2</tabstop>
   <tabstop>led3_2</tabstop>
   <tabstop>led4_2</tabstop>
@@ -4657,8 +4671,15 @@
   <tabstop>leeQ_2</tabstop>
   <tabstop>leeX_2</tabstop>
   <tabstop>ileMaterialFlange_2</tabstop>
+  <tabstop>led5_2</tabstop>
+  <tabstop>chbBlindHole_2</tabstop>
+  <tabstop>led5t_2</tabstop>
+  <tabstop>lel5t_2</tabstop>
   <tabstop>led9_1</tabstop>
   <tabstop>lee0_1</tabstop>
+  <tabstop>led0_1</tabstop>
+  <tabstop>led1_1</tabstop>
+  <tabstop>led2_1</tabstop>
   <tabstop>lee1_1</tabstop>
   <tabstop>lee2_1</tabstop>
   <tabstop>lelH_1</tabstop>
@@ -4669,6 +4690,9 @@
   <tabstop>ileMaterialLooseRing_1</tabstop>
   <tabstop>led9_2</tabstop>
   <tabstop>lee0_2</tabstop>
+  <tabstop>led0_2</tabstop>
+  <tabstop>led1_2</tabstop>
+  <tabstop>led2_2</tabstop>
   <tabstop>lee1_2</tabstop>
   <tabstop>lee2_2</tabstop>
   <tabstop>lelH_2</tabstop>
@@ -4677,6 +4701,7 @@
   <tabstop>led8_2</tabstop>
   <tabstop>leeL_2</tabstop>
   <tabstop>ileMaterialLooseRing_2</tabstop>
+  <tabstop>ileStandardGasket</tabstop>
   <tabstop>ileTypeGasket</tabstop>
   <tabstop>cbFormType</tabstop>
   <tabstop>cbInsType</tabstop>
@@ -4685,8 +4710,10 @@
   <tabstop>ledGin</tabstop>
   <tabstop>ledGout</tabstop>
   <tabstop>leeGt</tabstop>
+  <tabstop>ledG0</tabstop>
   <tabstop>lephiG</tabstop>
   <tabstop>ler2</tabstop>
+  <tabstop>sbnB</tabstop>
   <tabstop>ileBoltSize</tabstop>
   <tabstop>cbBoltType</tabstop>
   <tabstop>cbTensionerType</tabstop>
@@ -4707,19 +4734,21 @@
   <tabstop>ledW1</tabstop>
   <tabstop>ledW2</tabstop>
   <tabstop>ileMaterialWasher</tabstop>
-  <tabstop>chbShell2Equal</tabstop>
   <tabstop>cbTypeShell_1</tabstop>
   <tabstop>ledS_1</tabstop>
   <tabstop>leeS_1</tabstop>
   <tabstop>lephiS_1</tabstop>
   <tabstop>ileMaterialShell_1</tabstop>
+  <tabstop>chbShell2Equal</tabstop>
   <tabstop>cbTypeShell_2</tabstop>
   <tabstop>ledS_2</tabstop>
   <tabstop>leeS_2</tabstop>
   <tabstop>lephiS_2</tabstop>
   <tabstop>ileMaterialShell_2</tabstop>
   <tabstop>tvLoadCase</tabstop>
+  <tabstop>leF_Bspec</tabstop>
   <tabstop>twLoadCase</tabstop>
+  <tabstop>sbLoadCaseNo</tabstop>
   <tabstop>leP</tabstop>
   <tabstop>leT0</tabstop>
   <tabstop>leTB</tabstop>
@@ -4730,6 +4759,8 @@
   <tabstop>leTF_2</tabstop>
   <tabstop>leTL_2</tabstop>
   <tabstop>leTW_2</tabstop>
+  <tabstop>cbMaterialSafetyFactor</tabstop>
+  <tabstop>pbRefreshProperty</tabstop>
   <tabstop>leFx</tabstop>
   <tabstop>leFy</tabstop>
   <tabstop>leFz</tabstop>

@@ -33,7 +33,7 @@ public:
 
     bool setCurrentMaterial(const QString& materialIdx);
     bool isValid();
-    void refresh() {}
+    void refresh();
 
     double allowableDesignStress(double designTemp,
                                  STD2::CompType compType = STD2::CompDefault,
