@@ -90,20 +90,8 @@ void PCALC_EN1591Widget::init() {
 }
 
 void PCALC_EN1591Widget::initCadView() {
-    mCadView = new PCALC_CadView(this);
+    mCadView = new PCALC_EN1591CadView(this);
     cadLayout->addWidget(mCadView);
-    RS_Graphic* graphic = mCadView->getGraphic();
-    graphic->addEntity(new RS_Text(graphic,
-                                    RS_TextData(RS_Vector(10,10), 5, 100,
-                                                RS2::VAlignBottom,
-                                                RS2::HAlignLeft,
-                                                RS2::LeftToRight,
-                                                RS2::AtLeast,
-                                                1.0,
-                                                "Click tabs for drawing",
-                                                "standard",
-                                                0.0,
-                                                RS2::Update)));
 }
 
 void PCALC_EN1591Widget::initConnections() {
@@ -1177,22 +1165,41 @@ void PCALC_EN1591Widget::slotIleStandardGasketClicked() {
     dlgW->deleteLater();
 }
 
+/**
+ * @brief PCALC_EN1591Widget::slotUpdateDrawing
+ * tab = 0 draw all without dimension
+ * tab = 1 draw flanges with dimension
+ * tab = 2 draw gasket with dimension
+ * tab = 3 draw bolt nut washer with dimension
+ * tab = 4 draw shells with dimension
+ * tab = 5 load cases, do not change drawing
+ * tab = 6 calculation do not change drawing
+ * @param tab
+ */
 void PCALC_EN1591Widget::slotUpdateDrawing(int tab) {
-    RS_Graphic* graphic = mCadView->getGraphic();
-    graphic->clear();
+    //mCadView->drawTestLine();
 
-    // draw relevant view
-    mCadView->addLine(0, 0, 100, 50);
-
-    // tab = 0 draw all without dimension
-    // tab = 1 draw flanges with dimension
-    // tab = 2 draw gasket with dimension
-    // tab = 3 draw bolt nut washer with dimension
-    // tab = 4 draw shells with dimension
-    // tab = 5 load cases, do not change drawing
-    // tab = 6 calculation do not change drawing
-
-    mCadView->zoomAuto(true, true);
+    switch(tab) {
+    case 0:
+        mCadView->drawAll(mFlangeModel->getCurrentObject(),
+                          mGasketModel->getCurrentObject(),
+                          mBoltNutWasherModel->getCurrentObject(),
+                          mShellModel->getCurrentObject());
+        break;
+    case 1:
+        mCadView->drawFlanges(mFlangeModel->getCurrentObject());
+        break;
+    case 2:
+        mCadView->drawGasket(mGasketModel->getCurrentObject());
+        break;
+    case 3:
+        mCadView->drawBoltNutWasher(mBoltNutWasherModel->getCurrentObject());
+        break;
+    case 4:
+        mCadView->drawShells(mShellModel->getCurrentObject());
+    default:
+        break;
+    }
 }
 
 void PCALC_EN1591Widget::setInput() {

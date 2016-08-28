@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: pcalc_cadview.cpp 2241 2015-05-22 10:22:19Z rutger $
+ * $Id: pcalc_cadview.cpp 2241 2016-08-24 10:22:19Z rutger $
  * Created: Aug 24, 2016 - rutger
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
@@ -17,7 +17,7 @@
 PCALC_CadView::PCALC_CadView(QWidget* parent)
             : QG_GraphicView(parent) {
     initView();
-    initPcalc();
+    initLayers();
 }
 
 /**
@@ -48,7 +48,7 @@ void PCALC_CadView::initView() {
     //this->setDefaultAction(new RS_ActionDefault(*document, *this));
 }
 
-void PCALC_CadView::initPcalc() {
+void PCALC_CadView::initLayers() {
     this->setBackground(RS_Color(Qt::white));
     this->showRulers(false);
 
@@ -59,9 +59,15 @@ void PCALC_CadView::initPcalc() {
                                        RS_Pen(RS_Color(Qt::blue), RS2::Width09,
                                               RS2::SolidLine, 0.0),
                                        false , false)));
+    // for example thread lines on stud bolt
+    graphic->addLayer(new RS_Layer(
+                          RS_LayerData("SECONDARYLINE",
+                                       RS_Pen(RS_Color(Qt::black), RS2::Width07,
+                                              RS2::SolidLine, 0.0),
+                                       false , false)));
     graphic->addLayer(new RS_Layer(
                           RS_LayerData("DIMENSION",
-                                       RS_Pen(RS_Color(Qt::black), RS2::Width09,
+                                       RS_Pen(RS_Color(Qt::black), RS2::Width07,
                                               RS2::SolidLine, 0.0),
                                        false, false)));
     graphic->addLayer(new RS_Layer(
@@ -85,5 +91,25 @@ void PCALC_CadView::addLine(double x1, double y1, double x2, double y2) {
     graphic->addEntity(new RS_Line(graphic,
                                    RS_LineData(RS_Vector(x1, y1),
                                                RS_Vector(x2, y2))));
+}
+
+void PCALC_CadView::changeEvent(QEvent* e) {
+    QWidget::changeEvent(e);
+
+    switch (e->type()) {
+    // Language change per each Ui widget
+    //    case QEvent::LanguageChange:
+    //        retranslateUi(this);
+    //        break;
+    case QEvent::PaletteChange: {
+        // from RB_Widget::setPaletteColors() is mBaseColor in RB_Widget
+        QColor color= QApplication::palette().color(QPalette::Active,
+                                                    QPalette::Base);
+        setBackground(RS_Color(color));
+        break;
+    }
+    default:
+        break;
+    }
 }
 

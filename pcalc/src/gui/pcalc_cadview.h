@@ -1,5 +1,5 @@
 /*****************************************************************
- * $Id: pcalc_cadview.h 2241 2015-05-22 10:22:19Z rutger $
+ * $Id: pcalc_cadview.h 2241 2016-08-24 10:22:19Z rutger $
  * Created: Aug 24, 2016 - rutger
  *
  * Copyright (C) 2016 Red-Bag. All rights reserved.
@@ -36,14 +36,17 @@ public:
     explicit PCALC_CadView(QWidget* parent = 0);
     void addLine(double x1, double y1, double x2,double y2);
 
+
 signals:
 
 public slots:
 
+protected:
+    virtual void changeEvent(QEvent* e);
 
 private:
     void initView();
-    void initPcalc();
+    void initLayers();
 
 };
 

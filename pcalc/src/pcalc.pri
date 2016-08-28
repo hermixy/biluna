@@ -70,6 +70,7 @@ HEADERS += \
     ../src/gui/pcalc_en13555gasketwidget.h \
     ../src/gui/pcalc_en13555manufwidget.h \
     ../src/gui/pcalc_en13555typewidget.h \
+    ../src/gui/pcalc_en1591cadview.h \
     ../src/gui/pcalc_en1591selectgasketwidget.h \
     ../src/gui/pcalc_en1591widget.h \
     ../src/gui/pcalc_projectdialog.h \
@@ -198,6 +199,7 @@ SOURCES += \
     ../src/gui/pcalc_en13555gasketwidget.cpp \
     ../src/gui/pcalc_en13555manufwidget.cpp \
     ../src/gui/pcalc_en13555typewidget.cpp \
+    ../src/gui/pcalc_en1591cadview.cpp \
     ../src/gui/pcalc_en1591selectgasketwidget.cpp \
     ../src/gui/pcalc_en1591widget.cpp \
     ../src/gui/pcalc_projecteditwidget.cpp \
